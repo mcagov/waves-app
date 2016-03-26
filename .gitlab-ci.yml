@@ -10,7 +10,6 @@ before_script:
   - source ./scripts/prepare_build.sh
   - ruby -v
   - which ruby
-  - cp config/application.yml.example config/application.yml
   - touch log/application.log
   - touch log/test.log
   - retry bundle install --path vendor/bundle --without production --jobs $(nproc) "${FLAGS[@]}"
