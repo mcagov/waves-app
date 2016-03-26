@@ -1,0 +1,40 @@
+cache:
+  key: "ruby22"
+  paths:
+  - vendor
+
+variables:
+  RSPEC_RETRY_RETRY_COUNT: "3"
+
+before_script:
+  - source ./scripts/prepare_build.sh
+  - ruby -v
+  - which ruby
+  - cp config/application.yml.example config/application.yml
+  - touch log/application.log
+  - touch log/test.log
+  - retry bundle install --path vendor/bundle --without production --jobs $(nproc) "${FLAGS[@]}"
+  - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
+
+stages:
+- test
+
+rspec:
+  stage: test
+  script:
+    - RAILS_ENV=test SIMPLECOV=true bundle exec rspec
+  tags:
+    - ruby
+    - postgres
+
+bundler:audit:
+  stage: test
+  only:
+    - master
+    - staging
+  script:
+    - "bundle exec bundle-audit update"
+    - "bundle exec bundle-audit check"
+  tags:
+    - ruby
+    - postgres
