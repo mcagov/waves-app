@@ -9,7 +9,12 @@ development: &default
 
 test:
   <<: *default
+  adapter: postgresql
   database: vrsapp_test
+  username: vhqtest
+  password: vhqtest
+  encoding: utf8
+  host: localhost
 
 production: &deploy
   encoding: utf8
