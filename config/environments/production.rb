@@ -1,6 +1,11 @@
 require Rails.root.join("config/smtp")
 
 Rails.application.configure do
+  if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
+    ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
+  end
+
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
