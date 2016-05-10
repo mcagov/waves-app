@@ -4,6 +4,7 @@
 *.swp
 /.bundle
 /.env.local
+/config/database.yml
 /coverage/*
 /db/*.sqlite3
 /log/*
