@@ -2,31 +2,29 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-# CSS stuff - needed?
-gem "autoprefixer-rails"
-gem "bourbon", "5.0.0.beta.3"
-gem "neat", "~> 1.7.0"
-gem "refills"
-gem "normalize-rails", "~> 3.0.0"
-
-gem "recipient_interceptor"
-
+gem "flutie"
+gem "govuk_elements_rails"
+gem "govuk_frontend_toolkit"
+gem "govuk_template"
+gem "high_voltage", "~> 3.0.0"
 gem "jquery-rails"
 gem "pg"
 gem "puma"
 gem "rails", "~> 4.2.0"
+gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "sprockets", ">= 3.0.0"
 gem "sprockets-es6"
+gem "title"
 gem "uglifier"
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "dotenv-rails"
 
 group :development do
   gem "quiet_assets"
-  gem "web-console"
   gem "rubocop"
+  gem "web-console"
 end
 
 group :development, :test do

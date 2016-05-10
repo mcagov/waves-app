@@ -41,9 +41,9 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
+    b.use :error, wrap_with: { tag: :span, class: "error-message" }
+    b.use :hint,  wrap_with: { tag: :span, class: "form-hint" }
     b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
 
     ## full_messages_for
     # If you want to display the full error message for the attribute, you can
@@ -62,7 +62,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   # Default class for buttons
-  config.button_class = "btn"
+  config.button_class = "button"
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -104,7 +104,7 @@ SimpleForm.setup do |config|
   #   lambda { |label, required, explicit_label| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  # config.label_class = nil
+  config.label_class = "block-label"
 
   # You can define the default class to be used on forms. Can be overriden
   # with `html: { :class }`. Defaulting to none.
