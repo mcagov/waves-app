@@ -2,11 +2,6 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-# CSS stuff - needed?
-gem "autoprefixer-rails"
-gem "bourbon", "5.0.0.beta.3"
-gem "neat", "~> 1.7.0"
-gem "refills"
 gem "normalize-rails", "~> 3.0.0"
 
 gem "recipient_interceptor"
