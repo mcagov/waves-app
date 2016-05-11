@@ -1,7 +1,7 @@
 namespace :puma do
   desc "Restart puma cluster"
   task :kill do
-    puma_pids = `ps ax | grep puma | grep -v grep | cut -d " " -f 1`
+    puma_pids = `ps ax | grep puma | grep -v grep | grep -v rake | cut -d " " -f 1`
       .split("\n")
       .map(&:to_i)
 
