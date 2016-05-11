@@ -1,5 +1,4 @@
 if Rails.env.development? || Rails.env.test?
-  raise "the current env is #{Rails.env}"
   require "factory_girl"
 
   namespace :dev do
