@@ -1,5 +1,5 @@
 cache:
-  key: "ruby22"
+  key: "ruby23"
   paths:
   - vendor
 
@@ -21,8 +21,7 @@ rspec:
   script:
     - RAILS_ENV=test SIMPLECOV=true bundle exec rspec
   tags:
-    - ruby
-    - postgres
+    - ruby2.3
 
 bundler:audit:
   stage: test
@@ -33,5 +32,4 @@ bundler:audit:
     - "bundle exec bundle-audit update"
     - "bundle exec bundle-audit check"
   tags:
-    - ruby
-    - postgres
+    - ruby2.3
