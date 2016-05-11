@@ -24,6 +24,7 @@ gem "sprockets-es6"
 gem "title"
 gem "uglifier"
 gem "bundler-audit", ">= 0.5.0", require: false
+gem "dotenv-rails"
 
 group :development do
   gem "quiet_assets"
@@ -36,7 +37,6 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "bullet"
-  gem "dotenv-rails"
 	gem "factory_girl"
   gem "factory_girl_rails"
   gem "pry-byebug"
