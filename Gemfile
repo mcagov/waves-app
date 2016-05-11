@@ -11,6 +11,8 @@ gem "normalize-rails", "~> 3.0.0"
 
 gem "recipient_interceptor"
 
+gem "flutie"
+gem "high_voltage", "~> 3.0.0"
 gem "jquery-rails"
 gem "pg"
 gem "puma"
@@ -19,6 +21,7 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "sprockets", ">= 3.0.0"
 gem "sprockets-es6"
+gem "title"
 gem "uglifier"
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "dotenv-rails"
