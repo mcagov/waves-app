@@ -16,6 +16,7 @@ Dotenv::Railtie.load
 module Vrsapp
   class Application < Rails::Application
     config.quiet_assets = true
+
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
@@ -25,8 +26,8 @@ module Vrsapp
       generate.test_framework :rspec
       generate.view_specs false
     end
+
     config.action_controller.action_on_unpermitted_parameters = :raise
     config.active_record.raise_in_transactional_callbacks = true
-    config.active_job.queue_adapter = :delayed_job
   end
 end
