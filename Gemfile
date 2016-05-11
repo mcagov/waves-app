@@ -30,7 +30,7 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "bullet"
-	gem "factory_girl"
+  gem "factory_girl"
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
