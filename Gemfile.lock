@@ -88,6 +88,15 @@ GEM
       i18n
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    govuk_elements_rails (1.1.4)
+      govuk_frontend_toolkit (>= 4.10.0)
+      rails (>= 4.1.0)
+      sass (>= 3.2.0)
+    govuk_frontend_toolkit (4.10.0)
+      rails (>= 3.1.0)
+      sass (>= 3.2.0)
+    govuk_template (0.17.1)
+      rails (>= 3.1)
     hashdiff (0.3.0)
     high_voltage (3.0.0)
     i18n (0.7.0)
@@ -253,6 +262,9 @@ DEPENDENCIES
   factory_girl_rails
   flutie
   formulaic
+  govuk_elements_rails
+  govuk_frontend_toolkit
+  govuk_template
   high_voltage (~> 3.0.0)
   jquery-rails
   launchy
