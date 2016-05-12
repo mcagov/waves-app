@@ -12,6 +12,9 @@ en:
         title: Go to the GOV.UK homepage
         text: GOV.UK
 
+  mca:
+    title: Maritime Coastal Agency
+
   time:
     formats:
       default:
