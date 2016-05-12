@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//
+//= require govuk-template
+//
 //= require_tree .

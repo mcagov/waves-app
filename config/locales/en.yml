@@ -6,6 +6,12 @@ en:
       with_weekday:
         "%a %m/%d/%y"
 
+  header:
+    logo:
+      link:
+        title: Go to the GOV.UK homepage
+        text: GOV.UK
+
   time:
     formats:
       default:
@@ -16,4 +22,4 @@ en:
         "%B %d"
 
   titles:
-    application: Vrsapp
+    application: Small Ships Register
