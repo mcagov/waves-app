@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Preregistration, type: :model do
+  include PreregistrationsMixin
+
   subject(:preregistration) { described_class.new(parameters) }
 
   before do
@@ -34,28 +36,11 @@ describe Preregistration, type: :model do
 
     it { expect(preregistration).not_to be_valid }
 
-    it "shows the appropriate errors" do
-      parameters_hash.keys.each do |param|
+    it "returns the appropriate errors" do
+      preregistration_parameters_hash.keys.each do |param|
         message = I18n.t("activemodel.errors.models.preregistration.attributes.#{param}.accepted")
         expect(preregistration.errors[param]).to eq([message])
       end
     end
-  end
-
-  def parameters_hash(value = nil)
-    {
-      not_registered_before_on_ssr: value,
-      not_registered_under_part_1: value,
-      owners_are_uk_residents: value,
-      user_eligible_to_register: value
-    }
-  end
-
-  def valid_parameters
-    parameters_hash("1")
-  end
-
-  def invalid_parameters
-    parameters_hash("0")
   end
 end

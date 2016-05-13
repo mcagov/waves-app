@@ -17,8 +17,8 @@ class PreregistrationsController < ApplicationController
 
   def preregistration_params
     params.require(:preregistration).permit(
-      :not_registered_under_part_1,
       :not_registered_before_on_ssr,
+      :not_registered_under_part_1,
       :owners_are_uk_residents,
       :user_eligible_to_register
     )

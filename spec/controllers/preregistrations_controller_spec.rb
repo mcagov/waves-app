@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe PreregistrationsController, type: :controller do
+  include PreregistrationsMixin
+
   describe "#create" do
     context "when the preregistration parameters are valid" do
       it "responds with a success status" do
@@ -17,22 +19,15 @@ describe PreregistrationsController, type: :controller do
     end
   end
 
-  def parameters_hash(value = nil)
+  def valid_parameters
     {
-      preregistration: {
-        not_registered_before_on_ssr: value,
-        not_registered_under_part_1: value,
-        owners_are_uk_residents: value,
-        user_eligible_to_register: value
-      }
+      preregistration: preregistration_parameters_hash("1")
     }
   end
 
-  def valid_parameters
-    parameters_hash("1")
-  end
-
   def invalid_parameters
-    parameters_hash("0")
+    {
+      preregistration: preregistration_parameters_hash
+    }
   end
 end
