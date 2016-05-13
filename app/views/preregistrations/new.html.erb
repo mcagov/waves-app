@@ -1,0 +1,24 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("preregistration.new.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("preregistration.new.subtitle") %></h3>
+
+    <p><%= t("preregistration.new.prompt") %></p>
+
+    <%= simple_form_for @preregistration, url: preregistration_path do |f| %>
+      <legend class="visuallyhidden"><%= t("preregistration.new.title") %></legend>
+
+      <%= f.error_notification %>
+
+      <fieldset>
+        <%= field_for_preregistration_form(f, :not_registered_before_on_ssr) %>
+        <%= field_for_preregistration_form(f, :not_registered_under_part_1) %>
+        <%= field_for_preregistration_form(f, :owners_are_uk_residents) %>
+        <%= field_for_preregistration_form(f, :user_eligible_to_register) %>
+      </fieldset>
+
+      <%= f.button :submit, t("preregistration.new.submit"), class: "button" %>
+    <% end %>
+  </div>
+</div>

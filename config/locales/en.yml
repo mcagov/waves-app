@@ -26,6 +26,13 @@ en:
         title: Go to the GOV.UK homepage
         text: GOV.UK
 
+  preregistration:
+    new:
+      prompt: "Select all the statements that apply for the ship that you wish to register"
+      submit: Continue
+      subtitle: Preregistration
+      title: Registering a small ship
+
   mca:
     title: Maritime Coastal Agency
 
