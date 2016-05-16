@@ -34,8 +34,18 @@ if [ -f /.dockerinit ]; then
     export FLAGS=(--path vendor --retry 3)
 else
     export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin
+
+    username="gitlabadmin"
+    password="g1tL4BPG"
+    database="vrsapp_test_$((RANDOM/5000))"
+
     cp config/database.yml.example config/database.yml
-    sed "s/username\:.*$/username\: 'gitlabadmin'/" -i config/database.yml
-    sed "s/password\:.*$/password\: 'g1tL4BPG'/" -i config/database.yml
-    sed "s/vrsapp_test/vrsapp_test_$((RANDOM/5000))/" -i config/database.yml
+    sed "s/username\:.*$/username\: '${username}'/" -i config/database.yml
+    sed "s/password\:.*$/password\: '${password}'/" -i config/database.yml
+    sed "s/vrsapp_test/${database}/" -i config/database.yml
+
+    cp .env.example .env
+    sed "s/RACK_ENV=.*$/RACK_ENV=test/" -i .env
+    sed "s/SECRET_KEY_BASE=.*$/SECRET_KEY_BASE=$(date | md5sum | head -c 32)/" -i .env
+    sed "s/DATABASE_URL=/d" -i .env
 fi
