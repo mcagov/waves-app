@@ -47,5 +47,5 @@ else
     cp .env.example .env
     sed "s/RACK_ENV=.*$/RACK_ENV=test/" -i .env
     sed "s/SECRET_KEY_BASE=.*$/SECRET_KEY_BASE=$(date | md5sum | head -c 32)/" -i .env
-    sed "s/DATABASE_URL=/d" -i .env
+    sed "/DATABASE_URL=/d" -i .env
 fi
