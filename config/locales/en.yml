@@ -26,6 +26,9 @@ en:
         title: Go to the GOV.UK homepage
         text: GOV.UK
 
+  mca:
+    title: Maritime and Coastguard Agency
+
   preregistration:
     new:
       prompt: "Select all the statements that apply for the ship that you wish to register"
@@ -33,9 +36,6 @@ en:
       subtitle: Preregistration
       title: Registering a small ship
       error_description: "Please correct the highlighted problems below before proceeding."
-
-  mca:
-    title: Maritime Coastal Agency
 
   time:
     formats:
