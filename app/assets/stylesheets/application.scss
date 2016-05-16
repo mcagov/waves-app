@@ -31,3 +31,17 @@
 @import "elements/breadcrumbs";
 @import "elements/phase-banner";
 @import "elements/components";
+
+// Start now buttons
+.button-start,
+.button-get-started {
+  background-image: asset-url("icon-pointer.png");
+
+  @include device-pixel-ratio {
+    background-image: asset-url("icon-pointer-2x.png");
+  }
+
+  @include ie(6) {
+    background-image: asset-url("icon-pointer-2x.png");
+  }
+}
