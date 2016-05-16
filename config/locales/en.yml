@@ -32,6 +32,7 @@ en:
       submit: Continue
       subtitle: Preregistration
       title: Registering a small ship
+      error_description: "Please correct the highlighted problems below before proceeding."
 
   mca:
     title: Maritime Coastal Agency
