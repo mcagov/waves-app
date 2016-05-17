@@ -19,6 +19,8 @@ gem "sprockets", ">= 3.0.0"
 gem "sprockets-es6"
 gem "title"
 gem "uglifier"
+gem "wicked"
+
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "dotenv-rails"
 
@@ -31,7 +33,7 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "bullet"
-	gem "factory_girl"
+  gem "factory_girl"
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
