@@ -5,6 +5,11 @@
       <%= title %>
     </h1>
 
-    <a class="button button-start" href="<%= new_preregistration_path %>" role="button">Start now</a>
+    <a
+      class="button button-start"
+      href="<%= registration_wizard_path(Wicked::FIRST_STEP) %>"
+      role="button">
+      Start now
+    </a>
   </div>
 </div>

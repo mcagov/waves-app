@@ -1,5 +1,5 @@
-module PreregistrationsMixin
-  def preregistration_parameters_hash(value = "0")
+module RegistrationsMixin
+  def registration_parameters_hash(value = "0")
     {
       not_registered_before_on_ssr: value,
       not_registered_under_part_1: value,
@@ -9,10 +9,10 @@ module PreregistrationsMixin
   end
 
   def valid_parameters
-    preregistration_parameters_hash("1")
+    registration_parameters_hash("1")
   end
 
   def invalid_parameters
-    preregistration_parameters_hash
+    registration_parameters_hash
   end
 end
