@@ -27,5 +27,10 @@ module Vrsapp
 
     config.action_controller.action_on_unpermitted_parameters = :raise
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[
+      Rails.root.join("config", "locales", "**", "*.yml")
+    ]
   end
 end

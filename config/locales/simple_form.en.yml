@@ -6,37 +6,14 @@ en:
     required:
       text: "required"
       mark: "*"
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
 
     error_notification:
       default_message: "Please review the problems below:"
       preregistration: "There were problems with your registration"
 
     labels:
-      preregistration:
+      registration:
         not_registered_under_part_1: "The ship has not been registered under Part 1 of the Register of British Ships."
         not_registered_before_on_ssr: "The ship has never been registered on the Small Ships Register before."
         owners_are_uk_residents: "All the owners of the ship are ordinarily resident in the UK."
         user_eligible_to_register: "You are eligible to register a small ship."
-
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
