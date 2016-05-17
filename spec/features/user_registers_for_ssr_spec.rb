@@ -11,7 +11,7 @@ feature "User registers for small ships register", type: :feature do
       before do
         fill_form_and_submit(
           :registration,
-          :create,
+          :update,
           check_fields(
             "not_registered_before_on_ssr",
             "not_registered_under_part_1",
@@ -22,7 +22,8 @@ feature "User registers for small ships register", type: :feature do
       end
 
       scenario "user is taken to next stage" do
-        expected_path = "/registration_wizard/#{I18n.t('wicked.vessel_info')}"
+        registration_id = Registration.last.id
+        expected_path = "/registration_wizard/#{I18n.t('wicked.vessel_info')}?registration_id=#{registration_id}"
 
         expect(page).to have_current_path(expected_path)
       end
@@ -32,7 +33,7 @@ feature "User registers for small ships register", type: :feature do
       before do
         fill_form_and_submit(
           :registration,
-          :create,
+          :update,
           check_fields(
             "not_registered_before_on_ssr",
             "owners_are_uk_residents"
@@ -41,7 +42,7 @@ feature "User registers for small ships register", type: :feature do
       end
 
       scenario "user is shown registration form again" do
-        expect(page).to have_text(t("registration.new.subtitle"))
+        expect(page).to have_text(t("registration.prerequisites.title"))
       end
 
       scenario "user is shown registration error messages" do
