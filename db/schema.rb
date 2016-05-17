@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(version: 20160516135857) do
   end
 
   create_table "registrations", force: :cascade do |t|
-    t.string   "ip_country",   null: false
-    t.string   "card_country", null: false
+    t.string   "ip_country"
+    t.string   "card_country"
     t.string   "browser",      null: false
-    t.string   "payment_id",   null: false
+    t.string   "payment_id"
     t.string   "receipt_id"
     t.string   "status",       null: false
-    t.datetime "due_date",     null: false
-    t.boolean  "is_urgent",    null: false
+    t.datetime "due_date"
+    t.boolean  "is_urgent"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
