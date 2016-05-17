@@ -1,1 +1,51 @@
-VESSEL INFO
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("registration.vessel_info.title") %></h3>
+
+    <p><%= t("registration.vessel_info.prompt") %></p>
+
+    <%= simple_form_for @registration, url: wizard_path, method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("registration.vessel_info.title") %></legend>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <%= f.simple_fields_for :vessel do |v| %>
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :name, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :hin, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :make_and_model, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :length_in_centimeters, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :number_of_hulls, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+
+        <div class="form-group<%= " error" if f.error_notification %>">
+          <%= v.input :vessel_type, collection: VesselType.collected_designations, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
+        </div>
+      <% end %>
+
+      <%= f.button :submit, class: "button" %>
+    <% end %>
+  </div>
+</div>
