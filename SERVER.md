@@ -83,4 +83,10 @@ server {
         client_max_body_size 100M;
         keepalive_timeout 10;
 }
+
+server {
+        listen         80;
+        server_name    staging.vrsapp.uk;
+        return         301 https://$server_name$request_uri;
+}
 </pre>
