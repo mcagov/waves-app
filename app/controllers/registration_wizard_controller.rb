@@ -22,7 +22,11 @@ class RegistrationWizardController < ApplicationController
       )
     )
 
-    redirect_to next_wizard_path(registration_id: @registration.id)
+    if @registration.valid?
+      redirect_to next_wizard_path(registration_id: @registration.id)
+    else
+      render_wizard @registration
+    end
   end
 
   private
