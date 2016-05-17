@@ -19,6 +19,8 @@ gem "sprockets", ">= 3.0.0"
 gem "sprockets-es6"
 gem "title"
 gem "uglifier"
+gem "wicked"
+
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "dotenv-rails"
 
