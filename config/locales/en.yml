@@ -33,6 +33,12 @@ en:
   mca:
     title: Maritime and Coastguard Agency
 
+  phase:
+    banner:
+      alpha:
+        title: ALPHA
+        notice: "This is a new service – your <a href=\"mailto:andre.tanguy@oceanshq.com\">feedback</a> will help us to improve it."
+
   preregistration:
     new:
       prompt: "Select all the statements that apply for the ship that you wish to register"
