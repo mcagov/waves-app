@@ -1,0 +1,21 @@
+ en:
+  activerecord:
+    errors:
+      models:
+        registration:
+          attributes:
+            not_registered_before_on_ssr:
+              accepted: "The ship should not have already been registered on the Small Ships Register"
+            not_registered_under_part_1:
+              accepted: "The ship should not have been registered under Part 1 of the Register of British Ships"
+            owners_are_uk_residents:
+              accepted: "All the owners of the ship should be ordinarily resident in the UK"
+            user_eligible_to_register:
+              accepted: "You must be eligible to register a small ship"
+
+  registration:
+    new:
+      prompt: "Select all the statements that apply for the ship that you wish to register"
+      subtitle: Prerequisites
+      title: Registering a small ship
+      error_description: "Please correct the highlighted problems below before proceeding."
