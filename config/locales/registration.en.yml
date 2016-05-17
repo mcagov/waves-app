@@ -14,8 +14,11 @@
               accepted: "You must be eligible to register a small ship"
 
   registration:
-    new:
+    error_description: "Please correct the highlighted problems below before proceeding."
+    title: Registering a small ship
+    prerequisites:
       prompt: "Select all the statements that apply for the ship that you wish to register"
-      subtitle: Prerequisites
-      title: Registering a small ship
-      error_description: "Please correct the highlighted problems below before proceeding."
+      title: Prerequisites
+    vessel_info:
+      prompt: "Lorem ipsum"
+      title: Vessel Information
