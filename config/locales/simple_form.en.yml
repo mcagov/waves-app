@@ -17,3 +17,11 @@ en:
         not_registered_before_on_ssr: "The ship has never been registered on the Small Ships Register before."
         owners_are_uk_residents: "All the owners of the ship are ordinarily resident in the UK."
         user_eligible_to_register: "You are eligible to register a small ship."
+
+      vessel:
+        name: Name
+        hin: Hull identification number
+        make_and_model: Make and model
+        length_in_centimeters: Length (in centimetres)
+        number_of_hulls: Number of hulls
+        vessel_type: Vessel type

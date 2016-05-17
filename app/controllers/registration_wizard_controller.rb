@@ -7,6 +7,8 @@ class RegistrationWizardController < ApplicationController
     case step
     when I18n.t("wicked.prerequisites")
       @registration = Registration.new
+    when I18n.t("wicked.vessel_info")
+      @registration = Registration.find(params[:registration_id])
     end
 
     render_wizard
@@ -20,7 +22,7 @@ class RegistrationWizardController < ApplicationController
       )
     )
 
-    render_wizard @registration
+    redirect_to next_wizard_path(registration_id: @registration.id)
   end
 
   private
