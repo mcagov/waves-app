@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resource :preregistration, only: [:new, :create]
+  resources :registration_wizard, only: [:show, :update]
 end
