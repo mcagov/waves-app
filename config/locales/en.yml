@@ -32,6 +32,8 @@ en:
       registration:
         create: Continue
         update: Continue
+      vessels:
+        update: Continue
 
   mca:
     title: Maritime and Coastguard Agency

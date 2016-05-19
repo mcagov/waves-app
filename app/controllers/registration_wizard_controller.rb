@@ -15,12 +15,20 @@ class RegistrationWizardController < ApplicationController
   end
 
   def update
-    @registration = Registration.create(
-      prerequisite_params.merge(
-        status: :initiated,
-        browser: request.env["HTTP_USER_AGENT"] || "Unknown"
+    case step
+    when I18n.t("wicked.prerequisites")
+      @registration = Registration.create(
+        prerequisite_params.merge(
+          status: :initiated,
+          browser: request.env["HTTP_USER_AGENT"] || "Unknown"
+        )
       )
-    )
+    when I18n.t("wicked.vessel_info")
+      @registration = Registration.find(params[:registration][:id])
+      @registration.update(
+        vessel_info_params.merge(status: :vessel_info_added)
+      )
+    end
 
     if @registration.valid?
       redirect_to next_wizard_path(registration_id: @registration.id)
@@ -30,6 +38,22 @@ class RegistrationWizardController < ApplicationController
   end
 
   private
+
+  def vessel_info_params
+    params.require(:registration).permit(
+      :id,
+      vessels_attributes: [
+        :name,
+        :hin,
+        :make_and_model,
+        :length_in_centimeters,
+        :number_of_hulls,
+        :vessel_type_id,
+        :mmsi_number,
+        :radio_call_sign,
+      ]
+    )
+  end
 
   def prerequisite_params
     params.require(:registration).permit(
