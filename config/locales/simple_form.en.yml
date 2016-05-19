@@ -18,10 +18,16 @@ en:
         owners_are_uk_residents: "All the owners of the ship are ordinarily resident in the UK."
         user_eligible_to_register: "You are eligible to register a small ship."
 
-      vessel:
+      vessels:
         name: Name
         hin: Hull identification number
         make_and_model: Make and model
         length_in_centimeters: Length (in centimetres)
         number_of_hulls: Number of hulls
-        vessel_type: Vessel type
+        vessel_type_id: Vessel type
+        mmsi_number: MMSI Number
+        radio_call_sign: Radio Call Sign
+
+    prompts:
+      vessel:
+        vessel_type_id: "Select your vessel type"

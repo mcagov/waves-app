@@ -1,14 +1,14 @@
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:deletion)
+    DatabaseCleaner.clean_with(:deletion, except: %w(vessel_types))
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :truncation, { except: %w(vessel_types) }
   end
 
   config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.strategy = :deletion, { except: %w(vessel_types) }
   end
 
   config.before(:each) do
