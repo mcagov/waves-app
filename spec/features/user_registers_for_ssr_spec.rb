@@ -105,4 +105,23 @@ feature "User registers for small ships register", type: :feature do
     xcontext "when registration is not successful" do
     end
   end
+
+  xcontext "owner information" do
+  end
+
+  context "declaration step" do
+    context "when registration is successful" do
+      before do
+        complete_prerequisites_form
+        complete_vessel_info_form
+        complete_owner_info_form
+      end
+
+      scenario "user is taken to next stage" do
+        click_on "skip"
+
+        expect(page).to have_current_path(path_for_next_step("payment"))
+      end
+    end
+  end
 end

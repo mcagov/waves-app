@@ -25,6 +25,10 @@ def complete_vessel_info_form(fields = default_vessel_info_form_fields)
   )
 end
 
+def complete_owner_info_form
+  click_on "skip"
+end
+
 def default_prerequisites_form_fields
   {
     not_registered_before_on_ssr: true,

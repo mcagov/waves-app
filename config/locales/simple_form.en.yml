@@ -17,6 +17,9 @@ en:
         not_registered_before_on_ssr: "The ship has never been registered on the Small Ships Register before."
         owners_are_uk_residents: "All the owners of the ship are ordinarily resident in the UK."
         user_eligible_to_register: "You are eligible to register a small ship."
+        eligible_under_regulation_89: "I confirm that I am and all the owners are eligible to be the owner(s) of a small ship under regulation 89 (Persons qualified to be the owners of a small ship to be registered on Part III of the Register)"
+        eligible_under_regulation_90: "I confirm that the ship is entitled to be registered on Part III of the Register in accordance with regulation 90 (British connection)"
+        understands_false_statement_is_offence: "I UNDERSTAND THAT IT IS AN OFFENCE TO KNOWINGLY OR RECKLESSLY MAKE A FALSE STATEMENT IN ORDER TO OBTAIN REGISTRATION AND, BY TICKING THE BOX BELOW, HEREBY DECLARE THAT, TO THE BEST OF MY KNOWLEDGE, THE DETAILS GIVEN IN THIS ON-LINE APPLICATION ARE CORRECT"
 
       vessels:
         name: Name

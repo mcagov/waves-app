@@ -22,3 +22,7 @@
     vessel_info:
       prompt: "Lorem ipsum"
       title: Vessel Information
+    owner_info:
+    declaration:
+      prompt: "By submitting this online registration form you agree to the following statements:"
+      title: "Declaration"

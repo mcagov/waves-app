@@ -8,10 +8,24 @@ class Registration < ActiveRecord::Base
   validates :owners_are_uk_residents, acceptance: true
   validates :user_eligible_to_register, acceptance: true
 
-  validate :associated_vessel, if: :vessel_info_added?
+  validates :eligible_under_regulation_89,
+            acceptance: true,
+            if: :declaration_accepted?
+  validates :eligible_under_regulation_90,
+            acceptance: true,
+            if: :declaration_accepted?
+  validates :understands_false_statement_is_offence,
+            acceptance: true,
+            if: :declaration_accepted?
+
+  validate :associated_vessel?, if: :vessel_info_added?
 
   def vessel_info_added?
-    status == :vessel_info_added
+    status == "vessel_info_added"
+  end
+
+  def declaration_accepted?
+    status == "declaration_accepted"
   end
 
   def associated_vessel?

@@ -3,3 +3,5 @@ en:
     prerequisites: prerequisites
     vessel_info: vessel_info
     owner_info: owner_info
+    declaration: declaration
+    payment: payment
