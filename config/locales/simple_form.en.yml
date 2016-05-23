@@ -8,15 +8,17 @@ en:
       mark: "*"
 
     error_notification:
-      default_message: "Please review the problems below:"
-      preregistration: "There were problems with your registration"
+      default_message: "There were problems with your registration"
 
     labels:
       registration:
-        not_registered_under_part_1: "The ship has not been registered under Part 1 of the Register of British Ships."
-        not_registered_before_on_ssr: "The ship has never been registered on the Small Ships Register before."
-        owners_are_uk_residents: "All the owners of the ship are ordinarily resident in the UK."
-        user_eligible_to_register: "You are eligible to register a small ship."
+        not_registered_before_on_ssr: "The vessel has never been registered on the UK Small Ships Register."
+        not_registered_under_part_1: "The vessel is not currently registered on Part I of the UK Ship Register."
+        not_owned_by_company: "The vessel is not owned by a company."
+        not_commercial_fishing_or_submersible: "The vessel is not a commercial fishing or submersible vessel"
+        owners_are_uk_residents: "All the owners are ordinarily resident in the UK."
+        owners_are_eligible_to_register: "All the owners are eligible to register a vessel on the UK Small Ships Register."
+        not_registered_on_foreign_registry: "The vessel is not registered on a foreign registry."
 
       vessels:
         name: Name

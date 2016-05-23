@@ -59,8 +59,11 @@ class RegistrationWizardController < ApplicationController
     params.require(:registration).permit(
       :not_registered_before_on_ssr,
       :not_registered_under_part_1,
+      :not_owned_by_company,
+      :not_commercial_fishing_or_submersible,
       :owners_are_uk_residents,
-      :user_eligible_to_register
+      :owners_are_eligible_to_register,
+      :not_registered_on_foreign_registry
     )
   end
 end

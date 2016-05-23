@@ -20,10 +20,13 @@
       <% end %>
 
       <div class="form-group<%= " error" if f.error_notification %>">
-        <%= f.input :not_registered_before_on_ssr, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
-        <%= f.input :not_registered_under_part_1, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
-        <%= f.input :owners_are_uk_residents, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
-        <%= f.input :user_eligible_to_register, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
+        <%= form_checkbox(f, :not_registered_before_on_ssr) %>
+        <%= form_checkbox(f, :not_registered_under_part_1) %>
+        <%= form_checkbox(f, :not_owned_by_company) %>
+        <%= form_checkbox(f, :not_commercial_fishing_or_submersible) %>
+        <%= form_checkbox(f, :owners_are_uk_residents) %>
+        <%= form_checkbox(f, :owners_are_eligible_to_register) %>
+        <%= form_checkbox(f, :not_registered_on_foreign_registry) %>
       </div>
 
       <%= f.button :submit, class: "button" %>

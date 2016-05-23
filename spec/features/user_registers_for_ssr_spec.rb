@@ -31,7 +31,10 @@ feature "User registers for small ships register", type: :feature do
 
       scenario "user is shown registration error messages" do
         expect(page).to have_text(error_message("not_registered_under_part_1"))
-        expect(page).to have_text(error_message("user_eligible_to_register"))
+        expect(page).to have_text(error_message("not_owned_by_company"))
+        expect(page).to have_text(error_message("not_commercial_fishing_or_submersible"))
+        expect(page).to have_text(error_message("owners_are_eligible_to_register"))
+        expect(page).to have_text(error_message("not_registered_on_foreign_registry"))
       end
     end
   end
@@ -80,7 +83,7 @@ feature "User registers for small ships register", type: :feature do
           end
         end
 
-        describe "with other vessel type and text description" do
+        xdescribe "with other vessel type and text description" do
           scenario "user is taken to next stage" do
             fields = default_vessel_info_form_fields
             fields[:vessel_type_id] = "Other"
