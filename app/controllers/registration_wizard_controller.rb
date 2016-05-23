@@ -39,6 +39,7 @@ class RegistrationWizardController < ApplicationController
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def vessel_info_params
     params.require(:registration).permit(
       :id,
@@ -54,6 +55,7 @@ class RegistrationWizardController < ApplicationController
       ]
     )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def prerequisite_params
     params.require(:registration).permit(

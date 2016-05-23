@@ -45,7 +45,9 @@ feature "User registers for small ships register", type: :feature do
       describe "hull ID" do
         describe "with valid ID" do
           scenario "user is taken to next stage" do
-            expect{complete_vessel_info_form}.to change{Vessel.count}.by(1)
+            expect { complete_vessel_info_form }.to change {
+              Vessel.count
+            }.by(1)
 
             expect(page).to have_current_path(
               path_for_next_step("owner_info")
@@ -60,7 +62,7 @@ feature "User registers for small ships register", type: :feature do
 
             expect do
               complete_vessel_info_form(fields)
-            end.to change{Vessel.count}.by(1)
+            end.to change { Vessel.count }.by(1)
 
             expect(page).to have_current_path(
               path_for_next_step("owner_info")
@@ -72,7 +74,9 @@ feature "User registers for small ships register", type: :feature do
       describe "vessel type" do
         describe "with listed vessel type" do
           scenario "user is taken to next stage" do
-            expect{complete_vessel_info_form}.to change{Vessel.count}.by(1)
+            expect { complete_vessel_info_form }.to change {
+              Vessel.count
+            }.by(1)
 
             expect(page).to have_current_path(
               path_for_next_step("owner_info")
@@ -88,7 +92,7 @@ feature "User registers for small ships register", type: :feature do
 
             expect do
               complete_vessel_info_form(fields)
-            end.to change{Vessel.count}.by(1)
+            end.to change { Vessel.count }.by(1)
 
             expect(page).to have_current_path(
               path_for_next_step("owner_info")

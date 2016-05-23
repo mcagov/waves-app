@@ -1,4 +1,5 @@
 class AddOwners < ActiveRecord::Migration
+  # rubocop:disable Metrics/MethodLength
   def change
     create_table :owners do |t|
       t.string :title, null: false
@@ -13,4 +14,5 @@ class AddOwners < ActiveRecord::Migration
       t.timestamps null: false
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end
