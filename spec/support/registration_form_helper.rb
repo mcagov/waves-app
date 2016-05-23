@@ -2,7 +2,7 @@ def error_message(field)
   t("activerecord.errors.models.registration.attributes.#{field}.accepted")
 end
 
-def path_for_next_step(step)
+def path_for_step(step)
   registration_id = Registration.last.id
   step_string = I18n.t("wicked.#{step}")
 
@@ -26,7 +26,15 @@ def complete_vessel_info_form(fields = default_vessel_info_form_fields)
 end
 
 def complete_owner_info_form
-  click_on "skip"
+  click_on "Next"
+end
+
+def complete_declaration_form(fields = default_declaration_form_fields)
+  fill_form_and_submit(
+    :registration,
+    :update,
+    fields
+  )
 end
 
 def default_prerequisites_form_fields
@@ -49,6 +57,14 @@ def default_vessel_info_form_fields
     mmsi_number: random_uk_mmsi_number,
     radio_call_sign: "K12345",
   }
+end
+
+def default_declaration_form_fields
+  {
+    eligible_under_regulation_89: true,
+    eligible_under_regulation_90: true,
+    understands_false_statement_is_offence: true,
+  }.freeze
 end
 
 def random_uk_mmsi_number

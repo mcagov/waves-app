@@ -13,7 +13,7 @@ feature "User registers for small ships register", type: :feature do
       end
 
       scenario "user is taken to next stage" do
-        expect(page).to have_current_path(path_for_next_step("vessel_info"))
+        expect(page).to have_current_path(path_for_step("vessel_info"))
       end
     end
 
@@ -50,7 +50,7 @@ feature "User registers for small ships register", type: :feature do
             }.by(1)
 
             expect(page).to have_current_path(
-              path_for_next_step("owner_info")
+              path_for_step("owner_info")
             )
           end
         end
@@ -65,7 +65,7 @@ feature "User registers for small ships register", type: :feature do
             end.to change { Vessel.count }.by(1)
 
             expect(page).to have_current_path(
-              path_for_next_step("owner_info")
+              path_for_step("owner_info")
             )
           end
         end
@@ -79,7 +79,7 @@ feature "User registers for small ships register", type: :feature do
             }.by(1)
 
             expect(page).to have_current_path(
-              path_for_next_step("owner_info")
+              path_for_step("owner_info")
             )
           end
         end
@@ -95,7 +95,7 @@ feature "User registers for small ships register", type: :feature do
             end.to change { Vessel.count }.by(1)
 
             expect(page).to have_current_path(
-              path_for_next_step("owner_info")
+              path_for_step("owner_info")
             )
           end
         end
@@ -115,12 +115,35 @@ feature "User registers for small ships register", type: :feature do
         complete_prerequisites_form
         complete_vessel_info_form
         complete_owner_info_form
+
+        complete_declaration_form
       end
 
       scenario "user is taken to next stage" do
-        click_on "skip"
+        expect(page).to have_current_path(path_for_step("payment"))
+      end
+    end
 
-        expect(page).to have_current_path(path_for_next_step("payment"))
+    context "when registration is not successful" do
+      before do
+        complete_prerequisites_form
+        complete_vessel_info_form
+        complete_owner_info_form
+
+        complete_declaration_form(
+          eligible_under_regulation_89: true,
+          eligible_under_regulation_90: true
+        )
+      end
+
+      scenario "user is shown declaration form again" do
+        expect(page).to have_text(t("registration.declaration.title"))
+      end
+
+      scenario "user is shown declaration error messages" do
+        expect(page).to have_text(
+          error_message("understands_false_statement_is_offence")
+        )
       end
     end
   end

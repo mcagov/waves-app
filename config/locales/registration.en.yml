@@ -12,6 +12,12 @@
               accepted: "All the owners of the ship should be ordinarily resident in the UK"
             user_eligible_to_register:
               accepted: "You must be eligible to register a small ship"
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted"
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted"
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted"
 
   registration:
     error_description: "Please correct the highlighted problems below before proceeding."
