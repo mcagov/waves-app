@@ -18,6 +18,12 @@
               accepted: "All the owners should be eligible to register a vessel on the UK Small Ships Register."
             not_registered_on_foreign_registry:
               accepted: "The vessel should not be registered on a foreign registry."
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted"
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted"
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted"
 
   registration:
     error_description: "Please correct the highlighted problems below before proceeding."
@@ -28,3 +34,7 @@
     vessel_info:
       prompt: "Lorem ipsum"
       title: Vessel Information
+    owner_info:
+    declaration:
+      prompt: "By submitting this online registration form you agree to the following statements:"
+      title: "Declaration"

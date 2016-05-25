@@ -1,4 +1,5 @@
 class AddRegistrations < ActiveRecord::Migration
+  # rubocop:disable Metrics/MethodLength
   def change
     create_table :registrations do |t|
       t.string :ip_country
@@ -13,4 +14,5 @@ class AddRegistrations < ActiveRecord::Migration
       t.timestamps null: false
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end

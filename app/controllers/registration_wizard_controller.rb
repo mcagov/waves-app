@@ -1,13 +1,15 @@
 class RegistrationWizardController < ApplicationController
   include Wicked::Wizard::Translated
 
-  steps :prerequisites, :vessel_info, :owner_info
+  steps :prerequisites, :vessel_info, :owner_info, :declaration, :payment
 
   def show
-    case step
-    when I18n.t("wicked.prerequisites")
+    case step_name
+    when prerequisites_step_name
       @registration = Registration.new
-    when I18n.t("wicked.vessel_info")
+    when vessel_info_step_name,
+        owner_info_step_name,
+        declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
 
@@ -15,18 +17,23 @@ class RegistrationWizardController < ApplicationController
   end
 
   def update
-    case step
-    when I18n.t("wicked.prerequisites")
+    case step_name
+    when prerequisites_step_name
       @registration = Registration.create(
         prerequisite_params.merge(
           status: :initiated,
           browser: request.env["HTTP_USER_AGENT"] || "Unknown"
         )
       )
-    when I18n.t("wicked.vessel_info")
+    when vessel_info_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(
-        vessel_info_params.merge(status: :vessel_info_added)
+        vessel_info_params.merge(status: "vessel_info_added")
+      )
+    when declaration_step_name
+      @registration = Registration.find(params[:registration][:id])
+      @registration.update(
+        declaration_params.merge(status: "declaration_accepted")
       )
     end
 
@@ -39,6 +46,7 @@ class RegistrationWizardController < ApplicationController
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def vessel_info_params
     params.require(:registration).permit(
       :id,
@@ -55,6 +63,7 @@ class RegistrationWizardController < ApplicationController
       ]
     )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def prerequisite_params
     params.require(:registration).permit(
@@ -66,5 +75,38 @@ class RegistrationWizardController < ApplicationController
       :owners_are_eligible_to_register,
       :not_registered_on_foreign_registry
     )
+  end
+
+  def declaration_params
+    params.require(:registration).permit(
+      :id,
+      :eligible_under_regulation_89,
+      :eligible_under_regulation_90,
+      :understands_false_statement_is_offence
+      )
+  end
+
+  def prerequisites_step_name
+    I18n.t("wicked.prerequisites")
+  end
+
+  def vessel_info_step_name
+    I18n.t("wicked.vessel_info")
+  end
+
+  def owner_info_step_name
+    I18n.t("wicked.owner_info")
+  end
+
+  def declaration_step_name
+    I18n.t("wicked.declaration")
+  end
+
+  def payment_step_name
+    I18n.t("wicked.payment")
+  end
+
+  def step_name
+    step
   end
 end

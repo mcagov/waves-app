@@ -16,7 +16,7 @@ workers Integer(ENV.fetch("WEB_CONCURRENCY", 2))
 threads_count = Integer(ENV.fetch("MAX_THREADS", 2))
 threads(threads_count, threads_count)
 
-bind 'unix://tmp/sockets/puma.sock'
+bind "unix://tmp/sockets/puma.sock"
 
 preload_app!
 
