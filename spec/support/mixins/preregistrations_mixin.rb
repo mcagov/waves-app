@@ -1,5 +1,5 @@
 module RegistrationsMixin
-  def registration_parameters_hash(value = "0")
+  def prerequisites_parameters_hash(value = "0")
     {
       not_registered_before_on_ssr: value,
       not_registered_under_part_1: value,
@@ -8,11 +8,33 @@ module RegistrationsMixin
     }
   end
 
-  def valid_parameters
-    registration_parameters_hash("1")
+  def declaration_parameters_hash(value = "0")
+    {
+      eligible_under_regulation_89: value,
+      eligible_under_regulation_90: value,
+      understands_false_statement_is_offence: value,
+    }
   end
 
-  def invalid_parameters
-    registration_parameters_hash
+  def valid_parameters_for(what)
+    case what
+    when :prerequisites
+      prerequisites_parameters_hash("1")
+    when :declaration
+      declaration_parameters_hash("1").merge(
+        prerequisites_parameters_hash("1")
+      )
+    end
+  end
+
+  def invalid_parameters_for(what)
+    case what
+    when :prerequisites
+      prerequisites_parameters_hash
+    when :declaration
+      declaration_parameters_hash.merge(
+        prerequisites_parameters_hash("1")
+      )
+    end
   end
 end
