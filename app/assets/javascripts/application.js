@@ -15,4 +15,10 @@
 //
 //= require govuk-template
 //
+//= require govuk/selection-buttons
+//
 //= require_tree .
+
+$(document).ready(function () {
+  new GOVUK.SelectionButtons("input[type='checkbox']");
+});

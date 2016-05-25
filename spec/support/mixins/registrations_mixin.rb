@@ -3,8 +3,11 @@ module RegistrationsMixin
     {
       not_registered_before_on_ssr: value,
       not_registered_under_part_1: value,
+      not_owned_by_company: value,
+      not_commercial_fishing_or_submersible: value,
       owners_are_uk_residents: value,
-      user_eligible_to_register: value,
+      owners_are_eligible_to_register: value,
+      not_registered_on_foreign_registry: value,
     }
   end
 

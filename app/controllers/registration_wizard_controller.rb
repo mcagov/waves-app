@@ -8,8 +8,8 @@ class RegistrationWizardController < ApplicationController
     when prerequisites_step_name
       @registration = Registration.new
     when vessel_info_step_name,
-         owner_info_step_name,
-         declaration_step_name
+        owner_info_step_name,
+        declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
 
@@ -46,15 +46,6 @@ class RegistrationWizardController < ApplicationController
 
   private
 
-  def declaration_params
-    params.require(:registration).permit(
-      :id,
-      :eligible_under_regulation_89,
-      :eligible_under_regulation_90,
-      :understands_false_statement_is_offence
-    )
-  end
-
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
     params.require(:registration).permit(
@@ -66,6 +57,7 @@ class RegistrationWizardController < ApplicationController
         :length_in_centimeters,
         :number_of_hulls,
         :vessel_type_id,
+        :vessel_type_other,
         :mmsi_number,
         :radio_call_sign,
       ]
@@ -77,9 +69,21 @@ class RegistrationWizardController < ApplicationController
     params.require(:registration).permit(
       :not_registered_before_on_ssr,
       :not_registered_under_part_1,
+      :not_owned_by_company,
+      :not_commercial_fishing_or_submersible,
       :owners_are_uk_residents,
-      :user_eligible_to_register
+      :owners_are_eligible_to_register,
+      :not_registered_on_foreign_registry
     )
+  end
+
+  def declaration_params
+    params.require(:registration).permit(
+      :id,
+      :eligible_under_regulation_89,
+      :eligible_under_regulation_90,
+      :understands_false_statement_is_offence
+      )
   end
 
   def prerequisites_step_name

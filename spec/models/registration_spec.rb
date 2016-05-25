@@ -15,20 +15,32 @@ describe Registration, type: :model do
 
       it { expect(registration).to be_valid }
 
-      it "expects that the ship is not registered before on the SSR" do
+      it "is not registered before on the SSR" do
         expect(registration.errors[:not_registered_before_on_ssr]).to be_empty
       end
 
-      it "expects that the ship is not registered under Part 1" do
+      it "is not registered under Part 1" do
         expect(registration.errors[:not_registered_under_part_1]).to be_empty
       end
 
-      it "expects that the ship owners are UK residents" do
+      it "is not owned by a company" do
+        expect(registration.errors[:not_owned_by_company]).to be_empty
+      end
+
+      it "is not a commercial fishing vessel of submersible" do
+        expect(registration.errors[:not_commercial_fishing_or_submersible]).to be_empty
+      end
+
+      it "the owners are UK residents" do
         expect(registration.errors[:owners_are_uk_residents]).to be_empty
       end
 
-      it "expects that the user is eligible to register the ship" do
-        expect(registration.errors[:user_eligible_to_register]).to be_empty
+      it "the owners are eligible to register the ship" do
+        expect(registration.errors[:owners_are_eligible_to_register]).to be_empty
+      end
+
+      it "is not registered on a foreign registry" do
+        expect(registration.errors[:not_registered_on_foreign_registry]).to be_empty
       end
     end
 
@@ -72,6 +84,7 @@ describe Registration, type: :model do
         expect(
           registration.errors[:understands_false_statement_is_offence]
         ).to be_empty
+
       end
     end
 
