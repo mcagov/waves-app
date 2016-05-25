@@ -83,7 +83,7 @@ feature "User registers for small ships register", type: :feature do
           end
         end
 
-        xdescribe "with other vessel type and text description" do
+        describe "with other vessel type and text description" do
           scenario "user is taken to next stage" do
             fields = default_vessel_info_form_fields
             fields[:vessel_type_id] = "Other"

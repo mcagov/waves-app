@@ -21,14 +21,15 @@ en:
         not_registered_on_foreign_registry: "The vessel is not registered on a foreign registry."
 
       vessels:
-        name: Name
+        name: Name of vessel
         hin: Hull identification number
         make_and_model: Make and model
         length_in_centimeters: Length (in centimetres)
         number_of_hulls: Number of hulls
         vessel_type_id: Vessel type
-        mmsi_number: MMSI Number
-        radio_call_sign: Radio Call Sign
+        vessel_type_other: Other vessel type
+        mmsi_number: MMSI number
+        radio_call_sign: Radio call sign
 
     prompts:
       vessel:

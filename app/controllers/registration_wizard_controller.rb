@@ -49,6 +49,7 @@ class RegistrationWizardController < ApplicationController
         :length_in_centimeters,
         :number_of_hulls,
         :vessel_type_id,
+        :vessel_type_other,
         :mmsi_number,
         :radio_call_sign,
       ]

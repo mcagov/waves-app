@@ -12,6 +12,6 @@ class VesselType < ActiveRecord::Base
     end
 
     vessels << [("&#8212;"*10).html_safe, {disabled: true, }]
-    vessels << ["Other (please specify)", other_vessel_type.id]
+    vessels << ["Other (please specify)", other_vessel_type.id, {"data-target" => "other-vessel-type"}]
   end
 end
