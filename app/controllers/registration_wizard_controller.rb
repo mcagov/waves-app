@@ -28,12 +28,12 @@ class RegistrationWizardController < ApplicationController
     when vessel_info_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(
-        vessel_info_params.merge(status: :vessel_info_added)
+        vessel_info_params.merge(status: "vessel_info_added")
       )
     when declaration_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(
-        declaration_params.merge(status: :declaration_accepted)
+        declaration_params.merge(status: "declaration_accepted")
       )
     end
 
