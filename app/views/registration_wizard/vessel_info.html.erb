@@ -44,7 +44,7 @@
 
         <div class="form-group<%= " error" if f.error_notification %>">
           <%= v.input :vessel_type_id,
-            collection: VesselType.collected_designations,
+            collection: vessel_type_collection,
             input_html: {class: "form-control"},
             label_html: {class: "form-label"},
             prompt: :translate %>

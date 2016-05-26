@@ -7,4 +7,13 @@ module RegistrationWizardHelper
       label_html: {class: "block-label"}
     )
   end
+
+  def vessel_type_collection
+    vessels = VesselType.all.each_with_object([]) do |vessel_type, memo|
+      memo << [vessel_type.designation.titleize, vessel_type.id]
+    end
+
+    vessels << [nil, nil, {disabled: true}]
+    vessels << ["Other (please specify)", nil]
+  end
 end

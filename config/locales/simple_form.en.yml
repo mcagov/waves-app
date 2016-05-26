@@ -35,5 +35,5 @@ en:
         radio_call_sign: Radio call sign
 
     prompts:
-      vessel:
+      vessels:
         vessel_type_id: "Select your vessel type"
