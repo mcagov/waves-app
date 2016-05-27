@@ -50,11 +50,11 @@ def default_prerequisites_form_fields
 end
 
 def default_vessel_info_form_fields
-  form_fields = attributes_for(:vessel)
+  form_fields = attributes_for(:vessel, vessel_type: VesselType.all.sample)
 
-  vessel_type_designation =
-    VesselType.find(form_fields[:vessel_type_id]).designation.titleize
-  form_fields[:vessel_type_id] = vessel_type_designation
+  designation = form_fields[:vessel_type].designation.titleize
+  form_fields[:vessel_type_id] = designation
+  form_fields.delete(:vessel_type)
 
   form_fields
 end

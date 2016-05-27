@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "User registers for small ships register", type: :feature do
   before do
+    create_list(:vessel_type, 5)
     visit root_path
     click_on "Start now"
   end
