@@ -1,3 +1,3 @@
 class VesselType < ActiveRecord::Base
-  belongs_to :vessel
+  has_many :vessels
 end

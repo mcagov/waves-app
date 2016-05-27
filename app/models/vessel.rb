@@ -8,5 +8,5 @@ class Vessel < ActiveRecord::Base
   has_many :register_vessels
   has_many :registers, through: :register_vessels
 
-  has_one :vessel_type
+  belongs_to :vessel_type
 end
