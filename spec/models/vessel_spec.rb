@@ -4,15 +4,10 @@ describe Vessel, type: :model do
   describe "validations" do
     context "when the vessel is valid" do
       describe "vessel name" do
-        let!(:vessel) { build(:vessel) }
-
-        before { vessel.valid? }
-
         it "is present" do
-          expect(vessel.errors[:name]).to be_empty
-        end
+          vessel = build(:vessel)
+          vessel.valid?
 
-        it "is unique" do
           expect(vessel.errors[:name]).to be_empty
         end
       end
@@ -188,11 +183,6 @@ describe Vessel, type: :model do
       describe "vessel name" do
         it "is not present" do
           vessel = build(:vessel, name: " ")
-          expect(vessel).not_to be_valid
-        end
-
-        it "is not unique" do
-          vessel = build(:vessel, name: create(:vessel).name)
           expect(vessel).not_to be_valid
         end
       end
