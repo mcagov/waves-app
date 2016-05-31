@@ -5,7 +5,7 @@ en:
 
     required:
       text: "required"
-      mark: "*"
+      mark: ""
 
     error_notification:
       default_message: "There were problems with your registration"
@@ -27,7 +27,7 @@ en:
         name: Name of vessel
         hin: Hull identification number
         make_and_model: Make and model
-        length_in_centimeters: Length (in centimetres)
+        length_in_centimeters: Length of vessel
         number_of_hulls: Number of hulls
         vessel_type_id: Vessel type
         vessel_type_other: Other vessel type

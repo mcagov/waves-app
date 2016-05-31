@@ -7,9 +7,11 @@ class RegistrationWizardController < ApplicationController
     case step_name
     when prerequisites_step_name
       @registration = Registration.new
-    when vessel_info_step_name,
-        owner_info_step_name,
-        declaration_step_name
+    when vessel_info_step_name
+      @registration = Registration.find(params[:registration_id])
+      @vessels = [Vessel.new]
+    when owner_info_step_name,
+         declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
 
