@@ -50,8 +50,8 @@ class RegistrationWizardController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
-    assign_hin_parameter
-    assign_length_in_centimeters_parameter
+    assign_vessel_param(:hin)
+    assign_vessel_param(:length_in_centimeters)
 
     params.require(:registration).permit(
       :id,
@@ -116,29 +116,22 @@ class RegistrationWizardController < ApplicationController
     step
   end
 
-  def assign_hin_parameter
-    return unless hin_parameter_is_present?
+  def assign_vessel_param(parameter)
+    return unless vessel_param_is_present?(parameter)
 
-    hin_parameters = params.delete(:hin)
-    hin = "#{hin_parameters["prefix"]}-#{hin_parameters["suffix"]}".upcase
+    parameter_hash = params.delete(parameter)
+    value =
+      case parameter
+      when :hin
+        "#{parameter_hash["prefix"]}-#{parameter_hash["suffix"]}".upcase
+      when :length_in_centimeters
+        parameter_hash["m"].to_i * 100 + parameter_hash["cm"].to_i
+      end
 
-    params[:registration][:vessels_attributes]["0"].merge!(hin: hin)
+    params[:registration][:vessels_attributes]["0"].merge!(parameter => value)
   end
 
-  def hin_parameter_is_present?
-    params[:hin]["prefix"].present? || params[:hin]["suffix"].present?
-  end
-
-  def assign_length_in_centimeters_parameter
-    return unless length_in_centimeters_parameter_is_present?
-
-    length_parameters = params.delete(:length_in_centimeters)
-    length_in_centimetres = length_parameters["m"].to_i * 100 + length_parameters["cm"].to_i
-
-    params[:registration][:vessels_attributes]["0"].merge!(length_in_centimeters: length_in_centimetres)
-  end
-
-  def length_in_centimeters_parameter_is_present?
-    params[:length_in_centimeters]["m"].present? || params[:length_in_centimeters]["cm"].present?
+  def vessel_param_is_present?(parameter)
+    params[parameter].values.any? { |value| value.present? }
   end
 end
