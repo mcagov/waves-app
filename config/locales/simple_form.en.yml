@@ -36,4 +36,13 @@ en:
 
     prompts:
       vessels:
+        number_of_hulls: "Select number of hulls"
         vessel_type_id: "Select your vessel type"
+
+    placeholders:
+      vessels:
+        name: Name of vessel
+        make_and_model: Make and model
+        vessel_type_other: Other vessel type
+        mmsi_number: 123456789
+        radio_call_sign: X12345

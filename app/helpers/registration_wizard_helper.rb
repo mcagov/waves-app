@@ -3,8 +3,8 @@ module RegistrationWizardHelper
     form.input(
       attribute,
       as: :boolean,
+      label_html: {class: "block-label"},
       wrapper: false,
-      label_html: {class: "block-label"}
     )
   end
 
@@ -14,6 +14,10 @@ module RegistrationWizardHelper
     options.merge!(wrapper_html: {class: wrapper_class})
 
     form.input(attribute, options)
+  end
+
+  def number_of_hulls_collection
+    (1..6).map { |x| [x.to_s, x] }
   end
 
   def vessel_type_collection
