@@ -20,9 +20,16 @@ end
 def complete_vessel_info_form(fields = default_vessel_info_form_fields)
   hin = fields.delete(:hin)
 
-  if hin
+  if hin.present?
     page.fill_in("hin[prefix]", with: hin[0..1])
     page.fill_in("hin[suffix]", with: hin[3..-1])
+  end
+
+  length_in_centimeters = fields.delete(:length_in_centimeters)
+
+  if length_in_centimeters.present?
+    page.fill_in("length_in_centimeters[m]", with: (length_in_centimeters / 100).to_s)
+    page.fill_in("length_in_centimeters[cm]", with: (length_in_centimeters % 100).to_s)
   end
 
   fill_form_and_submit(

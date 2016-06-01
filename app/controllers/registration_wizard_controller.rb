@@ -51,6 +51,7 @@ class RegistrationWizardController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
     assign_hin_parameter
+    assign_length_in_centimeters_parameter
 
     params.require(:registration).permit(
       :id,
@@ -90,6 +91,7 @@ class RegistrationWizardController < ApplicationController
       )
   end
 
+
   def prerequisites_step_name
     I18n.t("wicked.prerequisites")
   end
@@ -125,5 +127,18 @@ class RegistrationWizardController < ApplicationController
 
   def hin_parameter_is_present?
     params[:hin]["prefix"].present? || params[:hin]["suffix"].present?
+  end
+
+  def assign_length_in_centimeters_parameter
+    return unless length_in_centimeters_parameter_is_present?
+
+    length_parameters = params.delete(:length_in_centimeters)
+    length_in_centimetres = length_parameters["m"].to_i * 100 + length_parameters["cm"].to_i
+
+    params[:registration][:vessels_attributes]["0"].merge!(length_in_centimeters: length_in_centimetres)
+  end
+
+  def length_in_centimeters_parameter_is_present?
+    params[:length_in_centimeters]["m"].present? || params[:length_in_centimeters]["cm"].present?
   end
 end
