@@ -23,7 +23,7 @@ class RegistrationWizardController < ApplicationController
     when prerequisites_step_name
       @registration = Registration.create(
         prerequisite_params.merge(
-          status: :initiated,
+          status: "initiated",
           browser: request.env["HTTP_USER_AGENT"] || "Unknown"
         )
       )
@@ -50,6 +50,8 @@ class RegistrationWizardController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
+    assign_hin_parameter
+
     params.require(:registration).permit(
       :id,
       vessels_attributes: [
@@ -110,5 +112,18 @@ class RegistrationWizardController < ApplicationController
 
   def step_name
     step
+  end
+
+  def assign_hin_parameter
+    return unless hin_parameter_is_present?
+
+    hin_parameters = params.delete(:hin)
+    hin = "#{hin_parameters["prefix"]}-#{hin_parameters["suffix"]}".upcase
+
+    params[:registration][:vessels_attributes]["0"].merge!(hin: hin)
+  end
+
+  def hin_parameter_is_present?
+    params[:hin]["prefix"].present? || params[:hin]["suffix"].present?
   end
 end

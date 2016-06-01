@@ -18,6 +18,13 @@ def complete_prerequisites_form(fields = default_prerequisites_form_fields)
 end
 
 def complete_vessel_info_form(fields = default_vessel_info_form_fields)
+  hin = fields.delete(:hin)
+
+  if hin
+    page.fill_in("hin[prefix]", with: hin[0..1])
+    page.fill_in("hin[suffix]", with: hin[3..-1])
+  end
+
   fill_form_and_submit(
     :vessels,
     :update,
