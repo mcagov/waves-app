@@ -16,6 +16,15 @@ module RegistrationWizardHelper
     form.input(attribute, options)
   end
 
+  def form_select(form, attribute, collection)
+    form_input(
+      form,
+      attribute,
+      collection: collection,
+      prompt: :translate,
+    )
+  end
+
   def number_of_hulls_collection
     (1..6).map { |x| [x.to_s, x] }
   end
