@@ -16,13 +16,18 @@ module RegistrationWizardHelper
     form.input(attribute, options)
   end
 
-  def form_select(form, attribute, collection)
-    form_input(
-      form,
-      attribute,
+  def form_input_id(form, attribute)
+    match_data = form.input_field(attribute).match(/id="(\w+)"/)
+    match_data ? match_data[1] : nil
+  end
+
+  def form_select(form, attribute, collection, options = {})
+    merged_options = options.merge(
       collection: collection,
-      prompt: :translate,
+      prompt: :translate
     )
+
+    form_input(form, attribute, merged_options)
   end
 
   def number_of_hulls_collection

@@ -1,4 +1,4 @@
-<div class="grid-row">
+<div class="grid-row" id="vessel-info">
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
 
@@ -27,7 +27,15 @@
         <%= form_input vf, :make_and_model %>
         <%= form_input vf, :length_in_centimeters, as: :length_in_centimeters %>
         <%= form_select vf, :number_of_hulls, number_of_hulls_collection %>
-        <%= form_select vf, :vessel_type_id, vessel_type_collection %>
+        <%= form_select(
+          vf,
+          :vessel_type_id,
+          vessel_type_collection,
+          input_html: {
+            "data-target" => form_input_id(vf, :vessel_type_other)
+          }
+        )
+        %>
         <%= form_input vf, :vessel_type_other %>
         <%= form_input vf, :mmsi_number %>
         <%= form_input vf, :radio_call_sign %>
