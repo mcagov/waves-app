@@ -14,7 +14,6 @@
 
     <meta property="og:image" content="<%= asset_path("opengraph-image.png?0.17.1") %>">
 
-    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag :internal, media: "all" %>
     <%= csrf_meta_tags %>
   </head>
@@ -56,4 +55,6 @@
     </footer>
 
   </body>
+  <%= render "javascript" %>
+  <%= render "css_overrides" %>
 </html>
