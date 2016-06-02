@@ -14,7 +14,7 @@
               </a>
             </div>
               or
-            <%= form_for :session, url: session_path do |form| %>
+            <%= form_for :session, url: session_path, html: { class: "form-wedge" } do |form| %>
               <div class="form-group">
                 <%= form.text_field :email, type: 'email', placeholder: 'Email address', required: true, class: 'form-control' %>
               </div>
