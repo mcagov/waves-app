@@ -3,36 +3,37 @@
   padding: 14px 14px 0;
   overflow:hidden;
   background-color:rgba(255,255,255,.8);
+
+  .help-block{
+    font-size:12px
+  }
+  .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+  }
+  .sso-buttons{
+    margin:12px 0
+  }
+  .sso-buttons a{
+    width: 49%;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
 }
-#login-dp .help-block{
-  font-size:12px
-}
-#login-dp .bottom{
-  background-color:rgba(255,255,255,.8);
-  border-top:1px solid #ddd;
-  clear:both;
-  padding:14px;
-}
-#login-dp .sso-buttons{
-  margin:12px 0
-}
-#login-dp .sso-buttons a{
-  width: 49%;
-}
-#login-dp .form-group {
-  margin-bottom: 10px;
-}
+
 .btn-activedirectory{
   color: #fff;
   background-color:#55acee;
-}
-.btn-activedirectory:hover{
-  color: #fff;
-  background-color:#59b5fa;
-}
-.btn-activedirectory {
   min-width: 135px;
   max-width: 135px;
+
+  :hover{
+    color: #fff;
+    background-color:#59b5fa;
+  }
 }
 
 .form-wedge {
