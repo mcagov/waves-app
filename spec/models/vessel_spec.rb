@@ -242,6 +242,8 @@ describe Vessel, type: :model do
           it "other vessel type is not blank" do
             vessel = build(:vessel, vessel_type_other: "Boaty")
             expect(vessel).not_to be_valid
+            expect(vessel.errors[:vessel_type_id]).not_to be_empty
+            expect(vessel.errors[:vessel_type_other]).not_to be_empty
           end
         end
 
@@ -249,6 +251,8 @@ describe Vessel, type: :model do
           it "other vessel type is blank " do
             vessel = build(:vessel, vessel_type: nil, vessel_type_other: nil)
             expect(vessel).not_to be_valid
+            expect(vessel.errors[:vessel_type_id]).not_to be_empty
+            expect(vessel.errors[:vessel_type_other]).not_to be_empty
           end
         end
       end

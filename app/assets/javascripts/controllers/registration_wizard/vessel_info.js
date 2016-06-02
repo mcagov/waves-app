@@ -6,11 +6,9 @@ $(document).ready(function () {
 
   vesselTypeIdField.on("change", function (event) {
     if (event.target.value === "") {
-      vesselTypeIdField.parent().css("margin-bottom", "10px");
       vesselTypeOtherField.showContent();
     } else {
       vesselTypeOtherField.hideContent();
-      vesselTypeIdField.parent().css("margin-bottom", "30px");
     }
   });
 });

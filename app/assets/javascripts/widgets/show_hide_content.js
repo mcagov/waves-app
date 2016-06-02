@@ -5,7 +5,10 @@ var ShowHideContent = function (control) {
   this.target = $("#" + targetId).parent();
   this.target.addClass("panel panel-border-narrow");
 
-  this.hideContent();
+  if (this.target.find("input").val())
+    this.showContent();
+  else
+    this.hideContent();
 };
 
 ShowHideContent.prototype.showContent = function () {
@@ -15,6 +18,7 @@ ShowHideContent.prototype.showContent = function () {
 };
 
 ShowHideContent.prototype.hideContent = function () {
+  this.target.find("input").val("")
   this.target.hide();
   this.target.addClass("js-hidden");
   this.setHiddenState(true);
