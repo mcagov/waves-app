@@ -39,12 +39,17 @@ GEM
     addressable (2.4.0)
     arel (6.0.3)
     ast (2.2.0)
+    autoprefixer-rails (6.3.6.2)
+      execjs
     awesome_print (1.6.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     bullet (5.0.0)
       activesupport (>= 3.0.0)
@@ -93,6 +98,8 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     flutie (2.0.0)
+    font-awesome-rails (4.6.3.0)
+      railties (>= 3.2, < 5.1)
     formulaic (0.3.0)
       activesupport
       capybara
@@ -266,6 +273,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bootstrap-sass (~> 3.3.6)
   bullet
   bundler-audit (>= 0.5.0)
   capybara-webkit
@@ -276,6 +284,7 @@ DEPENDENCIES
   factory_girl
   factory_girl_rails
   flutie
+  font-awesome-rails
   formulaic
   govuk_elements_rails
   govuk_frontend_toolkit

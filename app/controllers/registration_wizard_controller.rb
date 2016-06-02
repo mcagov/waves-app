@@ -1,6 +1,8 @@
 class RegistrationWizardController < ApplicationController
   include Wicked::Wizard::Translated
 
+  layout "public"
+
   steps :prerequisites, :vessel_info, :owner_info, :declaration, :payment
 
   def show
