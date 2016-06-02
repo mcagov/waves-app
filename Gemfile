@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
+gem "clearance"
 gem "flutie"
 gem "govuk_elements_rails"
 gem "govuk_frontend_toolkit"
