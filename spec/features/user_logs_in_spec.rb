@@ -5,21 +5,33 @@ feature "User logs in", type: :feature, js: true do
     visit root_path
   end
 
-  xcontext "using ActiveDirectory" do
-  end
+  xcontext "using ActiveDirectory"
 
   context "using email/password" do
-    let!(:user) { create(:user, password: "meh") }
+    let!(:password) { "meh" }
+    let!(:user) { create(:user, password: password) }
 
     scenario "user is taken to the dashboard with correct info" do
-      click_on "Login"
+      perform_sign_in user.email, password
 
-      fill_in "Email address", with: user.email
-      fill_in "Password", with: "meh"
-
-      click_on "Sign in"
-
-      expect(page.path).to equal("lol")
+      expect(page).to_not have_content("Login")
+      expect(page).to have_content("DASHBOARD")
     end
+
+    scenario "user is not taken to the dashboard with incorrect info" do
+      perform_sign_in user.email, "wrong_password"
+
+      expect(page).to have_content("Bad email or password.")
+      expect(page).to_not have_content("DASHBOARD")
+    end
+  end
+
+  def perform_sign_in(email, password)
+    click_on "Login"
+
+    fill_in "Email address", with: email
+    fill_in "Password", with: password
+
+    click_on "Sign in"
   end
 end
