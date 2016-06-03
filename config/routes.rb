@@ -4,13 +4,13 @@ Rails.application.routes.draw do
 
   resources :users, controller: "clearance/users", only: [:create] do
     resource :password,
-      controller: "clearance/passwords",
-      only: [:create, :edit, :update]
+             controller: "clearance/passwords",
+             only: [:create, :edit, :update]
   end
 
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
 
-  constraints Clearance::Constraints::SignedIn.new { |user| user.admin? } do
+  constraints Clearance::Constraints::SignedIn.new(&:admin?) do
     root to: "admin/dashboards#show", as: :admin_root
   end
 
@@ -19,11 +19,11 @@ Rails.application.routes.draw do
   end
 
   constraints Clearance::Constraints::SignedOut.new do
-    root to: 'pages#show', id: 'home'
+    root to: "pages#show", id: "home"
   end
 
   resources :registration_wizard, only: [:show, :update]
 
   # overriding HighVoltage
-  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get "/pages/*id" => "pages#show", as: :page, format: false
 end

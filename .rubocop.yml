@@ -1010,8 +1010,8 @@ Lint/DefEndAlignment:
   AutoCorrect: false
 
 # Checks for unused block arguments
-Lint/UnusedBlockArgument:
-  IgnoreEmptyBlocks: true
+#Lint/UnusedBlockArgument:
+#  IgnoreEmptyBlocks: true
 
 # Checks for unused method arguments.
 Lint/UnusedMethodArgument:
