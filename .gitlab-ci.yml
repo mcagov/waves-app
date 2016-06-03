@@ -8,6 +8,7 @@ variables:
 
 before_script:
   - source ./scripts/prepare_build.sh
+  - sudo apt-get install -y xvfb
   - ruby -v
   - which ruby
   - retry bundle install --path vendor/bundle --without production --jobs $(nproc) "${FLAGS[@]}"
@@ -19,7 +20,7 @@ stages:
 rspec:
   stage: test
   script:
-    - RAILS_ENV=test SIMPLECOV=true bundle exec rspec
+    - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec spec
   tags:
     - ruby2.3
 
