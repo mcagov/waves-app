@@ -42,15 +42,15 @@ ActiveRecord::Schema.define(version: 20160609115347) do
   end
 
   create_table "owners", force: :cascade do |t|
-    t.string   "forename",      null: false
-    t.string   "surname",       null: false
-    t.string   "nationality",   null: false
-    t.string   "email",         null: false
+    t.string   "first_name",              null: false
+    t.string   "last_name",               null: false
+    t.string   "nationality",   limit: 2, null: false
+    t.string   "email",                   null: false
     t.string   "phone_number"
-    t.string   "mobile_number", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "title",         null: false
+    t.string   "mobile_number",           null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "title"
   end
 
   create_table "register_vessels", force: :cascade do |t|
