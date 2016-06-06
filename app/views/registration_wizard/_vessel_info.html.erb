@@ -1,0 +1,33 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Vessel Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><%= @vessel.name %></td>
+    </tr>
+    <tr>
+      <td>Hull identification (HIN)</td>
+      <td><%= @vessel.hin %></td>
+    </tr>
+    <tr>
+     <td>Vessel type</td>
+      <td><%= @vessel.type %></td>
+    </tr>
+    <tr>
+      <td>Make/Model</td>
+      <td><%= @vessel.make_and_model %></td>
+    </tr>
+    <tr>
+      <td>Overall length</td>
+      <td><%= @vessel.length_in_centimeters %> (centimeters)</td>
+    </tr>
+    <tr>
+      <td>Number of hulls</td>
+      <td><%= @vessel.number_of_hulls %></td>
+    </tr>
+  </tbody>
+</table>

@@ -73,3 +73,7 @@
     declaration:
       prompt: "By submitting this online registration form you agree to the following statements:"
       title: "Declaration"
+      warning: "Please make sure the following information is correct. If it is not, please go back and change it accordingly."
+    summary:
+        prompt: "Please confirm that the following information is correct:"
+        title: "Summary"

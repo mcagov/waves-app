@@ -4,7 +4,7 @@
 
     <h3 class="heading-medium"><%= t("registration.declaration.title") %></h3>
 
-    <p><%= t("registration.declaration.prompt") %></p>
+    <p><%= t("registration.declaration.warning") %></p>
 
     <%= simple_form_for @registration, url: wizard_path, method: :put do |f| %>
       <legend class="visuallyhidden"><%= t("registration.declaration.title") %></legend>
@@ -20,6 +20,16 @@
           <p><%= t("registration.error_description") %></p>
         </div>
       <% end %>
+
+      <p>
+        <%= render partial: "vessel_info" %>
+        <br>
+        <%= render partial: "owner_info" %>
+      </p>
+
+      <br>
+
+      <p><%= t("registration.declaration.prompt") %></p>
 
       <div class="form-group<%= " error" if f.error_notification %>">
         <%= f.input :eligible_under_regulation_89, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>

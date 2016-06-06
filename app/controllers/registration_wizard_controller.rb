@@ -1,9 +1,11 @@
 class RegistrationWizardController < ApplicationController
   include Wicked::Wizard::Translated
 
-  layout "public"
-
-  steps :prerequisites, :vessel_info, :owner_info, :declaration, :payment
+  steps :prerequisites,
+        :vessel_info,
+        :owner_info,
+        :declaration,
+        :payment
 
   def show
     case step_name
@@ -12,9 +14,11 @@ class RegistrationWizardController < ApplicationController
     when vessel_info_step_name
       @registration = Registration.find(params[:registration_id])
       @registration.build_vessel
-    when owner_info_step_name,
-         declaration_step_name
+    when owner_info_step_name
       @registration = Registration.find(params[:registration_id])
+    when declaration_step_name
+      @registration = Registration.find(params[:registration_id])
+      @vessel = @registration.vessels.first
     end
 
     render_wizard
@@ -23,19 +27,12 @@ class RegistrationWizardController < ApplicationController
   def update
     case step_name
     when prerequisites_step_name
-      @registration = Registration.create(
-        prerequisite_params.merge(
-          browser: request.env["HTTP_USER_AGENT"] || "Unknown"
-        )
-      )
-    when vessel_info_step_name
+      @registration = Registration.create(params_for_step(step_name))
+    when vessel_info_step_name,
+         declaration_step_name
       @registration = Registration.find(params[:registration][:id])
-      @registration.update(vessel_info_params)
-      @registration.trigger(:added_vessel_info)
-    when declaration_step_name
-      @registration = Registration.find(params[:registration][:id])
-      @registration.update(declaration_params)
-      @registration.trigger(:accepted_declaration)
+      @vessel = @registration.vessels.first
+      @registration.update(params_for_step(step_name))
     end
 
     if @registration.valid?
@@ -90,6 +87,20 @@ class RegistrationWizardController < ApplicationController
     )
   end
 
+  def params_for_step(current_step)
+    case current_step
+    when prerequisites_step_name
+      prerequisite_params.merge(
+        status: "initiated",
+        browser: request.env["HTTP_USER_AGENT"] || "Unknown"
+      )
+    when vessel_info_step_name
+      vessel_info_params.merge(status: "vessel_info_added")
+    when declaration_step_name
+      declaration_params.merge(status: "declaration_accepted")
+    end
+  end
+
 
   def prerequisites_step_name
     I18n.t("wicked.prerequisites")
@@ -109,6 +120,10 @@ class RegistrationWizardController < ApplicationController
 
   def payment_step_name
     I18n.t("wicked.payment")
+  end
+
+  def summary_step_name
+    I18n.t("wicked.summary")
   end
 
   def step_name

@@ -125,11 +125,15 @@ feature "User registers for small ships register", type: :feature do
         complete_prerequisites_form
         complete_vessel_info_form
         complete_owner_info_form
-
-        complete_declaration_form
       end
 
       scenario "user is taken to next stage" do
+        registration = Registration.last
+        vessel = registration.vessels.first
+
+        check_page_has_vessel_info(page, vessel)
+
+        complete_declaration_form
         expect(page).to have_current_path(path_for_step("payment"))
       end
     end
@@ -147,14 +151,35 @@ feature "User registers for small ships register", type: :feature do
       end
 
       scenario "user is shown declaration form again" do
+        registration = Registration.last
+        vessel = registration.vessels.first
+
+        check_page_has_vessel_info(page, vessel)
+
         expect(page).to have_text(t("registration.declaration.title"))
       end
 
       scenario "user is shown declaration error messages" do
+        registration = Registration.last
+        vessel = registration.vessels.first
+
+        check_page_has_vessel_info(page, vessel)
+
         expect(page).to have_text(
           error_message("understands_false_statement_is_offence")
         )
       end
     end
   end
+end
+
+def check_page_has_vessel_info(page, vessel)
+  # TODO research making this a custom Capybara matcher
+  # can't find info on it ...
+  expect(page).to have_content(vessel.name)
+  expect(page).to have_content(vessel.hin)
+  expect(page).to have_content(vessel.type)
+  expect(page).to have_content(vessel.make_and_model)
+  expect(page).to have_content(vessel.length_in_centimeters)
+  expect(page).to have_content(vessel.number_of_hulls)
 end
