@@ -7,7 +7,7 @@ class AddVessels < ActiveRecord::Migration
       t.integer :length_in_centimeters, null: false
       t.integer :number_of_hulls, null: false
 
-      t.integer :vessel_type_id, references: :vessel_types
+      t.belongs_to :vessel_type, index: true
 
       t.timestamps null: false
     end
