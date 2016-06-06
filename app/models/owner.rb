@@ -20,7 +20,7 @@ class Owner < ActiveRecord::Base
     inclusion: { in: ALLOWED_NATIONALITIES }
   )
 
-  validates :email, presence: true
+  validates_email_format_of :email, presence: true
 
   validates :mobile_number, presence: true
 end

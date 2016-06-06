@@ -28,17 +28,17 @@
         owner:
           attributes:
             first_name:
-              blank: "The first name of the owner must be specified."
+              blank: "The owner's first name must be specified."
             last_name:
-              blank: "The last name of the owner must be specified."
+              blank: "The owner's last name must be specified."
             nationality:
-              blank: "The nationality of the owner must be specified."
-              invalid: "The nationality of the owner is invalid."
+              blank: "The owner's nationality must be specified."
+              invalid: "The owner's nationality is invalid."
               inclusion: "An owner with the specified nationality is ineligible to register."
             email:
-              blank: "The email of the owner must be specified."
+              invalid_email_address: "The owner's email address is invalid."
             mobile_number:
-              blank: "The mobile phone number of the owner must be specified."
+              blank: "The owner's mobile phone number must be specified."
 
         vessel:
           attributes:

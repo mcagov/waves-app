@@ -83,6 +83,11 @@ describe Owner, type: :model do
           owner = build(:owner, email: " ")
           expect(owner).not_to be_valid
         end
+
+        it "is invalid" do
+          owner = build(:owner, email: "owner[at]example.com")
+          expect(owner).not_to be_valid
+        end
       end
 
       describe "mobile number" do
