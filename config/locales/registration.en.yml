@@ -25,6 +25,21 @@
             understands_false_statement_is_offence:
               accepted: "This statement must be accepted."
 
+        owner:
+          attributes:
+            first_name:
+              blank: "The first name of the owner must be specified."
+            last_name:
+              blank: "The last name of the owner must be specified."
+            nationality:
+              blank: "The nationality of the owner must be specified."
+              invalid: "The nationality of the owner is invalid."
+              inclusion: "An owner with the specified nationality is ineligible to register."
+            email:
+              blank: "The email of the owner must be specified."
+            mobile_number:
+              blank: "The mobile phone number of the owner must be specified."
+
         vessel:
           attributes:
             name:
