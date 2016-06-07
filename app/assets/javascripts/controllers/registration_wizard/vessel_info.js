@@ -1,7 +1,9 @@
 $(document).ready(function () {
   if ($("#vessel-info").length === 0) return;
 
-  var vesselTypeIdField = $("#registration_vessels_attributes_0_vessel_type_id");
+  var formIdPrefix = "#registration_vessels_attributes_0_";
+
+  var vesselTypeIdField = $(formIdPrefix + "vessel_type_id");
   var vesselTypeOtherField = new ShowHideContent(vesselTypeIdField);
 
   vesselTypeIdField.on("change", function (event) {
@@ -11,4 +13,8 @@ $(document).ready(function () {
       vesselTypeOtherField.hideContent();
     }
   });
+
+  new LimitNumberField("#length_in_centimeters_m", 2);
+  new LimitNumberField("#length_in_centimeters_cm", 2);
+  new LimitNumberField(formIdPrefix + "mmsi_number", 9);
 });

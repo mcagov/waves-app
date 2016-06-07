@@ -18,7 +18,7 @@ class LengthInCentimetersInput < BaseInput
       max: maximum_value,
       min: 0,
       placeholder: "0",
-      value: (value || 0)
+      value: (value || "")
     )
   end
 end

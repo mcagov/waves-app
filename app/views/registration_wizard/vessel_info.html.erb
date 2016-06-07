@@ -38,7 +38,7 @@
         %>
         <%= form_input vf, :vessel_type_other %>
         <%= form_input vf, :mmsi_number %>
-        <%= form_input vf, :radio_call_sign %>
+        <%= form_input vf, :radio_call_sign, input_html: {maxlength: 6} %>
       <% end %>
 
       <%= f.button :submit, class: "button" %>
