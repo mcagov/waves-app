@@ -145,4 +145,6 @@ ActiveRecord::Schema.define(version: 20160609115347) do
     t.string   "radio_call_sign",       null: false
   end
 
+  add_index "vessels", ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
+
 end
