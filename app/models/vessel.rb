@@ -12,7 +12,12 @@ class Vessel < ActiveRecord::Base
 
   validates :name, presence: true
 
-  validates :hin, format: { with: /\AUK\-\d{12}\z/ }, allow_blank: true
+  validates(
+    :hin,
+    format: { with: /\A[A-Z]{2}\-[0-9A-Z]{12}\z/ },
+    allow_blank: true
+  )
+  validate :hin_must_begin_with_a_valid_country_code
 
   validates(
     :length_in_centimeters,
@@ -53,4 +58,13 @@ class Vessel < ActiveRecord::Base
     presence: true,
     format: { with: /\A[a-zA-Z]\d{4,5}\z/ }
   )
+
+  private
+
+  def hin_must_begin_with_a_valid_country_code
+    return if hin.blank? || ISO3166::Data.codes.include?(hin[0..1])
+
+    message = I18n.t("activerecord.errors.models.vessel.attributes.hin.invalid")
+    errors.add(:hin, message)
+  end
 end

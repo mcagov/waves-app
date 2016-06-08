@@ -189,14 +189,14 @@ describe Vessel, type: :model do
 
       describe "hull ID number" do
         it "is not valid" do
-          invalid_hin = "UK-#{rand.to_s[2..7]}"
+          invalid_hin = random_hin[0..-2]
           vessel = build(:vessel, hin: invalid_hin)
 
           expect(vessel).not_to be_valid
         end
 
-        it "is not a UK number" do
-          invalid_hin = "DE-#{rand.to_s[2..13]}"
+        it "does not contain a valid country code" do
+          invalid_hin = "XX-#{random_hin[3..-1]}"
           vessel = build(:vessel, hin: invalid_hin)
 
           expect(vessel).not_to be_valid
@@ -271,14 +271,14 @@ describe Vessel, type: :model do
         end
 
         it "is not the correct length" do
-          invalid_mmsi_number = "#{rand(232..235)}#{rand.to_s[2..9]}".to_i
+          invalid_mmsi_number = random_mmsi_number[0..-2]
           vessel = build(:vessel, mmsi_number: invalid_mmsi_number)
 
           expect(vessel).not_to be_valid
         end
 
         it "contains an invalid MID" do
-          invalid_mmsi_number = "231#{rand.to_s[2..7]}".to_i
+          invalid_mmsi_number = "231#{random_mmsi_number[3..-1]}"
           vessel = build(:vessel, mmsi_number: invalid_mmsi_number)
 
           expect(vessel).not_to be_valid
@@ -292,21 +292,21 @@ describe Vessel, type: :model do
         end
 
         it "does not start with a letter" do
-          invalid_radio_call_sign = "#{rand(0..9)}#{rand.to_s[2..7]}"
+          invalid_radio_call_sign = "#{rand(0..9)}#{random_radio_call_sign[1..-1]}"
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
         end
 
         it "has less than 4 digits" do
-          invalid_radio_call_sign = "#{(65 + rand(25)).chr}#{rand.to_s[2..4]}"
+          invalid_radio_call_sign = random_radio_call_sign[0..-3]
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
         end
 
         it "has greater than 5 digits" do
-          invalid_radio_call_sign = "#{(65 + rand(25)).chr}#{rand.to_s[2..8]}"
+          invalid_radio_call_sign = "#{random_radio_call_sign}#{rand.to_s[2..4]}"
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
