@@ -55,6 +55,10 @@
             radio_call_sign:
               blank: "The radio call sign must be specified."
               invalid: "The radio call sign is invalid."
+              too_long:
+                other: "The radio call sign is too long (maximum is %{count} characters)."
+              too_short:
+                other: "The radio call sign is too short (maximum is %{count} characters)."
 
   registration:
     error_description: "Please correct the highlighted problems below before proceeding."

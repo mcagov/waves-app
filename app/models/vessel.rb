@@ -56,7 +56,8 @@ class Vessel < ActiveRecord::Base
   validates(
     :radio_call_sign,
     presence: true,
-    format: { with: /\A[a-zA-Z]\d{4,5}\z/ }
+    length: { minimum: 6, maximum: 7 },
+    format: { with: /\A[0-9A-Z]{6,7}\z/}
   )
 
   private

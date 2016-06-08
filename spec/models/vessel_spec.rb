@@ -147,30 +147,23 @@ describe Vessel, type: :model do
       end
 
       describe "radio call sign" do
-        it "is present" do
+        it "is present and valid format" do
           vessel = build(:vessel)
           vessel.valid?
 
           expect(vessel.errors[:radio_call_sign]).to be_empty
         end
 
-        it "starts with a letter" do
-          vessel = build(:vessel)
-          vessel.valid?
-
-          expect(vessel.errors[:radio_call_sign]).to be_empty
-        end
-
-        it "contains 4 digits" do
-          radio_call_sign = "#{(65 + rand(25)).chr}#{rand.to_s[2..5]}"
+        it "is 6 characters long" do
+          radio_call_sign = random_radio_call_sign(6)
           vessel = build(:vessel, radio_call_sign: radio_call_sign)
           vessel.valid?
 
           expect(vessel.errors[:radio_call_sign]).to be_empty
         end
 
-        it "contains 5 digits" do
-          radio_call_sign = "#{(65 + rand(25)).chr}#{rand.to_s[2..6]}"
+        it "is 7 characters long" do
+          radio_call_sign = random_radio_call_sign(7)
           vessel = build(:vessel, radio_call_sign: radio_call_sign)
           vessel.valid?
 
@@ -291,22 +284,22 @@ describe Vessel, type: :model do
           expect(vessel).not_to be_valid
         end
 
-        it "does not start with a letter" do
-          invalid_radio_call_sign = "#{rand(0..9)}#{random_radio_call_sign[1..-1]}"
+        it "is less than 6 characters long" do
+          invalid_radio_call_sign = random_radio_call_sign(5)
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
         end
 
-        it "has less than 4 digits" do
-          invalid_radio_call_sign = random_radio_call_sign[0..-3]
+        it "is greater than 7 characters long" do
+          invalid_radio_call_sign = random_radio_call_sign(8)
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
         end
 
-        it "has greater than 5 digits" do
-          invalid_radio_call_sign = "#{random_radio_call_sign}#{rand.to_s[2..4]}"
+        it "is in an invalid format" do
+          invalid_radio_call_sign = random_radio_call_sign(6).insert(2, "-")
           vessel = build(:vessel, radio_call_sign: invalid_radio_call_sign)
 
           expect(vessel).not_to be_valid
