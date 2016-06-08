@@ -1,6 +1,10 @@
+def random_alphanumeric_string(length)
+  ([*("0".."9"), *("A".."Z")]).sample(length).join
+end
+
 def random_hin
   prefix = ISO3166::Data.codes.sample
-  suffix = rand(36**12).to_s(36).upcase
+  suffix = random_alphanumeric_string(12)
 
   "#{prefix}-#{suffix}"
 end
@@ -13,5 +17,5 @@ def random_mmsi_number
 end
 
 def random_radio_call_sign(length = [6, 7].sample)
-  rand(36**length).to_s(36).upcase
+  random_alphanumeric_string(length)
 end
