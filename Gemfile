@@ -6,6 +6,7 @@ gem "bundler-audit", ">= 0.5.0", require: false
 gem "bootstrap-sass", "~> 3.3.6"
 gem "clearance"
 gem "countries"
+gem "country_select"
 gem "dotenv-rails"
 gem "flutie"
 gem "font-awesome-rails"
