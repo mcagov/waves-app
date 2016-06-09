@@ -1,4 +1,4 @@
 class UserVesselRegistration < ActiveRecord::Base
   belongs_to :user
-  belongs_to :vessel_registration
+  belongs_to :registration
 end
