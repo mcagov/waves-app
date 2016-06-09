@@ -4,6 +4,7 @@ ruby "2.3.1"
 
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "bootstrap-sass", "~> 3.3.6"
+gem "rails-assets-bootstrap-select", source: "https://rails-assets.org"
 gem "clearance"
 gem "countries"
 gem "dotenv-rails"

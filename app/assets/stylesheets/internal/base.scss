@@ -28,13 +28,30 @@ footer {
   border-radius: 0 !important;
 }
 
-.nav-middle {
-  span {
-    top: 8px;
-  }
+.nav-adjust-top-8 {
+  margin-top: 8px;
+}
+
+.nav-adjust-top-10 {
+  margin-top: 10px;
 }
 
 .footer-text {
   padding-left: 180px;
   padding-top: 20px;
 }
+
+.bootstrap-select {
+  top: 8px;
+  left: 20px;
+}
+
+.pull-down {
+  margin-top: 80px;
+}
+
+.messages-notifier {
+  position: absolute;
+  left: calc(50% - 64px);
+}
+
