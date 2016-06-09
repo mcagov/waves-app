@@ -3,10 +3,12 @@ source "https://rubygems.org"
 ruby "2.3.1"
 
 gem "bundler-audit", ">= 0.5.0", require: false
+gem "bootstrap-sass", "~> 3.3.6"
 gem "clearance"
 gem "countries"
 gem "dotenv-rails"
 gem "flutie"
+gem "font-awesome-rails"
 gem "govuk_elements_rails"
 gem "govuk_frontend_toolkit"
 gem "govuk_template"

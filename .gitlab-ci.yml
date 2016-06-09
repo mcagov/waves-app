@@ -19,7 +19,7 @@ stages:
 rspec:
   stage: test
   script:
-    - RAILS_ENV=test SIMPLECOV=true bundle exec rspec
+    - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
   tags:
     - ruby2.3
 

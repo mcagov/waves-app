@@ -3,8 +3,8 @@ module RegistrationWizardHelper
     form.input(
       attribute,
       as: :boolean,
-      label_html: {class: "block-label"},
       wrapper: false,
+      label_html: { class: "block-label" }
     )
   end
 

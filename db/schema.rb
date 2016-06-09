@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20160609115347) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                           null: false
-    t.string   "ldap_id",                        null: false
+    t.string   "ldap_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "email"
@@ -117,6 +117,13 @@ ActiveRecord::Schema.define(version: 20160609115347) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+
+  create_table "vessel_registrations", force: :cascade do |t|
+    t.integer  "vessel_id"
+    t.integer  "registration_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "vessel_types", force: :cascade do |t|
     t.string   "designation", null: false

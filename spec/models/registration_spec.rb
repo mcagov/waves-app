@@ -28,7 +28,9 @@ describe Registration, type: :model do
       end
 
       it "is not a commercial fishing vessel of submersible" do
-        expect(registration.errors[:not_commercial_fishing_or_submersible]).to be_empty
+        expect(
+          registration.errors[:not_commercial_fishing_or_submersible]
+        ).to be_empty
       end
 
       it "the owners are UK residents" do
@@ -36,11 +38,15 @@ describe Registration, type: :model do
       end
 
       it "the owners are eligible to register the ship" do
-        expect(registration.errors[:owners_are_eligible_to_register]).to be_empty
+        expect(
+          registration.errors[:owners_are_eligible_to_register]
+        ).to be_empty
       end
 
       it "is not registered on a foreign registry" do
-        expect(registration.errors[:not_registered_on_foreign_registry]).to be_empty
+        expect(
+          registration.errors[:not_registered_on_foreign_registry]
+        ).to be_empty
       end
     end
 
@@ -84,7 +90,6 @@ describe Registration, type: :model do
         expect(
           registration.errors[:understands_false_statement_is_offence]
         ).to be_empty
-
       end
     end
 

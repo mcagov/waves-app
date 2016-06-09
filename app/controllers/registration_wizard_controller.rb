@@ -1,6 +1,8 @@
 class RegistrationWizardController < ApplicationController
   include Wicked::Wizard::Translated
 
+  layout "public"
+
   steps :prerequisites, :vessel_info, :owner_info, :declaration, :payment
 
   def show
@@ -88,7 +90,7 @@ class RegistrationWizardController < ApplicationController
       :eligible_under_regulation_89,
       :eligible_under_regulation_90,
       :understands_false_statement_is_offence
-      )
+    )
   end
 
 

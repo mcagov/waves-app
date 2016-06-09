@@ -69,7 +69,7 @@ def default_prerequisites_form_fields
     not_commercial_fishing_or_submersible: true,
     owners_are_uk_residents: true,
     owners_are_eligible_to_register: true,
-    not_registered_on_foreign_registry: true
+    not_registered_on_foreign_registry: true,
   }.freeze
 end
 
