@@ -31,8 +31,8 @@ class RegistrationWizardController < ApplicationController
     when vessel_info_step_name,
          declaration_step_name
       @registration = Registration.find(params[:registration][:id])
-      @vessel = @registration.vessels.first
       @registration.update(params_for_step(step_name))
+      @vessel = @registration.vessels.first
     end
 
     if @registration.valid?
@@ -101,7 +101,6 @@ class RegistrationWizardController < ApplicationController
     end
   end
 
-
   def prerequisites_step_name
     I18n.t("wicked.prerequisites")
   end
@@ -122,10 +121,6 @@ class RegistrationWizardController < ApplicationController
     I18n.t("wicked.payment")
   end
 
-  def summary_step_name
-    I18n.t("wicked.summary")
-  end
-
   def step_name
     step
   end
@@ -137,7 +132,7 @@ class RegistrationWizardController < ApplicationController
     value =
       case parameter
       when :hin
-        "#{parameter_hash["prefix"]}-#{parameter_hash["suffix"]}".upcase
+        "#{parameter_hash['prefix']}-#{parameter_hash['suffix']}".upcase
       when :length_in_centimeters
         parameter_hash["m"].to_i * 100 + parameter_hash["cm"].to_i
       end
@@ -146,6 +141,6 @@ class RegistrationWizardController < ApplicationController
   end
 
   def vessel_param_is_present?(parameter)
-    params[parameter].values.any? { |value| value.present? }
+    params[parameter].values.any?(&:present?)
   end
 end
