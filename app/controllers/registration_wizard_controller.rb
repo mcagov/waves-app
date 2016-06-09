@@ -7,9 +7,11 @@ class RegistrationWizardController < ApplicationController
     case step_name
     when prerequisites_step_name
       @registration = Registration.new
-    when vessel_info_step_name,
-        owner_info_step_name,
-        declaration_step_name
+    when vessel_info_step_name
+      @registration = Registration.find(params[:registration_id])
+      @registration.build_vessel
+    when owner_info_step_name,
+         declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
 
@@ -21,7 +23,7 @@ class RegistrationWizardController < ApplicationController
     when prerequisites_step_name
       @registration = Registration.create(
         prerequisite_params.merge(
-          status: :initiated,
+          status: "initiated",
           browser: request.env["HTTP_USER_AGENT"] || "Unknown"
         )
       )
@@ -48,9 +50,12 @@ class RegistrationWizardController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
+    assign_vessel_param(:hin)
+    assign_vessel_param(:length_in_centimeters)
+
     params.require(:registration).permit(
       :id,
-      vessels_attributes: [
+      vessel_attributes: [
         :name,
         :hin,
         :make_and_model,
@@ -86,6 +91,7 @@ class RegistrationWizardController < ApplicationController
       )
   end
 
+
   def prerequisites_step_name
     I18n.t("wicked.prerequisites")
   end
@@ -108,5 +114,24 @@ class RegistrationWizardController < ApplicationController
 
   def step_name
     step
+  end
+
+  def assign_vessel_param(parameter)
+    return unless vessel_param_is_present?(parameter)
+
+    parameter_hash = params.delete(parameter)
+    value =
+      case parameter
+      when :hin
+        "#{parameter_hash["prefix"]}-#{parameter_hash["suffix"]}".upcase
+      when :length_in_centimeters
+        parameter_hash["m"].to_i * 100 + parameter_hash["cm"].to_i
+      end
+
+    params[:registration][:vessel_attributes].merge!(parameter => value)
+  end
+
+  def vessel_param_is_present?(parameter)
+    params[parameter].values.any? { |value| value.present? }
   end
 end

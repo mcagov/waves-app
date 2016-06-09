@@ -19,11 +19,46 @@
             not_registered_on_foreign_registry:
               accepted: "The vessel should not be registered on a foreign registry."
             eligible_under_regulation_89:
-              accepted: "This statement must be accepted"
+              accepted: "This statement must be accepted."
             eligible_under_regulation_90:
-              accepted: "This statement must be accepted"
+              accepted: "This statement must be accepted."
             understands_false_statement_is_offence:
-              accepted: "This statement must be accepted"
+              accepted: "This statement must be accepted."
+
+        vessel:
+          attributes:
+            name:
+              blank: "The name of the vessel must be specified."
+            hin:
+              invalid: "The hull identification number is invalid."
+            length_in_centimeters:
+              blank: "The length of the vessel must be specified."
+              greater_than: "The length of the vessel must be greater than 1-centimetre."
+              less_than_or_equal_to: "The length of the vessel must be less than 24-metres."
+              not_an_integer: "The length of the vessel must be a whole number."
+            number_of_hulls:
+              blank: "The number of hulls must be specified."
+              greater_than: "The number of hulls must be greater than zero."
+              less_than_or_equal_to: "The number of hulls must be less than seven."
+              not_an_integer: "The number of hulls must be a whole number."
+            vessel_type_id:
+              blank: "The vessel type must be selected from the list or other."
+              present: "The vessel type must be selected from the list or other."
+            vessel_type_other:
+              blank: ""
+              present: ""
+            mmsi_number:
+              blank: "The MMSI number must be specified."
+              invalid: "The MMSI number is invalid."
+              not_an_integer: "The MMSI number must be a whole number."
+              taken: "This MMSI number has already been registered for another vessel."
+            radio_call_sign:
+              blank: "The radio call sign must be specified."
+              invalid: "The radio call sign is invalid."
+              too_long:
+                other: "The radio call sign is too long (maximum is %{count} characters)."
+              too_short:
+                other: "The radio call sign is too short (minimum is %{count} characters)."
 
   registration:
     error_description: "Please correct the highlighted problems below before proceeding."

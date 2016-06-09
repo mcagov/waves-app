@@ -2,7 +2,10 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
+gem "bundler-audit", ">= 0.5.0", require: false
 gem "clearance"
+gem "countries"
+gem "dotenv-rails"
 gem "flutie"
 gem "govuk_elements_rails"
 gem "govuk_frontend_toolkit"
@@ -21,9 +24,6 @@ gem "sprockets-es6"
 gem "title"
 gem "uglifier"
 gem "wicked"
-
-gem "bundler-audit", ">= 0.5.0", require: false
-gem "dotenv-rails"
 
 group :development do
   gem "quiet_assets"

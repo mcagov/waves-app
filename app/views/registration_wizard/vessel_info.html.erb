@@ -1,4 +1,4 @@
-<div class="grid-row">
+<div class="grid-row" id="vessel-info">
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
 
@@ -21,47 +21,24 @@
         </div>
       <% end %>
 
-      <%= f.simple_fields_for :vessels, [Vessel.new] do |v| %>
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :name, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :hin, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :make_and_model, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :length_in_centimeters, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :number_of_hulls, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :vessel_type_id,
-            collection: VesselType.collected_designations,
-            input_html: {class: "form-control"},
-            label_html: {class: "form-label"},
-            prompt: :translate %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :vessel_type_other, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :mmsi_number, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
-        <div class="form-group<%= " error" if f.error_notification %>">
-          <%= v.input :radio_call_sign, input_html: {class: "form-control"}, label_html: {class: "form-label"} %>
-        </div>
-
+      <%= f.simple_fields_for :vessel do |vf| %>
+        <%= form_input vf, :name %>
+        <%= form_input vf, :hin, as: :hin %>
+        <%= form_input vf, :make_and_model %>
+        <%= form_input vf, :length_in_centimeters, as: :length_in_centimeters %>
+        <%= form_select vf, :number_of_hulls, number_of_hulls_collection %>
+        <%= form_select(
+          vf,
+          :vessel_type_id,
+          vessel_type_collection,
+          input_html: {
+            "data-target" => form_input_id(vf, :vessel_type_other)
+          }
+        )
+        %>
+        <%= form_input vf, :vessel_type_other %>
+        <%= form_input vf, :mmsi_number %>
+        <%= form_input vf, :radio_call_sign, input_html: {maxlength: 7} %>
       <% end %>
 
       <%= f.button :submit, class: "button" %>
