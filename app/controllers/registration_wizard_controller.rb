@@ -18,7 +18,7 @@ class RegistrationWizardController < ApplicationController
       @registration = Registration.find(params[:registration_id])
     when declaration_step_name
       @registration = Registration.find(params[:registration_id])
-      @vessel = @registration.vessels.first
+      @vessel = @registration.vessel
     end
 
     render_wizard
@@ -32,7 +32,7 @@ class RegistrationWizardController < ApplicationController
          declaration_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(params_for_step(step_name))
-      @vessel = @registration.vessels.first
+      @vessel = @registration.vessel
     end
 
     if @registration.valid?

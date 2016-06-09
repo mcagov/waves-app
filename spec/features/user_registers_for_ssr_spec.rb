@@ -129,7 +129,7 @@ feature "User registers for small ships register", type: :feature do
 
       scenario "user is taken to next stage" do
         registration = Registration.last
-        vessel = registration.vessels.first
+        vessel = registration.vessel
 
         check_page_has_vessel_info(page, vessel)
 
@@ -152,7 +152,7 @@ feature "User registers for small ships register", type: :feature do
 
       scenario "user is shown declaration form again" do
         registration = Registration.last
-        vessel = registration.vessels.first
+        vessel = registration.vessel
 
         check_page_has_vessel_info(page, vessel)
 
@@ -161,7 +161,7 @@ feature "User registers for small ships register", type: :feature do
 
       scenario "user is shown declaration error messages" do
         registration = Registration.last
-        vessel = registration.vessels.first
+        vessel = registration.vessel
 
         check_page_has_vessel_info(page, vessel)
 
@@ -178,7 +178,7 @@ def check_page_has_vessel_info(page, vessel)
   # can't find info on it ...
   expect(page).to have_content(vessel.name)
   expect(page).to have_content(vessel.hin)
-  expect(page).to have_content(vessel.type)
+  expect(page).to have_content(vessel.vessel_type.designation)
   expect(page).to have_content(vessel.make_and_model)
   expect(page).to have_content(vessel.length_in_centimeters)
   expect(page).to have_content(vessel.number_of_hulls)
