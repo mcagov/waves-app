@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602103320) do
+ActiveRecord::Schema.define(version: 20160609115347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20160602103320) do
   end
 
   create_table "owners", force: :cascade do |t|
-    t.string   "title",         null: false
     t.string   "forename",      null: false
     t.string   "surname",       null: false
     t.string   "nationality",   null: false
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160602103320) do
     t.string   "mobile_number", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "title",         null: false
   end
 
   create_table "register_vessels", force: :cascade do |t|
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160602103320) do
     t.boolean  "is_urgent"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "vessel_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -97,10 +98,10 @@ ActiveRecord::Schema.define(version: 20160602103320) do
 
   create_table "user_vessel_registrations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "vessel_registration_id"
-    t.json     "changes",                default: {}, null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.json     "changes",         default: {}, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "registration_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,13 +117,6 @@ ActiveRecord::Schema.define(version: 20160602103320) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
-
-  create_table "vessel_registrations", force: :cascade do |t|
-    t.integer  "vessel_id"
-    t.integer  "registration_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "vessel_types", force: :cascade do |t|
     t.string   "designation", null: false
