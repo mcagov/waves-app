@@ -9,7 +9,7 @@ class RegistrationWizardController < ApplicationController
       @registration = Registration.new
     when vessel_info_step_name
       @registration = Registration.find(params[:registration_id])
-      @vessels = [Vessel.new]
+      @registration.build_vessel
     when owner_info_step_name,
          declaration_step_name
       @registration = Registration.find(params[:registration_id])
@@ -55,7 +55,7 @@ class RegistrationWizardController < ApplicationController
 
     params.require(:registration).permit(
       :id,
-      vessels_attributes: [
+      vessel_attributes: [
         :name,
         :hin,
         :make_and_model,
@@ -128,7 +128,7 @@ class RegistrationWizardController < ApplicationController
         parameter_hash["m"].to_i * 100 + parameter_hash["cm"].to_i
       end
 
-    params[:registration][:vessels_attributes]["0"].merge!(parameter => value)
+    params[:registration][:vessel_attributes].merge!(parameter => value)
   end
 
   def vessel_param_is_present?(parameter)

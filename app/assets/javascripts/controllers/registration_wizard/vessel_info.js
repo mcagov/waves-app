@@ -1,7 +1,7 @@
 $(document).ready(function () {
   if ($("#vessel-info").length === 0) return;
 
-  var formIdPrefix = "#registration_vessels_attributes_0_";
+  var formIdPrefix = "#registration_vessel_attributes_";
 
   var vesselTypeIdField = $(formIdPrefix + "vessel_type_id");
   var vesselTypeOtherField = new ShowHideContent(vesselTypeIdField);

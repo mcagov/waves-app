@@ -32,7 +32,7 @@ en:
       registration:
         create: Continue
         update: Continue
-      vessels:
+      vessel:
         update: Continue
 
   mca:

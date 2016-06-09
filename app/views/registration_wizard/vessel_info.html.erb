@@ -21,7 +21,7 @@
         </div>
       <% end %>
 
-      <%= f.simple_fields_for :vessels, @vessels do |vf| %>
+      <%= f.simple_fields_for :vessel do |vf| %>
         <%= form_input vf, :name %>
         <%= form_input vf, :hin, as: :hin %>
         <%= form_input vf, :make_and_model %>

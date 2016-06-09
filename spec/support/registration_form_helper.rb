@@ -22,7 +22,7 @@ def complete_vessel_info_form(fields = default_vessel_info_form_fields)
   complete_vessel_length_in_centimeters_field(fields)
 
   fill_form_and_submit(
-    :vessels,
+    :vessel,
     :update,
     fields
   )

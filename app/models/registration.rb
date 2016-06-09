@@ -33,6 +33,6 @@ class Registration < ActiveRecord::Base
   end
 
   def associated_vessel?
-    vessels.count > 0
+    vessel.present?
   end
 end

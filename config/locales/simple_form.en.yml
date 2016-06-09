@@ -23,7 +23,7 @@ en:
         eligible_under_regulation_90: "I confirm that the ship is entitled to be registered on Part III of the Register in accordance with regulation 90 (British connection)"
         understands_false_statement_is_offence: "I UNDERSTAND THAT IT IS AN OFFENCE TO KNOWINGLY OR RECKLESSLY MAKE A FALSE STATEMENT IN ORDER TO OBTAIN REGISTRATION AND, BY TICKING THE BOX BELOW, HEREBY DECLARE THAT, TO THE BEST OF MY KNOWLEDGE, THE DETAILS GIVEN IN THIS ON-LINE APPLICATION ARE CORRECT"
 
-      vessels:
+      vessel:
         name: Name of vessel
         hin: Hull identification number
         make_and_model: Make and model
@@ -40,7 +40,7 @@ en:
         vessel_type_id: "Select your vessel type"
 
     placeholders:
-      vessels:
+      vessel:
         name: Name of vessel
         make_and_model: Make and model
         vessel_type_other: Other vessel type
