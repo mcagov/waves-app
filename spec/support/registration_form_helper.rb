@@ -50,7 +50,7 @@ def complete_vessel_length_in_centimeters_field(fields)
 end
 
 def complete_owner_info_form
-  click_on "Next"
+  click_on I18n.t("helpers.submit.registration.update")
 end
 
 def complete_declaration_form(fields = default_declaration_form_fields)

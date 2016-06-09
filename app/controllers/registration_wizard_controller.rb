@@ -32,6 +32,8 @@ class RegistrationWizardController < ApplicationController
       @registration = Registration.find(params[:registration][:id])
       @registration.update(vessel_info_params)
       @registration.trigger(:added_vessel_info)
+    when owner_info_step_name
+      @registration = Registration.find(params[:registration][:id])
     when declaration_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(declaration_params)

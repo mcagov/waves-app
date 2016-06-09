@@ -1,8 +1,27 @@
-OWNER INFO
+<div class="grid-row" id="owner-info">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
 
-<p>COMING SOON</p>
+    <h3 class="heading-medium"><%= t("registration.owner_info.title") %></h3>
 
-<br/>
-<br/>
+    <p><%= t("registration.owner_info.prompt") %></p>
 
-<%= link_to 'Next', next_wizard_path(registration_id: @registration.id) %>
+    <%= simple_form_for @registration, url: wizard_path, method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("registration.owner_info.title") %></legend>
+
+      <%= f.input :id, as: :hidden %>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <%= f.button :submit, class: "button" %>
+    <% end %>
+  </div>
+</div>
