@@ -34,6 +34,8 @@ en:
         update: Continue
       vessel:
         update: Continue
+      owner:
+        update: Continue
 
   mca:
     title: Maritime and Coastguard Agency

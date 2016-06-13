@@ -8,7 +8,3 @@ def path_for_step(step)
 
   "/registration_wizard/#{step_string}?registration_id=#{registration_id}"
 end
-
-def complete_owner_info_form
-  click_on I18n.t("helpers.submit.registration.update")
-end

@@ -21,6 +21,16 @@
         </div>
       <% end %>
 
+      <%= f.simple_fields_for :owner, @owner do |of| %>
+        <%= form_select of, :title, owner_title_collection %>
+        <%= form_input of, :first_name %>
+        <%= form_input of, :last_name %>
+        <%= form_country_select of, :nationality %>
+        <%= form_input of, :email, as: :email %>
+        <%= form_input of, :mobile_number %>
+        <%= form_input of, :phone_number %>
+      <% end %>
+
       <%= f.button :submit, class: "button" %>
     <% end %>
   </div>

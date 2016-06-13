@@ -1,6 +1,15 @@
 class Owner < ActiveRecord::Base
   ALLOWED_NATIONALITIES = [
-    "UK"
+    "GB"
+  ].freeze
+
+  SUGGESTED_TITLES = [
+    "Mr",
+    "Mrs",
+    "Miss",
+    "Ms",
+    "Doctor",
+    "Reverant"
   ].freeze
 
   has_many :owner_addresses
@@ -20,7 +29,7 @@ class Owner < ActiveRecord::Base
     inclusion: { in: ALLOWED_NATIONALITIES }
   )
 
-  validates_email_format_of :email, presence: true
+  validates_email_format_of :email
 
   validates :mobile_number, presence: true
 end

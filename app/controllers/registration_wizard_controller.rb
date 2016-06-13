@@ -12,8 +12,10 @@ class RegistrationWizardController < ApplicationController
     when vessel_info_step_name
       @registration = Registration.find(params[:registration_id])
       @registration.build_vessel
-    when owner_info_step_name,
-         declaration_step_name
+    when owner_info_step_name
+      @registration = Registration.find(params[:registration_id])
+      @owner = Owner.new
+    when declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
 
@@ -28,26 +30,61 @@ class RegistrationWizardController < ApplicationController
           browser: request.env["HTTP_USER_AGENT"] || "Unknown"
         )
       )
+
+      if @registration.valid?
+        redirect_to next_wizard_path(registration_id: @registration.id)
+      else
+        render_wizard @registration
+      end
     when vessel_info_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(vessel_info_params)
       @registration.trigger(:added_vessel_info)
+
+      if @registration.valid?
+        redirect_to next_wizard_path(registration_id: @registration.id)
+      else
+        render_wizard @registration
+      end
     when owner_info_step_name
       @registration = Registration.find(params[:registration][:id])
+      @owner = Owner.new(owner_info_params[:owner])
+
+      if @owner.valid?
+        @owner.save
+        @registration.vessel.owners << @owner
+        @registration.trigger(:added_owner_info)
+
+        redirect_to next_wizard_path(registration_id: @registration.id)
+      else
+        render_step owner_info_step_name
+      end
     when declaration_step_name
       @registration = Registration.find(params[:registration][:id])
       @registration.update(declaration_params)
       @registration.trigger(:accepted_declaration)
-    end
 
-    if @registration.valid?
-      redirect_to next_wizard_path(registration_id: @registration.id)
-    else
-      render_wizard @registration
+      if @registration.valid?
+        redirect_to next_wizard_path(registration_id: @registration.id)
+      else
+        render_wizard @registration
+      end
     end
   end
 
   private
+
+  def prerequisite_params
+    params.require(:registration).permit(
+      :not_registered_before_on_ssr,
+      :not_registered_under_part_1,
+      :not_owned_by_company,
+      :not_commercial_fishing_or_submersible,
+      :owners_are_uk_residents,
+      :owners_are_eligible_to_register,
+      :not_registered_on_foreign_registry
+    )
+  end
 
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
@@ -71,15 +108,18 @@ class RegistrationWizardController < ApplicationController
   end
   # rubocop:enable Metrics/MethodLength
 
-  def prerequisite_params
+  def owner_info_params
     params.require(:registration).permit(
-      :not_registered_before_on_ssr,
-      :not_registered_under_part_1,
-      :not_owned_by_company,
-      :not_commercial_fishing_or_submersible,
-      :owners_are_uk_residents,
-      :owners_are_eligible_to_register,
-      :not_registered_on_foreign_registry
+      :id,
+      owner: [
+        :title,
+        :first_name,
+        :last_name,
+        :nationality,
+        :email,
+        :mobile_number,
+        :phone_number,
+      ]
     )
   end
 
