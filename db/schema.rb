@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609115347) do
+ActiveRecord::Schema.define(version: 20160615134102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "address_1",  null: false
+    t.string   "address_1",            null: false
     t.string   "address_2"
     t.string   "address_3"
-    t.string   "town",       null: false
+    t.string   "town",                 null: false
     t.string   "county"
-    t.string   "postcode",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "postcode",             null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "country",    limit: 2
   end
 
   create_table "owner_addresses", force: :cascade do |t|
