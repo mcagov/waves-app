@@ -18,6 +18,9 @@ class Owner < ActiveRecord::Base
   has_many :owner_vessels
   has_many :vessels, through: :owner_vessels
 
+  belongs_to :address
+  accepts_nested_attributes_for :address
+
   validates :first_name, presence: true
 
   validates :last_name, presence: true
