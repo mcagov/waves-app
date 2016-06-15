@@ -2,6 +2,8 @@ class Registration < ActiveRecord::Base
   belongs_to :vessel
   accepts_nested_attributes_for :vessel
 
+  mount_state_machine RegistrationStateMachine, state: "status"
+
   validates :not_registered_before_on_ssr, acceptance: true
   validates :not_registered_under_part_1, acceptance: true
   validates :not_owned_by_company, acceptance: true
@@ -25,11 +27,11 @@ class Registration < ActiveRecord::Base
   private
 
   def vessel_info_added?
-    status == "vessel_info_added"
+    state == "vessel_info_added"
   end
 
   def declaration_accepted?
-    status == "declaration_accepted"
+    state == "declaration_accepted"
   end
 
   def associated_vessel?
