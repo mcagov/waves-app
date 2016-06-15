@@ -15,14 +15,14 @@ feature "User logs in", type: :feature, js: true do
       perform_sign_in user.email, password
 
       expect(page).to_not have_content("Login")
-      expect(page).to have_content("DASHBOARD")
+      expect(page).to have_content("Part III")
     end
 
     scenario "user is not taken to the dashboard with incorrect info" do
       perform_sign_in user.email, "wrong_password"
 
       expect(page).to have_content("Bad email or password.")
-      expect(page).to_not have_content("DASHBOARD")
+      expect(page).to_not have_content("Part III")
     end
   end
 

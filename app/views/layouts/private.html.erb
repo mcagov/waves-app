@@ -21,35 +21,34 @@
   <body class="<%= body_class %>">
     <script>document.body.className = ((document.body.className) ? document.body.className + " js-enabled" : "js-enabled");</script>
 
-    <div class="navbar navbar-default navbar-inverse" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">VRS</a>
+    <div class="page-wrap">
+
+      <div class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <% if signed_in? %>
+            <%= render partial: 'shared/navbar/logged_in' %>
+          <% else %>
+            <%= render partial: 'shared/navbar/logged_out' %>
+          <% end %>
         </div>
-
-        <% if signed_in? %>
-          <%= render partial: 'shared/navbar/logged_in' %>
-        <% else %>
-          <%= render partial: 'shared/navbar/logged_out' %>
-        <% end %>
-
       </div>
+
+      <div id="flash">
+        <% flash.each do |key, value| -%>
+          <div class="alert alert-danger" role="alert">
+            <%= h value %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
+
     </div>
 
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div class="alert alert-danger" role="alert">
-          <%= h value %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="container">
-      <%= yield %>
-    </div>
-
-    <footer class="footer">
-      <div class="container">
+    <footer>
+      <div class="container footer-text">
         <p class="text-muted">&copy; 2016 Maritime And Coastguard Agency</p>
       </div>
     </footer>

@@ -2,8 +2,10 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-select";
 @import "font-awesome";
 
-@import "base";
-@import "login";
+@import "internal/base";
+@import "internal/login";
 
+@import "internal/dashboard";
