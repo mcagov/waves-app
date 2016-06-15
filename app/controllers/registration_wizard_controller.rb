@@ -25,20 +25,17 @@ class RegistrationWizardController < ApplicationController
     when prerequisites_step_name
       @registration = Registration.create(
         prerequisite_params.merge(
-          status: "initiated",
           browser: request.env["HTTP_USER_AGENT"] || "Unknown"
         )
       )
     when vessel_info_step_name
       @registration = Registration.find(params[:registration][:id])
-      @registration.update(
-        vessel_info_params.merge(status: "vessel_info_added")
-      )
+      @registration.update(vessel_info_params)
+      @registration.trigger(:added_vessel_info)
     when declaration_step_name
       @registration = Registration.find(params[:registration][:id])
-      @registration.update(
-        declaration_params.merge(status: "declaration_accepted")
-      )
+      @registration.update(declaration_params)
+      @registration.trigger(:accepted_declaration)
     end
 
     if @registration.valid?
