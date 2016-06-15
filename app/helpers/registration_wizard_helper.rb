@@ -60,4 +60,14 @@ module RegistrationWizardHelper
     titles << [nil, nil, {disabled: true}]
     titles << ["Other (please specify)", nil]
   end
+
+  def owner_title(form)
+    return "" unless Owner::SUGGESTED_TITLES.include?(form.object.title)
+    form.object.title
+  end
+
+  def owner_title_other(form)
+    return "" if Owner::SUGGESTED_TITLES.include?(form.object.title)
+    form.object.title
+  end
 end

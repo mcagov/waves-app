@@ -47,8 +47,8 @@ class RegistrationWizardController < ApplicationController
         render_wizard @registration
       end
     when owner_info_step_name
-      @registration = Registration.find(params[:registration][:id])
-      @owner = Owner.new(owner_info_params[:owner])
+      @registration = Registration.find(params[:registration_id])
+      @owner = Owner.new(owner_info_params)
 
       if @owner.valid?
         @owner.save
@@ -109,17 +109,19 @@ class RegistrationWizardController < ApplicationController
   # rubocop:enable Metrics/MethodLength
 
   def owner_info_params
-    params.require(:registration).permit(
-      :id,
-      owner: [
-        :title,
-        :first_name,
-        :last_name,
-        :nationality,
-        :email,
-        :mobile_number,
-        :phone_number,
-      ]
+    if params[:owner][:title_other].present?
+      params[:owner][:title] = params[:owner][:title_other]
+    end
+    params[:owner].delete(:title_other)
+
+    params.require(:owner).permit(
+      :title,
+      :first_name,
+      :last_name,
+      :nationality,
+      :email,
+      :mobile_number,
+      :phone_number
     )
   end
 
@@ -131,7 +133,6 @@ class RegistrationWizardController < ApplicationController
       :understands_false_statement_is_offence
     )
   end
-
 
   def prerequisites_step_name
     I18n.t("wicked.prerequisites")
