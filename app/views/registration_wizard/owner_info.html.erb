@@ -26,16 +26,14 @@
           f,
           :title,
           owner_title_collection,
-          input_html: {
-            "data-target" => "owner_title_other",
-          },
-          # selected: owner_title(f)
+          input_html: {"data-target" => "owner_title_other"},
+          selected: selected_owner_title(f)
         ) %>
         <%= form_input(
           f,
           :title_other,
           as: :fake,
-          input_html: {value: owner_title_other(f)}
+          input_html: {value: other_owner_title(f)}
         ) %>
         <%= form_input f, :first_name %>
         <%= form_input f, :last_name %>
