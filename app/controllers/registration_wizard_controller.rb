@@ -15,6 +15,7 @@ class RegistrationWizardController < ApplicationController
     when owner_info_step_name
       @registration = Registration.find(params[:registration_id])
       @owner = Owner.new
+      @owner.build_address
     when declaration_step_name
       @registration = Registration.find(params[:registration_id])
     end
@@ -52,6 +53,7 @@ class RegistrationWizardController < ApplicationController
 
       if @owner.valid?
         @owner.save
+
         @registration.vessel.owners << @owner
         @registration.trigger(:added_owner_info)
 
@@ -121,7 +123,16 @@ class RegistrationWizardController < ApplicationController
       :nationality,
       :email,
       :mobile_number,
-      :phone_number
+      :phone_number,
+      address_attributes: [
+        :address_1,
+        :address_2,
+        :address_3,
+        :town,
+        :county,
+        :postcode,
+        :country,
+      ]
     )
   end
 

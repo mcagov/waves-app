@@ -10,5 +10,7 @@ FactoryGirl.define do
     end
 
     mobile_number { "07#{rand.to_s[2..10]}" }
+
+    address { build(:address) }
   end
 end

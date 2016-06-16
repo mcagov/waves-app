@@ -11,6 +11,12 @@ en:
       default_message: "There were problems with your registration"
 
     labels:
+      address:
+        address_1: "Building and street"
+        town: "Town or city"
+        county: "County (optional)"
+        postcode: "Postcode"
+
       registration:
         not_registered_before_on_ssr: "The vessel has never been registered on the UK Small Ships Register."
         not_registered_under_part_1: "The vessel is not currently registered on Part I of the UK Ship Register."

@@ -21,27 +21,48 @@
         </div>
       <% end %>
 
-      <%= form_select(
-        f,
-        :title,
-        owner_title_collection,
-        input_html: {
-          "data-target" => "owner_title_other",
-        },
-        selected: owner_title(f)
-      ) %>
-      <%= form_input(
-        f,
-        :title_other,
-        as: :fake,
-        input_html: {value: owner_title_other(f)}
-      ) %>
-      <%= form_input f, :first_name %>
-      <%= form_input f, :last_name %>
-      <%= form_country_select f, :nationality %>
-      <%= form_input f, :email, as: :email %>
-      <%= form_input f, :mobile_number %>
-      <%= form_input f, :phone_number %>
+      <fieldset>
+        <%= form_select(
+          f,
+          :title,
+          owner_title_collection,
+          input_html: {
+            "data-target" => "owner_title_other",
+          },
+          # selected: owner_title(f)
+        ) %>
+        <%= form_input(
+          f,
+          :title_other,
+          as: :fake,
+          input_html: {value: owner_title_other(f)}
+        ) %>
+        <%= form_input f, :first_name %>
+        <%= form_input f, :last_name %>
+        <%= form_country_select f, :nationality %>
+      </fieldset>
+
+      <fieldset>
+        <h4 class="heading-small">Residential address</h4>
+
+        <%= f.simple_fields_for :address do |af| %>
+          <%= form_input af, :address_1 %>
+          <%= form_input af, :address_2, label: false %>
+          <%= form_input af, :address_3, label: false %>
+          <%= form_input af, :town %>
+          <%= form_input af, :county %>
+          <%= form_input af, :postcode %>
+          <%= form_country_select af, :country %>
+        <% end %>
+      </fieldset>
+
+      <fieldset>
+        <h4 class="heading-small">Contact information</h4>
+
+        <%= form_input f, :email, as: :email %>
+        <%= form_input f, :mobile_number %>
+        <%= form_input f, :phone_number %>
+      </fieldset>
 
       <%= f.button :submit, class: "button" %>
     <% end %>
