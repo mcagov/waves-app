@@ -1,5 +1,5 @@
 def country_name_from_code(country_code)
-  ISO3166::Country[country_code].name
+  ISO3166::Country[country_code].translations["en"]
 end
 
 def assign_address_fields(address)
