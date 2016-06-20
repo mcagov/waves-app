@@ -11,27 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609115347) do
+ActiveRecord::Schema.define(version: 20160620151547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "address_1",  null: false
+    t.string   "address_1",            null: false
     t.string   "address_2"
     t.string   "address_3"
-    t.string   "town",       null: false
+    t.string   "town",                 null: false
     t.string   "county"
-    t.string   "postcode",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "owner_addresses", force: :cascade do |t|
-    t.integer  "owner_id"
-    t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "postcode",             null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "country",    limit: 2
   end
 
   create_table "owner_vessels", force: :cascade do |t|
@@ -42,15 +36,15 @@ ActiveRecord::Schema.define(version: 20160609115347) do
   end
 
   create_table "owners", force: :cascade do |t|
-    t.string   "forename",      null: false
-    t.string   "surname",       null: false
-    t.string   "nationality",   null: false
-    t.string   "email",         null: false
-    t.string   "phone_number"
-    t.string   "mobile_number", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "title",         null: false
+    t.string   "first_name",             null: false
+    t.string   "last_name",              null: false
+    t.string   "nationality",  limit: 2, null: false
+    t.string   "email",                  null: false
+    t.string   "phone_number",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "title"
+    t.integer  "address_id"
   end
 
   create_table "register_vessels", force: :cascade do |t|
@@ -72,15 +66,16 @@ ActiveRecord::Schema.define(version: 20160609115347) do
   create_table "registrations", force: :cascade do |t|
     t.string   "ip_country"
     t.string   "card_country"
-    t.string   "browser",      null: false
+    t.string   "browser",             null: false
     t.string   "payment_id"
     t.string   "receipt_id"
-    t.string   "status",       null: false
+    t.string   "status",              null: false
     t.datetime "due_date"
     t.boolean  "is_urgent"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "vessel_id"
+    t.integer  "delivery_address_id"
   end
 
   create_table "roles", force: :cascade do |t|

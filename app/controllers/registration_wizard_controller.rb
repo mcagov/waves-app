@@ -8,17 +8,21 @@ class RegistrationWizardController < ApplicationController
         :payment
 
   def show
+    @registration =
+      if params[:registration_id].present?
+        Registration.find(params[:registration_id])
+      else
+        Registration.new
+      end
+
     case step_name
-    when prerequisites_step_name
-      @registration = Registration.new
     when vessel_info_step_name
-      @registration = Registration.find(params[:registration_id])
       @registration.build_vessel
-    when owner_info_step_name
-      @registration = Registration.find(params[:registration_id])
     when declaration_step_name
-      @registration = Registration.find(params[:registration_id])
       @vessel = @registration.vessel
+    when owner_info_step_name
+      @owner = Owner.new
+      @owner.build_address
     end
 
     render_wizard
@@ -27,12 +31,20 @@ class RegistrationWizardController < ApplicationController
   def update
     case step_name
     when prerequisites_step_name
-      @registration = Registration.create(params_for_step(step_name))
-    when vessel_info_step_name,
-         declaration_step_name
-      @registration = Registration.find(params[:registration][:id])
-      @registration.update(params_for_step(step_name))
-      @vessel = @registration.vessel
+      prerequisites_step_update
+    when vessel_info_step_name
+      vessel_info_step_update
+    when owner_info_step_name
+      @registration = Registration.find(params[:registration_id])
+      @owner = Owner.new(owner_info_params)
+
+      (render_step(owner_info_step_name) && return) unless @owner.valid?
+
+      @owner.save
+      @registration.vessel.owners << @owner
+      @registration.trigger(:added_owner_info)
+    when declaration_step_name
+      declaration_step_update
     end
 
     if @registration.valid?
@@ -43,6 +55,26 @@ class RegistrationWizardController < ApplicationController
   end
 
   private
+
+  def prerequisites_params
+    params.require(:registration).permit(
+      :not_registered_before_on_ssr,
+      :not_registered_under_part_1,
+      :not_owned_by_company,
+      :not_commercial_fishing_or_submersible,
+      :owners_are_uk_residents,
+      :owners_are_eligible_to_register,
+      :not_registered_on_foreign_registry
+    )
+  end
+
+  def prerequisites_step_update
+    @registration = Registration.create(
+      prerequisites_params.merge(
+        browser: request.env["HTTP_USER_AGENT"] || "Unknown"
+      )
+    )
+  end
 
   # rubocop:disable Metrics/MethodLength
   def vessel_info_params
@@ -66,15 +98,33 @@ class RegistrationWizardController < ApplicationController
   end
   # rubocop:enable Metrics/MethodLength
 
-  def prerequisite_params
-    params.require(:registration).permit(
-      :not_registered_before_on_ssr,
-      :not_registered_under_part_1,
-      :not_owned_by_company,
-      :not_commercial_fishing_or_submersible,
-      :owners_are_uk_residents,
-      :owners_are_eligible_to_register,
-      :not_registered_on_foreign_registry
+  def vessel_info_step_update
+    @registration = Registration.find(params[:registration][:id])
+    @registration.update(vessel_info_params)
+    @registration.trigger(:added_vessel_info)
+  end
+
+  def owner_info_params
+    title_other = params[:owner].delete(:title_other)
+    params[:owner][:title] = title_other if title_other.present?
+
+    params.require(:owner).permit(
+      :title,
+      :first_name,
+      :last_name,
+      :nationality,
+      :email,
+      :mobile_number,
+      :phone_number,
+      address_attributes: [
+        :address_1,
+        :address_2,
+        :address_3,
+        :town,
+        :county,
+        :postcode,
+        :country,
+      ]
     )
   end
 
@@ -87,18 +137,11 @@ class RegistrationWizardController < ApplicationController
     )
   end
 
-  def params_for_step(current_step)
-    case current_step
-    when prerequisites_step_name
-      prerequisite_params.merge(
-        status: "initiated",
-        browser: request.env["HTTP_USER_AGENT"] || "Unknown"
-      )
-    when vessel_info_step_name
-      vessel_info_params.merge(status: "vessel_info_added")
-    when declaration_step_name
-      declaration_params.merge(status: "declaration_accepted")
-    end
+  def declaration_step_update
+    @registration = Registration.find(params[:registration][:id])
+    @registration.update(declaration_params)
+    @vessel = @registration.vessel
+    @registration.trigger(:accepted_declaration)
   end
 
   def prerequisites_step_name

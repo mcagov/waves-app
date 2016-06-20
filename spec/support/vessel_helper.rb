@@ -1,5 +1,5 @@
 def random_alphanumeric_string(length)
-  ([*("0".."9"), *("A".."Z")]).sample(length).join
+  [*("0".."9"), *("A".."Z")].sample(length).join
 end
 
 def random_hin
