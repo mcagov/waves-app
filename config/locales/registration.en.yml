@@ -27,8 +27,8 @@
               inclusion: "An owner with the specified nationality is ineligible to register."
             email:
               invalid_email_address: "The owner's email address is invalid."
-            mobile_number:
-              blank: "The owner's mobile phone number must be specified."
+            phone_number:
+              blank: "The owner's phone number must be specified."
 
         registration:
           attributes:

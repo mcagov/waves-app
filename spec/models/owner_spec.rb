@@ -7,13 +7,13 @@ describe Owner, type: :model do
 
       before { owner.valid? }
 
-      describe "first_name" do
+      describe "first name" do
         it "is present" do
           expect(owner.errors[:first_name]).to be_empty
         end
       end
 
-      describe "last_name" do
+      describe "last name" do
         it "is present" do
           expect(owner.errors[:last_name]).to be_empty
         end
@@ -39,9 +39,9 @@ describe Owner, type: :model do
         end
       end
 
-      describe "mobile number" do
+      describe "phone number" do
         it "is present" do
-          expect(owner.errors[:mobile_number]).to be_empty
+          expect(owner.errors[:phone_number]).to be_empty
         end
       end
     end
@@ -90,9 +90,9 @@ describe Owner, type: :model do
         end
       end
 
-      describe "mobile number" do
+      describe "phone number" do
         it "is not present" do
-          owner = build(:owner, mobile_number: " ")
+          owner = build(:owner, phone_number: " ")
           expect(owner).not_to be_valid
         end
       end

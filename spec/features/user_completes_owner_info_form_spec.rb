@@ -68,7 +68,7 @@ feature "User completes owner info form", type: :feature do
       invalid_fields = default_owner_info_form_fields.merge(
         first_name: "",
         last_name: "",
-        mobile_number: ""
+        phone_number: ""
       )
       complete_owner_info_form(invalid_fields)
     end
@@ -78,7 +78,7 @@ feature "User completes owner info form", type: :feature do
     end
 
     scenario "user is shown error messages" do
-      %w(first_name last_name mobile_number).each do |attribute|
+      %w(first_name last_name phone_number).each do |attribute|
         expect(page).to have_text(
           t("activerecord.errors.models.owner.attributes.#{attribute}.blank")
         )

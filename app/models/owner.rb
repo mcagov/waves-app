@@ -31,5 +31,5 @@ class Owner < ActiveRecord::Base
 
   validates_email_format_of :email
 
-  validates :mobile_number, presence: true
+  validates :phone_number, presence: true
 end

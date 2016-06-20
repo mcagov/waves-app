@@ -36,8 +36,7 @@ en:
         last_name: Last name
         nationality: Nationality
         email: Email address
-        mobile_number: Phone number (mobile)
-        phone_number: Phone number (other)
+        phone_number: Phone number
 
       vessel:
         name: Name of vessel

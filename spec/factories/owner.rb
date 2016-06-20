@@ -9,7 +9,7 @@ FactoryGirl.define do
       "#{first_name}.#{last_name}.#{n}@example.com".downcase
     end
 
-    mobile_number { "07#{rand.to_s[2..10]}" }
+    phone_number { rand.to_s[2..12] }
 
     address { build(:address) }
   end
