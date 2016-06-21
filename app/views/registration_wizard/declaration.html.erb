@@ -22,9 +22,9 @@
       <% end %>
 
       <p>
-        <%= render partial: "vessel_info" %>
+        <%= render partial: "vessel_info", locals: { vessel: @vessel } %>
         <br>
-        <%= render partial: "owner_info" %>
+        <%= render partial: "owner_info", locals: { owner: @owner } %>
       </p>
 
       <br>
