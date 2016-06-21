@@ -9,7 +9,7 @@ class Owner < ActiveRecord::Base
     "Miss",
     "Ms",
     "Doctor",
-    "Reverant"
+    "Reverend"
   ].freeze
 
   has_many :owner_vessels
