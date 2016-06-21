@@ -60,7 +60,11 @@ class Vessel < ActiveRecord::Base
   )
 
   def type
-    vessel_type.designation.capitalize
+    if vessel_type_other.present?
+      vessel_type_other
+    else
+      vessel_type.designation.capitalize
+    end
   end
 
   def length_in_meters
