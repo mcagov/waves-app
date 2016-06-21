@@ -24,6 +24,18 @@ Rails.application.routes.draw do
 
   resources :registration_wizard, only: [:show, :update]
 
+  resources :registration_process, only: [:update] do
+    collection do
+      match "prerequisites" => "registration_process#prerequisites",
+            via: [:get, :put]
+      get :vessel_info
+      get :owner_info
+      get :declaration
+      get :payment
+      get :success
+    end
+  end
+
   # overriding HighVoltage
   get "/pages/*id" => "pages#show", as: :page, format: false
 end

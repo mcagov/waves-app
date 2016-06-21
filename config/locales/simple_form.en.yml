@@ -17,7 +17,7 @@ en:
         county: "County (optional)"
         postcode: "Postcode"
 
-      registration:
+      prerequisite:
         not_registered_before_on_ssr: "The vessel has never been registered on the UK Small Ships Register."
         not_registered_under_part_1: "The vessel is not currently registered on Part I of the UK Ship Register."
         not_owned_by_company: "The vessel is not owned by a company."
