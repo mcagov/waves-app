@@ -178,8 +178,8 @@ def check_page_has_vessel_info(page, vessel)
   # can't find info on it ...
   expect(page).to have_content(vessel.name)
   expect(page).to have_content(vessel.hin)
-  expect(page).to have_content(vessel.vessel_type.designation)
+  expect(page).to have_content(vessel.type)
   expect(page).to have_content(vessel.make_and_model)
-  expect(page).to have_content(vessel.length_in_centimeters)
+  expect(page).to have_content(vessel.length_in_meters)
   expect(page).to have_content(vessel.number_of_hulls)
 end

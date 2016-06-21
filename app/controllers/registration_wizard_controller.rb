@@ -142,6 +142,7 @@ class RegistrationWizardController < ApplicationController
     @registration = Registration.find(params[:registration][:id])
     @registration.update(declaration_params)
     @vessel = @registration.vessel
+    @owner = @registration.vessel.owners.first
     @registration.trigger(:accepted_declaration)
   end
 

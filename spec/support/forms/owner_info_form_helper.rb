@@ -1,3 +1,7 @@
+def country_name_from_code(country_code)
+  ISO3166::Country[country_code].translations["en"]
+end
+
 def assign_address_fields(address)
   fields = address.attributes.each_with_object({}) do |(key, value), object|
     object[key.to_sym] = value if value.present?
