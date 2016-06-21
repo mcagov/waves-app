@@ -59,6 +59,14 @@ class Vessel < ActiveRecord::Base
     format: { with: /\A[0-9A-Z]{6,7}\z/}
   )
 
+  def type
+    vessel_type.designation.capitalize
+  end
+
+  def length_in_meters
+    (length_in_centimeters / 100.0).round(2)
+  end
+
   private
 
   def hin_must_begin_with_a_valid_country_code

@@ -20,6 +20,7 @@ class RegistrationWizardController < ApplicationController
       @registration.build_vessel
     when declaration_step_name
       @vessel = @registration.vessel
+      @owner = @registration.vessel.owners.first
     when owner_info_step_name
       @owner = Owner.new
       @owner.build_address

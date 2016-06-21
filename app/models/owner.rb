@@ -32,4 +32,8 @@ class Owner < ActiveRecord::Base
   validates_email_format_of :email
 
   validates :phone_number, presence: true
+
+  def full_name_with_title
+    "#{title} #{first_name} #{last_name}"
+  end
 end
