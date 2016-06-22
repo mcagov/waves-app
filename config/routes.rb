@@ -22,8 +22,6 @@ Rails.application.routes.draw do
     root to: "pages#show", id: "home"
   end
 
-  resources :registration_wizard, only: [:show, :update]
-
   resources :registration_process, only: [:update] do
     collection do
       resource :prerequisites,

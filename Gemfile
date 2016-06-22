@@ -29,7 +29,6 @@ gem "strict_machine-rails", "~> 0.1.2"
 gem "title"
 gem "uglifier"
 gem "validates_email_format_of"
-gem "wicked"
 
 group :development do
   gem "quiet_assets"
