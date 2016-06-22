@@ -1,14 +1,12 @@
 class Registration::DeclarationController < Registration::BaseController
+  before_action :fetch_from_session
+
   def show
     @declaration = Declaration.new
-    @owner = get_from_session(:owner_info)
-    @vessel = get_from_session(:vessel_info)
   end
 
   def update
     @declaration = Declaration.new(declaration_params)
-    @owner = get_from_session(:owner_info)
-    @vessel = get_from_session(:vessel_info)
 
     if @declaration.valid?
       store_in_session(:owner_info, declaration_params)
@@ -19,6 +17,11 @@ class Registration::DeclarationController < Registration::BaseController
   end
 
   private
+
+  def fetch_from_session
+    @owner = get_from_session(:owner_info)
+    @vessel = get_from_session(:vessel_info)
+  end
 
   def declaration_params
     params.require(:declaration).permit(
