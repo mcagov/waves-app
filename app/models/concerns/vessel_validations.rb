@@ -40,7 +40,6 @@ module VesselValidations
     validates(
       :mmsi_number,
       presence: true,
-      uniqueness: true,
       numericality: { only_integer: true },
       format: { with: /\A(232|233|234|235)\d{6}\z/ }
     )

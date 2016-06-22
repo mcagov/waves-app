@@ -6,6 +6,8 @@ class Registration::VesselInfoController < Registration::BaseController
   def update
     @vessel_info = VesselInfo.new(vessel_info_params)
 
+    validate_mmsi_for(@vessel_info)
+
     if @vessel_info.valid?
       store_in_session(:vessel_info, vessel_info_params)
       return redirect_to controller: :owner_info, action: :show
@@ -46,5 +48,14 @@ class Registration::VesselInfoController < Registration::BaseController
       end
 
     params[:vessel_info].merge!(parameter => value)
+  end
+
+  def validate_mmsi_for(vessel_info)
+    if Vessel.find_by_mmsi_number(vessel_info.mmsi_number)
+      message = I18n.t(
+        "activemodel.errors.models.vessel_info.attributes.mmsi_number.taken"
+      )
+      vessel_info.errors.add(:mmsi_number, message)
+    end
   end
 end
