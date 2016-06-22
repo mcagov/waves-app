@@ -25,7 +25,7 @@ en:
             understands_false_statement_is_offence:
               accepted: "This statement must be accepted."
 
-  prerequisite:
+  prerequisites:
     form:
       prompt: "Select all the statements that apply for the ship that you wish to register"
       title: "Prerequisites"

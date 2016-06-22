@@ -2,8 +2,7 @@ require "rails_helper"
 
 feature "User completes prerequisites form", type: :feature do
   before do
-    visit page_path("start")
-    click_on "Start now"
+    visit prerequisites_path
   end
 
   context "when the form is completed successfully" do
@@ -32,19 +31,19 @@ feature "User completes prerequisites form", type: :feature do
 
     scenario "user is shown error messages" do
       expect(page).to have_text(
-        error_message(:prerequisites, "not_registered_under_part_1")
+        error_message(:prerequisite, "not_registered_under_part_1")
       )
       expect(page).to have_text(
-        error_message(:prerequisites, "not_owned_by_company")
+        error_message(:prerequisite, "not_owned_by_company")
       )
       expect(page).to have_text(
-        error_message(:prerequisites, "not_commercial_fishing_or_submersible")
+        error_message(:prerequisite, "not_commercial_fishing_or_submersible")
       )
       expect(page).to have_text(
-        error_message(:prerequisites, "owners_are_eligible_to_register")
+        error_message(:prerequisite, "owners_are_eligible_to_register")
       )
       expect(page).to have_text(
-        error_message(:prerequisites, "not_registered_on_foreign_registry")
+        error_message(:prerequisite, "not_registered_on_foreign_registry")
       )
     end
   end

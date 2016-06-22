@@ -2,14 +2,14 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
 
-    <h3 class="heading-medium"><%= t("prerequisite.form.title") %></h3>
+    <h3 class="heading-medium"><%= t("prerequisites.form.title") %></h3>
 
-    <p><%= t("prerequisite.form.prompt") %></p>
+    <p><%= t("prerequisites.form.prompt") %></p>
 
     <%= simple_form_for @prerequisite,
                         url: prerequisites_path,
                         method: :put do |f| %>
-      <legend class="visuallyhidden"><%= t("prerequisite.form.title") %></legend>
+      <legend class="visuallyhidden"><%= t("prerequisites.form.title") %></legend>
 
       <% if f.error_notification %>
         <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
