@@ -42,7 +42,11 @@ class Registration::VesselInfoController < Registration::BaseController
     value =
       case parameter
       when :hin
-        "#{parameter_hash['prefix']}-#{parameter_hash['suffix']}".upcase
+        if parameter_hash['prefix'].present? && parameter_hash['suffix'].present?
+          "#{parameter_hash['prefix']}-#{parameter_hash['suffix']}".upcase
+        else
+          nil
+        end
       when :length_in_centimeters
         parameter_hash["m"].to_i * 100 + parameter_hash["cm"].to_i
       end
