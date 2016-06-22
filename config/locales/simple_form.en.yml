@@ -38,7 +38,7 @@ en:
         email: Email address
         phone_number: Phone number
 
-      vessel:
+      vessel_info:
         name: Name of vessel
         hin: Hull identification number
         make_and_model: Make and model

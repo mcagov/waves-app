@@ -1,0 +1,44 @@
+<div class="grid-row" id="vessel-info">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("vessel_info.form.title") %></h3>
+
+    <p><%= t("vessel_info.form.prompt") %></p>
+
+    <%= simple_form_for @vessel_info,
+                        url: vessel_info_path,
+                        method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("vessel_info.form.title") %></legend>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <%= form_input f, :name %>
+      <%= form_input f, :hin, as: :hin %>
+      <%= form_input f, :make_and_model %>
+      <%= form_input f, :length_in_centimeters, as: :length_in_centimeters %>
+      <%= form_select f, :number_of_hulls, number_of_hulls_collection %>
+      <%= form_select(
+        f,
+        :vessel_type_id,
+        vessel_type_collection,
+        input_html: {
+          "data-target" => form_input_id(f, :vessel_type_other)
+        }
+      ) %>
+      <%= form_input f, :vessel_type_other %>
+      <%= form_input f, :mmsi_number %>
+      <%= form_input f, :radio_call_sign, input_html: {maxlength: 7} %>
+
+      <%= f.button :submit, class: "button" %>
+    <% end %>
+  </div>
+</div>

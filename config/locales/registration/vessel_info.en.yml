@@ -1,0 +1,13 @@
+en:
+  activemodel:
+    errors:
+      models:
+        vessel_info:
+          attributes:
+
+
+  vessel_info:
+    form:
+      prompt: "Lorem ipsum"
+      title: "Vessel Information"
+

@@ -26,13 +26,24 @@ Rails.application.routes.draw do
 
   resources :registration_process, only: [:update] do
     collection do
-      match "prerequisites" => "registration_process#prerequisites",
-            via: [:get, :put]
-      get :vessel_info
-      get :owner_info
-      get :declaration
-      get :payment
-      get :success
+      resource :prerequisites,
+               only: [:show, :update],
+               controller: "registration/prerequisites"
+      resource :vessel_info,
+               only: [:show, :update],
+               controller: "registration/vessel_info"
+      resource :owner_info,
+               only: [:show, :update],
+               controller: "registration/owner_info"
+      resource :declaration,
+               only: [:show, :update],
+               controller: "registration/declaration"
+      resource :payment,
+               only: [:show, :update],
+               controller: "registration/payment"
+      resource :success,
+               only: [:show, :update],
+               controller: "registration/success"
     end
   end
 

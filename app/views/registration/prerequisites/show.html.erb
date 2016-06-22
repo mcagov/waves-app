@@ -4,11 +4,11 @@
 
     <h3 class="heading-medium"><%= t("prerequisite.form.title") %></h3>
 
-    <p><%= t("prerequisite.form.title") %></p>
+    <p><%= t("prerequisite.form.prompt") %></p>
 
     <%= simple_form_for @prerequisite,
-      url: prerequisites_registration_process_index_path,
-      method: :put do |f| %>
+                        url: prerequisites_path,
+                        method: :put do |f| %>
       <legend class="visuallyhidden"><%= t("prerequisite.form.title") %></legend>
 
       <% if f.error_notification %>
