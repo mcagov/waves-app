@@ -9,7 +9,7 @@ module OwnerValidations
       :nationality,
       presence: true,
       format: { with: /\A[A-Z]{2}\z/ },
-      inclusion: { in: ALLOWED_NATIONALITIES }
+      inclusion: { in: Owner::ALLOWED_NATIONALITIES }
     )
 
     validates_email_format_of :email

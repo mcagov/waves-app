@@ -1,9 +1,9 @@
 class Owner < ActiveRecord::Base
-  include OwnerValidations
-
   ALLOWED_NATIONALITIES = [
     "GB"
   ].freeze
+
+  include OwnerValidations
 
   SUGGESTED_TITLES = [
     "Mr",
