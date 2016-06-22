@@ -32,21 +32,21 @@ feature "User registers for small ships register", type: :feature do
 
       scenario "user is shown registration error messages" do
         expect(page).to have_text(
-          error_message(:prerequisites,"not_registered_under_part_1")
+          error_message(:prerequisite,"not_registered_under_part_1")
         )
         expect(page).to have_text(
-          error_message(:prerequisites, "not_owned_by_company")
+          error_message(:prerequisite, "not_owned_by_company")
         )
         expect(page).to have_text(
           error_message(
-            :prerequisites, "not_commercial_fishing_or_submersible"
+            :prerequisite, "not_commercial_fishing_or_submersible"
           )
         )
         expect(page).to have_text(
-          error_message(:prerequisites, "owners_are_eligible_to_register")
+          error_message(:prerequisite, "owners_are_eligible_to_register")
         )
         expect(page).to have_text(
-          error_message(:prerequisites, "not_registered_on_foreign_registry")
+          error_message(:prerequisite, "not_registered_on_foreign_registry")
         )
       end
     end
