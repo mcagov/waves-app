@@ -71,4 +71,20 @@ module RegistrationWizardHelper
     return "" if Owner::SUGGESTED_TITLES.include?(form.object.title)
     form.object.title
   end
+
+  def delivery_address_toggle(form)
+    form.input(
+      :delivery_address_toggle,
+      as: :radio_buttons,
+      checked: false,
+      collection: [["No", false], ["Yes", true]],
+      input_html: {
+        "checked" => "",
+        "data-target" => "registration-delivery-address"
+      },
+      item_label_class: "block-label",
+      item_wrapper_tag: nil,
+      label: false
+    )
+  end
 end

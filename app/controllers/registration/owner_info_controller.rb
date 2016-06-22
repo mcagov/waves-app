@@ -8,7 +8,7 @@ class Registration::OwnerInfoController < Registration::BaseController
 
     if @owner_info.valid?
       store_in_session(:owner_info, owner_info_params)
-      return redirect_to controller: :declaration, action: :show
+      return redirect_to controller: :delivery_address, action: :show
     end
 
     render :show

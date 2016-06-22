@@ -1,0 +1,18 @@
+en:
+  activemodel:
+    errors:
+      models:
+        delivery_address:
+          attributes:
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted."
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted."
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted."
+
+  delivery_address:
+    form:
+      prompt: "Please enter the delivery address."
+      question: "Would you like the registration certificate to be delivered to an alternative address?"
+      title: "Delivery Address"

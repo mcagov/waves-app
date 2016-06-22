@@ -1,0 +1,46 @@
+<div class="grid-row" id="delivery-address">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("delivery_address.form.title") %></h3>
+
+    <p><%= t("delivery_address.form.question") %></p>
+
+    <%= simple_form_for @delivery_address,
+                        url: delivery_address_path,
+                        method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("delivery_address.form.title") %></legend>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <fieldset class="inline form-group">
+        <%= delivery_address_toggle f %>
+      </fieldset>
+
+      <fieldset id="registration-delivery-address">
+        <h4 class="heading-small">
+          <%= t("delivery_address.form.prompt") %>
+        </h4>
+
+        <%= form_input f, :address_1 %>
+        <%= form_input f, :address_2, label: false %>
+        <%= form_input f, :address_3, label: false %>
+        <%= form_input f, :town %>
+        <%= form_input f, :county %>
+        <%= form_input f, :postcode %>
+        <%= form_country_select f, :country %>
+      </fieldset>
+
+      <%= f.button :submit, "Continue", class: "button" %>
+    <% end %>
+  </div>
+</div>
+

@@ -31,6 +31,13 @@ en:
         mmsi_number: MMSI number
         radio_call_sign: Radio call sign
 
+      address: &ADDRESS_LABELS
+        address_1: "Building and street"
+        town: "Town or city"
+        county: "County (optional)"
+        postcode: "Postcode"
+        country: "Country"
+
       owner_info:
         title: Title
         title_other: Other title
@@ -39,10 +46,10 @@ en:
         nationality: Nationality
         email: Email address
         phone_number: Phone number
-        address_1: "Building and street"
-        town: "Town or city"
-        county: "County (optional)"
-        postcode: "Postcode"
+        <<: *ADDRESS_LABELS
+
+      delivery_address:
+        <<: *ADDRESS_LABELS
 
       declaration:
         eligible_under_regulation_89: "I confirm that I am and all the owners are eligible to be the owner(s) of a small ship under regulation 89 (Persons qualified to be the owners of a small ship to be registered on Part III of the Register)"
