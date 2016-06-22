@@ -1,5 +1,6 @@
 class Prerequisite
   include ActiveModel::Model
+  include PrerequisiteValidations
 
   attr_accessor(
     :not_registered_before_on_ssr,

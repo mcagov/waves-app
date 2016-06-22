@@ -1,5 +1,7 @@
 class OwnerInfo
   include ActiveModel::Model
+  include OwnerValidations
+  include AddressValidations
 
   attr_accessor(
     :title,
@@ -18,22 +20,6 @@ class OwnerInfo
     :email,
     :phone_number
   )
-
-  validates_presence_of :first_name,
-                        :last_name,
-                        :nationality,
-                        :address_1,
-                        :town,
-                        :postcode,
-                        :country,
-                        :email,
-                        :phone_number
-
-  validates_presence_of :title,
-                        unless: proc { |oi| oi.title_other.present? }
-
-  validates_presence_of :title_other,
-                        unless: proc { |oi| oi.title.present? }
 
   def full_name_with_title
     "#{title} #{first_name} #{last_name}"
