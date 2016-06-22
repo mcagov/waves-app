@@ -27,20 +27,26 @@ feature "User registers for small ships register", type: :feature do
       end
 
       scenario "user is shown registration form again" do
-        expect(page).to have_text(t("registration.prerequisites.title"))
+        expect(page).to have_text(t("prerequisites.form.title"))
       end
 
       scenario "user is shown registration error messages" do
-        expect(page).to have_text(error_message("not_registered_under_part_1"))
-        expect(page).to have_text(error_message("not_owned_by_company"))
         expect(page).to have_text(
-          error_message("not_commercial_fishing_or_submersible")
+          error_message(:prerequisites,"not_registered_under_part_1")
         )
         expect(page).to have_text(
-          error_message("owners_are_eligible_to_register")
+          error_message(:prerequisites, "not_owned_by_company")
         )
         expect(page).to have_text(
-          error_message("not_registered_on_foreign_registry")
+          error_message(
+            :prerequisites, "not_commercial_fishing_or_submersible"
+          )
+        )
+        expect(page).to have_text(
+          error_message(:prerequisites, "owners_are_eligible_to_register")
+        )
+        expect(page).to have_text(
+          error_message(:prerequisites, "not_registered_on_foreign_registry")
         )
       end
     end
@@ -55,10 +61,6 @@ feature "User registers for small ships register", type: :feature do
       describe "hull ID" do
         describe "with valid ID" do
           scenario "user is taken to next stage" do
-            expect { complete_vessel_info_form }.to change {
-              Vessel.count
-            }.by(1)
-
             expect(page).to have_current_path(
               path_for_step("owner_info")
             )
@@ -70,10 +72,6 @@ feature "User registers for small ships register", type: :feature do
             fields = default_vessel_info_form_fields
             fields.delete(:hin)
 
-            expect do
-              complete_vessel_info_form(fields)
-            end.to change { Vessel.count }.by(1)
-
             expect(page).to have_current_path(
               path_for_step("owner_info")
             )
@@ -84,10 +82,6 @@ feature "User registers for small ships register", type: :feature do
       describe "vessel type" do
         describe "with listed vessel type" do
           scenario "user is taken to next stage" do
-            expect { complete_vessel_info_form }.to change {
-              Vessel.count
-            }.by(1)
-
             expect(page).to have_current_path(
               path_for_step("owner_info")
             )
@@ -99,10 +93,6 @@ feature "User registers for small ships register", type: :feature do
             fields = default_vessel_info_form_fields
             fields[:vessel_type_id] = "Other (please specify)"
             fields[:vessel_type_other] = "Big Boat"
-
-            expect do
-              complete_vessel_info_form(fields)
-            end.to change { Vessel.count }.by(1)
 
             expect(page).to have_current_path(
               path_for_step("owner_info")
@@ -156,7 +146,7 @@ feature "User registers for small ships register", type: :feature do
 
         check_page_has_vessel_info(page, vessel)
 
-        expect(page).to have_text(t("registration.declaration.title"))
+        expect(page).to have_text(t("declaration.form.title"))
       end
 
       scenario "user is shown declaration error messages" do
@@ -166,7 +156,7 @@ feature "User registers for small ships register", type: :feature do
         check_page_has_vessel_info(page, vessel)
 
         expect(page).to have_text(
-          error_message("understands_false_statement_is_offence")
+          error_message(:declaration, "understands_false_statement_is_offence")
         )
       end
     end

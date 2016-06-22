@@ -13,7 +13,6 @@ feature "User completes vessel info form", type: :feature do
     describe "hull ID" do
       describe "with valid ID" do
         scenario "user is taken to next stage" do
-          expect { complete_vessel_info_form }.to change { Vessel.count }.by(1)
           expect(page).to have_current_path(path_for_step("owner_info"))
         end
       end
@@ -23,10 +22,6 @@ feature "User completes vessel info form", type: :feature do
           fields = default_vessel_info_form_fields
           fields.delete(:hin)
 
-          expect do
-            complete_vessel_info_form(fields)
-          end.to change { Vessel.count }.by(1)
-
           expect(page).to have_current_path(path_for_step("owner_info"))
         end
       end
@@ -35,8 +30,6 @@ feature "User completes vessel info form", type: :feature do
     describe "vessel type" do
       describe "with listed vessel type" do
         scenario "user is taken to next stage" do
-          expect { complete_vessel_info_form }.to change { Vessel.count }.by(1)
-
           expect(page).to have_current_path(path_for_step("owner_info"))
         end
       end
@@ -46,10 +39,6 @@ feature "User completes vessel info form", type: :feature do
           fields = default_vessel_info_form_fields
           fields[:vessel_type_id] = "Other (please specify)"
           fields[:vessel_type_other] = "Big Boat"
-
-          expect do
-            complete_vessel_info_form(fields)
-          end.to change { Vessel.count }.by(1)
 
           expect(page).to have_current_path(path_for_step("owner_info"))
         end

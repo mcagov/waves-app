@@ -11,5 +11,5 @@ def default_prerequisites_form_fields
 end
 
 def complete_prerequisites_form(fields = default_prerequisites_form_fields)
-  fill_form_and_submit(:registration, :update, fields)
+  fill_form_and_submit(:prerequisite, :update, fields)
 end

@@ -29,13 +29,13 @@ en:
 
   helpers:
     submit:
-      registration:
-        create: Continue
+      prerequisite:
         update: Continue
-      vessel:
+      vessel_info:
         update: Continue
-      owner:
-        create: Continue
+      owner_info:
+        update: Continue
+      declaration:
         update: Continue
 
   mca:
