@@ -11,6 +11,8 @@ class Vessel < ActiveRecord::Base
 
   belongs_to :vessel_type
 
+  validates_uniqueness_of :mmsi_number
+
   private
 
   def hin_must_begin_with_a_valid_country_code

@@ -16,10 +16,6 @@ module OwnerValidations
 
     validates :phone_number, presence: true
 
-    validates_presence_of :title,
-                        unless: proc { |oi| oi.title_other.present? }
-
-    validates_presence_of :title_other,
-                        unless: proc { |oi| oi.title.present? }
+    # FIXME: title!
   end
 end
