@@ -8,6 +8,7 @@ en:
 
   declaration:
     form:
-      prompt: "Lorem ipsum"
+      prompt: "By submitting this online registration form you agree to the following statements:"
       title: "Declaration"
+      warning: "Please make sure the following information is correct. If it is not, please go back and change it accordingly."
 

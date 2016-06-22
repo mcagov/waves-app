@@ -4,6 +4,28 @@ en:
       models:
         owner_info:
           attributes:
+            first_name:
+              blank: "The owner's first name must be specified."
+            last_name:
+              blank: "The owner's last name must be specified."
+            nationality:
+              blank: "The owner's nationality must be specified."
+              invalid: "The owner's nationality is invalid."
+              inclusion: "An owner with the specified nationality is ineligible to register."
+            email:
+              invalid_email_address: "The owner's email address is invalid."
+            phone_number:
+              blank: "The owner's phone number must be specified."
+            address_1:
+              blank: "The first line of the owner's address must be specified."
+            town:
+              blank: "The town or city of the owner's address must be specified."
+            postcode:
+              blank: "The postcode of the owner's address must be specified."
+            country:
+              blank: "The country of the owner's address must be specified."
+              invalid: "The country of the owner's address is invalid."
+              inclusion: "The country of the owner's address is invalid."
 
 
   owner_info:
