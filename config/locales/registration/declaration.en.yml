@@ -1,0 +1,13 @@
+en:
+  activemodel:
+    errors:
+      models:
+        declaration:
+          attributes:
+
+
+  declaration:
+    form:
+      prompt: "Lorem ipsum"
+      title: "Declaration"
+

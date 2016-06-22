@@ -1,0 +1,41 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Vessel Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.name') %></td>
+      <td><%= @vessel.name %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.hin') %></td>
+      <td><%= @vessel.hin %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.make_and_model') %></td>
+      <td><%= @vessel.make_and_model %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.length_in_centimeters') %></td>
+      <td><%= @vessel.length_in_meters %> metres</td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.number_of_hulls') %></td>
+      <td><%= @vessel.number_of_hulls %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.vessel_type_id') %></td>
+      <td><%= @vessel.type %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.mmsi_number') %></td>
+      <td><%= @vessel.mmsi_number %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.vessel_info.radio_call_sign') %></td>
+      <td><%= @vessel.radio_call_sign %></td>
+    </tr>
+  </tbody>
+</table>

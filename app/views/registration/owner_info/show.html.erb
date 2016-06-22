@@ -1,0 +1,65 @@
+<div class="grid-row" id="owner-info">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("owner_info.form.title") %></h3>
+
+    <p><%= t("owner_info.form.prompt") %></p>
+
+    <%= simple_form_for @owner_info,
+                        url: owner_info_path,
+                        method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("owner_info.form.title") %></legend>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <fieldset>
+        <%= form_select(
+          f,
+          :title,
+          owner_title_collection,
+          input_html: {"data-target" => "owner_title_other"},
+          selected: selected_owner_title(f)
+        ) %>
+        <%= form_input(
+          f,
+          :title_other,
+          as: :fake,
+          input_html: {value: other_owner_title(f)}
+        ) %>
+        <%= form_input f, :first_name %>
+        <%= form_input f, :last_name %>
+        <%= form_country_select f, :nationality %>
+      </fieldset>
+
+      <fieldset>
+        <h4 class="heading-small">Residential address</h4>
+
+        <%= form_input f, :address_1 %>
+        <%= form_input f, :address_2, label: false %>
+        <%= form_input f, :address_3, label: false %>
+        <%= form_input f, :town %>
+        <%= form_input f, :county %>
+        <%= form_input f, :postcode %>
+        <%= form_country_select f, :country %>
+      </fieldset>
+
+      <fieldset>
+        <h4 class="heading-small">Contact information</h4>
+
+        <%= form_input f, :email, as: :email %>
+        <%= form_input f, :phone_number %>
+      </fieldset>
+
+      <%= f.button :submit, "Continue", class: "button" %>
+    <% end %>
+  </div>
+</div>

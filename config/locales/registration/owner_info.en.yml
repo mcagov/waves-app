@@ -1,0 +1,13 @@
+en:
+  activemodel:
+    errors:
+      models:
+        owner_info:
+          attributes:
+
+
+  owner_info:
+    form:
+      prompt: "Lorem ipsum"
+      title: "Owner Information"
+

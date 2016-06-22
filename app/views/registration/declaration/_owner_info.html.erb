@@ -1,0 +1,60 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Owner details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Full Name</td>
+      <td><%= @owner.full_name_with_title %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.owner.nationality') %></td>
+      <td><%= country_name_from_code(@owner.nationality) %></td>
+    </tr>
+
+    <tr>
+      <td><%= t('simple_form.labels.address.address_1') %></td>
+      <td><%= @owner.address_1 %></td>
+    </tr>
+    <% unless @owner.address_2.blank? %>
+    <tr>
+      <td></td>
+      <td><%= @owner.address_2 %></td>
+    </tr>
+    <% end %>
+    <% unless @owner.address_3.blank? %>
+    <tr>
+      <td></td>
+      <td><%= @owner.address_3 %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td><%= t('simple_form.labels.address.town') %></td>
+      <td><%= @owner.town %></td>
+    </tr>
+    <% unless @owner.county.blank? %>
+      <tr>
+        <td><%= t('simple_form.labels.address.county') %></td>
+        <td><%= @owner.county %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><%= t('simple_form.labels.address.postcode') %></td>
+      <td><%= @owner.postcode %></td>
+    </tr>
+    <tr>
+      <td>Address country</td>
+      <td><%= @owner.country %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.owner.email') %></td>
+      <td><%= @owner.email %></td>
+    </tr>
+    <tr>
+      <td><%= t('simple_form.labels.owner.phone_number') %></td>
+      <td><%= @owner.phone_number %></td>
+    </tr>
+  </tbody>
+</table>

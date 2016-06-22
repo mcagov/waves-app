@@ -1,0 +1,45 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
+
+    <h3 class="heading-medium"><%= t("declaration.form.title") %></h3>
+
+    <p><%= t("declaration.form.prompt") %></p>
+
+    <%= simple_form_for @declaration,
+                        url: declaration_path,
+                        method: :put do |f| %>
+      <legend class="visuallyhidden">
+        <%= t("declaration.form.title") %>
+      </legend>
+
+      <% if f.error_notification %>
+        <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h1 class="heading-medium error-summary-heading" id="error-summary-heading">
+            <%= f.error_notification %>
+          </h1>
+
+          <p><%= t("registration.error_description") %></p>
+        </div>
+      <% end %>
+
+      <p>
+        <%= render partial: "vessel_info" %>
+        <br>
+        <%= render partial: "owner_info" %>
+      </p>
+
+      <br>
+
+      <p><%= t("declaration.form.prompt") %></p>
+
+      <div class="form-group<%= " error" if f.error_notification %>">
+        <%= f.input :eligible_under_regulation_89, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
+        <%= f.input :eligible_under_regulation_90, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
+        <%= f.input :understands_false_statement_is_offence, as: :boolean, wrapper: false, label_html: {class: "block-label"} %>
+      </div>
+
+      <%= f.button :submit, "Continue", class: "button" %>
+    <% end %>
+  </div>
+</div>
