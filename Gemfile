@@ -35,6 +35,7 @@ group :development do
   gem "quiet_assets"
   gem "rubocop"
   gem "web-console"
+  gem "i18n-debug", require: false
 end
 
 group :development, :test do
