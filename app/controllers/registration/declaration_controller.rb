@@ -7,6 +7,8 @@ class Registration::DeclarationController < Registration::BaseController
 
   def update
     @declaration = Declaration.new(declaration_params)
+    @owner = get_from_session(:owner_info)
+    @vessel = get_from_session(:vessel_info)
 
     if @declaration.valid?
       store_in_session(:owner_info, declaration_params)
