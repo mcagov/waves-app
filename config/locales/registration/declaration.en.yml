@@ -4,7 +4,12 @@ en:
       models:
         declaration:
           attributes:
-
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted."
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted."
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted."
 
   declaration:
     form:

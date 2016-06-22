@@ -3,5 +3,5 @@ def error_message(form_object, field)
 end
 
 def path_for_step(step)
-  "/registration_wizard/#{step}"
+  "/registration_process/#{step}"
 end

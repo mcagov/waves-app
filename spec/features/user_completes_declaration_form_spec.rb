@@ -3,12 +3,12 @@ require "rails_helper"
 feature "User completes declaration form", type: :feature do
   before do
     create_list(:vessel_type, 5)
-    visit page_path("start")
-    click_on "Start now"
 
-    complete_prerequisites_form
-    complete_vessel_info_form
-    complete_owner_info_form
+    session_set_prerequisites
+    session_set_vessel_info
+    session_set_owner_info
+
+    visit declaration_path
   end
 
   context "when the form is completed successfully" do
@@ -30,12 +30,12 @@ feature "User completes declaration form", type: :feature do
     end
 
     scenario "user is shown the form again" do
-      expect(page).to have_text(t("registration.declaration.title"))
+      expect(page).to have_text(t("declaration.form.title"))
     end
 
     scenario "user is shown error messages" do
       expect(page).to have_text(
-        error_message("understands_false_statement_is_offence")
+        error_message(:declaration, "understands_false_statement_is_offence")
       )
     end
   end

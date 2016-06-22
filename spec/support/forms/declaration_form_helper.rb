@@ -7,5 +7,5 @@ def default_declaration_form_fields
 end
 
 def complete_declaration_form(fields = default_declaration_form_fields)
-  fill_form_and_submit(:registration, :update, fields)
+  fill_form_and_submit(:declaration, :update, fields)
 end

@@ -4,6 +4,8 @@ class Registration::BaseController < ApplicationController
   def store_in_session(step, params)
     session[:last_step] = step
     session[step] = params
+
+    #byebug
   end
 
   def get_from_session(key)
