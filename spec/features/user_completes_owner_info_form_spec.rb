@@ -3,11 +3,11 @@ require "rails_helper"
 feature "User completes owner info form", type: :feature do
   before do
     create_list(:vessel_type, 5)
-    visit page_path("start")
-    click_on "Start now"
 
-    complete_prerequisites_form
-    complete_vessel_info_form
+    session_set_prerequisites
+    session_set_vessel_info
+
+    visit owner_info_path
   end
 
   context "when the form is completed successfully" do
