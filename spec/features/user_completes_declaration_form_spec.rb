@@ -2,19 +2,19 @@ require "rails_helper"
 
 feature "User completes declaration form", type: :feature do
   before do
+    clear_cookies!
     create_list(:vessel_type, 5)
 
-    session_set_prerequisites
-    session_set_vessel_info
-    session_set_owner_info
+    set_prerequisites_cookie
+    set_vessel_info_cookie
+    set_owner_info_cookie
+    set_delivery_address_cookie
 
     visit declaration_path
   end
 
   context "when the form is completed successfully" do
-    before do
-      complete_declaration_form
-    end
+    before { complete_declaration_form }
 
     scenario "user is taken to next stage" do
       expect(page).to have_current_path(path_for_step("payment"))
