@@ -1,7 +1,8 @@
 def default_vessel_info_form_fields
-  form_fields = attributes_for(:vessel, vessel_type: VesselType.all.sample)
-  form_fields[:vessel_type_id] = form_fields[:vessel_type].id
-  form_fields.delete(:vessel_type)
+  vessel_type = VesselType.all.sample
+  form_fields = attributes_for(:vessel, vessel_type: vessel_type)
+  form_fields[:vessel_type_id] =
+    form_fields.delete(:vessel_type).designation.titleize
 
   form_fields
 end

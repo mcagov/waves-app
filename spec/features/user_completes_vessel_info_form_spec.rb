@@ -4,11 +4,23 @@ feature "User completes vessel info form", type: :feature do
   before do
     create_list(:vessel_type, 5)
 
-    session_set_prerequisites
+    set_prerequisites_cookie
+
     visit vessel_info_path
+    clear_cookie_for_step
   end
 
+  let!(:step) { :vessel_info }
+
   context "when the form is completed successfully" do
+    scenario "vessel info is successfully saved in session" do
+      expect_cookie_to_be_unset
+
+      complete_vessel_info_form
+
+      expect_cookie_to_be_set
+    end
+
     describe "hull ID" do
       describe "with valid ID" do
         scenario "user is taken to next stage" do
@@ -53,6 +65,14 @@ feature "User completes vessel info form", type: :feature do
     end
   end
 
-  xcontext "when the form is not completed successfully" do
+  context "when the form is not completed successfully" do
+    scenario "vessel info is not successfully saved in session" do
+      fields = default_vessel_info_form_fields
+      fields.delete(:name)
+
+      complete_vessel_info_form(fields)
+
+      expect_cookie_to_be_unset
+    end
   end
 end

@@ -3,7 +3,10 @@ require "rails_helper"
 feature "User completes prerequisites form", type: :feature do
   before do
     visit prerequisites_path
+    clear_cookie_for_step
   end
+
+  let!(:step) { :prerequisites }
 
   context "when the form is completed successfully" do
     before do
@@ -12,6 +15,10 @@ feature "User completes prerequisites form", type: :feature do
 
     scenario "user is taken to next stage" do
       expect(page).to have_current_path(path_for_step("vessel_info"))
+    end
+
+    scenario "prerequisites are successfully saved in session" do
+      expect_cookie_to_be_set
     end
   end
 
@@ -27,6 +34,10 @@ feature "User completes prerequisites form", type: :feature do
       expect(page).to have_text(
         t("prerequisites.form.title")
       )
+    end
+
+    scenario "prerequisites are not successfully saved in session" do
+      expect_cookie_to_be_unset
     end
 
     scenario "user is shown error messages" do
