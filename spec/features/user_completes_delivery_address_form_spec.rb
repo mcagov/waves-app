@@ -25,6 +25,11 @@ feature "User completes delivery address form", type: :feature do
       scenario "user is taken to the next stage" do
         expect(page).to have_current_path(path_for_step("declaration"))
       end
+
+      it "unsets the cookie to prevent its re-use"
+      # so that a user's delivery address from a previous registration attempt
+      # is not reused on a separate registration attempt that does not use a
+      # different delivery address
     end
 
     context "when the form is not successfully completed" do
