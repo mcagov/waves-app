@@ -2,8 +2,9 @@ require "rails_helper"
 
 feature "User completes prerequisites form", type: :feature do
   before do
+    clear_cookies!
+
     visit prerequisites_path
-    clear_cookie_for_step
   end
 
   let!(:step) { :prerequisites }

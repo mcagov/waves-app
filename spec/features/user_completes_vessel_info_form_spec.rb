@@ -2,20 +2,18 @@ require "rails_helper"
 
 feature "User completes vessel info form", type: :feature do
   before do
+    clear_cookies!
     create_list(:vessel_type, 5)
 
     set_prerequisites_cookie
 
     visit vessel_info_path
-    clear_cookie_for_step
   end
 
   let!(:step) { :vessel_info }
 
   context "when the form is completed successfully" do
     scenario "vessel info is successfully saved in session" do
-      expect_cookie_to_be_unset
-
       complete_vessel_info_form
 
       expect_cookie_to_be_set

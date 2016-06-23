@@ -9,6 +9,12 @@ def default_owner_info_form_fields
   form_fields.merge!(address_form_fields)
   form_fields.delete(:address)
 
+  %i(nationality country).each do |country_field|
+    form_fields[country_field] = country_name_from_code(
+      form_fields[country_field]
+    )
+  end
+
   form_fields
 end
 

@@ -2,62 +2,61 @@ require "rails_helper"
 
 feature "User completes owner info form", type: :feature do
   before do
+    clear_cookies!
     create_list(:vessel_type, 5)
 
-    session_set_prerequisites
-    session_set_vessel_info
+    set_prerequisites_cookie
+    set_vessel_info_cookie
 
     visit owner_info_path
   end
 
+  let!(:step) { :owner_info }
+
   context "when the form is completed successfully" do
     describe "title" do
       describe "with suggested title" do
-        scenario "owner's title is from the suggested titles list" do
-          complete_owner_info_form
+        before { complete_owner_info_form }
 
-          owner = Owner.last
-          from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner.title)
+        scenario "owner's title is from the suggested titles list" do
+          owner_title = get_cookie_for_step["title"]
+          from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner_title)
 
           expect(from_suggested_title).to be_truthy
         end
 
-        scenario "owner is successfully saved" do
-          expect { complete_owner_info_form }.to change { Owner.count }.by(1)
+        scenario "owner is successfully saved in session" do
+          expect_cookie_to_be_set
         end
 
         scenario "user is taken to the next stage" do
-          complete_owner_info_form
-          expect(page).to have_current_path(path_for_step("declaration"))
+          expect(page).to have_current_path(path_for_step("delivery_address"))
         end
       end
 
       describe "with other title" do
-        let!(:owner_info_fields) do
-          default_owner_info_form_fields.merge(
+        before do
+          owner_info_fields = default_owner_info_form_fields.merge(
             title: "Other (please specify)",
             title_other: "Cap'n"
           )
+
+          complete_owner_info_form(owner_info_fields)
         end
 
         scenario "owner's title is not from the suggested titles list" do
-          complete_owner_info_form(owner_info_fields)
-
-          owner = Owner.last
-          from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner.title)
+          owner_title = get_cookie_for_step["title"]
+          from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner_title)
 
           expect(from_suggested_title).to be_falsey
         end
 
-        scenario "owner is successfully saved" do
-          expect do
-            complete_owner_info_form(owner_info_fields)
-          end.to change { Owner.count }.by(1)
+        scenario "owner is successfully saved in session" do
+          expect_cookie_to_be_set
         end
 
         scenario "user is taken to the next stage" do
-          complete_owner_info_form(owner_info_fields)
-          expect(page).to have_current_path(path_for_step("declaration"))
+          expect(page).to have_current_path(path_for_step("delivery_address"))
         end
       end
     end
@@ -70,17 +69,22 @@ feature "User completes owner info form", type: :feature do
         last_name: "",
         phone_number: ""
       )
+
       complete_owner_info_form(invalid_fields)
     end
 
+    scenario "owner info is not successfully saved in session" do
+      expect_cookie_to_be_unset
+    end
+
     scenario "user is shown the form again" do
-      expect(page).to have_text(t("registration.owner_info.title"))
+      expect(page).to have_text(t("owner_info.form.title"))
     end
 
     scenario "user is shown error messages" do
       %w(first_name last_name phone_number).each do |attribute|
         expect(page).to have_text(
-          t("activerecord.errors.models.owner.attributes.#{attribute}.blank")
+          t("activemodel.errors.models.owner_info.attributes.#{attribute}.blank")
         )
       end
     end
