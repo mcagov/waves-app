@@ -9,4 +9,8 @@ class Registration::BaseController < ApplicationController
     klass_name = key.to_s.camelize
     klass_name.constantize.new(JSON.parse(cookies[key]))
   end
+
+  def remove_from_session(key)
+    cookies.delete(key.to_s)
+  end
 end

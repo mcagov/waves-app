@@ -24,8 +24,6 @@ def set_owner_info_cookie(fields = default_owner_info_form_fields)
 end
 
 def set_delivery_address_cookie(fields = default_delivery_address_form_fields)
-  fields[:country] = country_code_from_name(fields[:country])
-
   set_cookie_for_step("delivery_address", fields)
 end
 

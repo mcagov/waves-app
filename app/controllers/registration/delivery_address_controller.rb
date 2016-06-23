@@ -14,6 +14,7 @@ class Registration::DeliveryAddressController < Registration::BaseController
 
       render :show
     else
+      remove_from_session(:delivery_address)
       redirect_to controller: :declaration, action: :show
     end
   end

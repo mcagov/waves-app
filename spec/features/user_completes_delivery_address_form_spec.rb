@@ -25,18 +25,15 @@ feature "User completes delivery address form", type: :feature do
       scenario "user is taken to the next stage" do
         expect(page).to have_current_path(path_for_step("declaration"))
       end
-
-      it "unsets the cookie to prevent its re-use"
-      # so that a user's delivery address from a previous registration attempt
-      # is not reused on a separate registration attempt that does not use a
-      # different delivery address
     end
 
     context "when the form is not successfully completed" do
       before do
         invalid_address = build(:address, address_1: "", postcode: " ")
+        invalid_fields = invalid_address.attributes.symbolize_keys
+        invalid_fields.reject! { |_, v| v.nil? }
 
-        complete_delivery_address_form(invalid_address)
+        complete_delivery_address_form(invalid_fields)
       end
 
       scenario "delivery address is not successfully saved in session" do
@@ -59,8 +56,12 @@ feature "User completes delivery address form", type: :feature do
 
   context "when the user doesn't choose an alternative delivery address" do
     scenario "user is taken to the next stage" do
+      set_delivery_address_cookie
+
       complete_delivery_address_form(nil)
       expect(page).to have_current_path(path_for_step("declaration"))
+
+      expect_cookie_to_be_unset
     end
   end
 end
