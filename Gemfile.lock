@@ -166,9 +166,6 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.3.2)
-    rack_session_access (0.1.1)
-      builder (>= 2.0.0)
-      rack (>= 1.0.0)
     rails (4.2.6)
       actionmailer (= 4.2.6)
       actionpack (= 4.2.6)
@@ -234,6 +231,8 @@ GEM
       tilt (>= 1.1, < 3)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    show_me_the_cookies (3.1.0)
+      capybara (~> 2.0)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -320,7 +319,6 @@ DEPENDENCIES
   quiet_assets
   rack-mini-profiler
   rack-timeout
-  rack_session_access
   rails (~> 4.2.0)
   rails-assets-bootstrap-select!
   rake (~> 11.1.2)
@@ -329,6 +327,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   shoulda-matchers
+  show_me_the_cookies
   simple_form
   simplecov
   sprockets (>= 3.0.0)
