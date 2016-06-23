@@ -9,8 +9,6 @@ class DeliveryAddress
     :town,
     :county,
     :postcode,
-    :country,
-    :email,
-    :phone_number
+    :country
   )
 end
