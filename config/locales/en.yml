@@ -35,6 +35,8 @@ en:
         update: Continue
       owner_info:
         update: Continue
+      delivery_address:
+        update: Continue
       declaration:
         update: Continue
 
