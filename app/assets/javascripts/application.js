@@ -22,5 +22,5 @@
 //= require_tree .
 
 $(document).ready(function () {
-  new GOVUK.SelectionButtons("input[type='checkbox']");
+  new GOVUK.SelectionButtons("input[type='checkbox'], input[type='radio']");
 });

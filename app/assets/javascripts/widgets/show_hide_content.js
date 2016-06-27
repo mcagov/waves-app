@@ -1,8 +1,13 @@
-var ShowHideContent = function (control) {
+var ShowHideContent = function (control, excludeParent) {
   var targetId = $(control).attr("data-target");
   $(control).attr("aria-controls", targetId);
 
-  this.target = $("#" + targetId).parent();
+  var target = $("#" + targetId);
+  if (excludeParent)
+    this.target = target;
+  else
+    this.target = target.parent();
+
   this.target.addClass("panel panel-border-narrow");
 
   if (this.target.find("input").val())
@@ -18,7 +23,8 @@ ShowHideContent.prototype.showContent = function () {
 };
 
 ShowHideContent.prototype.hideContent = function () {
-  this.target.find("input").val("")
+  this.target.find("input").val("");
+  this.target.find("select").val("");
   this.target.hide();
   this.target.addClass("js-hidden");
   this.setHiddenState(true);
@@ -28,3 +34,4 @@ ShowHideContent.prototype.setHiddenState = function (state) {
   this.target.attr("aria-hidden", state.toString());
   this.target.attr("aria-expanded", (!state).toString());
 };
+
