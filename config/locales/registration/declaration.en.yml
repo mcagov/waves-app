@@ -1,0 +1,19 @@
+en:
+  activemodel:
+    errors:
+      models:
+        declaration:
+          attributes:
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted."
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted."
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted."
+
+  declaration:
+    form:
+      prompt: "By submitting this online registration form you agree to the following statements:"
+      title: "Declaration"
+      warning: "Please make sure the following information is correct. If it is not, please go back and change it accordingly."
+

@@ -1,0 +1,32 @@
+en:
+  activemodel:
+    errors:
+      models:
+        prerequisite:
+          attributes:
+            not_registered_before_on_ssr:
+              accepted: "The vessel should not already have been registered on the UK Small Ships Register."
+            not_registered_under_part_1:
+              accepted: "The vessel should not currently be registered on Part I of the UK Ship Register."
+            not_owned_by_company:
+              accepted: "The vessel should not be owned by a company."
+            not_commercial_fishing_or_submersible:
+              accepted: "The vessel should not be a commercial fishing or submersible vessel"
+            owners_are_uk_residents:
+              accepted: "All the owners should be ordinarily resident in the UK."
+            owners_are_eligible_to_register:
+              accepted: "All the owners should be eligible to register a vessel on the UK Small Ships Register."
+            not_registered_on_foreign_registry:
+              accepted: "The vessel should not be registered on a foreign registry."
+            eligible_under_regulation_89:
+              accepted: "This statement must be accepted."
+            eligible_under_regulation_90:
+              accepted: "This statement must be accepted."
+            understands_false_statement_is_offence:
+              accepted: "This statement must be accepted."
+
+  prerequisites:
+    form:
+      prompt: "Select all the statements that apply for the ship that you wish to register"
+      title: "Prerequisites"
+

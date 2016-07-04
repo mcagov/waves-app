@@ -1,0 +1,4 @@
+en:
+  registration:
+    error_description: "Please correct the highlighted problems below before proceeding."
+    title: "Registering a small ship"

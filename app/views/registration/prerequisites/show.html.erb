@@ -2,12 +2,14 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t("registration.title") %></h1>
 
-    <h3 class="heading-medium"><%= t("registration.prerequisites.title") %></h3>
+    <h3 class="heading-medium"><%= t("prerequisites.form.title") %></h3>
 
-    <p><%= t("registration.prerequisites.prompt") %></p>
+    <p><%= t("prerequisites.form.prompt") %></p>
 
-    <%= simple_form_for @registration, url: wizard_path, method: :put do |f| %>
-      <legend class="visuallyhidden"><%= t("registration.prerequisites.title") %></legend>
+    <%= simple_form_for @prerequisite,
+                        url: prerequisites_path,
+                        method: :put do |f| %>
+      <legend class="visuallyhidden"><%= t("prerequisites.form.title") %></legend>
 
       <% if f.error_notification %>
         <div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
@@ -29,7 +31,7 @@
         <%= form_checkbox(f, :not_registered_on_foreign_registry) %>
       </div>
 
-      <%= f.button :submit, class: "button" %>
+      <%= f.button :submit, "Continue", class: "button" %>
     <% end %>
   </div>
 </div>

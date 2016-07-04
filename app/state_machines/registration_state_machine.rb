@@ -4,6 +4,9 @@ class RegistrationStateMachine < StrictMachine::Base
       on :added_vessel_info => :vessel_info_added, if: :valid?
     end
     state :vessel_info_added do
+      on :added_owner_info => :owner_info_added, if: :valid?
+    end
+    state :owner_info_added do
       on :accepted_declaration => :declaration_accepted, if: :valid?
     end
     state :declaration_accepted

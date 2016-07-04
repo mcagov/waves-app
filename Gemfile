@@ -6,6 +6,7 @@ gem "bundler-audit", ">= 0.5.0", require: false
 gem "bootstrap-sass", "~> 3.3.6"
 gem "clearance"
 gem "countries"
+gem "country_select"
 gem "dotenv-rails"
 gem "flutie"
 gem "font-awesome-rails"
@@ -27,12 +28,13 @@ gem "sprockets-es6"
 gem "strict_machine-rails", "~> 0.1.2"
 gem "title"
 gem "uglifier"
-gem "wicked"
+gem "validates_email_format_of"
 
 group :development do
   gem "quiet_assets"
   gem "rubocop"
   gem "web-console"
+  gem "i18n-debug", require: false
 end
 
 group :development, :test do
@@ -58,6 +60,7 @@ group :test do
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
+  gem "show_me_the_cookies"
 end
 
 group :staging, :production do
