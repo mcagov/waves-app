@@ -29,6 +29,7 @@ gem "strict_machine-rails", "~> 0.1.2"
 gem "title"
 gem "uglifier"
 gem "validates_email_format_of"
+gem "nokogiri", ">= 1.6.8"
 
 group :development do
   gem "quiet_assets"
