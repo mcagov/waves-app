@@ -17,7 +17,9 @@ This is a standard Rails 4.2 web app with a PostgreSQL database.
 
 #### Database model
 
-The expected database model for the app is given in the following diagram:
+The expected database model for the app is given in [this diagram][db-model].
+
+[db-model]: https://gitlab.oceanshq.com/maritime-coastguard-agency/vrsapp/uploads/3d089bf206206b2d313ac84eafa8505a/data_model.png
 
 #### Style
 
