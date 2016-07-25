@@ -23,7 +23,7 @@ gem "rake", "~> 11.1.2"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
-gem "sprockets", ">= 3.0.0"
+gem 'sprockets', '3.6.3'
 gem "sprockets-es6"
 gem "strict_machine-rails", "~> 0.1.2"
 gem "title"
