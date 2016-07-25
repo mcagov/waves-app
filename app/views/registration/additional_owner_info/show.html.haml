@@ -1,4 +1,6 @@
 #owner-info.grid-row
-  = simple_form_for :additional_owner_info do |f|
+  = simple_form_for @additional_owner_info,  url: additional_owner_info_path, method: :put do |f|
     %h1.form-title.heading-large= t("additional_owner_info.form.title")
     %p= t("additional_owner_info.form.prompt")
+    %legend.visuallyhidden= t("additional_owner_info.form.title")
+    = render "/registration/owner_info/fields", f: f

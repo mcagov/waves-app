@@ -1,14 +1,14 @@
 class Registration::AdditionalOwnerInfoController < Registration::BaseController
   def show
-    @owner_info = AdditionalOwnerInfo.new
+    @additional_owner_info = AdditionalOwnerInfo.new
   end
 
   def update
-    @owner_info = AdditionalOwnerInfo.new(additional_owner_info)
-    if @owner_info.valid?
-      store_in_session(:additional_owner_info, owner_info_params)
+    @additional_owner_info = AdditionalOwnerInfo.new(additional_owner_info_params)
 
-      if @owner_info.additional_owner == "true"
+    if @additional_owner_info.valid?
+      store_in_session(:additional_owner_info, additional_owner_info_params)
+      if @additional_owner_info.additional_owner == "true"
         return redirect_to controller: :additional_owner_info, action: :show
       else
         return redirect_to controller: :delivery_address, action: :show
