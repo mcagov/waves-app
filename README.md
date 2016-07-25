@@ -84,6 +84,7 @@ Setup your databases with:
 ### Installation issues
 
 If capybara-webkit fails when you run `bundle install`, refer to the [capybara-webkit help page](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
+
 ## Running the webserver locally
 
 The Puma webserver can be used to run the app locally:
@@ -97,3 +98,5 @@ The app will then be available at http://localhost:3000/
 We use RSpec for tests. To run the test suite, run:
 
     bundle exec rspec
+
+If you get the error `DATABASE_URL environment variable is set` you will need to remove the `DATABASE_URL` from the local .env file.
