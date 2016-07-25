@@ -18,7 +18,8 @@ class OwnerInfo
     :postcode,
     :country,
     :email,
-    :phone_number
+    :phone_number,
+    :additional_owner
   )
 
   def full_name_with_title

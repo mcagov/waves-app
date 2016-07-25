@@ -30,4 +30,8 @@
         %h4.heading-small Contact information
         = form_input f, :email, as: :email
         = form_input f, :phone_number
+      %fieldset.inline
+        %h4.heading-small= t("owner_info.form.labels.additional_owner")
+        .form-group
+          = additional_owner_radio_buttons(f)
       = f.button :submit, "Continue", class: "button"

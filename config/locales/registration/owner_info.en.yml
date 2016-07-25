@@ -32,4 +32,5 @@ en:
     form:
       prompt: "Lorem ipsum"
       title: "Owner Information"
-
+      labels:
+        additional_owner: "Are there any more owners?"

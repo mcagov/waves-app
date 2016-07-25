@@ -31,7 +31,8 @@ class Registration::OwnerInfoController < Registration::BaseController
       :postcode,
       :country,
       :email,
-      :phone_number
+      :phone_number,
+      :additional_owner
     )
   end
 end

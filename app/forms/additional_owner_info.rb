@@ -1,0 +1,2 @@
+class AdditionalOwnerInfo < OwnerInfo
+end

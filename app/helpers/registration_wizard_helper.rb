@@ -87,4 +87,15 @@ module RegistrationWizardHelper
       label: false
     )
   end
+
+  def additional_owner_radio_buttons(form)
+    form.input(
+      :additional_owner,
+      as: :radio_buttons,
+      checked: false,
+      collection: [["No", false], ["Yes", true]],
+      item_label_class: "block-label",
+      label: false
+    )
+  end
 end
