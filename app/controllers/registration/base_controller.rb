@@ -1,8 +1,15 @@
 class Registration::BaseController < ApplicationController
   private
 
-  def store_in_session(step, params)
-    cookies[step] = params.to_json
+  def store_in_session(step, params, datatype=:string)
+    case datatype
+      when :string
+        cookies[step] = params.to_json
+      when :array
+        counter = cookies["#{ step }_count"].to_i + 1
+        cookies["#{ step }_count"] = counter
+        cookies["#{ step }_#{ counter }"] = params.to_json
+    end
   end
 
   def get_from_session(key)

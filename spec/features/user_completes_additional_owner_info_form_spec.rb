@@ -3,11 +3,6 @@ require "rails_helper"
 feature "User completes owner info form", type: :feature do
   before do
     clear_cookies!
-    create_list(:vessel_type, 5)
-
-    set_prerequisites_cookie
-    set_vessel_info_cookie
-
     visit additional_owner_info_path
   end
 
@@ -25,5 +20,7 @@ feature "User completes owner info form", type: :feature do
 
     complete_additional_owner_info_form
     expect(page).to have_current_path(path_for_step("delivery_address"))
+
+    expect(get_me_the_cookie("additional_owner_info_count")[:value].to_i).to eq(2)
   end
 end

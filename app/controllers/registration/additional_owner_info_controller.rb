@@ -7,7 +7,8 @@ class Registration::AdditionalOwnerInfoController < Registration::BaseController
     @additional_owner_info = AdditionalOwnerInfo.new(additional_owner_info_params)
 
     if @additional_owner_info.valid?
-      store_in_session(:additional_owner_info, additional_owner_info_params)
+      store_in_session(:additional_owner_info, additional_owner_info_params, :array)
+
       if @additional_owner_info.additional_owner == "true"
         return redirect_to controller: :additional_owner_info, action: :show
       else
