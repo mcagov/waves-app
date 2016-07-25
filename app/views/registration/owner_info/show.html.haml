@@ -31,7 +31,7 @@
         = form_input f, :email, as: :email
         = form_input f, :phone_number
       %fieldset.inline
-        %h4.heading-small= t("owner_info.form.labels.additional_owner")
         .form-group
+          %h4.heading-medium= t("simple_form.labels.owner_info.additional_owner")
           = additional_owner_radio_buttons(f)
       = f.button :submit, "Continue", class: "button"

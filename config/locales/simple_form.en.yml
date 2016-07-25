@@ -47,6 +47,7 @@ en:
         email: Email address
         phone_number: Phone number
         <<: *ADDRESS_LABELS
+        additional_owner: Are there any more owners?
 
       delivery_address:
         <<: *ADDRESS_LABELS

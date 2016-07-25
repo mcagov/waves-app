@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       resource :owner_info,
                only: [:show, :update],
                controller: "registration/owner_info"
+      resource :additional_owner_info,
+               only: [:show, :update],
+               controller: "registration/additional_owner_info"
       resource :delivery_address,
                only: [:show, :update],
                controller: "registration/delivery_address"

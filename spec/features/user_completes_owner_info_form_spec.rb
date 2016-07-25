@@ -89,4 +89,17 @@ feature "User completes owner info form", type: :feature do
       end
     end
   end
+
+  context "when there are multiple owners" do
+    before do
+      within(".form-group", text: "Are there any more owners?") do
+        choose("Yes")
+      end
+      complete_owner_info_form
+    end
+
+    scenario "user is redirected to the additional_owner_info form" do
+      expect(page).to have_current_path(path_for_step("additional_owner_info"))
+    end
+  end
 end

@@ -1,12 +1,12 @@
-class Registration::OwnerInfoController < Registration::BaseController
+class Registration::AdditionalOwnerInfoController < Registration::BaseController
   def show
-    @owner_info = OwnerInfo.new
+    @owner_info = AdditionalOwnerInfo.new
   end
 
   def update
-    @owner_info = OwnerInfo.new(owner_info_params)
+    @owner_info = AdditionalOwnerInfo.new(additional_owner_info)
     if @owner_info.valid?
-      store_in_session(:owner_info, owner_info_params)
+      store_in_session(:additional_owner_info, owner_info_params)
 
       if @owner_info.additional_owner == "true"
         return redirect_to controller: :additional_owner_info, action: :show
@@ -20,8 +20,8 @@ class Registration::OwnerInfoController < Registration::BaseController
 
   private
 
-  def owner_info_params
-    params.require(:owner_info).permit(
+  def additional_owner_info_params
+    params.require(:additional_owner_info).permit(
       :title,
       :title_other,
       :first_name,

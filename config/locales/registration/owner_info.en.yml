@@ -32,5 +32,8 @@ en:
     form:
       prompt: "Lorem ipsum"
       title: "Owner Information"
-      labels:
-        additional_owner: "Are there any more owners?"
+
+  additional_owner_info:
+    form:
+      title: "Additional owner information"
+      prompt: "The regulations require that each registered owner of a UK vessel complete a simple declaration regarding their eligibility to own a UK vessel. As soon as the application is submitted, each additional owner will receive an automatic email inviting them to complete an online declaration. In the event that an owner does not have an email account, you can download a Part 3 declaration form to complete by hand."
