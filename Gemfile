@@ -30,6 +30,7 @@ gem "title"
 gem "uglifier"
 gem "validates_email_format_of"
 gem "nokogiri", ">= 1.6.8"
+gem "haml"
 
 group :development do
   gem "quiet_assets"
