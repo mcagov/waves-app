@@ -81,6 +81,9 @@ Setup your databases with:
     bundle exec rake db:setup
     bundle exec rake db:test:prepare
 
+### Installation issues
+
+If capybara-webkit fails when you run `bundle install`, refer to the [capybara-webkit help page](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
 ## Running the webserver locally
 
 The Puma webserver can be used to run the app locally:
