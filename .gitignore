@@ -13,3 +13,4 @@
 /tags
 /tmp/*
 .env
+.byebug_history
