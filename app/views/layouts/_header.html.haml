@@ -1,0 +1,12 @@
+%body
+  %header#global-header.with-proposition{:role => "banner"}
+    .header-wrapper
+      .header-global
+        .header-logo
+          = link_to "https://www.gov.uk", title: t("header.logo.link.title"), id: "logo", class: "content" do
+            = image_tag "gov.uk_logotype_crown_invert_trans.png?0.17.1", size: "35x31", alt: ""
+            = t("header.logo.link.text")
+      .header-proposition
+        .content
+          = link_to title, "#", id: "proposition-name"
+  #global-header-bar

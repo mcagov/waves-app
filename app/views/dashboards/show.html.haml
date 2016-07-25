@@ -1,0 +1,158 @@
+.row
+  .col-sm-3.col-md-2.sidebar
+    %ul.nav.nav-sidebar
+      %li.active
+        %a{:href => "#"}
+          Overview
+          %span.sr-only (current)
+      %li
+        %a{:href => "#"} Registrations
+    /
+      <ul class="nav nav-sidebar">
+      <li><a href="">Nav item again</a></li>
+      <li><a href="">One more nav</a></li>
+      <li><a href="">Another nav item</a></li>
+      </ul>
+  .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+    %h1.page-header Overview
+    .row.placeholders
+      .col-xs-6.col-sm-3.placeholder
+        %img.img-responsive{:alt => "Generic placeholder thumbnail", :height => "200", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "200"}/
+        %h4 New Registrations
+        %span.text-muted Last updated 2 mins ago
+      .col-xs-6.col-sm-3.placeholder
+        %img.img-responsive{:alt => "Generic placeholder thumbnail", :height => "200", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "200"}/
+        %h4 Re-registrations
+        %span.text-muted Last updated 5 mins ago
+      .col-xs-6.col-sm-3.placeholder
+        %img.img-responsive{:alt => "Generic placeholder thumbnail", :height => "200", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "200"}/
+        %h4 Change of owner/vessel details
+        %span.text-muted Last updated 3 mins ago
+    .bs-example
+      #accordion.panel-group
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"} New Registrations
+          #collapseOne.panel-collapse.collapse.in
+            .panel-body
+              .table-responsive
+                %table.table.table-striped
+                  %thead
+                    %tr
+                      %th #
+                      %th Header
+                      %th Header
+                      %th Header
+                      %th Header
+                  %tbody
+                    %tr
+                      %td 1,001
+                      %td Lorem
+                      %td ipsum
+                      %td dolor
+                      %td sit
+                    %tr
+                      %td 1,002
+                      %td amet
+                      %td consectetur
+                      %td adipiscing
+                      %td elit
+                    %tr
+                      %td 1,003
+                      %td Integer
+                      %td nec
+                      %td odio
+                      %td Praesent
+                    %tr
+                      %td 1,003
+                      %td libero
+                      %td Sed
+                      %td cursus
+                      %td ante
+                    %tr
+                      %td 1,004
+                      %td dapibus
+                      %td diam
+                      %td Sed
+                      %td nisi
+                    %tr
+                      %td 1,005
+                      %td Nulla
+                      %td quis
+                      %td sem
+                      %td at
+                    %tr
+                      %td 1,006
+                      %td nibh
+                      %td elementum
+                      %td imperdiet
+                      %td Duis
+                    %tr
+                      %td 1,007
+                      %td sagittis
+                      %td ipsum
+                      %td Praesent
+                      %td mauris
+                    %tr
+                      %td 1,008
+                      %td Fusce
+                      %td nec
+                      %td tellus
+                      %td sed
+                    %tr
+                      %td 1,009
+                      %td augue
+                      %td semper
+                      %td porta
+                      %td Mauris
+                    %tr
+                      %td 1,010
+                      %td massa
+                      %td Vestibulum
+                      %td lacinia
+                      %td arcu
+                    %tr
+                      %td 1,011
+                      %td eget
+                      %td nulla
+                      %td Class
+                      %td aptent
+                    %tr
+                      %td 1,012
+                      %td taciti
+                      %td sociosqu
+                      %td ad
+                      %td litora
+                    %tr
+                      %td 1,013
+                      %td torquent
+                      %td per
+                      %td conubia
+                      %td nostra
+                    %tr
+                      %td 1,014
+                      %td per
+                      %td inceptos
+                      %td himenaeos
+                      %td Curabitur
+                    %tr
+                      %td 1,015
+                      %td sodales
+                      %td ligula
+                      %td in
+                      %td libero
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"} Re-registrations
+          #collapseTwo.panel-collapse.collapse
+            .panel-body
+              %p TODO
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseThree"} Change of owner/vessel details
+          #collapseThree.panel-collapse.collapse
+            .panel-body
+              TODO

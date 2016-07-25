@@ -1,0 +1,59 @@
+!!!
+/[if lt IE 9] <html class="lte-ie8" lang="en">
+/ [if gt IE 8]><!
+%html{:lang => "en"}
+  / <![endif]
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "NOODP", :name => "ROBOTS"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %title= title
+    / [if gt IE 8]><!
+    = stylesheet_link_tag "govuk-template.css?0.17.1", media: "screen"
+    / <![endif]
+    /[if IE 6] <haml_loud> stylesheet_link_tag &quot;govuk-template-ie6.css?0.17.1&quot;, media: &quot;screen&quot; </haml_loud>
+    /[if IE 7] <haml_loud> stylesheet_link_tag &quot;govuk-template-ie7.css?0.17.1&quot;, media: &quot;screen&quot; </haml_loud>
+    /[if IE 8] <haml_loud> stylesheet_link_tag &quot;govuk-template-ie8.css?0.17.1&quot;, media: &quot;screen&quot; </haml_loud>
+    = stylesheet_link_tag "govuk-template-print.css?0.17.1", media: "print"
+    /[if IE 8]
+      <script>
+      (function(){if(window.opera){return;}
+      setTimeout(function(){var a=document,g,b={families:(g=
+      ["nta"]),urls:["<haml_loud> asset_path(&quot;fonts-ie8.css?0.17.1&quot;) </haml_loud>"]},
+      c="<haml_loud> asset_path(&quot;vendor/goog/webfont-debug.js?0.17.1&quot;) </haml_loud>",d="script",
+      e=a.createElement(d),f=a.getElementsByTagName(d)[0],h=g.length;WebFontConfig
+      \={custom:b},e.src=c,f.parentNode.insertBefore(e,f);for(;h=h-1;a.documentElement
+      \.className+=' wf-'+g[h].replace(/\s/g,'').toLowerCase()+'-n4-loading');},0)
+      })()
+      </script>
+    / [if gte IE 9]><!
+    = stylesheet_link_tag "fonts.css?0.17.1", media: "all"
+    / <![endif]
+    /[if lt IE 9] <haml_loud> javascript_include_tag &quot;ie.js?0.17.1&quot; </haml_loud>
+    = favicon_link_tag "favicon.ico?0.17.1"
+    = favicon_link_tag "gov.uk_logotype_crown.svg?0.17.1", rel: "mask-icon", color: "#0b0c0c", type: "image/svg"
+    = favicon_link_tag "apple-touch-icon-152x152.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "152x152", type: "image/png"
+    = favicon_link_tag "apple-touch-icon-120x120.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "120x120", type: "image/png"
+    = favicon_link_tag "apple-touch-icon-76x76.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "76x76", type: "image/png"
+    = favicon_link_tag "apple-touch-icon-60x60.png?0.17.1", rel: "apple-touch-icon-precomposed"
+    %meta{:content => "#{asset_path("opengraph-image.png?0.17.1")}", :property => "og:image"}/
+    = stylesheet_link_tag :govuk, media: "all"
+    = csrf_meta_tags
+  %body{:class => body_class}
+    :javascript
+      document.body.className = ((document.body.className) ? document.body.className + " js-enabled" : "js-enabled");
+    #skiplink-container
+      %div
+        %a.skiplink{:href => "#content"}
+    #global-cookie-message
+    = render "layouts/header"
+    %main#content{:role => "main"}
+      = render "layouts/phase_banner"
+      #page
+        = render "flashes"
+        = yield
+    = render "layouts/footer"
+    #global-app-error.app-error.hidden
+    = render "javascript"
+    = render "css_overrides"

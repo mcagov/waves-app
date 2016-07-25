@@ -1,0 +1,25 @@
+#delivery-address.grid-row
+  .column-two-thirds
+    %h1.heading-xlarge= t("registration.title")
+    %h3.heading-medium= t("delivery_address.form.title")
+    %p= t("delivery_address.form.question")
+    = simple_form_for @delivery_address, url: delivery_address_path, method: :put do |f|
+      %legend.visuallyhidden= t("delivery_address.form.title")
+      - if f.error_notification
+        .error-summary{"aria-labelledby" => "error-summary-heading", :role => "group", :tabindex => "-1"}
+          %h1#error-summary-heading.heading-medium.error-summary-heading
+            = f.error_notification
+          %p= t("registration.error_description")
+      %fieldset.inline.form-group
+        = delivery_address_toggle f
+      %fieldset#registration-delivery-address
+        %h4.heading-small
+          = t("delivery_address.form.prompt")
+        = form_input f, :address_1
+        = form_input f, :address_2, label: false
+        = form_input f, :address_3, label: false
+        = form_input f, :town
+        = form_input f, :county
+        = form_input f, :postcode
+        = form_country_select f, :country
+      = f.button :submit, "Continue", class: "button"

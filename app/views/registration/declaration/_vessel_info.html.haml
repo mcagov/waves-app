@@ -1,0 +1,31 @@
+%table
+  %thead
+    %tr
+      %th{:colspan => "2"} Vessel Info
+  %tbody
+    %tr
+      %td= t('simple_form.labels.vessel_info.name')
+      %td= @vessel.name
+    %tr
+      %td= t('simple_form.labels.vessel_info.hin')
+      %td= @vessel.hin
+    %tr
+      %td= t('simple_form.labels.vessel_info.make_and_model')
+      %td= @vessel.make_and_model
+    %tr
+      %td= t('simple_form.labels.vessel_info.length_in_centimeters')
+      %td
+        = @vessel.length_in_meters
+        metres
+    %tr
+      %td= t('simple_form.labels.vessel_info.number_of_hulls')
+      %td= @vessel.number_of_hulls
+    %tr
+      %td= t('simple_form.labels.vessel_info.vessel_type_id')
+      %td= @vessel.type
+    %tr
+      %td= t('simple_form.labels.vessel_info.mmsi_number')
+      %td= @vessel.mmsi_number
+    %tr
+      %td= t('simple_form.labels.vessel_info.radio_call_sign')
+      %td= @vessel.radio_call_sign

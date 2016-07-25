@@ -1,0 +1,26 @@
+.navbar-header
+  %a.navbar-brand{:href => "#"} VRS
+  %select.selectpicker.show-tick{"data-header" => "Select your registry", "data-style" => "btn-primary"}
+    %option{:disabled => "disabled"} Part I
+    %option{:disabled => "disabled"} Part II
+    %option{:selected => "selected"} Part III
+    %option{:disabled => "disabled"} Part IV
+  %span.messages-notifier.nav-adjust-top-8
+    %button.btn.btn-success{:type => "button"}
+      %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+      %span.badge 0
+.pull-right
+  %form.navbar-form.pull-left{:role => "search"}
+    .input-group
+      %input#srch-term.form-control{:name => "srch-term", :placeholder => "Search", :type => "text"}/
+      .input-group-btn
+        %button.btn.btn-default{:type => "submit"}
+          %i.glyphicon.glyphicon-search
+  = link_to raw("<span class='glyphicon glyphicon-log-out'></span>"), |
+    sign_out_path,                                                    |
+    method: :delete,                                                  |
+    class: "btn btn-default btn-sm nav-adjust-top-10"                 |
+.pull-right
+  = link_to raw("<span class='glyphicon glyphicon-user'></span>"), |
+    "#",                                                           |
+    class: "btn btn-default btn-sm nav-adjust-top-10"              |

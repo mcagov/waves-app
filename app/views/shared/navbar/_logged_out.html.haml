@@ -1,0 +1,30 @@
+.navbar-header
+  %a.navbar-brand{:href => "#"} VRS
+%ul.nav.navbar-nav.navbar-right
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      %b Login
+      %span.caret
+    %ul#login-dp.dropdown-menu
+      %li
+        .row
+          .col-md-12
+            Login via
+            .sso-buttons
+              %a.btn.btn-activedirectory{:disabled => "true", :href => "#"}
+                = fa_icon "windows"
+                ActiveDirectory
+            or
+            = form_for :session, url: session_path, html: { class: "form-wedge" } do |form|
+              .form-group
+                = form.text_field :email, type: 'email', placeholder: 'Email address', required: true, class: 'form-control'
+              .form-group
+                = form.password_field :password, placeholder: 'Password', required: true, class: 'form-control'
+                .help-block.text-right
+                  = link_to "Forgot your password?", new_password_path
+              .form-group
+                = form.submit "Sign in", class: "btn btn-primary btn-block"
+              .checkbox
+                %label
+                  %input{:type => "checkbox"}/
+                  keep me logged-in
