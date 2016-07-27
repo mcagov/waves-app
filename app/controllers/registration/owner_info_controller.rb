@@ -1,15 +1,16 @@
 class Registration::OwnerInfoController < Registration::BaseController
   def show
+    @scope = "additional_" if params[:additional]
     @owner_info = OwnerInfo.new
   end
 
   def update
     @owner_info = OwnerInfo.new(owner_info_params)
     if @owner_info.valid?
-      store_in_session(:owner_info, owner_info_params)
+      store_in_session(:owner_info, owner_info_params, :array)
 
       if @owner_info.additional_owner == "true"
-        return redirect_to controller: :additional_owner_info, action: :show
+        return redirect_to controller: :owner_info, action: :show, additional: :owner_info
       else
         return redirect_to controller: :delivery_address, action: :show
       end

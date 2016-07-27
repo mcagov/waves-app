@@ -19,14 +19,14 @@ feature "User completes owner info form", type: :feature do
         before { complete_owner_info_form }
 
         scenario "owner's title is from the suggested titles list" do
-          owner_title = get_cookie_for_step["title"]
+          owner_title = get_cookie_for("owner_info_1")["title"]
           from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner_title)
 
           expect(from_suggested_title).to be_truthy
         end
 
         scenario "owner is successfully saved in session" do
-          expect_cookie_to_be_set
+          expect_cookie_for("owner_info_1")
         end
 
         scenario "user is taken to the next stage" do
@@ -45,14 +45,14 @@ feature "User completes owner info form", type: :feature do
         end
 
         scenario "owner's title is not from the suggested titles list" do
-          owner_title = get_cookie_for_step["title"]
+          owner_title = get_cookie_for("owner_info_1")["title"]
           from_suggested_title = Owner::SUGGESTED_TITLES.include?(owner_title)
 
           expect(from_suggested_title).to be_falsey
         end
 
         scenario "owner is successfully saved in session" do
-          expect_cookie_to_be_set
+          expect_cookie_for("owner_info_1")
         end
 
         scenario "user is taken to the next stage" do
@@ -99,7 +99,14 @@ feature "User completes owner info form", type: :feature do
     end
 
     scenario "user is redirected to the additional_owner_info form" do
-      expect(page).to have_current_path(path_for_step("additional_owner_info"))
+      expect(page).to have_current_path(path_for_step("owner_info?additional=owner_info"))
+    end
+
+    scenario "user adds two additional owners" do
+      complete_owner_info_form
+      expect(page).to have_current_path(path_for_step("delivery_address"))
+
+      expect(get_me_the_cookie("owner_info_count")[:value].to_i).to eq(2)
     end
   end
 end

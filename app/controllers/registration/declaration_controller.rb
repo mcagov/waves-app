@@ -9,7 +9,7 @@ class Registration::DeclarationController < Registration::BaseController
     @declaration = Declaration.new(declaration_params)
 
     if @declaration.valid?
-      store_in_session(:owner_info, declaration_params)
+      store_in_session(:owner_info_1, declaration_params)
       return redirect_to controller: :payment, action: :show
     end
 
@@ -19,7 +19,7 @@ class Registration::DeclarationController < Registration::BaseController
   private
 
   def fetch_from_session
-    @owner = get_from_session(:owner_info)
+    @owner = get_from_session(:owner_info_1, "OwnerInfo")
     @vessel = get_from_session(:vessel_info)
   end
 

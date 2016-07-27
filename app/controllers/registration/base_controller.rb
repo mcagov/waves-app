@@ -12,8 +12,8 @@ class Registration::BaseController < ApplicationController
     end
   end
 
-  def get_from_session(key)
-    klass_name = key.to_s.camelize
+  def get_from_session(key, klass_name=nil)
+    klass_name ||= key.to_s.camelize
     klass_name.constantize.new(JSON.parse(cookies[key]))
   end
 
