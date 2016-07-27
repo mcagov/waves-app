@@ -15,12 +15,4 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //
-//= require govuk-template
-//
-//= require govuk/selection-buttons
-//
 //= require_tree .
-
-$(document).ready(function () {
-  new GOVUK.SelectionButtons("input[type='checkbox'], input[type='radio']");
-});

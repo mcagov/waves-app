@@ -23,14 +23,9 @@ The expected database model for the app is given in [this diagram][db-model].
 
 #### Style
 
-The [Government Digital Service][gds] [guidelines] and [styles] have been used
-to theme the registration form, whilst [Bootstrap][bootstrap] has been used to
-theme the internal dashboard.
+[Bootstrap][bootstrap] has been used to theme the internal dashboard.
 
 [bootstrap]: https://getbootstrap.com/
-[gds]: https://www.gov.uk/government/organisations/government-digital-service
-[guidelines]: https://www.gov.uk/service-manual/user-centred-design/resources/patterns/index.html
-[styles]: https://govuk-elements.herokuapp.com/
 
 #### Registration
 
