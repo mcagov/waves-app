@@ -1,3 +1,3 @@
-class Address < ActiveRecord::Base
+class Address < ApplicationRecord
   include AddressValidations
 end

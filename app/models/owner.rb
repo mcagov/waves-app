@@ -1,4 +1,4 @@
-class Owner < ActiveRecord::Base
+class Owner < ApplicationRecord
   ALLOWED_NATIONALITIES = [
     "GB"
   ].freeze

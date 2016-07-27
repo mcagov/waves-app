@@ -1,4 +1,4 @@
-class Vessel < ActiveRecord::Base
+class Vessel < ApplicationRecord
   include VesselValidations
 
   has_many :owner_vessels

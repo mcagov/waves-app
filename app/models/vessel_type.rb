@@ -1,4 +1,4 @@
-class VesselType < ActiveRecord::Base
+class VesselType < ApplicationRecord
   has_many :vessels
 
   def self.collected_designations

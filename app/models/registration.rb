@@ -1,4 +1,4 @@
-class Registration < ActiveRecord::Base
+class Registration < ApplicationRecord
   belongs_to :vessel
   accepts_nested_attributes_for :vessel
 
