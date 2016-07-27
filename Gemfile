@@ -20,7 +20,7 @@ gem "rake"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
-gem 'sprockets'
+gem "sprockets", "3.6.3"
 gem "sprockets-es6"
 gem "title"
 gem "uglifier"
