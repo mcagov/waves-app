@@ -2,9 +2,9 @@
 
 ## About
 
-This app currently consists of a vessel registration form and a content
-management system. The registration form is intended to be available on the
-Gov.UK website as a means for the owner of a (singley owned) small ship to
+This app currently consists of a vessel registration API and a content
+management system. The API is intended to support on the
+Gov.UK hosted website as a means for the owner of a (singley owned) small ship to
 register their vessel under **Part III of the UK Ships Register**. The content
 management system is intended to be a means of managing the register and
 workload of officers of the [Maritime and Coastguard Agency][mca].
@@ -13,7 +13,7 @@ workload of officers of the [Maritime and Coastguard Agency][mca].
 
 ## Architecture
 
-This is a standard Rails 4.2 web app with a PostgreSQL database.
+This is a standard Rails 5.0 web app with a PostgreSQL database.
 
 #### Database model
 
