@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -108,10 +107,9 @@ ActiveRecord::Schema.define(version: 20160620151547) do
     t.string   "encrypted_password", limit: 128
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "vessel_registrations", force: :cascade do |t|
     t.integer  "vessel_id"
@@ -138,8 +136,7 @@ ActiveRecord::Schema.define(version: 20160620151547) do
     t.string   "vessel_type_other"
     t.integer  "mmsi_number",           null: false
     t.string   "radio_call_sign",       null: false
+    t.index ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
   end
-
-  add_index "vessels", ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
 
 end
