@@ -16,7 +16,7 @@ module Clearance
           redirect_back_or url_after_create
         else
           flash[:notice] = status.failure_message
-          redirect_to :back
+          redirect_back(fallback_location: root_path)
         end
       end
     end
