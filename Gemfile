@@ -25,7 +25,6 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem 'sprockets', '3.6.3'
 gem "sprockets-es6"
-gem "strict_machine-rails", "~> 0.1.2"
 gem "title"
 gem "uglifier"
 gem "validates_email_format_of"
