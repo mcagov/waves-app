@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
+gem "rails", "~> 5.0.0"
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "bootstrap-sass", "~> 3.3.6"
 gem "clearance"
@@ -14,13 +15,12 @@ gem "high_voltage", "~> 3.0.0"
 gem "jquery-rails"
 gem "pg"
 gem "puma"
-gem "rails", "~> 4.2.0"
 gem "rails-assets-bootstrap-select", source: "https://rails-assets.org"
-gem "rake", "~> 11.1.2"
+gem "rake"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
-gem 'sprockets', '3.6.3'
+gem 'sprockets'
 gem "sprockets-es6"
 gem "title"
 gem "uglifier"
@@ -29,7 +29,6 @@ gem "nokogiri", ">= 1.6.8"
 gem "haml"
 
 group :development do
-  gem "quiet_assets"
   gem "rubocop"
   gem "web-console"
   gem "i18n-debug", require: false
@@ -42,7 +41,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.4.0"
+  gem "rspec-rails"
 end
 
 group :development, :staging do
