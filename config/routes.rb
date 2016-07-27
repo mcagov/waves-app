@@ -22,32 +22,6 @@ Rails.application.routes.draw do
     root to: "pages#show", id: "home"
   end
 
-  resources :registration_process, only: [:update] do
-    collection do
-      resource :prerequisites,
-               only: [:show, :update],
-               controller: "registration/prerequisites"
-      resource :vessel_info,
-               only: [:show, :update],
-               controller: "registration/vessel_info"
-      resource :owner_info,
-               only: [:show, :update],
-               controller: "registration/owner_info"
-      resource :delivery_address,
-               only: [:show, :update],
-               controller: "registration/delivery_address"
-      resource :declaration,
-               only: [:show, :update],
-               controller: "registration/declaration"
-      resource :payment,
-               only: [:show, :update],
-               controller: "registration/payment"
-      resource :success,
-               only: [:show, :update],
-               controller: "registration/success"
-    end
-  end
-
   # overriding HighVoltage
   get "/pages/*id" => "pages#show", as: :page, format: false
 end
