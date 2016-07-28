@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     root to: "pages#show", id: "home"
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :vessel_types, only: [:index]
+    end
+  end
+
   # overriding HighVoltage
   get "/pages/*id" => "pages#show", as: :page, format: false
 end
