@@ -17,6 +17,7 @@ end
 RSpec.configure do |config|
   config.include Features, type: :feature
   config.include ShowMeTheCookies, type: :feature
+  config.include Requests::JsonHelpers, type: :request
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
