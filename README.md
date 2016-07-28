@@ -1,4 +1,4 @@
-# VRS App
+# Waves Internal App
 
 ## About
 
