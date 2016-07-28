@@ -15,4 +15,4 @@ VESSEL_TYPES = [
 
 REGISTERS.each { |register| Register.find_or_create_by(name: register) }
 
-VESSEL_TYPES.each { |type| VesselType.find_or_create_by(designation: type) }
+VESSEL_TYPES.each { |name| VesselType.find_or_create_by(name: name, key: name.parameterize) }
