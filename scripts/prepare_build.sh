@@ -37,7 +37,7 @@ else
 
     username="gitlabadmin"
     password="g1tL4BPG"
-    database="waves_internal_test_$((RANDOM/5000))"
+    database="vrsapp_test_$((RANDOM/5000))"
 
     cp config/database.yml.example config/database.yml
     sed "s/username\:.*$/username\: '${username}'/" -i config/database.yml
