@@ -27,6 +27,7 @@ gem "uglifier"
 gem "validates_email_format_of"
 gem "nokogiri", ">= 1.6.8"
 gem "haml"
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem "rubocop"
