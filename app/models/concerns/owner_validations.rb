@@ -2,8 +2,7 @@ module OwnerValidations
   extend ActiveSupport::Concern
 
   included do
-    validates :first_name, presence: true
-    validates :last_name, presence: true
+    validates :name, presence: true
 
     validates(
       :nationality,

@@ -7,15 +7,9 @@ describe Owner, type: :model do
 
       before { owner.valid? }
 
-      describe "first name" do
+      describe "name" do
         it "is present" do
-          expect(owner.errors[:first_name]).to be_empty
-        end
-      end
-
-      describe "last name" do
-        it "is present" do
-          expect(owner.errors[:last_name]).to be_empty
+          expect(owner.errors[:name]).to be_empty
         end
       end
 
@@ -47,16 +41,9 @@ describe Owner, type: :model do
     end
 
     context "when the owner is invalid" do
-      describe "first name" do
+      describe "name" do
         it "is not present" do
-          owner = build(:owner, first_name: " ")
-          expect(owner).not_to be_valid
-        end
-      end
-
-      describe "last name" do
-        it "is not present" do
-          owner = build(:owner, last_name: " ")
+          owner = build(:owner, name: " ")
           expect(owner).not_to be_valid
         end
       end

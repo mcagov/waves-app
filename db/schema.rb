@@ -36,8 +36,7 @@ ActiveRecord::Schema.define(version: 20160729084232) do
   end
 
   create_table "owners", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "first_name",             null: false
-    t.string   "last_name",              null: false
+    t.string   "name",                   null: false
     t.string   "nationality",  limit: 2, null: false
     t.string   "email",                  null: false
     t.string   "phone_number",           null: false
