@@ -1,5 +1,5 @@
 class DashboardsController < InternalPagesController
   def show
-    @registrations = Registration.all
+    @registrations = Registration.includes(:vessel).all
   end
 end

@@ -1,0 +1,308 @@
+
+.right_col{role: 'main'}
+
+  %h1
+    New Registration
+    %small ID: G8J9DA43J
+
+  .alert.alert-warning
+    %strong Application Referred by Laura Clark-Theobald:
+    Name is inappropriate. Next action due on 10th August, 2016.
+
+  .row
+    .col-sm-12
+      .x_panel
+        .x_title
+          %h2 Registration Information
+          .pull-right{style: 'font-size: 1.2em'}
+            = link_to 'app+G8J9DA43J@wavesapp.uk', 'app+G8J9DA43J@wavesapp.uk'
+          .clearfix
+        .x_content
+          %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+            %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+              %li.active{:role => "presentation"}
+                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Vessel Information
+              %li{:role => "presentation"}
+                %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
+              %li{:role => "presentation"}
+                %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
+            #myTabContent.tab-content
+              #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+                %table.table.table-striped.registration
+                  %thead
+                    %th Vessel Details
+                    %th Submitted Information
+                  %tbody
+                    %tr
+                      %td{width: '30%'}= @registration.vessel.name
+                      %td{width: '70%'}
+                        %a#vessel-name-options{"data-placement" => "bottom", "data-title" => "Select vessel name", "data-type" => "select", :href => "#"}
+                          %strong= @registration.vessel.correspondent.name
+                    %tr
+                      %td Hull Identification Number (HIN)
+                      %td
+                        %a#vessel-hin{"data-placement" => "bottom", "data-title" => "Hull Identification Number (HIN)", "data-type" => "text", :href => "#"}
+                          %strong= @registration.vessel.hin
+                    %tr
+                      %td Make and model
+                      %td
+                        %a#vessel-make{"data-placement" => "bottom", "data-title" => "Make and model", "data-type" => "text", :href => "#"}
+                          %strong= @registration.vessel.make_and_model
+                    %tr
+                      %td Length
+                      %td
+                        %a#vessel-length{"data-placement" => "bottom", "data-title" => "Length", "data-type" => "text", :href => "#"}
+                          %strong= @registration.vessel.length_in_centimeters
+                    %tr
+                      %td Number of hulls
+                      %td
+                        %a#vessel-hulls{"data-placement" => "bottom", "data-title" => "Number of hulls", "data-type" => "select", :href => "#"}
+                          %strong= @registration.vessel.number_of_hulls
+                    %tr
+                      %td Vessel type
+                      %td
+                        %a#vessel-type{"data-placement" => "bottom", "data-title" => "Vessel Type", "data-type" => "select", :href => "#"}
+                          %strong= @registration.vessel.vessel_type.name
+
+                    %tr
+                      %td MMSI Number
+                      %td
+                        %a#vessel-mmsi{"data-placement" => "bottom", "data-title" => "MMSI Number", "data-type" => "text", :href => "#"}
+                          %strong= @registration.vessel.mmsi_number
+                    %tr
+                      %td Radio Call Sign
+                      %td
+                        %a#vessel-callsign{"data-placement" => "bottom", "data-title" => "Radio Call Sign", "data-type" => "text", :href => "#"}
+                          %strong= @registration.vessel.radio_call_sign
+              #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+                %table.table.table-striped
+                  %thead
+                    %th Owner #1
+                    %th Submitted Information
+                  %tbody
+                    %tr
+                      %td{width: '30%'} Owner Name
+                      %td{width: '70%'}
+                        %a#owner-name{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
+                          %strong Jacob Cameron
+                    %tr
+                      %td Owner Address
+                      %td
+                        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
+                          %strong 123 King Street, Barbican Approach, Plymouth, Devon, PL4 0EG
+                    %tr
+                      %td Declaration
+                      %td
+                        %i.fa.fa-check
+                        %strong Completed online
+                    %tr
+                      %td Supporting Information
+                      %td
+                        %strong
+                          Registered Country of Credit Card: UK
+                          %br
+                          Location of Submission: Spain (12.234.190.10)
+                %hr
+                %table.table.table-striped
+                  %thead
+                    %th Owner #2
+                    %th Submitted Information
+                  %tbody
+                    %tr
+                      %td{width: '30%'} Owner Name
+                      %td{width: '70%'}
+                        %a#owner-name-2{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
+                          %strong Lucinda Smith
+                    %tr
+                      %td Owner Address
+                      %td
+                        %a#owner-address-2{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
+                          %strong 978 Queen Street, Plymouth, Devon, PL4 0EG
+                    %tr
+                      %td Declaration
+                      %td
+                        %i.fa.fa-file-text-o
+                        = link_to '#declaration-uploaded', "data-target" => "#declaration-uploaded", "data-toggle" => "modal" do
+                          %strong View uploaded file
+                    %tr
+                      %td Supporting Information
+                      %td
+                        %strong
+                          Location of Submission: UK (2.187.77.8)
+              #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
+                %table.table.table-striped
+                  %thead
+                    %th From
+                    %th Subject
+                    %th Date Received
+                  %tbody
+                    %tr
+                      %td{width: '20%'} John Smith
+                      %td{width: '65%'}= link_to 'RE: Registration Renewal G8NJ23JD2', '#email-content', "data-target" => "#email-content", "data-toggle" => "modal"
+                      %td{width: '15%'} Yesterday
+                = link_to '#email-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#email-content-add", "data-toggle" => "modal" do
+                  %i.fa.fa-plus
+                  Add Correspondence
+
+  .row.no-print
+    .col-xs-12
+      = link_to '#reject-application', "data-target" => "#reject-application", "data-toggle" => "modal", class: 'btn btn-danger' do
+        %i.fa.fa-times
+        Reject Application
+      = link_to '#refer-application', "data-target" => "#refer-application", "data-toggle" => "modal", class: 'btn btn-warning' do
+        %i.fa.fa-pause
+        Refer Application
+      = link_to '#approve-application', "data-target" => "#approve-application", "data-toggle" => "modal", class: 'btn btn-success btn-lg pull-right' do
+        %i.fa.fa-check
+        Register Vessel & Issue Certificate of Registry
+
+
+.modal.fade{id: 'approve-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Register Vessel and Issue Certificate of Registry
+      .modal-body
+        %p You are about to register this vessel. Please select how you want to print the Certificate of Registry and cover letter.
+        %hr
+        .row
+          .col-md-12
+            .form-group
+              %label Print Options for Certificate of Registry & Cover Letter
+              %select.select2_single.form-control{style: 'width: 100%'}
+                %option Move documents to print queue (bulk printing)
+                %option Print documents now (individual documents)
+        .row
+          .col-md-12
+            .form-group
+              %label
+                %input{name: "email_certificate_of_registry", type: "checkbox"}
+                Send a copy of the Certificate of Registry to owner
+
+
+      .modal-footer
+        = link_to 'Register Vessel', '/part-3/processing/success', class: 'btn btn-success btn-lg'
+
+
+.modal.fade{id: 'reject-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Reject Application
+      .modal-body
+        %p Rejecting this application will create a task for your manager to approve a refund.
+        %hr
+        .row
+          .col-md-12
+            .form-group
+              %label Reason for Rejection
+              %select.select2_single.form-control{style: 'width: 100%;'}
+                %option Unsuitable Name
+                %option Too Long
+                %option Fraudulent
+        .row{style: 'margin-top: 15px;'}
+          .col-md-12
+            .form-group
+              %label Additional Information
+              %textarea.form-control{rows: '3'}
+      .modal-footer
+        %button.btn.btn-lg.btn-danger{:type => "button"} Reject Application
+
+
+.modal.fade{id: 'refer-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Refer Application
+      .modal-body
+        .row
+          .col-md-9
+            .form-group
+              %label Reason for Referral
+              %select.select2_single.form-control{style: 'width: 100%;'}
+                %option Unknown vessel type
+                %option Length and vessel type do not match
+                %option Hull identification number appears incorrect
+          .col-md-3
+            .form-group
+              %label Due By
+              %input.form-control{type: 'text', value: '01/09/2016'}
+        .row{style: 'margin-top: 15px;'}
+          .col-md-12
+            .form-group
+              %label Additional Information
+              %textarea.form-control{rows: '3'}
+
+        -# If postal application, need option to print a letter and send it via post
+
+      .modal-footer
+        %button.btn.btn-lg.btn-warning{:type => "button"} Refer Application
+
+.modal.fade{id: 'email-content', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title RE: Registration Renewal G8NJ23JD2
+      .modal-body
+        %code
+          %p Dear Rachel,
+          %p In response to your email regarding the name of the vessel, I understand that "MV Queeny" has been rejected, therefore we would like to go with "Bobcat" as the new name.
+          %p Thanks
+          %p John Smith
+          %hr
+          %p To John Smith,
+          %p You have submitted an application to register "MV Queeny". Unfortunately this name is deemed unacceptable due to its links with the Royal family. Please reply with a few alternative names.
+          %p Yours
+          %p Rachel Miles
+          %hr
+          %p To whom it may concern at RSS,
+          %p I have just submitted an application online to register my vessel, but I'm not sure if the name is acceptable. What should I do?
+          %p Regards
+          %p John Smith
+      .modal-footer
+        %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close
+
+.modal.fade{id: 'email-content-add', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Link Correspondence to Application
+      %form
+        .modal-body
+          .row
+            .col-md-6
+              .form-group
+                %label Subject
+                %input.form-control{type: 'text'}
+            .col-md-3
+              .form-group
+                %label Correspondence Format
+                %select.select2_single.form-control{style: 'width: 100%;'}
+                  %option Email
+                  %option Post
+            .col-md-3
+              .form-group
+                %label Date Received
+                %input.form-control{type: 'text', value: '01/09/2016'}
+          .row
+            .col-sm-12
+              .form-group
+                %label Content
+                %textarea.form-control{rows: 6}
+          .row
+            .col-sm-12
+              .form-group
+                %label Supporting Documents
+                %input{type: 'file'}
+        .modal-footer
+          %button.btn.btn-primary{"aria-label" => "Continue", "data-dismiss" => "modal", :type => "button"} Save Correspondence

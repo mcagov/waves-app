@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :registrations, only: [:show]
+
   # overriding HighVoltage
   get "/pages/*id" => "pages#show", as: :page, format: false
 end

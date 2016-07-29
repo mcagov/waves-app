@@ -23,4 +23,5 @@ class Owner < ApplicationRecord
   def full_name_with_title
     "#{title} #{first_name} #{last_name}"
   end
+  alias :name :full_name_with_title
 end
