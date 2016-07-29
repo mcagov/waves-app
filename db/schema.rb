@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.string   "make_and_model"
     t.integer  "length_in_centimeters", null: false
     t.integer  "number_of_hulls",       null: false
-    t.integer  "vessel_type_id"
+    t.uuid     "vessel_type_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "vessel_type_other"
