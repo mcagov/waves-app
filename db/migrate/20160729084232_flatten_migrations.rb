@@ -53,7 +53,6 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
     create_table "registrations", id: :uuid, force: :cascade do |t|
       t.string   "ip_country"
       t.string   "card_country"
-      t.string   "browser",             null: false
       t.string   "payment_id"
       t.string   "receipt_id"
       t.string   "status",              null: false

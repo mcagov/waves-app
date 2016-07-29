@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20160729084232) do
   create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "ip_country"
     t.string   "card_country"
-    t.string   "browser",             null: false
     t.string   "payment_id"
     t.string   "receipt_id"
     t.string   "status",              null: false
