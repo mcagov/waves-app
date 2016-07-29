@@ -16,7 +16,7 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
     end
 
     create_table "owner_vessels", id: :uuid, force: :cascade do |t|
-      t.integer  "owner_id"
+      t.uuid     "owner_id"
       t.integer  "vessel_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
@@ -31,15 +31,15 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
       t.datetime "created_at",             null: false
       t.datetime "updated_at",             null: false
       t.string   "title"
-      t.integer  "address_id"
+      t.uuid     "address_id"
     end
 
     create_table "register_vessels", id: :uuid, force: :cascade do |t|
-      t.integer  "register_id"
-      t.integer  "vessel_id"
+      t.uuid    "register_id"
+      t.uuid    "vessel_id"
       t.string   "status",          null: false
       t.datetime "expiry_date",     null: false
-      t.integer  "register_number", null: false
+      t.uuid    "register_number", null: false
       t.datetime "created_at",      null: false
       t.datetime "updated_at",      null: false
     end
@@ -60,8 +60,8 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
       t.boolean  "is_urgent"
       t.datetime "created_at",          null: false
       t.datetime "updated_at",          null: false
-      t.integer  "vessel_id"
-      t.integer  "delivery_address_id"
+      t.uuid     "vessel_id"
+      t.uuid     "delivery_address_id"
     end
 
     create_table "roles", id: :uuid, force: :cascade do |t|
@@ -71,18 +71,18 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
     end
 
     create_table "user_roles", id: :uuid, force: :cascade do |t|
-      t.integer  "user_id"
-      t.integer  "role_id"
+      t.uuid     "user_id"
+      t.uuid     "role_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
     create_table "user_vessel_registrations", id: :uuid, force: :cascade do |t|
-      t.integer  "user_id"
+      t.uuid     "user_id"
       t.json     "changes",         default: {}, null: false
       t.datetime "created_at",                   null: false
       t.datetime "updated_at",                   null: false
-      t.integer  "registration_id"
+      t.uuid     "registration_id"
     end
 
     create_table "users", id: :uuid, force: :cascade do |t|
@@ -99,8 +99,8 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
     end
 
     create_table "vessel_registrations", id: :uuid, force: :cascade do |t|
-      t.integer  "vessel_id"
-      t.integer  "registration_id"
+      t.uuid     "vessel_id"
+      t.uuid     "registration_id"
       t.datetime "created_at",      null: false
       t.datetime "updated_at",      null: false
     end
