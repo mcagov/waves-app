@@ -13,6 +13,15 @@ VESSEL_TYPES = [
   "wet bike",
 ].freeze
 
+USERS = ["develop"].freeze
+
 REGISTERS.each { |register| Register.find_or_create_by(name: register) }
 
 VESSEL_TYPES.each { |name| VesselType.find_or_create_by(name: name, key: name.parameterize) }
+
+USERS.each do |user|
+  u = User.find_or_initialize_by(name: user)
+  u.email = "#{ user }@example.com"
+  u.password = "password"
+  u.save!
+end
