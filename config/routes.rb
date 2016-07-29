@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   constraints Clearance::Constraints::SignedOut.new do
-    root to: "pages#show", id: "home"
+     root to: "clearance/sessions#new"
   end
 
   namespace :api do
@@ -30,6 +30,5 @@ Rails.application.routes.draw do
 
   resources :registrations, only: [:show]
 
-  # overriding HighVoltage
-  get "/pages/*id" => "pages#show", as: :page, format: false
+  root to: "dashboards#show"
 end

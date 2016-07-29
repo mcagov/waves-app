@@ -12,7 +12,7 @@
     = favicon_link_tag "apple-touch-icon-76x76.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "76x76", type: "image/png"
     = favicon_link_tag "apple-touch-icon-60x60.png?0.17.1", rel: "apple-touch-icon-precomposed"
     %meta{:content => "#{asset_path("opengraph-image.png?0.17.1")}", :property => "og:image"}/
-    = stylesheet_link_tag :internal, media: "all"
+    = stylesheet_link_tag "application"
     = csrf_meta_tags
   %body{:class => body_class}
     :javascript

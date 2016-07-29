@@ -120,7 +120,6 @@ GEM
     haml (4.0.7)
       tilt
     hashdiff (0.3.0)
-    high_voltage (3.0.0)
     i18n (0.7.0)
     i18n-debug (1.1.0)
       i18n (< 1)
@@ -308,7 +307,6 @@ DEPENDENCIES
   font-awesome-rails
   formulaic
   haml
-  high_voltage (~> 3.0.0)
   i18n-debug
   jquery-rails
   launchy
