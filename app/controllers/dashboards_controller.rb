@@ -1,3 +1,5 @@
 class DashboardsController < InternalPagesController
-  def show; end
+  def show
+    @registrations = Registration.all
+  end
 end

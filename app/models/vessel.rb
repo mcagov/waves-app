@@ -13,6 +13,10 @@ class Vessel < ApplicationRecord
 
   validates_uniqueness_of :mmsi_number
 
+  def correspondent
+    owners.first
+  end
+
   private
 
   def hin_must_begin_with_a_valid_country_code

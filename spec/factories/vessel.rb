@@ -8,5 +8,6 @@ FactoryGirl.define do
     vessel_type               { create(:vessel_type) }
     mmsi_number               { random_mmsi_number }
     radio_call_sign           { random_radio_call_sign }
+    owners                    { [build(:owner)] }
   end
 end
