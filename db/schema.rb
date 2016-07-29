@@ -14,8 +14,9 @@ ActiveRecord::Schema.define(version: 20160729084232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "address_1",            null: false
     t.string   "address_2"
     t.string   "address_3"
@@ -27,14 +28,14 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.string   "country",    limit: 2
   end
 
-  create_table "owner_vessels", force: :cascade do |t|
+  create_table "owner_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer  "owner_id"
     t.integer  "vessel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "owners", force: :cascade do |t|
+  create_table "owners", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "first_name",             null: false
     t.string   "last_name",              null: false
     t.string   "nationality",  limit: 2, null: false
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.integer  "address_id"
   end
 
-  create_table "register_vessels", force: :cascade do |t|
+  create_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer  "register_id"
     t.integer  "vessel_id"
     t.string   "status",          null: false
@@ -56,13 +57,13 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "registers", force: :cascade do |t|
+  create_table "registers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "registrations", force: :cascade do |t|
+  create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "ip_country"
     t.string   "card_country"
     t.string   "browser",             null: false
@@ -77,20 +78,20 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.integer  "delivery_address_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_roles", force: :cascade do |t|
+  create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_vessel_registrations", force: :cascade do |t|
+  create_table "user_vessel_registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer  "user_id"
     t.json     "changes",         default: {}, null: false
     t.datetime "created_at",                   null: false
@@ -98,7 +99,7 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.integer  "registration_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name",                           null: false
     t.string   "ldap_id"
     t.datetime "created_at",                     null: false
@@ -111,21 +112,21 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
-  create_table "vessel_registrations", force: :cascade do |t|
+  create_table "vessel_registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer  "vessel_id"
     t.integer  "registration_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
-  create_table "vessel_types", force: :cascade do |t|
+  create_table "vessel_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
     t.string   "key"
   end
 
-  create_table "vessels", force: :cascade do |t|
+  create_table "vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name",                  null: false
     t.string   "hin"
     t.string   "make_and_model"
