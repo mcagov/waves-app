@@ -1,37 +1,12 @@
 !!!
-%html{:lang => "en"}
+%html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "NOODP", :name => "ROBOTS"}/
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    %title= title
-    = favicon_link_tag "favicon.ico?0.17.1"
-    = favicon_link_tag "apple-touch-icon-152x152.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "152x152", type: "image/png"
-    = favicon_link_tag "apple-touch-icon-120x120.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "120x120", type: "image/png"
-    = favicon_link_tag "apple-touch-icon-76x76.png?0.17.1", rel: "apple-touch-icon-precomposed", sizes: "76x76", type: "image/png"
-    = favicon_link_tag "apple-touch-icon-60x60.png?0.17.1", rel: "apple-touch-icon-precomposed"
-    %meta{:content => "#{asset_path("opengraph-image.png?0.17.1")}", :property => "og:image"}/
-    = stylesheet_link_tag :internal, media: "all"
-    = csrf_meta_tags
-  %body{:class => body_class}
-    :javascript
-      document.body.className = ((document.body.className) ? document.body.className + " js-enabled" : "js-enabled");
-    .page-wrap
-      .navbar.navbar-default.navbar-inverse.navbar-fixed-top{:role => "navigation"}
-        .container-fluid
-          - if signed_in?
-            = render partial: 'shared/navbar/logged_in'
-          - else
-            = render partial: 'shared/navbar/logged_out'
-      #flash
-        - flash.each do |key, value|
-          .alert.alert-danger{:role => "alert"}
-            = h value
-      .container-fluid
-        = yield
-    %footer
-      .container.footer-text
-        %p.text-muted © 2016 Maritime And Coastguard Agency
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge,chrome=1", http: {equiv: "X-UA-Compatible"}}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %title= title || "MCA"
+    = stylesheet_link_tag "application"
+
+  %body{style: 'background:#F7F7F7;'}
+    = yield
   = render "javascript"
-  = render "css_overrides"

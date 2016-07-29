@@ -1,8 +1,12 @@
-.text-center.pull-down
-  %h1 Vessel Registration System
-  %p.lead
-    %br/
-    %br/
-    Welcome to Waves!
-    %br/
-    Log in using the form on the top right dropdown.
+#wrapper
+  #login.animate.form
+    %section.login_content
+      %form
+        %h1 Login to Waves
+        %input.form-control{:placeholder => "Username", :required => "", :type => "text"}/
+        %input.form-control{:placeholder => "Password", :required => "", :type => "password"}/
+        %a.btn.btn-success.btn-block.submit{href: "/"} Secure Login
+        .separator
+        %p
+          %a{href: "#"} Forgotten password?
+        %p &copy; 2016 All Rights Reserved.
