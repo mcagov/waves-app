@@ -1,0 +1,19 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "NOODP", :name => "ROBOTS"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %title= title || "MCA"
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+  %body.nav-md
+    .container.body
+      .main_container
+        = render partial: 'layouts/sidebar'
+        = render partial: 'layouts/topnav'
+        = yield
+        = render partial: 'layouts/footer'
+  = render "javascript"
+  = render "css_overrides"
