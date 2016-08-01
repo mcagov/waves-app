@@ -5,20 +5,21 @@ feature "User views new registration", type: :feature, js: true do
 
   before do
     visit root_path(as: create(:user))
+    click_on registration.vessel_info[:name]
   end
 
-  scenario "details page" do
-    click_on registration.vessel_info["name"]
-
+  scenario "vessel info" do
     within(".registration") do
-      expect(page).to have_content(registration.vessel_info["name"])
-      expect(page).to have_content(registration.vessel_info["hin"])
-      expect(page).to have_content(registration.vessel_info["make_and_model"])
-      expect(page).to have_content(registration.vessel_info["length_in_centimeters"])
-      expect(page).to have_content(registration.vessel_info["number_of_hulls"])
-      expect(page).to have_content(registration.vessel_info["vessel_type.name"])
-      expect(page).to have_content(registration.vessel_info["mmsi_number"])
-      expect(page).to have_content(registration.vessel_info["radio_call_sign"])
+      expect(page).to have_content(registration.vessel_info[:name])
+      expect(page).to have_content(registration.vessel_info[:hin])
+      expect(page).to have_content(registration.vessel_info[:mae_and_model])
+      expect(page).to have_content(registration.vessel_info[:length_in_cenimeters])
+      expect(page).to have_content(registration.vessel_info[:number_of_hulls])
+      expect(page).to have_content(registration.vessel_info[:vessel_type])
+      expect(page).to have_content(registration.vessel_info[:mmsi_number])
+      expect(page).to have_content(registration.vessel_info[:radio_callsign])
     end
   end
+
+  scenario "owner_info"
 end

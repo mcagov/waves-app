@@ -37,43 +37,43 @@
                       %td{width: '30%'} Vessel Name
                       %td{width: '70%'}
                         %a#vessel-name-options{"data-placement" => "bottom", "data-title" => "Select vessel name", "data-type" => "select", :href => "#"}
-                          %strong= @registration.vessel_info["name"]
+                          %strong= @registration.vessel_info[:name]
                     %tr
                       %td Hull Identification Number (HIN)
                       %td
                         %a#vessel-hin{"data-placement" => "bottom", "data-title" => "Hull Identification Number (HIN)", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info["hin"]
+                          %strong= @registration.vessel_info[:hin]
                     %tr
                       %td Make and model
                       %td
                         %a#vessel-make{"data-placement" => "bottom", "data-title" => "Make and model", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info["make_and_model"]
+                          %strong= @registration.vessel_info[:make_and_model]
                     %tr
                       %td Length
                       %td
                         %a#vessel-length{"data-placement" => "bottom", "data-title" => "Length", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info["length_in_centimeters"]
+                          %strong= @registration.vessel_info[:length_in_centimeters]
                     %tr
                       %td Number of hulls
                       %td
                         %a#vessel-hulls{"data-placement" => "bottom", "data-title" => "Number of hulls", "data-type" => "select", :href => "#"}
-                          %strong= @registration.vessel_info["number_of_hulls"]
+                          %strong= @registration.vessel_info[:number_of_hulls]
                     %tr
                       %td Vessel type
                       %td
                         %a#vessel-type{"data-placement" => "bottom", "data-title" => "Vessel Type", "data-type" => "select", :href => "#"}
-                          %strong= @registration.vessel_info["vessel_type"]
+                          %strong= @registration.vessel_info[:vessel_type]
 
                     %tr
                       %td MMSI Number
                       %td
                         %a#vessel-mmsi{"data-placement" => "bottom", "data-title" => "MMSI Number", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info["mmsi_number"]
+                          %strong= @registration.vessel_info[:mmsi_number]
                     %tr
                       %td Radio Call Sign
                       %td
                         %a#vessel-callsign{"data-placement" => "bottom", "data-title" => "Radio Call Sign", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info["radio_call_sign"]
+                          %strong= @registration.vessel_info[:radio_call_sign]
               #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
                 - @registration.owners.each do |owner|
                   %table.table.table-striped
@@ -85,12 +85,12 @@
                         %td{width: '30%'} Owner Name
                         %td{width: '70%'}
                           %a#owner-name{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
-                            %strong= owner["name"]
+                            %strong= owner[:name]
                       %tr
                         %td Owner Address
                         %td
                           %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-                            %strong= owner["street_address"]
+                            %strong= inline_address(owner)
                       %tr
                         %td Declaration
                         %td
