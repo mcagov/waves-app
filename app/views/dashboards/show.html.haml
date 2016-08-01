@@ -28,9 +28,9 @@
           %tbody
             - @registrations.each do |registration|
               %tr
-                %td= link_to registration.vessel.name, registration_path(registration)
+                %td= link_to registration.vessel_info["name"], registration_path(registration)
                 %td 104928
-                %td= registration.vessel.correspondent.name
+                %td= registration.correspondent_info["name"]
                 %td New Registration
                 %td 18/07 (10 days)
                 %td
