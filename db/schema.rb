@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160801120511) do
     t.datetime "updated_at",          null: false
     t.uuid     "vessel_id"
     t.uuid     "delivery_address_id"
-    t.jsonb    "changeset"
+    t.json     "changeset"
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
