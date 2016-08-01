@@ -15,4 +15,8 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //
-//= require_tree .
+//= require./vendor/nprogress
+//= require ./vendor/select2
+//= require ./vendor/pace.min
+//= require ./vendor/bootstrap-editable.min
+//= require ./vendor/custom
