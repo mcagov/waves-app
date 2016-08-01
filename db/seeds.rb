@@ -33,8 +33,39 @@ delivery_address = Address.create(
   country: "GB"
   )
 
-changeset = {
+vessel_info = {
+  name: "MV Karin",
+  hin: "GB-111111111111",
+  make_and_model: "Mirror Dinghy",
+  length_in_centimeters: 1200,
+  number_of_hulls: "1",
+  vessel_type: "dinghy",
+  vessel_type_other:"",
+  mmsi_number: "234422993",
+  radio_call_sign: "111111"
+}
 
+owner_1 = {
+  name: Faker::Name.name,
+  address_1: Faker::Address.street_address,
+  address_2: Faker::Address.secondary_address,
+  town: Faker::Address.city,
+  county: "Cornwall",
+  country: "GB"
+}
+
+owner_2 = {
+  name: Faker::Name.name,
+  address_1: Faker::Address.street_address,
+  town: Faker::Address.city,
+  country: "GB"
+}
+
+changeset = {
+  vessel_info: vessel_info,
+  owner_info_count: 2,
+  owner_info_1: owner_1,
+  owner_info_2: owner_2
 }.to_json
 
 Registration.create(
