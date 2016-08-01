@@ -25,3 +25,27 @@ USERS.each do |user|
   u.password = "password"
   u.save!
 end
+
+delivery_address = Address.create(
+  address_1: Faker::Address.street_address,
+  town: "Cardiff",
+  postcode: Faker::Address.postcode,
+  country: "GB"
+  )
+
+changeset = {
+
+}.to_json
+
+Registration.create(
+  ip_country:         "GB",
+  card_country:       "GB",
+  payment_id:         "PA12345",
+  receipt_id:         "RE5678",
+  status:             "paid",
+  due_date:           20.days.from_now,
+  is_urgent:          false,
+  vessel_id:           nil,
+  delivery_address:   delivery_address,
+  changeset:          changeset
+)

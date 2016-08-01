@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729084232) do
+ActiveRecord::Schema.define(version: 20160801120511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160729084232) do
     t.datetime "updated_at",          null: false
     t.uuid     "vessel_id"
     t.uuid     "delivery_address_id"
+    t.jsonb    "changeset"
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
