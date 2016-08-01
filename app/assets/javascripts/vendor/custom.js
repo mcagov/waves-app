@@ -142,13 +142,13 @@ $(document).ready(function() {
     });
 });
 
-// daterangepicker
-$(document).ready(function() {
-  $('#daterange').daterangepicker({
-    singleDatePicker: true,
-    calender_style: "picker_4"
-  });
-});
+// // daterangepicker
+// $(document).ready(function() {
+//   $('#daterange').daterangepicker({
+//     singleDatePicker: true,
+//     calender_style: "picker_4"
+//   });
+// });
 
 // Table
 $('table input').on('ifChecked', function () {
@@ -216,22 +216,22 @@ $MENU_TOGGLE.on('click', function() {
 //   resize: true
 // });
 
-Morris.Bar({
-  element: 'report_outstanding_work_graph_bar_group',
-  data: [
-    {"period": "2016-10-01", "received": 25, "outstanding": 7},
-    {"period": "2016-09-30", "received": 12, "outstanding": 7},
-    {"period": "2016-09-29", "received": 17, "outstanding": 10},
-    {"period": "2016-09-20", "received": 22, "outstanding": 14},
-    {"period": "2016-09-19", "received": 26, "outstanding": 19},
-    {"period": "2016-09-18", "received": 31, "outstanding": 26},
-    {"period": "2016-09-17", "received": 34, "outstanding": 31}
-  ],
-  xkey: 'period',
-  barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-  ykeys: ['received', 'outstanding'],
-  labels: ['Received', 'Outstanding'],
-  hideHover: 'auto',
-  xLabelAngle: 60,
-  resize: true
-});
+// Morris.Bar({
+//   element: 'report_outstanding_work_graph_bar_group',
+//   data: [
+//     {"period": "2016-10-01", "received": 25, "outstanding": 7},
+//     {"period": "2016-09-30", "received": 12, "outstanding": 7},
+//     {"period": "2016-09-29", "received": 17, "outstanding": 10},
+//     {"period": "2016-09-20", "received": 22, "outstanding": 14},
+//     {"period": "2016-09-19", "received": 26, "outstanding": 19},
+//     {"period": "2016-09-18", "received": 31, "outstanding": 26},
+//     {"period": "2016-09-17", "received": 34, "outstanding": 31}
+//   ],
+//   xkey: 'period',
+//   barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+//   ykeys: ['received', 'outstanding'],
+//   labels: ['Received', 'Outstanding'],
+//   hideHover: 'auto',
+//   xLabelAngle: 60,
+//   resize: true
+// });
