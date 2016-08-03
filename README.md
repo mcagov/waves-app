@@ -100,4 +100,4 @@ If you get the error `DATABASE_URL environment variable is set` you will need to
 
 We are using the [rack-cors](https://github.com/cyu/rack-cors) gem.
 
-Origins are defined in `config/initalisers/cors.rb`.
+CORS is configured in `config/initalisers/cors.rb` and the origins are defined by `ENV['CORS_ORIGINS']`.
