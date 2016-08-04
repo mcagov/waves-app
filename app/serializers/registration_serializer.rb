@@ -1,3 +1,3 @@
-class RegistraionSerializer < ActiveModel::Serializer
-  attributes :uuid
+class RegistrationSerializer < ActiveModel::Serializer
+  attributes :status, :changeset
 end

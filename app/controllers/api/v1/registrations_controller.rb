@@ -1,22 +1,25 @@
 module Api::V1
   class RegistrationsController < ApiController
     def create
+      @registration = Registration.new(create_registration_params)
 
-      @registration = Registration.create(registration_attributes)
-
-      render json: @registration
+      if @registration.save
+        render json: @registration, status: :created
+      else
+        render json: @registration, status: :unprocessable_entity,
+                       serializer: ActiveModel::Serializer::ErrorSerializer
+      end
     end
-
 
     private
 
-    def registration_params
-      params.require(:attributes).permit(:type, :status)
-    end
-
-
-    def registration_attributes
-      registration_params[:attributes] || {}
+    def create_registration_params
+      data = params.require("data")
+      attributes = data
+        .require(:attributes)
+        .permit(
+          :status, :changeset
+        )
     end
   end
 end

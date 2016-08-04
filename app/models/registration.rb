@@ -3,6 +3,8 @@ class Registration < ApplicationRecord
 
   belongs_to :delivery_address, class_name: "Address", required: false
 
+  validates :status, presence: true
+
   def submission
     JSON.parse(changeset, symbolize_names: true)
   end
