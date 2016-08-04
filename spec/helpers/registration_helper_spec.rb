@@ -13,7 +13,7 @@ def sample_address
   {
     address_1: "10 Downing Street",
     address_2: "",
-    address_2: nil,
+    address_3: nil,
     town: "Cardiff",
     county: "",
     country: "GB",
