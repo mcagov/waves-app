@@ -60,6 +60,7 @@ group :test do
   gem "timecop"
   gem "webmock"
   gem "show_me_the_cookies"
+  gem "rails-controller-testing"
 end
 
 group :staging, :production do
