@@ -3,8 +3,8 @@ require "rails_helper"
 describe Registration, type: :model do
   let!(:registration) { create_registration! }
 
-  it "gets the correspondent_info" do
-    expect(registration.correspondent_info).to eq(registration.submission[:owner_info_1])
+  it "gets the correspondent" do
+    expect(registration.correspondent).to eq(registration.submission[:owners][0])
   end
 
   it "gets the vessel_info" do

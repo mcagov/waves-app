@@ -6,23 +6,18 @@ class Registration < ApplicationRecord
   validates :status, presence: true
 
   def submission
-    JSON.parse(changeset, symbolize_names: true)
+    @submission ||= changeset.deep_symbolize_keys!
   end
 
-  def correspondent_info
-    submission[:owner_info_1]
+  def correspondent
+    @correspondent ||= submission[:owners].find{|owner| owner[:correspondent] == true}
   end
 
   def vessel_info
-    submission[:vessel_info]
+    @vessel_info ||= submission[:vessel_info]
   end
 
   def owners
-    owner_info_count = submission[:owner_info_count].to_i
-    ret = []
-    1.upto(owner_info_count) do |i|
-      ret << submission["owner_info_#{ i }".to_sym]
-    end
-    ret
+    @owners ||= submission[:owners]
   end
 end
