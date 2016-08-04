@@ -1,0 +1,66 @@
+{
+  "data":
+    {
+      "type": "features",
+      "attributes":
+        {
+          "register": "part_3",
+          "task": "apply_to_register_a_vessel",
+          "status": "pending_payment",
+          "changeset": {
+            "declaration": {
+              "eligible_under_regulation_89": "1",
+              "eligible_under_regulation_90": "1",
+              "understands_false_statement_is_offence": "1"
+            },
+            "ownership": {
+              "foo": ""
+            },
+            "vessel_info": {
+              "name": "Celebrator Doppelbock",
+              "alt_name_1": "Trappistes Rochefort 10",
+              "alt_name_2": "Oak Aged Yeti Imperial Stout",
+              "alt_name_3": "Hop Rod Rye",
+              "hin": "PR-QNTIECMU3FVA",
+              "make_and_model": "Makey McMakeface 1",
+              "length_in_centimeters": "1151",
+              "number_of_hulls": "5",
+              "vessel_type": "barge",
+              "vessel_type_other": "",
+              "mmsi_number": "233878594",
+              "radio_call_sign": "4RWO0K"
+            },
+            "owners": [
+              {
+                "name": "Horatio Nelson",
+                "nationality": "GB",
+                "address_1": "2 Keen Road",
+                "address_2": "",
+                "address_3": "",
+                "town": "Town 2",
+                "county": "County 2",
+                "postcode": "QZ2 3QM",
+                "country": "RU",
+                "email": "horatio-nelson.1@example.com",
+                "phone_number": "42672075807",
+                "correspondent": true
+              },
+              {
+                "name": "Edward McCallister",
+                "nationality": "GB",
+                "address_1": "4 Keen Road",
+                "address_2": "",
+                "address_3": "",
+                "town": "Town 4",
+                "county": "County 4",
+                "postcode": "UB2 7RP",
+                "country": "ME",
+                "email": "edward-mccallister.2@example.com",
+                "phone_number": "21911163031",
+                "correspondent": false
+              }
+            ]
+          }
+        }
+    }
+}

@@ -15,11 +15,7 @@ module Api::V1
 
     def create_registration_params
       data = params.require("data")
-      attributes = data
-        .require(:attributes)
-        .permit(
-          :status, :changeset, :task, :register
-        )
+      data.require(:attributes).permit!
     end
   end
 end
