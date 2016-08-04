@@ -18,7 +18,7 @@ module Api::V1
       attributes = data
         .require(:attributes)
         .permit(
-          :status, :changeset
+          :status, :changeset, :task, :register
         )
     end
   end
