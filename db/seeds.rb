@@ -15,6 +15,16 @@ VESSEL_TYPES = [
 
 USERS = ["develop"].freeze
 
+COUNTRIES = [
+  ["GB", "United Kingdom"],
+  ["FR", "France"],
+  ["ES", "Spain"],
+  ["PT", "Portugal"],
+  ["VG", "British Virgin Islands"]
+]
+
+COUNTRIES.each { |country| Country.find_or_create_by(code: country.first, name: country.last) }
+
 REGISTERS.each { |register| Register.find_or_create_by(name: register) }
 
 VESSEL_TYPES.each { |name| VesselType.find_or_create_by(name: name, key: name.parameterize) }

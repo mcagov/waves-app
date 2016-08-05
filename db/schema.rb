@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804143539) do
+ActiveRecord::Schema.define(version: 20160805093826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160804143539) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "country",    limit: 2
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code", using: :btree
   end
 
   create_table "owner_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
