@@ -10,7 +10,7 @@ class Registration < ApplicationRecord
   end
 
   def correspondent
-    @correspondent ||= submission[:owners].find{|owner| owner[:correspondent] == true}
+    @correspondent ||= submission[:owners].first
   end
 
   def vessel_info
