@@ -5,6 +5,8 @@ class Registration < ApplicationRecord
 
   validates :status, presence: true
 
+  has_one :payment
+
   def submission
     @submission ||= changeset.deep_symbolize_keys!
   end
@@ -19,5 +21,9 @@ class Registration < ApplicationRecord
 
   def owners
     @owners ||= submission[:owners]
+  end
+
+  def paid?
+    payment.present?
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805093826) do
+ActiveRecord::Schema.define(version: 20160815141021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20160805093826) do
     t.datetime "updated_at",             null: false
     t.string   "title"
     t.uuid     "address_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.json     "changeset"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["registration_id"], name: "index_payments_on_registration_id", using: :btree
   end
 
   create_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
