@@ -4,7 +4,7 @@ feature "User views new registration", type: :feature, js: true do
   let!(:registration) { create_registration! }
 
   before do
-    visit root_path(as: create(:user))
+    login
     click_on registration.vessel_info[:name]
   end
 
@@ -20,5 +20,15 @@ feature "User views new registration", type: :feature, js: true do
     end
   end
 
-  scenario "owner_info"
+  scenario "owner info", javascript: true do
+    click_link("Owners")
+
+    within("#tab_content2") do
+      expect(page).to have_css('th', text: "Owner #2")
+      expect(page).to have_css('#owner-name', text: "Horatio Nelson")
+      expect(page).to have_css('#owner-name', text: "Edward McCallister")
+    end
+  end
+
+  scenario "declaration status"
 end

@@ -5,12 +5,14 @@ class Registration < ApplicationRecord
 
   validates :status, presence: true
 
+  has_one :payment
+
   def submission
     @submission ||= changeset.deep_symbolize_keys!
   end
 
-  def correspondent
-    @correspondent ||= submission[:owners].first
+  def applicant
+    @applicant ||= submission[:owners].first
   end
 
   def vessel_info
@@ -19,5 +21,25 @@ class Registration < ApplicationRecord
 
   def owners
     @owners ||= submission[:owners]
+  end
+
+  def paid?
+    payment.present?
+  end
+
+  def official_no
+    "--pending--"
+  end
+
+  def target_date
+    "--pending--"
+  end
+
+  def source
+    "Online"
+  end
+
+  def vessel_type
+    vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
   end
 end
