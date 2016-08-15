@@ -29,12 +29,12 @@
             - @registrations.each do |registration|
               %tr
                 %td= link_to registration.vessel_info[:name], registration_path(registration)
-                %td 104928
-                %td= registration.correspondent[:name]
+                %td= registration.official_no
+                %td= registration.applicant[:name]
                 %td New Registration
-                %td 18/07 (10 days)
+                %td= registration.target_date
                 %td= css_tick(registration.paid?)
-                %td Online
+                %td= registration.source
                 %td
                   %button.btn.btn-default.btn-xs{"data-target" => "#unclaim-work", "data-toggle" => "modal", :type => "button"}
                     Unclaim

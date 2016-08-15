@@ -5,8 +5,8 @@ describe Registration, type: :model do
   context "in general" do
     let!(:registration) { create_registration! }
 
-    it "gets the correspondent" do
-      expect(registration.correspondent).to eq(registration.submission[:owners][0])
+    it "gets the default applicant" do
+      expect(registration.applicant).to eq(registration.submission[:owners][0])
     end
 
     it "gets the vessel_info" do
