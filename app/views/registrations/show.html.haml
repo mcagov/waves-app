@@ -52,7 +52,7 @@
                       %td Length
                       %td
                         %a#vessel-length{"data-placement" => "bottom", "data-title" => "Length", "data-type" => "text", :href => "#"}
-                          %strong= @registration.vessel_info[:length_in_centimeters]
+                          %strong= number_with_precision(@registration.vessel_info[:length_in_meters], precision: 2)
                     %tr
                       %td Number of hulls
                       %td
@@ -62,7 +62,7 @@
                       %td Vessel type
                       %td
                         %a#vessel-type{"data-placement" => "bottom", "data-title" => "Vessel Type", "data-type" => "select", :href => "#"}
-                          %strong= @registration.vessel_info[:vessel_type]
+                          %strong= @registration.vessel_type
 
                     %tr
                       %td MMSI Number

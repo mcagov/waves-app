@@ -38,4 +38,8 @@ class Registration < ApplicationRecord
   def source
     "Online"
   end
+
+  def vessel_type
+    vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
+  end
 end

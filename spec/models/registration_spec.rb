@@ -29,4 +29,23 @@ describe Registration, type: :model do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context "#vessel_type" do
+    let(:registration)  do
+      build(:registration, changeset: { vessel_info: vessel_info })
+    end
+
+    subject { registration.vessel_type }
+
+    context "with the vessel_type field" do
+      let(:vessel_info) { {vessel_type: "Barge"} }
+      it { expect(subject).to eq("Barge") }
+    end
+
+    context "using vessel_type_other field" do
+      let(:vessel_info) { {vessel_type: "", vessel_type_other: "Zebra"} }
+      it { expect(subject).to eq("Zebra") }
+    end
+
+  end
 end
