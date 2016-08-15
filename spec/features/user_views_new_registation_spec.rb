@@ -4,7 +4,7 @@ feature "User views new registration", type: :feature, js: true do
   let!(:registration) { create_registration! }
 
   before do
-    visit root_path(as: create(:user))
+    login
     click_on registration.vessel_info[:name]
   end
 

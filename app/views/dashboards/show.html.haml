@@ -14,7 +14,7 @@
       .x_panel
         .x_title
           %h4 Applications to be processed
-        %table.table.table-striped.table-hover
+        %table#registrations.table.table-striped.table-hover
           %thead
             %tr
               %th Vessel
@@ -33,8 +33,7 @@
                 %td= registration.correspondent[:name]
                 %td New Registration
                 %td 18/07 (10 days)
-                %td
-                  .i.fa.fa-check.green
+                %td= css_tick(registration.paid?)
                 %td Online
                 %td
                   %button.btn.btn-default.btn-xs{"data-target" => "#unclaim-work", "data-toggle" => "modal", :type => "button"}
