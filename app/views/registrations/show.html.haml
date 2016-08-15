@@ -75,10 +75,10 @@
                         %a#vessel-callsign{"data-placement" => "bottom", "data-title" => "Radio Call Sign", "data-type" => "text", :href => "#"}
                           %strong= @registration.vessel_info[:radio_call_sign]
               #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                - @registration.owners.each do |owner|
+                - @registration.owners.each_with_index do |owner, i|
                   %table.table.table-striped
                     %thead
-                      %th Owner #1
+                      %th Owner ##{ i + 1}
                       %th Submitted Information
                     %tbody
                       %tr
