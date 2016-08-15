@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-gem "rails", "~> 5.0.0"
+gem "rails", "~> 5.0.0.1"
 gem "bundler-audit", ">= 0.5.0", require: false
 gem "bootstrap-sass", "~> 3.3.6"
 gem "clearance"
