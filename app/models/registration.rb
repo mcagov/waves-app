@@ -5,20 +5,20 @@ class Registration < ApplicationRecord
 
   validates :task, presence: true
 
+  def applicant_name
+    "--pending--"
+  end
+
+  def owners
+    submission[:owners]
+  end
+
   def submission
     @submission ||= changeset.deep_symbolize_keys!
   end
 
-  def applicant
-    @applicant ||= submission[:owners].first
-  end
-
   def vessel_info
     @vessel_info ||= submission[:vessel_info]
-  end
-
-  def owners
-    @owners ||= submission[:owners]
   end
 
   def paid?
