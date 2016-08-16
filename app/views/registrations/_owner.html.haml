@@ -2,7 +2,9 @@
 %table.table.table-striped{ id: "owner_#{ i }"}
   %thead
     %th Owner ##{ i }
-    %th Submitted Information
+    %th
+      - if i == 1
+        Submitted Information
   %tbody
     %tr
       %td{width: '30%'} Owner Name
@@ -19,12 +21,15 @@
       %td.declaration
         %i.fa.fa-check
         %strong Completed online
+        #{ "--pending--" }
 
       %tr
         %td Supporting Information
         %td.payment
           %strong
             -if i == 1 && payment
+              Worldpay Order Code: #{ payment.wp_order_code }
+              %br
               Registered Country of Credit Card: #{ payment.wp_country }
               %br
               IP address of Submission: #{ payment.customer_ip }
