@@ -1,0 +1,13 @@
+%table.table.table-striped
+  %thead
+    %th From
+    %th Subject
+    %th Date Received
+  %tbody
+    %tr
+      %td{width: '20%'} --pending--
+      %td{width: '65%'}= link_to 'RE: Registration Renewal G8NJ23JD2', '#email-content', "data-target" => "#email-content", "data-toggle" => "modal"
+      %td{width: '15%'} Yesterday
+= link_to '#email-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#email-content-add", "data-toggle" => "modal" do
+  %i.fa.fa-plus
+  Add Correspondence

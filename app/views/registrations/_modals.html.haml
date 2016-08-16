@@ -1,0 +1,149 @@
+.modal.fade{id: 'approve-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Register Vessel and Issue Certificate of Registry
+      .modal-body
+        %p You are about to register this vessel. Please select how you want to print the Certificate of Registry and cover letter.
+        %hr
+        .row
+          .col-md-12
+            .form-group
+              %label Print Options for Certificate of Registry & Cover Letter
+              %select.select2_single.form-control{style: 'width: 100%'}
+                %option Move documents to print queue (bulk printing)
+                %option Print documents now (individual documents)
+        .row
+          .col-md-12
+            .form-group
+              %label
+                %input{name: "email_certificate_of_registry", type: "checkbox"}
+                Send a copy of the Certificate of Registry to owner
+
+
+      .modal-footer
+        = link_to 'Register Vessel', '/part-3/processing/success', class: 'btn btn-success btn-lg'
+
+
+.modal.fade{id: 'reject-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Reject Application
+      .modal-body
+        %p Rejecting this application will create a task for your manager to approve a refund.
+        %hr
+        .row
+          .col-md-12
+            .form-group
+              %label Reason for Rejection
+              %select.select2_single.form-control{style: 'width: 100%;'}
+                %option Unsuitable Name
+                %option Too Long
+                %option Fraudulent
+        .row{style: 'margin-top: 15px;'}
+          .col-md-12
+            .form-group
+              %label Additional Information
+              %textarea.form-control{rows: '3'}
+      .modal-footer
+        %button.btn.btn-lg.btn-danger{:type => "button"} Reject Application
+
+
+.modal.fade{id: 'refer-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Refer Application
+      .modal-body
+        .row
+          .col-md-9
+            .form-group
+              %label Reason for Referral
+              %select.select2_single.form-control{style: 'width: 100%;'}
+                %option Unknown vessel type
+                %option Length and vessel type do not match
+                %option Hull identification number appears incorrect
+          .col-md-3
+            .form-group
+              %label Due By
+              %input.form-control{type: 'text', value: '01/09/2016'}
+        .row{style: 'margin-top: 15px;'}
+          .col-md-12
+            .form-group
+              %label Additional Information
+              %textarea.form-control{rows: '3'}
+
+        -# If postal application, need option to print a letter and send it via post
+
+      .modal-footer
+        %button.btn.btn-lg.btn-warning{:type => "button"} Refer Application
+
+.modal.fade{id: 'email-content', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title RE: Registration Renewal G8NJ23JD2
+      .modal-body
+        %code
+          %p Dear Rachel,
+          %p In response to your email regarding the name of the vessel, I understand that "MV Queeny" has been rejected, therefore we would like to go with "Bobcat" as the new name.
+          %p Thanks
+          %p John Smith
+          %hr
+          %p To John Smith,
+          %p You have submitted an application to register "MV Queeny". Unfortunately this name is deemed unacceptable due to its links with the Royal family. Please reply with a few alternative names.
+          %p Yours
+          %p Rachel Miles
+          %hr
+          %p To whom it may concern at RSS,
+          %p I have just submitted an application online to register my vessel, but I'm not sure if the name is acceptable. What should I do?
+          %p Regards
+          %p John Smith
+      .modal-footer
+        %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close
+
+.modal.fade{id: 'email-content-add', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Link Correspondence to Application
+      %form
+        .modal-body
+          .row
+            .col-md-6
+              .form-group
+                %label Subject
+                %input.form-control{type: 'text'}
+            .col-md-3
+              .form-group
+                %label Correspondence Format
+                %select.select2_single.form-control{style: 'width: 100%;'}
+                  %option Email
+                  %option Post
+            .col-md-3
+              .form-group
+                %label Date Received
+                %input.form-control{type: 'text', value: '01/09/2016'}
+          .row
+            .col-sm-12
+              .form-group
+                %label Content
+                %textarea.form-control{rows: 6}
+          .row
+            .col-sm-12
+              .form-group
+                %label Supporting Documents
+                %input{type: 'file'}
+        .modal-footer
+          %button.btn.btn-primary{"aria-label" => "Continue", "data-dismiss" => "modal", :type => "button"} Save Correspondence

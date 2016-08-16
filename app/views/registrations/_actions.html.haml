@@ -1,0 +1,11 @@
+.row.no-print
+  .col-xs-12
+    = link_to '#reject-application', "data-target" => "#reject-application", "data-toggle" => "modal", class: 'btn btn-danger' do
+      %i.fa.fa-times
+      Reject Application
+    = link_to '#refer-application', "data-target" => "#refer-application", "data-toggle" => "modal", class: 'btn btn-warning' do
+      %i.fa.fa-pause
+      Refer Application
+    = link_to '#approve-application', "data-target" => "#approve-application", "data-toggle" => "modal", class: 'btn btn-success btn-lg pull-right' do
+      %i.fa.fa-check
+      Register Vessel & Issue Certificate of Registry
