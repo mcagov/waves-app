@@ -6,7 +6,6 @@
         {
           "register": "part_3",
           "task": "apply_to_register_a_vessel",
-          "status": "pending_payment",
           "changeset": {
             "declaration": {
               "eligible_under_regulation_89": "1",

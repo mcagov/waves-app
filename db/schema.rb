@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815141021) do
+ActiveRecord::Schema.define(version: 20160816081325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(version: 20160815141021) do
     t.string   "card_country"
     t.string   "payment_id"
     t.string   "receipt_id"
-    t.string   "status",              null: false
     t.datetime "due_date"
     t.boolean  "is_urgent"
     t.datetime "created_at",          null: false

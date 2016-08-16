@@ -1,11 +1,9 @@
 class Registration < ApplicationRecord
   belongs_to :vessel, required: false
-
   belongs_to :delivery_address, class_name: "Address", required: false
-
-  validates :status, presence: true
-
   has_one :payment
+
+  validates :task, presence: true
 
   def submission
     @submission ||= changeset.deep_symbolize_keys!
