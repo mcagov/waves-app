@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   factory :paid_registration, class: :registration do
-    payment { create(:payment)}
+    payment { build(:payment)}
     changeset {{}}
   end
 end
