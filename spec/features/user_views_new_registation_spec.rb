@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User views new registration", type: :feature, js: true do
-  let!(:registration) { create_registration! }
+  let!(:registration) { create_paid_registration! }
 
   before do
     login
@@ -23,10 +23,16 @@ feature "User views new registration", type: :feature, js: true do
   scenario "owner info", javascript: true do
     click_link("Owners")
 
-    within("#tab_content2") do
+    within("#owner_1") do
+      expect(page).to have_css('th', text: "Owner #1")
+      expect(page).to have_css('.owner-name', text: "Horatio Nelson")
+      expect(page).to have_css('.declaration', text: "Completed online")
+      expect(page).to have_css('.payment', text: "Registered Country of Credit Card: GB")
+    end
+
+    within("#owner_2") do
       expect(page).to have_css('th', text: "Owner #2")
-      expect(page).to have_css('#owner-name', text: "Horatio Nelson")
-      expect(page).to have_css('#owner-name', text: "Edward McCallister")
+      expect(page).to have_css('.owner-name', text: "Edward McCallister")
     end
   end
 
