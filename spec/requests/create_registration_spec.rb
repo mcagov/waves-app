@@ -6,6 +6,15 @@ describe "create registrations via the API", type: :request do
   context "with valid params" do
     let(:params) { valid_create_registration_json }
     let(:registration) { Registration.find(json["id"])}
+    let(:parsed_body) { JSON.parse(response.body) }
+
+    it "returns the status code :created" do
+      expect(response).to have_http_status(:created)
+    end
+
+    it "responds with the registration id" do
+      expect(parsed_body["data"]["id"]).to be_present
+    end
 
     it "creates a part_3 registration" do
       expect(registration.register.to_sym).to eq(:part_3)

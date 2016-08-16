@@ -6,9 +6,14 @@ describe "create payments via the API", type: :request do
   context "with valid params" do
     let(:params) { valid_create_payment_json }
     let(:payment) { Payment.find(json["id"])}
+    let(:parsed_body) { JSON.parse(response.body) }
 
-    it "creates a payment" do
-      expect(payment.id).to be_present
+    it "returns the status code :created" do
+      expect(response).to have_http_status(:created)
+    end
+
+    it "responds with the payment id" do
+      expect(parsed_body["data"]["id"]).to be_present
     end
 
     it "sets the payment#amount" do
