@@ -13,6 +13,14 @@ class Registration < ApplicationRecord
     submission[:owners]
   end
 
+  def job_type
+    'New Registration'
+  end
+
+  def source
+    'Online'
+  end
+
   def submission
     @submission ||= changeset.deep_symbolize_keys!
   end
