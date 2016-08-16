@@ -3,19 +3,17 @@
 
   %h1
     New Registration
-    %small ID: G8J9DA43J
+    %small ID: --pending--
 
-  .alert.alert-warning
-    %strong Application Referred by Laura Clark-Theobald:
-    Name is inappropriate. Next action due on 10th August, 2016.
+  / .alert.alert-warning
+  /   %strong Application Referred by Laura Clark-Theobald:
+  /   Name is inappropriate. Next action due on 10th August, 2016.
 
   .row
     .col-sm-12
       .x_panel
         .x_title
           %h2 Registration Information
-          .pull-right{style: 'font-size: 1.2em'}
-            = link_to 'app+G8J9DA43J@wavesapp.uk', 'app+G8J9DA43J@wavesapp.uk'
           .clearfix
         .x_content
           %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
@@ -75,35 +73,8 @@
                         %a#vessel-callsign{"data-placement" => "bottom", "data-title" => "Radio Call Sign", "data-type" => "text", :href => "#"}
                           %strong= @registration.vessel_info[:radio_call_sign]
               #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                - @registration.owners.each_with_index do |owner, i|
-                  %table.table.table-striped
-                    %thead
-                      %th Owner ##{ i + 1}
-                      %th Submitted Information
-                    %tbody
-                      %tr
-                        %td{width: '30%'} Owner Name
-                        %td{width: '70%'}
-                          %a#owner-name{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
-                            %strong= owner[:name]
-                      %tr
-                        %td Owner Address
-                        %td
-                          %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-                            %strong= inline_address(owner)
-                      %tr
-                        %td Declaration
-                        %td
-                          %i.fa.fa-check
-                          %strong Completed online
-                      %tr
-                        %td Supporting Information
-                        %td
-                          %strong
-                            Registered Country of Credit Card: UK
-                            %br
-                            Location of Submission: Spain (12.234.190.10)
-                  %hr
+                = render partial: 'owner', collection: @registration.owners, locals: { payment: @registration.payment }
+
               #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
                 %table.table.table-striped
                   %thead

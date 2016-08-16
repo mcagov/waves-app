@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815141021) do
+ActiveRecord::Schema.define(version: 20160816132951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,11 +54,16 @@ ActiveRecord::Schema.define(version: 20160815141021) do
     t.uuid     "address_id"
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.json     "changeset"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "registration_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "wp_token"
+    t.string   "wp_order_code"
+    t.string   "wp_amount"
+    t.string   "wp_country"
+    t.string   "customer_ip"
+    t.json     "wp_payment_response"
     t.index ["registration_id"], name: "index_payments_on_registration_id", using: :btree
   end
 
@@ -83,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160815141021) do
     t.string   "card_country"
     t.string   "payment_id"
     t.string   "receipt_id"
-    t.string   "status",              null: false
     t.datetime "due_date"
     t.boolean  "is_urgent"
     t.datetime "created_at",          null: false

@@ -1,0 +1,36 @@
+- i = owner_counter + 1
+%table.table.table-striped{ id: "owner_#{ i }"}
+  %thead
+    %th Owner ##{ i }
+    %th
+      - if i == 1
+        Submitted Information
+  %tbody
+    %tr
+      %td{width: '30%'} Owner Name
+      %td.owner-name{width: '70%'}
+        %a{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
+          %strong= owner[:name]
+    %tr
+      %td Owner Address
+      %td
+        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
+          %strong= inline_address(owner)
+    %tr
+      %td Declaration
+      %td.declaration
+        %i.fa.fa-check
+        %strong Completed online
+        #{ "--pending--" }
+
+      %tr
+        %td Supporting Information
+        %td.payment
+          %strong
+            -if i == 1 && payment
+              Worldpay Order Code: #{ payment.wp_order_code }
+              %br
+              Registered Country of Credit Card: #{ payment.wp_country }
+              %br
+              IP address of Submission: #{ payment.customer_ip }
+%hr

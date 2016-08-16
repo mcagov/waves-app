@@ -5,29 +5,29 @@
         %a#menu_toggle
           %i.fa.fa-bars
 
-      %ul.nav.navbar-nav.navbar-right
-        %li{style: 'width: 250px'}
-          .top_search
-            .input-group
-              %input.form-control{:placeholder => "Search for...", :type => "text"}/
-              %span.input-group-btn
-                %button.btn.btn-default{:type => "button"} Go!
-        %li.dropdown{:role => "presentation"}
-          %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
-            %i.fa.fa-envelope-o
-            %span.badge.bg-green 6
-          %ul#menu1.dropdown-menu.list-unstyled.msg_list{:role => "menu"}
-            %li
-              %a
-                %span.image
-                  = image_tag "img.jpg"
-                %span
-                  %span Ugo Ottanelli
-                  %span.time 3 mins ago
-                %span.message
-                  Referred a new vessel registration for approval
-            %li
-              .text-center
-                %a
-                  %strong See All Alerts
-                  %i.fa.fa-angle-right
+      / %ul.nav.navbar-nav.navbar-right
+      /   %li{style: 'width: 250px'}
+      /     .top_search
+      /       .input-group
+      /         %input.form-control{:placeholder => "Search for...", :type => "text"}/
+      /         %span.input-group-btn
+      /           %button.btn.btn-default{:type => "button"} Go!
+      /   %li.dropdown{:role => "presentation"}
+      /     %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+      /       %i.fa.fa-envelope-o
+      /       %span.badge.bg-green 6
+      /     %ul#menu1.dropdown-menu.list-unstyled.msg_list{:role => "menu"}
+      /       %li
+      /         %a
+      /           %span.image
+      /             = image_tag "img.jpg"
+      /           %span
+      /             %span Ugo Ottanelli
+      /             %span.time 3 mins ago
+      /           %span.message
+      /             Referred a new vessel registration for approval
+      /       %li
+      /         .text-center
+      /           %a
+      /             %strong See All Alerts
+      /             %i.fa.fa-angle-right

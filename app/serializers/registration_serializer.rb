@@ -1,3 +1,3 @@
 class RegistrationSerializer < ActiveModel::Serializer
-  attributes :status, :changeset
+  attributes :changeset
 end
