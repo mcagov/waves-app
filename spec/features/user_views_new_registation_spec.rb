@@ -8,6 +8,12 @@ feature "User views new registration", type: :feature, js: true do
     click_on registration.vessel_info[:name]
   end
 
+  scenario "heading" do
+    within("h1") do
+      expect(page).to have_content(registration.official_no)
+    end
+  end
+
   scenario "vessel info" do
     within(".registration") do
       expect(page).to have_content(registration.vessel_info[:name])

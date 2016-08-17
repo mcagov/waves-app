@@ -12,6 +12,10 @@ describe Registration, type: :model do
     it "get two owners" do
       expect(registration.owners.length).to eql(2)
     end
+
+    it "has an official number" do
+      expect(registration.official_no).to be_a(Integer)
+    end
   end
 
   context "#paid?" do
@@ -54,6 +58,5 @@ describe Registration, type: :model do
       let(:vessel_info) { {vessel_type: "", vessel_type_other: "Zebra"} }
       it { expect(subject).to eq("Zebra") }
     end
-
   end
 end

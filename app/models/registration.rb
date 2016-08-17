@@ -4,6 +4,8 @@ class Registration < ApplicationRecord
   has_one :payment
 
   validates :task, presence: true
+  validates :official_no, presence: true,
+      numericality: { only_integer: true }
 
   def applicant_name
     "--pending--"
@@ -41,10 +43,6 @@ class Registration < ApplicationRecord
     declarations.include?(owner[:email])
   end
 
-  def official_no
-    "--pending--"
-  end
-
   def target_date
     "--pending--"
   end
@@ -56,4 +54,14 @@ class Registration < ApplicationRecord
   def vessel_type
     vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
   end
+
+  before_validation(:on => :create) do
+    self.official_no = next_seq
+  end
+
+  private
+    def next_seq
+      result = Registration.connection.execute("SELECT nextval('registrations_official_no_seq')")
+      result[0]['nextval']
+    end
 end
