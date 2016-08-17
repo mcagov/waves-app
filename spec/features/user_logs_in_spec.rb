@@ -32,6 +32,6 @@ feature "User logs in", type: :feature, js: true do
   end
 
   def dashboard_text
-    "My Tasks"
+    "Unclaimed Tasks"
   end
 end
