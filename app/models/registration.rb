@@ -3,9 +3,9 @@ class Registration < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
+  auto_increment :official_no, initial: 100001
+
   validates :task, presence: true
-  validates :official_no, presence: true,
-      numericality: { only_integer: true }
 
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500
@@ -68,14 +68,4 @@ class Registration < ApplicationRecord
   def vessel_type
     vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
   end
-
-  before_validation(:on => :create) do
-    self.official_no = next_seq
-  end
-
-  private
-    def next_seq
-      result = Registration.connection.execute("SELECT nextval('registrations_official_no_seq')")
-      result[0]['nextval']
-    end
 end

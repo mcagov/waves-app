@@ -13,8 +13,8 @@ describe Registration, type: :model do
       expect(registration.owners.length).to eql(2)
     end
 
-    it "has an official number" do
-      expect(registration.official_no).to be_a(Integer)
+    it "has a 6 digit official number" do
+      expect(registration.official_no.to_s.length).to eq(6)
     end
   end
 
