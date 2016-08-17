@@ -7,12 +7,12 @@ class Registration < ApplicationRecord
   validates :official_no, presence: true,
       numericality: { only_integer: true }
 
-  def applicant_name
-    "--pending--"
+  def applicant
+    owners.first[:name] if owners
   end
 
   def owners
-    submission[:owners]
+    submission[:owners] || []
   end
 
   def job_type
