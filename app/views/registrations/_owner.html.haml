@@ -19,9 +19,9 @@
     %tr
       %td Declaration
       %td.declaration
-        %i.fa.fa-check
-        %strong Completed online
-        #{ "--pending--" }
+        - if @registration.declared_by?(owner)
+          %i.fa.fa-check
+          %strong Completed online
 
       %tr
         %td Supporting Information

@@ -26,6 +26,18 @@ describe Registration, type: :model do
     end
   end
 
+  context "declared_by?" do
+    let!(:registration) { create_registration! }
+
+    it "was declared_by by the first owner" do
+      expect(registration).to be_declared_by(registration.owners.first)
+    end
+
+    it "was not declared_by by the second owner" do
+      expect(registration).not_to be_declared_by(registration.owners.last)
+    end
+  end
+
   context "#vessel_type" do
     let(:registration)  do
       build(:registration, changeset: { vessel_info: vessel_info })

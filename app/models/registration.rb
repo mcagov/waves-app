@@ -33,6 +33,14 @@ class Registration < ApplicationRecord
     payment.present?
   end
 
+  def declarations
+    submission[:declarations] || []
+  end
+
+  def declared_by?(owner)
+    declarations.include?(owner[:email])
+  end
+
   def official_no
     "--pending--"
   end
