@@ -7,6 +7,12 @@ class Registration < ApplicationRecord
   validates :official_no, presence: true,
       numericality: { only_integer: true }
 
+  PREMIUM_AMOUNT = 7500
+  STANDARD_AMOUNT = 2500
+
+  PREMIUM_DAYS = 5
+  STANDARD_DAYS = 20
+
   def applicant
     owners.first[:name] if owners
   end
@@ -44,7 +50,15 @@ class Registration < ApplicationRecord
   end
 
   def target_date
-    "--pending--"
+    created_at.advance(days: target_days).to_date if paid?
+  end
+
+  def target_days
+    if payment.wp_amount.to_i == PREMIUM_AMOUNT
+      PREMIUM_DAYS
+    else
+      STANDARD_DAYS
+    end
   end
 
   def source
