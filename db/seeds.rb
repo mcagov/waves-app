@@ -35,6 +35,3 @@ USERS.each do |user|
   u.password = "password"
   u.save!
 end
-
-new_registration_json = JSON.parse(File.read('spec/fixtures/new_registration.json'))
-Registration.create(new_registration_json["data"]["attributes"])
