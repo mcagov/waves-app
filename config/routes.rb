@@ -33,5 +33,7 @@ Rails.application.routes.draw do
 
   resources :registrations, only: [:show]
 
+  get "/tasks/:action", controller: "tasks"
+
   root to: "dashboards#show"
 end
