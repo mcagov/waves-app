@@ -2,12 +2,12 @@
   .row
     .col-sm-9
       %h1{style: 'margin-top: 0px !important;'}
-        My Tasks
-    .col-sm-3
-      .pull-right
-        = link_to '/part-3/processing/new-registration', class: 'btn btn-primary' do
-          %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
-          Process Next Application
+        Unclaimed Tasks
+    / .col-sm-3
+    /   .pull-right
+    /     = link_to '/part-3/processing/new-registration', class: 'btn btn-primary' do
+    /       %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
+    /       Process Next Application
 
   .row
     .col-md-12
@@ -37,19 +37,19 @@
                 %td= registration.source
                 %td
                   %button.btn.btn-default.btn-xs{"data-target" => "#unclaim-work", "data-toggle" => "modal", :type => "button"}
-                    Unclaim
+                    Claim
 
-  .row
-    .col-md-12
-      .x_panel
-        .x_title
-          %h4 Applications to be processed
-        .x_content
-          %p.text-center
-            / = image_tag 'hs-huzzah-01.svg', width: '100px'
-          %h2.text-center
-            Tasks Complete
-          %p.text-center
-            Your task list is clear.
-          %p.text-center
-            = link_to 'Get More Work', '/part-3/tasks/unclaimed-tasks', class: 'btn btn-primary'
+  / .row
+  /   .col-md-12
+  /     .x_panel
+  /       .x_title
+  /         %h4 Applications to be processed
+  /       .x_content
+  /         %p.text-center
+  /           / = image_tag 'hs-huzzah-01.svg', width: '100px'
+  /         %h2.text-center
+  /           Tasks Complete
+  /         %p.text-center
+  /           Your task list is clear.
+  /         %p.text-center
+  /           = link_to 'Get More Work', '/part-3/tasks/unclaimed-tasks', class: 'btn btn-primary'
