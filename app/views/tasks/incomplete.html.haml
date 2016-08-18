@@ -1,5 +1,1 @@
-.right_col{role: 'main'}
-  .row
-    .col-sm-9
-      %h1{style: 'margin-top: 0px !important;'}
-        Incomplete Applications
+= render partial: "base", locals: { heading:  "Incomplete Applications", subheading: "Applications that are not ready to be processed", submissions: @submissions }

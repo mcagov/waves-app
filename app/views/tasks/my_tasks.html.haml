@@ -1,5 +1,1 @@
-.right_col{role: 'main'}
-  .row
-    .col-sm-9
-      %h1{style: 'margin-top: 0px !important;'}
-        My Tasks
+= render partial: "base", locals: { heading:  "My Tasks", subheading: "Applications to be processed", submissions: @submissions }

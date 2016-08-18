@@ -1,9 +1,10 @@
 class TasksController < InternalPagesController
+  before_action :load_submissions
 
-  def unclaimed
+
+  protected
+
+  def load_submissions
     @submissions = Submission.includes([:vessel, :payment]).all
-  end
-
-  def mine
   end
 end
