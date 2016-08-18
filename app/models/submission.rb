@@ -32,10 +32,6 @@ class Submission < ApplicationRecord
     'Online'
   end
 
-  def vessel_name
-    vessel.name
-  end
-
   def vessel
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end

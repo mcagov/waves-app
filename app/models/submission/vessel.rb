@@ -27,4 +27,8 @@ class Submission::Vessel
       vessel_type
     end
   end
+
+  def to_s
+    name
+  end
 end
