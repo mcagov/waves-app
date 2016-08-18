@@ -5,7 +5,7 @@ feature "User views new submission", type: :feature, js: true do
 
   before do
     login
-    click_on submission.vessel_info[:name]
+    click_on submission.vessel.name
   end
 
   scenario "heading" do
@@ -14,15 +14,15 @@ feature "User views new submission", type: :feature, js: true do
     end
   end
 
-  scenario "vessel info" do
+  scenario "vessel" do
     within(".submission") do
-      expect(page).to have_content(submission.vessel_info[:name])
-      expect(page).to have_content(submission.vessel_info[:hin])
-      expect(page).to have_content(submission.vessel_info[:make_and_model])
-      expect(page).to have_content(submission.vessel_info[:length_in_meters])
-      expect(page).to have_content(submission.vessel_info[:number_of_hulls])
-      expect(page).to have_content(submission.vessel_info[:vessel_type])
-      expect(page).to have_content(submission.vessel_info[:mmsi_number])
+      expect(page).to have_content(submission.vessel.name)
+      expect(page).to have_content(submission.vessel.hin)
+      expect(page).to have_content(submission.vessel.make_and_model)
+      expect(page).to have_content(submission.vessel.length_in_meters)
+      expect(page).to have_content(submission.vessel.number_of_hulls)
+      expect(page).to have_content(submission.vessel.vessel_type)
+      expect(page).to have_content(submission.vessel.mmsi_number)
     end
   end
 

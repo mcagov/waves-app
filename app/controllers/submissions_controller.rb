@@ -1,5 +1,5 @@
 class SubmissionsController < InternalPagesController
   def show
-    @submission = Submission.includes([:vessel, :payment]).find(params[:id])
+    @submission = Submission.includes(:payment).find(params[:id])
   end
 end

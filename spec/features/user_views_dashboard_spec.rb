@@ -9,7 +9,7 @@ feature "User views dashboard", type: :feature, js: true do
 
   scenario "submissions" do
     within("#submissions") do
-      expect(page).to have_content(submission.vessel_info[:name])
+      expect(page).to have_content(submission.vessel.name)
       expect(page).to have_content(submission.applicant)
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-times.i.red")

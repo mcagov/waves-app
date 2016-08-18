@@ -6,7 +6,7 @@ describe Submission, type: :model do
     let!(:submission) { create_submission! }
 
     it "gets the vessel_info" do
-      expect(submission.vessel_info).to eq(submission.user_input[:vessel_info])
+      expect(submission.vessel).to be_a(Submission::Vessel)
     end
 
     it "get two owners" do
@@ -35,24 +35,6 @@ describe Submission, type: :model do
 
     it "was not declared_by by the second owner" do
       expect(submission).not_to be_declared_by(submission.owners.last)
-    end
-  end
-
-  context "#vessel_type" do
-    let(:submission)  do
-      build(:submission, changeset: { vessel_info: vessel_info })
-    end
-
-    subject { submission.vessel_type }
-
-    context "with the vessel_type field" do
-      let(:vessel_info) { {vessel_type: "Barge"} }
-      it { expect(subject).to eq("Barge") }
-    end
-
-    context "using vessel_type_other field" do
-      let(:vessel_info) { {vessel_type: "", vessel_type_other: "Zebra"} }
-      it { expect(subject).to eq("Zebra") }
     end
   end
 

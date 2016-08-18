@@ -12,7 +12,6 @@ class Submission < ApplicationRecord
   STANDARD_DAYS = 20
 
   # sortable attributes
-
   def paid?
     payment.present?
   end
@@ -24,7 +23,16 @@ class Submission < ApplicationRecord
   # helper attributes
 
   def user_input
+    # this needs to be safer
     @user_input ||= changeset.deep_symbolize_keys!
+  end
+
+  def vessel
+    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
+  end
+
+  def owners
+    vessel.owners
   end
 
   def declarations
@@ -59,13 +67,5 @@ class Submission < ApplicationRecord
 
   def source
     'Online'
-  end
-
-  def vessel_info
-    @vessel_info ||= user_input[:vessel_info]
-  end
-
-  def vessel_type
-    vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
   end
 end
