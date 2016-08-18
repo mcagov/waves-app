@@ -19,7 +19,7 @@
     %tr
       %td Declaration
       %td.declaration
-        - if @registration.declared_by?(owner)
+        - if @submission.declared_by?(owner)
           %i.fa.fa-check
           %strong Completed online
 

@@ -1,9 +1,9 @@
 FactoryGirl.define do
-  factory :registration do
+  factory :submission do
     changeset {{}}
   end
 
-  factory :paid_registration, class: :registration do
+  factory :paid_submission, class: :submission do
     payment { build(:payment)}
     changeset {{}}
   end

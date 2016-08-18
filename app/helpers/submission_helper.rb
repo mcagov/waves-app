@@ -1,4 +1,4 @@
-module RegistrationHelper
+module SubmissionHelper
   def inline_address(hsh)
     [
       hsh[:address_1],

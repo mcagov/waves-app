@@ -2,7 +2,7 @@
 
 ## About
 
-This app currently consists of a vessel registration API and a content
+This app currently consists of a vessel submission API and a content
 management system. The API is intended to support on the
 Gov.UK hosted website as a means for the owner of a (singley owned) small ship to
 register their vessel under **Part III of the UK Ships Register**. The content
@@ -27,9 +27,9 @@ The expected database model for the app is given in [this diagram][db-model].
 
 [bootstrap]: https://getbootstrap.com/
 
-#### Registration
+#### Submission
 
-The registration form currently consists of a number of steps which are
+The submission form currently consists of a number of steps which are
 navigated by the user in the following order:
 
   1. `prerequisites`
@@ -40,8 +40,8 @@ navigated by the user in the following order:
   6. `payment`
 
 A form object for each step can be found in the `app/forms` directory, whilst
-associated controllers are in the `app/controllers/registration` directory, and
-form views are in the corresponding subdirectories of `app/views/registration`.
+associated controllers are in the `app/controllers/submission` directory, and
+form views are in the corresponding subdirectories of `app/views/submission`.
 
 As the user completes each step, the form data is validated according to the
 specific validations associated to the form object, and stored in a cookie in
@@ -52,13 +52,13 @@ the user's browser. The data is only saved in the database after the final step.
 Translations can be found in the locale files.  In particular:
 
   * `config/locales/en.yml` contains some standard text for the app, as well as
-    the translations for the submission buttons on the registration form,
+    the translations for the submission buttons on the submission form,
   * `config/locales/simple_form.en.yml` contains translations for the labels,
     prompts and placeholders associated with the fields in each step of the
-    registration form,
-  * `config/locales/registration/*.en.yml` contains translations for the
+    submission form,
+  * `config/locales/submission/*.en.yml` contains translations for the
     validation error messages, and page title and prompt, for each of the steps
-    in the registration form.
+    in the submission form.
 
 ## Setup
 

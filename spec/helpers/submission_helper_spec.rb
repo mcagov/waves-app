@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe RegistrationHelper, type: :helper do
+describe SubmissionHelper, type: :helper do
 
   describe "#inline_address" do
     it "renders an inline address" do

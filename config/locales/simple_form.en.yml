@@ -8,7 +8,7 @@ en:
       mark: ""
 
     error_notification:
-      default_message: "There were problems with your registration"
+      default_message: "There were problems with your submission"
 
     labels:
       prerequisite:

@@ -1,9 +1,9 @@
-class Registration < ApplicationRecord
+class Submission < ApplicationRecord
   belongs_to :vessel, required: false
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
-  validates :task, presence: true
+  validates :part, presence: true
 
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500
@@ -16,23 +16,23 @@ class Registration < ApplicationRecord
   end
 
   def owners
-    submission[:owners] || []
+    user_input[:owners] || []
   end
 
   def job_type
-    'New Registration'
+    ""
   end
 
   def source
     'Online'
   end
 
-  def submission
-    @submission ||= changeset.deep_symbolize_keys!
+  def user_input
+    @user_input ||= changeset.deep_symbolize_keys!
   end
 
   def vessel_info
-    @vessel_info ||= submission[:vessel_info]
+    @vessel_info ||= user_input[:vessel_info]
   end
 
   def paid?
@@ -40,7 +40,7 @@ class Registration < ApplicationRecord
   end
 
   def declarations
-    submission[:declarations] || []
+    user_input[:declarations] || []
   end
 
   def declared_by?(owner)

@@ -1,4 +1,4 @@
-%table.table.table-striped.table-fluid.registration
+%table.table.table-striped.table-fluid.submission
   %thead
     %th Vessel Details
     %th Submitted Information
@@ -32,7 +32,7 @@
       %td Vessel type
       %td
         %a#vessel-type{"data-placement" => "bottom", "data-title" => "Vessel Type", "data-type" => "select", :href => "#"}
-          %strong= @registration.vessel_type
+          %strong= @submission.vessel_type
 
     %tr
       %td MMSI Number

@@ -5,7 +5,7 @@
         Unclaimed Tasks
     / .col-sm-3
     /   .pull-right
-    /     = link_to '/part-3/processing/new-registration', class: 'btn btn-primary' do
+    /     = link_to '/part-3/processing/new-submission', class: 'btn btn-primary' do
     /       %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
     /       Process Next Application
 
@@ -14,7 +14,7 @@
       .x_panel
         .x_title
           %h4 Applications to be processed
-        %table#registrations.table.table-striped.table-hover
+        %table#submissions.table.table-striped.table-hover
           %thead
             %tr
               %th Vessel
@@ -25,14 +25,14 @@
               %th Source
               %th
           %tbody
-            - @registrations.each do |registration|
+            - @submissions.each do |submission|
               %tr
-                %td= link_to registration.vessel_info[:name], registration_path(registration)
-                %td= registration.applicant
-                %td= registration.job_type
-                %td= registration.target_date
-                %td= css_tick(registration.paid?)
-                %td= registration.source
+                %td= link_to submission.vessel_info[:name], submission_path(submission)
+                %td= submission.applicant
+                %td= submission.job_type
+                %td= submission.target_date
+                %td= css_tick(submission.paid?)
+                %td= submission.source
                 %td
                   %button.btn.btn-default.btn-xs{"data-target" => "#unclaim-work", "data-toggle" => "modal", :type => "button"}
                     Claim

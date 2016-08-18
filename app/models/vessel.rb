@@ -4,7 +4,7 @@ class Vessel < ApplicationRecord
   has_many :owner_vessels
   has_many :owners, through: :owner_vessels
 
-  has_many :registrations
+  has_many :submissions
 
   has_many :register_vessels
   has_many :registers, through: :register_vessels
