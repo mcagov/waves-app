@@ -33,7 +33,9 @@ Rails.application.routes.draw do
 
   resources :registrations, only: [:show]
 
-  get "/tasks/:action", controller: "tasks"
+  %w{ incomplete mine print_queue referred unclaimed }.each do |action|
+    get "/tasks/#{ action }", controller: "tasks", action: action
+  end
 
   root to: "dashboards#show"
 end
