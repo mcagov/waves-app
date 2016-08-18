@@ -22,7 +22,6 @@ describe "create new new_registrations via the API", type: :request do
 
     it "sets the due_date"
     it "sets the is_urgent flag"
-    it "sets the type"
     it "sets the part"
   end
 
