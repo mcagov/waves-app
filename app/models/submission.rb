@@ -3,7 +3,7 @@ class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
-  validates :task, presence: true
+  validates :part, presence: true
 
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500
@@ -20,7 +20,7 @@ class Submission < ApplicationRecord
   end
 
   def job_type
-    'New Submission'
+    ""
   end
 
   def source

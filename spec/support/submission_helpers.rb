@@ -1,7 +1,7 @@
 module SubmissionHelpers
   def create_submission!
     # long - but easy to cut and paste!
-    Submission.create(JSON.parse(File.read('spec/fixtures/new_submission.json'))["data"]["attributes"])
+    NewRegistration.create(JSON.parse(File.read('spec/fixtures/new_registration.json'))["data"]["attributes"])
   end
 
   def create_paid_submission!

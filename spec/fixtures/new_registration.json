@@ -4,8 +4,7 @@
       "type": "features",
       "attributes":
         {
-          "register": "part_3",
-          "task": "apply_to_register_a_vessel",
+          "part": "part_3",
           "changeset": {
             "declarations": ["horatio-nelson.1@example.com"],
             "ownership": {

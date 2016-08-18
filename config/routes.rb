@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :countries, only: [:index]
       resources :payments, only: [:create]
-      resources :submissions, only: [:create]
+      resources :new_registrations, only: [:create]
       resources :vessel_types, only: [:index]
     end
   end
