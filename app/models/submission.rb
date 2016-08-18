@@ -11,6 +11,40 @@ class Submission < ApplicationRecord
   PREMIUM_DAYS = 5
   STANDARD_DAYS = 20
 
+  # sortable attributes
+
+  def paid?
+    payment.present?
+  end
+
+  def target_date
+    created_at.advance(days: target_days).to_date if paid?
+  end
+
+  # helper attributes
+
+  def user_input
+    @user_input ||= changeset.deep_symbolize_keys!
+  end
+
+  def declarations
+    user_input[:declarations] || []
+  end
+
+  def declared_by?(owner)
+    declarations.include?(owner[:email])
+  end
+
+  def target_days
+    if payment.wp_amount.to_i == PREMIUM_AMOUNT
+      PREMIUM_DAYS
+    else
+      STANDARD_DAYS
+    end
+  end
+
+  # display attributes
+
   def applicant
     owners.first[:name] if owners
   end
@@ -27,40 +61,8 @@ class Submission < ApplicationRecord
     'Online'
   end
 
-  def user_input
-    @user_input ||= changeset.deep_symbolize_keys!
-  end
-
   def vessel_info
     @vessel_info ||= user_input[:vessel_info]
-  end
-
-  def paid?
-    payment.present?
-  end
-
-  def declarations
-    user_input[:declarations] || []
-  end
-
-  def declared_by?(owner)
-    declarations.include?(owner[:email])
-  end
-
-  def target_date
-    created_at.advance(days: target_days).to_date if paid?
-  end
-
-  def target_days
-    if payment.wp_amount.to_i == PREMIUM_AMOUNT
-      PREMIUM_DAYS
-    else
-      STANDARD_DAYS
-    end
-  end
-
-  def source
-    "Online"
   end
 
   def vessel_type
