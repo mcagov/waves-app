@@ -5,8 +5,7 @@ class Submission::Vessel < Vessel
     :alt_name_3,
     :length_in_meters,
     :vessel_type,
-    :vessel_type_other,
-    :owners
+    :vessel_type_other
   )
 
   def initialize(params={})

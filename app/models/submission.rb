@@ -11,36 +11,13 @@ class Submission < ApplicationRecord
   PREMIUM_DAYS = 5
   STANDARD_DAYS = 20
 
-  # sortable attributes
+  # sortable attributes these need to be added to the database record
   def paid?
     payment.present?
   end
 
   def target_date
     created_at.advance(days: target_days).to_date if paid?
-  end
-
-  # helper attributes
-
-  def user_input
-    # this needs to be safer
-    @user_input ||= changeset.deep_symbolize_keys!
-  end
-
-  def vessel
-    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
-  end
-
-  def owners
-    vessel.owners
-  end
-
-  def declarations
-    user_input[:declarations] || []
-  end
-
-  def declared_by?(owner)
-    declarations.include?(owner[:email])
   end
 
   def target_days
@@ -51,21 +28,40 @@ class Submission < ApplicationRecord
     end
   end
 
-  # display attributes
+  # helper attributes
+  def source
+    'Online'
+  end
 
-  def applicant
-    owners.first[:name] if owners
+  def vessel_name
+    vessel.name
+  end
+
+  def vessel
+    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
 
   def owners
     user_input[:owners] || []
   end
 
-  def job_type
-    ""
+  def declarations
+    user_input[:declarations] || []
   end
 
-  def source
-    'Online'
+  def declared_by?(owner)
+    declarations.include?(owner[:email])
   end
+
+  def applicant
+    owners.first[:name] if owners
+  end
+
+  protected
+
+  def user_input
+    @user_input ||=
+      changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
 end
