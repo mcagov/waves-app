@@ -5,6 +5,6 @@ class TasksController < InternalPagesController
   protected
 
   def load_submissions
-    @submissions = Submission.includes([:vessel, :payment]).all
+    @submissions = Submission.includes([:payment]).all
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818135908) do
+ActiveRecord::Schema.define(version: 20160818154056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 20160818135908) do
     t.boolean  "is_urgent"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.uuid     "vessel_id"
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"

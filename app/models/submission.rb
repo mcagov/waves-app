@@ -1,5 +1,4 @@
 class Submission < ApplicationRecord
-  belongs_to :vessel, required: false
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
