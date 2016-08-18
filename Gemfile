@@ -62,7 +62,6 @@ group :test do
   gem "webmock"
   gem "show_me_the_cookies"
   gem "rails-controller-testing"
-  gem 'simplecov', require: false
 end
 
 group :staging, :production do
