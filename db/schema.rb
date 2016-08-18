@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818093428) do
+ActiveRecord::Schema.define(version: 20160818135908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,13 +150,12 @@ ActiveRecord::Schema.define(version: 20160818093428) do
     t.string   "make_and_model"
     t.integer  "length_in_centimeters", null: false
     t.integer  "number_of_hulls",       null: false
-    t.uuid     "vessel_type_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "vessel_type_other"
     t.integer  "mmsi_number",           null: false
     t.string   "radio_call_sign",       null: false
-    t.index ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
+    t.string   "vessel_type"
   end
 
 end

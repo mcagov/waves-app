@@ -31,11 +31,7 @@ module VesselValidations
       }
     )
 
-    validates :vessel_type_id, presence: true, if: "vessel_type_other.blank?"
-    validates :vessel_type_id, absence: true, if: "vessel_type_other.present?"
-
-    validates :vessel_type_other, presence: true, if: "vessel_type_id.blank?"
-    validates :vessel_type_other, absence: true, if: "vessel_type_id.present?"
+    validates :vessel_type, presence: true
 
     validates(
       :mmsi_number,

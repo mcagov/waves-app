@@ -9,8 +9,6 @@ class Vessel < ApplicationRecord
   has_many :register_vessels
   has_many :registers, through: :register_vessels
 
-  belongs_to :vessel_type
-
   validates_uniqueness_of :mmsi_number
 
   def correspondent
