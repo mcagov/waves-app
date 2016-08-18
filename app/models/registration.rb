@@ -3,8 +3,6 @@ class Registration < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
-  auto_increment :official_no, initial: 100001
-
   validates :task, presence: true
 
   PREMIUM_AMOUNT = 7500

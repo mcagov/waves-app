@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817140439) do
+ActiveRecord::Schema.define(version: 20160818074228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 20160817140439) do
     t.json     "changeset"
     t.string   "register"
     t.string   "task"
-    t.integer  "official_no"
     t.index ["register"], name: "index_registrations_on_register", using: :btree
     t.index ["task"], name: "index_registrations_on_task", using: :btree
   end

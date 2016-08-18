@@ -10,7 +10,7 @@ feature "User views new registration", type: :feature, js: true do
 
   scenario "heading" do
     within("h1") do
-      expect(page).to have_content(registration.official_no)
+      expect(page).to have_content("New Registration")
     end
   end
 

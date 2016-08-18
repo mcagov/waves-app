@@ -18,7 +18,6 @@
           %thead
             %tr
               %th Vessel
-              %th Official No
               %th Applicant
               %th Job Type
               %th Target
@@ -29,7 +28,6 @@
             - @registrations.each do |registration|
               %tr
                 %td= link_to registration.vessel_info[:name], registration_path(registration)
-                %td= registration.official_no
                 %td= registration.applicant
                 %td= registration.job_type
                 %td= registration.target_date
