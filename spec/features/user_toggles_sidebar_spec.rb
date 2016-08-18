@@ -7,6 +7,9 @@ feature "User toggles the sidebar", type: :feature, js: true do
     click_link('My Tasks')
     expect(page).to have_css('h1', text: 'My Tasks')
 
+    click_link('Team Tasks')
+    expect(page).to have_css('h1', text: 'Team Tasks')
+
     click_link('Unclaimed Tasks')
     expect(page).to have_css('h1', text: 'Unclaimed Tasks')
 
