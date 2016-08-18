@@ -1,5 +1,5 @@
 class DashboardsController < InternalPagesController
   def show
-    @registrations = Registration.includes([:vessel, :payment]).all
+    redirect_to "/tasks/unclaimed"
   end
 end

@@ -33,5 +33,10 @@ Rails.application.routes.draw do
 
   resources :registrations, only: [:show]
 
+  %w{ incomplete my-tasks team-tasks print-queue referred unclaimed }.each do |action|
+    get "/tasks/#{ action }",
+      controller: "tasks", action: action.gsub('-', '_')
+  end
+
   root to: "dashboards#show"
 end
