@@ -1,7 +1,7 @@
 class TasksController < InternalPagesController
 
   def unclaimed
-    @registrations = Registration.includes([:vessel, :payment]).all
+    @submissions = Submission.includes([:vessel, :payment]).all
   end
 
   def mine

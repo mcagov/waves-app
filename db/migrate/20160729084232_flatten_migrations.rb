@@ -49,7 +49,7 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
       t.datetime "updated_at", null: false
     end
 
-    create_table "registrations", id: :uuid, force: :cascade do |t|
+    create_table "submissions", id: :uuid, force: :cascade do |t|
       t.string   "ip_country"
       t.string   "card_country"
       t.string   "payment_id"
@@ -76,12 +76,12 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
       t.datetime "updated_at", null: false
     end
 
-    create_table "user_vessel_registrations", id: :uuid, force: :cascade do |t|
+    create_table "user_vessel_submissions", id: :uuid, force: :cascade do |t|
       t.uuid     "user_id"
       t.json     "changes",         default: {}, null: false
       t.datetime "created_at",                   null: false
       t.datetime "updated_at",                   null: false
-      t.uuid     "registration_id"
+      t.uuid     "submission_id"
     end
 
     create_table "users", id: :uuid, force: :cascade do |t|
@@ -97,9 +97,9 @@ class FlattenMigrations < ActiveRecord::Migration[5.0]
       t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
     end
 
-    create_table "vessel_registrations", id: :uuid, force: :cascade do |t|
+    create_table "vessel_submissions", id: :uuid, force: :cascade do |t|
       t.uuid     "vessel_id"
-      t.uuid     "registration_id"
+      t.uuid     "submission_id"
       t.datetime "created_at",      null: false
       t.datetime "updated_at",      null: false
     end

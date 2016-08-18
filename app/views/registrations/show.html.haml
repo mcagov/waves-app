@@ -1,6 +1,6 @@
 .right_col{role: 'main'}
   %h1
-    New Registration
+    New Submission
 
   / .alert.alert-warning
   /   %strong Application Referred by Laura Clark-Theobald:
@@ -9,7 +9,7 @@
     .col-sm-12
       .x_panel
         .x_title
-          %h2 Registration Information
+          %h2 Submission Information
           .clearfix
         .x_content
           %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
@@ -26,10 +26,10 @@
 
             #myTabContent.tab-content
               #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "vessel", locals: { vessel_info: @registration.vessel_info }
+                = render partial: "vessel", locals: { vessel_info: @submission.vessel_info }
 
               #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                = render partial: 'owner', collection: @registration.owners, locals: { payment: @registration.payment }
+                = render partial: 'owner', collection: @submission.owners, locals: { payment: @submission.payment }
 
               #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
                 = render partial: 'correspondence'

@@ -1,3 +1,3 @@
-class RegistrationSerializer < ActiveModel::Serializer
+class SubmissionSerializer < ActiveModel::Serializer
   attributes :changeset
 end

@@ -1,4 +1,4 @@
-class UserVesselRegistration < ApplicationRecord
+class UserVesselSubmission < ApplicationRecord
   belongs_to :user
-  belongs_to :registration
+  belongs_to :submission
 end

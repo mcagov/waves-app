@@ -13,8 +13,8 @@ describe Api::V1::PaymentsController, type: :controller do
       expect(response.content_type).to eq("application/json")
     end
 
-    it "assigns the registration_id" do
-      expect(assigns(:payment).registration_id).to be_present
+    it "assigns the submission_id" do
+      expect(assigns(:payment).submission_id).to be_present
     end
   end
 end

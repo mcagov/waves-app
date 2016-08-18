@@ -1,5 +1,5 @@
-class AddOfficialNoToRegistrations < ActiveRecord::Migration[5.0]
+class AddOfficialNoToSubmissions < ActiveRecord::Migration[5.0]
   def change
-    add_column :registrations, :official_no, :integer
+    add_column :submissions, :official_no, :integer
   end
 end

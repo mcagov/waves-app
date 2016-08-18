@@ -1,5 +1,5 @@
-class RegistrationsController < InternalPagesController
+class SubmissionsController < InternalPagesController
   def show
-    @registration = Registration.includes([:vessel, :payment]).find(params[:id])
+    @submission = Submission.includes([:vessel, :payment]).find(params[:id])
   end
 end

@@ -3,7 +3,7 @@ class FixPaymentsTable < ActiveRecord::Migration[5.0]
     drop_table "payments"
 
     create_table "payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-      t.uuid  "registration_id"
+      t.uuid  "submission_id"
       t.datetime "created_at",          null: false
       t.datetime "updated_at",          null: false
       t.string   "wp_token"
@@ -12,7 +12,7 @@ class FixPaymentsTable < ActiveRecord::Migration[5.0]
       t.string   "wp_country"
       t.string   "customer_ip"
       t.json     "wp_payment_response"
-      t.index ["registration_id"], name: "index_payments_on_registration_id", using: :btree
+      t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
     end
   end
 end

@@ -1,19 +1,19 @@
 module Api::V1
-  class RegistrationsController < ApiController
+  class SubmissionsController < ApiController
     def create
-      @registration = Registration.new(create_registration_params)
+      @submission = Submission.new(create_submission_params)
 
-      if @registration.save
-        render json: @registration, status: :created
+      if @submission.save
+        render json: @submission, status: :created
       else
-        render json: @registration, status: :unprocessable_entity,
+        render json: @submission, status: :unprocessable_entity,
                        serializer: ActiveModel::Serializer::ErrorSerializer
       end
     end
 
     private
 
-    def create_registration_params
+    def create_submission_params
       data = params.require("data")
       data.require(:attributes).permit!
     end

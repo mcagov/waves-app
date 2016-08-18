@@ -1,4 +1,4 @@
-class Registration < ApplicationRecord
+class Submission < ApplicationRecord
   belongs_to :vessel, required: false
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
@@ -20,7 +20,7 @@ class Registration < ApplicationRecord
   end
 
   def job_type
-    'New Registration'
+    'New Submission'
   end
 
   def source

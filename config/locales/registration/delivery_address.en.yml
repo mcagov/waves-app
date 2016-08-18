@@ -18,5 +18,5 @@ en:
   delivery_address:
     form:
       prompt: "Please enter the delivery address."
-      question: "Would you like the registration certificate to be delivered to an alternative address?"
+      question: "Would you like the submission certificate to be delivered to an alternative address?"
       title: "Delivery Address"

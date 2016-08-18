@@ -26,12 +26,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :countries, only: [:index]
       resources :payments, only: [:create]
-      resources :registrations, only: [:create]
+      resources :submissions, only: [:create]
       resources :vessel_types, only: [:index]
     end
   end
 
-  resources :registrations, only: [:show]
+  resources :submissions, only: [:show]
 
   %w{ incomplete my-tasks team-tasks print-queue referred unclaimed }.each do |action|
     get "/tasks/#{ action }",

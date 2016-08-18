@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160818074228) do
   end
 
   create_table "payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "registration_id"
+    t.uuid     "submission_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "wp_token"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.string   "wp_country"
     t.string   "customer_ip"
     t.json     "wp_payment_response"
-    t.index ["registration_id"], name: "index_payments_on_registration_id", using: :btree
+    t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
   end
 
   create_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "ip_country"
     t.string   "card_country"
     t.string   "payment_id"
@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.json     "changeset"
     t.string   "register"
     t.string   "task"
-    t.index ["register"], name: "index_registrations_on_register", using: :btree
-    t.index ["task"], name: "index_registrations_on_task", using: :btree
+    t.index ["register"], name: "index_submissions_on_register", using: :btree
+    t.index ["task"], name: "index_submissions_on_task", using: :btree
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -114,12 +114,12 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_vessel_registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "user_vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "user_id"
     t.json     "changes",         default: {}, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.uuid     "registration_id"
+    t.uuid     "submission_id"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -135,9 +135,9 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
-  create_table "vessel_registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vessel_id"
-    t.uuid     "registration_id"
+    t.uuid     "submission_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

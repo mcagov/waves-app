@@ -1,8 +1,8 @@
-class AddRegisterAndTaskToRegistrations < ActiveRecord::Migration[5.0]
+class AddRegisterAndTaskToSubmissions < ActiveRecord::Migration[5.0]
   def change
-    add_column :registrations, :register, :string
-    add_column :registrations, :task, :string
-    add_index :registrations, :register
-    add_index :registrations, :task
+    add_column :submissions, :register, :string
+    add_column :submissions, :task, :string
+    add_index :submissions, :register
+    add_index :submissions, :task
   end
 end

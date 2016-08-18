@@ -1,3 +1,3 @@
 class Payment < ApplicationRecord
-  validates :registration_id, presence: true
+  validates :submission_id, presence: true
 end
