@@ -23,6 +23,11 @@ describe "create submissions via the API", type: :request do
     it "sets the submission#task" do
       expect(submission.task.to_sym).to eq(:new_submission)
     end
+
+    it "sets the due_date"
+    it "sets the is_urgent flag"
+    it "sets the type"
+    it "sets the part"
   end
 
   context "with invalid params" do

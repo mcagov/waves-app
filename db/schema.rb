@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818074228) do
+ActiveRecord::Schema.define(version: 20160818093428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,11 +83,14 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "ip_country"
-    t.string   "card_country"
     t.string   "payment_id"
-    t.string   "receipt_id"
     t.datetime "due_date"
     t.boolean  "is_urgent"
     t.datetime "created_at",          null: false
@@ -95,16 +98,8 @@ ActiveRecord::Schema.define(version: 20160818074228) do
     t.uuid     "vessel_id"
     t.uuid     "delivery_address_id"
     t.json     "changeset"
-    t.string   "register"
-    t.string   "task"
-    t.index ["register"], name: "index_submissions_on_register", using: :btree
-    t.index ["task"], name: "index_submissions_on_task", using: :btree
-  end
-
-  create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "part"
+    t.string   "type"
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -116,9 +111,9 @@ ActiveRecord::Schema.define(version: 20160818074228) do
 
   create_table "user_vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "user_id"
-    t.json     "changes",         default: {}, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.json     "changes",       default: {}, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.uuid     "submission_id"
   end
 
@@ -138,8 +133,8 @@ ActiveRecord::Schema.define(version: 20160818074228) do
   create_table "vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vessel_id"
     t.uuid     "submission_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "vessel_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
