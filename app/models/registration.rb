@@ -16,7 +16,7 @@ class Registration < ApplicationRecord
   end
 
   def owners
-    submission[:owners] || []
+    user_input[:owners] || []
   end
 
   def job_type
@@ -27,12 +27,12 @@ class Registration < ApplicationRecord
     'Online'
   end
 
-  def submission
-    @submission ||= changeset.deep_symbolize_keys!
+  def user_input
+    @user_input ||= changeset.deep_symbolize_keys!
   end
 
   def vessel_info
-    @vessel_info ||= submission[:vessel_info]
+    @vessel_info ||= user_input[:vessel_info]
   end
 
   def paid?
@@ -40,7 +40,7 @@ class Registration < ApplicationRecord
   end
 
   def declarations
-    submission[:declarations] || []
+    user_input[:declarations] || []
   end
 
   def declared_by?(owner)

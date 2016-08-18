@@ -6,7 +6,7 @@ describe Registration, type: :model do
     let!(:registration) { create_registration! }
 
     it "gets the vessel_info" do
-      expect(registration.vessel_info).to eq(registration.submission[:vessel_info])
+      expect(registration.vessel_info).to eq(registration.user_input[:vessel_info])
     end
 
     it "get two owners" do
