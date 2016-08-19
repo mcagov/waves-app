@@ -24,24 +24,6 @@ ActiveRecord::Schema.define(version: 20160819092306) do
     t.index ["code"], name: "index_countries_on_code", using: :btree
   end
 
-  create_table "owner_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "owner_id"
-    t.integer  "vessel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "owners", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",                   null: false
-    t.string   "nationality",  limit: 2, null: false
-    t.string   "email",                  null: false
-    t.string   "phone_number",           null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "title"
-    t.uuid     "address_id"
-  end
-
   create_table "payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
     t.datetime "created_at",          null: false
@@ -53,22 +35,6 @@ ActiveRecord::Schema.define(version: 20160819092306) do
     t.string   "customer_ip"
     t.json     "wp_payment_response"
     t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
-  end
-
-  create_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "register_id"
-    t.uuid     "vessel_id"
-    t.string   "status",          null: false
-    t.datetime "expiry_date",     null: false
-    t.uuid     "register_number", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  create_table "registers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -87,7 +53,6 @@ ActiveRecord::Schema.define(version: 20160819092306) do
     t.json     "changeset"
     t.string   "part"
     t.string   "type"
-    t.json     "vessel"
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -95,14 +60,6 @@ ActiveRecord::Schema.define(version: 20160819092306) do
     t.uuid     "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "user_id"
-    t.json     "changes",       default: {}, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.uuid     "submission_id"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -116,13 +73,6 @@ ActiveRecord::Schema.define(version: 20160819092306) do
     t.string   "remember_token",     limit: 128
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
-  end
-
-  create_table "vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "vessel_id"
-    t.uuid     "submission_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
   end
 
   create_table "vessel_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

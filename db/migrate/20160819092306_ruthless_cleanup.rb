@@ -13,14 +13,14 @@ class RuthlessCleanup < ActiveRecord::Migration[5.0]
       t.string   "country",    limit: 2
     end
 
-    create_table "owner_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "owner_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.uuid     "owner_id"
       t.integer  "vessel_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "owners", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "owners", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.string   "name",                   null: false
       t.string   "nationality",  limit: 2, null: false
       t.string   "email",                  null: false
@@ -31,7 +31,7 @@ class RuthlessCleanup < ActiveRecord::Migration[5.0]
       t.uuid     "address_id"
     end
 
-    create_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "register_vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.uuid     "register_id"
       t.uuid     "vessel_id"
       t.string   "status",          null: false
@@ -41,13 +41,13 @@ class RuthlessCleanup < ActiveRecord::Migration[5.0]
       t.datetime "updated_at",      null: false
     end
 
-    create_table "registers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "registers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.string   "name",       null: false
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "user_vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "user_vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.uuid     "user_id"
       t.json     "changes",       default: {}, null: false
       t.datetime "created_at",                 null: false
@@ -55,7 +55,7 @@ class RuthlessCleanup < ActiveRecord::Migration[5.0]
       t.uuid     "submission_id"
     end
 
-    create_table "vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    drop_table "vessel_submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
       t.uuid     "vessel_id"
       t.uuid     "submission_id"
       t.datetime "created_at",    null: false
