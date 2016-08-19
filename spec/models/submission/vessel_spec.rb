@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Submission::Vessel, type: :model do
   context "#new" do
-    subject { Submission::Vessel.new(input_params)}
+    subject { described_class.new(input_params)}
 
     context "in general" do
       let(:input_params) do
