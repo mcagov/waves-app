@@ -13,7 +13,6 @@ class Submission::Owner
     :country
   )
 
-
   def initialize(params={})
     params.reject!{|param| !self.respond_to?(param)}
     params.each { |key,value| instance_variable_set("@#{key}", value) }

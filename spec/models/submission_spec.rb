@@ -30,11 +30,11 @@ describe Submission, type: :model do
     let!(:submission) { create_submission! }
 
     it "was declared_by by the first owner" do
-      expect(submission).to be_declared_by(submission.owners.first)
+      expect(submission).to be_declared_by(submission.owners.first.email)
     end
 
     it "was not declared_by by the second owner" do
-      expect(submission).not_to be_declared_by(submission.owners.last)
+      expect(submission).not_to be_declared_by(submission.owners.last.email)
     end
   end
 

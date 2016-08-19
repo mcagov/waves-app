@@ -1,8 +1,8 @@
 require "rails_helper"
 
-describe Submission::Vessel, type: :model do
+describe Submission::Vessel do
   context "#new" do
-    subject { described_class.new(input_params)}
+    subject { Submission::Vessel.new(input_params)}
 
     context "in general" do
       let(:input_params) do
@@ -20,7 +20,6 @@ describe Submission::Vessel, type: :model do
         expect{ subject.non_existent }.to raise_error(NoMethodError)
       end
     end
-
 
     context "#type_of_vessel" do
       context "when vessel_type was chosen" do

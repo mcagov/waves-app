@@ -37,19 +37,22 @@ class Submission < ApplicationRecord
   end
 
   def owners
-    user_input[:owners] || []
+    @owners ||=
+      (user_input[:owners] || []).map do |owner_params|
+        Submission::Owner.new(owner_params)
+      end
   end
 
   def declarations
     user_input[:declarations] || []
   end
 
-  def declared_by?(owner)
-    declarations.include?(owner[:email])
+  def declared_by?(email)
+    declarations.include?(email)
   end
 
   def applicant
-    owners.first[:name] if owners
+    owners.first if owners
   end
 
   protected

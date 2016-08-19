@@ -10,16 +10,16 @@
       %td{width: '30%'} Owner Name
       %td.owner-name{width: '70%'}
         %a{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
-          %strong= owner[:name]
+          %strong= owner
     %tr
       %td Owner Address
       %td
         %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= inline_address(owner)
+          %strong= owner.inline_address
     %tr
       %td Declaration
       %td.declaration
-        - if @submission.declared_by?(owner)
+        - if @submission.declared_by?(owner.email)
           %i.fa.fa-check
           %strong Completed online
 
