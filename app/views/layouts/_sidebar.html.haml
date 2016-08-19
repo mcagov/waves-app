@@ -43,5 +43,6 @@
 
       = link_to '/settings', "data-original-title" => "Settings", "data-placement" => "top", "data-toggle" => "tooltip" do
         %span.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
-      %a{"data-original-title" => "Logout", "data-placement" => "top", "data-toggle" => "tooltip", :title => ""}
+
+      = link_to sign_out_path, method: :delete, id: "logout" do
         %span.glyphicon.glyphicon-off{"aria-hidden" => "true"}
