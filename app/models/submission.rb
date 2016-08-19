@@ -13,6 +13,11 @@ class Submission < ApplicationRecord
     state :referred
     state :print_queue
     state :completed
+
+
+    event :paid do
+      transitions to: :unassigned, from: :incomplete
+    end
   end
 
   PREMIUM_AMOUNT = 7500

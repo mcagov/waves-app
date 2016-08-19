@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :submission do
+    part "part_3"
     changeset {{}}
   end
 

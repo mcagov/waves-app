@@ -1,3 +1,13 @@
 class Payment < ApplicationRecord
-  validates :submission_id, presence: true
+  belongs_to :submission
+
+  after_create :mark_submission_as_paid
+
+  validates :submission, presence: true
+
+  private
+
+  def mark_submission_as_paid
+    submission.paid!
+  end
 end

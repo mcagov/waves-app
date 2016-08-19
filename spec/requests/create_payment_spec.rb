@@ -1,7 +1,10 @@
 require "rails_helper"
 
 describe "create payments via the API", type: :request do
-  before { post api_v1_payments_path, params: params }
+  before do
+    create(:submission, id: "240cdfa3-c930-4829-99a0-6c160a631d2d")
+    post api_v1_payments_path, params: params
+  end
 
   context "with valid params" do
     let(:params) { valid_create_payment_json }
