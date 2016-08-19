@@ -88,42 +88,6 @@ describe Vessel, type: :model do
         end
       end
 
-      describe "vessel type" do
-        context "when the vessel type is from the possible types" do
-          let!(:vessel) { build(:vessel) }
-
-          before { vessel.valid? }
-
-          it "vessel ID is not blank" do
-            expect(vessel.errors[:vessel_type_id]).to be_empty
-            expect(vessel.errors[:vessel_type_other]).to be_empty
-          end
-
-          it "other vessel type is blank" do
-            expect(vessel.errors[:vessel_type_id]).to be_empty
-            expect(vessel.errors[:vessel_type_other]).to be_empty
-          end
-        end
-
-        context "when the vessel type is not from the possible types" do
-          let!(:vessel) do
-            build(:vessel, vessel_type_id: nil, vessel_type_other: "Boaty")
-          end
-
-          before { vessel.valid? }
-
-          it "vessel ID is blank" do
-            expect(vessel.errors[:vessel_type_id]).to be_empty
-            expect(vessel.errors[:vessel_type_other]).to be_empty
-          end
-
-          it "other vessel type is not blank " do
-            expect(vessel.errors[:vessel_type_id]).to be_empty
-            expect(vessel.errors[:vessel_type_other]).to be_empty
-          end
-        end
-      end
-
       describe "MMSI number" do
         let!(:vessel) { build(:vessel) }
 
@@ -227,26 +191,6 @@ describe Vessel, type: :model do
         it "is greater than 6" do
           vessel = build(:vessel, number_of_hulls: 7)
           expect(vessel).not_to be_valid
-        end
-      end
-
-      describe "vessel type" do
-        context "when the vessel type is from the possible types" do
-          it "other vessel type is not blank" do
-            vessel = build(:vessel, vessel_type_other: "Boaty")
-            expect(vessel).not_to be_valid
-            expect(vessel.errors[:vessel_type_id]).not_to be_empty
-            expect(vessel.errors[:vessel_type_other]).not_to be_empty
-          end
-        end
-
-        context "when the vessel type is not from the possible types" do
-          it "other vessel type is blank " do
-            vessel = build(:vessel, vessel_type: nil, vessel_type_other: nil)
-            expect(vessel).not_to be_valid
-            expect(vessel.errors[:vessel_type_id]).not_to be_empty
-            expect(vessel.errors[:vessel_type_other]).not_to be_empty
-          end
         end
       end
 

@@ -16,7 +16,6 @@ end
 
 RSpec.configure do |config|
   config.include Features, type: :feature
-  config.include ShowMeTheCookies, type: :feature
   config.include Requests::JsonHelpers, type: :request
   config.include SubmissionHelpers
   config.infer_base_class_for_anonymous_controllers = false

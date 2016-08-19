@@ -60,7 +60,6 @@ group :test do
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
-  gem "show_me_the_cookies"
   gem "rails-controller-testing"
 end
 

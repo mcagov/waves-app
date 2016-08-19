@@ -30,14 +30,6 @@ module Clearance
       redirect_signed_in_users
     end
 
-    def redirect_signed_in_users
-      redirect_to(Clearance.configuration.redirect_url) if signed_in?
-    end
-
-    def url_after_create
-      Clearance.configuration.redirect_url
-    end
-
     def user_from_params
       email = user_params.delete(:email)
       password = user_params.delete(:password)

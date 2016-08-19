@@ -1,5 +1,3 @@
-REGISTERS = ["Part 1", "Part 2", "Part 3", "Part 4"].freeze
-
 VESSEL_TYPES = [
   "barge",
   "dinghy",
@@ -24,8 +22,6 @@ COUNTRIES = [
 ]
 
 COUNTRIES.each { |country| Country.find_or_create_by(code: country.first, name: country.last) }
-
-REGISTERS.each { |register| Register.find_or_create_by(name: register) }
 
 VESSEL_TYPES.each { |name| VesselType.find_or_create_by(name: name, key: name.parameterize) }
 

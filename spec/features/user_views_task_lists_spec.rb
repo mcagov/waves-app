@@ -1,9 +1,9 @@
 require "rails_helper"
 
-feature "User toggles the sidebar", type: :feature, js: true do
+feature "User views task lists", type: :feature, js: true do
   before { login }
 
-  scenario "viewing tasks" do
+  scenario "viewing task lists" do
     click_link('My Tasks')
     expect(page).to have_css('h1', text: 'My Tasks')
 
@@ -21,5 +21,13 @@ feature "User toggles the sidebar", type: :feature, js: true do
 
     click_link('Incomplete Applications')
     expect(page).to have_css('h1', text: 'Incomplete Applications')
+  end
+
+  scenario "moving a submission between lists" do
+    submission = create_paid_submission!
+
+    visit tasks_unclaimed_path
+    expect(page).to have_css('tr.submission')
+
   end
 end

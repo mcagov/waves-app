@@ -26,7 +26,7 @@
 
             #myTabContent.tab-content
               #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "vessel", locals: { vessel_info: @submission.vessel_info }
+                = render partial: "vessel", locals: { vessel: @submission.vessel }
 
               #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
                 = render partial: 'owner', collection: @submission.owners, locals: { payment: @submission.payment }

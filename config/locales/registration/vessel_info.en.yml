@@ -18,7 +18,7 @@ en:
               greater_than: "The number of hulls must be greater than zero."
               less_than_or_equal_to: "The number of hulls must be less than seven."
               not_an_integer: "The number of hulls must be a whole number."
-            vessel_type_id:
+            vessel_type:
               blank: "The vessel type must be selected from the list or other."
               present: "The vessel type must be selected from the list or other."
             vessel_type_other:

@@ -1,5 +1,4 @@
 class Submission < ApplicationRecord
-  belongs_to :vessel, required: false
   belongs_to :delivery_address, class_name: "Address", required: false
   has_one :payment
 
@@ -11,40 +10,9 @@ class Submission < ApplicationRecord
   PREMIUM_DAYS = 5
   STANDARD_DAYS = 20
 
-  def applicant
-    owners.first[:name] if owners
-  end
-
-  def owners
-    user_input[:owners] || []
-  end
-
-  def job_type
-    ""
-  end
-
-  def source
-    'Online'
-  end
-
-  def user_input
-    @user_input ||= changeset.deep_symbolize_keys!
-  end
-
-  def vessel_info
-    @vessel_info ||= user_input[:vessel_info]
-  end
-
+  # sortable attributes these need to be added to the database record
   def paid?
     payment.present?
-  end
-
-  def declarations
-    user_input[:declarations] || []
-  end
-
-  def declared_by?(owner)
-    declarations.include?(owner[:email])
   end
 
   def target_date
@@ -59,11 +27,39 @@ class Submission < ApplicationRecord
     end
   end
 
+  # helper attributes
   def source
-    "Online"
+    'Online'
   end
 
-  def vessel_type
-    vessel_info[:vessel_type].present? ? vessel_info[:vessel_type] : vessel_info[:vessel_type_other]
+  def vessel
+    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
+
+  def owners
+    @owners ||=
+      (user_input[:owners] || []).map do |owner_params|
+        Submission::Owner.new(owner_params)
+      end
+  end
+
+  def declarations
+    user_input[:declarations] || []
+  end
+
+  def declared_by?(email)
+    declarations.include?(email)
+  end
+
+  def applicant
+    owners.first if owners
+  end
+
+  protected
+
+  def user_input
+    @user_input ||=
+      changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
 end

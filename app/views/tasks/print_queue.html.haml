@@ -1,5 +1,1 @@
-.right_col{role: 'main'}
-  .row
-    .col-sm-9
-      %h1{style: 'margin-top: 0px !important;'}
-        Print Queue
+= render partial: "base", locals: { heading:  "Print Queue", subheading: "Completed applications that are ready for printing", submissions: @submissions }

@@ -6,7 +6,9 @@ if ENV.fetch("COVERAGE", false)
     SimpleCov.coverage_dir(dir)
   end
 
-  SimpleCov.start "rails"
+  SimpleCov.start do
+    # add_filter "/application_record/"
+  end
 end
 
 require "webmock/rspec"

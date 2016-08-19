@@ -26,7 +26,7 @@ en:
         make_and_model: Make and model
         length_in_centimeters: Length of vessel
         number_of_hulls: Number of hulls
-        vessel_type_id: Vessel type
+        vessel_type: Vessel type
         vessel_type_other: Other vessel type
         mmsi_number: MMSI number
         radio_call_sign: Radio call sign

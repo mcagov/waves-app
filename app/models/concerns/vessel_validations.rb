@@ -4,6 +4,8 @@ module VesselValidations
   included do
     validates :name, presence: true
 
+    validates_uniqueness_of :mmsi_number
+
     validates(
       :hin,
       format: { with: /\A[A-Z]{2}\-[0-9A-Z]{12}\z/ },
@@ -31,11 +33,7 @@ module VesselValidations
       }
     )
 
-    validates :vessel_type_id, presence: true, if: "vessel_type_other.blank?"
-    validates :vessel_type_id, absence: true, if: "vessel_type_other.present?"
-
-    validates :vessel_type_other, presence: true, if: "vessel_type_id.blank?"
-    validates :vessel_type_other, absence: true, if: "vessel_type_id.present?"
+    validates :vessel_type, presence: true
 
     validates(
       :mmsi_number,
