@@ -166,7 +166,6 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.6.0)
     rack (2.0.1)
     rack-cors (0.4.0)
     rack-mini-profiler (0.10.1)
@@ -206,8 +205,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.2.2)
-    recipient_interceptor (0.1.2)
-      mail
     rspec-core (3.5.1)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -324,7 +321,6 @@ DEPENDENCIES
   pg
   pry-byebug
   pry-rails
-  puma
   rack-cors
   rack-mini-profiler
   rack-timeout
@@ -332,7 +328,6 @@ DEPENDENCIES
   rails-assets-bootstrap-select!
   rails-controller-testing
   rake
-  recipient_interceptor
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
