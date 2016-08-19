@@ -264,6 +264,7 @@ GEM
     title (0.0.7)
       i18n
       rails (>= 3.1)
+    transitions (1.1.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -333,6 +334,7 @@ DEPENDENCIES
   sprockets-es6
   timecop
   title
+  transitions
   uglifier
   validates_email_format_of
   web-console
