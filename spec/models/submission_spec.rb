@@ -12,15 +12,19 @@ describe Submission, type: :model do
     it "get two owners" do
       expect(submission.owners.length).to eql(2)
     end
+
+    it "has a state: incomplete" do
+      expect(submission).to be_incomplete
+    end
   end
 
   context "#paid?" do
-    context "has a status: :paid" do
+    context "has been paid" do
       subject { build(:paid_submission).paid? }
       it { expect(subject).to be_truthy }
     end
 
-    context "has a status: :foo" do
+    context "has not been paid" do
       subject { build(:submission).paid? }
       it { expect(subject).to be_falsey }
     end

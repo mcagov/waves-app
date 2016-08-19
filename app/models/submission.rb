@@ -4,6 +4,22 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
 
+  include ActiveModel::Transitions
+
+  state_machine auto_scopes: true do
+    state :incomplete
+    state :unassigned
+    state :assigned
+    state :referred
+    state :print_queue
+    state :completed
+
+
+    event :paid do
+      transitions to: :unassigned, from: :incomplete
+    end
+  end
+
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500
 

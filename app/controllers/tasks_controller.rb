@@ -1,10 +1,26 @@
 class TasksController < InternalPagesController
-  before_action :load_submissions
 
+  def my_tasks
+    @submissions = []
+  end
 
-  protected
+  def team_tasks
+    @submissions = []
+  end
 
-  def load_submissions
-    @submissions = Submission.includes([:payment]).all
+   def unclaimed
+    @submissions = Submission.includes([:payment]).unassigned
+  end
+
+  def print_queue
+    @submissions = []
+  end
+
+  def incomplete
+    @submissions = Submission.incomplete
+  end
+
+  def referred
+    @submissions = []
   end
 end
