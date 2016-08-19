@@ -1,0 +1,44 @@
+{
+  "data":
+    {
+      "type": "features",
+      "attributes":
+        {
+          "part": "part_3",
+          "changeset": {
+            "declarations": ["alicejones@example.com"],
+            "ownership": {
+              "foo": ""
+            },
+            "vessel_info": {
+              "name": "Good Ship Venus",
+              "hin": "PR-QNTIECMU3FVA",
+              "make_and_model": "Galleon XX",
+              "length_in_meters": "11.51",
+              "number_of_hulls": "5",
+              "vessel_type": "",
+              "vessel_type_other": "sailing ship",
+              "mmsi_number": "233878594",
+              "radio_call_sign": "4RWO0K"
+            },
+            "owners": [
+              {
+                "name": "Alice Jones",
+                "nationality": "GB",
+                "address_1": "2 Keen Road",
+                "address_2": "",
+                "address_3": "",
+                "town": "Town 2",
+                "county": "County 2",
+                "postcode": "QZ2 3QM",
+                "country": "RU",
+                "email": "alicejones@example.com",
+                "phone_number": "42672075807",
+                "correspondent": true
+              }
+            ]
+          }
+        }
+    }
+}
+
