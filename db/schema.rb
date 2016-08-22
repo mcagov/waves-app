@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160819144433) do
     t.string   "part"
     t.string   "type"
     t.string   "state"
-    t.integer  "claimant_id"
+    t.uuid     "claimant_id"
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
