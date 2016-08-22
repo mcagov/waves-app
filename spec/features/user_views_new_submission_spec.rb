@@ -10,7 +10,7 @@ feature "User views new submission", type: :feature, js: true do
 
   scenario "heading" do
     within("h1") do
-      expect(page).to have_content("New Submission")
+      expect(page).to have_content("Submission Information")
     end
   end
 

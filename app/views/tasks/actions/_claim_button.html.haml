@@ -1,0 +1,9 @@
+.claim_button
+  - if submission.unassigned?
+    = form_tag claim_submission_path(submission) do
+      = submit_tag "Claim"
+
+  - elsif submission.claimant == current_user
+    = form_tag unclaim_submission_path(submission) do
+      = submit_tag "Unclaim"
+

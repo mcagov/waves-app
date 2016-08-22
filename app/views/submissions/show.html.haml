@@ -1,40 +1,31 @@
-.right_col{role: 'main'}
-  %h1
-    New Submission
+.x_panel
+  .x_title
+    %h1 Submission Information
+    .clearfix
+  .x_content
+    %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
 
-  / .alert.alert-warning
-  /   %strong Application Referred by Laura Clark-Theobald:
-  /   Name is inappropriate. Next action due on 10th August, 2016.
-  .row
-    .col-sm-12
-      .x_panel
-        .x_title
-          %h2 Submission Information
-          .clearfix
-        .x_content
-          %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+      %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+        %li.active{:role => "presentation"}
+          %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Vessel Information
 
-            %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
-              %li.active{:role => "presentation"}
-                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Vessel Information
+        %li{:role => "presentation"}
+          %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
 
-              %li{:role => "presentation"}
-                %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
+        %li{:role => "presentation"}
+          %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
 
-              %li{:role => "presentation"}
-                %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
+      #myTabContent.tab-content
+        #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+          = render partial: "vessel", locals: { vessel: @submission.vessel }
 
-            #myTabContent.tab-content
-              #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "vessel", locals: { vessel: @submission.vessel }
+        #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+          = render partial: 'owner', collection: @submission.owners, locals: { payment: @submission.payment }
 
-              #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                = render partial: 'owner', collection: @submission.owners, locals: { payment: @submission.payment }
-
-              #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
-                = render partial: 'correspondence'
+        #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
+          = render partial: 'correspondence'
 
 
 
-  = render partial: 'actions'
+= render partial: 'actions'
 = render partial: 'modals'

@@ -6,6 +6,7 @@ FactoryGirl.define do
 
   factory :paid_submission, class: :submission do
     payment { build(:payment)}
+    part "part_3"
     changeset {{}}
   end
 end

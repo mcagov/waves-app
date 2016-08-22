@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def admin?
     false
   end
+
+  def to_s
+    name
+  end
 end
