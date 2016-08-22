@@ -22,7 +22,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def approve
-    @submission.complete!
+    @submission.approve!
     render "completed"
   end
 

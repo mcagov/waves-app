@@ -11,5 +11,9 @@ describe NewRegistration, type: :model do
     it "creates a vessel" do
       expect(vessel).to be_present
     end
+
+    it "creates the one year registration"
+
+    it "fails gracefully if the vessel is not valid"
   end
 end

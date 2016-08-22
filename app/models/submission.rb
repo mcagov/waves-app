@@ -3,7 +3,7 @@ class Submission < ApplicationRecord
   belongs_to :claimant, class_name: "User", required: false
   has_one :payment
 
-  default_scope { includes(:payment)}
+  default_scope { includes(:payment).where.not(state: 'completed') }
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   validates :part, presence: true
@@ -15,8 +15,7 @@ class Submission < ApplicationRecord
     state :unassigned
     state :assigned
     state :referred
-    state :completed, enter: :process_application!
-    state :print_queue
+    state :completed
 
     event :paid do
       transitions to: :unassigned, from: :incomplete
@@ -30,7 +29,7 @@ class Submission < ApplicationRecord
       transitions to: :unassigned, from: :assigned
     end
 
-    event :complete! do
+    event :approve, success: :process_application! do
       transitions to: :completed, from: :assigned
     end
   end
