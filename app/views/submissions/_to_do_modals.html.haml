@@ -1,32 +1,3 @@
-.modal.fade{id: 'approve-application', role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Register Vessel and Issue Certificate of Registry
-      .modal-body
-        %p You are about to register this vessel. Please select how you want to print the Certificate of Registry and cover letter.
-        %hr
-        .row
-          .col-md-12
-            .form-group
-              %label Print Options for Certificate of Registry & Cover Letter
-              %select.select2_single.form-control{style: 'width: 100%'}
-                %option Move documents to print queue (bulk printing)
-                %option Print documents now (individual documents)
-        .row
-          .col-md-12
-            .form-group
-              %label
-                %input{name: "email_certificate_of_registry", type: "checkbox"}
-                Send a copy of the Certificate of Registry to owner
-
-
-      .modal-footer
-        = link_to 'Register Vessel', '/part-3/processing/success', class: 'btn btn-success btn-lg'
-
-
 .modal.fade{id: 'reject-application', role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
