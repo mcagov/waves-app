@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822125212) do
+ActiveRecord::Schema.define(version: 20160822131602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,16 +84,16 @@ ActiveRecord::Schema.define(version: 20160822125212) do
   end
 
   create_table "vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",                  null: false
+    t.string   "name",             null: false
     t.string   "hin"
     t.string   "make_and_model"
-    t.integer  "length_in_centimeters", null: false
-    t.integer  "number_of_hulls",       null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "mmsi_number",           null: false
-    t.string   "radio_call_sign",       null: false
+    t.integer  "number_of_hulls",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "mmsi_number",      null: false
+    t.string   "radio_call_sign",  null: false
     t.string   "vessel_type"
+    t.decimal  "length_in_meters"
   end
 
 end

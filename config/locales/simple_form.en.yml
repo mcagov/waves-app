@@ -24,7 +24,7 @@ en:
         name: Name of vessel
         hin: Hull identification number
         make_and_model: Make and model
-        length_in_centimeters: Length of vessel
+        length_in_meters: Length of vessel
         number_of_hulls: Number of hulls
         vessel_type: Vessel type
         vessel_type_other: Other vessel type

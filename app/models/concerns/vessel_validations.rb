@@ -14,7 +14,7 @@ module VesselValidations
     validate :hin_must_begin_with_a_valid_country_code
 
     validates(
-      :length_in_centimeters,
+      :length_in_meters,
       presence: true,
       numericality: {
         only_integer: true,

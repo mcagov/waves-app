@@ -33,28 +33,28 @@ describe Register::Vessel, type: :model do
           vessel = build(:register_vessel)
           vessel.valid?
 
-          expect(vessel.errors[:length_in_centimeters]).to be_empty
+          expect(vessel.errors[:length_in_meters]).to be_empty
         end
 
         it "is greater than 0 centimetres" do
-          vessel = build(:register_vessel, length_in_centimeters: 1)
+          vessel = build(:register_vessel, length_in_meters: 1)
           vessel.valid?
 
-          expect(vessel.errors[:length_in_centimeters]).to be_empty
+          expect(vessel.errors[:length_in_meters]).to be_empty
         end
 
         it "is less than 23.99 metres" do
-          vessel = build(:register_vessel, length_in_centimeters: 2398)
+          vessel = build(:register_vessel, length_in_meters: 2398)
           vessel.valid?
 
-          expect(vessel.errors[:length_in_centimeters]).to be_empty
+          expect(vessel.errors[:length_in_meters]).to be_empty
         end
 
         it "is exactly 23.99 metres" do
-          vessel = build(:register_vessel, length_in_centimeters: 2399)
+          vessel = build(:register_vessel, length_in_meters: 2399)
           vessel.valid?
 
-          expect(vessel.errors[:length_in_centimeters]).to be_empty
+          expect(vessel.errors[:length_in_meters]).to be_empty
         end
       end
 
@@ -162,17 +162,17 @@ describe Register::Vessel, type: :model do
 
       describe "length" do
         it "is not present" do
-          vessel = build(:register_vessel, length_in_centimeters: nil)
+          vessel = build(:register_vessel, length_in_meters: nil)
           expect(vessel).not_to be_valid
         end
 
         it "is less than 1 centimetre" do
-          vessel = build(:register_vessel, length_in_centimeters: 0)
+          vessel = build(:register_vessel, length_in_meters: 0)
           expect(vessel).not_to be_valid
         end
 
         it "is greater than 23.99 metres" do
-          vessel = build(:register_vessel, length_in_centimeters: 2400)
+          vessel = build(:register_vessel, length_in_meters: 2400)
           expect(vessel).not_to be_valid
         end
       end
