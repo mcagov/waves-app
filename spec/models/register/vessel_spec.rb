@@ -170,11 +170,6 @@ describe Register::Vessel, type: :model do
           vessel = build(:register_vessel, length_in_meters: 0)
           expect(vessel).not_to be_valid
         end
-
-        it "is greater than 23.99 metres" do
-          vessel = build(:register_vessel, length_in_meters: 2400)
-          expect(vessel).not_to be_valid
-        end
       end
 
       describe "number of hulls" do
