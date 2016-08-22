@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :vessel do
+  factory :register_vessel, class: 'Register::Vessel' do
     sequence(:name)           { |n| "Boaty McBoatface #{n}" }
     hin                       { random_hin }
     sequence(:make_and_model) { |n| "Makey McMakeface #{n}" }
