@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     member do
       post :claim
       post :unclaim
+      post :approve
     end
   end
 

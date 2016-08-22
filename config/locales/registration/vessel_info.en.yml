@@ -8,7 +8,7 @@ en:
               blank: "The name of the vessel must be specified."
             hin:
               invalid: "The hull identification number is invalid."
-            length_in_centimeters:
+            length_in_meters:
               blank: "The length of the vessel must be specified."
               greater_than: "The length of the vessel must be greater than 1-centimetre."
               less_than_or_equal_to: "The length of the vessel must be less than 24-metres."

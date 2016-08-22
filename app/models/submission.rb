@@ -1,8 +1,10 @@
 class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   belongs_to :claimant, class_name: "User", required: false
-
   has_one :payment
+
+  default_scope { includes(:payment).where.not(state: 'completed') }
+  scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   validates :part, presence: true
 
@@ -13,7 +15,6 @@ class Submission < ApplicationRecord
     state :unassigned
     state :assigned
     state :referred
-    state :print_queue
     state :completed
 
     event :paid do
@@ -27,19 +28,22 @@ class Submission < ApplicationRecord
     event :unclaimed do
       transitions to: :unassigned, from: :assigned
     end
+
+    event :approve do
+      transitions to: :completed, from: :assigned
+    end
   end
 
-  default_scope { includes(:payment)}
+  def process_application; end
 
-  scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
-
+  # configurable elements
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500
 
   PREMIUM_DAYS = 5
   STANDARD_DAYS = 20
 
-  # sortable attributes these need to be added to the database record
+  # attributes that need to be searchable / sortable
   def paid?
     payment.present?
   end
@@ -56,7 +60,7 @@ class Submission < ApplicationRecord
     end
   end
 
-  # helper attributes
+  # display helpers
   def source
     'Online'
   end
@@ -90,5 +94,4 @@ class Submission < ApplicationRecord
     @user_input ||=
       changeset.blank? ? {} : changeset.deep_symbolize_keys!
   end
-
 end

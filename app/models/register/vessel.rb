@@ -1,4 +1,4 @@
-class Vessel < ApplicationRecord
+class Register::Vessel < ApplicationRecord
   include VesselValidations
 
   private
