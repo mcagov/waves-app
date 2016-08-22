@@ -21,6 +21,11 @@ class SubmissionsController < InternalPagesController
     redirect_to tasks_my_tasks_path
   end
 
+  def approve
+    @submission.complete!
+    render "completed"
+  end
+
   protected
 
   def load_submission

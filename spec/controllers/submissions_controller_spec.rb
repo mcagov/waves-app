@@ -21,7 +21,6 @@ describe SubmissionsController, type: :controller do
       expect(response).to redirect_to(submission_path(assigns[:submission]))
     end
 
-
     context "#unclaim" do
       before do
         post :unclaim, params: {id: assigns[:submission].id}
@@ -33,6 +32,20 @@ describe SubmissionsController, type: :controller do
 
       it "redirects to my tasks " do
         expect(response).to redirect_to(tasks_my_tasks_path)
+      end
+    end
+
+    context "#approve" do
+      before do
+        post :approve, params: {id: assigns[:submission].id}
+      end
+
+      it "completes the submission" do
+        expect(assigns[:submission]).to be_completed
+      end
+
+      it "renders the completed page" do
+        expect(response).to render_template('completed')
       end
     end
   end

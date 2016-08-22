@@ -13,8 +13,8 @@ class Submission < ApplicationRecord
     state :unassigned
     state :assigned
     state :referred
+    state :completed, enter: :process_application!
     state :print_queue
-    state :completed
 
     event :paid do
       transitions to: :unassigned, from: :incomplete
@@ -27,7 +27,13 @@ class Submission < ApplicationRecord
     event :unclaimed do
       transitions to: :unassigned, from: :assigned
     end
+
+    event :complete! do
+      transitions to: :completed, from: :assigned
+    end
   end
+
+  def process_application!; end
 
   default_scope { includes(:payment)}
 

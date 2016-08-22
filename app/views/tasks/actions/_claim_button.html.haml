@@ -1,5 +1,7 @@
 .claim_button
-  - if submission.unassigned?
+  - if submission.completed?
+
+  - elsif submission.unassigned?
     = form_tag claim_submission_path(submission) do
       = submit_tag "Claim"
 
