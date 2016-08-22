@@ -3,8 +3,8 @@ class NewRegistration < Submission
     "New Registration"
   end
 
-  def process_application!
-    Register::Vessel.create!(
+  def process_application
+    Register::Vessel.create(
       {
         name: vessel.name,
         hin: vessel.hin,

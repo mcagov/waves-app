@@ -34,18 +34,34 @@ describe SubmissionsController, type: :controller do
         expect(response).to redirect_to(tasks_my_tasks_path)
       end
     end
+  end
 
-    context "#approve" do
-      before do
-        post :approve, params: {id: assigns[:submission].id}
-      end
+  context "#approve" do
+    let(:submission) { create_completeable_submission! }
 
+    context "succesfully" do
+      before { post :approve, params: {id: submission.id} }
       it "completes the submission" do
         expect(assigns[:submission]).to be_completed
       end
 
       it "renders the completed page" do
         expect(response).to render_template('completed')
+      end
+    end
+
+    context "unsuccessfully" do
+      before do
+        allow_any_instance_of(NewRegistration).to receive(:process_application).and_return(false)
+        post :approve, params: {id: submission.id}
+      end
+
+      it "does not move to completed" do
+        expect(assigns[:submission]).not_to be_completed
+      end
+
+      it "renders the errors page" do
+        expect(response).to render_template('errors')
       end
     end
   end

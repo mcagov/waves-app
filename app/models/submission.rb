@@ -29,13 +29,12 @@ class Submission < ApplicationRecord
       transitions to: :unassigned, from: :assigned
     end
 
-    event :approve, success: :process_application! do
+    event :approve do
       transitions to: :completed, from: :assigned
     end
   end
 
-  # state transition helpers
-  def process_application!; end
+  def process_application; end
 
   # configurable elements
   PREMIUM_AMOUNT = 7500
