@@ -32,7 +32,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :submissions, only: [:show]
+  resources :submissions, only: [:show] do
+    member do
+      post :claim
+      post :unclaim
+    end
+  end
 
   %w{ incomplete my-tasks team-tasks print-queue referred unclaimed }.each do |action|
     get "/tasks/#{ action }",

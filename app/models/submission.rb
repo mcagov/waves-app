@@ -1,5 +1,7 @@
 class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
+  belongs_to :claimant, class_name: "User", required: false
+
   has_one :payment
 
   validates :part, presence: true
@@ -14,11 +16,22 @@ class Submission < ApplicationRecord
     state :print_queue
     state :completed
 
-
     event :paid do
       transitions to: :unassigned, from: :incomplete
     end
+
+    event :claimed do
+      transitions to: :assigned, from: :unassigned
+    end
+
+    event :unclaimed do
+      transitions to: :unassigned, from: :assigned
+    end
   end
+
+  default_scope { includes(:payment)}
+
+  scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   PREMIUM_AMOUNT = 7500
   STANDARD_AMOUNT = 2500

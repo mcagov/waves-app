@@ -1,7 +1,7 @@
 class TasksController < InternalPagesController
 
   def my_tasks
-    @submissions = []
+    @submissions = Submission.assigned_to(current_user)
   end
 
   def team_tasks
@@ -9,7 +9,7 @@ class TasksController < InternalPagesController
   end
 
    def unclaimed
-    @submissions = Submission.includes([:payment]).unassigned
+    @submissions = Submission.unassigned
   end
 
   def print_queue

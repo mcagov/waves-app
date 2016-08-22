@@ -13,7 +13,12 @@
       .main_container
         = render partial: 'layouts/sidebar'
         = render partial: 'layouts/topnav'
-        = yield
-        = render partial: 'layouts/footer'
+
+        .right_col{role: 'main'}
+          .row
+            .col-sm-12
+              = render partial: 'layouts/flash'
+              = yield
+              = render partial: 'layouts/footer'
   = render "javascript"
   = render "css_overrides"
