@@ -13,7 +13,7 @@ class TasksController < InternalPagesController
   end
 
   def print_queue
-    @submissions = []
+    @submissions = Submission.completed
   end
 
   def incomplete
