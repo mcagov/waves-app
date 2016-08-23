@@ -31,7 +31,8 @@
         #tab_content4.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
           = render partial: 'payment', locals: { payment: @submission.payment }
 
-= render partial: 'actions'
+- if @submission.assigned?
+  = render partial: 'actions'
 
 = render partial: 'submissions/modals/register', locals: {submission: @submission}
 = render partial: 'to_do_modals'

@@ -45,8 +45,12 @@ feature "User views new submission", type: :feature, js: true do
     click_link("Payment")
 
     within("#payment") do
-      expect(page).to have_text("Registered Country of Credit Card: GB")
+      expect(page).to have_text("Worldpay Order Code")
     end
+  end
+
+  scenario "not viewing the action buttons as this is unassigned" do
+    expect(page).not_to have_css('a', text: 'Register Vessel & Issue Certificate of Registry')
   end
 
   scenario "declaration status"
