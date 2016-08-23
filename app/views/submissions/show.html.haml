@@ -15,15 +15,21 @@
         %li{:role => "presentation"}
           %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
 
+        %li{:role => "presentation"}
+          %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Payment
+
       #myTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
           = render partial: "vessel", locals: { vessel: @submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: 'owner', collection: @submission.owners, locals: { payment: @submission.payment }
+          = render partial: 'owner', collection: @submission.owners
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: 'correspondence'
+
+        #tab_content4.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+          = render partial: 'payment', locals: { payment: @submission.payment }
 
 = render partial: 'actions'
 

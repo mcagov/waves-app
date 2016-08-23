@@ -25,12 +25,5 @@
 
       %tr
         %td Supporting Information
-        %td.payment
-          %strong
-            -if i == 1 && payment
-              Worldpay Order Code: #{ payment.wp_order_code }
-              %br
-              Registered Country of Credit Card: #{ payment.wp_country }
-              %br
-              IP address of Submission: #{ payment.customer_ip }
+        %td
 %hr

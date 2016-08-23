@@ -33,7 +33,6 @@ feature "User views new submission", type: :feature, js: true do
       expect(page).to have_css('th', text: "Owner #1")
       expect(page).to have_css('.owner-name', text: "Horatio Nelson")
       expect(page).to have_css('.declaration', text: "Completed online")
-      expect(page).to have_css('.payment', text: "Registered Country of Credit Card: GB")
     end
 
     within("#owner_2") do
@@ -42,5 +41,16 @@ feature "User views new submission", type: :feature, js: true do
     end
   end
 
+  scenario "payment info", javascript: true do
+    click_link("Payment")
+
+    within("#payment") do
+      expect(page).to have_text("Registered Country of Credit Card: GB")
+    end
+  end
+
   scenario "declaration status"
 end
+
+
+
