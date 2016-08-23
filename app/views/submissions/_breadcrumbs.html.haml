@@ -1,0 +1,9 @@
+#breadcrumbs
+  Queue:
+  - case submission.current_state
+    - when :incomplete
+      = link_to "Incomplete Applications", tasks_incomplete_path
+    - when :unassigned
+      = link_to "Unclaimed Tasks", tasks_unclaimed_path
+    - when :assigned
+      = link_to "My Tasks", tasks_my_tasks_path
