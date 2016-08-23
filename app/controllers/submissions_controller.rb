@@ -23,7 +23,7 @@ class SubmissionsController < InternalPagesController
 
   def approve
     if @submission.process_application
-      @submission.approve!
+      @submission.approved!
       render "completed"
     else
       render "errors"

@@ -18,15 +18,13 @@ describe Submission, type: :model do
     end
 
     context "#paid?" do
-      context "has been paid" do
-        subject { build(:paid_submission).paid? }
-        it { expect(subject).to be_truthy }
-      end
+      subject { build(:paid_submission).paid? }
+      it { expect(subject).to be_truthy }
+    end
 
-      context "has not been paid" do
-        subject { build(:submission).paid? }
-        it { expect(subject).to be_falsey }
-      end
+    context "not paid" do
+      subject { build(:submission).paid? }
+      it { expect(subject).to be_falsey }
     end
 
     context "declared_by?" do
@@ -59,10 +57,9 @@ describe Submission, type: :model do
     end
   end
 
-
-  context "#approve!" do
+  context "#approved!" do
     let!(:submission) { create_completeable_submission! }
-    before { submission.approve! }
+    before { submission.approved! }
 
     it "transitions to completed" do
       expect(submission.reload).to be_completed

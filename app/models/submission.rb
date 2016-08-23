@@ -29,40 +29,15 @@ class Submission < ApplicationRecord
       transitions to: :unassigned, from: :assigned
     end
 
-    event :approve do
+    event :approved do
       transitions to: :completed, from: :assigned
     end
   end
 
   def process_application; end
 
-  # configurable elements
-  PREMIUM_AMOUNT = 7500
-  STANDARD_AMOUNT = 2500
-
-  PREMIUM_DAYS = 5
-  STANDARD_DAYS = 20
-
-  # attributes that need to be searchable / sortable
   def paid?
     payment.present?
-  end
-
-  def target_date
-    created_at.advance(days: target_days).to_date if paid?
-  end
-
-  def target_days
-    if payment.wp_amount.to_i == PREMIUM_AMOUNT
-      PREMIUM_DAYS
-    else
-      STANDARD_DAYS
-    end
-  end
-
-  # display helpers
-  def source
-    'Online'
   end
 
   def vessel
@@ -87,6 +62,33 @@ class Submission < ApplicationRecord
   def applicant
     owners.first if owners
   end
+
+  def source
+    'Online'
+  end
+
+    # BEGIN configurable elements
+  # do this in govuk
+  PREMIUM_AMOUNT = 7500
+  STANDARD_AMOUNT = 2500
+
+  PREMIUM_DAYS = 5
+  STANDARD_DAYS = 20
+
+  def target_date
+    created_at.advance(days: target_days).to_date if paid?
+  end
+
+  def target_days
+    if payment.wp_amount.to_i == PREMIUM_AMOUNT
+      PREMIUM_DAYS
+    else
+      STANDARD_DAYS
+    end
+  end
+  # END
+
+
 
   protected
 
