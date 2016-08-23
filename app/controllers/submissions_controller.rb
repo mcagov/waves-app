@@ -9,7 +9,7 @@ class SubmissionsController < InternalPagesController
     @submission.claimed!
 
     flash[:notice] = "You have succesfully claimed this application"
-    redirect_to submission_path(@submission)
+    redirect_to tasks_my_tasks_path
   end
 
 

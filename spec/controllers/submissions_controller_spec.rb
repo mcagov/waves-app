@@ -17,8 +17,8 @@ describe SubmissionsController, type: :controller do
       expect(assigns[:submission].claimant).to eq(current_user)
     end
 
-    it "redirects to the submission page" do
-      expect(response).to redirect_to(submission_path(assigns[:submission]))
+    it "redirects to my tasks" do
+      expect(response).to redirect_to(tasks_my_tasks_path)
     end
 
     context "#unclaim" do
@@ -30,7 +30,7 @@ describe SubmissionsController, type: :controller do
         expect(assigns[:submission].claimant).to be_nil
       end
 
-      it "redirects to my tasks " do
+      it "redirects to my tasks" do
         expect(response).to redirect_to(tasks_my_tasks_path)
       end
     end
@@ -41,6 +41,7 @@ describe SubmissionsController, type: :controller do
 
     context "succesfully" do
       before { post :approve, params: {id: submission.id} }
+
       it "completes the submission" do
         expect(assigns[:submission]).to be_completed
       end
