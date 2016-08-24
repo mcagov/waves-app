@@ -447,6 +447,9 @@ h2, .h2, h3, .h3 {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.heading_no_top_margin {
+  margin-top: 0px !important;
+}
 a {
   color: #5A738E;
   text-decoration: none;
@@ -648,6 +651,7 @@ a:hover, a:focus {
   float: left;
   margin: 0;
   padding-top: 16px;
+  padding-bottom: 16px;
   width: 70px;
 }
 .toggle a {
@@ -696,7 +700,7 @@ footer {
 }
 @media (min-width: 768px) {
   footer {
-    /*margin-left: 230px;*/
+    margin-left: 230px;
   }
 }
 .nav-sm footer {
@@ -5375,4 +5379,12 @@ ul.notifications {
 
 .select2_single {
   width: 100%;
+}
+
+.select2-selection__rendered {
+  height: 32px;
+}
+
+.alert {
+  padding: 10px !important;
 }
