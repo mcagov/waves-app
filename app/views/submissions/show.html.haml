@@ -17,7 +17,7 @@
           %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
 
         %li{:role => "presentation"}
-          %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Payment
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Payment
 
       #myTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -29,7 +29,7 @@
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: 'correspondence'
 
-        #tab_content4.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+        #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: 'payment', locals: { payment: @submission.payment }
 
 - if @submission.assigned?
