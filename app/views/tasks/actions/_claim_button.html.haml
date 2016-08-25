@@ -9,3 +9,7 @@
     = form_tag unclaim_submission_path(submission) do
       = submit_tag "Unclaim"
 
+  - elsif submission.rejected?
+    = form_tag claim_submission_path(submission) do
+      = submit_tag "Cancel Rejection & Claim"
+

@@ -23,4 +23,8 @@ class TasksController < InternalPagesController
   def referred
     @submissions = []
   end
+
+  def rejected
+    @submissions = Submission.order('updated_at desc').rejected
+  end
 end

@@ -23,4 +23,10 @@ module SubmissionHelpers
     submission.claimed!
     submission
   end
+
+  def visit_completeable_submission
+    submission = create_completeable_submission!
+    login(submission.claimant)
+    visit submission_path(submission)
+  end
 end

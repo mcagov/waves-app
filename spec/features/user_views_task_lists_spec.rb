@@ -24,6 +24,9 @@ feature "User views task lists", type: :feature, js: true do
 
     click_link('Incomplete Applications')
     expect(page).to have_css('h1', text: 'Incomplete Applications')
+
+    click_link('Rejected Applications')
+    expect(page).to have_css('h1', text: 'Rejected Applications')
   end
 
   scenario "moving a submission between lists" do

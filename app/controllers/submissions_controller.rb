@@ -6,7 +6,7 @@ class SubmissionsController < InternalPagesController
 
   def claim
     @submission.update_attribute(:claimant, current_user)
-    @submission.claimed!
+    @submission.claimed!(current_user)
 
     flash[:notice] = "You have succesfully claimed this application"
     redirect_to tasks_my_tasks_path
@@ -14,7 +14,6 @@ class SubmissionsController < InternalPagesController
 
 
   def unclaim
-    @submission.update_attribute(:claimant, nil)
     @submission.unclaimed!
 
     flash[:alert] = "That application has been moved into the Unclaimed Tasks queue"
