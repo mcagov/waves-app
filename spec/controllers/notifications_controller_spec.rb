@@ -29,7 +29,7 @@ describe NotificationsController, type: :controller do
     end
 
     it "unassigns the claimant" do
-      expect(assigns(:submission).claimant).to eq(current_user)
+      expect(assigns(:submission).claimant).to be_blank
     end
 
     it "creates a rejection notification" do
