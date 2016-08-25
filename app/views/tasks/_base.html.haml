@@ -24,8 +24,8 @@
           %td.vessel-name= link_to submission.vessel, submission_path(submission)
           %td= submission.applicant
           %td= submission.job_type
-          %td= submission.target_date
+          %td= submission.target_date.to_s(:waves)
           %td= css_tick(submission.paid?)
           %td= submission.source
-          %td= submission.updated_at
+          %td= submission.updated_at.to_s(:waves)
           %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
