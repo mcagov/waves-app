@@ -1,3 +1,3 @@
-def login
-  visit root_path(as: create(:user))
+def login(user=create(:user))
+  visit root_path(as: user)
 end
