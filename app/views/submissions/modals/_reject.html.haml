@@ -1,0 +1,25 @@
+.modal.fade{id: 'reject-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Reject Application
+      .modal-body
+        %p Rejecting this application will create a task for your manager to approve a refund.
+        %hr
+        .row
+          .col-md-12
+            .form-group
+              %label Reason for Rejection
+              %select.select2_single.form-control{style: 'width: 100%;'}
+                %option Unsuitable Name
+                %option Too Long
+                %option Fraudulent
+        .row{style: 'margin-top: 15px;'}
+          .col-md-12
+            .form-group
+              %label Additional Information
+              %textarea.form-control{rows: '3'}
+      .modal-footer
+        %button.btn.btn-lg.btn-danger{:type => "button"} Reject Application
