@@ -24,7 +24,7 @@ class Submission < ApplicationRecord
     end
 
     event :claimed do
-      transitions to: :assigned, from: :unassigned
+      transitions to: :assigned, from: [:unassigned, :rejected]
     end
 
     event :unclaimed do
