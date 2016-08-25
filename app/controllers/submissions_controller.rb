@@ -16,7 +16,7 @@ class SubmissionsController < InternalPagesController
   def unclaim
     @submission.unclaimed!
 
-    flash[:alert] = "That application has been moved into the Unclaimed Tasks queue"
+    flash[:notice] = "That application has been moved into the Unclaimed Tasks queue"
     redirect_to tasks_my_tasks_path
   end
 
