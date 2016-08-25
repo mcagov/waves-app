@@ -7,7 +7,7 @@ class NotificationsController < InternalPagesController
       subject: notification_params[:subject],
       body: notification_params[:body]
       )
-    @submission.update_attribute(:claimant, nil)
+
     @submission.rejected!
     redirect_to tasks_my_tasks_path
   end

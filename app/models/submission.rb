@@ -28,7 +28,8 @@ class Submission < ApplicationRecord
     end
 
     event :unclaimed do
-      transitions to: :unassigned, from: :assigned
+      transitions to: :unassigned, from: :assigned,
+        on_transition: :remove_claimant
     end
 
     event :approved do
@@ -36,7 +37,8 @@ class Submission < ApplicationRecord
     end
 
     event :rejected do
-      transitions to: :rejected, from: :assigned
+      transitions to: :rejected, from: :assigned,
+        on_transition: :remove_claimant
     end
   end
 
@@ -101,5 +103,9 @@ class Submission < ApplicationRecord
   def user_input
     @user_input ||=
       changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
+  def remove_claimant
+    update_attribute(:claimant, nil)
   end
 end
