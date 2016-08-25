@@ -2,6 +2,7 @@ class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   belongs_to :claimant, class_name: "User", required: false
   has_one :payment
+  has_many :notifications
 
   default_scope { includes(:payment).where.not(state: 'completed') }
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
@@ -16,6 +17,7 @@ class Submission < ApplicationRecord
     state :assigned
     state :referred
     state :completed
+    state :rejected
 
     event :paid do
       transitions to: :unassigned, from: :incomplete
@@ -31,6 +33,10 @@ class Submission < ApplicationRecord
 
     event :approved do
       transitions to: :completed, from: :assigned
+    end
+
+    event :rejected do
+      transitions to: :rejected, from: :assigned
     end
   end
 

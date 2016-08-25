@@ -1,7 +1,7 @@
 .modal.fade{id: 'reject-application', role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for Notification::Rejection.new, url: reject_notification_path(submission) do |f|
+      = simple_form_for Notification.new, url: reject_notification_path(submission) do |f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
