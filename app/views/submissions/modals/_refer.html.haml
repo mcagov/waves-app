@@ -1,0 +1,22 @@
+.modal.fade{id: 'refer-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = simple_form_for Notification.new, url: refer_notification_path(submission) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Refer Application
+        .modal-body
+          .row
+            .col-md-9
+              .form-group
+                = f.input :subject, as: :select, label: "Reason for Referral", collection: ["Unknown vessel type", "Length and vessel type do not match", "Hull identification number appears incorrect"]
+            .col-md-3
+              .form-group
+                = f.input :due_by, label: "Due By"
+          .row
+            .col-md-12
+              .form-group
+                = f.input :body, label: "Additional Information", input_html: {rows: 3}
+        .modal-footer
+          = f.submit "Refer Application", class: "btn btn-lg btn-warning"

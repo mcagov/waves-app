@@ -5,5 +5,19 @@ feature "User refers a submission", type: :feature, js: true do
     visit_completeable_submission
   end
 
-  scenario " and does stuff "
+  scenario "and restores it" do
+    within('#actions') { click_on "Refer Application" }
+
+    select "Unknown vessel type", from: "Reason for Referral"
+    fill_in "Additional Information", with: "Some stuff"
+    fill_in "Due By", with: "12/12/2020"
+    within('#refer-application') { click_on "Refer Application" }
+
+    click_on "Referred Applications"
+    expect(page).to have_css('.referred-until', text: "12/12/2020")
+    click_on "Cancel Referral"
+
+    click_on "My Tasks"
+    expect(page).to have_css('.vessel-name', text: "Celebrator Doppelbock")
+  end
 end
