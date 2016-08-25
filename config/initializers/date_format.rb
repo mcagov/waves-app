@@ -1,2 +1,2 @@
-Date::DATE_FORMATS[:waves] = '%d/%m/%y'
-Time::DATE_FORMATS[:waves] = '%d/%m/%y'
+Date::DATE_FORMATS[:default] = '%d/%m/%Y'
+Time::DATE_FORMATS[:default] = '%d/%m/%Y'
