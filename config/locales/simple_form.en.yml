@@ -1,71 +1,31 @@
 en:
   simple_form:
-    "yes": "Yes"
-    "no": "No"
-
+    "yes": 'Yes'
+    "no": 'No'
     required:
-      text: "required"
-      mark: ""
-
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "There were problems with your submission"
-
-    labels:
-      prerequisite:
-        not_registered_before_on_ssr: "The vessel has never been registered on the UK Small Ships Register."
-        not_registered_under_part_1: "The vessel is not currently registered on Part I of the UK Ship Register."
-        not_owned_by_company: "The vessel is not owned by a company."
-        not_commercial_fishing_or_submersible: "The vessel is not a commercial fishing or submersible vessel"
-        owners_are_uk_residents: "All the owners are ordinarily resident in the UK."
-        owners_are_eligible_to_register: "All the owners are eligible to register a vessel on the UK Small Ships Register."
-        not_registered_on_foreign_registry: "The vessel is not registered on a foreign registry."
-
-      vessel_info:
-        name: Name of vessel
-        hin: Hull identification number
-        make_and_model: Make and model
-        length_in_meters: Length of vessel
-        number_of_hulls: Number of hulls
-        vessel_type: Vessel type
-        vessel_type_other: Other vessel type
-        mmsi_number: MMSI number
-        radio_call_sign: Radio call sign
-
-      address: &ADDRESS_LABELS
-        address_1: "Building and street"
-        town: "Town or city"
-        county: "County (optional)"
-        postcode: "Postcode"
-        country: "Country"
-
-      owner_info:
-        title: Title
-        title_other: Other title
-        first_name: First name
-        last_name: Last name
-        nationality: Nationality
-        email: Email address
-        phone_number: Phone number
-        <<: *ADDRESS_LABELS
-        additional_owner: Are there any more owners?
-
-      delivery_address:
-        <<: *ADDRESS_LABELS
-
-      declaration:
-        eligible_under_regulation_89: "I confirm that I am and all the owners are eligible to be the owner(s) of a small ship under regulation 89 (Persons qualified to be the owners of a small ship to be registered on Part III of the Register)"
-        eligible_under_regulation_90: "I confirm that the ship is entitled to be registered on Part III of the Register in accordance with regulation 90 (British connection)"
-        understands_false_statement_is_offence: "I UNDERSTAND THAT IT IS AN OFFENCE TO KNOWINGLY OR RECKLESSLY MAKE A FALSE STATEMENT IN ORDER TO OBTAIN REGISTRATION AND, BY TICKING THE BOX BELOW, HEREBY DECLARE THAT, TO THE BEST OF MY KNOWLEDGE, THE DETAILS GIVEN IN THIS ON-LINE APPLICATION ARE CORRECT"
-
-    prompts:
-      vessels:
-        number_of_hulls: "Select number of hulls"
-        vessel_type_id: "Select your vessel type"
-
-    placeholders:
-      vessel:
-        name: Name of vessel
-        make_and_model: Make and model
-        vessel_type_other: Other vessel type
-        mmsi_number: 123456789
-        radio_call_sign: XXXXXX
+      default_message: "Please review the problems below:"
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'
