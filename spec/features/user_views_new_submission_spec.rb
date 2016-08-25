@@ -53,7 +53,9 @@ feature "User views new submission", type: :feature, js: true do
     expect(page).not_to have_css('a', text: 'Register Vessel & Issue Certificate of Registry')
   end
 
-  scenario "declaration status"
+  scenario "displaying the action buttons based on status"
+
+  scenario "declaration made"
 end
 
 
