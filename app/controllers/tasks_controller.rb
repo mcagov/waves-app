@@ -21,7 +21,7 @@ class TasksController < InternalPagesController
   end
 
   def referred
-    @submissions = []
+    @submissions = Submission.order('referred_until desc').referred
   end
 
   def rejected
