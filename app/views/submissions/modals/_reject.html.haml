@@ -9,9 +9,13 @@
         .modal-body
           %p Rejecting this application will create a task for your manager to approve a refund.
           %hr
-          .form-group
-            = f.input :subject, as: :select, label: "Reason for Rejection", collection: ["Unsuitable Name", "Too Long", "Fraudulent"]
-          .form-group
-          = f.input :body, label: "Additional Information", input_html: {rows: 3}
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :subject, as: :select, label: "Reason for Rejection", collection: ["Unsuitable Name", "Too Long", "Fraudulent"]
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :body, label: "Additional Information", input_html: {rows: 3}
         .modal-footer
           = f.submit "Reject Application", class: "btn btn-lg btn-danger"
