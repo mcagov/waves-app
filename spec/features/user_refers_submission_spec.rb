@@ -5,5 +5,5 @@ feature "User refers a submission", type: :feature, js: true do
     visit_completeable_submission
   end
 
-  scenario ""
+  scenario " and does stuff "
 end
