@@ -40,6 +40,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: [:show] do
+    member do
+      post :reject
+    end
+  end
+
   %w{ incomplete my-tasks team-tasks print-queue referred unclaimed }.each do |action|
     get "/tasks/#{ action }",
       controller: "tasks", action: action.gsub('-', '_')
