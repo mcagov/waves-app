@@ -8,7 +8,7 @@ class NotificationsController < InternalPagesController
       body: notification_params[:body]
       )
 
-    flash[:notice] = "You have succesfully reject that application"
+    flash[:notice] = "You have succesfully rejected that application"
     @submission.rejected!
     redirect_to tasks_my_tasks_path
   end
