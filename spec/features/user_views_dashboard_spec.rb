@@ -13,7 +13,7 @@ feature "User views dashboard", type: :feature, js: true do
       expect(page).to have_content("Horatio Nelson")
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
-      expect(page).to have_content(submission.target_date
+      expect(page).to have_content(submission.target_date)
       expect(page).to have_content(submission.source)
     end
   end
