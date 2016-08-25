@@ -18,13 +18,14 @@ class Submission < ApplicationRecord
     state :referred
     state :completed
     state :rejected
+    state :referred
 
     event :paid do
       transitions to: :unassigned, from: :incomplete
     end
 
     event :claimed do
-      transitions to: :assigned, from: [:unassigned, :rejected]
+      transitions to: :assigned, from: [:unassigned, :rejected, :referred]
     end
 
     event :unclaimed do
@@ -38,6 +39,11 @@ class Submission < ApplicationRecord
 
     event :rejected do
       transitions to: :rejected, from: :assigned,
+        on_transition: :remove_claimant
+    end
+
+    event :referred do
+      transitions to: :referred, from: :assigned,
         on_transition: :remove_claimant
     end
   end
