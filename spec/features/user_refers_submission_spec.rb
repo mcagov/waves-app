@@ -8,9 +8,10 @@ feature "User refers a submission", type: :feature, js: true do
   scenario "and restores it" do
     within('#actions') { click_on "Refer Application" }
 
+    fill_in "Due By", with: "12/12/2020"
     select "Unknown vessel type", from: "Reason for Referral"
     fill_in "Additional Information", with: "Some stuff"
-    fill_in "Due By", with: "12/12/2020"
+
     within('#refer-application') { click_on "Refer Application" }
 
     click_on "Referred Applications"

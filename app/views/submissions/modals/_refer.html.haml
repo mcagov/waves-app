@@ -1,4 +1,4 @@
-.modal.fade{id: 'refer-application', role: "dialog", tabindex: "-1"}
+.modal.fade{id: "refer-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
       = simple_form_for Notification.new, url: refer_notification_path(submission) do |f|
@@ -13,7 +13,7 @@
                 = f.input :subject, as: :select, label: "Reason for Referral", collection: ["Unknown vessel type", "Length and vessel type do not match", "Hull identification number appears incorrect"]
             .col-md-3
               .form-group
-                = f.input :due_by, label: "Due By"
+                = f.input :due_by, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "mm/dd/yyyy"}
           .row
             .col-md-12
               .form-group
