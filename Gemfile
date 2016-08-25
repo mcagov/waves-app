@@ -27,7 +27,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors'
 gem "auto_increment"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
-gem 'simple_form'
+gem 'bootstrap-datepicker-rails'
 
 group :development do
   gem "rubocop"

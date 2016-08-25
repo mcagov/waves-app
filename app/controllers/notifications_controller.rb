@@ -8,7 +8,22 @@ class NotificationsController < InternalPagesController
       body: notification_params[:body]
       )
 
+    flash[:notice] = "You have succesfully reject that application"
     @submission.rejected!
+    redirect_to tasks_my_tasks_path
+  end
+
+  def refer
+     Notification::Referral.create(
+      submission_id: @submission.id,
+      subject: notification_params[:subject],
+      body: notification_params[:body]
+      )
+
+    flash[:notice] = "You have succesfully referred that application"
+    @submission.update_attribute(:referred_until, notification_params[:due_by])
+
+    @submission.referred!
     redirect_to tasks_my_tasks_path
   end
 
@@ -19,6 +34,6 @@ class NotificationsController < InternalPagesController
   end
 
   def notification_params
-    params.require(:notification).permit(:subject, :body)
+    params.require(:notification).permit(:subject, :body, :due_by)
   end
 end

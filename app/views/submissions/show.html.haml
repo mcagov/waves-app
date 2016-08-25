@@ -35,6 +35,7 @@
 - if @submission.assigned?
   = render partial: 'actions'
 
+= render partial: 'submissions/modals/refer', locals: {submission: @submission}
 = render partial: 'submissions/modals/reject', locals: {submission: @submission}
 = render partial: 'submissions/modals/register', locals: {submission: @submission}
 = render partial: 'submissions/modals/to_do_modals'
