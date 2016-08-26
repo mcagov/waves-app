@@ -12,6 +12,9 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
 
+  validates :ref_no, presence: true
+  before_validation :set_ref_no
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
@@ -107,5 +110,9 @@ class Submission < ApplicationRecord
     else
       update_attribute(:target_date, 20.days.from_now)
     end
+  end
+
+  def set_ref_no
+    self.ref_no ||= "foo#{ Time.now.utc }"
   end
 end
