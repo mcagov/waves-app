@@ -1,7 +1,8 @@
 .row
   .col-sm-9
-    %h1.heading_no_top_margin
-      Submission Information
+    %h1{style: 'margin-top: 0px !important;'}
+      = @submission.job_type
+      %small ID: #{ @submission.reference_no }
 
 .x_panel
   .x_content
@@ -33,7 +34,7 @@
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: 'payment', locals: { payment: @submission.payment }
 
-- if @submission.assigned?
+- if @submission.claimant == current_user
   = render partial: 'actions'
 
 = render partial: 'submissions/modals/refer', locals: {submission: @submission}

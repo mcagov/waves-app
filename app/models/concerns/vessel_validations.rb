@@ -4,8 +4,6 @@ module VesselValidations
   included do
     validates :name, presence: true
 
-    validates_uniqueness_of :mmsi_number
-
     validates(
       :hin,
       format: { with: /\A[A-Z]{2}\-[0-9A-Z]{12}\z/ },

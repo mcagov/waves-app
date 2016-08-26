@@ -22,6 +22,12 @@ class SubmissionsController < InternalPagesController
 
   def approve
     if @submission.process_application
+      if params[:email_certificate_of_registry]
+         Notification::Referral.create(
+          submission_id: @submission.id,
+          subject: @submission.job_type
+        )
+      end
       @submission.approved!
       render "completed"
     else

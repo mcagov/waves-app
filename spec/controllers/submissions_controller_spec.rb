@@ -49,6 +49,20 @@ describe SubmissionsController, type: :controller do
       it "renders the completed page" do
         expect(response).to render_template('completed')
       end
+
+      it "does not create a notification" do
+        expect(assigns[:submission].notifications).to be_empty
+      end
+    end
+
+    context "with an email notification" do
+      before do
+        post :approve, params: {id: submission.id, email_certificate_of_registry: "on"}
+      end
+
+      it "creates a notification" do
+        expect(assigns[:submission].notifications.length).to eq(1)
+      end
     end
 
     context "unsuccessfully" do

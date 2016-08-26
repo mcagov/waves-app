@@ -1,2 +1,35 @@
+.row
+  .col-sm-9
+    %h1{style: 'margin-top: 0px !important;'}
+      = @submission.job_type
+      %small ID: #{ @submission.reference_no }
+  .col-sm-3
+    .pull-right
+      = link_to '#', class: 'btn btn-warning' do
+        %i.fa.fa-print{style: 'font-size: 1.2em;'}
+        Print Certificate of Registry
+      = link_to '#', class: 'btn btn-warning' do
+        %i.fa.fa-print{style: 'font-size: 1.2em;'}
+        Print Cover Letter
 
-vessel is now registered on Part III of the UK Ship Register
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2 Task Complete
+        .clearfix
+      .x_content
+        %p
+          - if params[:email_certificate_of_registry]
+            The vessel owner has been notified via email that their vessel is now registered on Part III of the UK Ship Register.
+          - else
+            The vessel is now registered on Part III of the UK Ship Register.
+
+.row.no-print
+  .col-xs-12
+    = link_to "#", class: 'btn btn-success btn-lg pull-right' do
+      %i.fa.fa-arrow-circle-right
+      Process Next Application
+    = link_to tasks_my_tasks_path, class: 'btn btn-info btn-lg' do
+      %i.fa.fa-list-ol
+      Return to My Tasks
