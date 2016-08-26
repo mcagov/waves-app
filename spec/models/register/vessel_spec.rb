@@ -97,10 +97,6 @@ describe Register::Vessel, type: :model do
           expect(vessel.errors[:mmsi_number]).to be_empty
         end
 
-        it "is unique" do
-          expect(vessel.errors[:mmsi_number]).to be_empty
-        end
-
         it "is the correct length" do
           expect(vessel.errors[:mmsi_number]).to be_empty
         end
@@ -192,13 +188,6 @@ describe Register::Vessel, type: :model do
       describe "MMSI number" do
         it "is not present" do
           vessel = build(:register_vessel, mmsi_number: nil)
-          expect(vessel).not_to be_valid
-        end
-
-        it "is not unique" do
-          invalid_mmsi_number = create(:register_vessel).mmsi_number
-          vessel = build(:register_vessel, mmsi_number: invalid_mmsi_number)
-
           expect(vessel).not_to be_valid
         end
 
