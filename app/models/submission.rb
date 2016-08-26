@@ -7,7 +7,7 @@ class Submission < ApplicationRecord
   has_one :registration
   has_one :registered_vessel, through: :registration
 
-  default_scope { includes(:payment).where.not(state: 'completed') }
+  default_scope { includes(:payment).order('target_date desc').where.not(state: 'completed') }
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   validates :part, presence: true
