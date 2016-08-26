@@ -113,6 +113,6 @@ class Submission < ApplicationRecord
   end
 
   def set_ref_no
-    self.ref_no ||= "foo#{ Time.now.utc }"
+    self.ref_no ||= "P3N#{ Time.now.utc }"
   end
 end
