@@ -38,23 +38,6 @@ describe Submission, type: :model do
         expect(submission).not_to be_declared_by(submission.owners.last.email)
       end
     end
-
-    context "#target_date" do
-      let!(:submission) { create_submission! }
-      let!(:payment) { create(:payment, submission_id: submission.id, wp_amount: wp_amount)}
-
-      subject { submission.target_date.to_date }
-
-      context "standard service" do
-        let(:wp_amount) { 2500 }
-        it { expect(subject).to eq(20.days.from_now.to_date) }
-      end
-
-      context "premium service" do
-        let(:wp_amount) { 7500 }
-        it { expect(subject).to eq(5.days.from_now.to_date) }
-      end
-    end
   end
 
   context "#approved!" do

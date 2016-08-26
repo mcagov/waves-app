@@ -88,29 +88,6 @@ class Submission < ApplicationRecord
     'Online'
   end
 
-    # BEGIN configurable elements
-  # do this in govuk
-  PREMIUM_AMOUNT = 7500
-  STANDARD_AMOUNT = 2500
-
-  PREMIUM_DAYS = 5
-  STANDARD_DAYS = 20
-
-  def target_date
-    created_at.advance(days: target_days).to_date if paid?
-  end
-
-  def target_days
-    if payment.wp_amount.to_i == PREMIUM_AMOUNT
-      PREMIUM_DAYS
-    else
-      STANDARD_DAYS
-    end
-  end
-  # END
-
-
-
   protected
 
   def user_input
