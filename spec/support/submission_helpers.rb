@@ -15,6 +15,17 @@ module SubmissionHelpers
     submission
   end
 
+  def create_urgent_paid_submission!
+    submission = create_submission!
+
+    new_payment_json = JSON.parse(File.read('spec/fixtures/urgent_payment.json'))
+    payment = Payment.new(new_payment_json["data"]["attributes"])
+    payment.update_attribute(:submission_id, submission.id)
+
+    submission.paid!
+    submission
+  end
+
   def create_completeable_submission!
     submission = create_paid_submission!
 

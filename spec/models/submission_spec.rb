@@ -48,4 +48,32 @@ describe Submission, type: :model do
       expect(submission.reload).to be_completed
     end
   end
+
+  context "paid!" do
+    context "with standard service" do
+      let!(:submission) { create_paid_submission! }
+
+      it "sets the target_date to 20 days away" do
+        expect(submission.target_date.to_date).to eq(Date.today.advance(days: 20))
+      end
+
+      it "is not urgent" do
+        expect(submission.is_urgent).to be_falsey
+      end
+    end
+
+    context "with urgent service" do
+      let!(:submission) { create_urgent_paid_submission! }
+
+      it "sets the target_date to 5 days away (best guess)" do
+        expect(submission.target_date.to_date).to eq(Date.today.advance(days: 5))
+      end
+
+      it "is urgent" do
+        expect(submission.is_urgent).to be_truthy
+      end
+    end
+
+
+  end
 end

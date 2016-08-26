@@ -24,7 +24,8 @@ class Submission < ApplicationRecord
     state :referred
 
     event :paid do
-      transitions to: :unassigned, from: :incomplete
+      transitions to: :unassigned, from: :incomplete,
+      on_transition: :set_target_date_and_urgent_flag
     end
 
     event :claimed do
@@ -97,5 +98,14 @@ class Submission < ApplicationRecord
 
   def remove_claimant
     update_attribute(:claimant, nil)
+  end
+
+  def set_target_date_and_urgent_flag
+    if paid? && payment.wp_amount.to_i == 7500
+      update_attribute(:target_date, 5.days.from_now)
+      update_attribute(:is_urgent, true)
+    else
+      update_attribute(:target_date, 20.days.from_now)
+    end
   end
 end
