@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826102946) do
+ActiveRecord::Schema.define(version: 20160826121642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160826102946) do
     t.string   "state"
     t.uuid     "claimant_id"
     t.datetime "referred_until"
+    t.string   "ref_no"
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
