@@ -7,7 +7,7 @@ class Submission < ApplicationRecord
   has_one :registration
   has_one :registered_vessel, through: :registration
 
-  default_scope { includes(:payment).where.not(state: 'completed') }
+  default_scope { includes(:payment).order('target_date desc').where.not(state: 'completed') }
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   validates :part, presence: true
@@ -24,7 +24,8 @@ class Submission < ApplicationRecord
     state :referred
 
     event :paid do
-      transitions to: :unassigned, from: :incomplete
+      transitions to: :unassigned, from: :incomplete,
+      on_transition: :set_target_date_and_urgent_flag
     end
 
     event :claimed do
@@ -88,29 +89,6 @@ class Submission < ApplicationRecord
     'Online'
   end
 
-    # BEGIN configurable elements
-  # do this in govuk
-  PREMIUM_AMOUNT = 7500
-  STANDARD_AMOUNT = 2500
-
-  PREMIUM_DAYS = 5
-  STANDARD_DAYS = 20
-
-  def target_date
-    created_at.advance(days: target_days).to_date if paid?
-  end
-
-  def target_days
-    if payment.wp_amount.to_i == PREMIUM_AMOUNT
-      PREMIUM_DAYS
-    else
-      STANDARD_DAYS
-    end
-  end
-  # END
-
-
-
   protected
 
   def user_input
@@ -120,5 +98,14 @@ class Submission < ApplicationRecord
 
   def remove_claimant
     update_attribute(:claimant, nil)
+  end
+
+  def set_target_date_and_urgent_flag
+    if paid? && payment.wp_amount.to_i == 7500
+      update_attribute(:target_date, 5.days.from_now)
+      update_attribute(:is_urgent, true)
+    else
+      update_attribute(:target_date, 20.days.from_now)
+    end
   end
 end

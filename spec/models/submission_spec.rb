@@ -38,23 +38,6 @@ describe Submission, type: :model do
         expect(submission).not_to be_declared_by(submission.owners.last.email)
       end
     end
-
-    context "#target_date" do
-      let!(:submission) { create_submission! }
-      let!(:payment) { create(:payment, submission_id: submission.id, wp_amount: wp_amount)}
-
-      subject { submission.target_date.to_date }
-
-      context "standard service" do
-        let(:wp_amount) { 2500 }
-        it { expect(subject).to eq(20.days.from_now.to_date) }
-      end
-
-      context "premium service" do
-        let(:wp_amount) { 7500 }
-        it { expect(subject).to eq(5.days.from_now.to_date) }
-      end
-    end
   end
 
   context "#approved!" do
@@ -64,5 +47,33 @@ describe Submission, type: :model do
     it "transitions to completed" do
       expect(submission.reload).to be_completed
     end
+  end
+
+  context "paid!" do
+    context "with standard service" do
+      let!(:submission) { create_paid_submission! }
+
+      it "sets the target_date to 20 days away" do
+        expect(submission.target_date.to_date).to eq(Date.today.advance(days: 20))
+      end
+
+      it "is not urgent" do
+        expect(submission.is_urgent).to be_falsey
+      end
+    end
+
+    context "with urgent service" do
+      let!(:submission) { create_urgent_paid_submission! }
+
+      it "sets the target_date to 5 days away (best guess)" do
+        expect(submission.target_date.to_date).to eq(Date.today.advance(days: 5))
+      end
+
+      it "is urgent" do
+        expect(submission.is_urgent).to be_truthy
+      end
+    end
+
+
   end
 end
