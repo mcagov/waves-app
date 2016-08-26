@@ -1,8 +1,11 @@
 class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   belongs_to :claimant, class_name: "User", required: false
+
   has_one :payment
   has_many :notifications
+  has_one :registration
+  has_one :registered_vessel, through: :registration
 
   default_scope { includes(:payment).where.not(state: 'completed') }
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
