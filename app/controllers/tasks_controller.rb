@@ -5,7 +5,7 @@ class TasksController < InternalPagesController
   end
 
   def team_tasks
-    @submissions = []
+    @submissions = Submission.assigned
   end
 
    def unclaimed
