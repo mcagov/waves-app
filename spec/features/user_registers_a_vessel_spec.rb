@@ -4,16 +4,23 @@ feature "User registers a vessel", type: :feature, js: true do
   before do
     create_paid_submission!
     login
-  end
-
-  scenario "in its simplest form" do
     within('tr.submission') { click_on("Claim") }
     within('tr.submission') { click_on("Celebrator") }
     click_link('Register Vessel')
-    within('.modal-content') { click_button('Register Vessel') }
+  end
 
-    expect(page).to have_text("vessel is now registered")
-    visit tasks_my_tasks_path
-    expect(page).not_to have_css('tr.submission')
+  scenario "in its simplest form" do
+    within('.modal-content') do
+      click_button('Register Vessel')
+    end
+    expect(page).to have_text("The vessel is now registered")
+  end
+
+  scenario "with email notification" do
+    within('.modal-content') do
+      check('Send a copy of the Certificate of Registry to owner')
+      click_button('Register Vessel')
+    end
+    expect(page).to have_text("The vessel owner has been notified via email")
   end
 end
