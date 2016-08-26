@@ -12,8 +12,8 @@ describe NewRegistration, type: :model do
       expect(vessel).to be_present
     end
 
-    it "creates the one year registration"
-
-    it "fails gracefully if the vessel is not valid"
+    it "creates the registered_owners" do
+      expect(vessel.registered_owners.first.name).to eq("Horatio Nelson")
+    end
   end
 end

@@ -1,5 +1,6 @@
 class Register::Vessel < ApplicationRecord
   include VesselValidations
+  has_many :registered_owners, class_name: "Register::Owner"
 
   private
 
