@@ -53,6 +53,10 @@ class Submission < ApplicationRecord
 
   def process_application; end
 
+  def reference_no
+    "--Pending--"
+  end
+
   def paid?
     payment.present?
   end

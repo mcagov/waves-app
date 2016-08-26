@@ -1,7 +1,8 @@
 .row
   .col-sm-9
-    %h1.heading_no_top_margin
-      Submission Information
+    %h1{style: 'margin-top: 0px !important;'}
+      = @submission.job_type
+      %small ID: #{ @submission.reference_no }
 
 .x_panel
   .x_content
