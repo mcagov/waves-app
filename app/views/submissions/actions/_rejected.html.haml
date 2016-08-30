@@ -1,0 +1,4 @@
+.row.no-print#actions
+  .col-xs-12
+    = form_tag claim_submission_path(submission) do
+      = submit_tag "Cancel Rejection & Claim", class: 'btn btn-success'

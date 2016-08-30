@@ -13,10 +13,6 @@
     Claimed by:
     = submission.claimant
 
-  - elsif submission.rejected?
-    = form_tag claim_submission_path(submission) do
-      = submit_tag "Cancel Rejection & Claim"
-
   - elsif submission.referred?
     = form_tag claim_submission_path(submission) do
       = submit_tag "Cancel Referral & Claim"
