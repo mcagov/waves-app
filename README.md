@@ -27,39 +27,6 @@ The expected database model for the app is given in [this diagram][db-model].
 
 [bootstrap]: https://getbootstrap.com/
 
-#### Submission
-
-The submission form currently consists of a number of steps which are
-navigated by the user in the following order:
-
-  1. `prerequisites`
-  2. `vessel_info`
-  3. `owner_info`
-  4. `delivery_address`
-  5. `declaration`
-  6. `payment`
-
-A form object for each step can be found in the `app/forms` directory, whilst
-associated controllers are in the `app/controllers/submission` directory, and
-form views are in the corresponding subdirectories of `app/views/submission`.
-
-As the user completes each step, the form data is validated according to the
-specific validations associated to the form object, and stored in a cookie in
-the user's browser. The data is only saved in the database after the final step.
-
-#### Translations
-
-Translations can be found in the locale files.  In particular:
-
-  * `config/locales/en.yml` contains some standard text for the app, as well as
-    the translations for the submission buttons on the submission form,
-  * `config/locales/simple_form.en.yml` contains translations for the labels,
-    prompts and placeholders associated with the fields in each step of the
-    submission form,
-  * `config/locales/submission/*.en.yml` contains translations for the
-    validation error messages, and page title and prompt, for each of the steps
-    in the submission form.
-
 ## Setup
 
 To set up a new development environment, follow the steps below:
