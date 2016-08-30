@@ -12,6 +12,7 @@ module SubmissionTransitions
       state :completed
       state :rejected
       state :referred
+      state :cancelled
 
       event :paid do
         transitions to: :unassigned, from: :incomplete,
@@ -19,7 +20,8 @@ module SubmissionTransitions
       end
 
       event :claimed do
-        transitions to: :assigned, from: [:unassigned, :rejected, :referred]
+        transitions to: :assigned,
+          from: [:unassigned, :rejected, :referred, :cancelled]
       end
 
       event :unclaimed do
@@ -29,6 +31,11 @@ module SubmissionTransitions
 
       event :approved do
         transitions to: :completed, from: :assigned
+      end
+
+      event :cancelled do
+        transitions to: :cancelled, from: :assigned,
+          on_transition: :remove_claimant
       end
 
       event :rejected do

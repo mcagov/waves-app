@@ -1,6 +1,9 @@
 - if @submission.claimant == current_user
   = render partial: 'submissions/actions/assigned', locals: {submission: @submission}
 
+- elsif @submission.cancelled?
+  = render partial: 'submissions/actions/cancelled', locals: {submission: @submission}
+
 - elsif @submission.rejected?
   = render partial: 'submissions/actions/rejected', locals: {submission: @submission}
 

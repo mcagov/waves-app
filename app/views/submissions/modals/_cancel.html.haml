@@ -1,0 +1,20 @@
+.modal.fade{id: 'cancel-application', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = simple_form_for Notification.new, url: cancel_notification_path(submission) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Cancel Application
+        .modal-body
+          %hr
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :subject, as: :select, label: "Reason for cancelling application", collection: ["Owner request", "No response from owner"], include_blank: false
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :body, label: "Additional Information", input_html: {rows: 3}
+        .modal-footer
+          = f.submit "Cancel Application", class: "btn btn-lg btn-info"

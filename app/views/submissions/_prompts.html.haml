@@ -1,4 +1,9 @@
-- if submission.rejected?
+- if submission.cancelled?
+  #prompt.alert.alert-info
+    Application Cancelled by #{ submission.cancellation.actioned_by }:
+    #{ submission.cancellation.subject }
+
+- elsif submission.rejected?
   #prompt.alert.alert-error
     Application Rejected by #{ submission.rejection.actioned_by }:
     #{ submission.rejection.subject }

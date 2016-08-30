@@ -27,4 +27,8 @@ class TasksController < InternalPagesController
   def rejected
     @submissions = Submission.order('updated_at desc').rejected
   end
+
+  def cancelled
+    @submissions = Submission.order('updated_at desc').cancelled
+  end
 end
