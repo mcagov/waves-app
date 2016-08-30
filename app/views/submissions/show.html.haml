@@ -35,9 +35,4 @@
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: 'payment', locals: { payment: @submission.payment }
 
-- if @submission.claimant == current_user
-  = render partial: 'submissions/actions/assigned', locals: {submission: @submission}
-- elsif @submission.rejected?
-  = render partial: 'submissions/actions/rejected', locals: {submission: @submission}
-
-
+= render partial: "actions", locals: {submission: @submission}
