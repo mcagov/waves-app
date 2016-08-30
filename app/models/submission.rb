@@ -28,7 +28,7 @@ class Submission < ApplicationRecord
 
     event :paid do
       transitions to: :unassigned, from: :incomplete,
-      on_transition: :set_target_date_and_urgent_flag
+        on_transition: :set_target_date_and_urgent_flag
     end
 
     event :claimed do
