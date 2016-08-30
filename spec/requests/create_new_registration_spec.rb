@@ -23,10 +23,6 @@ describe "create new new_registrations via the API", type: :request do
     it "creates a part_3 new_registration" do
       expect(new_registration.part.to_sym).to eq(:part_3)
     end
-
-    it "sets the due_date"
-    it "sets the is_urgent flag"
-    it "sets the part"
   end
 
   context "with invalid params" do
