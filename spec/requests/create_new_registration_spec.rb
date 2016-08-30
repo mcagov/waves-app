@@ -16,6 +16,10 @@ describe "create new new_registrations via the API", type: :request do
       expect(parsed_body["data"]["id"]).to be_present
     end
 
+    it "responds with the ref_no" do
+      expect(parsed_body["data"]["attributes"]["ref-no"]).to eq(new_registration.ref_no)
+    end
+
     it "creates a part_3 new_registration" do
       expect(new_registration.part.to_sym).to eq(:part_3)
     end

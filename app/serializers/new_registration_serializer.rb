@@ -1,3 +1,3 @@
 class NewRegistrationSerializer < ActiveModel::Serializer
-  attributes :changeset
+  attributes :changeset, :ref_no
 end
