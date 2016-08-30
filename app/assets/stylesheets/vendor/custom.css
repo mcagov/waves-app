@@ -170,7 +170,6 @@
   float: left;
   background: #EDEDED;
   border-bottom: 1px solid #D9DEE4;
-  margin-bottom: 20px;
   width: 100%;
   position: relative;
 }
@@ -5387,4 +5386,9 @@ ul.notifications {
 
 .alert {
   padding: 10px !important;
+}
+
+.breadcrumb {
+  background-color: #ffffff;
+  border: 1px solid #D9DEE4;
 }
