@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826135451) do
+ActiveRecord::Schema.define(version: 20160830140823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "activities", force: :cascade do |t|
+    t.uuid     "trackable_id"
+    t.string   "trackable_type"
+    t.uuid     "actioned_by"
+    t.text     "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["actioned_by"], name: "index_activities_on_actioned_by", using: :btree
+    t.index ["trackable_id"], name: "index_activities_on_trackable_id", using: :btree
+    t.index ["trackable_type"], name: "index_activities_on_trackable_type", using: :btree
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
@@ -46,11 +58,14 @@ ActiveRecord::Schema.define(version: 20160826135451) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.uuid    "submission_id"
-    t.string  "type"
-    t.string  "subject"
-    t.text    "body"
-    t.boolean "delivered",     default: false
+    t.uuid     "submission_id"
+    t.string   "type"
+    t.string   "subject"
+    t.text     "body"
+    t.boolean  "delivered",      default: false
+    t.uuid     "actioned_by_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["type"], name: "index_notifications_on_type", using: :btree
   end
 
