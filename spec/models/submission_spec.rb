@@ -17,6 +17,10 @@ describe Submission, type: :model do
       expect(submission).to be_incomplete
     end
 
+    it "has a ref_no" do
+      expect(submission.ref_no).to be_present
+    end
+
     context "#paid?" do
       subject { build(:paid_submission).paid? }
       it { expect(subject).to be_truthy }

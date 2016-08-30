@@ -43,4 +43,10 @@ class NewRegistration < Submission
       )
     end
   end
+
+  protected
+
+  def set_ref_no
+    self.ref_no ||= RefNo.generate("3N")
+  end
 end
