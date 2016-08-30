@@ -1,6 +1,19 @@
 class NotificationsController < InternalPagesController
   before_action :load_submission
 
+  def cancel
+    Notification::Cancellation.create(
+      submission_id: @submission.id,
+      subject: notification_params[:subject],
+      body: notification_params[:body],
+      actioned_by: current_user
+      )
+
+    flash[:notice] = "You have succesfully cancelled that application"
+    @submission.cancelled!
+    redirect_to tasks_my_tasks_path
+  end
+
   def reject
     Notification::Rejection.create(
       submission_id: @submission.id,

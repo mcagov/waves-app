@@ -8,6 +8,9 @@ class Submission < ApplicationRecord
 
   has_many :notifications
 
+  has_one :cancellation, -> { order('created_at desc').limit(1) },
+    class_name: "Notification::Cancellation"
+
   has_one :rejection, -> { order('created_at desc').limit(1) },
     class_name: "Notification::Rejection"
 

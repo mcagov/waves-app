@@ -20,6 +20,28 @@ describe NotificationsController, type: :controller do
     }
   end
 
+  context "#cancel" do
+    before do
+      post :cancel, params: notification_params
+    end
+
+    it "sets the status to cancelled" do
+      expect(assigns(:submission)).to be_cancelled
+    end
+
+    it "unassigns the claimant" do
+      expect(assigns(:submission).claimant).to be_blank
+    end
+
+    it "sets the cancellation actioned_by" do
+      expect(assigns(:submission).cancellation.actioned_by).to eq(current_user)
+    end
+
+    it "redirects to my tasks" do
+      expect(response).to redirect_to(tasks_my_tasks_path)
+    end
+  end
+
   context "#reject" do
     before do
       post :reject, params: notification_params
