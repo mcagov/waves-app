@@ -11,7 +11,7 @@ class RefNo
       if Submission.where(ref_no: ref_no).empty?
         ref_no
       else
-        build_unique
+        build_unique(prefix)
       end
     end
   end
