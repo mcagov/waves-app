@@ -12,7 +12,7 @@
           .row
             .col-sm-12
               .form-group
-                = f.input :subject, as: :select, label: "Reason for Rejection", collection: ["Unsuitable Name", "Too Long", "Fraudulent"]
+                = f.input :subject, as: :select, label: "Reason for Rejection", collection: ["Unsuitable Name", "Too Long", "Fraudulent"], include_blank: false
           .row
             .col-sm-12
               .form-group

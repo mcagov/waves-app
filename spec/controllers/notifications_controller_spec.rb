@@ -33,8 +33,8 @@ describe NotificationsController, type: :controller do
       expect(assigns(:submission).claimant).to be_blank
     end
 
-    it "creates a rejection notification" do
-      expect(assigns(:submission).notifications.first).to be_a(Notification::Rejection)
+    it "sets the rejection actioned_by" do
+      expect(assigns(:submission).rejection.actioned_by).to eq(current_user)
     end
 
     it "redirects to my tasks" do
@@ -59,8 +59,8 @@ describe NotificationsController, type: :controller do
       expect(assigns(:submission).claimant).to be_blank
     end
 
-    it "creates a referral notification" do
-      expect(assigns(:submission).notifications.first).to be_a(Notification::Referral)
+    it "sets the referral actioned_by" do
+      expect(assigns(:submission).referral.actioned_by).to eq(current_user)
     end
 
     it "redirects to my tasks" do

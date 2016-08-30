@@ -5,7 +5,8 @@ class NotificationsController < InternalPagesController
     Notification::Rejection.create(
       submission_id: @submission.id,
       subject: notification_params[:subject],
-      body: notification_params[:body]
+      body: notification_params[:body],
+      actioned_by: current_user
       )
 
     flash[:notice] = "You have succesfully rejected that application"
@@ -17,7 +18,8 @@ class NotificationsController < InternalPagesController
      Notification::Referral.create(
       submission_id: @submission.id,
       subject: notification_params[:subject],
-      body: notification_params[:body]
+      body: notification_params[:body],
+      actioned_by: current_user
       )
 
     flash[:notice] = "You have succesfully referred that application"
