@@ -6,7 +6,10 @@
     - when :unassigned
       = link_to "Unclaimed Tasks", tasks_unclaimed_path
     - when :assigned
-      = link_to "My Tasks", tasks_my_tasks_path
+      - if submission.claimant == current_user
+        = link_to "My Tasks", tasks_my_tasks_path
+      - else
+        = link_to "Team Tasks", tasks_team_tasks_path
     - when :rejected
       = link_to "Rejected Applications", tasks_rejected_path
     - when :referred
