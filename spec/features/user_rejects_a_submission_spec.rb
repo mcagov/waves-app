@@ -13,6 +13,7 @@ feature "User rejects a submission", type: :feature, js: true do
     within('#reject-application') { click_on "Reject Application" }
 
     click_on "Rejected Applications"
+    click_on("Celebrator Doppelbock")
     click_on "Cancel Rejection"
 
     click_on "My Tasks"
