@@ -5,7 +5,15 @@ class Submission < ApplicationRecord
   belongs_to :claimant, class_name: "User", required: false
 
   has_one :payment
+
   has_many :notifications
+
+  has_one :rejection, -> { order('created_at desc').limit(1) },
+    class_name: "Notification::Rejection"
+
+  has_one :referral, -> { order('created_at desc').limit(1) },
+    class_name: "Notification::Referral"
+
   has_one :registration
   has_one :registered_vessel, through: :registration
 

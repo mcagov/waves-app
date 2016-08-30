@@ -4,6 +4,7 @@
     %h1{style: 'margin-top: 0px !important;'}
       = @submission.job_type
       %small ID: #{ @submission.ref_no }
+    = render partial: "prompts", locals: {submission: @submission}
 .x_panel
   .x_content
     %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
