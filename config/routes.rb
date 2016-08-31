@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       post :unclaim
       post :approve
     end
+    resource :correspondence
   end
 
   resources :notifications, only: [:show] do
