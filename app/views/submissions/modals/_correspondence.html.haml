@@ -22,11 +22,6 @@
             .col-sm-12
               .form-group
                 = f.input :content, as: :text, input_html: {rows: 6}
-          .row
-            .col-sm-12
-              .form-group
-                %label Supporting Documents
-                %input{type: 'file'}
         .modal-footer
           = f.submit "Save Correspondence", class: "btn btn-primary"
 
