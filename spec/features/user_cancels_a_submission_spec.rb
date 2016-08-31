@@ -15,7 +15,12 @@ feature "User cancels a submission", type: :feature, js: true do
 
     click_on "Cancelled Applications"
     click_on("Celebrator Doppelbock")
-    expect(page).to have_css('#prompt', /Application Cancelled by.*: No response from owner/)
+
+    within("#prompt") do
+      expect(page).to have_text(
+        /Application Cancelled by.*: No response from owner\. Some stuff/
+      )
+    end
 
     click_on "Revert Cancellation"
 

@@ -14,7 +14,12 @@ feature "User rejects a submission", type: :feature, js: true do
 
     click_on "Rejected Applications"
     click_on("Celebrator Doppelbock")
-    expect(page).to have_css('#prompt', /Application Rejected by.*: Unsuitable name/)
+
+    within("#prompt") do
+      expect(page).to have_text(
+        /Application Rejected by.*: Too Long\. Some stuff/
+      )
+    end
 
     click_on "Cancel Rejection"
 

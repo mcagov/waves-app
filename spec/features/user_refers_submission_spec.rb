@@ -16,7 +16,12 @@ feature "User refers a submission", type: :feature, js: true do
 
     click_on "Referred Applications"
     click_on("Celebrator Doppelbock")
-    expect(page).to have_css('#prompt', /Application Referred by.*: Unsuitable name. Next action 12\/12\/2020/)
+
+    within('#prompt') do
+      expect(page).to have_text(
+       /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020/
+      )
+    end
 
     click_on "Cancel Referral"
 
