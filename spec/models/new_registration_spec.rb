@@ -25,5 +25,9 @@ describe NewRegistration, type: :model do
       expect(new_registration.registration.registered_at).to eq(Date.today)
       expect(new_registration.registration.registered_until).to eq(Date.today.advance days: 364)
     end
+
+    it "sets the registration#actioned_by" do
+      expect(new_registration.registration.actioned_by).to eq(new_registration.claimant)
+    end
   end
 end

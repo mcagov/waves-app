@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830140823) do
+ActiveRecord::Schema.define(version: 20160831084331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20160830140823) do
     t.date     "registered_until"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.uuid     "actioned_by_id"
+    t.index ["actioned_by_id"], name: "index_registrations_on_actioned_by_id", using: :btree
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
