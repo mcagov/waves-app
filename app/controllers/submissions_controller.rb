@@ -25,7 +25,8 @@ class SubmissionsController < InternalPagesController
       if params[:email_certificate_of_registry]
          Notification::Referral.create(
           submission_id: @submission.id,
-          subject: @submission.job_type
+          subject: @submission.job_type,
+          actioned_by: current_user
         )
       end
       @submission.approved!
