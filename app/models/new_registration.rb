@@ -39,7 +39,8 @@ class NewRegistration < Submission
         vessel_id: reg_vessel.id,
         submission_id: self.id,
         registered_at: Date.today,
-        registered_until: Date.today.advance(days: 364)
+        registered_until: Date.today.advance(days: 364),
+        actioned_by: self.claimant
       )
     end
   end

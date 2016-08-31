@@ -63,6 +63,10 @@ describe SubmissionsController, type: :controller do
       it "creates a notification" do
         expect(assigns[:submission].notifications.length).to eq(1)
       end
+
+      it "sets the notification#actioned_by" do
+        expect(assigns[:submission].notifications.first.actioned_by).to eq(current_user)
+      end
     end
 
     context "unsuccessfully" do

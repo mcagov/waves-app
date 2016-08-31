@@ -30,7 +30,7 @@
           = render partial: 'owner', collection: @submission.owners
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
-          = render partial: 'correspondence'
+          = render partial: 'correspondence', locals: {submission: @submission}
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: 'payment', locals: { payment: @submission.payment }
