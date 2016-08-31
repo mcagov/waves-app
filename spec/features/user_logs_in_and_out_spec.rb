@@ -13,19 +13,20 @@ feature "User logs in", type: :feature, js: true do
       perform_sign_in user.email, password
 
       expect(page).to_not have_content("Login")
-      expect(page).to have_content(unclaimed_tasks_text)
+      expect(page).to have_text(successfully_loggedin_page)
 
       # logging out
+      click_on("Part 3")
       find("#logout").click
       expect(page).to have_content("Login")
-      expect(page).to_not have_content(unclaimed_tasks_text)
+      expect(page).to_not have_content(successfully_loggedin_page)
     end
 
     scenario "user is not taken to the dashboard with incorrect info" do
       perform_sign_in user.email, "wrong_password"
 
       expect(page).to have_content("Login")
-      expect(page).to_not have_content(unclaimed_tasks_text)
+      expect(page).to_not have_content(successfully_loggedin_page)
     end
   end
 
@@ -33,7 +34,7 @@ feature "User logs in", type: :feature, js: true do
     visit tasks_unclaimed_path
 
     expect(page).to have_content("Login")
-    expect(page).to_not have_content(unclaimed_tasks_text)
+    expect(page).to_not have_content(successfully_loggedin_page)
   end
 
   def perform_sign_in(email, password)
@@ -43,7 +44,7 @@ feature "User logs in", type: :feature, js: true do
     click_on "Login"
   end
 
-  def unclaimed_tasks_text
-    "Unclaimed Tasks"
+  def successfully_loggedin_page
+    "Select Register"
   end
 end

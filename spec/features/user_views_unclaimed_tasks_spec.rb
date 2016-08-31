@@ -1,10 +1,10 @@
 require "rails_helper"
 
-feature "User views dashboard", type: :feature, js: true do
+feature "User views unclaimed task list", type: :feature, js: true do
   let!(:submission) { create_paid_submission! }
 
   before do
-    login
+    login_to_part_3
   end
 
   scenario "viewing the unclaimed submissions" do

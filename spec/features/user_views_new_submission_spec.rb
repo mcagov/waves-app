@@ -4,7 +4,7 @@ feature "User views new submission", type: :feature, js: true do
   let!(:submission) { create_paid_submission! }
 
   before do
-    login
+    login_to_part_3
     click_on submission.vessel.name
   end
 

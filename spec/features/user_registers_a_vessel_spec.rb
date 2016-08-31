@@ -2,10 +2,7 @@ require "rails_helper"
 
 feature "User registers a vessel", type: :feature, js: true do
   before do
-    create_paid_submission!
-    login
-    within('tr.submission') { click_on("Claim") }
-    within('tr.submission') { click_on("Celebrator") }
+    visit_claimed_submission
     click_link('Register Vessel')
   end
 
