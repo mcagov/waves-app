@@ -18,7 +18,7 @@ feature "User cancels a submission", type: :feature, js: true do
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Cancelled by.*: No response from owner\. Some stuff/
+        /Application Cancelled by.*: No response from owner\. Some stuff\./
       )
     end
 

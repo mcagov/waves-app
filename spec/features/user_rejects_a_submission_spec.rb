@@ -17,7 +17,7 @@ feature "User rejects a submission", type: :feature, js: true do
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Rejected by.*: Too Long\. Some stuff/
+        /Application Rejected by.*: Too Long\. Some stuff\./
       )
     end
 

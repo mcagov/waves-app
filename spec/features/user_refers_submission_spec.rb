@@ -19,7 +19,7 @@ feature "User refers a submission", type: :feature, js: true do
 
     within('#prompt') do
       expect(page).to have_text(
-       /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020/
+       /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020\./
       )
     end
 

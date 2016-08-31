@@ -2,17 +2,20 @@
   #prompt.alert.alert-info
     Application Cancelled by #{ submission.cancellation.actioned_by }:
     #{ submission.cancellation.subject }.
-    #{ submission.cancellation.body }
+    - if submission.cancellation.body.present?
+      #{ submission.cancellation.body }.
 
 - elsif submission.rejected?
   #prompt.alert.alert-error
     Application Rejected by #{ submission.rejection.actioned_by }:
     #{ submission.rejection.subject }.
-    #{ submission.rejection.body }.
+    - if submission.rejection.body.present?
+      #{ submission.rejection.body }.
 
 - elsif submission.referred?
   #prompt.alert.alert-warning
     Application Referred by #{ submission.referral.actioned_by }:
     #{ submission.referral.subject }.
-    #{ submission.referral.body }.
-    Next action due by #{ submission.referred_until }
+    - if submission.referral.body.present?
+      #{ submission.referral.body }.
+    Next action due by #{ submission.referred_until }.
