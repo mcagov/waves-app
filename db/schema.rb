@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831084331) do
+ActiveRecord::Schema.define(version: 20160831092829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,23 @@ ActiveRecord::Schema.define(version: 20160831084331) do
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.uuid     "noteable_id"
+    t.string   "noteable_type"
+    t.uuid     "actioned_by_id"
+    t.string   "type"
+    t.string   "subject"
+    t.string   "format"
+    t.datetime "noted_at"
+    t.text     "content"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["actioned_by_id"], name: "index_notes_on_actioned_by_id", using: :btree
+    t.index ["noteable_id"], name: "index_notes_on_noteable_id", using: :btree
+    t.index ["noteable_type"], name: "index_notes_on_noteable_type", using: :btree
+    t.index ["type"], name: "index_notes_on_type", using: :btree
   end
 
   create_table "notifications", force: :cascade do |t|
