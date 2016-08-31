@@ -7,6 +7,7 @@ class Submission < ApplicationRecord
   has_one :payment
 
   has_many :notifications
+  has_many :correspondences, as: :noteable
 
   has_one :cancellation, -> { order('created_at desc').limit(1) },
     class_name: "Notification::Cancellation"

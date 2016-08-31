@@ -1,13 +1,14 @@
 %table.table.table-striped
   %thead
-    %th From
+    %th Format
     %th Subject
     %th Date Received
   %tbody
-    %tr
-      %td{width: '20%'} --pending--
-      %td{width: '65%'}= link_to 'RE: Submission Renewal G8NJ23JD2', '#email-content', "data-target" => "#email-content", "data-toggle" => "modal"
-      %td{width: '15%'} Yesterday
+    - submission.correspondences.each do |correspondence|
+      %tr
+        %td{width: '20%'}= correspondence.format
+        %td{width: '65%'}= link_to correspondence.subject, "#correspondence-#{ correspondence.id }", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
+        %td{width: '15%'}= link_to correspondence.noted_at, '#email-content', "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
 = link_to '#email-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#email-content-add", "data-toggle" => "modal" do
   %i.fa.fa-plus
   Add Correspondence
