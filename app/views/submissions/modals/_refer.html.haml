@@ -8,14 +8,14 @@
           %h4.modal-title Refer Application
         .modal-body
           .row
-            .col-md-9
+            .col-sm-9
               .form-group
                 = f.input :subject, as: :select, label: "Reason for Referral", collection: ["Unknown vessel type", "Length and vessel type do not match", "Hull identification number appears incorrect"], include_blank: false
-            .col-md-3
+            .col-sm-3
               .form-group
                 = f.input :due_by, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
           .row
-            .col-md-12
+            .col-sm-12
               .form-group
                 = f.input :body, label: "Additional Information", input_html: {rows: 3}
         .modal-footer
