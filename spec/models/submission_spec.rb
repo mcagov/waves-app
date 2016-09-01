@@ -19,6 +19,10 @@ describe Submission, type: :model do
     it "has a ref_no" do
       expect(submission.ref_no).to be_present
     end
+  end
+
+  context "declarations" do
+     let!(:submission) { create_incomplete_submission! }
 
     it "has one completed declaration" do
       expect(submission.declarations.completed.length).to eq(1)
@@ -28,24 +32,24 @@ describe Submission, type: :model do
       expect(submission.declarations.incomplete.length).to eq(1)
     end
 
-    context "#paid?" do
+    it "was declared_by by the first owner" do
+      expect(submission.declared_by?(submission.owners.first.email)).to be_truthy
+    end
+
+    it "was not declared_by by the second owner" do
+      expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
+    end
+  end
+
+  context "#paid?" do
+    context "it is paid" do
       subject { build(:paid_submission).paid? }
       it { expect(subject).to be_truthy }
     end
 
-    context "not paid" do
+    context "it is not paid" do
       subject { build(:submission).paid? }
       it { expect(subject).to be_falsey }
-    end
-
-    context "declared_by?" do
-      it "was declared_by by the first owner" do
-        expect(submission.declared_by?(submission.owners.first.email)).to be_truthy
-      end
-
-      it "was not declared_by by the second owner" do
-        expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
-      end
     end
   end
 
