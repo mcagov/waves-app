@@ -51,7 +51,7 @@ describe SubmissionsController, type: :controller do
       end
 
       it "does not create a notification" do
-        expect(assigns[:submission].notifications).to be_empty
+        expect(Notification::Approval.all).to be_empty
       end
     end
 
@@ -62,12 +62,11 @@ describe SubmissionsController, type: :controller do
       end
 
       it "creates a notification" do
-        expect(assigns[:submission].notifications.length).to eq(1)
+        expect(Notification::Approval.count).to eq(1)
       end
 
       it "sets the notification#actioned_by" do
-        expect(assigns[:submission].notifications.first.actioned_by)
-          .to eq(current_user)
+        expect(Notification::Approval.first.actioned_by).to eq(current_user)
       end
     end
 
