@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831092829) do
+ActiveRecord::Schema.define(version: 20160901102336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "activities", force: :cascade do |t|
+  create_table "activities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "trackable_id"
     t.string   "trackable_type"
     t.uuid     "actioned_by"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160831092829) do
     t.index ["trackable_type"], name: "index_activities_on_trackable_type", using: :btree
   end
 
-  create_table "countries", force: :cascade do |t|
+  create_table "countries", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
     t.string   "code"
     t.datetime "created_at", null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160831092829) do
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
   end
 
-  create_table "notes", force: :cascade do |t|
+  create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "noteable_id"
     t.string   "noteable_type"
     t.uuid     "actioned_by_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160831092829) do
     t.index ["type"], name: "index_notes_on_type", using: :btree
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
     t.string   "type"
     t.string   "subject"
