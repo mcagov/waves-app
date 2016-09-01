@@ -1,11 +1,10 @@
 module SubmissionHelpers
+  def new_registration_attributes
+    JSON.parse(File.read('spec/fixtures/new_registration.json'))["data"]["attributes"]
+  end
+
   def create_incomplete_submission!
-    # long - but easy to cut and paste!
-    NewRegistration.create(
-      JSON.parse(
-        File.read("spec/fixtures/new_registration.json")
-      )["data"]["attributes"]
-    )
+    NewRegistration.create(new_registration_attributes)
   end
 
   def create_declared_submission!

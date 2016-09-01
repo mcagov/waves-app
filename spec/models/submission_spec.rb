@@ -19,6 +19,10 @@ describe Submission, type: :model do
     it "has a ref_no" do
       expect(submission.ref_no).to be_present
     end
+
+    it "has some declarations" do
+      expect(submission.declarations).not_to be_empty
+    end
   end
 
   context "declarations" do

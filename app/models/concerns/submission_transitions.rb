@@ -54,25 +54,7 @@ module SubmissionTransitions
 
     def init_new_submission
       self.ref_no = RefNo.generate(ref_no_prefix)
-
-      owners.each do |owner|
-        Declaration.find_or_create_by(
-          submission: self,
-          owner_email: owner.email)
-      end
-
-      (user_input[:declarations] || []).each do |email|
-        Declaration.find_by(
-          submission: self,
-          owner_email: email).declare!
-      end
-
-      declarations.incomplete.each do |declaration|
-        declaration.update_attributes(
-          notification:
-            Notification::OutstandingDeclaration.create(submission: self)
-          )
-      end
+      DeclarationBuilder.build(self, owners.map(&:email), user_input[:declarations])
     end
 
     def remove_claimant
