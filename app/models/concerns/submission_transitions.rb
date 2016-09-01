@@ -66,6 +66,13 @@ module SubmissionTransitions
           submission: self,
           owner_email: email).declare!
       end
+
+      declarations.incomplete.each do |declaration|
+        declaration.update_attributes(
+          notification:
+            Notification::OutstandingDeclaration.create(submission: self)
+          )
+      end
     end
 
     def remove_claimant

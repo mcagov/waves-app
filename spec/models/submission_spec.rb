@@ -39,6 +39,14 @@ describe Submission, type: :model do
     it "was not declared_by by the second owner" do
       expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
     end
+
+    it "does not build a notification for the completed declaration" do
+      expect(submission.declarations.completed.first.notification).to be_nil
+    end
+
+    it "builds a OutstandingDeclaration notification for the incomplete declaration" do
+      expect(submission.declarations.incomplete.first.notification).to be_a(Notification::OutstandingDeclaration)
+    end
   end
 
   context "#paid?" do

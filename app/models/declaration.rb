@@ -1,5 +1,6 @@
 class Declaration < ApplicationRecord
-  belongs_to :submission#, :outstanding_declaration
+  belongs_to :submission
+  belongs_to :notification
 
   include ActiveModel::Transitions
 
