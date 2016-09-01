@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20160901102336) do
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
   end
 
+  create_table "declarations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.string   "state"
+    t.string   "owner_email"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["state"], name: "index_declarations_on_state", using: :btree
+    t.index ["submission_id"], name: "index_declarations_on_submission_id", using: :btree
+  end
+
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "noteable_id"
     t.string   "noteable_type"

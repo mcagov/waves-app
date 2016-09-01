@@ -6,6 +6,7 @@ class Submission < ApplicationRecord
 
   has_one :payment
 
+  has_many :declarations
   has_many :notifications
   has_many :correspondences, as: :noteable
 
@@ -47,10 +48,6 @@ class Submission < ApplicationRecord
       (user_input[:owners] || []).map do |owner_params|
         Submission::Owner.new(owner_params)
       end
-  end
-
-  def declarations
-    user_input[:declarations] || []
   end
 
   def declared_by?(email)
