@@ -3,7 +3,7 @@ require "rails_helper"
 feature "User views task lists", type: :feature, js: true do
   before do
     create_paid_submission!
-    login
+    login_to_part_3
   end
 
   scenario "viewing task lists" do

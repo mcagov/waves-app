@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge,chrome=1", http: {equiv: "X-UA-Compatible"}}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %title= "MCA"
+    = stylesheet_link_tag 'bootstrap.min', 'custom', 'normalize', 'nprogress', 'font-awesome.min', 'icheck/flat/green'
+
+  %body{style: 'background:#F7F7F7;'}
+    = yield
+  = javascript_include_tag 'jquery.min', 'bootstrap.min'
