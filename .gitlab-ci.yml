@@ -24,6 +24,20 @@ rspec:
   tags:
     - ruby2.3
 
+brakeman:
+  stage: test
+  script:
+    - bundle exec brakeman
+  tags:
+    - ruby2.3
+
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop
+  tags:
+    - ruby2.3
+
 bundler:audit:
   stage: test
   only:

@@ -60,6 +60,7 @@ group :test do
   gem "timecop"
   gem "webmock"
   gem "rails-controller-testing"
+  gem "brakeman"
 end
 
 group :staging, :production do
