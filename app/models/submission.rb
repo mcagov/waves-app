@@ -25,13 +25,7 @@ class Submission < ApplicationRecord
   scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
 
   validates :part, presence: true
-
   validates :ref_no, presence: true
-  before_validation :set_ref_no
-
-  def set_ref_no
-    self.ref_no ||= RefNo.generate("00")
-  end
 
   def process_application; end
 

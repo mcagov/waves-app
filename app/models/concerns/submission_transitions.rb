@@ -5,7 +5,7 @@ module SubmissionTransitions
     include ActiveModel::Transitions
 
     state_machine auto_scopes: true do
-      state :incomplete
+      state :incomplete, enter: :set_ref_no
       state :unassigned
       state :assigned
       state :referred
@@ -50,6 +50,10 @@ module SubmissionTransitions
     end
 
     private
+
+    def set_ref_no
+      self.ref_no ||= RefNo.generate("00")
+    end
 
     def remove_claimant
       update_attribute(:claimant, nil)
