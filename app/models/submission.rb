@@ -51,7 +51,7 @@ class Submission < ApplicationRecord
   end
 
   def declared_by?(email)
-    declarations.include?(email)
+    declarations.completed.map(&:owner_email).include?(email)
   end
 
   def applicant

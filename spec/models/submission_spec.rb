@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Submission, type: :model do
   context "in general" do
-    let!(:submission) { create_submission! }
+    let!(:submission) { create_incomplete_submission! }
 
     it "gets the vessel_info" do
       expect(submission.vessel).to be_a(Submission::Vessel)
@@ -20,6 +20,14 @@ describe Submission, type: :model do
       expect(submission.ref_no).to be_present
     end
 
+    it "has one completed declaration" do
+      expect(submission.declarations.completed.length).to eq(1)
+    end
+
+    it "has one incomplete declaration" do
+      expect(submission.declarations.incomplete.length).to eq(1)
+    end
+
     context "#paid?" do
       subject { build(:paid_submission).paid? }
       it { expect(subject).to be_truthy }
@@ -31,14 +39,12 @@ describe Submission, type: :model do
     end
 
     context "declared_by?" do
-      let!(:submission) { create_submission! }
-
       it "was declared_by by the first owner" do
-        expect(submission).to be_declared_by(submission.owners.first.email)
+        expect(submission.declared_by?(submission.owners.first.email)).to be_truthy
       end
 
       it "was not declared_by by the second owner" do
-        expect(submission).not_to be_declared_by(submission.owners.last.email)
+        expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
       end
     end
   end
