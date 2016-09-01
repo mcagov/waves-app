@@ -55,7 +55,7 @@ class NewRegistration < Submission
     )
   end
 
-  def set_ref_no
-    self.ref_no ||= RefNo.generate("3N")
+  def ref_no_prefix
+    "3N"
   end
 end

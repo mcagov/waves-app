@@ -62,6 +62,10 @@ class Submission < ApplicationRecord
     "Online"
   end
 
+  def ref_no_prefix
+    "00"
+  end
+
   protected
 
   def user_input

@@ -53,7 +53,7 @@ module SubmissionTransitions
     private
 
     def init_new_submission
-      self.ref_no ||= RefNo.generate("00")
+      self.ref_no = RefNo.generate(ref_no_prefix)
 
       owners.each do |owner|
         Declaration.find_or_create_by(
