@@ -3,6 +3,6 @@ def login(user = create(:user))
 end
 
 def login_to_part_3(user = create(:user))
-  visit root_path(as: user)
+  login(user)
   click_on("Part 3")
 end
