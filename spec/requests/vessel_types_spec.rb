@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "VesselType API" do
-  VESSEL_TYPES = %w{ Lorry Barge Frigate }
+  VESSEL_TYPES = %w(Lorry Barge Frigate).freeze
 
   before do
     VESSEL_TYPES.each do |v|

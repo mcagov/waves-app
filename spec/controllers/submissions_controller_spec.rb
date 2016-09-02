@@ -10,7 +10,7 @@ describe SubmissionsController, type: :controller do
 
   context "#claim" do
     before do
-      post :claim, params: {id: create(:paid_submission).id}
+      post :claim, params: { id: create(:paid_submission).id }
     end
 
     it "assigns the claimant" do
@@ -23,7 +23,7 @@ describe SubmissionsController, type: :controller do
 
     context "#unclaim" do
       before do
-        post :unclaim, params: {id: assigns[:submission].id}
+        post :unclaim, params: { id: assigns[:submission].id }
       end
 
       it "unassigns the claimant" do
@@ -40,7 +40,7 @@ describe SubmissionsController, type: :controller do
     let(:submission) { create_completeable_submission! }
 
     context "succesfully" do
-      before { post :approve, params: {id: submission.id} }
+      before { post :approve, params: { id: submission.id } }
 
       it "completes the submission" do
         expect(assigns[:submission]).to be_completed
@@ -57,7 +57,8 @@ describe SubmissionsController, type: :controller do
 
     context "with an email notification" do
       before do
-        post :approve, params: {id: submission.id, email_certificate_of_registry: "on"}
+        params = { id: submission.id, email_certificate_of_registry: "on" }
+        post :approve, params: params
       end
 
       it "creates a notification" do
@@ -65,14 +66,16 @@ describe SubmissionsController, type: :controller do
       end
 
       it "sets the notification#actioned_by" do
-        expect(assigns[:submission].notifications.first.actioned_by).to eq(current_user)
+        expect(assigns[:submission].notifications.first.actioned_by)
+          .to eq(current_user)
       end
     end
 
     context "unsuccessfully" do
       before do
-        allow_any_instance_of(NewRegistration).to receive(:process_application).and_return(false)
-        post :approve, params: {id: submission.id}
+        allow_any_instance_of(NewRegistration)
+          .to receive(:process_application).and_return(false)
+        post :approve, params: { id: submission.id }
       end
 
       it "does not move to completed" do

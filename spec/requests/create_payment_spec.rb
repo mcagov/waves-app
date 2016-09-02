@@ -24,7 +24,8 @@ describe "create payments via the API", type: :request do
     end
 
     it "sets the payment#wp_order_code" do
-      expect(payment.wp_order_code).to eq("8481b725-e7c8-4c94-b311-9fa2f10748ae")
+      expect(payment.wp_order_code).to eq(
+        "8481b725-e7c8-4c94-b311-9fa2f10748ae")
     end
 
     it "sets the payment#wp_country" do
@@ -41,10 +42,12 @@ describe "create payments via the API", type: :request do
   end
 end
 
-def valid_create_payment_json(changeset="")
+# rubocop:disable all
+def valid_create_payment_json
   {"data"=>{"type"=>"payments", "attributes"=>{"submission_id"=>"240cdfa3-c930-4829-99a0-6c160a631d2d", "wp_token"=>"TEST_SU_84dbf02a-f537-4047-ab3c-1806dad6aa03", "wp_order_code"=>"8481b725-e7c8-4c94-b311-9fa2f10748ae", "wp_amount"=>2500, "wp_country"=>"GB", "wp_payment_response"=>{ }, "customer_ip"=>"127.0.0.1"}}}
 end
 
 def invalid_create_payment_json
   {"data"=>{"type"=>"foobars", "attributes"=>{"submission_id"=>""}}, "payment"=>{ }}
 end
+# rubocop:enable all

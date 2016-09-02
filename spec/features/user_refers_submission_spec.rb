@@ -18,14 +18,18 @@ feature "User refers a submission", type: :feature, js: true do
     click_on("Celebrator Doppelbock")
 
     within("#prompt") do
-      expect(page).to have_text(
-       /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020\./
-      )
+      expect(page).to have_text(referral_prompt)
     end
 
     click_on "Cancel Referral"
 
     click_on "My Tasks"
     expect(page).to have_css(".vessel-name", text: "Celebrator Doppelbock")
+  end
+
+  def referral_prompt
+    # rubocop:disable all
+    /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020\./
+    # rubocop:enable all
   end
 end

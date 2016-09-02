@@ -26,7 +26,7 @@ gem "haml"
 gem "active_model_serializers", "~> 0.10.0"
 gem "rack-cors"
 gem "auto_increment"
-gem "transitions", :require => ["transitions", "active_model/transitions"]
+gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "bootstrap-datepicker-rails"
 
 group :development do

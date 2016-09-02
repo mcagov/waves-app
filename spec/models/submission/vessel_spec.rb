@@ -8,7 +8,7 @@ describe Submission::Vessel do
       let(:input_params) do
         {
           name: "A real name",
-          non_existent: "rubbish"
+          non_existent: "rubbish",
         }
       end
 
@@ -17,7 +17,7 @@ describe Submission::Vessel do
       end
 
       it "does not have non_existent" do
-        expect{ subject.non_existent }.to raise_error(NoMethodError)
+        expect { subject.non_existent }.to raise_error(NoMethodError)
       end
     end
 
@@ -26,7 +26,7 @@ describe Submission::Vessel do
         let(:input_params) do
           {
             vessel_type: "Barge",
-            vessel_type_other: ""
+            vessel_type_other: "",
           }
         end
 
@@ -39,7 +39,7 @@ describe Submission::Vessel do
         let(:input_params) do
           {
             vessel_type: "?",
-            vessel_type_other: "Beer mug"
+            vessel_type_other: "Beer mug",
           }
         end
 

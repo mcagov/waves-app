@@ -1,5 +1,4 @@
 class TasksController < InternalPagesController
-
   def my_tasks
     @submissions = Submission.assigned_to(current_user)
   end
@@ -8,7 +7,7 @@ class TasksController < InternalPagesController
     @submissions = Submission.assigned
   end
 
-   def unclaimed
+  def unclaimed
     @submissions = Submission.unassigned
   end
 

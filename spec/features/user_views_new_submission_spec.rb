@@ -50,11 +50,11 @@ feature "User views new submission", type: :feature, js: true do
   end
 
   scenario "not viewing the action buttons as this is unassigned" do
-    expect(page).not_to have_css("a", text: "Register Vessel & Issue Certificate of Registry")
+    expect(page)
+      .not_to have_css(
+        "a", text: "Register Vessel & Issue Certificate of Registry"
+      )
   end
 
   scenario "declaration made"
 end
-
-
-

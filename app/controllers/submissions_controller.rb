@@ -12,23 +12,16 @@ class SubmissionsController < InternalPagesController
     redirect_to tasks_my_tasks_path
   end
 
-
   def unclaim
     @submission.unclaimed!
 
-    flash[:notice] = "That application has been moved into the Unclaimed Tasks queue"
+    flash[:notice] = "Application has been moved into the Unclaimed Tasks queue"
     redirect_to tasks_my_tasks_path
   end
 
   def approve
     if @submission.process_application
-      if params[:email_certificate_of_registry]
-         Notification::Referral.create(
-          submission_id: @submission.id,
-          subject: @submission.job_type,
-          actioned_by: current_user
-        )
-      end
+      create_notification
       @submission.approved!
       render "completed"
     else
@@ -40,5 +33,15 @@ class SubmissionsController < InternalPagesController
 
   def load_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def create_notification
+    if params[:email_certificate_of_registry]
+      Notification::Referral.create(
+        submission_id: @submission.id,
+        subject: @submission.job_type,
+        actioned_by: current_user
+      )
+    end
   end
 end

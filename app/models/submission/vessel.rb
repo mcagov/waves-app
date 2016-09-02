@@ -15,9 +15,9 @@ class Submission::Vessel
     :vessel_type_other
   )
 
-  def initialize(params={})
-    params.reject!{|param| !self.respond_to?(param)}
-    params.each { |key,value| instance_variable_set("@#{key}", value) }
+  def initialize(params = {})
+    params.reject! { |param| !respond_to?(param) }
+    params.each { |key, value| instance_variable_set("@#{key}", value) }
   end
 
   def type_of_vessel

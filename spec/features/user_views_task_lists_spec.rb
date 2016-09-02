@@ -39,7 +39,6 @@ feature "User views task lists", type: :feature, js: true do
     within("tr.submission") { click_on("Claim") }
     expect(page).to have_css("h1", text: "My Tasks")
 
-
     # unclaim task and redirect (return) to my tasks
     within("tr.submission") { click_on("Unclaim") }
     expect(page).to have_css("h1", text: "My Tasks")

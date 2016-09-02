@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Payment, type: :model do
-
   context "#create" do
     let(:payment) { create(:payment) }
 

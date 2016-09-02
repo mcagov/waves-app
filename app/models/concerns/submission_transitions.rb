@@ -16,17 +16,17 @@ module SubmissionTransitions
 
       event :paid do
         transitions to: :unassigned, from: :incomplete,
-          on_transition: :set_target_date_and_urgent_flag
+                    on_transition: :set_target_date_and_urgent_flag
       end
 
       event :claimed do
         transitions to: :assigned,
-          from: [:unassigned, :rejected, :referred, :cancelled]
+                    from: [:unassigned, :rejected, :referred, :cancelled]
       end
 
       event :unclaimed do
         transitions to: :unassigned, from: :assigned,
-          on_transition: :remove_claimant
+                    on_transition: :remove_claimant
       end
 
       event :approved do
@@ -35,17 +35,17 @@ module SubmissionTransitions
 
       event :cancelled do
         transitions to: :cancelled, from: :assigned,
-          on_transition: :remove_claimant
+                    on_transition: :remove_claimant
       end
 
       event :rejected do
         transitions to: :rejected, from: :assigned,
-          on_transition: :remove_claimant
+                    on_transition: :remove_claimant
       end
 
       event :referred do
         transitions to: :referred, from: :assigned,
-          on_transition: :remove_claimant
+                    on_transition: :remove_claimant
       end
     end
 

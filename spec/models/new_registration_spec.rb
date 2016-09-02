@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe NewRegistration, type: :model do
-
   let!(:new_registration) { create_completeable_submission! }
 
   context "in general" do
@@ -18,16 +17,21 @@ describe NewRegistration, type: :model do
     end
 
     it "creates the registered_owners" do
-      expect(new_registration.registered_vessel.registered_owners.length).to eq(2)
+      expect(
+        new_registration.registered_vessel.registered_owners.length
+      ).to eq(2)
     end
 
     it "creates the one year registration" do
-      expect(new_registration.registration.registered_at).to eq(Date.today)
-      expect(new_registration.registration.registered_until).to eq(Date.today.advance days: 364)
+      expect(new_registration.registration.registered_at)
+        .to eq(Date.today)
+      expect(new_registration.registration.registered_until)
+        .to eq(Date.today.advance(days: 364))
     end
 
     it "sets the registration#actioned_by" do
-      expect(new_registration.registration.actioned_by).to eq(new_registration.claimant)
+      expect(new_registration.registration.actioned_by)
+        .to eq(new_registration.claimant)
     end
   end
 end

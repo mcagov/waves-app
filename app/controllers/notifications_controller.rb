@@ -7,7 +7,7 @@ class NotificationsController < InternalPagesController
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user
-      )
+    )
 
     flash[:notice] = "You have succesfully cancelled that application"
     @submission.cancelled!
@@ -20,7 +20,7 @@ class NotificationsController < InternalPagesController
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user
-      )
+    )
 
     flash[:notice] = "You have succesfully rejected that application"
     @submission.rejected!
@@ -28,12 +28,12 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-     Notification::Referral.create(
+    Notification::Referral.create(
       submission_id: @submission.id,
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user
-      )
+    )
 
     flash[:notice] = "You have succesfully referred that application"
     @submission.update_attribute(:referred_until, notification_params[:due_by])

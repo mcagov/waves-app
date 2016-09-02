@@ -13,9 +13,9 @@ class Submission::Owner
     :country
   )
 
-  def initialize(params={})
-    params.reject!{|param| !self.respond_to?(param)}
-    params.each { |key,value| instance_variable_set("@#{key}", value) }
+  def initialize(params = {})
+    params.reject! { |param| !respond_to?(param) }
+    params.each { |key, value| instance_variable_set("@#{key}", value) }
   end
 
   def to_s
@@ -30,7 +30,7 @@ class Submission::Owner
       town,
       county,
       country,
-      postcode
+      postcode,
     ].compact.reject(&:empty?).join(", ")
   end
 end
