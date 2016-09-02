@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Submission, type: :model do
   context "in general" do
-    let!(:submission) { create_submission! }
+    let!(:submission) { create_incomplete_submission! }
 
     it "gets the vessel_info" do
       expect(submission.vessel).to be_a(Submission::Vessel)
@@ -20,26 +20,50 @@ describe Submission, type: :model do
       expect(submission.ref_no).to be_present
     end
 
-    context "#paid?" do
+    it "has some declarations" do
+      expect(submission.declarations).not_to be_empty
+    end
+  end
+
+  context "declarations" do
+    let!(:submission) { create_incomplete_submission! }
+
+    it "has one completed declaration" do
+      expect(submission.declarations.completed.length).to eq(1)
+    end
+
+    it "has one incomplete declaration" do
+      expect(submission.declarations.incomplete.length).to eq(1)
+    end
+
+    it "was declared_by by the first owner" do
+      expect(submission.declared_by?(submission.owners.first.email))
+        .to be_truthy
+    end
+
+    it "was not declared_by by the second owner" do
+      expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
+    end
+
+    it "does not build a notification for the completed declaration" do
+      expect(submission.declarations.completed.first.notification).to be_nil
+    end
+
+    it "builds a  notification for the incomplete declaration" do
+      expect(submission.declarations.incomplete.first.notification)
+        .to be_a(Notification::OutstandingDeclaration)
+    end
+  end
+
+  context "#paid?" do
+    context "it is paid" do
       subject { build(:paid_submission).paid? }
       it { expect(subject).to be_truthy }
     end
 
-    context "not paid" do
+    context "it is not paid" do
       subject { build(:submission).paid? }
       it { expect(subject).to be_falsey }
-    end
-
-    context "declared_by?" do
-      let!(:submission) { create_submission! }
-
-      it "was declared_by by the first owner" do
-        expect(submission).to be_declared_by(submission.owners.first.email)
-      end
-
-      it "was not declared_by by the second owner" do
-        expect(submission).not_to be_declared_by(submission.owners.last.email)
-      end
     end
   end
 

@@ -3,7 +3,7 @@ require "rails_helper"
 describe Api::V1::PaymentsController, type: :controller do
   context "#create" do
     before do
-      create_submission!
+      create_declared_submission!
       headers = { "ACCEPT" => "application/json" }
       params = JSON.parse(File.read("spec/fixtures/new_payment.json"))
       post :create, { params: params }, headers

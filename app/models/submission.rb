@@ -6,6 +6,7 @@ class Submission < ApplicationRecord
 
   has_one :payment
 
+  has_many :declarations
   has_many :notifications
   has_many :correspondences, as: :noteable
 
@@ -22,8 +23,11 @@ class Submission < ApplicationRecord
   has_one :registered_vessel, through: :registration
 
   default_scope do
-    includes(:payment).order("target_date asc").where.not(state: "completed")
+    includes([:payment, :declarations, :correspondences])
+      .order("target_date asc")
+      .where.not(state: :completed)
   end
+
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
   validates :part, presence: true
@@ -46,12 +50,8 @@ class Submission < ApplicationRecord
       end
   end
 
-  def declarations
-    user_input[:declarations] || []
-  end
-
   def declared_by?(email)
-    declarations.include?(email)
+    declarations.completed.map(&:owner_email).include?(email)
   end
 
   def applicant
@@ -60,6 +60,10 @@ class Submission < ApplicationRecord
 
   def source
     "Online"
+  end
+
+  def ref_no_prefix
+    "00"
   end
 
   protected

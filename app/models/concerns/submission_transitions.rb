@@ -5,7 +5,7 @@ module SubmissionTransitions
     include ActiveModel::Transitions
 
     state_machine auto_scopes: true do
-      state :incomplete, enter: :set_ref_no
+      state :incomplete, enter: :init_new_submission
       state :unassigned
       state :assigned
       state :referred
@@ -16,7 +16,8 @@ module SubmissionTransitions
 
       event :paid do
         transitions to: :unassigned, from: :incomplete,
-                    on_transition: :set_target_date_and_urgent_flag
+                    on_transition: :set_target_date_and_urgent_flag,
+                    guard: :declarations_completed?
       end
 
       event :claimed do
@@ -51,8 +52,11 @@ module SubmissionTransitions
 
     private
 
-    def set_ref_no
-      self.ref_no ||= RefNo.generate("00")
+    def init_new_submission
+      self.ref_no = RefNo.generate(ref_no_prefix)
+      DeclarationBuilder.build(
+        self, owners.map(&:email), user_input[:declarations]
+      )
     end
 
     def remove_claimant
@@ -66,6 +70,10 @@ module SubmissionTransitions
       else
         update_attribute(:target_date, 20.days.from_now)
       end
+    end
+
+    def declarations_completed?
+      owners.length == declarations.completed.length
     end
   end
 end
