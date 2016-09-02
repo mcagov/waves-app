@@ -1,4 +1,4 @@
-.modal.fade{id: 'approve-application', role: "dialog", tabindex: "-1"}
+.modal.fade{id: "approve-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
       = form_tag approve_submission_path(submission) do |f|
@@ -13,7 +13,7 @@
             .col-md-12
               .form-group
                 %label Print Options for Certificate of Registry & Cover Letter
-                %select.select2_single.form-control{style: 'width: 100%'}
+                %select.select2_single.form-control{style: "width: 100%"}
                   %option Move documents to print queue (bulk printing)
                   %option Print documents now (individual documents)
           .row
@@ -25,4 +25,4 @@
 
 
         .modal-footer
-          = submit_tag 'Register Vessel', class: 'btn btn-success btn-lg'
+          = submit_tag "Register Vessel", class: "btn btn-success btn-lg"

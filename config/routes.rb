@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   %w{ incomplete my-tasks team-tasks print-queue
     referred unclaimed rejected cancelled }.each do |action|
     get "/tasks/#{ action }",
-      controller: "tasks", action: action.gsub('-', '_')
+      controller: "tasks", action: action.gsub("-", "_")
   end
 
   root to: "dashboards#show"

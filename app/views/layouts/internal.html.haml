@@ -11,13 +11,13 @@
   %body.nav-md
     .container.body
       .main_container
-        = render partial: 'layouts/sidebar'
-        = render partial: 'layouts/topnav'
+        = render partial: "layouts/sidebar"
+        = render partial: "layouts/topnav"
 
-        .right_col{role: 'main'}
+        .right_col{role: "main"}
           .row
             .col-sm-12
-              = render partial: 'layouts/flash'
+              = render partial: "layouts/flash"
               = yield
   = render "javascript"
   = render "css_overrides"

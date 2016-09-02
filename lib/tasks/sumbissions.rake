@@ -9,13 +9,13 @@ namespace :submissions do
 
         submission =
           NewRegistration.create(JSON.parse(
-            File.read(Rails.root.join('spec', 'fixtures', json_file_name ))
+            File.read(Rails.root.join("spec", "fixtures", json_file_name ))
           )["data"]["attributes"]
         )
 
         payment =
           Payment.new(JSON.parse(
-            File.read(Rails.root.join('spec', 'fixtures', 'new_payment.json'))
+            File.read(Rails.root.join("spec", "fixtures", "new_payment.json"))
           )["data"]["attributes"]
         )
 

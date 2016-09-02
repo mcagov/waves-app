@@ -23,11 +23,11 @@ gem "uglifier"
 gem "validates_email_format_of"
 gem "nokogiri", ">= 1.6.8"
 gem "haml"
-gem 'active_model_serializers', '~> 0.10.0'
-gem 'rack-cors'
+gem "active_model_serializers", "~> 0.10.0"
+gem "rack-cors"
 gem "auto_increment"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
-gem 'bootstrap-datepicker-rails'
+gem "bootstrap-datepicker-rails"
 
 group :development do
   gem "rubocop"

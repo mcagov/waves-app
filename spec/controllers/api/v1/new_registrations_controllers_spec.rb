@@ -5,7 +5,7 @@ describe Api::V1::NewRegistrationsController, type: :controller do
   context "#create" do
     before do
       headers = {  "ACCEPT" => "application/json" }
-      params = JSON.parse(File.read('spec/fixtures/new_registration.json'))
+      params = JSON.parse(File.read("spec/fixtures/new_registration.json"))
       post :create, {params: params}, headers
     end
 

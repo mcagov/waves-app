@@ -47,7 +47,7 @@ describe SubmissionsController, type: :controller do
       end
 
       it "renders the completed page" do
-        expect(response).to render_template('completed')
+        expect(response).to render_template("completed")
       end
 
       it "does not create a notification" do
@@ -80,7 +80,7 @@ describe SubmissionsController, type: :controller do
       end
 
       it "renders the errors page" do
-        expect(response).to render_template('errors')
+        expect(response).to render_template("errors")
       end
     end
   end

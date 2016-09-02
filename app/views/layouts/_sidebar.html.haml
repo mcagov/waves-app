@@ -1,6 +1,6 @@
 .col-md-3.left_col
   .left_col.scroll-view
-    .navbar.nav_title{style: 'border: 0;'}
+    .navbar.nav_title{style: "border: 0;"}
       %a.site_title{href: root_path}
         Waves
     .clearfix
@@ -14,36 +14,36 @@
               Tasks
               %span.fa.fa-chevron-down
             %ul.nav.child_menu{:style => "display: none"}
-              %li= link_to 'My Tasks', '/tasks/my-tasks'
-              %li= link_to 'Team Tasks', '/tasks/team-tasks'
-              %li= link_to 'Unclaimed Tasks', '/tasks/unclaimed'
-              %li= link_to 'Print Queue', '/tasks/print-queue'
-              %li= link_to 'Referred Applications', '/tasks/referred'
-              %li= link_to 'Rejected Applications', '/tasks/rejected'
-              %li= link_to 'Cancelled Applications', '/tasks/cancelled'
-              %li= link_to 'Incomplete Applications', '/tasks/incomplete'
+              %li= link_to "My Tasks", "/tasks/my-tasks"
+              %li= link_to "Team Tasks", "/tasks/team-tasks"
+              %li= link_to "Unclaimed Tasks", "/tasks/unclaimed"
+              %li= link_to "Print Queue", "/tasks/print-queue"
+              %li= link_to "Referred Applications", "/tasks/referred"
+              %li= link_to "Rejected Applications", "/tasks/rejected"
+              %li= link_to "Cancelled Applications", "/tasks/cancelled"
+              %li= link_to "Incomplete Applications", "/tasks/incomplete"
           %li
             %a
               %i.fa.fa-ship
               Vessels
               %span.fa.fa-chevron-down
             %ul.nav.child_menu{:style => "display: none"}
-              %li= link_to 'Registered Vessels', '/part-3/vessels'
-              %li= link_to 'Pending Vessels', '/part-3/vessels'
-              %li= link_to 'Historical Vessels', '/part-3/vessels'
+              %li= link_to "Registered Vessels", "/part-3/vessels"
+              %li= link_to "Pending Vessels", "/part-3/vessels"
+              %li= link_to "Historical Vessels", "/part-3/vessels"
           %li
             %a
               %i.fa.fa-bar-chart-o
               Reports
               %span.fa.fa-chevron-down
             %ul.nav.child_menu{:style => "display: none"}
-              %li= link_to 'Outstanding Work', '/reports/outstanding-work'
+              %li= link_to "Outstanding Work", "/reports/outstanding-work"
 
     .sidebar-footer.hidden-small
-      = link_to '/', "data-original-title" => "Part III", "data-placement" => "top", "data-toggle" => "tooltip", class: 'sidebar-footer-part-selector' do
+      = link_to "/", "data-original-title" => "Part III", "data-placement" => "top", "data-toggle" => "tooltip", class: "sidebar-footer-part-selector" do
         Part III
 
-      = link_to '/settings', "data-original-title" => "Settings", "data-placement" => "top", "data-toggle" => "tooltip" do
+      = link_to "/settings", "data-original-title" => "Settings", "data-placement" => "top", "data-toggle" => "tooltip" do
         %span.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
 
       = link_to sign_out_path, method: :delete, id: "logout" do

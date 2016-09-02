@@ -21,14 +21,14 @@ class TasksController < InternalPagesController
   end
 
   def referred
-    @submissions = Submission.order('referred_until desc').referred
+    @submissions = Submission.order("referred_until desc").referred
   end
 
   def rejected
-    @submissions = Submission.order('updated_at desc').rejected
+    @submissions = Submission.order("updated_at desc").rejected
   end
 
   def cancelled
-    @submissions = Submission.order('updated_at desc').cancelled
+    @submissions = Submission.order("updated_at desc").cancelled
   end
 end

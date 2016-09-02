@@ -6,14 +6,14 @@
   %tbody
     - submission.correspondences.each do |correspondence|
       %tr
-        %td{width: '20%'}= correspondence.format
-        %td{width: '65%'}= link_to correspondence.subject, "#correspondence-#{ correspondence.id }", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
-        %td{width: '15%'}= link_to correspondence.noted_at, '#email-content', "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
-= link_to '#email-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#email-content-add", "data-toggle" => "modal" do
+        %td{width: "20%"}= correspondence.format
+        %td{width: "65%"}= link_to correspondence.subject, "#correspondence-#{ correspondence.id }", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
+        %td{width: "15%"}= link_to correspondence.noted_at, "#email-content", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
+= link_to "#email-content-add", class: "btn btn-primary btn-sm", "data-target" => "#email-content-add", "data-toggle" => "modal" do
   %i.fa.fa-plus
   Add Correspondence
 
-.modal.fade{id: 'email-content-add', role: "dialog", tabindex: "-1"}
+.modal.fade{id: "email-content-add", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header

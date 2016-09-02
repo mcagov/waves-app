@@ -1,7 +1,7 @@
 .row
   .col-sm-12
     = render partial: "breadcrumbs", locals: {submission: @submission}
-    %h1{style: 'margin-top: 0px !important;'}
+    %h1{style: "margin-top: 0px !important;"}
       = @submission.job_type
       %small ID: #{ @submission.ref_no }
     = render partial: "prompts", locals: {submission: @submission}
@@ -27,12 +27,12 @@
           = render partial: "vessel", locals: { vessel: @submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: 'owner', collection: @submission.owners
+          = render partial: "owner", collection: @submission.owners
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
-          = render partial: 'correspondence', locals: {submission: @submission}
+          = render partial: "correspondence", locals: {submission: @submission}
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
-          = render partial: 'payment', locals: { payment: @submission.payment }
+          = render partial: "payment", locals: { payment: @submission.payment }
 
 = render partial: "actions", locals: {submission: @submission}

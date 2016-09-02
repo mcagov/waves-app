@@ -7,7 +7,7 @@ feature "User logs in", type: :feature, js: true do
 
   context "using email/password" do
     let!(:password) { "meh" }
-    let!(:user) { create(:user, password: password, name: 'Bob') }
+    let!(:user) { create(:user, password: password, name: "Bob") }
 
     scenario "user is taken to the dashboard with correct info" do
       perform_sign_in user.email, password

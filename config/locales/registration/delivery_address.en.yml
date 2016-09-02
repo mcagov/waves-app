@@ -5,15 +5,15 @@ en:
         delivery_address:
           attributes:
             address_1:
-              blank: "The first line of the owner's address must be specified."
+              blank: "The first line of the owner"s address must be specified."
             town:
-              blank: "The town or city of the owner's address must be specified."
+              blank: "The town or city of the owner"s address must be specified."
             postcode:
-              blank: "The postcode of the owner's address must be specified."
+              blank: "The postcode of the owner"s address must be specified."
             country:
-              blank: "The country of the owner's address must be specified."
-              invalid: "The country of the owner's address is invalid."
-              inclusion: "The country of the owner's address is invalid."
+              blank: "The country of the owner"s address must be specified."
+              invalid: "The country of the owner"s address is invalid."
+              inclusion: "The country of the owner"s address is invalid."
 
   delivery_address:
     form:

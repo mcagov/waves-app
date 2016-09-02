@@ -9,4 +9,4 @@ api_mime_types = %W(
 )
 
 Mime::Type.unregister :json
-Mime::Type.register 'application/json', :json, api_mime_types
+Mime::Type.register "application/json", :json, api_mime_types
