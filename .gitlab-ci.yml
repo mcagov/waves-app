@@ -31,12 +31,12 @@ brakeman:
   tags:
     - ruby2.3
 
-# rubocop:
-#   stage: test
-#   script:
-#     - bundle exec rubocop
-#   tags:
-#     - ruby2.3
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop
+  tags:
+    - ruby2.3
 
 bundler:audit:
   stage: test
