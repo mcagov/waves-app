@@ -8,7 +8,7 @@ class Declaration < ApplicationRecord
     state :incomplete
     state :completed
 
-    event :declare do
+    event :declare, timestamp: true do
       transitions to: :completed, from: :incomplete
     end
   end
