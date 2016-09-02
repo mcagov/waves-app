@@ -1187,22 +1187,22 @@ table.dataTable td.focus {
   margin-left: 10px;
 }
 .paginate_disabled_previous {
-  background: url('../images/back_disabled.png') no-repeat top left;
+  background: url("../images/back_disabled.png") no-repeat top left;
 }
 .paginate_enabled_previous {
-  background: url('../images/back_enabled.png') no-repeat top left;
+  background: url("../images/back_enabled.png") no-repeat top left;
 }
 .paginate_enabled_previous:hover {
-  background: url('../images/back_enabled_hover.png') no-repeat top left;
+  background: url("../images/back_enabled_hover.png") no-repeat top left;
 }
 .paginate_disabled_next {
-  background: url('../images/forward_disabled.png') no-repeat top right;
+  background: url("../images/forward_disabled.png") no-repeat top right;
 }
 .paginate_enabled_next {
-  background: url('../images/forward_enabled.png') no-repeat top right;
+  background: url("../images/forward_enabled.png") no-repeat top right;
 }
 .paginate_enabled_next:hover {
-  background: url('../images/forward_enabled_hover.png') no-repeat top right;
+  background: url("../images/forward_enabled_hover.png") no-repeat top right;
 }
 table.display {
   margin: 0 auto;
@@ -1549,7 +1549,7 @@ span.right {
   background: -moz-linear-gradient(top, #a5dc98 0%, #00a675 100%) !important;
   background: -webkit-linear-gradient(top, #a5dc98 0%,#00a675 100%) !important;
   background: linear-gradient(to bottom, #a5dc98 0%,#00a675 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5dc98', endColorstr='#00a675',GradientType=0 ) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#a5dc98", endColorstr="#00a675",GradientType=0 ) !important;
 }
 .tile_count {
   margin-bottom: 20px;
@@ -2101,7 +2101,7 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
   transition: 0.15s ease-out;
 }
 .item .alert::after {
-  content: '';
+  content: "";
   display: block;
   height: 0;
   width: 0;
@@ -2366,7 +2366,7 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
   color: white;
 }
 .dropzone .dz-preview .dz-error-message:after {
-  content: '';
+  content: "";
   position: absolute;
   top: -6px;
   left: 64px;
@@ -2782,7 +2782,7 @@ textarea:focus {
   background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffffff", endColorstr="#ffe6e6e6", GradientType=0);
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
@@ -3442,7 +3442,7 @@ html > body > .ui-pnotify {
   font-size: 18px;
 }
 .percent:after {
-  content: '%';
+  content: "%";
   margin-left: 0.1em;
   font-size: .8em;
 }
@@ -3487,7 +3487,7 @@ ul.widget_tally .count {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffffff", endColorstr="#ffe6e6e6", GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   padding-bottom: 10px;
   -webkit-box-shadow: 0 4px 6px -6px #222;
@@ -4893,7 +4893,7 @@ a:hover {
   background: -o-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
   background: -ms-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
   background: linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#f7f9fa", endColorstr="#f0f0f0", GradientType=0);
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
   -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;

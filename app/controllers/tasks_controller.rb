@@ -1,5 +1,4 @@
 class TasksController < InternalPagesController
-
   def my_tasks
     @submissions = Submission.assigned_to(current_user)
   end
@@ -8,7 +7,7 @@ class TasksController < InternalPagesController
     @submissions = Submission.assigned
   end
 
-   def unclaimed
+  def unclaimed
     @submissions = Submission.unassigned
   end
 
@@ -21,14 +20,14 @@ class TasksController < InternalPagesController
   end
 
   def referred
-    @submissions = Submission.order('referred_until desc').referred
+    @submissions = Submission.order("referred_until desc").referred
   end
 
   def rejected
-    @submissions = Submission.order('updated_at desc').rejected
+    @submissions = Submission.order("updated_at desc").rejected
   end
 
   def cancelled
-    @submissions = Submission.order('updated_at desc').cancelled
+    @submissions = Submission.order("updated_at desc").cancelled
   end
 end

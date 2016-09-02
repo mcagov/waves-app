@@ -58,7 +58,8 @@ module Clearance
     def password_reset_params
       if params.key? :user
         ActiveSupport::Deprecation.warn %(
-          Since locales functionality was added, accessing params[:user] is no longer supported.
+          Since locales functionality was added,
+          accessing params[:user] is no longer supported.
         )
         params[:user][:password]
       else

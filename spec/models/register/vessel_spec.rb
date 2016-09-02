@@ -214,21 +214,30 @@ describe Register::Vessel, type: :model do
 
         it "is less than 6 characters long" do
           invalid_radio_call_sign = random_radio_call_sign(5)
-          vessel = build(:register_vessel, radio_call_sign: invalid_radio_call_sign)
+          vessel =
+            build(:register_vessel,
+                  radio_call_sign: invalid_radio_call_sign
+                 )
 
           expect(vessel).not_to be_valid
         end
 
         it "is greater than 7 characters long" do
           invalid_radio_call_sign = random_radio_call_sign(8)
-          vessel = build(:register_vessel, radio_call_sign: invalid_radio_call_sign)
+          vessel =
+            build(:register_vessel,
+                  radio_call_sign: invalid_radio_call_sign
+                 )
 
           expect(vessel).not_to be_valid
         end
 
         it "is in an invalid format" do
           invalid_radio_call_sign = random_radio_call_sign(6).insert(2, "-")
-          vessel = build(:register_vessel, radio_call_sign: invalid_radio_call_sign)
+          vessel =
+            build(:register_vessel,
+                  radio_call_sign: invalid_radio_call_sign
+                 )
 
           expect(vessel).not_to be_valid
         end

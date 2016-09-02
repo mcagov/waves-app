@@ -13,21 +13,26 @@ VESSEL_TYPES = [
 
 USERS = ["develop"].freeze
 
+# rubocop:disable WordArray
 COUNTRIES = [
   ["GB", "United Kingdom"],
   ["FR", "France"],
   ["ES", "Spain"],
   ["PT", "Portugal"],
-  ["VG", "British Virgin Islands"]
-]
+  ["VG", "British Virgin Islands"],
+].freeze
 
-COUNTRIES.each { |country| Country.find_or_create_by(code: country.first, name: country.last) }
+COUNTRIES.each do |country|
+  Country.find_or_create_by(code: country.first, name: country.last)
+end
 
-VESSEL_TYPES.each { |name| VesselType.find_or_create_by(name: name, key: name.parameterize) }
+VESSEL_TYPES.each do |name|
+  VesselType.find_or_create_by(name: name, key: name.parameterize)
+end
 
 USERS.each do |user|
   u = User.find_or_initialize_by(name: user)
-  u.email = "#{ user }@example.com"
+  u.email = "#{user}@example.com"
   u.password = "password"
   u.save!
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Country API" do
   before do
-    1.upto(5){|c| create(:country) }
+    1.upto(5) { create(:country) }
   end
 
   it "sends a list of countries" do

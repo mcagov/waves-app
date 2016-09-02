@@ -25,7 +25,8 @@ module Clearance
     def avoid_sign_in
       warn "[DEPRECATION] Clearance's `avoid_sign_in` before_filter is " \
         "deprecated. Use `redirect_signed_in_users` instead. " \
-        "Be sure to update any instances of `skip_before_filter :avoid_sign_in`" \
+        "Be sure to update any instances of " \
+        "`skip_before_filter :avoid_sign_in`" \
         " or `skip_before_action :avoid_sign_in` as well"
       redirect_signed_in_users
     end

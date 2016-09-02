@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   constraints Clearance::Constraints::SignedOut.new do
-     root to: "clearance/sessions#new"
+    root to: "clearance/sessions#new"
   end
 
   namespace :api do
@@ -49,10 +49,13 @@ Rails.application.routes.draw do
     end
   end
 
-  %w{ incomplete my-tasks team-tasks print-queue
-    referred unclaimed rejected cancelled }.each do |action|
-    get "/tasks/#{ action }",
-      controller: "tasks", action: action.gsub('-', '_')
+  %w(
+    incomplete my-tasks team-tasks print-queue
+    referred unclaimed rejected cancelled
+  ).each do |action|
+    get "/tasks/#{action}",
+        controller: "tasks",
+        action: action.tr("-", "_")
   end
 
   root to: "dashboards#show"

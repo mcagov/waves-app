@@ -15,8 +15,8 @@ describe NotificationsController, type: :controller do
       notification: {
         subject: "hello",
         message: "something to tell you",
-        due_by: 30.days.from_now
-      }
+        due_by: 30.days.from_now,
+      },
     }
   end
 

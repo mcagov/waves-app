@@ -1,2 +1,4 @@
-class Register::Owner < Customer
+module Register
+  class Owner < Customer
+  end
 end

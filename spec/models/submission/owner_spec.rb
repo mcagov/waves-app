@@ -2,13 +2,13 @@ require "rails_helper"
 
 describe Submission::Owner do
   context "#new" do
-    subject { Submission::Owner.new(input_params)}
+    subject { Submission::Owner.new(input_params) }
 
     context "in general" do
       let(:input_params) do
         {
           name: "A real name",
-          non_existent: "rubbish"
+          non_existent: "rubbish",
         }
       end
 
@@ -17,7 +17,7 @@ describe Submission::Owner do
       end
 
       it "does not have non_existent" do
-        expect{ subject.non_existent }.to raise_error(NoMethodError)
+        expect { subject.non_existent }.to raise_error(NoMethodError)
       end
     end
 
@@ -26,7 +26,7 @@ describe Submission::Owner do
         {
           address_1: "10 Downing St",
           address_2: "Whitehall",
-          town: "London"
+          town: "London",
         }
       end
 

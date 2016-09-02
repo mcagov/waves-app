@@ -6,7 +6,7 @@
 
 /*
  * Include this stylesheet on your page to get a more printer-friendly calendar.
- * When including this stylesheet, use the media='print' attribute of the <link> tag.
+ * When including this stylesheet, use the media="print" attribute of the <link> tag.
  * Make sure to include this stylesheet IN ADDITION to the regular fullcalendar.css.
  */
 
@@ -56,10 +56,10 @@ tbody,
 	display: none;
 }
 
-/* don't force a min-height on rows (for DayGrid) */
+/* don"t force a min-height on rows (for DayGrid) */
 .fc tbody .fc-row {
 	height: auto !important; /* undo height that JS set in distributeHeight */
-	min-height: 0 !important; /* undo the min-height from each view's specific stylesheet */
+	min-height: 0 !important; /* undo the min-height from each view"s specific stylesheet */
 }
 
 .fc tbody .fc-row .fc-content-skeleton {
@@ -102,17 +102,17 @@ tbody,
 /* TimeGrid Restyling
 --------------------------------------------------------------------------------------------------*/
 
-/* undo the min-height 100% trick used to fill the container's height */
+/* undo the min-height 100% trick used to fill the container"s height */
 .fc-time-grid {
 	min-height: 0 !important;
 }
 
-/* don't display the side axis at all ("all-day" and time cells) */
+/* don"t display the side axis at all ("all-day" and time cells) */
 .fc-agenda-view .fc-axis {
 	display: none;
 }
 
-/* don't display the horizontal lines */
+/* don"t display the horizontal lines */
 .fc-slats,
 .fc-time-grid hr { /* this hr is used when height is underused and needs to be filled */
 	display: none !important; /* important overrides inline declaration */
@@ -204,5 +204,5 @@ tbody,
 
 .fc-button-group,
 .fc button {
-	display: none; /* don't display any button-related controls */
+	display: none; /* don"t display any button-related controls */
 }

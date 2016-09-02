@@ -9,20 +9,22 @@ class Submission < ApplicationRecord
   has_many :notifications
   has_many :correspondences, as: :noteable
 
-  has_one :cancellation, -> { order('created_at desc').limit(1) },
-    class_name: "Notification::Cancellation"
+  has_one :cancellation, -> { order("created_at desc").limit(1) },
+          class_name: "Notification::Cancellation"
 
-  has_one :rejection, -> { order('created_at desc').limit(1) },
-    class_name: "Notification::Rejection"
+  has_one :rejection, -> { order("created_at desc").limit(1) },
+          class_name: "Notification::Rejection"
 
-  has_one :referral, -> { order('created_at desc').limit(1) },
-    class_name: "Notification::Referral"
+  has_one :referral, -> { order("created_at desc").limit(1) },
+          class_name: "Notification::Referral"
 
   has_one :registration
   has_one :registered_vessel, through: :registration
 
-  default_scope { includes(:payment).order('target_date asc').where.not(state: 'completed') }
-  scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
+  default_scope do
+    includes(:payment).order("target_date asc").where.not(state: "completed")
+  end
+  scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
   validates :part, presence: true
   validates :ref_no, presence: true
@@ -57,7 +59,7 @@ class Submission < ApplicationRecord
   end
 
   def source
-    'Online'
+    "Online"
   end
 
   protected

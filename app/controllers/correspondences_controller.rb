@@ -6,11 +6,9 @@ class CorrespondencesController < InternalPagesController
     @correspondence.actioned_by = current_user
     @correspondence.noteable = @submission
 
-    if @correspondence.save
-      flash[:notice] = "The correspondence has been saved"
-    end
-    redirect_to submission_path(@submission)
+    flash[:notice] = "The correspondence has been saved" if @correspondence.save
 
+    redirect_to submission_path(@submission)
   end
 
   private
@@ -20,6 +18,7 @@ class CorrespondencesController < InternalPagesController
   end
 
   def correspondence_params
-    params.require(:correspondence).permit(:subject, :format, :noted_at, :content)
+    params.require(:correspondence)
+          .permit(:subject, :format, :noted_at, :content)
   end
 end

@@ -1,7 +1,7 @@
 class FlattenMigrations < ActiveRecord::Migration[5.0]
   def change
     enable_extension "plpgsql"
-    enable_extension 'uuid-ossp'
+    enable_extension "uuid-ossp"
 
     create_table "addresses", id: :uuid, force: :cascade do |t|
       t.string   "address_1",            null: false

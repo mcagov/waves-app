@@ -13,9 +13,12 @@ describe RefNo do
 
   context "in the unlikely event of a duplicate" do
     before do
-      expect(SecureRandom).to receive(:hex).with(3).and_return("123456", "ABCDEF").twice
-      expect(Submission).to receive(:where).with(ref_no: "00-123456").and_return(["foo"]).once
-      expect(Submission).to receive(:where).with(ref_no: "00-ABCDEF").and_return([]).once
+      expect(SecureRandom).to receive(:hex).with(3)
+        .and_return("123456", "ABCDEF").twice
+      expect(Submission).to receive(:where).with(ref_no: "00-123456")
+        .and_return(["foo"]).once
+      expect(Submission).to receive(:where).with(ref_no: "00-ABCDEF")
+        .and_return([]).once
     end
 
     it { expect(ref_no).to be_present }

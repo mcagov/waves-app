@@ -30,14 +30,14 @@ feature "User views new submission", type: :feature, js: true do
     click_link("Owners")
 
     within("#owner_1") do
-      expect(page).to have_css('th', text: "Owner #1")
-      expect(page).to have_css('.owner-name', text: "Horatio Nelson")
-      expect(page).to have_css('.declaration', text: "Completed online")
+      expect(page).to have_css("th", text: "Owner #1")
+      expect(page).to have_css(".owner-name", text: "Horatio Nelson")
+      expect(page).to have_css(".declaration", text: "Completed online")
     end
 
     within("#owner_2") do
-      expect(page).to have_css('th', text: "Owner #2")
-      expect(page).to have_css('.owner-name', text: "Edward McCallister")
+      expect(page).to have_css("th", text: "Owner #2")
+      expect(page).to have_css(".owner-name", text: "Edward McCallister")
     end
   end
 
@@ -50,11 +50,11 @@ feature "User views new submission", type: :feature, js: true do
   end
 
   scenario "not viewing the action buttons as this is unassigned" do
-    expect(page).not_to have_css('a', text: 'Register Vessel & Issue Certificate of Registry')
+    expect(page)
+      .not_to have_css(
+        "a", text: "Register Vessel & Issue Certificate of Registry"
+      )
   end
 
   scenario "declaration made"
 end
-
-
-
