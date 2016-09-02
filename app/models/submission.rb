@@ -24,11 +24,11 @@ class Submission < ApplicationRecord
 
   default_scope do
     includes([:payment, :declarations, :correspondences])
-    .order('target_date asc')
-    .where.not(state: :completed)
+      .order("target_date asc")
+      .where.not(state: :completed)
   end
 
-  scope :assigned_to, lambda {|claimant| where(claimant: claimant)}
+  scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
   validates :part, presence: true
   validates :ref_no, presence: true

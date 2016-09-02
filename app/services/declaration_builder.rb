@@ -34,7 +34,7 @@ class DeclarationBuilder
           notification:
             Notification::OutstandingDeclaration.create(
               submission: @submission)
-          )
+        )
       end
     end
   end

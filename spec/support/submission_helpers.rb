@@ -1,6 +1,8 @@
 module SubmissionHelpers
   def new_registration_attributes
-    JSON.parse(File.read('spec/fixtures/new_registration.json'))["data"]["attributes"]
+    JSON.parse(
+      File.read("spec/fixtures/new_registration.json")
+    )["data"]["attributes"]
   end
 
   def create_incomplete_submission!
@@ -27,7 +29,7 @@ module SubmissionHelpers
   def create_paid_outstanding_declaration_submission!
     submission = create_incomplete_submission!
 
-    new_payment_json = JSON.parse(File.read('spec/fixtures/new_payment.json'))
+    new_payment_json = JSON.parse(File.read("spec/fixtures/new_payment.json"))
     payment = Payment.new(new_payment_json["data"]["attributes"])
     payment.update_attribute(:submission_id, submission.id)
 

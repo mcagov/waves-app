@@ -16,7 +16,7 @@ module SubmissionTransitions
 
       event :paid do
         transitions to: :unassigned, from: :incomplete,
-                    on_transition: :set_target_date_and_urgent_flag
+                    on_transition: :set_target_date_and_urgent_flag,
                     guard: :declarations_completed?
       end
 
@@ -54,7 +54,9 @@ module SubmissionTransitions
 
     def init_new_submission
       self.ref_no = RefNo.generate(ref_no_prefix)
-      DeclarationBuilder.build(self, owners.map(&:email), user_input[:declarations])
+      DeclarationBuilder.build(
+        self, owners.map(&:email), user_input[:declarations]
+      )
     end
 
     def remove_claimant

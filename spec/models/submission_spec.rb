@@ -26,7 +26,7 @@ describe Submission, type: :model do
   end
 
   context "declarations" do
-     let!(:submission) { create_incomplete_submission! }
+    let!(:submission) { create_incomplete_submission! }
 
     it "has one completed declaration" do
       expect(submission.declarations.completed.length).to eq(1)
@@ -37,7 +37,8 @@ describe Submission, type: :model do
     end
 
     it "was declared_by by the first owner" do
-      expect(submission.declared_by?(submission.owners.first.email)).to be_truthy
+      expect(submission.declared_by?(submission.owners.first.email))
+        .to be_truthy
     end
 
     it "was not declared_by by the second owner" do
@@ -48,8 +49,9 @@ describe Submission, type: :model do
       expect(submission.declarations.completed.first.notification).to be_nil
     end
 
-    it "builds a OutstandingDeclaration notification for the incomplete declaration" do
-      expect(submission.declarations.incomplete.first.notification).to be_a(Notification::OutstandingDeclaration)
+    it "builds a  notification for the incomplete declaration" do
+      expect(submission.declarations.incomplete.first.notification)
+        .to be_a(Notification::OutstandingDeclaration)
     end
   end
 

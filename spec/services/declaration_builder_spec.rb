@@ -30,8 +30,9 @@ describe DeclarationBuilder do
       expect(submission.declarations.completed.first.notification).to be_nil
     end
 
-    it "builds a OutstandingDeclaration notification for the incomplete declaration" do
-      expect(submission.declarations.incomplete.first.notification).to be_a(Notification::OutstandingDeclaration)
+    it "builds a notification for the incomplete declaration" do
+      expect(submission.declarations.incomplete.first.notification)
+        .to be_a(Notification::OutstandingDeclaration)
     end
   end
 end
