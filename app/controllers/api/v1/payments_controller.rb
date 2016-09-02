@@ -15,7 +15,9 @@ module Api::V1
 
     def create_payment_params
       data = params.require("data")
-      data.require(:attributes).permit!
+      data.require(:attributes).permit(
+        :submission_id, :wp_token, :wp_order_code,
+        :wp_amount, :wp_country, :customer_ip)
     end
   end
 end
