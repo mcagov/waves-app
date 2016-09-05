@@ -1,5 +1,5 @@
 class RemoveErroneousActivities < ActiveRecord::Migration[5.0]
   def change
-    # drop_table "activities"
+    drop_table "activities"
   end
 end

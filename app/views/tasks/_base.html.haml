@@ -22,7 +22,7 @@
           %td= submission.applicant
           %td= submission.job_type
           %td= submission.target_date
-          %td= css_tick(submission.paid?)
+          %td= css_tick(submission.payment.present?)
           %td= submission.source
           %td= submission.updated_at
           %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}

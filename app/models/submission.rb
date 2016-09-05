@@ -6,7 +6,8 @@ class Submission < ApplicationRecord
 
   has_one :payment
 
-  has_many :declarations
+  has_many :declarations, -> { order("created_at asc") }
+
   has_many :notifications
   has_many :correspondences, as: :noteable
 
@@ -35,27 +36,12 @@ class Submission < ApplicationRecord
 
   def process_application; end
 
-  def paid?
-    payment.present?
-  end
-
   def vessel
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
 
-  def owners
-    @owners ||=
-      (user_input[:owners] || []).map do |owner_params|
-        Submission::Owner.new(owner_params)
-      end
-  end
-
-  def declared_by?(email)
-    declarations.completed.map(&:owner_email).include?(email)
-  end
-
   def applicant
-    owners.first if owners
+    declarations.first.owner if declarations
   end
 
   def source

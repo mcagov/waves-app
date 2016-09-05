@@ -1,4 +1,4 @@
-class Submission::Owner
+class Declaration::Owner
   attr_accessor(
     :name,
     :nationality,

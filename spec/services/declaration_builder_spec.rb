@@ -3,31 +3,27 @@ require "rails_helper"
 describe DeclarationBuilder do
   context ".build" do
     before do
-      DeclarationBuilder.build(create(:submission), [alice, bob], [alice])
+      DeclarationBuilder.build(
+        create(:submission), [alice, bob], ["alice@example.com"])
     end
 
-    let(:alice) { "alice@example.com" }
-    let(:bob) { "bob@example.com" }
+    let(:alice) { build(:declaration_owner, email: "alice@example.com") }
+    let(:bob) { build(:declaration_owner) }
     let!(:submission) { Submission.last }
 
     it "has a completed declaration for alice" do
-      expect(submission.declarations.completed.first.owner_email).to eq(alice)
+      expect(submission.declarations.completed.first.owner.name)
+        .to eq(alice.name)
     end
 
     it "has an incomplete declaration for bob" do
-      expect(submission.declarations.incomplete.first.owner_email).to eq(bob)
-    end
-
-    it "was declared_by alice" do
-      expect(submission).to be_declared_by(alice)
-    end
-
-    it "was not declared_by bob" do
-      expect(submission).not_to be_declared_by(bob)
+      expect(submission.declarations.incomplete.first.owner.name)
+        .to eq(bob.name)
     end
 
     it "does not build a notification for the completed declaration" do
-      expect(submission.declarations.completed.first.notification).to be_nil
+      expect(submission.declarations.completed.first.notification)
+        .to be_nil
     end
 
     it "builds a notification for the incomplete declaration" do

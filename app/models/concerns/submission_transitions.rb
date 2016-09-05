@@ -17,7 +17,13 @@ module SubmissionTransitions
       event :paid do
         transitions to: :unassigned, from: :incomplete,
                     on_transition: :set_target_date_and_urgent_flag,
-                    guard: :declarations_completed?
+                    guard: :unassignable?
+      end
+
+      event :declared do
+        transitions to: :unassigned, from: :incomplete,
+                    on_transition: :set_target_date_and_urgent_flag,
+                    guard: :unassignable?
       end
 
       event :claimed do
@@ -54,8 +60,11 @@ module SubmissionTransitions
 
     def init_new_submission
       self.ref_no = RefNo.generate(ref_no_prefix)
+
       DeclarationBuilder.build(
-        self, owners.map(&:email), user_input[:declarations]
+        self,
+        user_input[:owners],
+        user_input[:declarations]
       )
     end
 
@@ -64,7 +73,7 @@ module SubmissionTransitions
     end
 
     def set_target_date_and_urgent_flag
-      if paid? && payment.wp_amount.to_i == 7500
+      if payment.wp_amount.to_i == 7500
         update_attribute(:target_date, 5.days.from_now)
         update_attribute(:is_urgent, true)
       else
@@ -72,8 +81,8 @@ module SubmissionTransitions
       end
     end
 
-    def declarations_completed?
-      owners.length == declarations.completed.length
+    def unassignable?
+      declarations.incomplete.empty? && payment.present?
     end
   end
 end

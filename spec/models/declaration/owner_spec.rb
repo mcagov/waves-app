@@ -1,8 +1,8 @@
 require "rails_helper"
 
-describe Submission::Owner do
+describe Declaration::Owner do
   context "#new" do
-    subject { Submission::Owner.new(input_params) }
+    subject { described_class.new(input_params) }
 
     context "in general" do
       let(:input_params) do

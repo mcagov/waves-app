@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User views new submission", type: :feature, js: true do
-  let!(:submission) { create_paid_submission! }
+  let!(:submission) { create_unassigned_submission! }
 
   before do
     login_to_part_3
@@ -29,15 +29,10 @@ feature "User views new submission", type: :feature, js: true do
   scenario "owner info", javascript: true do
     click_link("Owners")
 
-    within("#owner_1") do
+    within("#declaration_1") do
       expect(page).to have_css("th", text: "Owner #1")
       expect(page).to have_css(".owner-name", text: "Horatio Nelson")
       expect(page).to have_css(".declaration", text: "Completed online")
-    end
-
-    within("#owner_2") do
-      expect(page).to have_css("th", text: "Owner #2")
-      expect(page).to have_css(".owner-name", text: "Edward McCallister")
     end
   end
 
@@ -55,6 +50,4 @@ feature "User views new submission", type: :feature, js: true do
         "a", text: "Register Vessel & Issue Certificate of Registry"
       )
   end
-
-  scenario "declaration made"
 end

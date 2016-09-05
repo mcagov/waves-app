@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :countries, only: [:index]
-      resources :declarations, only: [:show]
+      resources :declarations, only: [:show, :update]
       resources :new_registrations, only: [:create]
       resources :payments, only: [:create]
       resources :vessel_types, only: [:index]
