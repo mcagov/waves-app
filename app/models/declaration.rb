@@ -14,6 +14,6 @@ class Declaration < ApplicationRecord
   end
 
   def owner
-    Owner.new(changeset)
+    Declaration::Owner.new(changeset)
   end
 end

@@ -1,6 +1,4 @@
-class Owner
-  include ActiveModel
-
+class Declaration::Owner
   attr_accessor(
     :name,
     :nationality,
