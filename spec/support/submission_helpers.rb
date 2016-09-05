@@ -9,13 +9,16 @@ module SubmissionHelpers
     NewRegistration.create(new_registration_attributes)
   end
 
+  def create_incomplete_paid_submission!
+    submission = create_incomplete_submission!
+    pay_submission(submission)
+
+    submission
+  end
+
   def create_unassigned_submission!
     submission = create_incomplete_submission!
-
-    payment_json = JSON.parse(File.read("spec/fixtures/new_payment.json"))
-    payment = Payment.new(payment_json["data"]["attributes"])
-    payment.update_attribute(:submission_id, submission.id)
-    submission.paid!
+    pay_submission(submission)
 
     submission.declarations.incomplete.map(&:declare!)
     submission.declared!
@@ -24,12 +27,7 @@ module SubmissionHelpers
 
   def create_unassigned_urgent_submission!
     submission = create_incomplete_submission!
-
-    payment_json =
-      JSON.parse(File.read("spec/fixtures/urgent_payment.json"))
-    payment = Payment.new(payment_json["data"]["attributes"])
-    payment.update_attribute(:submission_id, submission.id)
-    submission.paid!
+    pay_submission(submission, "urgent_payment")
 
     submission.declarations.incomplete.map(&:declare!)
     submission.declared!
@@ -55,5 +53,15 @@ module SubmissionHelpers
     submission = create_assigned_submission!
     login_to_part_3(submission.claimant)
     visit submission_path(submission)
+  end
+
+  def pay_submission(submission, payment_file = "new_payment")
+    payment_json =
+      JSON.parse(File.read("spec/fixtures/#{payment_file}.json"))
+
+    payment = Payment.new(payment_json["data"]["attributes"])
+    payment.update_attribute(:submission_id, submission.id)
+    submission.paid!
+    submission
   end
 end
