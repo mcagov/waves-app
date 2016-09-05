@@ -1,29 +1,31 @@
 require "rails_helper"
 
 describe "Complete Declaration API" do
-  let!(:submission) { create_paid_outstanding_declaration_submission! }
+  let!(:submission) { create_incomplete_paid_submission! }
   let(:outstanding_declaration) { submission.declarations.incomplete.first }
-  let(:params) { { id: declaration_id } }
+  let(:params) { { owner: { name: "Alice" } } }
 
-  before { post api_v1_completed_declarations_path, params: params }
+  before do
+    put api_v1_declaration_path(declaration_id), params: params
+  end
 
-  xcontext "with a valid declaration" do
+  context "with a valid declaration" do
     let(:declaration_id) { outstanding_declaration.id }
 
-    it "returns the status code :created" do
-      expect(response).to have_http_status(:created)
+    it "returns the status code :ok" do
+      expect(response).to have_http_status(:ok)
     end
 
     it "completes the declaration" do
-      expect(Declaration.find(outstanding_declaration)).to be_completed
+      expect(Declaration.find(outstanding_declaration.id)).to be_completed
     end
 
     it "sets the submission to unassigned" do
-      expect(Submission.find(submission)).to be_unassigned
+      expect(Submission.find(submission.id)).to be_unassigned
     end
   end
 
-  xcontext "with an already completed declaration" do
+  context "with an already completed declaration" do
     let(:declaration_id) { submission.declarations.completed.first.id }
 
     it "returns the status code :unprocessable_entity" do
@@ -31,7 +33,7 @@ describe "Complete Declaration API" do
     end
   end
 
-  xcontext "with an invalid declaration id" do
+  context "with an invalid declaration id" do
     let(:declaration_id) { "foo" }
 
     it "returns the status code :unprocessable_entity" do
