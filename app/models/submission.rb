@@ -6,7 +6,8 @@ class Submission < ApplicationRecord
 
   has_one :payment
 
-  has_many :declarations
+  has_many :declarations, -> { order("created_at asc") }
+
   has_many :notifications
   has_many :correspondences, as: :noteable
 
