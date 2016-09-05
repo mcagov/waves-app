@@ -10,7 +10,8 @@ class Declaration::Owner
     :town,
     :county,
     :postcode,
-    :country
+    :country,
+    :declared_at
   )
 
   def initialize(params = {})

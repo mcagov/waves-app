@@ -1,20 +1,51 @@
 require "rails_helper"
 
 describe "Oustanding Declaration API" do
-  let(:parsed_body) { JSON.parse(response.body) }
   before { get api_v1_declaration_path(declaration_id) }
 
   context "with a valid oustanding declaration" do
-    let(:declaration) { create(:declaration) }
-    let(:declaration_id) { declaration.id }
+    let(:submission) { create_incomplete_paid_submission! }
+    let(:declaration_id) do
+      submission.declarations.incomplete.first.id
+    end
+
+    let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
 
     it "responds with the status code :ok" do
       expect(response).to have_http_status(200)
     end
 
-    it "responds with the owner" do
-      expect(parsed_body["data"]["attributes"]["owner"]["name"])
-        .to eq(declaration.owner.name)
+    it "responds with the vessel" do
+      expect(parsed_attrs["vessel"]["name"])
+        .to eq("Celebrator Doppelbock")
+    end
+
+    context "the owner" do
+      it "name is Edward McCallister" do
+        expect(parsed_attrs["owner"]["name"])
+          .to eq("Edward McCallister")
+      end
+
+      it "has a nil declared_at date" do
+        expect(parsed_attrs["owner"]["declared_at"])
+          .to be_nil
+      end
+    end
+
+    context "the other_owners" do
+      it "returns only one" do
+        expect(parsed_attrs["other-owners"].length).to eq(1)
+      end
+
+      it "name is Horatio Nelson" do
+        expect(parsed_attrs["other-owners"][0]["name"])
+          .to eq("Horatio Nelson")
+      end
+
+      it "has a declared_at date" do
+        expect(parsed_attrs["other-owners"][0]["declared_at"])
+          .to be_present
+      end
     end
   end
 
