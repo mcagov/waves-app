@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User views task lists", type: :feature, js: true do
   before do
-    create_paid_submission!
+    create_unassigned_submission!
     login_to_part_3
   end
 

@@ -37,7 +37,7 @@ describe SubmissionsController, type: :controller do
   end
 
   context "#approve" do
-    let(:submission) { create_completeable_submission! }
+    let(:submission) { create_assigned_submission! }
 
     context "succesfully" do
       before { post :approve, params: { id: submission.id } }

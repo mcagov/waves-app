@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User views unclaimed task list", type: :feature, js: true do
-  let!(:submission) { create_paid_submission! }
+  let!(:submission) { create_unassigned_submission! }
 
   before do
     login_to_part_3

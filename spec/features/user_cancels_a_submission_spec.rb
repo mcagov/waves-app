@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User cancels a submission", type: :feature, js: true do
   before do
-    visit_completeable_submission
+    visit_assigned_submission
   end
 
   scenario "and restores it" do

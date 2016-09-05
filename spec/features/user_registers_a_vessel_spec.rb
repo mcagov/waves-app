@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User registers a vessel", type: :feature, js: true do
   before do
-    visit_claimed_submission
+    visit_assigned_submission
     click_link("Register Vessel")
   end
 

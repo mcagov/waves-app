@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User adds correspondence", type: :feature, js: true do
   before do
-    visit_completeable_submission
+    visit_assigned_submission
   end
 
   scenario "to a submission" do

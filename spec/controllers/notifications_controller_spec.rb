@@ -6,7 +6,7 @@ describe NotificationsController, type: :controller do
     allow(controller).to receive(:current_user).and_return(current_user)
   end
 
-  let!(:submission) { create_completeable_submission! }
+  let!(:submission) { create_assigned_submission! }
   let!(:current_user) { submission.claimant }
 
   let(:notification_params) do

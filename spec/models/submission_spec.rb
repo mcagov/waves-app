@@ -46,20 +46,8 @@ describe Submission, type: :model do
     end
   end
 
-  context "#paid?" do
-    context "it is paid" do
-      subject { build(:paid_submission).paid? }
-      it { expect(subject).to be_truthy }
-    end
-
-    context "it is not paid" do
-      subject { build(:submission).paid? }
-      it { expect(subject).to be_falsey }
-    end
-  end
-
   context "#approved!" do
-    let!(:submission) { create_completeable_submission! }
+    let!(:submission) { create_assigned_submission! }
     before { submission.approved! }
 
     it "transitions to completed" do
@@ -69,7 +57,7 @@ describe Submission, type: :model do
 
   context "paid!" do
     context "with standard service" do
-      let!(:submission) { create_paid_submission! }
+      let!(:submission) { create_assigned_submission! }
 
       it "sets the target_date to 20 days away" do
         expect(submission.target_date.to_date)
@@ -82,7 +70,7 @@ describe Submission, type: :model do
     end
 
     context "with urgent service" do
-      let!(:submission) { create_urgent_paid_submission! }
+      let!(:submission) { create_unassigned_urgent_submission! }
 
       it "sets the target_date to 5 days away (best guess)" do
         expect(submission.target_date.to_date)

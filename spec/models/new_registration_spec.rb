@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe NewRegistration, type: :model do
-  let!(:new_registration) { create_completeable_submission! }
+  let!(:new_registration) { create_assigned_submission! }
 
   context "in general" do
     it "has a ref_no with the expected prefix" do
