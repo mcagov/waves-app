@@ -1,30 +1,23 @@
 class DeclarationBuilder
   class << self
-    def build(submission, owners, declared_by)
+    def build(submission, owners, declared_by_emails)
       @submission = submission
       @owners = owners || []
-      @declared_by = declared_by || []
-      find_or_create_declarations
-      declare_completed_declarations
+      @declared_by_emails = declared_by_emails || []
+      build_declarations
       build_outstanding_declaration_notifications
     end
 
     private
 
-    def find_or_create_declarations
-      @owners.map do |owner|
-        Declaration.find_or_create_by(
-          submission: @submission,
-          owner_email: owner
-        )
-      end
-    end
-
-    def declare_completed_declarations
-      @declared_by.each do |declarer|
-        Declaration.find_by(
-          submission: @submission,
-          owner_email: declarer).declare!
+    def build_declarations
+      @owners.each do |owner|
+        declaration =
+          Declaration.create(
+            submission: @submission,
+            changeset: owner
+          )
+        declaration.declare! if @declared_by_emails.include?(owner.email)
       end
     end
 

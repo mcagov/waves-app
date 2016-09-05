@@ -12,4 +12,8 @@ class Declaration < ApplicationRecord
       transitions to: :completed, from: :incomplete
     end
   end
+
+  def owner
+    Owner.new(changeset)
+  end
 end

@@ -50,8 +50,10 @@ class Submission < ApplicationRecord
       end
   end
 
-  def declared_by?(email)
-    declarations.completed.map(&:owner_email).include?(email)
+  def declared_by?(owner)
+    declarations.completed.select do |declaration|
+      declaration.owner.email == owner.email
+    end.present?
   end
 
   def applicant

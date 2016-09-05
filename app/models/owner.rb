@@ -1,4 +1,6 @@
-class Submission::Owner
+class Owner
+  include ActiveModel
+
   attr_accessor(
     :name,
     :nationality,
