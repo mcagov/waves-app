@@ -35,10 +35,6 @@ class Submission < ApplicationRecord
 
   def process_application; end
 
-  def paid?
-    payment.present?
-  end
-
   def vessel
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
