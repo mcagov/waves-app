@@ -1,3 +1,3 @@
 class DeclarationSerializer < ActiveModel::Serializer
-  attributes :owner, :other_owners, :vessel
+  attributes :owner, :vessel_owners, :vessel
 end
