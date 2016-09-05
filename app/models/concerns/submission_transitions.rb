@@ -54,8 +54,11 @@ module SubmissionTransitions
 
     def init_new_submission
       self.ref_no = RefNo.generate(ref_no_prefix)
+
       DeclarationBuilder.build(
-        self, owners.map(&:email), user_input[:declarations]
+        self,
+        user_input[:owners],
+        user_input[:declarations]
       )
     end
 
@@ -73,7 +76,7 @@ module SubmissionTransitions
     end
 
     def declarations_completed?
-      owners.length == declarations.completed.length
+      declarations.incomplete.empty?
     end
   end
 end

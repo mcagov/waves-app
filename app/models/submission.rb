@@ -43,21 +43,8 @@ class Submission < ApplicationRecord
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
 
-  def owners
-    @owners ||=
-      (user_input[:owners] || []).map do |owner_params|
-        Submission::Owner.new(owner_params)
-      end
-  end
-
-  def declared_by?(owner)
-    declarations.completed.select do |declaration|
-      declaration.owner.email == owner.email
-    end.present?
-  end
-
   def applicant
-    owners.first if owners
+    declarations.first.owner if declarations
   end
 
   def source

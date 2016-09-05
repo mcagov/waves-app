@@ -8,8 +8,8 @@ describe Submission, type: :model do
       expect(submission.vessel).to be_a(Submission::Vessel)
     end
 
-    it "get two owners" do
-      expect(submission.owners.length).to eql(2)
+    it "get two declarations" do
+      expect(submission.declarations.length).to eql(2)
     end
 
     it "has a state: incomplete" do
@@ -36,20 +36,11 @@ describe Submission, type: :model do
       expect(submission.declarations.incomplete.length).to eq(1)
     end
 
-    it "was declared_by by the first owner" do
-      expect(submission.declared_by?(submission.owners.first.email))
-        .to be_truthy
-    end
-
-    it "was not declared_by by the second owner" do
-      expect(submission.declared_by?(submission.owners.last.email)).to be_falsey
-    end
-
     it "does not build a notification for the completed declaration" do
       expect(submission.declarations.completed.first.notification).to be_nil
     end
 
-    it "builds a  notification for the incomplete declaration" do
+    it "builds a notification for the incomplete declaration" do
       expect(submission.declarations.incomplete.first.notification)
         .to be_a(Notification::OutstandingDeclaration)
     end

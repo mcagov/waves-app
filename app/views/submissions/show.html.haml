@@ -27,7 +27,7 @@
           = render partial: "vessel", locals: { vessel: @submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: "owner", collection: @submission.owners
+          = render partial: "declaration", collection: @submission.declarations
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "correspondence", locals: {submission: @submission}

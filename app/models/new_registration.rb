@@ -27,7 +27,7 @@ class NewRegistration < Submission
   end
 
   def assign_owners # rubocop:disable Metrics/MethodLength
-    owners.each do |owner|
+    declarations.map(&:owner).each do |owner|
       Register::Owner.create(
         vessel_id: @reg_vessel.id,
         name: owner.name,

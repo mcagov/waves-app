@@ -17,7 +17,9 @@ class DeclarationBuilder
             submission: @submission,
             changeset: owner
           )
-        declaration.declare! if @declared_by_emails.include?(owner.email)
+        if @declared_by_emails.include?(declaration.owner.email)
+          declaration.declare!
+        end
       end
     end
 

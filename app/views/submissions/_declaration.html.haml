@@ -1,5 +1,5 @@
-- i = owner_counter + 1
-%table.table.table-striped{ id: "owner_#{ i }"}
+- i = declaration_counter + 1
+%table.table.table-striped{ id: "declaration_#{ i }"}
   %thead
     %th Owner ##{ i }
     %th
@@ -10,16 +10,16 @@
       %td{width: "30%"} Owner Name
       %td.owner-name{width: "70%"}
         %a{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
-          %strong= owner
+          %strong= declaration.owner
     %tr
       %td Owner Address
       %td
         %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= owner.inline_address
+          %strong= declaration.owner.inline_address
     %tr
       %td Declaration
       %td.declaration
-        - if @submission.declared_by?(owner.email)
+        - if declaration.completed?
           %i.fa.fa-check
           %strong Completed online
 
