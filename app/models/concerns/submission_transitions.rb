@@ -20,6 +20,12 @@ module SubmissionTransitions
                     guard: :declarations_completed?
       end
 
+      event :declared do
+        transitions to: :unassigned, from: :incomplete,
+                    on_transition: :set_target_date_and_urgent_flag,
+                    guard: :paid?
+      end
+
       event :claimed do
         transitions to: :assigned,
                     from: [:unassigned, :rejected, :referred, :cancelled]
