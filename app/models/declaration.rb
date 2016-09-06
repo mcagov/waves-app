@@ -8,7 +8,7 @@ class Declaration < ApplicationRecord
     state :incomplete
     state :completed
 
-    event :declare, timestamp: true do
+    event :declare, timestamp: true, success: :declare_submission do
       transitions to: :completed, from: :incomplete
     end
   end
@@ -25,5 +25,11 @@ class Declaration < ApplicationRecord
 
   def owners
     submission.declarations.map(&:owner)
+  end
+
+  private
+
+  def declare_submission
+    submission.declared!
   end
 end
