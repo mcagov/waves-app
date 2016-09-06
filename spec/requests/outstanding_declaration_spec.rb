@@ -32,18 +32,18 @@ describe "Oustanding Declaration API" do
       end
     end
 
-    context "the owners" do
-      it "returns both owners" do
-        expect(parsed_attrs["owners"].length).to eq(2)
+    context "the other owners" do
+      it "returns one owner" do
+        expect(parsed_attrs["other-owners"].length).to eq(1)
       end
 
       it "name is Horatio Nelson" do
-        expect(parsed_attrs["owners"][0]["name"])
+        expect(parsed_attrs["other-owners"][0]["name"])
           .to eq("Horatio Nelson")
       end
 
       it "has a declared_at date" do
-        expect(parsed_attrs["owners"][0]["declared_at"])
+        expect(parsed_attrs["other-owners"][0]["declared_at"])
           .to be_present
       end
     end
