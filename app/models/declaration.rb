@@ -23,7 +23,7 @@ class Declaration < ApplicationRecord
     submission.vessel
   end
 
-  def vessel_owners
+  def owners
     submission.declarations.map(&:owner)
   end
 end
