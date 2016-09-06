@@ -13,25 +13,23 @@ module SubmissionHelpers
     submission = create_incomplete_submission!
     pay_submission(submission)
 
-    submission
+    submission.reload
   end
 
   def create_unassigned_submission!
     submission = create_incomplete_submission!
     pay_submission(submission)
 
-    submission.declarations.incomplete.map(&:declare!)
-    submission.declared!
-    submission
+    submission.declarations.incomplete.map(&:declared!)
+    submission.reload
   end
 
   def create_unassigned_urgent_submission!
     submission = create_incomplete_submission!
     pay_submission(submission, "urgent_payment")
 
-    submission.declarations.incomplete.map(&:declare!)
-    submission.declared!
-    submission
+    submission.declarations.incomplete.map(&:declared!)
+    submission.reload
   end
 
   def create_assigned_submission!
@@ -40,7 +38,7 @@ module SubmissionHelpers
     submission.update_attribute(:claimant, create(:user))
 
     submission.claimed!
-    submission
+    submission.reload
   end
 
   def visit_unassigned_submission
