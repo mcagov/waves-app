@@ -16,7 +16,7 @@ module Api::V1
           @declaration.update_attributes(
             changeset: declaration_params[:changeset])
         end
-        @declaration.declare!
+        @declaration.declared!
         render status: :ok
       else
         render status: 422

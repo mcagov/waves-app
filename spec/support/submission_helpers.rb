@@ -20,7 +20,7 @@ module SubmissionHelpers
     submission = create_incomplete_submission!
     pay_submission(submission)
 
-    submission.declarations.incomplete.map(&:declare!)
+    submission.declarations.incomplete.map(&:declared!)
     submission.reload
   end
 
@@ -28,7 +28,7 @@ module SubmissionHelpers
     submission = create_incomplete_submission!
     pay_submission(submission, "urgent_payment")
 
-    submission.declarations.incomplete.map(&:declare!)
+    submission.declarations.incomplete.map(&:declared!)
     submission.reload
   end
 
