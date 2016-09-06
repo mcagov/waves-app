@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Complete Declaration API" do
   let!(:submission) { create_incomplete_paid_submission! }
   let(:outstanding_declaration) { submission.declarations.incomplete.first }
-  let(:params) { { owner: { name: "Alice" } } }
+  let(:params) { completed_declaration_params }
 
   before do
     put api_v1_declaration_path(declaration_id), params: params
@@ -14,6 +14,11 @@ describe "Complete Declaration API" do
 
     it "returns the status code :ok" do
       expect(response).to have_http_status(:ok)
+    end
+
+    it "updates the owner name" do
+      expect(Declaration.find(outstanding_declaration.id).owner.name)
+        .to eq("Bob")
     end
 
     it "completes the declaration" do
@@ -41,3 +46,9 @@ describe "Complete Declaration API" do
     end
   end
 end
+
+# rubocop:disable all
+def completed_declaration_params
+  {"data"=>{"type"=>"payments", "attributes"=>{"changeset"=>{"name"=>"Bob"}}}}
+end
+# rubocop:enable all
