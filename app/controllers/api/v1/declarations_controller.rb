@@ -12,10 +12,12 @@ module Api::V1
 
     def update
       if @declaration
-        @declaration.update_attributes(changeset: params[:owner])
+        if declaration_params[:changeset]
+          @declaration.update_attributes(
+            changeset: declaration_params[:changeset])
+        end
         @declaration.declare!
-        @declaration.submission.declared!
-        render json: @declaration
+        render status: :ok
       else
         render status: 422
       end
@@ -25,6 +27,11 @@ module Api::V1
 
     def load_declaration
       @declaration = Declaration.incomplete.find_by(id: params[:id])
+    end
+
+    def declaration_params
+      data = params.require("data")
+      data.require(:attributes).permit!
     end
   end
 end
