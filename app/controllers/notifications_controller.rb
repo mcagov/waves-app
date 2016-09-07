@@ -3,7 +3,7 @@ class NotificationsController < InternalPagesController
 
   def cancel
     Notification::Cancellation.create(
-      submission_id: @submission.id,
+      notifiable: @submission,
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user
@@ -16,7 +16,7 @@ class NotificationsController < InternalPagesController
 
   def reject
     Notification::Rejection.create(
-      submission_id: @submission.id,
+      notifiable: @submission,
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user
@@ -29,7 +29,7 @@ class NotificationsController < InternalPagesController
 
   def refer
     Notification::Referral.create(
-      submission_id: @submission.id,
+      notifiable: @submission,
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user

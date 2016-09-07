@@ -1,5 +1,5 @@
 class Notification < ApplicationRecord
-  belongs_to :submission
+  belongs_to :notifiable, polymorphic: true
   belongs_to :actioned_by, class_name: "User"
 
   after_create :send_email
