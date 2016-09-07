@@ -29,6 +29,7 @@ gem "auto_increment"
 gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "bootstrap-datepicker-rails"
 gem "delayed_job_active_record"
+gem "daemons"
 
 group :development do
   gem "rubocop"
