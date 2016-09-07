@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905084628) do
+ActiveRecord::Schema.define(version: 20160907103613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,21 @@ ActiveRecord::Schema.define(version: 20160905084628) do
     t.index ["submission_id"], name: "index_declarations_on_submission_id", using: :btree
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "noteable_id"
     t.string   "noteable_type"
@@ -80,10 +95,11 @@ ActiveRecord::Schema.define(version: 20160905084628) do
     t.string   "type"
     t.string   "subject"
     t.text     "body"
-    t.boolean  "delivered",      default: false
     t.uuid     "actioned_by_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "state"
+    t.index ["state"], name: "index_notifications_on_state", using: :btree
     t.index ["type"], name: "index_notifications_on_type", using: :btree
   end
 
