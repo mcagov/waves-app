@@ -5,7 +5,15 @@ class Notification < ApplicationRecord
   after_create :send_email
 
   def send_email
-    NotificationMailer.delay.test_email("test@example.com")
+    NotificationMailer.delay.send(email_template, *email_params)
+  end
+
+  def email_template
+    :test_email
+  end
+
+  def email_params
+    "test@example.com"
   end
 
   # while the due_by date *belongs* in the Notification::Referral model
