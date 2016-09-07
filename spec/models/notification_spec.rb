@@ -10,9 +10,12 @@ describe Notification, type: :model do
   end
 
   context "#send_to_queue!" do
-    before { subject.send_to_queue! }
+    before do
+      dj = double("delayed_job", send_email: "something")
+      expect(NotificationMailer).to receive(:delay).with(dj).once
 
-    it "invokes the mailer"
+      subject.send_to_queue!
+    end
 
     it "is queued" do
       expect(subject).to be_queued
