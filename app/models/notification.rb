@@ -5,12 +5,11 @@ class Notification < ApplicationRecord
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
-    state :undelivered
     state :queued
     state :delivered
 
-    event :send_to_queue do
-      transitions to: :queued, from: :undelivered,
+    event :deliver do
+      transitions to: :delivered, from: :queued,
                   on_transition: :send_email
     end
   end

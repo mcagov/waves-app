@@ -4,18 +4,18 @@ describe Notification, type: :model do
   subject { described_class.new }
 
   context "#create" do
-    it "has status: undelivered" do
-      expect(subject).to be_undelivered
+    it "has status: queued" do
+      expect(subject).to be_queued
     end
   end
 
-  context "#send_to_queue!" do
+  context "#deliver!" do
     before do
-      subject.send_to_queue!
+      subject.deliver!
     end
 
-    it "has status: queued" do
-      expect(subject).to be_queued
+    it "has status: delivered" do
+      expect(subject).to be_delivered
     end
 
     it "creates a delayed job" do
