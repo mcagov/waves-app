@@ -38,7 +38,7 @@ class SubmissionsController < InternalPagesController
   def create_notification
     if params[:email_certificate_of_registry]
       Notification::Approval.create(
-        submission_id: @submission.id,
+        notifiable: @submission,
         subject: @submission.job_type,
         actioned_by: current_user
       )

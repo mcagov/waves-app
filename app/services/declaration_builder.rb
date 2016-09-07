@@ -25,11 +25,8 @@ class DeclarationBuilder
 
     def build_outstanding_declaration_notifications
       @submission.declarations.incomplete.each do |declaration|
-        declaration.update_attributes(
-          notification:
-            Notification::OutstandingDeclaration.create(
-              submission: @submission)
-        )
+        Notification::OutstandingDeclaration.create(
+          notifiable: declaration)
       end
     end
   end

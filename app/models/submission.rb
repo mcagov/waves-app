@@ -8,16 +8,19 @@ class Submission < ApplicationRecord
 
   has_many :declarations, -> { order("created_at asc") }
 
-  has_many :notifications
+  has_many :notifications, as: :notifiable
   has_many :correspondences, as: :noteable
 
   has_one :cancellation, -> { order("created_at desc").limit(1) },
+          as: :notifiable,
           class_name: "Notification::Cancellation"
 
   has_one :rejection, -> { order("created_at desc").limit(1) },
+          as: :notifiable,
           class_name: "Notification::Rejection"
 
   has_one :referral, -> { order("created_at desc").limit(1) },
+          as: :notifiable,
           class_name: "Notification::Referral"
 
   has_one :registration
