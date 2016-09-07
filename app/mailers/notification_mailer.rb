@@ -2,10 +2,19 @@ class NotificationMailer < ApplicationMailer
   default from: ENV.fetch("EMAIL_FROM")
 
   def test_email(email)
-    mail(to: email, subject: "MCA test email service")
+    mail(to: email, subject: "Message from the MCA")
   end
 
-  def outstanding_declaration(email)
-    mail(to: email, subject: "Outstanding declaration")
+  def outstanding_declaration(email, name, declaration_id)
+    @name = name
+    @declaration_url =
+      govuk_url("/referral/outstanding_declaration/#{declaration_id}")
+    mail(to: email, subject: "Message from the MCA")
+  end
+
+  private
+
+  def govuk_url(path)
+    "https://#{ENV.fetch('GOVUK_HOST')}#{path}"
   end
 end
