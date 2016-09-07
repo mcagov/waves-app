@@ -9,9 +9,14 @@ class Notification < ApplicationRecord
     state :queued
     state :delivered
 
-    event :send_to_queue! do
-      transitions to: :queued, from: :undelivered
+    event :send_to_queue do
+      transitions to: :queued, from: :undelivered,
+                  on_transition: :send_email
     end
+  end
+
+  def send_email
+    NotificationMailer.delay.test_email
   end
 
   # while the due_by date *belongs* in the Notification::Referral model
