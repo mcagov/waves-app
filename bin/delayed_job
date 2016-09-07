@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-
+# rubocop:disable all
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
 require 'delayed/command'
 Delayed::Command.new(ARGV).daemonize
+# rubocop:enable all
