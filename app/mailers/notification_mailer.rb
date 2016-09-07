@@ -1,7 +1,7 @@
 class NotificationMailer < ApplicationMailer
-  default from: "notifications@example.com"
+  default from: ENV.fetch("EMAIL_FROM")
 
-  def test_email
-    mail(to: "test@example.com", subject: "MCA test email service")
+  def test_email(email: "test@example.com")
+    mail(to: email, subject: "MCA test email service")
   end
 end

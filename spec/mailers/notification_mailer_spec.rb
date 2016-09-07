@@ -7,7 +7,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to match(/MCA test email/)
       expect(mail.to).to eq(["test@example.com"])
-      expect(mail.from).to eq(["notifications@example.com"])
+      expect(mail.from).to eq([ENV.fetch("EMAIL_FROM")])
     end
 
     it "renders the body" do
