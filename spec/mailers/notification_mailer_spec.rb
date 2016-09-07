@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe NotificationMailer, type: :mailer do
   describe "test_email" do
-    let(:mail) { NotificationMailer.test_email }
+    let(:mail) { NotificationMailer.test_email("test@example.com") }
 
     it "renders the headers" do
       expect(mail.subject).to match(/MCA test email/)

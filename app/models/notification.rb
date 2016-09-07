@@ -15,7 +15,7 @@ class Notification < ApplicationRecord
   end
 
   def send_email
-    NotificationMailer.delay.test_email
+    NotificationMailer.delay.test_email("test@example.com")
   end
 
   # while the due_by date *belongs* in the Notification::Referral model
