@@ -4,11 +4,15 @@ class Notification::Cancellation < Notification
     :no_response_from_owner].freeze
 
   def email_template
-    case subject
+    case subject.to_sym
     when :owner_request
       :cancellation_owner_request
     when :no_reponse_from_owner
       :cancellation_no_response
     end
+  end
+
+  def additional_params
+    body
   end
 end

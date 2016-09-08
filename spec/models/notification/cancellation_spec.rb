@@ -11,11 +11,6 @@ describe Notification::Cancellation, type: :model do
       it "has the expected email_template" do
         expect(subject.email_template).to eq(:cancellation_owner_request)
       end
-
-      it "builds the expected email_params" do
-        expect(subject.email_params).to eq(
-          [notifiable.owner.email,additional_info])
-      end
     end
 
     context "reason: owner_request" do

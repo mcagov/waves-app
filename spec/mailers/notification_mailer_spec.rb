@@ -37,4 +37,12 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to include("/referral/outstanding_declaration/foo")
     end
   end
+
+  describe "cancellation_owner_request" do
+    it "renders the expected text"
+  end
+
+  describe "cancellation_no_response" do
+    it "renders the expected text"
+  end
 end

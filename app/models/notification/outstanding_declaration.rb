@@ -3,11 +3,7 @@ class Notification::OutstandingDeclaration < Notification
     :outstanding_declaration
   end
 
-  def email_params
-    [
-      notifiable.owner.email,
-      notifiable.owner.name,
-      notifiable.id,
-    ]
+  def additional_params
+    notifiable.id
   end
 end
