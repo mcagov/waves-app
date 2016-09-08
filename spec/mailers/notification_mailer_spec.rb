@@ -24,7 +24,8 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:body) { mail.body.encoded }
 
     it "renders the headers" do
-      expect(mail.subject).to match(/Message from the MCA/)
+      expect(mail.subject)
+        .to match(/Vessel Registration Owner Declaration Required/)
       expect(mail.to).to eq(["test@example.com"])
       expect(mail.from).to eq([ENV.fetch("EMAIL_FROM")])
     end

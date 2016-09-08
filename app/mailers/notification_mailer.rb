@@ -25,6 +25,42 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: "Application Cancelled")
   end
 
+  def referral_incorrect(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Referred - Action Required")
+  end
+
+  def referral_no_match(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Referred - Action Required")
+  end
+
+  def referral_unknown(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Referred - Action Required")
+  end
+
+  def rejection_fraudulent(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Referred - Action Required")
+  end
+
+  def rejection_too_long(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Referred - Action Required")
+  end
+
+  def rejection_unsuitable(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Cancelled")
+  end
+
   private
 
   def govuk_url(path)
