@@ -30,7 +30,8 @@ class NotificationsController < InternalPagesController
     end
 
     flash[:notice] = "You have succesfully referred that application"
-    @submission.update_attribute(:referred_until, notification_params[:due_by])
+    @submission.update_attribute(
+      :referred_until, notification_params[:actionable_at])
 
     @submission.referred!
     redirect_to tasks_my_tasks_path
@@ -43,7 +44,7 @@ class NotificationsController < InternalPagesController
   end
 
   def notification_params
-    params.require(:notification).permit(:subject, :body, :due_by)
+    params.require(:notification).permit(:subject, :body, :actionable_at)
   end
 
   def parsed_notification_params(owner)
