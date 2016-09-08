@@ -39,6 +39,10 @@ class Submission < ApplicationRecord
 
   def process_application; end
 
+  def owners
+    declarations.map(&:owner)
+  end
+
   def vessel
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end

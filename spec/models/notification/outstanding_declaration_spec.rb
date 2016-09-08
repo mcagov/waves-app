@@ -9,14 +9,8 @@ describe Notification::OutstandingDeclaration, type: :model do
       expect(subject.email_template).to eq(:outstanding_declaration)
     end
 
-    it "builds the expected email_params" do
-      expect(subject.email_params).to eq(
-        [
-          declaration.owner.email,
-          declaration.owner.name,
-          declaration.id,
-        ]
-      )
+    it "has additional_params" do
+      expect(subject.additional_params).to eq(declaration.id)
     end
   end
 end

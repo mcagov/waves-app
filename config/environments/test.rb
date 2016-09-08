@@ -43,4 +43,6 @@ Rails.application.configure do
 
   # enable sign in for tests
   config.middleware.use Clearance::BackDoor
+
+  config.action_mailer.asset_host = "http://test.local"
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Notification, type: :model do
   context "#create" do
-    before { described_class.create }
+    before { create(:notification) }
 
     it "delivers the email" do
       expect(Delayed::Job.count).to eq(1)

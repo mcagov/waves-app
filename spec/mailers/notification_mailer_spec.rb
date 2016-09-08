@@ -24,7 +24,8 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:body) { mail.body.encoded }
 
     it "renders the headers" do
-      expect(mail.subject).to match(/Message from the MCA/)
+      expect(mail.subject)
+        .to match(/Vessel Registration Owner Declaration Required/)
       expect(mail.to).to eq(["test@example.com"])
       expect(mail.from).to eq([ENV.fetch("EMAIL_FROM")])
     end
@@ -35,6 +36,39 @@ RSpec.describe NotificationMailer, type: :mailer do
 
     it "renders the declaration_url" do
       expect(body).to include("/referral/outstanding_declaration/foo")
+    end
+  end
+
+  describe "notification templates" do
+    let(:templates) do
+      [
+        :cancellation_owner_request,
+        :cancellation_no_response,
+        :referral_incorrect,
+        :referral_no_match,
+        :referral_unknown,
+        :rejection_fraudulent,
+        :rejection_too_long,
+        :rejection_unsuitable,
+      ]
+    end
+
+    it "render the name" do
+      templates.each do |template|
+        mail =
+          NotificationMailer.send(template, "alice@example.com", "Alice")
+        expect(mail.body.encoded).to match(/Dear Alice/)
+      end
+    end
+
+    it "render the additional info (for a random template)" do
+      templates.sample do |template|
+        mail =
+          NotificationMailer.send(
+            template, "alice@example.com",
+            "Alice", "Today is Thursday")
+        expect(mail.body.encoded).to match(/Today is Thursday/)
+      end
     end
   end
 end

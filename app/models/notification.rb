@@ -4,17 +4,22 @@ class Notification < ApplicationRecord
 
   after_create :send_email
 
+  validates :recipient_name, presence: true
+  validates :recipient_email, presence: true
+
   def send_email
-    NotificationMailer.delay.send(email_template, *email_params)
+    NotificationMailer.delay.send(
+      email_template,
+      recipient_email,
+      recipient_name,
+      *additional_params)
   end
 
   def email_template
     :test_email
   end
 
-  def email_params
-    "test@example.com"
-  end
+  def additional_params; end
 
   # while the due_by date *belongs* in the Notification::Referral model
   # it is here so we can create a Notification in the modal without
