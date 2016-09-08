@@ -30,7 +30,7 @@ Rails.application.configure do
   # have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  config.action_controller.asset_host = ENV.fetch("ASSET_HOST")
+  config.asset_host = ENV.fetch("ASSET_HOST")
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
@@ -97,6 +97,4 @@ Rails.application.configure do
     domain:               ENV.fetch("SMTP_DOMAIN"),
     user_name:            ENV.fetch("SMTP_USERNAME"),
     password:             ENV.fetch("SMTP_PASSWORD") }
-
-  config.asset_host = ENV.fetch("ASSET_HOST")
 end
