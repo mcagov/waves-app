@@ -9,6 +9,9 @@
   %body{:style => "font-family: Arial, sans-serif; font-size: 14px;"}
     %h2{:style => "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
       = image_tag image_url("mca-logo.png")
+
+    %p.hello Dear #{ @name },
+
     = yield
 
     - if @additional_info
