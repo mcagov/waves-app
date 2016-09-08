@@ -47,5 +47,5 @@ Rails.application.configure do
     user_name:            ENV.fetch("SMTP_USERNAME"),
     password:             ENV.fetch("SMTP_PASSWORD") }
 
-  config.action_controller.asset_host = ENV.fetch("ASSET_HOST")
+  config.action_mailer.asset_host = ENV.fetch("ASSET_HOST")
 end
