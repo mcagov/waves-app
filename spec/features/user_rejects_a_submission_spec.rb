@@ -8,7 +8,7 @@ feature "User rejects a submission", type: :feature, js: true do
   scenario "and restores it" do
     within("#actions") { click_on "Reject Application" }
 
-    select "Too Long", from: "Reason for Rejection"
+    select "Too long", from: "Reason for Rejection"
     fill_in "Additional Information", with: "Some stuff"
     within("#reject-application") { click_on "Reject Application" }
 
@@ -17,7 +17,7 @@ feature "User rejects a submission", type: :feature, js: true do
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Rejected by.*: Too Long\. Some stuff\./
+        /Application Rejected by.*: Too long\. Some stuff\./
       )
     end
 

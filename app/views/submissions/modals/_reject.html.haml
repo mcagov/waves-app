@@ -12,7 +12,9 @@
           .row
             .col-sm-12
               .form-group
-                = f.input :subject, as: :select, label: "Reason for Rejection", collection: ["Unsuitable Name", "Too Long", "Fraudulent"], include_blank: false
+                = f.input :subject, as: :select, label: "Reason for Rejection",
+                  collection: Notification::Rejection::REASONS.map{|r| [r.to_s.humanize,r.to_s]},
+                  include_blank: false
           .row
             .col-sm-12
               .form-group
