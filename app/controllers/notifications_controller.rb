@@ -2,12 +2,10 @@ class NotificationsController < InternalPagesController
   before_action :load_submission
 
   def cancel
-    Notification::Cancellation.create(
-      notifiable: @submission,
-      subject: notification_params[:subject],
-      body: notification_params[:body],
-      actioned_by: current_user
-    )
+    @submission.owners.each do |owner|
+      Notification::Cancellation.create(
+        parsed_notification_params(owner))
+    end
 
     flash[:notice] = "You have succesfully cancelled that application"
     @submission.cancelled!
@@ -15,12 +13,10 @@ class NotificationsController < InternalPagesController
   end
 
   def reject
-    Notification::Rejection.create(
-      notifiable: @submission,
-      subject: notification_params[:subject],
-      body: notification_params[:body],
-      actioned_by: current_user
-    )
+    @submission.owners.each do |owner|
+      Notification::Rejection.create(
+        parsed_notification_params(owner))
+    end
 
     flash[:notice] = "You have succesfully rejected that application"
     @submission.rejected!
@@ -28,12 +24,10 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-    Notification::Referral.create(
-      notifiable: @submission,
-      subject: notification_params[:subject],
-      body: notification_params[:body],
-      actioned_by: current_user
-    )
+    @submission.owners.each do |owner|
+      Notification::Referral.create(
+        parsed_notification_params(owner))
+    end
 
     flash[:notice] = "You have succesfully referred that application"
     @submission.update_attribute(:referred_until, notification_params[:due_by])
@@ -50,5 +44,16 @@ class NotificationsController < InternalPagesController
 
   def notification_params
     params.require(:notification).permit(:subject, :body, :due_by)
+  end
+
+  def parsed_notification_params(owner)
+    {
+      notifiable: @submission,
+      subject: notification_params[:subject],
+      body: notification_params[:body],
+      actioned_by: current_user,
+      recipient_email: owner.email,
+      recipient_name: owner.name,
+    }
   end
 end
