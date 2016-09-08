@@ -39,11 +39,36 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
-  describe "cancellation_owner_request" do
-    it "renders the expected text"
-  end
+  describe "notification templates" do
+    let(:templates) do
+      [
+        :cancellation_owner_request,
+        :cancellation_no_response,
+        :referral_incorrect,
+        :referral_no_match,
+        :referral_unknown,
+        :rejection_fraudulent,
+        :rejection_too_long,
+        :rejection_unsuitable,
+      ]
+    end
 
-  describe "cancellation_no_response" do
-    it "renders the expected text"
+    it "render the name" do
+      templates.each do |template|
+        mail =
+          NotificationMailer.send(template, "alice@example.com", "Alice")
+        expect(mail.body.encoded).to match(/Dear Alice/)
+      end
+    end
+
+    it "render the additional info (for a random template)" do
+      templates.sample do |template|
+        mail =
+          NotificationMailer.send(
+            template, "alice@example.com",
+            "Alice", "Today is Thursday")
+        expect(mail.body.encoded).to match(/Today is Thursday/)
+      end
+    end
   end
 end
