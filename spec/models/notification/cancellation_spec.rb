@@ -2,23 +2,19 @@ require "rails_helper"
 
 describe Notification::Cancellation, type: :model do
   context "in general" do
-    let(:submission) { build(:submission) }
-    subject { described_class.new(subject: reason, notifiable: submission) }
-
-    context "reason: owner_request" do
-      let(:reason) { :owner_request }
-
-      it "has the expected email_template" do
-        expect(subject.email_template).to eq(:cancellation_owner_request)
-      end
+    it "has the owner_request email_template" do
+      notification = described_class.new(subject: :owner_request)
+      expect(notification.email_template).to eq(:cancellation_owner_request)
     end
 
-    context "reason: owner_request" do
-      let(:reason) { :no_reponse_from_owner }
+    it "has the no_reponse_from_owner email_template" do
+      notification = described_class.new(subject: :no_reponse_from_owner)
+      expect(notification.email_template).to eq(:cancellation_no_response)
+    end
 
-      it "has the expected email_template" do
-        expect(subject.email_template).to eq(:cancellation_no_response)
-      end
+    it "has the additional_params" do
+      notification = described_class.new
+      expect(notification.additional_params).to eq(notification.body)
     end
   end
 end
