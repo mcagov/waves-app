@@ -8,7 +8,7 @@ describe Notification::Cancellation, type: :model do
     end
 
     it "has the cancellation_no_response email_template" do
-      notification = described_class.new(subject: :no_reponse_from_owner)
+      notification = described_class.new(subject: :no_response_from_owner)
       expect(notification.email_template).to eq(:cancellation_no_response)
     end
 

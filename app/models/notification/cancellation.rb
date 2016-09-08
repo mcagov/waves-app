@@ -7,7 +7,7 @@ class Notification::Cancellation < Notification
     case subject.to_sym
     when :owner_request
       :cancellation_owner_request
-    when :no_reponse_from_owner
+    when :no_response_from_owner
       :cancellation_no_response
     end
   end
