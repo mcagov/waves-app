@@ -4,6 +4,9 @@ class Notification < ApplicationRecord
 
   after_create :send_email
 
+  validates :recipient_name, presence: true
+  validates :recipient_email, presence: true
+
   def send_email
     NotificationMailer.delay.send(
       email_template,

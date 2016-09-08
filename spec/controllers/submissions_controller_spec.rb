@@ -61,8 +61,8 @@ describe SubmissionsController, type: :controller do
         post :approve, params: params
       end
 
-      it "creates a notification" do
-        expect(Notification::Approval.count).to eq(1)
+      it "creates a notification for each owner" do
+        expect(Notification::Approval.count).to eq(2)
       end
 
       it "sets the notification#actioned_by" do

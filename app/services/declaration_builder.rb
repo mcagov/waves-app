@@ -5,7 +5,7 @@ class DeclarationBuilder
       @owners = owners || []
       @declared_by_emails = declared_by_emails || []
       build_declarations
-      build_outstanding_declaration_notifications
+      build_notifications
     end
 
     private
@@ -23,9 +23,11 @@ class DeclarationBuilder
       end
     end
 
-    def build_outstanding_declaration_notifications
+    def build_notifications
       @submission.declarations.incomplete.each do |declaration|
         Notification::OutstandingDeclaration.create(
+          recipient_name: declaration.owner.name,
+          recipient_email: declaration.owner.email,
           notifiable: declaration)
       end
     end
