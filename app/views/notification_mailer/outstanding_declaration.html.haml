@@ -1,15 +1,15 @@
-%p.hello{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; font-weight: bold; margin: 15px 5%;"} Dear #{ @name },
+%p.hello Dear #{ @name },
 
-%p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+%p
   Please be advised that an application has been made by xxxxx to register a vessel with the name xxxx on the Part III of the UK Ship Register. As part of the registration process all owners must confirm eligibility by completing a declaration using the link below.
 
-%p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+%p
   %a{:href => "#{ @declaration_url }"}Click here to sign the declaration
 
-%p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+%p
   Alternatively, you can copy and paste the link into the address bar of your web browser
 
 %p= @declaration_url
 
-%p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+%p
   Only when all owner declarations have been received, will the application be processed.

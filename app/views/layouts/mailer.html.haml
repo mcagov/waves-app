@@ -1,6 +1,10 @@
 !!!
 %html{:style => "font-family: Arial, sans-serif; font-size: 14px;"}
   %head
+    :css
+      p { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%; }
+      p.hello { font-weight: bold; }
+
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body{:style => "font-family: Arial, sans-serif; font-size: 14px;"}
     %h2{:style => "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
@@ -8,12 +12,12 @@
     = yield
 
     - if @additional_info
-      %p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+      %p
         %b Additional information
         %br
         = @additional_info
 
-    %p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+    %p
       Kind regards,
       %br/
       Small Ships Register
