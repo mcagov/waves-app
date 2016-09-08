@@ -10,6 +10,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
       email, name, "This is some additional info")
   end
 
+  def cancellation_owner_request
+    NotificationMailer.cancellation_owner_request(
+      email, name)
+  end
+
   def cancellation_no_response
     NotificationMailer.cancellation_no_response(email, name)
   end

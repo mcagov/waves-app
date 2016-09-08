@@ -9,7 +9,20 @@ class NotificationMailer < ApplicationMailer
     @name = name
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
-    mail(to: email, subject: "Message from the MCA")
+    mail(to: email,
+         subject: "Vessel Registration Owner Declaration Required")
+  end
+
+  def cancellation_owner_request(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Cancelled")
+  end
+
+  def cancellation_no_response(email, name, additional_info = nil)
+    @additional_info = additional_info
+    @name = name
+    mail(to: email, subject: "Application Cancelled")
   end
 
   private

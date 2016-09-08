@@ -6,6 +6,13 @@
     %h2{:style => "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
       = image_tag image_url("mca-logo.png")
     = yield
+
+    - if @additional_info
+      %p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
+        %b Additional information
+        %br
+        = @additional_info
+
     %p{:style => "font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;"}
       Kind regards,
       %br/
