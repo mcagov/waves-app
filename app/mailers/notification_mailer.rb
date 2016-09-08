@@ -40,19 +40,19 @@ class NotificationMailer < ApplicationMailer
   def referral_unknown(email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: "Application Rejected")
   end
 
   def rejection_fraudulent(email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: "Application Rejected")
   end
 
   def rejection_too_long(email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: "Application Rejected")
   end
 
   def rejection_unsuitable(email, name, additional_info = nil)
