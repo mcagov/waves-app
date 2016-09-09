@@ -35,6 +35,7 @@ group :development do
   gem "rubocop"
   gem "web-console"
   gem "i18n-debug", require: false
+  gem "guard-rspec", require: false
 end
 
 group :development, :test do
