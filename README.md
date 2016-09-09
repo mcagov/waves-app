@@ -69,4 +69,17 @@ Emails can be previewed at: /rails/mailers
 
 This should be disabled in a live environment by setting the environment variable `PREVIEW_EMAILS` to `off`.
 
+## Cron jobs
+
+Cron jobs are managed with the [whenever](https://github.com/javan/whenever) gem.
+
+To ensure the crontab is kept up to date, ensure that `whenever --update-crontab` is called on deployment.
+
+#### Referred applications
+
+Schedule: Daily
+
+If the `submission#referred_until` date has been reached, applications should be restored to the unclaimed tasks queue. To run this task:
+
+  `rake waves:expire_referrals`
 

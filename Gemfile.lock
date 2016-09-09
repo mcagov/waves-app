@@ -81,6 +81,7 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
+    chronic (0.10.2)
     clearance (1.14.1)
       bcrypt
       email_validator (~> 1.4)
@@ -328,6 +329,8 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -387,6 +390,7 @@ DEPENDENCIES
   validates_email_format_of
   web-console
   webmock
+  whenever
 
 RUBY VERSION
    ruby 2.3.1p112
