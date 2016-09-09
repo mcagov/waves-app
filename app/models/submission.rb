@@ -32,7 +32,7 @@ class Submission < ApplicationRecord
 
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
-  scope :referred_until_expired, -> {
+  scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
 

@@ -16,7 +16,14 @@ FactoryGirl.define do
 
   factory :referred_submission, parent: :assigned_submission do
     after(:create) do |submission|
-      submission.update_attribute(:referred_until, Time.now)
+      submission.update_attribute(:referred_until, 30.days.from_now)
+      submission.referred!
+    end
+  end
+
+  factory :expired_referred_submission, parent: :assigned_submission do
+    after(:create) do |submission|
+      submission.update_attribute(:referred_until, 1.day.ago)
       submission.referred!
     end
   end

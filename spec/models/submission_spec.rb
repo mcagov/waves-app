@@ -139,6 +139,5 @@ describe Submission, type: :model do
       let(:referred_until) { nil }
       it { expect(submissions).to be_empty }
     end
-
   end
 end
