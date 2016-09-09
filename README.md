@@ -15,12 +15,6 @@ workload of officers of the [Maritime and Coastguard Agency][mca].
 
 This is a standard Rails 5.0 web app with a PostgreSQL database.
 
-#### Database model
-
-The expected database model for the app is given in [this diagram][db-model].
-
-[db-model]: https://gitlab.oceanshq.com/maritime-coastguard-agency/vrsapp/uploads/3d089bf206206b2d313ac84eafa8505a/data_model.png
-
 #### Style
 
 [Bootstrap][bootstrap] has been used to theme the internal dashboard.
