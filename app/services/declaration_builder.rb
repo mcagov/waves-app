@@ -18,7 +18,7 @@ class DeclarationBuilder
             changeset: owner
           )
 
-        if i == 0 && @declared_by_emails.include?(declaration.owner.email)
+        if i.zero? && @declared_by_emails.include?(declaration.owner.email)
           declaration.declared!
         end
       end
