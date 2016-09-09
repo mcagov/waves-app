@@ -11,13 +11,14 @@ class DeclarationBuilder
     private
 
     def build_declarations
-      @owners.each do |owner|
+      @owners.each_with_index do |owner, i|
         declaration =
           Declaration.create(
             submission: @submission,
             changeset: owner
           )
-        if @declared_by_emails.include?(declaration.owner.email)
+
+        if i == 0 && @declared_by_emails.include?(declaration.owner.email)
           declaration.declared!
         end
       end
