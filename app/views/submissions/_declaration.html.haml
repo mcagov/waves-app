@@ -17,6 +17,16 @@
         %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
           %strong= declaration.owner.inline_address
     %tr
+      %td Owner Email
+      %td
+        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
+          %strong= declaration.owner.email
+    %tr
+      %td Owner Phone Number
+      %td
+        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
+          %strong= declaration.owner.phone_number
+    %tr
       %td Declaration
       %td.declaration
         - if declaration.completed?
