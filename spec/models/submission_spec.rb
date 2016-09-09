@@ -87,4 +87,16 @@ describe Submission, type: :model do
       end
     end
   end
+
+  context "paid! (with an undeclared submission)" do
+    let!(:submission) { create_incomplete_submission! }
+
+    it "does not set the received_at date" do
+      expect(submission.received_at).to be_blank
+    end
+
+    it "does not set the target_date" do
+      expect(submission.target_date).to be_blank
+    end
+  end
 end
