@@ -36,8 +36,7 @@
                 "postcode": "QZ2 3QM",
                 "country": "RU",
                 "email": "horatio-nelson.1@example.com",
-                "phone_number": "42672075807",
-                "correspondent": true
+                "phone_number": "42672075807"
               },
               {
                 "name": "Edward McCallister",
@@ -49,9 +48,8 @@
                 "county": "County 4",
                 "postcode": "UB2 7RP",
                 "country": "ME",
-                "email": "edward-mccallister.2@example.com",
-                "phone_number": "21911163031",
-                "correspondent": false
+                "email": "edward.mcallister@exampl.com",
+                "phone_number": "21911163031"
               }
             ]
           }

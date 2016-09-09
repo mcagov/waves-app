@@ -33,8 +33,7 @@
                 "postcode": "QZ2 3QM",
                 "country": "RU",
                 "email": "alicejones@example.com",
-                "phone_number": "42672075807",
-                "correspondent": true
+                "phone_number": "42672075807"
               }
             ]
           }
