@@ -1,4 +1,6 @@
 class Submission < ApplicationRecord
+  has_paper_trail only: [:state]
+
   include SubmissionTransitions
 
   belongs_to :delivery_address, class_name: "Address", required: false
