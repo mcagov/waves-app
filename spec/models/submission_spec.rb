@@ -63,7 +63,11 @@ describe Submission, type: :model do
     end
 
     it "transitions to unassigned" do
-      expect(submission.reload).to be_unassigned
+      expect(submission).to be_unassigned
+    end
+
+    it "unsets referred_until" do
+      expect(submission.referred_until).to be_blank
     end
   end
 

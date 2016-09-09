@@ -16,6 +16,7 @@ FactoryGirl.define do
 
   factory :referred_submission, parent: :assigned_submission do
     after(:create) do |submission|
+      submission.update_attribute(:referred_until, Time.now)
       submission.referred!
     end
   end

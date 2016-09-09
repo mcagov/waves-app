@@ -86,6 +86,8 @@ module SubmissionTransitions
       else
         update_attribute(:target_date, 20.days.from_now)
       end
+
+      update_attribute(:referred_until, nil)
     end
 
     def unassignable?
