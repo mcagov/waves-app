@@ -5,8 +5,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def claim
-    @submission.update_attribute(:claimant, current_user)
-    @submission.claimed!
+    @submission.claimed!(current_user)
 
     flash[:notice] = "You have succesfully claimed this application"
     redirect_to tasks_my_tasks_path
