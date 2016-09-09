@@ -26,18 +26,21 @@ class NotificationMailer < ApplicationMailer
   end
 
   def referral_incorrect(email, name, additional_info = nil)
+    @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
     mail(to: email, subject: "Application Referred - Action Required")
   end
 
   def referral_no_match(email, name, additional_info = nil)
+    @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
     mail(to: email, subject: "Application Referred - Action Required")
   end
 
   def referral_unknown(email, name, additional_info = nil)
+    @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
     mail(to: email, subject: "Application Rejected")
