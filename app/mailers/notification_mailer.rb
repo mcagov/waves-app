@@ -43,7 +43,7 @@ class NotificationMailer < ApplicationMailer
     @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Rejected")
+    mail(to: email, subject: "Application Referred - Action Required")
   end
 
   def rejection_fraudulent(email, name, additional_info = nil)
