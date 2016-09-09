@@ -4,16 +4,19 @@ FactoryGirl.define do
     changeset { { owners: [build(:declaration_owner)] } }
   end
 
-  factory :paid_submission, class: :submission do
+  factory :paid_submission, parent: :submission do
     payment { build(:payment) }
-    part "part_3"
-    changeset { { owners: [build(:declaration_owner)] } }
   end
 
-  factory :referred_submission, class: :submission do
-    payment { build(:payment) }
-    part "part_3"
-    changeset { { owners: [build(:declaration_owner)] } }
-    state :referred
+  factory :assigned_submission, parent: :paid_submission do
+    after(:create) do |submission|
+      submission.claimed!
+    end
+  end
+
+  factory :referred_submission, parent: :assigned_submission do
+    after(:create) do |submission|
+      submission.referred!
+    end
   end
 end
