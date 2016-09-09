@@ -55,9 +55,14 @@ describe Submission, type: :model do
     end
   end
 
-  context "paid!" do
+  context "paid! (with a declared submission)" do
     context "with standard service" do
       let!(:submission) { create_assigned_submission! }
+
+      it "sets the received_at date to today" do
+        expect(submission.received_at.to_date)
+          .to eq(Date.today)
+      end
 
       it "sets the target_date to 20 days away" do
         expect(submission.target_date.to_date)

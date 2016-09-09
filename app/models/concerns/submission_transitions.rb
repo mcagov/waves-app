@@ -16,13 +16,13 @@ module SubmissionTransitions
 
       event :paid do
         transitions to: :unassigned, from: :incomplete,
-                    on_transition: :set_target_date_and_urgent_flag,
+                    on_transition: :init_processing_dates,
                     guard: :unassignable?
       end
 
       event :declared do
         transitions to: :unassigned, from: :incomplete,
-                    on_transition: :set_target_date_and_urgent_flag,
+                    on_transition: :init_processing_dates,
                     guard: :unassignable?
       end
 
@@ -72,7 +72,9 @@ module SubmissionTransitions
       update_attribute(:claimant, nil)
     end
 
-    def set_target_date_and_urgent_flag
+    def init_processing_dates
+      update_attribute(:received_at, Date.today)
+
       if payment.wp_amount.to_i == 7500
         update_attribute(:target_date, 5.days.from_now)
         update_attribute(:is_urgent, true)
