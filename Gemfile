@@ -31,6 +31,7 @@ gem "bootstrap-datepicker-rails"
 gem "delayed_job_active_record"
 gem "daemons"
 gem "whenever", require: false
+gem "paper_trail"
 
 group :development do
   gem "rubocop"
