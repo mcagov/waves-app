@@ -115,4 +115,30 @@ describe Submission, type: :model do
       expect(submission.target_date).to be_blank
     end
   end
+
+  context ".referred_until_expired" do
+    let!(:submission) { create(:submission, referred_until: referred_until) }
+    let(:submissions) { Submission.referred_until_expired }
+
+    context "tomorrow" do
+      let(:referred_until) { Date.tomorrow }
+      it { expect(submissions).to be_empty }
+    end
+
+    context "today" do
+      let(:referred_until) { Date.today }
+      it { expect(submissions.length).to eq(1) }
+    end
+
+    context "yesterday" do
+      let(:referred_until) { Date.yesterday }
+      it { expect(submissions.length).to eq(1) }
+    end
+
+    context "nil" do
+      let(:referred_until) { nil }
+      it { expect(submissions).to be_empty }
+    end
+
+  end
 end

@@ -32,6 +32,10 @@ class Submission < ApplicationRecord
 
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
+  scope :referred_until_expired, -> {
+    where("date(referred_until) <= ?", Date.today)
+  }
+
   validates :part, presence: true
   validates :ref_no, presence: true
 
