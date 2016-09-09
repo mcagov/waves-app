@@ -41,6 +41,13 @@ module SubmissionHelpers
     submission.reload
   end
 
+  def create_referred_submission!
+    submission = create_assigned_submission!
+
+    submission.referred!
+    submission.reload
+  end
+
   def visit_assigned_submission
     submission = create_assigned_submission!
     login_to_part_3(submission.claimant)

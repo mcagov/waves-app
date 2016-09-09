@@ -55,6 +55,18 @@ describe Submission, type: :model do
     end
   end
 
+  context "#unreferred!" do
+    let!(:submission) { create_referred_submission! }
+    before do
+      expect(submission).to receive(:init_processing_dates).once
+      submission.unreferred!
+    end
+
+    it "transitions to unassigned" do
+      expect(submission.reload).to be_unassigned
+    end
+  end
+
   context "paid! (with a declared submission)" do
     context "with standard service" do
       let!(:submission) { create_assigned_submission! }

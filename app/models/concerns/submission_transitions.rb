@@ -28,7 +28,12 @@ module SubmissionTransitions
 
       event :claimed do
         transitions to: :assigned,
-                    from: [:unassigned, :rejected, :referred, :cancelled]
+                    from: [:unassigned, :rejected, :cancelled]
+      end
+
+      event :unreferred do
+        transitions to: :unassigned, from: :referred,
+                    on_transition: :init_processing_dates
       end
 
       event :unclaimed do
