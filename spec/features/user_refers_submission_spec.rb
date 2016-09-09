@@ -21,7 +21,7 @@ feature "User refers a submission", type: :feature, js: true do
       expect(page).to have_text(referral_prompt)
     end
 
-    click_on "Cancel Referral"
+    click_on "Reclaim Referral"
 
     click_on "My Tasks"
     expect(page).to have_css(".vessel-name", text: "Celebrator Doppelbock")

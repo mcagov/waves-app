@@ -27,12 +27,14 @@ class Submission < ApplicationRecord
   has_one :registered_vessel, through: :registration
 
   default_scope do
-    includes([:payment, :declarations, :correspondences])
-      .order("target_date asc")
-      .where.not(state: :completed)
+    order("target_date asc").where.not(state: :completed)
   end
 
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
+
+  scope :referred_until_expired, lambda {
+    where("date(referred_until) <= ?", Date.today)
+  }
 
   validates :part, presence: true
   validates :ref_no, presence: true

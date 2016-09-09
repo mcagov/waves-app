@@ -10,7 +10,9 @@
         %th Vessel
         %th Applicant
         %th Job Type
-        %th Target
+        %th Date Received
+        %th Target Date
+        %th Referred Until
         %th Payment
         %th Source
         %th Last Update
@@ -21,7 +23,13 @@
           %td.vessel-name= link_to submission.vessel, submission_path(submission)
           %td= submission.applicant
           %td= submission.job_type
+          %td= submission.received_at
           %td= submission.target_date
+          %td
+            - if submission.referred?
+              = submission.referred_until
+            - else
+              n/a
           %td= css_tick(submission.payment.present?)
           %td= submission.source
           %td= submission.updated_at

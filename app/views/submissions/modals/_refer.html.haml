@@ -1,7 +1,8 @@
 .modal.fade{id: "refer-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for Notification.new, url: refer_notification_path(submission) do |f|
+      = simple_form_for Notification.new(actionable_at: 30.days.from_now),
+                        url: refer_notification_path(submission) do |f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
@@ -15,7 +16,7 @@
                   include_blank: false
             .col-sm-3
               .form-group
-                = f.input :due_by, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+                = f.input :actionable_at, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
           .row
             .col-sm-12
               .form-group

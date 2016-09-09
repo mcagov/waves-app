@@ -19,6 +19,11 @@ class SubmissionsController < InternalPagesController
     redirect_to tasks_my_tasks_path
   end
 
+  def claim_referral
+    @submission.unreferred!
+    claim
+  end
+
   def approve
     if @submission.process_application
       create_notification

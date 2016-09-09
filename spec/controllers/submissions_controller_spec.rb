@@ -36,6 +36,20 @@ describe SubmissionsController, type: :controller do
     end
   end
 
+  context "#claim_referral" do
+    before do
+      post :claim_referral, params: { id: create(:referred_submission).id }
+    end
+
+    it "assigns the claimant" do
+      expect(assigns[:submission].claimant).to eq(current_user)
+    end
+
+    it "sets the status to assigned" do
+      expect(assigns[:submission]).to be_assigned
+    end
+  end
+
   context "#approve" do
     let(:submission) { create_assigned_submission! }
 

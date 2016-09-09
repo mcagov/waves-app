@@ -55,9 +55,30 @@ describe Submission, type: :model do
     end
   end
 
-  context "paid!" do
+  context "#unreferred!" do
+    let!(:submission) { create_referred_submission! }
+    before do
+      expect(submission).to receive(:init_processing_dates).once
+      submission.unreferred!
+    end
+
+    it "transitions to unassigned" do
+      expect(submission).to be_unassigned
+    end
+
+    it "unsets referred_until" do
+      expect(submission.referred_until).to be_blank
+    end
+  end
+
+  context "paid! (with a declared submission)" do
     context "with standard service" do
       let!(:submission) { create_assigned_submission! }
+
+      it "sets the received_at date to today" do
+        expect(submission.received_at.to_date)
+          .to eq(Date.today)
+      end
 
       it "sets the target_date to 20 days away" do
         expect(submission.target_date.to_date)
@@ -80,6 +101,43 @@ describe Submission, type: :model do
       it "is urgent" do
         expect(submission.is_urgent).to be_truthy
       end
+    end
+  end
+
+  context "paid! (with an undeclared submission)" do
+    let!(:submission) { create_incomplete_submission! }
+
+    it "does not set the received_at date" do
+      expect(submission.received_at).to be_blank
+    end
+
+    it "does not set the target_date" do
+      expect(submission.target_date).to be_blank
+    end
+  end
+
+  context ".referred_until_expired" do
+    let!(:submission) { create(:submission, referred_until: referred_until) }
+    let(:submissions) { Submission.referred_until_expired }
+
+    context "tomorrow" do
+      let(:referred_until) { Date.tomorrow }
+      it { expect(submissions).to be_empty }
+    end
+
+    context "today" do
+      let(:referred_until) { Date.today }
+      it { expect(submissions.length).to eq(1) }
+    end
+
+    context "yesterday" do
+      let(:referred_until) { Date.yesterday }
+      it { expect(submissions.length).to eq(1) }
+    end
+
+    context "nil" do
+      let(:referred_until) { nil }
+      it { expect(submissions).to be_empty }
     end
   end
 end
