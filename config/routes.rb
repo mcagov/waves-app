@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       post :claim
       post :unclaim
       post :approve
+      post :claim_referral
     end
     resource :correspondence
   end
