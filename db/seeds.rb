@@ -11,7 +11,7 @@ VESSEL_TYPES = [
   "wet bike",
 ].freeze
 
-USERS = ["develop"].freeze
+USERS = ["alice", "bob", "charlie", "develop"].freeze
 
 # rubocop:disable WordArray
 COUNTRIES = [
@@ -31,7 +31,7 @@ VESSEL_TYPES.each do |name|
 end
 
 USERS.each do |user|
-  u = User.find_or_initialize_by(name: user)
+  u = User.find_or_initialize_by(name: user.humanize)
   u.email = "#{user}@example.com"
   u.password = "password"
   u.save!
