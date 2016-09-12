@@ -4,10 +4,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def additional_params
-    {
-      world_pay_transaction_no: world_pay_transaction_no,
-      submission_ref_no: submission_ref_no,
-    }
+    [world_pay_transaction_no, submission_ref_no]
   end
 
   private
