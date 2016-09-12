@@ -11,7 +11,7 @@ VESSEL_TYPES = [
   "wet bike",
 ].freeze
 
-USERS = ["alice", "bob", "charlie", "develop"].freeze
+USERS = %w(alice bob charlie develop).freeze
 
 # rubocop:disable WordArray
 COUNTRIES = [

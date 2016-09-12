@@ -44,6 +44,14 @@ feature "User views new submission", type: :feature, js: true do
     end
   end
 
+  scenario "history", javascript: true do
+    click_link("History")
+
+    within("#history") do
+      expect(page).to have_text("Application started")
+    end
+  end
+
   scenario "not viewing the action buttons as this is unassigned" do
     expect(page)
       .not_to have_css(
