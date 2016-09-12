@@ -25,6 +25,10 @@ class Submission < ApplicationRecord
           as: :notifiable,
           class_name: "Notification::Referral"
 
+  has_one :application_receipt, -> { order("created_at desc").limit(1) },
+          as: :notifiable,
+          class_name: "Notification::ApplicationReceipt"
+
   has_one :registration
   has_one :registered_vessel, through: :registration
 
@@ -53,6 +57,10 @@ class Submission < ApplicationRecord
 
   def applicant
     declarations.first.owner if declarations
+  end
+
+  def applicant_email
+    applicant.email if applicant
   end
 
   def source
