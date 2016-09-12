@@ -69,7 +69,7 @@ class NotificationMailer < ApplicationMailer
   def rejection_unsuitable(email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Cancelled")
+    mail(to: email, subject: "Application Rejected")
   end
 
   private
