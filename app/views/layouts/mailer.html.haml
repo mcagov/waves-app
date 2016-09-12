@@ -6,37 +6,39 @@
       p.hello { font-weight: bold; }
       ul { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%; }
 
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body{:style => "font-family: Arial, sans-serif; font-size: 14px;"}
-    %h2{:style => "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body{style: "font-family: Arial, sans-serif; font-size: 14px;"}
+    %h2{style: "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
       = image_tag image_url("mca-logo.png")
 
-    %p.hello Dear #{ @name },
+    %p.hello{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+      Dear #{ @name },
 
-    = yield
+    .yield{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+      = yield
 
     - if @additional_info
-      %p
+      %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
         %b Additional information
         %br
         = @additional_info
 
     - if @contact_us_on
-      %p If you have any queries, please contact us on #{ @contact_us_on }.
+      %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'} If you have any queries, please contact us on #{ @contact_us_on }.
 
-    %p
+    %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
       Kind regards,
-      %br/
+      %br
       Small Ships Register
-      %br/
+      %br
       Registry of Shipping and Seamen,
-      %br/
+      %br
       Anchor Court,
-      %br/
+      %br
       Keen Road,
-      %br/
+      %br
       Cardiff
-      %br/
+      %br
       CF24 5JW
     %p.footer{:style => "font-family: Arial, sans-serif; font-size: 11px; line-height: 1.5; border-top-style: dashed; border-top-color: #ccc; border-top-width: 1px; padding-top: 20px; color: #999; margin: 20px 5% 15px;"}
       Registered Office: Small Ships Register, Registry of Shipping and Seamen, Anchor Court, Keen Road, Cardiff, CF24 5JW
