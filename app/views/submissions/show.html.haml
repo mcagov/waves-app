@@ -22,6 +22,9 @@
         %li{:role => "presentation"}
           %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Payment
 
+        %li{:role => "history"}
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} History
+
       #myTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
           = render partial: "vessel", locals: { vessel: @submission.vessel }
@@ -34,5 +37,8 @@
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: "payment", locals: { payment: @submission.payment }
+
+        #tab_content5.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+          = render partial: "history"
 
 = render partial: "actions", locals: {submission: @submission}
