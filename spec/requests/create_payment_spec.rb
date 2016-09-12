@@ -2,12 +2,12 @@ require "rails_helper"
 
 describe "create payments via the API", type: :request do
   before do
-    create(:submission, id: "240cdfa3-c930-4829-99a0-6c160a631d2d")
     post api_v1_payments_path, params: params
   end
 
   context "with valid params" do
-    let(:params) { valid_create_payment_json }
+    let!(:submission) { create_incomplete_submission! }
+    let(:params) { valid_create_payment_json(submission) }
     let(:payment) { Payment.find(json["id"]) }
     let(:parsed_body) { JSON.parse(response.body) }
 
@@ -31,6 +31,10 @@ describe "create payments via the API", type: :request do
     it "sets the payment#wp_country" do
       expect(payment.wp_country).to eq("GB")
     end
+
+    it "builds the application_receipt notification" do
+      expect(payment.submission.application_receipt).to be_present
+    end
   end
 
   context "with invalid params" do
@@ -43,8 +47,8 @@ describe "create payments via the API", type: :request do
 end
 
 # rubocop:disable all
-def valid_create_payment_json
-  {"data"=>{"type"=>"payments", "attributes"=>{"submission_id"=>"240cdfa3-c930-4829-99a0-6c160a631d2d", "wp_token"=>"TEST_SU_84dbf02a-f537-4047-ab3c-1806dad6aa03", "wp_order_code"=>"8481b725-e7c8-4c94-b311-9fa2f10748ae", "wp_amount"=>2500, "wp_country"=>"GB", "wp_payment_response"=>{ }, "customer_ip"=>"127.0.0.1"}}}
+def valid_create_payment_json(submission)
+  {"data"=>{"type"=>"payments", "attributes"=>{"submission_id"=>"#{submission.id}", "wp_token"=>"TEST_SU_84dbf02a-f537-4047-ab3c-1806dad6aa03", "wp_order_code"=>"8481b725-e7c8-4c94-b311-9fa2f10748ae", "wp_amount"=>2500, "wp_country"=>"GB", "wp_payment_response"=>{ }, "customer_ip"=>"127.0.0.1"}}}
 end
 
 def invalid_create_payment_json
