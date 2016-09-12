@@ -12,8 +12,7 @@ describe Notification::ApplicationReceipt, type: :model do
     it "has additional_params" do
       expect(subject.additional_params)
         .to eq(
-          world_pay_transaction_no: submission.payment.wp_order_code,
-          submission_ref_no: submission.ref_no
+          [submission.payment.wp_order_code, submission.ref_no]
         )
     end
   end
