@@ -47,5 +47,9 @@ module Clearance
     def url_for_signed_in_users
       url_after_create
     end
+
+    def user_for_paper_trail
+      nil
+    end
   end
 end

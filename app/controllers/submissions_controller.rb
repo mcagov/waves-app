@@ -5,7 +5,6 @@ class SubmissionsController < InternalPagesController
   end
 
   def claim
-    @submission.update_attribute(:claimant, current_user)
     @submission.claimed!(current_user)
 
     flash[:notice] = "You have succesfully claimed this application"

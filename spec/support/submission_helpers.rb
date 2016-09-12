@@ -35,9 +35,7 @@ module SubmissionHelpers
   def create_assigned_submission!
     submission = create_unassigned_submission!
 
-    submission.update_attribute(:claimant, create(:user))
-
-    submission.claimed!
+    submission.claimed!(create(:user))
     submission.reload
   end
 

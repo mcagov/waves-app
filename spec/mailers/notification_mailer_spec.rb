@@ -39,6 +39,24 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
+  describe "application_receipt" do
+    let(:mail) do
+      NotificationMailer.application_receipt(
+        "test@example.com", "Alice", "WP_code", "Ref_no"
+      )
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the world_pay_transaction_no" do
+      expect(body).to match(/Merchant Cart ID: WP_code/)
+    end
+
+    it "renders the submission_ref_no" do
+      expect(body).to match(/Application Reference No: Ref_no/)
+    end
+  end
+
   describe "notification templates" do
     let(:templates) do
       [

@@ -28,7 +28,8 @@ module SubmissionTransitions
 
       event :claimed do
         transitions to: :assigned,
-                    from: [:unassigned, :rejected, :cancelled]
+                    from: [:unassigned, :rejected, :cancelled],
+                    on_transition: :add_claimant
       end
 
       event :unreferred do
@@ -75,6 +76,10 @@ module SubmissionTransitions
 
     def remove_claimant
       update_attribute(:claimant, nil)
+    end
+
+    def add_claimant(user)
+      update_attribute(:claimant, user)
     end
 
     def init_processing_dates

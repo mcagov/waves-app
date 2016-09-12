@@ -1,4 +1,6 @@
 class Submission < ApplicationRecord
+  has_paper_trail only: [:state]
+
   include SubmissionTransitions
 
   belongs_to :delivery_address, class_name: "Address", required: false
@@ -22,6 +24,10 @@ class Submission < ApplicationRecord
   has_one :referral, -> { order("created_at desc").limit(1) },
           as: :notifiable,
           class_name: "Notification::Referral"
+
+  has_one :application_receipt, -> { order("created_at desc").limit(1) },
+          as: :notifiable,
+          class_name: "Notification::ApplicationReceipt"
 
   has_one :registration
   has_one :registered_vessel, through: :registration
@@ -51,6 +57,10 @@ class Submission < ApplicationRecord
 
   def applicant
     declarations.first.owner if declarations
+  end
+
+  def applicant_email
+    applicant.email if applicant
   end
 
   def source

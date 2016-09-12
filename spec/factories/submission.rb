@@ -10,7 +10,7 @@ FactoryGirl.define do
 
   factory :assigned_submission, parent: :paid_submission do
     after(:create) do |submission|
-      submission.claimed!
+      submission.claimed!(create(:user))
     end
   end
 
