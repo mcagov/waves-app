@@ -36,7 +36,8 @@ class SubmissionsController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.find(params[:id])
+    @submission = Submission.includes(
+      [:payment, :correspondences, :notifications]).find(params[:id])
   end
 
   def create_notification
