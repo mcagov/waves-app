@@ -1,0 +1,22 @@
+%table.table.table-striped
+  %thead
+    %th Format
+    %th Subject
+    %th Date
+  %tbody
+    - correspondence_notifications(submission).each do |row|
+      - if row.is_a?(Correspondence)
+        = render partial: "submissions/tabs/correspondence",
+          locals: { correspondence: row }
+      - if row.is_a?(Notification)
+        = render partial: "submissions/tabs/notification",
+          locals: { notification: row }
+
+= render partial: "submissions/actions/correspondence"
+
+= render partial: "submissions/modals/new_correspondence",
+  locals: { submission: submission }
+
+= render partial: "submissions/modals/correspondences", locals: { submission: submission }
+
+= render partial: "submissions/modals/notifications", locals: { submission: submission }
