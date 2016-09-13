@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/tobyprivett/waves-utilities.git
+  revision: b2c3ed1f1a8a9a368b379510467bddadac003c82
+  specs:
+    waves-utilities (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -393,6 +399,7 @@ DEPENDENCIES
   transitions
   uglifier
   validates_email_format_of
+  waves-utilities!
   web-console
   webmock
   whenever

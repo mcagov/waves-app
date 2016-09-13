@@ -1,2 +1,0 @@
-class VesselType < ApplicationRecord
-end
