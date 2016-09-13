@@ -22,4 +22,9 @@ module SubmissionHelper
       submission.current_state
     end
   end
+
+  def correspondence_notifications(submission)
+    (submission.correspondences + submission.notifications
+    ).sort { |a, b| b.created_at <=> a.created_at }
+  end
 end
