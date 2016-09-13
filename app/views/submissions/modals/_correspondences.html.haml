@@ -1,0 +1,12 @@
+- submission.correspondences.each do |correspondence|
+  .modal.fade{id: "correspondence-#{ correspondence.id }", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4= correspondence.subject
+        .modal-body
+          %code= correspondence.content
+        .modal-footer
+          %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close
