@@ -9,6 +9,6 @@ class User < ApplicationRecord
   end
 
   def to_s
-    name
+    name.humanize
   end
 end

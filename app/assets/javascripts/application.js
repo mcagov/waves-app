@@ -16,6 +16,7 @@
 //= require bootstrap/tab
 //= require bootstrap/tooltip
 //= require bootstrap-datepicker
+//= require bootstrap/dropdown
 //
 //= require./vendor/nprogress
 //= require ./vendor/select2
