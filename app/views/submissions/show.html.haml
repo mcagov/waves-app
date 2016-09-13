@@ -27,18 +27,18 @@
 
       #myTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-          = render partial: "vessel", locals: { vessel: @submission.vessel }
+          = render partial: "submissions/tabs/vessel", locals: { vessel: @submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: "declaration", collection: @submission.declarations
+          = render partial: "submissions/tabs/declaration", collection: @submission.declarations
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
-          = render partial: "correspondence", locals: {submission: @submission}
+          = render partial: "submissions/tabs/correspondence", locals: {submission: @submission}
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
-          = render partial: "payment", locals: { payment: @submission.payment }
+          = render partial: "submissions/tabs/payment", locals: { payment: @submission.payment }
 
         #tab_content5.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
-          = render partial: "history"
+          = render partial: "submissions/tabs/history"
 
 = render partial: "actions", locals: {submission: @submission}
