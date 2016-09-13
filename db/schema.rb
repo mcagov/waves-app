@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909145512) do
+ActiveRecord::Schema.define(version: 20160913095257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,14 +19,6 @@ ActiveRecord::Schema.define(version: 20160909145512) do
   create_table "add_received_at_to_submissions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "countries", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_countries_on_code", using: :btree
   end
 
   create_table "customers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
