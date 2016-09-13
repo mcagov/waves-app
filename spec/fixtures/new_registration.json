@@ -27,14 +27,14 @@
             "owners": [
               {
                 "name": "Horatio Nelson",
-                "nationality": "GB",
+                "nationality": "UNITED KINGDOM",
                 "address_1": "2 Keen Road",
                 "address_2": "",
                 "address_3": "",
                 "town": "Town 2",
                 "county": "County 2",
                 "postcode": "QZ2 3QM",
-                "country": "RU",
+                "country": "UNITED KINGDOM",
                 "email": "horatio-nelson.1@example.com",
                 "phone_number": "42672075807"
               },
@@ -47,7 +47,7 @@
                 "town": "Town 4",
                 "county": "County 4",
                 "postcode": "UB2 7RP",
-                "country": "ME",
+                "country": "UNITED KINGDOM",
                 "email": "edward.mcallister@exampl.com",
                 "phone_number": "21911163031"
               }
