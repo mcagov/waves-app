@@ -18,4 +18,8 @@ class Notification::Rejection < Notification
   def additional_params
     body
   end
+
+  def email_subject
+    "Application Rejected"
+  end
 end

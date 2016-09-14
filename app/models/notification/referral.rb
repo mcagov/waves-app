@@ -18,4 +18,8 @@ class Notification::Referral < Notification
   def additional_params
     body
   end
+
+  def email_subject
+    "Application Referred - Action Required"
+  end
 end

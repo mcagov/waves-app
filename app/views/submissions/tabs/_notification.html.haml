@@ -1,4 +1,4 @@
 %tr
   %td{width: "20%"} System Email
-  %td{width: "65%"}= link_to notification.class.to_s.demodulize, "#notification-#{ notification.id }", "data-target" => "#notification-#{ notification.id }", "data-toggle" => "modal"
+  %td{width: "65%"}= link_to notification.email_subject, "#notification-#{ notification.id }", "data-target" => "#notification-#{ notification.id }", "data-toggle" => "modal"
   %td{width: "15%"}= link_to notification.created_at, "#email-content", "data-target" => "#notification-#{ notification.id }", "data-toggle" => "modal"
