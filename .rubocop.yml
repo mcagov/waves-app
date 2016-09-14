@@ -974,7 +974,7 @@ Metrics/MethodLength:
   Max: 10
 
 Metrics/ParameterLists:
-  Max: 5
+  Max: 6
   CountKeywordArgs: true
 
 Metrics/PerceivedComplexity:
