@@ -1,4 +1,6 @@
 %tr
   %td{width: "20%"}= correspondence.format
   %td{width: "65%"}= link_to correspondence.subject, "#correspondence-#{ correspondence.id }", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
-  %td{width: "15%"}= link_to correspondence.noted_at, "#email-content", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
+  %td{width: "15%"}
+    = link_to correspondence.noted_at, "#email-content", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
+    = render partial:  "submissions/modals/correspondence", locals: { correspondence: correspondence }

@@ -4,7 +4,7 @@
     %th Subject
     %th Date
   %tbody
-    - correspondence_notifications(submission).each do |row|
+    - submission.notification_list.each do |row|
       - if row.is_a?(Correspondence)
         = render partial: "submissions/tabs/correspondence",
           locals: { correspondence: row }
@@ -13,10 +13,5 @@
           locals: { notification: row }
 
 = render partial: "submissions/actions/correspondence"
-
 = render partial: "submissions/modals/new_correspondence",
   locals: { submission: submission }
-
-= render partial: "submissions/modals/correspondences", locals: { submission: submission }
-
-= render partial: "submissions/modals/notifications", locals: { submission: submission }
