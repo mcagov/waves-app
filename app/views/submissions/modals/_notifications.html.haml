@@ -17,7 +17,7 @@
             %dd= notification.recipient_email
           %dl
             %dt Reason
-            %dd= notification.subject.humanize
+            %dd= notification.subject.humanize if notification.subject
           %dl
             %dt Additional information
             %dd= notification.body
