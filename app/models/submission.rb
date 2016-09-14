@@ -45,6 +45,11 @@ class Submission < ApplicationRecord
   validates :part, presence: true
   validates :ref_no, presence: true
 
+  def notification_list
+    (correspondences + notifications + declarations.map(&:notification)
+    ).compact.sort { |a, b| b.created_at <=> a.created_at }
+  end
+
   def process_application; end
 
   def owners
