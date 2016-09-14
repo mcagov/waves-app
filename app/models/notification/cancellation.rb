@@ -15,4 +15,8 @@ class Notification::Cancellation < Notification
   def additional_params
     body
   end
+
+  def email_subject
+    "Application Cancelled"
+  end
 end
