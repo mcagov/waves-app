@@ -22,4 +22,8 @@ class Notification < ApplicationRecord
   end
 
   def additional_params; end
+
+  def email_subject
+    self.class.to_s.demodulize
+  end
 end
