@@ -7,6 +7,10 @@ class Notification::ApplicationReceipt < Notification
     [vessel_name, world_pay_transaction_no, submission_ref_no]
   end
 
+  def email_subject
+    "Application Receipt"
+  end
+
   private
 
   def world_pay_transaction_no
@@ -19,9 +23,5 @@ class Notification::ApplicationReceipt < Notification
 
   def vessel_name
     notifiable.vessel.name if notifiable.vessel
-  end
-
-  def email_subject
-    "Application Receipt"
   end
 end
