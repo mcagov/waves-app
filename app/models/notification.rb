@@ -12,6 +12,7 @@ class Notification < ApplicationRecord
   def send_email
     NotificationMailer.delay.send(
       email_template,
+      email_subject,
       recipient_email,
       recipient_name,
       *additional_params)
