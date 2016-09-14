@@ -17,6 +17,7 @@ feature "User logs in", type: :feature, js: true do
 
       # logging out
       click_on("Part 3")
+      find(".dropdown-toggle").click
       find("#logout").click
       expect(page).to have_content("Login")
       expect(page).to_not have_content(successfully_loggedin_page)

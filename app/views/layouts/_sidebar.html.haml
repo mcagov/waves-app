@@ -42,9 +42,3 @@
     .sidebar-footer.hidden-small
       = link_to "/", "data-original-title" => "Part III", "data-placement" => "top", "data-toggle" => "tooltip", class: "sidebar-footer-part-selector" do
         Part III
-
-      = link_to "/settings", "data-original-title" => "Settings", "data-placement" => "top", "data-toggle" => "tooltip" do
-        %span.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
-
-      = link_to sign_out_path, method: :delete, id: "logout" do
-        %span.glyphicon.glyphicon-off{"aria-hidden" => "true"}
