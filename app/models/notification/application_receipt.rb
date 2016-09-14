@@ -20,4 +20,8 @@ class Notification::ApplicationReceipt < Notification
   def vessel_name
     notifiable.vessel.name if notifiable.vessel
   end
+
+  def email_subject
+    "Application Receipt"
+  end
 end
