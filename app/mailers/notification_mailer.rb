@@ -5,72 +5,72 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: "Message from the MCA")
   end
 
-  def outstanding_declaration(email, name, declaration_id)
+  def outstanding_declaration(subject, email, name, declaration_id)
     @name = name
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
     mail(to: email,
-         subject: "Vessel Registration Owner Declaration Required")
+         subject: subject)
   end
 
-  def application_receipt(email, name, vessel_name,
+  def application_receipt(subject, email, name, vessel_name,
                           world_pay_transaction_no, submission_ref_no)
     @vessel_name = vessel_name
     @world_pay_transaction_no = world_pay_transaction_no
     @submission_ref_no = submission_ref_no
     @name = name
-    mail(to: email, subject: "Application Receipt")
+    mail(to: email, subject: subject)
   end
 
-  def cancellation_owner_request(email, name, additional_info = nil)
+  def cancellation_owner_request(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Cancelled")
+    mail(to: email, subject: subject)
   end
 
-  def cancellation_no_response(email, name, additional_info = nil)
+  def cancellation_no_response(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Cancelled")
+    mail(to: email, subject: subject)
   end
 
-  def referral_incorrect(email, name, additional_info = nil)
+  def referral_incorrect(subject, email, name, additional_info = nil)
     @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: subject)
   end
 
-  def referral_no_match(email, name, additional_info = nil)
+  def referral_no_match(subject, email, name, additional_info = nil)
     @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: subject)
   end
 
-  def referral_unknown(email, name, additional_info = nil)
+  def referral_unknown(subject, email, name, additional_info = nil)
     @contact_us_on = "XXX"
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Referred - Action Required")
+    mail(to: email, subject: subject)
   end
 
-  def rejection_fraudulent(email, name, additional_info = nil)
+  def rejection_fraudulent(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Rejected")
+    mail(to: email, subject: subject)
   end
 
-  def rejection_too_long(email, name, additional_info = nil)
+  def rejection_too_long(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Rejected")
+    mail(to: email, subject: subject)
   end
 
-  def rejection_unsuitable(email, name, additional_info = nil)
+  def rejection_unsuitable(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name
-    mail(to: email, subject: "Application Rejected")
+    mail(to: email, subject: subject)
   end
 
   private

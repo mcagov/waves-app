@@ -18,6 +18,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "outstanding_declaration" do
     let(:mail) do
       NotificationMailer.outstanding_declaration(
+        "Vessel Registration Owner Declaration Required",
         "test@example.com", "Alice", "foo")
     end
 
@@ -42,8 +43,8 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_receipt" do
     let(:mail) do
       NotificationMailer.application_receipt(
-        "test@example.com", "Alice", "Jolly Roger", "WP_code", "Ref_no"
-      )
+        "subject", "test@example.com", "Alice", "Jolly Roger",
+        "WP_code", "Ref_no")
     end
 
     let(:body) { mail.body.encoded }
@@ -78,7 +79,8 @@ RSpec.describe NotificationMailer, type: :mailer do
     it "render the name" do
       templates.each do |template|
         mail =
-          NotificationMailer.send(template, "alice@example.com", "Alice")
+          NotificationMailer.send(
+            template, "subject", "alice@example.com", "Alice")
         expect(mail.body.encoded).to match(/Dear Alice/)
       end
     end
@@ -87,7 +89,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       templates.sample do |template|
         mail =
           NotificationMailer.send(
-            template, "alice@example.com",
+            "subject", template, "alice@example.com",
             "Alice", "Today is Thursday")
         expect(mail.body.encoded).to match(/Today is Thursday/)
       end
