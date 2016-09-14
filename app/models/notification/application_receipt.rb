@@ -4,7 +4,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def additional_params
-    [world_pay_transaction_no, submission_ref_no]
+    [vessel_name, world_pay_transaction_no, submission_ref_no]
   end
 
   private
@@ -15,5 +15,9 @@ class Notification::ApplicationReceipt < Notification
 
   def submission_ref_no
     notifiable.ref_no
+  end
+
+  def vessel_name
+    notifiable.vessel.name if notifiable.vessel
   end
 end

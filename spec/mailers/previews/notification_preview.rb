@@ -7,8 +7,8 @@ class EmailTemplatesPreview < ActionMailer::Preview
 
   def application_receipt
     NotificationMailer.application_receipt(
-      email, name, "8481b725-e7c8-4c94-b311-9fa2f10748ae",
-      "3N-777EA4"
+      email, name, "Jolly Roger",
+      "8481b725-e7c8-4c94-b311-9fa2f10748ae", "3N-777EA4"
     )
   end
 

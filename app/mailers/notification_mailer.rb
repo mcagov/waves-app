@@ -13,8 +13,9 @@ class NotificationMailer < ApplicationMailer
          subject: "Vessel Registration Owner Declaration Required")
   end
 
-  def application_receipt(email, name, world_pay_transaction_no,
-                          submission_ref_no)
+  def application_receipt(email, name, vessel_name,
+                          world_pay_transaction_no, submission_ref_no)
+    @vessel_name = vessel_name
     @world_pay_transaction_no = world_pay_transaction_no
     @submission_ref_no = submission_ref_no
     @name = name
