@@ -1541,7 +1541,7 @@ span.right {
   text-decoration: none;
 }
 .sidebar-footer-part-selector {
-  width: 50% !important;
+  width: 100% !important;
   font-size: 12px;
   padding: 5px 0 !important;
   color: #ffffff;
