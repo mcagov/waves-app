@@ -35,13 +35,11 @@ feature "User views task lists", type: :feature, js: true do
   scenario "moving a submission between lists" do
     click_link("Unclaimed Tasks")
 
-    # claim task and redirect to my tasks
     within("tr.submission") { click_on("Claim") }
-    expect(page).to have_css("h1", text: "My Tasks")
+    expect(page).not_to have_css("tr.submission")
 
-    # unclaim task and redirect (return) to my tasks
+    click_link("My Tasks")
     within("tr.submission") { click_on("Unclaim") }
-    expect(page).to have_css("h1", text: "My Tasks")
     expect(page).not_to have_css("tr.submission")
   end
 

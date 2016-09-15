@@ -5,6 +5,7 @@ feature "User views new submission", type: :feature, js: true do
 
   before do
     login_to_part_3
+    click_link "Unclaimed Tasks"
     click_on submission.vessel.name
   end
 

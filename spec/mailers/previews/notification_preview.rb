@@ -3,7 +3,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
   def outstanding_declaration
     NotificationMailer.outstanding_declaration(
       Notification::OutstandingDeclaration.new.email_subject,
-      email, name, "a-very-long-id")
+      email, name, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
   end
 
   def application_receipt

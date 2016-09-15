@@ -2,31 +2,54 @@
   .col-sm-9
     %h1.heading_no_top_margin
       = heading
+  - if @my_tasks
+    .col-sm-3
+      .pull-right
+        = link_to tasks_next_task_path, class: 'btn btn-primary' do
+          %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
+          Process Next Application
 
-.x_panel
-  %table#submissions.table.table-striped.table-hover
-    %thead
-      %tr
-        %th Vessel
-        %th Applicant
-        %th Job Type
-        %th Date Received
-        %th Referred Until
-        %th Target Date
-        %th Payment
-        %th Source
-        %th Last Update
-        %th
-    %tbody
-      - submissions.each do |submission|
-        %tr.submission
-          %td.vessel-name= link_to submission.vessel, submission_path(submission)
-          %td= submission.applicant
-          %td= submission.job_type
-          %td= submission.received_at
-          %td= submission.referred? ? submission.referred_until : "n/a"
-          %td= submission.target_date
-          %td= css_tick(submission.payment.present?)
-          %td= submission.source
-          %td= submission.updated_at
-          %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
+.row
+  .col-md-12
+
+    - if @my_tasks && submissions.empty?
+      .x_panel
+        .x_content
+          %p.text-center
+            = image_tag 'hs-huzzah-01.svg', width: '100px'
+          %h2.text-center
+            Tasks Complete
+          %p.text-center
+            Your task list is clear.
+          %p.text-center
+            = link_to 'Get More Work', tasks_unclaimed_path, class: 'btn btn-primary'
+    - else
+      .x_panel
+        %table#submissions.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Vessel
+              %th Applicant
+              %th Job Type
+              %th Date Received
+              %th Referred Until
+              %th Target Date
+              %th Payment
+              %th Source
+              %th Last Update
+              %th
+          %tbody
+            - submissions.each do |submission|
+              %tr.submission{ id: "submission_#{ submission.id }"}
+                %td.vessel-name= link_to submission.vessel, submission_path(submission)
+                %td= submission.applicant
+                %td= submission.job_type
+                %td= submission.received_at
+                %td= submission.referred? ? submission.referred_until : "n/a"
+                %td= submission.target_date
+                %td= css_tick(submission.payment.present?)
+                %td= submission.source
+                %td= submission.updated_at
+                %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
+
+

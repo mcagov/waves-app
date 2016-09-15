@@ -5,10 +5,13 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: "Message from the MCA")
   end
 
-  def outstanding_declaration(subject, email, name, declaration_id)
+  def outstanding_declaration(
+      subject, email, name, declaration_id, vessel_name, applicant_name)
     @name = name
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
+    @vessel_name = vessel_name
+    @applicant_name = applicant_name
     mail(to: email,
          subject: subject)
   end

@@ -1,7 +1,12 @@
 FactoryGirl.define do
   factory :submission do
     part "part_3"
-    changeset { { owners: [build(:declaration_owner)] } }
+    changeset do
+      {
+        owners: [build(:declaration_owner)],
+        vessel_info: build(:vessel),
+      }
+    end
   end
 
   factory :paid_submission, parent: :submission do
