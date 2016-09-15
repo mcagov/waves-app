@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Notification::OutstandingDeclaration, type: :model do
   context "in general" do
-    let(:declaration) { create(:declaration) }
+    let!(:declaration) { create(:declaration) }
     subject { described_class.new(notifiable: declaration) }
 
     it "has the expected email_template" do
@@ -10,7 +10,11 @@ describe Notification::OutstandingDeclaration, type: :model do
     end
 
     it "has additional_params" do
-      expect(subject.additional_params).to eq(declaration.id)
+      expect(subject.additional_params).to eq(
+        [declaration.id,
+         declaration.submission.vessel.to_s,
+         declaration.submission.applicant.to_s,
+        ])
     end
   end
 end

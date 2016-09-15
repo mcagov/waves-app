@@ -19,7 +19,8 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:mail) do
       NotificationMailer.outstanding_declaration(
         "Vessel Registration Owner Declaration Required",
-        "test@example.com", "Alice", "foo")
+        "test@example.com", "Alice", "declaration_id",
+        "Jolly Roger", "Bob")
     end
 
     let(:body) { mail.body.encoded }
@@ -36,7 +37,16 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "renders the declaration_url" do
-      expect(body).to include("/referral/outstanding_declaration/foo")
+      expect(body)
+        .to include("/referral/outstanding_declaration/declaration_id")
+    end
+
+    it "renders the vessel name" do
+      expect(body).to match(/with the name Jolly Roger/)
+    end
+
+    it "renders the applicant name" do
+      expect(body).to match(/made by Bob/)
     end
   end
 

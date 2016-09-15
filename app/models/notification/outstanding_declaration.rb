@@ -4,7 +4,7 @@ class Notification::OutstandingDeclaration < Notification
   end
 
   def additional_params
-    [notifiable.id, vessel_name]
+    [notifiable.id, vessel_name, applicant_name]
   end
 
   def email_subject
@@ -14,10 +14,10 @@ class Notification::OutstandingDeclaration < Notification
   private
 
   def vessel_name
-    notifiable.submission.vessel  if notifiable.submission
+    notifiable.submission.vessel.to_s  if notifiable.submission
   end
 
   def applicant_name
-    notifiable.applicant_name if notifiable
+    notifiable.submission.applicant.to_s if notifiable.submission
   end
 end
