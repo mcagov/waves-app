@@ -10,28 +10,28 @@ describe SubmissionsController, type: :controller do
 
   context "#claim" do
     before do
-      post :claim, params: { id: create(:paid_submission).id }
+      post :claim, params: { id: create(:paid_submission).id }, xhr: true
     end
 
     it "assigns the claimant" do
       expect(assigns[:submission].claimant).to eq(current_user)
     end
 
-    it "redirects to my tasks" do
-      expect(response).to redirect_to(tasks_my_tasks_path)
+    it "renders the claim_button js" do
+      expect(response).to render_template("tasks/actions/claim_button")
     end
 
     context "#unclaim" do
       before do
-        post :unclaim, params: { id: assigns[:submission].id }
+        post :unclaim, params: { id: assigns[:submission].id }, xhr: true
       end
 
       it "unassigns the claimant" do
         expect(assigns[:submission].claimant).to be_nil
       end
 
-      it "redirects to my tasks" do
-        expect(response).to redirect_to(tasks_my_tasks_path)
+      it "renders the claim_button js" do
+        expect(response).to render_template("tasks/actions/claim_button")
       end
     end
   end
