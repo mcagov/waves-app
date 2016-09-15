@@ -52,7 +52,7 @@ Rails.application.routes.draw do
 
   %w(
     incomplete my-tasks team-tasks print-queue
-    referred unclaimed rejected cancelled
+    referred unclaimed rejected cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",
         controller: "tasks",

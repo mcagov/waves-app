@@ -30,4 +30,12 @@ class TasksController < InternalPagesController
   def cancelled
     @submissions = Submission.order("updated_at desc").cancelled
   end
+
+  def next_task
+    if (submission = Submission.assigned_to(current_user).first)
+      return redirect_to submission_path(submission)
+    else
+      return redirect_to tasks_my_tasks_path
+    end
+  end
 end
