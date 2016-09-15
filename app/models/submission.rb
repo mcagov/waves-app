@@ -79,7 +79,6 @@ class Submission < ApplicationRecord
   protected
 
   def user_input
-    @user_input ||=
-      changeset.blank? ? {} : changeset.deep_symbolize_keys!
+    changeset.blank? ? {} : changeset.deep_symbolize_keys!
   end
 end
