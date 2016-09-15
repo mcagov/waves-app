@@ -5,6 +5,7 @@ feature "User views unclaimed task list", type: :feature, js: true do
 
   before do
     login_to_part_3
+    click_link("Unclaimed Tasks")
   end
 
   scenario "viewing the unclaimed submissions" do
