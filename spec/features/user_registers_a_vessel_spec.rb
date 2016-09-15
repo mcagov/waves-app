@@ -11,6 +11,9 @@ feature "User registers a vessel", type: :feature, js: true do
       click_button("Register Vessel")
     end
     expect(page).to have_text("The vessel is now registered")
+
+    click_link("Process Next Application")
+    expect(page).to have_css("h1", text: "My Tasks")
   end
 
   scenario "with email notification" do
