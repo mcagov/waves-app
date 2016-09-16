@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :vessels, only: [:show]
+
   %w(
     incomplete my-tasks team-tasks print-queue
     referred unclaimed rejected cancelled next-task
