@@ -1,0 +1,18 @@
+- unless submission.similar_vessels.empty?
+  .x_panel
+    .x_content
+      #similar-vessels
+        %h4 Similar Vessels
+        %table.table.table-striped
+          %thead
+            %th Vessel Name
+            %th MMSI Number
+            %th Vessel type
+            %th Length
+          %tbody
+            - submission.similar_vessels.each do |similar_vessel|
+              %tr
+                %td= link_to similar_vessel.name, vessel_path(similar_vessel)
+                %td= similar_vessel.mmsi_number
+                %td= similar_vessel.vessel_type
+                %td= similar_vessel.length_in_meters
