@@ -22,4 +22,8 @@ module SubmissionHelper
       submission.current_state
     end
   end
+
+  def similar_attribute_icon(a, b)
+    content_tag(:div, " ", class: "i fa fa-star-o") if a == b && !a.blank?
+  end
 end

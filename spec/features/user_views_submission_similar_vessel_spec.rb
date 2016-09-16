@@ -8,7 +8,11 @@ feature "User views submission for similar vessel", type: :feature, js: true do
 
     within("#similar-vessels") do
       expect(page).to have_text("Similar Vessels")
-      click_link("Celebrator Doppelbock")
+
+      within(".vessel-name", text: "Celebrator Doppelbock") do
+        expect(page).to have_css(".i.fa.fa-star-o")
+        click_link("Celebrator Doppelbock")
+      end
     end
 
     expect(page).to have_css("h1", "Celebrator Doppelbock")

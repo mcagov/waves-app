@@ -7,12 +7,24 @@
           %thead
             %th Vessel Name
             %th MMSI Number
+            %th HIN
+            %th Radio Call Sign
             %th Vessel type
             %th Length
           %tbody
             - submission.similar_vessels.each do |similar_vessel|
               %tr
-                %td= link_to similar_vessel.name, vessel_path(similar_vessel)
-                %td= similar_vessel.mmsi_number
+                %td.vessel-name
+                  = link_to similar_vessel.name, vessel_path(similar_vessel)
+                  = similar_attribute_icon(similar_vessel.name, submission.vessel.name)
+                %td
+                  = similar_vessel.mmsi_number
+                  = similar_attribute_icon(similar_vessel.mmsi_number, submission.vessel.mmsi_number)
+                %td
+                  = similar_vessel.hin
+                  = similar_attribute_icon(similar_vessel.hin, submission.vessel.hin)
+                %td
+                  = similar_vessel.radio_call_sign
+                  = similar_attribute_icon(similar_vessel.radio_call_sign, submission.vessel.radio_call_sign)
                 %td= similar_vessel.vessel_type
                 %td= similar_vessel.length_in_meters
