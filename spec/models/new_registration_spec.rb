@@ -39,7 +39,7 @@ describe NewRegistration, type: :model do
     let!(:same_name) { create(:vessel, name: "Celebrator Doppelbock") }
 
     let!(:same_mmsi) { create(:vessel, mmsi_number: "233878594") }
-    let!(:blank_mmsi) { create(:vessel, mmsi_number: nil) }
+    let!(:blank_mmsi) { create(:vessel, mmsi_number: "") }
     let!(:different_mmsi) { create(:vessel, mmsi_number: rand(9)) }
 
     let!(:same_hin) { create(:vessel, hin: "foo") }
