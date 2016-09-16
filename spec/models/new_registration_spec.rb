@@ -45,5 +45,7 @@ describe NewRegistration, type: :model do
     it "contains two the similar_vessels" do
       expect(subject).to eq([same_mmsi, same_name])
     end
+
+    it "does not match on blank values"
   end
 end
