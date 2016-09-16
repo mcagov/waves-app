@@ -27,7 +27,10 @@
 
 .row.no-print
   .col-xs-12
-    = render partial: "tasks/actions/process_next"
     = link_to tasks_my_tasks_path, class: "btn btn-info btn-lg" do
       %i.fa.fa-list-ol
       Return to My Tasks
+    .pull-right
+      = link_to tasks_next_task_path, class: 'btn btn-success btn-lg' do
+        %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
+        Process Next Application
