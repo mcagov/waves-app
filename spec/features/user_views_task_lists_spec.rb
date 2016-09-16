@@ -42,6 +42,4 @@ feature "User views task lists", type: :feature, js: true do
     within("tr.submission") { click_on("Unclaim") }
     expect(page).not_to have_css("tr.submission")
   end
-
-  scenario "viewing tasks assigned to other team members"
 end
