@@ -76,6 +76,10 @@ class Submission < ApplicationRecord
     "00"
   end
 
+  def similar_vessels
+    []
+  end
+
   protected
 
   def user_input

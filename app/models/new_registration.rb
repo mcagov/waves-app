@@ -11,6 +11,12 @@ class NewRegistration < Submission
     end
   end
 
+  def similar_vessels
+    Register::Vessel
+      .where(name: vessel.name)
+      .or(Register::Vessel.where(mmsi_number: vessel.mmsi_number))
+  end
+
   protected
 
   def vessel_params
