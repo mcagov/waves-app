@@ -1,9 +1,9 @@
 .row
-  .col-sm-9
+  .col-sm-6
     %h1{style: "margin-top: 0px !important;"}
       = @submission.job_type
       %small ID: #{ @submission.ref_no }
-  .col-sm-3
+  .col-sm-6
     .pull-right
       = link_to "#", class: "btn btn-warning" do
         %i.fa.fa-print{style: "font-size: 1.2em;"}
