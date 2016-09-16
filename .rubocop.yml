@@ -650,7 +650,7 @@ Style/MultilineOperationIndentation:
   IndentationWidth: ~
 
 Style/NumericLiterals:
-  MinDigits: 5
+  MinDigits: 10
 
 Style/OptionHash:
   # A list of parameter names that will be flagged by this cop.

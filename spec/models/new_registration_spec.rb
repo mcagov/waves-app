@@ -34,4 +34,16 @@ describe NewRegistration, type: :model do
         .to eq(new_registration.claimant)
     end
   end
+
+  context "#similar_vessels" do
+    let!(:different_mmsi) { create(:vessel, mmsi_number: rand(9)) }
+    let!(:same_mmsi) { create(:vessel, mmsi_number: 233878594) }
+    let!(:same_name) { create(:vessel, name: "Celebrator Doppelbock") }
+
+    subject { new_registration.similar_vessels }
+
+    it "contains two the similar_vessels" do
+      expect(subject).to eq([same_mmsi, same_name])
+    end
+  end
 end
