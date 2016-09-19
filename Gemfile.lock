@@ -195,6 +195,9 @@ GEM
     paper_trail (5.2.2)
       activerecord (>= 3.0, < 6.0)
       request_store (~> 1.1)
+    parallel (1.9.0)
+    parallel_tests (2.9.0)
+      parallel
     parser (2.3.1.2)
       ast (~> 2.2)
     pg (0.18.4)
@@ -377,6 +380,7 @@ DEPENDENCIES
   launchy
   nokogiri (>= 1.6.8)
   paper_trail
+  parallel_tests
   pg
   pry-byebug
   pry-rails
