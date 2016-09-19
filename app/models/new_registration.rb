@@ -26,6 +26,11 @@ class NewRegistration < Submission
 
   protected
 
+  def init_new_submission
+    build_ref_no
+    build_declarations
+  end
+
   def vessel_params
     {
       name: vessel.name,
