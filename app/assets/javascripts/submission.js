@@ -2,6 +2,11 @@
 // to "similar" attributes in the "similar vessels" pane.
 // With this script, we set the reciprocal attribute in the vessel pane.
 $(document).ready(function() {
+
+  // Editable attributes
+  $('.editable-text').editable({ type: 'text' });
+
+  // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');
   }
