@@ -27,7 +27,10 @@ feature "User refers a submission", type: :feature, js: true do
     click_link "Celebrator Doppelbock"
     click_link "Correspondence"
 
-    first("a", text: "Application Referred - Action Required").click
+    within("#notification-list") do
+      first(
+        "a", text: "Application Referred - Action Required").click
+    end
     expect(page).to have_css("h4", "Referral Email")
   end
 
