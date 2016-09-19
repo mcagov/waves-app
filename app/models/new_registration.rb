@@ -26,6 +26,10 @@ class NewRegistration < Submission
 
   protected
 
+  def unassignable?
+    declarations.incomplete.empty? && payment.present?
+  end
+
   def init_new_submission
     build_ref_no
     build_declarations

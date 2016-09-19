@@ -102,7 +102,7 @@ module SubmissionTransitions
     end
 
     def unassignable?
-      declarations.incomplete.empty? && payment.present?
+      true
     end
   end
 end
