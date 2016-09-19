@@ -18,7 +18,9 @@
 //= require bootstrap-datepicker
 //= require bootstrap/dropdown
 //
-//= require./vendor/nprogress
+//= require ./vendor/nprogress
 //= require ./vendor/select2
 //= require ./vendor/pace.min
 //= require ./vendor/custom
+
+//= require submission

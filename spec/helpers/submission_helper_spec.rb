@@ -14,17 +14,17 @@ describe "SubmissionHelper", type: :helper do
 
   describe "#similar_attribute_icon", type: :helper do
     it "shows the icon" do
-      expect(helper.similar_attribute_icon("a", "a"))
+      expect(helper.similar_attribute_icon(:foo, "a", "a"))
         .to match(/i fa fa-star-o/)
     end
 
     it "does not show the icon with different values" do
-      expect(helper.similar_attribute_icon("a", 1))
+      expect(helper.similar_attribute_icon(:foo, "a", 1))
         .to be_blank
     end
 
     it "does not show the icon with empty strings" do
-      expect(helper.similar_attribute_icon("", ""))
+      expect(helper.similar_attribute_icon(:foo, "", ""))
         .to be_blank
     end
   end

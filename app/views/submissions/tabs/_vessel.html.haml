@@ -5,42 +5,41 @@
   %tbody
     %tr
       %td{width: "30%"} Vessel Name
-      %td{width: "70%"}
-        %a#vessel-name-options{"data-placement" => "bottom", "data-title" => "Select vessel name", "data-type" => "select", :href => "#"}
-          %strong= vessel.name
+      %td#vessel-name{width: "70%"}
+        %strong
+          = vessel.name
+          .i.fa.fa-star-o.hidden
     %tr
       %td Hull Identification Number (HIN)
-      %td
-        %a#vessel-hin{"data-placement" => "bottom", "data-title" => "Hull Identification Number (HIN)", "data-type" => "text", :href => "#"}
-          %strong= vessel.hin
+      %td#vessel-hin
+        %strong
+          = vessel.hin
+          .i.fa.fa-star-o.hidden
     %tr
       %td Make and model
-      %td
-        %a#vessel-make{"data-placement" => "bottom", "data-title" => "Make and model", "data-type" => "text", :href => "#"}
-          %strong= vessel.make_and_model
+      %td#vessel-make
+        %strong= vessel.make_and_model
     %tr
       %td Length
-      %td
-        %a#vessel-length{"data-placement" => "bottom", "data-title" => "Length", "data-type" => "text", :href => "#"}
-          %strong= number_with_precision(vessel.length_in_meters, precision: 2)
+      %td#vessel-length_in_meters
+        %strong= number_with_precision(vessel.length_in_meters, precision: 2)
     %tr
       %td Number of hulls
-      %td
-        %a#vessel-hulls{"data-placement" => "bottom", "data-title" => "Number of hulls", "data-type" => "select", :href => "#"}
-          %strong= vessel.number_of_hulls
+      %td#vessel-number_of_hulls
+        %strong= vessel.number_of_hulls
     %tr
       %td Vessel type
-      %td
-        %a#vessel-type{"data-placement" => "bottom", "data-title" => "Vessel Type", "data-type" => "select", :href => "#"}
-          %strong= vessel.type_of_vessel
-
+      %td#vessel_type
+        %strong= vessel.type_of_vessel
     %tr
       %td MMSI Number
-      %td
-        %a#vessel-mmsi{"data-placement" => "bottom", "data-title" => "MMSI Number", "data-type" => "text", :href => "#"}
-          %strong= vessel.mmsi_number
+      %td#vessel-mmsi_number
+        %strong
+          = vessel.mmsi_number
+          .i.fa.fa-star-o.hidden
     %tr
       %td Radio Call Sign
-      %td
-        %a#vessel-callsign{"data-placement" => "bottom", "data-title" => "Radio Call Sign", "data-type" => "text", :href => "#"}
-          %strong= vessel.radio_call_sign
+      %td#vessel-radio_call_sign
+        %strong
+          = vessel.radio_call_sign
+          .i.fa.fa-star-o.hidden

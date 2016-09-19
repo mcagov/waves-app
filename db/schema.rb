@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916111707) do
+ActiveRecord::Schema.define(version: 20160919091827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,6 +195,10 @@ ActiveRecord::Schema.define(version: 20160916111707) do
     t.string   "radio_call_sign"
     t.string   "vessel_type"
     t.decimal  "length_in_meters"
+    t.index ["hin"], name: "index_vessels_on_hin", using: :btree
+    t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
+    t.index ["name"], name: "index_vessels_on_name", using: :btree
+    t.index ["radio_call_sign"], name: "index_vessels_on_radio_call_sign", using: :btree
   end
 
 end

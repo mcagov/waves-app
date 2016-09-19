@@ -23,7 +23,12 @@ module SubmissionHelper
     end
   end
 
-  def similar_attribute_icon(a, b)
-    content_tag(:div, " ", class: "i fa fa-star-o") if a == b && !a.blank?
+  def similar_attribute_icon(key, vessel_attr, similar_vessel_attr)
+    if vessel_attr.to_s == similar_vessel_attr.to_s && vessel_attr.present?
+      # NOTE: once we set the similar-#{key} class, a javascript
+      # functions (submission.js) displays a star next to the
+      # reciprocal attribute in the vessel pane
+      content_tag(:div, "", class: "i fa fa-star-o similar-#{key}")
+    end
   end
 end
