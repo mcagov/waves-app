@@ -15,7 +15,7 @@
 //= require bootstrap/modal
 //= require bootstrap/tab
 //= require bootstrap/tooltip
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require bootstrap/dropdown
 //
 //= require ./vendor/nprogress
