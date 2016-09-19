@@ -12,11 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require bootstrap/modal
 //= require bootstrap/tab
 //= require bootstrap/tooltip
 //= require bootstrap-datepicker/core
 //= require bootstrap/dropdown
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //
 //= require ./vendor/nprogress
 //= require ./vendor/select2
