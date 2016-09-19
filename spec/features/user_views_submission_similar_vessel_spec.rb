@@ -1,11 +1,17 @@
 require "rails_helper"
 
 feature "User views submission for similar vessel", type: :feature, js: true do
-  scenario "viewing a similar vessel" do
+  scenario "viewing a vessel with similar name and different mmsi_number" do
     create(:vessel, mmsi_number: 233878594)
     create(:vessel, name: "Celebrator Doppelbock")
     visit_assigned_submission
 
+    # submitted vessel information
+    within("td#vessel-name") do
+      expect(page).to have_css(".i.fa.fa-star-o")
+    end
+
+    # similar vesels pane
     within("#similar-vessels") do
       expect(page).to have_text("Similar Vessels")
 

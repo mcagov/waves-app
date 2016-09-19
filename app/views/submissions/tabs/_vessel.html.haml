@@ -6,11 +6,15 @@
     %tr
       %td{width: "30%"} Vessel Name
       %td#vessel-name{width: "70%"}
-        %strong= vessel.name
+        %strong
+          = vessel.name
+          .i.fa.fa-star-o.hidden
     %tr
       %td Hull Identification Number (HIN)
       %td#vessel-hin
-        %strong= vessel.hin
+        %strong
+          = vessel.hin
+          .i.fa.fa-star-o.hidden
     %tr
       %td Make and model
       %td#vessel-make
@@ -27,12 +31,15 @@
       %td Vessel type
       %td#vessel_type
         %strong= vessel.type_of_vessel
-
     %tr
       %td MMSI Number
       %td#vessel-mmsi_number
-        %strong= vessel.mmsi_number
+        %strong
+          = vessel.mmsi_number
+          .i.fa.fa-star-o.hidden
     %tr
       %td Radio Call Sign
       %td#vessel-radio_call_sign
-        %strong= vessel.radio_call_sign
+        %strong
+          = vessel.radio_call_sign
+          .i.fa.fa-star-o.hidden
