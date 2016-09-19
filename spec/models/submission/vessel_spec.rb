@@ -6,10 +6,7 @@ describe Submission::Vessel do
 
     context "in general" do
       let(:input_params) do
-        {
-          name: "A real name",
-          non_existent: "rubbish",
-        }
+        { name: "A real name", non_existent: "rubbish" }
       end
 
       it "has a name" do
@@ -24,10 +21,7 @@ describe Submission::Vessel do
     context "#type_of_vessel" do
       context "when vessel_type was chosen" do
         let(:input_params) do
-          {
-            vessel_type: "Barge",
-            vessel_type_other: "",
-          }
+          { vessel_type: "Barge", vessel_type_other: "" }
         end
 
         it "uses the vessel_type field" do
@@ -37,10 +31,7 @@ describe Submission::Vessel do
 
       context "when vessel_type_other was chosen" do
         let(:input_params) do
-          {
-            vessel_type: "?",
-            vessel_type_other: "Beer mug",
-          }
+          { vessel_type: "?", vessel_type_other: "Beer mug" }
         end
 
         it "uses the vessel_type_other field" do
