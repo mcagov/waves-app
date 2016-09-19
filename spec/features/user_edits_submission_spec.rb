@@ -10,6 +10,10 @@ feature "User edits submission details", type: :feature, js: true do
 
     expect(page).to have_css("td#vessel-name", text: "Hop Rod Rye")
 
+    # while we know that the page is displaying the updated value
+    # we will do a "hard" test to be sure that value is persisted
+    expect(Submission.last.vessel.name).to eq("Hop Rod Rye")
+
     within("td#vessel-hin") { click_on "PR-QNTIECMU3FVA" }
     find(".editable-input input").set("ABCD")
     first(".editable-submit").click
