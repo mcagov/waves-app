@@ -40,4 +40,17 @@ describe Submission::Vessel do
       end
     end
   end
+
+  context "#assign_attributes" do
+    let!(:submission) { create_incomplete_submission! }
+    let(:vessel) { submission.vessel }
+
+    before do
+      vessel.assign_attributes(name: "Jolly Fine Boat")
+    end
+
+    it "updates the vessel name" do
+      expect(vessel.name).to eq("Jolly Fine Boat")
+    end
+  end
 end

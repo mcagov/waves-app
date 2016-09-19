@@ -17,7 +17,7 @@ class Submission::Vessel
 
   def initialize(params = {})
     params.reject! { |param| !respond_to?(param) }
-    params.each { |key, value| instance_variable_set("@#{key}", value) }
+    assign_attributes(params)
   end
 
   def type_of_vessel
@@ -30,5 +30,13 @@ class Submission::Vessel
 
   def to_s
     name
+  end
+
+  def assign_attributes(params = {})
+    params.each { |key, value| instance_variable_set("@#{key}", value) }
+  end
+
+  def alt_names
+    [alt_name_1, alt_name_2, alt_name_3].compact
   end
 end
