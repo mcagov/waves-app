@@ -59,6 +59,11 @@
         %strong
           = editable_owner("Owner Phone Number", "owner[phone_number]", declaration.owner.phone_number, declaration)
     %tr
+      %td Owner Nationality
+      %td.owner-nationality
+        %strong
+          = editable_owner_nationality(declaration.owner.nationality, declaration)
+    %tr
       %td Declaration
       %td.declaration
         - if declaration.completed?

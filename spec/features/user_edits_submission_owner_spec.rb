@@ -26,6 +26,13 @@ feature "User edits Owner submission details", type: :feature, js: true do
     expect(page)
       .to have_css("#declaration_1 .owner-phone_number", text: "999")
 
+    within("#declaration_1 .owner-nationality") { click_on("UNITED KINGDOM") }
+    find(".editable-input select").select("MALTA")
+    first(".editable-submit").click
+    click_on("Owners")
+    expect(page)
+      .to have_css("#declaration_1 .owner-nationality a", text: "MALTA")
+
     within("#declaration_1 .owner-address") { click_on("2 Keen Road, L") }
 
     within(".address-1") { click_on("2 Keen") }
@@ -57,6 +64,7 @@ feature "User edits Owner submission details", type: :feature, js: true do
     expect(owner.name).to eq("John Doe")
     expect(owner.email).to eq("jd@exampl.com")
     expect(owner.phone_number).to eq("999")
+    expect(owner.nationality).to eq("MALTA")
     expect(owner.address_1).to eq("A 1")
     expect(owner.address_2).to eq("A 2")
     expect(owner.town).to eq("Town")
