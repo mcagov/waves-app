@@ -55,6 +55,4 @@ feature "User edits submission details", type: :feature, js: true do
     expect(vessel.mmsi_number).to eq("111111111")
     expect(vessel.radio_call_sign).to eq("AM123")
   end
-
-  it "edits owners"
 end
