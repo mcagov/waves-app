@@ -6,10 +6,7 @@ describe Declaration::Owner do
 
     context "in general" do
       let(:input_params) do
-        {
-          name: "A real name",
-          non_existent: "rubbish",
-        }
+        { name: "A real name", non_existent: "rubbish" }
       end
 
       it "has a name" do
