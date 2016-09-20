@@ -18,24 +18,24 @@ describe Submission::Vessel do
       end
     end
 
-    context "#type_of_vessel" do
+    context "#vessel_type" do
       context "when vessel_type was chosen" do
         let(:input_params) do
           { vessel_type: "Barge", vessel_type_other: "" }
         end
 
         it "uses the vessel_type field" do
-          expect(subject.type_of_vessel).to eq("Barge")
+          expect(subject.vessel_type).to eq("Barge")
         end
       end
 
       context "when vessel_type_other was chosen" do
         let(:input_params) do
-          { vessel_type: "?", vessel_type_other: "Beer mug" }
+          { vessel_type: "", vessel_type_other: "Beer mug" }
         end
 
         it "uses the vessel_type_other field" do
-          expect(subject.type_of_vessel).to eq("Beer mug")
+          expect(subject.vessel_type).to eq("Beer mug")
         end
       end
     end

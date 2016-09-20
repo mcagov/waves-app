@@ -11,21 +11,13 @@ class Submission::Vessel
     :alt_name_2,
     :alt_name_3,
     :length_in_meters,
-    :vessel_type,
-    :vessel_type_other
+    :vessel_type
   )
 
   def initialize(params = {})
+    init_vessel_type(params)
     params.reject! { |param| !respond_to?(param) }
     assign_attributes(params)
-  end
-
-  def type_of_vessel
-    if vessel_type_other.present?
-      vessel_type_other
-    else
-      vessel_type
-    end
   end
 
   def to_s
@@ -38,5 +30,13 @@ class Submission::Vessel
 
   def alt_names
     [alt_name_1, alt_name_2, alt_name_3].compact
+  end
+
+  protected
+
+  def init_vessel_type(params)
+    if params[:vessel_type].blank?
+      params[:vessel_type] = params[:vessel_type_other]
+    end
   end
 end

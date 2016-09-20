@@ -44,7 +44,7 @@ class NewRegistration < Submission
       number_of_hulls: vessel.number_of_hulls,
       mmsi_number: vessel.mmsi_number,
       radio_call_sign: vessel.radio_call_sign,
-      vessel_type: vessel.type_of_vessel,
+      vessel_type: vessel.vessel_type,
     }
   end
 
