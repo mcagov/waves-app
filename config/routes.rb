@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     resource :vessels, only: [:update], controller: :submission_vessel
   end
 
+  resources :declarations, only: [] do
+    resource :owners, only: [:update], controller: :declaration_owner
+  end
+
   resources :notifications, only: [:show] do
     member do
       post :cancel
