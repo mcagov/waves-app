@@ -38,20 +38,10 @@ feature "User edits Owner submission details", type: :feature, js: true do
     first(".editable-submit").click
     expect(page).to have_css("#declaration_1 .address-2", text: "A 2")
 
-    within(".address-3") { click_on("Empty") }
-    find(".editable-input input").set("A 3")
-    first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-3", text: "A 3")
-
     within(".address-town") { click_on("London") }
     find(".editable-input input").set("Town")
     first(".editable-submit").click
     expect(page).to have_css("#declaration_1 .address-town", text: "Town")
-
-    within(".address-county") { click_on("Greater London") }
-    find(".editable-input input").set("County")
-    first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-county", text: "County")
 
     within(".address-postcode") { click_on("QZ2 3QM") }
     find(".editable-input input").set("E8")
@@ -69,9 +59,7 @@ feature "User edits Owner submission details", type: :feature, js: true do
     expect(owner.phone_number).to eq("999")
     expect(owner.address_1).to eq("A 1")
     expect(owner.address_2).to eq("A 2")
-    expect(owner.address_3).to eq("A 3")
     expect(owner.town).to eq("Town")
-    expect(owner.county).to eq("County")
     expect(owner.postcode).to eq("E8")
     expect(owner.country).to eq("SPAIN")
   end

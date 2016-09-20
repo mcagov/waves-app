@@ -23,30 +23,20 @@
         .collapse{ id: "address-fields-#{declaration.id}" }
 
           %dl.dl-horizontal.address-fields
-            %dt Address 1
+            %dt Building and Street
             %dd.address-1
               %strong
                 = editable_owner("Address 1", "owner[address_1]", declaration.owner.address_1, declaration)
 
-            %dt Address 2
+            %dt
             %dd.address-2
               %strong
                 = editable_owner("Address 2", "owner[address_2]", declaration.owner.address_2, declaration)
 
-            %dt Address 3
-            %dd.address-3
-              %strong
-                = editable_owner("Address 1", "owner[address_3]", declaration.owner.address_3, declaration)
-
-            %dt Town
+            %dt Town or city
             %dd.address-town
               %strong
                 = editable_owner("Town", "owner[town]", declaration.owner.town, declaration)
-
-            %dt County
-            %dd.address-county
-              %strong
-                = editable_owner("County", "owner[county]", declaration.owner.county, declaration)
 
             %dt Postcode
             %dd.address-postcode

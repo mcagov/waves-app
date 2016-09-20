@@ -31,9 +31,7 @@ class Declaration::Owner
     [
       address_1,
       address_2,
-      address_3,
       town,
-      county,
       country,
       postcode,
     ].compact.reject(&:empty?).join(", ")
