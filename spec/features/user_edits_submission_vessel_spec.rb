@@ -25,7 +25,7 @@ feature "User edits submission details", type: :feature, js: true do
     expect(page).to have_css("td#vessel-length_in_meters", text: "10.11")
 
     within("td#vessel-number_of_hulls") { click_on "5" }
-    find(".editable-input input").set("3")
+    find(".editable-input select").select("3")
     first(".editable-submit").click
     expect(page).to have_css("td#vessel-number_of_hulls", text: "3")
 

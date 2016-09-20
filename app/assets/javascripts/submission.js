@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   // Editable attributes
   $('.editable-text').editable({ type: 'text' });
+  $('.editable-select').editable({ type: 'select' });
 
   // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
