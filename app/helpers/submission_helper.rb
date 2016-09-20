@@ -31,4 +31,13 @@ module SubmissionHelper
       content_tag(:div, "", class: "i fa fa-star-o similar-#{key}")
     end
   end
+
+  def editable_vessel(attr_title, attr_name, attr_value)
+    link_to attr_value, "#",
+            class: "editable-text",
+            "data-name" => attr_name,
+            "data-value" => attr_value,
+            "data-url" => submission_vessels_path(@submission),
+            "data-title" => attr_title
+  end
 end

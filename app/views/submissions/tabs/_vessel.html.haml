@@ -7,13 +7,7 @@
       %td{width: "30%"} Vessel Name
       %td#vessel-name{width: "70%"}
         %strong
-          = link_to vessel.name, "#",
-            class: "editable-text",
-            "data-name" => "vessel[name]",
-            "data-value" => vessel.name,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "Vessel name"
-
+          = editable_vessel("Vessel name", "vessel[name]", vessel.name)
           .i.fa.fa-star-o.hidden
         .pull-right
           = vessel.alt_names.join(', ')
@@ -21,61 +15,37 @@
       %td Hull Identification Number (HIN)
       %td#vessel-hin
         %strong
-          = link_to vessel.hin, "#",
-            class: "editable-text",
-            "data-name" => "vessel[hin]",
-            "data-value" => vessel.hin,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "Hull Identification Number"
+          = editable_vessel("Hull Identification Number", "vessel[hin]", vessel.hin)
           .i.fa.fa-star-o.hidden
     %tr
       %td Make and model
       %td#vessel-make_and_model
         %strong
-          = link_to vessel.make_and_model, "#",
-            class: "editable-text",
-            "data-name" => "vessel[make_and_model]",
-            "data-value" => vessel.make_and_model,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "Make and model"
+          = editable_vessel("Make and model", "vessel[make_and_model]", vessel.make_and_model)
     %tr
       %td Length
       %td#vessel-length_in_meters
         %strong
-          = link_to vessel.length_in_meters, "#",
-            class: "editable-text",
-            "data-name" => "vessel[length_in_meters]",
-            "data-value" => vessel.length_in_meters,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "Length in metres"
+          = editable_vessel("Length", "vessel[length_in_meters]", vessel.length_in_meters)
     %tr
       %td Number of hulls
       %td#vessel-number_of_hulls
         %strong
-          = vessel.number_of_hulls
+          = editable_vessel("Number of hulls", "vessel[number_of_hulls]", vessel.number_of_hulls)
     %tr
       %td Vessel type
-      %td#vessel_type
-        %strong= vessel.type_of_vessel
+      %td#vessel-vessel_type
+        %strong
+          = editable_vessel("Vessel type", "vessel[vessel_type]", vessel.vessel_type)
     %tr
       %td MMSI Number
       %td#vessel-mmsi_number
         %strong
-          = link_to vessel.mmsi_number, "#",
-            class: "editable-text",
-            "data-name" => "vessel[mmsi_number]",
-            "data-value" => vessel.mmsi_number,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "MMSI Number"
+          = editable_vessel("MMSI Number", "vessel[mmsi_number]", vessel.mmsi_number)
           .i.fa.fa-star-o.hidden
     %tr
       %td Radio Call Sign
       %td#vessel-radio_call_sign
         %strong
-          = link_to vessel.radio_call_sign, "#",
-            class: "editable-text",
-            "data-name" => "vessel[radio_call_sign]",
-            "data-value" => vessel.radio_call_sign,
-            "data-url" => submission_vessels_path(@submission),
-            "data-title" => "Radio Call Sign"
+          = editable_vessel("Radio Call Sign", "vessel[radio_call_sign]", vessel.radio_call_sign )
           .i.fa.fa-star-o.hidden
