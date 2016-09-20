@@ -12,9 +12,36 @@
         = editable_owner("Owner Name", "owner[name]", declaration.owner.name, declaration)
     %tr
       %td Owner Address
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.inline_address
+      %td.owner-address
+        = link_to declaration.owner.inline_address, "#",
+          class: "editable-address",
+          "data-toggle" => "collapse",
+          "data-target" => "#address-fields-#{declaration.id}"
+
+        .collapse{ id: "address-fields-#{declaration.id}" }
+
+          %dl.dl-horizontal.address-fields
+            %dt Address 1
+            %dd.address-1= editable_owner("Address 1", "owner[address_1]", declaration.owner.address_1, declaration)
+
+            %dt Address 2
+            %dd.address-2= editable_owner("Address 2", "owner[address_2]", declaration.owner.address_2, declaration)
+
+            %dt Address 3
+            %dd.address-3= editable_owner("Address 1", "owner[address_3]", declaration.owner.address_3, declaration)
+
+            %dt Town
+            %dd.address-town= editable_owner("Town", "owner[town]", declaration.owner.town, declaration)
+
+            %dt County
+            %dd.address-county= editable_owner("County", "owner[county]", declaration.owner.county, declaration)
+
+            %dt Postcode
+            %dd.address-postcode= editable_owner("Postcode", "owner[postcode]", declaration.owner.postcode, declaration)
+
+            %dt Country
+            %dd.address-country= editable_owner("Country", "owner[country]", declaration.owner.country, declaration)
+
     %tr
       %td Owner Email
       %td.owner-email
