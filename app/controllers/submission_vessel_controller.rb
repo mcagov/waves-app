@@ -22,6 +22,6 @@ class SubmissionVesselController < InternalPagesController
     params.require(:vessel).permit(
       :name, :hin, :mmsi_number, :number_of_hulls,
       :make_and_model, :radio_call_sign, :vessel_type,
-      :length_in_meters)
+      :vessel_type_other, :length_in_meters)
   end
 end

@@ -34,6 +34,11 @@ feature "User edits submission details", type: :feature, js: true do
     first(".editable-submit").click
     expect(page).to have_css("td#vessel-vessel_type", text: "DONKEY")
 
+    within("td#vessel-vessel_type_other") { click_on "Empty" }
+    find(".editable-input input").set("CAR")
+    first(".editable-submit").click
+    expect(page).to have_css("td#vessel-vessel_type_other", text: "CAR")
+
     within("td#vessel-mmsi_number") { click_on "233878594" }
     find(".editable-input input").set("111111111")
     first(".editable-submit").click
@@ -52,6 +57,7 @@ feature "User edits submission details", type: :feature, js: true do
     expect(vessel.length_in_meters).to eq("10.11")
     expect(vessel.number_of_hulls).to eq("3")
     expect(vessel.vessel_type).to eq("DONKEY")
+    expect(vessel.vessel_type_other).to eq("CAR")
     expect(vessel.mmsi_number).to eq("111111111")
     expect(vessel.radio_call_sign).to eq("AM123")
   end

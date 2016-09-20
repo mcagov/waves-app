@@ -17,28 +17,6 @@ describe Submission::Vessel do
         expect { subject.non_existent }.to raise_error(NoMethodError)
       end
     end
-
-    context "#vessel_type" do
-      context "when vessel_type was chosen" do
-        let(:input_params) do
-          { vessel_type: "Barge", vessel_type_other: "" }
-        end
-
-        it "uses the vessel_type field" do
-          expect(subject.vessel_type).to eq("Barge")
-        end
-      end
-
-      context "when vessel_type_other was chosen" do
-        let(:input_params) do
-          { vessel_type: "", vessel_type_other: "Beer mug" }
-        end
-
-        it "uses the vessel_type_other field" do
-          expect(subject.vessel_type).to eq("Beer mug")
-        end
-      end
-    end
   end
 
   context "#assign_attributes" do
