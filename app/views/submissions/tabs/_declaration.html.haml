@@ -9,7 +9,7 @@
     %tr
       %td{width: "30%"} Owner Name
       %td.owner-name{width: "70%"}
-        = editable_owner("Name", "owner[name]", declaration.owner.name, declaration)
+        = editable_owner("Owner Name", "owner[name]", declaration.owner.name, declaration)
     %tr
       %td Owner Address
       %td
@@ -17,14 +17,12 @@
           %strong= declaration.owner.inline_address
     %tr
       %td Owner Email
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.email
+      %td.owner-email
+        = editable_owner("Owner Email", "owner[email]", declaration.owner.email, declaration)
     %tr
       %td Owner Phone Number
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.phone_number
+      %td.owner-phone_number
+        = editable_owner("Owner Phone Number", "owner[phone_number]", declaration.owner.phone_number, declaration)
     %tr
       %td Declaration
       %td.declaration
@@ -32,5 +30,4 @@
           %i.fa.fa-check
           %strong Completed online
           (#{ declaration.completed_at })
-
 %hr

@@ -18,6 +18,7 @@ class DeclarationOwnerController < InternalPagesController
   end
 
   def owner_params
-    params.require(:owner).permit(:name)
+    params.require(:owner).permit(
+      :name, :email, :phone_number)
   end
 end
