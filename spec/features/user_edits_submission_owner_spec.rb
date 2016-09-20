@@ -59,7 +59,7 @@ feature "User edits Owner submission details", type: :feature, js: true do
     expect(page).to have_css("#declaration_1 .address-postcode", text: "E8")
 
     within(".address-country") { click_on("UNITED KINGDOM") }
-    find(".editable-input input").set("SPAIN")
+    find(".editable-input select").select("SPAIN")
     first(".editable-submit").click
     expect(page).to have_css("#declaration_1 .address-country", text: "SPAIN")
 

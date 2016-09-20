@@ -34,6 +34,6 @@ module EditableHelper
             "data-value" => attr_value,
             "data-url" => declaration_owners_path(declaration),
             "data-title" => "Country",
-            "data-source" => []
+            "data-source" => eligible_country_list.to_json
   end
 end
