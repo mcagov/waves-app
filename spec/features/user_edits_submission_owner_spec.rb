@@ -6,59 +6,56 @@ feature "User edits Owner submission details", type: :feature, js: true do
   scenario "in general" do
     click_on("Owners")
 
-    within("#declaration_1 .owner-name") { click_on("Horatio Nelson") }
+    within(".owner-name") { click_on("Horatio Nelson") }
     find(".editable-input input").set("John Doe")
     first(".editable-submit").click
     click_on("Owners")
-    expect(page).to have_css("#declaration_1 .owner-name", text: "John Doe")
+    expect(page).to have_css(".owner-name", text: "John Doe")
 
-    within("#declaration_1 .owner-email") { click_on("@example.com") }
+    within(".owner-email") { click_on("@example.com") }
     find(".editable-input input").set("jd@exampl.com")
     first(".editable-submit").click
     click_on("Owners")
-    expect(page)
-      .to have_css("#declaration_1 .owner-email", text: "jd@exampl.com")
+    expect(page).to have_css(".owner-email", text: "jd@exampl.com")
 
-    within("#declaration_1 .owner-phone_number") { click_on("42672075807") }
+    within(".owner-phone_number") { click_on("42672075807") }
     find(".editable-input input").set("999")
     first(".editable-submit").click
     click_on("Owners")
-    expect(page)
-      .to have_css("#declaration_1 .owner-phone_number", text: "999")
+    expect(page).to have_css(".owner-phone_number", text: "999")
 
-    within("#declaration_1 .owner-nationality") { click_on("UNITED KINGDOM") }
+    within(".owner-nationality") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("MALTA")
     first(".editable-submit").click
     click_on("Owners")
-    expect(page)
-      .to have_css("#declaration_1 .owner-nationality a", text: "MALTA")
+    expect(page).to have_css(".owner-nationality a", text: "MALTA")
 
-    within("#declaration_1 .owner-address") { click_on("2 Keen Road, L") }
+    within(".owner-address") { click_on("2 Keen Road, L") }
 
     within(".address-1") { click_on("2 Keen") }
     find(".editable-input input").set("A 1")
     first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-1", text: "A 1")
+    expect(page).to have_css(".address-1", text: "A 1")
 
     within(".address-2") { click_on("Empty") }
     find(".editable-input input").set("A 2")
     first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-2", text: "A 2")
+    expect(page).to have_css(".address-2", text: "A 2")
 
     within(".address-town") { click_on("London") }
     find(".editable-input input").set("Town")
     first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-town", text: "Town")
+    expect(page).to have_css(".address-town", text: "Town")
 
     within(".address-postcode") { click_on("QZ2 3QM") }
     find(".editable-input input").set("E8")
     first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-postcode", text: "E8")
+    expect(page).to have_css(".address-postcode", text: "E8")
 
     within(".address-country") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("SPAIN")
     first(".editable-submit").click
-    expect(page).to have_css("#declaration_1 .address-country", text: "SPAIN")
+    expect(page).to have_css(".address-country", text: "SPAIN")
 
     owner = Declaration.first.owner
     expect(owner.name).to eq("John Doe")
