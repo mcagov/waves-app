@@ -32,4 +32,17 @@ describe Declaration::Owner do
       end
     end
   end
+
+  context "#assign_attributes" do
+    let!(:declaration) { create(:declaration) }
+    let(:owner) { declaration.owner }
+
+    before do
+      owner.assign_attributes(name: "John Doe")
+    end
+
+    it "updates the owner name" do
+      expect(owner.name).to eq("John Doe")
+    end
+  end
 end
