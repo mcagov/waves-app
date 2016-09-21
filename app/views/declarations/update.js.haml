@@ -1,0 +1,3 @@
+:plain
+  var html = '#{escape_javascript(render :partial => "declarations/status", locals: { declaration: @declaration })}';
+  $("#declaration_#{ @declaration.id }").html(html);
