@@ -12,18 +12,6 @@ feature "User edits Owner submission details", type: :feature, js: true do
     click_on("Owners")
     expect(page).to have_css(".owner-name", text: "John Doe")
 
-    within(".owner-email") { click_on("@example.com") }
-    find(".editable-input input").set("jd@exampl.com")
-    first(".editable-submit").click
-    click_on("Owners")
-    expect(page).to have_css(".owner-email", text: "jd@exampl.com")
-
-    within(".owner-phone_number") { click_on("42672075807") }
-    find(".editable-input input").set("999")
-    first(".editable-submit").click
-    click_on("Owners")
-    expect(page).to have_css(".owner-phone_number", text: "999")
-
     within(".owner-nationality") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("MALTA")
     first(".editable-submit").click
@@ -37,21 +25,6 @@ feature "User edits Owner submission details", type: :feature, js: true do
     first(".editable-submit").click
     expect(page).to have_css(".address-1", text: "A 1")
 
-    within(".address-2") { click_on("Empty") }
-    find(".editable-input input").set("A 2")
-    first(".editable-submit").click
-    expect(page).to have_css(".address-2", text: "A 2")
-
-    within(".address-town") { click_on("London") }
-    find(".editable-input input").set("Town")
-    first(".editable-submit").click
-    expect(page).to have_css(".address-town", text: "Town")
-
-    within(".address-postcode") { click_on("QZ2 3QM") }
-    find(".editable-input input").set("E8")
-    first(".editable-submit").click
-    expect(page).to have_css(".address-postcode", text: "E8")
-
     within(".address-country") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("SPAIN")
     first(".editable-submit").click
@@ -59,13 +32,8 @@ feature "User edits Owner submission details", type: :feature, js: true do
 
     owner = Declaration.first.owner
     expect(owner.name).to eq("John Doe")
-    expect(owner.email).to eq("jd@exampl.com")
-    expect(owner.phone_number).to eq("999")
     expect(owner.nationality).to eq("MALTA")
     expect(owner.address_1).to eq("A 1")
-    expect(owner.address_2).to eq("A 2")
-    expect(owner.town).to eq("Town")
-    expect(owner.postcode).to eq("E8")
     expect(owner.country).to eq("SPAIN")
   end
 end
