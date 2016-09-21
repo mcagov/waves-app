@@ -60,7 +60,6 @@ class NewRegistration < Submission
         address_2: owner.address_2,
         address_3: owner.address_3,
         town: owner.town,
-        county: owner.county,
         postcode: owner.postcode,
         country: owner.country
       )

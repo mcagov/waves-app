@@ -8,7 +8,6 @@ class Declaration::Owner
     :address_2,
     :address_3,
     :town,
-    :county,
     :postcode,
     :country,
     :declared_at
