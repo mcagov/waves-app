@@ -64,6 +64,11 @@ class Submission < ApplicationRecord
     changeset[:vessel_info] = vessel_params
   end
 
+  def delivery_address
+    @delivery_address ||=
+      Submission::DeliveryAddress.new(user_input[:delivery_address])
+  end
+
   def applicant
     declarations.first.owner if declarations
   end
