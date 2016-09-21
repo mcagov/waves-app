@@ -60,6 +60,10 @@ class Submission < ApplicationRecord
     @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
   end
 
+  def vessel=(vessel_params)
+    changeset[:vessel_info] = vessel_params
+  end
+
   def applicant
     declarations.first.owner if declarations
   end

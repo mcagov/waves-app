@@ -48,6 +48,10 @@ module SubmissionHelpers
 
   def visit_assigned_submission
     submission = create_assigned_submission!
+
+    # we don't need the second declaration
+    submission.declarations.last.destroy
+
     login_to_part_3(submission.claimant)
     visit submission_path(submission)
   end

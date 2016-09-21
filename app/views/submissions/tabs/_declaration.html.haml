@@ -9,23 +9,63 @@
     %tr
       %td{width: "30%"} Owner Name
       %td.owner-name{width: "70%"}
-        %a{"data-placement" => "bottom", "data-title" => "Owner Name", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner
+        %strong
+          = editable_owner("Owner Name", "owner[name]", declaration.owner.name, declaration)
     %tr
       %td Owner Address
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.inline_address
+      %td.owner-address
+        %strong
+          = link_to declaration.owner.inline_address, "#",
+          class: "editable-address",
+          "data-toggle" => "collapse",
+          "data-target" => "#address-fields-#{declaration.id}"
+
+        .collapse{ id: "address-fields-#{declaration.id}" }
+
+          %dl.dl-horizontal.address-fields
+            %dt Building and Street
+            %dd.address-1
+              %strong
+                = editable_owner("Address 1", "owner[address_1]", declaration.owner.address_1, declaration)
+            %dt
+            %dd.address-2
+              %strong
+                = editable_owner("Address 2", "owner[address_2]", declaration.owner.address_2, declaration)
+            %dt
+            %dd.address-3
+              %strong
+                = editable_owner("Address 3", "owner[address_3]", declaration.owner.address_3, declaration)
+
+            %dt Town or city
+            %dd.address-town
+              %strong
+                = editable_owner("Town", "owner[town]", declaration.owner.town, declaration)
+
+            %dt Postcode
+            %dd.address-postcode
+              %strong
+                = editable_owner("Postcode", "owner[postcode]", declaration.owner.postcode, declaration)
+
+            %dt Country
+            %dd.address-country
+              %strong
+                = editable_owner_country(declaration.owner.country, declaration)
+
     %tr
       %td Owner Email
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.email
+      %td.owner-email
+        %strong
+          = editable_owner("Owner Email", "owner[email]", declaration.owner.email, declaration)
     %tr
       %td Owner Phone Number
-      %td
-        %a#owner-address{"data-placement" => "bottom", "data-title" => "Owner Address", "data-type" => "text", :href => "#"}
-          %strong= declaration.owner.phone_number
+      %td.owner-phone_number
+        %strong
+          = editable_owner("Owner Phone Number", "owner[phone_number]", declaration.owner.phone_number, declaration)
+    %tr
+      %td Owner Nationality
+      %td.owner-nationality
+        %strong
+          = editable_owner_nationality(declaration.owner.nationality, declaration)
     %tr
       %td Declaration
       %td.declaration
@@ -33,5 +73,4 @@
           %i.fa.fa-check
           %strong Completed online
           (#{ declaration.completed_at })
-
 %hr

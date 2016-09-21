@@ -6,10 +6,7 @@ describe Declaration::Owner do
 
     context "in general" do
       let(:input_params) do
-        {
-          name: "A real name",
-          non_existent: "rubbish",
-        }
+        { name: "A real name", non_existent: "rubbish" }
       end
 
       it "has a name" do
@@ -33,6 +30,19 @@ describe Declaration::Owner do
       it "rendes the expected address fields" do
         expect(subject.inline_address).to eq("10 Downing St, Whitehall, London")
       end
+    end
+  end
+
+  context "#assign_attributes" do
+    let!(:declaration) { create(:declaration) }
+    let(:owner) { declaration.owner }
+
+    before do
+      owner.assign_attributes(name: "John Doe")
+    end
+
+    it "updates the owner name" do
+      expect(owner.name).to eq("John Doe")
     end
   end
 end

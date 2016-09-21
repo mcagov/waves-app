@@ -62,11 +62,17 @@ module SubmissionTransitions
       end
     end
 
-    private
+    protected
 
     def init_new_submission
-      self.ref_no = RefNo.generate(ref_no_prefix)
+      build_ref_no
+    end
 
+    def build_ref_no
+      self.ref_no = RefNo.generate(ref_no_prefix)
+    end
+
+    def build_declarations
       DeclarationBuilder.build(
         self,
         user_input[:owners],
@@ -96,7 +102,7 @@ module SubmissionTransitions
     end
 
     def unassignable?
-      declarations.incomplete.empty? && payment.present?
+      true
     end
   end
 end

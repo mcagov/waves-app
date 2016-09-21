@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe DeclarationBuilder do
-  context ".build" do
+  context ".build a new registration" do
     before do
       DeclarationBuilder.build(
-        create(:submission), [alice, bob], ["alice@example.com"])
+        create(:new_registration), [alice, bob], ["alice@example.com"])
     end
 
     let(:alice) { build(:declaration_owner, email: "alice@example.com") }
