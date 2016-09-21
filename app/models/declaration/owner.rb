@@ -1,15 +1,10 @@
 class Declaration::Owner
+  include Address
+
   attr_accessor(
-    :name,
     :nationality,
     :email,
     :phone_number,
-    :address_1,
-    :address_2,
-    :address_3,
-    :town,
-    :postcode,
-    :country,
     :declared_at
   )
 
@@ -24,16 +19,5 @@ class Declaration::Owner
 
   def assign_attributes(params = {})
     params.each { |key, value| instance_variable_set("@#{key}", value) }
-  end
-
-  def inline_address
-    [
-      address_1,
-      address_2,
-      address_3,
-      town,
-      country,
-      postcode,
-    ].compact.reject(&:empty?).join(", ")
   end
 end
