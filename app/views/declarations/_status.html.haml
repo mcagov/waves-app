@@ -1,0 +1,14 @@
+%strong
+  - if declaration.completed?
+    %i.fa.fa-check
+    %strong
+      Completed
+      - if declaration.completed_by
+        = " by #{declaration.completed_by}"
+      - else
+        online
+    (#{ declaration.completed_at })
+  - else
+    = form_for declaration, remote: true do |f|
+
+      .form-group= f.submit "Add manual declaration"

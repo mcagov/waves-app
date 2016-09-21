@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919091827) do
+ActiveRecord::Schema.define(version: 20160921135545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20160919091827) do
     t.uuid     "notification_id"
     t.datetime "completed_at"
     t.json     "changeset"
+    t.uuid     "completed_by_id"
+    t.index ["completed_by_id"], name: "index_declarations_on_completed_by_id", using: :btree
     t.index ["notification_id"], name: "index_declarations_on_notification_id", using: :btree
     t.index ["state"], name: "index_declarations_on_state", using: :btree
     t.index ["submission_id"], name: "index_declarations_on_submission_id", using: :btree

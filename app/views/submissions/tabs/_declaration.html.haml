@@ -16,13 +16,13 @@
       %td.owner-address
         %strong
           = link_to declaration.owner.inline_address, "#",
-            class: "editable-address",
+            class: "editable-link",
             "data-toggle" => "collapse",
             "data-target" => "#address-fields-#{declaration.id}"
 
         .collapse{ id: "address-fields-#{declaration.id}" }
 
-          %dl.dl-horizontal.address-fields
+          %dl.dl-horizontal.editable-fields
             %dt Building and Street
             %dd.address-1
               %strong
@@ -68,9 +68,7 @@
           = editable_owner_nationality(declaration.owner.nationality, declaration)
     %tr
       %td Declaration
-      %td.declaration
-        - if declaration.completed?
-          %i.fa.fa-check
-          %strong Completed online
-          (#{ declaration.completed_at })
+      %td.declaration{ id: "declaration_#{declaration.id}" }
+        = render partial: "declarations/status", locals: { declaration: declaration}
+
 %hr
