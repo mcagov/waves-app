@@ -10,4 +10,8 @@ module ApplicationHelper
   def nationality_list
     WavesUtilities::Nationality.all
   end
+
+  def add_details_if_blank(str)
+    str.blank? ? "Add details" : str
+  end
 end
