@@ -1,5 +1,7 @@
 class Declaration < ApplicationRecord
   belongs_to :submission
+  belongs_to :completed_by, class_name: "User"
+
   has_one :notification, as: :notifiable
 
   include ActiveModel::Transitions
