@@ -66,7 +66,11 @@ class Submission < ApplicationRecord
 
   def delivery_address
     @delivery_address ||=
-      Submission::DeliveryAddress.new(user_input[:delivery_address])
+      Submission::DeliveryAddress.new(user_input[:delivery_address] || {})
+  end
+
+  def delivery_address=(delivery_address_params)
+    changeset[:delivery_address] = delivery_address_params
   end
 
   def applicant
