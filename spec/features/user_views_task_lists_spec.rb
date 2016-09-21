@@ -31,6 +31,4 @@ feature "User views task lists", type: :feature, js: true do
     click_link("Referred Applications")
     expect(page).to have_css("h1", text: "Referred Applications")
   end
-
-  scenario "test the claim / unclaim button"
 end
