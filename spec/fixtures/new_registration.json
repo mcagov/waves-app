@@ -51,7 +51,16 @@
                 "email": "edward.mcallister@exampl.com",
                 "phone_number": "21911163031"
               }
-            ]
+            ],
+            "delivery_address": {
+              "name": "BOB DOLE",
+              "address_1": "11 DOWNING ST",
+              "address_2": "WHITEHALL",
+              "address_3": "",
+              "town": "CARDIFF",
+              "postcode": "W1 1AF",
+              "country": "GB"
+            }
           }
         }
     }
