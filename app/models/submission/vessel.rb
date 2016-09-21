@@ -1,4 +1,6 @@
 class Submission::Vessel
+  include VirtualModel
+
   attr_accessor(
     :name,
     :hin,
@@ -14,19 +16,6 @@ class Submission::Vessel
     :vessel_type,
     :vessel_type_other
   )
-
-  def initialize(params = {})
-    params.reject! { |param| !respond_to?(param) }
-    assign_attributes(params)
-  end
-
-  def to_s
-    name
-  end
-
-  def assign_attributes(params = {})
-    params.each { |key, value| instance_variable_set("@#{key}", value) }
-  end
 
   def alt_names
     [alt_name_1, alt_name_2, alt_name_3].compact

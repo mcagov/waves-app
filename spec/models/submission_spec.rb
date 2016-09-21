@@ -23,6 +23,10 @@ describe Submission, type: :model do
     it "has some declarations" do
       expect(submission.declarations).not_to be_empty
     end
+
+    it "gets the delivery_address" do
+      expect(submission.delivery_address.country).to eq("UNITED KINGDOM")
+    end
   end
 
   context "declarations" do

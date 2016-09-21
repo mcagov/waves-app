@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     end
     resource :correspondence
     resource :vessels, only: [:update], controller: :submission_vessel
+    resource :delivery_addresses,
+             only: [:update],
+             controller: :submission_delivery_address
   end
 
   resources :declarations, only: [] do

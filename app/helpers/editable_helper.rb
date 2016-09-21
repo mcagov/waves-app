@@ -56,4 +56,23 @@ module EditableHelper
             "data-title" => "Nationality",
             "data-source" => nationality_list.to_json
   end
+
+  def editable_delivery_address(attr_title, attr_name, attr_value)
+    link_to attr_value, "#",
+            class: "editable-text",
+            "data-name" => attr_name,
+            "data-value" => attr_value,
+            "data-url" => submission_delivery_addresses_path(@submission),
+            "data-title" => attr_title
+  end
+
+  def editable_delivery_address_country(attr_value)
+    link_to attr_value, "#",
+            class: "editable-select",
+            "data-name" => "delivery_address[country]",
+            "data-value" => attr_value,
+            "data-url" => submission_delivery_addresses_path(@submission),
+            "data-title" => "Country",
+            "data-source" => nationality_list.to_json
+  end
 end

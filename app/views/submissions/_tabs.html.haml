@@ -32,5 +32,7 @@
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: "submissions/tabs/payment", locals: { payment: submission.payment }
 
+          = render partial: "submissions/tabs/delivery_address", locals: { delivery_address: submission.delivery_address }
+
         #tab_content5.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
           = render partial: "submissions/tabs/history"

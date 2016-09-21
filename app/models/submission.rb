@@ -64,6 +64,15 @@ class Submission < ApplicationRecord
     changeset[:vessel_info] = vessel_params
   end
 
+  def delivery_address
+    @delivery_address ||=
+      Submission::DeliveryAddress.new(user_input[:delivery_address] || {})
+  end
+
+  def delivery_address=(delivery_address_params)
+    changeset[:delivery_address] = delivery_address_params
+  end
+
   def applicant
     declarations.first.owner if declarations
   end
@@ -78,10 +87,6 @@ class Submission < ApplicationRecord
 
   def ref_no_prefix
     "00"
-  end
-
-  def similar_vessels
-    []
   end
 
   protected
