@@ -32,14 +32,5 @@ feature "User views task lists", type: :feature, js: true do
     expect(page).to have_css("h1", text: "Referred Applications")
   end
 
-  scenario "moving a submission between lists" do
-    click_link("Unclaimed Tasks")
-
-    within("tr.submission") { click_on("Claim") }
-    expect(page).not_to have_css("tr.submission")
-
-    click_link("My Tasks")
-    within("tr.submission") { click_on("Unclaim") }
-    expect(page).not_to have_css("tr.submission")
-  end
+  scenario "test the claim / unclaim button"
 end
