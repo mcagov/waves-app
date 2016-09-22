@@ -36,6 +36,7 @@ gem "whenever", require: false
 gem "paper_trail"
 gem "waves-utilities",
     git: "https://github.com/tobyprivett/waves-utilities.git"
+gem "protokoll"
 
 group :development do
   gem "rubocop"
