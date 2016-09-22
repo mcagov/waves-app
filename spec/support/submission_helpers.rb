@@ -6,7 +6,7 @@ module SubmissionHelpers
   end
 
   def create_incomplete_submission!
-    NewRegistration.create(new_registration_attributes)
+    Submission::NewRegistration.create(new_registration_attributes)
   end
 
   def create_incomplete_paid_submission!

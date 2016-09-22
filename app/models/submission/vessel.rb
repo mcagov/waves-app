@@ -20,4 +20,12 @@ class Submission::Vessel
   def alt_names
     [alt_name_1, alt_name_2, alt_name_3].compact
   end
+
+  def type_of_vessel
+    if vessel_type_other.present?
+      vessel_type_other
+    else
+      vessel_type
+    end
+  end
 end

@@ -43,7 +43,8 @@ module SubmissionTransitions
       end
 
       event :approved do
-        transitions to: :completed, from: :assigned
+        transitions to: :completed, from: :assigned,
+                    on_transition: :process_application
       end
 
       event :cancelled do
@@ -73,7 +74,7 @@ module SubmissionTransitions
     end
 
     def build_declarations
-      DeclarationBuilder.build(
+      Builders::DeclarationBuilder.create(
         self,
         user_input[:owners],
         user_input[:declarations]

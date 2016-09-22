@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :new_registration do
+  factory :new_registration, class: "Submission::NewRegistration" do
     part "part_3"
     changeset do
       {

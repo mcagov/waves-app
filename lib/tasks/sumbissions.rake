@@ -6,7 +6,7 @@ namespace :submissions do
     ].each do |json_file_name|
 
       submission =
-        NewRegistration.create(
+        Submission::NewRegistration.create(
           JSON.parse(
             File.read(Rails.root.join("spec", "fixtures", json_file_name))
           )["data"]["attributes"]

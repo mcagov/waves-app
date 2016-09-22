@@ -1,9 +1,9 @@
 require "rails_helper"
 
-describe DeclarationBuilder do
-  context ".build a new registration" do
+describe Builders::DeclarationBuilder do
+  context ".create" do
     before do
-      DeclarationBuilder.build(
+      Builders::DeclarationBuilder.create(
         create(:new_registration), [alice, bob], ["alice@example.com"])
     end
 

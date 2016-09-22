@@ -15,6 +15,10 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
+  describe "approval" do
+    it "awaits text from the MCA"
+  end
+
   describe "outstanding_declaration" do
     let(:mail) do
       NotificationMailer.outstanding_declaration(
