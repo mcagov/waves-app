@@ -2,14 +2,14 @@ require "rails_helper"
 
 describe Search, type: :model do
   context ".similar_vessels" do
-    let!(:same_name) { create(:vessel, name: "Celebrator Doppelbock") }
-    let!(:same_mmsi) { create(:vessel, mmsi_number: "233878594") }
-    let!(:blank_mmsi) { create(:vessel, mmsi_number: "") }
-    let!(:different_mmsi) { create(:vessel, mmsi_number: rand(9)) }
-    let!(:same_hin) { create(:vessel, hin: "foo") }
-    let!(:blank_hin) { create(:vessel, hin: nil) }
-    let!(:same_radio) { create(:vessel, radio_call_sign: "4RWO0K") }
-    let!(:blank_radio) { create(:vessel, radio_call_sign: nil) }
+    let!(:same_name) { create(:register_vessel, name: "Celebrator Doppelbock") }
+    let!(:same_mmsi) { create(:register_vessel, mmsi_number: "233878594") }
+    let!(:blank_mmsi) { create(:register_vessel, mmsi_number: "") }
+    let!(:different_mmsi) { create(:register_vessel, mmsi_number: rand(9)) }
+    let!(:same_hin) { create(:register_vessel, hin: "foo") }
+    let!(:blank_hin) { create(:register_vessel, hin: nil) }
+    let!(:same_radio) { create(:register_vessel, radio_call_sign: "4RWO0K") }
+    let!(:blank_radio) { create(:register_vessel, radio_call_sign: nil) }
 
     let!(:vessel) { create_unassigned_submission!.vessel }
     subject { Search.similar_vessels(vessel) }
