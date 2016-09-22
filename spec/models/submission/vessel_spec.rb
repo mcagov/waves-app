@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe Submission::Vessel do
-  context "#new" do
-    subject { Submission::Vessel.new(input_params) }
+  context "in general" do
+    subject { described_class.new(input_params) }
 
-    context "in general" do
+    context "#new" do
       let(:input_params) do
         { name: "A real name", non_existent: "rubbish" }
       end
@@ -15,6 +15,26 @@ describe Submission::Vessel do
 
       it "does not have non_existent" do
         expect { subject.non_existent }.to raise_error(NoMethodError)
+      end
+    end
+
+    context "#type_of_vessel" do
+      context "vessel_type_other" do
+        let(:input_params) { { vessel_type_other: "MUG" } }
+
+        it "uses the vessel_type_other" do
+          expect(subject.type_of_vessel).to eq("MUG")
+        end
+      end
+
+      context "vessel_type" do
+        let(:input_params) do
+          { vessel_type: "BARGE", vessel_type_other: "" }
+        end
+
+        it "uses the vessel_type" do
+          expect(subject.type_of_vessel).to eq("BARGE")
+        end
       end
     end
   end
