@@ -5,9 +5,10 @@ class DeclarationOwnerController < InternalPagesController
     @owner.assign_attributes(owner_params)
     @declaration.update_attributes(changeset: @owner)
 
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    render json: {
+      status: 200, target_id: @declaration.id,
+      inline_address: @declaration.owner.inline_address
+    }
   end
 
   protected

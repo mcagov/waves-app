@@ -21,8 +21,8 @@ describe DeclarationOwnerController, type: :controller do
       expect(declaration.reload.owner.name).to eq("John Doe")
     end
 
-    it "returns status 204 (as expected by bootstrap-editable" do
-      expect(response).to have_http_status(204)
+    it "returns status 200" do
+      expect(response).to have_http_status(200)
     end
   end
 end

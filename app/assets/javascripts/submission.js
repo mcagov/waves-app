@@ -4,8 +4,38 @@
 $(document).ready(function() {
 
   // Editable attributes
-  $('.editable-text').editable({ type: 'text' });
+  $('.editable-text').editable({  type: 'text' });
   $('.editable-select').editable({ type: 'select' });
+
+  $('.editable-delivery-address').editable({
+    type: 'text',
+    success:  function(response, newValue) {
+      $("a#inline_delivery_address").text(response.inline_name_and_address);
+    }
+  });
+
+  $('.editable-delivery-country').editable({
+    type: 'select',
+    success:  function(response, newValue) {
+      $("a#inline_delivery_address").text(response.inline_name_and_address);
+    }
+  });
+
+  $('.editable-owner-address').editable({
+    type: 'text',
+    success:  function(response, newValue) {
+      var target = response.target_id;
+      $("a#inline_owner_address_" + target).text(response.inline_address);
+    }
+  });
+
+  $('.editable-owner-country').editable({
+    type: 'select',
+    success:  function(response, newValue) {
+      var target = response.target_id;
+      $("a#inline_owner_address_" + target).text(response.inline_address);
+    }
+  });
 
   // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {

@@ -6,6 +6,7 @@
         %strong
           = link_to add_details_if_blank(delivery_address.inline_name_and_address), "#",
           class: "editable-address",
+          id: "inline_delivery_address",
           "data-toggle" => "collapse",
           "data-target" => "#delivery-address-fields"
 
@@ -43,4 +44,4 @@
             %dt Country
             %dd.address-country
               %strong
-                = editable_delivery_address_country(delivery_address.country)
+                = editable_delivery_country(delivery_address.country)
