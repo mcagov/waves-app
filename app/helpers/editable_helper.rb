@@ -30,7 +30,7 @@ module EditableHelper
 
   def editable_owner(attr_title, attr_name, attr_value, declaration)
     link_to attr_value, "#",
-            class: "editable-text",
+            class: "editable-owner-address",
             "data-name" => attr_name,
             "data-value" => attr_value,
             "data-url" => declaration_owners_path(declaration),
@@ -39,7 +39,7 @@ module EditableHelper
 
   def editable_owner_country(attr_value, declaration)
     link_to attr_value, "#",
-            class: "editable-select",
+            class: "editable-owner-country",
             "data-name" => "owner[country]",
             "data-value" => attr_value,
             "data-url" => declaration_owners_path(declaration),

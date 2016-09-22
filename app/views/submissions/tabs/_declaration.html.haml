@@ -17,6 +17,7 @@
         %strong
           = link_to declaration.owner.inline_address, "#",
             class: "editable-link",
+            id: "inline_owner_address_#{declaration.id}",
             "data-toggle" => "collapse",
             "data-target" => "#address-fields-#{declaration.id}"
 
