@@ -4,7 +4,7 @@ class Submission::NewRegistration < Submission
   end
 
   def process_application
-    Builders::RegistrationBuilder.create(self)
+    Builders::NewRegistrationBuilder.create(self)
   end
 
   def similar_vessels
