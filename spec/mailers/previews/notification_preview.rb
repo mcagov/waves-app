@@ -16,7 +16,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
 
   def application_approval
     NotificationMailer.application_approval(
-      Notification::Approval.new.email_subject,
+      Notification::ApplicationApproval.new.email_subject,
       email, name, "SRXXXXXX"
     )
   end

@@ -55,7 +55,7 @@ class SubmissionsController < InternalPagesController
 
   def create_notification
     @submission.owners.each do |owner|
-      Notification::Approval.create(
+      Notification::ApplicationApproval.create(
         recipient_email: owner.email,
         recipient_name: owner.name,
         notifiable: @submission,
