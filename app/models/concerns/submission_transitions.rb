@@ -73,7 +73,7 @@ module SubmissionTransitions
     end
 
     def build_declarations
-      DeclarationBuilder.build(
+      Builders::DeclarationBuilder.build(
         self,
         user_input[:owners],
         user_input[:declarations]

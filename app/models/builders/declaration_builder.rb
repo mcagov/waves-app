@@ -1,4 +1,4 @@
-class DeclarationBuilder
+class Builders::DeclarationBuilder
   class << self
     def build(submission, owners, declared_by_emails)
       @submission = submission
