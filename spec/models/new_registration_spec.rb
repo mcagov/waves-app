@@ -7,31 +7,16 @@ describe NewRegistration, type: :model do
     it "has a ref_no with the expected prefix" do
       expect(new_registration.ref_no).to match(/3N-.*/)
     end
+
+    it "is called Submission::NewRegistration"
   end
 
   context "#process_application!" do
-    before { new_registration.process_application }
-
-    it "creates a vessel" do
-      expect(new_registration.registered_vessel).to be_present
+    before do
+      expect(Builders::RegistrationBuilder)
+        .to receive(:create).with(new_registration)
     end
 
-    it "creates the registered_owners" do
-      expect(
-        new_registration.registered_vessel.registered_owners.length
-      ).to eq(2)
-    end
-
-    it "creates the one year registration" do
-      expect(new_registration.registration.registered_at)
-        .to eq(Date.today)
-      expect(new_registration.registration.registered_until)
-        .to eq(Date.today.advance(days: 364))
-    end
-
-    it "sets the registration#actioned_by" do
-      expect(new_registration.registration.actioned_by)
-        .to eq(new_registration.claimant)
-    end
+    it { new_registration.process_application }
   end
 end
