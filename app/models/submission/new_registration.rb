@@ -1,4 +1,4 @@
-class NewRegistration < Submission
+class Submission::NewRegistration < Submission
   def job_type
     "New Registration"
   end

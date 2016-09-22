@@ -5,7 +5,7 @@ describe "create new new_registrations via the API", type: :request do
 
   context "with valid params" do
     let(:params) { valid_create_new_registration_json }
-    let(:new_registration) { NewRegistration.find(json["id"]) }
+    let(:new_registration) { Submission::NewRegistration.find(json["id"]) }
     let(:parsed_body) { JSON.parse(response.body) }
 
     it "returns the status code :created" do
