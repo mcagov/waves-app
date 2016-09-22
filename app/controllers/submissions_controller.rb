@@ -54,15 +54,13 @@ class SubmissionsController < InternalPagesController
   end
 
   def create_notification
-    if params[:email_certificate_of_registry]
-      @submission.owners.each do |owner|
-        Notification::Approval.create(
-          recipient_email: owner.email,
-          recipient_name: owner.name,
-          notifiable: @submission,
-          subject: @submission.job_type,
-          actioned_by: current_user)
-      end
+    @submission.owners.each do |owner|
+      Notification::ApplicationApproval.create(
+        recipient_email: owner.email,
+        recipient_name: owner.name,
+        notifiable: @submission,
+        subject: @submission.job_type,
+        actioned_by: current_user)
     end
   end
 end

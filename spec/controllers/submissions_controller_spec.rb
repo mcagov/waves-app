@@ -64,8 +64,13 @@ describe SubmissionsController, type: :controller do
         expect(response).to render_template("completed")
       end
 
-      it "does not create a notification" do
-        expect(Notification::Approval.all).to be_empty
+      it "creates a notification for each owner" do
+        expect(Notification::ApplicationApproval.count).to eq(2)
+      end
+
+      it "sets the notification#actioned_by" do
+        expect(Notification::ApplicationApproval.first.actioned_by)
+          .to eq(current_user)
       end
     end
 
@@ -75,13 +80,7 @@ describe SubmissionsController, type: :controller do
         post :approve, params: params
       end
 
-      it "creates a notification for each owner" do
-        expect(Notification::Approval.count).to eq(2)
-      end
-
-      it "sets the notification#actioned_by" do
-        expect(Notification::Approval.first.actioned_by).to eq(current_user)
-      end
+      it "attaches the certificate to the email notification"
     end
 
     context "unsuccessfully" do

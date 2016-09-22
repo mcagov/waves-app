@@ -1,4 +1,4 @@
-class Builders::RegistrationBuilder
+class Builders::NewRegistrationBuilder
   class << self
     def create(submission)
       @submission = submission
@@ -45,7 +45,7 @@ class Builders::RegistrationBuilder
         vessel: @vessel,
         submission_id: @submission.id,
         registered_at: Date.today,
-        registered_until: Date.today.advance(days: 364),
+        registered_until: Date.today.advance(years: 5),
         actioned_by: @submission.claimant
       )
     end

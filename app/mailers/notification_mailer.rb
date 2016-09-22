@@ -25,6 +25,12 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def application_approval(subject, email, name, reg_no)
+    @reg_no = reg_no
+    @name = name
+    mail(to: email, subject: subject)
+  end
+
   def cancellation_owner_request(subject, email, name, additional_info = nil)
     @additional_info = additional_info
     @name = name

@@ -14,6 +14,13 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_approval
+    NotificationMailer.application_approval(
+      Notification::ApplicationApproval.new.email_subject,
+      email, name, "SRXXXXXX"
+    )
+  end
+
   def cancellation_owner_request_with_additional_info
     NotificationMailer.cancellation_owner_request(
       Notification::Cancellation.new.email_subject,

@@ -2,8 +2,8 @@ require "rails_helper"
 
 feature "User views submission for similar vessel", type: :feature, js: true do
   scenario "viewing a vessel with similar name and different mmsi_number" do
-    create(:vessel, mmsi_number: 233878594)
-    create(:vessel, name: "Celebrator Doppelbock")
+    create(:register_vessel, mmsi_number: 233878594)
+    create(:register_vessel, name: "Celebrator Doppelbock")
     visit_assigned_submission
 
     # submitted vessel information
