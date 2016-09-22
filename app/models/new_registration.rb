@@ -12,16 +12,7 @@ class NewRegistration < Submission
   end
 
   def similar_vessels
-    Register::Vessel
-      .where(name: vessel.name)
-      .or(Register::Vessel
-        .where(["hin = ? and hin <> ''", vessel.hin]))
-      .or(Register::Vessel
-          .where(["mmsi_number = ? and mmsi_number > 0",
-                  vessel.mmsi_number.to_i]))
-      .or(Register::Vessel
-        .where(["radio_call_sign = ? and radio_call_sign <> ''",
-                vessel.radio_call_sign]))
+    Search.similar_vessels(vessel)
   end
 
   protected
