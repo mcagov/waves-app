@@ -76,6 +76,19 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
+  describe "application_approval" do
+    let(:mail) do
+      NotificationMailer.application_approval(
+        "subject", "test@example.com", "Alice", "Reg_no")
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the reg no" do
+      expect(body).to match(/your vessel is Reg_no/)
+    end
+  end
+
   describe "notification templates" do
     let(:templates) do
       [
