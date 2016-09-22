@@ -4,7 +4,7 @@ FactoryGirl.define do
     changeset do
       {
         owners: [build(:declaration_owner)],
-        vessel_info: build(:vessel),
+        vessel_info: build(:submission_vessel),
       }
     end
   end
