@@ -11,7 +11,7 @@ describe Submission::NewRegistration, type: :model do
 
   context "#process_application!" do
     before do
-      expect(Builders::RegistrationBuilder)
+      expect(Builders::NewRegistrationBuilder)
         .to receive(:create).with(new_registration)
     end
 

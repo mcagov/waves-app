@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Builders::RegistrationBuilder do
+describe Builders::NewRegistrationBuilder do
   context ".create" do
     let!(:submission) { create_assigned_submission! }
     let(:registration) { described_class.create(submission) }
@@ -20,9 +20,9 @@ describe Builders::RegistrationBuilder do
         .to eq(Date.today)
     end
 
-    it "creates the one year registration" do
+    it "creates the five year registration" do
       expect(registration.registered_until)
-        .to eq(Date.today.advance(days: 364))
+        .to eq(registration.created_at.advance(years: 5).to_date)
     end
 
     it "sets the registration#actioned_by" do
