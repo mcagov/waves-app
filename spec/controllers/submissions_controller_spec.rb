@@ -65,11 +65,12 @@ describe SubmissionsController, type: :controller do
       end
 
       it "creates a notification for each owner" do
-        expect(Notification::Approval.count).to eq(2)
+        expect(Notification::ApplicationApproval.count).to eq(2)
       end
 
       it "sets the notification#actioned_by" do
-        expect(Notification::Approval.first.actioned_by).to eq(current_user)
+        expect(Notification::ApplicationApproval.first.actioned_by)
+          .to eq(current_user)
       end
     end
 

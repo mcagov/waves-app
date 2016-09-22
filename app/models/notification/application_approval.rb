@@ -1,4 +1,4 @@
-class Notification::Approval < Notification
+class Notification::ApplicationApproval < Notification
   def email_template
     :application_approval
   end
