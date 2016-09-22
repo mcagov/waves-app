@@ -17,10 +17,10 @@ feature "User edits Delivery Address details", type: :feature, js: true do
       find(".editable-input select").select("SPAIN")
       first(".editable-submit").click
       expect(page).to have_css(".address-country", text: "SPAIN")
-    end
 
-    delivery_address = Submission.first.delivery_address
-    expect(delivery_address.name).to eq("John Doe")
-    expect(delivery_address.country).to eq("SPAIN")
+      expect(page).to have_css(
+        "a#inline_delivery_address",
+        text: "ohn Doe, 11 DOWNING ST, WHITEHALL, CARDIFF, SPAIN, W1 1AF")
+    end
   end
 end

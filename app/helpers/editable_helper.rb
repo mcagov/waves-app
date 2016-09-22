@@ -59,16 +59,16 @@ module EditableHelper
 
   def editable_delivery_address(attr_title, attr_name, attr_value)
     link_to attr_value, "#",
-            class: "editable-text",
+            class: "editable-delivery-address",
             "data-name" => attr_name,
             "data-value" => attr_value,
             "data-url" => submission_delivery_addresses_path(@submission),
             "data-title" => attr_title
   end
 
-  def editable_delivery_address_country(attr_value)
+  def editable_delivery_country(attr_value)
     link_to attr_value, "#",
-            class: "editable-select",
+            class: "editable-delivery-country",
             "data-name" => "delivery_address[country]",
             "data-value" => attr_value,
             "data-url" => submission_delivery_addresses_path(@submission),

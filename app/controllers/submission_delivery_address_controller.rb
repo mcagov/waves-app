@@ -6,9 +6,10 @@ class SubmissionDeliveryAddressController < InternalPagesController
     @submission.delivery_address = @delivery_address
     @submission.save
 
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    render json: {
+      status: 200,
+      inline_name_and_address: @delivery_address.inline_name_and_address,
+    }
   end
 
   protected
