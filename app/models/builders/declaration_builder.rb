@@ -1,6 +1,6 @@
 class Builders::DeclarationBuilder
   class << self
-    def build(submission, owners, declared_by_emails)
+    def create(submission, owners, declared_by_emails)
       @submission = submission
       @owners = owners || []
       @declared_by_emails = declared_by_emails || []
