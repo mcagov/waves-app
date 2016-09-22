@@ -87,7 +87,7 @@ describe SubmissionsController, type: :controller do
     context "unsuccessfully" do
       before do
         allow_any_instance_of(Submission::NewRegistration)
-          .to receive(:process_application).and_return(false)
+          .to receive(:approved!).and_return(false)
         post :approve, params: { id: submission.id }
       end
 

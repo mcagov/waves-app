@@ -52,7 +52,10 @@ describe Submission, type: :model do
 
   context "#approved!" do
     let!(:submission) { create_assigned_submission! }
-    before { submission.approved! }
+    before do
+      expect(submission).to receive(:process_application)
+      submission.approved!
+    end
 
     it "transitions to completed" do
       expect(submission.reload).to be_completed

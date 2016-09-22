@@ -43,7 +43,8 @@ module SubmissionTransitions
       end
 
       event :approved do
-        transitions to: :completed, from: :assigned
+        transitions to: :completed, from: :assigned,
+                    on_transition: :process_application
       end
 
       event :cancelled do
