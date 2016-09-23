@@ -4,6 +4,11 @@ module Register
 
     has_many :owners, class_name: "Register::Owner"
 
+    has_many :registrations
+    has_one :latest_registration,
+            -> { order("registered_until desc").limit(1) },
+            class_name: "Registration"
+
     def to_s
       name
     end

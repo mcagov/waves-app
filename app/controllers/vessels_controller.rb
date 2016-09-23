@@ -5,6 +5,6 @@ class VesselsController < InternalPagesController
 
   def index
     @vessels =
-      Register::Vessel.paginate(page: params[:page], per_page: 20)
+      Register::Vessel.paginate(page: params[:page], per_page: 20).order(:name)
   end
 end
