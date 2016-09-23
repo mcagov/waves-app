@@ -3,6 +3,14 @@
 // With this script, we set the reciprocal attribute in the vessel pane.
 $(document).ready(function() {
 
+  // WYSIWYG
+  tinymce.init({
+    selector: 'textarea.wysiwyg',
+    menubar: false,
+    toolbar: false,
+    statusbar: false
+  });
+
   // Editable attributes
   $('.editable-text').editable({  type: 'text' });
   $('.editable-select').editable({ type: 'select' });
