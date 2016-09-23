@@ -17,21 +17,7 @@
         = render partial: "vessels/tabs/owner", collection: @vessel.owners
 
       #tab_content2.tab-pane.fade.in{"aria-labelledby" => "applications-tab", :role => "tabpanel"}
-        %table.table.table-striped.table-hover
-          %thead
-            %tr
-              %th Application ID
-              %th Job Type
-              %th Date Received
-              %th Date Processed
-              %th Source
-          %tbody
-            %tr
-              %td= link_to 'G8J9DA43J', '/applications/new-registration/process-complete'
-              %td= link_to 'New Registration', '/applications/new-registration/process-complete'
-              %td 18/07/2016
-              %td 29/07/2016
-              %td Online
+        = render partial: "vessels/tabs/submissions", locals: { vessel: @vessel }
       #tab_content3.tab-pane.fade.in{"aria-labelledby" => "history-tab", :role => "tabpanel"}
         %table.table.table-striped.table-hover
           %thead
