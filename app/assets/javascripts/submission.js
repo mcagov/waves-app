@@ -8,7 +8,8 @@ $(document).ready(function() {
     selector: 'textarea.wysiwyg',
     menubar: false,
     toolbar: false,
-    statusbar: false
+    statusbar: false,
+    height : 180
   });
 
   // Editable attributes
