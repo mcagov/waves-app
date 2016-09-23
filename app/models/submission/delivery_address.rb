@@ -1,5 +1,5 @@
 class Submission::DeliveryAddress
-  include Address
+  include VirtualAddress
   include VirtualModel
 
   def inline_name_and_address
