@@ -1,0 +1,16 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Application ID
+      %th Job Type
+      %th Date Received
+      %th Date Processed
+      %th Source
+  %tbody
+    - vessel.submission_list.each do |submission|
+      %tr
+        %td= link_to submission.ref_no, submission_path(submission)
+        %td= link_to submission.job_type, submission_path(submission)
+        %td= submission.received_at
+        %td= submission.updated_at if submission.completed?
+        %td= submission.source

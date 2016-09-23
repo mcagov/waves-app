@@ -46,6 +46,13 @@ module SubmissionHelpers
     submission.reload
   end
 
+  def create_completed_application!
+    submission = create_assigned_submission!
+    submission.approved!
+
+    submission.reload
+  end
+
   def visit_assigned_submission
     submission = create_assigned_submission!
 

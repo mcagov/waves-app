@@ -12,5 +12,11 @@ module Register
     def to_s
       name
     end
+
+    def submission_list
+      registrations
+        .map(&:submission)
+        .compact.sort { |a, b| b.created_at <=> a.created_at }
+    end
   end
 end
