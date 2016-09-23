@@ -1,0 +1,133 @@
+.row
+  %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+    %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a#owner-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} People
+      %li{:role => "presentation"}
+        %a#applications-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Applications
+      %li{:role => "presentation"}
+        %a#history-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} History
+      %li{:role => "presentation"}
+        %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Correspondence
+      %li{:role => "presentation"}
+        %a#notes-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} Notes
+    #myTabContent.tab-content
+      #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+        %table.table.table-striped
+          %thead
+            %th Owner #1
+            %th
+          %tbody
+            %tr
+              %td{width: '30%'} Owner Name
+              %td{width: '35%'}
+                %strong Jacob Cameron
+            %tr
+              %td Owner Address
+              %td
+                %strong 123 King Street, Barbican Approach, Plymouth, Devon, PL4 0EG
+        %hr
+        %table.table.table-striped
+          %thead
+            %th Owner #2
+            %th
+          %tbody
+            %tr
+              %td{width: '30%'} Owner Name
+              %td{width: '35%'}
+                %strong Lucinda Smith
+            %tr
+              %td Owner Address
+              %td
+                %strong 978 Queen Street, Plymouth, Devon, PL4 0EG
+
+        %hr
+        %table.table.table-striped
+          %thead
+            %th Agent
+            %th
+          %tbody
+            %tr
+              %td{width: '30%'} Agent Name
+              %td{width: '35%'}
+                %strong Fairline Mallorca SL
+            %tr
+              %td Agent Address
+              %td
+                %strong Calle del Barranc 7, Puerto Portals, Calvià, España, 07181
+      #tab_content2.tab-pane.fade.in{"aria-labelledby" => "applications-tab", :role => "tabpanel"}
+        %table.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Application ID
+              %th Job Type
+              %th Date Received
+              %th Date Processed
+              %th Source
+          %tbody
+            %tr
+              %td= link_to 'G8J9DA43J', '/applications/new-registration/process-complete'
+              %td= link_to 'New Registration', '/applications/new-registration/process-complete'
+              %td 18/07/2016
+              %td 29/07/2016
+              %td Online
+      #tab_content3.tab-pane.fade.in{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+        %table.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Date
+              %th Item
+              %th Description
+              %th Responsible
+          %tbody
+            %tr
+              %td 29/04/2016 at 10:03
+              %td Email
+              %td= link_to 'Notice of Registry Renewal', ''#'
+              %td Laura Clark-Theobald
+            %tr
+              %td 29/04/2016 at 00:01
+              %td Letter
+              %td= link_to 'Notice of Registry Renewal', '#'
+              %td System Generated
+            %tr
+              %td 09/11/2012 at 11:38
+              %td Change of Owner
+              %td
+                From:
+                %em John Smith, 490 Kings Road, Plymouth, PL1 1AA
+                to
+                %strong Fred Bloggs, 78 Jupiter Street, Margate, Kent, KT2 4ID
+              %td Rachel Miles
+            %tr
+              %td 04/08/2012 at 13:05
+              %td Registration
+              %td
+              %td Rachel Miles
+      #tab_content4.tab-pane.fade.in{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
+        %table.table.table-striped
+          %thead
+            %th From
+            %th Subject
+            %th Date Received
+          %tbody
+            %tr
+              %td{width: '20%'} John Smith
+              %td{width: '65%'}= link_to 'RE: Registration Renewal G8NJ23JD2', '#email-content', "data-target" => "#email-content", "data-toggle" => "modal"
+              %td{width: '15%'} Yesterday
+        = link_to '#email-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#email-content-add", "data-toggle" => "modal" do
+          %i.fa.fa-plus
+          Add Correspondence
+      #tab_content5.tab-pane.fade.in{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
+        %table.table.table-striped
+          %thead
+            %th Notes
+            %th Date
+          %tbody
+            %tr
+              %td{width: '20%'} John Smith
+              %td{width: '65%'}= link_to 'Police phoned regarding owner of the vessel.....', '#note-content', "data-target" => "#note-content", "data-toggle" => "modal"
+              %td{width: '15%'} 3 days ago
+        = link_to '#note-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#note-content-add", "data-toggle" => "modal" do
+          %i.fa.fa-plus
+          Add Note
