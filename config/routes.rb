@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :vessels, only: [:show]
+  resources :vessels, only: [:show, :index]
 
   %w(
     incomplete my-tasks team-tasks print-queue
