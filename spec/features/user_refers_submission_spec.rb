@@ -10,8 +10,6 @@ feature "User refers a submission", type: :feature, js: true do
 
     fill_in "Due By", with: "12/12/2020"
     select "Unknown vessel type", from: "Reason for Referral"
-    fill_in "Additional Information", with: "Some stuff"
-
     within("#refer-application") { click_on "Refer Application" }
 
     click_on "Referred Applications"
@@ -36,7 +34,7 @@ feature "User refers a submission", type: :feature, js: true do
 
   def referral_prompt
     # rubocop:disable all
-    /Application Referred by.*: Unknown vessel type\. Some stuff\. Next action due by 12\/12\/2020\./
+    /Application Referred by.*: Unknown vessel type\. Next action due by 12\/12\/2020\./
     # rubocop:enable all
   end
 end

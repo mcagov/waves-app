@@ -16,6 +16,7 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
+//= require tinymce
 //
 //= require ./vendor/nprogress
 //= require ./vendor/select2

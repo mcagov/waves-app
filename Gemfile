@@ -37,6 +37,7 @@ gem "paper_trail"
 gem "waves-utilities",
     git: "https://github.com/tobyprivett/waves-utilities.git"
 gem "protokoll"
+gem "tinymce-rails"
 
 group :development do
   gem "rubocop"

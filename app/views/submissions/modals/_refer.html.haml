@@ -20,6 +20,7 @@
           .row
             .col-sm-12
               .form-group
-                = f.input :body, label: "Additional Information", input_html: {rows: 3}
+                = render partial: "shared/fields/message_editor",
+                  locals: { f: f, message_type: :refer }
         .modal-footer
           = f.submit "Refer Application", class: "btn btn-lg btn-warning"

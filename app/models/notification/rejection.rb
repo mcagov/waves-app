@@ -5,14 +5,7 @@ class Notification::Rejection < Notification
     :fraudulent].freeze
 
   def email_template
-    case subject.to_sym
-    when :unsuitable_name
-      :rejection_unsuitable
-    when :too_long
-      :rejection_too_long
-    when :fraudulent
-      :rejection_fraudulent
-    end
+    :wysiwyg
   end
 
   def additional_params

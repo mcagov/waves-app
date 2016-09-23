@@ -17,6 +17,7 @@
           .row
             .col-sm-12
               .form-group
-                = f.input :body, label: "Additional Information", input_html: {rows: 3}
+                = render partial: "shared/fields/message_editor",
+                  locals: { f: f, message_type: :cancel }
         .modal-footer
           = f.submit "Cancel Application", class: "btn btn-lg btn-info"
