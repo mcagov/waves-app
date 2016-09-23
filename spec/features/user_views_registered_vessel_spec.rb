@@ -19,4 +19,8 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page)
       .to have_link("New Registration", href: submission_path(@submission))
   end
+
+  scenario "viewing history"
+  scenario "viewing / adding correspondence"
+  scenario "viewing /adding notes"
 end
