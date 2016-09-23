@@ -1,0 +1,15 @@
+- i = owner_counter + 1
+%table.table.table-striped
+  %thead
+    %th Owner ##{ i }
+    %th
+  %tbody
+    %tr
+      %td{width: '30%'} Owner Name
+      %td{width: '35%'}
+        %strong #{ owner.name }
+    %tr
+      %td Owner Address
+      %td
+        %strong= owner.inline_address
+%hr

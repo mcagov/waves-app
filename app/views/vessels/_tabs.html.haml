@@ -11,50 +11,11 @@
         %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Correspondence
       %li{:role => "presentation"}
         %a#notes-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} Notes
-    #myTabContent.tab-content
-      #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-        %table.table.table-striped
-          %thead
-            %th Owner #1
-            %th
-          %tbody
-            %tr
-              %td{width: '30%'} Owner Name
-              %td{width: '35%'}
-                %strong Jacob Cameron
-            %tr
-              %td Owner Address
-              %td
-                %strong 123 King Street, Barbican Approach, Plymouth, Devon, PL4 0EG
-        %hr
-        %table.table.table-striped
-          %thead
-            %th Owner #2
-            %th
-          %tbody
-            %tr
-              %td{width: '30%'} Owner Name
-              %td{width: '35%'}
-                %strong Lucinda Smith
-            %tr
-              %td Owner Address
-              %td
-                %strong 978 Queen Street, Plymouth, Devon, PL4 0EG
 
-        %hr
-        %table.table.table-striped
-          %thead
-            %th Agent
-            %th
-          %tbody
-            %tr
-              %td{width: '30%'} Agent Name
-              %td{width: '35%'}
-                %strong Fairline Mallorca SL
-            %tr
-              %td Agent Address
-              %td
-                %strong Calle del Barranc 7, Puerto Portals, Calvià, España, 07181
+    #myTabContent.tab-content
+      #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
+        = render partial: "vessels/tabs/owner", collection: @vessel.owners
+
       #tab_content2.tab-pane.fade.in{"aria-labelledby" => "applications-tab", :role => "tabpanel"}
         %table.table.table-striped.table-hover
           %thead
