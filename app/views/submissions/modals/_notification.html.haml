@@ -19,7 +19,7 @@
             %dt Reason
             %dd= notification.subject.humanize if notification.subject
           %dl
-            %dt Additional information
-            %dd= notification.body
+            %dt Message
+            %dd= notification.body.html_safe
       .modal-footer
         %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close
