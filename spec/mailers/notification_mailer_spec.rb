@@ -89,37 +89,16 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
-  describe "notification templates" do
-    let(:templates) do
-      [
-        :cancellation_owner_request,
-        :cancellation_no_response,
-        :referral_incorrect,
-        :referral_no_match,
-        :referral_unknown,
-        :rejection_fraudulent,
-        :rejection_too_long,
-        :rejection_unsuitable,
-      ]
+  describe "wysiwyg" do
+    let(:mail) do
+      NotificationMailer.wysiwyg(
+        "subject", "test@example.com", "Alice", "Some text")
     end
 
-    it "render the name" do
-      templates.each do |template|
-        mail =
-          NotificationMailer.send(
-            template, "subject", "alice@example.com", "Alice")
-        expect(mail.body.encoded).to match(/Dear Alice/)
-      end
-    end
+    let(:body) { mail.body.encoded }
 
-    it "render the additional info (for a random template)" do
-      templates.sample do |template|
-        mail =
-          NotificationMailer.send(
-            "subject", template, "alice@example.com",
-            "Alice", "Today is Thursday")
-        expect(mail.body.encoded).to match(/Today is Thursday/)
-      end
+    it "renders the body" do
+      expect(body).to match(/Some text/)
     end
   end
 end

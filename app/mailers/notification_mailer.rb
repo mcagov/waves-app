@@ -31,53 +31,8 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
-  def cancellation_owner_request(subject, email, name, additional_info = nil)
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def cancellation_no_response(subject, email, name, additional_info = nil)
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def referral_incorrect(subject, email, name, additional_info = nil)
-    @contact_us_on = "XXX"
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def referral_no_match(subject, email, name, additional_info = nil)
-    @contact_us_on = "XXX"
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def referral_unknown(subject, email, name, additional_info = nil)
-    @contact_us_on = "XXX"
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def rejection_fraudulent(subject, email, name, additional_info = nil)
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def rejection_too_long(subject, email, name, additional_info = nil)
-    @additional_info = additional_info
-    @name = name
-    mail(to: email, subject: subject)
-  end
-
-  def rejection_unsuitable(subject, email, name, additional_info = nil)
-    @additional_info = additional_info
+  def wysiwyg(subject, email, name, body)
+    @body = body
     @name = name
     mail(to: email, subject: subject)
   end
