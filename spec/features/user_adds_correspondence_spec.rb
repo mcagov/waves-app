@@ -19,7 +19,7 @@ feature "User adds correspondence", type: :feature, js: true do
     expect(page).to have_css(".modal-body", text: "Hello Bob")
   end
 
-  xscenario "to a vessel" do
+  scenario "to a vessel" do
     visit_registered_vessel
     click_on("Correspondence")
     click_link("Add Correspondence")
@@ -30,10 +30,6 @@ feature "User adds correspondence", type: :feature, js: true do
     fill_in "Content", with: "Hello Bob"
     click_on "Save Correspondence"
 
-    click_on("Correspondence")
-    click_on("My Subject")
-
-    expect(page).to have_css("h4", text: "My Subject")
-    expect(page).to have_css(".modal-body", text: "Hello Bob")
+    expect(page).to have_css("#flash", "The correspondence has been saved")
   end
 end

@@ -62,7 +62,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :vessels, only: [:show, :index]
+  resources :vessels, only: [:show, :index] do
+    resource :correspondence,
+             only: [:create],
+             controller: :vessel_correspondences
+  end
 
   %w(
     incomplete my-tasks team-tasks print-queue
