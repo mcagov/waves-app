@@ -1,0 +1,17 @@
+%table.table.table-striped.table-hover#history
+  %thead
+    %tr
+      %th Date
+      %th Item
+      %th Description
+      %th Responsible
+  / This will eventually be: vessel.history_items
+  / and include all changes to the vessel details
+  / e.g. papertrail
+  - @vessel.registrations.each do |registration|
+    %tbody
+      %tr
+        %td= registration.created_at.to_s(:date_time)
+        %td.history-item New Registration
+        %td
+        %td= registration.actioned_by
