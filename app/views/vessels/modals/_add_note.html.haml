@@ -1,0 +1,15 @@
+.modal.fade{id: 'note-content-add', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Add Note
+      = simple_form_for Note.new, url: vessel_note_path(vessel), method: :post do |f|
+        .modal-body
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :content, label: "Content", as: :text, input_html: { rows: 6 }
+        .modal-footer
+          = f.submit "Save Note", class: "btn btn-primary"

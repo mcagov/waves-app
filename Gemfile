@@ -38,6 +38,7 @@ gem "waves-utilities",
     git: "https://github.com/tobyprivett/waves-utilities.git"
 gem "protokoll"
 gem "tinymce-rails"
+gem "will_paginate-bootstrap"
 
 group :development do
   gem "rubocop"

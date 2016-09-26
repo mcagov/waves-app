@@ -30,11 +30,7 @@ class Submission < ApplicationRecord
           class_name: "Notification::ApplicationReceipt"
 
   has_one :registration
-  has_one :registered_vessel, through: :registration
-
-  default_scope do
-    order("target_date asc").where.not(state: :completed)
-  end
+  has_one :registered_vessel, through: :registration, source: :vessel
 
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 
@@ -87,6 +83,10 @@ class Submission < ApplicationRecord
 
   def ref_no_prefix
     "00"
+  end
+
+  def editable?
+    !completed?
   end
 
   protected

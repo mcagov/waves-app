@@ -1,3 +1,68 @@
-%h1= @vessel.name
-
-%code Page Under Construction
+.row
+  .col-sm-9
+    %h1{style: 'margin-top: 0px !important;'}
+      = @vessel.name
+      %span (#{ @vessel.vessel_type })
+  .col-sm-3
+    .pull-right
+      = link_to '#take-action', "data-target" => "#take-action", "data-toggle" => "modal", class: 'btn btn-primary disabled' do
+        %i.fa.fa-hand-paper-o{style: 'font-size: 1.2em; font-weight: bold;'}
+        Registrar Tools
+.row
+  .x_panel
+    .x_title
+      %h2 Vessel Details
+      .clearfix
+    .x_content
+      .row{style: 'padding-bottom: 15px;'}
+        .col-sm-4
+          %table.table
+            %tbody
+              %tr
+                %td{style: 'border-top: 0px #fff !important'} SSR Number:
+                %td{style: 'border-top: 0px #fff !important'}
+                  %strong= @vessel.reg_no
+              %tr
+                %td Make and model:
+                %td
+                  %strong= @vessel.make_and_model
+              %tr
+                %td Length:
+                %td
+                  %strong #{ @vessel.length_in_meters } metres
+              %tr
+                %td Type:
+                %td
+                  %strong= @vessel.vessel_type
+        .col-sm-4
+          %table.table
+            %tbody
+              %tr
+                %td{style: 'border-top: 0px #fff !important'} MMSI Number:
+                %td{style: 'border-top: 0px #fff !important'}
+                  %strong= @vessel.mmsi_number
+              %tr
+                %td Radio Call Sign:
+                %td
+                  %strong= @vessel.radio_call_sign
+              %tr
+                %td Hulls:
+                %td
+                  %strong= @vessel.number_of_hulls
+              %tr
+                %td HIN:
+                %td
+                  %strong= @vessel.hin
+        .col-sm-4
+          %table.table
+            %tbody
+              %tr
+                %td{style: 'border-top: 0px #fff !important'} Registration Date:
+                %td{style: 'border-top: 0px #fff !important'}
+                  %strong= @vessel.latest_registration.created_at if @vessel.latest_registration
+              %tr
+                %td Reg Expiry Date:
+                %td
+                  %strong= @vessel.latest_registration.registered_until if @vessel.latest_registration
+      = render partial: "tabs"
+= render partial: "vessels/modals/to_do"

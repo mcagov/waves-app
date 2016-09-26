@@ -1,4 +1,4 @@
-module Address
+module VirtualAddress
   extend ActiveSupport::Concern
 
   included do

@@ -1,0 +1,13 @@
+%table.table.table-striped#notification-list
+  %thead
+    %th Format
+    %th Subject
+    %th Date
+  %tbody
+    - notification_list.each do |row|
+      - if row.is_a?(Correspondence)
+        = render partial: "shared/notification_list/tabs/correspondence",
+          locals: { correspondence: row }
+      - if row.is_a?(Notification)
+        = render partial: "shared/notification_list/tabs/notification",
+          locals: { notification: row }

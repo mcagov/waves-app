@@ -1,0 +1,131 @@
+.modal.fade{id: 'take-action', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Take Action
+      .modal-body
+        %p= link_to 'Email Certificate of Registry', '#email-certificate-of-registry', "data-target" => "#email-certificate-of-registry", "data-toggle" => "modal", "data-dismiss" => "modal", class: 'btn btn-block btn-success'
+        %p= link_to 'Send Renewal Reminder', '#send-renewal', "data-target" => "#send-renewal", "data-toggle" => "modal", "data-dismiss" => "modal", class: 'btn btn-block btn-primary'
+        %hr
+        %p= link_to 'Freeze Record', '#', class: 'btn btn-block btn-warning'
+        %p= link_to 'Registrar Closure', '#', class: 'btn btn-block btn-danger'
+        %p= link_to 'Reinstate Closed Record', '#', class: 'btn btn-block btn-info'
+
+.modal.fade{id: 'email-certificate-of-registry', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Email Certificate of Registry
+      %form
+        .modal-body
+          %p A copy of the Certificate of Registry will be sent to the recipient.
+          .row
+            .col-md-12
+              .form-group
+                %label Recipient
+                %select.select2_single.form-control{style: 'width: 100%;'}
+                  %option Owner 1: John Smith (john@smith.com)
+                  %option Owner 2: Jessica Hill (jessica@hill.com)
+                  %option Agent: Fairline Mallorca SL (info@fairlinemallorca.es)
+        .modal-footer
+          %button.btn.btn-primary{"aria-label" => "Continue", "data-dismiss" => "modal", :type => "button"} Send Copy of Certificate of Registry
+
+.modal.fade{id: 'send-renewal', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Send Renewal Reminder
+      %form
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                %label Correspondence Format
+                %select.select2_single.form-control{style: 'width: 100%;'}
+                  %option Email: Send immediately
+                  %option Post: Print immediately
+                  %option Post: Add to print queue
+        .modal-footer
+          %button.btn.btn-primary{"aria-label" => "Continue", "data-dismiss" => "modal", :type => "button"} Send Renewal Reminder
+
+
+.modal.fade{id: 'email-content', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title RE: Registration Renewal G8NJ23JD2
+      .modal-body
+        %code
+          %p Dear Rachel,
+          %p In response to your email regarding the name of the vessel, I understand that "MV Queeny" has been rejected, therefore we would like to go with "Bobcat" as the new name.
+          %p Thanks
+          %p John Smith
+          %hr
+          %p To John Smith,
+          %p You have submitted an application to register "MV Queeny". Unfortunately this name is deemed unacceptable due to its links with the Royal family. Please reply with a few alternative names.
+          %p Yours
+          %p Rachel Miles
+          %hr
+          %p To whom it may concern at RSS,
+          %p I have just submitted an application online to register my vessel, but I'm not sure if the name is acceptable. What should I do?
+          %p Regards
+          %p John Smith
+      .modal-footer
+        %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close
+
+.modal.fade{id: 'email-content-add', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Add Correspondence
+      %form
+        .modal-body
+          .row
+            .col-md-6
+              .form-group
+                %label Subject
+                %input.form-control{type: 'text'}
+            .col-md-3
+              .form-group
+                %label Correspondence Format
+                %select.select2_single.form-control{style: 'width: 100%;'}
+                  %option Email
+                  %option Post
+            .col-md-3
+              .form-group
+                %label Date Received
+                %input.form-control{type: 'text', value: '01/09/2016'}
+          .row
+            .col-sm-12
+              .form-group
+                %label Content
+                %textarea.form-control{rows: 6}
+          .row
+            .col-sm-12
+              .form-group
+                %label Supporting Documents
+                %input{type: 'file'}
+        .modal-footer
+          %button.btn.btn-primary{"aria-label" => "Continue", "data-dismiss" => "modal", :type => "button"} Save Correspondence
+
+.modal.fade{id: 'note-content', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Note on 4th August 2016
+      .modal-body
+        %p National Crime Agency called today regarding this vessel. Content goes here
+      .modal-footer
+        %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close

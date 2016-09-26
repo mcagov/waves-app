@@ -1,20 +1,20 @@
-class CorrespondencesController < InternalPagesController
-  before_action :load_submission
+class VesselCorrespondencesController < InternalPagesController
+  before_action :load_vessel
 
   def create
     @correspondence = Correspondence.new(correspondence_params)
     @correspondence.actioned_by = current_user
-    @correspondence.noteable = @submission
+    @correspondence.noteable = @vessel
 
     flash[:notice] = "The correspondence has been saved" if @correspondence.save
 
-    redirect_to submission_path(@submission)
+    redirect_to vessel_path(@vessel)
   end
 
   private
 
-  def load_submission
-    @submission = Submission.find(params[:submission_id])
+  def load_vessel
+    @vessel = Register::Vessel.find(params[:vessel_id])
   end
 
   def correspondence_params

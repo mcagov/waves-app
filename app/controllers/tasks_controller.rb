@@ -1,14 +1,14 @@
 class TasksController < InternalPagesController
   def my_tasks
-    @submissions = Submission.assigned_to(current_user)
+    @submissions = submission_scope.assigned_to(current_user)
   end
 
   def team_tasks
-    @submissions = Submission.assigned
+    @submissions = submission_scope.assigned
   end
 
   def unclaimed
-    @submissions = Submission.unassigned
+    @submissions = submission_scope.unassigned
   end
 
   def print_queue
@@ -16,26 +16,32 @@ class TasksController < InternalPagesController
   end
 
   def incomplete
-    @submissions = Submission.incomplete
+    @submissions = submission_scope.incomplete
   end
 
   def referred
-    @submissions = Submission.order("referred_until desc").referred
+    @submissions = submission_scope.order("referred_until desc").referred
   end
 
   def rejected
-    @submissions = Submission.order("updated_at desc").rejected
+    @submissions = submission_scope.order("updated_at desc").rejected
   end
 
   def cancelled
-    @submissions = Submission.order("updated_at desc").cancelled
+    @submissions = submission_scope.order("updated_at desc").cancelled
   end
 
   def next_task
-    if (submission = Submission.assigned_to(current_user).first)
+    if (submission = submission_scope.assigned_to(current_user).first)
       return redirect_to submission_path(submission)
     else
       return redirect_to tasks_my_tasks_path
     end
+  end
+
+  private
+
+  def submission_scope
+    Submission.order("target_date asc").where.not(state: :completed)
   end
 end

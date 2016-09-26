@@ -1,5 +1,5 @@
 class Declaration::Owner
-  include Address
+  include VirtualAddress
   include VirtualModel
 
   attr_accessor(
