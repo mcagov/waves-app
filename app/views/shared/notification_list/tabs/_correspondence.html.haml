@@ -3,4 +3,4 @@
   %td= link_to correspondence.subject, "#correspondence-#{ correspondence.id }", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
   %td
     = link_to correspondence.created_at.to_s(:date_time), "#email-content", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
-    = render partial:  "submissions/modals/correspondence", locals: { correspondence: correspondence }
+    = render partial:  "shared/notification_list/modals/correspondence", locals: { correspondence: correspondence }

@@ -6,12 +6,8 @@
   %tbody
     - submission.notification_list.each do |row|
       - if row.is_a?(Correspondence)
-        = render partial: "submissions/tabs/correspondence",
+        = render partial: "shared/notification_list/tabs/correspondence",
           locals: { correspondence: row }
       - if row.is_a?(Notification)
-        = render partial: "submissions/tabs/notification",
+        = render partial: "shared/notification_list/tabs/notification",
           locals: { notification: row }
-
-= render partial: "submissions/actions/correspondence"
-= render partial: "submissions/modals/new_correspondence",
-  locals: { submission: submission }
