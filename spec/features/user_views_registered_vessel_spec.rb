@@ -19,7 +19,7 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page).to have_link("Add Correspondence")
   end
 
-  scenario "and links to the submission page (which can not be edited)" do
+  scenario "linking to the submission page (which can not be edited)" do
     expect(page).to have_css("h1", text: "Celebrator")
 
     click_on("Applications")
