@@ -27,7 +27,7 @@
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "shared/notification_list/base",
-            locals: {submission: submission}
+            locals: { notification_list: submission.notification_list }
           = render partial: "submissions/actions/add_correspondence", locals: { submission: submission }
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}

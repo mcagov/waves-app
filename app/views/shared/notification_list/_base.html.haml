@@ -4,7 +4,7 @@
     %th Subject
     %th Date
   %tbody
-    - submission.notification_list.each do |row|
+    - notification_list.each do |row|
       - if row.is_a?(Correspondence)
         = render partial: "shared/notification_list/tabs/correspondence",
           locals: { correspondence: row }
