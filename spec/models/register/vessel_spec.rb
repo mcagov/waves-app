@@ -36,4 +36,27 @@ describe Register::Vessel do
 
     it "will eventually include *other* submissions, e.g. change of owner"
   end
+
+  context "#notification_list" do
+    let!(:vessel_correspondence) do
+      create(:correspondence, noteable: vessel)
+    end
+
+    let!(:submission) { create(:submission) }
+    let!(:submission_correspondence) do
+      create(:correspondence, noteable: submission)
+    end
+
+    before do
+      allow(vessel)
+        .to receive(:submission_list).and_return([submission])
+    end
+
+    subject { vessel.notification_list }
+
+    it "returns the expected notification_list" do
+      expect(subject)
+        .to eq([submission_correspondence, vessel_correspondence])
+    end
+  end
 end

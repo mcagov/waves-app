@@ -9,6 +9,8 @@ module Register
             -> { order("registered_until desc").limit(1) },
             class_name: "Registration"
 
+    has_many :correspondences, as: :noteable
+
     def to_s
       name
     end
@@ -17,6 +19,12 @@ module Register
       registrations
         .map(&:submission)
         .compact.sort { |a, b| b.created_at <=> a.created_at }
+    end
+
+    def notification_list
+      (correspondences +
+        submission_list.map(&:notification_list).flatten
+      ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end
   end
 end
