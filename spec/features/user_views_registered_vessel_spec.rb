@@ -14,6 +14,9 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     click_on("History")
     expect(page).to have_css(".history-item", "New Registration")
+
+    click_on("Correspondence")
+    expect(page).to have_link("Add Correspondence")
   end
 
   scenario "and links to the submission page (which can not be edited)" do

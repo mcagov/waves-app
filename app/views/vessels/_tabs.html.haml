@@ -22,7 +22,7 @@
         = render partial: "vessels/tabs/history", locals: { vessel: @vessel }
       #tab_content4.tab-pane.fade.in{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
         = render partial: "shared/notification_list/base",
-          locals: { notification_list: [] }
+          locals: { notification_list: @vessel.notification_list }
         = render partial: "vessels/actions/add_correspondence", locals: { vessel: @vessel }
       / #tab_content5.tab-pane.fade.in{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
       /   %table.table.table-striped
