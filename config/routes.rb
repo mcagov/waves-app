@@ -39,8 +39,12 @@ Rails.application.routes.draw do
       post :approve
       post :claim_referral
     end
-    resource :correspondence
-    resource :vessels, only: [:update], controller: :submission_vessel
+    resource :correspondence,
+             only: [:create],
+             controller: :submission_correspondences
+    resource :vessels,
+             only: [:update],
+             controller: :submission_vessel
     resource :delivery_addresses,
              only: [:update],
              controller: :submission_delivery_address
