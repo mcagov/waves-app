@@ -30,7 +30,7 @@ class Submission < ApplicationRecord
           class_name: "Notification::ApplicationReceipt"
 
   has_one :registration
-  has_one :registered_vessel, through: :registration
+  has_one :registered_vessel, through: :registration, source: :vessel
 
   scope :assigned_to, -> (claimant) { where(claimant: claimant) }
 

@@ -17,12 +17,20 @@ describe "User views a registered vessel", type: :feature, js: true do
     click_on("Applications")
     click_on("New Registration")
 
-    expect(page).not_to have_css("#actions")
-
     within("#vessel-name") do
       expect(page).to have_text("Celebrator")
       expect(page).not_to have_link("Celebrator")
     end
+
+    expect(page).not_to have_css("#actions")
+
+    within(".breadcrumb") do
+      expect(page).to have_link("Registered Vessels", href: vessels_path)
+      click_on(@submission.registered_vessel.reg_no)
+    end
+
+    expect(page)
+      .to have_current_path("/vessels/#{@submission.registered_vessel.id}")
   end
 
   scenario "viewing history"
