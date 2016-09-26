@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User views a registered vessel", type: :feature, js: true do
   before do
-    @submission = create_completed_application!
+    @submission = create_completed_submission!
     login_to_part_3
     visit vessels_path
     click_on("Celebrator")

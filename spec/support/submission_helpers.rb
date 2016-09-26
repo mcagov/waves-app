@@ -46,7 +46,7 @@ module SubmissionHelpers
     submission.reload
   end
 
-  def create_completed_application!
+  def create_completed_submission!
     submission = create_assigned_submission!
     submission.approved!
 
@@ -55,6 +55,16 @@ module SubmissionHelpers
 
   def visit_assigned_submission
     submission = create_assigned_submission!
+
+    # we don't need the second declaration
+    submission.declarations.last.destroy
+
+    login_to_part_3(submission.claimant)
+    visit submission_path(submission)
+  end
+
+  def visit_completed_submission
+    submission = create_completed_submission!
 
     # we don't need the second declaration
     submission.declarations.last.destroy
