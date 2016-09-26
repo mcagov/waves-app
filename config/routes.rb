@@ -66,6 +66,10 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: :vessel_correspondences
+
+    resource :note,
+             only: [:create],
+             controller: :vessel_notes
   end
 
   %w(

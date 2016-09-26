@@ -10,6 +10,7 @@ module Register
             class_name: "Registration"
 
     has_many :correspondences, as: :noteable
+    has_many :notes, -> { order("created_at desc") }, as: :noteable
 
     def to_s
       name
