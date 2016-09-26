@@ -19,6 +19,19 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page).to have_link("Add Correspondence")
   end
 
+  scenario "adding notes" do
+    click_on("Notes")
+    click_on("Add Note")
+    fill_in("Content", with: "Some stuff")
+    click_on("Save Note")
+
+    click_on("Notes")
+    within("#notes") do
+      click_on("Some stuff")
+      expect(page).to have_css(".modal-body", text: "Some stuff")
+    end
+  end
+
   scenario "linking to the submission page (which can not be edited)" do
     expect(page).to have_css("h1", text: "Celebrator")
 

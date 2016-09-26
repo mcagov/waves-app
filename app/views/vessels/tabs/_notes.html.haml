@@ -1,0 +1,17 @@
+%table.table.table-striped#notes
+  %thead
+    %th Recorded by
+    %th Content
+    %th Date
+  %tbody
+    - vessel.notes.each do |note|
+      %tr
+        %td{width: '15%'}= note.actioned_by
+        %td{width: '65%'}
+          = link_to truncate(note.content, length: 100), "#note-#{ note.id }", "data-target" => "#note-#{ note.id }", "data-toggle" => "modal"
+        %td{width: '20%'}
+          = note.created_at.to_s(:date_time)
+          = render partial: "vessels/modals/note", locals: { note: note }
+
+= render partial: "vessels/actions/add_note", locals: { vessel: vessel }
+= render partial: "vessels/modals/add_note", locals: { vessel: vessel }
