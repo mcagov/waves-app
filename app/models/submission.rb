@@ -85,6 +85,10 @@ class Submission < ApplicationRecord
     "00"
   end
 
+  def editable?
+    !completed?
+  end
+
   protected
 
   def user_input
