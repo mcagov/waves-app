@@ -7,11 +7,9 @@
 
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
-
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown"}
             Logged in as #{current_user}
             %span.fa.fa-angle-down
-
           %ul.dropdown-menu.pull-right
             %li
               = link_to "Gov UK", ENV['GOVUK_HOST'], target: 'blank'
@@ -19,4 +17,11 @@
               = link_to sign_out_path, method: :delete, id: "logout" do
                 %i.fa.fa-sign-out.pull-right
                 Log Out
+        %li{style: 'width: 250px'}
+          .top_search
+            = form_tag "/search", method: :get do
+              .input-group
+                = text_field_tag :q, params[:q], id: "search", placeholder: "Search for...", class: "form-control"
+                %span.input-group-btn
+                  = button_tag "Go!", type: "submit", class: "btn btn-default"
   .clearfix

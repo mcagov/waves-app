@@ -85,6 +85,10 @@ class Submission < ApplicationRecord
     "00"
   end
 
+  def job_type
+    ""
+  end
+
   def editable?
     !completed?
   end

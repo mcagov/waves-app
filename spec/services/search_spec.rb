@@ -1,6 +1,20 @@
 require "rails_helper"
 
 describe Search, type: :model do
+  context ".by_vessel" do
+    let(:vessel) { create(:register_vessel) }
+    subject { Search.by_vessel(vessel.reg_no) }
+
+    it { expect(subject).to include(vessel) }
+  end
+
+  context ".by_submission" do
+    let(:submission) { create(:submission) }
+    subject { Search.by_submission(submission.ref_no) }
+
+    it { expect(subject).to include(submission) }
+  end
+
   context ".similar_vessels" do
     let!(:same_name) { create(:register_vessel, name: "Celebrator Doppelbock") }
     let!(:same_mmsi) { create(:register_vessel, mmsi_number: "233878594") }

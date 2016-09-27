@@ -1,5 +1,13 @@
 class Search
   class << self
+    def by_vessel(q)
+      Register::Vessel.where(reg_no: q)
+    end
+
+    def by_submission(q)
+      Submission.where(ref_no: q)
+    end
+
     def similar_vessels(vessel)
       Register::Vessel
         .where(name: vessel.name)
