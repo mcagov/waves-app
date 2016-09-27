@@ -81,5 +81,7 @@ Rails.application.routes.draw do
         action: action.tr("-", "_")
   end
 
+  get "/search", controller: :search, action: :show
+
   root to: "dashboards#show"
 end
