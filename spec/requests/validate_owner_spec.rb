@@ -15,6 +15,8 @@ describe "Validate an owner" do
       it "has the status :created" do
         expect(response).to have_http_status(:created)
       end
+
+      it "returns the client_session_id"
     end
 
     context "when the client_session is not created" do
@@ -27,6 +29,12 @@ describe "Validate an owner" do
       it "does not create a submission" do
         expect(ClientSession.count).to eq(0)
       end
+    end
+  end
+
+  context "#update" do
+    context "with valid params" do
+      it "returns the Submission::RenewRegistration"
     end
   end
 end
