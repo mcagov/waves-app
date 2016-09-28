@@ -10,6 +10,7 @@ describe ClientSession do
 
     context "with a valid vessel reg_no" do
       let!(:vessel) { create(:register_vessel) }
+      let!(:owner) { create(:register_owner, vessel: vessel) }
       let(:vessel_reg_no) { vessel.reg_no }
       let(:external_session_key) { "123" }
 
@@ -27,6 +28,14 @@ describe ClientSession do
 
       it "belongs to the vessel" do
         expect(subject.vessel).to eq(vessel)
+      end
+
+      it "delivers a notify message" do
+        expect(Delayed::Job.count).to eq(1)
+      end
+
+      it "returns the recipient_phone_numbers a notify message" do
+        expect(subject.recipient_phone_numbers).to eq([owner.phone_number])
       end
 
       context "but no external_session_key" do

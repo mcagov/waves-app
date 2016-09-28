@@ -15,9 +15,15 @@ class ClientSession < ApplicationRecord
     state :used
   end
 
+  def recipient_phone_numbers
+    vessel.owners.map(&:phone_number)
+  end
+
   private
 
   def init_client_session
     self.otp = rand(10000..999999)
+
+    SmsProvider.send_otp(vessel.owners, otp)
   end
 end
