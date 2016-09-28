@@ -2,10 +2,10 @@ module Api
   module V1
     class ClientSessionsController < ApiController
       def create
-        @client_session = ClientSession.create(validate_owner_params)
+        @client_session = ClientSession.new(validate_owner_params)
 
-        if @client_session
-          render json: @client_session, status: :created
+        if @client_session.save
+          render status: :created
         else
           render status: 404
         end

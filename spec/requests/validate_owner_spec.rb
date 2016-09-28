@@ -3,7 +3,8 @@ require "rails_helper"
 describe "Validate an owner" do
   context "client_session#create" do
     before do
-      allow(ClientSession).to receive(:create).and_return(bln)
+      allow_any_instance_of(ClientSession)
+        .to receive(:save).and_return(bln)
       post api_v1_client_sessions_path, params: create_params
     end
 
