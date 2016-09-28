@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe "Validate an owner" do
-  context "#create" do
+  context "client_session#create" do
     let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
 
     before do
       allow(ClientSession).to receive(:create).and_return(bln)
-      post api_v1_validate_owners_path, params: create_params
+      post api_v1_client_sessions_path, params: create_params
     end
 
     context "when the client_session is created" do
@@ -32,7 +32,7 @@ describe "Validate an owner" do
     end
   end
 
-  context "#update" do
+  context "client_session#update" do
     context "with valid params" do
       it "returns the Submission::RenewRegistration"
     end

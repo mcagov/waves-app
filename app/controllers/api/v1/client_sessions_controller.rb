@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ValidateOwnersController < ApiController
+    class ClientSessionsController < ApiController
       def create
         @client_session = ClientSession.create(validate_owner_params)
 
