@@ -18,6 +18,6 @@ class ClientSession < ApplicationRecord
   private
 
   def init_client_session
-    self.otp = 111111
+    self.otp = rand(10000..999999)
   end
 end
