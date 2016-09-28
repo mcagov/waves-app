@@ -34,8 +34,9 @@ describe ClientSession do
         expect(Delayed::Job.count).to eq(1)
       end
 
-      it "returns the recipient_phone_numbers a notify message" do
-        expect(subject.recipient_phone_numbers).to eq([owner.phone_number])
+      it "returns the obfuscated_recipient_phone_numbers" do
+        expect(subject.obfuscated_recipient_phone_numbers)
+          .to eq(["######{owner.phone_number.last(3)}"])
       end
 
       context "but no external_session_key" do
