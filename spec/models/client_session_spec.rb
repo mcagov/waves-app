@@ -31,6 +31,11 @@ describe ClientSession do
         expect(subject.obfuscated_recipient_phone_numbers)
           .to eq(["######{owner.phone_number.last(3)}"])
       end
+
+      it "sends the sms" do
+        expect(SmsProvider).to receive(:send_otp).once
+        subject
+      end
     end
 
     context "with invalid attributes" do

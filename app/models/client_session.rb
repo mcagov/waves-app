@@ -13,6 +13,10 @@ class ClientSession < ApplicationRecord
     self.otp = rand(10000..999999)
   end
 
+  after_create do
+    SmsProvider.send_otp(vessel.owners, otp)
+  end
+
   def obfuscated_recipient_phone_numbers
     vessel.owners.map do |owner|
       "######{owner.phone_number.last(3)}"
