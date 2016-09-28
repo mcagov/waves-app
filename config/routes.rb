@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :new_registrations, only: [:create]
       resources :payments, only: [:create]
       resources :vessel_types, only: [:index]
+      resources :validate_owners, only: [:create]
     end
   end
 
