@@ -2,8 +2,6 @@ require "rails_helper"
 
 describe "Validate an owner" do
   context "client_session#create" do
-    let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
-
     before do
       allow(ClientSession).to receive(:create).and_return(bln)
       post api_v1_client_sessions_path, params: create_params
@@ -15,8 +13,6 @@ describe "Validate an owner" do
       it "has the status :created" do
         expect(response).to have_http_status(:created)
       end
-
-      it "returns the client_session_id"
     end
 
     context "when the client_session is not created" do
@@ -41,6 +37,6 @@ end
 
 # rubocop:disable all
 def create_params
-  {"data"=>{"attributes"=>{"vessel_reg_no"=>"foo","client_session_id"=>"bar"}}}
+  {"data"=>{"attributes"=>{"vessel_reg_no"=>"foo","external_session_key"=>"bar"}}}
 end
 # rubocop:enable all
