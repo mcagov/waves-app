@@ -1,7 +1,7 @@
 require "rails_helper"
 
-describe "Validate an owner" do
-  context "client_session#create" do
+describe "Client session" do
+  context "#create" do
     before do
       allow_any_instance_of(ClientSession)
         .to receive(:save).and_return(bln)
