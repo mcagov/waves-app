@@ -15,10 +15,6 @@ describe ClientSession do
       let(:vessel_reg_no) { vessel.reg_no }
       let(:external_session_key) { "123" }
 
-      it "is persisted" do
-        expect(subject).to be_persisted
-      end
-
       it "sets the OTP" do
         expect(subject.otp).to be_present
       end
