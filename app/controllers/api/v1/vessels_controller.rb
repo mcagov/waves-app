@@ -2,16 +2,28 @@ module Api
   module V1
     class VesselsController < ApiController
       def show
-        vessel_reg_no = params[:id].split(";")
-
-        # validate and delete the client_session
-        @vessel = Register::Vessel.where(reg_no: vessel_reg_no).first
+        @vessel = load_vessel
 
         if @vessel
           render json: @vessel
         else
           render status: 404
         end
+      end
+
+      private
+
+      def vessel_params
+        params[:id].split(";")
+      end
+
+      def load_vessel
+        client_session = ClientSession.find_by(
+          vessel_reg_no: vessel_params[0],
+          access_code: vessel_params[1],
+          external_session_key: vessel_params[2])
+
+        client_session.vessel if client_session
       end
     end
   end
