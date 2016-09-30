@@ -1,7 +1,7 @@
-class CountrySerializer < ActiveModel::Serializer
-  attributes :id, :recipients
+class ClientSessionSerializer < ActiveModel::Serializer
+  attributes :id, :delivered_to
 
-  def recipients
-    obfuscated_recipient_phone_numbers
+  def delivered_to
+    object.obfuscated_recipient_phone_numbers
   end
 end
