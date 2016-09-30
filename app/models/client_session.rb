@@ -19,7 +19,7 @@ class ClientSession < ApplicationRecord
 
   def obfuscated_recipient_phone_numbers
     vessel.owners.map do |owner|
-      "######{owner.phone_number.last(3)}"
+      "********#{owner.phone_number.last(3)}"
     end
   end
 end
