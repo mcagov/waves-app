@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930113934) do
+ActiveRecord::Schema.define(version: 20160930151116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,10 @@ ActiveRecord::Schema.define(version: 20160930113934) do
   create_table "client_sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "external_session_key"
     t.string   "vessel_reg_no"
-    t.uuid     "submission_id"
     t.integer  "access_code"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.index ["external_session_key"], name: "index_client_sessions_on_external_session_key", using: :btree
-    t.index ["submission_id"], name: "index_client_sessions_on_submission_id", using: :btree
     t.index ["vessel_reg_no"], name: "index_client_sessions_on_vessel_reg_no", using: :btree
   end
 
