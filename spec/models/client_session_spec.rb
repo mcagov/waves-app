@@ -25,7 +25,7 @@ describe ClientSession do
 
       it "builds the obfuscated_recipient_phone_numbers" do
         expect(subject.obfuscated_recipient_phone_numbers)
-          .to eq(["######{owner.phone_number.last(3)}"])
+          .to eq(["********#{owner.phone_number.last(3)}"])
       end
 
       it "sends the sms" do
