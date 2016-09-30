@@ -1,8 +1,13 @@
 require "rails_helper"
 
 describe "Client session" do
+  let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
+
   context "#create" do
     before do
+      allow_any_instance_of(ClientSession)
+        .to receive(:obfuscated_recipient_phone_numbers).and_return([1, 2])
+
       allow_any_instance_of(ClientSession)
         .to receive(:save).and_return(bln)
       post api_v1_client_sessions_path, params: create_params
@@ -13,6 +18,10 @@ describe "Client session" do
 
       it "has the status :created" do
         expect(response).to have_http_status(:created)
+      end
+
+      it "has the delivered_to" do
+        expect(parsed_attrs["delivered-to"]).to eq([1, 2])
       end
     end
 

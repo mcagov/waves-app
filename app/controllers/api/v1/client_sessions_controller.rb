@@ -5,7 +5,7 @@ module Api
         @client_session = ClientSession.new(validate_owner_params)
 
         if @client_session.save
-          render status: :created
+          render json: @client_session, status: :created
         else
           render status: 404
         end

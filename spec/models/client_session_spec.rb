@@ -23,7 +23,7 @@ describe ClientSession do
         expect(subject.vessel).to eq(vessel)
       end
 
-      it "returns the obfuscated_recipient_phone_numbers" do
+      it "builds the obfuscated_recipient_phone_numbers" do
         expect(subject.obfuscated_recipient_phone_numbers)
           .to eq(["######{owner.phone_number.last(3)}"])
       end
