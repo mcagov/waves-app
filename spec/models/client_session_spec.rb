@@ -15,8 +15,8 @@ describe ClientSession do
       let(:vessel_reg_no) { vessel.reg_no }
       let(:external_session_key) { "123" }
 
-      it "sets the OTP" do
-        expect(subject.otp).to be_present
+      it "sets the access_code" do
+        expect(subject.access_code).to be_present
       end
 
       it "belongs to the vessel" do
@@ -29,7 +29,7 @@ describe ClientSession do
       end
 
       it "sends the sms" do
-        expect(SmsProvider).to receive(:send_otp).once
+        expect(SmsProvider).to receive(:send_access_code).once
         subject
       end
     end

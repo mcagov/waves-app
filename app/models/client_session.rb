@@ -7,14 +7,14 @@ class ClientSession < ApplicationRecord
 
   validates :vessel_reg_no, presence: true
   validates :external_session_key, presence: true
-  validates :otp, presence: true, length: { is: 6 }
+  validates :access_code, presence: true, length: { is: 6 }
 
   before_validation(on: :create) do
-    self.otp = rand(10000..999999)
+    self.access_code = rand(10000..999999)
   end
 
   after_create do
-    SmsProvider.send_otp(vessel.owners, otp)
+    SmsProvider.send_access_code(vessel.owners, access_code)
   end
 
   def obfuscated_recipient_phone_numbers
