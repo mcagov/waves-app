@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :payments, only: [:create]
       resources :vessel_types, only: [:index]
       resources :client_sessions, only: [:create]
+      resources :vessels, only: [:show]
     end
   end
 

@@ -1,9 +1,9 @@
 class SmsProvider
   class << self
-    def send_otp(owners, otp)
+    def send_access_code(owners, access_code)
       owners.each do |owner|
         # should be replaced with SMS service
-        FakeSmsMailer.delay.send_otp(owner.email, otp)
+        FakeSmsMailer.delay.send_access_code(owner.email, access_code)
       end
     end
   end
