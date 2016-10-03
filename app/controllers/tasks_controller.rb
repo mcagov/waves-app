@@ -32,6 +32,7 @@ class TasksController < InternalPagesController
   end
 
   def next_task
+    # rubocop: disable Style/GuardClause
     if (submission = submission_scope.assigned_to(current_user).first)
       return redirect_to submission_path(submission)
     else
