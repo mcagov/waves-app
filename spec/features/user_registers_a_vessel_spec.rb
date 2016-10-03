@@ -14,6 +14,6 @@ feature "User approves a new registration", type: :feature, js: true do
 
     click_on("Print Certificate of Registry")
     expect(response_headers["Content-Type"])
-      .to eq("application/pdf; charset=utf-8")
+      .to eq("application/pdf")
   end
 end
