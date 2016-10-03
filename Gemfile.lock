@@ -211,9 +211,13 @@ GEM
       parallel
     parser (2.3.1.4)
       ast (~> 2.2)
+    pdf-core (0.6.1)
     pg (0.19.0)
     pkg-config (1.1.7)
     powerpack (0.1.1)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
     protokoll (2.0.1)
       rails (>= 4.0)
     pry (0.10.4)
@@ -335,6 +339,7 @@ GEM
       i18n
       rails (>= 3.1)
     transitions (1.2.0)
+    ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
@@ -400,6 +405,7 @@ DEPENDENCIES
   paper_trail
   parallel_tests
   pg
+  prawn
   protokoll
   pry-byebug
   pry-rails
