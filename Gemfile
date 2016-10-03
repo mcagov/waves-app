@@ -3,77 +3,74 @@ source "https://rubygems.org"
 ruby "2.3.1"
 
 gem "rails", "~> 5.0.0.1"
-gem "coffee-rails"
-gem "bundler-audit", ">= 0.5.0", require: false
+
+
+gem "auto_increment"
+gem "active_model_serializers", "~> 0.10.0"
+gem "bootstrap-datepicker-rails"
+gem "bootstrap-editable-rails"
 gem "bootstrap-sass", "~> 3.3.6"
+gem "coffee-rails"
 gem "clearance"
 gem "countries"
 gem "country_select"
+gem "daemons"
+gem "delayed_job_active_record"
 gem "dotenv-rails"
 gem "flutie"
 gem "font-awesome-rails"
 gem "jquery-rails"
+gem "haml"
 gem "pg"
+gem "nokogiri", ">= 1.6.8"
+gem "paper_trail"
+gem "protokoll"
+gem "rack-cors"
 gem "rake"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "sprockets", "3.6.3"
 gem "sprockets-es6"
+gem "tinymce-rails"
 gem "title"
+gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "uglifier"
 gem "validates_email_format_of"
-gem "nokogiri", ">= 1.6.8"
-gem "haml"
-gem "active_model_serializers", "~> 0.10.0"
-gem "rack-cors"
-gem "auto_increment"
-gem "transitions", require: ["transitions", "active_model/transitions"]
-gem "bootstrap-datepicker-rails"
-gem "bootstrap-editable-rails"
-gem "delayed_job_active_record"
-gem "daemons"
-gem "whenever", require: false
-gem "paper_trail"
 gem "waves-utilities",
     git: "https://github.com/tobyprivett/waves-utilities.git"
-gem "protokoll"
-gem "tinymce-rails"
+gem "whenever", require: false
 gem "will_paginate-bootstrap"
 
 group :development do
-  gem "rubocop"
-  gem "web-console"
-  gem "i18n-debug", require: false
   gem "guard-rspec", require: false
+  gem "web-console"
 end
 
 group :development, :test do
   gem "awesome_print"
   gem "bullet"
+  gem "bundler-audit", ">= 0.5.0", require: false
   gem "factory_girl"
   gem "factory_girl_rails"
+  gem "faker"
+  gem "parallel_tests"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
-  gem "faker"
-  gem "parallel_tests"
-end
-
-group :development, :staging do
-  gem "rack-mini-profiler", require: false
+  gem "rubocop"
 end
 
 group :test do
+  gem "brakeman"
   gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
+  gem "rails-controller-testing"
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
-  gem "rails-controller-testing"
-  gem "brakeman"
 end
 
 group :staging, :production do
