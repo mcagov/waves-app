@@ -10,7 +10,7 @@ class ClientSession < ApplicationRecord
   validates :access_code, presence: true, length: { is: 6 }
 
   before_validation(on: :create) do
-    self.access_code = rand(10000..999999)
+    self.access_code = rand(100000..999999)
   end
 
   after_create do
