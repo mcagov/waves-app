@@ -5,7 +5,7 @@ describe "User views a registered vessel", type: :feature, js: true do
     @submission = create_completed_submission!
     login_to_part_3
     visit vessels_path
-    click_on("Celebrator")
+    click_on("CELEBRATOR")
   end
 
   scenario "viewing vessel details" do
