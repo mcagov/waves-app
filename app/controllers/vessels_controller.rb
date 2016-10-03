@@ -5,9 +5,10 @@ class VesselsController < InternalPagesController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = RegistrationCertificate.new(@vessel)
+        pdf = RegistrationCertificate.new(@vessel, params[:bg] == "off")
         send_data pdf.render, filename: pdf.filename,
-                              type: "application/pdf", disposition: "inline"
+                              type: "application/pdf",
+                              disposition: "inline"
       end
     end
   end
