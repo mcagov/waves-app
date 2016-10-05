@@ -5,7 +5,8 @@ class RegistrationCertificate
   end
 
   def render
-    @pdf = Prawn::Document.new(background: background_image, page_size: "A6")
+    @pdf = Prawn::Document.new(margin: 0, page_size: "A6")
+    @pdf.image background_image, scale: 0.48
     @pdf.font("Helvetica", size: 10)
     details
     owners
