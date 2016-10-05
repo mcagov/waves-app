@@ -25,11 +25,6 @@ class RegistrationCertificate
 
   private
 
-  def set_default_font
-    @pdf.fill_color("000000")
-    @pdf.font("Helvetica", size: 10)
-  end
-
   def page_1_template
     "#{Rails.root}/public/certificates/part_3_front.png" if @preview
   end
@@ -39,34 +34,53 @@ class RegistrationCertificate
   end
 
   def details
-    set_default_font
-    @pdf.draw_text @vessel.registered_until, at: [17, 260]
-    @pdf.draw_text @vessel.reg_no, at: [144, 260]
-    @pdf.draw_text @vessel.vessel_type.upcase, at: [84, 210]
-    @pdf.draw_text @vessel.length_in_meters, at: [84, 194]
-    @pdf.draw_text @vessel.number_of_hulls, at: [84, 178]
-    @pdf.draw_text @vessel, at: [84, 164]
-    @pdf.draw_text @vessel.hin, at: [84, 149]
+    draw_value(
+      @vessel.registered_until.to_s(:dasherize),
+      at: [57, 300])
+    draw_value @vessel.reg_no, at: [182, 300]
+    draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
+    draw_label_value "Overall Length", @vessel.length_in_meters, at: [34, 250]
+    draw_label_value "Number of Hulls", @vessel.number_of_hulls, at: [34, 235]
+    draw_label_value "Name of Ship", @vessel, at: [34, 220]
+    draw_label_value "Hull ID Number", @vessel.hin, at: [34, 205]
   end
 
   def owners
-    set_default_font
     offset = 0
     @vessel.owners.each do |owner|
-      @pdf.draw_text owner, at: [0, 118 - offset]
+      draw_value owner, at: [40, 157 - offset]
       offset += 12
     end
   end
 
   def registration_date
-    set_default_font
-    @pdf.draw_text @vessel.registered_at, at: [34, -14]
+    default_value_font
+    @pdf.draw_text @vessel.registered_at, at: [60, 27]
+  end
+
+  def draw_label_value(label, text, opts)
+    default_label_font
+    @pdf.text_box("#{label} :", opts.merge(align: :right, width: 80))
+    default_value_font
+    @pdf.draw_text(text, at: [opts[:at][0] + 85, opts[:at][1] - 7])
+  end
+
+  def draw_value(text, opts = {})
+    default_value_font
+    @pdf.draw_text(text, opts)
   end
 
   def watermark
     @pdf.transparent(0.1) do
-      @pdf.draw_text "COPY OF ORIGINAL",
-      at: [60, 10], rotate: 60, size: 44
+      @pdf.draw_text "COPY OF ORIGINAL", at: [60, 10], rotate: 60, size: 44
     end
+  end
+
+  def default_value_font
+    @pdf.font("Helvetica-BoldOblique", size: 10)
+  end
+
+  def default_label_font
+    @pdf.font("Helvetica-Oblique", size: 10)
   end
 end
