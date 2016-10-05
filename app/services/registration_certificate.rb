@@ -25,11 +25,11 @@ class RegistrationCertificate
   private
 
   def page_1_template
-    "#{Rails.root}/public/certificates/part_3_front.png" if @preview
+    "#{Rails.root}/public/certificates/part_3_front.png"
   end
 
   def page_2_template
-    "#{Rails.root}/public/certificates/part_3_rear.png" if @preview
+    "#{Rails.root}/public/certificates/part_3_rear.png"
   end
 
   def details
