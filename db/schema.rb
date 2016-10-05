@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930151116) do
+ActiveRecord::Schema.define(version: 20161005154240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160930151116) do
     t.string   "notifiable_type"
     t.string   "recipient_name"
     t.string   "recipient_email"
+    t.string   "attachments"
     t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
     t.index ["notifiable_type"], name: "index_notifications_on_notifiable_type", using: :btree
     t.index ["type"], name: "index_notifications_on_type", using: :btree
