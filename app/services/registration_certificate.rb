@@ -1,7 +1,6 @@
 class RegistrationCertificate
-  def initialize(vessel, preview = true)
+  def initialize(vessel)
     @vessel = vessel
-    @preview = preview
   end
 
   def render

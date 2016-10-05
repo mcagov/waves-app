@@ -3,7 +3,7 @@
     %h1{style: 'margin-top: 0px !important;'}
       = @vessel.name
       %span (#{ @vessel.vessel_type })
-    = link_to "Preview Certificate (attachment)", vessel_path(@vessel, format: :pdf, bg: "off")
+    = link_to "Preview Certificate (PDF)", vessel_path(@vessel, format: :pdf, bg: "off")
     |
     = link_to "Preview Certificate (print)", vessel_path(@vessel, format: :pdf)
   .col-sm-3
