@@ -6,11 +6,13 @@ class RegistrationCertificate
 
   def render
     @pdf = Prawn::Document.new(margin: 0, page_size: "A6")
-    @pdf.image background_image, scale: 0.48
+    @pdf.image page_1_template, scale: 0.48
     @pdf.font("Helvetica", size: 10)
     details
     owners
     registration_date
+    @pdf.start_new_page
+    @pdf.image page_2_template, scale: 0.48
     @pdf.render
   end
 
@@ -22,8 +24,12 @@ class RegistrationCertificate
 
   private
 
-  def background_image
-    "#{Rails.root}/public/certificates/part_3.png" if @preview
+  def page_1_template
+    "#{Rails.root}/public/certificates/part_3_front.png" if @preview
+  end
+
+  def page_2_template
+    "#{Rails.root}/public/certificates/part_3_rear.png" if @preview
   end
 
   def details
