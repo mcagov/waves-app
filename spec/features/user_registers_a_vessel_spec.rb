@@ -11,9 +11,7 @@ feature "User approves a new registration", type: :feature, js: true do
       click_button("Register Vessel")
     end
     expect(page).to have_text("The vessel owner has been notified via email")
-
-    click_on("Print Certificate of Registry")
-    expect(response_headers["Content-Type"])
-      .to eq("application/pdf")
   end
+
+  scenario "attaching certificate to the email"
 end
