@@ -43,6 +43,8 @@ class TasksController < InternalPagesController
   private
 
   def submission_scope
-    Submission.order("target_date asc").where.not(state: :completed)
+    Submission
+      .order("target_date asc")
+      .where.not(state: [:printing, :completed])
   end
 end

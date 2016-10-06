@@ -90,7 +90,7 @@ class Submission < ApplicationRecord
   end
 
   def editable?
-    !completed?
+    !completed? && !printing?
   end
 
   protected
