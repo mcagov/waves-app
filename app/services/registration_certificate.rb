@@ -33,9 +33,7 @@ class RegistrationCertificate
   end
 
   def details
-    draw_value(
-      @vessel.registered_until.to_s(:dasherize),
-      at: [57, 300])
+    draw_value(@vessel.registered_until, at: [57, 300])
     draw_value @vessel.reg_no, at: [182, 300]
     draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
     draw_label_value "Overall Length", @vessel.length_in_meters, at: [34, 250]
