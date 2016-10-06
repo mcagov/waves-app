@@ -7,9 +7,7 @@ class RegistrationCertificate
     @pdf = Prawn::Document.new(margin: 0, page_size: "A6")
     @pdf.image page_1_template, scale: 0.48
     watermark
-    details
-    owners
-    registration_date
+    registration_details
     @pdf.start_new_page
     @pdf.image page_2_template, scale: 0.48
     watermark
@@ -32,7 +30,7 @@ class RegistrationCertificate
     "#{Rails.root}/public/certificates/part_3_rear.png"
   end
 
-  def details
+  def registration_details
     draw_value(@vessel.registered_until, at: [57, 300])
     draw_value @vessel.reg_no, at: [182, 300]
     draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
@@ -40,6 +38,9 @@ class RegistrationCertificate
     draw_label_value "Number of Hulls", @vessel.number_of_hulls, at: [34, 235]
     draw_label_value "Name of Ship", @vessel, at: [34, 220]
     draw_label_value "Hull ID Number", @vessel.hin, at: [34, 205]
+
+    owners
+    @pdf.draw_text @vessel.registered_at, at: [60, 27]
   end
 
   def owners
@@ -48,11 +49,6 @@ class RegistrationCertificate
       draw_value owner, at: [40, 157 - offset]
       offset += 12
     end
-  end
-
-  def registration_date
-    default_value_font
-    @pdf.draw_text @vessel.registered_at, at: [60, 27]
   end
 
   def draw_label_value(label, text, opts)
