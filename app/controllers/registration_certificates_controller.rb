@@ -1,5 +1,5 @@
 class RegistrationCertificatesController < InternalPagesController
-  layout :false
+  layout "registration_certificate"
 
   def show
     @vessel = Register::Vessel.find(params[:id])

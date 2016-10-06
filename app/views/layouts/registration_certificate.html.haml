@@ -1,0 +1,9 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title= title || "MCA"
+    = stylesheet_link_tag "registration_certificate", media: "all"
+  %body
+    = yield

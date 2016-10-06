@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: asset-url("part_3_front.png") no-repeat 0 0;
+  font-family: "Helvetica-BoldOblique";
+  size: 10pt;
+}
+
+#registered-until {
+  position: absolute;
+  top: 230px;
+  left: 136px;
+}
+
+#reg_no {
+  position: absolute;
+  top: 230px;
+  left: 394px;
+}
+
+#vessel-details {
+  position: absolute;
+  top: 304px;
+  left: 50px;
+
+  .detail {
+    .label {
+      margin-top: 15px;
+      width: 150px;
+      text-align: right;
+      font-family: "Helvetica-Oblique";
+      float: left;
+    }
+    .attr_value {
+      margin-top: 15px;
+      float: left;
+      width: 200px;
+      margin-left: 10px;
+    }
+  }
+}
+
+#owners {
+  position: absolute;
+  top: 510px;
+  left: 100px;
+  .owner-name {
+    margin-top: 15px;
+  }
+}
+
+#registration-date {
+  position: absolute;
+  top: 800px;
+  left: 140px;
+}
+@page {
+  size: A6 portrait;
+  margin: 0;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+}
