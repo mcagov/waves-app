@@ -74,15 +74,6 @@ describe SubmissionsController, type: :controller do
       end
     end
 
-    context "with an email notification" do
-      before do
-        params = { id: submission.id, email_certificate_of_registry: "on" }
-        post :approve, params: params
-      end
-
-      it "attaches the certificate to the email notification"
-    end
-
     context "unsuccessfully" do
       before do
         allow_any_instance_of(Submission::NewRegistration)

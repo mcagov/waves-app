@@ -37,12 +37,6 @@ describe "Client session" do
       end
     end
   end
-
-  context "client_session#update" do
-    context "with valid params" do
-      it "returns the Submission::RenewRegistration"
-    end
-  end
 end
 
 # rubocop:disable all
