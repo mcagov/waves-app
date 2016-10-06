@@ -13,7 +13,7 @@ feature "User approves a new registration", type: :feature, js: true do
     expect(page).to have_text("The vessel owner has been notified via email")
 
     click_on("Print Certificate of Registry")
-    expect(page).to have_css("#registered-until")
+    expect(page).to have_text("Printing Certificate.....")
   end
 
   scenario "attaching certificate to the email" do
