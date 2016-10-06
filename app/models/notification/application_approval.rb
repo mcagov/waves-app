@@ -8,12 +8,24 @@ class Notification::ApplicationApproval < Notification
   end
 
   def additional_params
-    vessel_reg_no
+    [vessel_reg_no, registration_certificate]
   end
 
   private
 
+  def vessel
+    @vessel ||= notifiable.registration.vessel
+  end
+
   def vessel_reg_no
-    notifiable.registration.vessel.reg_no
+    vessel.reg_no
+  end
+
+  def registration_certificate
+    RegistrationCertificate.new(vessel).render if attach_certificate?
+  end
+
+  def attach_certificate?
+    attachments == "registration_certificate"
   end
 end
