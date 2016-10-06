@@ -13,5 +13,13 @@ feature "User approves a new registration", type: :feature, js: true do
     expect(page).to have_text("The vessel owner has been notified via email")
   end
 
-  scenario "attaching certificate to the email"
+  scenario "attaching certificate to the email" do
+    within(".modal-content") do
+      check "Send a copy of the Certificate"
+      click_button("Register Vessel")
+    end
+    expect(page).to have_text("The vessel owner has been notified via email")
+    expect(Notification::ApplicationApproval.last.attachments)
+      .to match(/registration_certificate/)
+  end
 end

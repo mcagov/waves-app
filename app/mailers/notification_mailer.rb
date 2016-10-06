@@ -25,9 +25,13 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
-  def application_approval(subject, email, name, reg_no)
+  def application_approval(subject, email, name, reg_no, pdf_attachment = nil)
     @reg_no = reg_no
     @name = name
+    if pdf_attachment
+      attachments["Certificate_of_Registration_copy.pdf"] = pdf_attachment
+      @certificate_attached = true
+    end
     mail(to: email, subject: subject)
   end
 

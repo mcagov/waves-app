@@ -60,7 +60,8 @@ class SubmissionsController < InternalPagesController
         recipient_name: owner.name,
         notifiable: @submission,
         subject: @submission.job_type,
-        actioned_by: current_user)
+        actioned_by: current_user,
+        attachments: params[:notification_attachments])
     end
   end
 end

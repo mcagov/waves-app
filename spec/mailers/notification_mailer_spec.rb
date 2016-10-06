@@ -15,10 +15,6 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
-  describe "approval" do
-    it "awaits text from the MCA"
-  end
-
   describe "outstanding_declaration" do
     let(:mail) do
       NotificationMailer.outstanding_declaration(
@@ -79,13 +75,17 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_approval" do
     let(:mail) do
       NotificationMailer.application_approval(
-        "subject", "test@example.com", "Alice", "Reg_no")
+        "subject", "test@example.com", "Alice", "Reg_no", "reg_cert")
     end
 
     let(:body) { mail.body.encoded }
 
     it "renders the reg no" do
       expect(body).to match(/your vessel is Reg_no/)
+    end
+
+    it "renders the certificate_attached message" do
+      expect(body).to match(/certificate attached, as requested/)
     end
   end
 
