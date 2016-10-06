@@ -64,6 +64,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :registration_certificates, only: [:show]
+
   resources :vessels, only: [:show, :index] do
     resource :correspondence,
              only: [:create],
