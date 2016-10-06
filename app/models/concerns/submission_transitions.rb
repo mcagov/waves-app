@@ -9,6 +9,7 @@ module SubmissionTransitions
       state :unassigned
       state :assigned
       state :referred
+      state :printing
       state :completed
       state :rejected
       state :referred
@@ -43,8 +44,12 @@ module SubmissionTransitions
       end
 
       event :approved do
-        transitions to: :completed, from: :assigned,
+        transitions to: :printing, from: :assigned,
                     on_transition: :process_application
+      end
+
+      event :printed do
+        transitions to: :completed, from: :printing
       end
 
       event :cancelled do
