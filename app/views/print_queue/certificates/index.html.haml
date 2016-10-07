@@ -1,13 +1,6 @@
 .row
-  .col-sm-9
-    %h1.heading_no_top_margin
-      Print Queue: Certificates of Registry
-
-  .col-sm-3
-    .pull-right
-      = link_to '#', class: 'btn btn-primary' do
-        %i.fa.fa-print{style: 'font-size: 1.2em; font-weight: bold;'}
-        Process Print Queue
+  %h1.heading_no_top_margin
+    Print Queue: Certificates of Registry
 
 .row
   .col-md-12
@@ -17,10 +10,22 @@
           %tr
             %th Vessel
             %th Offical Number
-            %th Certificate Reqistry
-            %th Cover Letter
-        %tbody
-          %td
-          %td
-          %td
-          %td
+            %th
+              = link_to '#', class: 'btn btn-primary' do
+                %i.fa.fa-print
+                Print Certificates of Registry
+            %th
+              = link_to '#', class: 'btn btn-primary' do
+                %i.fa.fa-print
+                Print Cover Letters
+
+        - @submissions.each do |submission|
+          %tbody
+            %td= submission.registered_vessel
+            %td= submission.registered_vessel.reg_no
+            %td.certificate
+              - if submission.registration_certificate_printed?
+                = css_tick(true)
+            %td.cover-letter
+              - if submission.cover_letter_printed?
+                = css_tick(true)

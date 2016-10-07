@@ -1,5 +1,5 @@
 class PrintQueue::CertificatesController < InternalPagesController
   def index
-    @print_jobs = [] # PrintJob.all
+    @submissions = Submission.printing
   end
 end
