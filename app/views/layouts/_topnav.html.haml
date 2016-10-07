@@ -4,7 +4,8 @@
       .nav.toggle
         %a#menu_toggle
           %i.fa.fa-bars
-
+      .nav.navbar-left.active-register
+        = link_to "Active: Part III", "/", class: "btn btn-info"
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown"}
@@ -12,12 +13,12 @@
             %span.fa.fa-angle-down
           %ul.dropdown-menu.pull-right
             %li
-              = link_to "Gov UK", ENV['GOVUK_HOST'], target: 'blank'
+              = link_to "Gov UK", ENV['GOVUK_HOST'], target: "blank"
             %li
               = link_to sign_out_path, method: :delete, id: "logout" do
                 %i.fa.fa-sign-out.pull-right
                 Log Out
-        %li{style: 'width: 250px'}
+        %li{style: "width: 250px"}
           .top_search
             = form_tag "/search", method: :get do
               .input-group

@@ -2,11 +2,10 @@
   .left_col.scroll-view
     .navbar.nav_title{style: "border: 0;"}
       %a.site_title{href: root_path}
-        Waves
+        = image_tag 'logo.png'
     .clearfix
     #sidebar-menu.main_menu_side.hidden-print.main_menu
       .menu_section
-        %h3 Navigation
         %ul.nav.side-menu
           %li
             %a.toggle-tasks
@@ -38,7 +37,3 @@
               %span.fa.fa-chevron-down
             %ul.nav.child_menu{:style => "display: none"}
               %li= link_to "Outstanding Work", "#"
-
-    .sidebar-footer.hidden-small
-      = link_to "/", "data-original-title" => "Part III", "data-placement" => "top", "data-toggle" => "tooltip", class: "sidebar-footer-part-selector" do
-        Active: Part III
