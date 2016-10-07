@@ -1,17 +1,16 @@
 class RegistrationCertificate
-  def initialize(registration)
+  def initialize(registration, mode = :complete)
     @registration = registration
     @vessel = @registration.vessel
+    @mode = mode
   end
 
   def render
-    @pdf = Prawn::Document.new(margin: 0, page_size: "A6")
-    @pdf.image page_1_template, scale: 0.48
-    watermark
-    registration_details
-    @pdf.start_new_page
-    @pdf.image page_2_template, scale: 0.48
-    watermark
+    @pdf = Prawn::Document.new(
+      margin: 0, page_size: "A6", skip_page_creation: true)
+    render_complete if @mode == :complete
+    render_printable if @mode == :printable
+    @pdf.print if @mode == :printable
     @pdf.render
   end
 
@@ -22,6 +21,21 @@ class RegistrationCertificate
   end
 
   private
+
+  def render_complete
+    @pdf.start_new_page
+    @pdf.image page_1_template, scale: 0.48
+    watermark
+    registration_details
+    @pdf.start_new_page
+    @pdf.image page_2_template, scale: 0.48
+    watermark
+  end
+
+  def render_printable
+    @pdf.start_new_page
+    registration_details
+  end
 
   def page_1_template
     "#{Rails.root}/public/certificates/part_3_front.png"

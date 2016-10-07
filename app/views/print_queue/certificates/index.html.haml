@@ -11,7 +11,7 @@
             %th Vessel
             %th Offical Number
             %th
-              = link_to '#', class: 'btn btn-primary' do
+              = link_to print_queue_certificates_path(format: :pdf), class: "btn btn-primary" do
                 %i.fa.fa-print
                 Print Certificates of Registry
             %th

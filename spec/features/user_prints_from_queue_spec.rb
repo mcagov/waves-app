@@ -10,18 +10,16 @@ describe "User prints from queue", type: :feature, js: true do
   scenario "processing the certificates" do
     expect(page).to have_css("h1", "Print Queue: Certificates of Registry")
 
-    within(".certificate") { expect(page).to have_css(".fa-times.red") }
-    within(".cover-letter") { expect(page).to have_css(".fa-times.red") }
-
-    click_button("Process Print Queue")
+    click_on("Print Certificates of Registry")
     expect(page).to have_text("%PDF")
 
-    within(".certificate") { expect(page).to have_css(".fa-cross.green") }
-    within(".cover-letter") { expect(page).to have_css(".fa-times.red") }
+    visit print_queue_certificates_path
+    within(".certificate") { expect(page).to have_text("Printed: ") }
 
     click_on("Process Cover Letters")
     expect(page).to have_text("%PDF")
 
-    expect(page).to have_css(".disabled", "Process Print Queue")
+    visit print_queue_certificates_path
+    expect(page).to have_text("No items")
   end
 end
