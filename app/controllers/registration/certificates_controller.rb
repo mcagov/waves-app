@@ -1,12 +1,12 @@
-class Pdf::RegistrationCertificatesController < InternalPagesController
+class Registration::CertificatesController < InternalPagesController
   layout :false
 
   def show
-    @vessel = Register::Vessel.find(params[:id])
+    @registration = Registration.find(params[:id])
 
     respond_to do |format|
       format.pdf do
-        pdf = PrintableRegistrationCertificate.new(@vessel)
+        pdf = PrintableRegistrationCertificate.new(@registration)
         send_data pdf.render, filename: pdf.filename,
                               type: "application/pdf",
                               disposition: "inline"

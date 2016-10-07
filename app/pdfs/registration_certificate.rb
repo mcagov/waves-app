@@ -1,6 +1,7 @@
 class RegistrationCertificate
-  def initialize(vessel)
-    @vessel = vessel
+  def initialize(registration)
+    @registration = registration
+    @vessel = @registration.vessel
   end
 
   def render
@@ -16,7 +17,7 @@ class RegistrationCertificate
 
   def filename
     title = @vessel.to_s.parameterize
-    reg_date = @vessel.registered_at.to_s(:db)
+    reg_date = @registration.registered_at.to_s(:db)
     "#{title}-registration-#{reg_date}.pdf"
   end
 
@@ -31,7 +32,7 @@ class RegistrationCertificate
   end
 
   def registration_details
-    draw_value(@vessel.registered_until, at: [57, 300])
+    draw_value(@registration.registered_until, at: [57, 300])
     draw_value @vessel.reg_no, at: [182, 300]
     draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
     draw_label_value "Overall Length", @vessel.length_in_meters, at: [34, 250]
@@ -40,7 +41,7 @@ class RegistrationCertificate
     draw_label_value "Hull ID Number", @vessel.hin, at: [34, 205]
 
     owners
-    @pdf.draw_text @vessel.registered_at, at: [60, 27]
+    @pdf.draw_text @registration.registered_at, at: [60, 27]
   end
 
   def owners

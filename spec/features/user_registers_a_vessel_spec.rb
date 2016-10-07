@@ -6,13 +6,23 @@ feature "User approves a new registration", type: :feature, js: true do
     click_link("Register Vessel")
   end
 
-  scenario "in its simplest form" do
+  scenario "printing the certificate" do
     within(".modal-content") do
       click_button("Register Vessel")
     end
     expect(page).to have_text("The vessel owner has been notified via email")
 
     click_on("Print Certificate of Registry")
+    expect(page).to have_text("%PDF")
+  end
+
+  xscenario "printing the cover letter" do
+    within(".modal-content") do
+      click_button("Register Vessel")
+    end
+    expect(page).to have_text("The vessel owner has been notified via email")
+
+    click_on("Print Cover letter")
     expect(page).to have_text("%PDF")
   end
 

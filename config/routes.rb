@@ -64,8 +64,9 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :pdf do
-    resources :registration_certificates, only: [:show]
+  namespace :registration do
+    resources :certificates, only: [:show]
+    resources :cover_letter, only: [:show]
   end
 
   resources :vessels, only: [:show, :index] do
