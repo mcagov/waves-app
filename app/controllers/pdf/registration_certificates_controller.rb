@@ -1,4 +1,4 @@
-class RegistrationCertificatesController < InternalPagesController
+class Pdf::RegistrationCertificatesController < InternalPagesController
   layout :false
 
   def show
