@@ -1,0 +1,26 @@
+.row
+  .col-sm-9
+    %h1.heading_no_top_margin
+      Print Queue: Certificates of Registry
+
+  .col-sm-3
+    .pull-right
+      = link_to '#', class: 'btn btn-primary' do
+        %i.fa.fa-print{style: 'font-size: 1.2em; font-weight: bold;'}
+        Process Print Queue
+
+.row
+  .col-md-12
+    .x_panel
+      %table#print_queue.table.table-striped.table-hover
+        %thead
+          %tr
+            %th Vessel
+            %th Offical Number
+            %th Certificate Reqistry
+            %th Cover Letter
+        %tbody
+          %td
+          %td
+          %td
+          %td

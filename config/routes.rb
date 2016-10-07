@@ -69,6 +69,10 @@ Rails.application.routes.draw do
     resources :cover_letters, only: [:show]
   end
 
+  namespace :print_queue do
+    resources :certificates, only: [:index]
+  end
+
   resources :vessels, only: [:show, :index] do
     resource :correspondence,
              only: [:create],
