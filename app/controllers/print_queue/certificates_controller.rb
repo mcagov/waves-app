@@ -5,10 +5,10 @@ class PrintQueue::CertificatesController < InternalPagesController
     respond_to do |format|
       format.html
       format.pdf do
-        registration = @submissions.first.registration
-        pdf = RegistrationCertificate.new(registration, :printable)
-        send_data pdf.render, filename: "Certificates-of-Registry",
-                              type: "application/pdf", disposition: "inline"
+        pdf = Certificate.new(@submissions.map(&:registration))
+        send_data pdf.render, filename: pdf.filename,
+                              type: "application/pdf",
+                              disposition: "inline"
       end
     end
   end

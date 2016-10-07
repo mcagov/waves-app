@@ -22,7 +22,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def registration_certificate
-    RegistrationCertificate.new(registration).render if attach_certificate?
+    Certificate.new(registration, :attachment).render if attach_certificate?
   end
 
   def attach_certificate?

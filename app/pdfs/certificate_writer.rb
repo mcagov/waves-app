@@ -1,28 +1,20 @@
-class RegistrationCertificate
-  def initialize(registration, mode = :complete)
+class CertificateWriter
+  def initialize(registration, pdf, mode = :printable)
     @registration = registration
     @vessel = @registration.vessel
+    @pdf = pdf
     @mode = mode
   end
 
-  def render
-    @pdf = Prawn::Document.new(
-      margin: 0, page_size: "A6", skip_page_creation: true)
-    render_complete if @mode == :complete
-    render_printable if @mode == :printable
-    @pdf.print if @mode == :printable
-    @pdf.render
-  end
-
-  def filename
-    title = @vessel.to_s.parameterize
-    reg_date = @registration.registered_at.to_s(:db)
-    "#{title}-registration-#{reg_date}.pdf"
+  def write
+    write_complete if @mode == :attachment
+    write_printable if @mode == :printable
+    @pdf
   end
 
   private
 
-  def render_complete
+  def write_complete
     @pdf.start_new_page
     @pdf.image page_1_template, scale: 0.48
     watermark
@@ -32,7 +24,7 @@ class RegistrationCertificate
     watermark
   end
 
-  def render_printable
+  def write_printable
     @pdf.start_new_page
     registration_details
   end

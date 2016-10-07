@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe RegistrationCertificate do
+describe Certificate do
   context "in general" do
     let!(:vessel) { create(:register_vessel, name: "Jolly Roger") }
 
@@ -18,6 +18,6 @@ describe RegistrationCertificate do
       expect(subject.render[0, 4]).to eq("%PDF")
     end
 
-    it "needs to render multiple certificates in one PDF"
+    it "tests the rendering of multiple certificates in one PDF"
   end
 end
