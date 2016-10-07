@@ -16,5 +16,7 @@ describe Submission::NewRegistration, type: :model do
     end
 
     it { new_registration.process_application }
+
+    it "creates the print jobs"
   end
 end
