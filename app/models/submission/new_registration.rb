@@ -5,10 +5,19 @@ class Submission::NewRegistration < Submission
 
   def process_application
     Builders::NewRegistrationBuilder.create(self)
+    update_attributes print_jobs: build_print_jobs
   end
 
   def similar_vessels
     Search.similar_vessels(vessel)
+  end
+
+  def registration_certificate_printed?
+    print_jobs["registration_certificate"]
+  end
+
+  def cover_letter_printed?
+    print_jobs["cover_letter"]
   end
 
   protected
@@ -24,5 +33,9 @@ class Submission::NewRegistration < Submission
 
   def ref_no_prefix
     "3N"
+  end
+
+  def build_print_jobs
+    { registration_certificate: false, cover_letter: false }
   end
 end
