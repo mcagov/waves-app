@@ -80,7 +80,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    incomplete my-tasks team-tasks print-queue
+    incomplete my-tasks team-tasks
     referred unclaimed rejected cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",

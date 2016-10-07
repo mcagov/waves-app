@@ -11,10 +11,6 @@ class TasksController < InternalPagesController
     @submissions = submission_scope.unassigned
   end
 
-  def print_queue
-    @submissions = []
-  end
-
   def incomplete
     @submissions = submission_scope.incomplete
   end

@@ -16,9 +16,6 @@ feature "User views task lists", type: :feature, js: true do
     click_link("Unclaimed Tasks")
     expect(page).to have_css("h1", text: "Unclaimed Tasks")
 
-    click_link("Print Queue")
-    expect(page).to have_css("h1", text: "Print Queue")
-
     click_link("Referred Applications")
     expect(page).to have_css("h1", text: "Referred Applications")
 
