@@ -16,13 +16,13 @@ feature "User approves a new registration", type: :feature, js: true do
     expect(page).to have_text("%PDF")
   end
 
-  xscenario "printing the cover letter" do
+  scenario "printing the cover letter" do
     within(".modal-content") do
       click_button("Register Vessel")
     end
     expect(page).to have_text("The vessel owner has been notified via email")
 
-    click_on("Print Cover letter")
+    click_on("Print Cover Letter")
     expect(page).to have_text("%PDF")
   end
 

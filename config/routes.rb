@@ -66,7 +66,7 @@ Rails.application.routes.draw do
 
   namespace :registration do
     resources :certificates, only: [:show]
-    resources :cover_letter, only: [:show]
+    resources :cover_letters, only: [:show]
   end
 
   resources :vessels, only: [:show, :index] do

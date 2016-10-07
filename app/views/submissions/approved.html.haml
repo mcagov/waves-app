@@ -8,7 +8,7 @@
       = link_to registration_certificate_path(@submission.registration, format: :pdf), class: "btn btn-warning" do
         %i.fa.fa-print{style: "font-size: 1.2em;"}
         Print Certificate of Registry
-      = link_to "#", class: "btn btn-warning" do
+      = link_to registration_cover_letter_path(@submission.registration, format: :pdf), class: "btn btn-warning" do
         %i.fa.fa-print{style: "font-size: 1.2em;"}
         Print Cover Letter
 
