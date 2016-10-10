@@ -49,7 +49,9 @@ module SubmissionTransitions
       end
 
       event :printed do
-        transitions to: :completed, from: :printing
+        transitions to: :completed, from: :printing,
+                    on_transition: :update_print_jobs,
+                    guard: :print_jobs_completed?
       end
 
       event :cancelled do

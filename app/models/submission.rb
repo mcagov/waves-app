@@ -1,6 +1,7 @@
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
+  include SubmissionPrintJobs
   include SubmissionAttributes
   include SubmissionHelpers
   include SubmissionTransitions
