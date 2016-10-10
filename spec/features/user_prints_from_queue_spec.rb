@@ -16,7 +16,7 @@ describe "User prints from queue", type: :feature, js: true do
     visit print_queue_certificates_path
     within(".certificate") { expect(page).to have_text("Printed: ") }
 
-    click_on("Process Cover Letters")
+    click_on("Print Cover Letters")
     expect(page).to have_text("%PDF")
 
     visit print_queue_certificates_path

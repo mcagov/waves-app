@@ -24,8 +24,8 @@
             %td= submission.registered_vessel
             %td= submission.registered_vessel.reg_no
             %td.certificate
-              - if submission.registration_certificate_printed?
-                = css_tick(true)
+              - if submission.printed?(:registration_certificate)
+                = "Printed: #{ submission.print_jobs["registration_certificate"].in_time_zone.to_s(:date_time) }"
             %td.cover-letter
-              - if submission.cover_letter_printed?
-                = css_tick(true)
+              - if submission.printed?(:cover_letter)
+                = "Printed: #{ submission.print_jobs["cover_letter"].in_time_zone.to_s(:date_time) }"
