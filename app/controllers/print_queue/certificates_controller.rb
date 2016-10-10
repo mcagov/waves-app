@@ -1,25 +1,15 @@
-# move this to a print queue controller
-# that takes input :print_job_type
-
 class PrintQueue::CertificatesController < InternalPagesController
   before_action :load_submissions
 
   def index
     respond_to do |format|
       format.html
-
       format.pdf do
         load_registrations
         pdf = Certificate.new(@registrations)
-
-        # when we implement a modal, the user will click
-        # "completed" to call an update method that marks
-        # the submissions printed
         mark_submissions_printed
 
-        send_data pdf.render, filename: pdf.filename,
-                              type: "application/pdf",
-                              disposition: "inline"
+        render_pdf(pdf, pdf.filename)
       end
     end
   end

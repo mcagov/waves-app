@@ -7,4 +7,11 @@ class InternalPagesController < ApplicationController
   def user_for_paper_trail
     current_user
   end
+
+  def render_pdf(pdf, filename)
+    send_data pdf.render,
+              filename: filename,
+              type: "application/pdf",
+              disposition: "inline"
+  end
 end
