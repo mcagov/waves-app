@@ -17,11 +17,11 @@
             %th Vessel
             %th Offical Number
             %th
-              = link_to print_queue_certificates_path(format: :pdf), class: "btn btn-primary" do
+              = link_to print_queue_certificates_path(format: :pdf), target: "_blank", class: "btn btn-primary" do
                 %i.fa.fa-print
                 Print Certificates of Registry
             %th
-              = link_to print_queue_cover_letters_path(format: :pdf), class: 'btn btn-primary' do
+              = link_to print_queue_cover_letters_path(format: :pdf), target: "_blank", class: 'btn btn-primary' do
                 %i.fa.fa-print
                 Print Cover Letters
 

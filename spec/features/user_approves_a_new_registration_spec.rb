@@ -12,8 +12,13 @@ feature "User approves a new registration", type: :feature, js: true do
     end
     expect(page).to have_text("The vessel owner has been notified via email")
 
-    click_on("Print Certificate of Registry")
-    expect(page).to have_text("%PDF")
+    pdf_window = window_opened_by do
+      click_on("Print Certificate of Registry")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
 
     expect(Submission.last.printed?(:registration_certificate)).to be_truthy
   end
@@ -24,8 +29,13 @@ feature "User approves a new registration", type: :feature, js: true do
     end
     expect(page).to have_text("The vessel owner has been notified via email")
 
-    click_on("Print Cover Letter")
-    expect(page).to have_text("%PDF")
+    pdf_window = window_opened_by do
+      click_on("Print Cover Letter")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
 
     expect(Submission.last.printed?(:cover_letter)).to be_truthy
   end
