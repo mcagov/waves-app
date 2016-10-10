@@ -11,10 +11,6 @@ class TasksController < InternalPagesController
     @submissions = submission_scope.unassigned
   end
 
-  def print_queue
-    @submissions = []
-  end
-
   def incomplete
     @submissions = submission_scope.incomplete
   end
@@ -43,6 +39,8 @@ class TasksController < InternalPagesController
   private
 
   def submission_scope
-    Submission.order("target_date asc").where.not(state: :completed)
+    Submission
+      .order("target_date asc")
+      .where.not(state: [:printing, :completed])
   end
 end

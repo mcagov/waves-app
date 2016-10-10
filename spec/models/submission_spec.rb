@@ -57,8 +57,8 @@ describe Submission, type: :model do
       submission.approved!
     end
 
-    it "transitions to completed" do
-      expect(submission.reload).to be_completed
+    it "transitions to printing" do
+      expect(submission.reload).to be_printing
     end
   end
 
@@ -184,6 +184,12 @@ describe Submission, type: :model do
 
     context "when the state is completed" do
       let(:submission_state) { :completed }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "when the state is printing" do
+      let(:submission_state) { :printing }
 
       it { expect(subject).to be_falsey }
     end

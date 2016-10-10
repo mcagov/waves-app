@@ -1,26 +1,33 @@
-class RegistrationCertificate
-  def initialize(vessel)
-    @vessel = vessel
+class CertificateWriter
+  def initialize(registration, pdf, mode = :printable)
+    @registration = registration
+    @vessel = @registration.vessel
+    @pdf = pdf
+    @mode = mode
   end
 
-  def render
-    @pdf = Prawn::Document.new(margin: 0, page_size: "A6")
+  def write
+    write_complete if @mode == :attachment
+    write_printable if @mode == :printable
+    @pdf
+  end
+
+  private
+
+  def write_complete
+    @pdf.start_new_page
     @pdf.image page_1_template, scale: 0.48
     watermark
     registration_details
     @pdf.start_new_page
     @pdf.image page_2_template, scale: 0.48
     watermark
-    @pdf.render
   end
 
-  def filename
-    title = @vessel.to_s.parameterize
-    reg_date = @vessel.registered_at.to_s(:db)
-    "#{title}-registration-#{reg_date}.pdf"
+  def write_printable
+    @pdf.start_new_page
+    registration_details
   end
-
-  private
 
   def page_1_template
     "#{Rails.root}/public/certificates/part_3_front.png"
@@ -31,7 +38,7 @@ class RegistrationCertificate
   end
 
   def registration_details
-    draw_value(@vessel.registered_until, at: [57, 300])
+    draw_value(@registration.registered_until, at: [57, 300])
     draw_value @vessel.reg_no, at: [182, 300]
     draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
     draw_label_value "Overall Length", @vessel.length_in_meters, at: [34, 250]
@@ -40,7 +47,7 @@ class RegistrationCertificate
     draw_label_value "Hull ID Number", @vessel.hin, at: [34, 205]
 
     owners
-    @pdf.draw_text @vessel.registered_at, at: [60, 27]
+    @pdf.draw_text @registration.registered_at, at: [60, 27]
   end
 
   def owners

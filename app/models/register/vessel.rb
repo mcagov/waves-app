@@ -14,9 +14,6 @@ module Register
              -> { where("type is null").order("created_at desc") },
              as: :noteable
 
-    delegate :registered_until, to: :latest_registration
-    delegate :registered_at, to: :latest_registration
-
     def to_s
       name.upcase
     end

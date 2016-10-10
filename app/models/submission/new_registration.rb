@@ -5,6 +5,7 @@ class Submission::NewRegistration < Submission
 
   def process_application
     Builders::NewRegistrationBuilder.create(self)
+    update_attributes print_jobs: build_print_jobs
   end
 
   def similar_vessels
@@ -24,5 +25,9 @@ class Submission::NewRegistration < Submission
 
   def ref_no_prefix
     "3N"
+  end
+
+  def print_job_types
+    [:registration_certificate, :cover_letter]
   end
 end

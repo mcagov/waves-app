@@ -41,7 +41,7 @@ class SubmissionsController < InternalPagesController
   def approve
     if @submission.approved!
       create_notification
-      render "completed"
+      render "approved"
     else
       render "errors"
     end

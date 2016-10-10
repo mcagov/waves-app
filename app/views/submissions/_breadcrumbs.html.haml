@@ -1,5 +1,5 @@
 %ol.breadcrumb
-  - if @submission.completed?
+  - if !@submission.editable?
     %li.breadcrumb-item.active
       = link_to "Registered Vessels", vessels_path
     %li.breadcrumb-item

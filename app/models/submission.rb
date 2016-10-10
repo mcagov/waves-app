@@ -1,6 +1,9 @@
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
+  include SubmissionPrintJobs
+  include SubmissionAttributes
+  include SubmissionHelpers
   include SubmissionTransitions
 
   belongs_to :delivery_address, class_name: "Address", required: false
@@ -40,62 +43,4 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
   validates :ref_no, presence: true
-
-  def notification_list
-    (correspondences + notifications + declarations.map(&:notification)
-    ).compact.sort { |a, b| b.created_at <=> a.created_at }
-  end
-
-  def process_application; end
-
-  def owners
-    declarations.map(&:owner)
-  end
-
-  def vessel
-    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
-  end
-
-  def vessel=(vessel_params)
-    changeset[:vessel_info] = vessel_params
-  end
-
-  def delivery_address
-    @delivery_address ||=
-      Submission::DeliveryAddress.new(user_input[:delivery_address] || {})
-  end
-
-  def delivery_address=(delivery_address_params)
-    changeset[:delivery_address] = delivery_address_params
-  end
-
-  def applicant
-    declarations.first.owner if declarations
-  end
-
-  def applicant_email
-    applicant.email if applicant
-  end
-
-  def source
-    "Online"
-  end
-
-  def ref_no_prefix
-    "00"
-  end
-
-  def job_type
-    ""
-  end
-
-  def editable?
-    !completed?
-  end
-
-  protected
-
-  def user_input
-    changeset.blank? ? {} : changeset.deep_symbolize_keys!
-  end
 end

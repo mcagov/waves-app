@@ -45,9 +45,16 @@ def create_referred_submission!
   submission.reload
 end
 
-def create_completed_submission!
+def create_printing_submission!
   submission = create_assigned_submission!
   submission.approved!
+
+  submission.reload
+end
+
+def create_completed_submission!
+  submission = create_printing_submission!
+  submission.printed!
 
   submission.reload
 end

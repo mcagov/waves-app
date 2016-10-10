@@ -13,16 +13,16 @@ class Notification::ApplicationApproval < Notification
 
   private
 
-  def vessel
-    @vessel ||= notifiable.registration.vessel
+  def registration
+    @registration ||= notifiable.registration
   end
 
   def vessel_reg_no
-    vessel.reg_no
+    registration.vessel.reg_no
   end
 
   def registration_certificate
-    RegistrationCertificate.new(vessel).render if attach_certificate?
+    Certificate.new(registration, :attachment).render if attach_certificate?
   end
 
   def attach_certificate?

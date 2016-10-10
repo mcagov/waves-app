@@ -56,12 +56,12 @@ describe SubmissionsController, type: :controller do
     context "succesfully" do
       before { post :approve, params: { id: submission.id } }
 
-      it "completes the submission" do
-        expect(assigns[:submission]).to be_completed
+      it "moves the submission to :printing" do
+        expect(assigns[:submission]).to be_printing
       end
 
-      it "renders the completed page" do
-        expect(response).to render_template("completed")
+      it "renders the aproved page" do
+        expect(response).to render_template("approved")
       end
 
       it "creates a notification for each owner" do

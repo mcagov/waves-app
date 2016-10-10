@@ -64,7 +64,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :registration_certificates, only: [:show]
+  namespace :registration do
+    resources :certificates, only: [:show]
+    resources :cover_letters, only: [:show]
+  end
+
+  namespace :print_queue do
+    resources :certificates, only: [:index]
+    resources :cover_letters, only: [:index]
+  end
 
   resources :vessels, only: [:show, :index] do
     resource :correspondence,
@@ -77,7 +85,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    incomplete my-tasks team-tasks print-queue
+    incomplete my-tasks team-tasks
     referred unclaimed rejected cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",
