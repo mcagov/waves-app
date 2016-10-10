@@ -4,6 +4,10 @@ class Customer < ApplicationRecord
   end
 
   def inline_address
+    compacted_address.join(", ")
+  end
+
+  def compacted_address
     [
       address_1,
       address_2,
@@ -11,6 +15,6 @@ class Customer < ApplicationRecord
       town,
       country,
       postcode,
-    ].compact.reject(&:empty?).join(", ")
+    ].compact.reject(&:empty?)
   end
 end
