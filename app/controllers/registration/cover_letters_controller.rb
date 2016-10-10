@@ -6,10 +6,9 @@ class Registration::CoverLettersController < InternalPagesController
 
     respond_to do |format|
       format.pdf do
-        pdf = RegistrationCoverLetter.new(@registration)
-        send_data pdf.render, filename: pdf.filename,
-                              type: "application/pdf",
-                              disposition: "inline"
+        pdf = CoverLetter.new(@registration)
+
+        render_pdf(pdf, pdf.filename)
       end
     end
   end

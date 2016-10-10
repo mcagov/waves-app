@@ -20,6 +20,6 @@ describe "User prints from queue", type: :feature, js: true do
     expect(page).to have_text("%PDF")
 
     visit print_queue_certificates_path
-    expect(page).to have_text("No items")
+    expect(page).to have_css("h2", "no items")
   end
 end

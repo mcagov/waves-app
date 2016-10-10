@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   namespace :print_queue do
     resources :certificates, only: [:index]
+    resources :cover_letters, only: [:index]
   end
 
   resources :vessels, only: [:show, :index] do

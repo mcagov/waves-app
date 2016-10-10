@@ -4,7 +4,13 @@
 
 .row
   .col-md-12
-    .x_panel
+    - if @submissions.empty?
+      .x_panel
+        .x_panel
+          .x_content
+            %h2.text-center
+              There are no items in this queue
+    - else
       %table#print_queue.table.table-striped.table-hover
         %thead
           %tr
@@ -15,7 +21,7 @@
                 %i.fa.fa-print
                 Print Certificates of Registry
             %th
-              = link_to '#', class: 'btn btn-primary' do
+              = link_to print_queue_cover_letters_path(format: :pdf), class: 'btn btn-primary' do
                 %i.fa.fa-print
                 Print Cover Letters
 
