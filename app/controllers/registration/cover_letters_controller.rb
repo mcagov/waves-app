@@ -3,13 +3,9 @@ class Registration::CoverLettersController < InternalPagesController
 
   def show
     @registration = Registration.find(params[:id])
+    pdf = CoverLetter.new(@registration)
+    @registration.submission.update_print_job!(:cover_letter)
 
-    respond_to do |format|
-      format.pdf do
-        pdf = CoverLetter.new(@registration)
-
-        render_pdf(pdf, pdf.filename)
-      end
-    end
+    render_pdf(pdf, pdf.filename)
   end
 end

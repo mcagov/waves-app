@@ -14,6 +14,8 @@ feature "User approves a new registration", type: :feature, js: true do
 
     click_on("Print Certificate of Registry")
     expect(page).to have_text("%PDF")
+
+    expect(Submission.last.printed?(:registration_certificate)).to be_truthy
   end
 
   scenario "printing the cover letter" do
@@ -24,6 +26,8 @@ feature "User approves a new registration", type: :feature, js: true do
 
     click_on("Print Cover Letter")
     expect(page).to have_text("%PDF")
+
+    expect(Submission.last.printed?(:cover_letter)).to be_truthy
   end
 
   scenario "attaching certificate to the email" do
