@@ -9,14 +9,14 @@ class CoverLetter
     @registrations.each do |registration|
       @pdf = CoverLetterWriter.new(registration, @pdf).write
     end
-    PdfRender.new(@pdf).render
+    PdfRender.new(@pdf, :foo).render
   end
 
   def filename
     if @registrations.length == 1
       single_cover_letter_filename
     else
-      "Certificates-of-Registry"
+      "cover-letters.pdf"
     end
   end
 

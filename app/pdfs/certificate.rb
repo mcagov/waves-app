@@ -18,7 +18,7 @@ class Certificate
     if @registrations.length == 1
       single_registration_filename
     else
-      "Certificates-of-Registry"
+      "certificates-of-registry.pdf"
     end
   end
 

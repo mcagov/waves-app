@@ -8,20 +8,63 @@ describe Certificate do
       create(:registration, vessel: vessel, registered_at: "2012-12-03")
     end
 
-    subject { Certificate.new(registration) }
+    let(:certificate) { Certificate.new(registration, mode) }
 
-    it "has a filename" do
-      expect(subject.filename).to eq("jolly-roger-registration-2012-12-03.pdf")
+    context "as an attachment" do
+      let(:mode) { :attachment }
+
+      it "has a filename" do
+        expect(certificate.filename)
+          .to match(/jolly-roger-registration-.*\.pdf/)
+      end
+
+      it "renders a pdf" do
+        expect(certificate.render[0, 4]).to eq("%PDF")
+      end
+
+      describe "reading the pdf" do
+        let(:io) { StringIO.new(certificate.render) }
+
+        it "has two pages and the watermark" do
+          PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
+            expect(reader.page_count).to eq(2)
+            expect(reader.page(1).text).to match(/COPY OF ORIGINAL/)
+          end
+        end
+      end
     end
 
-    it "renders a pdf" do
-      expect(subject.render[0, 4]).to eq("%PDF")
-    end
+    context "as printable" do
+      let(:mode) { :printable }
 
-    it "tests the pdf has the expected elements"
+      it "has one page and has the vessel name" do
+        PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
+          expect(reader.page_count).to eq(1)
+          expect(reader.page(1).text).to match(/JOLLY ROGER/)
+        end
+      end
+    end
   end
 
   context "for multiple registrations" do
-    it "has multiple pages"
+    before do
+      3.times { create_printing_submission! }
+    end
+
+    let(:certificate) { Certificate.new(Registration.all) }
+
+    it "has a filename" do
+      expect(certificate.filename)
+        .to eq("certificates-of-registry.pdf")
+    end
+
+    it "has three pages with the owner name on each" do
+      PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
+        expect(reader.page_count).to eq(3)
+        expect(reader.page(1).text).to match(/HORATIO NELSON/)
+        expect(reader.page(2).text).to match(/HORATIO NELSON/)
+        expect(reader.page(3).text).to match(/HORATIO NELSON/)
+      end
+    end
   end
 end
