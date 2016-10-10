@@ -16,7 +16,7 @@ class CoverLetter
     if @registrations.length == 1
       single_cover_letter_filename
     else
-      "Certificates-of-Registry"
+      "cover-letters.pdf"
     end
   end
 
