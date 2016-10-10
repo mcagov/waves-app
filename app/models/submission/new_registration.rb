@@ -12,14 +12,6 @@ class Submission::NewRegistration < Submission
     Search.similar_vessels(vessel)
   end
 
-  def registration_certificate_printed?
-    print_jobs["registration_certificate"]
-  end
-
-  def cover_letter_printed?
-    print_jobs["cover_letter"]
-  end
-
   protected
 
   def unassignable?
@@ -35,7 +27,7 @@ class Submission::NewRegistration < Submission
     "3N"
   end
 
-  def build_print_jobs
-    { registration_certificate: false, cover_letter: false }
+  def print_job_types
+    [:registration_certificate, :cover_letter]
   end
 end
