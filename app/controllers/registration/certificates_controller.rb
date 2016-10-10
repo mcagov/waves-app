@@ -6,7 +6,7 @@ class Registration::CertificatesController < InternalPagesController
 
     respond_to do |format|
       format.pdf do
-        pdf = Certificate.new(@registration, :printable)
+        pdf = Certificate.new(@registration)
         send_data pdf.render, filename: pdf.filename,
                               type: "application/pdf",
                               disposition: "inline"
