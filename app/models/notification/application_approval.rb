@@ -8,7 +8,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def additional_params
-    [vessel_reg_no, registration_certificate]
+    [vessel_reg_no, actioned_by, registration_certificate]
   end
 
   private

@@ -9,7 +9,7 @@ class Notification::Referral < Notification
   end
 
   def additional_params
-    body
+    [body, actioned_by]
   end
 
   def email_subject

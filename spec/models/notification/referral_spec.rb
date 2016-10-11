@@ -1,3 +1,4 @@
+
 require "rails_helper"
 
 describe Notification::Referral, type: :model do
@@ -8,7 +9,8 @@ describe Notification::Referral, type: :model do
   end
 
   it "has the additional_params" do
-    expect(notification.additional_params).to eq(notification.body)
+    expect(notification.additional_params)
+      .to eq([notification.body, notification.actioned_by])
   end
 
   it "has the email_subject" do

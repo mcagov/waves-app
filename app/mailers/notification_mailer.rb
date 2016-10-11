@@ -12,8 +12,8 @@ class NotificationMailer < ApplicationMailer
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
     @vessel_name = vessel_name
     @correspondent_name = correspondent_name
-    mail(to: email,
-         subject: subject)
+
+    mail(to: email, subject: subject)
   end
 
   def application_receipt(subject, email, name, vessel_name,
@@ -22,22 +22,28 @@ class NotificationMailer < ApplicationMailer
     @world_pay_transaction_no = world_pay_transaction_no
     @submission_ref_no = submission_ref_no
     @name = name
+
     mail(to: email, subject: subject)
   end
 
-  def application_approval(subject, email, name, reg_no, pdf_attachment = nil)
+  def application_approval(subject, email, name, reg_no, actioned_by,
+                           pdf_attachment = nil)
     @reg_no = reg_no
     @name = name
     if pdf_attachment
       attachments["Certificate_of_Registration_copy.pdf"] = pdf_attachment
       @certificate_attached = true
     end
+    @actioned_by = actioned_by
+
     mail(to: email, subject: subject)
   end
 
-  def wysiwyg(subject, email, name, body)
+  def wysiwyg(subject, email, name, body, actioned_by)
     @body = body
     @name = name
+    @actioned_by = actioned_by
+
     mail(to: email, subject: subject)
   end
 
