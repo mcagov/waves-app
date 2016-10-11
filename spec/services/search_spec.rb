@@ -16,7 +16,7 @@ describe Search, type: :model do
   end
 
   context ".similar_vessels" do
-    let!(:same_name) { create(:register_vessel, name: "Celebrator Doppelbock") }
+    let!(:same_name) { create(:register_vessel, name: "CELEBRATOR DOPPELBOCK") }
     let!(:same_mmsi) { create(:register_vessel, mmsi_number: "233878594") }
     let!(:blank_mmsi) { create(:register_vessel, mmsi_number: "") }
     let!(:different_mmsi) { create(:register_vessel, mmsi_number: rand(9)) }

@@ -13,7 +13,7 @@ feature "User refers a submission", type: :feature, js: true do
     within("#refer-application") { click_on "Refer Application" }
 
     click_on "Referred Applications"
-    click_on("Celebrator Doppelbock")
+    click_on("CELEBRATOR DOPPELBOCK")
 
     within("#prompt") do
       expect(page).to have_text(referral_prompt)
@@ -22,7 +22,7 @@ feature "User refers a submission", type: :feature, js: true do
     click_button "Reclaim Referral"
 
     click_link "My Tasks"
-    click_link "Celebrator Doppelbock"
+    click_link "CELEBRATOR DOPPELBOCK"
     click_link "Correspondence"
 
     within("#notification-list") do

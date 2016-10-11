@@ -6,7 +6,7 @@ feature "User edits Owner submission details", type: :feature, js: true do
   scenario "in general" do
     click_on("Owners")
 
-    within(".owner-name") { click_on("Horatio Nelson") }
+    within(".owner-name") { click_on("HORATIO NELSON") }
     find(".editable-input input").set("John Doe")
     first(".editable-submit").click
     click_on("Owners")
@@ -18,9 +18,9 @@ feature "User edits Owner submission details", type: :feature, js: true do
     click_on("Owners")
     expect(page).to have_css(".owner-nationality a", text: "MALTA")
 
-    within(".owner-address") { click_on("2 Keen Road, L") }
+    within(".owner-address") { click_on("2 KEEN ROAD, L") }
 
-    within(".address-1") { click_on("2 Keen") }
+    within(".address-1") { click_on("2 KEEN") }
     find(".editable-input input").set("Address 1")
     first(".editable-submit").click
     expect(page).to have_css(".address-1", text: "Address 1")

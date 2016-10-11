@@ -6,7 +6,7 @@ describe Builders::NewRegistrationBuilder do
     let(:registration) { described_class.create(submission) }
 
     it "creates the expected vessel type" do
-      expect(registration.vessel.vessel_type).to eq("barge")
+      expect(registration.vessel.vessel_type).to eq("BARGE")
     end
 
     it "creates the owners" do

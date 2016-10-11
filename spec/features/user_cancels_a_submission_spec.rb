@@ -13,7 +13,7 @@ feature "User cancels a submission", type: :feature, js: true do
     within("#cancel-application") { click_on "Cancel Application" }
 
     click_on "Cancelled Applications"
-    click_on("Celebrator Doppelbock")
+    click_on("CELEBRATOR DOPPELBOCK")
 
     within("#prompt") do
       expect(page).to have_text(
@@ -24,6 +24,6 @@ feature "User cancels a submission", type: :feature, js: true do
     click_on "Revert Cancellation"
 
     click_on "My Tasks"
-    expect(page).to have_css(".vessel-name", text: "Celebrator Doppelbock")
+    expect(page).to have_css(".vessel-name", text: "CELEBRATOR DOPPELBOCK")
   end
 end

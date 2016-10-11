@@ -11,24 +11,24 @@
               "foo": ""
             },
             "vessel_info": {
-              "name": "Good Ship Venus",
+              "name": "GOOD SHIP VENUS",
               "hin": "PR-QNTIECMU3FVA",
-              "make_and_model": "Galleon XX",
+              "make_and_model": "GALLEON XX",
               "length_in_meters": "11.51",
               "number_of_hulls": "5",
               "vessel_type": "",
-              "vessel_type_other": "sailing ship",
+              "vessel_type_other": "SAILING SHIP",
               "mmsi_number": "233878123",
               "radio_call_sign": "4RWO0K"
             },
             "owners": [
               {
-                "name": "Alice Jones",
+                "name": "ALICE JONES",
                 "nationality": "GB",
-                "address_1": "2 Keen Road",
+                "address_1": "2 KEEN ROAD",
                 "address_2": "",
                 "address_3": "",
-                "town": "Town 2",
+                "town": "PORTSMOUTH",
                 "postcode": "QZ2 3QM",
                 "country": "RU",
                 "email": "alicejones@example.com",

@@ -12,7 +12,7 @@ describe Notification::ApplicationReceipt, type: :model do
     it "has additional_params" do
       expect(subject.additional_params)
         .to eq(
-          ["Celebrator Doppelbock",
+          ["CELEBRATOR DOPPELBOCK",
            submission.payment.wp_order_code, submission.ref_no]
         )
     end
