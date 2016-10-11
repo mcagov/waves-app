@@ -21,7 +21,6 @@ module SubmissionHelper
   end
 
   def similar_attribute_icon(key, vessel_attr, similar_vessel_attr)
-    # rubocop: disable Style/GuardClause
     if vessel_attr.to_s == similar_vessel_attr.to_s && vessel_attr.present?
       # NOTE: once we set the similar-#{key} class, a javascript
       # functions (submission.js) displays a star next to the
