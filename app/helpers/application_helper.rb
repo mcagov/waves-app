@@ -1,6 +1,10 @@
 module ApplicationHelper
-  def eligible_country_list
-    WavesUtilities::Country.all.map { |c| c[0] }
+  def owner_country_list
+    ["UNITED KINGDOM"]
+  end
+
+  def all_country_list
+    WavesUtilities::Country.all
   end
 
   def vessel_type_list

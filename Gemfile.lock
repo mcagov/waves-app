@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tobyprivett/waves-utilities.git
-  revision: f1743112cbe7bb3de476936320ced7090b59d935
+  revision: fe179034a285a2aa076bc325f5e8e43a9eb653a5
   specs:
     waves-utilities (0.1.0)
 

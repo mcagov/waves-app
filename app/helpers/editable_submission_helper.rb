@@ -58,7 +58,7 @@ module EditableSubmissionHelper
       "data-value" => attr_value,
       "data-url" => declaration_owners_path(declaration),
       "data-title" => "Country",
-      "data-source" => eligible_country_list.to_json)
+      "data-source" => owner_country_list.to_json)
   end
 
   def editable_owner_nationality(attr_value, declaration)
@@ -93,6 +93,6 @@ module EditableSubmissionHelper
       "data-value" => attr_value,
       "data-url" => submission_delivery_addresses_path(@submission),
       "data-title" => "Country",
-      "data-source" => nationality_list.to_json)
+      "data-source" => all_country_list.to_json)
   end
 end
