@@ -3,8 +3,10 @@ class Submission::NewRegistration < Submission
     "New Registration"
   end
 
-  def process_application
-    Builders::NewRegistrationBuilder.create(self)
+  def process_application(registration_starts_at = Time.now)
+    Builders::NewRegistrationBuilder.create(
+      self, registration_starts_at.to_datetime)
+
     update_attributes print_jobs: build_print_jobs
   end
 

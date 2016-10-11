@@ -39,7 +39,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def approve
-    if @submission.approved!
+    if @submission.approved!(params[:registration_starts_at])
       create_notification
       render "approved"
     else
