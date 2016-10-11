@@ -25,8 +25,8 @@ module Api
       def create_application_receipt_notification
         Notification::ApplicationReceipt.create(
           notifiable: submission,
-          recipient_name: submission.applicant,
-          recipient_email: submission.applicant_email
+          recipient_name: submission.correspondent,
+          recipient_email: submission.correspondent_email
         )
       end
 

@@ -23,12 +23,12 @@ module SubmissionAttributes
       changeset[:delivery_address] = delivery_address_params
     end
 
-    def applicant
+    def correspondent
       declarations.first.owner if declarations
     end
 
-    def applicant_email
-      applicant.email if applicant
+    def correspondent_email
+      correspondent.email if correspondent
     end
 
     def source

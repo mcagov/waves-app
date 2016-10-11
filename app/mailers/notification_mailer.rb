@@ -6,12 +6,12 @@ class NotificationMailer < ApplicationMailer
   end
 
   def outstanding_declaration(
-      subject, email, name, declaration_id, vessel_name, applicant_name)
+      subject, email, name, declaration_id, vessel_name, correspondent_name)
     @name = name
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
     @vessel_name = vessel_name
-    @applicant_name = applicant_name
+    @correspondent_name = correspondent_name
     mail(to: email,
          subject: subject)
   end

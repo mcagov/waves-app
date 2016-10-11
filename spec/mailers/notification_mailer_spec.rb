@@ -45,7 +45,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/with the name Jolly Roger/)
     end
 
-    it "renders the applicant name" do
+    it "renders the correspondent name" do
       expect(body).to match(/made by Bob/)
     end
   end
