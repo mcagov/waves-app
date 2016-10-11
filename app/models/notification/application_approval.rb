@@ -4,7 +4,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def email_subject
-    "Application Approved"
+    "Application Approved: #{vessel_name} - #{vessel_reg_no}"
   end
 
   def additional_params
@@ -27,5 +27,9 @@ class Notification::ApplicationApproval < Notification
 
   def attach_certificate?
     attachments == "registration_certificate"
+  end
+
+  def vessel_name
+    notifiable.vessel.name if notifiable.vessel
   end
 end

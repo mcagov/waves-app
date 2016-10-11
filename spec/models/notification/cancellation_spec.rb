@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Notification::Cancellation, type: :model do
-  let(:notification) { described_class.new }
+  let(:notification) { described_class.new(notifiable: build(:submission)) }
 
   it "has the wysiwyg email_template" do
     expect(notification.email_template).to eq(:wysiwyg)
@@ -13,6 +13,6 @@ describe Notification::Cancellation, type: :model do
 
   it "has the email_subject" do
     expect(notification.email_subject)
-      .to eq("Application Cancelled")
+      .to match(/Application Cancelled: Boaty McBoatface [0-9]/)
   end
 end

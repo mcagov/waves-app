@@ -17,7 +17,8 @@ describe Notification::ApplicationApproval, type: :model do
       end
 
       it "has the expected email_subject" do
-        expect(subject.email_subject).to eq("Application Approved")
+        expect(subject.email_subject)
+          .to match(/Application Approved: Boaty McBoatface.* - SSR2.*/)
       end
 
       it "has additional_params" do

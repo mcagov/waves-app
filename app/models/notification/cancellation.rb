@@ -12,6 +12,12 @@ class Notification::Cancellation < Notification
   end
 
   def email_subject
-    "Application Cancelled"
+    "Application Cancelled: #{vessel_name}"
+  end
+
+  private
+
+  def vessel_name
+    notifiable.vessel.name if notifiable.vessel
   end
 end

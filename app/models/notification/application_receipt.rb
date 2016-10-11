@@ -8,7 +8,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def email_subject
-    "Application Receipt"
+    "Application Receipt: #{vessel_name}"
   end
 
   private
