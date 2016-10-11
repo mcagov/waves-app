@@ -59,4 +59,6 @@ $(document).ready(function() {
   if ($('#similar-vessels .similar-radio_call_sign').length) {
     $('#vessel-radio_call_sign .fa-star-o.hidden').removeClass('hidden');
   }
+
+  $('.datetimepicker').datetimepicker({});
 });

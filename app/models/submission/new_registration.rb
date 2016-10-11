@@ -3,7 +3,9 @@ class Submission::NewRegistration < Submission
     "New Registration"
   end
 
-  def process_application(registration_starts_at = Time.now)
+  def process_application(registration_starts_at)
+    registration_starts_at ||= Date.today
+
     Builders::NewRegistrationBuilder.create(
       self, registration_starts_at.to_datetime)
 

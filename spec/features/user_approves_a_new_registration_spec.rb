@@ -6,6 +6,17 @@ feature "User approves a new registration", type: :feature, js: true do
     click_link("Register Vessel")
   end
 
+  scenario "setting the registration start date" do
+    within(".modal-content") do
+      fill_in "registration_starts_at", with: "12/12/2020 11:59 AM"
+      click_button("Register Vessel")
+    end
+    expect(page).to have_text("The vessel owner has been notified via email")
+
+    expect(Registration.last.registered_at)
+      .to eq("12/12/2020 11:59 AM".to_datetime)
+  end
+
   scenario "printing the certificate" do
     within(".modal-content") do
       click_button("Register Vessel")
