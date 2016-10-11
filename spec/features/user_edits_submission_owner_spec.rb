@@ -25,12 +25,8 @@ feature "User edits Owner submission details", type: :feature, js: true do
     first(".editable-submit").click
     expect(page).to have_css(".address-1", text: "Address 1")
 
-    within(".address-country") { click_on("UNITED KINGDOM") }
-    find(".editable-input select").select("SPAIN")
-    first(".editable-submit").click
-    expect(page).to have_css(".address-country", text: "SPAIN")
-
     expect(page).to have_css(
-      "a.editable-link", text: "Address 1, London, SPAIN, QZ2 3QM")
+      "a.editable-link",
+      text: "Address 1, London, UNITED KINGDOM, QZ2 3QM")
   end
 end
