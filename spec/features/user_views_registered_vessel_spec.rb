@@ -9,11 +9,8 @@ describe "User views a registered vessel", type: :feature, js: true do
   end
 
   scenario "viewing vessel details" do
-    click_on("People")
+    click_on("Owners")
     expect(page).to have_css(".owner-name", text: "HORATIO NELSON")
-
-    click_on("History")
-    expect(page).to have_css(".history-item", "New Registration")
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")
@@ -35,7 +32,7 @@ describe "User views a registered vessel", type: :feature, js: true do
   scenario "linking to the submission page (which can not be edited)" do
     expect(page).to have_css("h1", text: "CELEBRATOR")
 
-    click_on("Applications")
+    click_on("Application History")
     click_on("New Registration")
 
     within("#vessel-name") do
