@@ -24,10 +24,8 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-    @submission.owners.each do |owner|
-      Notification::Referral.create(
-        parsed_notification_params(owner))
-    end
+    Notification::Referral.create(
+      parsed_notification_params(@submission.correspondent))
 
     flash[:notice] = "You have succesfully referred that application"
     @submission.update_attribute(
