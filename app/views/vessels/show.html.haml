@@ -21,49 +21,49 @@
           %table.table
             %tbody
               %tr
-                %td{style: 'border-top: 0px #fff !important'} SSR Number:
-                %td{style: 'border-top: 0px #fff !important'}
+                %td.soft-label.no-top-border SSR Number:
+                %td.no-top-border
                   %strong= @vessel.reg_no
               %tr
-                %td Make and model:
+                %td.soft-label Make and model:
                 %td
                   %strong= @vessel.make_and_model
               %tr
-                %td Length:
+                %td.soft-label Length:
                 %td
                   %strong #{ @vessel.length_in_meters }m
               %tr
-                %td Type:
+                %td.soft-label Type:
                 %td
                   %strong= @vessel.vessel_type
         .col-sm-4
           %table.table
             %tbody
               %tr
-                %td{style: 'border-top: 0px #fff !important'} MMSI Number:
-                %td{style: 'border-top: 0px #fff !important'}
+                %td.soft-label.no-top-border MMSI Number:
+                %td.no-top-border
                   %strong= @vessel.mmsi_number
               %tr
-                %td Radio Call Sign:
+                %td.soft-label Radio Call Sign:
                 %td
                   %strong= @vessel.radio_call_sign
               %tr
-                %td Hulls:
+                %td.soft-label Hulls:
                 %td
                   %strong= @vessel.number_of_hulls
               %tr
-                %td HIN:
+                %td.soft-label HIN:
                 %td
                   %strong= @vessel.hin
         .col-sm-4
           %table.table
             %tbody
               %tr
-                %td{style: 'border-top: 0px #fff !important'} Registration Date:
-                %td{style: 'border-top: 0px #fff !important'}
+                %td.soft-label.no-top-border Registration Date:
+                %td.no-top-border
                   %strong= @vessel.latest_registration.created_at if @vessel.latest_registration
               %tr
-                %td Reg Expiry Date:
+                %td.soft-label Reg Expiry Date:
                 %td
                   %strong= @vessel.latest_registration.registered_until if @vessel.latest_registration
       = render partial: "tabs"
