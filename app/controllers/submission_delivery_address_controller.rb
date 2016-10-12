@@ -2,7 +2,9 @@ class SubmissionDeliveryAddressController < InternalPagesController
   before_action :load_submission_and_delivery_address
 
   def update
-    @delivery_address.assign_attributes(delivery_address_params)
+    @delivery_address.assign_attributes(
+      Transformer.upcase_params(delivery_address_params))
+
     @submission.delivery_address = @delivery_address
     @submission.save
 

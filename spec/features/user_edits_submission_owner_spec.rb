@@ -7,10 +7,16 @@ feature "User edits Owner submission details", type: :feature, js: true do
     click_on("Owners")
 
     within(".owner-name") { click_on("HORATIO NELSON") }
-    find(".editable-input input").set("JOHN DOE")
+    find(".editable-input input").set("John Doe")
     first(".editable-submit").click
 
     expect(page).to have_css(".owner-name", text: "JOHN DOE")
+
+    within(".owner-email") { click_on("horatio-nelson.1@example.com") }
+    find(".editable-input input").set("bob@example.com")
+    first(".editable-submit").click
+
+    expect(page).to have_css(".owner-email", text: "bob@example.com")
 
     within(".owner-nationality") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("MALTA")
