@@ -11,7 +11,7 @@ feature "User edits Delivery Address details", type: :feature, js: true do
       within(".address-name") { click_on("BOB DOLE") }
       find(".editable-input input").set("John Doe")
       first(".editable-submit").click
-      expect(page).to have_css(".address-name", text: "John Doe")
+      expect(page).to have_css(".address-name", text: "JOHN DOE")
 
       within(".address-country") { click_on("UNITED KINGDOM") }
       find(".editable-input select").select("SPAIN")
@@ -20,7 +20,7 @@ feature "User edits Delivery Address details", type: :feature, js: true do
 
       expect(page).to have_css(
         "a#inline_delivery_address",
-        text: "ohn Doe, 11 DOWNING ST, WHITEHALL, CARDIFF, SPAIN, W1 1AF")
+        text: "JOHN DOE, 11 DOWNING ST, WHITEHALL, CARDIFF, SPAIN, W1 1AF")
     end
   end
 end

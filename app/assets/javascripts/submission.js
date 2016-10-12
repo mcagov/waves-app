@@ -30,6 +30,7 @@ $(document).ready(function() {
     type: 'text',
     success:  function(response, newValue) {
       $("a#inline_delivery_address").text(response.inline_name_and_address);
+      $(this).addClass('upcase');
     }
   });
 
@@ -45,6 +46,7 @@ $(document).ready(function() {
     success:  function(response, newValue) {
       var target = response.target_id;
       $("a#inline_owner_address_" + target).text(response.inline_address);
+      $(this).addClass('upcase');
     }
   });
 
