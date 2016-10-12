@@ -50,4 +50,14 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page)
       .to have_current_path("/vessels/#{@submission.registered_vessel.id}")
   end
+
+  scenario "viewing the registration status" do
+    expect(page).to have_css(".label-success", text: "Registered")
+
+    registration = Registration.last
+    registration.update_attributes(registered_until: 1.day.ago)
+
+    visit vessel_path(registration.vessel)
+    expect(page).to have_css(".label-danger", text: "Registration Expired")
+  end
 end
