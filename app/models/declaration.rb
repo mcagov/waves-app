@@ -4,6 +4,8 @@ class Declaration < ApplicationRecord
 
   has_one :notification, as: :notifiable
 
+  has_attached_file :completed_form
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
