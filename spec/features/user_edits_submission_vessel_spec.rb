@@ -5,7 +5,7 @@ feature "User edits submission details", type: :feature, js: true do
 
   scenario "editing vessel details" do
     within("td#vessel-name") { click_on "CELEBRATOR DOPPELBOCK" }
-    find(".editable-input input").set("HOP ROD RYE")
+    find(".editable-input input").set("Hop rod rye")
     first(".editable-submit").click
     expect(page).to have_css("td#vessel-name", text: "HOP ROD RYE")
 

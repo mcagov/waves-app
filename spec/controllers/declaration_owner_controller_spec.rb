@@ -14,11 +14,15 @@ describe DeclarationOwnerController, type: :controller do
     before do
       put :update, params: {
         declaration_id: declaration.id,
-        owner: { name: "John Doe" } }, xhr: true
+        owner: { name: "John Doe", email: "jo@example.com" } }, xhr: true
     end
 
     it "updates the declaration" do
-      expect(declaration.reload.owner.name).to eq("John Doe")
+      expect(declaration.reload.owner.name).to eq("JOHN DOE")
+    end
+
+    it "does not upcase the email address" do
+      expect(declaration.reload.owner.email).to eq("jo@example.com")
     end
 
     it "returns status 200" do
