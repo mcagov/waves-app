@@ -70,5 +70,7 @@ $(document).ready(function() {
     $('#vessel-radio_call_sign .fa-star-o.hidden').removeClass('hidden');
   }
 
-  $('.datetimepicker').datetimepicker({});
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });
 });
