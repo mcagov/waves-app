@@ -21,14 +21,15 @@ describe Declaration::Owner do
     context "#inline_address" do
       let(:input_params) do
         {
-          address_1: "10 Downing St",
-          address_2: "Whitehall",
-          town: "London",
+          address_1: "10 DOWNING ST",
+          address_2: "WHITEHALL",
+          town: "LONDON",
         }
       end
 
       it "rendes the expected address fields" do
-        expect(subject.inline_address).to eq("10 Downing St, Whitehall, London")
+        expect(subject.inline_address)
+          .to eq("10 DOWNING ST, WHITEHALL, LONDON")
       end
     end
   end
@@ -38,11 +39,11 @@ describe Declaration::Owner do
     let(:owner) { declaration.owner }
 
     before do
-      owner.assign_attributes(name: "John Doe")
+      owner.assign_attributes(name: "JOHN DOE")
     end
 
     it "updates the owner name" do
-      expect(owner.name).to eq("John Doe")
+      expect(owner.name).to eq("JOHN DOE")
     end
   end
 end
