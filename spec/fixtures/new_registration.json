@@ -11,43 +11,43 @@
               "foo": ""
             },
             "vessel_info": {
-              "name": "Celebrator Doppelbock",
-              "alt_name_1": "Trappistes Rochefort 10",
-              "alt_name_2": "Oak Aged Yeti Imperial Stout",
-              "alt_name_3": "Hop Rod Rye",
+              "name": "CELEBRATOR DOPPELBOCK",
+              "alt_name_1": "TRAPPISTES ROCHEFORT 10",
+              "alt_name_2": "OAK AGED YETI IMPERIAL STOUT",
+              "alt_name_3": "HOP ROD RYE",
               "hin": "PR-QNTIECMU3FVA",
-              "make_and_model": "Makey McMakeface 1",
+              "make_and_model": "MAKEY MCMAKEFACe 1",
               "length_in_meters": "11.51",
               "number_of_hulls": "5",
-              "vessel_type": "barge",
+              "vessel_type": "BARGE",
               "vessel_type_other": "",
               "mmsi_number": "233878594",
               "radio_call_sign": "4RWO0K"
             },
             "owners": [
               {
-                "name": "Horatio Nelson",
+                "name": "HORATIO NELSON",
                 "nationality": "UNITED KINGDOM",
-                "address_1": "2 Keen Road",
+                "address_1": "2 KEEN ROAD",
                 "address_2": "",
                 "address_3": "",
-                "town": "London",
+                "town": "LONDON",
                 "postcode": "QZ2 3QM",
                 "country": "UNITED KINGDOM",
                 "email": "horatio-nelson.1@example.com",
-                "phone_number": "42672075807"
+                "phone_number": "000000111"
               },
               {
-                "name": "Edward McCallister",
+                "name": "EDWARD MCCALLISTER",
                 "nationality": "GB",
-                "address_1": "4 Keen Road",
+                "address_1": "4 KEEN ROAD",
                 "address_2": "",
                 "address_3": "",
                 "town": "Town 4",
                 "postcode": "UB2 7RP",
                 "country": "UNITED KINGDOM",
                 "email": "edward.mcallister@example.com",
-                "phone_number": "21911163031"
+                "phone_number": "00000002222"
               }
             ],
             "delivery_address": {

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tobyprivett/waves-utilities.git
-  revision: f1743112cbe7bb3de476936320ced7090b59d935
+  revision: fe179034a285a2aa076bc325f5e8e43a9eb653a5
   specs:
     waves-utilities (0.1.0)
 
@@ -73,6 +73,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap3-datetimepicker-rails (4.17.42)
+      momentjs-rails (>= 2.8.1)
     brakeman (3.4.0)
     builder (3.2.2)
     bullet (5.4.2)
@@ -198,6 +200,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     nenv (0.3.0)
     nio4r (1.2.1)
     nokogiri (1.6.8)
@@ -391,6 +395,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-editable-rails
   bootstrap-sass (~> 3.3.6)
+  bootstrap3-datetimepicker-rails
   brakeman
   bullet
   bundler-audit (>= 0.5.0)
@@ -413,6 +418,7 @@ DEPENDENCIES
   haml
   jquery-rails
   launchy
+  momentjs-rails
   nokogiri (>= 1.6.8)
   paper_trail
   parallel_tests

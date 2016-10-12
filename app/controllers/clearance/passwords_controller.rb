@@ -94,7 +94,6 @@ module Clearance
     end
 
     def ensure_existing_user
-      # rubocop:disable Style/GuardClause
       unless find_user_by_id_and_confirmation_token
         flash_failure_when_forbidden
 

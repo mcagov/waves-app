@@ -2,10 +2,10 @@
   %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
     %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
       %li.active{:role => "presentation"}
-        %a#owner-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} People
+        %a#owner-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Owners
 
       %li{:role => "presentation"}
-        %a#applications-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Applications
+        %a#applications-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Application History
 
       %li{:role => "presentation"}
         %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
@@ -14,7 +14,7 @@
         %a#notes-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Notes
 
       %li{:role => "presentation"}
-        %a#history-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} History
+        %a#history-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} Contacts
 
     #myTabContent.tab-content
       #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
@@ -32,4 +32,4 @@
         = render partial: "vessels/tabs/notes", locals: { vessel: @vessel }
 
       #tab_content5.tab-pane.fade.in{"aria-labelledby" => "history-tab", :role => "tabpanel"}
-        = render partial: "vessels/tabs/history", locals: { vessel: @vessel }
+        = render partial: "vessels/tabs/contacts", locals: { vessel: @vessel }

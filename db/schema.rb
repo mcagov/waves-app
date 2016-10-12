@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007103205) do
+ActiveRecord::Schema.define(version: 20161011145309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(version: 20161007103205) do
   create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vessel_id"
     t.uuid     "submission_id"
-    t.date     "registered_at"
-    t.date     "registered_until"
+    t.datetime "registered_at"
+    t.datetime "registered_until"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.uuid     "actioned_by_id"

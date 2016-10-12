@@ -54,7 +54,7 @@ describe Submission, type: :model do
     let!(:submission) { create_assigned_submission! }
     before do
       expect(submission).to receive(:process_application)
-      submission.approved!
+      submission.approved!(Date.today)
     end
 
     it "transitions to printing" do

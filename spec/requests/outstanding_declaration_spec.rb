@@ -17,13 +17,13 @@ describe "Oustanding Declaration API" do
 
     it "responds with the vessel" do
       expect(parsed_attrs["vessel"]["name"])
-        .to eq("Celebrator Doppelbock")
+        .to eq("CELEBRATOR DOPPELBOCK")
     end
 
     context "the owner" do
-      it "name is Edward McCallister" do
+      it "name is EDWARD MCCALLISTER" do
         expect(parsed_attrs["owner"]["name"])
-          .to eq("Edward McCallister")
+          .to eq("EDWARD MCCALLISTER")
       end
 
       it "has a nil declared_at date" do
@@ -37,9 +37,9 @@ describe "Oustanding Declaration API" do
         expect(parsed_attrs["other-owners"].length).to eq(1)
       end
 
-      it "name is Horatio Nelson" do
+      it "name is HORATIO NELSON" do
         expect(parsed_attrs["other-owners"][0]["name"])
-          .to eq("Horatio Nelson")
+          .to eq("HORATIO NELSON")
       end
 
       it "has a declared_at date" do

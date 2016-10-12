@@ -9,10 +9,16 @@ class Notification::Referral < Notification
   end
 
   def additional_params
-    body
+    [body, actioned_by]
   end
 
   def email_subject
-    "Application Referred - Action Required"
+    "Application Referred - Action Required: #{vessel_name}"
+  end
+
+  private
+
+  def vessel_name
+    notifiable.vessel.name if notifiable.vessel
   end
 end

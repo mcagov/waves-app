@@ -23,7 +23,7 @@ class CoverLetterWriter
     set_bold_font
     @pdf.draw_text "UK Ship Register", at: [340, 780]
     @pdf.draw_text "Anchor Court", at: [340, 766]
-    @pdf.draw_text "Keen Road", at: [340, 752]
+    @pdf.draw_text "KEEN ROAD", at: [340, 752]
     @pdf.draw_text "Cardiff", at: [340, 738]
     @pdf.draw_text "CF24 5JW", at: [340, 724]
 

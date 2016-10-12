@@ -14,9 +14,10 @@ describe Submission::NewRegistration, type: :model do
 
     before do
       expect(Builders::NewRegistrationBuilder)
-        .to receive(:create).with(new_registration)
+        .to receive(:create)
+        .with(new_registration, "12/12/2020 11:59 AM".to_datetime)
 
-      new_registration.process_application
+      new_registration.process_application("12/12/2020 11:59 AM")
     end
 
     it "has not printed the registration_certificate" do

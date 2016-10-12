@@ -47,7 +47,7 @@ end
 
 def create_printing_submission!
   submission = create_assigned_submission!
-  submission.approved!
+  submission.approved!(1.day.ago)
 
   submission.reload
 end

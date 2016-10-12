@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-datepicker";
+@import 'bootstrap-datetimepicker';
 @import "bootstrap-editable";
 @import "font-awesome";
 
@@ -9,4 +10,5 @@
 @import "vendor/morris.min";
 @import "vendor/custom";
 
-@import "submission"
+@import "submission";
+@import "typography";

@@ -45,7 +45,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/with the name Jolly Roger/)
     end
 
-    it "renders the applicant name" do
+    it "renders the correspondent name" do
       expect(body).to match(/made by Bob/)
     end
   end
@@ -75,7 +75,8 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_approval" do
     let(:mail) do
       NotificationMailer.application_approval(
-        "subject", "test@example.com", "Alice", "Reg_no", "reg_cert")
+        "subject", "test@example.com", "Alice", "Reg_no",
+        "Sally SSR", "reg_cert")
     end
 
     let(:body) { mail.body.encoded }
@@ -87,18 +88,34 @@ RSpec.describe NotificationMailer, type: :mailer do
     it "renders the certificate_attached message" do
       expect(body).to match(/certificate attached, as requested/)
     end
+
+    it "renders the actioned_by signature" do
+      expect(body).to match(/Sally SSR/)
+    end
+
+    it "renders the phone number" do
+      expect(body).to match(/02920 448813/)
+    end
   end
 
   describe "wysiwyg" do
     let(:mail) do
       NotificationMailer.wysiwyg(
-        "subject", "test@example.com", "Alice", "Some text")
+        "subject", "test@example.com", "Alice", "Some text", "Sally SSR")
     end
 
     let(:body) { mail.body.encoded }
 
     it "renders the body" do
       expect(body).to match(/Some text/)
+    end
+
+    it "renders the actioned_by signature" do
+      expect(body).to match(/Sally SSR/)
+    end
+
+    it "renders the phone number" do
+      expect(body).to match(/02920 448813/)
     end
   end
 end

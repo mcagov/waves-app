@@ -2,7 +2,7 @@ class SubmissionVesselController < InternalPagesController
   before_action :load_submission_and_vessel
 
   def update
-    @vessel.assign_attributes(vessel_params)
+    @vessel.assign_attributes(Transformer.upcase_params(vessel_params))
     @submission.vessel = @vessel
     @submission.save
 

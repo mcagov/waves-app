@@ -6,31 +6,27 @@ feature "User edits Owner submission details", type: :feature, js: true do
   scenario "in general" do
     click_on("Owners")
 
-    within(".owner-name") { click_on("Horatio Nelson") }
-    find(".editable-input input").set("John Doe")
+    within(".owner-name") { click_on("HORATIO NELSON") }
+    find(".editable-input input").set("JOHN DOE")
     first(".editable-submit").click
-    click_on("Owners")
-    expect(page).to have_css(".owner-name", text: "John Doe")
+
+    expect(page).to have_css(".owner-name", text: "JOHN DOE")
 
     within(".owner-nationality") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("MALTA")
     first(".editable-submit").click
-    click_on("Owners")
+
     expect(page).to have_css(".owner-nationality a", text: "MALTA")
 
-    within(".owner-address") { click_on("2 Keen Road, L") }
-
-    within(".address-1") { click_on("2 Keen") }
-    find(".editable-input input").set("Address 1")
+    within(".owner-address") { click_on("2 KEEN ROAD, L") }
+    within(".address-1") { click_on("2 KEEN") }
+    find(".editable-input input").set("ADDRESS 1")
     first(".editable-submit").click
-    expect(page).to have_css(".address-1", text: "Address 1")
 
-    within(".address-country") { click_on("UNITED KINGDOM") }
-    find(".editable-input select").select("SPAIN")
-    first(".editable-submit").click
-    expect(page).to have_css(".address-country", text: "SPAIN")
+    expect(page).to have_css(".address-1", text: "ADDRESS 1")
 
     expect(page).to have_css(
-      "a.editable-link", text: "Address 1, London, SPAIN, QZ2 3QM")
+      "a.editable-link",
+      text: "ADDRESS 1, LONDON, UNITED KINGDOM, QZ2 3QM")
   end
 end

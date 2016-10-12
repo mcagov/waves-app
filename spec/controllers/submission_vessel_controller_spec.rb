@@ -17,7 +17,7 @@ describe SubmissionVesselController, type: :controller do
     end
 
     it "updates the submission" do
-      expect(submission.reload.vessel.name).to eq("Bob's Boat")
+      expect(submission.reload.vessel.name).to eq("BOB'S BOAT")
     end
 
     it "returns status 204 (as expected by bootstrap-editable" do

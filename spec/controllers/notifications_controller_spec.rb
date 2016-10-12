@@ -40,6 +40,10 @@ describe NotificationsController, type: :controller do
     it "redirects to my tasks" do
       expect(response).to redirect_to(tasks_my_tasks_path)
     end
+
+    it "creates a notification for each owner" do
+      expect(Notification::Cancellation.count).to eq(2)
+    end
   end
 
   context "#reject" do
@@ -61,6 +65,10 @@ describe NotificationsController, type: :controller do
 
     it "redirects to my tasks" do
       expect(response).to redirect_to(tasks_my_tasks_path)
+    end
+
+    it "creates a notification for each owner" do
+      expect(Notification::Rejection.count).to eq(2)
     end
   end
 
@@ -87,6 +95,12 @@ describe NotificationsController, type: :controller do
 
     it "redirects to my tasks" do
       expect(response).to redirect_to(tasks_my_tasks_path)
+    end
+
+    it "creates one notification addressed to the correspondent" do
+      expect(Notification::Referral.count).to eq(1)
+      expect(Notification::Referral.last.recipient_email)
+        .to eq("horatio-nelson.1@example.com")
     end
   end
 end

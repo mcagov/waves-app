@@ -8,7 +8,7 @@ describe Customer do
 
     it do
       expect(subject.inline_address)
-        .to eq("10 Downing St, Whitehall, London, UNITED KINDOM, W1 1AA")
+        .to eq("10 DOWNING ST, WHITEHALL, LONDON, UNITED KINDOM, W1 1AA")
     end
   end
 end

@@ -9,11 +9,8 @@ describe "User views a registered vessel", type: :feature, js: true do
   end
 
   scenario "viewing vessel details" do
-    click_on("People")
-    expect(page).to have_css(".owner-name", text: "Horatio Nelson")
-
-    click_on("History")
-    expect(page).to have_css(".history-item", "New Registration")
+    click_on("Owners")
+    expect(page).to have_css(".owner-name", text: "HORATIO NELSON")
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")
@@ -33,14 +30,14 @@ describe "User views a registered vessel", type: :feature, js: true do
   end
 
   scenario "linking to the submission page (which can not be edited)" do
-    expect(page).to have_css("h1", text: "Celebrator")
+    expect(page).to have_css("h1", text: "CELEBRATOR")
 
-    click_on("Applications")
+    click_on("Application History")
     click_on("New Registration")
 
     within("#vessel-name") do
-      expect(page).to have_text("Celebrator")
-      expect(page).not_to have_link("Celebrator")
+      expect(page).to have_text("CELEBRATOR")
+      expect(page).not_to have_link("CELEBRATOR")
     end
 
     expect(page).not_to have_css("#actions")
@@ -52,5 +49,15 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     expect(page)
       .to have_current_path("/vessels/#{@submission.registered_vessel.id}")
+  end
+
+  scenario "viewing the registration status" do
+    expect(page).to have_css(".label-success", text: "Registered")
+
+    registration = Registration.last
+    registration.update_attributes(registered_until: 1.day.ago)
+
+    visit vessel_path(registration.vessel)
+    expect(page).to have_css(".label-danger", text: "Registration Expired")
   end
 end

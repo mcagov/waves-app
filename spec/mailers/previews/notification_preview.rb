@@ -23,8 +23,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
 
   def wysiwyg
     NotificationMailer.wysiwyg(
-      Notification::Referral.new.email_subject,
-      email, name, "<p>Line 1.</p><p>Line 2.</p>")
+      "WYSIWYG", email, name, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
   end
 
   private

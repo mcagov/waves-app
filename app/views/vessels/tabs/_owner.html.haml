@@ -1,7 +1,10 @@
 - i = owner_counter + 1
 %table.table.table-striped{ id: "owner_#{i}" }
   %thead
-    %th Owner ##{ i }
+    %th
+      Owner ##{ i }
+      - if i == 1
+        (Correspondent)
     %th
   %tbody
     %tr

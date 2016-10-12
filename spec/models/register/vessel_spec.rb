@@ -59,4 +59,29 @@ describe Register::Vessel do
         .to eq([submission_correspondence, vessel_correspondence])
     end
   end
+
+  context "#registration_status" do
+    let!(:vessel) { create(:register_vessel) }
+    subject { vessel.registration_status }
+
+    context "with an active registration" do
+      before do
+        create(:registration, vessel: vessel, registered_until: 1.day.from_now)
+      end
+
+      it { expect(subject).to eq(:registered) }
+    end
+
+    context "with an expired registration" do
+      before do
+        create(:registration, vessel: vessel, registered_until: 1.week.ago)
+      end
+
+      it { expect(subject).to eq(:expired) }
+    end
+
+    context "without a registration" do
+      it { expect(subject).to eq(:pending) }
+    end
+  end
 end

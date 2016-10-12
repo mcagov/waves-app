@@ -10,8 +10,8 @@ feature "User views unclaimed task list", type: :feature, js: true do
 
   scenario "viewing the unclaimed submissions" do
     within("#submissions") do
-      expect(page).to have_content("Celebrator Doppelbock")
-      expect(page).to have_content("Horatio Nelson")
+      expect(page).to have_content("CELEBRATOR DOPPELBOCK")
+      expect(page).to have_content("HORATIO NELSON")
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
       expect(page).to have_content(submission.target_date)

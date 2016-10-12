@@ -13,8 +13,18 @@ $(document).ready(function() {
   });
 
   // Editable attributes
-  $('.editable-text').editable({  type: 'text' });
+  // Note that we add a class .upcase after *some* of the attributes
+  // have been updated. This is to mimic the upcase action that is
+  // done in the controller
   $('.editable-select').editable({ type: 'select' });
+  $('.editable-email').editable({ type: 'text' });
+
+  $('.editable-text').editable({
+    type: 'text',
+    success:  function(response, newValue) {
+      $(this).addClass('upcase');
+    }
+  });
 
   $('.editable-delivery-address').editable({
     type: 'text',
@@ -59,4 +69,8 @@ $(document).ready(function() {
   if ($('#similar-vessels .similar-radio_call_sign').length) {
     $('#vessel-radio_call_sign .fa-star-o.hidden').removeClass('hidden');
   }
+
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });
 });

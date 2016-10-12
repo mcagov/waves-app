@@ -49,6 +49,17 @@ module EditableSubmissionHelper
       "data-title" => attr_title)
   end
 
+  def editable_owner_email(attr_title, attr_name, attr_value, declaration)
+    editable_link_to(
+      @submission.editable?,
+      attr_value, "#",
+      class: "editable-email",
+      "data-name" => attr_name,
+      "data-value" => attr_value,
+      "data-url" => declaration_owners_path(declaration),
+      "data-title" => attr_title)
+  end
+
   def editable_owner_country(attr_value, declaration)
     editable_link_to(
       @submission.editable?,
@@ -58,7 +69,7 @@ module EditableSubmissionHelper
       "data-value" => attr_value,
       "data-url" => declaration_owners_path(declaration),
       "data-title" => "Country",
-      "data-source" => eligible_country_list.to_json)
+      "data-source" => owner_country_list.to_json)
   end
 
   def editable_owner_nationality(attr_value, declaration)
@@ -93,6 +104,6 @@ module EditableSubmissionHelper
       "data-value" => attr_value,
       "data-url" => submission_delivery_addresses_path(@submission),
       "data-title" => "Country",
-      "data-source" => nationality_list.to_json)
+      "data-source" => all_country_list.to_json)
   end
 end

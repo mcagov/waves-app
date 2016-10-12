@@ -13,7 +13,7 @@ describe Notification::OutstandingDeclaration, type: :model do
       expect(subject.additional_params).to eq(
         [declaration.id,
          declaration.submission.vessel.to_s,
-         declaration.submission.applicant.to_s,
+         declaration.submission.correspondent.to_s,
         ])
     end
   end
