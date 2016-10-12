@@ -9,7 +9,7 @@ feature "User declares a submission", type: :feature, js: true do
     visit submission_path(submission)
   end
 
-  scenario "and uploads a file" do
+  scenario "in its simplest form" do
     click_on("Owners")
     click_on("Add manual declaration")
 

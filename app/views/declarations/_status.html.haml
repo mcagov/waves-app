@@ -9,6 +9,6 @@
         online
     (#{ declaration.completed_at })
   - else
-    = form_for declaration, remote: true do |f|
-
-      .form-group= f.submit "Add manual declaration"
+    = simple_form_for declaration, remote: true, authenticity_token: true do |f|
+      .form-group= f.input :completed_form, as: :file, label: false
+      .form-group= f.button :submit, "Add manual declaration"
