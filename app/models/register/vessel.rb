@@ -29,5 +29,15 @@ module Register
         submission_list.map(&:notification_list).flatten
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end
+
+    def registration_status
+      return :pending unless latest_registration
+
+      if latest_registration .registered_until >= Date.today
+        :registered
+      else
+        :expired
+      end
+    end
   end
 end
