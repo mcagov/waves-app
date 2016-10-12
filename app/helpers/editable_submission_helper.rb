@@ -49,6 +49,17 @@ module EditableSubmissionHelper
       "data-title" => attr_title)
   end
 
+  def editable_owner_email(attr_title, attr_name, attr_value, declaration)
+    editable_link_to(
+      @submission.editable?,
+      attr_value, "#",
+      class: "editable-email",
+      "data-name" => attr_name,
+      "data-value" => attr_value,
+      "data-url" => declaration_owners_path(declaration),
+      "data-title" => attr_title)
+  end
+
   def editable_owner_country(attr_value, declaration)
     editable_link_to(
       @submission.editable?,

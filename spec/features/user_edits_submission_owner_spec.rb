@@ -7,22 +7,22 @@ feature "User edits Owner submission details", type: :feature, js: true do
     click_on("Owners")
 
     within(".owner-name") { click_on("HORATIO NELSON") }
-    find(".editable-input input").set("John Doe")
+    find(".editable-input input").set("JOHN DOE")
     first(".editable-submit").click
-    click_on("Owners")
+
     expect(page).to have_css(".owner-name", text: "JOHN DOE")
 
     within(".owner-nationality") { click_on("UNITED KINGDOM") }
     find(".editable-input select").select("MALTA")
     first(".editable-submit").click
-    click_on("Owners")
+
     expect(page).to have_css(".owner-nationality a", text: "MALTA")
 
     within(".owner-address") { click_on("2 KEEN ROAD, L") }
-
     within(".address-1") { click_on("2 KEEN") }
-    find(".editable-input input").set("Address 1")
+    find(".editable-input input").set("ADDRESS 1")
     first(".editable-submit").click
+
     expect(page).to have_css(".address-1", text: "ADDRESS 1")
 
     expect(page).to have_css(
