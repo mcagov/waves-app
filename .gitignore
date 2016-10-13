@@ -10,6 +10,7 @@
 /log/*
 /public/system
 /public/assets
+/spec/test_files
 /tags
 /tmp/*
 .env
