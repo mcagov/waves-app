@@ -2,10 +2,15 @@ class DeclarationsController < InternalPagesController
   before_action :load_declaration
 
   def update
-    declaration_params ||= {}
-    declaration_params[:completed_by] = current_user
-    @declaration.update_attributes(declaration_params)
-    @declaration.declared!
+    @declaration.completed_form = declaration_params[:completed_form]
+    @declaration.completed_by = current_user
+
+    @declaration.declared! if @declaration.save
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to submission_path(@declaration.submission) }
+    end
   end
 
   protected
@@ -16,6 +21,6 @@ class DeclarationsController < InternalPagesController
 
   def declaration_params
     params.require(:declaration).permit(
-      :completed_forms) || {}
+      :id, :completed_form)
   end
 end
