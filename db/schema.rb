@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012153730) do
+ActiveRecord::Schema.define(version: 20161013104704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "assets", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.uuid     "owner"
+    t.string   "owner_type"
+    t.index ["owner"], name: "index_assets_on_owner", using: :btree
+    t.index ["owner_type"], name: "index_assets_on_owner_type", using: :btree
+  end
 
   create_table "client_sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "external_session_key"
