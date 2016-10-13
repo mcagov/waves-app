@@ -31,7 +31,7 @@ class CoverLetterWriter
       i += spacer
     end
 
-    i +=  spacer * 4
+    i += spacer * 4
     @pdf.draw_text @registration.actioned_by, at: [l_margin, 500 - i]
   end
 
