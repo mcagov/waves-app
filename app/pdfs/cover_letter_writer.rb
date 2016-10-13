@@ -10,10 +10,7 @@ class CoverLetterWriter
 
   def write
     @pdf.start_new_page
-    mca_address
-    date_and_ref
-    correspondent_address
-    greeting
+    init_stationary
     vessel_name
     message
     @pdf
@@ -33,6 +30,9 @@ class CoverLetterWriter
       @pdf.draw_text line, at: [l_margin, 500 - i]
       i += spacer
     end
+
+    i +=  spacer * 4
+    @pdf.draw_text @registration.actioned_by, at: [l_margin, 500 - i]
   end
 
   # rubocop:disable Metrics/MethodLength

@@ -1,4 +1,11 @@
 module Stationary
+  def init_stationary
+    mca_address
+    date_and_ref
+    correspondent_address
+    greeting
+  end
+
   def l_margin
     45
   end
