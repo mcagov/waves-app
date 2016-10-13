@@ -28,7 +28,7 @@ module Stationary
                at: [l_margin, 780], scale: 0.35
 
     @pdf.image "#{Rails.root}/public/pdf_images/mca_ensign.png",
-               at: [l_margin, 100], scale: 0.18
+               at: [l_margin, 80], scale: 0.18
   end
 
   def mca_address

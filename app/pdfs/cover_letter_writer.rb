@@ -33,6 +33,8 @@ class CoverLetterWriter
 
     i += spacer * 4
     @pdf.draw_text @registration.actioned_by, at: [l_margin, 500 - i]
+    i += spacer
+    @pdf.draw_text "Registration Officer", at: [l_margin, 500 - i]
   end
 
   # rubocop:disable Metrics/MethodLength
