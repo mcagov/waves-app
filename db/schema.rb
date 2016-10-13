@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20161013104704) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.uuid     "owner"
+    t.uuid     "owner_id"
     t.string   "owner_type"
-    t.index ["owner"], name: "index_assets_on_owner", using: :btree
+    t.index ["owner_id"], name: "index_assets_on_owner_id", using: :btree
     t.index ["owner_type"], name: "index_assets_on_owner_type", using: :btree
   end
 
