@@ -18,6 +18,6 @@ class VesselNotesController < InternalPagesController
   end
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, assets_attributes: [:file])
   end
 end

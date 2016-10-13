@@ -2,13 +2,19 @@
   %thead
     %th Recorded by
     %th Content
+    %th Documents
     %th Date
   %tbody
     - vessel.notes.each do |note|
       %tr
         %td{width: '15%'}= note.actioned_by
-        %td{width: '65%'}
+        %td{width: '40%'}
           = link_to truncate(note.content, length: 100), "#note-#{ note.id }", "data-target" => "#note-#{ note.id }", "data-toggle" => "modal"
+        %td{width: '25%'}
+          - note.assets.each do |asset|
+            - if asset.file.exists?
+              %i.fa.fa-file-pdf-o
+              = link_to asset.file_file_name, asset.file.url
         %td{width: '20%'}
           = note.created_at.to_s(:date_time)
           = render partial: "vessels/modals/note", locals: { note: note }

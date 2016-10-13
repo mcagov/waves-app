@@ -16,17 +16,23 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page).to have_link("Add Correspondence")
   end
 
-  scenario "adding notes" do
+  scenario "adding a note with two attachments" do
     click_on("Notes")
     click_on("Add Note")
+
     fill_in("Content", with: "Some stuff")
+    page.attach_file(
+      "note_assets_attributes_0_file", "spec/support/files/mca_test.pdf")
+    page.attach_file(
+      "note_assets_attributes_1_file", "spec/support/files/mca_test.jpg")
     click_on("Save Note")
 
     click_on("Notes")
-    within("#notes") do
-      click_on("Some stuff")
-      expect(page).to have_css(".modal-body", text: "Some stuff")
-    end
+    expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
+    expect(page).to have_link("mca_test.jpg", href: /mca_test.jpg/)
+
+    click_on("Some stuff")
+    expect(page).to have_css(".modal-body", text: "Some stuff")
   end
 
   scenario "linking to the submission page (which can not be edited)" do
