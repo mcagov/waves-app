@@ -1,0 +1,15 @@
+%ul.nav.side-menu
+  %li
+    %a.toggle-tasks
+      %i.fa.fa-list-ol
+      Tasks
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Payment Batches", "/finance/batches"
+  %li
+    %a
+      %i.fa.fa-bar-chart-o
+      Reports
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Outstanding Work", "#"
