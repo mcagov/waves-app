@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :finance do
+    resources :batches
+  end
+
   resources :submissions, only: [:show] do
     member do
       post :claim

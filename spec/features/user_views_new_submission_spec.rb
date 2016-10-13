@@ -13,6 +13,8 @@ feature "User views new submission", type: :feature, js: true do
     within("h1") do
       expect(page).to have_content("New Registration ID: ")
     end
+
+    expect(page).to have_css(".active-register", text: "Active: Part III")
   end
 
   scenario "payment info", javascript: true do
