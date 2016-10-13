@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012124227) do
+ActiveRecord::Schema.define(version: 20161013104704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "assets", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.uuid     "owner_id"
+    t.string   "owner_type"
+    t.index ["owner_id"], name: "index_assets_on_owner_id", using: :btree
+    t.index ["owner_type"], name: "index_assets_on_owner_type", using: :btree
+  end
 
   create_table "client_sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "external_session_key"
@@ -58,12 +69,16 @@ ActiveRecord::Schema.define(version: 20161012124227) do
   create_table "declarations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
     t.string   "state"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.uuid     "notification_id"
     t.datetime "completed_at"
     t.json     "changeset"
     t.uuid     "completed_by_id"
+    t.string   "completed_form_file_name"
+    t.string   "completed_form_content_type"
+    t.integer  "completed_form_file_size"
+    t.datetime "completed_form_updated_at"
     t.index ["completed_by_id"], name: "index_declarations_on_completed_by_id", using: :btree
     t.index ["notification_id"], name: "index_declarations_on_notification_id", using: :btree
     t.index ["state"], name: "index_declarations_on_state", using: :btree

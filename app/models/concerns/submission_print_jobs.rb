@@ -8,10 +8,6 @@ module SubmissionPrintJobs
       printed!
     end
 
-    def print_job_types
-      []
-    end
-
     def build_print_jobs
       print_job_types.inject({}) do |h, print_job_type|
         h.merge(print_job_type => false)

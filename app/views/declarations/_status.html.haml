@@ -8,7 +8,14 @@
       - else
         online
     (#{ declaration.completed_at })
-  - else
-    = form_for declaration, remote: true do |f|
 
-      .form-group= f.submit "Add manual declaration"
+    - if declaration.completed_form.exists?
+      %p
+        %i.fa.fa-file-pdf-o
+        = link_to declaration.completed_form_file_name, declaration.completed_form.url
+
+  - else
+    = simple_form_for declaration, remote: true, authenticity_token: true do |f|
+      = f.input :id, as: :hidden
+      .form-group= f.input :completed_form, as: :file, label: false
+      .form-group= f.button :submit, "Add manual declaration"

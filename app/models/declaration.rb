@@ -4,6 +4,9 @@ class Declaration < ApplicationRecord
 
   has_one :notification, as: :notifiable
 
+  has_attached_file :completed_form, validate_media_type: false
+  do_not_validate_attachment_file_type :completed_form
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
