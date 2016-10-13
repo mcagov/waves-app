@@ -1,11 +1,9 @@
-def new_registration_attributes
-  JSON.parse(
-    File.read("spec/fixtures/new_registration.json")
-  )["data"]["attributes"]
-end
-
 def create_incomplete_submission!
-  Submission::NewRegistration.create(new_registration_attributes)
+  data =
+    JSON.parse(
+      File.read("spec/fixtures/new_registration.json")
+    )["data"]["attributes"]
+  Submission::NewRegistration.create(data)
 end
 
 def create_incomplete_paid_submission!

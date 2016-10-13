@@ -35,10 +35,6 @@ module SubmissionAttributes
       "Online"
     end
 
-    def job_type
-      ""
-    end
-
     protected
 
     def user_input
