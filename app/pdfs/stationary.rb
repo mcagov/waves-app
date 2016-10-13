@@ -1,5 +1,6 @@
 module Stationary
   def init_stationary
+    mca_logos
     mca_address
     date_and_ref
     correspondent_address
@@ -20,6 +21,14 @@ module Stationary
 
   def set_copy_font
     @pdf.font("Helvetica", size: 11)
+  end
+
+  def mca_logos
+    @pdf.image "#{Rails.root}/public/pdf_images/mca_color_logo.png",
+               at: [l_margin, 780], scale: 0.35
+
+    @pdf.image "#{Rails.root}/public/pdf_images/mca_ensign.png",
+               at: [l_margin, 100], scale: 0.18
   end
 
   def mca_address
@@ -48,7 +57,7 @@ module Stationary
   def correspondent_address
     i = 0
     @correspondent.compacted_address.each do |line|
-      @pdf.draw_text line, at: [l_margin, 680 - i]
+      @pdf.draw_text line, at: [l_margin, 640 - i]
       i += spacer
     end
   end
