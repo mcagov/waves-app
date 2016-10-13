@@ -23,6 +23,7 @@ class CoverLetterWriter
     @pdf.draw_text @vessel, at: [l_margin, 530]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def message
     set_copy_font
     i = 0
