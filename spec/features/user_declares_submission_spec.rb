@@ -5,7 +5,7 @@ feature "User declares a submission", type: :feature, js: true do
   let!(:bob) { create(:user, name: "Bob") }
 
   before do
-    login(bob)
+    login_to_part_3(bob)
     visit submission_path(submission)
   end
 
