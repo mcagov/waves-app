@@ -15,7 +15,7 @@ end
 
 def create_unassigned_submission!
   submission = create_incomplete_submission!
-  pay_submission(submission)
+  submission = pay_submission(submission)
 
   submission.declarations.incomplete.map(&:declared!)
   submission.reload
@@ -78,11 +78,16 @@ def visit_completed_submission
 end
 
 def pay_submission(submission, payment_file = "new_payment")
-  payment_json =
-    JSON.parse(File.read("spec/fixtures/#{payment_file}.json"))
+  payment_params =
+    JSON.parse(
+      File.read(Rails.root.join("spec", "fixtures", "#{payment_file}.json"))
+    )["data"]["attributes"]
 
-  payment = Payment.new(payment_json["data"]["attributes"])
-  payment.update_attribute(:submission_id, submission.id)
-  submission.paid!
+  payment_params[:submission_id] = submission.id
+
+  Builders::WorldPayPaymentBuilder.create(
+    payment_params.to_h.symbolize_keys)
+
+  submission.reload.paid!
   submission
 end
