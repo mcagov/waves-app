@@ -20,7 +20,6 @@ class DeclarationsController < InternalPagesController
   end
 
   def declaration_params
-    params.require(:declaration).permit(
-      :id, :completed_form)
+    params.require(:declaration).permit(:completed_form)
   end
 end

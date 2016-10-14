@@ -1,0 +1,37 @@
+%ul.nav.side-menu
+  %li
+    %a.toggle-tasks
+      %i.fa.fa-list-ol
+      Tasks
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "My Tasks", "/tasks/my-tasks"
+      %li= link_to "Team Tasks", "/tasks/team-tasks"
+      %li= link_to "Unclaimed Tasks", "/tasks/unclaimed"
+      %li= link_to "Referred Applications", "/tasks/referred"
+      %li= link_to "Rejected Applications", "/tasks/rejected"
+      %li= link_to "Cancelled Applications", "/tasks/cancelled"
+      %li= link_to "Incomplete Applications", "/tasks/incomplete"
+  %li
+    %a
+      %i.fa.fa-print
+      Print Queue
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Certificates of Registry", "/print_queue/certificates"
+  %li
+    %a
+      %i.fa.fa-ship
+      Vessels
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Registered Vessels", "/vessels"
+      %li= link_to "Pending Vessels", "#"
+      %li= link_to "Historical Vessels", "#"
+  %li
+    %a
+      %i.fa.fa-bar-chart-o
+      Reports
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Outstanding Work", "#"

@@ -18,4 +18,4 @@
     = simple_form_for declaration, remote: true, authenticity_token: true do |f|
       = f.input :id, as: :hidden
       .form-group= f.input :completed_form, as: :file, label: false
-      .form-group= f.button :submit, "Add manual declaration"
+      .form-group= f.button :submit, "Upload Declaration", class: "hidden"

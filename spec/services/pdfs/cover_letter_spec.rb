@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe CoverLetter do
+describe Pdfs::CoverLetter do
   context "for a single registration" do
     before { create_printing_submission! }
 
-    let(:cover_letter) { CoverLetter.new(Registration.last) }
+    let(:cover_letter) { Pdfs::CoverLetter.new(Registration.last) }
 
     it "has a filename" do
       expect(cover_letter.filename)
@@ -17,7 +17,7 @@ describe CoverLetter do
       3.times { create_printing_submission! }
     end
 
-    let(:cover_letter) { CoverLetter.new(Registration.all) }
+    let(:cover_letter) { Pdfs::CoverLetter.new(Registration.all) }
 
     it "has a filename" do
       expect(cover_letter.filename)

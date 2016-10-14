@@ -1,4 +1,4 @@
-class CoverLetter
+class Pdfs::CoverLetter
   def initialize(registrations)
     @registrations = Array(registrations)
     @pdf = Prawn::Document.new(
@@ -7,9 +7,9 @@ class CoverLetter
 
   def render
     @registrations.each do |registration|
-      @pdf = CoverLetterWriter.new(registration, @pdf).write
+      @pdf = Pdfs::CoverLetterWriter.new(registration, @pdf).write
     end
-    PdfRender.new(@pdf, :foo).render
+    Pdfs::PdfRender.new(@pdf, :foo).render
   end
 
   def filename

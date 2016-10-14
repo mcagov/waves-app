@@ -14,4 +14,16 @@ class InternalPagesController < ApplicationController
               type: "application/pdf",
               disposition: "inline"
   end
+
+  private
+
+  def current_activity
+    Activity.new(session[:current_activity])
+  end
+  helper_method :current_activity
+
+  def activity_root(activity)
+    session[:current_activity] = activity.to_sym
+    current_activity.root_path
+  end
 end

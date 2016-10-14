@@ -5,7 +5,7 @@ class PrintQueue::CoverLettersController < InternalPagesController
     respond_to do |format|
       format.pdf do
         load_registrations
-        pdf = CoverLetter.new(@registrations)
+        pdf = Pdfs::CoverLetter.new(@registrations)
         mark_submissions_printed
 
         render_pdf(pdf, pdf.filename)

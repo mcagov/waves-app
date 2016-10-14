@@ -1,4 +1,4 @@
-class Certificate
+class Pdfs::Certificate
   def initialize(registrations, mode = :printable)
     @registrations = Array(registrations)
     @mode = mode
@@ -9,9 +9,9 @@ class Certificate
   def render
     @registrations.each do |registration|
       @pdf =
-        CertificateWriter.new(registration, @pdf, @mode).write
+        Pdfs::CertificateWriter.new(registration, @pdf, @mode).write
     end
-    PdfRender.new(@pdf, @mode).render
+    Pdfs::PdfRender.new(@pdf, @mode).render
   end
 
   def filename
