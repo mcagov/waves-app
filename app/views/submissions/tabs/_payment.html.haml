@@ -4,18 +4,18 @@
       %tr
         %td{width: "30%"} Worldpay Order Code
         %td
-          %strong= payment.wp_order_code
+          %strong= payment.remittance.wp_order_code
       %tr
         %td Registered Country of Credit Card
         %td
-          %strong= payment.wp_country
+          %strong= payment.remittance.wp_country
       %tr
         %td IP address of Submission
         %td
-          %strong= payment.customer_ip
+          %strong= payment.remittance.customer_ip
       %tr
         %td Amount
         %td
           %strong
             £
-            = number_with_precision(payment.wp_amount.to_f / 100, precision: 2)
+            = number_with_precision(payment.amount.to_f / 100, precision: 2)

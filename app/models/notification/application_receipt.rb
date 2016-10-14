@@ -14,7 +14,7 @@ class Notification::ApplicationReceipt < Notification
   private
 
   def world_pay_transaction_no
-    notifiable.payment.wp_order_code
+    notifiable.payment.remittance.wp_order_code
   end
 
   def submission_ref_no

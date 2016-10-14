@@ -50,7 +50,7 @@ module SubmissionHelpers
     def init_processing_dates
       update_attribute(:received_at, Date.today)
 
-      if payment.wp_amount.to_i == 7500
+      if payment.amount == 7500
         update_attribute(:target_date, 5.days.from_now)
         update_attribute(:is_urgent, true)
       else

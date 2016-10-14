@@ -12,14 +12,17 @@ namespace :submissions do
           )["data"]["attributes"]
         )
 
-      payment =
-        Payment.new(
-          JSON.parse(
-            File.read(Rails.root.join("spec", "fixtures", "new_payment.json"))
-          )["data"]["attributes"]
-        )
+      payment_params =
+        JSON.parse(
+          File.read(Rails.root.join("spec", "fixtures", "new_payment.json"))
+        )["data"]["attributes"]
 
-      payment.submission_id = submission.id
+      payment_params[:submission_id] = submission.id
+
+      payment =
+        Builders::WorldPayPaymentBuilder.create(
+          payment_params.to_h.symbolize_keys)
+
       payment.save
     end
   end

@@ -2,9 +2,10 @@ module Api
   module V1
     class PaymentsController < ApiController
       def create
-        @payment = Payment.new(create_payment_params)
+        @payment =
+          Builders::WorldPayPaymentBuilder.create(create_payment_params)
 
-        if @payment.save
+        if @payment.valid?
           create_application_receipt_notification
           render json: @payment, status: :created
         else
@@ -19,7 +20,7 @@ module Api
         data = params.require("data")
         data.require(:attributes).permit(
           :submission_id, :wp_token, :wp_order_code,
-          :wp_amount, :wp_country, :customer_ip)
+          :wp_amount, :wp_country, :customer_ip, :wp_payment_response)
       end
 
       def create_application_receipt_notification
