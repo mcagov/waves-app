@@ -30,6 +30,10 @@ module Submission::Helpers
     print_jobs[print_job_type.to_s].present?
   end
 
+  def payment
+    payments.first
+  end
+
   protected
 
   def unassignable?
