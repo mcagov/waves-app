@@ -73,6 +73,10 @@ class Submission < ApplicationRecord
   validates :part, presence: true
   validates :ref_no, presence: true
 
+  scope :referred_until_expired, lambda {
+    where("date(referred_until) <= ?", Date.today)
+  }
+
   def owners
     declarations.map(&:owner)
   end
