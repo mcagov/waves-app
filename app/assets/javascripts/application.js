@@ -26,3 +26,4 @@
 //= require ./vendor/custom
 
 //= require submission
+//= require ui-helpers
