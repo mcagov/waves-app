@@ -1,8 +1,8 @@
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
-  include SubmissionAttributes
-  include SubmissionHelpers
+  include Submission::Attributes
+  include Submission::Helpers
 
   include ActiveModel::Transitions
 
