@@ -9,7 +9,10 @@ class Submission < ApplicationRecord
   belongs_to :delivery_address, class_name: "Address", required: false
   belongs_to :claimant, class_name: "User", required: false
 
-  has_one :payment
+  has_many :payments
+  def payment
+    payments.first
+  end
 
   has_many :declarations, -> { order("created_at asc") }
 

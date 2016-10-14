@@ -3,7 +3,7 @@ class SubmissionsController < InternalPagesController
 
   def show
     @submission = Submission.includes(
-      [:payment, :correspondences, :notifications]).find(params[:id])
+      [:payments, :correspondences, :notifications]).find(params[:id])
   end
 
   def claim
