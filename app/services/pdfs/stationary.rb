@@ -1,4 +1,4 @@
-module Stationary
+module Pdfs::Stationary
   def init_stationary
     mca_logos
     mca_address

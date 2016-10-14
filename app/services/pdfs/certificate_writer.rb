@@ -1,4 +1,4 @@
-class CertificateWriter
+class Pdfs::CertificateWriter
   def initialize(registration, pdf, mode = :printable)
     @registration = registration
     @vessel = @registration.vessel

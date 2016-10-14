@@ -1,4 +1,4 @@
-class PdfRender
+class Pdfs::PdfRender
   def initialize(pdf = nil, mode = :printable)
     @pdf = pdf || Prawn::Document.new
     @mode = mode

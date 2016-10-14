@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Certificate do
+describe Pdfs::Certificate do
   context "for a single registration" do
     let!(:vessel) { create(:register_vessel, name: "Jolly Roger") }
 
@@ -8,7 +8,7 @@ describe Certificate do
       create(:registration, vessel: vessel, registered_at: "2012-12-03")
     end
 
-    let(:certificate) { Certificate.new(registration, mode) }
+    let(:certificate) { Pdfs::Certificate.new(registration, mode) }
 
     context "as an attachment" do
       let(:mode) { :attachment }
@@ -51,7 +51,7 @@ describe Certificate do
       3.times { create_printing_submission! }
     end
 
-    let(:certificate) { Certificate.new(Registration.all) }
+    let(:certificate) { Pdfs::Certificate.new(Registration.all) }
 
     it "has a filename" do
       expect(certificate.filename)

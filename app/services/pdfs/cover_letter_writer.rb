@@ -1,5 +1,5 @@
-class CoverLetterWriter
-  include Stationary
+class Pdfs::CoverLetterWriter
+  include Pdfs::Stationary
 
   def initialize(registration, pdf)
     @registration = registration

@@ -6,7 +6,7 @@ class PrintQueue::CertificatesController < InternalPagesController
       format.html
       format.pdf do
         load_registrations
-        pdf = Certificate.new(@registrations)
+        pdf = Pdfs::Certificate.new(@registrations)
         mark_submissions_printed
 
         render_pdf(pdf, pdf.filename)
