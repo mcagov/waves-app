@@ -10,7 +10,9 @@ FactoryGirl.define do
   end
 
   factory :paid_submission, parent: :submission do
-    payment { build(:payment) }
+    after(:create) do |submission|
+      create(:payment, submission: submission)
+    end
   end
 
   factory :assigned_submission, parent: :paid_submission do
