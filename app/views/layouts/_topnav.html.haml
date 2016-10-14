@@ -5,7 +5,7 @@
         %a#menu_toggle
           %i.fa.fa-bars
       .nav.navbar-left.active-register
-        = link_to "Active: #{ current_activity }", "/", class: "btn btn-info"
+        = link_to "Active: #{ current_activity }", "/", class: "btn btn-#{current_activity.bs_theme}"
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown"}

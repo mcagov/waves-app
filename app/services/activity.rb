@@ -15,6 +15,16 @@ class Activity
     end
   end
 
+  def bs_theme
+    case @part
+    when :part_1 then :success
+    when :part_2 then :info
+    when :part_3 then :warning
+    when :part_4 then :danger
+    when :finance then :primary
+    end
+  end
+
   def is?(part)
     @part == part
   end
