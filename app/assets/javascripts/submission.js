@@ -75,4 +75,8 @@ $(document).ready(function() {
   $('.datetimepicker').datetimepicker({
     format: 'DD/MM/YYYY, h:mm:ss a'
   });
+
+  $('input#declaration_completed_form').on('change', function(){
+    $(this).closest('form').find(':submit').removeClass('hidden');
+  })
 });
