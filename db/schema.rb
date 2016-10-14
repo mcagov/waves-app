@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013104704) do
+ActiveRecord::Schema.define(version: 20161014100234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,14 +136,13 @@ ActiveRecord::Schema.define(version: 20161013104704) do
 
   create_table "payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "wp_token"
-    t.string   "wp_order_code"
-    t.string   "wp_amount"
-    t.string   "wp_country"
-    t.string   "customer_ip"
-    t.json     "wp_payment_response"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "remittance_type"
+    t.uuid     "remittance_id"
+    t.integer  "amount"
+    t.index ["remittance_id"], name: "index_payments_on_remittance_id", using: :btree
+    t.index ["remittance_type"], name: "index_payments_on_remittance_type", using: :btree
     t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
   end
 
@@ -233,6 +232,16 @@ ActiveRecord::Schema.define(version: 20161013104704) do
     t.index ["name"], name: "index_vessels_on_name", using: :btree
     t.index ["radio_call_sign"], name: "index_vessels_on_radio_call_sign", using: :btree
     t.index ["reg_no"], name: "index_vessels_on_reg_no", using: :btree
+  end
+
+  create_table "world_pay_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "wp_token"
+    t.string   "wp_order_code"
+    t.string   "wp_country"
+    t.string   "customer_ip"
+    t.json     "wp_payment_response"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
 end
