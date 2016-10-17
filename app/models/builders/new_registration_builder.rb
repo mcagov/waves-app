@@ -3,12 +3,7 @@ class Builders::NewRegistrationBuilder
     def create(submission, registration_starts_at)
       @submission = submission
       @registration_starts_at = registration_starts_at
-      @registration_starts_at ||= Date.today
-      @registration_starts_at = registration_starts_at
-
       create_dependencies
-
-      @registration
     end
 
     private

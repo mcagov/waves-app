@@ -13,7 +13,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def notification_list
-    NotificationList.for_submission(@submission)
+    Builders::NotificationListBuilder.for_submission(@submission)
   end
 
   def printed?(print_job_type)

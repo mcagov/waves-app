@@ -1,4 +1,4 @@
-class NotificationList
+class Builders::NotificationListBuilder
   class << self
     def for_submission(submission)
       @submission = submission

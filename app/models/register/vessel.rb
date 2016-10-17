@@ -25,7 +25,8 @@ module Register
     end
 
     def notification_list
-      NotificationList.for_registered_vessel(self, submission_list)
+      Builders::NotificationListBuilder
+        .for_registered_vessel(self, submission_list)
     end
 
     def registration_status
