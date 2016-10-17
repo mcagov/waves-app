@@ -24,26 +24,15 @@ describe Register::Vessel do
   end
 
   context "#notification_list" do
-    let!(:vessel_correspondence) do
-      create(:correspondence, noteable: vessel)
-    end
-
-    let!(:submission) { create(:submission) }
-    let!(:submission_correspondence) do
-      create(:correspondence, noteable: submission)
-    end
+    let!(:vessel) { build(:register_vessel) }
 
     before do
-      allow(vessel)
-        .to receive(:submission_list).and_return([submission])
+      expect(Builders::NotificationListBuilder)
+        .to receive(:for_registered_vessel)
+        .with(vessel)
     end
 
-    subject { vessel.notification_list }
-
-    it "returns the expected notification_list" do
-      expect(subject)
-        .to eq([submission_correspondence, vessel_correspondence])
-    end
+    it { vessel.notification_list }
   end
 
   context "#registration_status" do

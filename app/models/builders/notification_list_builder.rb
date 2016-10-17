@@ -13,7 +13,6 @@ class Builders::NotificationListBuilder
       @registered_vessel = registered_vessel
       @submissions = @registered_vessel.submissions
 
-      @submissions = submissions
       (
         @registered_vessel.correspondences +
         @submissions.map { |submission| for_submission(submission) }.flatten

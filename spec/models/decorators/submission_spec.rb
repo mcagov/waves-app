@@ -25,34 +25,14 @@ describe Decorators::Submission, type: :model do
   end
 
   context "#notification_list" do
-    let!(:submission) { create(:submission) }
+    let!(:submission) { build(:submission) }
 
-    let!(:outstanding_declaration) do
-      create(
-        :notification,
-        notifiable: create(:declaration, submission: submission),
-        created_at: Date.today)
+    before do
+      expect(Builders::NotificationListBuilder)
+        .to receive(:for_submission)
+        .with(submission)
     end
 
-    let!(:old_notification) do
-      create(:notification, notifiable: submission, created_at: 1.year.ago)
-    end
-
-    let!(:recent_notification) do
-      create(:notification, notifiable: submission, created_at: 1.day.ago)
-    end
-
-    let!(:correspondence) do
-      create(:correspondence, noteable: submission, created_at: 3.days.ago)
-    end
-
-    subject { Decorators::Submission.new(submission).notification_list }
-
-    it "builds a list" do
-      expect(subject).to eq(
-        [outstanding_declaration,
-         recent_notification, correspondence, old_notification]
-      )
-    end
+    it { described_class.new(submission).notification_list }
   end
 end

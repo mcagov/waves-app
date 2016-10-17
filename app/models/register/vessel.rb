@@ -14,7 +14,7 @@ module Register
              -> { where("type is null").order("created_at desc") },
              as: :noteable
 
-    has_many :submissions,-> { order("created_at desc") }
+    has_many :submissions, -> { order("created_at desc") }
 
     def to_s
       name.upcase
