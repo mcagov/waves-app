@@ -16,4 +16,8 @@ class Decorators::Submission < SimpleDelegator
     (correspondences + notifications + declarations.map(&:notification)
     ).compact.sort { |a, b| b.created_at <=> a.created_at }
   end
+
+  def printed?(print_job_type)
+    print_jobs && print_jobs[print_job_type.to_s].present?
+  end
 end

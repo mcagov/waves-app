@@ -2,7 +2,6 @@
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
-  include Submission::Helpers
   include Submission::Associations
   include ActiveModel::Transitions
 
@@ -52,7 +51,7 @@ class Submission < ApplicationRecord
 
     event :printed do
       transitions to: :completed, from: :printing,
-                  guard: :print_jobs_completed?
+                  guard: :printing_completed?
     end
 
     event :cancelled do
@@ -98,6 +97,10 @@ class Submission < ApplicationRecord
     Builders::NewRegistrationBuilder.create(self, registration_starts_at)
   end
 
+  def printing_completed?
+    Policies::Submission.printing_completed?(self)
+  end
+
   def owners
     declarations.map(&:owner)
   end
@@ -137,5 +140,19 @@ class Submission < ApplicationRecord
 
   def user_input
     changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
+  def payment
+    payments.first
+  end
+
+  protected
+
+  def remove_claimant
+    update_attribute(:claimant, nil)
+  end
+
+  def add_claimant(user)
+    update_attribute(:claimant, user)
   end
 end

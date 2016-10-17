@@ -6,5 +6,10 @@ class Policies::Submission
       return false unless @submission.payment.present?
       true
     end
+
+    def printing_completed?(submission)
+      @submission = submission
+      !@submission.print_jobs.map(&:last).include?(false)
+    end
   end
 end

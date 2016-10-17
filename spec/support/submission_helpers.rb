@@ -52,7 +52,8 @@ end
 
 def create_completed_submission!
   submission = create_printing_submission!
-  submission.printed!
+  PrintWorker.new(submission).update_job!(:cover_letter)
+  PrintWorker.new(submission).update_job!(:registration_certificate)
 
   submission.reload
 end
