@@ -38,5 +38,9 @@ describe Builders::NewRegistrationBuilder do
       expect(submission.print_jobs.symbolize_keys)
         .to eq(registration_certificate: false, cover_letter: false)
     end
+
+    it "saves the vessel_id to the submission" do
+      expect(submission.vessel_id).to be_present
+    end
   end
 end

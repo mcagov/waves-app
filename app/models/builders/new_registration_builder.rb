@@ -11,6 +11,7 @@ class Builders::NewRegistrationBuilder
     def create_dependencies
       Registration.transaction do
         create_vessel
+        assign_vessel
         create_owners
         create_registration
         create_print_jobs
@@ -28,6 +29,10 @@ class Builders::NewRegistrationBuilder
         radio_call_sign: @submission.vessel.radio_call_sign,
         vessel_type: @submission.vessel.type_of_vessel
       )
+    end
+
+    def assign_vessel
+      @submission.update_attribute(:vessel_id, @vessel.id)
     end
 
     def create_owners
