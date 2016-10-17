@@ -47,10 +47,6 @@ module Submission::Helpers
 
   protected
 
-  def unassignable?
-    declarations.incomplete.empty? && payment.present?
-  end
-
   def print_job_types
     [:registration_certificate, :cover_letter]
   end

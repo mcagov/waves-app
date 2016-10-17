@@ -20,13 +20,13 @@ class Submission < ApplicationRecord
     event :paid do
       transitions to: :unassigned, from: :incomplete,
                   on_transition: :init_processing_dates,
-                  guard: :unassignable?
+                  guard: :actionable?
     end
 
     event :declared do
       transitions to: :unassigned, from: :incomplete,
                   on_transition: :init_processing_dates,
-                  guard: :unassignable?
+                  guard: :actionable?
     end
 
     event :claimed do
@@ -88,6 +88,10 @@ class Submission < ApplicationRecord
 
   def init_processing_dates
     Builders::ProcessingDatesBuilder.create(self, payment.amount)
+  end
+
+  def actionable?
+    Policies::Submission.actionable?(self)
   end
 
   def owners
