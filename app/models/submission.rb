@@ -94,6 +94,10 @@ class Submission < ApplicationRecord
     Policies::Submission.actionable?(self)
   end
 
+  def process_application(registration_starts_at)
+    Builders::NewRegistrationBuilder.create(self, registration_starts_at)
+  end
+
   def owners
     declarations.map(&:owner)
   end
