@@ -51,29 +51,8 @@ module Submission::Helpers
     declarations.incomplete.empty? && payment.present?
   end
 
-  def init_new_submission
-    build_ref_no
-    build_declarations
-  end
-
-  def build_ref_no
-    self.ref_no = RefNo.generate(ref_no_prefix)
-  end
-
-  def ref_no_prefix
-    "3N"
-  end
-
   def print_job_types
     [:registration_certificate, :cover_letter]
-  end
-
-  def build_declarations
-    Builders::DeclarationBuilder.create(
-      self,
-      user_input[:owners],
-      user_input[:declarations]
-    )
   end
 
   def remove_claimant
@@ -82,18 +61,5 @@ module Submission::Helpers
 
   def add_claimant(user)
     update_attribute(:claimant, user)
-  end
-
-  def init_processing_dates
-    update_attribute(:received_at, Date.today)
-
-    if payment.amount == 7500
-      update_attribute(:target_date, 5.days.from_now)
-      update_attribute(:is_urgent, true)
-    else
-      update_attribute(:target_date, 20.days.from_now)
-    end
-
-    update_attribute(:referred_until, nil)
   end
 end

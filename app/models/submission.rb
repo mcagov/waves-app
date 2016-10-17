@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
@@ -81,6 +82,14 @@ class Submission < ApplicationRecord
     where("date(referred_until) <= ?", Date.today)
   }
 
+  def init_new_submission
+    Builders::SubmissionBuilder.create(self)
+  end
+
+  def init_processing_dates
+    Builders::ProcessingDatesBuilder.create(self, payment.amount)
+  end
+
   def owners
     declarations.map(&:owner)
   end
@@ -117,8 +126,6 @@ class Submission < ApplicationRecord
   def job_type
     "New Registration"
   end
-
-  protected
 
   def user_input
     changeset.blank? ? {} : changeset.deep_symbolize_keys!
