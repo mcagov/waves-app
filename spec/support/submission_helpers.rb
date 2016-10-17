@@ -1,9 +1,17 @@
-def create_incomplete_submission!
+def build_incomplete_submission!
   data =
     JSON.parse(
       File.read("spec/fixtures/new_registration.json")
     )["data"]["attributes"]
-  Submission.create(data)
+
+  Submission.new(data)
+end
+
+def create_incomplete_submission!
+  submission = build_incomplete_submission!
+  submission.save!
+
+  submission
 end
 
 def create_incomplete_paid_submission!

@@ -29,27 +29,6 @@ describe Submission, type: :model do
     end
   end
 
-  context "initializing a new_submission" do
-    let!(:submission) { create_incomplete_submission! }
-
-    it "has one completed declaration" do
-      expect(submission.declarations.completed.length).to eq(1)
-    end
-
-    it "has one incomplete declaration" do
-      expect(submission.declarations.incomplete.length).to eq(1)
-    end
-
-    it "does not build a notification for the completed declaration" do
-      expect(submission.declarations.completed.first.notification).to be_nil
-    end
-
-    it "builds a notification for the incomplete declaration" do
-      expect(submission.declarations.incomplete.first.notification)
-        .to be_a(Notification::OutstandingDeclaration)
-    end
-  end
-
   context ".referred_until_expired" do
     let!(:submission) { create(:submission, referred_until: referred_until) }
     let(:submissions) { Submission.referred_until_expired }
