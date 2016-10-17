@@ -11,5 +11,9 @@ class Policies::Submission
       @submission = submission
       !@submission.print_jobs.map(&:last).include?(false)
     end
+
+    def approvable?(_submission)
+      actionable?
+    end
   end
 end

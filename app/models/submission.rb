@@ -23,6 +23,10 @@ class Submission < ApplicationRecord
     Policies::Submission.actionable?(self)
   end
 
+  def approvable?(_registration_start_date = nil)
+    Policies::Submission.approvable?(self)
+  end
+
   def process_application(registration_starts_at)
     Builders::NewRegistrationBuilder.create(self, registration_starts_at)
   end

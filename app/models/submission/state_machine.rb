@@ -45,7 +45,8 @@ module Submission::StateMachine
 
         event :approved do
           transitions to: :printing, from: :assigned,
-                      on_transition: :process_application
+                      on_transition: :process_application,
+                      guard: :approvable?
         end
 
         event :printed do
