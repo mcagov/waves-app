@@ -2,8 +2,10 @@ class SubmissionsController < InternalPagesController
   before_action :load_submission, except: [:show]
 
   def show
-    @submission = Submission.includes(
+    submission = Submission.includes(
       [:payments, :correspondences, :notifications]).find(params[:id])
+
+    @submission = Decorators::Submission.new(submission)
   end
 
   def claim

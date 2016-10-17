@@ -4,10 +4,6 @@ module Submission::Helpers
     ).compact.sort { |a, b| b.created_at <=> a.created_at }
   end
 
-  def editable?
-    !completed? && !printing?
-  end
-
   def update_print_job!(print_job_type)
     print_jobs[print_job_type] = Time.now
     update_attribute(:print_jobs, print_jobs)
@@ -24,10 +20,6 @@ module Submission::Helpers
 
   def payment
     payments.first
-  end
-
-  def similar_vessels
-    Search.similar_vessels(vessel)
   end
 
   protected

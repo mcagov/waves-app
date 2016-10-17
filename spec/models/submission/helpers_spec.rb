@@ -30,27 +30,4 @@ describe "Submission Helpers", type: :model do
       )
     end
   end
-
-  context "#editable?" do
-    let(:submission) { Submission.new(state: submission_state) }
-    subject { submission.editable? }
-
-    context "when the state is completed" do
-      let(:submission_state) { :completed }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when the state is printing" do
-      let(:submission_state) { :printing }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when the state is something else" do
-      let(:submission_state) { "" }
-
-      it { expect(subject).to be_truthy }
-    end
-  end
 end
