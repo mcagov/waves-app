@@ -68,6 +68,10 @@ class Submission < ApplicationRecord
       transitions to: :referred, from: :assigned,
                   on_transition: :remove_claimant
     end
+
+    def event_fired(_current_state, _new_state, event)
+      self.paper_trail_event = event.name
+    end
   end
 
   validates :part, presence: true
