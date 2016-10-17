@@ -9,8 +9,10 @@ class Builders::NotificationListBuilder
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end
 
-    def for_registered_vessel(registered_vessel, submissions)
+    def for_registered_vessel(registered_vessel)
       @registered_vessel = registered_vessel
+      @submissions = @registered_vessel.submissions
+
       @submissions = submissions
       (
         @registered_vessel.correspondences +

@@ -23,20 +23,6 @@ describe Register::Vessel do
     it { expect(subject).to eq(current_reg) }
   end
 
-  context "#submission_list" do
-    before do
-      create(:registration, vessel: vessel, submission: submission)
-    end
-
-    let(:submission) { create(:submission) }
-
-    subject { vessel.submission_list }
-
-    it { expect(subject).to include(submission) }
-
-    it "will eventually include *other* submissions, e.g. change of owner"
-  end
-
   context "#notification_list" do
     let!(:vessel_correspondence) do
       create(:correspondence, noteable: vessel)

@@ -14,19 +14,14 @@ module Register
              -> { where("type is null").order("created_at desc") },
              as: :noteable
 
+    has_many :submissions,-> { order("created_at desc") }
+
     def to_s
       name.upcase
     end
 
-    def submission_list
-      registrations
-        .map(&:submission)
-        .compact.sort { |a, b| b.created_at <=> a.created_at }
-    end
-
     def notification_list
-      Builders::NotificationListBuilder
-        .for_registered_vessel(self, submission_list)
+      Builders::NotificationListBuilder.for_registered_vessel(self)
     end
 
     def registration_status
