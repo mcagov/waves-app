@@ -25,9 +25,7 @@ module Register
     end
 
     def notification_list
-      (correspondences +
-        submission_list.map(&:notification_list).flatten
-      ).compact.sort { |a, b| b.created_at <=> a.created_at }
+      NotificationList.for_registered_vessel(self, submission_list)
     end
 
     def registration_status
