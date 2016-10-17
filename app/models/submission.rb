@@ -110,6 +110,10 @@ class Submission < ApplicationRecord
     "Online"
   end
 
+  def job_type
+    "New Registration"
+  end
+
   protected
 
   def user_input

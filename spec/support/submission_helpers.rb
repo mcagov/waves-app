@@ -3,7 +3,7 @@ def create_incomplete_submission!
     JSON.parse(
       File.read("spec/fixtures/new_registration.json")
     )["data"]["attributes"]
-  Submission::NewRegistration.create(data)
+  Submission.create(data)
 end
 
 def create_incomplete_paid_submission!

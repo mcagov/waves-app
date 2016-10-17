@@ -4,7 +4,7 @@ describe Builders::DeclarationBuilder do
   context ".create" do
     before do
       Builders::DeclarationBuilder.create(
-        create(:new_registration), [alice, bob], ["alice@example.com"])
+        create(:submission), [alice, bob], ["alice@example.com"])
     end
 
     let(:alice) { build(:declaration_owner, email: "alice@example.com") }

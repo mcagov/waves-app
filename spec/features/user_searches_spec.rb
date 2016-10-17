@@ -14,7 +14,7 @@ describe "User searches" do
   end
 
   scenario "for a submission" do
-    submission = create(:new_registration)
+    submission = create(:submission)
 
     find("input#search").set(submission.ref_no)
     click_on("Go!")

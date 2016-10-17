@@ -4,7 +4,7 @@ describe Builders::WorldPayPaymentBuilder do
   context ".create" do
     let(:payment_params) do
       {
-        submission_id: create(:new_registration).id,
+        submission_id: create(:submission).id,
         wp_token: "TOKEN",
         wp_order_code: "ORDER1",
         wp_amount: "25.00",

@@ -16,8 +16,8 @@ describe Submission, type: :model do
       expect(submission).to be_incomplete
     end
 
-    it "has a ref_no" do
-      expect(submission.ref_no).to be_present
+    it "has a ref_no with the expected prefix" do
+      expect(submission.ref_no).to match(/3N-.*/)
     end
 
     it "has some declarations" do
@@ -72,6 +72,57 @@ describe Submission, type: :model do
     context "nil" do
       let(:referred_until) { nil }
       it { expect(submissions).to be_empty }
+    end
+  end
+
+  context "#process_application" do
+    let!(:submission) { create_assigned_submission! }
+
+    before do
+      expect(Builders::NewRegistrationBuilder)
+        .to receive(:create)
+        .with(submission, "12/12/2020 11:59 AM".to_datetime)
+
+      submission.process_application("12/12/2020 11:59 AM")
+    end
+
+    it "has not printed the registration_certificate" do
+      expect(submission.printed?(:registration_certificate))
+        .to be_falsey
+    end
+
+    it "has not printed the cover_letter" do
+      expect(submission.printed?(:cover_letter))
+        .to be_falsey
+    end
+  end
+
+  context "#update_print_job" do
+    let!(:submission) { create_printing_submission! }
+
+    context "printing the registration_certificate" do
+      before do
+        submission.update_print_job!(:registration_certificate)
+      end
+
+      it "has printed the registration_certificate" do
+        expect(submission.printed?(:registration_certificate))
+          .to be_truthy
+      end
+
+      it "has the state printing" do
+        expect(submission).to be_printing
+      end
+
+      context "printing the cover_letter" do
+        before do
+          submission.update_print_job!(:cover_letter)
+        end
+
+        it "has the state completed" do
+          expect(submission).to be_completed
+        end
+      end
     end
   end
 end

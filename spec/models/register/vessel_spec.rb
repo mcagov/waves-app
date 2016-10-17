@@ -25,14 +25,14 @@ describe Register::Vessel do
 
   context "#submission_list" do
     before do
-      create(:registration, vessel: vessel, submission: new_registration)
+      create(:registration, vessel: vessel, submission: submission)
     end
 
-    let(:new_registration) { create(:new_registration) }
+    let(:submission) { create(:submission) }
 
     subject { vessel.submission_list }
 
-    it { expect(subject).to include(new_registration) }
+    it { expect(subject).to include(submission) }
 
     it "will eventually include *other* submissions, e.g. change of owner"
   end
