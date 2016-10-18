@@ -16,7 +16,7 @@ class Submission < ApplicationRecord
   end
 
   def init_processing_dates
-    Builders::ProcessingDatesBuilder.create(self, payment.amount)
+    Builders::ProcessingDatesBuilder.create(self)
   end
 
   def actionable?

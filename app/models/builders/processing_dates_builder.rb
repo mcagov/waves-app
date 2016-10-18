@@ -1,12 +1,12 @@
 class Builders::ProcessingDatesBuilder
   class << self
-    def create(submission, payment_amount)
+    def create(submission)
       @submission = submission
-      @payment_amount = payment_amount
+      @payment_amount = submission.payments.sum(&:amount)
 
       @submission.update_attribute(:received_at, Date.today)
 
-      if payment_amount == 7500
+      if @payment_amount == 7500
         @submission.update_attribute(:target_date, 5.days.from_now)
         @submission.update_attribute(:is_urgent, true)
       else

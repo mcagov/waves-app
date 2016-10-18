@@ -69,7 +69,7 @@ describe Submission, type: :model do
 
         expect(Builders::ProcessingDatesBuilder)
           .to receive(:create)
-          .with(submission, payment.amount)
+          .with(submission)
       end
 
       it { submission.paid! }
@@ -107,7 +107,7 @@ describe Submission, type: :model do
       before do
         expect(Builders::ProcessingDatesBuilder)
           .to receive(:create)
-          .with(submission, submission.payment.amount)
+          .with(submission)
 
         submission.unreferred!
       end
