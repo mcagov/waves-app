@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   end
 
   namespace :finance do
-    resources :payments
+    resources :payments, only: [:new, :create]
+    resources :submissions, only: [:show]
   end
 
   resources :submissions, only: [:show] do

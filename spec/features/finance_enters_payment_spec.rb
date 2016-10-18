@@ -21,7 +21,10 @@ describe "Finance enters a payment" do
 
     fill_in("Applicant Name", with: "Bob")
     fill_in("Applicant Email", with: "bob@example.com")
-
     fill_in("Documents Received", with: "bits and bobs")
+
+    click_on("Save Application")
+
+    expect(page).to have_css(".alert", "Application successfully saved")
   end
 end
