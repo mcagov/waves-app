@@ -10,6 +10,21 @@ en:
       # html: "<abbr title="required">*</abbr>"
     error_notification:
       default_message: "Please review the problems below:"
+
+    labels:
+      finance_payment:
+        part: Part of Register
+        task: Application Type
+        vessel_reg_no: Official Number
+        vessel_name: Vessel Name
+        service_level: Service Level
+        payment_type: Payment Type
+        payment_amount: Fee Amount
+        receipt_no: Fee Receipt Number
+        applicant_name: Applicant Name
+        applicant_email: Applicant Email
+        documents_received: Documents Received
+
     # Examples
     # labels:
     #   defaults:
