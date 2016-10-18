@@ -13,5 +13,9 @@ describe Builders::SubmissionBuilder do
     it "builds two declarations" do
       expect(submission.declarations.count).to eq(2)
     end
+
+    it "is a new registration" do
+      expect(submission.task.to_sym).to eq(:new_registration)
+    end
   end
 end
