@@ -9,15 +9,9 @@
         %h2 Finance & Processing Information
         .clearfix
       .x_content
-        .row
+        = simple_form_for @payment, url: finance_payments_path do |f|
           .col-md-3
-            .form-group
-              %label.control-label Part of Register
-              %select.form-control.select2_single.select2-hidden-accessible
-                %option Part I
-                %option Part II
-                %option Part III
-                %option Part IV
+            = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, label: "Part of Register"
           .col-md-3
             .form-group
               %label.control-label Application Type
@@ -80,7 +74,7 @@
               %label.control-label Documents Received
               %input#documents_received.form-control{type: "text"}
 
-.row.no-print
+  .row.no-print
   .col-xs-12
     = link_to '/finance/add-fee-receipt-success', class: 'btn btn-success btn-lg pull-right' do
       %i.fa.fa-check

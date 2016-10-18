@@ -1,6 +1,13 @@
 class Activity
   attr_reader :part
 
+  PART_TYPES = [
+    ["Part I", :part_1],
+    ["Part II", :part_2],
+    ["Part III", :part_3],
+    ["Part IV", :part_4],
+  ].freeze
+
   def initialize(part)
     @part = part.to_sym
   end
