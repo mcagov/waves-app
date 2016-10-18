@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018092720) do
+ActiveRecord::Schema.define(version: 20161018142753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,7 +173,6 @@ ActiveRecord::Schema.define(version: 20161018092720) do
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
-    t.string   "type"
     t.string   "state"
     t.uuid     "claimant_id"
     t.datetime "referred_until"
@@ -182,11 +181,11 @@ ActiveRecord::Schema.define(version: 20161018092720) do
     t.json     "print_jobs"
     t.uuid     "vessel_id"
     t.string   "task"
+    t.string   "source"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
     t.index ["state"], name: "index_submissions_on_state", using: :btree
-    t.index ["type"], name: "index_submissions_on_type", using: :btree
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
