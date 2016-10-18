@@ -1,9 +1,17 @@
-def create_incomplete_submission!
+def build_incomplete_submission!
   data =
     JSON.parse(
       File.read("spec/fixtures/new_registration.json")
     )["data"]["attributes"]
-  Submission::NewRegistration.create(data)
+
+  Submission.new(data)
+end
+
+def create_incomplete_submission!
+  submission = build_incomplete_submission!
+  submission.save!
+
+  submission
 end
 
 def create_incomplete_paid_submission!
@@ -52,7 +60,8 @@ end
 
 def create_completed_submission!
   submission = create_printing_submission!
-  submission.printed!
+  PrintWorker.new(submission).update_job!(:cover_letter)
+  PrintWorker.new(submission).update_job!(:registration_certificate)
 
   submission.reload
 end

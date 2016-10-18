@@ -7,7 +7,7 @@
       %th Date Processed
       %th Source
   %tbody
-    - vessel.submission_list.each do |submission|
+    - vessel.submissions.each do |submission|
       %tr
         %td= link_to submission.ref_no, submission_path(submission)
         %td= link_to submission.job_type, submission_path(submission)

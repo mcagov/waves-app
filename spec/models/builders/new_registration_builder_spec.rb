@@ -2,10 +2,12 @@ require "rails_helper"
 
 describe Builders::NewRegistrationBuilder do
   context ".create" do
-    let!(:submission) { create_assigned_submission! }
-    let(:registration) do
+    before do
       described_class.create(submission, "10/10/2012 12:23 PM".to_datetime)
     end
+
+    let!(:submission) { create_assigned_submission! }
+    let(:registration) { submission.registration }
 
     it "creates the expected vessel type" do
       expect(registration.vessel.vessel_type).to eq("BARGE")
@@ -30,6 +32,15 @@ describe Builders::NewRegistrationBuilder do
     it "sets the registration#actioned_by" do
       expect(registration.actioned_by)
         .to eq(submission.claimant)
+    end
+
+    it "builds the print_jobs" do
+      expect(submission.print_jobs.symbolize_keys)
+        .to eq(registration_certificate: false, cover_letter: false)
+    end
+
+    it "saves the vessel_id to the submission" do
+      expect(submission.vessel_id).to be_present
     end
   end
 end

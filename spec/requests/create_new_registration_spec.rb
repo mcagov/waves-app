@@ -5,24 +5,24 @@ describe "create new new_registrations via the API", type: :request do
 
   context "with valid params" do
     let(:params) { valid_create_new_registration_json }
-    let(:new_registration) { Submission::NewRegistration.find(json["id"]) }
+    let(:submission) { Submission.find(json["id"]) }
     let(:parsed_body) { JSON.parse(response.body) }
 
     it "returns the status code :created" do
       expect(response).to have_http_status(:created)
     end
 
-    it "responds with the new_registration id" do
+    it "responds with the submission id" do
       expect(parsed_body["data"]["id"]).to be_present
     end
 
     it "responds with the ref_no" do
       expect(parsed_body["data"]["attributes"]["ref-no"]
-            ).to eq(new_registration.ref_no)
+            ).to eq(submission.ref_no)
     end
 
     it "creates a part_3 new_registration" do
-      expect(new_registration.part.to_sym).to eq(:part_3)
+      expect(submission.part.to_sym).to eq(:part_3)
     end
   end
 

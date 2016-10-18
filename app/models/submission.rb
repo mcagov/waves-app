@@ -1,74 +1,8 @@
 class Submission < ApplicationRecord
   has_paper_trail only: [:state]
 
-  include Submission::Helpers
   include Submission::Associations
-  include ActiveModel::Transitions
-
-  state_machine auto_scopes: true do
-    state :incomplete, enter: :init_new_submission
-    state :unassigned
-    state :assigned
-    state :referred
-    state :printing
-    state :completed
-    state :rejected
-    state :referred
-    state :cancelled
-
-    event :paid do
-      transitions to: :unassigned, from: :incomplete,
-                  on_transition: :init_processing_dates,
-                  guard: :unassignable?
-    end
-
-    event :declared do
-      transitions to: :unassigned, from: :incomplete,
-                  on_transition: :init_processing_dates,
-                  guard: :unassignable?
-    end
-
-    event :claimed do
-      transitions to: :assigned,
-                  from: [:unassigned, :rejected, :cancelled],
-                  on_transition: :add_claimant
-    end
-
-    event :unreferred do
-      transitions to: :unassigned, from: :referred,
-                  on_transition: :init_processing_dates
-    end
-
-    event :unclaimed do
-      transitions to: :unassigned, from: :assigned,
-                  on_transition: :remove_claimant
-    end
-
-    event :approved do
-      transitions to: :printing, from: :assigned,
-                  on_transition: :process_application
-    end
-
-    event :printed do
-      transitions to: :completed, from: :printing,
-                  guard: :print_jobs_completed?
-    end
-
-    event :cancelled do
-      transitions to: :cancelled, from: :assigned,
-                  on_transition: :remove_claimant
-    end
-
-    event :rejected do
-      transitions to: :rejected, from: :assigned,
-                  on_transition: :remove_claimant
-    end
-
-    event :referred do
-      transitions to: :referred, from: :assigned,
-                  on_transition: :remove_claimant
-    end
-  end
+  include Submission::StateMachine
 
   validates :part, presence: true
   validates :ref_no, presence: true
@@ -76,6 +10,30 @@ class Submission < ApplicationRecord
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
+
+  def init_new_submission
+    Builders::SubmissionBuilder.create(self)
+  end
+
+  def init_processing_dates
+    Builders::ProcessingDatesBuilder.create(self)
+  end
+
+  def actionable?
+    Policies::Submission.actionable?(self)
+  end
+
+  def approvable?(_registration_start_date = nil)
+    Policies::Submission.approvable?(self)
+  end
+
+  def process_application(registration_starts_at)
+    Builders::NewRegistrationBuilder.create(self, registration_starts_at)
+  end
+
+  def printing_completed?
+    Policies::Submission.printing_completed?(self)
+  end
 
   def owners
     declarations.map(&:owner)
@@ -110,9 +68,25 @@ class Submission < ApplicationRecord
     "Online"
   end
 
-  protected
+  def job_type
+    "New Registration"
+  end
 
   def user_input
     changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
+  def payment
+    payments.first
+  end
+
+  protected
+
+  def remove_claimant
+    update_attribute(:claimant, nil)
+  end
+
+  def add_claimant(user)
+    update_attribute(:claimant, user)
   end
 end

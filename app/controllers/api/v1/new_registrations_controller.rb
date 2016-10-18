@@ -3,7 +3,7 @@ module Api
     class NewRegistrationsController < ApiController
       def create
         @new_registration =
-          Submission::NewRegistration.new(create_new_registration_params)
+          Submission.new(create_new_registration_params)
 
         if @new_registration.save
           render json: @new_registration, status: :created

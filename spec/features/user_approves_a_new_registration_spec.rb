@@ -31,7 +31,7 @@ feature "User approves a new registration", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
 
-    expect(Submission.last.printed?(:registration_certificate)).to be_truthy
+    expect(Submission.last.print_jobs["registration_certificate"]).to be_truthy
   end
 
   scenario "printing the cover letter" do
@@ -48,7 +48,7 @@ feature "User approves a new registration", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
 
-    expect(Submission.last.printed?(:cover_letter)).to be_truthy
+    expect(Submission.last.print_jobs["cover_letter"]).to be_truthy
   end
 
   scenario "attaching certificate to the email" do
