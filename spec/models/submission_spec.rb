@@ -33,8 +33,6 @@ describe Submission, type: :model do
     let!(:submission) { create(:submission, referred_until: referred_until) }
     let(:submissions) { Submission.referred_until_expired }
 
-    it "builds this into ExpiredReferral service"
-
     context "tomorrow" do
       let(:referred_until) { Date.tomorrow }
       it { expect(submissions).to be_empty }
