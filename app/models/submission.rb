@@ -6,6 +6,8 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
   validates :ref_no, presence: true
+  validates :source, presence: true
+  validates :task, presence: true
 
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
@@ -62,10 +64,6 @@ class Submission < ApplicationRecord
 
   def correspondent_email
     correspondent.email if correspondent
-  end
-
-  def source
-    "Online"
   end
 
   def job_type
