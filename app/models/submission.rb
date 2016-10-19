@@ -29,6 +29,14 @@ class Submission < ApplicationRecord
     Policies::Submission.approvable?(self)
   end
 
+  def editable?
+    Policies::Submission.editable?(self)
+  end
+
+  def officer_intervention_required?
+    Policies::Submission.officer_intervention_required?(self)
+  end
+
   def process_application(registration_starts_at)
     Builders::NewRegistrationBuilder.create(self, registration_starts_at)
   end
@@ -42,7 +50,7 @@ class Submission < ApplicationRecord
   end
 
   def vessel
-    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
+    @vessel ||= Submission::Vessel.new(user_input[:vessel_info] || {})
   end
 
   def vessel=(vessel_params)
@@ -59,7 +67,7 @@ class Submission < ApplicationRecord
   end
 
   def correspondent
-    declarations.first.owner if declarations
+    declarations.first.owner unless declarations.empty?
   end
 
   def correspondent_email
@@ -67,7 +75,7 @@ class Submission < ApplicationRecord
   end
 
   def job_type
-    "New Registration"
+    Task.description(task)
   end
 
   def user_input

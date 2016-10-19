@@ -19,6 +19,7 @@ class PrintQueue::BaseController < InternalPagesController
   def load_submissions
     @submissions =
       Submission
+      .where(part: current_activity.part)
       .includes([registration: [vessel: [:owners]]]).printing
       .map { |submission| Decorators::Submission.new(submission) }
   end

@@ -4,10 +4,6 @@ class Decorators::Submission < SimpleDelegator
     super
   end
 
-  def editable?
-    !completed? && !printing?
-  end
-
   def similar_vessels
     Search.similar_vessels(vessel)
   end
@@ -18,5 +14,33 @@ class Decorators::Submission < SimpleDelegator
 
   def printed?(print_job_type)
     print_jobs && print_jobs[print_job_type.to_s].present?
+  end
+
+  def vessel_name
+    return vessel.name if vessel.name
+    if finance_payment && finance_payment.vessel_name.present?
+      finance_payment.vessel_name
+    else
+      "Unkown"
+    end
+  end
+
+  def applicant_name
+    return correspondent if correspondent
+    if finance_payment && finance_payment.applicant_name.present?
+      finance_payment.applicant_name
+    else
+      "Unkown"
+    end
+  end
+
+  def source_description
+    source.titleize
+  end
+
+  private
+
+  def finance_payment
+    payment.remittance if source.to_sym == :manual_entry
   end
 end
