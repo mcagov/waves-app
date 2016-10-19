@@ -27,4 +27,8 @@ describe "Finance enters a payment" do
 
     expect(page).to have_css(".alert", "Application successfully saved")
   end
+
+  scenario "by clicking the sidebar"
+  scenario "and views the payment list"
+  scenario "and organises payments into batches"
 end
