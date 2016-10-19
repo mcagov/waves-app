@@ -67,7 +67,7 @@ class Submission < ApplicationRecord
   end
 
   def job_type
-    "New Registration"
+    Task.description(task)
   end
 
   def user_input
