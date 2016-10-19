@@ -29,4 +29,11 @@ describe "User prints from queue", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
   end
+
+  scenario "when viewing another part of the registry" do
+    login_to_part_1
+    visit print_queue_certificates_path
+
+    expect(page).to have_content("There are no items in this queue")
+  end
 end

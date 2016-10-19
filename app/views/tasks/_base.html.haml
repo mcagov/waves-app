@@ -23,6 +23,13 @@
             Your task list is clear.
           %p.text-center
             = link_to 'Get More Work', tasks_unclaimed_path, class: 'btn btn-primary'
+    - elsif submissions.empty?
+      .x_panel
+        .x_panel
+          .x_content
+            %h2.text-center
+              There are no items in this queue
+
     - else
       .x_panel
         %table#submissions.table.table-striped.table-hover
