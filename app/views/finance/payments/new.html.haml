@@ -16,9 +16,9 @@
             .col-md-3
               = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
             .col-md-3
-              = f.input :vessel_reg_no, label: "Official Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe
+              = f.input :vessel_reg_no, label: "Official Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
             .col-md-3
-              = f.input :vessel_name, label: "Vessel Name <span style='font-weight: normal !important;'>(if known)</span>".html_safe
+              = f.input :vessel_name, label: "Vessel Name <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
           .row
             .col-md-3
               = f.input :service_level, collection: ServiceLevel::SERVICE_LEVEL_TYPES, as: :select, include_blank: false,input_html: { class: "select2 select2_single" }
@@ -27,10 +27,10 @@
             .col-md-3
               = f.input :payment_amount, as: :currency
             .col-md-3
-              = f.input :receipt_no
+              = f.input :receipt_no, input_html: { class: "upcase" }
           .row
             .col-md-6
-              = f.input :applicant_name
+              = f.input :applicant_name, input_html: { class: "upcase" }
             .col-md-6
               = f.input :applicant_email
           .row
