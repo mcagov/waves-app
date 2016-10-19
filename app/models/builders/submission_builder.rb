@@ -15,7 +15,7 @@ class Builders::SubmissionBuilder
       @submission.part ||= :part_3
       @submission.task ||= :new_registration
       @submission.source ||= :online
-      @submission.ref_no = RefNo.generate("3N")
+      @submission.ref_no = RefNo.generate_for(@submission)
     end
 
     def build_declarations
