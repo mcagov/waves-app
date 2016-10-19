@@ -29,6 +29,10 @@ class Submission < ApplicationRecord
     Policies::Submission.approvable?(self)
   end
 
+  def editable?
+    Policies::Submission.editable?(self)
+  end
+
   def officer_intervention_required?
     Policies::Submission.officer_intervention_required?(self)
   end

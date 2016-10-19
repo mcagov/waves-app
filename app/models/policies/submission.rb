@@ -16,6 +16,10 @@ class Policies::Submission
       true
     end
 
+    def editable?(submission)
+      !submission.completed? && !submission.printing?
+    end
+
     def printing_completed?(submission)
       @submission = submission
       !@submission.print_jobs.map(&:last).include?(false)
