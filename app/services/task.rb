@@ -11,4 +11,10 @@ class Task
     ["Transcript Request", :transcript],
     ["Unknown", :unknown],
   ].freeze
+
+  class << self
+    def description(key)
+      TASK_TYPES.find { |t| t[1] == key.to_sym }[0]
+    end
+  end
 end

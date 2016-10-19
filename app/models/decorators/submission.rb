@@ -38,6 +38,10 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
+  def source_description
+    source.titleize
+  end
+
   private
 
   def finance_payment

@@ -50,7 +50,7 @@
                 %td= submission.referred? ? submission.referred_until : "n/a"
                 %td= submission.target_date
                 %td= css_tick(submission.payment.present?)
-                %td= submission.source
+                %td= submission.source_description
                 %td= submission.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
 
