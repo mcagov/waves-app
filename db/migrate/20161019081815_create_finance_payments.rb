@@ -7,7 +7,7 @@ class CreateFinancePayments < ActiveRecord::Migration[5.0]
       t.string   :vessel_name
       t.string   :service_level
       t.string   :payment_type
-      t.integer   :payment_amount
+      t.decimal  :payment_amount
       t.string   :receipt_no
       t.string   :applicant_name
       t.string   :applicant_email
