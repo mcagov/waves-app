@@ -4,10 +4,6 @@ class Decorators::Submission < SimpleDelegator
     super
   end
 
-  def editable?
-    !completed? && !printing?
-  end
-
   def similar_vessels
     Search.similar_vessels(vessel)
   end
