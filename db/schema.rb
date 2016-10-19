@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018142753) do
+ActiveRecord::Schema.define(version: 20161019081815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,24 @@ ActiveRecord::Schema.define(version: 20161018142753) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
+  create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "part"
+    t.string   "task"
+    t.string   "vessel_reg_no"
+    t.string   "vessel_name"
+    t.string   "service_level"
+    t.string   "payment_type"
+    t.string   "payment_amount"
+    t.string   "receipt_no"
+    t.string   "applicant_name"
+    t.string   "applicant_email"
+    t.string   "documents_received"
+    t.uuid     "actioned_by_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
   end
 
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
