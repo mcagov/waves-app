@@ -31,7 +31,7 @@
           = render partial: "submissions/actions/add_correspondence", locals: { submission: submission }
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
-          = render partial: "submissions/tabs/payment", locals: { payment: submission.payment }
+          = render partial: "submissions/tabs/payment", collection: submission.payments, as: :payment
 
           = render partial: "submissions/tabs/delivery_address", locals: { delivery_address: submission.delivery_address }
 

@@ -1,87 +1,44 @@
-.row
-  .col-sm-12
-    %h1{style: "margin-top: 0px !important;"}
-      Finance: Record Payment
-.row
-  .col-md-12
-    .x_panel
-      .x_title
-        %h2 Finance & Processing Information
-        .clearfix
-      .x_content
-        .row
-          .col-md-3
-            .form-group
-              %label.control-label Part of Register
-              %select.form-control.select2_single.select2-hidden-accessible
-                %option Part I
-                %option Part II
-                %option Part III
-                %option Part IV
-          .col-md-3
-            .form-group
-              %label.control-label Application Type
-              %select.form-control.select2_single.select2-hidden-accessible
-                %option New Registration
-                %option Name Reservation
-                %option Change of Ownership
-                %option Change of Vessel Details
-                %option Renewal
-                %option Re-registration
-                %option Closure
-          .col-md-3
-            .form-group
-              %label.control-label
-                Official Number
-                %span{style: 'font-weight: normal !important;'} (if known)
-              %input#official_number.form-control{type: "text"}
-          .col-md-3
-            .form-group
-              %label.control-label
-                Vessel Name
-                %span{style: 'font-weight: normal !important;'} (if known)
-              %input#vessel_name.form-control{type: "text"}
-        .row
-          .col-md-3
-            .form-group
-              %label.control-label Service Level
-              %select.form-control.select2_single
-                %option Premium
-                %option 3 days
-                %option{selected: 'selected'} 10 days
-          .col-md-3
-            .form-group
-              %label.control-label Payment Type
-              %select.form-control.select2_single
-                %option Bacs
-                %option Cash
-                %option Client Account
-                %option Cheque
-                %option Credit/Debit Card
-                %option Postal Order
-          .col-md-3
-            .form-group.has-feedback
-              %label.control-label Fee Amount
-              %input#declaration.form-control.has-feedback-left{type: "text"}
-              %span.form-control-feedback.left{"aria-hidden" => "true"} £
+= simple_form_for @finance_payment, url: finance_payments_path do |f|
+  .row
+    .col-sm-12
+      %h1{style: "margin-top: 0px !important;"}
+        Finance: Record Payment
+  .row
+    .col-md-12
+      .x_panel
+        .x_title
+          %h2 Finance & Processing Information
+          .clearfix
+        .x_content
+          .row
+            .col-md-3
+              = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+            .col-md-3
+              = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+            .col-md-3
+              = f.input :vessel_reg_no, label: "Official Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe
+            .col-md-3
+              = f.input :vessel_name, label: "Vessel Name <span style='font-weight: normal !important;'>(if known)</span>".html_safe
+          .row
+            .col-md-3
+              = f.input :service_level, collection: ServiceLevel::SERVICE_LEVEL_TYPES, as: :select, include_blank: false,input_html: { class: "select2 select2_single" }
+            .col-md-3
+              = f.input :payment_type, collection: Payment::FinancePayment::PAYMENT_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+            .col-md-3
+              = f.input :payment_amount, as: :currency
+            .col-md-3
+              = f.input :receipt_no
+          .row
+            .col-md-6
+              = f.input :applicant_name
+            .col-md-6
+              = f.input :applicant_email
+          .row
+            .col-md-12
+              = f.input :documents_received
 
-          .col-md-3
-            .form-group
-              %label.control-label Fee Receipt Number
-              %input#receipt_number.form-control{type: "text"}
-        .row
-          .col-md-12
-            .form-group
-              %label.control-label Applicant Email Address
-              %input#email_address.form-control{type: "text"}
-        .row
-          .col-md-12
-            .form-group
-              %label.control-label Documents Received
-              %input#documents_received.form-control{type: "text"}
-
-.row.no-print
+  .row.no-print
   .col-xs-12
-    = link_to '/finance/add-fee-receipt-success', class: 'btn btn-success btn-lg pull-right' do
+    = button_tag(type: 'submit', class: "btn-success btn-lg pull-right") do
       %i.fa.fa-check
       Save Application

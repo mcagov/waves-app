@@ -35,4 +35,8 @@ describe Decorators::Submission, type: :model do
 
     it { described_class.new(submission).notification_list }
   end
+
+  context "#service_level" do
+    it "prefers the service_level as :standard over is_urgent?"
+  end
 end

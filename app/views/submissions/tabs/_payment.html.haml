@@ -1,4 +1,4 @@
-- if payment
+- if payment.remittance
   %table.table.table-striped#payment
     %tbody
       %tr
@@ -19,3 +19,13 @@
           %strong
             £
             = number_with_precision(payment.amount.to_f / 100, precision: 2)
+- else
+  %table.table.table-striped#payment
+    %tbody
+      %tr
+        %td Amount
+        %td
+          %strong
+            £
+            = number_with_precision(payment.amount.to_f / 100, precision: 2)
+

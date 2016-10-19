@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018092720) do
+ActiveRecord::Schema.define(version: 20161019081815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,24 @@ ActiveRecord::Schema.define(version: 20161018092720) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "part"
+    t.string   "task"
+    t.string   "vessel_reg_no"
+    t.string   "vessel_name"
+    t.string   "service_level"
+    t.string   "payment_type"
+    t.decimal  "payment_amount"
+    t.string   "receipt_no"
+    t.string   "applicant_name"
+    t.string   "applicant_email"
+    t.string   "documents_received"
+    t.uuid     "actioned_by_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
+  end
+
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "noteable_id"
     t.string   "noteable_type"
@@ -173,7 +191,6 @@ ActiveRecord::Schema.define(version: 20161018092720) do
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
-    t.string   "type"
     t.string   "state"
     t.uuid     "claimant_id"
     t.datetime "referred_until"
@@ -182,11 +199,11 @@ ActiveRecord::Schema.define(version: 20161018092720) do
     t.json     "print_jobs"
     t.uuid     "vessel_id"
     t.string   "task"
+    t.string   "source"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
     t.index ["state"], name: "index_submissions_on_state", using: :btree
-    t.index ["type"], name: "index_submissions_on_type", using: :btree
   end
 
   create_table "user_roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
