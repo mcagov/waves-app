@@ -1,8 +1,8 @@
-.row
-  .col-sm-12
-    %h1{style: "margin-top: 0px !important;"}
-      Finance: Record Payment
-= simple_form_for @payment, url: finance_payments_path do |f|
+= simple_form_for @finance_payment, url: finance_payments_path do |f|
+  .row
+    .col-sm-12
+      %h1{style: "margin-top: 0px !important;"}
+        Finance: Record Payment
   .row
     .col-md-12
       .x_panel
@@ -23,7 +23,7 @@
             .col-md-3
               = f.input :service_level, collection: ServiceLevel::SERVICE_LEVEL_TYPES, as: :select, include_blank: false,input_html: { class: "select2 select2_single" }
             .col-md-3
-              = f.input :payment_type, collection: Payment::PAYMENT_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+              = f.input :payment_type, collection: Payment::FinancePayment::PAYMENT_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
             .col-md-3
               = f.input :payment_amount, as: :currency
             .col-md-3

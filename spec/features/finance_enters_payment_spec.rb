@@ -16,7 +16,7 @@ describe "Finance enters a payment" do
 
     select("Premium", from: "Service Level")
     select("Cheque", from: "Payment Type")
-    fill_in("Fee Amount", with: "25.00")
+    fill_in("Fee Amount", with: "2500")
     fill_in("Fee Receipt Number", with: "123")
 
     fill_in("Applicant Name", with: "Bob")
