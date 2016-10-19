@@ -2,14 +2,9 @@
   %li
     %a.toggle-tasks
       %i.fa.fa-list-ol
-      Tasks
+      Payments
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Payment Batches", "/finance/payments"
-  %li
-    %a
-      %i.fa.fa-bar-chart-o
-      Reports
-      %span.fa.fa-chevron-down
-    %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Outstanding Work", "#"
+      %li= link_to "Record Payment", "/finance/payments/new"
+      %li= link_to "Recent Payments", "/finance/payments"
+

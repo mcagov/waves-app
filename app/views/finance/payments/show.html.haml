@@ -1,1 +1,23 @@
-Show
+%h1 Finance: Payment Recorded
+
+#finance_payment
+  .row
+    .col-md-12
+      .x_panel
+        .x_title
+          %h2 Finance & Processing Information
+          .clearfix
+        .x_content
+          - if @prompt_success
+            .alert.alert-success
+              %p.text-center{style: 'font-size: 1.4em;'}
+                Application successfully saved. Write this reference number on the paperwork:
+                %strong #{@finance_payment.submission_ref_no}
+
+          = render partial: "payment", locals: { finance_payment: @finance_payment }
+
+  .row.no-print
+    .col-xs-12
+      = link_to new_finance_payment_path, class: 'btn btn-success btn-lg pull-right' do
+        %i.fa.fa-plus
+        New Application

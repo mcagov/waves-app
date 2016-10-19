@@ -1,0 +1,50 @@
+%table.table.table-striped
+  %tbody
+    %tr
+      %td{width: '50%'} Application Reference No
+      %td
+        %strong= finance_payment.submission_ref_no
+    %tr
+      %td Part of Register
+      %td
+        %strong= finance_payment.part_description
+    %tr
+      %td Application Type
+      %td
+        %strong= finance_payment.task_description
+    %tr
+      %td Official No
+      %td
+        %strong= finance_payment.vessel_reg_no
+    %tr
+      %td Vessel Name
+      %td
+        %strong= finance_payment.vessel_name
+    %tr
+      %td Payment Type
+      %td
+        %strong= finance_payment.payment_type_description
+    %tr
+      %td Service Level
+      %td
+        %strong= finance_payment.service_level.titleize
+    %tr
+      %td Fee Amount
+      %td
+        %strong= finance_payment.formatted_payment_amount
+    %tr
+      %td Fee Receipt Number
+      %td
+        %strong= finance_payment.receipt_no
+    %tr
+      %td Applicant Name
+      %td
+        %strong= finance_payment.applicant_name
+    %tr
+      %td Applicant Email
+      %td
+        %strong= finance_payment.applicant_email
+    %tr
+      %td Documents Received
+      %td
+        %strong= finance_payment.documents_received
