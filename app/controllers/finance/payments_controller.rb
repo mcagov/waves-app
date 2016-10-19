@@ -3,15 +3,19 @@ class Finance::PaymentsController < InternalPagesController
     @finance_payment = Payment::FinancePayment.new
   end
 
+  def show
+    @prompt_success = (params[:prompt] == "success")
+    finance_payment = Payment::FinancePayment.find(params[:id])
+    @finance_payment = Decorators::FinancePayment.new(finance_payment)
+  end
+
   def create
     @finance_payment = Payment::FinancePayment.new(finance_payment_params)
     @finance_payment.actioned_by = current_user
 
     if @finance_payment.save
-      flash[:notice] = "Application successfully saved.\
-                       Write this number on the paperwork: \
-                       #{@finance_payment.submission_ref_no}"
-      redirect_to finance_payment_path(@finance_payment)
+
+      redirect_to finance_payment_path(@finance_payment, prompt: :success)
     else
       render :new
     end
