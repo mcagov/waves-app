@@ -42,7 +42,7 @@ class Submission < ApplicationRecord
   end
 
   def vessel
-    @vessel ||= Submission::Vessel.new(user_input[:vessel_info])
+    @vessel ||= Submission::Vessel.new(user_input[:vessel_info] || {})
   end
 
   def vessel=(vessel_params)
@@ -59,7 +59,7 @@ class Submission < ApplicationRecord
   end
 
   def correspondent
-    declarations.first.owner if declarations
+    declarations.first.owner unless declarations.empty?
   end
 
   def correspondent_email
