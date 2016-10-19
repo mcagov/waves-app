@@ -40,6 +40,7 @@ class TasksController < InternalPagesController
   def submission_scope
     Submission
       .order("target_date asc")
+      .where(part: current_activity.part)
       .where.not(state: [:printing, :completed])
   end
 end
