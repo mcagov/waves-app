@@ -4,6 +4,9 @@
     %h1{style: "margin-top: 0px !important;"}
       = @submission.job_type
       %small ID: #{ @submission.ref_no }
+
+      = link_to "Edit Application", edit_submission_path(@submission), class: "btn btn-primary pull-right"
+
     = render partial: "prompts", locals: {submission: @submission}
 
 = render partial: "tabs", locals: {submission: @submission}
