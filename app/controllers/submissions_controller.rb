@@ -12,6 +12,8 @@ class SubmissionsController < InternalPagesController
     @submission = Decorators::Submission.new(submission)
   end
 
+  def edit; end
+
   def claim
     @submission.claimed!(current_user)
 

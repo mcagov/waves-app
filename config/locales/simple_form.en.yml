@@ -5,9 +5,6 @@ en:
     required:
       text: "required"
       mark: "*"
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won"t be used.
-      # html: "<abbr title="required">*</abbr>"
     error_notification:
       default_message: "Please review the problems below:"
 
@@ -24,23 +21,17 @@ en:
         applicant_name: Applicant Name
         applicant_email: Applicant Email
         documents_received: Documents Received
-
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: "Password"
-    #   user:
-    #     new:
-    #       email: "E-mail to sign in."
-    #     edit:
-    #       email: "E-mail."
-    # hints:
-    #   defaults:
-    #     username: "User name to sign in."
-    #     password: "No special characters, please."
-    # include_blanks:
-    #   defaults:
-    #     age: "Rather not say"
-    # prompts:
-    #   defaults:
-    #     age: "Select your age"
+      submission:
+        part: Part of Register
+        task: Application Type
+        vessel:
+          name: Vessel Name
+          reg_no: Official No.
+          vessel_type: Vessel Type
+          vessel_type_other: Vessel Type (other)
+          hin: Hull Identification Number (HIN)
+          make_and_model: Make and model
+          length_in_meters: Length
+          number_of_hulls: Number of hulls
+          mmsi_number: MMSI Number
+          radio_call_sign: Radio Call Sign

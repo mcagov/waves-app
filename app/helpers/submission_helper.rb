@@ -28,4 +28,8 @@ module SubmissionHelper
       content_tag(:div, "", class: "i fa fa-star-o similar-#{key}")
     end
   end
+
+  def vessel_label(attr)
+    t("simple_form.labels.submission.vessel.#{attr}")
+  end
 end
