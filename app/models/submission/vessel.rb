@@ -13,7 +13,6 @@ class Submission::Vessel
     :alt_name_1,
     :alt_name_2,
     :alt_name_3,
-    :length_in_meters,
     :vessel_type,
     :vessel_type_other
   )

@@ -5,10 +5,15 @@
       Manual Entry
       %small ID: #{ @submission.ref_no }
 .row
-  .col-md-12
+  .col-sm-12
     .x_panel
       .x_title
         %h2 Finance & Processing Information
         .clearfix
       .x_content
         = render partial: "finance/payments/payment", locals: { finance_payment: @finance_payment }
+
+- if @submission.claimant == current_user
+  .row.no-print#actions
+    .col-sm-12
+      = link_to "Convert to Application", manual_entry_path(@submission), method: :patch, class: "btn btn-lg btn-primary pull-right"

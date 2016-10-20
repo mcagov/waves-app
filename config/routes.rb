@@ -56,7 +56,7 @@ Rails.application.routes.draw do
              controller: :submission_delivery_address
   end
 
-  resources :manual_entries, only: [:show]
+  resources :manual_entries, only: [:show, :update]
 
   resources :declarations, only: [:update] do
     resource :owners, only: [:update], controller: :declaration_owner

@@ -1,0 +1,6 @@
+.row
+  .col-sm-12
+    %h1{style: "margin-top: 0px !important;"}
+      Edit Application
+      %small ID: #{ @submission.ref_no }
+= render partial: "submissions/forms/base", locals: { submission: @submission }

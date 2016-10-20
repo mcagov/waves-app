@@ -12,6 +12,8 @@ class SubmissionsController < InternalPagesController
     @submission = Decorators::Submission.new(submission)
   end
 
+  def edit; end
+
   def claim
     @submission.claimed!(current_user)
 
@@ -46,7 +48,9 @@ class SubmissionsController < InternalPagesController
 
   def approve
     if @submission.approved!(params[:registration_starts_at])
-      create_notification
+      Builders::NotificationBuilder
+        .application_approval(
+          @submission, current_user, params[:notification_attachments])
       render "approved"
     else
       render "errors"
@@ -57,17 +61,5 @@ class SubmissionsController < InternalPagesController
 
   def load_submission
     @submission = Submission.find(params[:id])
-  end
-
-  def create_notification
-    @submission.owners.each do |owner|
-      Notification::ApplicationApproval.create(
-        recipient_email: owner.email,
-        recipient_name: owner.name,
-        notifiable: @submission,
-        subject: @submission.job_type,
-        actioned_by: current_user,
-        attachments: params[:notification_attachments])
-    end
   end
 end
