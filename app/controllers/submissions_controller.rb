@@ -6,7 +6,7 @@ class SubmissionsController < InternalPagesController
       [:payments, :correspondences, :notifications]).find(params[:id])
 
     if submission.officer_intervention_required?
-      return redirect_to edit_manual_entry_path(submission)
+      return redirect_to manual_entry_path(submission)
     end
 
     @submission = Decorators::Submission.new(submission)
