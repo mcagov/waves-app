@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views a manual entry", type: :feature, js: true do
+describe "User edits a manual entry", type: :feature, js: true do
   before do
     create(:finance_payment, vessel_name: "MY BOAT", part: :part_1)
     login_to_part_1
@@ -10,5 +10,10 @@ describe "User views a manual entry", type: :feature, js: true do
   scenario "rendering the manual entry page" do
     click_on("MY BOAT")
     expect(page).to have_css("h1", "Manual Entry")
+
+    within("#finance_payment") do
+      expect(page).to have_text("Part I")
+      expect(page).to have_text("MY BOAT")
+    end
   end
 end

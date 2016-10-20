@@ -31,6 +31,7 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("Part III")
       expect(page).to have_text("New Registration")
       expect(page).to have_text("OFFICIAL_NO")
+      expect(page).to have_text("MY BOAT")
       expect(page).to have_text("Premium")
       expect(page).to have_text("Cheque")
       expect(page).to have_text("25.00")

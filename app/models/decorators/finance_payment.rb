@@ -23,4 +23,8 @@ class Decorators::FinancePayment < SimpleDelegator
       t[1] == payment_type.to_sym
     end[0] if payment_type
   end
+
+  def service_level_description
+    service_level.titleize if service_level
+  end
 end
