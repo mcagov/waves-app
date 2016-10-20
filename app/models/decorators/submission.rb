@@ -21,7 +21,7 @@ class Decorators::Submission < SimpleDelegator
     if finance_payment && finance_payment.vessel_name.present?
       finance_payment.vessel_name
     else
-      "Unkown"
+      "Unknown"
     end
   end
 
@@ -30,7 +30,7 @@ class Decorators::Submission < SimpleDelegator
     if finance_payment && finance_payment.applicant_name.present?
       finance_payment.applicant_name
     else
-      "Unkown"
+      "Unknown"
     end
   end
 
