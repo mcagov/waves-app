@@ -20,6 +20,7 @@ module Submission::Associations
 
     def declaration_associations(base)
       base.has_many :declarations, -> { order("created_at asc") }
+      base.accepts_nested_attributes_for :declarations
     end
 
     # rubocop:disable Metrics/MethodLength

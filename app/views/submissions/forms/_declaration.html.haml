@@ -1,0 +1,10 @@
+= declaration_f.simple_fields_for :owner do |owner_f|
+  - owner_f.object = declaration_f.object.owner
+  .x_panel
+    .x_title
+      %h4 Owner ##{ declaration_f.options[:child_index] + 1 }
+      .clearfix
+    .x_content
+      .row
+        .col-md-3
+          = owner_f.input :name, input_html: { class: "upcase" }, required: false

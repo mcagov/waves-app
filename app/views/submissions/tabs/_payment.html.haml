@@ -1,4 +1,4 @@
-- if payment.remittance
+- if payment.remittance.is_a?(Payment::WorldPay)
   %table.table.table-striped#payment
     %tbody
       %tr

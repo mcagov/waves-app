@@ -13,10 +13,15 @@
               = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
             .col-md-3
               = f.simple_fields_for :vessel do |vessel_f|
+                - vessel_f.object = f.object.vessel
                 = vessel_f.input :reg_no, input_html: { class: "upcase" }, required: false
             .col-md-3
 
       = render partial: "submissions/forms/vessel", locals: { submission_f: f }
+
+      = f.simple_fields_for :declarations do |declaration_f|
+        = render partial: "submissions/forms/declaration", locals: { declaration_f: declaration_f }
+
   / .row.no-print
   /   .col-md-12
   /     = button_tag(type: 'submit', class: "btn-success btn-lg pull-right") do

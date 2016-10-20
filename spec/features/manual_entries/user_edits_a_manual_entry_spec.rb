@@ -2,7 +2,11 @@ require "rails_helper"
 
 describe "User edits a manual entry", type: :feature, js: true do
   before do
-    create(:finance_payment, vessel_name: "MY BOAT", part: :part_3)
+    create(
+      :finance_payment,
+      part: :part_3,
+      vessel_name: "MY BOAT", applicant_name: "BOB")
+
     login_to_part_3
     click_on("Unclaimed Tasks")
   end
@@ -19,6 +23,7 @@ describe "User edits a manual entry", type: :feature, js: true do
     end
 
     expect(page).to have_field("Vessel Name", with: "MY BOAT")
+    expect(page).to have_field("Name", with: "BOB")
   end
 
   scenario "when they have not claimed it" do
