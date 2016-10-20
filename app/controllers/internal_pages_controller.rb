@@ -18,6 +18,7 @@ class InternalPagesController < ApplicationController
   private
 
   def current_activity
+    session[:current_activity] ||= :part_3
     Activity.new(session[:current_activity])
   end
   helper_method :current_activity
