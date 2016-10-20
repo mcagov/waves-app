@@ -35,7 +35,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def source_description
-    source.titleize
+    source.titleize if source
   end
 
   private
