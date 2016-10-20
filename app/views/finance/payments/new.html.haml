@@ -12,9 +12,9 @@
         .x_content
           .row
             .col-md-3
-              = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+              = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
             .col-md-3
-              = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+              = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
             .col-md-3
               = f.input :vessel_reg_no, label: "Official Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
             .col-md-3
