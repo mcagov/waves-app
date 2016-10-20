@@ -4,6 +4,12 @@ class ManualEntriesController < InternalPagesController
 
   def show; end
 
+  def update
+    @submission =
+      Builders::ManualEntryBuilder.convert_to_application(@submission)
+    redirect_to edit_submission_path(@submission)
+  end
+
   protected
 
   def load_submission

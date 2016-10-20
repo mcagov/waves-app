@@ -21,7 +21,11 @@ class Payment::FinancePayment < ApplicationRecord
   ].freeze
 
   def submission_ref_no
-    payment.submission.ref_no
+    submission.ref_no
+  end
+
+  def submission
+    payment.submission
   end
 
   private
