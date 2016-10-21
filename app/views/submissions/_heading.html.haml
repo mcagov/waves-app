@@ -1,0 +1,8 @@
+%h1{style: "margin-top: 0px !important;"}
+  = submission.job_type
+  %small
+    ID:
+    = link_to_if submission.editable?,
+               submission.ref_no,
+               edit_submission_details_path(submission),
+               id: "edit_submission_ref_no"

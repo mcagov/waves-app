@@ -54,6 +54,9 @@ Rails.application.routes.draw do
     resource :delivery_addresses,
              only: [:update],
              controller: :submission_delivery_address
+    resource :details,
+             only: [:edit, :update],
+             controller: :submission_details
   end
 
   resources :manual_entries, only: [:show, :update]
