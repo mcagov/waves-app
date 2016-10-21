@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User edits a manual entry", type: :feature, js: true do
+describe "User converts manual entry", type: :feature, js: true do
   before do
     create(
       :finance_payment,
@@ -11,7 +11,7 @@ describe "User edits a manual entry", type: :feature, js: true do
     click_on("Unclaimed Tasks")
   end
 
-  scenario "when they have claimed it" do
+  scenario "when they have claimed it they can 'convert' it" do
     click_on("Claim")
     click_on("My Tasks")
     click_on("MY BOAT")
@@ -26,7 +26,7 @@ describe "User edits a manual entry", type: :feature, js: true do
     expect(page).to have_field("Name", with: "BOB")
   end
 
-  scenario "when they have not claimed it" do
+  scenario "when they have not claimed it they can't 'convert' it" do
     click_on("MY BOAT")
 
     expect(page).to have_css("h1", "Manual Entry")
