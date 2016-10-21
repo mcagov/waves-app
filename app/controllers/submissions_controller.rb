@@ -14,6 +14,15 @@ class SubmissionsController < InternalPagesController
 
   def edit; end
 
+  def update
+    if @submission.update_attributes(submission_params)
+      flash[:notice] = "The application has been updated"
+      redirect_to submission_path(@submission)
+    else
+      render :edit
+    end
+  end
+
   def claim
     @submission.claimed!(current_user)
 
@@ -61,5 +70,17 @@ class SubmissionsController < InternalPagesController
 
   def load_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def submission_params
+    params.require(:submission).permit(
+      vessel: [
+        :name, :hin, :make_and_model, :length_in_meters,
+        :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],
+      declarations_attributes: [
+        owner: [:name, :email, :phone_number, :nationality, :address_1,
+                :address_2, :address_3, :town, :postcode],
+      ]
+    )
   end
 end

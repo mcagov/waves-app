@@ -24,6 +24,10 @@ class Declaration < ApplicationRecord
     owner
   end
 
+  def owner=(owner_params)
+    self.changeset = owner_params
+  end
+
   def vessel
     submission.vessel
   end

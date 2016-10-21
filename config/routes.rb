@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create, :show]
   end
 
-  resources :submissions, only: [:show, :edit] do
+  resources :submissions, only: [:show, :edit, :update] do
     member do
       post :claim
       post :unclaim

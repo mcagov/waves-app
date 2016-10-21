@@ -35,6 +35,3 @@ en:
           number_of_hulls: Number of Hulls
           mmsi_number: MMSI Number
           radio_call_sign: Radio Call Sign
-        declaration:
-          owner:
-            name: Owner Name
