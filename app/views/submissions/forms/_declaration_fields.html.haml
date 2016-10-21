@@ -2,9 +2,14 @@
   - owner_f.object = declaration_f.object.owner
   .x_panel
     .x_title
-      %h4 Owner ##{ declaration_f.options[:child_index] + 1 }
+      %h2 Owner ##{ declaration_f.options[:child_index] + 1 }
       .clearfix
     .x_content
       .row
         .col-md-3
           = owner_f.input :name, input_html: { class: "upcase" }, required: false
+      .row
+        .col-md-12
+          = link_to "#", class: "warning" do
+            %i.fa.fa-trash
+            Remove Owner

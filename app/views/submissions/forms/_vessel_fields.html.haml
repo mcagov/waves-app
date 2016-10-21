@@ -22,10 +22,8 @@
         .col-md-3
           = vessel_f.input :vessel_type_other, input_html: { class: "upcase" }, required: false
         .col-md-3
-          = vessel_f.input :make_and_model, input_html: { class: "upcase" }, required: false
+          = vessel_f.input :mmsi_number, input_html: { class: "upcase" }, required: false
       .row
         .col-md-3
-          = vessel_f.input :mmsi_number, input_html: { class: "upcase" }, required: false
-        .col-md-3
           = vessel_f.input :radio_call_sign, input_html: { class: "upcase" }, required: false
-        .col-md-6
+        .col-md-9
