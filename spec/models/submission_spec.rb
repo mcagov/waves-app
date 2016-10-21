@@ -16,8 +16,8 @@ describe Submission, type: :model do
       expect(submission).to be_incomplete
     end
 
-    it "has a ref_no with the expected prefix" do
-      expect(submission.ref_no).to match(/3N-.*/)
+    it "has a ref_no" do
+      expect(submission.ref_no).to be_present
     end
 
     it "has some declarations" do
