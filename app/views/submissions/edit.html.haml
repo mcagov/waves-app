@@ -1,4 +1,8 @@
 .row
   .col-sm-12
+    = render partial: "breadcrumbs", locals: {submission: @submission}
+.row
+  .col-sm-6
     = render partial: "submissions/heading", locals: {submission: @submission}
+
 = render partial: "submissions/forms/base", locals: { submission: @submission }

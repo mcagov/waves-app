@@ -5,7 +5,10 @@
   .col-sm-6
     = render partial: "submissions/heading", locals: {submission: @submission}
   .col-sm-6
-    = link_to "Edit Application", edit_submission_path(@submission), class: "btn btn-primary pull-right"
+    - if @submission.claimant == current_user
+      = link_to "Edit Application",
+                edit_submission_path(@submission),
+                class: "btn btn-primary pull-right"
 
     = render partial: "prompts", locals: {submission: @submission}
 

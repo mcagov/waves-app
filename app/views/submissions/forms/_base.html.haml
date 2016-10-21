@@ -1,18 +1,15 @@
 = simple_form_for @submission do |f|
-
   = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
 
   = f.simple_fields_for :declarations do |declaration_f|
-    = render partial: "submissions/forms/declaration_fields", locals: { declaration_f: declaration_f }
-
-  .row
-    .col-md-12
-      = link_to "#", class: "btn btn-primary" do
-        %i.fa.fa-plus
-        Add Individual Owner
+    = render partial: "submissions/forms/declaration_fields", locals: { f: declaration_f }
+  %div
+    = link_to_add_association f, :declarations, class: "btn btn-primary", partial: "submissions/forms/declaration_fields" do
+      %i.fa.fa-plus
+      Add Individual Owner
 
   .row.no-print
-    .col-md-12
+    .col-sm-12
       = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
         %i.fa.fa-check
         Save Application

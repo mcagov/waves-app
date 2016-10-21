@@ -19,6 +19,7 @@
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require tinymce
+//= require cocoon
 //
 //= require ./vendor/nprogress
 //= require ./vendor/select2
@@ -27,3 +28,4 @@
 
 //= require submission
 //= require ui-helpers
+

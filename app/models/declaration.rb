@@ -19,7 +19,7 @@ class Declaration < ApplicationRecord
   end
 
   def owner
-    owner = Declaration::Owner.new(changeset)
+    owner = Declaration::Owner.new(changeset || {})
     owner.declared_at = completed_at
     owner
   end
