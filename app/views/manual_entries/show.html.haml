@@ -1,9 +1,7 @@
 .row
   .col-sm-12
     = render partial: "submissions/breadcrumbs", locals: {submission: @submission}
-    %h1{style: "margin-top: 0px !important;"}
-      Manual Entry
-      %small ID: #{ @submission.ref_no }
+    = render partial: "submissions/heading", locals: {submission: @submission}
 .row
   .col-sm-12
     .x_panel

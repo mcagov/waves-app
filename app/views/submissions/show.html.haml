@@ -1,11 +1,11 @@
 .row
   .col-sm-12
     = render partial: "breadcrumbs", locals: {submission: @submission}
-    %h1{style: "margin-top: 0px !important;"}
-      = @submission.job_type
-      %small ID: #{ @submission.ref_no }
-
-      = link_to "Edit Application", edit_submission_path(@submission), class: "btn btn-primary pull-right"
+.row
+  .col-sm-6
+    = render partial: "submissions/heading", locals: {submission: @submission}
+  .col-sm-6
+    = link_to "Edit Application", edit_submission_path(@submission), class: "btn btn-primary pull-right"
 
     = render partial: "prompts", locals: {submission: @submission}
 
