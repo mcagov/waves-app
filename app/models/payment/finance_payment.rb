@@ -32,17 +32,12 @@ class Payment::FinancePayment < ApplicationRecord
   private
 
   def build_payment_and_submission
-    submission = Submission.create(
-      part: part,
-      task: task,
-      officer_intervention_required: true,
-      source: :manual_entry
-    )
-
     Payment.create(
       amount: payment_amount.to_f * 100,
-      submission: submission,
-      remittance: self
-    )
+      remittance: self,
+      submission: Submission.create(part: part,
+                                    task: task,
+                                    officer_intervention_required: true,
+                                    source: :manual_entry))
   end
 end
