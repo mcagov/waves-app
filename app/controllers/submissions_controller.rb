@@ -72,6 +72,7 @@ class SubmissionsController < InternalPagesController
     @submission = Submission.find(params[:id])
   end
 
+  # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
       vessel: [
@@ -79,8 +80,9 @@ class SubmissionsController < InternalPagesController
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],
       declarations_attributes: [
         :id,
+        :_destroy,
         owner: [:name, :email, :phone_number, :nationality, :address_1,
-                :address_2, :address_3, :town, :postcode, :_destroy],
+                :address_2, :address_3, :town, :postcode],
       ]
     )
   end
