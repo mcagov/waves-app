@@ -75,11 +75,12 @@ class SubmissionsController < InternalPagesController
   def submission_params
     params.require(:submission).permit(
       vessel: [
-        :name, :hin, :make_and_model, :length_in_meters,
+        :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],
       declarations_attributes: [
+        :id,
         owner: [:name, :email, :phone_number, :nationality, :address_1,
-                :address_2, :address_3, :town, :postcode],
+                :address_2, :address_3, :town, :postcode, :_destroy],
       ]
     )
   end
