@@ -22,7 +22,7 @@ class Payment::FinancePayment < ApplicationRecord
   ].freeze
 
   def submission_ref_no
-    submission.ref_no
+    submission.ref_no if submission
   end
 
   def submission
