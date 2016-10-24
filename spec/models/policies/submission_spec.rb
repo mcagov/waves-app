@@ -1,28 +1,6 @@
 require "rails_helper"
 
 describe Policies::Submission do
-  describe "#officer_intervention_required?" do
-    let!(:submission) { create(:submission) }
-
-    subject { submission.officer_intervention_required? }
-
-    context "false by default" do
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when the changeset is nil" do
-      before { submission.update_attributes(changeset: nil) }
-
-      it { expect(subject).to be_falsey }
-
-      context "but it is attached to a payment" do
-        before { create(:payment, submission: submission) }
-
-        it { expect(subject).to be_truthy }
-      end
-    end
-  end
-
   context "#editable?" do
     before do
       allow(submission).to receive(:completed?).and_return(completed)

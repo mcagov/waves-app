@@ -24,6 +24,11 @@ describe Payment::FinancePayment do
     it "has a submission ref_no" do
       expect(finance_payment.submission_ref_no).to be_present
     end
+
+    it "sets the officer_intervention_required flag" do
+      expect(finance_payment.submission.officer_intervention_required)
+        .to be_truthy
+    end
   end
 
   context "with invalid params" do

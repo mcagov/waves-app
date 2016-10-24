@@ -35,6 +35,7 @@ class Payment::FinancePayment < ApplicationRecord
     submission = Submission.create(
       part: part,
       task: task,
+      officer_intervention_required: true,
       source: :manual_entry
     )
 
