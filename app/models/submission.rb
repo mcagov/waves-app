@@ -54,6 +54,7 @@ class Submission < ApplicationRecord
   end
 
   def vessel=(vessel_params)
+    self.changeset ||= {}
     changeset[:vessel_info] = vessel_params
   end
 
