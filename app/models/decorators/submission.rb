@@ -17,7 +17,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def vessel_name
-    return vessel.name if vessel.name
+    return vessel.name if vessel.name.present?
     if finance_payment && finance_payment.vessel_name.present?
       finance_payment.vessel_name
     else
