@@ -33,10 +33,6 @@ class Submission < ApplicationRecord
     Policies::Submission.editable?(self)
   end
 
-  def officer_intervention_required?
-    Policies::Submission.officer_intervention_required?(self)
-  end
-
   def process_application(registration_starts_at)
     Builders::NewRegistrationBuilder.create(self, registration_starts_at)
   end

@@ -7,6 +7,7 @@ class Builders::ManualEntryBuilder
       build_changeset
       build_declarations
 
+      @submission.update_attribute(:officer_intervention_required, false)
       @submission
     end
 
