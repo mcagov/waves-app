@@ -5,29 +5,28 @@
       Tasks
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "My Tasks", "/tasks/my-tasks"
-      %li= link_to "Team Tasks", "/tasks/team-tasks"
-      %li= link_to "Unclaimed Tasks", "/tasks/unclaimed"
-      %li= link_to "Referred Applications", "/tasks/referred"
-      %li= link_to "Rejected Applications", "/tasks/rejected"
-      %li= link_to "Cancelled Applications", "/tasks/cancelled"
-      %li= link_to "Incomplete Applications", "/tasks/incomplete"
+      %li= link_to "Add New Application", new_submission_path
+      %li= link_to "My Tasks", tasks_my_tasks_path
+      %li= link_to "Team Tasks", tasks_team_tasks_path
+      %li= link_to "Unclaimed Tasks", tasks_unclaimed_path
+      %li= link_to "Referred Applications", tasks_referred_path
+      %li= link_to "Rejected Applications", tasks_rejected_path
+      %li= link_to "Cancelled Applications", tasks_cancelled_path
+      %li= link_to "Incomplete Applications", tasks_incomplete_path
   %li
     %a
       %i.fa.fa-print
       Print Queue
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Certificates of Registry", "/print_queue/certificates"
+      %li= link_to "Certificates of Registry", print_queue_certificates_path
   %li
     %a
       %i.fa.fa-ship
       Vessels
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Registered Vessels", "/vessels"
-      %li= link_to "Pending Vessels", "#"
-      %li= link_to "Historical Vessels", "#"
+      %li= link_to "Registered Vessels", vessels_path
   %li
     %a
       %i.fa.fa-bar-chart-o

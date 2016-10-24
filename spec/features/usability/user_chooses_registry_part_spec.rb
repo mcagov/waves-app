@@ -5,6 +5,6 @@ describe "User chooses registry part" do
 
   scenario "but when they don't we default to part_3" do
     visit "/tasks/unclaimed"
-    expect(page).to have_css(".active-register", "Part III")
+    expect(page).to have_css(".active-register", text: "Part III")
   end
 end

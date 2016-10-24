@@ -8,7 +8,8 @@ describe "User prints from queue", type: :feature, js: true do
   end
 
   scenario "processing the certificates" do
-    expect(page).to have_css("h1", "Print Queue: Certificates of Registry")
+    expect(page)
+      .to have_css("h1", text: "Print Queue: Certificates of Registry")
 
     pdf_window = window_opened_by do
       click_on("Print Certificates of Registry")

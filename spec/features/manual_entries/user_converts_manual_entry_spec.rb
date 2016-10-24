@@ -16,7 +16,7 @@ describe "User converts manual entry", type: :feature, js: true do
     click_on("My Tasks")
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", "Manual Entry")
+    expect(page).to have_css("h1", text: "New Registration")
 
     within("#actions") do
       click_on("Convert to Application")
@@ -29,7 +29,7 @@ describe "User converts manual entry", type: :feature, js: true do
   scenario "when they have not claimed it they can't 'convert' it" do
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", "Manual Entry")
+    expect(page).to have_css("h1", text: "New Registration")
 
     within("#finance_payment") do
       expect(page).to have_text("Part I")

@@ -29,7 +29,7 @@ feature "User refers a submission", type: :feature, js: true do
       first(
         "a", text: "Application Referred - Action Required").click
     end
-    expect(page).to have_css("h4", "Referral Email")
+    expect(page).to have_css("h4", text: "Referral Email")
   end
 
   def referral_prompt

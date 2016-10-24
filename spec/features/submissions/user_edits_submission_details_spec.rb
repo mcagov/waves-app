@@ -11,7 +11,7 @@ describe "User edits top-level submission details (an edge case)" do
     fill_in("Official No.", with: "BOB")
     click_on("Save")
 
-    expect(page).to have_css("h1", "Change of Address")
+    expect(page).to have_css("h1", text: "Change of Address")
     submission = Submission.last
     expect(submission.task.to_sym).to eq(:change_address)
     expect(submission.vessel.reg_no).to eq("BOB")
@@ -21,7 +21,7 @@ describe "User edits top-level submission details (an edge case)" do
     select("Part II", from: "Part of Register")
     click_on("Save")
 
-    expect(page).to have_css("h1", "My Tasks")
+    expect(page).to have_css("h1", text: "My Tasks")
     expect(page).to have_text("moved to Part II")
     expect(Submission.last).to be_unassigned
   end

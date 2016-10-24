@@ -10,7 +10,7 @@ describe "User searches" do
     find("input#search").set(reg_no)
     click_on("Go!")
 
-    expect(page).to have_css("h1", vessel.name)
+    expect(page).to have_css("h1", text: vessel.name)
   end
 
   scenario "for a submission" do
@@ -19,7 +19,7 @@ describe "User searches" do
     find("input#search").set(submission.ref_no)
     click_on("Go!")
 
-    expect(page).to have_css("h1", "New Registration")
+    expect(page).to have_css("h1", text: "New Registration")
   end
 
   scenario "nothing found" do

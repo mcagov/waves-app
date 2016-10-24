@@ -8,7 +8,8 @@ feature "User views unclaimed task list", type: :feature, js: true do
     click_link("Unclaimed Tasks")
 
     within("#submissions") do
-      expect(page).to have_css(".vessel-name", "CELEBRATOR DOPPELBOCK")
+      expect(page)
+        .to have_css(".vessel-name", text: "CELEBRATOR DOPPELBOCK")
       expect(page).to have_content("HORATIO NELSON")
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")

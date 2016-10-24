@@ -1,5 +1,19 @@
 class SubmissionsController < InternalPagesController
-  before_action :load_submission, except: [:show]
+  before_action :load_submission, except: [:show, :new, :create]
+
+  def new
+    @submission = Submission.new
+  end
+
+  def create
+    @submission = Submission.new(submission_params)
+    @submission.part = current_activity.part
+    @submission.claimant = current_user
+    @submission.state = :assigned
+    @submission.save
+
+    redirect_to edit_submission_path(@submission)
+  end
 
   def show
     submission = Submission.includes(
@@ -75,6 +89,7 @@ class SubmissionsController < InternalPagesController
   # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
+      :task,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],

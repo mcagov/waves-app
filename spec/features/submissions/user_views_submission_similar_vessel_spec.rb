@@ -21,7 +21,7 @@ feature "User views submission for similar vessel", type: :feature, js: true do
       end
     end
 
-    expect(page).to have_css("h1", "CELEBRATOR DOPPELBOCK")
+    expect(page).to have_css("h1", text: "CELEBRATOR DOPPELBOCK")
   end
 
   scenario "no similar vessels" do
