@@ -4,6 +4,7 @@ describe Payment::FinancePayment do
   context "with valid params" do
     let!(:finance_payment) do
       described_class.create(
+        payment_date: Date.today,
         part: :part_1,
         task: :unknown,
         payment_type: :cash,
@@ -34,6 +35,7 @@ describe Payment::FinancePayment do
       )
     end
 
+    it { expect(finance_payment.errors).to include(:payment_date) }
     it { expect(finance_payment.errors).to include(:part) }
     it { expect(finance_payment.errors).to include(:payment_amount) }
     it { expect(finance_payment.errors).to include(:task) }

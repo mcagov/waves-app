@@ -6,6 +6,7 @@ class Payment::FinancePayment < ApplicationRecord
   has_one :payment, as: :remittance
   belongs_to :actioned_by, class_name: "User"
 
+  validates :payment_date, presence: true
   validates :part, presence: true
   validates :task, presence: true
   validates :payment_amount,
