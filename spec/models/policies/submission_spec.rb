@@ -2,19 +2,23 @@ require "rails_helper"
 
 describe Policies::Submission do
   describe "#officer_intervention_required?" do
-    let!(:submission) { create(:submission, changeset: nil) }
+    let!(:submission) { create(:submission) }
 
     subject { submission.officer_intervention_required? }
 
-    context "when there is no changeset" do
-      it { expect(subject).to be_truthy }
+    context "false by default" do
+      it { expect(subject).to be_falsey }
+    end
 
-      context "when the officer has added something to the changeset" do
-        before do
-          submission.update_attributes(changeset: { foo: :bar })
-        end
+    context "when the changeset is nil" do
+      before { submission.update_attributes(changeset: nil) }
 
-        it { expect(subject).to be_falsey }
+      it { expect(subject).to be_falsey }
+
+      context "but it is attached to a payment" do
+        before { create(:payment, submission: submission) }
+
+        it { expect(subject).to be_truthy }
       end
     end
   end
