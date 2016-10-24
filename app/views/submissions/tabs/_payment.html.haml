@@ -19,9 +19,22 @@
           %strong
             £
             = number_with_precision(payment.amount.to_f / 100, precision: 2)
-- else
+- elsif payment.remittance.is_a?(Payment::FinancePayment)
+  - finance_payment = Decorators::FinancePayment.new(payment.remittance)
   %table.table.table-striped#payment
     %tbody
+      %tr
+        %td{width: "30%"} Payment Date
+        %td
+          %strong= finance_payment.payment_date
+      %tr
+        %td Payment Type
+        %td
+          %strong= finance_payment.payment_type_description
+      %tr
+        %td Fee Receipt Number
+        %td
+          %strong= finance_payment.receipt_no
       %tr
         %td Amount
         %td

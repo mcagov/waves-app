@@ -10,6 +10,7 @@ en:
 
     labels:
       payment_finance_payment:
+        payment_date: Payment Date
         part: Part of Register
         task: Application Type
         vessel_reg_no: Official Number

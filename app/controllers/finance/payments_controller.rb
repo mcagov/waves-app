@@ -1,6 +1,6 @@
 class Finance::PaymentsController < InternalPagesController
   def new
-    @finance_payment = Payment::FinancePayment.new
+    @finance_payment = Payment::FinancePayment.new(payment_date: Date.today)
   end
 
   def show
@@ -25,8 +25,8 @@ class Finance::PaymentsController < InternalPagesController
 
   def finance_payment_params
     params.require(:payment_finance_payment).permit(
-      :part, :task, :vessel_reg_no, :vessel_name, :service_level,
-      :payment_type, :payment_amount, :receipt_no, :applicant_name,
-      :applicant_email, :documents_received)
+      :payment_date, :part, :task, :vessel_reg_no, :vessel_name,
+      :service_level, :payment_type, :payment_amount, :receipt_no,
+      :applicant_name, :applicant_email, :documents_received)
   end
 end
