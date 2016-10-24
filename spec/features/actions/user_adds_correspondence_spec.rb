@@ -30,7 +30,8 @@ feature "User adds correspondence", type: :feature, js: true do
     fill_in "Content", with: "Hello Bob"
     click_on "Save Correspondence"
 
-    expect(page).to have_css("#flash", "The correspondence has been saved")
+    expect(page)
+      .to have_css("#flash", text: "The correspondence has been saved")
     expect(Correspondence.last.noteable).to eq(Register::Vessel.last)
   end
 end

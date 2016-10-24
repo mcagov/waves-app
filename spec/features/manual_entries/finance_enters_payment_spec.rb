@@ -25,7 +25,7 @@ describe "Finance enters a payment", type: :feature do
 
     click_on("Save Application")
 
-    expect(page).to have_css(".alert", "Application successfully saved")
+    expect(page).to have_css(".alert", text: "Application successfully saved")
 
     within("#finance_payment") do
       expect(page).to have_text("Part III")
