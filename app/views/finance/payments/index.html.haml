@@ -1,0 +1,23 @@
+.row
+  .col-sm-12
+    %h1{style: "margin-top: 0px !important;"}
+      Finance: Recent Payments
+.row
+  .col-md-12
+    .x_panel
+      .x_content
+        %table#finance-payments.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Payment Date
+              %th Payment Type
+              %th Fee Amount
+              %th Fee Receipt Number
+          %tbody
+          - @finance_payments.each do |finance_payment|
+            - finance_payment = Decorators::FinancePayment.new(finance_payment)
+            %tr.finance-payment
+              %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment)
+              %td= finance_payment.payment_type_description
+              %td= finance_payment.formatted_payment_amount
+              %td= finance_payment.payment.submission.ref_no
