@@ -1,8 +1,6 @@
 .row
   .col-sm-6
-    %h1{style: "margin-top: 0px !important;"}
-      = @submission.job_type
-      %small ID: #{ @submission.ref_no }
+    = render partial: "submissions/heading", locals: {submission: @submission}
   .col-sm-6
     .pull-right
       = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do

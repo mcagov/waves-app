@@ -1,6 +1,8 @@
 .row
   .col-sm-12
-    %h1{style: "margin-top: 0px !important;"}
-      Edit Application
-      %small ID: #{ @submission.ref_no }
+    = render partial: "breadcrumbs", locals: {submission: @submission}
+.row
+  .col-sm-6
+    = render partial: "submissions/heading", locals: {submission: @submission}
+
 = render partial: "submissions/forms/base", locals: { submission: @submission }

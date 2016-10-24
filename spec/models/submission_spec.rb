@@ -8,20 +8,8 @@ describe Submission, type: :model do
       expect(submission.vessel).to be_a(Submission::Vessel)
     end
 
-    it "get two declarations" do
-      expect(submission.declarations.length).to eql(2)
-    end
-
     it "has a state: incomplete" do
       expect(submission).to be_incomplete
-    end
-
-    it "has a ref_no with the expected prefix" do
-      expect(submission.ref_no).to match(/3N-.*/)
-    end
-
-    it "has some declarations" do
-      expect(submission.declarations).not_to be_empty
     end
 
     it "gets the delivery_address" do

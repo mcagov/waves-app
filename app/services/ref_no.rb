@@ -1,23 +1,17 @@
 class RefNo
   class << self
-    def generate_for(submission)
-      @submission = submission
-      build_unique(build_prefix)
+    def generate
+      build_unique
     end
 
     private
 
-    def build_prefix
-      task_key = @submission.task.to_sym == :new_registration ? "N" : "X"
-      "#{@submission.part[-1]}#{task_key}"
-    end
-
-    def build_unique(prefix)
-      ref_no = prefix + "-" + SecureRandom.hex(3).upcase
+    def build_unique
+      ref_no = SecureRandom.hex(3).upcase
       if Submission.where(ref_no: ref_no).empty?
         ref_no
       else
-        build_unique(prefix)
+        build_unique
       end
     end
   end

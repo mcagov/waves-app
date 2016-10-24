@@ -18,8 +18,8 @@ describe Builders::SubmissionBuilder do
       expect(submission.part.to_sym).to eq(:part_3)
     end
 
-    it "builds the ref_no with the default prefix" do
-      expect(submission.ref_no).to match(/3N-.*/)
+    it "builds the ref_no" do
+      expect(submission.ref_no).to be_present
     end
 
     it "builds a declaration for each owner" do

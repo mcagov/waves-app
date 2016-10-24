@@ -2,12 +2,11 @@
   .col-sm-9
     %h1.heading_no_top_margin
       = heading
-  - if @my_tasks
-    .col-sm-3
-      .pull-right
-        = link_to tasks_next_task_path, class: 'btn btn-primary' do
-          %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
-          Process Next Application
+  .col-sm-3
+    .pull-right
+      = link_to tasks_next_task_path, class: 'btn btn-primary' do
+        %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
+        Process Next Application
 
 .row
   .col-md-12

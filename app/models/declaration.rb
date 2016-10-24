@@ -19,9 +19,13 @@ class Declaration < ApplicationRecord
   end
 
   def owner
-    owner = Declaration::Owner.new(changeset)
+    owner = Declaration::Owner.new(changeset || {})
     owner.declared_at = completed_at
     owner
+  end
+
+  def owner=(owner_params)
+    self.changeset = owner_params
   end
 
   def vessel
