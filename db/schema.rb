@@ -198,11 +198,11 @@ ActiveRecord::Schema.define(version: 20161025105054) do
     t.string   "ref_no"
     t.datetime "received_at"
     t.json     "print_jobs"
-    t.uuid     "vessel_id"
     t.string   "task"
     t.string   "source"
     t.boolean  "officer_intervention_required"
     t.string   "vessel_reg_no"
+    t.uuid     "vessel_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
