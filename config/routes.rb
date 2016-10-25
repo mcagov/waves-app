@@ -84,10 +84,12 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
+    resources :submissions,
+              only: :show,
+              controller: :vessel_submissions
     resource :correspondence,
              only: [:create],
              controller: :vessel_correspondences
-
     resource :note,
              only: [:create],
              controller: :vessel_notes
