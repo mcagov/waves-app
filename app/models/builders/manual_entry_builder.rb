@@ -14,13 +14,7 @@ class Builders::ManualEntryBuilder
     private
 
     def build_changeset
-      changeset =
-        {
-          vessel_info: {
-            name: @finance_payment.vessel_name,
-            reg_no: @finance_payment.vessel_reg_no,
-          },
-        }
+      changeset = { vessel_info: { name: @finance_payment.vessel_name } }
       @submission.update_attribute(:changeset, changeset)
     end
 

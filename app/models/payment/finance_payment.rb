@@ -37,6 +37,7 @@ class Payment::FinancePayment < ApplicationRecord
       remittance: self,
       submission: Submission.create(part: part,
                                     task: task,
+                                    vessel_reg_no: vessel_reg_no,
                                     officer_intervention_required: true,
                                     source: :manual_entry))
   end
