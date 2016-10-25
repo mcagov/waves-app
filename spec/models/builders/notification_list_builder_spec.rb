@@ -32,14 +32,14 @@ describe Builders::NotificationListBuilder do
     end
 
     context "#for_registered_vessel" do
-      before do
-        submission.update_attribute(:vessel_id, vessel.id)
-      end
-
       let!(:vessel) { create(:register_vessel) }
 
       let!(:vessel_correspondence) do
         create(:correspondence, noteable: vessel, created_at: 1.hour.ago)
+      end
+
+      before do
+        submission.update_attribute(:registered_vessel_id, vessel.id)
       end
 
       subject { described_class.for_registered_vessel(vessel) }

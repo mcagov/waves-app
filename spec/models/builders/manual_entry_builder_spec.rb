@@ -24,7 +24,7 @@ describe Builders::ManualEntryBuilder do
         expect(submission.officer_intervention_required?).to be_falsey
       end
 
-      it "is associated to the registered_vessel" do
+      it "is associates the submission with the registered_vessel" do
         expect(submission.registered_vessel).to eq(registered_vessel)
       end
 
