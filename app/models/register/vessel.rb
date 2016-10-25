@@ -14,7 +14,9 @@ module Register
              -> { where("type is null").order("created_at desc") },
              as: :noteable
 
-    has_many :submissions, -> { order("created_at desc") }
+    has_many :submissions,
+             -> { order("created_at desc") },
+             foreign_key: :registered_vessel_id
 
     def to_s
       name.upcase

@@ -2,6 +2,8 @@ require "rails_helper"
 
 describe Builders::ManualEntryBuilder do
   context ".convert_to_application" do
+    let!(:registered_vessel) { create(:register_vessel) }
+
     let!(:submission) do
       Builders::ManualEntryBuilder
         .convert_to_application(finance_payment.submission)
@@ -12,7 +14,7 @@ describe Builders::ManualEntryBuilder do
         create(
           :finance_payment,
           vessel_name: "MV BOB",
-          vessel_reg_no: "ABC",
+          vessel_reg_no: registered_vessel.reg_no,
           applicant_name: "BOB",
           applicant_email: "bob@example.com",
           documents_received: "rock scissors paper")
@@ -22,10 +24,11 @@ describe Builders::ManualEntryBuilder do
         expect(submission.officer_intervention_required?).to be_falsey
       end
 
-      it "sets the expected attributes" do
-        expect(submission.vessel.name).to eq("MV BOB")
-        expect(submission.vessel_reg_no).to eq("ABC")
+      it "is associated to the registered_vessel" do
+        expect(submission.registered_vessel).to eq(registered_vessel)
+      end
 
+      it "buils the correspondent" do
         expect(submission.correspondent.name).to eq("BOB")
         expect(submission.correspondent.email).to eq("bob@example.com")
       end

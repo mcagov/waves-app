@@ -20,7 +20,7 @@ class SubmissionDetailsController < InternalPagesController
 
   def submission_details_params
     params.require(:submission).permit(
-      :part, :task, :vessel_reg_no
+      :part, :task, :registered_vessel_id
     )
   end
 

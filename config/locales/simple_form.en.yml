@@ -13,7 +13,7 @@ en:
         payment_date: Payment Date
         part: Part of Register
         task: Application Type
-        vessel_reg_no: Official No.
+        vessel_reg_no: Official Number
         vessel_name: Vessel Name
         service_level: Service Level
         payment_type: Payment Type
@@ -25,7 +25,7 @@ en:
       submission:
         part: Part of Register
         task: Application Type
-        vessel_reg_no: Official No.
+        registered_vessel_id: Official Number
         vessel:
           name: Vessel Name
           vessel_type: Vessel Type
