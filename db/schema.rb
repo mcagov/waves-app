@@ -187,8 +187,8 @@ ActiveRecord::Schema.define(version: 20161024145258) do
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "target_date"
     t.boolean  "is_urgent"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
