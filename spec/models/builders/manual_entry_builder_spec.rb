@@ -24,7 +24,7 @@ describe Builders::ManualEntryBuilder do
 
       it "sets the expected attributes" do
         expect(submission.vessel.name).to eq("MV BOB")
-        expect(submission.vessel.reg_no).to eq("ABC")
+        expect(submission.vessel_reg_no).to eq("ABC")
 
         expect(submission.correspondent.name).to eq("BOB")
         expect(submission.correspondent.email).to eq("bob@example.com")

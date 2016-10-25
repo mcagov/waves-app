@@ -12,9 +12,10 @@ describe "User edits top-level submission details (an edge case)" do
     click_on("Save")
 
     expect(page).to have_css("h1", text: "Change of Address")
+
     submission = Submission.last
     expect(submission.task.to_sym).to eq(:change_address)
-    expect(submission.vessel.reg_no).to eq("BOB")
+    expect(submission.vessel_reg_no).to eq("BOB")
   end
 
   scenario "when the part has been changed it unassigns the submission" do

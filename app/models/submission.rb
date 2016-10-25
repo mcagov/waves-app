@@ -46,7 +46,8 @@ class Submission < ApplicationRecord
   end
 
   def vessel
-    @vessel ||= Submission::Vessel.new(user_input[:vessel_info] || {})
+    @vessel ||=
+      Submission::Vessel.new(symbolized_changeset[:vessel_info] || {})
   end
 
   def vessel=(vessel_params)
@@ -56,7 +57,8 @@ class Submission < ApplicationRecord
 
   def delivery_address
     @delivery_address ||=
-      Submission::DeliveryAddress.new(user_input[:delivery_address] || {})
+      Submission::DeliveryAddress.new(
+        symbolized_changeset[:delivery_address] || {})
   end
 
   def delivery_address=(delivery_address_params)
@@ -75,7 +77,7 @@ class Submission < ApplicationRecord
     Task.description(task)
   end
 
-  def user_input
+  def symbolized_changeset
     changeset.blank? ? {} : changeset.deep_symbolize_keys!
   end
 

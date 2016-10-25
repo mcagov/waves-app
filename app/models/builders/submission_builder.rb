@@ -21,8 +21,8 @@ class Builders::SubmissionBuilder
     def build_declarations
       Builders::DeclarationBuilder.create(
         @submission,
-        @submission.user_input[:owners],
-        @submission.user_input[:declarations]
+        @submission.symbolized_changeset[:owners],
+        @submission.symbolized_changeset[:declarations]
       )
     end
   end

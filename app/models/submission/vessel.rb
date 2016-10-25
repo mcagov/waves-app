@@ -3,7 +3,6 @@ class Submission::Vessel
 
   attr_accessor(
     :name,
-    :reg_no,
     :hin,
     :make_and_model,
     :length_in_meters,
