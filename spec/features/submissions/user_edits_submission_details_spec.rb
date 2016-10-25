@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User edits top-level submission details (an edge case)" do
   before do
-    @vessel = create(:register_vessel)
+    @vessel = create(:registered_vessel)
     visit_assigned_submission
     find("#edit_submission_ref_no").click
   end

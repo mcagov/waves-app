@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe ClientSession do
   context "#create" do
-    let!(:vessel) { create(:register_vessel) }
+    let!(:vessel) { create(:registered_vessel) }
     let!(:owner) { create(:register_owner, vessel: vessel) }
 
     context "with valid attributes" do

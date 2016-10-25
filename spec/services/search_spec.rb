@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Search, type: :model do
   context ".by_vessel" do
-    let(:vessel) { create(:register_vessel) }
+    let(:vessel) { create(:registered_vessel) }
     subject { Search.by_vessel(vessel.reg_no) }
 
     it { expect(subject).to include(vessel) }
@@ -16,14 +16,17 @@ describe Search, type: :model do
   end
 
   context ".similar_vessels" do
-    let!(:same_name) { create(:register_vessel, name: "CELEBRATOR DOPPELBOCK") }
-    let!(:same_mmsi) { create(:register_vessel, mmsi_number: "233878594") }
-    let!(:blank_mmsi) { create(:register_vessel, mmsi_number: "") }
-    let!(:different_mmsi) { create(:register_vessel, mmsi_number: rand(9)) }
-    let!(:same_hin) { create(:register_vessel, hin: "foo") }
-    let!(:blank_hin) { create(:register_vessel, hin: nil) }
-    let!(:same_radio) { create(:register_vessel, radio_call_sign: "4RWO0K") }
-    let!(:blank_radio) { create(:register_vessel, radio_call_sign: nil) }
+    let!(:same_name) do
+      create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
+    end
+
+    let!(:same_mmsi) { create(:registered_vessel, mmsi_number: "233878594") }
+    let!(:blank_mmsi) { create(:registered_vessel, mmsi_number: "") }
+    let!(:different_mmsi) { create(:registered_vessel, mmsi_number: rand(9)) }
+    let!(:same_hin) { create(:registered_vessel, hin: "foo") }
+    let!(:blank_hin) { create(:registered_vessel, hin: nil) }
+    let!(:same_radio) { create(:registered_vessel, radio_call_sign: "4RWO0K") }
+    let!(:blank_radio) { create(:registered_vessel, radio_call_sign: nil) }
 
     let!(:vessel) { create_unassigned_submission!.vessel }
     subject { Search.similar_vessels(vessel) }

@@ -32,7 +32,7 @@ describe Builders::NotificationListBuilder do
     end
 
     context "#for_registered_vessel" do
-      let!(:vessel) { create(:register_vessel) }
+      let!(:vessel) { create(:registered_vessel) }
 
       let!(:vessel_correspondence) do
         create(:correspondence, noteable: vessel, created_at: 1.hour.ago)

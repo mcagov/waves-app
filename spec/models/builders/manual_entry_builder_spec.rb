@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Builders::ManualEntryBuilder do
   context ".convert_to_application" do
-    let!(:registered_vessel) { create(:register_vessel) }
+    let!(:registered_vessel) { create(:registered_vessel) }
 
     let!(:submission) do
       Builders::ManualEntryBuilder

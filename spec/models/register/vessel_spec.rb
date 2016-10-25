@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Register::Vessel do
-  let!(:vessel) { create(:register_vessel) }
+  let!(:vessel) { create(:registered_vessel) }
 
   context ".create" do
     it "generates a vessel#reg_no" do
@@ -24,7 +24,7 @@ describe Register::Vessel do
   end
 
   context "#notification_list" do
-    let!(:vessel) { build(:register_vessel) }
+    let!(:vessel) { build(:registered_vessel) }
 
     before do
       expect(Builders::NotificationListBuilder)
@@ -36,7 +36,7 @@ describe Register::Vessel do
   end
 
   context "#registration_status" do
-    let!(:vessel) { create(:register_vessel) }
+    let!(:vessel) { create(:registered_vessel) }
     subject { vessel.registration_status }
 
     context "with an active registration" do
