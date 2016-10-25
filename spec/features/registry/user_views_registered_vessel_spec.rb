@@ -3,6 +3,7 @@ require "rails_helper"
 describe "User views a registered vessel", type: :feature, js: true do
   before do
     @submission = create_completed_submission!
+    @vessel = Register::Vessel.last
     login_to_part_3
     visit vessels_path
     click_on("CELEBRATOR")
@@ -50,11 +51,8 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     within(".breadcrumb") do
       expect(page).to have_link("Registered Vessels", href: vessels_path)
-      click_on(@submission.registered_vessel.reg_no)
+      expect(page).to have_link(@vessel.reg_no, href: vessel_path(@vessel))
     end
-
-    expect(page)
-      .to have_current_path("/vessels/#{@submission.registered_vessel.id}")
   end
 
   scenario "viewing the registration status" do
