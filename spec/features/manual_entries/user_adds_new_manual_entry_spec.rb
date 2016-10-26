@@ -24,6 +24,7 @@ describe "User adds a new manual entry", type: :feature do
 
     click_on("Save Application")
 
+    expect(page).to have_css("h5", "Manual Entry")
     expect(page).to have_css("#vessel-name", text: "BOB'S BOAT")
     expect(page).to have_css("#vessel-hin", text: "MY_HIN")
     expect(page).to have_css("#vessel-make_and_model", text: "MARK 2")
