@@ -7,6 +7,8 @@ describe Register::Vessel do
     it "generates a vessel#reg_no" do
       expect(vessel.reg_no).to match(/SSR2[0-9]{5}/)
     end
+
+    it "has a registry part"
   end
 
   context "#latest_registration" do

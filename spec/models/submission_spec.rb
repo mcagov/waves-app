@@ -17,14 +17,15 @@ describe Submission, type: :model do
     end
   end
 
-  context "#vessel_reg_no" do
+  context "#vessel_reg_no (for a change of vessel_details)" do
     let!(:registered_vessel) { create(:registered_vessel) }
-    let!(:submission) { create(:submission) }
-
-    before do
-      submission.vessel_reg_no = vessel_reg_no
-      submission.save!
+    let!(:submission) do
+      build(:submission,
+            task: :change_vessel,
+            vessel_reg_no: vessel_reg_no)
     end
+
+    before { submission.save }
 
     context "for a vessel that exists" do
       let(:vessel_reg_no) { registered_vessel.reg_no }
@@ -41,12 +42,8 @@ describe Submission, type: :model do
     context "that is unknown" do
       let(:vessel_reg_no) { "bob" }
 
-      it "does not have a vessel_reg_no" do
-        expect(submission.vessel_reg_no).to be_blank
-      end
-
-      it "does not have a registered_vessel" do
-        expect(submission.registered_vessel).to be_nil
+      it "has an error message on the vessel_reg_no" do
+        expect(submission.errors).to include(:vessel_reg_no)
       end
     end
   end

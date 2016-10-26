@@ -17,9 +17,12 @@ class ManualEntriesController < InternalPagesController
     @submission.part = current_activity.part
     @submission.claimant = current_user
     @submission.state = :assigned
-    @submission.save
 
-    redirect_to edit_submission_path(@submission)
+    if @submission.save
+      redirect_to edit_submission_path(@submission)
+    else
+      render :new
+    end
   end
 
   def convert_to_application

@@ -20,5 +20,9 @@ class Policies::Submission
       @submission = submission
       !@submission.print_jobs.map(&:last).include?(false)
     end
+
+    def registered_vessel_required?(submission)
+      ![:unknown, :new_registration].include?(submission.task.to_sym)
+    end
   end
 end
