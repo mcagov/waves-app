@@ -54,12 +54,9 @@ Rails.application.routes.draw do
     resource :delivery_addresses,
              only: [:update],
              controller: :submission_delivery_address
-    resource :details,
-             only: [:edit, :update],
-             controller: :submission_details
   end
 
-  resources :manual_entries, only: [:new, :create, :show, :update] do
+  resources :manual_entries, only: [:new, :edit, :create, :show, :update] do
     member do
       patch :convert_to_application, shallow: true
     end

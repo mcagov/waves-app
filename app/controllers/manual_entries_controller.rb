@@ -28,6 +28,17 @@ class ManualEntriesController < InternalPagesController
     redirect_to edit_submission_path(@submission)
   end
 
+  def edit; end
+
+  def update
+    @original_submission_part = @submission.part
+    if @submission.update_attributes(submission_params)
+      succcessful_redirect_after_update
+    else
+      render :edit
+    end
+  end
+
   protected
 
   def load_submission
@@ -35,6 +46,18 @@ class ManualEntriesController < InternalPagesController
   end
 
   def submission_params
-    params.require(:submission).permit(:task, :vessel_reg_no)
+    params.require(:submission).permit(:part, :task, :vessel_reg_no)
+  end
+
+  def succcessful_redirect_after_update
+    if @original_submission_part == @submission.part
+      flash[:notice] = "The application has been updated"
+      redirect_to submission_path(@submission)
+    else
+      @submission.unclaimed!
+      flash[:notice] = "The application has been moved\
+                       to #{Activity.new(@submission.part)}"
+      redirect_to tasks_my_tasks_path
+    end
   end
 end

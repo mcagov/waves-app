@@ -3,10 +3,4 @@
     %h1{style: "margin-top: 0px !important;"} Add New Application
 
 = simple_form_for @submission, url: manual_entries_path do |f|
-  .row
-    = render partial: "manual_entries/fields", locals: { f: f }
-  .row.no-print
-    .col-sm-12
-      = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
-        %i.fa.fa-check
-        Save Application
+  = render partial: "fields", locals: { f: f }

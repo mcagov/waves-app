@@ -5,6 +5,6 @@
     ID:
     = link_to_if submission.editable?,
                submission.ref_no,
-               edit_submission_details_path(submission),
+               edit_manual_entry_path(submission),
                id: "edit_submission_ref_no"
 %h5 Source: #{submission.source_description}
