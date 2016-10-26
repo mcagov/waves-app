@@ -1,19 +1,5 @@
 class SubmissionsController < InternalPagesController
-  before_action :load_submission, except: [:show, :new, :create]
-
-  def new
-    @submission = Submission.new
-  end
-
-  def create
-    @submission = Submission.new(submission_params)
-    @submission.part = current_activity.part
-    @submission.claimant = current_user
-    @submission.state = :assigned
-    @submission.save
-
-    redirect_to edit_submission_path(@submission)
-  end
+  before_action :load_submission, except: [:show]
 
   def show
     submission = Submission.includes(
@@ -74,6 +60,8 @@ class SubmissionsController < InternalPagesController
       Builders::NotificationBuilder
         .application_approval(
           @submission, current_user, params[:notification_attachments])
+
+      @submission = Decorators::Submission.new(@submission)
       render "approved"
     else
       render "errors"
@@ -89,7 +77,6 @@ class SubmissionsController < InternalPagesController
   # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
-      :task, :vessel_reg_no,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],

@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User adds a new manual entry", type: :feature do
   before do
     login_to_part_3
-    visit new_submission_path
+    visit new_manual_entry_path
   end
 
   scenario "for a new registration" do

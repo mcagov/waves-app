@@ -1,8 +1,26 @@
 class ManualEntriesController < InternalPagesController
-  before_action :load_submission
-  before_action :load_finance_payment
+  before_action :load_submission, only: [:show, :update]
 
-  def show; end
+  def show
+    if @submission.payment
+      @finance_payment =
+        Decorators::FinancePayment.new(@submission.payment.remittance)
+    end
+  end
+
+  def new
+    @submission = Submission.new
+  end
+
+  def create
+    @submission = Submission.new(submission_params)
+    @submission.part = current_activity.part
+    @submission.claimant = current_user
+    @submission.state = :assigned
+    @submission.save
+
+    redirect_to edit_submission_path(@submission)
+  end
 
   def update
     @submission =
@@ -16,10 +34,7 @@ class ManualEntriesController < InternalPagesController
     @submission = Submission.find(params[:id])
   end
 
-  def load_finance_payment
-    if @submission.payment
-      @finance_payment =
-        Decorators::FinancePayment.new(@submission.payment.remittance)
-    end
+  def submission_params
+    params.require(:submission).permit(:task, :vessel_reg_no)
   end
 end

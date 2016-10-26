@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create, :show, :index]
   end
 
-  resources :submissions, only: [:new, :show, :edit, :update, :create] do
+  resources :submissions, only: [:show, :edit, :update] do
     member do
       post :claim
       post :unclaim
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
              controller: :submission_details
   end
 
-  resources :manual_entries, only: [:show, :update]
+  resources :manual_entries, only: [:new, :create, :show, :update]
 
   resources :declarations, only: [:update] do
     resource :owners, only: [:update], controller: :declaration_owner
