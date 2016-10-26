@@ -14,7 +14,6 @@ class Finance::PaymentsController < InternalPagesController
     @finance_payment.actioned_by = current_user
 
     if @finance_payment.save
-
       redirect_to finance_payment_path(@finance_payment, prompt: :success)
     else
       render :new

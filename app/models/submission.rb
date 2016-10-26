@@ -85,6 +85,14 @@ class Submission < ApplicationRecord
     payments.first
   end
 
+  def vessel_reg_no
+    registered_vessel.reg_no if registered_vessel
+  end
+
+  def vessel_reg_no=(reg_no)
+    self.registered_vessel = Register::Vessel.where(reg_no: reg_no).first
+  end
+
   protected
 
   def remove_claimant

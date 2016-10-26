@@ -1,13 +1,47 @@
 class ManualEntriesController < InternalPagesController
-  before_action :load_submission
-  before_action :load_finance_payment
+  before_action :load_submission, except: [:new, :create]
 
-  def show; end
+  def show
+    if @submission.payment
+      @finance_payment =
+        Decorators::FinancePayment.new(@submission.payment.remittance)
+    end
+  end
 
-  def update
+  def new
+    @submission = Submission.new
+  end
+
+  def create
+    @submission = Submission.new(submission_params)
+    @submission.part = current_activity.part
+    @submission.claimant = current_user
+    @submission.state = :assigned
+
+    if validate_registered_vessel_exists && @submission.save
+      redirect_to edit_submission_path(@submission)
+    else
+      render :new
+    end
+  end
+
+  def convert_to_application
     @submission =
       Builders::ManualEntryBuilder.convert_to_application(@submission)
     redirect_to edit_submission_path(@submission)
+  end
+
+  def edit; end
+
+  def update
+    @original_submission_part = @submission.part
+    @submission.assign_attributes(submission_params)
+
+    if validate_registered_vessel_exists && @submission.save
+      succcessful_redirect_after_update
+    else
+      render :edit
+    end
   end
 
   protected
@@ -16,10 +50,29 @@ class ManualEntriesController < InternalPagesController
     @submission = Submission.find(params[:id])
   end
 
-  def load_finance_payment
-    if @submission.payment
-      @finance_payment =
-        Decorators::FinancePayment.new(@submission.payment.remittance)
+  def submission_params
+    params.require(:submission).permit(:part, :task, :vessel_reg_no)
+  end
+
+  def succcessful_redirect_after_update
+    if @original_submission_part == @submission.part
+      flash[:notice] = "The application has been updated"
+      redirect_to submission_path(@submission)
+    else
+      @submission.unclaimed!
+      flash[:notice] = "The application has been moved\
+                       to #{Activity.new(@submission.part)}"
+      redirect_to tasks_my_tasks_path
     end
+  end
+
+  def validate_registered_vessel_exists
+    if Policies::Submission.registered_vessel_required?(@submission)
+      unless @submission.registered_vessel
+        @submission.errors.add(:vessel_reg_no, "was not found in the Registry")
+        return false
+      end
+    end
+    true
   end
 end

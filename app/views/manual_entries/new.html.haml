@@ -1,0 +1,6 @@
+.row
+  .col-sm-6
+    %h1{style: "margin-top: 0px !important;"} Add New Application
+
+= simple_form_for @submission, url: manual_entries_path do |f|
+  = render partial: "fields", locals: { f: f }

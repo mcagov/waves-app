@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe Notification::ApplicationApproval, type: :model do
   context "in general" do
-    let!(:register_vessel) { create(:register_vessel) }
+    let!(:registered_vessel) { create(:registered_vessel) }
     let!(:submission) { create(:submission) }
     let!(:registration) do
       create(:registration,
-             vessel: register_vessel, submission: submission)
+             vessel: registered_vessel, submission: submission)
     end
 
     context "in general" do
@@ -23,7 +23,7 @@ describe Notification::ApplicationApproval, type: :model do
 
       it "has additional_params" do
         expect(subject.additional_params)
-          .to eq([register_vessel.reg_no, subject.actioned_by, nil])
+          .to eq([registered_vessel.reg_no, subject.actioned_by, nil])
       end
     end
 

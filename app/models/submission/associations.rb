@@ -47,7 +47,9 @@ module Submission::Associations
 
     def registration_associations(base)
       base.has_one :registration
-      base.has_one :registered_vessel, through: :registration, source: :vessel
+      base.belongs_to :registered_vessel,
+                      foreign_key: :registered_vessel_id,
+                      class_name: "Register::Vessel"
     end
 
     def user_associations(base)

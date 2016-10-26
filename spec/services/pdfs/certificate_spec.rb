@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Pdfs::Certificate do
   context "for a single registration" do
-    let!(:vessel) { create(:register_vessel, name: "Jolly Roger") }
+    let!(:vessel) { create(:registered_vessel, name: "Jolly Roger") }
 
     let!(:registration) do
       create(:registration, vessel: vessel, registered_at: "2012-12-03")

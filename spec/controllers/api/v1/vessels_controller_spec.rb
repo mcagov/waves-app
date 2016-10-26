@@ -4,7 +4,7 @@ describe Api::V1::VesselsController, type: :controller do
   context "#show" do
     let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
 
-    let!(:vessel) { create(:register_vessel) }
+    let!(:vessel) { create(:registered_vessel) }
     let!(:client_session) { create(:client_session, vessel: vessel) }
     let(:external_session_key) { client_session.external_session_key }
 

@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create, :show, :index]
   end
 
-  resources :submissions, only: [:new, :show, :edit, :update, :create] do
+  resources :submissions, only: [:show, :edit, :update] do
     member do
       post :claim
       post :unclaim
@@ -54,12 +54,13 @@ Rails.application.routes.draw do
     resource :delivery_addresses,
              only: [:update],
              controller: :submission_delivery_address
-    resource :details,
-             only: [:edit, :update],
-             controller: :submission_details
   end
 
-  resources :manual_entries, only: [:show, :update]
+  resources :manual_entries, only: [:new, :edit, :create, :show, :update] do
+    member do
+      patch :convert_to_application, shallow: true
+    end
+  end
 
   resources :declarations, only: [:update] do
     resource :owners, only: [:update], controller: :declaration_owner
@@ -84,10 +85,12 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
+    resources :submissions,
+              only: :show,
+              controller: :vessel_submissions
     resource :correspondence,
              only: [:create],
              controller: :vessel_correspondences
-
     resource :note,
              only: [:create],
              controller: :vessel_notes

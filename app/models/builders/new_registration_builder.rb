@@ -32,7 +32,7 @@ class Builders::NewRegistrationBuilder
     end
 
     def assign_vessel
-      @submission.update_attribute(:vessel_id, @vessel.id)
+      @submission.update_attribute(:registered_vessel_id, @vessel.id)
     end
 
     def create_owners

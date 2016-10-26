@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User adds a new manual entry", type: :feature do
   before do
     login_to_part_3
-    visit new_submission_path
+    visit new_manual_entry_path
   end
 
   scenario "for a new registration" do
@@ -24,6 +24,7 @@ describe "User adds a new manual entry", type: :feature do
 
     click_on("Save Application")
 
+    expect(page).to have_css("h5", "Manual Entry")
     expect(page).to have_css("#vessel-name", text: "BOB'S BOAT")
     expect(page).to have_css("#vessel-hin", text: "MY_HIN")
     expect(page).to have_css("#vessel-make_and_model", text: "MARK 2")
@@ -33,5 +34,21 @@ describe "User adds a new manual entry", type: :feature do
     expect(page).to have_css("#vessel-vessel_type_other", text: "TEACUP")
     expect(page).to have_css("#vessel-mmsi_number", text: "MMSI-123")
     expect(page).to have_css("#vessel-radio_call_sign", text: "RADIO-CALL")
+  end
+
+  scenario "for a change of vessel details with an invalid official number" do
+    select("Change of Vessel Details", from: "Application Type")
+    fill_in("Official Number", with: "Bob")
+    click_on("Save Application")
+
+    expect(page).to have_css(".submission_vessel_reg_no", text: "not found")
+  end
+
+  scenario "for a change of vessel details with an invalid official number" do
+    select("Change of Vessel Details", from: "Application Type")
+    fill_in("Official Number", with: create(:registered_vessel).reg_no)
+    click_on("Save Application")
+
+    expect(page).to have_css("h1", text: "Change of Vessel Details")
   end
 end

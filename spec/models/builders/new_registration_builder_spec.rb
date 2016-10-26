@@ -39,8 +39,8 @@ describe Builders::NewRegistrationBuilder do
         .to eq(registration_certificate: false, cover_letter: false)
     end
 
-    it "saves the vessel_id to the submission" do
-      expect(submission.vessel_id).to be_present
+    it "associates the submission with the registered_vessel" do
+      expect(submission.registered_vessel).to eq(Register::Vessel.last)
     end
   end
 end

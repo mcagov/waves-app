@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025105054) do
+ActiveRecord::Schema.define(version: 20161025134257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 20161025105054) do
   create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "part"
     t.string   "task"
-    t.string   "vessel_reg_no"
     t.string   "vessel_name"
     t.string   "service_level"
     t.string   "payment_type"
@@ -118,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161025105054) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.date     "payment_date"
+    t.string   "vessel_reg_no"
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
   end
 
@@ -198,11 +198,10 @@ ActiveRecord::Schema.define(version: 20161025105054) do
     t.string   "ref_no"
     t.datetime "received_at"
     t.json     "print_jobs"
-    t.uuid     "vessel_id"
     t.string   "task"
     t.string   "source"
     t.boolean  "officer_intervention_required"
-    t.string   "vessel_reg_no"
+    t.uuid     "registered_vessel_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree

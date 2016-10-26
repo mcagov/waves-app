@@ -14,4 +14,4 @@
 - if @submission.claimant == current_user
   .row.no-print#actions
     .col-sm-12
-      = link_to "Convert to Application", manual_entry_path(@submission), method: :patch, class: "btn btn-lg btn-primary pull-right"
+      = link_to "Convert to Application", convert_to_application_manual_entry_path(@submission), method: :patch, class: "btn btn-lg btn-primary pull-right"

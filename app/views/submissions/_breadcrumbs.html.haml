@@ -1,24 +1,18 @@
 %ol.breadcrumb
-  - if !@submission.editable?
-    %li.breadcrumb-item.active
-      = link_to "Registered Vessels", vessels_path
-    %li.breadcrumb-item
-      = link_to @submission.registered_vessel.reg_no, vessel_path(@submission.registered_vessel)
-  - else
-    %li.breadcrumb-item.active
-      Queue
-    %li.breadcrumb-item
-      - case submission.current_state
-        - when :incomplete
-          = link_to "Incomplete Applications", tasks_incomplete_path
-        - when :unassigned
-          = link_to "Unclaimed Tasks", tasks_unclaimed_path
-        - when :assigned
-          - if submission.claimant == current_user
-            = link_to "My Tasks", tasks_my_tasks_path
-          - else
-            = link_to "Team Tasks", tasks_team_tasks_path
-        - when :rejected
-          = link_to "Rejected Applications", tasks_rejected_path
-        - when :referred
-          = link_to "Referred Applications", tasks_referred_path
+  %li.breadcrumb-item.active
+    Queue
+  %li.breadcrumb-item
+    - case submission.current_state
+      - when :incomplete
+        = link_to "Incomplete Applications", tasks_incomplete_path
+      - when :unassigned
+        = link_to "Unclaimed Tasks", tasks_unclaimed_path
+      - when :assigned
+        - if submission.claimant == current_user
+          = link_to "My Tasks", tasks_my_tasks_path
+        - else
+          = link_to "Team Tasks", tasks_team_tasks_path
+      - when :rejected
+        = link_to "Rejected Applications", tasks_rejected_path
+      - when :referred
+        = link_to "Referred Applications", tasks_referred_path

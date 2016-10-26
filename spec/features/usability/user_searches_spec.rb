@@ -4,7 +4,7 @@ describe "User searches" do
   before { login_to_part_3 }
 
   scenario "for a registered vessel" do
-    vessel = create(:register_vessel)
+    vessel = create(:registered_vessel)
     reg_no = vessel.reg_no
 
     find("input#search").set(reg_no)
