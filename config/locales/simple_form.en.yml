@@ -25,7 +25,7 @@ en:
       submission:
         part: Part of Register
         task: Application Type
-        registered_vessel_id: Official Number
+        vessel_reg_no: Official Number
         vessel:
           name: Vessel Name
           vessel_type: Vessel Type

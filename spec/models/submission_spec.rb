@@ -17,6 +17,40 @@ describe Submission, type: :model do
     end
   end
 
+  context "#vessel_reg_no" do
+    let!(:registered_vessel) { create(:registered_vessel) }
+    let!(:submission) { create(:submission) }
+
+    before do
+      submission.vessel_reg_no = vessel_reg_no
+      submission.save!
+    end
+
+    context "for a vessel that exists" do
+      let(:vessel_reg_no) { registered_vessel.reg_no }
+
+      it "gets the vessel_reg_no" do
+        expect(submission.vessel_reg_no).to eq(vessel_reg_no)
+      end
+
+      it "has a registered_vessel" do
+        expect(submission.registered_vessel).to eq(registered_vessel)
+      end
+    end
+
+    context "that is unknown" do
+      let(:vessel_reg_no) { "bob" }
+
+      it "does not have a vessel_reg_no" do
+        expect(submission.vessel_reg_no).to be_blank
+      end
+
+      it "does not have a registered_vessel" do
+        expect(submission.registered_vessel).to be_nil
+      end
+    end
+  end
+
   context ".referred_until_expired" do
     let!(:submission) { create(:submission, referred_until: referred_until) }
     let(:submissions) { Submission.referred_until_expired }

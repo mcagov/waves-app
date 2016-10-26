@@ -37,12 +37,8 @@ class Payment::FinancePayment < ApplicationRecord
       remittance: self,
       submission: Submission.create(part: part,
                                     task: task,
-                                    registered_vessel_id: registered_vessel_id,
+                                    vessel_reg_no: vessel_reg_no,
                                     officer_intervention_required: true,
                                     source: :manual_entry))
-  end
-
-  def registered_vessel_id
-    Register::Vessel.where(reg_no: vessel_reg_no).pluck(:id).first
   end
 end

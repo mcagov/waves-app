@@ -89,7 +89,7 @@ class SubmissionsController < InternalPagesController
   # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
-      :task,
+      :task, :vessel_reg_no,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],

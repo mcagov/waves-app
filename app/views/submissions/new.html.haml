@@ -5,6 +5,8 @@
 = simple_form_for @submission do |f|
   .row
     .col-md-3
+      = f.input :vessel_reg_no
+    .col-md-3
       = f.input :task, collection: Task::TASK_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
   .row.no-print
     .col-sm-12
