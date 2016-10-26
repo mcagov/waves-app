@@ -1,5 +1,5 @@
 class ManualEntriesController < InternalPagesController
-  before_action :load_submission, only: [:show, :update]
+  before_action :load_submission, except: [:new, :create]
 
   def show
     if @submission.payment
@@ -22,7 +22,7 @@ class ManualEntriesController < InternalPagesController
     redirect_to edit_submission_path(@submission)
   end
 
-  def update
+  def convert_to_application
     @submission =
       Builders::ManualEntryBuilder.convert_to_application(@submission)
     redirect_to edit_submission_path(@submission)

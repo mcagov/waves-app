@@ -59,7 +59,11 @@ Rails.application.routes.draw do
              controller: :submission_details
   end
 
-  resources :manual_entries, only: [:new, :create, :show, :update]
+  resources :manual_entries, only: [:new, :create, :show, :update] do
+    member do
+      patch :convert_to_application, shallow: true
+    end
+  end
 
   resources :declarations, only: [:update] do
     resource :owners, only: [:update], controller: :declaration_owner
