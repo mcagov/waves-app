@@ -8,7 +8,6 @@ class Submission < ApplicationRecord
   validates :ref_no, presence: true
   validates :source, presence: true
   validates :task, presence: true
-  validate :registered_vessel_exists
 
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
@@ -102,13 +101,5 @@ class Submission < ApplicationRecord
 
   def add_claimant(user)
     update_attribute(:claimant, user)
-  end
-
-  def registered_vessel_exists
-    if Policies::Submission.registered_vessel_required?(self)
-      unless registered_vessel
-        errors.add(:vessel_reg_no, "was not found in the Registry")
-      end
-    end
   end
 end

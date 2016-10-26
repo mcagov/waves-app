@@ -18,7 +18,7 @@ class ManualEntriesController < InternalPagesController
     @submission.claimant = current_user
     @submission.state = :assigned
 
-    if @submission.save
+    if validate_registered_vessel_exists && @submission.save
       redirect_to edit_submission_path(@submission)
     else
       render :new
@@ -35,7 +35,9 @@ class ManualEntriesController < InternalPagesController
 
   def update
     @original_submission_part = @submission.part
-    if @submission.update_attributes(submission_params)
+    @submission.assign_attributes(submission_params)
+
+    if validate_registered_vessel_exists && @submission.save
       succcessful_redirect_after_update
     else
       render :edit
@@ -62,5 +64,15 @@ class ManualEntriesController < InternalPagesController
                        to #{Activity.new(@submission.part)}"
       redirect_to tasks_my_tasks_path
     end
+  end
+
+  def validate_registered_vessel_exists
+    if Policies::Submission.registered_vessel_required?(@submission)
+      unless @submission.registered_vessel
+        @submission.errors.add(:vessel_reg_no, "was not found in the Registry")
+        return false
+      end
+    end
+    true
   end
 end
