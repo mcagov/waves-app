@@ -1,4 +1,4 @@
-class SubmissionCorrespondencesController < InternalPagesController
+class Submission::CorrespondencesController < InternalPagesController
   before_action :load_submission
 
   def create

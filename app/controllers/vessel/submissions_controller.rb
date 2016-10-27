@@ -1,4 +1,4 @@
-class VesselSubmissionsController < InternalPagesController
+class Vessel::SubmissionsController < InternalPagesController
   before_action :load_vessel
 
   def show

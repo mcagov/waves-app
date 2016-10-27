@@ -10,7 +10,7 @@ module EditableSubmissionHelper
       class: "editable-text",
       "data-name" => attr_name,
       "data-value" => attr_value,
-      "data-url" => submission_vessels_path(@submission),
+      "data-url" => submission_vessel_path(@submission),
       "data-title" => attr_title)
   end
 
@@ -21,7 +21,7 @@ module EditableSubmissionHelper
       class: "editable-select",
       "data-name" => "vessel[vessel_type]",
       "data-value" => attr_value,
-      "data-url" => submission_vessels_path(@submission),
+      "data-url" => submission_vessel_path(@submission),
       "data-title" => "Vessel type",
       "data-source" => vessel_type_list.to_json)
   end
@@ -33,7 +33,7 @@ module EditableSubmissionHelper
       class: "editable-select",
       "data-name" => "vessel[number_of_hulls]",
       "data-value" => attr_value,
-      "data-url" => submission_vessels_path(@submission),
+      "data-url" => submission_vessel_path(@submission),
       "data-title" => "Number of hulls",
       "data-source" => (1..6).to_a.to_json)
   end

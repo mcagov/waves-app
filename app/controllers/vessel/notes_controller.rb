@@ -1,4 +1,4 @@
-class VesselNotesController < InternalPagesController
+class Vessel::NotesController < InternalPagesController
   before_action :load_vessel
 
   def create

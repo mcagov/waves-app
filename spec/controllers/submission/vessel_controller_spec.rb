@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe SubmissionVesselController, type: :controller do
+describe Submission::VesselController, type: :controller do
   before do
     allow(controller).to receive(:signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(current_user)

@@ -39,21 +39,23 @@ Rails.application.routes.draw do
   end
 
   resources :submissions, only: [:show, :edit, :update] do
-    member do
-      post :claim
-      post :unclaim
-      post :approve
-      post :claim_referral
+    resource :states, controller: "submission/states", only: [:show] do
+      member do
+        post :claim
+        post :unclaim
+        post :approve
+        post :claim_referral
+      end
     end
     resource :correspondence,
              only: [:create],
-             controller: :submission_correspondences
-    resource :vessels,
+             controller: "submission/correspondences"
+    resource :vessel,
              only: [:update],
-             controller: :submission_vessel
+             controller: "submission/vessel"
     resource :delivery_addresses,
              only: [:update],
-             controller: :submission_delivery_address
+             controller: "submission/delivery_address"
   end
 
   resources :manual_entries, only: [:new, :edit, :create, :show, :update] do
@@ -87,13 +89,13 @@ Rails.application.routes.draw do
   resources :vessels, only: [:show, :index] do
     resources :submissions,
               only: :show,
-              controller: :vessel_submissions
+              controller: "vessel/submissions"
     resource :correspondence,
              only: [:create],
-             controller: :vessel_correspondences
+             controller: "vessel/correspondences"
     resource :note,
              only: [:create],
-             controller: :vessel_notes
+             controller: "vessel/notes"
   end
 
   %w(
