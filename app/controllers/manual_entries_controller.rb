@@ -30,7 +30,6 @@ class ManualEntriesController < InternalPagesController
     @submission.officer_intervention_required = false
 
     if @submission.save
-      Builders::ManualEntryBuilder.convert_to_application(@submission)
       redirect_to_edit_or_show
     else
       render :edit

@@ -18,13 +18,6 @@ describe ManualEntriesController, type: :controller do
     end
 
     context "for a new_registration" do
-      before do
-        allow(Builders::ManualEntryBuilder)
-          .to receive(:convert_to_application)
-          .with(submission)
-          .and_return(submission)
-      end
-
       let(:task) { :new_registration }
 
       it "officer intervention is no longer required" do
