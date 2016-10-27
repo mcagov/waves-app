@@ -49,6 +49,30 @@ describe ManualEntriesController, type: :controller do
     end
   end
 
+  describe "#create" do
+    context "successfully" do
+      before do
+        allow(controller)
+          .to receive(:current_activity).and_return(Activity.new(:part_1))
+
+        post :create,
+             params: { submission: { task: :new_registration } }
+      end
+
+      it "sets the part" do
+        expect(assigns(:submission).part.to_sym).to eq(:part_1)
+      end
+
+      it "sets the claimant (and we can assume it is assigned)" do
+        expect(assigns(:submission).claimant).to eq(current_user)
+      end
+
+      it "sets the source" do
+        expect(assigns(:submission).source.to_sym).to eq(:manual_entry)
+      end
+    end
+  end
+
   describe "#update" do
     let!(:submission) { create(:submission, state: :assigned) }
 

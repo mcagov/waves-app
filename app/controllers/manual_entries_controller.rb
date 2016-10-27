@@ -17,6 +17,7 @@ class ManualEntriesController < InternalPagesController
     @submission.part = current_activity.part
     @submission.claimant = current_user
     @submission.state = :assigned
+    @submission.source = :manual_entry
 
     if @submission.save
       redirect_to_edit_or_show
