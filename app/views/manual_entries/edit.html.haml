@@ -1,5 +1,7 @@
 .row
-  .col-sm-6
-    %h1{style: "margin-top: 0px !important;"} Edit Application
+  .col-sm-12
+    = render partial: "submissions/breadcrumbs", locals: {submission: @submission}
+    = render partial: "submissions/heading", locals: {submission: @submission}
+
 = simple_form_for @submission, url: manual_entry_path do |f|
   = render partial: "fields", locals: { f: f }

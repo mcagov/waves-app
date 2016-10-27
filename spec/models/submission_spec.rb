@@ -17,6 +17,39 @@ describe Submission, type: :model do
     end
   end
 
+  context ".registered_vessel_exists" do
+    let!(:submission) { build(:submission) }
+
+    before do
+      allow(Policies::Submission)
+        .to receive(:registered_vessel_required?)
+        .with(submission)
+        .and_return(registered_vessel_required_policy)
+
+      submission.save
+    end
+
+    context "when the registered_vessel_required? policy returns true" do
+      let(:registered_vessel_required_policy) { true }
+
+      it { expect(submission.errors).to include(:vessel_reg_no) }
+
+      context "and the submission has a registered_vessel" do
+        before do
+          submission.vessel_reg_no = create(:registered_vessel).reg_no
+        end
+
+        it { expect(submission).to be_valid }
+      end
+    end
+
+    context "when the registered_vessel_required? policy returns false" do
+      let(:registered_vessel_required_policy) { false }
+
+      it { expect(submission).to be_valid }
+    end
+  end
+
   context ".referred_until_expired" do
     let!(:submission) { create(:submission, referred_until: referred_until) }
     let(:submissions) { Submission.referred_until_expired }
