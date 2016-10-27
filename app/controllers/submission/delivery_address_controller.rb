@@ -1,4 +1,4 @@
-class SubmissionDeliveryAddressController < InternalPagesController
+class Submission::DeliveryAddressController < InternalPagesController
   before_action :load_submission_and_delivery_address
 
   def update
