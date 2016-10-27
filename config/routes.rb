@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     end
     resource :correspondence,
              only: [:create],
-             controller: :submission_correspondences
+             controller: "submission/correspondences"
     resource :vessels,
              only: [:update],
              controller: :submission_vessel
