@@ -7,12 +7,13 @@ describe ManualEntriesController, type: :controller do
   end
 
   let!(:current_user) { create(:user) }
-  let!(:submission) { create(:finance_payment).submission }
-  before { submission.update_attribute(:state, :assigned) }
 
-  describe "#update" do
+  describe "#convert_to_application" do
+    let!(:submission) { create(:finance_payment).submission }
+
     before do
-      submission.update_attribute(:task, task)
+      submission.update_attributes(state: :assigned, task: task)
+
       post :convert_to_application, params: { id: submission.id }
     end
 
@@ -49,6 +50,8 @@ describe ManualEntriesController, type: :controller do
   end
 
   describe "#update" do
+    let!(:submission) { create(:submission, state: :assigned) }
+
     context "for a valid change_vessel" do
       let!(:registered_vessel) { create(:registered_vessel) }
 
