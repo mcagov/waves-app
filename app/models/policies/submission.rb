@@ -22,6 +22,8 @@ class Policies::Submission
     end
 
     def registered_vessel_required?(submission)
+      return false if submission.officer_intervention_required?
+      return false if submission.registered_vessel
       ![:unknown, :new_registration].include?(submission.task.to_sym)
     end
   end
