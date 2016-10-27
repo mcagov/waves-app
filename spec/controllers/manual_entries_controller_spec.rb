@@ -91,36 +91,4 @@ describe ManualEntriesController, type: :controller do
       end
     end
   end
-
-  describe "#update" do
-    context "for a valid change_vessel" do
-      let!(:registered_vessel) { create(:registered_vessel) }
-
-      before do
-        post :create,
-             params: {
-               submission: {
-                 task: :change_vessel,
-                 vessel_reg_no: registered_vessel.reg_no } }
-      end
-
-      it "redirects_to submissions#show" do
-        expect(response)
-          .to redirect_to(submission_path(assigns(:submission)))
-      end
-    end
-
-    context "for a new_registration" do
-      before do
-        post :create,
-             params: {
-               submission: { task: :new_registration } }
-      end
-
-      it "redirects_to submissions#edit" do
-        expect(response)
-          .to redirect_to(edit_submission_path(assigns(:submission)))
-      end
-    end
-  end
 end
