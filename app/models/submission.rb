@@ -10,12 +10,18 @@ class Submission < ApplicationRecord
   validates :task, presence: true
   validate :registered_vessel_exists
 
+  before_update :update_submission, if: :registered_vessel_id_changed?
+
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
 
   def init_new_submission
     Builders::SubmissionBuilder.create(self)
+  end
+
+  def update_submission
+    Builders::SubmissionBuilder.update(self)
   end
 
   def init_processing_dates

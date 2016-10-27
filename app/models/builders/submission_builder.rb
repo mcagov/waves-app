@@ -9,6 +9,12 @@ class Builders::SubmissionBuilder
       @submission
     end
 
+    def update(submission)
+      @submission = submission
+
+      @submission
+    end
+
     private
 
     def ensure_defaults
