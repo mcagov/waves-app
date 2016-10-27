@@ -92,7 +92,7 @@ Rails.application.routes.draw do
               controller: :vessel_submissions
     resource :correspondence,
              only: [:create],
-             controller: :vessel_correspondences
+             controller: "vessel/correspondences"
     resource :note,
              only: [:create],
              controller: :vessel_notes
