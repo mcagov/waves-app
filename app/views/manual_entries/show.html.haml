@@ -9,20 +9,6 @@
         %h2 Finance & Processing Information
         .clearfix
       .x_content
-
-      - if @submission.claimant == current_user
-        - if Policies::Submission.registered_vessel_required?(@submission) && @submission.registered_vessel
-
-          #prompt.alert.alert-info A vessel was not found, please update the Official Number
-          .row
-            .col-md-3
-              = simple_form_for @submission, url: manual_entry_path do |f|
-                = f.input :vessel_reg_no
-            .col-md-3
-              = button_tag(type: 'submit', class: "btn btn-primary") do
-                %i.fa.fa-check
-                Save Application
-
       = render partial: "finance/payments/payment", locals: { finance_payment: @finance_payment }
 
   - if @submission.claimant == current_user
