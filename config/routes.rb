@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   resources :manual_entries, only: [:new, :edit, :create, :show, :update] do
     member do
-      patch :convert_to_application, shallow: true
+      patch :convert_to_application
     end
   end
 
