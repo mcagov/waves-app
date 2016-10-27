@@ -1,4 +1,4 @@
-class SubmissionVesselController < InternalPagesController
+class Submission::VesselController < InternalPagesController
   before_action :load_submission_and_vessel
 
   def update

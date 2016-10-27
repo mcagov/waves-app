@@ -50,9 +50,9 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
-    resource :vessels,
+    resource :vessel,
              only: [:update],
-             controller: :submission_vessel
+             controller: "submission/vessel"
     resource :delivery_addresses,
              only: [:update],
              controller: "submission/delivery_address"
