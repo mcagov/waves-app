@@ -39,11 +39,13 @@ Rails.application.routes.draw do
   end
 
   resources :submissions, only: [:show, :edit, :update] do
-    member do
-      post :claim
-      post :unclaim
-      post :approve
-      post :claim_referral
+    resource :states, controller: "submission/states", only: [:show] do
+      member do
+        post :claim
+        post :unclaim
+        post :approve
+        post :claim_referral
+      end
     end
     resource :correspondence,
              only: [:create],

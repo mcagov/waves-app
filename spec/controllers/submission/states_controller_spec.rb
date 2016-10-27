@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe SubmissionsController, type: :controller do
+describe Submission::StatesController, type: :controller do
   before do
     allow(controller).to receive(:signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(current_user)
@@ -10,7 +10,8 @@ describe SubmissionsController, type: :controller do
 
   context "#claim" do
     before do
-      post :claim, params: { id: create(:paid_submission).id }, xhr: true
+      post :claim,
+           params: { submission_id: create(:paid_submission).id }, xhr: true
     end
 
     it "assigns the claimant" do
@@ -23,7 +24,8 @@ describe SubmissionsController, type: :controller do
 
     context "#unclaim" do
       before do
-        post :unclaim, params: { id: assigns[:submission].id }, xhr: true
+        post :unclaim,
+             params: { submission_id: assigns[:submission].id }, xhr: true
       end
 
       it "unassigns the claimant" do
@@ -38,7 +40,8 @@ describe SubmissionsController, type: :controller do
 
   context "#claim_referral" do
     before do
-      post :claim_referral, params: { id: create(:referred_submission).id }
+      post :claim_referral,
+           params: { submission_id: create(:referred_submission).id }
     end
 
     it "assigns the claimant" do
@@ -54,7 +57,7 @@ describe SubmissionsController, type: :controller do
     let(:submission) { create_assigned_submission! }
 
     context "succesfully" do
-      before { post :approve, params: { id: submission.id } }
+      before { post :approve, params: { submission_id: submission.id } }
 
       it "moves the submission to :printing" do
         expect(assigns[:submission]).to be_printing
@@ -78,7 +81,7 @@ describe SubmissionsController, type: :controller do
       before do
         allow_any_instance_of(Submission)
           .to receive(:approved!).and_return(false)
-        post :approve, params: { id: submission.id }
+        post :approve, params: { submission_id: submission.id }
       end
 
       it "does not move to completed" do

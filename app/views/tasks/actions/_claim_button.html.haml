@@ -2,11 +2,11 @@
   - if submission.completed?
 
   - elsif submission.unassigned?
-    = form_tag claim_submission_path(submission), remote: true do
+    = form_tag claim_submission_states_path(submission), remote: true do
       = submit_tag "Claim"
 
   - elsif submission.claimant == current_user
-    = form_tag unclaim_submission_path(submission), remote: true do
+    = form_tag unclaim_submission_states_path(submission), remote: true do
       = submit_tag "Unclaim"
 
   - elsif submission.assigned?
