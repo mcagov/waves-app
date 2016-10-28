@@ -44,7 +44,7 @@ describe "User adds a new manual entry", type: :feature do
     expect(page).to have_css(".submission_vessel_reg_no", text: "not found")
   end
 
-  scenario "for a change of vessel details with an invalid official number" do
+  scenario "for a change of vessel details with a valid official number" do
     select("Change of Vessel Details", from: "Application Type")
     fill_in("Official Number", with: create(:registered_vessel).reg_no)
     click_on("Save Application")

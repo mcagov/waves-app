@@ -5,7 +5,7 @@ module Submission::StateMachine
       base.include ActiveModel::Transitions
 
       base.state_machine auto_scopes: true do
-        state :incomplete, enter: :init_new_submission
+        state :incomplete, enter: :build_defaults
         state :unassigned
         state :assigned
         state :referred

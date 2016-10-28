@@ -29,6 +29,10 @@ describe Payment::FinancePayment do
       expect(finance_payment.submission.officer_intervention_required)
         .to be_truthy
     end
+
+    it "sets the source" do
+      expect(finance_payment.submission.source.to_sym).to eq(:manual_entry)
+    end
   end
 
   context "with invalid params" do

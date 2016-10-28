@@ -15,6 +15,19 @@ describe Submission, type: :model do
     it "gets the delivery_address" do
       expect(submission.delivery_address.country).to eq("UNITED KINGDOM")
     end
+
+    context "changing the registered_vessel_id" do
+      before do
+        expect(Builders::SubmissionBuilder)
+          .to receive(:build_defaults)
+          .with(submission)
+      end
+
+      it "invokes the SubmissionBuilder#build_defaults" do
+        submission.registered_vessel_id = create(:registered_vessel).id
+        submission.save
+      end
+    end
   end
 
   context ".registered_vessel_exists" do

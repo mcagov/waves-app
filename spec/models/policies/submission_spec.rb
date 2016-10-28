@@ -6,12 +6,6 @@ describe Policies::Submission do
 
     subject { Policies::Submission.registered_vessel_required?(submission) }
 
-    context "when officer_intervention_required?" do
-      before { submission.officer_intervention_required = true }
-
-      it { expect(subject).to be_falsey }
-    end
-
     context "when the task is :new_registration or :unknown" do
       before { submission.task = [:new_registration, :unknown].sample }
 

@@ -1,15 +1,9 @@
 class SubmissionsController < InternalPagesController
-  before_action :load_submission, except: [:show]
+  before_action :load_submission
+  before_action :check_officer_intervention_required
 
   def show
-    submission = Submission.includes(
-      [:payments, :correspondences, :notifications]).find(params[:id])
-
-    if submission.officer_intervention_required?
-      return redirect_to manual_entry_path(submission)
-    end
-
-    @submission = Decorators::Submission.new(submission)
+    @submission = Decorators::Submission.new(@submission)
   end
 
   def edit; end
@@ -26,7 +20,8 @@ class SubmissionsController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.find(params[:id])
+    @submission = Submission.includes(
+      [:payments, :correspondences, :notifications]).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength
@@ -42,5 +37,11 @@ class SubmissionsController < InternalPagesController
                 :address_2, :address_3, :town, :postcode],
       ]
     )
+  end
+
+  def check_officer_intervention_required
+    if @submission.officer_intervention_required?
+      return redirect_to manual_entry_path(@submission)
+    end
   end
 end

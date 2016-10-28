@@ -17,9 +17,10 @@ class ManualEntriesController < InternalPagesController
     @submission.part = current_activity.part
     @submission.claimant = current_user
     @submission.state = :assigned
+    @submission.source = :manual_entry
 
     if @submission.save
-      redirect_to edit_submission_path(@submission)
+      redirect_to_edit_or_show
     else
       render :new
     end
@@ -29,8 +30,7 @@ class ManualEntriesController < InternalPagesController
     @submission.officer_intervention_required = false
 
     if @submission.save
-      Builders::ManualEntryBuilder.convert_to_application(@submission)
-      redirect_to edit_submission_path(@submission)
+      redirect_to_edit_or_show
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class ManualEntriesController < InternalPagesController
     @submission.assign_attributes(submission_params)
 
     if @submission.save
-      succcessful_redirect_after_update
+      redirect_after_successful_update
     else
       render :edit
     end
@@ -59,10 +59,17 @@ class ManualEntriesController < InternalPagesController
     params.require(:submission).permit(:part, :task, :vessel_reg_no)
   end
 
-  def succcessful_redirect_after_update
-    if @original_submission_part == @submission.part
-      flash[:notice] = "The application has been updated"
+  def redirect_to_edit_or_show
+    if @submission.task.to_sym == :new_registration
+      redirect_to edit_submission_path(@submission)
+    else
       redirect_to submission_path(@submission)
+    end
+  end
+
+  def redirect_after_successful_update
+    if @original_submission_part == @submission.part
+      redirect_to_edit_or_show
     else
       @submission.unclaimed!
       flash[:notice] = "The application has been moved\

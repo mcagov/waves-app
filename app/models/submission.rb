@@ -8,14 +8,24 @@ class Submission < ApplicationRecord
   validates :ref_no, presence: true
   validates :source, presence: true
   validates :task, presence: true
-  validate :registered_vessel_exists
+
+  validates :task,
+            inclusion: {
+              in: Task.validation_helper_task_type_list,
+              message: "must be selected" },
+            unless: :officer_intervention_required?
+
+  validate :registered_vessel_exists,
+           unless: :officer_intervention_required?
+
+  before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
 
-  def init_new_submission
-    Builders::SubmissionBuilder.create(self)
+  def build_defaults
+    Builders::SubmissionBuilder.build_defaults(self)
   end
 
   def init_processing_dates
@@ -80,6 +90,10 @@ class Submission < ApplicationRecord
 
   def symbolized_changeset
     changeset.blank? ? {} : changeset.deep_symbolize_keys!
+  end
+
+  def symbolized_registry_info
+    registry_info.blank? ? {} : registry_info.deep_symbolize_keys!
   end
 
   def payment

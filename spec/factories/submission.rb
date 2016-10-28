@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :submission do
     part "part_3"
+    task :new_registration
     changeset do
       {
         owners: [build(:declaration_owner)],

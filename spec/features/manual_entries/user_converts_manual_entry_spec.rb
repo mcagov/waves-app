@@ -5,6 +5,7 @@ describe "User converts manual entry", type: :feature, js: true do
     create(
       :finance_payment,
       part: :part_3,
+      task: :new_registration,
       vessel_name: "MY BOAT", applicant_name: "BOB")
 
     login_to_part_3
@@ -22,8 +23,7 @@ describe "User converts manual entry", type: :feature, js: true do
       click_on("Convert to Application")
     end
 
-    expect(page).to have_field("Vessel Name", with: "MY BOAT")
-    expect(page).to have_field("Name", with: "BOB")
+    expect(page).to have_field("Vessel Name")
   end
 
   scenario "when they have not claimed it they can't 'convert' it" do
