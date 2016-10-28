@@ -20,5 +20,9 @@ class Task
         ["Registration Closure", :closure],
         ["Transcript Request", :transcript]]
     end
+
+    def validation_helper_task_type_list
+      task_types.map { |t| t[1].to_s }
+    end
   end
 end
