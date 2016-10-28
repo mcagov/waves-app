@@ -19,11 +19,11 @@ describe Submission, type: :model do
     context "changing the registered_vessel_id" do
       before do
         expect(Builders::SubmissionBuilder)
-          .to receive(:update)
+          .to receive(:build_defaults)
           .with(submission)
       end
 
-      it "invokes the SubmissionBuilder#update" do
+      it "invokes the SubmissionBuilder#build_defaults" do
         submission.registered_vessel_id = create(:registered_vessel).id
         submission.save
       end

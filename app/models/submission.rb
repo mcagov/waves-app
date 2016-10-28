@@ -18,18 +18,14 @@ class Submission < ApplicationRecord
   validate :registered_vessel_exists,
            unless: :officer_intervention_required?
 
-  before_update :update_submission, if: :registered_vessel_id_changed?
+  before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
 
-  def init_new_submission
-    Builders::SubmissionBuilder.create(self)
-  end
-
-  def update_submission
-    Builders::SubmissionBuilder.update(self)
+  def build_defaults
+    Builders::SubmissionBuilder.build_defaults(self)
   end
 
   def init_processing_dates
