@@ -41,6 +41,6 @@ class Decorators::Submission < SimpleDelegator
   private
 
   def finance_payment
-    payment.remittance if source.to_sym == :manual_entry
+    payment.remittance if payment && source.to_sym == :manual_entry
   end
 end

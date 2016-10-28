@@ -34,6 +34,11 @@ describe "User adds a new manual entry", type: :feature do
     expect(page).to have_css("#vessel-vessel_type_other", text: "TEACUP")
     expect(page).to have_css("#vessel-mmsi_number", text: "MMSI-123")
     expect(page).to have_css("#vessel-radio_call_sign", text: "RADIO-CALL")
+
+    # regression test, ensure that tasks list doesn't break
+    # when the manual entry has no payment
+    visit tasks_my_tasks_path
+    expect(page).to have_css("h1", text: "My Tasks")
   end
 
   scenario "for a change of vessel details with an invalid official number" do
