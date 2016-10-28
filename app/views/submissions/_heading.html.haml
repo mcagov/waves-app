@@ -8,3 +8,10 @@
                edit_manual_entry_path(submission),
                id: "edit_submission_ref_no"
 %h5 Source: #{submission.source_description}
+- if @submission.registered_vessel
+  %h5
+    Registered Vessel:
+    = link_to vessel_path(@submission.registered_vessel) do
+      = @submission.registered_vessel.reg_no
+      \/
+      = @submission.registered_vessel

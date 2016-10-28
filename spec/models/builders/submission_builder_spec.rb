@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe Builders::SubmissionBuilder do
-  context "#create" do
-    let!(:submission) { build_incomplete_submission! }
+  let!(:submission) { create(:submission) }
 
+  context "#create" do
     subject { described_class.create(submission) }
 
     it "defaults to task = new_registration" do
@@ -25,5 +25,10 @@ describe Builders::SubmissionBuilder do
     it "builds a declaration for each owner" do
       expect(submission.declarations.count).to eq(submission.owners.count)
     end
+  end
+
+  describe "#update" do
+    it "builds the registry_infor"
+    it "builds the registry_infor"
   end
 end
