@@ -1,11 +1,16 @@
-%table.table.table-striped.table-fluid.submission
+- registry_vessel = @submission.registry_vessel
+%table.table.table-striped.table-fluid.submission-vessel
   %thead
     %th Vessel Details
+    - if @submission.display_registry_info?
+      %th Current Information
     %th Submitted Information
   %tbody
     %tr
       %td{width: "30%"} Vessel Name
-      %td#vessel-name{width: "70%"}
+      - if @submission.display_registry_info?
+        %td{width: "30%"}= registry_vessel.name
+      %td#vessel-name
         %strong
           = editable_vessel("Vessel name", "vessel[name]", vessel.name)
           .i.fa.fa-star-o.hidden
@@ -13,43 +18,59 @@
           = vessel.alt_names.join(', ')
     %tr
       %td Hull Identification Number (HIN)
+      - if @submission.display_registry_info?
+        %td= registry_vessel.hin
       %td#vessel-hin
         %strong
           = editable_vessel("Hull Identification Number", "vessel[hin]", vessel.hin)
           .i.fa.fa-star-o.hidden
     %tr
       %td Make and model
+      - if @submission.display_registry_info?
+        %td= registry_vessel.make_and_model
       %td#vessel-make_and_model
         %strong
           = editable_vessel("Make and model", "vessel[make_and_model]", vessel.make_and_model)
     %tr
       %td Length
+      - if @submission.display_registry_info?
+        %td= registry_vessel.length_in_meters
       %td#vessel-length_in_meters
         %strong
           = editable_vessel("Length", "vessel[length_in_meters]", vessel.length_in_meters)
     %tr
       %td Number of hulls
+      - if @submission.display_registry_info?
+        %td= registry_vessel.number_of_hulls
       %td#vessel-number_of_hulls
         %strong
           = editable_number_of_hulls(vessel.number_of_hulls)
     %tr
       %td Vessel type
+      - if @submission.display_registry_info?
+        %td= registry_vessel.vessel_type
       %td#vessel-vessel_type
         %strong
           = editable_vessel_type(vessel.vessel_type)
     %tr
       %td Vessel type (other)
+      - if @submission.display_registry_info?
+        %td n/a
       %td#vessel-vessel_type_other
         %strong
           = editable_vessel("Vessel type_other", "vessel[vessel_type_other]", vessel.vessel_type_other)
     %tr
       %td MMSI Number
+      - if @submission.display_registry_info?
+        %td= registry_vessel.mmsi_number
       %td#vessel-mmsi_number
         %strong
           = editable_vessel("MMSI Number", "vessel[mmsi_number]", vessel.mmsi_number)
           .i.fa.fa-star-o.hidden
     %tr
       %td Radio Call Sign
+      - if @submission.display_registry_info?
+        %td= registry_vessel.radio_call_sign
       %td#vessel-radio_call_sign
         %strong
           = editable_vessel("Radio Call Sign", "vessel[radio_call_sign]", vessel.radio_call_sign )
