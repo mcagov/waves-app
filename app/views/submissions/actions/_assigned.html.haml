@@ -12,9 +12,10 @@
       %i.fa.fa-trash
       Cancel Application
 
-    = link_to "#approve-application", "data-target" => "#approve-application", "data-toggle" => "modal", class: "btn btn-success btn-lg pull-right" do
-      %i.fa.fa-check
-      Register Vessel & Issue Certificate of Registry
+    - if @submission.approvable?
+      = link_to "#approve-application", "data-target" => "#approve-application", "data-toggle" => "modal", class: "btn btn-success btn-lg pull-right" do
+        %i.fa.fa-check
+        Register Vessel & Issue Certificate of Registry
 
 = render partial: "submissions/modals/cancel", locals: {submission: @submission}
 = render partial: "submissions/modals/refer", locals: {submission: @submission}
