@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User views change of vessel details submission", type: :feature, js: true do
+feature "User views change of details submission", type: :feature, js: true do
   let!(:submission) { create_unassigned_submission! }
 
   before do
@@ -17,11 +17,17 @@ feature "User views change of vessel details submission", type: :feature, js: tr
     end
   end
 
-  scenario "vessel info renders a three column table", javascript: true do
+  scenario "vessel info renders three column table", javascript: true do
     click_link("Vessel Information")
 
     within("table.submission-vessel") do
       expect(page).to have_css("th", count: 3)
+
+      expect(page)
+        .to have_css("td#registry-vessel-name", text: "CELEBRATOR DOPPELBOCK")
+
+      expect(page)
+        .to have_css("td#vessel-name", text: "No change")
     end
   end
 end

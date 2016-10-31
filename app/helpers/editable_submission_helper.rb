@@ -1,41 +1,27 @@
 module EditableSubmissionHelper
+  def editable_vessel(
+    title, name, value, reg_info_value, css = "editable-text", source = nil)
+    link_to editable_value(value, reg_info_value),
+            "#",
+            class: css,
+            data: {
+              title: title,
+              name: name,
+              url: submission_vessel_path(@submission),
+              emptytext: editable_emptytext(value, reg_info_value),
+              source: source }
+  end
+
+  def editable_value(value, reg_info_value)
+    value == reg_info_value ? "" : value
+  end
+
+  def editable_emptytext(value, reg_info_value)
+    value == reg_info_value ? "No change" : ""
+  end
+
   def editable_link_to(boolean, *link_to_params)
     link_to_if boolean, *link_to_params
-  end
-
-  def editable_vessel(attr_title, attr_name, attr_value)
-    editable_link_to(
-      @submission.editable?,
-      attr_value, "#",
-      class: "editable-text",
-      "data-name" => attr_name,
-      "data-value" => attr_value,
-      "data-url" => submission_vessel_path(@submission),
-      "data-title" => attr_title)
-  end
-
-  def editable_vessel_type(attr_value)
-    editable_link_to(
-      @submission.editable?,
-      attr_value, "#",
-      class: "editable-select",
-      "data-name" => "vessel[vessel_type]",
-      "data-value" => attr_value,
-      "data-url" => submission_vessel_path(@submission),
-      "data-title" => "Vessel type",
-      "data-source" => vessel_type_list.to_json)
-  end
-
-  def editable_number_of_hulls(attr_value)
-    editable_link_to(
-      @submission.editable?,
-      attr_value, "#",
-      class: "editable-select",
-      "data-name" => "vessel[number_of_hulls]",
-      "data-value" => attr_value,
-      "data-url" => submission_vessel_path(@submission),
-      "data-title" => "Number of hulls",
-      "data-source" => (1..6).to_a.to_json)
   end
 
   def editable_owner(attr_title, attr_name, attr_value, declaration)
