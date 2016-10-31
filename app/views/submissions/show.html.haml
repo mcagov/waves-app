@@ -6,7 +6,8 @@
     = render partial: "submissions/heading", locals: {submission: @submission}
   .col-sm-6
     = render partial: "submissions/actions/edit_button", locals: {submission: @submission}
-    = render partial: "prompts", locals: {submission: @submission}
+
+= render partial: "submissions/info/prompts", locals: {submission: @submission}
 
 = render partial: "tabs", locals: {submission: @submission}
 = render partial: "similar_vessels", locals: {submission: @submission}

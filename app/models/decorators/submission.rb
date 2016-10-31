@@ -38,6 +38,10 @@ class Decorators::Submission < SimpleDelegator
     source.titleize if source
   end
 
+  def previous_update_by
+    versions.last.whodunnit
+  end
+
   private
 
   def finance_payment
