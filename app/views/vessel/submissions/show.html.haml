@@ -7,6 +7,6 @@
         = link_to @vessel.reg_no, vessel_path(@vessel)
 .row
   .col-sm-6
-    = render partial: "submissions/heading", locals: {submission: @submission}
+    = render partial: "submissions/info/heading", locals: {submission: @submission}
 
 = render partial: "submissions/tabs", locals: {submission: @submission}
