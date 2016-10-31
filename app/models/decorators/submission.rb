@@ -42,6 +42,15 @@ class Decorators::Submission < SimpleDelegator
     versions.last.whodunnit
   end
 
+  def display_registry_info?
+    registry_info.present?
+  end
+
+  def registry_vessel
+    @registry_vessel ||=
+      Submission::Vessel.new(symbolized_registry_info[:vessel_info] || {})
+  end
+
   private
 
   def finance_payment

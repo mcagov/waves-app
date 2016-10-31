@@ -9,7 +9,7 @@
     %tr
       %td{width: "30%"} Vessel Name
       - if @submission.display_registry_info?
-        %td{width: "30%"}= registry_vessel.name
+        %td#registry-vessel-name{width: "30%"}= registry_vessel.name
       %td#vessel-name
         %strong
           = editable_vessel("Vessel name", "vessel[name]", vessel.name)
