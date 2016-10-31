@@ -3,7 +3,7 @@ require "rails_helper"
 describe ClientSession do
   context "#create" do
     let!(:vessel) { create(:registered_vessel) }
-    let!(:owner) { create(:register_owner, vessel: vessel) }
+    let!(:owner) { create(:registered_vessel).owners.first }
 
     context "with valid attributes" do
       before { expect(SmsProvider).to receive(:send_access_code).once }
