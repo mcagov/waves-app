@@ -24,6 +24,12 @@ class Submission < ApplicationRecord
     where("date(referred_until) <= ?", Date.today)
   }
 
+  after_touch :check_current_state
+
+  def check_current_state
+    unassigned! if incomplete? && actionable?
+  end
+
   def build_defaults
     Builders::SubmissionBuilder.build_defaults(self)
   end

@@ -104,7 +104,7 @@ describe Submission, type: :model do
           .with(submission)
       end
 
-      it { submission.unassigned! }
+      it { submission.touch }
     end
 
     context "to assigned" do
