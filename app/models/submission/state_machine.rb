@@ -15,13 +15,7 @@ module Submission::StateMachine
         state :referred
         state :cancelled
 
-        event :paid do
-          transitions to: :unassigned, from: :incomplete,
-                      on_transition: :init_processing_dates,
-                      guard: :actionable?
-        end
-
-        event :declared do
+        event :unassigned do
           transitions to: :unassigned, from: :incomplete,
                       on_transition: :init_processing_dates,
                       guard: :actionable?

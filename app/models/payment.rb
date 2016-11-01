@@ -3,13 +3,13 @@ class Payment < ApplicationRecord
 
   belongs_to :remittance, polymorphic: true
 
-  after_create :mark_submission_as_paid
+  after_create :move_to_unassigned
 
   validates :submission, presence: true
 
   private
 
-  def mark_submission_as_paid
-    submission.paid!
+  def move_to_unassigned
+    submission.unassigned!
   end
 end

@@ -97,6 +97,5 @@ def pay_submission(submission, payment_file = "new_payment")
   Builders::WorldPayPaymentBuilder.create(
     payment_params.to_h.symbolize_keys)
 
-  submission.reload.paid!
-  submission
+  submission.reload
 end
