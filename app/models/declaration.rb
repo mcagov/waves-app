@@ -1,5 +1,5 @@
 class Declaration < ApplicationRecord
-  belongs_to :submission
+  belongs_to :submission, touch: true
   belongs_to :completed_by, class_name: "User"
 
   has_one :notification, as: :notifiable
@@ -13,7 +13,7 @@ class Declaration < ApplicationRecord
     state :incomplete
     state :completed
 
-    event :declared, timestamp: true, success: :move_submission_to_unassigned do
+    event :declared, timestamp: true do
       transitions to: :completed, from: :incomplete
     end
   end
@@ -34,11 +34,5 @@ class Declaration < ApplicationRecord
 
   def other_owners
     (submission.declarations - [self]).map(&:owner)
-  end
-
-  private
-
-  def move_submission_to_unassigned
-    submission.unassigned!
   end
 end

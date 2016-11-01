@@ -17,7 +17,7 @@ FactoryGirl.define do
 
     after(:create) do |submission|
       submission.build_defaults
-      submission.unassigned!
+      submission.touch
     end
   end
 

@@ -57,4 +57,36 @@ module Submission::Associations
       base.scope :assigned_to, -> (claimant) { where(claimant: claimant) }
     end
   end
+
+  def owners
+    declarations.map(&:owner)
+  end
+
+  def vessel
+    @vessel ||=
+      Submission::Vessel.new(symbolized_changeset[:vessel_info] || {})
+  end
+
+  def vessel=(vessel_params)
+    self.changeset ||= {}
+    changeset[:vessel_info] = vessel_params
+  end
+
+  def delivery_address
+    @delivery_address ||=
+      Submission::DeliveryAddress.new(
+        symbolized_changeset[:delivery_address] || {})
+  end
+
+  def delivery_address=(delivery_address_params)
+    changeset[:delivery_address] = delivery_address_params
+  end
+
+  def correspondent
+    declarations.first.owner unless declarations.empty?
+  end
+
+  def correspondent_email
+    correspondent.email if correspondent
+  end
 end
