@@ -33,6 +33,36 @@ describe Payment::FinancePayment do
     it "sets the source" do
       expect(finance_payment.submission.source.to_sym).to eq(:manual_entry)
     end
+
+    it "sets the state to unassigned so it is ready to be claimed" do
+      expect(finance_payment.submission).to be_unassigned
+    end
+
+    it "sets the target date" do
+      expect(finance_payment.submission.target_date).to be_present
+    end
+  end
+
+  context "for a change_vessel submission" do
+    let!(:finance_payment) do
+      described_class.create(
+        payment_date: Date.today,
+        part: :part_1,
+        task: :change_vessel,
+        vessel_reg_no: create(:registered_vessel).reg_no,
+        payment_type: :cash,
+        payment_amount: "15",
+        actioned_by: create(:user)
+      )
+    end
+
+    it "sets the state to unassigned so it is ready to be claimed" do
+      expect(finance_payment.submission).to be_unassigned
+    end
+
+    it "sets the target date" do
+      expect(finance_payment.submission.target_date).to be_present
+    end
   end
 
   context "with invalid params" do

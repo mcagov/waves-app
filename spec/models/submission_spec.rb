@@ -104,7 +104,7 @@ describe Submission, type: :model do
           .with(submission)
       end
 
-      it { submission.paid! }
+      it { submission.unassigned! }
     end
 
     context "to assigned" do

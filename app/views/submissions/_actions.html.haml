@@ -1,4 +1,4 @@
-- if @submission.approvable? && @submission.claimant == current_user
+- if @submission.claimant == current_user
   = render partial: "submissions/actions/assigned", locals: {submission: @submission}
 
 - elsif @submission.cancelled?

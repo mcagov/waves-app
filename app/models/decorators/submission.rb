@@ -38,6 +38,28 @@ class Decorators::Submission < SimpleDelegator
     source.titleize if source
   end
 
+  def previous_update_by
+    versions.last.whodunnit
+  end
+
+  def display_registry_info?
+    registry_info.present?
+  end
+
+  def registry_vessel
+    @registry_vessel ||=
+      Submission::Vessel.new(symbolized_registry_info[:vessel_info] || {})
+  end
+
+  def registry_owners
+    return [] unless symbolized_registry_info[:owners]
+
+    @registry_owners ||=
+      symbolized_registry_info[:owners].map do |owner|
+        Declaration::Owner.new(owner)
+      end
+  end
+
   private
 
   def finance_payment

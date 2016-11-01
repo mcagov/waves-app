@@ -1,7 +1,5 @@
-.row
-  .col-sm-12
-    = render partial: "submissions/breadcrumbs", locals: {submission: @submission}
-    = render partial: "submissions/heading", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
+= render partial: "submissions/info/heading", locals: {submission: @submission}
 .row
   .col-sm-12
     .x_panel

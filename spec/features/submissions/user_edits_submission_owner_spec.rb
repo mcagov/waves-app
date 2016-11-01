@@ -6,6 +6,8 @@ feature "User edits Owner submission details", type: :feature, js: true do
   scenario "in general" do
     click_on("Owners")
 
+    expect(page).to have_css("table#declaration_1 th", count: 2)
+
     within(".owner-name") { click_on("HORATIO NELSON") }
     find(".editable-input input").set("John Doe")
     first(".editable-submit").click

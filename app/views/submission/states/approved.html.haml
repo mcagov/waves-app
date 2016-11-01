@@ -1,6 +1,6 @@
 .row
   .col-sm-6
-    = render partial: "submissions/heading", locals: {submission: @submission}
+    = render partial: "submissions/info/heading", locals: {submission: @submission}
   .col-sm-6
     .pull-right
       = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do

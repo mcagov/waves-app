@@ -13,7 +13,7 @@ class Declaration < ApplicationRecord
     state :incomplete
     state :completed
 
-    event :declared, timestamp: true, success: :declare_submission do
+    event :declared, timestamp: true, success: :move_submission_to_unassigned do
       transitions to: :completed, from: :incomplete
     end
   end
@@ -38,7 +38,7 @@ class Declaration < ApplicationRecord
 
   private
 
-  def declare_submission
-    submission.declared!
+  def move_submission_to_unassigned
+    submission.unassigned!
   end
 end

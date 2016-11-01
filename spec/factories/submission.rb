@@ -10,6 +10,17 @@ FactoryGirl.define do
     end
   end
 
+  factory :unassigned_change_vessel_submission, class: "Submission" do
+    task          :change_vessel
+    source        :manual_entry
+    vessel_reg_no { create(:registered_vessel).reg_no }
+
+    after(:create) do |submission|
+      submission.build_defaults
+      submission.unassigned!
+    end
+  end
+
   factory :paid_submission, parent: :submission do
     after(:create) do |submission|
       create(:payment, submission: submission)

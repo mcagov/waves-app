@@ -3,7 +3,9 @@ require "rails_helper"
 feature "User edits submission details", type: :feature, js: true do
   before { visit_assigned_submission }
 
-  scenario "editing vessel details" do
+  scenario "in a two column table" do
+    expect(page).to have_css("table.submission-vessel th", count: 2)
+
     within("td#vessel-name") { click_on "CELEBRATOR DOPPELBOCK" }
     find(".editable-input input").set("Hop rod rye")
     first(".editable-submit").click

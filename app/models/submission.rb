@@ -44,6 +44,10 @@ class Submission < ApplicationRecord
     Policies::Submission.editable?(self)
   end
 
+  def uneditable?
+    !editable?
+  end
+
   def process_application(registration_starts_at)
     Builders::NewRegistrationBuilder.create(self, registration_starts_at)
   end

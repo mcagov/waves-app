@@ -1,17 +1,12 @@
-.row
-  .col-sm-12
-    = render partial: "breadcrumbs", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
 .row
   .col-sm-6
-    = render partial: "submissions/heading", locals: {submission: @submission}
+    = render partial: "submissions/info/heading", locals: {submission: @submission}
   .col-sm-6
-    - if @submission.claimant == current_user
-      = link_to "Edit Application",
-                edit_submission_path(@submission),
-                class: "btn btn-primary pull-right"
+    = render partial: "submissions/actions/edit_button", locals: {submission: @submission}
 
-    = render partial: "prompts", locals: {submission: @submission}
+= render partial: "submissions/info/prompts", locals: {submission: @submission}
 
-= render partial: "tabs", locals: {submission: @submission}
+= render partial: "main", locals: {submission: @submission}
 = render partial: "similar_vessels", locals: {submission: @submission}
 = render partial: "actions", locals: {submission: @submission}

@@ -1,8 +1,14 @@
 class Policies::Submission
   class << self
     def actionable?(submission)
-      # for online part 3 registrations, this is the same as approvable?
-      approvable?(submission)
+      @submission = submission
+
+      case @submission.source.to_sym
+      when :online
+        approvable?(submission)
+      when :manual_entry
+        true
+      end
     end
 
     def approvable?(submission)
