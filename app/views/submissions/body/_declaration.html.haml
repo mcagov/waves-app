@@ -1,5 +1,6 @@
 - owner = declaration.owner
 - registry_owner = @submission.registry_owners[declaration_counter]
+- registry_owner ||= Register::Owner.new
 
 %table.table.table-striped{ id: "declaration_#{ declaration_counter + 1 }"}
   %thead
@@ -15,19 +16,26 @@
           = registry_owner.name
       %td.owner-name
         %strong
-          = editable_owner("Owner Name", "owner[name]", declaration.owner.name, declaration)
+          - if @submission.uneditable?
+            = owner.name
+          - else
+            = editable_owner "Owner Name", "owner[name]",
+              owner.name, registry_owner.name, declaration
     %tr
       %td Owner Address
       - if registry_owner
         %td
           = registry_owner.inline_address
       %td.owner-address
-        %strong
-          = link_to declaration.owner.inline_address, "#",
-            class: "editable-link",
-            id: "inline_owner_address_#{declaration.id}",
-            "data-toggle" => "collapse",
-            "data-target" => "#address-fields-#{declaration.id}"
+        - if @submission.uneditable?
+          %strong= owner.inline_address
+        - else
+          %strong
+            = link_to declaration.owner.inline_address, "#",
+              class: "editable-link",
+              id: "inline_owner_address_#{declaration.id}",
+              "data-toggle" => "collapse",
+              "data-target" => "#address-fields-#{declaration.id}"
 
         .collapse{ id: "address-fields-#{declaration.id}" }
 
@@ -35,30 +43,42 @@
             %dt Building and Street
             %dd.address-1
               %strong
-                = editable_owner("Address 1", "owner[address_1]", declaration.owner.address_1, declaration)
+                = editable_owner "Address 1", "owner[address_1]",
+                  owner.address_1, registry_owner.address_1, declaration,
+                  "editable-owner-address"
             %dt
             %dd.address-2
               %strong
-                = editable_owner("Address 2", "owner[address_2]", declaration.owner.address_2, declaration)
+                = editable_owner "Address 2", "owner[address_2]",
+                  owner.address_2, registry_owner.address_2, declaration,
+                  "editable-owner-address"
             %dt
             %dd.address-3
               %strong
-                = editable_owner("Address 3", "owner[address_3]", declaration.owner.address_3, declaration)
+                = editable_owner "Address 3", "owner[address_3]",
+                  owner.address_3, registry_owner.address_3, declaration,
+                  "editable-owner-address"
 
             %dt Town or city
             %dd.address-town
               %strong
-                = editable_owner("Town", "owner[town]", declaration.owner.town, declaration)
+                = editable_owner "Town", "owner[town]",
+                  owner.town, registry_owner.town, declaration,
+                  "editable-owner-address"
 
             %dt Postcode
             %dd.address-postcode
               %strong
-                = editable_owner("Postcode", "owner[postcode]", declaration.owner.postcode, declaration)
+                = editable_owner "Postcode", "owner[postcode]",
+                  owner.postcode, registry_owner.postcode, declaration,
+                  "editable-owner-address"
 
             %dt Country
             %dd.address-country
               %strong
-                = editable_owner_country(declaration.owner.country, declaration)
+                = editable_owner "Country", "owner[country]",
+                  owner.country, registry_owner.country, declaration,
+                  "editable-owner-country", owner_country_list.to_json
 
     %tr
       %td Owner Email
@@ -67,7 +87,13 @@
           = registry_owner.email
       %td.owner-email
         %strong
-          = editable_owner_email("Owner Email", "owner[email]", declaration.owner.email, declaration)
+          - if @submission.uneditable?
+            = owner.email
+          - else
+            = editable_owner "Owner Email", "owner[email]",
+              owner.email, registry_owner.email, declaration,
+              "editable-email"
+
     %tr
       %td Owner Phone Number
       - if registry_owner
@@ -75,7 +101,11 @@
           = registry_owner.phone_number
       %td.owner-phone_number
         %strong
-          = editable_owner("Owner Phone Number", "owner[phone_number]", declaration.owner.phone_number, declaration)
+          - if @submission.uneditable?
+            = owner.phone_number
+          - else
+            = editable_owner "Owner Phone Number", "owner[phone_number]",
+              owner.phone_number, registry_owner.phone_number, declaration
     %tr
       %td Owner Nationality
       - if registry_owner
@@ -83,11 +113,16 @@
           = registry_owner.nationality
       %td.owner-nationality
         %strong
-          = editable_owner_nationality(declaration.owner.nationality, declaration)
+          - if @submission.uneditable?
+            = owner.nationality
+          - else
+            = editable_owner "Owner Nationality", "owner[nationality]",
+              owner.nationality, registry_owner.nationality, declaration,
+              "editable-select", nationality_list.to_json
     %tr
       %td Declaration
       - if registry_owner
-        %td
+        %td n/a
       %td.declaration{ id: "declaration_#{declaration.id}" }
         = render partial: "declarations/status", locals: { declaration: declaration}
 %hr

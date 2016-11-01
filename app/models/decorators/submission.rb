@@ -52,6 +52,8 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def registry_owners
+    return [] unless symbolized_registry_info[:owners]
+
     @registry_owners ||=
       symbolized_registry_info[:owners].map do |owner|
         Declaration::Owner.new(owner)

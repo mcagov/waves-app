@@ -32,6 +32,8 @@ feature "User views change of details submission", type: :feature, js: true do
       expect(page)
         .to have_css("td.registry-owner-name",
                      text: registered_vessel.owners.first.name)
+
+      expect(page).to have_css("td.owner-name", text: "No change")
     end
   end
 end
