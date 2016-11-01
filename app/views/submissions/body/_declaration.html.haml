@@ -1,18 +1,26 @@
-- i = declaration_counter + 1
-%table.table.table-striped{ id: "declaration_#{ i }"}
+- owner = declaration.owner
+- registry_owner = @submission.registry_owners[declaration_counter]
+
+%table.table.table-striped{ id: "declaration_#{ declaration_counter + 1 }"}
   %thead
-    %th Owner ##{ i }
-    %th
-      - if i == 1
-        Submitted Information
+    %th Owner ##{ declaration_counter + 1 }
+    - if @submission.display_registry_info?
+      %th Current Information
+    %th Submitted Information
   %tbody
     %tr
-      %td{width: "30%"} Owner Name
-      %td.owner-name{width: "70%"}
+      %td{width: "20%"} Owner Name
+      - if registry_owner
+        %td.registry-owner-name{width: "40%"}
+          = registry_owner.name
+      %td.owner-name
         %strong
           = editable_owner("Owner Name", "owner[name]", declaration.owner.name, declaration)
     %tr
       %td Owner Address
+      - if registry_owner
+        %td
+          = registry_owner.inline_address
       %td.owner-address
         %strong
           = link_to declaration.owner.inline_address, "#",
@@ -54,22 +62,32 @@
 
     %tr
       %td Owner Email
+      - if registry_owner
+        %td
+          = registry_owner.email
       %td.owner-email
         %strong
           = editable_owner_email("Owner Email", "owner[email]", declaration.owner.email, declaration)
     %tr
       %td Owner Phone Number
+      - if registry_owner
+        %td
+          = registry_owner.phone_number
       %td.owner-phone_number
         %strong
           = editable_owner("Owner Phone Number", "owner[phone_number]", declaration.owner.phone_number, declaration)
     %tr
       %td Owner Nationality
+      - if registry_owner
+        %td
+          = registry_owner.nationality
       %td.owner-nationality
         %strong
           = editable_owner_nationality(declaration.owner.nationality, declaration)
     %tr
       %td Declaration
+      - if registry_owner
+        %td
       %td.declaration{ id: "declaration_#{declaration.id}" }
         = render partial: "declarations/status", locals: { declaration: declaration}
-
 %hr

@@ -51,6 +51,13 @@ class Decorators::Submission < SimpleDelegator
       Submission::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
 
+  def registry_owners
+    @registry_owners ||=
+      symbolized_registry_info[:owners].map do |owner|
+        Declaration::Owner.new(owner)
+      end
+  end
+
   private
 
   def finance_payment
