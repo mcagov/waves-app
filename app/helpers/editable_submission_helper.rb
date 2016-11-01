@@ -36,13 +36,8 @@ module EditableSubmissionHelper
     value == reg_info_value ? "No change" : ""
   end
 
-  def editable_link_to(boolean, *link_to_params)
-    link_to_if boolean, *link_to_params
-  end
-
   def editable_delivery_address(attr_title, attr_name, attr_value)
-    editable_link_to(
-      @submission.editable?,
+    link_to(
       attr_value, "#",
       class: "editable-delivery-address",
       "data-name" => attr_name,
@@ -52,8 +47,7 @@ module EditableSubmissionHelper
   end
 
   def editable_delivery_country(attr_value)
-    editable_link_to(
-      @submission.editable?,
+    link_to(
       attr_value, "#",
       class: "editable-delivery-country",
       "data-name" => "delivery_address[country]",

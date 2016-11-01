@@ -3,45 +3,48 @@
     %tr
       %td{width: "30%"} Delivery Address
       %td
-        %strong
-          = link_to add_details_if_blank(delivery_address.inline_name_and_address), "#",
-          class: "editable-address",
-          id: "inline_delivery_address",
-          "data-toggle" => "collapse",
-          "data-target" => "#delivery-address-fields"
+        - if @submission.uneditable?
+          %strong= delivery_address.inline_name_and_address
+        -else
+          %strong
+            = link_to add_details_if_blank(delivery_address.inline_name_and_address), "#",
+            class: "editable-address",
+            id: "inline_delivery_address",
+            "data-toggle" => "collapse",
+            "data-target" => "#delivery-address-fields"
 
-        .collapse{ id: "delivery-address-fields" }
+          .collapse{ id: "delivery-address-fields" }
 
-          %dl.dl-horizontal.address-fields
-            %dt Name
-            %dd.address-name
-              %strong
-                = editable_delivery_address("Name", "delivery_address[name]", delivery_address.name)
+            %dl.dl-horizontal.address-fields
+              %dt Name
+              %dd.address-name
+                %strong
+                  = editable_delivery_address("Name", "delivery_address[name]", delivery_address.name)
 
-            %dt Building and Street
-            %dd.address-1
-              %strong
-                = editable_delivery_address("Address 1", "delivery_address[address_1]", delivery_address.address_1)
-            %dt
-            %dd.address-2
-              %strong
-                = editable_delivery_address("Address 2", "delivery_address[address_2]", delivery_address.address_2)
-            %dt
-            %dd.address-3
-              %strong
-                = editable_delivery_address("Address 3", "delivery_address[address_3]", delivery_address.address_3)
+              %dt Building and Street
+              %dd.address-1
+                %strong
+                  = editable_delivery_address("Address 1", "delivery_address[address_1]", delivery_address.address_1)
+              %dt
+              %dd.address-2
+                %strong
+                  = editable_delivery_address("Address 2", "delivery_address[address_2]", delivery_address.address_2)
+              %dt
+              %dd.address-3
+                %strong
+                  = editable_delivery_address("Address 3", "delivery_address[address_3]", delivery_address.address_3)
 
-            %dt Town or city
-            %dd.address-town
-              %strong
-                = editable_delivery_address("Town", "delivery_address[town]", delivery_address.town)
+              %dt Town or city
+              %dd.address-town
+                %strong
+                  = editable_delivery_address("Town", "delivery_address[town]", delivery_address.town)
 
-            %dt Postcode
-            %dd.address-postcode
-              %strong
-                = editable_delivery_address("Postcode", "delivery_address[postcode]", delivery_address.postcode)
+              %dt Postcode
+              %dd.address-postcode
+                %strong
+                  = editable_delivery_address("Postcode", "delivery_address[postcode]", delivery_address.postcode)
 
-            %dt Country
-            %dd.address-country
-              %strong
-                = editable_delivery_country(delivery_address.country)
+              %dt Country
+              %dd.address-country
+                %strong
+                  = editable_delivery_country(delivery_address.country)
