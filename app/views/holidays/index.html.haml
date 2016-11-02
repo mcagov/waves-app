@@ -1,0 +1,14 @@
+.row
+  .col-sm-9
+    %h1.heading_no_top_margin Public Holidays in Wales
+
+%table.table.table-striped
+  %thead
+    %th Date
+    %th Name
+  %tbody
+    - @holidays.each do |holiday|
+      %tr
+        %td= holiday[:date].strftime("%A, %d %B %Y")
+        %td= holiday[:name]
+
