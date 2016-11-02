@@ -108,6 +108,6 @@ Rails.application.routes.draw do
   end
 
   get "/search", controller: :search, action: :show
-  get "/holidays", controller: :holidays, action: :index
+  get "/target_dates", controller: :target_dates, action: :index
   root to: "dashboards#show"
 end
