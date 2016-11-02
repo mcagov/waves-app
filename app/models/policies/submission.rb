@@ -19,7 +19,7 @@ class Policies::Submission
       return false unless @submission.task.to_sym == :new_registration
 
       return false unless @submission.declarations.incomplete.empty?
-      return false unless AccountLedger.paid?(@submission)
+      return false unless AccountLedger.payment_status(@submission) == :paid
       true
     end
 

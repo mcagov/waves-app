@@ -27,6 +27,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :part_paid_submission, parent: :submission do
+    after(:create) do |submission|
+      create(:payment, submission: submission, amount: 10)
+    end
+  end
+
   factory :assigned_submission, parent: :paid_submission do
     after(:create) do |submission|
       submission.claimed!(create(:user))
