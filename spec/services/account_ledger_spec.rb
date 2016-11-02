@@ -10,6 +10,12 @@ describe AccountLedger do
       it { expect(subject).to eq(:paid) }
     end
 
+    context "with full payment for urgent service" do
+      let(:submission) { create(:paid_urgent_submission) }
+
+      it { expect(subject).to eq(:paid) }
+    end
+
     context "with a part payment" do
       let(:submission) { create(:part_paid_submission) }
 

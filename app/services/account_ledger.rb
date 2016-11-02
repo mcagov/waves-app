@@ -4,8 +4,12 @@ class AccountLedger
       @submission = submission
 
       return :unpaid if @submission.payments.empty?
-      return :paid if @submission.payments.sum(:amount).to_i == 2500
+      return :paid if amount_paid(submission) >= 2500
       :part_paid
+    end
+
+    def amount_paid(submission)
+      submission.payments.sum(&:amount).to_i
     end
   end
 end

@@ -27,6 +27,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :paid_urgent_submission, parent: :submission do
+    after(:create) do |submission|
+      create(:payment, submission: submission, amount: 7500)
+    end
+  end
+
   factory :part_paid_submission, parent: :submission do
     after(:create) do |submission|
       create(:payment, submission: submission, amount: 10)

@@ -2,7 +2,8 @@ class Builders::ProcessingDatesBuilder
   class << self
     def create(submission)
       @submission = submission
-      @payment_amount = submission.payments.sum(&:amount)
+
+      @payment_amount = AccountLedger.amount_paid(submission)
 
       @submission.update_attribute(:received_at, Date.today)
 
