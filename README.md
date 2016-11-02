@@ -65,9 +65,7 @@ CORS is configured in `config/initalisers/cors.rb` and the origins are defined b
 
 ## Email previews
 
-Emails can be previewed at: /rails/mailers
-
-This should be disabled in a live environment by setting the environment variable `PREVIEW_EMAILS` to `off`.
+Emails can be previewed at: /rails/mailers in development.
 
 ## Cron jobs
 
