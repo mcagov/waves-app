@@ -67,8 +67,11 @@ describe Submission::StatesController, type: :controller do
         expect(response).to render_template("approved")
       end
 
-      it "creates a notification for each owner" do
-        expect(Notification::ApplicationApproval.count).to eq(2)
+      it "creates a notification for the applicant" do
+        expect(Notification::ApplicationApproval.count).to eq(1)
+
+        expect(Notification::ApplicationApproval.first.recipient_email)
+          .to eq("horatio-nelson.1@example.com")
       end
 
       it "sets the notification#actioned_by" do
