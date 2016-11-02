@@ -41,8 +41,10 @@ describe NotificationsController, type: :controller do
       expect(response).to redirect_to(tasks_my_tasks_path)
     end
 
-    it "creates a notification for each owner" do
-      expect(Notification::Cancellation.count).to eq(2)
+    it "creates a notification for the correspondent" do
+      expect(Notification::Cancellation.count).to eq(1)
+      expect(Notification::Cancellation.last.recipient_email)
+        .to eq("horatio-nelson.1@example.com")
     end
   end
 
@@ -68,7 +70,9 @@ describe NotificationsController, type: :controller do
     end
 
     it "creates a notification for each owner" do
-      expect(Notification::Rejection.count).to eq(2)
+      expect(Notification::Rejection.count).to eq(1)
+      expect(Notification::Rejection.last.recipient_email)
+        .to eq("horatio-nelson.1@example.com")
     end
   end
 
