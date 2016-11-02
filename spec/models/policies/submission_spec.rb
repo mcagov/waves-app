@@ -86,7 +86,7 @@ describe Policies::Submission do
         context "with completed declarations and payment" do
           before do
             allow(AccountLedger)
-              .to receive(:paid?).with(submission).and_return(true)
+              .to receive(:payment_status).with(submission).and_return(:paid)
           end
 
           it { expect(subject).to be_truthy }

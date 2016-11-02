@@ -1,8 +1,11 @@
 module SubmissionHelper
-  def css_tick(bln)
-    if bln
+  def payment_status_icon(payment_status)
+    case payment_status
+    when :paid
       content_tag(:div, " ", class: "i fa fa-check green")
-    else
+    when :part_paid
+      content_tag(:div, " ", class: "i fa fa-check-circle-o")
+    when :unpaid
       content_tag(:div, " ", class: "i fa fa-times red")
     end
   end

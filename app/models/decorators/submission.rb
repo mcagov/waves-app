@@ -60,6 +60,10 @@ class Decorators::Submission < SimpleDelegator
       end
   end
 
+  def payment_status
+    AccountLedger.payment_status(self)
+  end
+
   private
 
   def finance_payment
