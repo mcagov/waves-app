@@ -2,7 +2,9 @@ module Register
   class Vessel < ApplicationRecord
     protokoll :reg_no, pattern: "SSR2#####"
 
-    has_many :owners, class_name: "Register::Owner"
+    has_many :owners,
+             -> { order("updated_at asc") },
+             class_name: "Register::Owner"
 
     has_many :registrations
     has_one :latest_registration,
