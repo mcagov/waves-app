@@ -46,4 +46,10 @@ FactoryGirl.define do
       submission.referred!
     end
   end
+
+  factory :completed_submission, parent: :assigned_submission do
+    after(:create) do |submission|
+      submission.completed!
+    end
+  end
 end
