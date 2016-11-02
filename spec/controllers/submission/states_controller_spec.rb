@@ -84,8 +84,8 @@ describe Submission::StatesController, type: :controller do
         post :approve, params: { submission_id: submission.id }
       end
 
-      it "does not move to completed" do
-        expect(assigns[:submission]).not_to be_completed
+      it "is still :assigned" do
+        expect(assigns[:submission]).to be_assigned
       end
 
       it "renders the errors page" do
