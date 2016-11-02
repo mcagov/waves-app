@@ -2,10 +2,8 @@ class NotificationsController < InternalPagesController
   before_action :load_submission
 
   def cancel
-    @submission.owners.each do |owner|
-      Notification::Cancellation.create(
-        parsed_notification_params(owner))
-    end
+    Notification::Cancellation.create(
+      parsed_notification_params(@submission.correspondent))
 
     flash[:notice] = "You have succesfully cancelled that application"
     @submission.cancelled!
@@ -13,10 +11,8 @@ class NotificationsController < InternalPagesController
   end
 
   def reject
-    @submission.owners.each do |owner|
-      Notification::Rejection.create(
-        parsed_notification_params(owner))
-    end
+    Notification::Rejection.create(
+      parsed_notification_params(@submission.correspondent))
 
     flash[:notice] = "You have succesfully rejected that application"
     @submission.rejected!

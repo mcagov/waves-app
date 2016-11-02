@@ -42,5 +42,13 @@ describe Builders::NewRegistrationBuilder do
     it "associates the submission with the registered_vessel" do
       expect(submission.registered_vessel).to eq(Register::Vessel.last)
     end
+
+    it "creates registered owners in the expect order" do
+      expect(submission.owners.first.name)
+        .to eq(registration.vessel.owners.first.name)
+
+      expect(submission.owners.last.name)
+        .to eq(registration.vessel.owners.last.name)
+    end
   end
 end

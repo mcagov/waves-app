@@ -7,9 +7,8 @@ Rails.application.config.action_mailer.smtp_settings = {
   user_name:            ENV.fetch("SMTP_USERNAME"),
   password:             ENV.fetch("SMTP_PASSWORD") }
 
-if ENV.fetch("PREVIEW_EMAILS") == "on"
+if Rails.env.development?
   Rails.application.config.action_mailer.show_previews = true
-  Rails.application.config.consider_all_requests_local = true
   Rails.application.config.action_mailer.preview_path =
     "#{Rails.root}/spec/mailers/previews"
 end

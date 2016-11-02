@@ -27,6 +27,18 @@ FactoryGirl.define do
     end
   end
 
+  factory :paid_urgent_submission, parent: :submission do
+    after(:create) do |submission|
+      create(:payment, submission: submission, amount: 7500)
+    end
+  end
+
+  factory :part_paid_submission, parent: :submission do
+    after(:create) do |submission|
+      create(:payment, submission: submission, amount: 10)
+    end
+  end
+
   factory :assigned_submission, parent: :paid_submission do
     after(:create) do |submission|
       submission.claimed!(create(:user))
@@ -44,6 +56,12 @@ FactoryGirl.define do
     after(:create) do |submission|
       submission.update_attribute(:referred_until, 1.day.ago)
       submission.referred!
+    end
+  end
+
+  factory :completed_submission, parent: :assigned_submission do
+    after(:create) do |submission|
+      submission.completed!
     end
   end
 end
