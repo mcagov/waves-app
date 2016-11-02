@@ -31,15 +31,15 @@
           %strong= owner.inline_address
         - else
           %strong
-            = link_to declaration.owner.inline_address, "#",
+            = link_to declaration.owner.inline_address,
+              "#address-fields-#{declaration.id}",
               class: "editable-link",
               id: "inline_owner_address_#{declaration.id}",
-              "data-toggle" => "collapse",
-              "data-target" => "#address-fields-#{declaration.id}"
+              "data-toggle" => "collapse"
 
-        .collapse{ id: "address-fields-#{declaration.id}" }
+        .collapse.editable-fields{ id: "address-fields-#{declaration.id}" }
 
-          %dl.dl-horizontal.editable-fields
+          %dl.dl-horizontal
             %dt Building and Street
             %dd.address-1
               %strong
