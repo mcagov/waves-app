@@ -1,49 +1,46 @@
 require "rails_helper"
 
 describe Builders::ProcessingDatesBuilder do
-  context ".create" do
-    context "paid! (with a declared submission)" do
-      context "with standard service" do
-        let!(:submission) { create_assigned_submission! }
+  context ".create (invoked by: submission#init_processing_dates)" do
+    let!(:calculated_date) { 1.year.ago }
 
-        it "sets the received_at date to today" do
-          expect(submission.received_at.to_date)
-            .to eq(Date.today)
-        end
+    before do
+      target_date = double(target_date)
 
-        it "sets the target_date to 20 days away" do
-          expect(submission.target_date.to_date)
-            .to eq(Date.today.advance(days: 20))
-        end
+      allow(TargetDate)
+        .to receive(:new).with(Date.today, mode)
+        .and_return(target_date)
 
-        it "is not urgent" do
-          expect(submission.is_urgent).to be_falsey
-        end
+      allow(target_date).to receive(:calculate).and_return(calculated_date)
+    end
+
+    context "with standard service" do
+      let!(:submission) { create(:paid_submission) }
+      let!(:mode) { :standard }
+
+      it "sets the received_at date" do
+        expect(submission.received_at).to be_present
       end
 
-      context "with urgent service" do
-        let!(:submission) { create_unassigned_urgent_submission! }
+      it "sets the target_date" do
+        expect(submission.target_date).to eq(calculated_date)
+      end
 
-        it "sets the target_date to 5 days away (best guess)" do
-          expect(submission.target_date.to_date)
-            .to eq(Date.today.advance(days: 5))
-        end
-
-        it "is urgent" do
-          expect(submission.is_urgent).to be_truthy
-        end
+      it "is not urgent" do
+        expect(submission.is_urgent).to be_falsey
       end
     end
 
-    context "paid! (with an undeclared submission)" do
-      let!(:submission) { create_incomplete_submission! }
+    context "with urgent service" do
+      let!(:submission) { create(:paid_urgent_submission) }
+      let(:mode) { :urgent }
 
-      it "does not set the received_at date" do
-        expect(submission.received_at).to be_blank
+      it "sets the target_date" do
+        expect(submission.target_date).to eq(calculated_date)
       end
 
-      it "does not set the target_date" do
-        expect(submission.target_date).to be_blank
+      it "sets the urgent flag" do
+        expect(submission.is_urgent).to be_truthy
       end
     end
   end
