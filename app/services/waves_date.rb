@@ -1,4 +1,4 @@
-class WavesDates
+class WavesDate
   class << self
     def next_working_day(the_date)
       @the_date = the_date
