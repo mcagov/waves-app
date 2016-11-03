@@ -18,14 +18,20 @@
         %p
           Standard processing target date (10 working days):
           %strong= TargetDate.new(@start_date, :standard).calculate
+
+%h3 Bank Holidays in Wales
+
+%p
+  This data is read from
+  = link_to "Gov UK", "https://www.gov.uk/bank-holidays", target: "_blank"
 .row
   .col-md-6
     %table.table.table-striped
       %thead
-        %th Public Holidays in Wales
-        %th Event
+        %th Date
+        %th Title
       %tbody
         - @holidays.each do |holiday|
           %tr
-            %td= holiday[:date].strftime("%A, %d %B %Y")
-            %td= holiday[:name]
+            %td= holiday.holiday_date.strftime("%A, %d %B %Y")
+            %td= holiday.title

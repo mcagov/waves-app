@@ -37,6 +37,6 @@ module SubmissionHelper
   end
 
   def default_referred_until
-    WavesDates.next_working_day(30.days.from_now)
+    WavesDate.next_working_day(30.days.from_now)
   end
 end

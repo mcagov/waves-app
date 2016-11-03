@@ -1,8 +1,8 @@
 require "rails_helper"
 
-describe WavesDates do
+describe WavesDate do
   describe ".next_working_day" do
-    subject { WavesDates.next_working_day(the_date) }
+    subject { WavesDate.next_working_day(the_date) }
 
     context "on a saturday over easter" do
       let(:the_date) { Date.civil(2016, 3, 26) }
