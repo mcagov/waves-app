@@ -3,18 +3,16 @@ class Builders::ProcessingDatesBuilder
     def create(submission)
       @submission = submission
 
-      @payment_amount = AccountLedger.amount_paid(submission)
+      received_at = Date.today
+      referred_until = nil
+      service_level = AccountLedger.service_level(@submission)
+      target_date = TargetDate.new(Date.today, service_level).calculate
 
-      @submission.update_attribute(:received_at, Date.today)
-
-      if @payment_amount == 7500
-        @submission.update_attribute(:target_date, 5.days.from_now)
-        @submission.update_attribute(:is_urgent, true)
-      else
-        @submission.update_attribute(:target_date, 20.days.from_now)
-      end
-
-      @submission.update_attribute(:referred_until, nil)
+      @submission.update_attributes(
+        is_urgent: service_level == :urgent,
+        received_at: received_at,
+        referred_until: referred_until,
+        target_date: target_date)
     end
   end
 end

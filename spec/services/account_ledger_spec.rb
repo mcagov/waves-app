@@ -28,4 +28,20 @@ describe AccountLedger do
       it { expect(subject).to eq(:unpaid) }
     end
   end
+
+  context ".service_level" do
+    subject { AccountLedger.service_level(submission) }
+
+    context "with full payment" do
+      let(:submission) { create(:paid_submission) }
+
+      it { expect(subject).to eq(:standard) }
+    end
+
+    context "with full payment for urgent service" do
+      let(:submission) { create(:paid_urgent_submission) }
+
+      it { expect(subject).to eq(:urgent) }
+    end
+  end
 end

@@ -11,5 +11,9 @@ class AccountLedger
     def amount_paid(submission)
       submission.payments.sum(&:amount).to_i
     end
+
+    def service_level(submission)
+      amount_paid(submission) == 7500 ? :urgent : :standard
+    end
   end
 end
