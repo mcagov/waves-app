@@ -27,11 +27,17 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = "tmp/rspec_examples.txt"
   config.order = :random
 
-  config.before do
-    WebMock.disable_net_connect!(allow_localhost: true)
-  end
+  config.around(:each) do |example|
+    stub_request(:get, "https://www.gov.uk/bank-holidays.json")
+      .with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" })
+      .to_return(
+        body: File.read("#{Rails.root}/spec/fixtures/govuk_holidays.json"))
 
-  config.after(:suite) do
+    WebMock.disable_net_connect!(allow_localhost: true)
+
+    example.call
+
+    WebMock.allow_net_connect!
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 end
