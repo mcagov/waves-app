@@ -1,45 +1,53 @@
 require "rails_helper"
 
 describe Builders::ProcessingDatesBuilder do
-  context ".create (invoked by: submission#init_processing_dates)" do
-    let!(:calculated_date) { 1.year.ago }
-
+  describe ".create" do
     before do
-      target_date = double(target_date)
+      expect(AccountLedger)
+        .to receive(:service_level)
+        .with(submission)
+        .and_return(service_level)
 
-      allow(TargetDate)
-        .to receive(:new).with(Date.today, mode)
+      target_date_instance = double(:target_date_instance)
+
+      expect(TargetDate)
+        .to receive(:new).with(Date.today, service_level)
+        .and_return(target_date_instance)
+
+      expect(target_date_instance)
+        .to receive(:calculate)
         .and_return(target_date)
 
-      allow(target_date).to receive(:calculate).and_return(calculated_date)
+      Builders::ProcessingDatesBuilder.create(submission)
     end
 
+    let(:target_date) { Date.civil(2001, 11, 9) }
+    let(:submission) { build(:submission) }
+
     context "with standard service" do
-      let!(:submission) { create(:paid_submission) }
-      let!(:mode) { :standard }
+      let(:service_level) { :standard }
 
-      it "sets the received_at date" do
-        expect(submission.received_at).to be_present
+      it "does not set submission#is_urgent" do
+        expect(submission.is_urgent).not_to be_truthy
       end
 
-      it "sets the target_date" do
-        expect(submission.target_date).to eq(calculated_date)
+      it "sets submission#received_at" do
+        expect(submission.received_at.to_date).to eq(Date.today)
       end
 
-      it "is not urgent" do
-        expect(submission.is_urgent).to be_falsey
+      it "ensures submission#referred_until is nil" do
+        expect(submission.referred_until).to be_nil
+      end
+
+      it "sets submission#target_date" do
+        expect(submission.target_date).to eq(target_date)
       end
     end
 
     context "with urgent service" do
-      let!(:submission) { create(:paid_urgent_submission) }
-      let(:mode) { :urgent }
+      let(:service_level) { :urgent }
 
-      it "sets the target_date" do
-        expect(submission.target_date).to eq(calculated_date)
-      end
-
-      it "sets the urgent flag" do
+      it "sets submission#is_urgent flag" do
         expect(submission.is_urgent).to be_truthy
       end
     end
