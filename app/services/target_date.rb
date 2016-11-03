@@ -1,7 +1,7 @@
 class TargetDate
-  def initialize(start_date, mode)
+  def initialize(start_date, service_level)
     @start_date = start_date.advance(days: -1)
-    @mode = mode
+    @service_level = service_level
     set_business_days
   end
 
@@ -12,7 +12,7 @@ class TargetDate
   private
 
   def number_of_days
-    @mode == :urgent ? 3 : 10
+    @service_level == :urgent ? 3 : 10
   end
 
   def set_business_days
