@@ -12,10 +12,8 @@ class WavesDate
     private
 
     def set_business_days
-      Holidays.between(
-        @the_date, @the_date.advance(days: 7), :gb_wls).each do |holiday|
-
-        BusinessTime::Config.holidays << holiday[:date]
+      Holiday.all.each do |holiday|
+        BusinessTime::Config.holidays << holiday.holiday_date
       end
     end
   end

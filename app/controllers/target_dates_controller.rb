@@ -1,6 +1,6 @@
 class TargetDatesController < InternalPagesController
   def index
-    @holidays = Holidays.between(Date.today, 4.year.from_now, :gb_wls)
+    @holidays = Holiday.all
     @start_date = start_date_params if params[:start_date]
     @start_date ||= Date.today
   end
