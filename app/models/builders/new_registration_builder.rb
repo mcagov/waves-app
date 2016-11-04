@@ -18,8 +18,10 @@ class Builders::NewRegistrationBuilder
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def create_vessel
       @vessel = Register::Vessel.create(
+        part: @submission.part,
         name: @submission.vessel.name,
         hin: @submission.vessel.hin,
         make_and_model: @submission.vessel.make_and_model,
@@ -27,8 +29,7 @@ class Builders::NewRegistrationBuilder
         number_of_hulls: @submission.vessel.number_of_hulls,
         mmsi_number: @submission.vessel.mmsi_number,
         radio_call_sign: @submission.vessel.radio_call_sign,
-        vessel_type: @submission.vessel.type_of_vessel
-      )
+        vessel_type: @submission.vessel.type_of_vessel)
     end
 
     def assign_vessel

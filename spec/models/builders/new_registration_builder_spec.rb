@@ -13,6 +13,10 @@ describe Builders::NewRegistrationBuilder do
       expect(registration.vessel.vessel_type).to eq("BARGE")
     end
 
+    it "sets the registry part" do
+      expect(registration.vessel.part.to_sym).to eq(:part_3)
+    end
+
     it "creates the owners" do
       expect(
         registration.vessel.owners.length
