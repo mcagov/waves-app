@@ -4,7 +4,7 @@ describe "Oustanding Declaration API" do
   before { get api_v1_declaration_path(declaration_id) }
 
   context "with a valid oustanding declaration" do
-    let(:submission) { create_incomplete_paid_submission! }
+    let(:submission) { create_submission_from_api! }
     let(:declaration_id) do
       submission.declarations.incomplete.first.id
     end
