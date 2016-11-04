@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User processes next application", type: :feature, js: true do
   before do
-    submission = create_assigned_submission!
+    submission = create(:assigned_submission)
     login_to_part_3(submission.claimant)
   end
 

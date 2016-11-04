@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User claims a submission", type: :feature, js: true do
   before do
-    create_unassigned_submission!
+    create(:unassigned_submission)
     login_to_part_3
   end
 

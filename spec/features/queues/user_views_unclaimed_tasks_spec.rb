@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User views unclaimed task list", type: :feature, js: true do
-  let!(:submission) { create_unassigned_submission! }
+  let!(:submission) { create(:unassigned_submission) }
 
   scenario "viewing the unclaimed submissions" do
     login_to_part_3
@@ -9,8 +9,8 @@ feature "User views unclaimed task list", type: :feature, js: true do
 
     within("#submissions") do
       expect(page)
-        .to have_css(".vessel-name", text: "CELEBRATOR DOPPELBOCK")
-      expect(page).to have_content("HORATIO NELSON")
+        .to have_css(".vessel-name", text: submission.vessel.name)
+      expect(page).to have_content(submission.correspondent.name)
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
       expect(page).to have_content(submission.target_date)

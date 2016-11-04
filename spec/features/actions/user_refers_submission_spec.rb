@@ -3,6 +3,7 @@ require "rails_helper"
 feature "User refers a submission", type: :feature, js: true do
   before do
     visit_assigned_submission
+    @vessel_name = Submission.last.vessel.name
   end
 
   scenario "and restores it" do
@@ -13,7 +14,7 @@ feature "User refers a submission", type: :feature, js: true do
     within("#refer-application") { click_on "Refer Application" }
 
     click_on "Referred Applications"
-    click_on("CELEBRATOR DOPPELBOCK")
+    click_on @vessel_name
 
     within("#prompt") do
       expect(page).to have_text(referral_prompt)
@@ -21,9 +22,9 @@ feature "User refers a submission", type: :feature, js: true do
 
     click_button "Reclaim Referral"
 
-    click_link "My Tasks"
-    click_link "CELEBRATOR DOPPELBOCK"
-    click_link "Correspondence"
+    click_on "My Tasks"
+    click_on @vessel_name
+    click_on "Correspondence"
 
     within("#notification-list") do
       first(

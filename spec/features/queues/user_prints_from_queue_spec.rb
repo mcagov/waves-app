@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User prints from queue", type: :feature, js: true do
   before do
-    create_printing_submission!
+    create(:printing_submission)
     login_to_part_3
     visit print_queue_certificates_path
   end

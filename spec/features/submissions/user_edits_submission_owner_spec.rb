@@ -4,23 +4,25 @@ feature "User edits Owner submission details", type: :feature, js: true do
   before { visit_assigned_submission }
 
   scenario "in general" do
+    owner = Declaration.last.owner
+
     click_on("Owners")
 
     expect(page).to have_css("table#declaration_1 th", count: 2)
 
-    within(".owner-name") { click_on("HORATIO NELSON") }
+    within(".owner-name") { click_on(owner.name) }
     find(".editable-input input").set("John Doe")
     first(".editable-submit").click
 
     expect(page).to have_css(".owner-name", text: "JOHN DOE")
 
-    within(".owner-email") { click_on("horatio-nelson.1@example.com") }
+    within(".owner-email") { click_on(owner.email) }
     find(".editable-input input").set("bob@example.com")
     first(".editable-submit").click
 
     expect(page).to have_css(".owner-email", text: "bob@example.com")
 
-    within(".owner-nationality") { click_on("UNITED KINGDOM") }
+    within(".owner-nationality") { click_on(owner.country) }
     find(".editable-input select").select("MALTA")
     first(".editable-submit").click
 

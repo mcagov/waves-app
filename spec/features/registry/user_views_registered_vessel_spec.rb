@@ -2,16 +2,16 @@ require "rails_helper"
 
 describe "User views a registered vessel", type: :feature, js: true do
   before do
-    @submission = create_completed_submission!
-    @vessel = Register::Vessel.last
+    @submission = create(:completed_submission)
+    @vessel = @submission.registered_vessel
     login_to_part_3
-    visit vessels_path
-    click_on("CELEBRATOR")
+    visit vessel_path(@vessel)
   end
 
   scenario "viewing vessel details" do
     click_on("Owners")
-    expect(page).to have_css(".owner-name", text: "HORATIO NELSON")
+    expect(page)
+      .to have_css(".owner-name", text: @submission.correspondent.name)
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")
@@ -37,14 +37,14 @@ describe "User views a registered vessel", type: :feature, js: true do
   end
 
   scenario "linking to the submission page (which can not be edited)" do
-    expect(page).to have_css("h1", text: "CELEBRATOR")
+    expect(page).to have_css("h1", text: @submission.vessel.name)
 
     click_on("Application History")
     click_on("New Registration")
 
     within("#vessel-name") do
-      expect(page).to have_text("CELEBRATOR")
-      expect(page).not_to have_link("CELEBRATOR")
+      expect(page).to have_text(@submission.vessel.name)
+      expect(page).not_to have_link(@submission.vessel.name)
     end
 
     expect(page).not_to have_css("#actions")
