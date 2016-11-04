@@ -1,5 +1,6 @@
 class SearchController < InternalPagesController
   def show
+    @part = current_activity.part
     lookup_vessel
     lookup_submission
   end
@@ -7,12 +8,12 @@ class SearchController < InternalPagesController
   private
 
   def lookup_vessel
-    vessels = Search.by_vessel(params[:q].upcase)
+    vessels = Search.by_vessel(@part, params[:q].upcase)
     redirect_to vessel_path(vessels.first) unless vessels.empty?
   end
 
   def lookup_submission
-    submissions = Search.by_submission(params[:q].upcase)
+    submissions = Search.by_submission(@part, params[:q].upcase)
     redirect_to submission_path(submissions.first) unless submissions.empty?
   end
 end

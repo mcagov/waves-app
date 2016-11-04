@@ -30,6 +30,25 @@ describe Submission, type: :model do
     end
   end
 
+  context ".vessel_reg_no =" do
+    let!(:registered_vessel) { create(:registered_vessel, part: vessel_part) }
+    let(:submission) { create(:incomplete_submission, part: :part_1) }
+
+    before { submission.vessel_reg_no = registered_vessel.reg_no }
+
+    context "for a part_1 submission and a part_1 registered_vessel" do
+      let(:vessel_part) { :part_1 }
+
+      it { expect(submission.registered_vessel).to eq(registered_vessel) }
+    end
+
+    context "for a part_2 submission and a part_1 registered_vessel" do
+      let(:vessel_part) { :part_2 }
+
+      it { expect(submission.registered_vessel).to be_nil }
+    end
+  end
+
   context ".registered_vessel_exists" do
     let!(:submission) { build(:submission) }
 
