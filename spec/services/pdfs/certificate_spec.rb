@@ -48,7 +48,8 @@ describe Pdfs::Certificate do
 
   context "for multiple registrations" do
     before do
-      3.times { create_printing_submission! }
+      3.times { create(:printing_submission) }
+      @owners = Declaration.all.map(&:owner)
     end
 
     let(:certificate) { Pdfs::Certificate.new(Registration.all) }
@@ -61,9 +62,9 @@ describe Pdfs::Certificate do
     it "has three pages with the owner name on each" do
       PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
         expect(reader.page_count).to eq(3)
-        expect(reader.page(1).text).to match(/HORATIO NELSON/)
-        expect(reader.page(2).text).to match(/HORATIO NELSON/)
-        expect(reader.page(3).text).to match(/HORATIO NELSON/)
+        expect(reader.page(1).text).to match(@owners[0].name.upcase)
+        expect(reader.page(2).text).to match(@owners[1].name.upcase)
+        expect(reader.page(3).text).to match(@owners[2].name.upcase)
       end
     end
   end
