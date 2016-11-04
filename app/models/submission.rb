@@ -84,7 +84,7 @@ class Submission < ApplicationRecord
 
   def vessel_reg_no=(reg_no)
     self.registered_vessel =
-      Register::Vessel.where(reg_no: reg_no).first
+      Register::Vessel.where(reg_no: reg_no, part: part).first
   end
 
   protected
