@@ -59,20 +59,20 @@ describe Policies::Submission do
     subject { submission.printing_completed? }
 
     context "with outstanding print jobs" do
-      let!(:submission) { create_printing_submission! }
+      let!(:submission) { create(:printing_submission) }
 
       it { expect(subject).to be_falsey }
     end
 
     context "with no outstanding print jobs" do
-      let!(:submission) { create_completed_submission! }
+      let!(:submission) { create(:completed_submission) }
 
       it { expect(subject).to be_truthy }
     end
   end
 
   describe "approvable?" do
-    let!(:submission) { create_incomplete_submission! }
+    let!(:submission) { create(:incomplete_submission) }
     subject { submission.approvable? }
 
     context "with outstanding declarations" do

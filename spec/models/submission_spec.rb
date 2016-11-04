@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Submission, type: :model do
   context "in general" do
-    let!(:submission) { create_incomplete_submission! }
+    let!(:submission) { create(:incomplete_submission) }
 
     it "gets the vessel_info" do
       expect(submission.vessel).to be_a(Submission::Vessel)
@@ -90,7 +90,7 @@ describe Submission, type: :model do
 
   context "state machine transitions" do
     context "to unassigned" do
-      let!(:submission) { create_incomplete_submission! }
+      let!(:submission) { create(:incomplete_submission) }
       let!(:payment) { Payment.create(amount: 100, submission: submission) }
 
       before do
@@ -108,7 +108,7 @@ describe Submission, type: :model do
     end
 
     context "to assigned" do
-      let!(:submission) { create_unassigned_submission! }
+      let!(:submission) { create(:unassigned_submission) }
       let!(:bob) { create(:user) }
 
       before { submission.claimed!(bob) }
@@ -117,7 +117,7 @@ describe Submission, type: :model do
     end
 
     context "from assigned to unassigned" do
-      let!(:submission) { create_assigned_submission! }
+      let!(:submission) { create(:assigned_submission) }
       let!(:bob) { create(:user) }
 
       before { submission.unclaimed! }
@@ -126,7 +126,7 @@ describe Submission, type: :model do
     end
 
     context "from assigned to referred" do
-      let!(:submission) { create_assigned_submission! }
+      let!(:submission) { create(:assigned_submission) }
 
       before { submission.referred! }
 
@@ -134,7 +134,7 @@ describe Submission, type: :model do
     end
 
     context "from referred to unassigned" do
-      let!(:submission) { create_referred_submission! }
+      let!(:submission) { create(:referred_submission) }
 
       before do
         expect(Builders::ProcessingDatesBuilder)
@@ -148,7 +148,7 @@ describe Submission, type: :model do
     end
 
     context "to printing" do
-      let!(:submission) { create_assigned_submission! }
+      let!(:submission) { create(:assigned_submission) }
       let(:registration_starts_at) { Time.now }
 
       before do
@@ -166,7 +166,7 @@ describe Submission, type: :model do
     end
 
     context "to completed" do
-      let!(:submission) { create_printing_submission! }
+      let!(:submission) { create(:printing_submission) }
 
       before do
         allow(Policies::Submission)

@@ -40,7 +40,7 @@ describe Submission::Vessel do
   end
 
   context "#assign_attributes" do
-    let!(:submission) { create_incomplete_submission! }
+    let!(:submission) { create(:incomplete_submission) }
     let(:vessel) { submission.vessel }
 
     before do
