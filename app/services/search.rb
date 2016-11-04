@@ -1,16 +1,18 @@
 class Search
   class << self
     def by_vessel(part, q)
-      Register::Vessel.where(reg_no: q, part: part.to_s)
+      Register::Vessel.in_part(part).where(reg_no: q)
     end
 
     def by_submission(part, q)
-      Submission.where(ref_no: q, part: part.to_s)
+      Submission.in_part(part).where(ref_no: q)
     end
 
+    # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)
       Register::Vessel
-        .where(name: vessel.name, part: part.to_s)
+        .in_part(part)
+        .where(name: vessel.name)
         .or(Register::Vessel
           .where(["hin = ? and hin <> ''", vessel.hin]))
         .or(Register::Vessel

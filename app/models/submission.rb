@@ -20,6 +20,8 @@ class Submission < ApplicationRecord
 
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
+  scope :in_part, ->(part) { where(part: part.to_sym) }
+
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
@@ -84,7 +86,7 @@ class Submission < ApplicationRecord
 
   def vessel_reg_no=(reg_no)
     self.registered_vessel =
-      Register::Vessel.where(reg_no: reg_no, part: part).first
+      Register::Vessel.in_part(part).where(reg_no: reg_no).first
   end
 
   protected

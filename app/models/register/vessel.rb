@@ -22,6 +22,8 @@ module Register
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id
 
+    scope :in_part, ->(part) { where(part: part.to_sym) }
+
     def to_s
       name.upcase
     end
