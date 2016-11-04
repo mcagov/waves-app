@@ -48,6 +48,9 @@ module Submission::Associations
     def registration_associations(base)
       base.has_one :registration
       base.belongs_to :registered_vessel,
+                      lambda { |submission|
+                        where("vessels.part = ?", submission.part)
+                      },
                       foreign_key: :registered_vessel_id,
                       class_name: "Register::Vessel"
     end

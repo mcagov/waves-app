@@ -11,7 +11,8 @@ describe Submission::StatesController, type: :controller do
   context "#claim" do
     before do
       post :claim,
-           params: { submission_id: create(:paid_submission).id }, xhr: true
+           params: {
+             submission_id: create(:unassigned_submission).id }, xhr: true
     end
 
     it "assigns the claimant" do
@@ -54,7 +55,7 @@ describe Submission::StatesController, type: :controller do
   end
 
   context "#approve" do
-    let(:submission) { create_assigned_submission! }
+    let(:submission) { create(:assigned_submission) }
 
     context "succesfully" do
       before { post :approve, params: { submission_id: submission.id } }
@@ -71,7 +72,7 @@ describe Submission::StatesController, type: :controller do
         expect(Notification::ApplicationApproval.count).to eq(1)
 
         expect(Notification::ApplicationApproval.first.recipient_email)
-          .to eq("horatio-nelson.1@example.com")
+          .to eq(submission.owners.first.email)
       end
 
       it "sets the notification#actioned_by" do

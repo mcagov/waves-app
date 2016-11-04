@@ -6,17 +6,22 @@ describe Builders::NewRegistrationBuilder do
       described_class.create(submission, "10/10/2012 12:23 PM".to_datetime)
     end
 
-    let!(:submission) { create_assigned_submission! }
+    let!(:submission) do
+      create(:assigned_submission,
+             changeset: {
+               vessel_info: build(:submission_vessel, vessel_type: "BARGE"),
+               owners: [{ name: "ALICE" }, { name: "BOB" }],
+             })
+    end
+
     let(:registration) { submission.registration }
 
     it "creates the expected vessel type" do
       expect(registration.vessel.vessel_type).to eq("BARGE")
     end
 
-    it "creates the owners" do
-      expect(
-        registration.vessel.owners.length
-      ).to eq(2)
+    it "sets the registry part" do
+      expect(registration.vessel.part.to_sym).to eq(:part_3)
     end
 
     it "records the registration date" do
@@ -44,11 +49,9 @@ describe Builders::NewRegistrationBuilder do
     end
 
     it "creates registered owners in the expect order" do
-      expect(submission.owners.first.name)
-        .to eq(registration.vessel.owners.first.name)
-
-      expect(submission.owners.last.name)
-        .to eq(registration.vessel.owners.last.name)
+      expect(registration.vessel.owners.length).to eq(2)
+      expect(registration.vessel.owners.first.name).to eq("ALICE")
+      expect(registration.vessel.owners.last.name).to eq("BOB")
     end
   end
 end

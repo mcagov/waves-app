@@ -28,7 +28,7 @@ describe Search, type: :model do
     let!(:same_radio) { create(:registered_vessel, radio_call_sign: "4RWO0K") }
     let!(:blank_radio) { create(:registered_vessel, radio_call_sign: nil) }
 
-    let!(:vessel) { create_unassigned_submission!.vessel }
+    let!(:vessel) { create_submission_from_api!.vessel }
     subject { Search.similar_vessels(vessel) }
 
     it "contains the same_name" do

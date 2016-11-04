@@ -6,7 +6,7 @@ describe "create payments via the API", type: :request do
   end
 
   context "with valid params" do
-    let!(:submission) { create_incomplete_submission! }
+    let!(:submission) { create(:incomplete_submission) }
     let(:params) { valid_create_payment_json(submission) }
     let(:payment) { Payment.find(json["id"]) }
     let(:parsed_body) { JSON.parse(response.body) }

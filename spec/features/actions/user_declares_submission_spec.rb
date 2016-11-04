@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User declares a submission", type: :feature, js: true do
-  let!(:submission) { create_incomplete_submission! }
+  let!(:submission) { create(:incomplete_submission) }
   let!(:bob) { create(:user, name: "Bob") }
 
   before do
@@ -12,7 +12,7 @@ feature "User declares a submission", type: :feature, js: true do
   scenario "uploading a completed form" do
     click_on("Owners")
 
-    within("#declaration_2 .declaration") do
+    within("#declaration_1 .declaration") do
       expect(page).not_to have_button("Upload Declaration")
 
       page.attach_file(
@@ -21,9 +21,8 @@ feature "User declares a submission", type: :feature, js: true do
     end
 
     click_on("Owners")
-    within("#declaration_2 .declaration") do
+    within("#declaration_1 .declaration") do
       expect(page).to have_text("Completed by Bob")
-      expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
     end
   end
 end

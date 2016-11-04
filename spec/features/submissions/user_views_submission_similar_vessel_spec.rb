@@ -4,7 +4,9 @@ feature "User views submission for similar vessel", type: :feature, js: true do
   scenario "viewing a vessel with similar name and different mmsi_number" do
     create(:registered_vessel, mmsi_number: 233878594)
     create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
-    visit_assigned_submission
+
+    login_to_part_3
+    visit submission_path(create_submission_from_api!)
 
     # submitted vessel information
     within("td#vessel-name") do

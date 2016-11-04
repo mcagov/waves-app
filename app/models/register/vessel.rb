@@ -2,6 +2,8 @@ module Register
   class Vessel < ApplicationRecord
     protokoll :reg_no, pattern: "SSR2#####"
 
+    validates :part, presence: true
+
     has_many :owners,
              -> { order("updated_at asc") },
              class_name: "Register::Owner"

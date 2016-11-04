@@ -7,7 +7,7 @@ describe Submission::VesselController, type: :controller do
   end
 
   let!(:current_user) { create(:user) }
-  let!(:submission) { create_incomplete_submission! }
+  let!(:submission) { create(:incomplete_submission) }
 
   context "#update" do
     before do
