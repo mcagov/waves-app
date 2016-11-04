@@ -6,7 +6,7 @@ describe NotificationsController, type: :controller do
     allow(controller).to receive(:current_user).and_return(current_user)
   end
 
-  let!(:submission) { create_assigned_submission! }
+  let!(:submission) { create(:assigned_submission) }
   let!(:current_user) { submission.claimant }
 
   let(:notification_params) do
@@ -44,7 +44,7 @@ describe NotificationsController, type: :controller do
     it "creates a notification for the correspondent" do
       expect(Notification::Cancellation.count).to eq(1)
       expect(Notification::Cancellation.last.recipient_email)
-        .to eq("horatio-nelson.1@example.com")
+        .to eq(submission.correspondent.email)
     end
   end
 
@@ -72,7 +72,7 @@ describe NotificationsController, type: :controller do
     it "creates a notification for each owner" do
       expect(Notification::Rejection.count).to eq(1)
       expect(Notification::Rejection.last.recipient_email)
-        .to eq("horatio-nelson.1@example.com")
+        .to eq(submission.correspondent.email)
     end
   end
 
@@ -104,7 +104,7 @@ describe NotificationsController, type: :controller do
     it "creates one notification addressed to the correspondent" do
       expect(Notification::Referral.count).to eq(1)
       expect(Notification::Referral.last.recipient_email)
-        .to eq("horatio-nelson.1@example.com")
+        .to eq(submission.correspondent.email)
     end
   end
 end
