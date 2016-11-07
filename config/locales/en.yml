@@ -15,41 +15,21 @@ en:
       short:
         "%B %d"
 
-  ###########################
-
-  copyright:
-    license: Open Government License
-    notice: "All content is available under the <a href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated"
-
-  header:
-    logo:
-      link:
-        title: Go to the GOV.UK homepage
-        text: GOV.UK
-
-  helpers:
-    submit:
-      prerequisite:
-        update: Continue
-      vessel_info:
-        update: Continue
-      owner_info:
-        update: Continue
-      additional_owner_info:
-        update: Continue
-      delivery_address:
-        update: Continue
-      declaration:
-        update: Continue
-
   mca:
     title: Maritime and Coastguard Agency
 
-  phase:
-    banner:
-      alpha:
-        title: ALPHA
-        notice: "This is a new service – your <a href=\"mailto:andre.tanguy@oceanshq.com\">feedback</a> will help us to improve it."
-
   titles:
     application: Small Ships Register
+
+  submission:
+    approval:
+      inline-btn:
+        new_registration: Complete Registration
+        change_ownership: Complete Change of Ownership
+        change_vessel: Complete Change of Vessel Details
+        change_address: Complete Change of Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Complete Name Reservation
+        renewal: Renew Registration
+        closure: Close Registration
+        transcript: Issue Transcript

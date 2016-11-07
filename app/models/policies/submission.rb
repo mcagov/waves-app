@@ -14,10 +14,6 @@ class Policies::Submission
     def approvable?(submission)
       @submission = submission
 
-      # disable approval for anything that is not a new_registration
-      # we will remove this when we build out the other task approvals
-      return false unless @submission.task.to_sym == :new_registration
-
       return false unless @submission.declarations.incomplete.empty?
       return false unless AccountLedger.payment_status(@submission) == :paid
       true
