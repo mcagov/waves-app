@@ -24,5 +24,9 @@ class Task
     def validation_helper_task_type_list
       task_types.map { |t| t[1].to_s }
     end
+
+    def payment_required?(key)
+      ![:change_address, :closure].include?(key.to_sym)
+    end
   end
 end

@@ -17,6 +17,11 @@ describe "SubmissionHelper", type: :helper do
       expect(helper.payment_status_icon(:unpaid))
         .to match(/i fa fa-times red/)
     end
+
+    it "it :not_applicable" do
+      expect(helper.payment_status_icon(:not_applicable))
+        .to eq("n/a")
+    end
   end
 
   describe "#similar_attribute_icon", type: :helper do

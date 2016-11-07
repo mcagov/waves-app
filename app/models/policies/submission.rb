@@ -15,7 +15,7 @@ class Policies::Submission
       @submission = submission
 
       return false unless @submission.declarations.incomplete.empty?
-      return false unless AccountLedger.payment_status(@submission) == :paid
+      return false if AccountLedger.outstanding_payment?(@submission)
       true
     end
 

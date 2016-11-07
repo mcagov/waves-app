@@ -7,6 +7,8 @@ module SubmissionHelper
       content_tag(:div, " ", class: "i fa fa-check-circle-o")
     when :unpaid
       content_tag(:div, " ", class: "i fa fa-times red")
+    when :not_applicable
+      "n/a"
     end
   end
 
