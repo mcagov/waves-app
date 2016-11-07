@@ -5,7 +5,8 @@
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
-          %h4.modal-title Register Vessel and Issue Certificate of Registry
+          %h4.modal-title
+            = t("submission.approval.modal-title.#{submission.task}")
         .modal-body
           .row
             .col-md-12
@@ -19,6 +20,5 @@
                   %input{name: "notification_attachments", value: "registration_certificate", type: "checkbox"}
                   Send a copy of the Certificate of Registry to owner
 
-
         .modal-footer
-          = submit_tag "Register Vessel", class: "btn btn-success btn-lg"
+          = submit_tag t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"

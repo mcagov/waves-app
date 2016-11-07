@@ -33,3 +33,25 @@ en:
         renewal: Renew Registration
         closure: Close Registration
         transcript: Issue Transcript
+      modal-title:
+        new_registration: Register Vessel and Issue Certificate of Registry
+        change_ownership: Change Ownership and Issue Certificate of Registry
+        change_vessel: Change Vessel Details and Issue Certificate of Registry
+        change_address: Change of Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Complete Name Reservation
+        renewal: Renew Registration and Issue Certificate of Registry
+        closure: Close Registration
+        transcript: Issue Transcript
+      modal-btn:
+        new_registration: Register Vessel
+        change_ownership: Change Ownership
+        change_vessel: Change Vessel Details
+        change_address: Change Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Reserve Name
+        renewal: Renew Registration
+        closure: Close Registration
+        transcript: Issue Transcript
+
+

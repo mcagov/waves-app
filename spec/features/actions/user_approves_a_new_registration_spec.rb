@@ -3,7 +3,7 @@ require "rails_helper"
 feature "User approves a new registration", type: :feature, js: true do
   before do
     visit_assigned_submission
-    click_link("Register Vessel")
+    click_link("Complete Registration")
   end
 
   scenario "setting the registration start date" do
