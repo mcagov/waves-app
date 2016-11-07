@@ -23,6 +23,7 @@ feature "User declares a submission", type: :feature, js: true do
     click_on("Owners")
     within("#declaration_1 .declaration") do
       expect(page).to have_text("Completed by Bob")
+      expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
     end
   end
 end

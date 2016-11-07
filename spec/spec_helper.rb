@@ -38,6 +38,9 @@ RSpec.configure do |config|
     example.call
 
     WebMock.allow_net_connect!
+  end
+
+  config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 end
