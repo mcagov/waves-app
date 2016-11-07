@@ -20,8 +20,9 @@ class SubmissionsController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.includes(
-      [:payments, :correspondences, :notifications]).find(params[:id])
+    @submission =
+      Submission.in_part(current_activity.part).includes(
+        [:payments, :correspondences, :notifications]).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength
