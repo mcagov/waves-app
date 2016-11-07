@@ -1,33 +1,28 @@
 class AccountLedger
-  class << self
-    def payment_status(submission)
-      @submission = submission
+  def initialize(submission)
+    @submission = submission
+  end
 
-      return :not_applicable if amount_due(submission) == 0
-      return :unpaid if @submission.payments.empty?
-      return :paid if amount_paid(@submission) >= amount_due(@submission)
-      :part_paid
-    end
+  def payment_status
+    return :not_applicable if amount_due.zero?
+    return :unpaid if @submission.payments.empty?
+    return :paid if amount_paid >= amount_due
+    :part_paid
+  end
 
-    def outstanding_payment?(submission)
-      ![:not_applicable, :paid].include?(payment_status(submission))
-    end
+  def amount_due
+    Task.payment_required?(@submission.task) ? 2500 : 0
+  end
 
-    def service_level(submission)
-      amount_paid(submission) == 7500 ? :urgent : :standard
-    end
+  def amount_paid
+    @submission.payments.sum(&:amount).to_i
+  end
 
-    def amount_paid(submission)
-      submission.payments.sum(&:amount).to_i
-    end
+  def awaiting_payment?
+    ![:not_applicable, :paid].include?(payment_status)
+  end
 
-    def amount_due(submission)
-      @submission = submission
-      if Task.payment_required?(@submission.task)
-        2500
-      else
-        0
-      end
-    end
+  def service_level
+    amount_paid == 7500 ? :urgent : :standard
   end
 end
