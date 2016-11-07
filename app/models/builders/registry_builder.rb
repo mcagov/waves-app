@@ -1,4 +1,4 @@
-class Builders::NewRegistrationBuilder
+class Builders::RegistryBuilder
   class << self
     def create(submission, registration_starts_at)
       @submission = submission

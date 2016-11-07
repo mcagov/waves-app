@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Builders::NewRegistrationBuilder do
+describe Builders::RegistryBuilder do
   context ".create" do
     before do
       described_class.create(submission, "10/10/2012 12:23 PM".to_datetime)
