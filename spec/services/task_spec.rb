@@ -30,4 +30,18 @@ describe Task do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context "#issues_certificate?" do
+    subject { task.issues_certificate? }
+
+    context "for a renewal" do
+      let(:key) { :new_registration }
+      it { expect(subject).to be_truthy }
+    end
+
+    context "for a transcript" do
+      let(:key) { :transcript }
+      it { expect(subject).to be_falsey }
+    end
+  end
 end

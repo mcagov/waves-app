@@ -7,18 +7,20 @@
             %span{"aria-hidden" => "true"} ×
           %h4.modal-title
             = t("submission.approval.modal-title.#{submission.task}")
-        .modal-body
-          .row
-            .col-md-12
-              .form-group
-                %label Date and Time to take effect from
-                = text_field_tag :registration_starts_at, Time.now, class: "form-control datetimepicker"
-          .row
-            .col-md-12
-              .form-group
-                %label
-                  %input{name: "notification_attachments", value: "registration_certificate", type: "checkbox"}
-                  Send a copy of the Certificate of Registry to owner
+
+        - if Task.new(submission.task).issues_certificate?
+          .modal-body
+            .row
+              .col-md-12
+                .form-group
+                  %label Date and Time to take effect from
+                  = text_field_tag :registration_starts_at, Time.now, class: "form-control datetimepicker"
+            .row
+              .col-md-12
+                .form-group
+                  %label
+                    %input{name: "notification_attachments", value: "registration_certificate", type: "checkbox"}
+                    Send a copy of the Certificate of Registry to owner
 
         .modal-footer
           = submit_tag t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"

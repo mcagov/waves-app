@@ -11,6 +11,13 @@ class Task
     ![:change_address, :closure].include?(@key)
   end
 
+  def issues_certificate?
+    [
+      :new_registration, :change_ownership, :change_vessel, :renew,
+      :duplicate_certificate
+    ].include?(@key)
+  end
+
   class << self
     def manual_entry_task_types
       task_types << ["Unknown", :unknown]
