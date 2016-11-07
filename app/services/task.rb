@@ -1,9 +1,17 @@
 class Task
-  class << self
-    def description(key)
-      manual_entry_task_types.find { |t| t[1] == key.to_sym }[0]
-    end
+  def initialize(key)
+    @key = key.to_sym
+  end
 
+  def description
+    Task.manual_entry_task_types.find { |t| t[1] == @key }[0]
+  end
+
+  def payment_required?
+    ![:change_address, :closure].include?(@key)
+  end
+
+  class << self
     def manual_entry_task_types
       task_types << ["Unknown", :unknown]
     end
@@ -23,10 +31,6 @@ class Task
 
     def validation_helper_task_type_list
       task_types.map { |t| t[1].to_s }
-    end
-
-    def payment_required?(key)
-      ![:change_address, :closure].include?(key.to_sym)
     end
   end
 end

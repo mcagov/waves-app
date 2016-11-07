@@ -65,7 +65,7 @@ class Submission < ApplicationRecord
   end
 
   def job_type
-    Task.description(task)
+    Task.new(task).description
   end
 
   def symbolized_changeset

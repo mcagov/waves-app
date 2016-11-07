@@ -11,7 +11,7 @@ class AccountLedger
   end
 
   def amount_due
-    Task.payment_required?(@submission.task) ? 2500 : 0
+    Task.new(@submission.task).payment_required? ? 2500 : 0
   end
 
   def amount_paid

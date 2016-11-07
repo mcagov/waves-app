@@ -11,7 +11,7 @@ class Decorators::FinancePayment < SimpleDelegator
   end
 
   def task_description
-    Task.description(task)
+    Task.new(task).description
   end
 
   def formatted_payment_amount
