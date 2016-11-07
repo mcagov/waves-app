@@ -24,6 +24,8 @@ module Register
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
+    delegate :registered_until, to: :latest_registration
+
     def to_s
       name.upcase
     end
@@ -35,7 +37,7 @@ module Register
     def registration_status
       return :pending unless latest_registration
 
-      if latest_registration .registered_until >= Date.today
+      if registered_until >= Date.today
         :registered
       else
         :expired

@@ -10,11 +10,14 @@
 
         - if Task.new(submission.task).issues_certificate?
           .modal-body
-            .row
-              .col-md-12
-                .form-group
-                  %label Date and Time to take effect from
-                  = text_field_tag :registration_starts_at, Time.now, class: "form-control datetimepicker"
+            - unless Task.new(submission.task).duplicates_certificate?
+              .row
+                .col-md-12
+                  .form-group
+                    %label Date and Time to take effect from
+                    = text_field_tag :registration_starts_at,
+                      RegistrationDate.for(submission),
+                      class: "form-control datetimepicker"
             .row
               .col-md-12
                 .form-group

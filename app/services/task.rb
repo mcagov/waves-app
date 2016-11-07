@@ -18,6 +18,14 @@ class Task
     ].include?(@key)
   end
 
+  def duplicates_certificate?
+    [:duplicate_certificate].include?(@key)
+  end
+
+  def renews_certificate?
+    [:renewal].include?(@key)
+  end
+
   class << self
     def manual_entry_task_types
       task_types << ["Unknown", :unknown]
