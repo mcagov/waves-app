@@ -40,6 +40,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :assigned_closure_submission, parent: :assigned_submission do
+    task          :closure
+    vessel_reg_no { create(:registered_vessel).reg_no }
+  end
+
   factory :referred_submission, parent: :assigned_submission do
     after(:create) do |submission|
       submission.update_attribute(:referred_until, 30.days.from_now)
