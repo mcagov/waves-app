@@ -18,9 +18,3 @@ def visit_assigned_submission
   login_to_part_3(submission.claimant)
   visit submission_path(submission)
 end
-
-def visit_completed_submission
-  submission = create(:completed_submission)
-  login_to_part_3(submission.claimant)
-  visit submission_path(submission)
-end

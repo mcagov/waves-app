@@ -32,10 +32,6 @@ module SubmissionHelper
     end
   end
 
-  def vessel_label(attr)
-    t("simple_form.labels.submission.vessel.#{attr}")
-  end
-
   def default_referred_until
     WavesDate.next_working_day(30.days.from_now)
   end
