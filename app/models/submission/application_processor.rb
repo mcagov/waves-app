@@ -3,8 +3,8 @@ class Submission::ApplicationProcessor
     def run(submission, registration_starts_at)
       @submission = submission
 
-      Builders::RegistryBuilder
-        .create(@submission, registration_starts_at)
+      Builders::RegistryBuilder.create(@submission)
+      Builders::RegistrationBuilder.create(@submission, registration_starts_at)
     end
   end
 end

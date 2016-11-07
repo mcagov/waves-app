@@ -11,10 +11,16 @@ describe Submission::ApplicationProcessor do
       before do
         expect(Builders::RegistryBuilder)
           .to receive(:create)
+          .with(submission)
+
+        expect(Builders::RegistrationBuilder)
+          .to receive(:create)
           .with(submission, registration_starts_at)
       end
 
       it { subject }
     end
+
+    it "checks behaviour of other tasks"
   end
 end
