@@ -17,7 +17,9 @@ class Submission::DeliveryAddressController < InternalPagesController
   protected
 
   def load_submission_and_delivery_address
-    @submission = Submission.find(params[:submission_id])
+    @submission =
+      Submission
+      .in_part(current_activity.part).find(params[:submission_id])
     @delivery_address = @submission.delivery_address
   end
 

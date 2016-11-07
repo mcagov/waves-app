@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104092413) do
+ActiveRecord::Schema.define(version: 20161107092347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 20161104092413) do
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
+    t.index ["part"], name: "index_vessels_on_part", using: :btree
     t.index ["radio_call_sign"], name: "index_vessels_on_radio_call_sign", using: :btree
     t.index ["reg_no"], name: "index_vessels_on_reg_no", using: :btree
   end

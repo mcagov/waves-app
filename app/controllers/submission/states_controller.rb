@@ -49,6 +49,7 @@ class Submission::StatesController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.find(params[:submission_id])
+    @submission =
+      Submission.in_part(current_activity.part).find(params[:submission_id])
   end
 end
