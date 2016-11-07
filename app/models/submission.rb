@@ -57,7 +57,7 @@ class Submission < ApplicationRecord
   end
 
   def process_application(registration_starts_at)
-    Builders::NewRegistrationBuilder.create(self, registration_starts_at)
+    Submission::ApplicationProcessor.run(self, registration_starts_at)
   end
 
   def printing_completed?

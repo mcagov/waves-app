@@ -176,8 +176,8 @@ describe Submission, type: :model do
           .with(submission)
           .and_return(true)
 
-        expect(Builders::NewRegistrationBuilder)
-          .to receive(:create)
+        expect(Submission::ApplicationProcessor)
+          .to receive(:run)
           .with(submission, registration_starts_at)
       end
 
