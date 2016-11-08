@@ -10,7 +10,9 @@
           %thead
             %tr
               %th Payment Date
+              %th Part of Register
               %th Payment Type
+              %th Application Type
               %th Fee Amount
               %th Fee Receipt Number
           %tbody
@@ -18,6 +20,8 @@
             - finance_payment = Decorators::FinancePayment.new(finance_payment)
             %tr.finance-payment
               %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment)
+              %td= finance_payment.part_description
+              %td= finance_payment.task_description
               %td= finance_payment.payment_type_description
               %td= finance_payment.formatted_payment_amount
               %td= finance_payment.payment.submission.ref_no
