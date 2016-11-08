@@ -25,8 +25,7 @@ en:
     approval:
       inline-btn:
         new_registration: Complete Registration
-        change_ownership: Complete Change of Ownership
-        change_vessel: Complete Change of Vessel Details
+        change_registry_details: Complete Change of Registry Details
         change_address: Complete Change of Address
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
@@ -35,8 +34,7 @@ en:
         transcript: Issue Transcript
       modal-title:
         new_registration: Register Vessel and Issue Certificate of Registry
-        change_ownership: Change Ownership and Issue Certificate of Registry
-        change_vessel: Change Vessel Details and Issue Certificate of Registry
+        change_registry_details: Change Registry Details and Issue Certificate of Registry
         change_address: Change of Address
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
@@ -45,8 +43,7 @@ en:
         transcript: Issue Transcript
       modal-btn:
         new_registration: Register Vessel
-        change_ownership: Change Ownership
-        change_vessel: Change Vessel Details
+        change_registry_details: Change Registry Details
         change_address: Change Address
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Reserve Name
@@ -55,8 +52,7 @@ en:
         transcript: Issue Transcript
       confirmation:
         new_registration: The vessel owner has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
-        change_ownership: The vessel owner has been notified via email that their request for a Change of Ownership has been approved.
-        change_vessel: The vessel owner has been notified via email that their request for a Change of Vessel Details has been approved.
+        change_registry_details: The vessel owner has been notified via email that their request for a Change of Registry Details has been approved.
         change_address: The vessel owner has been notified via email that their request for a Change of Address has been approved.
         duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
         reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.

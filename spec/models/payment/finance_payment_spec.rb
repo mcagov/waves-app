@@ -43,12 +43,12 @@ describe Payment::FinancePayment do
     end
   end
 
-  context "for a change_vessel submission" do
+  context "for a change_registry_details submission" do
     let!(:finance_payment) do
       described_class.create(
         payment_date: Date.today,
         part: :part_1,
-        task: :change_vessel,
+        task: :change_registry_details,
         vessel_reg_no: create(:registered_vessel).reg_no,
         payment_type: :cash,
         payment_amount: "15",

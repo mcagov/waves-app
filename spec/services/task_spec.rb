@@ -11,9 +11,9 @@ describe Task do
       it { expect(subject).to eq("New Registration") }
     end
 
-    context "of a change_ownership" do
-      let(:key) { :change_ownership }
-      it { expect(subject).to eq("Change of Ownership") }
+    context "of a change_registry_details" do
+      let(:key) { :change_registry_details }
+      it { expect(subject).to eq("Change of Registry Details") }
     end
   end
 

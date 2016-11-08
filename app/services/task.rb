@@ -13,7 +13,7 @@ class Task
 
   def issues_certificate?
     [
-      :new_registration, :change_ownership, :change_vessel, :renew,
+      :new_registration, :change_registry_details, :renew,
       :duplicate_certificate
     ].include?(@key)
   end
@@ -33,8 +33,7 @@ class Task
 
     def task_types
       [
-        ["Change of Ownership", :change_ownership],
-        ["Change of Vessel Details", :change_vessel],
+        ["Change of Registry Details", :change_registry_details],
         ["Change of Address", :change_address],
         ["Duplicate Certificate of Registry", :duplicate_certificate],
         ["Name Reservation", :reserve_name],
