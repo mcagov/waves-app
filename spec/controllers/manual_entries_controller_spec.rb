@@ -45,11 +45,8 @@ describe ManualEntriesController, type: :controller do
   describe "#create" do
     context "successfully" do
       before do
-        allow(controller)
-          .to receive(:current_activity).and_return(Activity.new(:part_1))
-
         post :create,
-             params: { submission: { task: :new_registration } }
+             params: { submission: { task: :new_registration, part: :part_1 } }
       end
 
       it "sets the part" do
