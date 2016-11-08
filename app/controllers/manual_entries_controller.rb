@@ -9,11 +9,15 @@ class ManualEntriesController < InternalPagesController
   end
 
   def new
-    @submission = Submission.new
+    @submission = Submission.new(part: current_activity.part)
   end
 
   def create
-    @submission = build_new_manual_entry.submission
+    @submission = Submission.new(submission_params)
+
+    @submission.claimant = current_user
+    @submission.state = :assigned
+    @submission.source = :manual_entry
 
     if @submission.save
       redirect_to_edit_or_show
@@ -72,13 +76,5 @@ class ManualEntriesController < InternalPagesController
                        to #{Activity.new(@submission.part)}"
       redirect_to tasks_my_tasks_path
     end
-  end
-
-  def build_new_manual_entry
-    Builders::ManualEntryBuilder.new(
-      current_activity.part,
-      submission_params[:task],
-      submission_params[:vessel_reg_no],
-      current_user)
   end
 end
