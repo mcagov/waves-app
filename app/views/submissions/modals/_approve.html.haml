@@ -8,7 +8,7 @@
           %h4.modal-title
             = t("submission.approval.modal-title.#{submission.task}")
 
-        - if Task.new(submission.task).issues_certificate?
+        - if Task.new(submission.task).prints_certificate?
           .modal-body
             - unless Task.new(submission.task).duplicates_certificate?
               .row

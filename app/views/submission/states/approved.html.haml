@@ -3,7 +3,7 @@
     = render partial: "submissions/info/heading", locals: {submission: @submission}
   .col-sm-6
     .pull-right
-      - if Task.new(@submission.task).issues_certificate?
+      - if Task.new(@submission.task).prints_certificate?
         = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
           Print Certificate of Registry

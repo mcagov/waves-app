@@ -31,8 +31,8 @@ describe Task do
     end
   end
 
-  context "#issues_certificate?" do
-    subject { task.issues_certificate? }
+  context "#prints_certificate?" do
+    subject { task.prints_certificate? }
 
     context "for a renewal" do
       let(:key) { :new_registration }

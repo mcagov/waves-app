@@ -11,9 +11,9 @@ class Task
     ![:change_address, :closure].include?(@key)
   end
 
-  def issues_certificate?
+  def prints_certificate?
     [
-      :new_registration, :change_registry_details, :renew,
+      :new_registration, :change_registry_details, :renewal,
       :duplicate_certificate
     ].include?(@key)
   end
@@ -23,7 +23,14 @@ class Task
   end
 
   def renews_certificate?
-    [:renewal].include?(@key)
+    [:change_registry_details, :renewal]
+      .include?(@key)
+  end
+
+  def builds_registry?
+    [
+      :change_registry_details, :change_address,
+      :new_registration, :renewal].include?(@key)
   end
 
   class << self
