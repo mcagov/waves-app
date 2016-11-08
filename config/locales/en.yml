@@ -15,41 +15,50 @@ en:
       short:
         "%B %d"
 
-  ###########################
-
-  copyright:
-    license: Open Government License
-    notice: "All content is available under the <a href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated"
-
-  header:
-    logo:
-      link:
-        title: Go to the GOV.UK homepage
-        text: GOV.UK
-
-  helpers:
-    submit:
-      prerequisite:
-        update: Continue
-      vessel_info:
-        update: Continue
-      owner_info:
-        update: Continue
-      additional_owner_info:
-        update: Continue
-      delivery_address:
-        update: Continue
-      declaration:
-        update: Continue
-
   mca:
     title: Maritime and Coastguard Agency
 
-  phase:
-    banner:
-      alpha:
-        title: ALPHA
-        notice: "This is a new service – your <a href=\"mailto:andre.tanguy@oceanshq.com\">feedback</a> will help us to improve it."
-
   titles:
     application: Small Ships Register
+
+  submission:
+    approval:
+      inline-btn:
+        new_registration: Complete Registration
+        change_registry_details: Complete Change of Registry Details
+        change_address: Complete Change of Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Complete Name Reservation
+        renewal: Renew Registration
+        closure: Close Registration
+        transcript: Issue Transcript
+      modal-title:
+        new_registration: Register Vessel and Issue Certificate of Registry
+        change_registry_details: Change Registry Details and Issue Certificate of Registry
+        change_address: Change of Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Complete Name Reservation
+        renewal: Renew Registration and Issue Certificate of Registry
+        closure: Close Registration
+        transcript: Issue Transcript
+      modal-btn:
+        new_registration: Register Vessel
+        change_registry_details: Change Registry Details
+        change_address: Change Address
+        duplicate_certificate: Issue Duplicate Certificate
+        reserve_name: Reserve Name
+        renewal: Renew Registration
+        closure: Close Registration
+        transcript: Issue Transcript
+      confirmation:
+        new_registration: The vessel owner has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
+        change_registry_details: The vessel owner has been notified via email that their request for a Change of Registry Details has been approved.
+        change_address: The vessel owner has been notified via email that their request for a Change of Address has been approved.
+        duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
+        reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.
+        renewal: The vessel owner has been notified via email that their request for a Registration Renewal has been approved.
+        closure: The vessel owner has been notified via email that their request for a Registration Closure has been approved.
+        transcript: The vessel owner has been notified via email that their Transcript Request has been approved.
+
+
+

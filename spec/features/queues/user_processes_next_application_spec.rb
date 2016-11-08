@@ -9,8 +9,8 @@ feature "User processes next application", type: :feature, js: true do
   scenario "clicking Process Next Application" do
     click_link("Process Next Application")
 
-    click_link("Register Vessel")
-    click_button("Register Vessel")
+    click_link("Complete Registration")
+    within(".modal-dialog") { click_button("Register Vessel") }
     expect(page).to have_text("Task Complete")
 
     click_link("My Tasks")

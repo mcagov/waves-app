@@ -24,8 +24,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :unassigned_change_vessel_submission, class: "Submission" do
-    task          :change_vessel
+  factory :unassigned_change_registry_details_submission, class: "Submission" do
+    task          :change_registry_details
     source        :manual_entry
     vessel_reg_no { create(:registered_vessel).reg_no }
 
@@ -38,6 +38,11 @@ FactoryGirl.define do
     after(:create) do |submission|
       submission.claimed!(create(:user))
     end
+  end
+
+  factory :assigned_closure_submission, parent: :assigned_submission do
+    task          :closure
+    vessel_reg_no { create(:registered_vessel).reg_no }
   end
 
   factory :referred_submission, parent: :assigned_submission do

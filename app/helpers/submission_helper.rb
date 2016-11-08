@@ -7,6 +7,8 @@ module SubmissionHelper
       content_tag(:div, " ", class: "i fa fa-check-circle-o")
     when :unpaid
       content_tag(:div, " ", class: "i fa fa-times red")
+    when :not_applicable
+      "n/a"
     end
   end
 
@@ -30,10 +32,6 @@ module SubmissionHelper
       # reciprocal attribute in the vessel pane
       content_tag(:div, "", class: "i fa fa-star-o similar-#{key}")
     end
-  end
-
-  def vessel_label(attr)
-    t("simple_form.labels.submission.vessel.#{attr}")
   end
 
   def default_referred_until

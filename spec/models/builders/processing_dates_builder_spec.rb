@@ -3,10 +3,12 @@ require "rails_helper"
 describe Builders::ProcessingDatesBuilder do
   describe ".create" do
     before do
+      account_ledger_instance =
+        double(:account_ledger_instance, service_level: service_level)
       expect(AccountLedger)
-        .to receive(:service_level)
+        .to receive(:new)
         .with(submission)
-        .and_return(service_level)
+        .and_return(account_ledger_instance)
 
       target_date_instance = double(:target_date_instance)
 

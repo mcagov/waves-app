@@ -1,17 +1,46 @@
 class Task
-  class << self
-    def description(key)
-      manual_entry_task_types.find { |t| t[1] == key.to_sym }[0]
-    end
+  def initialize(key)
+    @key = key.to_sym
+  end
 
+  def description
+    Task.manual_entry_task_types.find { |t| t[1] == @key }[0]
+  end
+
+  def payment_required?
+    ![:change_address, :closure].include?(@key)
+  end
+
+  def prints_certificate?
+    [
+      :new_registration, :change_registry_details, :renewal,
+      :duplicate_certificate
+    ].include?(@key)
+  end
+
+  def duplicates_certificate?
+    [:duplicate_certificate].include?(@key)
+  end
+
+  def renews_certificate?
+    [:change_registry_details, :renewal]
+      .include?(@key)
+  end
+
+  def builds_registry?
+    [
+      :change_registry_details, :change_address,
+      :new_registration, :renewal].include?(@key)
+  end
+
+  class << self
     def manual_entry_task_types
       task_types << ["Unknown", :unknown]
     end
 
     def task_types
       [
-        ["Change of Ownership", :change_ownership],
-        ["Change of Vessel Details", :change_vessel],
+        ["Change of Registry Details", :change_registry_details],
         ["Change of Address", :change_address],
         ["Duplicate Certificate of Registry", :duplicate_certificate],
         ["Name Reservation", :reserve_name],

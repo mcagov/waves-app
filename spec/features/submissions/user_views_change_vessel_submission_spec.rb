@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User views change of details submission", type: :feature, js: true do
-  let!(:submission) { create(:unassigned_change_vessel_submission) }
+  let!(:submission) { create(:unassigned_change_registry_details_submission) }
   let!(:registered_vessel) { submission.registered_vessel }
   before do
     login_to_part_3
@@ -10,7 +10,7 @@ feature "User views change of details submission", type: :feature, js: true do
 
   scenario "rendering 3 column table for vessel and owners" do
     within("h1") do
-      expect(page).to have_content("Change of Vessel Details ID: ")
+      expect(page).to have_content("Change of Registry Details ID: ")
     end
 
     click_link("Vessel Information")

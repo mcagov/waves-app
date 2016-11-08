@@ -3,7 +3,7 @@ require "rails_helper"
 feature "User approves a new registration", type: :feature, js: true do
   before do
     visit_assigned_submission
-    click_link("Register Vessel")
+    click_link("Complete Registration")
   end
 
   scenario "setting the registration start date" do
@@ -12,6 +12,7 @@ feature "User approves a new registration", type: :feature, js: true do
       click_button("Register Vessel")
     end
     expect(page).to have_text("The vessel owner has been notified via email")
+    expect(page).to have_text("registered on Part III of the UK Ship Register")
 
     expect(Registration.last.registered_at)
       .to eq("12/12/2020 11:59 AM".to_datetime)

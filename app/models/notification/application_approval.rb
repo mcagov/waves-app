@@ -18,7 +18,15 @@ class Notification::ApplicationApproval < Notification
   end
 
   def vessel_reg_no
-    registration.vessel.reg_no
+    registered_vessel.reg_no if registered_vessel
+  end
+
+  def vessel_name
+    registered_vessel.name if registered_vessel
+  end
+
+  def registered_vessel
+    notifiable.registered_vessel if notifiable
   end
 
   def registration_certificate
@@ -29,9 +37,5 @@ class Notification::ApplicationApproval < Notification
 
   def attach_certificate?
     attachments == "registration_certificate"
-  end
-
-  def vessel_name
-    notifiable.vessel.name if notifiable.vessel
   end
 end

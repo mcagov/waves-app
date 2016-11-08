@@ -61,7 +61,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def payment_status
-    AccountLedger.payment_status(self)
+    AccountLedger.new(@submission).payment_status
   end
 
   private

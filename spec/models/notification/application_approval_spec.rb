@@ -3,7 +3,11 @@ require "rails_helper"
 describe Notification::ApplicationApproval, type: :model do
   context "in general" do
     let!(:registered_vessel) { create(:registered_vessel) }
-    let!(:submission) { create(:submission) }
+
+    let!(:submission) do
+      create(:submission, registered_vessel: registered_vessel)
+    end
+
     let!(:registration) do
       create(:registration,
              vessel: registered_vessel, submission: submission)

@@ -3,12 +3,13 @@
     = render partial: "submissions/info/heading", locals: {submission: @submission}
   .col-sm-6
     .pull-right
-      = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
-        %i.fa.fa-print{style: "font-size: 1.2em;"}
-        Print Certificate of Registry
-      = link_to registration_cover_letter_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
-        %i.fa.fa-print{style: "font-size: 1.2em;"}
-        Print Cover Letter
+      - if Task.new(@submission.task).prints_certificate?
+        = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
+          %i.fa.fa-print{style: "font-size: 1.2em;"}
+          Print Certificate of Registry
+        = link_to registration_cover_letter_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
+          %i.fa.fa-print{style: "font-size: 1.2em;"}
+          Print Cover Letter
 
 .row
   .col-md-12.col-sm-12.col-xs-12
@@ -17,7 +18,9 @@
         %h2 Task Complete
         .clearfix
       .x_content
-        %p The vessel owner has been notified via email that their vessel is now registered on Part III of the UK Ship Register.
+        %p
+          = t("submission.approval.confirmation.#{@submission.task}",
+            part: Activity.new(@submission.part))
 
 .row.no-print
   .col-xs-12

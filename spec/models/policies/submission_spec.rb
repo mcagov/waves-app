@@ -78,16 +78,24 @@ describe Policies::Submission do
     context "with outstanding declarations" do
       it { expect(subject).to be_falsey }
 
-      context "with completed declarations and no payment" do
-        before { submission.declarations.incomplete.map(&:declared!) }
+      context "with completed declarations but awaiting_payment" do
+        before do
+          submission.declarations.incomplete.map(&:declared!)
+
+          account_ledger_instance =
+            double(:account_ledger, awaiting_payment?: awaiting_payment)
+
+          allow(AccountLedger)
+            .to receive(:new).with(submission)
+            .and_return(account_ledger_instance)
+        end
+
+        let(:awaiting_payment) { true }
 
         it { expect(subject).to be_falsey }
 
-        context "with completed declarations and payment" do
-          before do
-            allow(AccountLedger)
-              .to receive(:payment_status).with(submission).and_return(:paid)
-          end
+        context "with completed declarations and not awaiting_payment" do
+          let(:awaiting_payment) { false }
 
           it { expect(subject).to be_truthy }
         end
