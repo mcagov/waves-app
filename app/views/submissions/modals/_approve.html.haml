@@ -16,7 +16,7 @@
                   .form-group
                     %label Date and Time to take effect from
                     = text_field_tag :registration_starts_at,
-                      RegistrationDate.for(submission),
+                      RegistrationDate.for(submission).starts_at,
                       class: "form-control datetimepicker"
             .row
               .col-md-12
