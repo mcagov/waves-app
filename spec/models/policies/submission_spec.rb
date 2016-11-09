@@ -71,6 +71,24 @@ describe Policies::Submission do
     end
   end
 
+  context "#printing_required?" do
+    let!(:submission) { build(:submission, task: task) }
+
+    subject { submission.printing_required? }
+
+    context "for a new_registration" do
+      let!(:task) { :new_registration }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "for a closure" do
+      let!(:task) { :closure }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
   describe "approvable?" do
     let!(:submission) { create(:incomplete_submission) }
     subject { submission.approvable? }
