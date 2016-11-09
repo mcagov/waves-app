@@ -1,4 +1,4 @@
-.nested-fields
+.nested-fields.postcode-lookup
   = f.simple_fields_for :owner do |owner_f|
     - owner_f.object = f.object.owner
     .x_panel
@@ -14,27 +14,28 @@
             = owner_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }, required: false
           .col-md-3
             = owner_f.input :nationality, label: "Country of Nationality", as: :select, collection: WavesUtilities::Nationality.all, input_html: { class: "upcase" }, required: false
-        .row#postcode-lookup
+
+        .row
           .col-md-4
-            %label.form-label-bold{ for: "#postcode_lookup_field" }
+            %label.form-label-bold
               Postcode
             .input-group
-              = text_field_tag :postcode_lookup_field, "", class: "form-control"
+              = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
               %span.input-group-btn
-                = link_to "Lookup address", "#", id: "postcode_lookup_button", class: "btn btn-primary"
+                = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
           .col-md-8
         .row
           .col-md-4.form-group
-            #postcode_lookup_api_key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
-            #lookup_field
+            .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+            .postcode-results-field
         .clearfix
         .row
           .col-md-3
-            = owner_f.input :address_1, input_html: { class: "upcase address_1" }, required: false
+            = owner_f.input :address_1, input_html: { class: "upcase address-1" }, required: false
           .col-md-3
-            = owner_f.input :address_2, input_html: { class: "upcase address_2" }, required: false
+            = owner_f.input :address_2, input_html: { class: "upcase address-2" }, required: false
           .col-md-3
-            = owner_f.input :address_3, input_html: { class: "upcase address_3" }, required: false
+            = owner_f.input :address_3, input_html: { class: "upcase address-3" }, required: false
           .col-md-3
             = owner_f.input :town, label: "Town or City", input_html: { class: "upcase town" }, required: false
         .row
