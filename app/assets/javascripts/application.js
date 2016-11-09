@@ -25,7 +25,9 @@
 //= require ./vendor/select2
 //= require ./vendor/pace.min
 //= require ./vendor/custom
-
+//= require ./vendor/jquery.postcodes
+//
+//= require postcode_lookup
 //= require submission
 //= require ui-helpers
 
