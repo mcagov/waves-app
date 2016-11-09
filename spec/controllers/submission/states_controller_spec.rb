@@ -84,7 +84,7 @@ describe Submission::StatesController, type: :controller do
     context "unsuccessfully" do
       before do
         allow_any_instance_of(Submission)
-          .to receive(:approved!).and_return(false)
+          .to receive(:move_to_print_queue!).and_return(false)
         post :approve, params: { submission_id: submission.id }
       end
 

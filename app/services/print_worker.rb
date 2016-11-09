@@ -7,6 +7,6 @@ class PrintWorker
     print_jobs = @submission.print_jobs
     print_jobs[print_job_type] = Time.now
     @submission.update_attribute(:print_jobs, print_jobs)
-    @submission.printed!
+    @submission.completed!
   end
 end

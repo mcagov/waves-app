@@ -60,6 +60,10 @@ class Submission < ApplicationRecord
     Submission::ApplicationProcessor.run(self, registration_starts_at)
   end
 
+  def printing_required?
+    Policies::Submission.printing_required?(self)
+  end
+
   def printing_completed?
     Policies::Submission.printing_completed?(self)
   end

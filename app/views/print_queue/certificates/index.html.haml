@@ -24,6 +24,7 @@
               = link_to print_queue_cover_letters_path(format: :pdf), target: "_blank", class: 'btn btn-primary' do
                 %i.fa.fa-print
                 Print Cover Letters
+            %th Proccessed by
 
         - @submissions.each do |submission|
           %tbody
@@ -35,3 +36,4 @@
             %td.cover-letter
               - if submission.printed?(:cover_letter)
                 = "Printed: #{ submission.print_jobs["cover_letter"].in_time_zone.to_s(:date_time) }"
+            %td= submission.claimant
