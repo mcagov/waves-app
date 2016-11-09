@@ -81,6 +81,33 @@ describe Submission::StatesController, type: :controller do
       end
     end
 
+    context "when printing is not required" do
+      before do
+        allow_any_instance_of(Submission)
+          .to receive(:printing_required?)
+          .and_return(false)
+
+        post :approve, params: { submission_id: submission.id }
+      end
+
+      it "moves the submission to :completed" do
+        expect(assigns[:submission]).to be_completed
+      end
+
+      it "renders the aproved page" do
+        expect(response).to render_template("approved")
+      end
+
+      it "creates a notification for the applicant" do
+        expect(Notification::ApplicationApproval.count).to eq(1)
+      end
+
+      it "sets the notification#actioned_by" do
+        expect(Notification::ApplicationApproval.first.actioned_by)
+          .to eq(current_user)
+      end
+    end
+
     context "unsuccessfully" do
       before do
         allow_any_instance_of(Submission)
