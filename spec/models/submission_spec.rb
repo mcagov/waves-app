@@ -193,7 +193,7 @@ describe Submission, type: :model do
           .with(submission)
       end
 
-      it { submission.printed! }
+      it { submission.completed! }
     end
   end
 end

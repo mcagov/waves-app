@@ -43,7 +43,7 @@ module Submission::StateMachine
                       guard: :approvable?
         end
 
-        event :printed do
+        event :completed do
           transitions to: :completed, from: :printing,
                       guard: :printing_completed?
         end

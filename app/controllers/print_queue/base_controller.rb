@@ -7,7 +7,7 @@ class PrintQueue::BaseController < InternalPagesController
       format.pdf do
         load_registrations
         pdf = Pdfs::Certificate.new(@registrations)
-        mark_submissions_printed
+        mark_submissions_completed
 
         render_pdf(pdf, pdf.filename)
       end
@@ -28,7 +28,7 @@ class PrintQueue::BaseController < InternalPagesController
     @registrations = @submissions.map(&:registration)
   end
 
-  def mark_submissions_printed
+  def mark_submissions_completed
     raise NotImplemented
   end
 
