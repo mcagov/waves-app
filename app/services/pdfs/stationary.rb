@@ -55,9 +55,10 @@ module Pdfs::Stationary
   end
 
   def correspondent_address
+    @pdf.draw_text @correspondent, at: [l_margin, 660]
     i = 0
     @correspondent.compacted_address.each do |line|
-      @pdf.draw_text line, at: [l_margin, 640 - i]
+      @pdf.draw_text line, at: [l_margin, 646 - i]
       i += spacer
     end
   end
