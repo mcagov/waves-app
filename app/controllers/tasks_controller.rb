@@ -1,18 +1,19 @@
 class TasksController < InternalPagesController
   def my_tasks
-    @submissions = submission_scope.assigned_to(current_user)
+    @submissions =
+      submission_scope.assigned_to(current_user).order("target_date asc")
   end
 
   def team_tasks
-    @submissions = submission_scope.assigned
+    @submissions = submission_scope.assigned.order("target_date asc")
   end
 
   def unclaimed
-    @submissions = submission_scope.unassigned
+    @submissions = submission_scope.unassigned.order("target_date asc")
   end
 
   def incomplete
-    @submissions = submission_scope.incomplete
+    @submissions = submission_scope.incomplete.order("target_date asc")
   end
 
   def referred
@@ -39,7 +40,6 @@ class TasksController < InternalPagesController
 
   def submission_scope
     Submission
-      .order("target_date asc")
       .in_part(current_activity.part)
       .where.not(state: [:printing, :completed])
   end

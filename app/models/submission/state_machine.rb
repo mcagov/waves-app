@@ -43,6 +43,12 @@ module Submission::StateMachine
                       guard: :approvable?
         end
 
+        event :skip_print_queue do
+          transitions to: :completed, from: :assigned,
+                      on_transition: :process_application,
+                      guard: :approvable?
+        end
+
         event :completed do
           transitions to: :completed, from: :printing,
                       guard: :printing_completed?

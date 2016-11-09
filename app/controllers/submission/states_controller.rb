@@ -34,7 +34,7 @@ class Submission::StatesController < InternalPagesController
   end
 
   def approve
-    if @submission.move_to_print_queue!(params[:registration_starts_at])
+    if move_to_printing_or_completed
       Builders::NotificationBuilder
         .application_approval(
           @submission, current_user, params[:notification_attachments])
@@ -51,5 +51,13 @@ class Submission::StatesController < InternalPagesController
   def load_submission
     @submission =
       Submission.in_part(current_activity.part).find(params[:submission_id])
+  end
+
+  def move_to_printing_or_completed
+    if @submission.printing_required?
+      @submission.move_to_print_queue!(params[:registration_starts_at])
+    else
+      @submission.skip_print_queue!(params[:registration_starts_at])
+    end
   end
 end
