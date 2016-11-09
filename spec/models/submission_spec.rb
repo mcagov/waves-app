@@ -181,7 +181,7 @@ describe Submission, type: :model do
           .with(submission, registration_starts_at)
       end
 
-      it { submission.approved!(registration_starts_at) }
+      it { submission.move_to_print_queue!(registration_starts_at) }
     end
 
     context "to completed" do

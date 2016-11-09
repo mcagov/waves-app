@@ -34,7 +34,7 @@ class Submission::StatesController < InternalPagesController
   end
 
   def approve
-    if @submission.approved!(params[:registration_starts_at])
+    if @submission.move_to_print_queue!(params[:registration_starts_at])
       Builders::NotificationBuilder
         .application_approval(
           @submission, current_user, params[:notification_attachments])

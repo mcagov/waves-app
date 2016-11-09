@@ -37,7 +37,7 @@ module Submission::StateMachine
                       on_transition: :remove_claimant
         end
 
-        event :approved do
+        event :move_to_print_queue do
           transitions to: :printing, from: :assigned,
                       on_transition: :process_application,
                       guard: :approvable?
