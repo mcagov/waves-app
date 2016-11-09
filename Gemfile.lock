@@ -186,10 +186,10 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.0.2)
-    jsonapi (0.1.1.beta4)
-      jsonapi-parser (= 0.1.1.beta2)
+    jsonapi (0.1.1.beta6)
+      jsonapi-parser (= 0.1.1.beta3)
       jsonapi-renderer (= 0.1.1.beta1)
-    jsonapi-parser (0.1.1.beta2)
+    jsonapi-parser (0.1.1.beta3)
     jsonapi-renderer (0.1.1.beta1)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -213,9 +213,8 @@ GEM
       railties (>= 3.1)
     nenv (0.3.0)
     nio4r (1.2.1)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -241,7 +240,6 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.19.0)
-    pkg-config (1.1.7)
     powerpack (0.1.1)
     prawn (2.1.0)
       pdf-core (~> 0.6.1)
@@ -404,7 +402,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10.0)
+  active_model_serializers
   auto_increment
   awesome_print
   bootstrap-datepicker-rails
