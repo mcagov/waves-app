@@ -35,7 +35,13 @@ class Builders::SubmissionBuilder
     end
 
     def build_declarations
-      return unless Declaration.where(submission: @submission).empty?
+      # Here we need to protect against re-building the owner declaraions
+      # We can never be sure how many times a submission will pass through
+      # this builder, so the rule is: if there are some declarations,
+      # don't build anymore!
+      if @submission.persisted?
+        return unless Declaration.where(submission: @submission).empty?
+      end
 
       submitted_owners = @submission.symbolized_changeset[:owners]
       completed_declarations = @submission.symbolized_changeset[:declarations]
