@@ -31,6 +31,26 @@ describe "User prints from queue", type: :feature, js: true do
     end
   end
 
+  scenario "printing a single certificate" do
+    pdf_window = window_opened_by do
+      within("td.certificate") { click_on("Print") }
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
+  end
+
+  scenario "printing a single cover letter" do
+    pdf_window = window_opened_by do
+      within("td.cover-letter") { click_on("Print") }
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
+  end
+
   scenario "when viewing another part of the registry" do
     login_to_part_1
     visit print_queue_certificates_path
