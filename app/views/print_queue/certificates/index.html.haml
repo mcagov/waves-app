@@ -16,11 +16,11 @@
           %tr
             %th Vessel
             %th Offical Number
-            %th
+            %th.text-center
               = link_to print_queue_certificates_path(format: :pdf), target: "_blank", class: "btn btn-primary" do
                 %i.fa.fa-print
                 Print Certificates of Registry
-            %th
+            %th.text-center
               = link_to print_queue_cover_letters_path(format: :pdf), target: "_blank", class: 'btn btn-primary' do
                 %i.fa.fa-print
                 Print Cover Letters
@@ -30,10 +30,19 @@
           %tbody
             %td= submission.registered_vessel
             %td= submission.registered_vessel.reg_no
-            %td.certificate
+            %td.certificate.text-center
               - if submission.printed?(:registration_certificate)
                 = "Printed: #{ submission.print_jobs["registration_certificate"].in_time_zone.to_s(:date_time) }"
-            %td.cover-letter
+              - else
+                = link_to registration_certificate_path(submission.registration, format: :pdf), target: "_blank" do
+                  %i.fa.fa-print
+                  Print
+
+            %td.cover-letter.text-center
               - if submission.printed?(:cover_letter)
                 = "Printed: #{ submission.print_jobs["cover_letter"].in_time_zone.to_s(:date_time) }"
+              - else
+                = link_to registration_cover_letter_path(submission.registration, format: :pdf), target: "_blank" do
+                  %i.fa.fa-print
+                  Print
             %td= submission.claimant
