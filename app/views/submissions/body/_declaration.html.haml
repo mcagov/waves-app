@@ -5,37 +5,46 @@
 %table.table.table-striped{ id: "declaration_#{ declaration_counter + 1 }"}
   %thead
     %th Owner ##{ declaration_counter + 1 }
+
     - if @submission.display_registry_info?
       %th Current Information
-    %th Submitted Information
+
+    - if @submission.display_changeset?
+      %th Submitted Information
   %tbody
     %tr
       %td{width: "20%"} Owner Name
+
       - if registry_owner
         %td.registry-owner-name{width: "40%"}
           = registry_owner.name
-      %td.owner-name
-        %strong
-          - if @submission.uneditable?
-            = owner.name
-          - else
-            = editable_owner "Owner Name", "owner[name]",
-              owner.name, registry_owner.name, declaration
+
+      - if @submission.display_changeset?
+        %td.owner-name
+          %strong
+            - if @submission.uneditable?
+              = owner.name
+            - else
+              = editable_owner "Owner Name", "owner[name]",
+                owner.name, registry_owner.name, declaration
     %tr
       %td Owner Address
+
       - if registry_owner
         %td
           = registry_owner.inline_address
-      %td.owner-address
-        - if @submission.uneditable?
-          %strong= owner.inline_address
-        - else
-          %strong
-            = link_to declaration.owner.inline_address,
-              "#address-fields-#{declaration.id}",
-              class: "editable-link",
-              id: "inline_owner_address_#{declaration.id}",
-              "data-toggle" => "collapse"
+
+      - if @submission.display_changeset?
+        %td.owner-address
+          - if @submission.uneditable?
+            %strong= owner.inline_address
+          - else
+            %strong
+              = link_to declaration.owner.inline_address,
+                "#address-fields-#{declaration.id}",
+                class: "editable-link",
+                id: "inline_owner_address_#{declaration.id}",
+                "data-toggle" => "collapse"
 
         .collapse.editable-fields{ id: "address-fields-#{declaration.id}" }
 
@@ -82,47 +91,55 @@
 
     %tr
       %td Owner Email
+
       - if registry_owner
-        %td
-          = registry_owner.email
-      %td.owner-email
-        %strong
-          - if @submission.uneditable?
-            = owner.email
-          - else
-            = editable_owner "Owner Email", "owner[email]",
-              owner.email, registry_owner.email, declaration,
-              "editable-email"
+        %td= registry_owner.email
+
+      - if @submission.display_changeset?
+        %td.owner-email
+          %strong
+            - if @submission.uneditable?
+              = owner.email
+            - else
+              = editable_owner "Owner Email", "owner[email]",
+                owner.email, registry_owner.email, declaration,
+                "editable-email"
 
     %tr
       %td Owner Phone Number
+
       - if registry_owner
-        %td
-          = registry_owner.phone_number
-      %td.owner-phone_number
-        %strong
-          - if @submission.uneditable?
-            = owner.phone_number
-          - else
-            = editable_owner "Owner Phone Number", "owner[phone_number]",
-              owner.phone_number, registry_owner.phone_number, declaration
+        %td= registry_owner.phone_number
+
+      - if @submission.display_changeset?
+        %td.owner-phone_number
+          %strong
+            - if @submission.uneditable?
+              = owner.phone_number
+            - else
+              = editable_owner "Owner Phone Number", "owner[phone_number]",
+                owner.phone_number, registry_owner.phone_number, declaration
     %tr
       %td Owner Nationality
+
       - if registry_owner
         %td
           = registry_owner.nationality
-      %td.owner-nationality
-        %strong
-          - if @submission.uneditable?
-            = owner.nationality
-          - else
-            = editable_owner "Owner Nationality", "owner[nationality]",
-              owner.nationality, registry_owner.nationality, declaration,
-              "editable-select", nationality_list.to_json
-    %tr
-      %td Declaration
-      - if registry_owner
-        %td n/a
-      %td.declaration{ id: "declaration_#{declaration.id}" }
-        = render partial: "declarations/status", locals: { declaration: declaration}
+
+      - if @submission.display_changeset?
+        %td.owner-nationality
+          %strong
+            - if @submission.uneditable?
+              = owner.nationality
+            - else
+              = editable_owner "Owner Nationality", "owner[nationality]",
+                owner.nationality, registry_owner.nationality, declaration,
+                "editable-select", nationality_list.to_json
+    - if @submission.display_changeset?
+      %tr
+        %td Declaration
+        - if registry_owner
+          %td n/a
+        %td.declaration{ id: "declaration_#{declaration.id}" }
+          = render partial: "declarations/status", locals: { declaration: declaration}
 %hr
