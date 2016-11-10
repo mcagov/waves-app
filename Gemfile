@@ -5,7 +5,7 @@ ruby "2.3.1"
 gem "rails", "~> 5.0.0.1"
 
 gem "auto_increment"
-gem "active_model_serializers", "~> 0.10.0"
+gem "active_model_serializers"
 gem "bootstrap-datepicker-rails"
 gem "bootstrap-editable-rails"
 gem "bootstrap-sass", "~> 3.3.6"
