@@ -46,6 +46,10 @@ class Decorators::Submission < SimpleDelegator
     registry_info.present?
   end
 
+  def display_changeset?
+    Task.new(task).builds_registry?
+  end
+
   def registry_vessel
     @registry_vessel ||=
       Submission::Vessel.new(symbolized_registry_info[:vessel_info] || {})

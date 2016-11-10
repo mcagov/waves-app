@@ -2,115 +2,145 @@
 %table.table.table-striped.table-fluid.submission-vessel
   %thead
     %th Vessel Details
+
     - if @submission.display_registry_info?
       %th Current Information
-    %th Submitted Information
+
+    - if @submission.display_changeset?
+      %th Submitted Information
   %tbody
     %tr
       %td{width: "30%"} Vessel Name
+
       - if @submission.display_registry_info?
         %td#registry-vessel-name{width: "30%"}= registry_vessel.name
-      %td#vessel-name
-        %strong
-          - if @submission.uneditable?
-            = vessel.name
-          - else
-            = editable_vessel "Vessel name", "vessel[name]",
-              vessel.name, registry_vessel.name
-          .i.fa.fa-star-o.hidden
-        .pull-right
-          = vessel.alt_names.join(', ')
+
+      - if @submission.display_changeset?
+        %td#vessel-name
+          %strong
+            - if @submission.uneditable?
+              = vessel.name
+            - else
+              = editable_vessel "Vessel name", "vessel[name]",
+                vessel.name, registry_vessel.name
+            .i.fa.fa-star-o.hidden
+          .pull-right
+            = vessel.alt_names.join(', ')
     %tr
       %td Hull Identification Number (HIN)
+
       - if @submission.display_registry_info?
         %td= registry_vessel.hin
-      %td#vessel-hin
-        %strong
-          - if @submission.uneditable?
-            = vessel.hin
-          - else
-            = editable_vessel "Hull Identification Number", "vessel[hin]",
-              vessel.hin, registry_vessel.hin
-          .i.fa.fa-star-o.hidden
+
+      - if @submission.display_changeset?
+        %td#vessel-hin
+          %strong
+            - if @submission.uneditable?
+              = vessel.hin
+            - else
+              = editable_vessel "Hull Identification Number", "vessel[hin]",
+                vessel.hin, registry_vessel.hin
+            .i.fa.fa-star-o.hidden
     %tr
       %td Make and model
+
       - if @submission.display_registry_info?
         %td= registry_vessel.make_and_model
-      %td#vessel-make_and_model
-        %strong
-          - if @submission.uneditable?
-            = vessel.make_and_model
-          - else
-            = editable_vessel "Make and model", "vessel[make_and_model]",
-              vessel.make_and_model, registry_vessel.make_and_model
+
+      - if @submission.display_changeset?
+        %td#vessel-make_and_model
+          %strong
+            - if @submission.uneditable?
+              = vessel.make_and_model
+            - else
+              = editable_vessel "Make and model", "vessel[make_and_model]",
+                vessel.make_and_model, registry_vessel.make_and_model
     %tr
       %td Length
+
       - if @submission.display_registry_info?
         %td= registry_vessel.length_in_meters
-      %td#vessel-length_in_meters
-        %strong
-          - if @submission.uneditable?
-            = vessel.length_in_meters
-          - else
-          = editable_vessel "Length", "vessel[length_in_meters]",
-            vessel.length_in_meters, registry_vessel.length_in_meters
+
+      - if @submission.display_changeset?
+        %td#vessel-length_in_meters
+          %strong
+            - if @submission.uneditable?
+              = vessel.length_in_meters
+            - else
+            = editable_vessel "Length", "vessel[length_in_meters]",
+              vessel.length_in_meters, registry_vessel.length_in_meters
     %tr
       %td Number of hulls
+
       - if @submission.display_registry_info?
         %td= registry_vessel.number_of_hulls
-      %td#vessel-number_of_hulls
-        %strong
-          - if @submission.uneditable?
-            = vessel.number_of_hulls
-          - else
-            = editable_vessel "Number of hulls", "vessel[number_of_hulls]",
-              vessel.number_of_hulls, registry_vessel.number_of_hulls,
-              "editable-select", ((1..6).to_a.to_json)
+
+      - if @submission.display_changeset?
+        %td#vessel-number_of_hulls
+          %strong
+            - if @submission.uneditable?
+              = vessel.number_of_hulls
+            - else
+              = editable_vessel "Number of hulls", "vessel[number_of_hulls]",
+                vessel.number_of_hulls, registry_vessel.number_of_hulls,
+                "editable-select", ((1..6).to_a.to_json)
     %tr
       %td Vessel type
+
       - if @submission.display_registry_info?
         %td= registry_vessel.vessel_type
-      %td#vessel-vessel_type
-        %strong
-          - if @submission.uneditable?
-            = vessel.vessel_type
-          - else
-            = editable_vessel "Vessel type", "vessel[vessel_type]",
-              vessel.vessel_type, registry_vessel.vessel_type,
-              "editable-select", vessel_type_list.to_json
+
+      - if @submission.display_changeset?
+        %td#vessel-vessel_type
+          %strong
+            - if @submission.uneditable?
+              = vessel.vessel_type
+            - else
+              = editable_vessel "Vessel type", "vessel[vessel_type]",
+                vessel.vessel_type, registry_vessel.vessel_type,
+                "editable-select", vessel_type_list.to_json
     %tr
       %td Vessel type (other)
+
       - if @submission.display_registry_info?
         %td n/a
-      %td#vessel-vessel_type_other
-        %strong
 
-          - if @submission.uneditable?
-            = vessel.vessel_type_other
-          - else
-            = editable_vessel "Vessel type_other", "vessel[vessel_type_other]",
-              vessel.vessel_type_other, registry_vessel.vessel_type_other
+      - if @submission.display_changeset?
+        %td#vessel-vessel_type_other
+          %strong
+
+            - if @submission.uneditable?
+              = vessel.vessel_type_other
+            - else
+              = editable_vessel "Vessel type_other", "vessel[vessel_type_other]",
+                vessel.vessel_type_other, registry_vessel.vessel_type_other
     %tr
       %td MMSI Number
+
       - if @submission.display_registry_info?
         %td= registry_vessel.mmsi_number
-      %td#vessel-mmsi_number
-        %strong
-          - if @submission.uneditable?
-            = vessel.mmsi_number
-          - else
-            = editable_vessel "MMSI Number", "vessel[mmsi_number]",
-              vessel.mmsi_number, registry_vessel.mmsi_number
-          .i.fa.fa-star-o.hidden
+
+      - if @submission.display_changeset?
+        %td#vessel-mmsi_number
+          %strong
+            - if @submission.uneditable?
+              = vessel.mmsi_number
+            - else
+              = editable_vessel "MMSI Number", "vessel[mmsi_number]",
+                vessel.mmsi_number, registry_vessel.mmsi_number
+            .i.fa.fa-star-o.hidden
     %tr
       %td Radio Call Sign
+
       - if @submission.display_registry_info?
         %td= registry_vessel.radio_call_sign
-      %td#vessel-radio_call_sign
-        %strong
-          - if @submission.uneditable?
-            = vessel.radio_call_sign
-          - else
-            = editable_vessel "Radio Call Sign", "vessel[radio_call_sign]",
-              vessel.radio_call_sign, registry_vessel.radio_call_sign
-          .i.fa.fa-star-o.hidden
+
+      - if @submission.display_changeset?
+        %td#vessel-radio_call_sign
+          %strong
+            - if @submission.uneditable?
+              = vessel.radio_call_sign
+            - else
+              = editable_vessel "Radio Call Sign", "vessel[radio_call_sign]",
+                vessel.radio_call_sign, registry_vessel.radio_call_sign
+            .i.fa.fa-star-o.hidden
