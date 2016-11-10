@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  if ($(".postcode-lookup").length === 0) return;
-
   $(document).on('click', '.postcode-lookup-button', function(e) {
     e.preventDefault();
   });
