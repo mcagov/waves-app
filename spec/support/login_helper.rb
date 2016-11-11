@@ -1,5 +1,6 @@
 def login(user = create(:user))
-  visit root_path(as: user)
+  sign_in user
+  visit root_path
 end
 
 def login_to_part_1(user = create(:user))
