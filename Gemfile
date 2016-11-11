@@ -73,6 +73,7 @@ group :test do
   gem "formulaic"
   gem "launchy"
   gem "pdf-reader"
+  gem "rack_session_access"
   gem "rails-controller-testing"
   gem "shoulda-matchers"
   gem "simplecov", require: false
