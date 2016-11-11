@@ -17,7 +17,7 @@
             %li
               = link_to "Target Date Calculator", target_dates_path
             %li
-              = link_to sign_out_path, method: :delete, id: "logout" do
+              = link_to destroy_user_session_path, method: :delete, id: "logout" do
                 %i.fa.fa-sign-out.pull-right
                 Log Out
         %li{style: "width: 250px"}

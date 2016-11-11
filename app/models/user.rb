@@ -1,12 +1,7 @@
 class User < ApplicationRecord
-  include Clearance::User
-
-  has_many :user_roles
-  has_many :users, through: :user_roles
-
-  def admin?
-    false
-  end
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :trackable, :validatable
 
   def to_s
     name

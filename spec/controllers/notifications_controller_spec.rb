@@ -2,12 +2,11 @@ require "rails_helper"
 
 describe NotificationsController, type: :controller do
   before do
-    allow(controller).to receive(:signed_in?).and_return(true)
-    allow(controller).to receive(:current_user).and_return(current_user)
+    sign_in claimant
   end
 
   let!(:submission) { create(:assigned_submission) }
-  let!(:current_user) { submission.claimant }
+  let!(:claimant) { submission.claimant }
 
   let(:notification_params) do
     {
@@ -34,7 +33,7 @@ describe NotificationsController, type: :controller do
     end
 
     it "sets the cancellation actioned_by" do
-      expect(assigns(:submission).cancellation.actioned_by).to eq(current_user)
+      expect(assigns(:submission).cancellation.actioned_by).to eq(claimant)
     end
 
     it "redirects to my tasks" do
@@ -62,7 +61,7 @@ describe NotificationsController, type: :controller do
     end
 
     it "sets the rejection actioned_by" do
-      expect(assigns(:submission).rejection.actioned_by).to eq(current_user)
+      expect(assigns(:submission).rejection.actioned_by).to eq(claimant)
     end
 
     it "redirects to my tasks" do
@@ -94,7 +93,7 @@ describe NotificationsController, type: :controller do
     end
 
     it "sets the referral actioned_by" do
-      expect(assigns(:submission).referral.actioned_by).to eq(current_user)
+      expect(assigns(:submission).referral.actioned_by).to eq(claimant)
     end
 
     it "redirects to my tasks" do
