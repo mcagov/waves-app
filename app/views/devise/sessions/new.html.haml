@@ -1,0 +1,12 @@
+#wrapper
+  #login.animate.form
+    %section.login_content
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        %h1 Login to Waves
+        = f.input :email, autofocus: true, label: false,
+          placeholder: "Email address", class: "form-control"
+        = f.input :password, label: false,
+          placeholder: "Password", input_html: { class: "form-control" }
+        = f.button :submit, "Secure Login", class: "btn btn-success btn-block"
+      .separator
+      %p &copy; 2016 All Rights Reserved.
