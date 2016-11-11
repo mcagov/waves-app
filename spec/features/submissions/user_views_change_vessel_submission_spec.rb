@@ -3,6 +3,7 @@ require "rails_helper"
 feature "User views change of details submission", type: :feature, js: true do
   let!(:submission) { create(:unassigned_change_registry_details_submission) }
   let!(:registered_vessel) { submission.registered_vessel }
+
   before do
     login_to_part_3
     visit submission_path(submission)
