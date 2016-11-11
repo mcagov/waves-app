@@ -2,11 +2,10 @@ require "rails_helper"
 
 describe Submission::StatesController, type: :controller do
   before do
-    allow(controller).to receive(:signed_in?).and_return(true)
-    allow(controller).to receive(:current_user).and_return(current_user)
+    sign_in claimant
   end
 
-  let!(:current_user) { create(:user) }
+  let!(:claimant) { create(:user) }
 
   context "#claim" do
     before do
@@ -16,7 +15,7 @@ describe Submission::StatesController, type: :controller do
     end
 
     it "assigns the claimant" do
-      expect(assigns[:submission].claimant).to eq(current_user)
+      expect(assigns[:submission].claimant).to eq(claimant)
     end
 
     it "renders the claim_button js" do
@@ -46,7 +45,7 @@ describe Submission::StatesController, type: :controller do
     end
 
     it "assigns the claimant" do
-      expect(assigns[:submission].claimant).to eq(current_user)
+      expect(assigns[:submission].claimant).to eq(claimant)
     end
 
     it "sets the status to assigned" do
@@ -77,7 +76,7 @@ describe Submission::StatesController, type: :controller do
 
       it "sets the notification#actioned_by" do
         expect(Notification::ApplicationApproval.first.actioned_by)
-          .to eq(current_user)
+          .to eq(claimant)
       end
     end
 
@@ -104,7 +103,7 @@ describe Submission::StatesController, type: :controller do
 
       it "sets the notification#actioned_by" do
         expect(Notification::ApplicationApproval.first.actioned_by)
-          .to eq(current_user)
+          .to eq(claimant)
       end
     end
 

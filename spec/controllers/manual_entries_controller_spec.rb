@@ -2,11 +2,10 @@ require "rails_helper"
 
 describe ManualEntriesController, type: :controller do
   before do
-    allow(controller).to receive(:signed_in?).and_return(true)
-    allow(controller).to receive(:current_user).and_return(current_user)
+    sign_in claimant
   end
 
-  let!(:current_user) { create(:user) }
+  let!(:claimant) { create(:user) }
 
   describe "#convert_to_application" do
     let!(:submission) { create(:finance_payment).submission }
@@ -54,7 +53,7 @@ describe ManualEntriesController, type: :controller do
       end
 
       it "sets the claimant (and we can assume it is assigned)" do
-        expect(assigns(:submission).claimant).to eq(current_user)
+        expect(assigns(:submission).claimant).to eq(claimant)
       end
 
       it "sets the source" do

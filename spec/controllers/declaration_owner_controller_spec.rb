@@ -2,11 +2,9 @@ require "rails_helper"
 
 describe DeclarationOwnerController, type: :controller do
   before do
-    allow(controller).to receive(:signed_in?).and_return(true)
-    allow(controller).to receive(:current_user).and_return(current_user)
+    sign_in create(:user)
   end
 
-  let!(:current_user) { create(:user) }
   let!(:submission) { create(:incomplete_submission) }
   let!(:declaration) { submission.declarations.first }
 
