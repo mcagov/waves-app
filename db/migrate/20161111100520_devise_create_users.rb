@@ -1,6 +1,9 @@
 class DeviseCreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users, id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+      ## Added by Waves
+      t.string :name
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
