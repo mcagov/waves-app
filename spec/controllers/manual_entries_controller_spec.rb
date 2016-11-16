@@ -26,6 +26,10 @@ describe ManualEntriesController, type: :controller do
       it "redirects to submission#edit" do
         expect(response).to redirect_to(edit_submission_path(submission))
       end
+
+      it "generates the ref_no" do
+        expect(submission.reload.ref_no).to be_present
+      end
     end
 
     context "for change_registry_details and there is no vessel" do
