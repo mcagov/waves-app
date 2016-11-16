@@ -7,6 +7,8 @@ describe Payment::FinancePayment do
         payment_date: Date.today,
         part: :part_1,
         task: :unknown,
+        submission_ref_no: "",
+        vessel_reg_no: "",
         payment_type: :cash,
         payment_amount: "25",
         actioned_by: create(:user)
