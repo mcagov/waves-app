@@ -9,8 +9,7 @@
         - if @prompt_success
           .alert.alert-success
             %p.text-center{style: 'font-size: 1.4em;'}
-              Application successfully saved. Write this reference number on the paperwork:
-              %strong #{@finance_payment.submission_ref_no}
+              Payment successfully recorded.
 
         = render partial: "payment", locals: { finance_payment: @finance_payment }
 
