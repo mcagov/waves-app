@@ -39,8 +39,6 @@ class TasksController < InternalPagesController
   private
 
   def submission_scope
-    Submission
-      .in_part(current_activity.part)
-      .where.not(state: [:printing, :completed])
+    Submission.in_part(current_activity.part).active
   end
 end
