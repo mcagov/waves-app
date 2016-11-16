@@ -17,7 +17,7 @@ class Builders::SubmissionBuilder
       @submission.part ||= :part_3
       @submission.task ||= :new_registration
       @submission.source ||= :online
-      @submission.ref_no ||= RefNo.generate
+      @submission.ref_no ||= RefNo.generate_for(@submission)
     end
 
     def build_registry_info

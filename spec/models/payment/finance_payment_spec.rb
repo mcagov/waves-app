@@ -21,8 +21,8 @@ describe Payment::FinancePayment do
       expect(finance_payment.payment.amount).to eq(2500)
     end
 
-    it "has a submission ref_no" do
-      expect(finance_payment.submission_ref_no).to be_present
+    it "does not have a submission ref_no" do
+      expect(finance_payment.submission_ref_no).to be_blank
     end
 
     it "sets the officer_intervention_required flag" do

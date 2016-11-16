@@ -1,7 +1,7 @@
 class RefNo
   class << self
-    def generate
-      build_unique
+    def generate_for(submission)
+      build_unique unless submission.officer_intervention_required?
     end
 
     private
