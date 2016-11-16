@@ -29,9 +29,9 @@ describe Builders::RegistryBuilder do
     end
 
     context "with a task that changes registry details" do
-      let!(:change_details_submission) do
+      let!(:change_vessel_submission) do
         create(:assigned_submission,
-               task: :change_registry_details,
+               task: :change_vessel,
                registered_vessel: registered_vessel,
                changeset: {
                  vessel_info: build(:submission_vessel, name: "DON DINGHY"),
@@ -41,7 +41,7 @@ describe Builders::RegistryBuilder do
       end
 
       before do
-        described_class.create(change_details_submission)
+        described_class.create(change_vessel_submission)
         registered_vessel.reload
       end
 

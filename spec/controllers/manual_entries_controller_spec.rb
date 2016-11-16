@@ -32,8 +32,8 @@ describe ManualEntriesController, type: :controller do
       end
     end
 
-    context "for change_registry_details and there is no vessel" do
-      let(:task) { :change_registry_details }
+    context "for change_vessel and there is no vessel" do
+      let(:task) { :change_vessel }
 
       it "render manual_entries#edit" do
         expect(response).to render_template(:edit)
@@ -69,7 +69,7 @@ describe ManualEntriesController, type: :controller do
   describe "#update" do
     let!(:submission) { create(:submission, state: :assigned) }
 
-    context "for a valid change_registry_details" do
+    context "for a valid change_vessel" do
       let!(:registered_vessel) { create(:registered_vessel) }
 
       before do
@@ -77,7 +77,7 @@ describe ManualEntriesController, type: :controller do
               params: {
                 id: submission.id,
                 submission: {
-                  task: :change_registry_details,
+                  task: :change_vessel,
                   vessel_reg_no: registered_vessel.reg_no } }
       end
 

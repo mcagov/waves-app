@@ -5,7 +5,7 @@ describe "User converts manual entry", type: :feature, js: true do
     create(
       :finance_payment,
       part: :part_3,
-      task: :change_registry_details,
+      task: :duplicate_certificate,
       vessel_reg_no: create(:registered_vessel, name: "MY BOAT").reg_no,
       vessel_name: "MY BOAT", applicant_name: "BOB")
 
@@ -18,7 +18,7 @@ describe "User converts manual entry", type: :feature, js: true do
     click_on("My Tasks")
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", text: "Change of Registry Details")
+    expect(page).to have_css("h1", text: "Duplicate Certificate of Registry")
 
     within("#actions") do
       click_on("Convert to Application")
@@ -30,7 +30,7 @@ describe "User converts manual entry", type: :feature, js: true do
   scenario "when they have not claimed it they can't 'convert' it" do
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", text: "Change of Registry Details")
+    expect(page).to have_css("h1", text: "Duplicate Certificate of Registry")
 
     within("#finance_payment") do
       expect(page).to have_text("Part I")

@@ -13,7 +13,7 @@ class Task
 
   def prints_certificate?
     [
-      :new_registration, :change_registry_details, :renewal,
+      :new_registration, :change_owner, :change_vessel, :renewal,
       :duplicate_certificate
     ].include?(@key)
   end
@@ -23,13 +23,13 @@ class Task
   end
 
   def renews_certificate?
-    [:change_registry_details, :renewal]
+    [:change_owner, :change_vessel, :renewal]
       .include?(@key)
   end
 
   def builds_registry?
     [
-      :change_registry_details, :change_address,
+      :change_owner, :change_vessel, :change_address,
       :new_registration, :renewal].include?(@key)
   end
 
@@ -38,7 +38,7 @@ class Task
       [
         ["Duplicate Certificate of Registry", :duplicate_certificate],
         ["Change of Ownership", :change_owner],
-        ["Change of Vessel Details", :change_details],
+        ["Change of Vessel Details", :change_vessel],
         ["Name Reservation", :reserve_name],
         ["New Registration", :new_registration],
         ["Registration Renewal", :renewal],
@@ -48,8 +48,9 @@ class Task
 
     def task_types
       [
-        ["Change of Registry Details", :change_registry_details],
         ["Change of Address", :change_address],
+        ["Change of Ownership", :change_owner],
+        ["Change of Vessel Details", :change_vessel],
         ["Duplicate Certificate of Registry", :duplicate_certificate],
         ["Name Reservation", :reserve_name],
         ["New Registration", :new_registration],
