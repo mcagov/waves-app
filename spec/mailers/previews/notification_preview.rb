@@ -13,6 +13,12 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def payment_receipt
+    NotificationMailer.payment_receipt(
+      "Email subject", email, name, "", "Officer Bob"
+    )
+  end
+
   def application_approval
     NotificationMailer.application_approval(
       "Email subject", email, name, "SRXXXXXX", "Officer Bob"

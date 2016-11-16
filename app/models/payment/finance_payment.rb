@@ -1,6 +1,8 @@
 class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
+  delegate :submission, to: :payment
+
   after_create :build_payment_and_submission
 
   has_one :payment, as: :remittance
@@ -12,6 +14,9 @@ class Payment::FinancePayment < ApplicationRecord
   validates :payment_amount,
             presence: true, numericality: { greater_than: 0 }
 
+  validate :registered_vessel_exists
+  validate :submission_ref_no_exists
+
   PAYMENT_TYPES = [
     ["Bacs", :bacs],
     ["Cash", :cash],
@@ -21,24 +26,46 @@ class Payment::FinancePayment < ApplicationRecord
     ["Postal Order", :postal_order],
   ].freeze
 
-  def submission_ref_no
-    submission.ref_no if submission
-  end
-
-  def submission
-    payment.submission
-  end
-
   private
+
+  def registered_vessel_exists
+    return if vessel_reg_no.blank?
+
+    unless Register::Vessel.in_part(part).find_by(reg_no: vessel_reg_no)
+      errors.add(
+        :vessel_reg_no,
+        "was not found in the #{Activity.new(part)} Registry")
+    end
+  end
+
+  def submission_ref_no_exists
+    return if submission_ref_no.blank?
+
+    unless Submission.in_part(part).find_by(ref_no: submission_ref_no)
+      errors.add(
+        :submission_ref_no,
+        "is not a current #{Activity.new(part)} Reference Number")
+    end
+  end
 
   def build_payment_and_submission
     Payment.create(
       amount: payment_amount.to_f * 100,
       remittance: self,
-      submission: Submission.create(part: part,
-                                    task: task,
-                                    vessel_reg_no: vessel_reg_no,
-                                    officer_intervention_required: true,
-                                    source: :manual_entry))
+      submission: build_submission)
+  end
+
+  def build_submission
+    if submission_ref_no
+      Submission.in_part(part).active.find_by(ref_no: submission_ref_no)
+
+    else
+      Submission.create(
+        part: part,
+        task: task,
+        vessel_reg_no: vessel_reg_no,
+        officer_intervention_required: true,
+        source: :manual_entry)
+    end
   end
 end

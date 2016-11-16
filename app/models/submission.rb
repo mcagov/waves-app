@@ -5,7 +5,6 @@ class Submission < ApplicationRecord
   include Submission::StateMachine
 
   validates :part, presence: true
-  validates :ref_no, presence: true
   validates :source, presence: true
   validates :task, presence: true
 
@@ -15,13 +14,15 @@ class Submission < ApplicationRecord
               message: "must be selected" },
             unless: :officer_intervention_required?
 
+  validate :ref_no, unless: :officer_intervention_required?
+
   validate :registered_vessel_exists,
            unless: :officer_intervention_required?
 
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
-
+  scope :active, -> { where.not(state: [:printing, :completed]) }
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
@@ -106,7 +107,9 @@ class Submission < ApplicationRecord
   def registered_vessel_exists
     if Policies::Submission.registered_vessel_required?(self)
       unless registered_vessel
-        errors.add(:vessel_reg_no, "was not found in the Registry")
+        errors.add(
+          :vessel_reg_no,
+          "was not found in the #{Activity.new(part)} Registry")
       end
     end
   end

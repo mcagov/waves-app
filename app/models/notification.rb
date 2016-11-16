@@ -6,10 +6,9 @@ class Notification < ApplicationRecord
 
   after_create :send_email
 
-  validates :recipient_name, presence: true
-  validates :recipient_email, presence: true
-
   def send_email
+    return unless deliverable?
+
     NotificationMailer.delay.send(
       email_template,
       email_subject,
@@ -26,5 +25,9 @@ class Notification < ApplicationRecord
 
   def email_subject
     self.class.to_s.demodulize
+  end
+
+  def deliverable?
+    recipient_name.present? && recipient_email.present?
   end
 end

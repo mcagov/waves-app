@@ -1,11 +1,7 @@
 %table.table.table-striped#finance_payment
   %tbody
     %tr
-      %td{width: '50%'} Application Reference No
-      %td
-        %strong= finance_payment.submission_ref_no
-    %tr
-      %td Payment Date
+      %td{width: '50%'} Receipt Date
       %td
         %strong= finance_payment.payment_date
     %tr
@@ -13,9 +9,13 @@
       %td
         %strong= finance_payment.part_description
     %tr
-      %td Application Type
+      %td Task Type
       %td
         %strong= finance_payment.task_description
+    %tr
+      %td Reference Number
+      %td
+        %strong= finance_payment.submission_ref_no
     %tr
       %td Official Number
       %td
@@ -28,10 +28,6 @@
       %td Payment Type
       %td
         %strong= finance_payment.payment_type_description
-    %tr
-      %td Service Level
-      %td
-        %strong= finance_payment.service_level_description
     %tr
       %td Fee Amount
       %td

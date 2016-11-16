@@ -24,8 +24,8 @@ describe Submission::ApplicationProcessor do
                task: task, registered_vessel: create(:registered_vessel))
       end
 
-      context "change_registry_details" do
-        let(:task) { :change_registry_details }
+      context "change_vessel" do
+        let(:task) { :change_vessel }
 
         before do
           expect_registry_builder

@@ -11,9 +11,9 @@ describe Task do
       it { expect(subject).to eq("New Registration") }
     end
 
-    context "of a change_registry_details" do
-      let(:key) { :change_registry_details }
-      it { expect(subject).to eq("Change of Registry Details") }
+    context "of a change_vessel" do
+      let(:key) { :change_vessel }
+      it { expect(subject).to eq("Change of Vessel Details") }
     end
   end
 
@@ -42,6 +42,22 @@ describe Task do
     context "for a transcript" do
       let(:key) { :transcript }
       it { expect(subject).to be_falsey }
+    end
+  end
+
+  context ".finance_task_types" do
+    it do
+      [:change_address, :closure].each do |task_type|
+        expect(Task.finance_task_types).not_to include(task_type)
+      end
+    end
+  end
+
+  context ".default_task_types" do
+    it do
+      [:reserve_name, :unknown].each do |task_type|
+        expect(Task.default_task_types).not_to include(task_type)
+      end
     end
   end
 end

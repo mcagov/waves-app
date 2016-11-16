@@ -28,6 +28,7 @@ class ManualEntriesController < InternalPagesController
 
   def convert_to_application
     @submission.officer_intervention_required = false
+    @submission.ref_no = RefNo.generate_for(@submission)
 
     if @submission.save
       redirect_to_edit_or_show

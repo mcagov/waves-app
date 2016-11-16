@@ -45,8 +45,8 @@ end
 end
 
 2.times do
-  Task.task_types.reject do |task|
-     [:reserve_name, :new_registration].include?(task[1])
+  Task.default_task_types.reject do |task|
+     [:new_registration].include?(task[1])
   end.each do |task|
 
     submission = Submission.create!(
