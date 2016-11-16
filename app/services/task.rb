@@ -4,7 +4,7 @@ class Task
   end
 
   def description
-    Task.manual_entry_task_types.find { |t| t[1] == @key }[0]
+    Task.task_types.find { |t| t[1] == @key }[0]
   end
 
   def payment_required?
@@ -34,8 +34,16 @@ class Task
   end
 
   class << self
-    def manual_entry_task_types
-      task_types << ["Unknown", :unknown]
+    def receipt_entry_task_types
+      [
+        ["Duplicate Certificate of Registry", :duplicate_certificate],
+        ["Change of Ownership", :change_owner],
+        ["Change of Vessel Details", :change_details],
+        ["Name Reservation", :reserve_name],
+        ["New Registration", :new_registration],
+        ["Registration Renewal", :renewal],
+        ["Transcript Request", :transcript],
+        ["Unkown", :unknown]]
     end
 
     def task_types
