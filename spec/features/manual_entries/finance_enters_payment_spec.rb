@@ -11,7 +11,7 @@ describe "Finance enters a payment", type: :feature do
 
     fill_in("Payment Date", with: "12/12/2012")
     select("Part III", from: "Part of Register")
-    select("New Registration", from: "Application Type")
+    select("New Registration", from: "Task Type")
     fill_in("Official Number", with: "OFFICIAL_NO")
     fill_in("Vessel Name", with: "MY BOAT")
 

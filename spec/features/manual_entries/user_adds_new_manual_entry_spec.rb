@@ -7,7 +7,7 @@ describe "User adds a new manual entry", type: :feature do
   end
 
   scenario "for a new registration" do
-    select("New Registration", from: "Application Type")
+    select("New Registration", from: "Task Type")
     click_on("Save Application")
 
     expect(page).to have_css(".breadcrumb", text: "My Tasks")
@@ -42,7 +42,7 @@ describe "User adds a new manual entry", type: :feature do
   end
 
   scenario "for a change of vessel details with an invalid official number" do
-    select("Change of Registry Details", from: "Application Type")
+    select("Change of Registry Details", from: "Task Type")
     fill_in("Official Number", with: "Bob")
     click_on("Save Application")
 
@@ -50,7 +50,7 @@ describe "User adds a new manual entry", type: :feature do
   end
 
   scenario "for a change of vessel details with a valid official number" do
-    select("Change of Registry Details", from: "Application Type")
+    select("Change of Registry Details", from: "Task Type")
     fill_in("Official Number", with: create(:registered_vessel).reg_no)
     click_on("Save Application")
 
