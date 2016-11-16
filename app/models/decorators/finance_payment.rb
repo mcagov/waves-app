@@ -11,7 +11,7 @@ class Decorators::FinancePayment < SimpleDelegator
   end
 
   def task_description
-    Task.receipt_entry_task_types.find { |t| t[1] == task.to_sym }[0]
+    Task.new(task).description
   end
 
   def formatted_payment_amount

@@ -11,7 +11,7 @@ feature "User views change of details submission", type: :feature, js: true do
 
   scenario "rendering 3 column table for vessel and owners" do
     within("h1") do
-      expect(page).to have_content("Change of Registry Details ID: ")
+      expect(page).to have_content("Change of Vessel Details ID: ")
     end
 
     click_link("Vessel Information")
