@@ -49,34 +49,59 @@ describe Payment::FinancePayment do
     let!(:finance_payment) do
       described_class.create(
         payment_date: Date.today,
+        part: submission.part,
+        submission_ref_no: submission.ref_no,
+        task: :unknown,
         payment_amount: "25",
-        actioned_by: create(:user),
-        submission_ref_no: submission.ref_no
+        actioned_by: create(:user)
       )
     end
 
-    it "does not change the state of the existing submission" do
-      expect(submission.reload.current_state).to eq(:assigned)
+    it "assigns the finance_payment to the existing submission" do
+      expect(finance_payment.reload.submission).to eq(submission)
+    end
+  end
+
+  context "for a registered (when vessel_reg_no is valid)" do
+    let(:registered_vessel) { create(:registered_vessel) }
+
+    let!(:finance_payment) do
+      described_class.create(
+        payment_date: Date.today,
+        part: registered_vessel.part,
+        vessel_reg_no: registered_vessel.reg_no,
+        payment_amount: "25",
+        actioned_by: create(:user),
+        task: :change_vessel
+      )
     end
 
-    it "does not set the officer_intervention_required flag" do
-      expect(submission.reload.officer_intervention_required).to be_falsey
+    it "creates an unassigned submission" do
+      expect(finance_payment.submission.current_state).to eq(:unassigned)
+    end
+
+    it "sets the officer_intervention_required flag" do
+      expect(finance_payment.submission.officer_intervention_required)
+        .to be_truthy
     end
   end
 
   context "with invalid params" do
     let!(:finance_payment) do
       described_class.create(
-        part: nil,
+        part: :part_1,
         payment_amount: "bob",
-        task: nil
+        task: nil,
+        vessel_reg_no: "nonexistent",
+        submission_ref_no: "nonexistent"
       )
     end
 
     it { expect(finance_payment.errors).to include(:payment_date) }
-    it { expect(finance_payment.errors).to include(:part) }
     it { expect(finance_payment.errors).to include(:payment_amount) }
     it { expect(finance_payment.errors).to include(:task) }
+    it { expect(finance_payment.errors).to include(:vessel_reg_no) }
+    it { expect(finance_payment.errors).to include(:submission_ref_no) }
 
     it "does not create the payment" do
       expect(finance_payment.payment).to be_nil

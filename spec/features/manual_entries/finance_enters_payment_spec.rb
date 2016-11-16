@@ -13,8 +13,8 @@ describe "Finance enters a payment", type: :feature do
     fill_in("Receipt Date", with: "12/12/2012")
     select("New Registration", from: "Task Type")
 
-    fill_in("Reference Number", with: "REF_NO")
-    fill_in("Official Number", with: "OFFICIAL_NO")
+    fill_in("Reference Number", with: "")
+    fill_in("Official Number", with: "")
     fill_in("Vessel Name", with: "MY BOAT")
 
     select("Cheque", from: "Payment Type")
@@ -33,8 +33,6 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("12/12/2012")
       expect(page).to have_text("Part III")
       expect(page).to have_text("New Registration")
-      expect(page).to have_text("REF_NO")
-      expect(page).to have_text("OFFICIAL_NO")
       expect(page).to have_text("MY BOAT")
       expect(page).to have_text("Cheque")
       expect(page).to have_text("25.00")

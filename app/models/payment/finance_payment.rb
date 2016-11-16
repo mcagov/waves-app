@@ -14,6 +14,9 @@ class Payment::FinancePayment < ApplicationRecord
   validates :payment_amount,
             presence: true, numericality: { greater_than: 0 }
 
+  validate :registered_vessel_exists
+  validate :submission_ref_no_exists
+
   PAYMENT_TYPES = [
     ["Bacs", :bacs],
     ["Cash", :cash],
@@ -24,6 +27,26 @@ class Payment::FinancePayment < ApplicationRecord
   ].freeze
 
   private
+
+  def registered_vessel_exists
+    return if vessel_reg_no.blank?
+
+    unless Register::Vessel.in_part(part).find_by(reg_no: vessel_reg_no)
+      errors.add(
+        :vessel_reg_no,
+        "was not found in the #{Activity.new(part)} Registry")
+    end
+  end
+
+  def submission_ref_no_exists
+    return if submission_ref_no.blank?
+
+    unless Submission.in_part(part).find_by(ref_no: submission_ref_no)
+      errors.add(
+        :submission_ref_no,
+        "is not a current #{Activity.new(part)} Reference Number")
+    end
+  end
 
   def build_payment_and_submission
     Payment.create(
