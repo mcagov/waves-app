@@ -47,6 +47,14 @@ class NotificationMailer < ApplicationMailer
     mail(to: email, subject: subject)
   end
 
+  def payment_receipt(subject, email, name, body, actioned_by)
+    @body = body
+    @name = name
+    @actioned_by = actioned_by
+
+    mail(to: email, subject: subject)
+  end
+
   private
 
   def govuk_url(path)

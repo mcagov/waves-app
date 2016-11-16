@@ -41,5 +41,7 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("bob@example.com")
       expect(page).to have_text("bits and bobs")
     end
+
+    expect(Notification::PaymentReceipt.count).to eq(1)
   end
 end

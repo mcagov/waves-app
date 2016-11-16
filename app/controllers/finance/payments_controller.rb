@@ -14,6 +14,8 @@ class Finance::PaymentsController < InternalPagesController
     @finance_payment.actioned_by = current_user
 
     if @finance_payment.save
+      Notification::PaymentReceipt.create(notification_params)
+
       redirect_to finance_payment_path(@finance_payment, prompt: :success)
     else
       render :new
@@ -33,5 +35,14 @@ class Finance::PaymentsController < InternalPagesController
       :payment_date, :part, :task, :vessel_reg_no, :vessel_name,
       :service_level, :payment_type, :payment_amount, :receipt_no,
       :applicant_name, :applicant_email, :documents_received)
+  end
+
+  def notification_params
+    {
+      notifiable: @finance_payment,
+      actioned_by: current_user,
+      recipient_email: @finance_payment.applicant_email,
+      recipient_name: @finance_payment.applicant_name,
+    }
   end
 end
