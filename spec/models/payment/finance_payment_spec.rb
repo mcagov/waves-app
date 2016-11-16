@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Payment::FinancePayment do
-  context "with valid params" do
+  context "for a new application" do
     let!(:finance_payment) do
       described_class.create(
         payment_date: Date.today,
@@ -43,25 +43,24 @@ describe Payment::FinancePayment do
     end
   end
 
-  context "for a change_registry_details submission" do
+  context "for an existing application (when submission_ref_no is valid)" do
+    let(:submission) { create(:assigned_submission) }
+
     let!(:finance_payment) do
       described_class.create(
         payment_date: Date.today,
-        part: :part_1,
-        task: :change_registry_details,
-        vessel_reg_no: create(:registered_vessel).reg_no,
-        payment_type: :cash,
-        payment_amount: "15",
-        actioned_by: create(:user)
+        payment_amount: "25",
+        actioned_by: create(:user),
+        submission_ref_no: submission.ref_no
       )
     end
 
-    it "sets the state to unassigned so it is ready to be claimed" do
-      expect(finance_payment.submission).to be_unassigned
+    it "does not change the state of the existing submission" do
+      expect(submission.reload.current_state).to eq(:assigned)
     end
 
-    it "sets the target date" do
-      expect(finance_payment.submission.target_date).to be_present
+    it "does not set the officer_intervention_required flag" do
+      expect(submission.reload.officer_intervention_required).to be_falsey
     end
   end
 

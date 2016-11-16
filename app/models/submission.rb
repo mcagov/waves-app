@@ -22,7 +22,7 @@ class Submission < ApplicationRecord
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
-
+  scope :active, lambda { where.not(state: [:printing, :completed]) }
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }

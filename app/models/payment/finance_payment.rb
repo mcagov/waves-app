@@ -1,6 +1,8 @@
 class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
+  delegate :submission, to: :payment
+
   after_create :build_payment_and_submission
 
   has_one :payment, as: :remittance
@@ -27,10 +29,20 @@ class Payment::FinancePayment < ApplicationRecord
     Payment.create(
       amount: payment_amount.to_f * 100,
       remittance: self,
-      submission: Submission.create(part: part,
-                                    task: task,
-                                    vessel_reg_no: vessel_reg_no,
-                                    officer_intervention_required: true,
-                                    source: :manual_entry))
+      submission: build_submission)
+  end
+
+  def build_submission
+    if submission_ref_no
+      Submission.in_part(part).active.find_by(ref_no: submission_ref_no)
+
+    else
+      Submission.create(
+        part: part,
+        task: task,
+        vessel_reg_no: vessel_reg_no,
+        officer_intervention_required: true,
+        source: :manual_entry)
+    end
   end
 end
