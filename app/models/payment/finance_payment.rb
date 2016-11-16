@@ -29,7 +29,7 @@ class Payment::FinancePayment < ApplicationRecord
   private
 
   def registered_vessel_exists
-    return if vessel_reg_no.blank?
+    return unless vessel_reg_no.present?
 
     unless Register::Vessel.in_part(part).find_by(reg_no: vessel_reg_no)
       errors.add(
@@ -39,7 +39,7 @@ class Payment::FinancePayment < ApplicationRecord
   end
 
   def submission_ref_no_exists
-    return if submission_ref_no.blank?
+    return unless submission_ref_no.present?
 
     unless Submission.in_part(part).find_by(ref_no: submission_ref_no)
       errors.add(
@@ -56,7 +56,7 @@ class Payment::FinancePayment < ApplicationRecord
   end
 
   def build_submission
-    if submission_ref_no
+    if submission_ref_no.present?
       Submission.in_part(part).active.find_by(ref_no: submission_ref_no)
 
     else
