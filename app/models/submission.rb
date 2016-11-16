@@ -107,7 +107,9 @@ class Submission < ApplicationRecord
   def registered_vessel_exists
     if Policies::Submission.registered_vessel_required?(self)
       unless registered_vessel
-        errors.add(:vessel_reg_no, "was not found in the Registry")
+        errors.add(
+          :vessel_reg_no,
+          "was not found in the #{Activity.new(part)} Registry")
       end
     end
   end
