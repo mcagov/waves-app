@@ -1,7 +1,7 @@
 .row
   .col-sm-12
     %h1{style: "margin-top: 0px !important;"}
-      Finance: Recent Payments
+      Finance: Recent Receipt Entries
 .row
   .col-md-12
     .x_panel
@@ -9,10 +9,10 @@
         %table#finance-payments.table.table-striped.table-hover
           %thead
             %tr
-              %th Payment Date
+              %th Receipt Date
               %th Part of Register
+              %th Task Type
               %th Payment Type
-              %th Application Type
               %th Fee Amount
               %th Fee Receipt Number
           %tbody
@@ -24,4 +24,4 @@
               %td= finance_payment.task_description
               %td= finance_payment.payment_type_description
               %td= finance_payment.formatted_payment_amount
-              %td= finance_payment.payment.submission.ref_no
+              %td= finance_payment.receipt_no

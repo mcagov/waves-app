@@ -2,7 +2,7 @@
   .row
     .col-sm-12
       %h1{style: "margin-top: 0px !important;"}
-        Finance: Record Payment
+        Finance: Receipt Entry
   .row
     .col-md-12
       .x_panel
@@ -11,33 +11,33 @@
           .clearfix
         .x_content
           .row
-            .col-md-3
-              = f.input :payment_date, as: :string, input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
-          .row
-            .col-md-3
+            .col-md-4
+              = f.input :payment_date, as: :string, label: "Receipt Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
+            .col-md-4
               = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
-            .col-md-3
-              = f.input :task, collection: Task.manual_entry_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
-            .col-md-3
+            .col-md-4
+              = f.input :task, collection: Task.receipt_entry_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
+          .row
+            .col-md-4
+              = f.input :submission_ref_no, label: "Reference Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
+            .col-md-4
               = f.input :vessel_reg_no, label: "Official Number <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
-            .col-md-3
+            .col-md-4
               = f.input :vessel_name, label: "Vessel Name <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
           .row
-            .col-md-3
-              = f.input :service_level, collection: ServiceLevel::SERVICE_LEVEL_TYPES, as: :select, include_blank: false,input_html: { class: "select2 select2_single" }
-            .col-md-3
+            .col-md-4
               = f.input :payment_type, collection: Payment::FinancePayment::PAYMENT_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
-            .col-md-3
+            .col-md-4
               = f.input :payment_amount, as: :currency
-            .col-md-3
+            .col-md-4
               = f.input :receipt_no, input_html: { class: "upcase" }
           .row
-            .col-md-6
+            .col-md-4
               = f.input :applicant_name, input_html: { class: "upcase" }
-            .col-md-6
+            .col-md-4
               = f.input :applicant_email
           .row
-            .col-md-12
+            .col-md-8
               = f.input :documents_received
 
   .row.no-print

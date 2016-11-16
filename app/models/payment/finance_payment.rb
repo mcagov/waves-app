@@ -21,14 +21,6 @@ class Payment::FinancePayment < ApplicationRecord
     ["Postal Order", :postal_order],
   ].freeze
 
-  def submission_ref_no
-    submission.ref_no if submission
-  end
-
-  def submission
-    payment.submission
-  end
-
   private
 
   def build_payment_and_submission
