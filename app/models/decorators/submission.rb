@@ -30,7 +30,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def previous_update_by
-    versions.last.whodunnit
+    ""
   end
 
   def display_registry_info?
