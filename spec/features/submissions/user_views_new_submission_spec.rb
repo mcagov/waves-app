@@ -18,7 +18,7 @@ feature "User views new submission", type: :feature, js: true do
 
     click_link("Payment")
     within("#payment") do
-      expect(page).to have_text("Worldpay Order Code")
+      expect(page).to have_text("Amount £ 25.00")
     end
 
     click_link("History")

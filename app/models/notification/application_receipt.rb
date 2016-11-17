@@ -4,7 +4,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def additional_params
-    [vessel_name, world_pay_transaction_no, submission_ref_no]
+    [vessel_name, "", submission_ref_no]
   end
 
   def email_subject
@@ -12,10 +12,6 @@ class Notification::ApplicationReceipt < Notification
   end
 
   private
-
-  def world_pay_transaction_no
-    notifiable.payment.remittance.wp_order_code
-  end
 
   def submission_ref_no
     notifiable.ref_no
