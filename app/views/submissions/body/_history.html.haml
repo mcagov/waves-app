@@ -2,17 +2,14 @@
   %thead
     %th Date
     %th Activity
+    %th Officer
   %tbody
-    %tr
-      %td= @submission.updated_at.in_time_zone.to_s(:date_time)
-      %td= action_for(@submission, @submission.claimant)
-    - @submission.versions.reverse.each do |version|
-      - if submission = version.reify
-        - unless submission.incomplete?
-          %tr
-            %td= submission.updated_at.in_time_zone.to_s(:date_time)
-            %td= action_for(submission, version.whodunnit)
+    - WorkLog.activities_for(@submission).each do |activity|
+      %tr
+        %td= activity.actioned_at.in_time_zone.to_s(:date_time)
+        %td= activity.description
+        %td= activity.actioned_by
     %tr
       %td= @submission.created_at.in_time_zone.to_s(:date_time)
       %td Application started
-
+      %td
