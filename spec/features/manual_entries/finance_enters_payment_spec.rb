@@ -13,8 +13,8 @@ describe "Finance enters a payment", type: :feature do
     fill_in("Fee Receipt Date", with: "12/12/2012")
     select("New Registration", from: "Task Type")
 
-    fill_in("Reference Number", with: "")
-    fill_in("Official Number", with: "")
+    fill_in("Reference No.", with: "")
+    fill_in("Official No.", with: "")
     fill_in("Vessel Name", with: "MY BOAT")
 
     select("Cheque", from: "Payment Type")

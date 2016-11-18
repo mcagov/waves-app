@@ -9,7 +9,7 @@ describe "User edits top-level submission details (an edge case)" do
 
   scenario "when the part is not changed" do
     select("Change of Address", from: "Task Type")
-    fill_in("Official Number", with: @vessel.reg_no)
+    fill_in("Official No.", with: @vessel.reg_no)
     click_on("Save")
 
     expect(page).to have_css("h1", text: "Change of Address")
