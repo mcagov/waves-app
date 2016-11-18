@@ -7,6 +7,7 @@ describe Builders::WorldPayPaymentBuilder do
         submission_id: create(:submission).id,
         wp_amount: "25.00",
         customer_ip: "127.0.0.1",
+        wp_order_code: "ORDER_CODE",
       }
     end
 
@@ -18,8 +19,12 @@ describe Builders::WorldPayPaymentBuilder do
       expect(subject.amount).to eq(25.00)
     end
 
-    it "has the expected remittance attributes" do
+    it "has the expected customer_ip" do
       expect(subject.remittance.customer_ip).to eq("127.0.0.1")
+    end
+
+    it "has the expected wp_order_code" do
+      expect(subject.remittance.wp_order_code).to eq("ORDER_CODE")
     end
   end
 end
