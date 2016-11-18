@@ -1,15 +1,12 @@
-%h1 Finance: Payment Recorded
+%h1 Finance: Fees Entered
 .row
   .col-md-12
     .x_panel
-      .x_title
-        %h2 Finance & Processing Information
-        .clearfix
       .x_content
         - if @prompt_success
           .alert.alert-success
             %p.text-center{style: 'font-size: 1.4em;'}
-              Payment successfully recorded.
+              Fee entry successfully recorded.
 
         = render partial: "payment", locals: { finance_payment: @finance_payment }
 

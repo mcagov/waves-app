@@ -22,12 +22,14 @@ describe "Finance enters a payment", type: :feature do
     fill_in("Fee Receipt Number", with: "Fee receipt no")
 
     fill_in("Applicant Name", with: "BOB")
-    fill_in("Applicant Email", with: "bob@example.com")
+    fill_in("Applicant's Email Address", with: "bob@example.com")
     fill_in("Documents Received", with: "bits and bobs")
 
     click_on("Save Application")
 
-    expect(page).to have_css(".alert", text: "Payment successfully recorded")
+    expect(page).to have_css(
+      ".alert",
+      text: "Fee entry successfully recorded")
 
     within("#finance_payment") do
       expect(page).to have_text("12/12/2012")

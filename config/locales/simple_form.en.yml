@@ -20,7 +20,7 @@ en:
         payment_amount: Fee Amount
         receipt_no: Fee Receipt Number
         applicant_name: Applicant Name
-        applicant_email: Applicant Email
+        applicant_email: Applicant's Email Address
         documents_received: Documents Received
       submission:
         part: Part of Register
