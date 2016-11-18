@@ -12,7 +12,9 @@ class Builders::WorldPayPaymentBuilder
     private
 
     def create_world_pay_payment
-      Payment::WorldPay.create(customer_ip: @wp_params[:customer_ip])
+      Payment::WorldPay.create(
+        customer_ip: @wp_params[:customer_ip],
+        wp_order_code: @wp_params[:wp_order_code])
     end
   end
 end

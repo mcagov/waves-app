@@ -19,7 +19,7 @@ module Api
       def create_payment_params
         data = params.require("data")
         data.require(:attributes).permit(
-          :submission_id, :wp_amount, :customer_ip)
+          :submission_id, :wp_amount, :customer_ip, :wp_order_code)
       end
 
       def create_application_receipt_notification
