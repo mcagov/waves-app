@@ -7,7 +7,7 @@ describe "Finance enters a payment", type: :feature do
 
   scenario "in its simplest form" do
     expect(page).to have_css(".active-register", text: "Active: Finance")
-    expect(page).to have_css("h1", text: "Finance: Receipt Entry")
+    expect(page).to have_css("h1", text: "Finance: Fee Entry")
 
     select("Part III", from: "Part of Register")
     fill_in("Receipt Date", with: "12/12/2012")
