@@ -15,7 +15,7 @@ class AccountLedger
   end
 
   def amount_paid
-    @submission.payments.sum(&:amount).to_i
+    @submission.payments.map { |payment| payment.amount.to_i }.inject(:+)
   end
 
   def awaiting_payment?
