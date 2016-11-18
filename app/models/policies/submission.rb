@@ -14,7 +14,7 @@ class Policies::Submission
     def approvable?(submission)
       @submission = submission
 
-      return false unless @submission.declarations.incomplete.empty?
+      return false unless @submission.incomplete_declarations.empty?
       return false if AccountLedger.new(@submission).awaiting_payment?
       true
     end
