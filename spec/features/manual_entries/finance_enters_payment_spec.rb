@@ -7,17 +7,17 @@ describe "Finance enters a payment", type: :feature do
 
   scenario "in its simplest form" do
     expect(page).to have_css(".active-register", text: "Active: Finance")
-    expect(page).to have_css("h1", text: "Finance: Receipt Entry")
+    expect(page).to have_css("h1", text: "Finance: Fee Entry")
 
-    select("Part III", from: "Part of Register")
-    fill_in("Receipt Date", with: "12/12/2012")
-    select("New Registration", from: "Task Type")
+    select("Part III", from: "Part of the Register")
+    fill_in("Fee Receipt Date", with: "12/12/2012")
+    select("New Registration", from: "Application Type")
 
-    fill_in("Reference Number", with: "")
-    fill_in("Official Number", with: "")
+    fill_in("Reference No.", with: "")
+    fill_in("Official No.", with: "")
     fill_in("Vessel Name", with: "MY BOAT")
 
-    select("Cheque", from: "Payment Type")
+    select("CHQ", from: "Payment Type")
     fill_in("Fee Amount", with: "25")
     fill_in("Fee Receipt Number", with: "Fee receipt no")
 
@@ -34,7 +34,7 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("Part III")
       expect(page).to have_text("New Registration")
       expect(page).to have_text("MY BOAT")
-      expect(page).to have_text("Cheque")
+      expect(page).to have_text("CHQ")
       expect(page).to have_text("25.00")
       expect(page).to have_text("Fee receipt no")
       expect(page).to have_text("BOB")

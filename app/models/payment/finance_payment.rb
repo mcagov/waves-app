@@ -18,12 +18,12 @@ class Payment::FinancePayment < ApplicationRecord
   validate :submission_ref_no_exists
 
   PAYMENT_TYPES = [
-    ["Bacs", :bacs],
-    ["Cash", :cash],
-    ["Cheque", :cheque],
-    ["Client Account", :client_account],
-    ["Credit/Debit Card", :card],
-    ["Postal Order", :postal_order],
+    ["BACS", :bacs],
+    ["CHQ", :cheque],
+    ["CASH", :cash],
+    ["CHAPS", :chaps],
+    ["PO", :postal_order],
+    ["CARD", :card],
   ].freeze
 
   private

@@ -13,7 +13,7 @@ describe Task do
 
     context "of a change_vessel" do
       let(:key) { :change_vessel }
-      it { expect(subject).to eq("Change of Vessel Details") }
+      it { expect(subject).to eq("Change of Vessel details") }
     end
   end
 

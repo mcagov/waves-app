@@ -89,17 +89,6 @@ describe Submission::ApplicationProcessor do
 
         it { subject }
       end
-
-      context "reserve_name" do
-        let(:task) { :reserve_name }
-
-        before do
-          dont_expect_registry_builder
-          dont_expect_registration_builder
-        end
-
-        it { subject }
-      end
     end
   end
 end
