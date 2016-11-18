@@ -39,6 +39,9 @@ class TasksController < InternalPagesController
   private
 
   def submission_scope
-    Submission.in_part(current_activity.part).active
+    Submission
+      .in_part(current_activity.part)
+      .includes(:claimant, :declarations, payments: [:remittance])
+      .active
   end
 end

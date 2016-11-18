@@ -20,6 +20,11 @@ module Submission::Associations
 
     def declaration_associations(base)
       base.has_many :declarations, -> { order("created_at asc") }
+      base.has_many :incomplete_declarations, lambda {
+        where("state = 'incomplete'")
+          .order("created_at asc")
+      },
+                    class_name: "Declaration"
       base.accepts_nested_attributes_for :declarations, allow_destroy: true
     end
 
