@@ -8,7 +8,7 @@ describe "User edits top-level submission details (an edge case)" do
   end
 
   scenario "when the part is not changed" do
-    select("Change of Address", from: "Task Type")
+    select("Change of Address", from: "Application Type")
     fill_in("Official No.", with: @vessel.reg_no)
     click_on("Save")
 

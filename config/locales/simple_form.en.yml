@@ -24,7 +24,7 @@ en:
         documents_received: Documents Received
       submission:
         part: Part of Register
-        task: Task Type
+        task: Application Type
         vessel_reg_no: Official No.
         vessel:
           name: Vessel Name
