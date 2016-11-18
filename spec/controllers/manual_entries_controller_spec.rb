@@ -23,8 +23,8 @@ describe ManualEntriesController, type: :controller do
         expect(submission.reload.officer_intervention_required).to be_falsey
       end
 
-      it "redirects to submission#edit" do
-        expect(response).to redirect_to(edit_submission_path(submission))
+      it "redirects to submission#show" do
+        expect(response).to redirect_to(submission_path(submission))
       end
 
       it "generates the ref_no" do
@@ -41,27 +41,6 @@ describe ManualEntriesController, type: :controller do
 
       it "officer intervention is still required" do
         expect(submission.reload.officer_intervention_required).to be_truthy
-      end
-    end
-  end
-
-  describe "#create" do
-    context "successfully" do
-      before do
-        post :create,
-             params: { submission: { task: :new_registration, part: :part_1 } }
-      end
-
-      it "sets the part" do
-        expect(assigns(:submission).part.to_sym).to eq(:part_1)
-      end
-
-      it "sets the claimant (and we can assume it is assigned)" do
-        expect(assigns(:submission).claimant).to eq(claimant)
-      end
-
-      it "sets the source" do
-        expect(assigns(:submission).source.to_sym).to eq(:manual_entry)
       end
     end
   end
@@ -83,19 +62,6 @@ describe ManualEntriesController, type: :controller do
 
       it "redirects_to submissions#show" do
         expect(response).to redirect_to(submission_path(submission))
-      end
-    end
-
-    context "for a new_registration" do
-      before do
-        patch :update,
-              params: {
-                id: submission.id,
-                submission: { task: :new_registration } }
-      end
-
-      it "redirects_to submissions#edit" do
-        expect(response).to redirect_to(edit_submission_path(submission))
       end
     end
 
