@@ -55,7 +55,7 @@ describe Task do
 
   context ".default_task_types" do
     it do
-      [:reserve_name, :unknown].each do |task_type|
+      [:unknown].each do |task_type|
         expect(Task.default_task_types).not_to include(task_type)
       end
     end
