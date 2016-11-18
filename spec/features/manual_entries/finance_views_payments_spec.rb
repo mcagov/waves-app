@@ -4,7 +4,7 @@ describe "Finance views payments", type: :feature, js: true do
   before do
     3.times { create(:finance_payment) }
     login_to_finance
-    click_on("Recent Receipt Entries")
+    click_on("Recent Fee Entries")
   end
 
   scenario "as a list of 3 items" do
