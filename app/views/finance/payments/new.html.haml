@@ -12,7 +12,7 @@
         .x_content
           .row
             .col-md-4
-              = f.input :payment_date, as: :string, label: "Receipt Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
+              = f.input :payment_date, as: :string, label: "Fee Receipt Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
             .col-md-4
               = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
             .col-md-4

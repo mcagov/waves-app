@@ -10,7 +10,7 @@ describe "Finance enters a payment", type: :feature do
     expect(page).to have_css("h1", text: "Finance: Fee Entry")
 
     select("Part III", from: "Part of Register")
-    fill_in("Receipt Date", with: "12/12/2012")
+    fill_in("Fee Receipt Date", with: "12/12/2012")
     select("New Registration", from: "Task Type")
 
     fill_in("Reference Number", with: "")
