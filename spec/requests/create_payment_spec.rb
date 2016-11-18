@@ -42,7 +42,7 @@ end
 
 # rubocop:disable all
 def valid_create_payment_json(submission)
-  {"data"=>{"type"=>"payments", "attributes"=>{"submission_id"=>"#{submission.id}", "wp_token"=>"TEST_SU_84dbf02a-f537-4047-ab3c-1806dad6aa03", "wp_order_code"=>"8481b725-e7c8-4c94-b311-9fa2f10748ae", "wp_amount"=>2500, "wp_country"=>"GB", "wp_payment_response"=>{"foo"=>"bar"}, "customer_ip"=>"127.0.0.1"}}}
+  {"data"=>{"type"=>"payments", "attributes"=>{"submission_id"=>"#{submission.id}", "wp_amount"=>2500, "customer_ip"=>"127.0.0.1"}}}
 end
 
 def invalid_create_payment_json
