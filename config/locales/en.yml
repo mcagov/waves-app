@@ -56,7 +56,7 @@ en:
       confirmation:
         new_registration: The vessel owner has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
         change_owner: The vessel owner has been notified via email that their request for a Change of Ownership has been approved.
-        change_vessel: The vessel owner has been notified via email that their request for a Change of Vessel Details has been approved.
+        change_vessel: The vessel owner has been notified via email that their request for a Change of Vessel details has been approved.
         change_address: The vessel owner has been notified via email that their request for a Change of Address has been approved.
         duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
         reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.

@@ -14,7 +14,7 @@ class Task
   def prints_certificate?
     [
       :new_registration, :change_owner, :change_vessel, :renewal,
-      :duplicate_certificate
+      :duplicate_certificate, :re_registration
     ].include?(@key)
   end
 
@@ -23,20 +23,20 @@ class Task
   end
 
   def renews_certificate?
-    [:change_owner, :change_vessel, :renewal]
+    [:change_owner, :change_vessel, :renewal, :re_registration]
       .include?(@key)
   end
 
   def builds_registry?
     [
       :change_owner, :change_vessel, :change_address,
-      :new_registration, :renewal].include?(@key)
+      :re_registration, :new_registration, :renewal].include?(@key)
   end
 
   class << self
     def finance_task_types
       all_task_types.delete_if do |t|
-        [:change_address, :closure].include?(t[1])
+        [:change_address, :closure, :enquiry].include?(t[1])
       end
     end
 
@@ -51,15 +51,17 @@ class Task
     # rubocop:disable Metrics/MethodLength
     def all_task_types
       [
-        ["Change of Address", :change_address],
-        ["Change of Ownership", :change_owner],
-        ["Change of Vessel Details", :change_vessel],
-        ["Duplicate Certificate of Registry", :duplicate_certificate],
-        ["Name Reservation", :reserve_name],
         ["New Registration", :new_registration],
-        ["Registration Renewal", :renewal],
+        ["Renewal of Registration", :renewal],
+        ["Re-Registration", :re_registration],
+        ["Change of Ownership", :change_owner],
+        ["Change of Vessel details", :change_vessel],
+        ["Change of Address", :change_address],
         ["Registration Closure", :closure],
-        ["Transcript Request", :transcript],
+        ["Transcript of Registry (current, closed, historic, dated)",
+         :transcript],
+        ["Duplicate Certificate", :duplicate_certificate],
+        ["General Enquiry", :enquiry],
         ["Unknown", :unknown]]
     end
   end
