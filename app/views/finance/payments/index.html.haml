@@ -14,7 +14,6 @@
               %th Application Type
               %th Payment Type
               %th Fee Amount
-              %th Fee Receipt Number
           %tbody
           - @finance_payments.each do |finance_payment|
             - finance_payment = Decorators::FinancePayment.new(finance_payment)
@@ -24,4 +23,3 @@
               %td= finance_payment.task_description
               %td= finance_payment.payment_type_description
               %td= finance_payment.formatted_payment_amount
-              %td= finance_payment.receipt_no
