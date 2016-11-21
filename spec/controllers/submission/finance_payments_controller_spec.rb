@@ -1,19 +1,19 @@
 require "rails_helper"
 
-describe ManualEntriesController, type: :controller do
+describe Submission::FinancePaymentsController, type: :controller do
   before do
     sign_in claimant
   end
 
   let!(:claimant) { create(:user) }
 
-  describe "#convert_to_application" do
+  describe "#convert" do
     let!(:submission) { create(:finance_payment).submission }
 
     before do
       submission.update_attributes(state: :assigned, task: task)
 
-      post :convert_to_application, params: { id: submission.id }
+      patch :convert, params: { submission_id: submission.id }
     end
 
     context "for a new_registration" do
@@ -35,7 +35,7 @@ describe ManualEntriesController, type: :controller do
     context "for change_vessel and there is no vessel" do
       let(:task) { :change_vessel }
 
-      it "render manual_entries#edit" do
+      it "renders #edit" do
         expect(response).to render_template(:edit)
       end
 
@@ -54,7 +54,7 @@ describe ManualEntriesController, type: :controller do
       before do
         patch :update,
               params: {
-                id: submission.id,
+                submission_id: submission.id,
                 submission: {
                   task: :change_vessel,
                   vessel_reg_no: registered_vessel.reg_no } }
@@ -62,18 +62,6 @@ describe ManualEntriesController, type: :controller do
 
       it "redirects_to submissions#show" do
         expect(response).to redirect_to(submission_path(submission))
-      end
-    end
-
-    context "when the part changes" do
-      before do
-        patch :update, params: {
-          id: submission.id,
-          submission: { part: :part_4 } }
-      end
-
-      it "redirects_to submissions#edit" do
-        expect(response).to redirect_to(tasks_my_tasks_path)
       end
     end
   end

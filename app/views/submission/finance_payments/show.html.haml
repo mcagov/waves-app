@@ -1,0 +1,7 @@
+= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
+= render partial: "submissions/info/heading", locals: {submission: @submission}
+
+- if @submission.claimant == current_user
+  .row.no-print#actions
+    .col-sm-12
+      = link_to "Convert to Application", convert_submission_finance_payment_path(@submission), method: :patch, class: "btn btn-lg btn-primary pull-right"

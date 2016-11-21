@@ -4,9 +4,6 @@
 - elsif @submission.cancelled?
   = render partial: "submissions/actions/cancelled", locals: {submission: @submission}
 
-- elsif @submission.rejected?
-  = render partial: "submissions/actions/rejected", locals: {submission: @submission}
-
 - elsif @submission.referred?
   = render partial: "submissions/actions/referred", locals: {submission: @submission}
 

@@ -20,6 +20,7 @@ class Policies::Submission
     end
 
     def editable?(submission)
+      return false if submission.officer_intervention_required?
       !submission.completed? && !submission.printing?
     end
 

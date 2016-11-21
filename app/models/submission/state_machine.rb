@@ -11,7 +11,6 @@ module Submission::StateMachine
         state :referred
         state :printing
         state :completed
-        state :rejected
         state :referred
         state :cancelled
 
@@ -23,7 +22,7 @@ module Submission::StateMachine
 
         event :claimed do
           transitions to: :assigned,
-                      from: [:unassigned, :rejected, :cancelled],
+                      from: [:unassigned, :cancelled],
                       on_transition: :add_claimant
         end
 
@@ -56,11 +55,6 @@ module Submission::StateMachine
 
         event :cancelled do
           transitions to: :cancelled, from: :assigned,
-                      on_transition: :remove_claimant
-        end
-
-        event :rejected do
-          transitions to: :rejected, from: :assigned,
                       on_transition: :remove_claimant
         end
 

@@ -48,7 +48,7 @@ class SubmissionsController < InternalPagesController
 
   def check_officer_intervention_required
     if @submission.officer_intervention_required?
-      return redirect_to manual_entry_path(@submission)
+      return redirect_to submission_finance_payment_path(@submission)
     end
   end
 end

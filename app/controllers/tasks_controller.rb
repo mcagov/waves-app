@@ -20,10 +20,6 @@ class TasksController < InternalPagesController
     @submissions = submission_scope.order("referred_until desc").referred
   end
 
-  def rejected
-    @submissions = submission_scope.order("updated_at desc").rejected
-  end
-
   def cancelled
     @submissions = submission_scope.order("updated_at desc").cancelled
   end

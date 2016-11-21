@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User converts manual entry", type: :feature, js: true do
+describe "User converts finance payment", type: :feature, js: true do
   before do
     create(
       :finance_payment,
@@ -31,10 +31,6 @@ describe "User converts manual entry", type: :feature, js: true do
     click_on("MY BOAT")
 
     expect(page).to have_css("h1", text: "Duplicate Certificate")
-
-    within("#finance_payment") do
-      expect(page).to have_text("Part I")
-      expect(page).to have_text("MY BOAT")
-    end
+    expect(page).not_to have_css("#actions")
   end
 end

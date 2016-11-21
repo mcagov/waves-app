@@ -5,13 +5,12 @@
       = submission.job_type
       %small
         ID:
-        = link_to_if submission.editable?,
-                   (submission.ref_no || "Not yet generated"),
-                   edit_manual_entry_path(submission),
-                   id: "edit_submission_ref_no"
+        = submission.ref_no || "Not yet generated"
   .col-sm-6.pull-right
-    = render partial: "submissions/actions/edit_button", locals: {submission: submission}
-
+    - if submission.editable? && submission.claimant == current_user
+      = link_to "Edit Application",
+        edit_submission_path(submission),
+        class: "btn btn-primary pull-right"
 
 .row
   .x_panel
@@ -43,7 +42,7 @@
               %tr
                 %td.soft-label Vessel Name:
                 %td
-                  %strong= submission.vessel
+                  %strong= submission.vessel_name
               %tr
                 %td.soft-label Payment Received:
                 %td

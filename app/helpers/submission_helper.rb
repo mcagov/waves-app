@@ -16,7 +16,7 @@ module SubmissionHelper
     case submission.current_state
     when :unassigned
       "Unclaimed queue"
-    when :referred, :cancelled, :rejected
+    when :referred, :cancelled
       submission.current_state.to_s.humanize
     when :assigned
       "Claimed by #{officer}"
