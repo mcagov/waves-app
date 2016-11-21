@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118143735) do
+ActiveRecord::Schema.define(version: 20161121092323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,7 +108,6 @@ ActiveRecord::Schema.define(version: 20161118143735) do
     t.string   "vessel_name"
     t.string   "payment_type"
     t.decimal  "payment_amount"
-    t.string   "receipt_no"
     t.string   "applicant_name"
     t.string   "applicant_email"
     t.string   "documents_received"
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 20161118143735) do
     t.datetime "updated_at",         null: false
     t.date     "payment_date"
     t.string   "vessel_reg_no"
-    t.string   "submission_ref_no"
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
   end
 

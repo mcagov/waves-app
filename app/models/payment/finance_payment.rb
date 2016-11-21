@@ -15,7 +15,6 @@ class Payment::FinancePayment < ApplicationRecord
             presence: true, numericality: { greater_than: 0 }
 
   validate :registered_vessel_exists
-  validate :submission_ref_no_exists
 
   PAYMENT_TYPES = [
     ["BACS", :bacs],
@@ -38,16 +37,6 @@ class Payment::FinancePayment < ApplicationRecord
     end
   end
 
-  def submission_ref_no_exists
-    return unless submission_ref_no.present?
-
-    unless Submission.in_part(part).find_by(ref_no: submission_ref_no)
-      errors.add(
-        :submission_ref_no,
-        "is not a current #{Activity.new(part)} Reference Number")
-    end
-  end
-
   def build_payment_and_submission
     Payment.create(
       amount: payment_amount.to_f * 100,
@@ -56,16 +45,11 @@ class Payment::FinancePayment < ApplicationRecord
   end
 
   def build_submission
-    if submission_ref_no.present?
-      Submission.in_part(part).active.find_by(ref_no: submission_ref_no)
-
-    else
-      Submission.create(
-        part: part,
-        task: task,
-        vessel_reg_no: vessel_reg_no,
-        officer_intervention_required: true,
-        source: :manual_entry)
-    end
+    Submission.create(
+      part: part,
+      task: task,
+      vessel_reg_no: vessel_reg_no,
+      officer_intervention_required: true,
+      source: :manual_entry)
   end
 end

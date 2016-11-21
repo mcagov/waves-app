@@ -18,7 +18,6 @@ en:
         service_level: Service Level
         payment_type: Payment Type
         payment_amount: Fee Amount
-        receipt_no: Fee Receipt Number
         applicant_name: Applicant Name
         applicant_email: Applicant's Email Address
         documents_received: Documents Received
