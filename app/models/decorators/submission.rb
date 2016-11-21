@@ -34,6 +34,15 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
+  def applicant_email
+    return correspondent.email if correspondent
+    if finance_payment && finance_payment.applicant_emai.present?
+      finance_payment.applicant_email
+    else
+      "Unknown"
+    end
+  end
+
   def source_description
     source.titleize if source
   end
@@ -66,6 +75,20 @@ class Decorators::Submission < SimpleDelegator
 
   def payment_status
     AccountLedger.new(@submission).payment_status
+  end
+
+  def payment_received
+    AccountLedger.new(@submission).amount_paid
+  end
+
+  def declaration_status
+    if declarations.empty?
+      "Undefined"
+    elsif incomplete_declarations.empty?
+      "Complete"
+    else
+      "Incomplete"
+    end
   end
 
   private
