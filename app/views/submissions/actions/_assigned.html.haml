@@ -1,10 +1,5 @@
 .row.no-print#actions
   .col-xs-12
-    = render partial: "submissions/modals/reject", locals: {submission: @submission}
-    = link_to "#reject-application", "data-target" => "#reject-application", "data-toggle" => "modal", class: "btn btn-danger" do
-      %i.fa.fa-times
-      Reject Application
-
     = render partial: "submissions/modals/refer", locals: {submission: @submission}
     = link_to "#refer-application", "data-target" => "#refer-application", "data-toggle" => "modal", class: "btn btn-warning" do
       %i.fa.fa-pause

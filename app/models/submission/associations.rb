@@ -34,9 +34,6 @@ module Submission::Associations
       base.has_one :cancellation, -> { order("created_at desc").limit(1) },
                    as: :notifiable,
                    class_name: "Notification::Cancellation"
-      base.has_one :rejection, -> { order("created_at desc").limit(1) },
-                   as: :notifiable,
-                   class_name: "Notification::Rejection"
       base.has_one :referral, -> { order("created_at desc").limit(1) },
                    as: :notifiable,
                    class_name: "Notification::Referral"

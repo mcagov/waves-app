@@ -10,15 +10,6 @@ class NotificationsController < InternalPagesController
     redirect_to tasks_my_tasks_path
   end
 
-  def reject
-    Notification::Rejection.create(
-      parsed_notification_params(@submission.correspondent))
-
-    flash[:notice] = "You have succesfully rejected that application"
-    @submission.rejected!
-    redirect_to tasks_my_tasks_path
-  end
-
   def refer
     Notification::Referral.create(
       parsed_notification_params(@submission.correspondent))

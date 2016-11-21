@@ -3,19 +3,12 @@
     Application Cancelled by #{ submission.previous_update_by }
     - if submission.cancellation
       \:
-      #{ submission.cancellation.subject.to_s.humanize }.
-
-- elsif submission.rejected?
-  #prompt.alert.alert-error
-    Application Rejected by #{ submission.previous_update_by }
-    - if submission.rejection
-      \:
-      #{ submission.rejection.subject.to_s.humanize }.
+      #{ submission.cancellation.subject }.
 
 - elsif submission.referred?
   #prompt.alert.alert-warning
     Application Referred by #{ submission.previous_update_by }
     - if submission.referral
       \:
-      #{ submission.referral.subject }.
+      #{ submission.referral.subject.to_s.humanize }.
     Next action due by #{ submission.referred_until }.

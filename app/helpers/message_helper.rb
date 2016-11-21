@@ -5,8 +5,6 @@ module MessageHelper
       cancel_email_text
     when :refer
       refer_email_text
-    when :reject
-      reject_email_text
     end
   end
 
@@ -23,11 +21,5 @@ module MessageHelper
       on Part III of the UK Ship Register.</p>
       <p>Your application has been referred for the following reason:
       [REFERRAL REASON]</p>)
-  end
-
-  def reject_email_text
-    %(<p>Thank you for your application to register your vessel
-      on Part III of the UK Ship Register.</p>
-      <p>[REJECTION REASON])
   end
 end
