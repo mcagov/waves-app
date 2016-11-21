@@ -44,6 +44,12 @@ describe Policies::Submission do
 
       it { expect(subject).to be_falsey }
     end
+
+    context "when officer_intervention_required" do
+      before { submission.officer_intervention_required = true }
+
+      it { expect(subject).to be_falsey }
+    end
   end
 
   context "#actionable?" do

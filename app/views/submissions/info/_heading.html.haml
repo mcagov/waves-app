@@ -10,8 +10,10 @@
                    edit_manual_entry_path(submission),
                    id: "edit_submission_ref_no"
   .col-sm-6.pull-right
-    = render partial: "submissions/actions/edit_button", locals: {submission: submission}
-
+    - if submission.editable? && submission.claimant == current_user
+      = link_to "Edit Application",
+        edit_submission_path(submission),
+        class: "btn btn-primary pull-right"
 
 .row
   .x_panel
