@@ -24,6 +24,14 @@ Rails.application.routes.draw do
         post :claim_referral
       end
     end
+    resource :finance_payment,
+             only: [:show, :edit],
+             controller: "submission/finance_payments" do
+      member do
+        patch :update
+        patch :convert
+      end
+    end
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
@@ -33,12 +41,6 @@ Rails.application.routes.draw do
     resource :delivery_addresses,
              only: [:update],
              controller: "submission/delivery_address"
-  end
-
-  resources :manual_entries, only: [:new, :edit, :create, :show, :update] do
-    member do
-      patch :convert_to_application
-    end
   end
 
   resources :declarations, only: [:update] do
