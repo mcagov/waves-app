@@ -36,7 +36,7 @@ class Decorators::Submission < SimpleDelegator
 
   def applicant_email
     return correspondent.email if correspondent
-    if finance_payment && finance_payment.applicant_emai.present?
+    if finance_payment && finance_payment.applicant_email.present?
       finance_payment.applicant_email
     else
       "Unknown"
