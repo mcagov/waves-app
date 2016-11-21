@@ -5,10 +5,7 @@
       = submission.job_type
       %small
         ID:
-        = link_to_if submission.editable?,
-                   (submission.ref_no || "Not yet generated"),
-                   edit_manual_entry_path(submission),
-                   id: "edit_submission_ref_no"
+        = submission.ref_no || "Not yet generated"
   .col-sm-6.pull-right
     - if submission.editable? && submission.claimant == current_user
       = link_to "Edit Application",

@@ -64,17 +64,5 @@ describe ManualEntriesController, type: :controller do
         expect(response).to redirect_to(submission_path(submission))
       end
     end
-
-    context "when the part changes" do
-      before do
-        patch :update, params: {
-          id: submission.id,
-          submission: { part: :part_4 } }
-      end
-
-      it "redirects_to submissions#edit" do
-        expect(response).to redirect_to(tasks_my_tasks_path)
-      end
-    end
   end
 end
