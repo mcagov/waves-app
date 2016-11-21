@@ -23,7 +23,7 @@ describe "Finance enters a payment", type: :feature do
     fill_in("Applicant's Email Address", with: "bob@example.com")
     fill_in("Documents Received", with: "bits and bobs")
 
-    click_on("Save Application")
+    click_on("Save Fee Entry")
 
     expect(page).to have_css(
       ".alert",
