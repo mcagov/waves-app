@@ -9,7 +9,7 @@ feature "User cancels a submission", type: :feature, js: true do
   scenario "and restores it" do
     within("#actions") { click_on "Cancel Application" }
 
-    select "No response from owner", from: "Reason for cancelling application"
+    select "Rejected (by RSS)", from: "Reason for cancelling application"
     page.execute_script("tinyMCE.activeEditor.insertContent('Some stuff')")
     within("#cancel-application") { click_on "Cancel Application" }
 
@@ -18,7 +18,7 @@ feature "User cancels a submission", type: :feature, js: true do
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Cancelled by.*: No response from owner./
+        /Application Cancelled by.*: Rejected \(by RSS\)/
       )
     end
 

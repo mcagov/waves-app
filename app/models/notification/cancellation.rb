@@ -1,7 +1,6 @@
 class Notification::Cancellation < Notification
-  REASONS = [
-    :owner_request,
-    :no_response_from_owner].freeze
+  REASONS =
+    ["Cancelled by Applicant", "Rejected (by RSS)"].freeze
 
   def email_template
     :wysiwyg

@@ -12,7 +12,7 @@
             .col-sm-12
               .form-group
                 = f.input :subject, as: :select, label: "Reason for cancelling application",
-                  collection: Notification::Cancellation::REASONS.map{|r| [r.to_s.humanize,r.to_s]},
+                  collection: Notification::Cancellation::REASONS,
                   include_blank: false
           .row
             .col-sm-12
