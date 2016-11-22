@@ -10,13 +10,16 @@
           %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
 
         %li{:role => "presentation"}
-          %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Correspondence
+          %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Documents
 
         %li{:role => "presentation"}
-          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Payment & Delivery
+          %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Correspondence
+
+        %li{:role => "presentation"}
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} Payment & Delivery
 
         %li{:role => "history"}
-          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} History
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content6", :role => "tab"} History
 
       #submissionTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -25,16 +28,19 @@
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
           = render partial: "submissions/body/declaration", collection: submission.declarations
 
-        #tab_content3.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
+        #tab_content3.tab-pane.fade{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
+          Documents
+
+        #tab_content4.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "shared/notification_list/base",
             locals: { notification_list: submission.notification_list }
           - if @submission.editable?
             = render partial: "submissions/actions/add_correspondence", locals: { submission: submission }
 
-        #tab_content4.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
+        #tab_content5.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: "submissions/body/payment", collection: submission.payments, as: :payment
 
           = render partial: "submissions/body/delivery_address", locals: { delivery_address: submission.delivery_address }
 
-        #tab_content5.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+        #tab_content6.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
           = render partial: "submissions/body/history"
