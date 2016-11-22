@@ -87,6 +87,10 @@ class SubmissionsController < InternalPagesController
   end
 
   def init_new_submission
+    if params[:submission][:task].to_sym != :new_registration
+      params[:submission].delete(:vessel)
+    end
+
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
     @submission.state = :assigned

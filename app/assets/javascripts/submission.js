@@ -79,4 +79,28 @@ $(document).ready(function() {
   $('input#declaration_completed_form').on('change', function(){
     $(this).closest('form').find(':submit').removeClass('hidden');
   })
+
+  // toggle new submission form field based on task type
+  if ($("form#new_submission").length) {
+    set_task_type_depenencies();
+  }
+
+  $('form #submission_task').on('change', function(){
+    set_task_type_depenencies();
+  })
+
+  function set_task_type_depenencies() {
+    var current_task_type = $('form #submission_task').val();
+
+    if (current_task_type == 'new_registration') {
+      $('#submission_vessel_name').removeClass('hidden');
+      $('#submission_vessel_reg_no').addClass('hidden');
+    }
+    else{
+      $('#submission_vessel_name').addClass('hidden');
+      $('#submission_vessel_reg_no').removeClass('hidden');
+    }
+
+  }
+
 });
