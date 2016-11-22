@@ -1,0 +1,30 @@
+.row
+  .col-sm-6
+    %h1{style: "margin-top: 0px !important;"}
+      Start a New Application
+
+= simple_form_for @submission do |f|
+  .row
+    .col-md-12
+      .x_content
+        .row
+          .col-md-3
+            = f.input :received_at, as: :string, label: "Date Document Received", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
+          .col-md-3
+            = f.input :task, collection: Task.default_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
+          .col-md-3
+            = f.input :vessel_reg_no, label: "Official No. <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
+          .col-md-4
+            / = f.input :vessel_name, label: "Vessel Name <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
+        .row
+          .col-md-4
+            / = f.input :applicant_name, input_html: { class: "upcase" }
+          .col-md-4
+            / = f.input :applicant_email
+
+  .row.no-print
+    .col-md-12
+      = button_tag(type: 'submit', class: "btn btn-success btn-lg pull-right") do
+        %i.fa.fa-check
+        Save Application
+

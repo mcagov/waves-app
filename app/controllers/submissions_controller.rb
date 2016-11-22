@@ -1,6 +1,12 @@
 class SubmissionsController < InternalPagesController
-  before_action :load_submission
-  before_action :check_officer_intervention_required
+  before_action :load_submission,
+                only: [:show, :edit, :update]
+  before_action :check_officer_intervention_required,
+                only: [:show, :edit, :update]
+
+  def new
+    @submission = Submission.new
+  end
 
   def show
     @submission = Decorators::Submission.new(@submission)
