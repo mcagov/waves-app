@@ -10,7 +10,7 @@ feature "User views unclaimed task list", type: :feature, js: true do
     within("#submissions") do
       expect(page)
         .to have_css(".vessel-name", text: submission.vessel.name)
-      expect(page).to have_content(submission.correspondent.name)
+      expect(page).to have_content(submission.applicant_name)
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
       expect(page).to have_content(submission.target_date)

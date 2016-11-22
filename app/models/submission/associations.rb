@@ -86,12 +86,4 @@ module Submission::Associations
   def delivery_address=(delivery_address_params)
     changeset[:delivery_address] = delivery_address_params
   end
-
-  def correspondent
-    declarations.first.owner unless declarations.empty?
-  end
-
-  def correspondent_email
-    correspondent.email if correspondent
-  end
 end

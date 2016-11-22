@@ -1,9 +1,13 @@
 .row
-  .col-sm-9
+  .col-sm-6
     %h1.heading_no_top_margin
       = heading
-  .col-sm-3
+  .col-sm-6
     .pull-right
+      = link_to new_submission_path, class: 'btn btn-success' do
+        %i.fa.fa-plus{style: 'font-size: 1.2em; font-weight: bold;'}
+        Start a New Application
+
       = link_to tasks_next_task_path, class: 'btn btn-primary' do
         %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
         Process Next Application

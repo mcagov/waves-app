@@ -11,7 +11,7 @@ describe "User views a registered vessel", type: :feature, js: true do
   scenario "viewing vessel details" do
     click_on("Owners")
     expect(page)
-      .to have_css(".owner-name", text: @submission.correspondent.name)
+      .to have_css(".owner-name", text: @submission.owners.first.name)
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")

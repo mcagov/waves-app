@@ -2,8 +2,7 @@ class NotificationsController < InternalPagesController
   before_action :load_submission
 
   def cancel
-    Notification::Cancellation.create(
-      parsed_notification_params(@submission.correspondent))
+    Notification::Cancellation.create(parsed_notification_params)
 
     flash[:notice] = "You have succesfully cancelled that application"
     @submission.cancelled!
@@ -11,8 +10,7 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-    Notification::Referral.create(
-      parsed_notification_params(@submission.correspondent))
+    Notification::Referral.create(parsed_notification_params)
 
     flash[:notice] = "You have succesfully referred that application"
     @submission.update_attribute(
@@ -32,14 +30,14 @@ class NotificationsController < InternalPagesController
     params.require(:notification).permit(:subject, :body, :actionable_at)
   end
 
-  def parsed_notification_params(owner)
+  def parsed_notification_params
     {
       notifiable: @submission,
       subject: notification_params[:subject],
       body: notification_params[:body],
       actioned_by: current_user,
-      recipient_email: owner.email,
-      recipient_name: owner.name,
+      recipient_email: @submission.applicant_email,
+      recipient_name: @submission.applicant_name,
     }
   end
 end

@@ -1,4 +1,14 @@
 = simple_form_for @submission do |f|
+  .row
+    .col-md-12
+      .x_panel
+        .x_content
+          .row
+            .col-md-3
+              = f.input :applicant_name, label: "Applicant Name", input_html: { class: "upcase" }
+            .col-md-3
+              = f.input :applicant_email, label: "Applicant's Email Address"
+
   = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
 
   = f.simple_fields_for :declarations do |declaration_f|

@@ -43,7 +43,7 @@ describe NotificationsController, type: :controller do
     it "creates a notification for the correspondent" do
       expect(Notification::Cancellation.count).to eq(1)
       expect(Notification::Cancellation.last.recipient_email)
-        .to eq(submission.correspondent.email)
+        .to eq(submission.applicant_email)
     end
   end
 
@@ -75,7 +75,7 @@ describe NotificationsController, type: :controller do
     it "creates one notification addressed to the correspondent" do
       expect(Notification::Referral.count).to eq(1)
       expect(Notification::Referral.last.recipient_email)
-        .to eq(submission.correspondent.email)
+        .to eq(submission.applicant_email)
     end
   end
 end

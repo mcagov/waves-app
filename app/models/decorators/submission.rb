@@ -25,24 +25,6 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
-  def applicant_name
-    return correspondent if correspondent
-    if finance_payment && finance_payment.applicant_name.present?
-      finance_payment.applicant_name
-    else
-      "Unknown"
-    end
-  end
-
-  def applicant_email
-    return correspondent.email if correspondent
-    if finance_payment && finance_payment.applicant_email.present?
-      finance_payment.applicant_email
-    else
-      "Unknown"
-    end
-  end
-
   def source_description
     source.titleize if source
   end

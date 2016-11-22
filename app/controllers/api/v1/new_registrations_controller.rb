@@ -2,13 +2,13 @@ module Api
   module V1
     class NewRegistrationsController < ApiController
       def create
-        @new_registration =
-          Submission.new(create_new_registration_params)
+        @submission = Submission.new(create_submission_params)
+        init_applicant
 
-        if @new_registration.save
-          render json: @new_registration, status: :created
+        if @submission.save
+          render json: @submission, status: :created
         else
-          render json: @new_registration,
+          render json: @submission,
                  status: :unprocessable_entity,
                  serializer: ActiveModel::Serializer::ErrorSerializer
         end
@@ -16,9 +16,17 @@ module Api
 
       private
 
-      def create_new_registration_params
+      def create_submission_params
         data = params.require("data")
         data.require(:attributes).permit!
+      end
+
+      def init_applicant
+        applicant = @submission.owners.first
+        return unless applicant
+
+        @submission.applicant_name = applicant.name
+        @submission.applicant_email = applicant.email
       end
     end
   end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create, :show, :index]
   end
 
-  resources :submissions, only: [:show, :edit, :update] do
+  resources :submissions, only: [:new, :create, :show, :edit, :update] do
     resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim
