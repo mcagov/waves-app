@@ -16,7 +16,7 @@ feature "User declares a submission", type: :feature, js: true do
       expect(page).not_to have_button("Upload Declaration")
 
       page.attach_file(
-        "declaration[completed_form]", "spec/support/files/mca_test.pdf")
+        "declaration[completed_form]", mca_file)
       click_on("Upload Declaration")
     end
 
