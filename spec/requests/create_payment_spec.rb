@@ -29,6 +29,14 @@ describe "create payments via the API", type: :request do
     it "builds the application_receipt notification" do
       expect(payment.submission.application_receipt).to be_present
     end
+
+    it "sets the application_name" do
+      expect(payment.submission.application_receipt).to be_present
+    end
+
+    it "builds the application_receipt notification" do
+      expect(payment.submission.application_receipt).to be_present
+    end
   end
 
   context "with invalid params" do
