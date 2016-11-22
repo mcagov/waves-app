@@ -50,6 +50,8 @@ class Payment::FinancePayment < ApplicationRecord
       task: task,
       vessel_reg_no: vessel_reg_no,
       officer_intervention_required: true,
-      source: :manual_entry)
+      source: :manual_entry,
+      applicant_name: applicant_name,
+      applicant_email: applicant_email)
   end
 end

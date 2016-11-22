@@ -10,7 +10,9 @@ describe Payment::FinancePayment do
         vessel_reg_no: "",
         payment_type: :cash,
         payment_amount: "25",
-        actioned_by: create(:user)
+        actioned_by: create(:user),
+        applicant_name: "Bob",
+        applicant_email: "bob@example.com"
       )
     end
 
@@ -37,6 +39,15 @@ describe Payment::FinancePayment do
 
     it "sets the target date" do
       expect(finance_payment.submission.target_date).to be_present
+    end
+
+    it "sets the applicant_name" do
+      expect(finance_payment.submission.applicant_name).to eq("Bob")
+    end
+
+    it "sets the applicant_email" do
+      expect(finance_payment.submission.applicant_email)
+        .to eq("bob@example.com")
     end
   end
 
