@@ -9,12 +9,11 @@ class SubmissionsController < InternalPagesController
   end
 
   def create
-    @submission = Submission.new(submission_params)
+    init_new_submission
 
     if @submission.save
-      if params[:new_submission_actions] == "application_receipt_email"
-        send_application_receipt_email
-      end
+      send_application_receipt_email
+
       redirect_to submission_path(@submission)
     else
       render :new
@@ -53,7 +52,7 @@ class SubmissionsController < InternalPagesController
   # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
-      :applicant_name, :applicant_email,
+      :task, :received_at, :applicant_name, :applicant_email,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],
@@ -73,11 +72,23 @@ class SubmissionsController < InternalPagesController
   end
 
   def send_application_receipt_email
+    return unless params[:new_submission_actions] == "application_receipt"
+
     Notification::ApplicationReceipt.create(
       notifiable: @submission,
       recipient_name: @submission.applicant_name,
-      recipient_email: @submission.applicant_email)
+      recipient_email: @submission.applicant_email,
+      actioned_by: current_user)
+
     flash[:notice] =
       "An Application Receipt has been sent to #{@submission.applicant_email}"
+  end
+
+  def init_new_submission
+    @submission = Submission.new(submission_params)
+    @submission.source = :manual_entry
+    @submission.part = current_activity.part
+    @submission.state = :assigned
+    @submission.claimant = current_user
   end
 end

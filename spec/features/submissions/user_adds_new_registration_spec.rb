@@ -14,6 +14,7 @@ feature "User adds a new registration", type: :feature do
   scenario "with an application receipt email" do
     check("Send an Application Receipt email")
     click_on("Save Application")
+
     expect(page).to have_css("h1", text: "New Registration ID: ")
     expect(Notification::ApplicationReceipt.last.recipient_email)
       .to eq("bob@example.com")
