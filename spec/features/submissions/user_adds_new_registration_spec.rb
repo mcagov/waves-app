@@ -6,6 +6,8 @@ feature "User adds a new registration", type: :feature do
     click_on("Start a New Application")
 
     select("New Registration", from: "Application Type")
+    fill_in("Vessel Name", with: "MY BOAT")
+
     fill_in("Date Document Received", with: "1/1/2016")
     fill_in("Applicant Name", with: "Bob")
     fill_in("Applicant's Email Address", with: "bob@example.com")
@@ -16,6 +18,8 @@ feature "User adds a new registration", type: :feature do
     click_on("Save Application")
 
     expect(page).to have_css("h1", text: "New Registration ID: ")
+    expect(page).to have_css("td.vessel-name", text: "MY BOAT")
+
     expect(Notification::ApplicationReceipt.last.recipient_email)
       .to eq("bob@example.com")
     expect(page)
