@@ -5,7 +5,8 @@ class SubmissionsController < InternalPagesController
                 only: [:show, :edit, :update]
 
   def new
-    @submission = Submission.new(received_at: Date.today)
+    @submission =
+      Submission.new(received_at: Date.today, part: current_activity.part)
   end
 
   def create
@@ -52,7 +53,8 @@ class SubmissionsController < InternalPagesController
   # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
-      :task, :received_at, :applicant_name, :applicant_email,
+      :part, :task, :received_at, :applicant_name,
+      :applicant_email, :vessel_reg_no,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign],
@@ -87,7 +89,6 @@ class SubmissionsController < InternalPagesController
   def init_new_submission
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
-    @submission.part = current_activity.part
     @submission.state = :assigned
     @submission.claimant = current_user
   end

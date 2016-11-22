@@ -12,6 +12,7 @@ describe SubmissionsController, type: :controller do
       session[:current_activity] = :part_4
       post :create, params: {
         submission: {
+          part: :part_4,
           received_at: "2001-1-1",
           task: :change_vessel } }
     end
