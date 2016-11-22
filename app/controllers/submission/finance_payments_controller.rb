@@ -10,6 +10,7 @@ class Submission::FinancePaymentsController < InternalPagesController
     if @submission.save
       redirect_to submission_path(@submission)
     else
+      @submission.officer_intervention_required = true
       render :edit
     end
   end
