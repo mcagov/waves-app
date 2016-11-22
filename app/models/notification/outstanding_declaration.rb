@@ -18,6 +18,6 @@ class Notification::OutstandingDeclaration < Notification
   end
 
   def correspondent_name
-    notifiable.submission.correspondent.to_s if notifiable.submission
+    notifiable.submission.applicant_name if notifiable.submission
   end
 end

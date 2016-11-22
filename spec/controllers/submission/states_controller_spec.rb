@@ -70,8 +70,11 @@ describe Submission::StatesController, type: :controller do
       it "creates a notification for the applicant" do
         expect(Notification::ApplicationApproval.count).to eq(1)
 
+        expect(Notification::ApplicationApproval.first.recipient_name)
+          .to eq(submission.applicant_name)
+
         expect(Notification::ApplicationApproval.first.recipient_email)
-          .to eq(submission.owners.first.email)
+          .to eq(submission.applicant_email)
       end
 
       it "sets the notification#actioned_by" do

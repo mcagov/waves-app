@@ -53,7 +53,9 @@ end
       part: :part_3,
       source: :online,
       task: task[1],
-      registered_vessel_id: Register::Vessel.all.sample.id
+      registered_vessel_id: Register::Vessel.all.sample.id,
+      applicant_name: Faker::Name.name,
+      applicant_email: Faker::Internet.safe_email
     )
 
     submission.payments.create(

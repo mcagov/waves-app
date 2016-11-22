@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :submission do
     part "part_3"
     task :new_registration
+    applicant_name Faker::Name.name
+    applicant_email Faker::Internet.safe_email
     changeset do
       {
         owners: [build(:declaration_owner)],
