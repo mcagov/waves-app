@@ -5,13 +5,16 @@ class SubmissionsController < InternalPagesController
                 only: [:show, :edit, :update]
 
   def new
-    @submission = Submission.new
+    @submission = Submission.new(received_at: Date.today)
   end
 
   def create
     @submission = Submission.new(submission_params)
 
     if @submission.save
+      if params[:new_submission_actions] == "application_receipt_email"
+        send_application_receipt_email
+      end
       redirect_to submission_path(@submission)
     else
       render :new
@@ -67,5 +70,14 @@ class SubmissionsController < InternalPagesController
     if @submission.officer_intervention_required?
       return redirect_to submission_finance_payment_path(@submission)
     end
+  end
+
+  def send_application_receipt_email
+    Notification::ApplicationReceipt.create(
+      notifiable: @submission,
+      recipient_name: @submission.applicant_name,
+      recipient_email: @submission.applicant_email)
+    flash[:notice] =
+      "An Application Receipt has been sent to #{@submission.applicant_email}"
   end
 end
