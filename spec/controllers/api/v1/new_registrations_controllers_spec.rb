@@ -13,12 +13,22 @@ describe Api::V1::NewRegistrationsController, type: :controller do
     end
 
     it "assigns the changeset" do
-      expect(assigns(:new_registration).changeset).to be_present
+      expect(assigns(:submission).changeset).to be_present
     end
 
     it "assigns the vessel name" do
-      vessel_info = assigns(:new_registration).changeset["vessel-info"]
+      vessel_info = assigns(:submission).changeset["vessel-info"]
       expect(vessel_info["name"]).to be_present
+    end
+
+    it "assigns the applicant_name" do
+      expect(assigns(:submission).applicant_name)
+        .to eq("HORATIO NELSON")
+    end
+
+    it "assigns the applicant_email" do
+      expect(assigns(:submission).applicant_email)
+        .to eq("horatio-nelson.1@example.com")
     end
   end
 end
