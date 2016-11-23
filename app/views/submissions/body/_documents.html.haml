@@ -1,4 +1,4 @@
-%table.table.table-striped#notes
+%table.table.table-striped#documents
   %thead
     %th Date Document Received
     %th Uploaded Files
@@ -9,17 +9,18 @@
     - documents.each do |document|
       %tr
         %td{width: '15%'}
+          = document.noted_at
+        %td{width: '35%'}
           - document.assets.each do |asset|
             - if asset.file.exists?
               %i.fa.fa-file-pdf-o
               = link_to asset.file_file_name, asset.file.url
               %br
-        %td{width: '55%'}
-          = link_to truncate(document.content, length: 100), "#document-#{ document.id }", "data-target" => "#document-#{ document.id }", "data-toggle" => "modal"
-        %td{width: '15%'}= document.actioned_by
-        %td{width: '15%'}
-          = document.created_at.to_s(:date_time)
-          = render partial: "vessels/modals/document", locals: { document: document }
+        %td{width: '35%'}= link_to document.content
+        %td.added_by{width: '15%'}
+          = document.actioned_by
+          on
+          = document.created_at
 
 = render partial: "submissions/actions/add_document", locals: { submission: @submission }
 = render partial: "submissions/modals/add_document", locals: { submission: @submission }

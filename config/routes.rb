@@ -39,7 +39,7 @@ Rails.application.routes.draw do
              only: [:update],
              controller: "submission/delivery_address"
     resource :documents,
-             only: [:update],
+             only: [:create],
              controller: "submission/documents"
     resource :vessel,
              only: [:update],
