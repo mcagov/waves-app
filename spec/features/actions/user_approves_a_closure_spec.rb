@@ -5,7 +5,7 @@ feature "User approves a closure", type: :feature, js: true do
     submission = create(:assigned_closure_submission)
     login_to_part_3(submission.claimant)
     visit submission_path(submission)
-    click_link("Close Registration", href: "#approve-application")
+    click_link("Complete Registration Closure", href: "#approve-application")
   end
 
   scenario "in general" do
@@ -14,7 +14,7 @@ feature "User approves a closure", type: :feature, js: true do
 
       select("Failed to Renew", from: "Closure Reason")
       fill_in("Closure Date", with: "01/09/2011")
-      click_button("Close Registration")
+      click_button("Complete Registration Closure")
     end
     expect(page).not_to have_link("Print Certificate of Registry")
     expect(page).to have_text("Registration Closure has been approved")
