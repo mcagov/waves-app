@@ -55,8 +55,8 @@ class Submission < ApplicationRecord
     !editable?
   end
 
-  def process_application(registration_starts_at)
-    Submission::ApplicationProcessor.run(self, registration_starts_at)
+  def process_application(approval_params)
+    Submission::ApplicationProcessor.run(self, approval_params)
   end
 
   def printing_required?

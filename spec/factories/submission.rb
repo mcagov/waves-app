@@ -63,7 +63,7 @@ FactoryGirl.define do
 
   factory :printing_submission, parent: :assigned_submission do
     after(:create) do |submission|
-      submission.move_to_print_queue!(Date.today)
+      submission.move_to_print_queue!(registration_starts_at: Date.today)
     end
   end
 

@@ -29,15 +29,11 @@ class Submission::ApprovalsController < InternalPagesController
       :registration_starts_at)
   end
 
-  def registration_starts_at
-    approval_params[:registration_starts_at]
-  end
-
   def process_approval
     if @submission.printing_required?
-      @submission.move_to_print_queue!(registration_starts_at)
+      @submission.move_to_print_queue!(approval_params)
     else
-      @submission.skip_print_queue!(registration_starts_at)
+      @submission.skip_print_queue!(approval_params)
     end
   end
 end

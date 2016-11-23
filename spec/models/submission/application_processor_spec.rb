@@ -4,7 +4,13 @@ describe Submission::ApplicationProcessor do
   context "#run" do
     let(:registration_starts_at) { 1.week.ago }
 
-    subject { described_class.run(submission, registration_starts_at) }
+    let(:approval_params) do
+      { registration_starts_at: registration_starts_at }
+    end
+
+    subject do
+      described_class.run(submission, approval_params)
+    end
 
     context "new_registration" do
       let(:task) { :new_registration }

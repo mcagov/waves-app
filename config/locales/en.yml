@@ -30,7 +30,7 @@ en:
         change_owner: Complete Change of Ownership
         change_vessel: Complete Change of Vessel Details
         change_address: Complete Change of Address
-        closure: Complete Registration Closure
+        closure: Close Registration
         transcript: Issue Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
@@ -42,7 +42,7 @@ en:
         change_owner: Change Ownership and Issue Certificate of Registry
         change_vessel: Change Vessel Details and Issue Certificate of Registry
         change_address: Change of Address
-        closure: Registration Closure
+        closure: Close Registration
         transcript: Issue Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
