@@ -1,7 +1,7 @@
 .modal.fade{id: "approve-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = form_tag approve_submission_states_path(submission) do |f|
+      = simple_form_for Submission::Approval.new, url: submission_approval_path(submission) do |approval_f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
@@ -10,7 +10,7 @@
 
         - if Task.new(submission.task).prints_certificate?
           = render partial: "submissions/modals/approve/certificate",
-            locals: { submission: submission }
+            locals: { submission: submission, approval_f: approval_f }
 
         .modal-footer
-          = submit_tag t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
+          = approval_f.submit t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
