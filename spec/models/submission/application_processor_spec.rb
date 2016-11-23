@@ -2,10 +2,12 @@ require "rails_helper"
 
 describe Submission::ApplicationProcessor do
   context "#run" do
-    let(:registration_starts_at) { 1.week.ago }
-
     let(:approval_params) do
-      { registration_starts_at: registration_starts_at }
+      {
+        registration_starts_at: "01/01/2011",
+        closure_at: "02/02/2012",
+        closure_reason: "a reason",
+      }
     end
 
     subject do
@@ -80,6 +82,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
+          expect_closed_registration_builder
         end
 
         it { subject }
@@ -112,9 +115,15 @@ end
 def expect_registration_builder
   expect(Builders::RegistrationBuilder)
     .to receive(:create)
-    .with(submission, registration_starts_at)
+    .with(submission, "01/01/2011")
 end
 
 def dont_expect_registration_builder
   expect(Builders::RegistrationBuilder).not_to receive(:create)
+end
+
+def expect_closed_registration_builder
+  expect(Builders::ClosedRegistrationBuilder)
+    .to receive(:create)
+    .with(submission, "02/02/2012", "a reason")
 end
