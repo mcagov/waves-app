@@ -1,0 +1,14 @@
+.modal-body
+  .row
+    .col-md-12
+      .form-group
+        - approval_f.object.registration_starts_at = Date.today
+        = approval_f.input :registration_starts_at, label: "Closure Date", input_html: { class: "datepicker" }
+
+.modal-body
+  .row
+    .col-md-12
+      .form-group
+        = approval_f.input :closure_reason, as: :select, label: "Closure Reasons",
+          collection: Submission::Approval::CLOSURE_REASONS,
+          include_blank: false

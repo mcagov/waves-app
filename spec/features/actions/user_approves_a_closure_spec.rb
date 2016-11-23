@@ -11,6 +11,9 @@ feature "User approves a closure", type: :feature, js: true do
   scenario "in general" do
     within(".modal-content") do
       expect(page).not_to have_field("registration_starts_at")
+
+      select("Failed to Renew", from: "Closure Reason")
+      fill_in("Closure Date", with: "01/09/2011")
       click_button("Close Registration")
     end
     expect(page).not_to have_link("Print Certificate of Registry")
