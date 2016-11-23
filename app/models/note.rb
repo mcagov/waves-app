@@ -7,7 +7,8 @@ class Note < ApplicationRecord
 
   class << self
     def build(counter = 1)
-      note = Note.new
+      # rubocop:disable Style/RedundantSelf
+      note = self.new
       counter.times { note.assets.build }
       note
     end

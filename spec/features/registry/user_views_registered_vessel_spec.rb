@@ -23,7 +23,7 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     fill_in("Content", with: "Some stuff")
     page.attach_file(
-      "note_assets_attributes_0_file", "spec/support/files/mca_test.pdf")
+      "note_assets_attributes_0_file", mca_file)
     page.attach_file(
       "note_assets_attributes_1_file", "spec/support/files/mca_test.jpg")
     click_on("Save Note")

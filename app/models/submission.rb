@@ -1,6 +1,4 @@
 class Submission < ApplicationRecord
-  has_paper_trail only: [:state]
-
   include Submission::Associations
   include Submission::StateMachine
 
