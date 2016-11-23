@@ -9,9 +9,7 @@ describe Submission::ApprovalsController, type: :controller do
 
   context "#create" do
     let(:submission) { create(:assigned_submission) }
-    let(:params) do
-      { submission_approval: { foo: :bar }, submission_id: submission.id }
-    end
+    let(:params) { { submission_id: submission.id } }
 
     context "succesfully" do
       before { post :create, params: params }

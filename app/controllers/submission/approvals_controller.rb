@@ -22,6 +22,8 @@ class Submission::ApprovalsController < InternalPagesController
   end
 
   def approval_params
+    return {} unless params[:submission_approval]
+
     params.require(:submission_approval).permit(
       :notification_attachments,
       :registration_starts_at)
