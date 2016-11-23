@@ -9,21 +9,8 @@
             = t("submission.approval.modal-title.#{submission.task}")
 
         - if Task.new(submission.task).prints_certificate?
-          .modal-body
-            - unless Task.new(submission.task).duplicates_certificate?
-              .row
-                .col-md-12
-                  .form-group
-                    %label Date and Time to take effect from
-                    = text_field_tag :registration_starts_at,
-                      RegistrationDate.for(submission).starts_at,
-                      class: "form-control datetimepicker"
-            .row
-              .col-md-12
-                .form-group
-                  %label
-                    %input{name: "notification_attachments", value: "registration_certificate", type: "checkbox"}
-                    Send a copy of the Certificate of Registry to owner
+          = render partial: "submissions/modals/approve/certificate",
+            locals: { submission: submission }
 
         .modal-footer
           = submit_tag t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
