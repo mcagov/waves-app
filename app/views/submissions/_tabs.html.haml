@@ -29,7 +29,7 @@
           = render partial: "submissions/body/declaration", collection: submission.declarations
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
-          Documents
+          = render partial: "submissions/body/documents", locals: { documents: submission.documents }
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "shared/notification_list/base",

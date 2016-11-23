@@ -1,0 +1,25 @@
+.modal.fade{id: 'document-content-add', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Document Entry
+      = simple_form_for Document.build(3), url: submission_documents_path(submission), method: :post do |f|
+        .modal-body
+          .row
+            .col-sm-6
+              .form-group
+                = f.input :noted_at, as: :string, label: "Date Document Received", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+          .row
+            .col-sm-9
+              .form-group
+                %Label Upload Files
+                = f.fields_for :assets do |asset_f|
+                  = asset_f.input :file, label: false, as: :file
+          .row
+            .col-sm-9
+              .form-group
+                = f.input :content, label: "Notes", as: :text, input_html: { rows: 6 }
+        .modal-footer
+          = f.submit "Save Document", class: "btn btn-primary"

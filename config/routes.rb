@@ -35,12 +35,15 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
-    resource :vessel,
-             only: [:update],
-             controller: "submission/vessel"
     resource :delivery_addresses,
              only: [:update],
              controller: "submission/delivery_address"
+    resource :documents,
+             only: [:update],
+             controller: "submission/documents"
+    resource :vessel,
+             only: [:update],
+             controller: "submission/vessel"
   end
 
   resources :declarations, only: [:update] do
