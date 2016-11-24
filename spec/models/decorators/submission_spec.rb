@@ -11,12 +11,6 @@ describe Decorators::Submission, type: :model do
       it { expect(subject).to be_falsey }
     end
 
-    context "when the state is printing" do
-      let(:submission_state) { :printing }
-
-      it { expect(subject).to be_falsey }
-    end
-
     context "when the state is something else" do
       let(:submission_state) { "" }
 

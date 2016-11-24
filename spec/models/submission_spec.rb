@@ -166,34 +166,13 @@ describe Submission, type: :model do
       it { expect(submission.claimant).to be_nil }
     end
 
-    context "to printing" do
+    context "from assigned to completed" do
       let!(:submission) { create(:assigned_submission) }
-      let(:registration_starts_at) { Time.now }
+      let!(:bob) { create(:user) }
 
-      before do
-        expect(Policies::Submission)
-          .to receive(:approvable?)
-          .with(submission)
-          .and_return(true)
+      before { submission.approved! }
 
-        expect(Submission::ApplicationProcessor)
-          .to receive(:run)
-          .with(submission, registration_starts_at)
-      end
-
-      it { submission.move_to_print_queue!(registration_starts_at) }
-    end
-
-    context "to completed" do
-      let!(:submission) { create(:printing_submission) }
-
-      before do
-        allow(Policies::Submission)
-          .to receive(:printing_completed?)
-          .with(submission)
-      end
-
-      it { submission.completed! }
+      it { expect(submission.claimant).to be_present }
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124122744) do
+ActiveRecord::Schema.define(version: 20161124164743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,7 +197,6 @@ ActiveRecord::Schema.define(version: 20161124122744) do
     t.datetime "referred_until"
     t.string   "ref_no"
     t.datetime "received_at"
-    t.json     "print_jobs"
     t.string   "task"
     t.string   "source"
     t.boolean  "officer_intervention_required"

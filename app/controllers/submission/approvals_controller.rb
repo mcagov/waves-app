@@ -2,7 +2,7 @@ class Submission::ApprovalsController < InternalPagesController
   before_action :load_submission
 
   def create
-    if process_approval
+    if @submission.approved!(approval_params)
       Builders::NotificationBuilder
         .application_approval(
           @submission, current_user, approval_params[:notification_attachments])
@@ -27,13 +27,5 @@ class Submission::ApprovalsController < InternalPagesController
     params.require(:submission_approval).permit(
       :notification_attachments,
       :registration_starts_at)
-  end
-
-  def process_approval
-    if @submission.printing_required?
-      @submission.move_to_print_queue!(approval_params)
-    else
-      @submission.skip_print_queue!(approval_params)
-    end
   end
 end

@@ -20,7 +20,7 @@ class Submission < ApplicationRecord
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
-  scope :active, -> { where.not(state: [:printing, :completed]) }
+  scope :active, -> { where.not(state: [:completed]) }
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
@@ -55,16 +55,8 @@ class Submission < ApplicationRecord
     !editable?
   end
 
-  def process_application(approval_params)
+  def process_application(approval_params = {})
     Submission::ApplicationProcessor.run(self, approval_params)
-  end
-
-  def printing_required?
-    Policies::Submission.printing_required?(self)
-  end
-
-  def printing_completed?
-    Policies::Submission.printing_completed?(self)
   end
 
   def job_type

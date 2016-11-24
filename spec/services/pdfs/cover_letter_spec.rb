@@ -2,7 +2,13 @@ require "rails_helper"
 
 describe Pdfs::CoverLetter do
   context "for a single registration" do
-    before { create(:printing_submission) }
+    before do
+      vessel = create(:registered_vessel)
+      create(
+        :registration,
+        registry_info: vessel.registry_info,
+        vessel_id: vessel.id, registered_at: "2012-12-03")
+    end
 
     let(:cover_letter) { Pdfs::CoverLetter.new(Registration.last) }
 

@@ -61,17 +61,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :printing_submission, parent: :assigned_submission do
-    after(:create) do |submission|
-      submission.move_to_print_queue!(registration_starts_at: Date.today)
-    end
-  end
-
-  factory :completed_submission, parent: :printing_submission do
-    after(:create) do |submission|
-      PrintWorker.new(submission).update_job!("registration_certificate")
-      PrintWorker.new(submission).update_job!("cover_letter")
-    end
+  factory :completed_submission, parent: :assigned_submission do
+    state :completed
   end
 
   factory :paid_submission, parent: :unassigned_submission do

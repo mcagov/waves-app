@@ -21,20 +21,7 @@ class Policies::Submission
 
     def editable?(submission)
       return false if submission.officer_intervention_required?
-      !submission.completed? && !submission.printing?
-    end
-
-    def printing_completed?(submission)
-      @submission = submission
-      return true unless printing_required?(submission)
-
-      !@submission.print_jobs.map(&:last).include?(false)
-    end
-
-    def printing_required?(submission)
-      @submission = submission
-
-      Task.new(@submission.task).prints_certificate?
+      !submission.completed?
     end
 
     def registered_vessel_required?(submission)
