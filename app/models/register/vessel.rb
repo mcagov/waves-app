@@ -43,5 +43,12 @@ module Register
         :expired
       end
     end
+
+    def registry_info
+      {
+        vessel_info: attributes,
+        owners: owners.map(&:attributes),
+      }
+    end
   end
 end

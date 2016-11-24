@@ -1,9 +1,9 @@
 class Builders::RegistrationBuilder
   class << self
-    def create(submission, registration_starts_at)
+    def create(submission, registered_vessel, registration_starts_at)
       @submission = submission
       @registration_starts_at = registration_starts_at
-      @vessel = @submission.registered_vessel
+      @registered_vessel = registered_vessel
 
       Registration.transaction do
         create_registration
@@ -21,6 +21,8 @@ class Builders::RegistrationBuilder
         submission_id: @submission.id,
         registered_at: registration_date.starts_at,
         registered_until: registration_date.ends_at,
+        submission_ref_no: @submission.ref_no,
+        registry_info: @registered_vessel.registry_info,
         actioned_by: @submission.claimant
       )
     end

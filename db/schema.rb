@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122102153) do
+ActiveRecord::Schema.define(version: 20161124122744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,9 +170,11 @@ ActiveRecord::Schema.define(version: 20161122102153) do
     t.uuid     "submission_id"
     t.datetime "registered_at"
     t.datetime "registered_until"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.uuid     "actioned_by_id"
+    t.json     "registry_info"
+    t.string   "submission_ref_no"
     t.index ["actioned_by_id"], name: "index_registrations_on_actioned_by_id", using: :btree
   end
 

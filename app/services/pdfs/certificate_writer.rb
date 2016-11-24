@@ -40,7 +40,7 @@ class Pdfs::CertificateWriter
   def registration_details
     draw_value(@registration.registered_until, at: [57, 300])
     draw_value @vessel.reg_no, at: [182, 300]
-    draw_label_value "Description", @vessel.vessel_type.upcase, at: [34, 265]
+    draw_label_value "Description", @vessel[:vessel_type].upcase, at: [34, 265]
     draw_label_value "Overall Length", @vessel.length_in_meters, at: [34, 250]
     draw_label_value "Number of Hulls", @vessel.number_of_hulls, at: [34, 235]
     draw_label_value "Name of Ship", @vessel, at: [34, 220]

@@ -23,10 +23,8 @@ class Builders::SubmissionBuilder
     def build_registry_info
       return unless @submission.registry_info.blank?
 
-      @submission.registry_info = {
-        vessel_info: @submission.registered_vessel.attributes,
-        owners: @submission.registered_vessel.owners.map(&:attributes),
-      }
+      @submission.registry_info =
+        @submission.registered_vessel.registry_info
     end
 
     def build_changeset

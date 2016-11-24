@@ -9,6 +9,8 @@ class Builders::RegistryBuilder
         assign_vessel_to_submission
         build_owners
       end
+
+      @vessel
     end
 
     private

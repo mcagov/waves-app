@@ -26,7 +26,7 @@ class Pdfs::Certificate
 
   def single_registration_filename
     registration = @registrations.first
-    title = registration.vessel.to_s.parameterize
+    title = registration.vessel_name.parameterize
     reg_date = registration.registered_at.to_s(:db)
     "#{title}-registration-#{reg_date}.pdf"
   end
