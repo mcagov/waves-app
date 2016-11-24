@@ -31,9 +31,8 @@ describe Builders::RegistrationBuilder do
         .to eq(registration_certificate: false, cover_letter: false)
     end
 
-    it "makes a snapshot of the vessel's registry_info" do
-      expect(registration.registry_info)
-        .to eq(registered_vessel.build_registry_info)
+    it "makes a snapshot of the vessel details" do
+      expect(registration.vessel[:id]).to eq(registered_vessel.id)
     end
 
     it "records the submission_ref_no" do

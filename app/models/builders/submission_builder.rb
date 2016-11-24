@@ -29,6 +29,7 @@ class Builders::SubmissionBuilder
 
     def build_changeset
       return unless @submission.changeset.blank?
+
       @submission.changeset = @submission.registry_info
     end
 

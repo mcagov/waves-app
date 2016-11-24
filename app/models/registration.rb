@@ -3,7 +3,7 @@ class Registration < ApplicationRecord
   belongs_to :actioned_by, class_name: "User", required: false
 
   def vessel
-    symbolized_changeset[:vessel_info] || {}
+    symbolized_registry_info[:vessel_info] || {}
   end
 
   def vessel_name
@@ -11,16 +11,16 @@ class Registration < ApplicationRecord
   end
 
   def owners
-    symbolized_changeset[:vessel_info]
+    symbolized_registry_info[:owner_info] || []
   end
 
   private
 
-  def symbolized_changeset
-    if submission_changeset.blank?
+  def symbolized_registry_info
+    if registry_info.blank?
       {}
     else
-      submission_changeset.deep_symbolize_keys!
+      registry_info.deep_symbolize_keys!
     end
   end
 end
