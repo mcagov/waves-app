@@ -4,7 +4,7 @@ FactoryGirl.define do
     sequence(:name)           { |n| "Boaty McBoatface #{n}" }
     number_of_hulls           { rand(1..6) }
     vessel_type               "BARGE"
-    owners                    { [build(:register_owner)] }
+    owners                    { [build(:registered_owner)] }
   end
 
   after(:create) do

@@ -49,7 +49,7 @@ describe Pdfs::Certificate do
     end
   end
 
-  xcontext "for multiple registrations" do
+  context "for multiple registrations" do
     before do
       3.times do
         vessel = create(:registered_vessel)
@@ -58,11 +58,10 @@ describe Pdfs::Certificate do
           registry_info: vessel.registry_info,
           vessel_id: vessel.id, registered_at: "2012-12-03")
       end
-
-      @owners = Registration.all.map{ |r| r.owners[0] }
     end
 
     let(:certificate) { Pdfs::Certificate.new(Registration.all) }
+    let(:owners) { Registration.all.map{ |r| r.owners[0] } }
 
     it "has a filename" do
       expect(certificate.filename)
@@ -72,9 +71,9 @@ describe Pdfs::Certificate do
     it "has three pages with the owner name on each" do
       PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
         expect(reader.page_count).to eq(3)
-        expect(reader.page(1).text).to match(@owners[0][:name].upcase)
-        expect(reader.page(2).text).to match(@owners[1][:name].upcase)
-        expect(reader.page(3).text).to match(@owners[2][:name].upcase)
+        expect(reader.page(1).text).to match(owners[0][:name])
+        expect(reader.page(2).text).to match(owners[1][:name])
+        expect(reader.page(3).text).to match(owners[2][:name])
       end
     end
   end

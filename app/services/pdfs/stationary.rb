@@ -50,14 +50,14 @@ module Pdfs::Stationary
     @pdf.draw_text "Date: ", at: [340, 634]
     set_copy_font
     @pdf.draw_text "", at: [400, 662]
-    @pdf.draw_text @vessel.reg_no, at: [400, 648]
+    @pdf.draw_text @vessel[:reg_no], at: [400, 648]
     @pdf.draw_text Date.today.to_s(:formal), at: [400, 634]
   end
 
   def correspondent_address
     @pdf.draw_text @correspondent, at: [l_margin, 660]
     i = 0
-    @correspondent.compacted_address.each do |line|
+    compacted_address(@correspondent).each do |line|
       @pdf.draw_text line, at: [l_margin, 646 - i]
       i += spacer
     end
@@ -65,6 +65,10 @@ module Pdfs::Stationary
 
   def greeting
     set_copy_font
-    @pdf.draw_text "Dear #{@correspondent}", at: [l_margin, 560]
+    @pdf.draw_text "Dear #{@correspondent[:name]}", at: [l_margin, 560]
+  end
+
+  def compacted_address(customer)
+    Customer.new(customer).compacted_address
   end
 end

@@ -11,7 +11,7 @@ class Registration < ApplicationRecord
   end
 
   def owners
-    symbolized_registry_info[:owner_info] || []
+    symbolized_registry_info[:owners] || []
   end
 
   private
