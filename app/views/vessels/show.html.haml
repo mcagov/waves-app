@@ -61,10 +61,10 @@
               %tr
                 %td.soft-label.no-top-border Registration Date:
                 %td.no-top-border
-                  %strong= @vessel.latest_registration.created_at if @vessel.latest_registration
+                  %strong= @vessel.current_registration.created_at if @vessel.current_registration
               %tr
                 %td.soft-label Reg Expiry Date:
                 %td
-                  %strong= @vessel.latest_registration.registered_until if @vessel.latest_registration
+                  %strong= @vessel.current_registration.registered_until if @vessel.current_registration
       = render partial: "tabs"
 = render partial: "vessels/modals/to_do"

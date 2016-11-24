@@ -9,7 +9,7 @@ module Register
              class_name: "Register::Owner"
 
     has_many :registrations
-    has_one :latest_registration,
+    has_one :current_registration,
             -> { order("registered_until desc").limit(1) },
             class_name: "Registration"
 
@@ -24,7 +24,7 @@ module Register
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
-    delegate :registered_until, to: :latest_registration
+    delegate :registered_until, to: :current_registration
 
     def to_s
       name.upcase
@@ -35,7 +35,7 @@ module Register
     end
 
     def registration_status
-      return :pending unless latest_registration
+      return :pending unless current_registration
 
       if registered_until >= Date.today
         :registered

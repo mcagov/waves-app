@@ -13,7 +13,7 @@ describe Register::Vessel do
     end
   end
 
-  context "#latest_registration" do
+  context "#current_registration" do
     let!(:current_reg) do
       create(:registration, vessel: vessel, registered_until: 1.year.from_now)
     end
@@ -22,7 +22,7 @@ describe Register::Vessel do
       create(:registration, vessel: vessel, registered_until: 10.years.ago)
     end
 
-    subject { vessel.latest_registration }
+    subject { vessel.current_registration }
 
     it { expect(subject).to eq(current_reg) }
   end
