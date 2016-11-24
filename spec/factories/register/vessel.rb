@@ -6,4 +6,8 @@ FactoryGirl.define do
     vessel_type               "BARGE"
     owners                    { [build(:register_owner)] }
   end
+
+  after(:create) do
+    build(:registration)
+  end
 end

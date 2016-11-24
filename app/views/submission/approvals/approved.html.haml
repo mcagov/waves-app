@@ -1,6 +1,10 @@
 .row
   .col-sm-6
-    = render partial: "submissions/info/heading", locals: {submission: @submission}
+    %h1{style: "margin-top: 0px !important;"}
+      = @submission.job_type
+      %small
+        ID:
+        = @submission.ref_no
   .col-sm-6
     .pull-right
       - if Task.new(@submission.task).prints_certificate?

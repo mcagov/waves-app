@@ -3,6 +3,10 @@ class Task
     @key = key.to_sym
   end
 
+  def ==(other)
+    @key == other.to_sym
+  end
+
   def description
     Task.all_task_types.find { |t| t[1] == @key }[0]
   end
