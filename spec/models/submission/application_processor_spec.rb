@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Submission::ApplicationProcessor do
+  let(:registered_vessel) { double(:registered_vessel) }
+
   context "#run" do
     let(:approval_params) do
       {
@@ -59,7 +61,7 @@ describe Submission::ApplicationProcessor do
 
         before do
           dont_expect_registry_builder
-          expect_registration_builder
+          dont_expect_registration_builder
         end
 
         it { subject }
@@ -106,6 +108,7 @@ def expect_registry_builder
   expect(Builders::RegistryBuilder)
     .to receive(:create)
     .with(submission)
+    .and_return(registered_vessel)
 end
 
 def dont_expect_registry_builder
@@ -115,7 +118,7 @@ end
 def expect_registration_builder
   expect(Builders::RegistrationBuilder)
     .to receive(:create)
-    .with(submission, "01/01/2011")
+    .with(submission, registered_vessel, "01/01/2011")
 end
 
 def dont_expect_registration_builder

@@ -37,6 +37,12 @@ class Task
       :re_registration, :new_registration, :renewal].include?(@key)
   end
 
+  def builds_registration?
+    [
+      :change_owner, :change_vessel,
+      :re_registration, :new_registration, :renewal].include?(@key)
+  end
+
   class << self
     def finance_task_types
       all_task_types.delete_if do |t|
