@@ -20,7 +20,7 @@ class PrintQueue::BaseController < InternalPagesController
     @submissions =
       Submission
       .where(part: current_activity.part)
-      .includes([registration: [vessel: [:owners]]]).printing
+      .includes(:registration).printing
       .map { |submission| Decorators::Submission.new(submission) }
   end
 
