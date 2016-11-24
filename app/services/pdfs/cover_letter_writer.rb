@@ -20,7 +20,7 @@ class Pdfs::CoverLetterWriter
 
   def vessel_name
     set_bold_font
-    @pdf.draw_text @vessel, at: [l_margin, 530]
+    @pdf.draw_text @vessel[:name], at: [l_margin, 530]
   end
 
   def message

@@ -55,7 +55,7 @@ module Pdfs::Stationary
   end
 
   def correspondent_address
-    @pdf.draw_text @correspondent, at: [l_margin, 660]
+    @pdf.draw_text @correspondent[:name], at: [l_margin, 660]
     i = 0
     compacted_address(@correspondent).each do |line|
       @pdf.draw_text line, at: [l_margin, 646 - i]
