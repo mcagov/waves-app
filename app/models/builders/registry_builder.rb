@@ -44,8 +44,7 @@ class Builders::RegistryBuilder
     end
 
     def build_owner(owner)
-      Register::Owner.create(
-        vessel: @vessel,
+      @vessel.owners.create(
         name: owner.name, nationality: owner.nationality,
         email: owner.email, phone_number: owner.phone_number,
         address_1: owner.address_1, address_2: owner.address_2,

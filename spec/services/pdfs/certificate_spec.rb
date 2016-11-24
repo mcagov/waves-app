@@ -61,7 +61,7 @@ describe Pdfs::Certificate do
     end
 
     let(:certificate) { Pdfs::Certificate.new(Registration.all) }
-    let(:owners) { Registration.all.map{ |r| r.owners[0] } }
+    let(:owners) { Registration.all.map { |r| r.owners[0] } }
 
     it "has a filename" do
       expect(certificate.filename)

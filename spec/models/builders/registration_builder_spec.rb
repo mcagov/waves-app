@@ -26,11 +26,6 @@ describe Builders::RegistrationBuilder do
         .to eq(submission.claimant)
     end
 
-    it "builds the print_jobs" do
-      expect(submission.print_jobs.symbolize_keys)
-        .to eq(registration_certificate: false, cover_letter: false)
-    end
-
     it "makes a snapshot of the vessel details" do
       expect(registration.vessel[:id]).to eq(registered_vessel.id)
     end
