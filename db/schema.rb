@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124164743) do
+ActiveRecord::Schema.define(version: 20161124165714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,17 @@ ActiveRecord::Schema.define(version: 20161124164743) do
     t.index ["remittance_id"], name: "index_payments_on_remittance_id", using: :btree
     t.index ["remittance_type"], name: "index_payments_on_remittance_type", using: :btree
     t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
+  end
+
+  create_table "print_jobs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "printable_id"
+    t.string   "printable_type"
+    t.string   "template"
+    t.uuid     "printed_by"
+    t.datetime "printed_at"
+    t.index ["printable_id"], name: "index_print_jobs_on_printable_id", using: :btree
+    t.index ["printable_type"], name: "index_print_jobs_on_printable_type", using: :btree
+    t.index ["template"], name: "index_print_jobs_on_template", using: :btree
   end
 
   create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

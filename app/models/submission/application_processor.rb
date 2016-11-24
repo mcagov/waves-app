@@ -34,7 +34,12 @@ class Submission::ApplicationProcessor
     end
 
     def add_certificates_to_print_queue
-      [:registration_certificate, :cover_letter]
+      [:registration_certificate, :cover_letter].each do |template|
+        PrintJob.create(
+          printable: @registration,
+          template: template
+        )
+      end
     end
   end
 end

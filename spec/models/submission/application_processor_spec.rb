@@ -23,6 +23,7 @@ describe Submission::ApplicationProcessor do
       before do
         expect_registry_builder
         expect_registration_builder
+        expect_print_certificate_builder
       end
 
       it { subject }
@@ -40,6 +41,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
+          expect_print_certificate_builder
         end
 
         it { subject }
@@ -51,6 +53,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           dont_expect_registration_builder
+          dont_expect_print_certificate_builder
         end
 
         it { subject }
@@ -62,6 +65,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
+          expect_print_certificate_builder
         end
 
         it { subject }
@@ -73,6 +77,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
+          expect_print_certificate_builder
         end
 
         it { subject }
@@ -85,6 +90,7 @@ describe Submission::ApplicationProcessor do
           dont_expect_registry_builder
           dont_expect_registration_builder
           expect_closed_registration_builder
+          dont_expect_print_certificate_builder
         end
 
         it { subject }
@@ -96,6 +102,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
+          dont_expect_print_certificate_builder
         end
 
         it { subject }
@@ -129,4 +136,12 @@ def expect_closed_registration_builder
   expect(Builders::ClosedRegistrationBuilder)
     .to receive(:create)
     .with(submission, "02/02/2012", "a reason")
+end
+
+def expect_print_certificate_builder
+  expect(PrintJob).to receive(:create).twice
+end
+
+def dont_expect_print_certificate_builder
+  expect(PrintJob).not_to receive(:create)
 end
