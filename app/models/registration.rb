@@ -1,5 +1,4 @@
 class Registration < ApplicationRecord
-  belongs_to :submission, required: false
   belongs_to :actioned_by, class_name: "User", required: false
 
   def vessel

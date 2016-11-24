@@ -4,7 +4,9 @@ class Registration::CoverLettersController < InternalPagesController
   def show
     @registration = Registration.find(params[:id])
     pdf = Pdfs::CoverLetter.new(@registration)
-    PrintWorker.new(@registration.submission).update_job!(:cover_letter)
+
+    submission = Submission.find_by(ref_no: @registration.submission_ref_no)
+    PrintWorker.new(submission).update_job!(:cover_letter)
 
     render_pdf(pdf, pdf.filename)
   end

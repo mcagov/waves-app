@@ -4,8 +4,9 @@ class Registration::CertificatesController < InternalPagesController
   def show
     @registration = Registration.find(params[:id])
     pdf = Pdfs::Certificate.new(@registration)
-    PrintWorker.new(@registration.submission)
-               .update_job!(:registration_certificate)
+
+    submission = Submission.find_by(ref_no: @registration.submission_ref_no)
+    PrintWorker.new(submission).update_job!(:registration_certificate)
 
     render_pdf(pdf, pdf.filename)
   end
