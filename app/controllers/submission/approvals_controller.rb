@@ -7,8 +7,7 @@ class Submission::ApprovalsController < InternalPagesController
         .application_approval(
           @submission, current_user, approval_params[:notification_attachments])
 
-      @submission = Decorators::Submission.new(@submission)
-      render "approved"
+      redirect_to registration_path(@submission.registration)
     else
       render "errors"
     end

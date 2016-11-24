@@ -18,8 +18,8 @@ describe Submission::ApprovalsController, type: :controller do
         expect(assigns[:submission]).to be_completed
       end
 
-      it "renders the aproved page" do
-        expect(response).to render_template("approved")
+      it "redirects to the registration page" do
+        expect(response).to redirect_to(/registrations/)
       end
 
       it "creates a notification for the applicant" do
@@ -35,7 +35,7 @@ describe Submission::ApprovalsController, type: :controller do
     context "unsuccessfully" do
       before do
         allow_any_instance_of(Submission)
-          .to receive(:move_to_print_queue!).and_return(false)
+          .to receive(:approved!).and_return(false)
         post :create, params: params
       end
 

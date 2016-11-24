@@ -62,7 +62,9 @@ FactoryGirl.define do
   end
 
   factory :completed_submission, parent: :assigned_submission do
-    state :completed
+    after(:create) do |submission|
+      submission.approved!({})
+    end
   end
 
   factory :paid_submission, parent: :unassigned_submission do
