@@ -9,7 +9,10 @@ describe Builders::RegistrationBuilder do
 
     let!(:submission) { create(:assigned_submission) }
     let!(:registered_vessel) { create(:registered_vessel) }
-    let(:registration) { submission.registration }
+
+    let(:registration) do
+      Registration.find_by(submission_ref_no: submission.ref_no)
+    end
 
     it "records the registration date" do
       expect(registration.registered_at)

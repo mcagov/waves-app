@@ -14,7 +14,8 @@ class Notification::ApplicationApproval < Notification
   private
 
   def registration
-    @registration ||= notifiable.registration
+    @registration ||=
+      Registration.find_by(submission_ref_no: notifiable.ref_no)
   end
 
   def vessel_reg_no

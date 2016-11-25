@@ -3,13 +3,10 @@ class Submission::ApprovalsController < InternalPagesController
 
   def create
     if @submission.approved!(approval_params)
-      Builders::NotificationBuilder
-        .application_approval(
-          @submission,
-          current_user,
-          approval_params[:notification_attachments])
+      build_notification
 
-      redirect_to registration_path(@submission.registration)
+      redirect_to registration_path(
+        Registration.find_by(submission_ref_no: @submission.ref_no))
     else
       render "errors"
     end
@@ -28,5 +25,13 @@ class Submission::ApprovalsController < InternalPagesController
     params.require(:submission_approval).permit(
       :notification_attachments,
       :registration_starts_at)
+  end
+
+  def build_notification
+    Builders::NotificationBuilder
+      .application_approval(
+        @submission,
+        current_user,
+        approval_params[:notification_attachments])
   end
 end

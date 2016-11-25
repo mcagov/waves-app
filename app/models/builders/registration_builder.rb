@@ -15,7 +15,6 @@ class Builders::RegistrationBuilder
 
       Registration.create(
         vessel_id: @registered_vessel.id,
-        submission_id: @submission.id,
         registered_at: registration_date.starts_at,
         registered_until: registration_date.ends_at,
         submission_ref_no: @submission.ref_no,

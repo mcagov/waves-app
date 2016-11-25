@@ -24,7 +24,9 @@ describe Builders::ClosedRegistrationBuilder do
       create(:submission, registered_vessel: registered_vessel)
     end
 
-    let(:registration) { submission.registration }
+    let(:registration) do
+      Registration.find_by(submission_ref_no: submission.ref_no)
+    end
 
     it "records the closed_at date" do
       expect(registration.closed_at).to eq("10/10/2012 12:23 PM".to_datetime)

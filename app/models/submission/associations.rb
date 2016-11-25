@@ -49,7 +49,6 @@ module Submission::Associations
     end
 
     def registration_associations(base)
-      base.has_one :registration
       base.belongs_to :registered_vessel,
                       lambda { |submission|
                         where("vessels.part = ?", submission.part)

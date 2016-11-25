@@ -15,7 +15,6 @@ class Builders::ClosedRegistrationBuilder
     def create_closed_registration
       Registration.create(
         vessel_id: @registered_vessel.id,
-        submission_id: @submission.id,
         registered_at: @previous_registration.try(:registered_at),
         registered_until: @previous_registration.try(:registered_until),
         closed_at: @closure_at,
