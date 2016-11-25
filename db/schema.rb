@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125095117) do
+ActiveRecord::Schema.define(version: 20161125112200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(version: 20161125095117) do
     t.datetime "updated_at",        null: false
     t.datetime "closed_at"
     t.text     "description"
+    t.index ["submission_ref_no"], name: "index_registrations_on_submission_ref_no", using: :btree
+    t.index ["vessel_id"], name: "index_registrations_on_vessel_id", using: :btree
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
