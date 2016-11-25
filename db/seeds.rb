@@ -38,7 +38,8 @@ end
   end
 
   registered_at = Faker::Date.between(4.years.ago, 1.month.ago)
-  vessel.registrations.create(
+  Registration.create(
+    vessel_id: vessel.id,
     registered_at: registered_at,
     registered_until: registered_at.advance(years: 5)
   )
