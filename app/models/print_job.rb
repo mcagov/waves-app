@@ -4,4 +4,7 @@ class PrintJob < ApplicationRecord
 
   validates :part, presence: true
   validates :template, presence: true
+
+  scope :in_part, ->(part) { where(part: part.to_sym) }
+  scope :unprinted, -> { where(printed_at: nil) }
 end
