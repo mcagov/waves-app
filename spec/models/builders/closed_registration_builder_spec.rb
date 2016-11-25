@@ -49,11 +49,11 @@ describe Builders::ClosedRegistrationBuilder do
     end
 
     it "records the previous registration dates" do
-      expect(registration.registered_at)
-        .to eq(previous_registration.registered_at)
+      expect(registration.registered_at.to_date)
+        .to eq(previous_registration.registered_at.to_date)
 
-      expect(registration.registered_until)
-        .to eq(previous_registration.registered_until)
+      expect(registration.registered_until.to_date)
+        .to eq(previous_registration.registered_until.to_date)
     end
   end
 end
