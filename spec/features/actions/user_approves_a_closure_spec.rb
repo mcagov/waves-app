@@ -20,7 +20,7 @@ feature "User approves a closure", type: :feature, js: true do
     expect(page).to have_text("Registration Closure has been approved")
 
     pdf_window = window_opened_by do
-      click_on("Print Closed Transcript")
+      click_on("Print Current Transcript")
     end
 
     within_window(pdf_window) do

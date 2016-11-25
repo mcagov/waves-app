@@ -21,6 +21,11 @@ en:
   titles:
     application: Small Ships Register
 
+  print_job:
+    button_text:
+      cover_letter: Print Cover Letter
+      registration_certificate: Print Certificate of Registry
+      current_transcript: Print Current Transcript
   submission:
     approval:
       inline-btn:
