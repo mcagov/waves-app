@@ -2,7 +2,7 @@ class Submission::ApprovalsController < InternalPagesController
   before_action :load_submission
 
   def create
-    if @submission.approved!(approval_params)
+    if @submission.approved!(approval_params.to_h)
       build_notification
 
       redirect_to registration_path(
@@ -24,7 +24,9 @@ class Submission::ApprovalsController < InternalPagesController
 
     params.require(:submission_approval).permit(
       :notification_attachments,
-      :registration_starts_at)
+      :registration_starts_at,
+      :closure_at,
+      :closure_reason)
   end
 
   def build_notification
