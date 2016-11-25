@@ -59,7 +59,6 @@ Rails.application.routes.draw do
   end
 
   resources :registrations, only: [:show]
-
   resources :print_jobs, only: [:show]
 
   namespace :print_queue do
