@@ -10,7 +10,7 @@ module Register
 
     has_many :registrations
     has_one :current_registration,
-            -> { order("registered_until desc").limit(1) },
+            -> { order("created_at desc").limit(1) },
             class_name: "Registration"
 
     has_many :correspondences, as: :noteable
