@@ -16,7 +16,7 @@
           Print Cover Letter
 
       - elsif Task.new(@submission.task).prints_closed_transcript?
-        = link_to "#", target: "_blank", class: "btn btn-warning" do
+        = link_to registration_transcript_path(@registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
           Print Closed Transcript
 

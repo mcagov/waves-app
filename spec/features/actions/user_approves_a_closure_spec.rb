@@ -17,9 +17,14 @@ feature "User approves a closure", type: :feature, js: true do
       click_button("Close Registration")
     end
 
-    expect(page).to have_link("Print Closed Transcript")
     expect(page).to have_text("Registration Closure has been approved")
-  end
 
-  scenario "print transcipt from registrations#show"
+    pdf_window = window_opened_by do
+      click_on("Print Closed Transcript")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
+  end
 end
