@@ -45,6 +45,20 @@ describe Task do
     end
   end
 
+  context "#prints_current_transcript?" do
+    subject { task.prints_current_transcript? }
+
+    context "for a new_registration" do
+      let(:key) { :new_registration }
+      it { expect(subject).to be_falsey }
+    end
+
+    context "for a closure" do
+      let(:key) { :closure }
+      it { expect(subject).to be_truthy }
+    end
+  end
+
   context ".finance_task_types" do
     it do
       [:change_address, :closure].each do |task_type|

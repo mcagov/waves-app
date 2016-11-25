@@ -10,7 +10,9 @@ describe Notification::ApplicationApproval, type: :model do
 
     let!(:registration) do
       create(:registration,
-             vessel: registered_vessel, submission: submission)
+             registry_info: registered_vessel.registry_info,
+             vessel_id: registered_vessel.id,
+             submission_ref_no: submission.ref_no)
     end
 
     context "in general" do

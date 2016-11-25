@@ -12,10 +12,6 @@ class Decorators::Submission < SimpleDelegator
     Builders::NotificationListBuilder.for_submission(@submission)
   end
 
-  def printed?(print_job_type)
-    print_jobs && print_jobs[print_job_type.to_s].present?
-  end
-
   def vessel_name
     return vessel.name if vessel.name.present?
     if finance_payment && finance_payment.vessel_name.present?

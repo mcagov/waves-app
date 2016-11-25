@@ -2,8 +2,8 @@
   .row
     .col-md-12
       .form-group
-        - approval_f.object.registration_starts_at = Date.today
-        = approval_f.input :registration_starts_at, label: "Closure Date", input_html: { class: "datepicker" }
+        - approval_f.object.closure_at = Date.today
+        = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datepicker" }
 
 .modal-body
   .row

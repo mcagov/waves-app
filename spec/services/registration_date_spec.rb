@@ -24,7 +24,7 @@ describe RegistrationDate do
           .and_return(registered_vessel)
       end
 
-      it "sets starts_at to the expiry of latest_registration" do
+      it "sets starts_at to the expiry of current_registration" do
         expect(subject.starts_at.to_date).to eq(1.month.from_now.to_date)
       end
     end

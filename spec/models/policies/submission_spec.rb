@@ -22,22 +22,14 @@ describe Policies::Submission do
   context "#editable?" do
     before do
       allow(submission).to receive(:completed?).and_return(completed)
-      allow(submission).to receive(:printing?).and_return(printing)
     end
 
     let(:completed) { false }
-    let(:printing) { false }
     let(:submission) { build(:submission) }
 
     subject { submission.editable? }
 
     it { expect(subject).to be_truthy }
-
-    context "when the current_state is printing" do
-      let(:printing) { true }
-
-      it { expect(subject).to be_falsey }
-    end
 
     context "when the current_state is completed" do
       let(:completed) { true }
@@ -59,40 +51,6 @@ describe Policies::Submission do
     end
 
     it { build(:submission).approvable? }
-  end
-
-  context "#printing_completed?" do
-    subject { submission.printing_completed? }
-
-    context "with outstanding print jobs" do
-      let!(:submission) { create(:printing_submission) }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "with no outstanding print jobs" do
-      let!(:submission) { create(:completed_submission) }
-
-      it { expect(subject).to be_truthy }
-    end
-  end
-
-  context "#printing_required?" do
-    let!(:submission) { build(:submission, task: task) }
-
-    subject { submission.printing_required? }
-
-    context "for a new_registration" do
-      let!(:task) { :new_registration }
-
-      it { expect(subject).to be_truthy }
-    end
-
-    context "for a closure" do
-      let!(:task) { :closure }
-
-      it { expect(subject).to be_falsey }
-    end
   end
 
   describe "approvable?" do

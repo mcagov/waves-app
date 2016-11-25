@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122102153) do
+ActiveRecord::Schema.define(version: 20161125153107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,15 +165,31 @@ ActiveRecord::Schema.define(version: 20161122102153) do
     t.index ["submission_id"], name: "index_payments_on_submission_id", using: :btree
   end
 
+  create_table "print_jobs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "printable_id"
+    t.string   "printable_type"
+    t.string   "template"
+    t.uuid     "printed_by_id"
+    t.datetime "printed_at"
+    t.string   "part"
+    t.index ["printable_id"], name: "index_print_jobs_on_printable_id", using: :btree
+    t.index ["printable_type"], name: "index_print_jobs_on_printable_type", using: :btree
+    t.index ["template"], name: "index_print_jobs_on_template", using: :btree
+  end
+
   create_table "registrations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vessel_id"
-    t.uuid     "submission_id"
     t.datetime "registered_at"
     t.datetime "registered_until"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
     t.uuid     "actioned_by_id"
-    t.index ["actioned_by_id"], name: "index_registrations_on_actioned_by_id", using: :btree
+    t.json     "registry_info"
+    t.string   "submission_ref_no"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.datetime "closed_at"
+    t.text     "description"
+    t.index ["submission_ref_no"], name: "index_registrations_on_submission_ref_no", using: :btree
+    t.index ["vessel_id"], name: "index_registrations_on_vessel_id", using: :btree
   end
 
   create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -195,7 +211,6 @@ ActiveRecord::Schema.define(version: 20161122102153) do
     t.datetime "referred_until"
     t.string   "ref_no"
     t.datetime "received_at"
-    t.json     "print_jobs"
     t.string   "task"
     t.string   "source"
     t.boolean  "officer_intervention_required"

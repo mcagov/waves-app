@@ -8,9 +8,8 @@ module Register
              -> { order("updated_at asc") },
              class_name: "Register::Owner"
 
-    has_many :registrations
-    has_one :latest_registration,
-            -> { order("registered_until desc").limit(1) },
+    has_one :current_registration,
+            -> { order("created_at desc").limit(1) },
             class_name: "Registration"
 
     has_many :correspondences, as: :noteable
@@ -24,7 +23,7 @@ module Register
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
-    delegate :registered_until, to: :latest_registration
+    delegate :registered_until, to: :current_registration
 
     def to_s
       name.upcase
@@ -35,13 +34,20 @@ module Register
     end
 
     def registration_status
-      return :pending unless latest_registration
+      return :pending unless current_registration
 
       if registered_until >= Date.today
         :registered
       else
         :expired
       end
+    end
+
+    def registry_info
+      {
+        vessel_info: attributes,
+        owners: owners.map(&:attributes),
+      }
     end
   end
 end

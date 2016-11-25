@@ -2,13 +2,11 @@ class Submission::ApprovalsController < InternalPagesController
   before_action :load_submission
 
   def create
-    if process_approval
-      Builders::NotificationBuilder
-        .application_approval(
-          @submission, current_user, approval_params[:notification_attachments])
+    if @submission.approved!(approval_params.to_h)
+      build_notification
 
-      @submission = Decorators::Submission.new(@submission)
-      render "approved"
+      redirect_to registration_path(
+        Registration.find_by(submission_ref_no: @submission.ref_no))
     else
       render "errors"
     end
@@ -26,14 +24,16 @@ class Submission::ApprovalsController < InternalPagesController
 
     params.require(:submission_approval).permit(
       :notification_attachments,
-      :registration_starts_at)
+      :registration_starts_at,
+      :closure_at,
+      :closure_reason)
   end
 
-  def process_approval
-    if @submission.printing_required?
-      @submission.move_to_print_queue!(approval_params)
-    else
-      @submission.skip_print_queue!(approval_params)
-    end
+  def build_notification
+    Builders::NotificationBuilder
+      .application_approval(
+        @submission,
+        current_user,
+        approval_params[:notification_attachments])
   end
 end

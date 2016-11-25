@@ -17,7 +17,9 @@
       Print Queue
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Certificates of Registry", print_queue_certificates_path
+
+      - [:registration_certificate, :cover_letter, :current_transcript].each do |template|
+        %li= link_to t("print_job.menu_title.#{template}"), print_jobs_path(template: template)
   %li
     %a
       %i.fa.fa-ship

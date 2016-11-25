@@ -9,7 +9,6 @@ module Submission::StateMachine
         state :unassigned
         state :assigned
         state :referred
-        state :printing
         state :completed
         state :referred
         state :cancelled
@@ -36,21 +35,10 @@ module Submission::StateMachine
                       on_transition: :remove_claimant
         end
 
-        event :move_to_print_queue do
-          transitions to: :printing, from: :assigned,
-                      on_transition: :process_application,
-                      guard: :approvable?
-        end
-
-        event :skip_print_queue do
+        event :approved do
           transitions to: :completed, from: :assigned,
                       on_transition: :process_application,
                       guard: :approvable?
-        end
-
-        event :completed do
-          transitions to: :completed, from: :printing,
-                      guard: :printing_completed?
         end
 
         event :cancelled do

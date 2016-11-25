@@ -7,77 +7,68 @@ describe Submission::ApprovalsController, type: :controller do
 
   let!(:claimant) { create(:user) }
 
-  context "#create" do
-    let(:submission) { create(:assigned_submission) }
-    let(:params) { { submission_id: submission.id } }
+  describe "in general" do
+    context "#create" do
+      let(:submission) { create(:assigned_submission) }
 
-    context "succesfully" do
-      before { post :create, params: params }
-
-      it "moves the submission to :printing" do
-        expect(assigns[:submission]).to be_printing
+      let(:approval_params) do
+        {
+          notification_attachments: "foo",
+          registration_starts_at: "1/1/2011",
+          closure_at: "2/2/2022",
+          closure_reason: "some text",
+        }
       end
 
-      it "renders the aproved page" do
-        expect(response).to render_template("approved")
+      let(:params) do
+        {
+          submission_id: submission.id,
+          submission_approval: approval_params,
+        }
       end
 
-      it "creates a notification for the applicant" do
-        expect(Notification::ApplicationApproval.count).to eq(1)
+      context "succesfully" do
+        before do
+          allow_any_instance_of(Submission)
+            .to receive(:approved!)
+            .with(approval_params)
+            .and_return(true)
 
-        expect(Notification::ApplicationApproval.first.recipient_name)
-          .to eq(submission.applicant_name)
+          expect(Registration)
+            .to receive(:find_by)
+            .and_return(double(:registration))
 
-        expect(Notification::ApplicationApproval.first.recipient_email)
-          .to eq(submission.applicant_email)
+          post :create, params: params
+        end
+
+        it "redirects to the registration page" do
+          expect(response).to redirect_to(/registrations/)
+        end
+
+        it "creates a notification for the applicant" do
+          expect(Notification::ApplicationApproval.count).to eq(1)
+        end
+
+        it "sets the notification#actioned_by" do
+          expect(Notification::ApplicationApproval.first.actioned_by)
+            .to eq(claimant)
+        end
       end
 
-      it "sets the notification#actioned_by" do
-        expect(Notification::ApplicationApproval.first.actioned_by)
-          .to eq(claimant)
-      end
-    end
+      context "unsuccessfully" do
+        before do
+          allow_any_instance_of(Submission)
+            .to receive(:approved!).and_return(false)
+          post :create, params: params
+        end
 
-    context "when printing is not required" do
-      before do
-        allow_any_instance_of(Submission)
-          .to receive(:printing_required?)
-          .and_return(false)
+        it "is still :assigned" do
+          expect(assigns[:submission]).to be_assigned
+        end
 
-        post :create, params: params
-      end
-
-      it "moves the submission to :completed" do
-        expect(assigns[:submission]).to be_completed
-      end
-
-      it "renders the aproved page" do
-        expect(response).to render_template("approved")
-      end
-
-      it "creates a notification for the applicant" do
-        expect(Notification::ApplicationApproval.count).to eq(1)
-      end
-
-      it "sets the notification#actioned_by" do
-        expect(Notification::ApplicationApproval.first.actioned_by)
-          .to eq(claimant)
-      end
-    end
-
-    context "unsuccessfully" do
-      before do
-        allow_any_instance_of(Submission)
-          .to receive(:move_to_print_queue!).and_return(false)
-        post :create, params: params
-      end
-
-      it "is still :assigned" do
-        expect(assigns[:submission]).to be_assigned
-      end
-
-      it "renders the errors page" do
-        expect(response).to render_template("errors")
+        it "renders the errors page" do
+          expect(response).to render_template("errors")
+        end
       end
     end
   end

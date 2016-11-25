@@ -2,12 +2,19 @@ require "rails_helper"
 
 describe "User prints from queue", type: :feature, js: true do
   before do
-    create(:printing_submission)
+    @template = :registration_certificate
+
+    registration =
+      create(:registration,
+             registry_info: create(:registered_vessel).registry_info)
+
+    create(:print_job, template: @template, printable: registration)
+
     login_to_part_3
-    visit print_queue_certificates_path
+    visit print_jobs_path(template: @template)
   end
 
-  scenario "processing the certificates" do
+  scenario "printing all certificates" do
     expect(page)
       .to have_css("h1", text: "Print Queue: Certificates of Registry")
 
@@ -19,19 +26,11 @@ describe "User prints from queue", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
 
-    visit print_queue_certificates_path
-    within(".certificate") { expect(page).to have_text("Printed: ") }
-
-    pdf_window = window_opened_by do
-      click_on("Print Cover Letters")
-    end
-
-    within_window(pdf_window) do
-      expect(page).to have_text("%PDF")
-    end
+    visit print_jobs_path(template: @template)
+    expect(page).to have_content("There are no items in this queue")
   end
 
-  scenario "printing a single certificate" do
+  scenario "printing a single item" do
     pdf_window = window_opened_by do
       within("td.certificate") { click_on("Print") }
     end
@@ -41,19 +40,9 @@ describe "User prints from queue", type: :feature, js: true do
     end
   end
 
-  scenario "printing a single cover letter" do
-    pdf_window = window_opened_by do
-      within("td.cover-letter") { click_on("Print") }
-    end
-
-    within_window(pdf_window) do
-      expect(page).to have_text("%PDF")
-    end
-  end
-
   scenario "when viewing another part of the registry" do
     login_to_part_1
-    visit print_queue_certificates_path
+    visit print_jobs_path(template: @template)
 
     expect(page).to have_content("There are no items in this queue")
   end

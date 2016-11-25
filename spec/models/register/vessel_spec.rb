@@ -13,16 +13,20 @@ describe Register::Vessel do
     end
   end
 
-  context "#latest_registration" do
-    let!(:current_reg) do
-      create(:registration, vessel: vessel, registered_until: 1.year.from_now)
-    end
-
+  context "#current_registration" do
     let!(:old_reg) do
-      create(:registration, vessel: vessel, registered_until: 10.years.ago)
+      create(
+        :registration,
+        vessel_id: vessel.id, registered_until: 10.years.ago)
     end
 
-    subject { vessel.latest_registration }
+    let!(:current_reg) do
+      create(
+        :registration,
+        vessel_id: vessel.id, registered_until: 1.year.from_now)
+    end
+
+    subject { vessel.current_registration }
 
     it { expect(subject).to eq(current_reg) }
   end
@@ -45,7 +49,9 @@ describe Register::Vessel do
 
     context "with an active registration" do
       before do
-        create(:registration, vessel: vessel, registered_until: 1.day.from_now)
+        create(
+          :registration,
+          vessel_id: vessel.id, registered_until: 1.day.from_now)
       end
 
       it { expect(subject).to eq(:registered) }
@@ -53,7 +59,9 @@ describe Register::Vessel do
 
     context "with an expired registration" do
       before do
-        create(:registration, vessel: vessel, registered_until: 1.week.ago)
+        create(
+          :registration,
+          vessel_id: vessel.id, registered_until: 1.week.ago)
       end
 
       it { expect(subject).to eq(:expired) }

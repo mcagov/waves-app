@@ -16,7 +16,15 @@ feature "User approves a closure", type: :feature, js: true do
       fill_in("Closure Date", with: "01/09/2011")
       click_button("Close Registration")
     end
-    expect(page).not_to have_link("Print Certificate of Registry")
+
     expect(page).to have_text("Registration Closure has been approved")
+
+    pdf_window = window_opened_by do
+      click_on("Print Current Transcript")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
   end
 end

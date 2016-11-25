@@ -4,16 +4,14 @@
       = @submission.job_type
       %small
         ID:
-        = @submission.ref_no
+        = @registration.submission_ref_no
   .col-sm-6
     .pull-right
-      - if Task.new(@submission.task).prints_certificate?
-        = link_to registration_certificate_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
+      - @print_jobs.each do |print_job|
+        = link_to print_job_path(print_job, format: :pdf),
+          target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
-          Print Certificate of Registry
-        = link_to registration_cover_letter_path(@submission.registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
-          %i.fa.fa-print{style: "font-size: 1.2em;"}
-          Print Cover Letter
+          = t("print_job.button_text.#{print_job.template}")
 
 .row
   .col-md-12.col-sm-12.col-xs-12
@@ -24,7 +22,7 @@
       .x_content
         %p
           = t("submission.approval.confirmation.#{@submission.task}",
-            part: Activity.new(@submission.part))
+            part: Activity.new(@submission.part).to_s)
 
 .row.no-print
   .col-xs-12
