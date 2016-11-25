@@ -2,8 +2,8 @@ class Builders::RegistrationBuilder
   class << self
     def create(submission, registered_vessel, registration_starts_at)
       @submission = submission
-      @registration_starts_at = registration_starts_at
-      @registered_vessel = registered_vessel || Date.today
+      @registered_vessel = registered_vessel
+      @registration_starts_at = registration_starts_at || Date.today
 
       create_registration
     end
