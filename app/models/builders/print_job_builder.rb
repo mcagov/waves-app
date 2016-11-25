@@ -1,8 +1,9 @@
 class Builders::PrintJobBuilder
   class << self
-    def create(registration, templates)
+    def create(registration, part, templates)
       @registration = registration
       @templates = templates
+      @part = part
 
       create_templates if @registration
     end
@@ -13,6 +14,7 @@ class Builders::PrintJobBuilder
       @templates.each do |template|
         PrintJob.create(
           printable: @registration,
+          part: @part,
           template: template
         )
       end

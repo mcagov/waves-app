@@ -42,8 +42,10 @@ class Submission::ApplicationProcessor
     end
 
     def build_print_jobs
+      return unless @task.print_job_templates
+
       Builders::PrintJobBuilder
-        .create(@registration, @task.print_job_templates)
+        .create(@registration, @submission.part, @task.print_job_templates)
     end
   end
 end

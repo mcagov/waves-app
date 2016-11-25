@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125112756) do
+ActiveRecord::Schema.define(version: 20161125144813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20161125112756) do
     t.string   "template"
     t.uuid     "printed_by"
     t.datetime "printed_at"
+    t.string   "part"
     t.index ["printable_id"], name: "index_print_jobs_on_printable_id", using: :btree
     t.index ["printable_type"], name: "index_print_jobs_on_printable_type", using: :btree
     t.index ["template"], name: "index_print_jobs_on_template", using: :btree

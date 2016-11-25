@@ -45,8 +45,8 @@ describe Task do
     end
   end
 
-  context "#prints_closed_transcript?" do
-    subject { task.prints_closed_transcript? }
+  context "#prints_current_transcript?" do
+    subject { task.prints_current_transcript? }
 
     context "for a new_registration" do
       let(:key) { :new_registration }

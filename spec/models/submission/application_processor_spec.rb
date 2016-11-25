@@ -139,9 +139,9 @@ def expect_closed_registration_builder
 end
 
 def expect_print_job_builder
-  expect(PrintJob).to receive(:create)
+  expect(Builders::PrintJobBuilder).to receive(:create)
 end
 
 def dont_expect_print_job_builder
-  expect(PrintJob).not_to receive(:create)
+  expect(Builders::PrintJobBuilder).not_to receive(:create)
 end

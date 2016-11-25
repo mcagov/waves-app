@@ -4,7 +4,7 @@ describe Builders::PrintJobBuilder do
   context ".create" do
     before do
       described_class.create(
-        registration, [:a_template, :b_template])
+        registration, :part_1, [:a_template, :b_template])
     end
 
     let(:print_jobs) { PrintJob.all }
