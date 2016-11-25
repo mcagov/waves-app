@@ -15,6 +15,14 @@ class Task
     ![:change_address, :closure].include?(@key)
   end
 
+  def print_job_templates
+    if prints_certificate?
+      [:registration_certificate, :cover_letter]
+    elsif prints_current_transcript?
+      [:current_transcript]
+    end
+  end
+
   def prints_certificate?
     [
       :new_registration, :change_owner, :change_vessel, :renewal,
@@ -22,7 +30,7 @@ class Task
     ].include?(@key)
   end
 
-  def prints_closed_transcript?
+  def prints_current_transcript?
     [:closure].include?(@key)
   end
 

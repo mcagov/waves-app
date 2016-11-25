@@ -6,7 +6,7 @@ class Submission::ApplicationProcessor
       @approval_params = approval_params
 
       process_changes
-      add_certificates_to_print_queue if @task.prints_certificate?
+      build_print_jobs
     end
 
     private
@@ -41,13 +41,12 @@ class Submission::ApplicationProcessor
           @approval_params[:closure_reason])
     end
 
-    def add_certificates_to_print_queue
-      [:registration_certificate, :cover_letter].each do |template|
-        PrintJob.create(
-          printable: @registration,
-          template: template
-        )
-      end
+    def build_print_jobs
+      return unless @task.print_job_templates
+
+      PrintJob.create(
+        printable: @registration,
+        template: @task.print_job_templates)
     end
   end
 end

@@ -23,7 +23,7 @@ describe Submission::ApplicationProcessor do
       before do
         expect_registry_builder
         expect_registration_builder
-        expect_print_certificate_builder
+        expect_print_job_builder
       end
 
       it { subject }
@@ -41,7 +41,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
-          expect_print_certificate_builder
+          expect_print_job_builder
         end
 
         it { subject }
@@ -53,7 +53,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           dont_expect_registration_builder
-          dont_expect_print_certificate_builder
+          dont_expect_print_job_builder
         end
 
         it { subject }
@@ -65,7 +65,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
-          expect_print_certificate_builder
+          expect_print_job_builder
         end
 
         it { subject }
@@ -77,7 +77,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
-          expect_print_certificate_builder
+          expect_print_job_builder
         end
 
         it { subject }
@@ -90,7 +90,7 @@ describe Submission::ApplicationProcessor do
           dont_expect_registry_builder
           dont_expect_registration_builder
           expect_closed_registration_builder
-          dont_expect_print_certificate_builder
+          expect_print_job_builder
         end
 
         it { subject }
@@ -102,7 +102,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
-          dont_expect_print_certificate_builder
+          expect_print_job_builder
         end
 
         it { subject }
@@ -138,10 +138,10 @@ def expect_closed_registration_builder
     .with(submission, "02/02/2012", "a reason")
 end
 
-def expect_print_certificate_builder
-  expect(PrintJob).to receive(:create).twice
+def expect_print_job_builder
+  expect(PrintJob).to receive(:create)
 end
 
-def dont_expect_print_certificate_builder
+def dont_expect_print_job_builder
   expect(PrintJob).not_to receive(:create)
 end
