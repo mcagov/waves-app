@@ -5,7 +5,9 @@ class Submission::ApprovalsController < InternalPagesController
     if @submission.approved!(approval_params)
       Builders::NotificationBuilder
         .application_approval(
-          @submission, current_user, approval_params[:notification_attachments])
+          @submission,
+          current_user,
+          approval_params[:notification_attachments])
 
       redirect_to registration_path(@submission.registration)
     else
