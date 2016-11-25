@@ -8,7 +8,8 @@
   .col-sm-6
     .pull-right
       - @print_jobs.each do |print_job|
-        = link_to "#", target: "_blank", class: "btn btn-warning" do
+        = link_to print_job_path(print_job),
+          target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
           = t("print_job.button_text.#{print_job.template}")
 

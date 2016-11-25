@@ -59,11 +59,8 @@ Rails.application.routes.draw do
   end
 
   resources :registrations, only: [:show]
-  namespace :registration do
-    resources :certificates, only: [:show]
-    resources :cover_letters, only: [:show]
-    resources :transcripts, only: [:show]
-  end
+
+  resources :print_jobs, only: [:show]
 
   namespace :print_queue do
     resources :certificates, only: [:index]
