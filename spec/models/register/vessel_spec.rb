@@ -14,16 +14,16 @@ describe Register::Vessel do
   end
 
   context "#current_registration" do
-    let!(:current_reg) do
-      create(
-        :registration,
-        vessel_id: vessel.id, registered_until: 1.year.from_now)
-    end
-
     let!(:old_reg) do
       create(
         :registration,
         vessel_id: vessel.id, registered_until: 10.years.ago)
+    end
+
+    let!(:current_reg) do
+      create(
+        :registration,
+        vessel_id: vessel.id, registered_until: 1.year.from_now)
     end
 
     subject { vessel.current_registration }
