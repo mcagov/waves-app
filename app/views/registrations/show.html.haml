@@ -7,13 +7,18 @@
         = @registration.submission_ref_no
   .col-sm-6
     .pull-right
-      - if Task.new(@task).prints_certificate?
+      - if Task.new(@submission.task).prints_certificate?
         = link_to registration_certificate_path(@registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
           Print Certificate of Registry
         = link_to registration_cover_letter_path(@registration, format: :pdf), target: "_blank", class: "btn btn-warning" do
           %i.fa.fa-print{style: "font-size: 1.2em;"}
           Print Cover Letter
+
+      - elsif Task.new(@submission.task).prints_closed_transcript?
+        = link_to "#", target: "_blank", class: "btn btn-warning" do
+          %i.fa.fa-print{style: "font-size: 1.2em;"}
+          Print Closed Transcript
 
 .row
   .col-md-12.col-sm-12.col-xs-12
@@ -23,8 +28,8 @@
         .clearfix
       .x_content
         %p
-          = t("submission.approval.confirmation.#{@task}",
-            part: Activity.new(@part))
+          = t("submission.approval.confirmation.#{@submission.task}",
+            part: Activity.new(@submission.part).to_s)
 
 .row.no-print
   .col-xs-12

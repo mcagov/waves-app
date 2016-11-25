@@ -22,6 +22,10 @@ class Task
     ].include?(@key)
   end
 
+  def prints_closed_transcript?
+    [:closure].include?(@key)
+  end
+
   def duplicates_certificate?
     [:duplicate_certificate].include?(@key)
   end

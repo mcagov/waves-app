@@ -1,7 +1,6 @@
 class RegistrationsController < InternalPagesController
   def show
     @registration = Registration.find(params[:id])
-    @task = :new_registration
-    @part = :part_3
+    @submission = Submission.find_by(ref_no: @registration.submission_ref_no)
   end
 end
