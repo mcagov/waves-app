@@ -17,6 +17,7 @@ feature "User approves a closure", type: :feature, js: true do
       click_button("Close Registration")
     end
 
+    expect(page).to have_css("h1", text: "Registration Closure")
     expect(page).to have_text("Registration Closure has been approved")
 
     pdf_window = window_opened_by do
