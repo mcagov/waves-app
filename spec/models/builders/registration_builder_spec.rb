@@ -14,7 +14,6 @@ describe Builders::RegistrationBuilder do
              registered_vessel: registered_vessel)
     end
 
-
     let(:registration) do
       Registration.find_by(submission_ref_no: submission.ref_no)
     end

@@ -21,7 +21,8 @@ describe Builders::ClosedRegistrationBuilder do
     end
 
     let!(:submission) do
-      create(:submission, registered_vessel: registered_vessel)
+      create(:submission,
+             registered_vessel: registered_vessel, task: :closure)
     end
 
     let(:registration) do
@@ -46,6 +47,10 @@ describe Builders::ClosedRegistrationBuilder do
 
     it "records the submission_ref_no" do
       expect(registration.submission_ref_no).to eq(submission.ref_no)
+    end
+
+    it "records the task" do
+      expect(registration.task).to eq(submission.task)
     end
 
     it "records the previous registration dates" do
