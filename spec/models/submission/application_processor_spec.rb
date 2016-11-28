@@ -23,6 +23,7 @@ describe Submission::ApplicationProcessor do
       before do
         expect_registry_builder
         expect_registration_builder
+        dont_expect_cloned_registration_builder
         expect_print_job_builder
       end
 
@@ -41,6 +42,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
+          dont_expect_cloned_registration_builder
           expect_print_job_builder
         end
 
@@ -53,6 +55,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           dont_expect_registration_builder
+          expect_cloned_registration_builder
           dont_expect_print_job_builder
         end
 
@@ -65,6 +68,7 @@ describe Submission::ApplicationProcessor do
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
+          expect_cloned_registration_builder
           expect_print_job_builder
         end
 
@@ -77,6 +81,7 @@ describe Submission::ApplicationProcessor do
         before do
           expect_registry_builder
           expect_registration_builder
+          dont_expect_cloned_registration_builder
           expect_print_job_builder
         end
 
@@ -90,6 +95,7 @@ describe Submission::ApplicationProcessor do
           dont_expect_registry_builder
           dont_expect_registration_builder
           expect_closed_registration_builder
+          dont_expect_cloned_registration_builder
           expect_print_job_builder
         end
 
@@ -97,11 +103,12 @@ describe Submission::ApplicationProcessor do
       end
 
       context "transcript" do
-        let(:task) { :closure }
+        let(:task) { :transcript }
 
         before do
           dont_expect_registry_builder
           dont_expect_registration_builder
+          expect_cloned_registration_builder
           expect_print_job_builder
         end
 
@@ -136,6 +143,15 @@ def expect_closed_registration_builder
   expect(Builders::ClosedRegistrationBuilder)
     .to receive(:create)
     .with(submission, "02/02/2012", "a reason")
+end
+
+def dont_expect_cloned_registration_builder
+  expect(Builders::ClonedRegistrationBuilder).not_to receive(:create)
+end
+
+def expect_cloned_registration_builder
+  expect(Builders::ClonedRegistrationBuilder)
+    .to receive(:create).with(submission)
 end
 
 def expect_print_job_builder

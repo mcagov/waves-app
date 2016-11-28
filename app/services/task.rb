@@ -19,7 +19,7 @@ class Task
     if prints_certificate?
       [:registration_certificate, :cover_letter]
     elsif prints_current_transcript?
-      [:current_transcript]
+      [:transcript, :closure]
     end
   end
 
@@ -80,8 +80,7 @@ class Task
         ["Change of Vessel details", :change_vessel],
         ["Change of Address", :change_address],
         ["Registration Closure", :closure],
-        ["Transcript of Registry (current, closed, historic, dated)",
-         :transcript],
+        ["Transcript of Registry", :transcript],
         ["Duplicate Certificate", :duplicate_certificate],
         ["General Enquiry", :enquiry],
         ["Unknown", :unknown]]
