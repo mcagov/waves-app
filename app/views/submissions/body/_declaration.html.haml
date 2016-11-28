@@ -142,4 +142,10 @@
           %td n/a
         %td.declaration{ id: "declaration_#{declaration.id}" }
           = render partial: "declarations/status", locals: { declaration: declaration}
+    - else
+      %tr
+        %td Declaration
+        %td.declaration{ id: "declaration_#{declaration.id}" }
+          = render partial: "declarations/status", locals: { declaration: declaration}
+
 %hr
