@@ -18,6 +18,7 @@ class Builders::RegistrationBuilder
         registered_at: registration_date.starts_at,
         registered_until: registration_date.ends_at,
         submission_ref_no: @submission.ref_no,
+        task: @submission.task,
         registry_info: @registered_vessel.registry_info,
         actioned_by: @submission.claimant
       )
