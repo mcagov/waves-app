@@ -19,7 +19,7 @@
     %ul.nav.child_menu{:style => "display: none"}
 
       - [:registration_certificate, :cover_letter, :current_transcript, :historic_transcript].each do |template|
-        %li= link_to t("print_job.menu_title.#{template}"), print_jobs_path(template: template)
+        %li= link_to t("print_job.menu_title.#{template}"), "/print_queue/#{template}"
   %li
     %a
       %i.fa.fa-ship

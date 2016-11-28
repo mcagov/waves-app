@@ -28,15 +28,7 @@ class PrintJobsController < InternalPagesController
 
   def build_pdf(print_jobs, template)
     printable_items = Array(print_jobs).map(&:printable)
-
-    case template.to_sym
-    when :registration_certificate
-      Pdfs::Certificate.new(printable_items)
-    when :cover_letter
-      Pdfs::CoverLetter.new(printable_items)
-    when :current_transcript
-      Pdfs::Transcript.new(printable_items)
-    end
+    Pdfs::Processor.run(template, printable_items)
   end
 
   def mark_as_printed(printed_jobs)
