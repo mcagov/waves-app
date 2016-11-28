@@ -67,6 +67,16 @@ describe Register::Vessel do
       it { expect(subject).to eq(:expired) }
     end
 
+    context "with a closed registration" do
+      before do
+        create(
+          :registration,
+          vessel_id: vessel.id, closed_at: 1.day.ago)
+      end
+
+      it { expect(subject).to eq(:closed) }
+    end
+
     context "without a registration" do
       it { expect(subject).to eq(:pending) }
     end

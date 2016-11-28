@@ -35,12 +35,9 @@ module Register
 
     def registration_status
       return :pending unless current_registration
-
-      if registered_until >= Date.today
-        :registered
-      else
-        :expired
-      end
+      return :closed if current_registration.closed_at?
+      return :expired if Time.now.to_i > registered_until.to_i
+      :registered
     end
 
     def registry_info
