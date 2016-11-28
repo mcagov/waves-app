@@ -42,6 +42,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :cancelled_submission, parent: :assigned_submission do
+    after(:create) do |submission|
+      submission.cancelled!
+    end
+  end
+
   factory :assigned_closure_submission, parent: :assigned_submission do
     task          :closure
     vessel_reg_no { create(:registered_vessel).reg_no }

@@ -6,6 +6,8 @@ class Submission::DocumentsController < InternalPagesController
     @document.actioned_by = current_user
     @document.noteable = @submission
 
+    @submission.unreferred! if @submission.can_unreferred?
+
     flash[:notice] = "The document has been saved" if @document.save
 
     redirect_to submission_path(@submission)
