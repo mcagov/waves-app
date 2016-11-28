@@ -19,6 +19,8 @@ class Submission::ApplicationProcessor
           build_registration
         elsif @task == :closure
           build_closed_registration
+        else
+          clone_current_registration
         end
     end
 
@@ -39,6 +41,10 @@ class Submission::ApplicationProcessor
           @submission,
           @approval_params[:closure_at],
           @approval_params[:closure_reason])
+    end
+
+    def clone_current_registration
+      Builders::ClonedRegistrationBuilder.create(@submission)
     end
 
     def build_print_jobs

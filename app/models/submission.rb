@@ -27,6 +27,8 @@ class Submission < ApplicationRecord
 
   after_touch :check_current_state
 
+  delegate :registration_status, to: :registered_vessel, allow_nil: true
+
   def check_current_state
     unassigned! if incomplete? && actionable?
   end

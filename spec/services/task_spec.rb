@@ -39,8 +39,8 @@ describe Task do
       it { expect(subject).to be_truthy }
     end
 
-    context "for a transcript" do
-      let(:key) { :transcript }
+    context "for a current transcript" do
+      let(:key) { :current_transcript }
       it { expect(subject).to be_falsey }
     end
   end

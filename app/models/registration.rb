@@ -1,5 +1,9 @@
 class Registration < ApplicationRecord
   belongs_to :actioned_by, class_name: "User", required: false
+  belongs_to :registered_vessel, class_name: "Register::Vessel",
+                                 foreign_key: :vessel_id
+
+  validates :task, presence: true
 
   def vessel
     symbolized_registry_info[:vessel_info] || {}

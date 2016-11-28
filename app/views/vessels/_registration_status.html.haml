@@ -2,4 +2,10 @@
   .label.label-success Registered
 
 - elsif registration_status == :expired
-  .label.label-danger Registration Expired
+  .label.label-warning Registration Expired
+
+- elsif registration_status == :closed
+  .label.label-danger Registration Closed
+
+- elsif registration_status == :pending
+  .label.label-info Not Registered

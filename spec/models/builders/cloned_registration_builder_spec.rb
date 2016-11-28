@@ -1,16 +1,13 @@
 require "rails_helper"
 
-describe Builders::ClosedRegistrationBuilder do
+describe Builders::ClonedRegistrationBuilder do
   context ".create" do
     before do
       allow(registered_vessel)
         .to receive(:current_registration)
         .and_return(previous_registration)
 
-      described_class.create(
-        submission,
-        "10/10/2012 12:23 PM".to_datetime,
-        "Mi Razon")
+      described_class.create(submission)
     end
 
     let!(:registered_vessel) { create(:registered_vessel) }
@@ -27,14 +24,6 @@ describe Builders::ClosedRegistrationBuilder do
 
     let(:registration) do
       Registration.find_by(submission_ref_no: submission.ref_no)
-    end
-
-    it "records the closed_at date" do
-      expect(registration.closed_at).to eq("10/10/2012 12:23 PM".to_datetime)
-    end
-
-    it "records the closure reason" do
-      expect(registration.description).to eq("Mi Razon")
     end
 
     it "records the registration#actioned_by" do

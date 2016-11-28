@@ -7,8 +7,12 @@ describe Builders::RegistrationBuilder do
         submission, registered_vessel, "10/10/2012 12:23 PM".to_datetime)
     end
 
-    let!(:submission) { create(:assigned_submission) }
     let!(:registered_vessel) { create(:registered_vessel) }
+    let!(:submission) do
+      create(:assigned_submission,
+             task: :change_vessel,
+             registered_vessel: registered_vessel)
+    end
 
     let(:registration) do
       Registration.find_by(submission_ref_no: submission.ref_no)
@@ -35,6 +39,10 @@ describe Builders::RegistrationBuilder do
 
     it "records the submission_ref_no" do
       expect(registration.submission_ref_no).to eq(submission.ref_no)
+    end
+
+    it "records the task" do
+      expect(registration.task.to_sym).to eq(:change_vessel)
     end
   end
 end

@@ -11,6 +11,8 @@
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
+    .pull-right
+      %h4= render partial: "/vessels/registration_status", locals: { registration_status: @submission.registration_status }
 
 .row
   .col-sm-12

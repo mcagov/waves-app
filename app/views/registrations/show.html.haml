@@ -1,7 +1,7 @@
 .row
   .col-sm-6
     %h1{style: "margin-top: 0px !important;"}
-      = @submission.job_type
+      = Task.new(@registration.task).description
       %small
         ID:
         = @registration.submission_ref_no
@@ -21,8 +21,8 @@
         .clearfix
       .x_content
         %p
-          = t("submission.approval.confirmation.#{@submission.task}",
-            part: Activity.new(@submission.part).to_s)
+          = t("submission.approval.confirmation.#{@registration.task}",
+            part: Activity.new(@registered_vessel.part).to_s)
 
 .row.no-print
   .col-xs-12
