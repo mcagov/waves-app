@@ -102,8 +102,21 @@ describe Submission::ApplicationProcessor do
         it { subject }
       end
 
-      context "transcript" do
+      context "current_transcript" do
         let(:task) { :current_transcript }
+
+        before do
+          dont_expect_registry_builder
+          dont_expect_registration_builder
+          expect_cloned_registration_builder
+          expect_print_job_builder
+        end
+
+        it { subject }
+      end
+
+      context "historic_transcript" do
+        let(:task) { :historic_transcript }
 
         before do
           dont_expect_registry_builder

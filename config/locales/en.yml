@@ -26,14 +26,17 @@ en:
       cover_letter: Print Cover Letter
       registration_certificate: Print Certificate of Registry
       current_transcript: Print Current Transcript
+      historic_transcript: Print Historic Transcript
     print_all_button_text:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
       current_transcript: Print Current Transcripts
+      historic_transcript: Print Historic Transcripts
     menu_title:
       cover_letter: Cover Letters
       registration_certificate: Certificates of Registry
       current_transcript: Current Transcripts
+      historic_transcript: Historic Transcripts
   submission:
     approval:
       inline-btn:
@@ -44,7 +47,8 @@ en:
         change_vessel: Complete Change of Vessel Details
         change_address: Complete Change of Address
         closure: Close Registration
-        current_transcript: Issue Transcript of Registry
+        current_transcript: Issue Current Transcript of Registry
+        historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
@@ -56,7 +60,8 @@ en:
         change_vessel: Change Vessel Details and Issue Certificate of Registry
         change_address: Change of Address
         closure: Close Registration
-        current_transcript: Issue Transcript of Registry
+        current_transcript: Issue Current Transcript of Registry
+        historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Complete General Enquiry
@@ -68,7 +73,8 @@ en:
         change_vessel: Complete Change of Vessel Details
         change_address: Complete Change of Address
         closure: Close Registration
-        current_transcript: Issue Transcript of Registry
+        current_transcript: Issue Current Transcript of Registry
+        historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
@@ -82,7 +88,8 @@ en:
         duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
         reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.
         closure: The vessel owner has been notified via email that their request for a Registration Closure has been approved.
-        current_transcript: The vessel owner has been notified via email that their Transcript Request has been approved.
+        current_transcript: The vessel owner has been notified via email that their request for a Current Transcript of Registry has been approved.
+        historic_transcript: The vessel owner has been notified via email that their request for an Historic Transcript of Registry has been approved.
         enquiry: The General Enquiry has been marked as completed.
 
 
