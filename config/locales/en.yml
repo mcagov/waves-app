@@ -44,7 +44,7 @@ en:
         change_vessel: Complete Change of Vessel Details
         change_address: Complete Change of Address
         closure: Close Registration
-        transcript: Issue Transcript of Registry
+        current_transcript: Issue Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
@@ -56,7 +56,7 @@ en:
         change_vessel: Change Vessel Details and Issue Certificate of Registry
         change_address: Change of Address
         closure: Close Registration
-        transcript: Issue Transcript of Registry
+        current_transcript: Issue Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Complete General Enquiry
@@ -68,7 +68,7 @@ en:
         change_vessel: Complete Change of Vessel Details
         change_address: Complete Change of Address
         closure: Close Registration
-        transcript: Issue Transcript of Registry
+        current_transcript: Issue Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
@@ -82,7 +82,7 @@ en:
         duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
         reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.
         closure: The vessel owner has been notified via email that their request for a Registration Closure has been approved.
-        transcript: The vessel owner has been notified via email that their Transcript Request has been approved.
+        current_transcript: The vessel owner has been notified via email that their Transcript Request has been approved.
         enquiry: The General Enquiry has been marked as completed.
 
 

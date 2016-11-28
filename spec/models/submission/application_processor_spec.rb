@@ -103,7 +103,7 @@ describe Submission::ApplicationProcessor do
       end
 
       context "transcript" do
-        let(:task) { :transcript }
+        let(:task) { :current_transcript }
 
         before do
           dont_expect_registry_builder
