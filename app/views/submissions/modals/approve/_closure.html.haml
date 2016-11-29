@@ -1,14 +1,12 @@
-.modal-body
-  .row
-    .col-md-12
-      .form-group
-        - approval_f.object.closure_at = Date.today
-        = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datepicker" }
+.row
+  .col-md-12
+    .form-group
+      - approval_f.object.closure_at = Date.today
+      = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datepicker" }
 
-.modal-body
-  .row
-    .col-md-12
-      .form-group
-        = approval_f.input :closure_reason, as: :select, label: "Closure Reasons",
-          collection: Submission::Approval::CLOSURE_REASONS,
-          include_blank: false
+.row
+  .col-md-12
+    .form-group
+      = approval_f.input :closure_reason, as: :select, label: "Closure Reasons",
+        collection: Submission::Approval::CLOSURE_REASONS,
+        include_blank: false

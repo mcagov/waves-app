@@ -28,4 +28,15 @@ feature "User approves a closure", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
   end
+
+  scenario "attaching certificate to the email" do
+    within(".modal-content") do
+      check "Send a copy of the Transcript by email"
+      click_button("Close Registration")
+    end
+
+    expect(page).to have_text("The applicant has been notified via email")
+    expect(Notification::ApplicationApproval.last.attachments)
+      .to match(/current_transcript/)
+  end
 end
