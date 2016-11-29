@@ -12,7 +12,7 @@ class Task
   end
 
   def payment_required?
-    ![:change_address, :closure].include?(@key)
+    ![:change_address, :closure, :enquiry].include?(@key)
   end
 
   def print_job_templates

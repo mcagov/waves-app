@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  namespace :admin do
+    resources :target_dates, only: [:index]
+    resources :tasks, only: [:index]
+  end
+
   namespace :api do
     namespace :v1 do
       resources :declarations, only: [:show, :update]
@@ -93,6 +99,5 @@ Rails.application.routes.draw do
   end
 
   get "/search", controller: :search, action: :show
-  get "/target_dates", controller: :target_dates, action: :index
   root to: "dashboards#show"
 end
