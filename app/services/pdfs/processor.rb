@@ -4,12 +4,15 @@ class Pdfs::Processor
       case template.to_sym
       when :registration_certificate
         Pdfs::Certificate.new(printable_items)
+
       when :cover_letter
         Pdfs::CoverLetter.new(printable_items)
+
       when :current_transcript
         Pdfs::Transcript.new(printable_items)
+
       when :historic_transcript
-        Pdfs::Transcript.new(printable_items)
+        Pdfs::HistoricTranscript.new(printable_items)
       end
     end
   end

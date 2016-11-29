@@ -8,6 +8,7 @@ module Register
              -> { order("updated_at asc") },
              class_name: "Register::Owner"
 
+    has_many :registrations
     has_one :current_registration,
             -> { order("created_at desc").limit(1) },
             class_name: "Registration"
