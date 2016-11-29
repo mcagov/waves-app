@@ -1,4 +1,4 @@
-class TargetDatesController < InternalPagesController
+class Admin::TargetDatesController < InternalPagesController
   def index
     @holidays = Holiday.all
     @start_date = start_date_params if params[:start_date]

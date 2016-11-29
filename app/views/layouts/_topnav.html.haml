@@ -15,7 +15,7 @@
             %li
               = link_to "Gov UK", ENV['GOVUK_HOST'], target: "blank"
             %li
-              = link_to "Target Date Calculator", target_dates_path
+              = link_to "Target Date Calculator", admin_target_dates_path
             %li
               = link_to destroy_user_session_path, method: :delete, id: "logout" do
                 %i.fa.fa-sign-out.pull-right

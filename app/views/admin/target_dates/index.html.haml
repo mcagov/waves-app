@@ -4,7 +4,7 @@
 .row
   .col-md-6
     .pull-sright
-      = form_tag '/target_dates', method: :get do
+      = form_tag '/admin/target_dates', method: :get do
         = select_date @start_date,  prefix: 'start_date', order: [:day, :month, :year]
         = submit_tag 'Calculate'
 %br
