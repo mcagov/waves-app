@@ -1,3 +1,25 @@
 .row
-  .col-md-6
+  .col-md-12
     %h1 Task Processing
+
+.row
+  .col-md-12
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Task
+        %th Payment Required
+        %th Print/Email Certificate of Registry
+        %th Generate new 5-year Registration
+        %th Update Registry Details
+        %th Print/Email Current Transcript
+        %th Print/Email Historic Transcript
+      %tbody
+        - @tasks.each do |task|
+          %tr
+            %td= task.description
+            %td= y_n(task.payment_required?)
+            %td= y_n(task.prints_certificate?)
+            %td= y_n(task.builds_registration?)
+            %td= y_n(task.builds_registry?)
+            %td= y_n(task.prints_current_transcript?)
+            %td= y_n(task.prints_historic_transcript?)
