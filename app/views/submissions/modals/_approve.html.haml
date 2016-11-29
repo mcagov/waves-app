@@ -8,13 +8,22 @@
           %h4.modal-title
             = t("submission.approval.modal-title.#{submission.task}")
 
-        - if Task.new(submission.task).prints_certificate?
-          = render partial: "submissions/modals/approve/certificate",
-            locals: { submission: submission, approval_f: approval_f }
+        .modal-body
+          - if Task.new(submission.task).prints_certificate?
+            = render partial: "submissions/modals/approve/certificate",
+              locals: { submission: submission, approval_f: approval_f }
 
-        - if Task.new(submission.task) == :closure
-          = render partial: "submissions/modals/approve/closure",
-            locals: { submission: submission, approval_f: approval_f }
+          - if Task.new(submission.task) == :closure
+            = render partial: "submissions/modals/approve/closure",
+              locals: { submission: submission, approval_f: approval_f }
+
+          - if Task.new(submission.task).prints_current_transcript?
+            = render partial: "submissions/modals/approve/transcript",
+              locals: { attachment: :current_transcript }
+
+          - if Task.new(submission.task).prints_historic_transcript?
+            = render partial: "submissions/modals/approve/transcript",
+              locals: { attachment: :historic_transcript }
 
         .modal-footer
           = approval_f.submit t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
