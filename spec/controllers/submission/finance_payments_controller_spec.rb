@@ -30,6 +30,10 @@ describe Submission::FinancePaymentsController, type: :controller do
       it "generates the ref_no" do
         expect(submission.reload.ref_no).to be_present
       end
+
+      it "sends an application_receipt email" do
+        expect(Notification::ApplicationReceipt.count).to eq(1)
+      end
     end
 
     context "for change_vessel and there is no vessel" do
