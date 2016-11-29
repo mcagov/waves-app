@@ -119,7 +119,7 @@ class Pdfs::TranscriptWriter
       @pdf.draw_text owner[:name], at: [l_margin, 700 - i]
       @pdf.text_box Customer.new(owner).inline_address, width: 500,
         at: [l_margin, 690 - i]
-      i += 45
+      i += 60
     end
 
     @pdf.text_box "Page 2 of 2", width: 500,
