@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :target_dates, only: [:index]
+    resources :tasks, only: [:index]
   end
 
   namespace :api do

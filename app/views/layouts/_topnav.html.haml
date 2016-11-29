@@ -17,6 +17,8 @@
             %li
               = link_to "Target Date Calculator", admin_target_dates_path
             %li
+              = link_to "Task Processing", admin_tasks_path
+            %li
               = link_to destroy_user_session_path, method: :delete, id: "logout" do
                 %i.fa.fa-sign-out.pull-right
                 Log Out
