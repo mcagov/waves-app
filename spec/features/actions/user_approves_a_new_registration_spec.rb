@@ -14,7 +14,7 @@ feature "User approves a new registration", type: :feature, js: true do
       fill_in "Date and Time to take effect from", with: "12/12/2020 11:59 AM"
       click_button("Register Vessel")
     end
-    expect(page).to have_text("The vessel owner has been notified via email")
+    expect(page).to have_text("The applicant has been notified via email")
     expect(page).to have_text("registered on Part III of the UK Ship Register")
 
     expect(Registration.last.registered_at)
@@ -25,7 +25,7 @@ feature "User approves a new registration", type: :feature, js: true do
     within(".modal-content") do
       click_button("Register Vessel")
     end
-    expect(page).to have_text("The vessel owner has been notified via email")
+    expect(page).to have_text("The applicant has been notified via email")
 
     pdf_window = window_opened_by do
       click_on("Print Certificate of Registry")
@@ -40,7 +40,7 @@ feature "User approves a new registration", type: :feature, js: true do
     within(".modal-content") do
       click_button("Register Vessel")
     end
-    expect(page).to have_text("The vessel owner has been notified via email")
+    expect(page).to have_text("The applicant has been notified via email")
 
     pdf_window = window_opened_by do
       click_on("Print Cover Letter")
@@ -56,7 +56,7 @@ feature "User approves a new registration", type: :feature, js: true do
       check "Send a copy of the Certificate"
       click_button("Register Vessel")
     end
-    expect(page).to have_text("The vessel owner has been notified via email")
+    expect(page).to have_text("The applicant has been notified via email")
     expect(Notification::ApplicationApproval.last.attachments)
       .to match(/registration_certificate/)
   end

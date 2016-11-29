@@ -79,17 +79,17 @@ en:
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
       confirmation:
-        new_registration: The vessel owner has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
-        renewal: The vessel owner has been notified via email that their request for a Registration Renewal has been approved.
-        re_registration: The vessel owner has been notified via email that their request for a Re-Registration has been approved.
-        change_owner: The vessel owner has been notified via email that their request for a Change of Ownership has been approved.
-        change_vessel: The vessel owner has been notified via email that their request for a Change of Vessel details has been approved.
-        change_address: The vessel owner has been notified via email that their request for a Change of Address has been approved.
-        duplicate_certificate: The vessel owner has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
-        reserve_name: The vessel owner has been notified via email that their request for a Name Reservation has been approved.
-        closure: The vessel owner has been notified via email that their request for a Registration Closure has been approved.
-        current_transcript: The vessel owner has been notified via email that their request for a Current Transcript of Registry has been approved.
-        historic_transcript: The vessel owner has been notified via email that their request for an Historic Transcript of Registry has been approved.
+        new_registration: The applicant has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
+        renewal: The applicant has been notified via email that their request for a Registration Renewal has been approved.
+        re_registration: The applicant has been notified via email that their request for a Re-Registration has been approved.
+        change_owner: The applicant has been notified via email that their request for a Change of Ownership has been approved.
+        change_vessel: The applicant has been notified via email that their request for a Change of Vessel details has been approved.
+        change_address: The applicant has been notified via email that their request for a Change of Address has been approved.
+        duplicate_certificate: The applicant has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
+        reserve_name: The applicant has been notified via email that their request for a Name Reservation has been approved.
+        closure: The applicant has been notified via email that their request for a Registration Closure has been approved.
+        current_transcript: The applicant has been notified via email that their request for a Current Transcript of Registry has been approved.
+        historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
         enquiry: The General Enquiry has been marked as completed.
 
 
