@@ -20,6 +20,8 @@ class Task
       [:registration_certificate, :cover_letter]
     elsif prints_current_transcript?
       [:current_transcript]
+    elsif prints_historic_transcript?
+      [:historic_transcript]
     end
   end
 
@@ -32,6 +34,10 @@ class Task
 
   def prints_current_transcript?
     [:closure, :current_transcript].include?(@key)
+  end
+
+  def prints_historic_transcript?
+    [:historic_transcript].include?(@key)
   end
 
   def duplicates_certificate?
@@ -81,6 +87,7 @@ class Task
         ["Change of Address", :change_address],
         ["Registration Closure", :closure],
         ["Current Transcript of Registry", :current_transcript],
+        ["Historic Transcript of Registry", :historic_transcript],
         ["Duplicate Certificate", :duplicate_certificate],
         ["General Enquiry", :enquiry],
         ["Unknown", :unknown]]

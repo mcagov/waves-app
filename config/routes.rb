@@ -78,8 +78,18 @@ Rails.application.routes.draw do
     referred unclaimed cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",
-        controller: "tasks",
+        controller: :tasks,
         action: action.tr("-", "_")
+  end
+
+  %w(
+    registration_certificate cover_letter
+    current_transcript historic_transcript
+  ).each do |template|
+    get "/print_queue/#{template}",
+        controller: :print_jobs,
+        action: :index,
+        template: template
   end
 
   get "/search", controller: :search, action: :show
