@@ -44,7 +44,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
   def application_receipt_re_registration
     NotificationMailer.application_receipt(
       default_params,
-      "My Boat", "3N-777EA4", true, :closure
+      "My Boat", "3N-777EA4", true, :re_registration
     )
   end
 
