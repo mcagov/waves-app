@@ -3,7 +3,7 @@ require "rails_helper"
 describe Pdfs::Transcript do
   let(:transcript_title) { "TRANSCRIPT OF REGISTRY" }
 
-  xcontext "for a single transcript" do
+  context "for a single transcript" do
     before do
       vessel = create(:registered_vessel)
       create(
@@ -16,18 +16,18 @@ describe Pdfs::Transcript do
 
     it "has a filename" do
       expect(transcript.filename)
-        .to match(/boaty-mcboatfac.*\-transcript-.*\.pdf/)
+        .to match(/boaty-mcboatfac.*\-transcript\.pdf/)
     end
 
     it "has two pages with the title on page 1" do
       PDF::Reader.open(StringIO.new(transcript.render)) do |reader|
         expect(reader.page_count).to eq(2)
-        expect(reader.page(1).text).to have_text(transcript_title)
+        expect(reader.page(1).text).to match(/#{transcript_title}/)
       end
     end
   end
 
-  xcontext "for multiple transcripts" do
+  context "for multiple transcripts" do
     before do
       3.times do
         vessel = create(:registered_vessel)
@@ -48,9 +48,9 @@ describe Pdfs::Transcript do
     it "has six pages with the title on page 1,3,5" do
       PDF::Reader.open(StringIO.new(transcript.render)) do |reader|
         expect(reader.page_count).to eq(6)
-        expect(reader.page(1).text).to have_text(transcript_title)
-        expect(reader.page(3).text).to match(transcript_title)
-        expect(reader.page(5).text).to match(transcript_title)
+        expect(reader.page(1).text).to match(/#{transcript_title}/)
+        expect(reader.page(3).text).to match(/#{transcript_title}/)
+        expect(reader.page(5).text).to match(/#{transcript_title}/)
       end
     end
   end
