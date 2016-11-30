@@ -13,6 +13,7 @@
         %th Update Registry Details
         %th Print/Email Current Transcript
         %th Print/Email Historic Transcript
+        %th Email on Application Approval
       %tbody
         - @tasks.each do |task|
           %tr
@@ -23,3 +24,4 @@
             %td= y_n(task.builds_registry?)
             %td= y_n(task.prints_current_transcript?)
             %td= y_n(task.prints_historic_transcript?)
+            %td= y_n(task.emails_application_approval?)

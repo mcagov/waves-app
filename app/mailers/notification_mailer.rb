@@ -33,11 +33,9 @@ class NotificationMailer < ApplicationMailer
                            pdf_attachment = nil)
     @reg_no = reg_no
     @name = defaults[:name]
-    if pdf_attachment
-      attachments["#{reg_no}.pdf"] = pdf_attachment
-      @attachment = true
-    end
     @actioned_by = actioned_by
+    # rubocop:disable Lint/UselessAssignment
+    attachments = enable_attachment(pdf_attachment)
 
     mail(to: defaults[:to], subject: defaults[:subject],
          template_path: "notification_mailer/application_approval",
@@ -56,5 +54,13 @@ class NotificationMailer < ApplicationMailer
 
   def govuk_url(path)
     File.join(ENV.fetch("GOVUK_HOST"), path)
+  end
+
+  def enable_attachment(attachment)
+    if attachment
+      attachments["#{@reg_no}.pdf"] = attachment
+      @attachment = true
+    end
+    attachments
   end
 end
