@@ -58,10 +58,9 @@ class NotificationMailer < ApplicationMailer
   end
 
   def enable_attachment(attachment)
-    if attachment
-      attachments["#{@reg_no}.pdf"] = attachment
-      @attachment = true
-    end
+    return if attachment.nil?
+    attachments["#{@reg_no}.pdf"] = attachment
+    @attachment = true
     attachments
   end
 end

@@ -9,7 +9,7 @@ class Notification::ApplicationApproval < Notification
 
   def additional_params
     [vessel_reg_no, actioned_by,
-     notifiable.task, vessel_name, registration_certificate]
+     notifiable.task, vessel_name, email_attachments]
   end
 
   private
@@ -31,13 +31,18 @@ class Notification::ApplicationApproval < Notification
     notifiable.registered_vessel if notifiable
   end
 
-  def registration_certificate
-    if attach_certificate?
-      Pdfs::Certificate.new(registration, :attachment).render
-    end
-  end
+  def email_attachments
+    return if attachments.blank?
 
-  def attach_certificate?
-    attachments == "registration_certificate"
+    case attachments.to_sym
+    when :registration_certificate
+      Pdfs::Certificate.new(registration, :attachment).render
+
+    when :current_transcript
+      Pdfs::Transcript.new(registration, :attachment).render
+
+    when :historic_transcript
+      Pdfs::HistoricTranscript.new(registration, :attachment).render
+    end
   end
 end
