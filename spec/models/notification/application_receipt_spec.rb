@@ -12,7 +12,7 @@ describe Notification::ApplicationReceipt, type: :model do
     it "has additional_params" do
       expect(subject.additional_params)
         .to eq(
-          [submission.vessel.name, submission.ref_no, true]
+          [submission.vessel.name, submission.ref_no, true, :new_registration]
         )
     end
   end

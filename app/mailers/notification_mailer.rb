@@ -17,7 +17,7 @@ class NotificationMailer < ApplicationMailer
   end
 
   def application_receipt(defaults, vessel_name, submission_ref_no,
-                          declarations_required)
+                          declarations_required, template_name)
     @vessel_name = vessel_name
     @submission_ref_no = submission_ref_no
     @name = defaults[:name]
@@ -26,7 +26,7 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to],
          subject: defaults[:subject],
          template_path: "notification_mailer/application_receipt",
-         template_name: "default")
+         template_name: template_name)
   end
 
   def application_approval(defaults, reg_no, actioned_by,

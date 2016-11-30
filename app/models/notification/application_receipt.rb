@@ -4,7 +4,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def additional_params
-    [vessel_name, submission_ref_no, declarations_required]
+    [vessel_name, submission_ref_no, declarations_required, notifiable.task]
   end
 
   def email_subject
