@@ -1,4 +1,6 @@
 class NotificationMailer < ApplicationMailer
+  helper :mailer
+
   default from: ENV.fetch("EMAIL_FROM")
 
   def test_email(email)
