@@ -72,7 +72,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       end
     end
 
-     context "when declarations are NOT required" do
+    context "when declarations are NOT required" do
       let(:declarations_required) { false }
 
       it "renders the vessel name" do
@@ -85,6 +85,18 @@ RSpec.describe NotificationMailer, type: :mailer do
 
       it "does not enders the declarations text" do
         expect(body).not_to match(/As soon as all declarations/)
+      end
+    end
+  end
+
+  describe "application_receipt templates are present" do
+    it "renders for each task type" do
+      Task.default_task_types.each do |task|
+        mail =
+          NotificationMailer.application_receipt(
+            default_params, "Jolly Roger", "Ref_no", false, task[1])
+
+        expect(mail.body.encoded).to match(/Jolly Roger/)
       end
     end
   end
