@@ -105,7 +105,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:mail) do
       NotificationMailer.application_approval(
         default_params, "Reg_no",
-        "Sally SSR", "reg_cert")
+        "Sally SSR", :new_registration, "reg_cert")
     end
 
     let(:body) { mail.body.encoded }
@@ -115,7 +115,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "renders the certificate_attached message" do
-      expect(body).to match(/certificate attached, as requested/)
+      expect(body).to match(/attached a copy of your certificate/)
     end
 
     it "renders the actioned_by signature" do

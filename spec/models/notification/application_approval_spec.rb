@@ -29,7 +29,10 @@ describe Notification::ApplicationApproval, type: :model do
 
       it "has additional_params" do
         expect(subject.additional_params)
-          .to eq([registered_vessel.reg_no, subject.actioned_by, nil])
+          .to eq(
+            [
+              registered_vessel.reg_no,
+              subject.actioned_by, "new_registration", nil])
       end
     end
 
@@ -39,8 +42,8 @@ describe Notification::ApplicationApproval, type: :model do
           notifiable: submission, attachments: "registration_certificate")
       end
 
-      it "has the certificate as the third additional param" do
-        expect(subject.additional_params[2][0, 4]).to eq("%PDF")
+      it "has the certificate as the fourth additional param" do
+        expect(subject.additional_params[3][0, 4]).to eq("%PDF")
       end
     end
   end

@@ -29,17 +29,19 @@ class NotificationMailer < ApplicationMailer
          template_name: template_name)
   end
 
-  def application_approval(defaults, reg_no, actioned_by,
+  def application_approval(defaults, reg_no, actioned_by, template_name,
                            pdf_attachment = nil)
     @reg_no = reg_no
     @name = defaults[:name]
     if pdf_attachment
-      attachments["Certificate_of_Registration_copy.pdf"] = pdf_attachment
-      @certificate_attached = true
+      attachments["#{reg_no}.pdf"] = pdf_attachment
+      @attachment = true
     end
     @actioned_by = actioned_by
 
-    mail(to: defaults[:to], subject: defaults[:subject])
+    mail(to: defaults[:to], subject: defaults[:subject],
+         template_path: "notification_mailer/application_approval",
+         template_name: template_name)
   end
 
   def wysiwyg(defaults, body, actioned_by)
