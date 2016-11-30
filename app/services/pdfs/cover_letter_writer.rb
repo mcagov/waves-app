@@ -13,6 +13,8 @@ class Pdfs::CoverLetterWriter
     init_stationary
     vessel_name
     message
+    @pdf.start_new_page
+    registration_number
     @pdf
   end
 
@@ -28,6 +30,11 @@ class Pdfs::CoverLetterWriter
     @pdf.formatted_text_box message_text,
                             at: [l_margin, 510],
                             width: 495
+  end
+
+  def registration_number
+    @pdf.font("Times-Roman", size: 124)
+    @pdf.draw_text @vessel[:reg_no], at: [300, 100], rotate: 90
   end
 
   # rubocop:disable all
