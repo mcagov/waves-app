@@ -65,8 +65,7 @@ class Task
     [
       :new_registration, :renewal, :re_registration,
       :change_owner, :change_vessel, :change_address,
-      :closure, :current_transcript, :historic_transcript,
-      :duplicate_certificate].include?(@key)
+      :closure, :current_transcript, :historic_transcript].include?(@key)
   end
 
   class << self
