@@ -104,7 +104,7 @@ class Pdfs::TranscriptWriter
     @pdf.move_down 60
     @pdf.stroke_horizontal_rule
 
-    @pdf.draw_text "The following details show the current ownership and"\
+    @pdf.draw_text "The following details show the current ownership and "\
                    "shareholding of",
                    at: [l_margin, 760]
     @pdf.draw_text "#{@vessel[:name]} O.N. #{@vessel[:reg_no]}",
