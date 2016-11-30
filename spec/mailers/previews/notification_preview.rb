@@ -48,6 +48,13 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_receipt_closure
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :closure
+    )
+  end
+
   def application_receipt_current_transcript
     NotificationMailer.application_receipt(
       default_params,
