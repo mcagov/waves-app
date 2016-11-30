@@ -68,7 +68,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       end
 
       it "renders the declarations text" do
-        expect(body).to match(/As soon as all declarations/)
+        expect(body).to match(/#{declaration_text}/)
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe NotificationMailer, type: :mailer do
       end
 
       it "does not enders the declarations text" do
-        expect(body).not_to match(/As soon as all declarations/)
+        expect(body).not_to match(/#{declaration_text}/)
       end
     end
   end
@@ -151,4 +151,8 @@ end
 
 def default_params
   { subject: "subject", to: "test@example.com", name: "Alice" }
+end
+
+def declaration_text
+  "until all declarations have been received"
 end
