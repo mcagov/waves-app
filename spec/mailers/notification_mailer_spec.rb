@@ -101,6 +101,18 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
+  describe "application_approval templates are present" do
+    it "renders for each task type" do
+      Task.default_task_types.each do |task|
+        mail =
+          NotificationMailer.application_approval(
+            default_params, "Reg_no", "Bob", task[1], "MV Boat")
+
+        expect(mail.body.encoded).to match(/Dear Alice/)
+      end
+    end
+  end
+
   describe "application_approval" do
     let(:mail) do
       NotificationMailer.application_approval(

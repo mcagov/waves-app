@@ -90,9 +90,39 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
-  def application_approval
+  def application_approval_new_registration
     NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", "new_registration", "MV Bob"
+      default_params, "SRXXXXXX", "Officer Bob", :new_registration, "MV Bob"
+    )
+  end
+
+  def application_approval_renewal
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :renewal, "MV Bob"
+    )
+  end
+
+  def application_approval_re_registration
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :re_registration, "MV Bob"
+    )
+  end
+
+  def application_approval_change_owner
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_owner, "MV Bob"
+    )
+  end
+
+  def application_approval_change_vessel
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_vessel, "MV Bob"
+    )
+  end
+
+  def application_approval_change_address
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_address, "MV Bob"
     )
   end
 
