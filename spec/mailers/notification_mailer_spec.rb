@@ -105,7 +105,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:mail) do
       NotificationMailer.application_approval(
         default_params, "Reg_no",
-        "Sally SSR", :new_registration, "reg_cert")
+        "Sally SSR", :new_registration, "My boat", "an_attachment")
     end
 
     let(:body) { mail.body.encoded }

@@ -92,7 +92,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
 
   def application_approval
     NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", "new_registration"
+      default_params, "SRXXXXXX", "Officer Bob", "new_registration", "MV Bob"
     )
   end
 

@@ -30,10 +30,11 @@ class NotificationMailer < ApplicationMailer
   end
 
   def application_approval(defaults, reg_no, actioned_by, template_name,
-                           pdf_attachment = nil)
+                           vessel_name, pdf_attachment = nil)
     @reg_no = reg_no
     @name = defaults[:name]
     @actioned_by = actioned_by
+    @vessel_name = vessel_name
     # rubocop:disable Lint/UselessAssignment
     attachments = enable_attachment(pdf_attachment)
 
