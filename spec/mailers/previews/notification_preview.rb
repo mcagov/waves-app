@@ -126,6 +126,24 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_approval_closure
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :closure, "MV Bob"
+    )
+  end
+
+  def application_approval_current_transcript
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :current_transcript, "MV Bob"
+    )
+  end
+
+  def application_approval_historic_transcript
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :historic_transcript, "MV Bob"
+    )
+  end
+
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
