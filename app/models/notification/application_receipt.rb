@@ -4,7 +4,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def additional_params
-    [vessel_name, "", submission_ref_no]
+    [vessel_name, submission_ref_no, declarations_required]
   end
 
   def email_subject
@@ -19,5 +19,12 @@ class Notification::ApplicationReceipt < Notification
 
   def vessel_name
     notifiable.vessel.name if notifiable.vessel
+  end
+
+  def declarations_required
+    if notifiable.source.to_sym == :online
+      return true if notifiable.task.to_sym != :change_address
+    end
+    false
   end
 end

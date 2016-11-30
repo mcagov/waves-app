@@ -2,35 +2,34 @@
 class EmailTemplatesPreview < ActionMailer::Preview
   def outstanding_declaration
     NotificationMailer.outstanding_declaration(
-      Notification::OutstandingDeclaration.new.email_subject,
-      email, name, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
+      default_params, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
   end
 
   def application_receipt
     NotificationMailer.application_receipt(
-      "Email subject", email, name, "Jolly Roger",
-      "8481b725-e7c8-4c94-b311-9fa2f10748ae", "3N-777EA4"
+      default_params,
+      "My Boat", "3N-777EA4", true
     )
   end
 
   def application_approval
     NotificationMailer.application_approval(
-      "Email subject", email, name, "SRXXXXXX", "Officer Bob"
+      default_params, "SRXXXXXX", "Officer Bob"
     )
   end
 
   def wysiwyg
     NotificationMailer.wysiwyg(
-      "WYSIWYG", email, name, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
+      default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
   end
 
   private
 
-  def email
-    "sample@example.com"
-  end
-
-  def name
-    "Alice"
+  def default_params
+    {
+      subject: "email subject",
+      to: "alice@example.com",
+      name: "Alice",
+    }
   end
 end

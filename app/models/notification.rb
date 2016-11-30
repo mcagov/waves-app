@@ -10,11 +10,7 @@ class Notification < ApplicationRecord
     return unless deliverable?
 
     NotificationMailer.delay.send(
-      email_template,
-      email_subject,
-      recipient_email,
-      recipient_name,
-      *additional_params)
+      email_template, default_params, *additional_params)
   end
 
   def email_template
@@ -29,5 +25,15 @@ class Notification < ApplicationRecord
 
   def deliverable?
     recipient_name.present? && recipient_email.present?
+  end
+
+  private
+
+  def default_params
+    {
+      subject: email_subject,
+      to: recipient_email,
+      name: recipient_name,
+    }
   end
 end

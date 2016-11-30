@@ -18,16 +18,13 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "outstanding_declaration" do
     let(:mail) do
       NotificationMailer.outstanding_declaration(
-        "Vessel Registration Owner Declaration Required",
-        "test@example.com", "Alice", "declaration_id",
+        default_params, "declaration_id",
         "Jolly Roger", "Bob")
     end
 
     let(:body) { mail.body.encoded }
 
     it "renders the headers" do
-      expect(mail.subject)
-        .to match(/Vessel Registration Owner Declaration Required/)
       expect(mail.to).to eq(["test@example.com"])
       expect(mail.from).to eq([ENV.fetch("EMAIL_FROM")])
     end
@@ -53,8 +50,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_receipt" do
     let(:mail) do
       NotificationMailer.application_receipt(
-        "subject", "test@example.com", "Alice", "Jolly Roger",
-        "WP_code", "Ref_no")
+        default_params, "Jolly Roger", "Ref_no", true)
     end
 
     let(:body) { mail.body.encoded }
@@ -63,19 +59,19 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/vessel Jolly Roger/)
     end
 
-    it "renders the world_pay_transaction_no" do
-      expect(body).to match(/Merchant Cart ID: WP_code/)
-    end
-
     it "renders the submission_ref_no" do
       expect(body).to match(/Application Reference No: Ref_no/)
+    end
+
+    it "renders the declarations text" do
+      expect(body).to match(/As soon as all declarations/)
     end
   end
 
   describe "application_approval" do
     let(:mail) do
       NotificationMailer.application_approval(
-        "subject", "test@example.com", "Alice", "Reg_no",
+        default_params, "Reg_no",
         "Sally SSR", "reg_cert")
     end
 
@@ -101,7 +97,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "wysiwyg" do
     let(:mail) do
       NotificationMailer.wysiwyg(
-        "subject", "test@example.com", "Alice", "Some text", "Sally SSR")
+        default_params, "Some text", "Sally SSR")
     end
 
     let(:body) { mail.body.encoded }
@@ -118,4 +114,8 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/02920 448813/)
     end
   end
+end
+
+def default_params
+  { subject: "subject", to: "test@example.com", name: "Alice" }
 end

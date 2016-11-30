@@ -6,45 +6,48 @@ class NotificationMailer < ApplicationMailer
   end
 
   def outstanding_declaration(
-      subject, email, name, declaration_id, vessel_name, correspondent_name)
-    @name = name
+      defaults, declaration_id, vessel_name, correspondent_name)
+    @name = defaults[:name]
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
     @vessel_name = vessel_name
     @correspondent_name = correspondent_name
 
-    mail(to: email, subject: subject)
+    mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  def application_receipt(subject, email, name, vessel_name,
-                          world_pay_transaction_no, submission_ref_no)
+  def application_receipt(defaults, vessel_name, submission_ref_no,
+                          declarations_required)
     @vessel_name = vessel_name
-    @world_pay_transaction_no = world_pay_transaction_no
     @submission_ref_no = submission_ref_no
-    @name = name
+    @name = defaults[:name]
+    @declarations_required = declarations_required
 
-    mail(to: email, subject: subject)
+    mail(to: defaults[:to],
+         subject: defaults[:subject],
+         template_path: "notification_mailer/application_receipt",
+         template_name: "default")
   end
 
-  def application_approval(subject, email, name, reg_no, actioned_by,
+  def application_approval(defaults, reg_no, actioned_by,
                            pdf_attachment = nil)
     @reg_no = reg_no
-    @name = name
+    @name = defaults[:name]
     if pdf_attachment
       attachments["Certificate_of_Registration_copy.pdf"] = pdf_attachment
       @certificate_attached = true
     end
     @actioned_by = actioned_by
 
-    mail(to: email, subject: subject)
+    mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  def wysiwyg(subject, email, name, body, actioned_by)
+  def wysiwyg(defaults, body, actioned_by)
     @body = body
-    @name = name
+    @name = defaults[:name]
     @actioned_by = actioned_by
 
-    mail(to: email, subject: subject)
+    mail(to: defaults[:to], subject: defaults[:subject])
   end
 
   private
