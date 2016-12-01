@@ -8,6 +8,8 @@ class Submission::FinancePaymentsController < InternalPagesController
     @submission.ref_no = RefNo.generate_for(@submission)
 
     if @submission.save
+      create_notification
+
       redirect_to submission_path(@submission)
     else
       @submission.officer_intervention_required = true
@@ -30,5 +32,13 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def submission_params
     params.require(:submission).permit(:task, :vessel_reg_no)
+  end
+
+  def create_notification
+    Notification::ApplicationReceipt.create(
+      notifiable: @submission,
+      recipient_name: @submission.applicant_name,
+      recipient_email: @submission.applicant_email,
+      actioned_by: current_user)
   end
 end

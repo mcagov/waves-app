@@ -29,18 +29,44 @@ describe Notification::ApplicationApproval, type: :model do
 
       it "has additional_params" do
         expect(subject.additional_params)
-          .to eq([registered_vessel.reg_no, subject.actioned_by, nil])
+          .to eq(
+            [
+              registered_vessel.reg_no,
+              subject.actioned_by, "new_registration",
+              registered_vessel.name, nil])
       end
     end
 
-    context "attaching the certificate" do
+    context "attaching a certificate" do
       subject do
         described_class.new(
           notifiable: submission, attachments: "registration_certificate")
       end
 
-      it "has the certificate as the third additional param" do
-        expect(subject.additional_params[2][0, 4]).to eq("%PDF")
+      it "has the certificate as the fifth additional param" do
+        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
+      end
+    end
+
+    context "attaching a current_transcript" do
+      subject do
+        described_class.new(
+          notifiable: submission, attachments: "current_transcript")
+      end
+
+      it "has the certificate as the fifth additional param" do
+        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
+      end
+    end
+
+    context "attaching a historic_transcript" do
+      subject do
+        described_class.new(
+          notifiable: submission, attachments: "historic_transcript")
+      end
+
+      it "has the certificate as the fifth additional param" do
+        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
       end
     end
   end

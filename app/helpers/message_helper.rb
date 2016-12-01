@@ -1,25 +1,36 @@
 module MessageHelper
-  def default_email_text(notification_type)
+  def default_email_text(notification_type, submission)
     case notification_type
     when :cancel
-      cancel_email_text
+      cancel_email_text(submission)
     when :refer
-      refer_email_text
+      refer_email_text(submission)
     end
   end
 
-  def cancel_email_text
-    %(<p>Thank you for your application to register your vessel
-      on Part III of the UK Ship Register.</p>
-      <p>[CANCELLATION REASON].</p>
-      <p>A refund will be processed shortly and you will be notified
-      when it has been issued.</p>)
+  def cancel_email_text(submission)
+    %(<p>Thank you for your application regarding the vessel
+      #{submission.vessel}</p>
+      <p>Please note that your application has been cancelled
+      for the following reason/s</p>
+      <p>[FREE TEXT]</p>
+      <p>Where applicable the fee will be refunded using the same
+      method and to the same payee as the original payment.</p>
+      <p>If you require any further assistance please do not
+      hesitate to contact us at ssr.registry@mcga.gov.uk.</p>
+      <p>Please quote your application reference
+      #{submission.ref_no} in all correspondence.</p>)
   end
 
-  def refer_email_text
-    %(<p>Thank you for your application to register your vessel
-      on Part III of the UK Ship Register.</p>
-      <p>Your application has been referred for the following reason:
-      [REFERRAL REASON]</p>)
+  def refer_email_text(submission)
+    %(<p>Thank you for your application regarding the vessel
+      #{submission.vessel}</p>
+      <p>In order for us to proceed with your application we
+      will require the following:</p>
+      <p>[FREE TEXT]</p>
+      <p>If you require any further assistance please do not
+      hesitate to contact us at ssr.registry@mcga.gov.uk.</p>
+      <p>Please quote your application reference
+      #{submission.ref_no} in all correspondence.</p>)
   end
 end

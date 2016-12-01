@@ -61,6 +61,13 @@ class Task
       :re_registration, :new_registration, :renewal].include?(@key)
   end
 
+  def emails_application_approval?
+    [
+      :new_registration, :renewal, :re_registration,
+      :change_owner, :change_vessel, :change_address,
+      :closure, :current_transcript, :historic_transcript].include?(@key)
+  end
+
   class << self
     def finance_task_types
       all_task_types.delete_if do |t|

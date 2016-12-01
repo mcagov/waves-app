@@ -1,42 +1,162 @@
 # Preview all emails at http://localhost:3000/rails/mailers/notification
+# rubocop:disable all
 class EmailTemplatesPreview < ActionMailer::Preview
   def outstanding_declaration
     NotificationMailer.outstanding_declaration(
-      Notification::OutstandingDeclaration.new.email_subject,
-      email, name, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
+      default_params, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
   end
 
-  def application_receipt
+  def application_receipt_new_registration
     NotificationMailer.application_receipt(
-      "Email subject", email, name, "Jolly Roger",
-      "8481b725-e7c8-4c94-b311-9fa2f10748ae", "3N-777EA4"
+      default_params,
+      "My Boat", "3N-777EA4", true, :new_registration
     )
   end
 
-  def payment_receipt
-    NotificationMailer.payment_receipt(
-      "Email subject", email, name, "", "Officer Bob"
+  def application_receipt_renewal
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :renewal
     )
   end
 
-  def application_approval
+  def application_receipt_change_owner
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :change_owner
+    )
+  end
+
+  def application_receipt_change_vessel
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :change_vessel
+    )
+  end
+
+  def application_receipt_change_address
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :change_address
+    )
+  end
+
+  def application_receipt_re_registration
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :re_registration
+    )
+  end
+
+  def application_receipt_closure
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :closure
+    )
+  end
+
+  def application_receipt_current_transcript
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :current_transcript
+    )
+  end
+
+  def application_receipt_current_transcript
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :current_transcript
+    )
+  end
+
+  def application_receipt_historic_transcript
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :historic_transcript
+    )
+  end
+
+  def application_receipt_duplicate_certificate
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :duplicate_certificate
+    )
+  end
+
+  def application_receipt_enquiry
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :enquiry
+    )
+  end
+
+  def application_approval_new_registration
     NotificationMailer.application_approval(
-      "Email subject", email, name, "SRXXXXXX", "Officer Bob"
+      default_params, "SRXXXXXX", "Officer Bob", :new_registration, "MV Bob"
+    )
+  end
+
+  def application_approval_renewal
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :renewal, "MV Bob"
+    )
+  end
+
+  def application_approval_re_registration
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :re_registration, "MV Bob"
+    )
+  end
+
+  def application_approval_change_owner
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_owner, "MV Bob"
+    )
+  end
+
+  def application_approval_change_vessel
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_vessel, "MV Bob"
+    )
+  end
+
+  def application_approval_change_address
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :change_address, "MV Bob"
+    )
+  end
+
+  def application_approval_closure
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :closure, "MV Bob"
+    )
+  end
+
+  def application_approval_current_transcript
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :current_transcript, "MV Bob"
+    )
+  end
+
+  def application_approval_historic_transcript
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :historic_transcript, "MV Bob"
     )
   end
 
   def wysiwyg
     NotificationMailer.wysiwyg(
-      "WYSIWYG", email, name, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
+      default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
   end
 
   private
 
-  def email
-    "sample@example.com"
-  end
-
-  def name
-    "Alice"
+  def default_params
+    {
+      subject: "email subject",
+      to: "alice@example.com",
+      name: "Alice",
+    }
   end
 end
+# rubocop:enable all

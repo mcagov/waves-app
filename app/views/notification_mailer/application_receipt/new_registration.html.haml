@@ -1,0 +1,15 @@
+%p
+  Thank you for your application to register the vessel #{@vessel_name} on #{part_of_register}.
+  - if @declarations_required
+    #{pending_declaration_msg}
+  #{application_processing_time}
+
+%p  Application Reference No: #{@submission_ref_no}
+
+%p Please note an #{official_number_for_part} will not be generated until your application has been assessed and approved.
+
+%p If your application is successful, a Certificate of British Registry #{will_be_sent}.
+
+%p #{if_no_certificate}
+
+%p #{quote_ref_no}
