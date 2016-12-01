@@ -19,6 +19,8 @@ describe Submission::DocumentsController, type: :controller do
       it "moves to #unassigned" do
         expect(assigns(:submission)).to be_unassigned
       end
+
+      it { creates_a_work_log_entry("Document", :document_entry) }
     end
 
     context "when the submission is #cancelled" do
@@ -27,6 +29,8 @@ describe Submission::DocumentsController, type: :controller do
       it "remains to #cancelled" do
         expect(assigns(:submission)).to be_cancelled
       end
+
+      it { creates_a_work_log_entry("Document", :document_entry) }
     end
 
     context "when the submission is #incomplete" do
@@ -35,6 +39,8 @@ describe Submission::DocumentsController, type: :controller do
       it "remains #incomplete (#check_current_state still be called)" do
         expect(assigns(:submission)).to be_incomplete
       end
+
+      it { creates_a_work_log_entry("Document", :document_entry) }
     end
 
     context "when the submission is #assigned" do
@@ -43,6 +49,8 @@ describe Submission::DocumentsController, type: :controller do
       it "remains #assigned" do
         expect(assigns(:submission)).to be_assigned
       end
+
+      it { creates_a_work_log_entry("Document", :document_entry) }
     end
   end
 end

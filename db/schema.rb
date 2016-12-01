@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128085520) do
+ActiveRecord::Schema.define(version: 20161201114128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -262,6 +262,19 @@ ActiveRecord::Schema.define(version: 20161128085520) do
     t.index ["part"], name: "index_vessels_on_part", using: :btree
     t.index ["radio_call_sign"], name: "index_vessels_on_radio_call_sign", using: :btree
     t.index ["reg_no"], name: "index_vessels_on_reg_no", using: :btree
+  end
+
+  create_table "work_logs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.json     "logged_info"
+    t.string   "logged_type"
+    t.string   "description"
+    t.uuid     "actioned_by_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["actioned_by_id"], name: "index_work_logs_on_actioned_by_id", using: :btree
+    t.index ["logged_type"], name: "index_work_logs_on_logged_type", using: :btree
+    t.index ["submission_id"], name: "index_work_logs_on_submission_id", using: :btree
   end
 
   create_table "world_pay_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
