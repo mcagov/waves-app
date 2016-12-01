@@ -64,10 +64,13 @@ Rails.application.routes.draw do
              controller: "submission/vessel"
   end
 
-
   resources :print_jobs, only: [:show, :index]
 
   resources :registrations, only: [:show]
+
+  namespace :reports do
+    resources :work_logs, only: [:index]
+  end
 
   resources :vessels, only: [:show, :index] do
     resources :submissions,
