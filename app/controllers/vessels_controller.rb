@@ -2,7 +2,14 @@ class VesselsController < InternalPagesController
   def show
     @vessel =
       Register::Vessel.in_part(current_activity.part)
-                      .find(params[:id])
+                      .includes(
+                        :correspondences, :owners, :registrations,
+                        :current_registration, :notes,
+                        submissions: [
+                          :correspondences,
+                          { notifications: :notifiable },
+                          { declarations: :notification }]
+                      ).find(params[:id])
   end
 
   def index
