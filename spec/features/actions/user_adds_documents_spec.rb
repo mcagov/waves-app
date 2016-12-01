@@ -19,5 +19,10 @@ feature "User adds documents to a submission", type: :feature, js: true do
       expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
       expect(page).to have_link("mca_test_2.pdf", href: /mca_test_2.pdf/)
     end
+
+    click_on("History")
+    within("#history") do
+      expect(page).to have_text("Document entry")
+    end
   end
 end

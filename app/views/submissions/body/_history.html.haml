@@ -4,12 +4,12 @@
     %th Activity
     %th Officer
   %tbody
-    - WorkLog.activities_for(@submission).each do |activity|
-      %tr
-        %td= activity.actioned_at.in_time_zone.to_s(:date_time)
-        %td= activity.description
-        %td= activity.actioned_by
     %tr
       %td= @submission.created_at.in_time_zone.to_s(:date_time)
       %td Application started
       %td
+    - @submission.work_logs.each do |work_log|
+      %tr
+        %td= work_log.created_at.in_time_zone.to_s(:date_time)
+        %td= work_log.description.humanize
+        %td= work_log.actioned_by

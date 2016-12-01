@@ -8,7 +8,10 @@ class Submission::DocumentsController < InternalPagesController
 
     @submission.unreferred! if @submission.can_unreferred?
 
-    flash[:notice] = "The document has been saved" if @document.save
+    if @document.save
+      flash[:notice] = "The document has been saved"
+      log_work!(@submission, @document, :document_entry)
+    end
 
     redirect_to submission_path(@submission)
   end

@@ -53,6 +53,8 @@ describe Submission::ApprovalsController, type: :controller do
           expect(Notification::ApplicationApproval.first.actioned_by)
             .to eq(claimant)
         end
+
+        it { creates_a_work_log_entry("Submission", :processed_application) }
       end
 
       context "unsuccessfully" do
@@ -69,6 +71,8 @@ describe Submission::ApprovalsController, type: :controller do
         it "renders the errors page" do
           expect(response).to render_template("errors")
         end
+
+        it { does_not_create_a_work_log_entry }
       end
     end
   end

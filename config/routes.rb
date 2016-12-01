@@ -17,8 +17,20 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :declarations, only: [:update] do
+    resource :owners, only: [:update], controller: :declaration_owner
+  end
+
   namespace :finance do
     resources :payments, only: [:new, :create, :show, :index]
+  end
+
+  resources :notifications, only: [:show] do
+    member do
+      post :cancel
+      post :reject
+      post :refer
+    end
   end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
@@ -52,20 +64,13 @@ Rails.application.routes.draw do
              controller: "submission/vessel"
   end
 
-  resources :declarations, only: [:update] do
-    resource :owners, only: [:update], controller: :declaration_owner
-  end
-
-  resources :notifications, only: [:show] do
-    member do
-      post :cancel
-      post :reject
-      post :refer
-    end
-  end
+  resources :print_jobs, only: [:show, :index]
 
   resources :registrations, only: [:show]
-  resources :print_jobs, only: [:show, :index]
+
+  namespace :reports do
+    resources :work_logs, only: [:index]
+  end
 
   resources :vessels, only: [:show, :index] do
     resources :submissions,

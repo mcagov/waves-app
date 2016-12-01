@@ -22,4 +22,14 @@ class InternalPagesController < ApplicationController
     session[:current_activity] = activity.to_sym
     current_activity.root_path
   end
+
+  def log_work!(submission, logged_info, description)
+    WorkLog.create(
+      submission: submission,
+      logged_info: logged_info,
+      logged_type: logged_info.class.to_s,
+      description: description,
+      actioned_by: current_user,
+      part: current_activity.part)
+  end
 end
