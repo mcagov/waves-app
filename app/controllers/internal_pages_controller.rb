@@ -29,6 +29,7 @@ class InternalPagesController < ApplicationController
       logged_info: logged_info,
       logged_type: logged_info.class.to_s,
       description: description,
-      actioned_by: current_user)
+      actioned_by: current_user,
+      part: current_activity.part)
   end
 end

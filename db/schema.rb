@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201114128) do
+ActiveRecord::Schema.define(version: 20161201150902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 20161201114128) do
     t.uuid     "actioned_by_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "part"
     t.index ["actioned_by_id"], name: "index_work_logs_on_actioned_by_id", using: :btree
     t.index ["logged_type"], name: "index_work_logs_on_logged_type", using: :btree
     t.index ["submission_id"], name: "index_work_logs_on_submission_id", using: :btree
