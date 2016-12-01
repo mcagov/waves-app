@@ -47,7 +47,7 @@ class SubmissionsController < InternalPagesController
           :incomplete_declarations,
           :correspondences,
           :notifications,
-        ]).find(params[:id])
+          :work_logs]).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength

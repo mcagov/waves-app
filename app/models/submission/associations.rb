@@ -4,6 +4,7 @@ module Submission::Associations
       address_associations(base)
       notes_associations(base)
       declaration_associations(base)
+      misc_associations(base)
       notification_associations(base)
       payment_associations(base)
       registration_associations(base)
@@ -27,6 +28,10 @@ module Submission::Associations
       },
                     class_name: "Declaration"
       base.accepts_nested_attributes_for :declarations, allow_destroy: true
+    end
+
+    def misc_associations(base)
+      base.has_many :work_logs
     end
 
     # rubocop:disable Metrics/MethodLength
