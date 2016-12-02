@@ -44,7 +44,7 @@ describe Register::Vessel do
   end
 
   context "#registration_status" do
-    let!(:vessel) { create(:registered_vessel) }
+    let!(:vessel) { create(:unregistered_vessel) }
     subject { vessel.registration_status }
 
     context "with an active registration" do
@@ -79,6 +79,46 @@ describe Register::Vessel do
 
     context "without a registration" do
       it { expect(subject).to eq(:pending) }
+    end
+  end
+
+  context "#prints_registration_certificate?" do
+    before do
+      allow(vessel).to receive(:registration_status).and_return(status)
+    end
+
+    subject { vessel.prints_registration_certificate? }
+
+    context "with status: registered" do
+      let(:status) { :registered }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "with status: foo (i.e. any other status)" do
+      let(:status) { :foo }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
+  context "#prints_transcript?" do
+    before do
+      allow(vessel).to receive(:registration_status).and_return(status)
+    end
+
+    subject { vessel.prints_transcript? }
+
+    context "with status: pending" do
+      let(:status) { :pending }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "with status: foo (i.e. any other status)" do
+      let(:status) { :foo }
+
+      it { expect(subject).to be_truthy }
     end
   end
 end

@@ -73,15 +73,21 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
-    resources :submissions,
-              only: :show,
-              controller: "vessel_submissions"
+    resource :current_transcript,
+             only: [:show],
+             controller: "vessel/current_transcript"
     resource :correspondence,
              only: [:create],
              controller: "vessel/correspondences"
+    resource :historic_transcript,
+             only: [:show],
+             controller: "vessel/historic_transcript"
     resource :note,
              only: [:create],
              controller: "vessel/notes"
+    resource :registration_certificate,
+             only: [:show],
+             controller: "vessel/registration_certificate"
   end
 
   %w(

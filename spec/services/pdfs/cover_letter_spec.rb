@@ -2,15 +2,10 @@ require "rails_helper"
 
 describe Pdfs::CoverLetter do
   context "for a single registration" do
-    before do
-      vessel = create(:registered_vessel)
-      create(
-        :registration,
-        registry_info: vessel.registry_info,
-        vessel_id: vessel.id, registered_at: "2012-12-03")
+    let(:vessel) { create(:registered_vessel) }
+    let(:cover_letter) do
+      described_class.new(vessel.current_registration)
     end
-
-    let(:cover_letter) { Pdfs::CoverLetter.new(Registration.last) }
 
     it "has a filename" do
       expect(cover_letter.filename)
@@ -19,16 +14,7 @@ describe Pdfs::CoverLetter do
   end
 
   context "for multiple registrations" do
-    before do
-      3.times do
-        vessel = create(:registered_vessel)
-        create(
-          :registration,
-          registry_info: vessel.registry_info,
-          vessel_id: vessel.id, registered_at: "2012-12-03")
-      end
-    end
-
+    before { 3.times { create(:registered_vessel) } }
     let(:cover_letter) { Pdfs::CoverLetter.new(Registration.all) }
 
     it "has a filename" do

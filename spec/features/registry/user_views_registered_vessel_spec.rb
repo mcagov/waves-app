@@ -48,11 +48,7 @@ describe "User views a registered vessel", type: :feature, js: true do
     end
 
     expect(page).not_to have_css("#actions")
-
-    within(".breadcrumb") do
-      expect(page).to have_link("Registered Vessels", href: vessels_path)
-      expect(page).to have_link(@vessel.reg_no, href: vessel_path(@vessel))
-    end
+    expect(page).not_to have_css(".breadcrumb")
   end
 
   scenario "viewing the registration status" do

@@ -5,9 +5,10 @@
       %span (#{ @vessel.vessel_type })
   .col-sm-3
     .pull-right
-      = link_to '#take-action', "data-target" => "#take-action", "data-toggle" => "modal", class: 'btn btn-primary disabled' do
+      = link_to '#take-action', "data-target" => "#take-action", "data-toggle" => "modal", class: 'btn btn-primary' do
         %i.fa.fa-hand-paper-o{style: 'font-size: 1.2em; font-weight: bold;'}
         Registrar Tools
+      = render partial: "vessels/modals/registrar_tools", locals: { vessel: @vessel }
 .row
   .x_panel
     .x_title
@@ -67,4 +68,3 @@
                 %td
                   %strong= @vessel.current_registration.registered_until if @vessel.current_registration
       = render partial: "tabs"
-= render partial: "vessels/modals/to_do"

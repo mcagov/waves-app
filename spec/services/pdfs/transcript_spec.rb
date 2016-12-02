@@ -4,15 +4,10 @@ describe Pdfs::Transcript do
   let(:transcript_title) { "TRANSCRIPT OF REGISTRY" }
 
   context "for a single transcript" do
-    before do
-      vessel = create(:registered_vessel)
-      create(
-        :registration,
-        registry_info: vessel.registry_info,
-        vessel_id: vessel.id, registered_at: "2012-12-03")
+    let(:vessel) { create(:registered_vessel) }
+    let(:transcript) do
+      described_class.new(vessel.current_registration)
     end
-
-    let(:transcript) { described_class.new(Registration.last) }
 
     it "has a filename" do
       expect(transcript.filename)
@@ -28,16 +23,7 @@ describe Pdfs::Transcript do
   end
 
   context "for multiple transcripts" do
-    before do
-      3.times do
-        vessel = create(:registered_vessel)
-        create(
-          :registration,
-          registry_info: vessel.registry_info,
-          vessel_id: vessel.id, registered_at: "2012-12-03")
-      end
-    end
-
+    before { 3.times { create(:registered_vessel) } }
     let(:transcript) { described_class.new(Registration.all) }
 
     it "has a filename" do

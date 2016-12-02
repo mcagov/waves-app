@@ -47,5 +47,13 @@ module Register
         owners: owners.map(&:attributes),
       }
     end
+
+    def prints_registration_certificate?
+      registration_status == :registered
+    end
+
+    def prints_transcript?
+      registration_status != :pending
+    end
   end
 end
