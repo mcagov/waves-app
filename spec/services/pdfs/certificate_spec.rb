@@ -3,13 +3,7 @@ require "rails_helper"
 describe Pdfs::Certificate do
   context "for a single registration" do
     let!(:vessel) { create(:registered_vessel, name: "Jolly Roger") }
-
-    let!(:registration) do
-      create(
-        :registration,
-        registry_info: vessel.registry_info,
-        vessel_id: vessel.id, registered_at: "2012-12-03")
-    end
+    let!(:registration) { vessel.current_registration }
 
     let(:certificate) { Pdfs::Certificate.new(registration, mode) }
 
@@ -51,13 +45,7 @@ describe Pdfs::Certificate do
 
   context "for multiple registrations" do
     before do
-      3.times do
-        vessel = create(:registered_vessel)
-        create(
-          :registration,
-          registry_info: vessel.registry_info,
-          vessel_id: vessel.id, registered_at: "2012-12-03")
-      end
+      3.times { create(:registered_vessel) }
     end
 
     let(:certificate) { Pdfs::Certificate.new(Registration.all) }
