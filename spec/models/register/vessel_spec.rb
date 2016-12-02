@@ -77,6 +77,14 @@ describe Register::Vessel do
       it { expect(subject).to eq(:closed) }
     end
 
+    context "with a frozen vessel" do
+      before do
+        vessel.update_attribute(:frozen_at, 1.day.ago)
+      end
+
+      it { expect(subject).to eq(:frozen) }
+    end
+
     context "without a registration" do
       it { expect(subject).to eq(:pending) }
     end
