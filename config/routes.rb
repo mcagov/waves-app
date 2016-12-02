@@ -73,6 +73,9 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
+    resource :current_transcript,
+             only: [:show],
+             controller: "vessel/current_transcript"
     resource :correspondence,
              only: [:create],
              controller: "vessel/correspondences"

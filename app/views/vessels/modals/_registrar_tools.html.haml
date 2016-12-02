@@ -10,3 +10,7 @@
             vessel_registration_certificate_path(vessel, format: :pdf),
             target: "_blank",
             class: "btn btn-block btn-success"
+        %p= link_to "Print Current Transcript",
+            vessel_current_transcript_path(vessel, format: :pdf),
+            target: "_blank",
+            class: "btn btn-block btn-primary"
