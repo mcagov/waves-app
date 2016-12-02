@@ -92,6 +92,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_receipt templates are present" do
     it "renders for each task type" do
       Task.default_task_types.each do |task|
+        next unless Task.new(task[1]).emails_application_receipt?
         mail =
           NotificationMailer.application_receipt(
             default_params, "Jolly Roger", "Ref_no", false, task[1])

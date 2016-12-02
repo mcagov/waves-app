@@ -68,6 +68,14 @@ class Task
       :closure, :current_transcript, :historic_transcript].include?(@key)
   end
 
+  def emails_application_receipt?
+    [
+      :new_registration, :renewal, :re_registration,
+      :change_owner, :change_vessel, :change_address,
+      :closure, :current_transcript, :historic_transcript,
+      :duplicate_certificate, :enquiry].include?(@key)
+  end
+
   class << self
     def finance_task_types
       all_task_types.delete_if do |t|
@@ -76,11 +84,7 @@ class Task
     end
 
     def default_task_types
-      all_task_types.delete_if do |t|
-        [
-          :unknown, :registrar_closure, :registrar_restores_closure
-        ].include?(t[1])
-      end
+      all_task_types.delete_if { |t| t[1] == :unknown }
     end
 
     def validation_helper_task_type_list
