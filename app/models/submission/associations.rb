@@ -73,8 +73,7 @@ module Submission::Associations
   end
 
   def vessel
-    @vessel ||=
-      Submission::Vessel.new(symbolized_changeset[:vessel_info] || {})
+    Submission::Vessel.new(symbolized_changeset[:vessel_info] || {})
   end
 
   def vessel=(vessel_params)
@@ -83,9 +82,8 @@ module Submission::Associations
   end
 
   def delivery_address
-    @delivery_address ||=
-      Submission::DeliveryAddress.new(
-        symbolized_changeset[:delivery_address] || {})
+    Submission::DeliveryAddress.new(
+      symbolized_changeset[:delivery_address] || {})
   end
 
   def delivery_address=(delivery_address_params)
