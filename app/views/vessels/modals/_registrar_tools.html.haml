@@ -14,3 +14,7 @@
             vessel_current_transcript_path(vessel, format: :pdf),
             target: "_blank",
             class: "btn btn-block btn-primary"
+        %p= link_to "Print Historic Transcript",
+            vessel_historic_transcript_path(vessel, format: :pdf),
+            target: "_blank",
+            class: "btn btn-block btn-info"

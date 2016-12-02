@@ -79,6 +79,9 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: "vessel/correspondences"
+    resource :historic_transcript,
+             only: [:show],
+             controller: "vessel/historic_transcript"
     resource :note,
              only: [:create],
              controller: "vessel/notes"
