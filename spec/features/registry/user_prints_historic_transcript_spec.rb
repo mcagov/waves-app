@@ -14,4 +14,11 @@ describe "User prints a historic transcript", type: :feature, js: true do
       expect(page).to have_text("%PDF")
     end
   end
+
+  scenario "when the vessel is not registered" do
+    visit_unregistered_vessel
+
+    click_on("Registrar Tools")
+    expect(page).to have_css("a.disabled", "Print Historic Transcript")
+  end
 end

@@ -9,12 +9,14 @@
         %p= link_to "Print Certificate of Registry",
             vessel_registration_certificate_path(vessel, format: :pdf),
             target: "_blank",
-            class: "btn btn-block btn-success"
+            class: "btn btn-block btn-success #{'disabled' unless vessel.prints_registration_certificate?}"
+
         %p= link_to "Print Current Transcript",
             vessel_current_transcript_path(vessel, format: :pdf),
             target: "_blank",
-            class: "btn btn-block btn-primary"
+            class: "btn btn-block btn-primary #{'disabled' unless vessel.prints_transcript?}"
+
         %p= link_to "Print Historic Transcript",
             vessel_historic_transcript_path(vessel, format: :pdf),
             target: "_blank",
-            class: "btn btn-block btn-info"
+            class: "btn btn-block btn-info #{'disabled' unless vessel.prints_transcript?}"
