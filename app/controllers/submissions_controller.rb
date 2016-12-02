@@ -44,10 +44,11 @@ class SubmissionsController < InternalPagesController
         [
           { payments: [:remittance] },
           { declarations: [:notification] },
+          { documents: [:assets, :actioned_by] },
+          { work_logs: [:actioned_by] },
           :incomplete_declarations,
           :correspondences,
-          :notifications,
-          :work_logs]).find(params[:id])
+          :notifications]).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength
