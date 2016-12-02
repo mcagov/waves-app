@@ -22,34 +22,24 @@ class Vessel::ClosureController < InternalPagesController
   end
 
   def complete_closure_submission
-    @submission = Submission.create(
-      task: :registrar_closure,
-      part: current_activity.part,
-      vessel_reg_no: @vessel.reg_no,
-      source: :manual_entry,
-      state: :completed,
-      ref_no: RefNo.generate_for(Submission.new),
-      claimant: current_user,
-      received_at: Time.now,
-      registry_info: @vessel.registry_info,
-      changeset: @vessel.registry_info)
+    @submission =
+      Builders::CompletedSubmissionBuilder.create(
+        :registrar_closure,
+        current_activity.part,
+        @vessel,
+        current_user)
 
     Builders::ClosedRegistrationBuilder
       .create(@submission, Time.now, Task.new(:registrar_closure).description)
   end
 
   def complete_restore_closure_submission
-     @submission = Submission.create(
-      task: :registrar_restores_closure,
-      part: current_activity.part,
-      vessel_reg_no: @vessel.reg_no,
-      source: :manual_entry,
-      state: :completed,
-      ref_no: RefNo.generate_for(Submission.new),
-      claimant: current_user,
-      received_at: Time.now,
-      registry_info: @vessel.registry_info,
-      changeset: @vessel.registry_info)
+    @submission =
+      Builders::CompletedSubmissionBuilder.create(
+        :registrar_restores_closure,
+        current_activity.part,
+        @vessel,
+        current_user)
 
     Builders::RestoreClosedRegistrationBuilder.create(@submission)
   end
