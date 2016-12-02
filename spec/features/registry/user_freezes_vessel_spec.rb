@@ -8,12 +8,12 @@ describe "User freezes (and unfreezes) a vessel", type: :feature, js: true do
     click_on("Freeze Record")
 
     expect(page)
-      .to have_css("#registration_status .label-danger", text: "Frozen")
+      .to have_css("#registration_status", text: "Frozen")
 
     click_on("Registrar Tools")
     click_on("Unfreeze Record")
 
     expect(page)
-      .to have_css("#registration_status .label-success", text: "Registered")
+      .to have_css("#registration_status", text: "Registered")
   end
 end
