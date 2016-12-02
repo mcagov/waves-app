@@ -79,6 +79,9 @@ Rails.application.routes.draw do
     resource :note,
              only: [:create],
              controller: "vessel/notes"
+    resource :registration_certificate,
+             only: [:show],
+             controller: "vessel/registration_certificate"
   end
 
   %w(

@@ -6,6 +6,7 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title Take Action
       .modal-body
-        - if vessel.current_registration
-          %p= link_to "Print Certificate of Registry", registration_path(vessel.current_registration, format: :pdf),
-              target: "_blank", class: "btn btn-block btn-success"
+        %p= link_to "Print Certificate of Registry",
+            vessel_registration_certificate_path(vessel, format: :pdf),
+            target: "_blank",
+            class: "btn btn-block btn-success"
