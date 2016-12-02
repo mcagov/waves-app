@@ -58,10 +58,10 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     registration.update_attributes(registered_until: 1.day.ago)
     visit vessel_path(registration.vessel)
-    expect(page).to have_css(".label-warning", text: "Registration Expired")
+    expect(page).to have_css(".label-default", text: "Registration Expired")
 
     registration.update_attributes(closed_at: 1.day.ago)
     visit vessel_path(registration.vessel)
-    expect(page).to have_css(".label-danger", text: "Registration Closed")
+    expect(page).to have_css(".label-warning", text: "Registration Closed")
   end
 end
