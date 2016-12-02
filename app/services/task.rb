@@ -76,7 +76,11 @@ class Task
     end
 
     def default_task_types
-      all_task_types.delete_if { |t| t[1] == :unknown }
+      all_task_types.delete_if do |t|
+        [
+          :unknown, :registrar_closure, :registrar_restores_closure
+        ].include?(t[1])
+      end
     end
 
     def validation_helper_task_type_list
@@ -97,6 +101,8 @@ class Task
         ["Historic Transcript of Registry", :historic_transcript],
         ["Duplicate Certificate", :duplicate_certificate],
         ["General Enquiry", :enquiry],
+        ["Registrar Closure", :registrar_closure],
+        ["Registrar Restores Closure", :registrar_restores_closure],
         ["Unknown", :unknown]]
     end
   end
