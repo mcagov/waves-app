@@ -41,7 +41,9 @@ end
   Registration.create(
     vessel_id: vessel.id,
     registered_at: registered_at,
-    registered_until: registered_at.advance(years: 5)
+    registered_until: registered_at.advance(years: 5),
+    registry_info: vessel.registry_info,
+    task: :new_registration
   )
 end
 
