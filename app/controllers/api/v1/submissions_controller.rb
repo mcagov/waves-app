@@ -1,6 +1,6 @@
 module Api
   module V1
-    class NewRegistrationsController < ApiController
+    class SubmissionsController < ApiController
       def create
         @submission = Submission.new(create_submission_params)
         init_applicant

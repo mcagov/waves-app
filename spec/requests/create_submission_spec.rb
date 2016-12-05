@@ -1,7 +1,7 @@
 require "rails_helper"
 
-describe "create new new_registrations via the API", type: :request do
-  before { post api_v1_new_registrations_path, params: params }
+describe "create submissions via the API", type: :request do
+  before { post api_v1_submissions_path, params: params }
 
   context "with valid params" do
     let(:params) { valid_create_new_registration_json }
