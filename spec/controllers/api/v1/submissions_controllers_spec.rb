@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Api::V1::NewRegistrationsController, type: :controller do
+describe Api::V1::SubmissionsController, type: :controller do
   context "#create" do
     before do
       headers = { "ACCEPT" => "application/json" }
