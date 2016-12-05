@@ -21,7 +21,7 @@ describe "Client session" do
       end
 
       it "has the delivered_to" do
-        expect(parsed_attrs["delivered-to"]).to eq([1, 2])
+        expect(parsed_attrs["delivered_to"]).to eq([1, 2])
       end
     end
 
