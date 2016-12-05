@@ -68,6 +68,14 @@ class Task
       :closure, :current_transcript, :historic_transcript].include?(@key)
   end
 
+  def emails_application_receipt?
+    [
+      :new_registration, :renewal, :re_registration,
+      :change_owner, :change_vessel, :change_address,
+      :closure, :current_transcript, :historic_transcript,
+      :duplicate_certificate, :enquiry].include?(@key)
+  end
+
   class << self
     def finance_task_types
       all_task_types.delete_if do |t|
@@ -97,6 +105,8 @@ class Task
         ["Historic Transcript of Registry", :historic_transcript],
         ["Duplicate Certificate", :duplicate_certificate],
         ["General Enquiry", :enquiry],
+        ["Registrar Closure", :registrar_closure],
+        ["Registrar Restores Closure", :registrar_restores_closure],
         ["Unknown", :unknown]]
     end
   end

@@ -12,10 +12,9 @@ class Policies::Submission
     end
 
     def approvable?(submission)
-      @submission = submission
-
-      return false unless @submission.incomplete_declarations.empty?
-      return false if AccountLedger.new(@submission).awaiting_payment?
+      return false if submission.registration_status == :frozen
+      return false unless submission.incomplete_declarations.empty?
+      return false if AccountLedger.new(submission).awaiting_payment?
       true
     end
 

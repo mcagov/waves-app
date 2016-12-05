@@ -73,6 +73,12 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
+    resource :closure,
+             only: [:create],
+             controller: "vessel/closure"
+    resource :cold_storage,
+             only: [:create],
+             controller: "vessel/cold_storage"
     resource :current_transcript,
              only: [:show],
              controller: "vessel/current_transcript"

@@ -1,11 +1,15 @@
-- if registration_status == :registered
-  .label.label-success Registered
+#registration_status
+  - if registration_status == :registered
+    .label.label-success Registered
 
-- elsif registration_status == :expired
-  .label.label-warning Registration Expired
+  - elsif registration_status == :expired
+    .label.label-default Registration Expired
 
-- elsif registration_status == :closed
-  .label.label-danger Registration Closed
+  - elsif registration_status == :closed
+    .label.label-warning Registration Closed
 
-- elsif registration_status == :pending
-  .label.label-info Not Registered
+  - elsif registration_status == :pending
+    .label.label-info Not Registered
+
+  - elsif registration_status == :frozen
+    .label.label-danger Frozen

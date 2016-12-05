@@ -54,10 +54,27 @@ describe Policies::Submission do
   end
 
   describe "approvable?" do
-    let!(:submission) { create(:incomplete_submission) }
     subject { submission.approvable? }
 
+    context "frozen /unfrozen" do
+      let(:submission) { create(:assigned_submission) }
+
+      context "in general (i.e. not frozen)" do
+        it { expect(subject).to be_truthy }
+      end
+
+      context "when the registration_status is :frozen" do
+        before do
+          allow(submission)
+            .to receive(:registration_status).and_return(:frozen)
+        end
+
+        it { expect(subject).to be_falsey }
+      end
+    end
+
     context "with outstanding declarations" do
+      let!(:submission) { create(:incomplete_submission) }
       it { expect(subject).to be_falsey }
 
       context "with completed declarations but awaiting_payment" do
