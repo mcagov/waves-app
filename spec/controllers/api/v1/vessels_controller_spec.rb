@@ -24,8 +24,8 @@ describe Api::V1::VesselsController, type: :controller do
           expect(response.content_type).to eq("application/json")
         end
 
-        it "returns the registry-info" do
-          expect(parsed_attrs["registry-info"]["vessel-info"]["name"])
+        it "returns the registry_info" do
+          expect(parsed_attrs["registry_info"]["vessel_info"]["name"])
             .to eq(vessel.name)
         end
       end

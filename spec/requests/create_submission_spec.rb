@@ -17,7 +17,7 @@ describe "create submissions via the API", type: :request do
     end
 
     it "responds with the ref_no" do
-      expect(parsed_body["data"]["attributes"]["ref-no"]
+      expect(parsed_body["data"]["attributes"]["ref_no"]
             ).to eq(submission.ref_no)
     end
 

@@ -17,7 +17,7 @@ describe Api::V1::SubmissionsController, type: :controller do
     end
 
     it "assigns the vessel name" do
-      vessel_info = assigns(:submission).changeset["vessel-info"]
+      vessel_info = assigns(:submission).changeset["vessel_info"]
       expect(vessel_info["name"]).to be_present
     end
 
