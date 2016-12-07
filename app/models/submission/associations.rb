@@ -76,6 +76,10 @@ module Submission::Associations
     Submission::Vessel.new(symbolized_changeset[:vessel_info] || {})
   end
 
+  def agent
+    Submission::Agent.new(symbolized_changeset[:agent] || {})
+  end
+
   def vessel=(vessel_params)
     self.changeset ||= {}
     changeset[:vessel_info] = vessel_params

@@ -9,6 +9,7 @@ FactoryGirl.define do
         owners: [build(:declaration_owner)],
         vessel_info: build(:submission_vessel),
         delivery_address: build(:submission_delivery_address),
+        agent: build(:submission_agent),
       }
     end
   end
