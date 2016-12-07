@@ -3,7 +3,7 @@ module Api
     class SubmissionsController < ApiController
       def create
         @submission = Submission.new(create_submission_params)
-        init_applicant
+        @submission = Builders::ApplicantBuilder.build(@submission)
 
         if @submission.save
           render json: @submission, status: :created
@@ -19,14 +19,6 @@ module Api
       def create_submission_params
         data = params.require("data")
         data.require(:attributes).permit!
-      end
-
-      def init_applicant
-        applicant = @submission.owners.first
-        return unless applicant
-
-        @submission.applicant_name = applicant.name
-        @submission.applicant_email = applicant.email
       end
     end
   end

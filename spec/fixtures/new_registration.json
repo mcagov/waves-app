@@ -6,6 +6,7 @@
         {
           "part": "part_3",
           "changeset": {
+            "correspondent": "owners_1",
             "declarations": ["horatio-nelson.1@example.com"],
             "ownership": {
               "foo": ""
@@ -24,8 +25,14 @@
               "mmsi_number": "233878594",
               "radio_call_sign": "4RWO0K"
             },
+            "agent": {
+              "name": "Annabel Agent",
+              "email": "agent@example.com",
+              "phone_number": "12345"
+            },
             "owners": [
               {
+                "id": "owners_1",
                 "name": "HORATIO NELSON",
                 "nationality": "UNITED KINGDOM",
                 "address_1": "2 KEEN ROAD",
@@ -38,6 +45,7 @@
                 "phone_number": "000000111"
               },
               {
+                "id": "owners_2",
                 "name": "EDWARD MCCALLISTER",
                 "nationality": "GB",
                 "address_1": "4 KEEN ROAD",
