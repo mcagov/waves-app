@@ -18,8 +18,12 @@
         %li{:role => "presentation"}
           %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content5", :role => "tab"} Payment & Delivery
 
+        %li{:role => "agent"}
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content6", :role => "tab"} Agent
+
         %li{:role => "history"}
-          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content6", :role => "tab"} History
+          %a#payment-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content7", :role => "tab"} History
+
 
       #submissionTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -42,5 +46,8 @@
 
           = render partial: "submissions/body/delivery_address", locals: { delivery_address: submission.delivery_address }
 
-        #tab_content6.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+        #tab_content6.tab-pane.fade{"aria-labelledby" => "agent-tab", :role => "tabpanel"}
+          = render partial: "submissions/body/agent", locals: { agent: submission.agent }
+
+        #tab_content7.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
           = render partial: "submissions/body/history"

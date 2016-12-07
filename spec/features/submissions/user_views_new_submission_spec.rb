@@ -25,5 +25,12 @@ feature "User views new submission", type: :feature, js: true do
     within("#history") do
       expect(page).to have_text("Application started")
     end
+
+    click_link("Agent")
+    within("#agent") do
+      expect(page).to have_css(".agent-name", text: "Annabel Agent")
+      expect(page).to have_css(".agent-email", text: "agent@example.com")
+      expect(page).to have_css(".agent-phone_number", text: "1-800-AGENT")
+    end
   end
 end
