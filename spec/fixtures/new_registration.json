@@ -6,6 +6,7 @@
         {
           "part": "part_3",
           "changeset": {
+            "correspondent": "owners_1",
             "declarations": ["horatio-nelson.1@example.com"],
             "ownership": {
               "foo": ""
@@ -23,6 +24,11 @@
               "vessel_type_other": "",
               "mmsi_number": "233878594",
               "radio_call_sign": "4RWO0K"
+            },
+            "agent": {
+              "name": "Annabel Agent",
+              "email": "agent@example.com",
+              "phone_number": "12345"
             },
             "owners": [
               {
