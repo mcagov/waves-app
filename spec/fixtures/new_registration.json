@@ -32,6 +32,7 @@
             },
             "owners": [
               {
+                "id": "owners_1",
                 "name": "HORATIO NELSON",
                 "nationality": "UNITED KINGDOM",
                 "address_1": "2 KEEN ROAD",
@@ -44,6 +45,7 @@
                 "phone_number": "000000111"
               },
               {
+                "id": "owners_2",
                 "name": "EDWARD MCCALLISTER",
                 "nationality": "GB",
                 "address_1": "4 KEEN ROAD",
