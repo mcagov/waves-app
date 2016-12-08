@@ -53,9 +53,6 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
-    resource :delivery_addresses,
-             only: [:update],
-             controller: "submission/delivery_address"
     resource :documents,
              only: [:create],
              controller: "submission/documents"
