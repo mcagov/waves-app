@@ -37,4 +37,12 @@ module SubmissionHelper
   def default_referred_until
     WavesDate.next_working_day(30.days.from_now)
   end
+
+  def compare_reg_info(value, reg_info_value)
+    if value == reg_info_value
+      "<div class='no-change'>No change</div>".html_safe
+    else
+      value
+    end
+  end
 end

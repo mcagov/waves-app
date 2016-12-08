@@ -12,52 +12,6 @@ $(document).ready(function() {
     height : 180
   });
 
-  // Editable attributes
-  // Note that we add a class .upcase after *some* of the attributes
-  // have been updated. This is to mimic the upcase action that is
-  // done in the controller
-  $('.editable-select').editable({ type: 'select' });
-  $('.editable-email').editable({ type: 'text' });
-
-  $('.editable-text').editable({
-    type: 'text',
-    success:  function(response, newValue) {
-      $(this).addClass('upcase');
-    }
-  });
-
-  $('.editable-delivery-address').editable({
-    type: 'text',
-    success:  function(response, newValue) {
-      $("a#inline_delivery_address").text(response.inline_name_and_address);
-      $(this).addClass('upcase');
-    }
-  });
-
-  $('.editable-delivery-country').editable({
-    type: 'select',
-    success:  function(response, newValue) {
-      $("a#inline_delivery_address").text(response.inline_name_and_address);
-    }
-  });
-
-  $('.editable-owner-address').editable({
-    type: 'text',
-    success:  function(response, newValue) {
-      var target = response.target_id;
-      $("a#inline_owner_address_" + target).text(response.inline_address);
-      $(this).addClass('upcase');
-    }
-  });
-
-  $('.editable-owner-country').editable({
-    type: 'select',
-    success:  function(response, newValue) {
-      var target = response.target_id;
-      $("a#inline_owner_address_" + target).text(response.inline_address);
-    }
-  });
-
   // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');

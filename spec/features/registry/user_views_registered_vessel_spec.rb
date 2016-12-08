@@ -36,7 +36,7 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page).to have_css(".modal-body", text: "Some stuff")
   end
 
-  scenario "linking to the submission page (which can not be edited)" do
+  scenario "linking to the submission page" do
     expect(page).to have_css("h1", text: @submission.vessel.name)
 
     click_on("Application History")
@@ -44,7 +44,6 @@ describe "User views a registered vessel", type: :feature, js: true do
 
     within("#vessel-name") do
       expect(page).to have_text(@submission.vessel.name)
-      expect(page).not_to have_link(@submission.vessel.name)
     end
 
     expect(page).not_to have_css("#actions")

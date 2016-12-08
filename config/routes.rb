@@ -17,9 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :declarations, only: [:update] do
-    resource :owners, only: [:update], controller: :declaration_owner
-  end
+  resources :declarations, only: [:update]
 
   namespace :finance do
     resources :payments, only: [:new, :create, :show, :index]
@@ -53,15 +51,9 @@ Rails.application.routes.draw do
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
-    resource :delivery_addresses,
-             only: [:update],
-             controller: "submission/delivery_address"
     resource :documents,
              only: [:create],
              controller: "submission/documents"
-    resource :vessel,
-             only: [:update],
-             controller: "submission/vessel"
   end
 
   resources :print_jobs, only: [:show, :index]
