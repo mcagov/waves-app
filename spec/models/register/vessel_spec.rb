@@ -141,15 +141,9 @@ describe Register::Vessel do
       it "has the owner attributes" do
         expect(subject[:owners][0]["name"]).to eq(vessel.owners.first.name)
       end
-    end
-
-    context "when the vessel has an agent" do
-      before do
-        vessel.build_agent(name: "Bob").save!
-      end
 
       it "has the agent attributes" do
-        expect(subject[:agent]["name"]).to eq("Bob")
+        expect(subject[:agent]["name"]).to eq(vessel.agent.name)
       end
     end
   end

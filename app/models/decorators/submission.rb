@@ -42,6 +42,11 @@ class Decorators::Submission < SimpleDelegator
       Submission::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
 
+  def registry_agent
+    @registry_agent ||=
+      Submission::Agent.new(symbolized_registry_info[:agent] || {})
+  end
+
   def registry_owners
     return [] unless symbolized_registry_info[:owners]
 
