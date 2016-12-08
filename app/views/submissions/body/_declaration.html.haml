@@ -15,7 +15,7 @@
     %tr
       %td{width: "20%"} Owner Name
 
-      - if registry_owner
+      - if @submission.display_registry_info?
         %td.registry-owner-name{width: "40%"}
           = registry_owner.name
 
@@ -25,12 +25,11 @@
             - if @submission.uneditable?
               = owner.name
             - else
-              = editable_owner "Owner Name", "owner[name]",
-                owner.name, registry_owner.name, declaration
+              = compare_reg_info owner.name, registry_owner.name
     %tr
       %td Owner Address
 
-      - if registry_owner
+      - if @submission.display_registry_info?
         %td
           = registry_owner.inline_address
 
@@ -40,59 +39,11 @@
             %strong= owner.inline_address
           - else
             %strong
-              = link_to declaration.owner.inline_address,
-                "#address-fields-#{declaration.id}",
-                class: "editable-link",
-                id: "inline_owner_address_#{declaration.id}",
-                "data-toggle" => "collapse"
-
-        .collapse.editable-fields{ id: "address-fields-#{declaration.id}" }
-
-          %dl.dl-horizontal
-            %dt Building and Street
-            %dd.address-1
-              %strong
-                = editable_owner "Address 1", "owner[address_1]",
-                  owner.address_1, registry_owner.address_1, declaration,
-                  "editable-owner-address"
-            %dt
-            %dd.address-2
-              %strong
-                = editable_owner "Address 2", "owner[address_2]",
-                  owner.address_2, registry_owner.address_2, declaration,
-                  "editable-owner-address"
-            %dt
-            %dd.address-3
-              %strong
-                = editable_owner "Address 3", "owner[address_3]",
-                  owner.address_3, registry_owner.address_3, declaration,
-                  "editable-owner-address"
-
-            %dt Town or city
-            %dd.address-town
-              %strong
-                = editable_owner "Town", "owner[town]",
-                  owner.town, registry_owner.town, declaration,
-                  "editable-owner-address"
-
-            %dt Postcode
-            %dd.address-postcode
-              %strong
-                = editable_owner "Postcode", "owner[postcode]",
-                  owner.postcode, registry_owner.postcode, declaration,
-                  "editable-owner-address"
-
-            %dt Country
-            %dd.address-country
-              %strong
-                = editable_owner "Country", "owner[country]",
-                  owner.country, registry_owner.country, declaration,
-                  "editable-owner-country", owner_country_list.to_json
-
+              = compare_reg_info owner.inline_address, registry_owner.inline_address
     %tr
       %td Owner Email
 
-      - if registry_owner
+      - if @submission.display_registry_info?
         %td= registry_owner.email
 
       - if @submission.display_changeset?
@@ -101,14 +52,11 @@
             - if @submission.uneditable?
               = owner.email
             - else
-              = editable_owner "Owner Email", "owner[email]",
-                owner.email, registry_owner.email, declaration,
-                "editable-email"
-
+              = compare_reg_info owner.email, registry_owner.email
     %tr
       %td Owner Phone Number
 
-      - if registry_owner
+      - if @submission.display_registry_info?
         %td= registry_owner.phone_number
 
       - if @submission.display_changeset?
@@ -117,12 +65,11 @@
             - if @submission.uneditable?
               = owner.phone_number
             - else
-              = editable_owner "Owner Phone Number", "owner[phone_number]",
-                owner.phone_number, registry_owner.phone_number, declaration
+              = compare_reg_info owner.phone_number, registry_owner.phone_number
     %tr
       %td Owner Nationality
 
-      - if registry_owner
+      - if @submission.display_registry_info?
         %td
           = registry_owner.nationality
 
@@ -132,13 +79,11 @@
             - if @submission.uneditable?
               = owner.nationality
             - else
-              = editable_owner "Owner Nationality", "owner[nationality]",
-                owner.nationality, registry_owner.nationality, declaration,
-                "editable-select", nationality_list.to_json
+              = compare_reg_info owner.nationality, registry_owner.nationality
     - if @submission.display_changeset?
       %tr
         %td Declaration
-        - if registry_owner
+        - if @submission.display_registry_info?
           %td n/a
         %td.declaration{ id: "declaration_#{declaration.id}" }
           = render partial: "declarations/status", locals: { declaration: declaration}
