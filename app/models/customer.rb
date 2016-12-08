@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  belongs_to :vessel
+
   def to_s
     name
   end
