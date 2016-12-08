@@ -4,6 +4,8 @@ module Register
 
     validates :part, presence: true
 
+    has_one :agent, class_name: "Register::Agent"
+
     has_many :owners,
              -> { order("updated_at asc") },
              class_name: "Register::Owner"
