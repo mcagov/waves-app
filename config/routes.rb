@@ -59,9 +59,6 @@ Rails.application.routes.draw do
     resource :documents,
              only: [:create],
              controller: "submission/documents"
-    resource :vessel,
-             only: [:update],
-             controller: "submission/vessel"
   end
 
   resources :print_jobs, only: [:show, :index]
