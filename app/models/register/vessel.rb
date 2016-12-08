@@ -48,6 +48,7 @@ module Register
       {
         vessel_info: attributes,
         owners: owners.map(&:attributes),
+        agent: (agent || Register::Agent.new).attributes,
       }
     end
 

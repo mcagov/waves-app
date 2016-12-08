@@ -129,4 +129,28 @@ describe Register::Vessel do
       it { expect(subject).to be_truthy }
     end
   end
+
+  context "#registry_info" do
+    subject { vessel.registry_info }
+
+    context "in general" do
+      it "has the vessel attributes" do
+        expect(subject[:vessel_info]["name"]).to eq(vessel.name)
+      end
+
+      it "has the owner attributes" do
+        expect(subject[:owners][0]["name"]).to eq(vessel.owners.first.name)
+      end
+    end
+
+    context "when the vessel has an agent" do
+      before do
+        vessel.build_agent(name: "Bob").save!
+      end
+
+      it "has the agent attributes" do
+        expect(subject[:agent]["name"]).to eq("Bob")
+      end
+    end
+  end
 end
