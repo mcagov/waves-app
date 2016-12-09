@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Submission::ApplicationProcessor do
-  let(:registered_vessel) { double(:registered_vessel) }
+  let(:registered_vessel) { Register::Vessel.new }
 
   context "#run" do
     let(:approval_params) do
