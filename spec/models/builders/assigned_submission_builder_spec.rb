@@ -14,6 +14,10 @@ describe Builders::AssignedSubmissionBuilder do
       expect(submission).to be_assigned
     end
 
+    it "assigns the task" do
+      expect(submission.task.to_sym).to eq(:registrar_closure)
+    end
+
     it "is a manual_entry" do
       expect(submission.source.to_sym).to eq(:manual_entry)
     end
