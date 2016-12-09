@@ -127,6 +127,19 @@ describe Submission::ApplicationProcessor do
 
         it { subject }
       end
+
+      context "manual_override" do
+        let(:task) { :manual_override }
+
+        before do
+          expect_registry_builder
+          dont_expect_registration_builder
+          expect_cloned_registration_builder
+          dont_expect_print_job_builder
+        end
+
+        it { subject }
+      end
     end
   end
 end
