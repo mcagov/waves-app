@@ -33,5 +33,10 @@ describe Builders::AssignedSubmissionBuilder do
     it "assigns the registered_vessel" do
       expect(submission.registered_vessel).to eq(registered_vessel)
     end
+
+    it "builds declarations with state :not_required" do
+      expect(submission.declarations.map(&:current_state))
+        .to eq([:not_required])
+    end
   end
 end

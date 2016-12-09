@@ -6,7 +6,10 @@ class Builders::AssignedSubmissionBuilder
       @registered_vessel = registered_vessel
       @claimant = claimant
 
-      create_completed_submission
+      @submission = build_submission
+      build_not_required_declarations
+
+      @submission
     end
 
     def current_state
@@ -15,7 +18,7 @@ class Builders::AssignedSubmissionBuilder
 
     private
 
-    def create_completed_submission
+    def build_submission
       Submission.create(
         task: @task, part: @part,
         vessel_reg_no: @registered_vessel.reg_no,
@@ -24,6 +27,15 @@ class Builders::AssignedSubmissionBuilder
         claimant: @claimant, received_at: Time.now,
         registry_info: @registered_vessel.registry_info,
         changeset: @registered_vessel.registry_info)
+    end
+
+    def build_not_required_declarations
+      @registered_vessel.owners.each do |owner|
+        Declaration.create(
+          submission: @submission,
+          changeset: owner,
+          state: :not_required)
+      end
     end
   end
 end
