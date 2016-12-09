@@ -12,7 +12,7 @@
     %tr
       %td{width: "20%"} Agent Name
 
-      - if registry_agent
+      - if @submission.display_registry_info?
         %td.registry-agent-name{width: "40%"}
           = registry_agent.name
 
@@ -22,7 +22,7 @@
     %tr
       %td{width: "20%"} Agent Email
 
-      - if registry_agent
+      - if @submission.display_registry_info?
         %td.registry-agent-email{width: "40%"}
           = registry_agent.email
 
@@ -32,7 +32,7 @@
     %tr
       %td Agent Phone Number
 
-      - if registry_agent
+      - if @submission.display_registry_info?
         %td= registry_agent.phone_number
 
       %td.agent-phone_number
