@@ -1,4 +1,4 @@
 module Register
-  class Owner < Customer
+  class Agent < Customer
   end
 end

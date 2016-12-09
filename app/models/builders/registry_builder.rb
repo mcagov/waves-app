@@ -8,6 +8,7 @@ class Builders::RegistryBuilder
         update_vessel_details
         assign_vessel_to_submission
         build_owners
+        build_agent
       end
 
       @vessel
@@ -51,6 +52,15 @@ class Builders::RegistryBuilder
         address_3: owner.address_3,
         town: owner.town, postcode: owner.postcode,
         country: owner.country)
+    end
+
+    def build_agent
+      return unless @submission.agent
+      agent = @vessel.agent || @vessel.build_agent
+      agent.name = @submission.agent.name
+      agent.email = @submission.agent.email
+      agent.phone_number = @submission.agent.phone_number
+      agent.save
     end
   end
 end

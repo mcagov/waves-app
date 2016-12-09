@@ -5,6 +5,7 @@ FactoryGirl.define do
     number_of_hulls           { rand(1..6) }
     vessel_type               "BARGE"
     owners                    { [build(:registered_owner)] }
+    agent                     { build(:registered_agent) }
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do

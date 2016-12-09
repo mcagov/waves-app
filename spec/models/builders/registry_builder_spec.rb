@@ -9,6 +9,7 @@ describe Builders::RegistryBuilder do
              changeset: {
                vessel_info: build(:submission_vessel, name: "BOB BARGE"),
                owners: [{ name: "ALICE" }, { name: "BOB" }],
+               agent: build(:submission_agent),
              })
     end
 
@@ -26,6 +27,10 @@ describe Builders::RegistryBuilder do
       expect(registered_vessel.owners.length).to eq(2)
       expect(registered_vessel.owners.first.name).to eq("ALICE")
       expect(registered_vessel.owners.last.name).to eq("BOB")
+    end
+
+    it "creates the registered agent" do
+      expect(registered_vessel.reload.agent.name).to eq("Annabel Agent")
     end
 
     context "with a task that changes registry details" do
