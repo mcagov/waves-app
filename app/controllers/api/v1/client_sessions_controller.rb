@@ -16,7 +16,7 @@ module Api
       def validate_owner_params
         data = params.require("data")
         data.require(:attributes).permit(
-          [:vessel_reg_no, :external_session_key])
+          [:vessel_reg_no, :email, :external_session_key])
       end
     end
   end
