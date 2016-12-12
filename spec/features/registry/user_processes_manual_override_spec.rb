@@ -11,5 +11,10 @@ describe "User processes a manual override", type: :feature, js: true do
 
     click_on("Owners")
     expect(page).to have_css(".declaration", text: "n/a")
+
+    click_on("Approve Manual Override")
+    within(".modal-content") { click_button("Approve") }
+
+    expect(page).to have_text("The Manual Override has been processed.")
   end
 end

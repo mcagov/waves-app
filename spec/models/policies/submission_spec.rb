@@ -56,6 +56,12 @@ describe Policies::Submission do
   describe "approvable?" do
     subject { submission.approvable? }
 
+    context "manual_override" do
+      let(:submission) { build(:submission, task: :manual_override) }
+
+      it { expect(subject).to be_truthy }
+    end
+
     context "frozen /unfrozen" do
       let(:submission) { create(:assigned_submission) }
 
