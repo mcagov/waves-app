@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Submission::ApplicationProcessor do
-  let(:registered_vessel) { double(:registered_vessel) }
+  let(:registered_vessel) { Register::Vessel.new }
 
   context "#run" do
     let(:approval_params) do
@@ -123,6 +123,19 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           expect_print_job_builder
+        end
+
+        it { subject }
+      end
+
+      context "manual_override" do
+        let(:task) { :manual_override }
+
+        before do
+          expect_registry_builder
+          dont_expect_registration_builder
+          expect_cloned_registration_builder
+          dont_expect_print_job_builder
         end
 
         it { subject }

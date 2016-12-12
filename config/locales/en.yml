@@ -52,6 +52,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
+        manual_override: Approve Manual Override
       modal-title:
         new_registration: Register Vessel and Issue Certificate of Registry
         renewal: Renew Registration and Issue Certificate of Registry
@@ -65,6 +66,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Complete General Enquiry
+        manual_override: Manual Override
       modal-btn:
         new_registration: Register Vessel
         renewal: Renew Registration
@@ -78,6 +80,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
+        manual_override: Approve
       confirmation:
         new_registration: The applicant has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
         renewal: The applicant has been notified via email that their request for a Registration Renewal has been approved.
@@ -91,5 +94,6 @@ en:
         current_transcript: The applicant has been notified via email that their request for a Current Transcript of Registry has been approved.
         historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
         enquiry: The General Enquiry has been marked as completed.
+        manual_override: The Manual Override has been processed.
 
 
