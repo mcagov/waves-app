@@ -1,5 +1,7 @@
 %strong
-  - if declaration.completed?
+  - if declaration.not_required?
+    n/a
+  - elsif declaration.completed?
     %i.fa.fa-check
     %strong
       Completed

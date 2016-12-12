@@ -86,6 +86,9 @@ Rails.application.routes.draw do
     resource :registration_certificate,
              only: [:show],
              controller: "vessel/registration_certificate"
+    resource :manual_override,
+             only: [:create],
+             controller: "vessel/manual_override"
   end
 
   %w(
