@@ -24,9 +24,7 @@ class ClientSession < ApplicationRecord
     SmsProvider.send_access_code(customer, access_code)
   end
 
-  def obfuscated_recipient_phone_numbers
-    vessel.owners.map do |owner|
-      "********#{owner.phone_number.last(3)}"
-    end
+  def obfuscated_recipient_phone_number
+    "********#{customer.phone_number.last(3)}"
   end
 end
