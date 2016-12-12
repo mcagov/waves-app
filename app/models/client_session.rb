@@ -17,7 +17,8 @@ class ClientSession < ApplicationRecord
 
   def email=(val)
     return unless registered_vessel
-    self.customer = registered_vessel.customers.find_by(email: val)
+    self.customer =
+      registered_vessel.customers.where("UPPER(email) = ?", val.upcase).first
   end
 
   after_create do
