@@ -6,7 +6,7 @@ describe "Client session" do
   context "#create" do
     before do
       allow_any_instance_of(ClientSession)
-        .to receive(:obfuscated_recipient_phone_numbers).and_return([1, 2])
+        .to receive(:obfuscated_recipient_phone_number).and_return([1, 2])
 
       allow_any_instance_of(ClientSession)
         .to receive(:save).and_return(bln)

@@ -2,7 +2,7 @@ module Api
   module V1
     class ClientSessionsController < ApiController
       def create
-        @client_session = ClientSession.new(validate_owner_params)
+        @client_session = ClientSession.new(client_session_params)
 
         if @client_session.save
           render json: @client_session, status: :created
@@ -13,10 +13,9 @@ module Api
 
       private
 
-      def validate_owner_params
-        data = params.require("data")
-        data.require(:attributes).permit(
-          [:vessel_reg_no, :external_session_key])
+      def client_session_params
+        params.require("data").require(:attributes).permit(
+          [:vessel_reg_no, :email, :external_session_key])
       end
     end
   end

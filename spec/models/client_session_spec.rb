@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe ClientSession do
   context "#create" do
-    let!(:vessel) { create(:registered_vessel) }
+    let!(:registered_vessel) { create(:registered_vessel) }
     let!(:owner) { create(:registered_vessel).owners.first }
 
     context "with valid attributes" do
@@ -10,7 +10,8 @@ describe ClientSession do
 
       subject do
         ClientSession.create(
-          vessel_reg_no: vessel.reg_no,
+          vessel_reg_no: registered_vessel.reg_no,
+          email: owner.email,
           external_session_key: "123")
       end
 
@@ -18,13 +19,13 @@ describe ClientSession do
         expect(subject.access_code).to be_present
       end
 
-      it "belongs to the vessel" do
-        expect(subject.vessel).to eq(vessel)
+      it "belongs to the registered_vessel" do
+        expect(subject.registered_vessel).to eq(registered_vessel)
       end
 
-      it "builds the obfuscated_recipient_phone_numbers" do
-        expect(subject.obfuscated_recipient_phone_numbers)
-          .to eq(["********#{owner.phone_number.last(3)}"])
+      it "builds the obfuscated_recipient_phone_number" do
+        expect(subject.obfuscated_recipient_phone_number)
+          .to eq("********#{owner.phone_number.last(3)}")
       end
     end
 
@@ -32,11 +33,12 @@ describe ClientSession do
       subject do
         ClientSession.create(
           vessel_reg_no: "foo",
+          email: "something",
           external_session_key: "")
       end
 
-      it "does not belong to a vessel" do
-        expect(subject.vessel).to be_nil
+      it "does not belong to a registered_vessel" do
+        expect(subject.registered_vessel).to be_nil
       end
 
       it "has an error on the external_session_key" do

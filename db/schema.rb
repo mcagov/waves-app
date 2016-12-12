@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202114941) do
+ActiveRecord::Schema.define(version: 20161212134754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20161202114941) do
     t.integer  "access_code"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.uuid     "customer_id"
     t.index ["external_session_key"], name: "index_client_sessions_on_external_session_key", using: :btree
     t.index ["vessel_reg_no"], name: "index_client_sessions_on_vessel_reg_no", using: :btree
   end
