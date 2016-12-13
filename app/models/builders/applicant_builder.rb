@@ -24,7 +24,11 @@ class Builders::ApplicantBuilder
     end
 
     def load_agent
-      @changeset[:agent]
+      if @changeset[:agent].present?
+        @changeset[:agent]
+      else
+        @submission.registered_vessel.agent
+      end
     end
 
     def load_owners
