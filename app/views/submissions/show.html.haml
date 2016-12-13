@@ -6,4 +6,6 @@
 
 - unless @submission.registered_vessel
   = render partial: "similar_vessels", locals: {submission: @submission}
-= render partial: "actions", locals: {submission: @submission}
+
+- if @submission.actionable?
+  = render partial: "actions", locals: {submission: @submission}
