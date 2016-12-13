@@ -23,6 +23,6 @@ class AccountLedger
   end
 
   def service_level
-    amount_paid == 7500 ? :urgent : :standard
+    amount_paid == 5000 ? :urgent : :standard
   end
 end
