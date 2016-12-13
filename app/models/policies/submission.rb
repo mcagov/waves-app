@@ -3,6 +3,8 @@ class Policies::Submission
     def actionable?(submission)
       @submission = submission
 
+      return false if @submission.completed?
+
       case @submission.source.to_sym
       when :online
         approvable?(submission)

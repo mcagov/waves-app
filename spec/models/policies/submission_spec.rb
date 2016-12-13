@@ -45,12 +45,42 @@ describe Policies::Submission do
   end
 
   context "#actionable?" do
-    before do
-      expect(Policies::Submission)
-        .to receive(:approvable?)
+    let(:submission) do
+      build(:submission, source: source, state: current_state)
     end
 
-    it { build(:submission).approvable? }
+    let(:source) { :online }
+    let(:current_state) { :assigned }
+
+    subject { submission.actionable? }
+
+    context "when the source is :online" do
+      before do
+        allow(Policies::Submission)
+          .to receive(:approvable?).with(submission)
+          .and_return(true)
+      end
+
+      it { expect(subject).to be_truthy }
+
+      context "and the current_state is :completed" do
+        let(:current_state) { :completed }
+
+        it { expect(subject).to be_falsey }
+      end
+    end
+
+    context "when the source is :manual_entry" do
+      let(:source) { :manual_entry }
+
+      it { expect(subject).to be_truthy }
+
+      context "and the current_state is :completed" do
+        let(:current_state) { :completed }
+
+        it { expect(subject).to be_falsey }
+      end
+    end
   end
 
   describe "approvable?" do
