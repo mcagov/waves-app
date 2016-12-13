@@ -6,6 +6,13 @@ describe "User edits a submission", js: true do
     click_on "Edit Application"
   end
 
+  scenario "vessel: editing" do
+    fill_in("Vessel Name", with: "BOAT")
+    click_on("Save Application")
+
+    expect(page).to have_css(".vessel-name", text: "BOAT")
+  end
+
   scenario "owners: removing Alice, then Adding Bob " do
     click_on("Owners")
     click_on("Remove Owner")
