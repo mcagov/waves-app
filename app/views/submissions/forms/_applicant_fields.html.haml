@@ -1,2 +1,6 @@
-= submission_f.input :applicant_name, label: "Applicant Name", input_html: { class: "upcase" }
-= submission_f.input :applicant_email, label: "Applicant's Email Address"
+%h2 Applicant
+.row
+  .col-md-3
+    = submission_f.input :applicant_name, label: "Applicant Name", input_html: { class: "upcase" }
+  .col-md-3
+    = submission_f.input :applicant_email, label: "Applicant's Email Address"
