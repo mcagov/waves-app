@@ -602,7 +602,7 @@ a:hover, a:focus {
   margin-left: 0 !important;
   display: block;
   margin: 0;
-  padding: 10px 0px 0px 15px;
+  padding: 10px 0px 0px 3px;
 }
 .site_title:hover, .site_title:focus {
   text-decoration: none
