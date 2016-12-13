@@ -3,7 +3,7 @@
 "type": "payments",
 "attributes": {
 "submission_id": "240cdfa3-c930-4829-99a0-6c160a631d2d",
-"wp_amount": 7500,
+"wp_amount": 5000,
 "customer_ip": "127.0.0.1",
 "wp_order_code": "wp_order_code"
 }
