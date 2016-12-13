@@ -45,12 +45,25 @@ describe Policies::Submission do
   end
 
   context "#actionable?" do
-    before do
-      expect(Policies::Submission)
-        .to receive(:approvable?)
+    let(:submission) { build(:submission, source: source) }
+    subject { submission.actionable? }
+
+    context "when the source is :online" do
+      let(:source) { :online }
+
+      before do
+        expect(Policies::Submission)
+          .to receive(:approvable?).with(submission)
+      end
+
+      it { subject }
     end
 
-    it { build(:submission).approvable? }
+    context "when the source is :manual_entry" do
+      let(:source) { :manual_entry }
+
+      it { expect(subject).to be_truthy }
+    end
   end
 
   describe "approvable?" do
