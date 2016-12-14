@@ -6,23 +6,16 @@ describe "User edits a submission", js: true do
     click_on "Edit Application"
   end
 
-  scenario "adding Bob as an additional owner, then removing him" do
-    find(".owner-name").set("Alice")
-    click_on "Add Individual Owner"
-
-    all(".owner-name").last.set("Bob")
+  scenario "vessel and applicant details" do
+    fill_in("Vessel Name", with: "BOAT")
+    fill_in("Applicant Name", with: "ANNIE")
+    fill_in("Applicant's Email", with: "annie@example.com")
     click_on("Save Application")
 
-    click_on("Owners")
-    expect(page).to have_css("#declaration_1 .owner-name", text: "ALICE")
-    expect(page).to have_css("#declaration_2 .owner-name", text: "BOB")
-
-    click_on "Edit Application"
-    all("a", text: "Remove Owner").last.click
-    click_on("Save Application")
-
-    click_on("Owners")
-    expect(page).to have_css("#declaration_1")
-    expect(page).not_to have_css("#declaration_2")
+    expect(page).to have_css(".vessel-name", text: "BOAT")
+    expect(page).to have_css(".applicant-name", text: "ANNIE")
+    expect(page).to have_css(".applicant-email", text: "annie@example.com")
   end
+
+  scenario "owners"
 end

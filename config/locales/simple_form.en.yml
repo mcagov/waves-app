@@ -25,8 +25,13 @@ en:
         part: Part of Register
         task: Application Type
         vessel_reg_no: Official No.
+        applicant_name: Applicant Name
+        applicant_email: Applicant's Email Address
         vessel:
           name: Vessel Name
+          alt_name_1: "Alternative Vessel Name #1"
+          alt_name_2: "Alternative Vessel Name #2"
+          alt_name_3: "Alternative Vessel Name #3"
           vessel_type: Vessel Type
           vessel_type_other: Vessel Type (other)
           hin: Hull Identification Number (HIN)

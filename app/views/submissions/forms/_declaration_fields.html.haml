@@ -16,16 +16,15 @@
             = owner_f.input :nationality, label: "Country of Nationality", as: :select, collection: WavesUtilities::Nationality.all, input_html: { class: "upcase" }, required: false
 
         .row
-          .col-md-4
+          .col-md-3
             %label.form-label-bold
               Postcode
             .input-group
               = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
               %span.input-group-btn
                 = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
-          .col-md-8
         .row
-          .col-md-4.form-group
+          .col-md-6.form-group
             .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
             .postcode-results-field
         .clearfix

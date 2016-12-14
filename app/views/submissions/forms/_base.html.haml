@@ -1,22 +1,27 @@
-= simple_form_for @submission do |f|
+= simple_form_for @submission, class: "form-vertical" do |f|
   .row
     .col-md-12
       .x_panel
+        .x_title
+          %h2 Edit Application
+          .clearfix
         .x_content
-          .row
-            .col-md-3
-              = f.input :applicant_name, label: "Applicant Name", input_html: { class: "upcase" }
-            .col-md-3
-              = f.input :applicant_email, label: "Applicant's Email Address"
+          %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+            %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
 
-  = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
+              %li.active{:role => "presentation"}
+                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Vessel Details
 
-  = f.simple_fields_for :declarations do |declaration_f|
-    = render partial: "submissions/forms/declaration_fields", locals: { f: declaration_f }
-  %div
-    = link_to_add_association f, :declarations, class: "btn btn-primary", partial: "submissions/forms/declaration_fields" do
-      %i.fa.fa-plus
-      Add Individual Owner
+              %li{:role => "presentation"}
+                %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
+
+            #myTabContent.tab-content
+
+              #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+                = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
+
+              #tab_content2.tab-pane.fade.in{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+                = render partial: "submissions/forms/owner_fields", locals: { submission_f: f }
 
   .row.no-print
     .col-sm-12
