@@ -3,13 +3,22 @@
   - vessel_f.object = submission_f.object.vessel
   .row
     .col-md-3
-      = vessel_f.input :name, input_html: { class: "upcase" }, required: false
+      = vessel_f.input :name, label: "Approved Vessel Name", input_html: { class: "upcase" }, required: false
     .col-md-3
       = vessel_f.input :alt_name_1, input_html: { class: "upcase" }, required: false
+      = link_to "#", id: "alt_name_1", class: "promote_alt_name" do
+        %i.fa.fa-check
+        Use this name
     .col-md-3
       = vessel_f.input :alt_name_2, input_html: { class: "upcase" }, required: false
+      = link_to "#", id: "alt_name_2", class: "promote_alt_name" do
+        %i.fa.fa-check
+        Use this name
     .col-md-3
       = vessel_f.input :alt_name_3, input_html: { class: "upcase" }, required: false
+      = link_to "#", id: "alt_name_3", class: "promote_alt_name" do
+        %i.fa.fa-check
+        Use this name
   %hr
   .row
     .col-md-3

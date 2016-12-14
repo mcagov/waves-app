@@ -1,0 +1,15 @@
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th Nationality
+    %th Address
+  %tbody
+    - owners.each do |owner|
+      %tr
+        %td.owner-name= owner
+        %td= owner.email
+        %td= owner.phone_number
+        %td= owner.nationality
+        %td= owner.inline_address
