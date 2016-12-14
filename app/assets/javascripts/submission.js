@@ -12,6 +12,20 @@ $(document).ready(function() {
     height : 180
   });
 
+  // Promote an alternative vessel name
+  $('.promote_alt_name').on('click', function() {
+    var original_vessel_name = $('#submission_vessel_name').val();
+    var new_vessel_name = $('#submission_vessel_' + this.id).val();
+
+    console.log(original_vessel_name)
+    console.log(new_vessel_name)
+
+    $('#submission_vessel_name').val(new_vessel_name);
+    $('#submission_vessel_' + this.id).val(original_vessel_name);
+
+    return false;
+  });
+
   // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');

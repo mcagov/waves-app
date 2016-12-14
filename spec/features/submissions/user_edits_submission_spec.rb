@@ -7,7 +7,7 @@ describe "User edits a submission", js: true do
   end
 
   scenario "vessel and applicant details" do
-    fill_in("Vessel Name", with: "BOAT")
+    fill_in("Approved Vessel Name", with: "BOAT")
     fill_in("Applicant Name", with: "ANNIE")
     fill_in("Applicant's Email", with: "annie@example.com")
     click_on("Save Application")
