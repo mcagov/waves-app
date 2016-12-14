@@ -22,7 +22,7 @@ feature "User views owner submission details", type: :feature, js: true do
     expect(page).to have_css(".owner-email", text: owner.email)
     expect(page).to have_css(".owner-phone_number", text: owner.phone_number)
     expect(page).to have_css(".owner-nationality", text: owner.nationality)
-    expect(page).to have_css(".declaration-status", text: "Incomplete")
+    expect(page).to have_button("Complete Declaration")
 
     expect(page).to have_css(".strike", text: registry_owner.name)
     expect(page).to have_css(".strike", text: registry_owner.email)

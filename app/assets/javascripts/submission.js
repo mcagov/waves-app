@@ -30,10 +30,6 @@ $(document).ready(function() {
     format: 'DD/MM/YYYY, h:mm:ss a'
   });
 
-  $('input#declaration_completed_form').on('change', function(){
-    $(this).closest('form').find(':submit').removeClass('hidden');
-  })
-
   // toggle new submission form field based on task type
   if ($("form#new_submission").length) {
     set_task_type_depenencies();

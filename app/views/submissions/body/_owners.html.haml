@@ -16,7 +16,8 @@
         %td.owner-phone_number= owner.phone_number
         %td.owner-nationality= owner.nationality
         %td.owner-address= owner.inline_address
-        %td.declaration-status= declaration.current_state.to_s.humanize
+        %td.declaration-status
+          = render partial: "declarations/status", locals: { declaration: declaration}
 
     - @submission.registry_owners.each do |owner|
       %tr
