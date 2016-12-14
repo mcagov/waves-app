@@ -56,6 +56,15 @@ class Decorators::Submission < SimpleDelegator
       end
   end
 
+  def removed_registry_owners
+    declaration_owner_names =
+      declarations.map { |declaration| declaration.owner.name.upcase }
+
+    registry_owners.delete_if do |registry_owner|
+      declaration_owner_names.include?(registry_owner.name)
+    end
+  end
+
   def payment_status
     AccountLedger.new(@submission).payment_status
   end
