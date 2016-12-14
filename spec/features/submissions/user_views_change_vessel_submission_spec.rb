@@ -9,7 +9,7 @@ feature "User views change of details submission", type: :feature, js: true do
     visit submission_path(submission)
   end
 
-  scenario "rendering 3 column table for vessel, owners and agent" do
+  scenario "rendering vessel, owners and agent tabs" do
     within("h1") do
       expect(page).to have_content("Change of Vessel details ID: ")
     end
@@ -26,15 +26,8 @@ feature "User views change of details submission", type: :feature, js: true do
     end
 
     click_link("Owners")
-    within("table#declaration_1") do
-      expect(page).to have_css("th", count: 3)
-
-      expect(page)
-        .to have_css("td.registry-owner-name",
-                     text: registered_vessel.owners.first.name)
-
-      expect(page).to have_css("td.owner-name", text: "No change")
-    end
+    expect(page)
+      .to have_css("td.owner-name", text: registered_vessel.owners.first.name)
 
     click_link("Agent")
     within("table#agent") do

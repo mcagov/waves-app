@@ -1,0 +1,28 @@
+%h2 Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th Nationality
+    %th Address
+    %th Declaration
+  %tbody
+    - @submission.declarations.each do |declaration|
+      - owner = declaration.owner
+      %tr
+        %td.owner-name= link_to owner, "#"
+        %td.owner-email= owner.email
+        %td.owner-phone_number= owner.phone_number
+        %td.owner-nationality= owner.nationality
+        %td.owner-address= owner.inline_address
+        %td.declaration-status= declaration.current_state.to_s.humanize
+
+    - @submission.registry_owners.each do |owner|
+      %tr
+        %td.owner-name.strike= owner
+        %td.strike= owner.email
+        %td.strike= owner.phone_number
+        %td.strike= owner.nationality
+        %td.strike= owner.inline_address
+        %td n/a
