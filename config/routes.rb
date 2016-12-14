@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :declarations, only: [:update]
+  resources :declarations, only: [:create, :update]
 
   namespace :finance do
     resources :payments, only: [:new, :create, :show, :index]

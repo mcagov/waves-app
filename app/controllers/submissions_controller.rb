@@ -25,7 +25,9 @@ class SubmissionsController < InternalPagesController
     @submission = Decorators::Submission.new(@submission)
   end
 
-  def edit; end
+  def edit
+    @submission = Decorators::Submission.new(@submission)
+  end
 
   def update
     if @submission.update_attributes(submission_params)

@@ -1,0 +1,96 @@
+%h2 Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th Nationality
+    %th Address
+    %th
+  %tbody
+    - @submission.declarations.each do |declaration|
+      - owner = declaration.owner
+      %tr
+        %td.owner-name= link_to owner, "#"
+        %td.owner-email= owner.email
+        %td.owner-phone_number= owner.phone_number
+        %td.owner-nationality= owner.nationality
+        %td.owner-address= owner.inline_address
+        %td
+          = link_to '#', class: 'btn-link', onclick: 'return confirm("Are you sure you want to remove this owner?");', style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
+
+    - @submission.removed_registry_owners.each do |owner|
+      %tr
+        %td.owner-name.strike= owner
+        %td.strike= owner.email
+        %td.strike= owner.phone_number
+        %td.strike= owner.nationality
+        %td.strike= owner.inline_address
+        %td
+          = link_to '#', class: 'btn-link' do
+            %i.fa.fa-mail-reply-all
+            Reinstate
+
+
+
+.row
+  .col-md-12
+    = link_to '#new-individual-owner', class: 'btn btn-primary', "data-target" => "#new-individual-owner", "data-toggle" => "modal" do
+      %i.fa.fa-plus
+      Add Individual Owner
+
+
+.modal.fade{id: 'new-individual-owner', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title New Individual Owner
+      .modal-body
+        .postcode-lookup
+          - declaration = Declaration.last
+          = simple_form_for declaration do |f|
+            = f.simple_fields_for :owner do |owner_f|
+              - owner_f.object = f.object.owner
+              .row
+                .col-md-3
+                  = owner_f.input :name, label: "Owner Name", input_html: { class: "upcase owner-name" }, required: false
+                .col-md-3
+                  = owner_f.input :email, required: false
+                .col-md-3
+                  = owner_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }, required: false
+                .col-md-3
+                  = owner_f.input :nationality, label: "Country of Nationality", as: :select, collection: WavesUtilities::Nationality.all, input_html: { class: "upcase" }, required: false
+
+              .row
+                .col-md-4
+                  %label.form-label-bold
+                    Postcode
+                  .input-group
+                    = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
+                    %span.input-group-btn
+                      = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
+              .row
+                .col-md-8.form-group
+                  .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+                  .postcode-results-field
+              .clearfix
+              .row
+                .col-md-4
+                  = owner_f.input :address_1, input_html: { class: "upcase address-1" }, required: false
+                .col-md-4
+                  = owner_f.input :address_2, input_html: { class: "upcase address-2" }, required: false
+                .col-md-4
+                  = owner_f.input :address_3, input_html: { class: "upcase address-3" }, required: false
+              .row
+                .col-md-4
+                  = owner_f.input :town, label: "Town or City", input_html: { class: "upcase town" }, required: false
+                .col-md-4
+                  = owner_f.input :postcode, input_html: { class: "upcase postcode" }, required: false
+                .col-md-4
+                  = owner_f.input :country, collection: ["UNITED KINGDOM"]
+      .modal-footer
+        %button.btn.btn-primary{:type => "button"} Save Individual Owner

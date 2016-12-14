@@ -16,6 +16,4 @@ describe "User edits a submission", js: true do
     expect(page).to have_css(".applicant-name", text: "ANNIE")
     expect(page).to have_css(".applicant-email", text: "annie@example.com")
   end
-
-  scenario "owners"
 end
