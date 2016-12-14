@@ -19,6 +19,6 @@ describe "User prints a current transcript", type: :feature, js: true do
     visit_unregistered_vessel
 
     click_on("Registrar Tools")
-    expect(page).to have_css("a.disabled", "Print Current Transcript")
+    expect(page).to have_css("a.disabled", text: "Print Current Transcript")
   end
 end
