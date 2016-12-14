@@ -59,13 +59,7 @@ class SubmissionsController < InternalPagesController
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
-        :alt_name_1, :alt_name_2, :alt_name_3],
-      declarations_attributes: [
-        :id,
-        :_destroy,
-        owner: [:name, :email, :phone_number, :nationality, :address_1,
-                :address_2, :address_3, :town, :postcode],
-      ]
+        :alt_name_1, :alt_name_2, :alt_name_3]
     )
   end
 

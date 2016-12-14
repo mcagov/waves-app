@@ -27,7 +27,6 @@ module Submission::Associations
           .order("created_at asc")
       },
                     class_name: "Declaration"
-      base.accepts_nested_attributes_for :declarations, allow_destroy: true
     end
 
     def misc_associations(base)
