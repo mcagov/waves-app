@@ -30,7 +30,7 @@
           = render partial: "submissions/body/vessel", locals: { vessel: submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/declaration", collection: submission.declarations
+          = render partial: "submissions/body/owners"
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
           = render partial: "submissions/body/documents", locals: { documents: submission.documents }

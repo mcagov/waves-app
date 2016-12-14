@@ -5397,3 +5397,7 @@ ul.notifications {
   background-color: #ffffff;
   border: 1px solid #D9DEE4;
 }
+
+.strike {
+  text-decoration: line-through;
+}

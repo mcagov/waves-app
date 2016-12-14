@@ -19,6 +19,7 @@ describe "User prints a registration certificate", type: :feature, js: true do
     visit_unregistered_vessel
 
     click_on("Registrar Tools")
-    expect(page).to have_css("a.disabled", "Print Certificate of Registry")
+    expect(page)
+      .to have_css("a.disabled", text: "Print Certificate of Registry")
   end
 end
