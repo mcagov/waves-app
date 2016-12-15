@@ -16,9 +16,21 @@ describe "User edits submission owners", js: true do
     fill_in("Email", with: "alice@example.com")
     fill_in("Phone Number", with: "012345678")
 
+    fill_in("Address 1", with: "Address 1")
+    fill_in("Address 2", with: "Address 2")
+    fill_in("Address 3", with: "Address 3")
+    fill_in("Town or City", with: "Town")
+    fill_in("Postcode", with: "POC123")
+
     click_on("Save Individual Owner")
     click_on("Owners")
+
     expect(page).to have_link("ALICE NEW OWNER", href: "#")
+    expect(page).to have_css(".owner-phone_number", text: "012345678")
+    expect(page).to have_css(".owner-nationality", text: "FRANCE")
+    expect(page)
+      .to have_css(".owner-address",
+                   text: "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, POC123")
   end
 
   scenario "editing an owner" do

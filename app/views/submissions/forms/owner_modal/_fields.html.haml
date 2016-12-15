@@ -4,8 +4,13 @@
       - owner_f.object = f.object.owner
       .row
         .col-md-3
-          = owner_f.input :name, label: "Owner Name", input_html: { class: "upcase owner-name"}, required: false,
-            disabled: !f.object.new_record?
+          - if f.object.new_record?
+            = owner_f.input :name, label: "Owner Name", input_html: { class: "upcase owner-name"}, required: false
+          - else
+            = owner_f.input :name, label: "Owner Name", input_html: { class: "upcase owner-name"}, required: false,
+              disabled: true
+            = owner_f.input :name, as: :hidden
+
         .col-md-3
           = owner_f.input :email, required: false
         .col-md-3
