@@ -40,6 +40,6 @@
   %hr
   .row
     .col-md-3
-      = submission_f.input :applicant_name, input_html: { class: "upcase" }
+      = submission_f.input :applicant_name, input_html: { class: "upcase" }, required: false
     .col-md-3
-      = submission_f.input :applicant_email
+      = submission_f.input :applicant_email, required: false

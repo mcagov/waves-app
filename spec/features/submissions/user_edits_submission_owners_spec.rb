@@ -22,6 +22,7 @@ describe "User edits submission owners", js: true do
     fill_in("Town or City", with: "Town")
     fill_in("Postcode", with: "POC123")
 
+    within(".declaration_declaration_signed") { choose("Yes") }
     click_on("Save Individual Owner")
 
     expect(page).to have_link("ALICE NEW OWNER", href: "#")
@@ -31,6 +32,7 @@ describe "User edits submission owners", js: true do
     expect(page)
       .to have_css(".owner-address",
                    text: "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, POC123")
+    expect(Declaration.last).to be_completed
   end
 
   scenario "editing an owner" do

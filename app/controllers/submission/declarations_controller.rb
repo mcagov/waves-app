@@ -48,7 +48,9 @@ class Submission::DeclarationsController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.find(params[:submission_id])
+    @submission =
+      Submission.in_part(current_activity.part)
+                .includes(:declarations).find(params[:submission_id])
   end
 
   def load_declaration
@@ -57,7 +59,7 @@ class Submission::DeclarationsController < InternalPagesController
 
   def declaration_params
     params.require(:declaration).permit(
-      :id, :_destroy,
+      :id, :_destroy, :declaration_signed,
       owner: [:name, :email, :phone_number, :nationality, :address_1,
               :address_2, :address_3, :town, :postcode])
   end
