@@ -33,4 +33,12 @@ class Declaration < ApplicationRecord
   def other_owners
     (submission.declarations - [self]).map(&:owner)
   end
+
+  def declaration_signed
+    completed?
+  end
+
+  def declaration_signed=(bln)
+    self.state = :completed if bln
+  end
 end
