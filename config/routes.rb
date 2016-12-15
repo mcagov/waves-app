@@ -17,8 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :declarations, only: [:create, :update]
-
   namespace :finance do
     resources :payments, only: [:new, :create, :show, :index]
   end
@@ -33,6 +31,13 @@ Rails.application.routes.draw do
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
     resource :approval, controller: "submission/approvals", only: [:create]
+    resources :declarations,
+              controller: "submission/declarations",
+              only: [:create, :update] do
+      member do
+        post :complete
+      end
+    end
     resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim
