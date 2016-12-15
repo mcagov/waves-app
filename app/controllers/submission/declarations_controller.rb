@@ -6,6 +6,8 @@ class Submission::DeclarationsController < InternalPagesController
     @declaration.submission = @submission
     @declaration.save
 
+    sign_declaration if @declaration.declaration_signed == "true"
+
     @modal_id = "new_declaration"
     render_update_js
   end
@@ -14,14 +16,15 @@ class Submission::DeclarationsController < InternalPagesController
     load_declaration
     @declaration.update_attributes(declaration_params)
 
+    sign_declaration if @declaration.declaration_signed == "true"
+
     @modal_id = "declaration_#{@declaration.id}"
     render_update_js
   end
 
   def complete
     load_declaration
-    @declaration.completed_by = current_user
-    @declaration.declared! if @declaration.save
+    sign_declaration
 
     redirect_to submission_path(@declaration.submission)
   end
@@ -71,5 +74,10 @@ class Submission::DeclarationsController < InternalPagesController
         render "/submissions/forms/owners/update.js"
       end
     end
+  end
+
+  def sign_declaration
+    @declaration.completed_by = current_user
+    @declaration.declared! if @declaration.save
   end
 end
