@@ -6,14 +6,16 @@ class Submission::DeclarationsController < InternalPagesController
     @declaration.submission = @submission
     @declaration.save
 
-    redirect_to edit_submission_path(@submission)
+    @modal_id = "new_declaration"
+    render_update_js
   end
 
   def update
     load_declaration
     @declaration.update_attributes(declaration_params)
 
-    redirect_to edit_submission_path(@submission)
+    @modal_id = "declaration_#{@declaration.id}"
+    render_update_js
   end
 
   def complete
@@ -39,5 +41,14 @@ class Submission::DeclarationsController < InternalPagesController
       :id, :_destroy,
       owner: [:name, :email, :phone_number, :nationality, :address_1,
               :address_2, :address_3, :town, :postcode])
+  end
+
+  def render_update_js
+    respond_to do |format|
+      format.js do
+        @submission = Decorators::Submission.new(load_submission)
+        render "/submissions/forms/owners/update.js"
+      end
+    end
   end
 end

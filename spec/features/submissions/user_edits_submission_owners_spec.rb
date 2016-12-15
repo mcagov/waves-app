@@ -23,9 +23,9 @@ describe "User edits submission owners", js: true do
     fill_in("Postcode", with: "POC123")
 
     click_on("Save Individual Owner")
-    click_on("Owners")
 
     expect(page).to have_link("ALICE NEW OWNER", href: "#")
+    expect(page).to have_css(".owner-email", text: "alice@example.com")
     expect(page).to have_css(".owner-phone_number", text: "012345678")
     expect(page).to have_css(".owner-nationality", text: "FRANCE")
     expect(page)
@@ -39,10 +39,10 @@ describe "User edits submission owners", js: true do
 
     expect(page).to have_css("input.owner-name:disabled")
 
-    fill_in("Email", with: "@alice@example.com")
+    fill_in("Email", with: "edited_alice@example.com")
     click_on("Save Individual Owner")
 
-    click_on("Owners")
-    expect(page).to have_css(".owner-email", text: "@alice@example.com")
+    click_on(owner_name)
+    expect(find_field("Email").value).to eq("edited_alice@example.com")
   end
 end
