@@ -38,12 +38,12 @@
         %td.strike= owner.nationality
         %td.strike= owner.inline_address
         %td
-          = link_to reinstate_submission_declaration_path(@submission, name: owner.name),
-            method: :post,
-            remote: true,
-            class: 'btn-link' do
-            %i.fa.fa-mail-reply-all
-            Reinstate
+          / = link_to reinstate_submission_declaration_path(@submission, name: owner.name),
+          /   method: :post,
+          /   remote: true,
+          /   class: 'btn-link' do
+          /   %i.fa.fa-mail-reply-all
+          /   Reinstate
 
 .row
   .col-md-12
