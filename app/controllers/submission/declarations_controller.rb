@@ -1,6 +1,14 @@
 class Submission::DeclarationsController < InternalPagesController
   before_action :load_submission
 
+  def create
+    raise "CREATE"
+  end
+
+  def update
+    raise "UPDATE"
+  end
+
   def complete
     load_declaration
     @declaration.completed_by = current_user

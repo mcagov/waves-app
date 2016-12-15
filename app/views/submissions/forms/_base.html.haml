@@ -10,17 +10,17 @@
             %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
 
               %li.active{:role => "presentation"}
-                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content1", :role => "tab"} Vessel Details
+                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessel_tab", :role => "tab"} Vessel Details
 
               %li{:role => "presentation"}
-                %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content2", :role => "tab"} Owners
+                %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners
 
             #myTabContent.tab-content
 
-              #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+              #vessel_tab.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
                 = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
 
-              #tab_content2.tab-pane.fade.in{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+              #owners_tab.tab-pane.fade.in{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
                 = render partial: "submissions/forms/owners", locals: { submission_f: f }
 
   .row.no-print
@@ -28,3 +28,8 @@
       = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
         %i.fa.fa-check
         Save Application
+
+- @submission.declarations.each do |declaration|
+  = render partial: "submissions/forms/owner_modal/edit",
+           locals: { declaration: declaration, modal_id:  "declaration_#{declaration.id}" }
+= render partial: "submissions/forms/owner_modal/new", locals: { modal_id:  "new_declaration" }

@@ -16,8 +16,6 @@
             "data-target" => "#declaration_#{declaration.id}",
             "data-toggle" => "modal" do
             = owner
-          = render partial: "submissions/forms/owner_modal",
-            locals: { declaration: declaration, modal_id:  "declaration_#{declaration.id}" }
         %td.owner-email= owner.email
         %td.owner-phone_number= owner.phone_number
         %td.owner-nationality= owner.nationality
@@ -49,4 +47,3 @@
       "data-toggle" => "modal" do
       %i.fa.fa-plus
       Add Individual Owner
-    = render partial: "submissions/forms/owner_modal", locals: { declaration: Declaration.new, modal_id:  "new_declaration" }
