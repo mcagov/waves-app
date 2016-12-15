@@ -48,7 +48,9 @@ class Submission::DeclarationsController < InternalPagesController
   protected
 
   def load_submission
-    @submission = Submission.find(params[:submission_id])
+    @submission =
+      Submission.in_part(current_activity.part)
+                .includes(:declarations).find(params[:submission_id])
   end
 
   def load_declaration
