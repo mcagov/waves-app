@@ -12,7 +12,7 @@ $(document).ready(function() {
     height : 180
   });
 
-  // Promote an alternative vessel name
+  // Submission#edit: Promote an alternative vessel name
   $('.promote_alt_name').on('click', function() {
     var original_vessel_name = $('#submission_vessel_name').val();
     var new_vessel_name = $('#submission_vessel_' + this.id).val();
@@ -26,19 +26,17 @@ $(document).ready(function() {
     return false;
   });
 
-  // Validate the owner name field
+  // Submission#edit: Validate the owner name field (in modal)
   $('form#new_declaration').on('submit', function() {
     var owner_name_field = 'form#new_declaration #declaration_owner_name';
 
     if ($(owner_name_field).val().length == 0) {
-      $(owner_name_field).addClass('field-error')
-      // $(owner_name_field).focus();
+      $(owner_name_field).addClass('field-error');
       return false;
     }
   });
 
-
-  // Similar vessel attribute icons
+  // Vessel#show: Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');
   }
@@ -52,11 +50,13 @@ $(document).ready(function() {
     $('#vessel-radio_call_sign .fa-star-o.hidden').removeClass('hidden');
   }
 
+  // General: set the datepicker time format
   $('.datetimepicker').datetimepicker({
     format: 'DD/MM/YYYY, h:mm:ss a'
   });
 
-  // toggle new submission form field based on task type
+
+  // Submissions#new: toggle Official No / Vessel Name field
   if ($("form#new_submission").length) {
     set_task_type_depenencies();
   }
