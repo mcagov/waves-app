@@ -9,7 +9,7 @@
           %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
             %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
 
-              %li.active{:role => "presentation"}
+              %li{:role => "presentation", class: "active"}
                 %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessel_tab", :role => "tab"} Vessel Details
 
               %li{:role => "presentation"}
@@ -17,11 +17,11 @@
 
             #myTabContent.tab-content
 
-              #vessel_tab.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+              #vessel_tab.tab-pane.fade.in{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
                 = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
 
               #owners_tab.tab-pane.fade.in{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                = render partial: "submissions/forms/owners", locals: { submission_f: f }
+                #owners_list= render partial: "submissions/forms/owners/list", locals: { submission_f: f }
 
   .row.no-print
     .col-sm-12
@@ -29,7 +29,5 @@
         %i.fa.fa-check
         Save Application
 
-- @submission.declarations.each do |declaration|
-  = render partial: "submissions/forms/owner_modal/edit",
-           locals: { declaration: declaration, modal_id:  "declaration_#{declaration.id}" }
-= render partial: "submissions/forms/owner_modal/new", locals: { modal_id:  "new_declaration" }
+#owners_modals
+  = render partial: "/submissions/forms/owners/modals"
