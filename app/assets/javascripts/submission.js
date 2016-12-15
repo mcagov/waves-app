@@ -26,6 +26,18 @@ $(document).ready(function() {
     return false;
   });
 
+  // Validate the owner name field
+  $('form#new_declaration').on('submit', function() {
+    var owner_name_field = 'form#new_declaration #declaration_owner_name';
+
+    if ($(owner_name_field).val().length == 0) {
+      $(owner_name_field).addClass('field-error')
+      // $(owner_name_field).focus();
+      return false;
+    }
+  });
+
+
   // Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');
