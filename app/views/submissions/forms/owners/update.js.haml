@@ -1,6 +1,8 @@
 :plain
-  $("##{ @modal_id }").modal('toggle');
-  $(".modal-backdrop").hide();
+  if ("#{ @modal_id }".length > 0) {
+    $("##{ @modal_id }").modal('toggle');
+    $(".modal-backdrop").hide();
+  }
 
   var owners_list_html = '#{escape_javascript(
               render :partial => "/submissions/forms/owners/list")}';
