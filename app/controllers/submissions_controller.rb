@@ -53,7 +53,6 @@ class SubmissionsController < InternalPagesController
           :notifications]).find(params[:id])
   end
 
-  # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name,
