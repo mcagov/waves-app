@@ -45,4 +45,12 @@ describe "User edits submission owners", js: true do
     click_on(owner_name)
     expect(find_field("Email").value).to eq("edited_alice@example.com")
   end
+
+  scenario "removing an owner" do
+    owner_name = Declaration.last.owner.name
+    expect(page).to have_css(".owner-name", text: owner_name)
+
+    page.accept_confirm { click_on("Remove") }
+    expect(page).not_to have_text(owner_name)
+  end
 end

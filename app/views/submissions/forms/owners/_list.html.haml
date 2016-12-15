@@ -21,12 +21,14 @@
         %td.owner-nationality= owner.nationality
         %td.owner-address= owner.inline_address
         %td
-          = link_to '#',
+          = link_to submission_declaration_path(@submission, declaration),
             class: 'btn-link',
-            onclick: 'return confirm("Are you sure you want to remove this owner?");', style: 'color: red;' do
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this owner?" },
+            style: 'color: red;' do
             %i.fa.fa-trash
             Remove
-
 
     - @submission.removed_registry_owners.each do |owner|
       %tr

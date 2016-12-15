@@ -26,6 +26,13 @@ class Submission::DeclarationsController < InternalPagesController
     redirect_to submission_path(@declaration.submission)
   end
 
+  def destroy
+    load_declaration
+    @declaration.delete
+
+    render_update_js
+  end
+
   protected
 
   def load_submission

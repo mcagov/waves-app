@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resource :approval, controller: "submission/approvals", only: [:create]
     resources :declarations,
               controller: "submission/declarations",
-              only: [:create, :update] do
+              only: [:create, :update, :destroy] do
       member do
         post :complete
       end
