@@ -38,7 +38,10 @@
         %td.strike= owner.nationality
         %td.strike= owner.inline_address
         %td
-          = link_to '#', class: 'btn-link' do
+          = link_to reinstate_submission_declaration_path(@submission, name: owner.name),
+            method: :post,
+            remote: true,
+            class: 'btn-link' do
             %i.fa.fa-mail-reply-all
             Reinstate
 
