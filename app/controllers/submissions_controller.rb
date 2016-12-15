@@ -25,7 +25,9 @@ class SubmissionsController < InternalPagesController
     @submission = Decorators::Submission.new(@submission)
   end
 
-  def edit; end
+  def edit
+    @submission = Decorators::Submission.new(@submission)
+  end
 
   def update
     if @submission.update_attributes(submission_params)
@@ -51,7 +53,6 @@ class SubmissionsController < InternalPagesController
           :notifications]).find(params[:id])
   end
 
-  # rubocop:disable Metrics/MethodLength
   def submission_params
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name,
@@ -59,13 +60,7 @@ class SubmissionsController < InternalPagesController
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
-        :alt_name_1, :alt_name_2, :alt_name_3],
-      declarations_attributes: [
-        :id,
-        :_destroy,
-        owner: [:name, :email, :phone_number, :nationality, :address_1,
-                :address_2, :address_3, :town, :postcode],
-      ]
+        :alt_name_1, :alt_name_2, :alt_name_3]
     )
   end
 

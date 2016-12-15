@@ -12,6 +12,7 @@
     (#{ declaration.completed_at })
 
   - else
-    = simple_form_for declaration do |f|
-      = f.input :id, as: :hidden
+    = simple_form_for declaration,
+                      url: complete_submission_declaration_path(@submission, declaration),
+                      method: :post do |f|
       .form-group= f.button :submit, "Complete Declaration"

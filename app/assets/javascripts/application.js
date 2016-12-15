@@ -17,7 +17,6 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
 //= require tinymce
-//= require cocoon
 //
 //= require ./vendor/nprogress
 //= require ./vendor/select2
