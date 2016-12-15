@@ -1,7 +1,8 @@
 :plain
   if ("#{ @modal_id }".length > 0) {
-    $("##{ @modal_id }").modal('toggle');
-    $(".modal-backdrop").hide();
+    $("##{ @modal_id }").modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
   }
 
   var owners_list_html = '#{escape_javascript(

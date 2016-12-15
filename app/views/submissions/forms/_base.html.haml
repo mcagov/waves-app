@@ -17,10 +17,10 @@
 
             #myTabContent.tab-content
 
-              #vessel_tab.tab-pane.fade.in{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+              #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
                 = render partial: "submissions/forms/vessel_fields", locals: { submission_f: f }
 
-              #owners_tab.tab-pane.fade.in{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
+              #owners_tab.tab-pane{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
                 #owners_list= render partial: "submissions/forms/owners/list", locals: { submission_f: f }
 
   .row.no-print
