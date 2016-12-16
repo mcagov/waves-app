@@ -23,6 +23,10 @@ describe "Client session" do
       it "has the delivered_to" do
         expect(parsed_attrs["delivered_to"]).to eq([1, 2])
       end
+
+      it "has the customer_id" do
+        expect(parsed_attrs.keys).to include("customer_id")
+      end
     end
 
     context "when the client_session is not created" do
