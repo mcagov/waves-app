@@ -36,14 +36,8 @@
         %td.strike= owner.email
         %td.strike= owner.phone_number
         %td.strike= owner.nationality
-        %td.strike= owner.inline_address
-        %td
-          / = link_to reinstate_submission_declaration_path(@submission, name: owner.name),
-          /   method: :post,
-          /   remote: true,
-          /   class: 'btn-link' do
-          /   %i.fa.fa-mail-reply-all
-          /   Reinstate
+        %td.strike{ colspan: 2 }= owner.inline_address
+
 
 .row
   .col-md-12

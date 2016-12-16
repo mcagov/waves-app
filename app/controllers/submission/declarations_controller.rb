@@ -36,18 +36,6 @@ class Submission::DeclarationsController < InternalPagesController
     render_update_js
   end
 
-  def reinstate
-    @registry_owner =
-      @submission.changeset["owners"].find { |o| o["name"] == params[:name] }
-
-    if @registry_owner
-      Declaration.create(
-        submission: @submission, changeset: @registry_owner)
-    end
-
-    render_update_js
-  end
-
   protected
 
   def load_submission

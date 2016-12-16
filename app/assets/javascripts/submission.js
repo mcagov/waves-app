@@ -12,17 +12,18 @@ $(document).ready(function() {
     height : 180
   });
 
+  // General: set the datepicker time format
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });
+
   // Submission#edit: Promote an alternative vessel name
   $('.promote_alt_name').on('click', function() {
     var original_vessel_name = $('#submission_vessel_name').val();
     var new_vessel_name = $('#submission_vessel_' + this.id).val();
 
-    console.log(original_vessel_name)
-    console.log(new_vessel_name)
-
     $('#submission_vessel_name').val(new_vessel_name);
     $('#submission_vessel_' + this.id).val(original_vessel_name);
-
     return false;
   });
 
@@ -36,7 +37,7 @@ $(document).ready(function() {
     }
   });
 
-  // Vessel#show: Similar vessel attribute icons
+  // Submission#show: Similar vessel attribute icons
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');
   }
@@ -50,16 +51,8 @@ $(document).ready(function() {
     $('#vessel-radio_call_sign .fa-star-o.hidden').removeClass('hidden');
   }
 
-  // General: set the datepicker time format
-  $('.datetimepicker').datetimepicker({
-    format: 'DD/MM/YYYY, h:mm:ss a'
-  });
-
-
   // Submissions#new: toggle Official No / Vessel Name field
-  if ($("form#new_submission").length) {
-    set_task_type_depenencies();
-  }
+  if ($("form#new_submission").length) { set_task_type_depenencies(); }
 
   $('form #submission_task').on('change', function(){
     set_task_type_depenencies();
@@ -76,7 +69,6 @@ $(document).ready(function() {
       $('#submission_vessel_name').addClass('hidden');
       $('#submission_vessel_reg_no').removeClass('hidden');
     }
-
-  }
+  };
 
 });
