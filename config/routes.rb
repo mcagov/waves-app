@@ -36,7 +36,6 @@ Rails.application.routes.draw do
               only: [:create, :update, :destroy] do
       member do
         post :complete
-        post :reinstate
       end
     end
     resource :states, controller: "submission/states", only: [:show] do

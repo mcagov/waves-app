@@ -48,11 +48,11 @@ describe "User edits submission owners", js: true do
     expect(find_field("Email").value).to eq("edited_alice@example.com")
   end
 
-  scenario "removing an owner and reinstating" do
+  scenario "removing an owner" do
     owner_name = Declaration.last.owner.name
 
     # insert an owner into the registry info in order
-    # to test that an owner can be "removed" and "reinstated"
+    # to test that an owner can be "removed" and displays as ".strike"
     Submission.last.update_attributes(
       registry_info: { owners: [{ name: owner_name }] })
 
@@ -60,8 +60,5 @@ describe "User edits submission owners", js: true do
 
     page.accept_confirm { click_on("Remove") }
     expect(page).to have_css(".strike", text: owner_name)
-
-    # click_on("Reinstate")
-    # expect(page).to have_css(".owner-name", text: owner_name)
   end
 end
