@@ -11,7 +11,7 @@
     - @submission.declarations.each do |declaration|
       - owner = declaration.owner
       %tr
-        %td.owner-name= link_to owner, "#"
+        %td.owner-name= owner
         %td.owner-email= owner.email
         %td.owner-phone_number= owner.phone_number
         %td.owner-nationality= owner.nationality
