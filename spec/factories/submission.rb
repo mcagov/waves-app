@@ -22,7 +22,10 @@ FactoryGirl.define do
 
   factory :unassigned_submission, parent: :incomplete_submission do
     after(:create) do |submission|
-      submission.declarations.map(&:declared!)
+      submission.declarations.map do |declaration|
+        declaration.declared! if declaration.can_transition?(:declared)
+      end
+
       create(:payment, submission: submission)
     end
   end
