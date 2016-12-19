@@ -15,11 +15,11 @@ class Builders::DeclarationBuilder
         declaration =
           Declaration.create(
             submission: @submission,
-            changeset: owner
-          )
+            changeset: owner,
+            state: initial_state_for_task)
 
         if @declared_by_emails.include?(declaration.owner.email)
-          declaration.declared!
+          declaration.declared! if declaration.can_transition? :declared
         end
       end
     end
@@ -30,6 +30,14 @@ class Builders::DeclarationBuilder
           recipient_name: declaration.owner.name,
           recipient_email: declaration.owner.email,
           notifiable: declaration)
+      end
+    end
+
+    def initial_state_for_task
+      if Task.new(@submission.task).declarations_required_on_create?
+        :incomplete
+      else
+        :not_required
       end
     end
   end

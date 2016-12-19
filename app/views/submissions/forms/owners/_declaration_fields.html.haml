@@ -1,0 +1,16 @@
+- declaration = Decorators::Declaration.new(f.object)
+- if declaration.declaration_required?
+  %hr
+  .row
+    .col-md-4
+      .form-group
+        - if declaration.incomplete?
+          %label Declaration Signed
+          - f.object.declaration_signed = false
+          = f.input :declaration_signed,
+            label: false,
+            as: :radio_buttons,
+            item_label_class: "radio-inline",
+            item_wrapper_tag: false
+        - elsif f.object.completed?
+          %p= render partial: "/declarations/status", locals: { declaration: f.object }

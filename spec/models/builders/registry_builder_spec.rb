@@ -36,7 +36,7 @@ describe Builders::RegistryBuilder do
     context "with a task that changes registry details" do
       let!(:change_vessel_submission) do
         create(:assigned_submission,
-               task: :change_vessel,
+               task: :re_registration,
                registered_vessel: registered_vessel,
                changeset: {
                  vessel_info: build(:submission_vessel, name: "DON DINGHY"),
