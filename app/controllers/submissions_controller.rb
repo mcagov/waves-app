@@ -54,6 +54,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def submission_params
+    return {} unless params[:submission]
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name,
       :applicant_email, :vessel_reg_no,

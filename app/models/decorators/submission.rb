@@ -83,6 +83,10 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
+  def vessel_can_be_edited?
+    Task.new(task).vessel_can_be_edited?
+  end
+
   private
 
   def finance_payment

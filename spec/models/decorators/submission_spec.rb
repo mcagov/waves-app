@@ -30,6 +30,19 @@ describe Decorators::Submission, type: :model do
     it { described_class.new(submission).notification_list }
   end
 
+  context "#vessel_can_be_edited?" do
+    let!(:submission) { build(:submission) }
+
+    before do
+      task = double(:task)
+
+      expect(Task).to receive(:new).with(submission.task).and_return(task)
+      expect(task).to receive(:vessel_can_be_edited?)
+    end
+
+    it { described_class.new(submission).vessel_can_be_edited? }
+  end
+
   context "#service_level" do
     it "prefers the service_level as :standard over is_urgent?"
   end
