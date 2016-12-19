@@ -44,19 +44,8 @@
           = owner_f.input :postcode, input_html: { class: "upcase postcode" }, required: false
         .col-md-4
           = owner_f.input :country, collection: ["UNITED KINGDOM"], required: false, include_blank: false
-      %hr
-      .row
-        .col-md-4
-          .form-group
-            - if f.object.incomplete?
-              %label Declaration Signed
-              = f.input :declaration_signed,
-                label: false,
-                as: :radio_buttons,
-                item_label_class: "radio-inline",
-                item_wrapper_tag: false
-            - else
-              %p= render partial: "/declarations/status", locals: { declaration: f.object }
+
+      = render partial: "submissions/forms/owners/declaration_fields", locals: { f: f }
 .modal-footer
   = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
     Save Individual Owner
