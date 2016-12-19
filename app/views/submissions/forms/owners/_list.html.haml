@@ -12,9 +12,12 @@
       - owner = declaration.owner
       %tr
         %td.owner-name
-          = link_to '#',
-            "data-target" => "#declaration_#{declaration.id}",
-            "data-toggle" => "modal" do
+          - if @submission.address_can_be_changed?
+            = link_to '#',
+              "data-target" => "#declaration_#{declaration.id}",
+              "data-toggle" => "modal" do
+              = owner
+          - else
             = owner
         %td.owner-email= owner.email
         %td.owner-phone_number= owner.phone_number
