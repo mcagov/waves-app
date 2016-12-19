@@ -83,6 +83,18 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
+  def vessel_can_be_edited?
+    Task.new(task).vessel_can_be_edited?
+  end
+
+  def ownership_can_be_changed?
+    Task.new(task).ownership_can_be_changed?
+  end
+
+  def address_can_be_changed?
+    Task.new(task).address_can_be_changed?
+  end
+
   private
 
   def finance_payment
