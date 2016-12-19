@@ -1,7 +1,7 @@
 .modal.fade{id: modal_id, role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
-      = simple_form_for Declaration.new,
+      = simple_form_for Declaration.new(submission_id: @submission.id),
         method: :post,
         remote: true,
         url: submission_declarations_path(@submission) do |f|
