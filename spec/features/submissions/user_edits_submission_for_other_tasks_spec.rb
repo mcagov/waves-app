@@ -8,6 +8,10 @@ describe "User edits submission for other tasks", js: true do
 
     expect(page).to have_css("#vessel_tab fieldset[disabled]")
 
+    click_on("Owners")
+    expect(page).not_to have_link("Remove")
+    expect(page).not_to have_link("Add Individual Owner")
+
     click_on("Save Application")
     expect(page).to have_current_path(submission_path(Submission.last))
   end
