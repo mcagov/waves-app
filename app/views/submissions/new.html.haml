@@ -28,6 +28,12 @@
             .col-md-3
               = f.input :applicant_email, label: "Applicant's Email Address"
           .row
+            .col-md-8
+              .form-group
+                %label
+                  %input{name: "submission[applicant_is_agent]", value: "1", type: "checkbox"}
+                  Applicant is Agent
+          .row
             .col-md-4
               .form-group
                 %label
