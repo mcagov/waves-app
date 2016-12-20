@@ -1,6 +1,5 @@
 - agent = @submission.agent
-%h2 Agent
-%table.table.table-striped
+%table.table.table-striped#agent_list
   %thead
     %th Name
     %th Email
@@ -8,16 +7,15 @@
     %th Address
     %th
   %tbody
-
     - if agent.name.present?
       %tr
         %td.agent-name
           = link_to '#',
-            "data-target" => "#edit_agent", "data-toggle" => "modal" do
+            "data-target" => "#edit_agent_modal", "data-toggle" => "modal" do
             = agent
         %td.agent-email= agent.email
         %td.agent-phone_number= agent.phone_number
-        %td.agent-address= agent.inline_address
+        %td.agent-address{width: "40%"}= agent.inline_address
         %td
           = link_to submission_agent_path(@submission, agent),
             class: 'btn-link',
@@ -31,7 +29,7 @@
   .row
     .col-md-12
       = link_to '#', class: 'btn btn-primary',
-        "data-target" => "#edit_agent",
+        "data-target" => "#edit_agent_modal",
         "data-toggle" => "modal" do
         %i.fa.fa-plus
         Add Agent
