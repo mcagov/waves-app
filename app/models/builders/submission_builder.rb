@@ -51,10 +51,16 @@ class Builders::SubmissionBuilder
     end
 
     def build_agent
-      @submission.agent = {
-        name: @submission.applicant_name,
-        email: @submission.applicant_email,
-      }
+      agent_attrs = @submission.agent.attributes
+
+      if @submission.applicant_name
+        agent_attrs[:name] = @submission.applicant_name
+      end
+      if @submission.applicant_email
+        agent_attrs[:email] = @submission.applicant_email
+      end
+
+      @submission.agent = agent_attrs
     end
   end
 end
