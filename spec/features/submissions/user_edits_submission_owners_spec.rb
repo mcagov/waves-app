@@ -8,7 +8,6 @@ describe "User edits submission owners", js: true do
   end
 
   scenario "adding an owner" do
-    click_on("Owners")
     click_on("Add Individual Owner")
 
     fill_in("Owner Name", with: "ALICE NEW OWNER")
