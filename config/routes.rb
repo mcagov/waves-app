@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
+    resources :agent,
+              controller: "submission/agent", only: [:update, :destroy]
     resource :approval, controller: "submission/approvals", only: [:create]
     resources :declarations,
               controller: "submission/declarations",
