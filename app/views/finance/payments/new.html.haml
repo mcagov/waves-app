@@ -32,6 +32,12 @@
               = f.input :applicant_email
           .row
             .col-md-8
+              .form-group
+                %label
+                  %input{name: "payment_finance_payment[applicant_is_agent]", value: "1", type: "checkbox"}
+                  Applicant is Agent
+          .row
+            .col-md-8
               = f.input :documents_received
 
   .row.no-print
