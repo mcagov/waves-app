@@ -84,6 +84,11 @@ module Submission::Associations
     changeset[:vessel_info] = vessel_params
   end
 
+  def agent=(agent_params)
+    self.changeset ||= {}
+    changeset[:agent] = agent_params
+  end
+
   def delivery_address
     Submission::DeliveryAddress.new(
       symbolized_changeset[:delivery_address] || {})

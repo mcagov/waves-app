@@ -7,13 +7,17 @@ describe Builders::SubmissionBuilder do
         changeset: changeset,
         registry_info: registry_info,
         registered_vessel: registered_vessel,
-        declarations: declarations)
+        declarations: declarations,
+        applicant_name: "BOB",
+        applicant_email: "bob@example.com",
+        applicant_is_agent: applicant_is_agent)
     end
 
     let!(:changeset) { nil }
     let!(:registry_info) { nil }
     let!(:registered_vessel) { nil }
     let!(:declarations) { [] }
+    let!(:applicant_is_agent) { false }
 
     before { described_class.build_defaults(submission) }
 
@@ -44,6 +48,15 @@ describe Builders::SubmissionBuilder do
 
       it "does not build any declarations" do
         expect(submission.declarations).to be_empty
+      end
+    end
+
+    context "when the applicant is an agent" do
+      let!(:applicant_is_agent) { true }
+
+      it "builds the agent in the changeset" do
+        expect(submission.agent.name).to eq("BOB")
+        expect(submission.agent.email).to eq("bob@example.com")
       end
     end
 
