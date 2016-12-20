@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220133552) do
+ActiveRecord::Schema.define(version: 20161220141617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,8 +200,8 @@ ActiveRecord::Schema.define(version: 20161220133552) do
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "target_date"
     t.boolean  "is_urgent"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 20161220133552) do
     t.json     "registry_info"
     t.string   "applicant_name"
     t.string   "applicant_email"
+    t.boolean  "applicant_is_agent",            default: false
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
