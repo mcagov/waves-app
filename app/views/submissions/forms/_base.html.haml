@@ -22,7 +22,7 @@
                   locals: { submission_f: f, disabled: !@submission.vessel_can_be_edited? }
 
               #owners_tab.tab-pane{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                #owners_list= render partial: "submissions/forms/owners/list", locals: { submission_f: f }
+                #owners_list= render partial: "submissions/forms/owners/list"
 
   .row.no-print
     .col-sm-12
