@@ -7,7 +7,7 @@
         ID:
         = submission.ref_no || "Not yet generated"
   .col-sm-6.pull-right
-    - if submission.editable? && submission.claimant == current_user
+    - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
