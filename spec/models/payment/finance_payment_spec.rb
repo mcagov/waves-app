@@ -12,7 +12,8 @@ describe Payment::FinancePayment do
         payment_amount: "25",
         actioned_by: create(:user),
         applicant_name: "Bob",
-        applicant_email: "bob@example.com"
+        applicant_email: "bob@example.com",
+        applicant_is_agent: true
       )
     end
 
@@ -48,6 +49,10 @@ describe Payment::FinancePayment do
     it "sets the applicant_email" do
       expect(finance_payment.submission.applicant_email)
         .to eq("bob@example.com")
+    end
+
+    it "sets the applicant_is_agent flag" do
+      expect(finance_payment.submission.applicant_is_agent).to be_truthy
     end
   end
 

@@ -31,7 +31,9 @@
     %tr
       %td Applicant Name
       %td
-        %strong= finance_payment.applicant_name
+        %strong
+          = finance_payment.applicant_name
+          = "(Agent)" if finance_payment.applicant_is_agent
     %tr
       %td Applicant`s Email Address
       %td

@@ -15,6 +15,9 @@
               %li{:role => "presentation"}
                 %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners
 
+              %li{:role => "presentation"}
+                %a#agent-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#agent_tab", :role => "tab"} Agent
+
             #myTabContent.tab-content
 
               #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -22,7 +25,10 @@
                   locals: { submission_f: f, disabled: !@submission.vessel_can_be_edited? }
 
               #owners_tab.tab-pane{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                #owners_list= render partial: "submissions/forms/owners/list", locals: { submission_f: f }
+                #owners_list= render partial: "submissions/forms/owners/list"
+
+              #agent_tab.tab-pane{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+                = render partial: "submissions/forms/agent/list"
 
   .row.no-print
     .col-sm-12
@@ -32,3 +38,5 @@
 
 #owners_modals
   = render partial: "/submissions/forms/owners/modals"
+#agent_modal
+  = render partial: "/submissions/forms/agent/modal"

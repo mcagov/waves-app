@@ -1,0 +1,54 @@
+.modal.fade{id: "edit_agent_modal", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for @submission,
+        remote: true,
+        method: :put,
+        url: submission_agent_path(@submission) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Agent Information
+          .modal-body
+            .postcode-lookup
+              = f.simple_fields_for :agent do |agent_f|
+                - agent_f.object = f.object.agent
+                .row
+                  .col-md-6
+                    = agent_f.input :name, label: "Full Name", input_html: { class: "upcase agent-name"}, required: false
+                  .col-md-3
+                    = agent_f.input :email, label: "Email Address", required: false
+                  .col-md-3
+                    = agent_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }, required: false
+
+                .row
+                  .col-md-6
+                    %label.form-label-bold
+                      Postcode
+                    .input-group
+                      = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
+                      %span.input-group-btn
+                        = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
+                .row
+                  .col-md-8.form-group
+                    .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+                    .postcode-results-field
+                .clearfix
+                .row
+                  .col-md-4
+                    = agent_f.input :address_1, input_html: { class: "upcase address-1" }, required: false
+                  .col-md-4
+                    = agent_f.input :address_2, input_html: { class: "upcase address-2" }, required: false
+                  .col-md-4
+                    = agent_f.input :address_3, input_html: { class: "upcase address-3" }, required: false
+                .row
+                  .col-md-4
+                    = agent_f.input :town, label: "Town or City", input_html: { class: "upcase town" }, required: false
+                  .col-md-4
+                    = agent_f.input :postcode, input_html: { class: "upcase postcode" }, required: false
+                  .col-md-4
+                    = agent_f.input :country, collection: WavesUtilities::Country.all, required: false, include_blank: false, selected: (@submission.agent.country || "UNITED KINGDOM")
+
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
+              Save Agent

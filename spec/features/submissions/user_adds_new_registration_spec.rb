@@ -31,4 +31,11 @@ feature "User adds a new registration", type: :feature do
     expect(page).to have_css("h1", text: "New Registration ID: ")
     expect(Notification::ApplicationReceipt.last).to be_nil
   end
+
+  scenario "when the applicant is an agent" do
+    check("Applicant is Agent")
+    click_on("Save Application")
+
+    expect(Submission.last.agent.name).to eq("Bob")
+  end
 end

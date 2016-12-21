@@ -21,6 +21,8 @@ describe "Finance enters a payment", type: :feature do
 
     fill_in("Applicant Name", with: "BOB")
     fill_in("Applicant's Email Address", with: "bob@example.com")
+    check("Applicant is Agent")
+
     fill_in("Documents Received", with: "bits and bobs")
 
     click_on("Save Fee Entry")
@@ -36,7 +38,7 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("MY BOAT")
       expect(page).to have_text("CHQ")
       expect(page).to have_text("25.00")
-      expect(page).to have_text("BOB")
+      expect(page).to have_text("BOB (Agent)")
       expect(page).to have_text("bob@example.com")
       expect(page).to have_text("bits and bobs")
     end

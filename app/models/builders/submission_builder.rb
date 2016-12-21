@@ -7,6 +7,7 @@ class Builders::SubmissionBuilder
       build_registry_info if @submission.registered_vessel
       build_changeset if @submission.registered_vessel
       build_declarations if @submission.changeset
+      build_agent if @submission.applicant_is_agent
 
       @submission
     end
@@ -47,6 +48,19 @@ class Builders::SubmissionBuilder
 
       Builders::DeclarationBuilder.create(
         @submission, submitted_owners, completed_declarations)
+    end
+
+    def build_agent
+      agent_attrs = @submission.agent.attributes
+
+      if @submission.applicant_name
+        agent_attrs[:name] = @submission.applicant_name
+      end
+      if @submission.applicant_email
+        agent_attrs[:email] = @submission.applicant_email
+      end
+
+      @submission.agent = agent_attrs
     end
   end
 end

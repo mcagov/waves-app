@@ -52,6 +52,7 @@ class Payment::FinancePayment < ApplicationRecord
       officer_intervention_required: true,
       source: :manual_entry,
       applicant_name: applicant_name,
-      applicant_email: applicant_email)
+      applicant_email: applicant_email,
+      applicant_is_agent: applicant_is_agent)
   end
 end

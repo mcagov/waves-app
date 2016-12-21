@@ -7,13 +7,17 @@ describe Builders::SubmissionBuilder do
         changeset: changeset,
         registry_info: registry_info,
         registered_vessel: registered_vessel,
-        declarations: declarations)
+        declarations: declarations,
+        applicant_name: "BOB",
+        applicant_email: "bob@example.com",
+        applicant_is_agent: applicant_is_agent)
     end
 
     let!(:changeset) { nil }
     let!(:registry_info) { nil }
     let!(:registered_vessel) { nil }
     let!(:declarations) { [] }
+    let!(:applicant_is_agent) { false }
 
     before { described_class.build_defaults(submission) }
 
@@ -44,6 +48,30 @@ describe Builders::SubmissionBuilder do
 
       it "does not build any declarations" do
         expect(submission.declarations).to be_empty
+      end
+    end
+
+    context "when the applicant is an agent" do
+      let!(:applicant_is_agent) { true }
+
+      it "builds the agent in the changeset" do
+        expect(submission.agent.name).to eq("BOB")
+        expect(submission.agent.email).to eq("bob@example.com")
+      end
+
+      context "when there is already an agent" do
+        let!(:changeset) { agent_sample_data }
+        let(:agent) { submission.agent }
+
+        it "builds the agent name and email from the applicant" do
+          expect(agent.name).to eq("BOB")
+          expect(agent.email).to eq("bob@example.com")
+        end
+
+        it "retains the agent details that were in the registry_info" do
+          expect(agent.phone_number).to eq("12345")
+          expect(agent.address_1).to eq("1 MAIN STREET")
+        end
       end
     end
 
@@ -117,6 +145,17 @@ describe Builders::SubmissionBuilder do
       end
     end
   end
+end
+
+def agent_sample_data
+  {
+    agent: {
+      name: "ROBERT",
+      email: "robert@example.com",
+      phone_number: "12345",
+      address_1: "1 MAIN STREET",
+    },
+  }
 end
 
 def vessel_owner_sample_data
