@@ -7,6 +7,13 @@ class Submission::AgentsController < InternalPagesController
     render_update_js
   end
 
+  def destroy
+    @submission.agent = {}
+    @submission.save
+
+    render_update_js
+  end
+
   protected
 
   def load_submission

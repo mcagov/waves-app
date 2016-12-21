@@ -29,4 +29,13 @@ describe "User edits submission agent", js: true do
     expect(page)
       .to have_css(".agent-address", text: "A1, A2, A3, TOWN, POC123, SPAIN")
   end
+
+  scenario "removing the agent and replacing" do
+    click_on("Remove")
+    click_on("Add Agent")
+    fill_in("Full Name", with: "ANOTHER AGENT")
+    click_on("Save Agent")
+
+    expect(page).to have_link("ANOTHER AGENT", href: "#")
+  end
 end
