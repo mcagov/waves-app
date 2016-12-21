@@ -1,22 +1,22 @@
 - submission = Decorators::Submission.new(submission)
 .row
-  .col-sm-6
+  .col-md-6
     %h1{style: "margin-top: 0px !important;"}
       = submission.job_type
-      %small
+      %mdall
         ID:
         = submission.ref_no || "Not yet generated"
-  .col-sm-6.pull-right
+  .col-md-6.pull-right
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
 .row
-  .col-sm-12
+  .col-md-12
     .x_panel
       .x_content
         .row
-          .col-sm-4
+          .col-md-4
             %table.table
               %tbody
                 %tr
@@ -31,7 +31,7 @@
                   %td.soft-label Target Date:
                   %td
                     %strong= submission.target_date
-          .col-sm-4
+          .col-md-4
             %table.table
               %tbody
                 %tr
@@ -46,7 +46,7 @@
                   %td.soft-label Vessel Name:
                   %td.vessel-name
                     %strong= submission.vessel_name
-          .col-sm-4
+          .col-md-4
             %table.table
               %tbody
                 %tr
