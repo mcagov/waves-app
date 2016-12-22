@@ -41,7 +41,7 @@ gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
-    git: "https://github.com/tobyprivett/waves-utilities.git"
+    git: "https://github.com/oceanshq/waves-utilities.git"
 gem "whenever", require: false
 gem "will_paginate-bootstrap"
 
