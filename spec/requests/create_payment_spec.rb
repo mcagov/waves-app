@@ -38,7 +38,7 @@ describe "create payments via the API", type: :request do
       expect(payment.submission.application_receipt).to be_present
     end
 
-    context "for electronic_delivery" do
+    context "for electronic_delivery of a current_transcript" do
       let!(:submission) { create(:electronic_delivery_submission) }
 
       it "does not build an application_receipt notification" do
@@ -46,7 +46,8 @@ describe "create payments via the API", type: :request do
       end
 
       it "builds an application_approval notification" do
-        expect(Notification::ApplicationApproval.count).to eq(1)
+        notification = Notification::ApplicationApproval.last
+        expect(notification.attachments.to_sym).to eq(:current_transcript)
       end
 
       it "sets the submission state to completed" do

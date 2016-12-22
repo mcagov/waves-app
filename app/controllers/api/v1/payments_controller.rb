@@ -44,7 +44,8 @@ module Api
 
       def create_application_approval_notification
         Builders::NotificationBuilder.application_approval(
-          submission, nil, :current_transcript)
+          submission, nil,
+          Task.new(submission.task).print_job_templates.first)
       end
     end
   end
