@@ -20,6 +20,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :electronic_delivery_submission, parent: :submission do
+    task :current_transcript
+    vessel_reg_no { create(:registered_vessel).reg_no }
+    changeset { { electronic_delivery: true } }
+  end
+
   factory :unassigned_submission, parent: :incomplete_submission do
     after(:create) do |submission|
       submission.declarations.map do |declaration|
