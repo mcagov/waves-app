@@ -33,6 +33,10 @@ class Submission < ApplicationRecord
     unassigned! if incomplete? && actionable?
   end
 
+  def electronic_delivery?
+    symbolized_changeset[:electronic_delivery]
+  end
+
   def build_defaults
     Builders::SubmissionBuilder.build_defaults(self)
   end

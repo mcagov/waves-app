@@ -44,7 +44,7 @@
         #tab_content5.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
           = render partial: "submissions/body/payment", collection: submission.payments, as: :payment
 
-          = render partial: "submissions/body/delivery_address", locals: { delivery_address: submission.delivery_address }
+          = render partial: "submissions/body/delivery_address", locals: { submission: submission }
 
         #tab_content6.tab-pane.fade{"aria-labelledby" => "agent-tab", :role => "tabpanel"}
           = render partial: "submissions/body/agent", locals: { agent: submission.agent }
