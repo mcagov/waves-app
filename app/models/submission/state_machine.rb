@@ -41,6 +41,11 @@ module Submission::StateMachine
                       guard: :approvable?
         end
 
+        event :approve_electronic_delivery do
+          transitions to: :completed, from: :unassigned,
+                      on_transition: :process_application
+        end
+
         event :cancelled do
           transitions to: :cancelled, from: :assigned,
                       on_transition: :remove_claimant

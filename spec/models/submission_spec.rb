@@ -198,5 +198,14 @@ describe Submission, type: :model do
 
       it { expect(submission.claimant).to be_present }
     end
+
+    context "#approve_electronic_delivery" do
+      let!(:submission) { create(:unassigned_submission) }
+
+      before { submission.approve_electronic_delivery! }
+
+      it { expect(submission.claimant).to be_nil }
+      it { expect(submission).to be_completed }
+    end
   end
 end
