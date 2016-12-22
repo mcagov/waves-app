@@ -37,6 +37,23 @@ describe "create payments via the API", type: :request do
     it "builds the application_receipt notification" do
       expect(payment.submission.application_receipt).to be_present
     end
+
+    context "for electronic_delivery of a current_transcript" do
+      let!(:submission) { create(:electronic_delivery_submission) }
+
+      it "does not build an application_receipt notification" do
+        expect(Notification::ApplicationReceipt.count).to eq(0)
+      end
+
+      it "builds an application_approval notification" do
+        notification = Notification::ApplicationApproval.last
+        expect(notification.attachments.to_sym).to eq(:current_transcript)
+      end
+
+      it "sets the submission state to completed" do
+        expect(payment.submission).to be_completed
+      end
+    end
   end
 
   context "with invalid params" do

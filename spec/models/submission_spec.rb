@@ -30,6 +30,30 @@ describe Submission, type: :model do
     end
   end
 
+  context "#electronic_delivery?" do
+    let(:submission) { build(:submission, changeset: electronic_delivery) }
+
+    subject { submission.electronic_delivery? }
+
+    context "when electronic_delivery is true" do
+      let(:electronic_delivery) { { "electronic_delivery" => true } }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "when electronic_delivery is false" do
+      let(:electronic_delivery) { { "electronic_delivery" => false } }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "when the electronic_delivery has not been defined" do
+      let(:electronic_delivery) { {} }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
   context ".vessel_reg_no =" do
     let!(:registered_vessel) { create(:registered_vessel, part: vessel_part) }
     let(:submission) { create(:incomplete_submission, part: :part_1) }
@@ -173,6 +197,15 @@ describe Submission, type: :model do
       before { submission.approved! }
 
       it { expect(submission.claimant).to be_present }
+    end
+
+    context "#approve_electronic_delivery" do
+      let!(:submission) { create(:unassigned_submission) }
+
+      before { submission.approve_electronic_delivery! }
+
+      it { expect(submission.claimant).to be_nil }
+      it { expect(submission).to be_completed }
     end
   end
 end

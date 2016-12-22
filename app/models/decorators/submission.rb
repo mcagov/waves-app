@@ -95,6 +95,14 @@ class Decorators::Submission < SimpleDelegator
     Task.new(task).address_can_be_changed?
   end
 
+  def delivery_description
+    if electronic_delivery?
+      "Electronic delivery"
+    else
+      delivery_address.inline_name_and_address
+    end
+  end
+
   private
 
   def finance_payment

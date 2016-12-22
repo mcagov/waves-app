@@ -6,7 +6,7 @@ module Api
           Builders::WorldPayPaymentBuilder.create(create_payment_params)
 
         if @payment.valid?
-          create_application_receipt_notification
+          process_payment_receipt
           render json: @payment, status: :created
         else
           render json: @payment, status: :unprocessable_entity,
@@ -22,16 +22,30 @@ module Api
           :submission_id, :wp_amount, :customer_ip, :wp_order_code)
       end
 
-      def create_application_receipt_notification
-        Notification::ApplicationReceipt.create(
-          notifiable: submission,
-          recipient_name: submission.applicant_name,
-          recipient_email: submission.applicant_email
-        )
+      def process_payment_receipt
+        if submission.electronic_delivery?
+          create_application_approval_notification
+          submission.approve_electronic_delivery!
+        else
+          create_application_receipt_notification
+        end
       end
 
       def submission
         @submission ||= @payment.submission
+      end
+
+      def create_application_receipt_notification
+        Notification::ApplicationReceipt.create(
+          notifiable: submission,
+          recipient_name: submission.applicant_name,
+          recipient_email: submission.applicant_email)
+      end
+
+      def create_application_approval_notification
+        Builders::NotificationBuilder.application_approval(
+          submission, nil,
+          Task.new(submission.task).print_job_templates.first)
       end
     end
   end
