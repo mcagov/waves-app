@@ -187,6 +187,7 @@ GEM
       jsonapi-renderer (= 0.1.1.beta1)
     jsonapi-parser (0.1.1.beta3)
     jsonapi-renderer (0.1.1.beta1)
+    jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.1.5)
@@ -214,6 +215,8 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    notifications-ruby-client (1.0.0)
+      jwt (~> 1.5)
     orm_adapter (0.5.0)
     paperclip (5.1.0)
       activemodel (>= 4.2.0)
@@ -433,6 +436,7 @@ DEPENDENCIES
   launchy
   momentjs-rails
   nokogiri (>= 1.6.8)
+  notifications-ruby-client
   paperclip
   parallel_tests
   pdf-reader
