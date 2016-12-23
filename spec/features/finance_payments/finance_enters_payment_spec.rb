@@ -9,8 +9,10 @@ describe "Finance enters a payment", type: :feature do
     expect(page).to have_css(".active-register", text: "Active: Finance")
     expect(page).to have_css("h1", text: "Finance: Fee Entry")
 
-    select("Part III", from: "Part of the Register")
     fill_in("Fee Receipt Date", with: "12/12/2012")
+    fill_in("Application Reference No", with: "ABC123")
+
+    select("Part III", from: "Part of the Register")
     select("New Registration", from: "Application Type")
 
     fill_in("Official No.", with: "")
@@ -33,6 +35,7 @@ describe "Finance enters a payment", type: :feature do
 
     within("#finance_payment") do
       expect(page).to have_text("12/12/2012")
+      expect(page).to have_text("ABC123")
       expect(page).to have_text("Part III")
       expect(page).to have_text("New Registration")
       expect(page).to have_text("MY BOAT")
