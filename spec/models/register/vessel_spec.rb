@@ -14,21 +14,17 @@ describe Register::Vessel do
   end
 
   context "#current_registration" do
-    let!(:old_reg) do
-      create(
-        :registration,
-        vessel_id: vessel.id, registered_until: 10.years.ago)
+    let!(:old_registration) do
+      create(:ten_year_old_registration, vessel_id: vessel.id)
     end
 
-    let!(:current_reg) do
-      create(
-        :registration,
-        vessel_id: vessel.id, registered_until: 1.year.from_now)
+    let!(:latest_registration) do
+      Registration.order("created_at desc").first
     end
 
     subject { vessel.current_registration }
 
-    it { expect(subject).to eq(current_reg) }
+    it { expect(subject).to eq(latest_registration) }
   end
 
   context "#notification_list" do
