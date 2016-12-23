@@ -8,4 +8,9 @@ FactoryGirl.define do
     created_at 10.years.ago
     task :vessel_details
   end
+
+  factory :nine_year_old_registration, class: "Registration" do
+    created_at 10.years.ago
+    task :vessel_details
+  end
 end
