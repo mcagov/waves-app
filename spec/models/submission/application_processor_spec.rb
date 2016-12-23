@@ -115,6 +115,20 @@ describe Submission::ApplicationProcessor do
         it { subject }
       end
 
+      context "current_transcript (electronic_delivery)" do
+        let(:task) { :current_transcript }
+
+        before do
+          submission.changeset["electronic_delivery"] = true
+          dont_expect_registry_builder
+          dont_expect_registration_builder
+          expect_cloned_registration_builder
+          dont_expect_print_job_builder
+        end
+
+        it { subject }
+      end
+
       context "historic_transcript" do
         let(:task) { :historic_transcript }
 
