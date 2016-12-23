@@ -49,6 +49,7 @@ class Submission::ApplicationProcessor
 
     def build_print_jobs
       return unless @task.print_job_templates
+      return if @submission.electronic_delivery?
 
       Builders::PrintJobBuilder
         .create(@registration, @submission.part, @task.print_job_templates)

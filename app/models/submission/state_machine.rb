@@ -42,7 +42,8 @@ module Submission::StateMachine
         end
 
         event :approve_electronic_delivery do
-          transitions to: :completed, from: :unassigned
+          transitions to: :completed, from: :unassigned,
+                      on_transition: :process_application
         end
 
         event :cancelled do
