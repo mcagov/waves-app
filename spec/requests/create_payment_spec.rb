@@ -45,6 +45,10 @@ describe "create payments via the API", type: :request do
         expect(Notification::ApplicationReceipt.count).to eq(0)
       end
 
+      it "does not build any print jobs" do
+        expect(PrintJob.count).to eq(0)
+      end
+
       it "builds an application_approval notification" do
         notification = Notification::ApplicationApproval.last
         expect(notification.attachments.to_sym).to eq(:current_transcript)
