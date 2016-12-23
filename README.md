@@ -67,6 +67,12 @@ CORS is configured in `config/initalisers/cors.rb` and the origins are defined b
 
 Emails can be previewed at: /rails/mailers in development.
 
+##### SMS Notification
+SMS Notifications are delivered by [Gov.UK Notify](https://www.notifications.service.gov.uk).
+This is implemented in `app/services/sms_provider.rb`.
+Ensure that the API key is set as `ENV['NOTIFY_API_KEY']`,
+And the Template ID as `ENV['NOTIFY_TEMPLATE_ID']`.
+
 ##### Cron jobs
 
 Cron jobs are managed with the [whenever](https://github.com/javan/whenever) gem.
