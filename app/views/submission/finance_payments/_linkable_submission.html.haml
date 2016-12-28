@@ -1,0 +1,20 @@
+- linkable_submission = Decorators::Submission.new(linkable_submission)
+%h2
+  Linked Application
+  %br
+  = linkable_submission.job_type
+  ID: #{linkable_submission.ref_no}
+
+= render partial: "submissions/info/summary", locals: {submission: linkable_submission}
+
+- if submission.claimant == current_user
+  .row.no-print#actions
+    .col-sm-6
+      = link_to "Link to a Different Application",
+        "#",
+        class: "btn btn-md btn-warning"
+    .col-sm-6
+      = link_to "Link to Application",
+        "#",
+        class: "btn btn-lg btn-primary pull-right"
+

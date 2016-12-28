@@ -1,5 +1,6 @@
 class Submission::FinancePaymentsController < InternalPagesController
   before_action :load_submission
+  before_action :load_linkable_submission
 
   def show; end
 
@@ -28,6 +29,12 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def load_submission
     @submission = Submission.find(params[:submission_id])
+  end
+
+  def load_linkable_submission
+    linkable_ref_no = @submission.symbolized_changeset[:linkable_ref_no]
+    @linkable_submission =
+      Submission.find_by(ref_no: linkable_ref_no) if linkable_ref_no
   end
 
   def submission_params
