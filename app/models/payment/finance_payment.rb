@@ -7,14 +7,6 @@ class Payment::FinancePayment < ApplicationRecord
 
   has_one :payment, as: :remittance
   belongs_to :actioned_by, class_name: "User"
-  belongs_to :linkable_submission,
-             lambda { |finance_payment|
-               where("submissions.ref_no = ?",
-                     finance_payment.application_ref_no)
-             },
-             foreign_key: "application_ref_no",
-             primary_key: "ref_no",
-             class_name: "Submission"
 
   validates :payment_date, presence: true
   validates :part, presence: true

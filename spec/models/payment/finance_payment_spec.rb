@@ -2,8 +2,6 @@ require "rails_helper"
 
 describe Payment::FinancePayment do
   context "for a new application" do
-    let!(:submission) { create(:submission) }
-
     let!(:finance_payment) do
       described_class.create(
         payment_date: Date.today,
@@ -15,8 +13,7 @@ describe Payment::FinancePayment do
         actioned_by: create(:user),
         applicant_name: "Bob",
         applicant_email: "bob@example.com",
-        applicant_is_agent: true,
-        application_ref_no: submission.ref_no
+        applicant_is_agent: true
       )
     end
 
@@ -56,11 +53,6 @@ describe Payment::FinancePayment do
 
     it "sets the applicant_is_agent flag" do
       expect(finance_payment.submission.applicant_is_agent).to be_truthy
-    end
-
-    it "enables a #linkable_submission" do
-      expect(finance_payment.linkable_submission)
-        .to eq(submission)
     end
   end
 
