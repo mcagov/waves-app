@@ -53,6 +53,7 @@ class Payment::FinancePayment < ApplicationRecord
       source: :manual_entry,
       applicant_name: applicant_name,
       applicant_email: applicant_email,
-      applicant_is_agent: applicant_is_agent)
+      applicant_is_agent: applicant_is_agent,
+      changeset: { linkable_ref_no: application_ref_no })
   end
 end

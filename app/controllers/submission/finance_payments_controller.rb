@@ -1,7 +1,9 @@
 class Submission::FinancePaymentsController < InternalPagesController
   before_action :load_submission
 
-  def show; end
+  def show
+    load_linkable_submission
+  end
 
   def convert
     @submission.officer_intervention_required = false
@@ -17,6 +19,19 @@ class Submission::FinancePaymentsController < InternalPagesController
     end
   end
 
+  def link
+    @target_submission =
+      Builders::LinkedSubmissionBuilder
+      .create(@submission, params[:target_ref_no])
+
+    if @target_submission
+      redirect_to @target_submission
+    else
+      flash[:notice] = "Unknown Application Reference No."
+      redirect_to @submission
+    end
+  end
+
   def edit; end
 
   def update
@@ -28,6 +43,12 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def load_submission
     @submission = Submission.find(params[:submission_id])
+  end
+
+  def load_linkable_submission
+    linkable_ref_no = @submission.symbolized_changeset[:linkable_ref_no]
+    @linkable_submission =
+      Submission.find_by(ref_no: linkable_ref_no) if linkable_ref_no
   end
 
   def submission_params
