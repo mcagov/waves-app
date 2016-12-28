@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       member do
         patch :update
         patch :convert
+        patch :link
       end
     end
     resource :correspondence,

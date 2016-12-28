@@ -19,6 +19,14 @@ class Submission::FinancePaymentsController < InternalPagesController
     end
   end
 
+  def link
+    @target_submission =
+      Builders::LinkedSubmissionBuilder
+      .create(@submission, params[:target_ref_no])
+
+    redirect_to @target_submission
+  end
+
   def edit; end
 
   def update

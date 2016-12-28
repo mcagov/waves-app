@@ -25,6 +25,8 @@ describe "User links finance_payment", type: :feature, js: true do
       .to have_css("h1", text: "New Registration ID: Not yet generated")
 
     within("#actions") { click_on("Link to Application") }
+
+    expect(page).to have_css("h1", text: "New Registration ID: ABC123")
   end
 
   scenario "to a different application" do
