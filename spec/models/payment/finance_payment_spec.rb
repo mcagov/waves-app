@@ -13,9 +13,12 @@ describe Payment::FinancePayment do
         actioned_by: create(:user),
         applicant_name: "Bob",
         applicant_email: "bob@example.com",
-        applicant_is_agent: true
+        applicant_is_agent: true,
+        application_ref_no: "ABC123"
       )
     end
+
+    let(:submission) { finance_payment.submission }
 
     it "is actioned_by a user" do
       expect(finance_payment.actioned_by).to be_present
@@ -26,33 +29,38 @@ describe Payment::FinancePayment do
     end
 
     it "sets the officer_intervention_required flag" do
-      expect(finance_payment.submission.officer_intervention_required)
+      expect(submission.officer_intervention_required)
         .to be_truthy
     end
 
     it "sets the source" do
-      expect(finance_payment.submission.source.to_sym).to eq(:manual_entry)
+      expect(submission.source.to_sym).to eq(:manual_entry)
     end
 
     it "sets the state to unassigned so it is ready to be claimed" do
-      expect(finance_payment.submission).to be_unassigned
+      expect(submission).to be_unassigned
     end
 
     it "sets the target date" do
-      expect(finance_payment.submission.target_date).to be_present
+      expect(submission.target_date).to be_present
     end
 
     it "sets the applicant_name" do
-      expect(finance_payment.submission.applicant_name).to eq("Bob")
+      expect(submission.applicant_name).to eq("Bob")
     end
 
     it "sets the applicant_email" do
-      expect(finance_payment.submission.applicant_email)
+      expect(submission.applicant_email)
         .to eq("bob@example.com")
     end
 
     it "sets the applicant_is_agent flag" do
       expect(finance_payment.submission.applicant_is_agent).to be_truthy
+    end
+
+    it "sets the linkable_ref_no in the changeset" do
+      linkable_ref_no = submission.symbolized_changeset[:linkable_ref_no]
+      expect(linkable_ref_no).to eq("ABC123")
     end
   end
 
