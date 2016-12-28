@@ -1,8 +1,9 @@
 class Submission::FinancePaymentsController < InternalPagesController
   before_action :load_submission
-  before_action :load_linkable_submission
 
-  def show; end
+  def show
+    load_linkable_submission
+  end
 
   def convert
     @submission.officer_intervention_required = false
