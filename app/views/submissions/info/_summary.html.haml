@@ -1,0 +1,56 @@
+- submission = Decorators::Submission.new(submission)
+.row
+  .col-md-12
+    .x_panel
+      .x_content
+        .row
+          .col-md-4
+            %table.table
+              %tbody
+                %tr
+                  %td.soft-label.no-top-border Source:
+                  %td.no-top-border
+                    %strong= submission.source_description
+                %tr
+                  %td.soft-label Date Received:
+                  %td
+                    %strong= submission.received_at
+                %tr
+                  %td.soft-label Target Date:
+                  %td
+                    %strong= submission.target_date
+          .col-md-4
+            %table.table
+              %tbody
+                %tr
+                  %td.soft-label.no-top-border Official No.:
+                  %td.no-top-border
+                    -if submission.vessel_reg_no.present?
+                      %strong= link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
+                %tr
+                  %td.soft-label Registration Status
+                  %td= render partial: "/vessels/registration_status", locals: { registration_status: submission.registration_status }
+                %tr
+                  %td.soft-label Vessel Name:
+                  %td.vessel-name
+                    %strong= submission.vessel_name
+          .col-md-4
+            %table.table
+              %tbody
+                %tr
+                  %td.soft-label.no-top-border Applicant:
+                  %td.no-top-border.applicant-name
+                    %strong
+                      = submission.applicant_name
+                      - if submission.applicant_email.present?
+                        (#{submission.applicant_email})
+                %tr
+                  %td.soft-label Declarations:
+                  %td
+                    %strong= submission.declaration_status
+
+                %tr
+                  %td.soft-label Payment Received:
+                  %td
+                    %strong= "£#{number_with_precision(submission.payment_received.to_f / 100, precision: 2)}"
+
