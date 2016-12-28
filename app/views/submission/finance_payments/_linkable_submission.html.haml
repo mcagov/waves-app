@@ -10,12 +10,35 @@
 - if @submission.claimant == current_user
   .row.no-print#actions
     .col-sm-6
-      = link_to "Link to a Different Application",
-        "#",
-        class: "btn btn-md btn-warning"
+      = link_to  "#link-application",
+        "data-target" => "#link-application",
+        "data-toggle" => "modal",
+        class: "btn btn-md btn-warning" do
+        Link to a Different Application
     .col-sm-6
       = link_to "Link to Application",
         link_submission_finance_payment_path(@submission, target_ref_no: linkable_submission.ref_no),
         method: :patch,
         class: "btn btn-lg btn-primary pull-right"
 
+.modal.fade{id: "link-application", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = simple_form_for @submission,
+        url: link_submission_finance_payment_path(@submission),
+        method: :patch do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title
+            Link to a Different Application
+
+        .modal-body
+          .row
+            .col-sm-6
+              .form-group
+                %label{ for: "target_ref_no" } Application Reference No.
+                = text_field_tag "target_ref_no", "", class: "form-control string optional"
+
+        .modal-footer
+          = f.submit "Link to Application", class: "btn btn-success btn-lg"

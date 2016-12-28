@@ -24,7 +24,12 @@ class Submission::FinancePaymentsController < InternalPagesController
       Builders::LinkedSubmissionBuilder
       .create(@submission, params[:target_ref_no])
 
-    redirect_to @target_submission
+    if @target_submission
+      redirect_to @target_submission
+    else
+      flash[:notice] = "Unknown Application Reference No."
+      redirect_to @submission
+    end
   end
 
   def edit; end
