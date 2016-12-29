@@ -3,9 +3,9 @@
 - if @search_results.empty?
   %p Nothing found.
 - else
-  %table#search_results
-    - @search_results.each do |search_result|
-
-      %tr.submission
-        %td= search_result.inspect
+  %table.table.table-striped#search_results
+    %tbody
+      - @search_results.each do |search_result|
+        = render partial: "/search/#{search_result.searchable_type.downcase}",
+          locals: { searchable: search_result.searchable }
 

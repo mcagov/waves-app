@@ -103,6 +103,14 @@ class Decorators::Submission < SimpleDelegator
     end
   end
 
+  def radio_call_sign
+    vessel.radio_call_sign if vessel
+  end
+
+  def mmsi_number
+    vessel.mmsi_number if vessel
+  end
+
   private
 
   def finance_payment
