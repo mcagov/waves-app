@@ -3,6 +3,7 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def show
     load_linkable_submission
+    @submission = Decorators::Submission.new(@submission)
   end
 
   def convert
