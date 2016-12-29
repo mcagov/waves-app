@@ -2,15 +2,14 @@ require "rails_helper"
 
 describe "User searches" do
   before do
-    create(:submission, ref_no: "ABC456")
-    create(:submission, ref_no: "ABC123")
-    create(:registered_vessel, name: "ABC FUN")
-    create(:registered_vessel, mmsi_number: "232181282")
-
     login_to_part_3
   end
 
   scenario "searching by part of the submission ref_no" do
+    create(:submission, ref_no: "ABC456")
+    create(:submission, ref_no: "ABC123")
+    create(:registered_vessel, name: "ABC FUN")
+
     search_for("ABC")
 
     within("#search_results") do
@@ -19,11 +18,16 @@ describe "User searches" do
     end
   end
 
-  scenario "searching by part of the vessel mmsi" do
+  scenario "searching by part of the vessel mmsi", js: true do
+    vessel = create(:registered_vessel, mmsi_number: "232181282")
+    create(:submission, registered_vessel: vessel)
+
     search_for("232181")
 
     within("#search_results") do
       expect(page).to have_css("tr.vessel", count: 1)
+      click_on("1 open application")
+      expect(page).to have_css("tr.submission", count: 1)
     end
   end
 
