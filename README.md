@@ -141,4 +141,11 @@ The app follows the standard Rails MVC pattern, additionally:
 
 And mixins:
 1. Concerns. Tried to limit the use of Active Record Concerns to functionality that was open to all models.
-2. Submission mixins. The Submission class was getting too big for rubocop, so `app/model/submission/associations.rb' and `app/model/submission/state_machine.rb' were extracted to modules. No reason other than code organization. Would welcome smart refactoring.
+2. Submission mixins. The Submission class was getting too big for rubocop, so `app/model/submission/associations.rb` and  `app/model/submission/state_machine.rb` were extracted to modules. No reason other than code organization. Would welcome smart refactoring.
+
+##### Search
+Searching is helped along with [pg_search gem](https://github.com/Casecommons/pg_search).
+To rebuild the (e.g. Submission) indexes after making changes to the configuration:
+`PgSearch::Multisearch.rebuild(Submission)`
+Global search configuration can be added to:
+`config/initializers/pg_search.rb`
