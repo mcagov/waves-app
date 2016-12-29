@@ -3,7 +3,8 @@ class CreatePgSearchDocuments < ActiveRecord::Migration
     say_with_time("Creating table for pg_search multisearch") do
       create_table :pg_search_documents do |t|
         t.text :content
-        t.belongs_to :searchable, :polymorphic => true, :index => true
+        t.uuid :searchable_id, index: true
+        t.string :searchable_type, index: true
         t.timestamps null: false
       end
     end

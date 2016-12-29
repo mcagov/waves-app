@@ -166,11 +166,12 @@ ActiveRecord::Schema.define(version: 20161229115533) do
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
+    t.uuid     "searchable_id"
     t.string   "searchable_type"
-    t.integer  "searchable_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
+    t.index ["searchable_id"], name: "index_pg_search_documents_on_searchable_id", using: :btree
+    t.index ["searchable_type"], name: "index_pg_search_documents_on_searchable_type", using: :btree
   end
 
   create_table "print_jobs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
