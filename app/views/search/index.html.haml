@@ -6,6 +6,5 @@
   %table.table.table-striped#search_results
     %tbody
       - @search_results.each do |search_result|
-        = render partial: "/search/#{search_result.searchable_type.downcase}",
+        = render partial: "/search/#{search_result.searchable_type.demodulize.downcase}",
           locals: { searchable: search_result.searchable }
-

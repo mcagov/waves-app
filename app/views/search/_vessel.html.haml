@@ -1,0 +1,10 @@
+- vessel = searchable
+%tr.vessel
+  %td
+    = link_to vessel.name, vessel_path(vessel)
+    %br
+    = vessel.vessel_type
+    %br
+    Callsign: #{vessel.radio_call_sign}, MMSI: #{vessel.mmsi_number}
+  %td
+    %span.label.label-success REGISTERED VESSEL
