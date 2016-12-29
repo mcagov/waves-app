@@ -1,36 +1,6 @@
 require "rails_helper"
 
 describe SimpleSearch, type: :model do
-  context ".by_vessel" do
-    let(:registered_vessel) { create(:registered_vessel) }
-    subject { SimpleSearch.by_vessel(part, registered_vessel.reg_no) }
-
-    context "in part_3" do
-      let(:part) { :part_3 }
-      it { expect(subject).to include(registered_vessel) }
-    end
-
-    context "in part_x" do
-      let(:part) { :part_x }
-      it { expect(subject).to be_empty }
-    end
-  end
-
-  context ".by_submission" do
-    let(:submission) { create(:submission) }
-    subject { SimpleSearch.by_submission(part, submission.ref_no) }
-
-    context "in part_3" do
-      let(:part) { :part_3 }
-      it { expect(subject).to include(submission) }
-    end
-
-    context "in part_x" do
-      let(:part) { :part_x }
-      it { expect(subject).to be_empty }
-    end
-  end
-
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
