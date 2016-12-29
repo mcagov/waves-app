@@ -1,0 +1,11 @@
+%h1 Search results
+
+- if @search_results.empty?
+  %p Nothing found.
+- else
+  %table#search_results
+    - @search_results.each do |search_result|
+
+      %tr.submission
+        %td= search_result.inspect
+
