@@ -1,37 +1,30 @@
 require "rails_helper"
 
 describe "User searches" do
-  before { login_to_part_3 }
+  before do
+    create(:submission, ref_no: "ABC456")
+    create(:submission, ref_no: "ABC123")
 
-  scenario "for a registered vessel" do
-    vessel = create(:registered_vessel)
-    reg_no = vessel.reg_no
-
-    find("input#search").set(reg_no)
-    click_on("Go!")
-
-    expect(page).to have_css("h1", text: vessel.name)
+    login_to_part_3
   end
 
-  scenario "for a submission" do
-    submission = create(:submission)
+  scenario "searching by part of the submission ref_no" do
+    search_for("ABC")
 
-    find("input#search").set(submission.ref_no)
-    click_on("Go!")
-
-    expect(page).to have_css("h1", text: "New Registration")
+    within("#search_results") do
+      expect(page).to have_css("tr.submission", count: 2)
+    end
   end
 
   scenario "nothing found" do
-    find("input#search").set("foo")
-    click_on("Go!")
-
+    search_for("foo")
     expect(page).to have_text("Nothing found")
   end
 
-  scenario "no search criteria" do
-    click_on("Go!")
+  scenario "searching by vessel mmsi"
+end
 
-    expect(page).to have_text("Nothing found")
-  end
+def search_for(term)
+  find("input#search").set(term)
+  click_on("Go!")
 end
