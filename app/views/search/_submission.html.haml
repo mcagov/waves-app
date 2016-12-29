@@ -6,5 +6,6 @@
     %span.pull-right.label.label-primary APPLICATION
     %br
     Application Reference: #{submission.ref_no}
-    %br
-    Callsign: #{submission.radio_call_sign}, MMSI: #{submission.mmsi_number}
+    - if show_detail
+      %br
+      Callsign: #{submission.radio_call_sign}, MMSI: #{submission.mmsi_number}
