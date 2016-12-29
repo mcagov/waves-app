@@ -1,4 +1,4 @@
-class Search
+class SimpleSearch
   class << self
     def by_vessel(part, q)
       Register::Vessel.in_part(part).where(reg_no: q)
