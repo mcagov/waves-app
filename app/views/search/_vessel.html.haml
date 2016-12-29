@@ -22,4 +22,4 @@
           %tbody
             - submissions.each do |submission|
               = render partial: "/search/submission",
-                locals: { searchable: submission }
+                locals: { searchable: submission, show_detail: false }
