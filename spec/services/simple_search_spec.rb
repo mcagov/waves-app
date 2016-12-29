@@ -1,36 +1,6 @@
 require "rails_helper"
 
-describe Search, type: :model do
-  context ".by_vessel" do
-    let(:registered_vessel) { create(:registered_vessel) }
-    subject { Search.by_vessel(part, registered_vessel.reg_no) }
-
-    context "in part_3" do
-      let(:part) { :part_3 }
-      it { expect(subject).to include(registered_vessel) }
-    end
-
-    context "in part_x" do
-      let(:part) { :part_x }
-      it { expect(subject).to be_empty }
-    end
-  end
-
-  context ".by_submission" do
-    let(:submission) { create(:submission) }
-    subject { Search.by_submission(part, submission.ref_no) }
-
-    context "in part_3" do
-      let(:part) { :part_3 }
-      it { expect(subject).to include(submission) }
-    end
-
-    context "in part_x" do
-      let(:part) { :part_x }
-      it { expect(subject).to be_empty }
-    end
-  end
-
+describe SimpleSearch, type: :model do
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
@@ -45,7 +15,7 @@ describe Search, type: :model do
     let!(:blank_radio) { create(:registered_vessel, radio_call_sign: nil) }
 
     let!(:vessel) { create_submission_from_api!.vessel }
-    subject { Search.similar_vessels(:part_3, vessel) }
+    subject { SimpleSearch.similar_vessels(:part_3, vessel) }
 
     it "contains the same_name" do
       expect(subject).to include(same_name)

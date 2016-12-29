@@ -1,5 +1,9 @@
 module Register
   class Vessel < ApplicationRecord
+    include PgSearch
+    multisearchable against:
+      [:reg_no, :name, :mmsi_number, :radio_call_sign]
+
     protokoll :reg_no, pattern: "SSR2#####"
 
     validates :part, presence: true

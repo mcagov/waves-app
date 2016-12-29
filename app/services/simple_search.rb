@@ -1,13 +1,5 @@
-class Search
+class SimpleSearch
   class << self
-    def by_vessel(part, q)
-      Register::Vessel.in_part(part).where(reg_no: q)
-    end
-
-    def by_submission(part, q)
-      Submission.in_part(part).where(ref_no: q)
-    end
-
     # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)
       Register::Vessel

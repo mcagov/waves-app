@@ -1,37 +1,43 @@
 require "rails_helper"
 
 describe "User searches" do
-  before { login_to_part_3 }
-
-  scenario "for a registered vessel" do
-    vessel = create(:registered_vessel)
-    reg_no = vessel.reg_no
-
-    find("input#search").set(reg_no)
-    click_on("Go!")
-
-    expect(page).to have_css("h1", text: vessel.name)
+  before do
+    login_to_part_3
   end
 
-  scenario "for a submission" do
-    submission = create(:submission)
+  scenario "searching by part of the submission ref_no" do
+    create(:submission, ref_no: "ABC456")
+    create(:submission, ref_no: "ABC123")
+    create(:registered_vessel, name: "ABC FUN")
 
-    find("input#search").set(submission.ref_no)
-    click_on("Go!")
+    search_for("ABC")
 
-    expect(page).to have_css("h1", text: "New Registration")
+    within("#search_results") do
+      expect(page).to have_css("tr.submission", count: 2)
+      expect(page).to have_css("tr.vessel", count: 1)
+    end
+  end
+
+  scenario "searching by part of the vessel mmsi", js: true do
+    vessel = create(:registered_vessel, mmsi_number: "232181282")
+    create(:submission, registered_vessel: vessel)
+
+    search_for("232181")
+
+    within("#search_results") do
+      expect(page).to have_css("tr.vessel", count: 1)
+      click_on("1 open application")
+      expect(page).to have_css("tr.submission", count: 1)
+    end
   end
 
   scenario "nothing found" do
-    find("input#search").set("foo")
-    click_on("Go!")
-
+    search_for("foo")
     expect(page).to have_text("Nothing found")
   end
+end
 
-  scenario "no search criteria" do
-    click_on("Go!")
-
-    expect(page).to have_text("Nothing found")
-  end
+def search_for(term)
+  find("input#search").set(term)
+  click_on("Go!")
 end

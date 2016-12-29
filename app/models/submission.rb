@@ -2,6 +2,9 @@ class Submission < ApplicationRecord
   include Submission::Associations
   include Submission::StateMachine
 
+  include PgSearch
+  multisearchable against: :ref_no
+
   validates :part, presence: true
   validates :source, presence: true
   validates :task, presence: true

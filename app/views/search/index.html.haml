@@ -1,0 +1,10 @@
+%h1 Search results
+
+- if @search_results.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %tbody
+      - @search_results.each do |search_result|
+        = render partial: "/search/#{search_result.searchable_type.demodulize.downcase}",
+          locals: { searchable: search_result.searchable }

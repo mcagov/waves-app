@@ -5,7 +5,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def similar_vessels
-    Search.similar_vessels(part, vessel)
+    SimpleSearch.similar_vessels(part, vessel)
   end
 
   def notification_list
@@ -101,6 +101,14 @@ class Decorators::Submission < SimpleDelegator
     else
       delivery_address.inline_name_and_address
     end
+  end
+
+  def radio_call_sign
+    vessel.radio_call_sign if vessel
+  end
+
+  def mmsi_number
+    vessel.mmsi_number if vessel
   end
 
   private

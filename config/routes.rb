@@ -118,6 +118,6 @@ Rails.application.routes.draw do
         template: template
   end
 
-  get "/search", controller: :search, action: :show
+  get "/search", controller: :search, action: :index
   root to: "dashboards#show"
 end

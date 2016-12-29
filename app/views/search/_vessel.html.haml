@@ -1,0 +1,25 @@
+- vessel = searchable
+- submissions = vessel.submissions.active
+%tr.vessel
+  %td
+    = link_to vessel_path(vessel), class: "search-result" do
+      = vessel.name
+    %span.pull-right.label.label-success REGISTERED VESSEL
+    %br
+    = vessel.vessel_type
+    %br
+    Callsign: #{vessel.radio_call_sign}, MMSI: #{vessel.mmsi_number}
+
+    - unless submissions.empty?
+      %br
+      = link_to "#",
+        "data-target" => "#vessel_submissions_#{vessel.id}",
+        "data-toggle" => "collapse" do
+        &gt;
+        = pluralize(submissions.length, "open application")
+      .collapse{ id: "vessel_submissions_#{vessel.id}" }
+        %table.table
+          %tbody
+            - submissions.each do |submission|
+              = render partial: "/search/submission",
+                locals: { searchable: submission }
