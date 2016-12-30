@@ -19,7 +19,13 @@
           %td= submission.job_type
           %td= submission.ref_no
           %td
-            = simple_form_for submission,
-              url: link_submission_finance_payment_path(submission),
-              method: :patch do |f|
-              = f.submit "Link"
+            = link_to "#",
+              onclick: "set_target_ref_no('#{submission.ref_no}')",
+              class: "btn btn-warning btn-xs" do
+              Link
+:javascript
+  function set_target_ref_no(ref_no) {
+    $("#target_ref_no").val(ref_no);
+    $("#target_ref_no").closest("form").submit();
+  }
+

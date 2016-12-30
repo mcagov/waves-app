@@ -2,16 +2,20 @@ require "rails_helper"
 
 describe "User links finance_payment", type: :feature, js: true do
   before do
+    vessel_reg_no = create(:registered_vessel).reg_no
+
     create(
       :submission,
       part: :part_3,
-      task: :new_registration,
+      vessel_reg_no: vessel_reg_no,
+      task: :change_owner,
       ref_no: "ABC123")
 
     create(
       :submission,
       part: :part_3,
-      task: :new_registration,
+      vessel_reg_no: vessel_reg_no,
+      task: :change_vessel,
       ref_no: "FOOBAR")
 
     create(
@@ -32,7 +36,7 @@ describe "User links finance_payment", type: :feature, js: true do
 
     within("#actions") { click_on("Link to Application") }
 
-    expect(page).to have_css("h1", text: "New Registration ID: ABC123")
+    expect(page).to have_css("h1", text: "Change of Ownership ID: ABC123")
   end
 
   scenario "to another application" do
@@ -43,6 +47,7 @@ describe "User links finance_payment", type: :feature, js: true do
       within("#submissions") { click_on("Link") }
     end
 
-    expect(page).to have_css("h1", text: "New Registration ID: FOOBAR")
+    expect(page)
+      .to have_css("h1", text: "Change of Vessel details ID: FOOBAR")
   end
 end

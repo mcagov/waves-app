@@ -12,4 +12,8 @@
           .col-sm-6
             = form_tag "/search/submissions", method: :get, remote: true do
               = render partial: "search/fields"
-        #submissions
+        = simple_form_for @submission,
+              url: link_submission_finance_payment_path(@submission),
+              method: :patch do |f|
+          = hidden_field_tag :target_ref_no
+          #submissions
