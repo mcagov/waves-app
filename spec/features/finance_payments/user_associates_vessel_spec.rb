@@ -5,7 +5,7 @@ describe "User associates vessel to finance_payment",
 
   scenario "changing the Offical No. for a change_vessel submission" do
     create(:registered_vessel, reg_no: "SSR200000")
-    create(:registered_vessel, reg_no: "SSR244444")
+    create(:registered_vessel, reg_no: "SSR244444", name: "FOOBAR")
 
     create(:finance_payment, task: :change_vessel, vessel_reg_no: "SSR200000")
 
@@ -13,6 +13,15 @@ describe "User associates vessel to finance_payment",
 
     within("#finance_info .official_no") do
       click_on("Change")
+    end
+
+    within("#change-vessel") do
+      search_for("foo")
+      within("#vessels") { click_on("Link") }
+    end
+
+    within("#finance_info") do
+      expect(page).to have_css(".official_no", text: "SSR244444")
     end
   end
 

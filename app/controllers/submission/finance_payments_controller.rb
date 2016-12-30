@@ -37,7 +37,13 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def update
     @submission.assign_attributes(submission_params)
-    convert
+
+    if @submission.save
+      redirect_to submission_path(@submission)
+    else
+      @submission.update_attribute(:officer_intervention_required, true)
+      render :edit
+    end
   end
 
   protected

@@ -14,4 +14,9 @@
               = hidden_field_tag :response_path, "/submission/finance_payments/search_results/vessels"
               = render partial: "search/fields"
 
-        #vessels
+
+        = simple_form_for @submission,
+              url: submission_finance_payment_path(@submission),
+              method: :patch do |f|
+          = f.input :vessel_reg_no, as: :hidden
+          #vessels
