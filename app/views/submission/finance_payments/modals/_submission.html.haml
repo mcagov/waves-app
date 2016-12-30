@@ -1,0 +1,15 @@
+.modal.fade{id: "link-application", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Search for an Application
+
+      .modal-body
+        .row
+          .col-sm-6
+            = form_tag "/search/submissions", method: :get, remote: true do
+              = render partial: "search/fields"
+        #submissions

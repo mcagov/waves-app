@@ -36,8 +36,3 @@ describe "User searches" do
     expect(page).to have_text("Nothing found")
   end
 end
-
-def search_for(term)
-  find("input#search").set(term)
-  click_on("Go!")
-end

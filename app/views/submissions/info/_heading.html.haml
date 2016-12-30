@@ -1,14 +1,13 @@
 - submission = Decorators::Submission.new(submission)
 .row
-  .col-md-6
+  .col-md-9
     %h1{style: "margin-top: 0px !important;"}
       = submission.job_type
-      %mdall
-        ID:
-        = submission.ref_no || "Not yet generated"
-  .col-md-6.pull-right
+
+      ID:
+      = submission.ref_no || "Not yet generated"
+  .col-md-3.pull-right
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
-= render partial: "submissions/info/summary", locals: { submission: submission }

@@ -9,6 +9,12 @@ describe "User links finance_payment", type: :feature, js: true do
       ref_no: "ABC123")
 
     create(
+      :submission,
+      part: :part_3,
+      task: :new_registration,
+      ref_no: "FOOBAR")
+
+    create(
       :finance_payment,
       part: :part_3,
       task: :new_registration,
@@ -29,25 +35,14 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page).to have_css("h1", text: "New Registration ID: ABC123")
   end
 
-  scenario "to a different application" do
-    within("#actions") { click_on("Link to a Different Application") }
+  scenario "to another application" do
+    within("#actions") { click_on("Link to Another Application") }
 
     within("#link-application") do
-      fill_in("Application Reference No.", with: "ABC123")
-      click_on("Link to Application")
+      search_for("foo")
+      within("#submissions") { click_on("Link") }
     end
 
-    expect(page).to have_css("h1", text: "New Registration ID: ABC123")
-  end
-
-  scenario "with an invalid application reference no." do
-    within("#actions") { click_on("Link to a Different Application") }
-
-    within("#link-application") do
-      fill_in("Application Reference No.", with: "foo")
-      click_on("Link to Application")
-    end
-
-    expect(page).to have_css(".alert", text: "Unknown Application Ref")
+    expect(page).to have_css("h1", text: "New Registration ID: FOOBAR")
   end
 end
