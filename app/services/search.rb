@@ -4,6 +4,18 @@ class Search
       PgSearch.multisearch(term)
     end
 
+    def submissions(term)
+      results =
+        all(term).map(&:searchable).map do |result|
+          if result.is_a?(Register::Vessel)
+            result.submissions
+          else
+            result
+          end
+        end
+      results.flatten.uniq
+    end
+
     # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)
       Register::Vessel

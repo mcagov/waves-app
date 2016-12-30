@@ -10,6 +10,24 @@ describe Search, type: :model do
     it { Search.all("foo") }
   end
 
+  context ".submissions" do
+    context "search by vessel name" do
+      let!(:submission) { create(:assigned_change_vessel_submission) }
+
+      subject { Search.submissions(submission.vessel.name.slice(0, 3)) }
+
+      it { expect(subject.first).to eq(submission) }
+    end
+
+    context "search by submission ref_no" do
+      let!(:submission) { create(:assigned_submission) }
+
+      subject { Search.submissions(submission.ref_no.slice(0, 3)) }
+
+      it { expect(subject.first).to eq(submission) }
+    end
+  end
+
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
