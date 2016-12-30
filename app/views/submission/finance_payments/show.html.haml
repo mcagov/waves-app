@@ -1,32 +1,6 @@
 = render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
 = render partial: "submissions/info/heading", locals: {submission: @submission}
-
-.x_panel
-  .x_content
-    .row
-      %table.table
-        %thead
-          %th{ width: "50%" } Finance Information
-          %th Submission Vessel Details
-        %tbody
-          %tr
-            %td
-              Payment Received:
-              = "£#{number_with_precision(@submission.payment_received.to_f / 100, precision: 2)}"
-            %td
-              Name:
-              = @submission.vessel_name
-          %tr
-            %td
-              Date Received:
-              = @submission.received_at
-            %td
-              Official No:
-              = @submission.vessel_reg_no
-          %tr
-            %td{ colspan: 2 }
-              Target Date:
-              = @submission.target_date
+= render partial: "summary", locals: {submission: @submission}
 
 - if @linkable_submission
   = render partial: "linkable_submission", locals: {submission: @submission, linkable_submission: @linkable_submission}
