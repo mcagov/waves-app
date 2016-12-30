@@ -19,7 +19,10 @@
               = submission.received_at
             %td.official_no
               Official No:
-              = submission.vessel_reg_no
+              - if submission.new_registration?
+                N/A
+              - else
+                = submission.vessel_reg_no
           %tr
             %td{ colspan: 2 }
               Target Date:
