@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe SimpleSearch, type: :model do
+describe Search, type: :model do
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")
@@ -15,7 +15,7 @@ describe SimpleSearch, type: :model do
     let!(:blank_radio) { create(:registered_vessel, radio_call_sign: nil) }
 
     let!(:vessel) { create_submission_from_api!.vessel }
-    subject { SimpleSearch.similar_vessels(:part_3, vessel) }
+    subject { Search.similar_vessels(:part_3, vessel) }
 
     it "contains the same_name" do
       expect(subject).to include(same_name)

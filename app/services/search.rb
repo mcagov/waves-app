@@ -1,4 +1,4 @@
-class SimpleSearch
+class Search
   class << self
     # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)

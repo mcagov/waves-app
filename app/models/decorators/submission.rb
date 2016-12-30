@@ -5,7 +5,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def similar_vessels
-    SimpleSearch.similar_vessels(part, vessel)
+    Search.similar_vessels(part, vessel)
   end
 
   def notification_list
