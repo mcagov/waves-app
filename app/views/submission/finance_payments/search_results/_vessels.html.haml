@@ -1,0 +1,14 @@
+- if vessels.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %thead
+      %th Vessel Name
+      %th Official No.
+      %th
+    %tbody
+      - vessels.each do |vessel|
+        %tr
+          %td= vessel.name
+          %td= vessel.reg_no
+          %td

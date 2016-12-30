@@ -11,6 +11,7 @@
         .row
           .col-sm-6
             = form_tag "/search/vessels", method: :get, remote: true do
+              = hidden_field_tag :response_path, "/submission/finance_payments/search_results/vessels"
               = render partial: "search/fields"
 
         #vessels

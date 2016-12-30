@@ -1,0 +1,6 @@
+:plain
+  $("#vessels").html(
+    '#{escape_javascript(
+       render partial: "/submission/finance_payments/search_results/vessels",
+       locals: { vessels: @vessels })}'
+  );
