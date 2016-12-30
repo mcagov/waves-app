@@ -1,6 +1,15 @@
 require "rails_helper"
 
 describe Search, type: :model do
+  context ".all" do
+    before do
+      expect(PgSearch)
+        .to receive(:multisearch).with("foo")
+    end
+
+    it { Search.all("foo") }
+  end
+
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")

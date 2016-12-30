@@ -1,5 +1,5 @@
 class SearchController < InternalPagesController
   def index
-    @search_results = PgSearch.multisearch(params[:q])
+    @search_results = Search.all(params[:q])
   end
 end

@@ -1,5 +1,9 @@
 class Search
   class << self
+    def all(term)
+      PgSearch.multisearch(term)
+    end
+
     # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)
       Register::Vessel
