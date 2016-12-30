@@ -16,6 +16,12 @@ class Search
       results.flatten.uniq
     end
 
+    def vessels(term)
+      PgSearch.multisearch(term)
+              .where(searchable_type: "Register::Vessel")
+              .map(&:searchable)
+    end
+
     # rubocop:disable Metrics/MethodLength
     def similar_vessels(part, vessel)
       Register::Vessel
