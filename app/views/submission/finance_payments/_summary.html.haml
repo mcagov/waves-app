@@ -23,6 +23,12 @@
                 N/A
               - else
                 = submission.vessel_reg_no
+                - if @submission.claimant == current_user
+                  = link_to "#change-vessel",
+                    "data-target" => "#change-vessel",
+                    "data-toggle" => "modal",
+                    class: "btn btn-xs btn-info" do
+                    Change
           %tr
             %td{ colspan: 2 }
               Target Date:

@@ -3,6 +3,19 @@ require "rails_helper"
 describe "User associates vessel to finance_payment",
          type: :feature, js: true do
 
+  scenario "changing the Offical No. for a change_vessel submission" do
+    create(:registered_vessel, reg_no: "SSR200000")
+    create(:registered_vessel, reg_no: "SSR244444")
+
+    create(:finance_payment, task: :change_vessel, vessel_reg_no: "SSR200000")
+
+    claim_submission_and_visit
+
+    within("#finance_info .official_no") do
+      click_on("Change")
+    end
+  end
+
   scenario "hiding the Official No. for a change_vessel submission" do
     create(:finance_payment, task: :new_registration)
 
