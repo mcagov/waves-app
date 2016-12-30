@@ -120,5 +120,7 @@ Rails.application.routes.draw do
 
   get "/search", controller: :search, action: :index
   get "/search/submissions", controller: :search, action: :submissions
+  get "/search/vessels", controller: :search, action: :vessels
+
   root to: "dashboards#show"
 end

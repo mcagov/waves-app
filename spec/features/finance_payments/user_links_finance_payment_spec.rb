@@ -24,10 +24,7 @@ describe "User links finance_payment", type: :feature, js: true do
       task: :new_registration,
       application_ref_no: "ABC123")
 
-    login_to_part_3
-    click_on("Unclaimed Tasks")
-    click_on("Claim")
-    click_on("Process Next Application")
+    claim_submission_and_visit
   end
 
   scenario "to the prompted application" do

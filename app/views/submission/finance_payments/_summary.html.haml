@@ -1,0 +1,35 @@
+#finance_info.x_panel
+  .x_content
+    .row
+      %table.table
+        %thead
+          %th{ width: "50%" } Finance Information
+          %th Submitted Vessel Details
+        %tbody
+          %tr
+            %td
+              Payment Received:
+              = "£#{number_with_precision(submission.payment_received.to_f / 100, precision: 2)}"
+            %td
+              Name:
+              = submission.vessel_name
+          %tr
+            %td
+              Date Received:
+              = submission.received_at
+            %td.official_no
+              Official No:
+              - if submission.new_registration?
+                N/A
+              - else
+                = submission.vessel_reg_no
+                - if @submission.claimant == current_user
+                  = link_to "#change-vessel",
+                    "data-target" => "#change-vessel",
+                    "data-toggle" => "modal",
+                    class: "btn btn-xs btn-info" do
+                    Change
+          %tr
+            %td{ colspan: 2 }
+              Target Date:
+              = submission.target_date

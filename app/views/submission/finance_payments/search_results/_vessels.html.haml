@@ -1,0 +1,25 @@
+- if vessels.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %thead
+      %th Vessel Name
+      %th Official No.
+      %th
+    %tbody
+      - vessels.each do |vessel|
+        %tr
+          %td= vessel.name
+          %td= vessel.reg_no
+          %td
+            = link_to "#",
+              onclick: "set_reg_no('#{vessel.reg_no}')",
+              class: "btn btn-warning btn-xs" do
+              Link
+:javascript
+  function set_reg_no(reg_no) {
+    $("#submission_vessel_reg_no").val(reg_no);
+    $("#submission_vessel_reg_no").closest("form").submit();
+  }
+
+

@@ -18,3 +18,10 @@ def visit_assigned_submission
   login_to_part_3(submission.claimant)
   visit submission_path(submission)
 end
+
+def claim_submission_and_visit
+  login_to_part_3
+  click_on("Unclaimed Tasks")
+  click_on("Claim")
+  click_on("Process Next Application")
+end

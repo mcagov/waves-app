@@ -28,6 +28,16 @@ describe Search, type: :model do
     end
   end
 
+  context ".vessels" do
+    context "search by vessel name" do
+      let!(:vessel) { create(:registered_vessel, name: "BOBS BOAT") }
+
+      subject { Search.vessels("BOB") }
+
+      it { expect(subject.first).to eq(vessel) }
+    end
+  end
+
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")

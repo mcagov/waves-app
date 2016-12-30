@@ -95,6 +95,10 @@ class Decorators::Submission < SimpleDelegator
     Task.new(task).address_can_be_changed?
   end
 
+  def new_registration?
+    Task.new(task) == :new_registration
+  end
+
   def delivery_description
     if electronic_delivery?
       "Electronic delivery"

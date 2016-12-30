@@ -4,6 +4,7 @@ class Submission::FinancePaymentsController < InternalPagesController
   def show
     load_linkable_submission
     @submission = Decorators::Submission.new(@submission)
+    @similar_submissions = Search.similar_submissions(@submission)
   end
 
   def convert
@@ -37,7 +38,13 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def update
     @submission.assign_attributes(submission_params)
-    convert
+
+    if @submission.save
+      redirect_to submission_path(@submission)
+    else
+      @submission.update_attribute(:officer_intervention_required, true)
+      render :edit
+    end
   end
 
   protected
