@@ -1,21 +1,15 @@
 .modal.fade{id: "link-application", role: "dialog", tabindex: "-1"}
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
-      = simple_form_for @submission,
-        url: link_submission_finance_payment_path(@submission),
-        method: :patch do |f|
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title
-            Link to a Different Application
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Search for an Application
 
-        .modal-body
-          .row
-            .col-sm-6
-              .form-group
-                %label{ for: "target_ref_no" } Application Reference No.
-                = text_field_tag "target_ref_no", "", class: "form-control string optional"
-
-        .modal-footer
-          = f.submit "Link to Application", class: "btn btn-success btn-lg"
+      .modal-body
+        .row
+          .col-sm-6
+            = form_tag "/search/submissions", method: :get, remote: true do
+              = render partial: "search/fields"
+        #submissions

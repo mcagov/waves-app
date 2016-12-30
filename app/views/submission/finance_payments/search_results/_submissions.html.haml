@@ -1,0 +1,25 @@
+- if submissions.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %thead
+      %th Vessel Name
+      %th Official No.
+      %th Applicant Name
+      %th Application Type
+      %th Reference No.
+      %th
+    %tbody
+      - submissions.each do |submission|
+        - submission = Decorators::Submission.new(submission)
+        %tr
+          %td= submission.vessel_name
+          %td= submission.vessel_reg_no
+          %td= submission.applicant_name
+          %td= submission.job_type
+          %td= submission.ref_no
+          %td
+            = simple_form_for submission,
+              url: link_submission_finance_payment_path(submission),
+              method: :patch do |f|
+              = f.submit "Link"

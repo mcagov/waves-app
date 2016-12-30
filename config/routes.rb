@@ -119,5 +119,6 @@ Rails.application.routes.draw do
   end
 
   get "/search", controller: :search, action: :index
+  get "/search/submissions", controller: :search, action: :submissions
   root to: "dashboards#show"
 end
