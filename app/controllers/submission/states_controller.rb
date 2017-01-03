@@ -6,7 +6,7 @@ class Submission::StatesController < InternalPagesController
 
     respond_to do |format|
       format.html do
-        flash[:notice] = "You have succesfully claimed this application"
+        flash[:notice] = "You have successfully claimed this application"
         redirect_to submission_path(@submission)
       end
       format.js { render "tasks/actions/claim_button" }
@@ -29,7 +29,7 @@ class Submission::StatesController < InternalPagesController
     @submission.unreferred!
     @submission.claimed!(current_user)
 
-    flash[:notice] = "You have succesfully claimed this application"
+    flash[:notice] = "You have successfully claimed this application"
     redirect_to tasks_my_tasks_path
   end
 

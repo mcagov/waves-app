@@ -5,8 +5,7 @@ describe "User converts finance payment", type: :feature, js: true do
     create(
       :finance_payment,
       part: :part_3,
-      task: :duplicate_certificate,
-      vessel_reg_no: create(:registered_vessel, name: "MY BOAT").reg_no,
+      task: :new_registration,
       vessel_name: "MY BOAT", applicant_name: "BOB")
 
     login_to_part_3
@@ -18,19 +17,19 @@ describe "User converts finance payment", type: :feature, js: true do
     click_on("My Tasks")
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", text: "Duplicate Certificate")
+    expect(page).to have_css("h1", text: "New Registration")
 
     within("#actions") do
       click_on("Convert to Application")
     end
 
-    expect(page).to have_css("#actions")
+    expect(page).to have_css(".alert", text: "successfully converted")
   end
 
   scenario "when they have not claimed it they can't 'convert' it" do
     click_on("MY BOAT")
 
-    expect(page).to have_css("h1", text: "Duplicate Certificate")
+    expect(page).to have_css("h1", text: "New Registration")
     expect(page).not_to have_css("#actions")
   end
 end

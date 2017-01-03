@@ -27,7 +27,7 @@ describe Submission::ApprovalsController, type: :controller do
         }
       end
 
-      context "succesfully" do
+      context "successfully" do
         before do
           allow_any_instance_of(Submission)
             .to receive(:approved!)
