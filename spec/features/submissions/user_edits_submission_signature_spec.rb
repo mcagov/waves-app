@@ -28,5 +28,6 @@ describe "User edits submission signature" do
 
     expect(page).to have_text("The application has been moved to Part I")
     expect(Submission.last.registry_info).to be_blank
+    expect(Submission.last).to be_unassigned
   end
 end
