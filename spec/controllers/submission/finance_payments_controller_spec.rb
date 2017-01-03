@@ -35,18 +35,6 @@ describe Submission::FinancePaymentsController, type: :controller do
         expect(Notification::ApplicationReceipt.count).to eq(1)
       end
     end
-
-    context "for change_vessel and there is no vessel" do
-      let(:task) { :change_vessel }
-
-      it "renders #edit" do
-        expect(response).to render_template(:edit)
-      end
-
-      it "officer intervention is still required" do
-        expect(submission.reload.officer_intervention_required).to be_truthy
-      end
-    end
   end
 
   describe "#update" do
@@ -60,31 +48,11 @@ describe Submission::FinancePaymentsController, type: :controller do
               params: {
                 submission_id: submission.id,
                 submission: {
-                  task: :change_vessel,
                   vessel_reg_no: registered_vessel.reg_no } }
       end
 
       it "redirects_to submissions#show" do
         expect(response).to redirect_to(submission_path(submission))
-      end
-    end
-
-    context "when the vessel is invalid" do
-      before do
-        patch :update,
-              params: {
-                submission_id: submission.id,
-                submission: {
-                  task: :change_vessel,
-                  vessel_reg_no: "foo" } }
-      end
-
-      it "renders the edit template" do
-        expect(response).to render_template(:edit)
-      end
-
-      it "ensures the officer_intervention_required is true" do
-        expect(assigns(:submission).officer_intervention_required).to be_truthy
       end
     end
   end
