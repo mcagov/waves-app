@@ -1,0 +1,26 @@
+%table.table#payment
+  %thead
+    %th Receipt Date
+    %th Payment Type
+    %th Order Code
+    %th Customer IP
+    %th Amount
+  %tbody
+    - submission.payments.each do |payment|
+      %tr
+        - if payment.remittance.is_a?(Payment::WorldPay)
+          %td= payment.remittance.created_at
+          %td World Pay
+          %td= payment.remittance.wp_order_code
+          %td= payment.remittance.customer_ip
+
+        - elsif payment.remittance.is_a?(Payment::FinancePayment)
+          - finance_payment = Decorators::FinancePayment.new(payment.remittance)
+          %td= finance_payment.payment_date
+          %td= finance_payment.payment_type_description
+          %td N/A
+          %td N/A
+        %td
+          %strong
+            £
+            = number_with_precision(payment.amount.to_f / 100, precision: 2)

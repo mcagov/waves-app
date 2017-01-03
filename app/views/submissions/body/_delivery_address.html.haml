@@ -1,7 +1,8 @@
-%table.table#delivery_address
-  %tbody
-    %tr
-      %td{width: "30%"} Delivery Address
-      %td
-        %strong
-          = submission.delivery_description
+- if submission.delivery_description
+  %table.table#delivery_address
+    %tbody
+      %tr
+        %td{width: "30%"} Delivery Address
+        %td
+          %strong
+            = submission.delivery_description
