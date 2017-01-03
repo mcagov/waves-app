@@ -22,7 +22,7 @@ en:
         applicant_email: Applicant's Email Address
         documents_received: Documents Received
       submission:
-        part: Part of Register
+        part: Part of the Register
         task: Application Type
         vessel_reg_no: Official No.
         applicant_name: Applicant Name

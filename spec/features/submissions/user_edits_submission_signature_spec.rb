@@ -22,5 +22,11 @@ describe "User edits submission signature" do
     expect(Submission.last.registry_info).to be_blank
   end
 
-  scenario "changing the part of the registry"
+  scenario "changing the part of the registry" do
+    select("Part I", from: "Part of the Register")
+    click_on("Save")
+
+    expect(page).to have_text("The application has been moved to Part I")
+    expect(Submission.last.registry_info).to be_blank
+  end
 end
