@@ -4,7 +4,7 @@ class NotificationsController < InternalPagesController
   def cancel
     Notification::Cancellation.create(parsed_notification_params)
 
-    flash[:notice] = "You have succesfully cancelled that application"
+    flash[:notice] = "You have successfully cancelled that application"
     @submission.cancelled!
     redirect_to tasks_my_tasks_path
   end
@@ -12,7 +12,7 @@ class NotificationsController < InternalPagesController
   def refer
     Notification::Referral.create(parsed_notification_params)
 
-    flash[:notice] = "You have succesfully referred that application"
+    flash[:notice] = "You have successfully referred that application"
     @submission.update_attribute(
       :referred_until, notification_params[:actionable_at])
 
