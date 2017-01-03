@@ -10,7 +10,7 @@ describe "User searches" do
     create(:submission, ref_no: "ABC123")
     create(:registered_vessel, name: "ABC FUN")
 
-    search_for("ABC")
+    within(".nav_menu") { search_for("ABC") }
 
     within("#search_results") do
       expect(page).to have_css("tr.submission", count: 2)
@@ -22,7 +22,7 @@ describe "User searches" do
     vessel = create(:registered_vessel, mmsi_number: "232181282")
     create(:submission, registered_vessel: vessel)
 
-    search_for("232181")
+    within(".nav_menu") { search_for("232181") }
 
     within("#search_results") do
       expect(page).to have_css("tr.vessel", count: 1)
@@ -32,7 +32,7 @@ describe "User searches" do
   end
 
   scenario "nothing found" do
-    search_for("foo")
+    within(".nav_menu") { search_for("foo") }
     expect(page).to have_text("Nothing found")
   end
 end

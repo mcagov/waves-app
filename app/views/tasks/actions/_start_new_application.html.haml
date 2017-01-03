@@ -1,0 +1,35 @@
+= link_to "#start-new-application",
+  data: { target: "#start-new-application", toggle: "modal" },
+  class: 'btn btn-success' do
+  %i.fa.fa-plus{style: 'font-size: 1.2em; font-weight: bold;'}
+  Start a New Application
+
+.modal.fade{id: "start-new-application", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Start a New Application
+      .modal-body
+        %p= link_to "New Registration", new_submission_path,
+            class: "btn btn-block btn-success"
+        %p= link_to "Other Task", "#search-for-vessel",
+            data: { dismiss: "modal", toggle: "modal", target: "#search-for-vessel" },
+            class: 'btn btn-block btn-warning'
+
+.modal.fade{id: "search-for-vessel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Search for a Vessel
+      .modal-body
+        .row
+          .col-sm-6
+            = form_tag "/search/vessels", method: :get, remote: true do
+              = hidden_field_tag :part, "/tasks/search_results/vessels"
+              = hidden_field_tag :response_path, "/tasks/search_results/vessels"
+              = render partial: "search/fields"
+        #vessels

@@ -1,0 +1,21 @@
+- if vessels.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %thead
+      %th Vessel Name
+      %th Official No.
+      %th
+    %tbody
+      - vessels.each do |vessel|
+        %tr
+          %td= vessel.name
+          %td= vessel.reg_no
+          %td.pull-right
+            - submission = Submission.new(task: :re_registration, part: current_activity.part, vessel_reg_no: vessel.reg_no)
+            = simple_form_for submission,
+              url: new_submission_path, method: :get do |f|
+              = f.input :vessel_reg_no, as: :hidden
+              = f.input :part, as: :hidden
+              = f.input :task, as: :hidden
+              = f.submit "Use this vessel", class: "btn btn-warning btn-xs"
