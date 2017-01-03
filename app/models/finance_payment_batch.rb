@@ -1,0 +1,2 @@
+class FinancePaymentBatch < ApplicationRecord
+end
