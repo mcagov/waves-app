@@ -52,7 +52,7 @@ $(document).ready(function() {
   }
 
   // Submissions#new: toggle Official No / Vessel Name field
-  if ($("form#new_submission").length) { set_task_type_depenencies(); }
+  if ($('form #submission_task').length > 0) { set_task_type_depenencies(); }
 
   $('form #submission_task').on('change', function(){
     set_task_type_depenencies();

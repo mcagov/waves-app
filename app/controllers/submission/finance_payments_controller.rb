@@ -60,7 +60,7 @@ class Submission::FinancePaymentsController < InternalPagesController
   end
 
   def submission_params
-    params.require(:submission).permit(:task, :vessel_reg_no)
+    params.require(:submission).permit(:vessel_reg_no)
   end
 
   def create_notification

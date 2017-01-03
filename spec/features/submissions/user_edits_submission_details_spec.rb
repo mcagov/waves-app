@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User edits a submission", js: true do
+describe "User edits submission details", js: true do
   before do
     visit_assigned_submission
     click_on "Edit Application"

@@ -2,10 +2,10 @@
 .row
   .col-md-9
     %h1{style: "margin-top: 0px !important;"}
-      = submission.job_type
-
-      ID:
-      = submission.ref_no || "Not yet generated"
+      = link_to submission_signature_path(submission) do
+        = submission.job_type
+        ID:
+        = submission.ref_no || "Not yet generated"
   .col-md-3.pull-right
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
