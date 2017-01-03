@@ -6,6 +6,7 @@ class Submission::SignaturesController < InternalPagesController
 
   def update
     @submission.assign_attributes(submission_params)
+    @submission.registry_info = nil
 
     if @submission.save
       redirect_to submission_path(@submission)
