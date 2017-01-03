@@ -31,7 +31,7 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "New Registration ID: Not yet generated")
 
-    within("td.official_no") { expect(page).not_to have_link("Change") }
+    within("td.official_no") { expect(page).not_to have_text("Change") }
 
     within("#actions") { click_on("Link to Application") }
 
@@ -48,5 +48,10 @@ describe "User links finance_payment", type: :feature, js: true do
 
     expect(page)
       .to have_css("h1", text: "Change of Vessel details ID: FOOBAR")
+  end
+
+  scenario "unlinking the application" do
+    within(".linkable_ref_no") { click_on("Unlink") }
+    within("#actions") { expect(page).to have_link("Convert to Application") }
   end
 end
