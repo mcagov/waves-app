@@ -40,6 +40,9 @@ Rails.application.routes.draw do
         post :complete
       end
     end
+    resource :signature,
+             controller: "submission/signatures",
+             only: [:show, :update]
     resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim

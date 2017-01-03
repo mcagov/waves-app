@@ -2,7 +2,7 @@
 .row
   .col-md-9
     %h1{style: "margin-top: 0px !important;"}
-      = link_to "#" do
+      = link_to submission_signature_path(submission) do
         = submission.job_type
         ID:
         = submission.ref_no || "Not yet generated"
