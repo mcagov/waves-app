@@ -3,7 +3,7 @@ require "rails_helper"
 feature "User adds a new registration", type: :feature do
   before do
     login_to_part_3
-    click_on("Start a New Application")
+    visit new_submission_path
 
     select("New Registration", from: "Application Type")
     fill_in("Vessel Name", with: "MY BOAT")
