@@ -31,6 +31,8 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "New Registration ID: Not yet generated")
 
+    within("td.official_no") { expect(page).not_to have_link("Change") }
+
     within("#actions") { click_on("Link to Application") }
 
     expect(page).to have_css("h1", text: "Change of Ownership ID: ABC123")
