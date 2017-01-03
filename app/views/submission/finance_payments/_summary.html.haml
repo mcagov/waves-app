@@ -23,7 +23,7 @@
                 N/A
               - else
                 = submission.vessel_reg_no
-                - if @submission.claimant == current_user
+                - if @submission.claimant == current_user && !@linkable_submission
                   = link_to "#change-vessel",
                     "data-target" => "#change-vessel",
                     "data-toggle" => "modal",

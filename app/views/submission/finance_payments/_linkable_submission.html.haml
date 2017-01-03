@@ -10,9 +10,14 @@
               = render partial: "/vessels/registration_status", locals: { registration_status: linkable_submission.registration_status }
         %tbody
           %tr
-            %td
+            %td.linkable_ref_no
               Application Reference No:
               = linkable_submission.ref_no
+              = link_to "Unlink this Application",
+                unlink_submission_finance_payment_path(@submission),
+                method: :patch,
+                class: "btn btn-xs btn-warning"
+
           %tr
             %td
               Application Type:

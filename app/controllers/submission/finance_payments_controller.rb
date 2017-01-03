@@ -34,6 +34,13 @@ class Submission::FinancePaymentsController < InternalPagesController
     end
   end
 
+  def unlink
+    load_linkable_submission
+    @submission.update_attribute(
+      :changeset, @submission.symbolized_changeset.except(:linkable_ref_no))
+    redirect_to submission_path(@submission)
+  end
+
   def edit; end
 
   def update
