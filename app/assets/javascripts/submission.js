@@ -1,6 +1,3 @@
-// On the the submission details page we display a font-awesome star next
-// to "similar" attributes in the "similar vessels" pane.
-// With this script, we set the reciprocal attribute in the vessel pane.
 $(document).ready(function() {
 
   // WYSIWYG
@@ -37,7 +34,9 @@ $(document).ready(function() {
     }
   });
 
-  // Submission#show: Similar vessel attribute icons
+  // On the the submission details page we display a font-awesome star next
+  // to "similar" attributes in the "similar vessels" pane.
+  // With this script, we set the reciprocal attribute in the vessel pane.
   if ($('#similar-vessels .similar-name').length) {
     $('#vessel-name .fa-star-o.hidden').removeClass('hidden');
   }
