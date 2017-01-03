@@ -20,11 +20,11 @@
 
 - if @submission.claimant == current_user
   = content_for :primary_action_button do
-    - if @submission.registered_vessel.blank?
-      = link_to "Convert to Application", "#",
-        class: "btn btn-lg btn-primary pull-right disabled"
-    - else
+    - if @submission.convertible?
       = link_to "Convert to Application",
         convert_submission_finance_payment_path(@submission),
         method: :patch,
         class: "btn btn-lg btn-primary pull-right"
+    - else
+      = link_to "Convert to Application", "#",
+        class: "btn btn-lg btn-primary pull-right disabled"

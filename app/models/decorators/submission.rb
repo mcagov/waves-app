@@ -115,6 +115,10 @@ class Decorators::Submission < SimpleDelegator
     vessel.mmsi_number if vessel
   end
 
+  def convertible?
+    new_registration? || registered_vessel.present?
+  end
+
   private
 
   def finance_payment

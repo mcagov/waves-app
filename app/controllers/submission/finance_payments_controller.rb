@@ -13,7 +13,7 @@ class Submission::FinancePaymentsController < InternalPagesController
 
     if @submission.save
       create_notification
-
+      flash[:notice] = "You have succesfully converted that application"
       redirect_to submission_path(@submission)
     else
       @submission.officer_intervention_required = true
