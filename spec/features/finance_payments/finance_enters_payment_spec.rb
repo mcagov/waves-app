@@ -3,6 +3,7 @@ require "rails_helper"
 describe "Finance enters a payment", type: :feature do
   before do
     login_to_finance
+    click_on("Start a Batch")
   end
 
   scenario "in its simplest form" do
