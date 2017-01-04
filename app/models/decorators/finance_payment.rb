@@ -14,10 +14,6 @@ class Decorators::FinancePayment < SimpleDelegator
     Task.new(task).description
   end
 
-  def formatted_payment_amount
-    "£#{number_with_precision(payment_amount.to_f, precision: 2)}"
-  end
-
   def payment_type_description
     Payment::FinancePayment::PAYMENT_TYPES.find do |t|
       t[1] == payment_type.to_sym
