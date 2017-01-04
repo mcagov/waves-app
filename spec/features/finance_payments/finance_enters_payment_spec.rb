@@ -9,6 +9,7 @@ describe "Finance enters a payment", type: :feature do
   scenario "in its simplest form" do
     expect(page).to have_css(".active-register", text: "Active: Finance")
     expect(page).to have_css("h1", text: "Finance: Fee Entry")
+    expect(page).to have_text("Batch: #{FinancePaymentBatch.last.batch_no}")
 
     fill_in("Fee Receipt Date", with: "12/12/2012")
     fill_in("Application Reference No", with: "ABC123")

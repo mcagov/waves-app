@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104091643) do
+ActiveRecord::Schema.define(version: 20170104093613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170104091643) do
     t.uuid     "ended_by_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "batch_no"
     t.index ["finance_payment_id"], name: "index_finance_payment_batches_on_finance_payment_id", using: :btree
   end
 
