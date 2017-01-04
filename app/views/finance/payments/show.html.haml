@@ -1,4 +1,5 @@
-%h1 Finance: Fees Entered
+= render partial: "/finance/payments/heading"
+
 .row
   .col-md-12
     .x_panel
@@ -10,8 +11,4 @@
 
         = render partial: "payment", locals: { finance_payment: @finance_payment }
 
-.row.no-print
-  .col-xs-12
-    = link_to new_finance_payment_path, class: 'btn btn-success btn-lg pull-right' do
-      %i.fa.fa-plus
-      New Fee Entry
+= render partial: "/finance/batches/actions", locals: { batch: @batch }

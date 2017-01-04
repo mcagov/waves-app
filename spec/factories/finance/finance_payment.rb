@@ -4,5 +4,6 @@ FactoryGirl.define do
     part            :part_3
     task            :new_registration
     payment_amount  25.00
+    batch           { build(:finance_batch) }
   end
 end

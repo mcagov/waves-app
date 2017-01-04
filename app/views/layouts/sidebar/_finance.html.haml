@@ -2,9 +2,10 @@
   %li
     %a.toggle-tasks
       %i.fa.fa-list-ol
-      Payments
+      Batches
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Fee Entry", new_finance_payment_path
-      %li= link_to "Recent Fee Entries", finance_payments_path
-
+      %li= link_to "All Batches", finance_batches_path
+      %li= link_to "Batches This Week", this_week_finance_batches_path
+      %li= link_to "Batches This Month", this_month_finance_batches_path
+      %li= link_to "Batches This Year", this_year_finance_batches_path

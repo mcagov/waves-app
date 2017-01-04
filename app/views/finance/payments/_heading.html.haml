@@ -1,0 +1,12 @@
+.row
+  .col-md-4
+    %h1{style: "margin-top: 0px !important;"}
+      Finance: Fee Entry
+  .col-md-4
+    %h5 Start Date:  #{@batch.opened_at.to_s(:date_time)}
+    - if @batch.closed?
+      %h5 End Date:  #{@batch.closed_at.to_s(:date_time)}
+  .col-md-4
+    %h5 Batch: #{@batch.batch_no}
+    %h5 Officer: #{@batch.processed_by}
+

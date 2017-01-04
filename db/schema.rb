@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229115533) do
+ActiveRecord::Schema.define(version: 20170104093613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,17 @@ ActiveRecord::Schema.define(version: 20161229115533) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "finance_payment_id"
+    t.datetime "opened_at"
+    t.datetime "closed_at"
+    t.uuid     "processed_by_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "batch_no"
+    t.index ["finance_payment_id"], name: "index_finance_batches_on_finance_payment_id", using: :btree
+  end
+
   create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "part"
     t.string   "task"
@@ -115,6 +126,7 @@ ActiveRecord::Schema.define(version: 20161229115533) do
     t.string   "vessel_reg_no"
     t.boolean  "applicant_is_agent", default: false
     t.string   "application_ref_no"
+    t.uuid     "batch_id"
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
   end
 

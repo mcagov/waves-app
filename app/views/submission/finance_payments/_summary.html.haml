@@ -9,7 +9,7 @@
           %tr
             %td
               Payment Received:
-              = "£#{number_with_precision(submission.payment_received.to_f / 100, precision: 2)}"
+              = formatted_amount(submission.payment_received)
             %td
               Name:
               = submission.vessel_name

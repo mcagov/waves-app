@@ -1,4 +1,6 @@
 class Finance::PaymentsController < InternalPagesController
+  before_action :load_batch
+
   def new
     @finance_payment = Payment::FinancePayment.new(payment_date: Date.today)
   end
@@ -12,9 +14,11 @@ class Finance::PaymentsController < InternalPagesController
   def create
     @finance_payment = Payment::FinancePayment.new(finance_payment_params)
     @finance_payment.actioned_by = current_user
+    @finance_payment.batch = @batch
 
     if @finance_payment.save
-      redirect_to finance_payment_path(@finance_payment, prompt: :success)
+      redirect_to finance_batch_payment_path(
+        @batch, @finance_payment, prompt: :success)
     else
       render :new
     end
@@ -22,7 +26,7 @@ class Finance::PaymentsController < InternalPagesController
 
   def index
     @finance_payments =
-      Payment::FinancePayment.paginate(page: params[:page], per_page: 20)
+      @batch.finance_payments.paginate(page: params[:page], per_page: 20)
   end
 
   protected
@@ -33,5 +37,10 @@ class Finance::PaymentsController < InternalPagesController
       :task, :vessel_reg_no, :vessel_name,
       :service_level, :payment_type, :payment_amount, :applicant_is_agent,
       :applicant_name, :applicant_email, :documents_received)
+  end
+
+  def load_batch
+    @batch = FinanceBatch.includes(finance_payments: [:payment])
+                         .find(params[:batch_id])
   end
 end

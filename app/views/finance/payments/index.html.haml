@@ -1,7 +1,5 @@
-.row
-  .col-sm-12
-    %h1{style: "margin-top: 0px !important;"}
-      Finance: Recent Fee Entries
+= render partial: "/finance/payments/heading"
+
 .row
   .col-md-12
     .x_panel
@@ -10,16 +8,20 @@
           %thead
             %tr
               %th Fee Receipt Date
-              %th Part of Register
               %th Application Type
+              %th Part of Register
               %th Payment Type
               %th Fee Amount
           %tbody
           - @finance_payments.each do |finance_payment|
             - finance_payment = Decorators::FinancePayment.new(finance_payment)
             %tr.finance-payment
-              %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment)
-              %td= finance_payment.part_description
+              %td
+                = link_to finance_batch_payment_path(@batch, finance_payment) do
+                  = finance_payment.payment_date
               %td= finance_payment.task_description
+              %td= finance_payment.part_description
               %td= finance_payment.payment_type_description
-              %td= finance_payment.formatted_payment_amount
+              %td= formatted_amount(finance_payment.payment.amount)
+
+= render partial: "/finance/batches/actions", locals: { batch: @batch }

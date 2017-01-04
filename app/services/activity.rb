@@ -38,7 +38,7 @@ class Activity
 
   def root_path
     case @part
-    when :finance then "/finance/payments/new"
+    when :finance then "/finance/batches"
     else
       "/tasks/my-tasks"
     end

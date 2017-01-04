@@ -52,5 +52,4 @@
                 %tr
                   %td.soft-label Payment Received:
                   %td
-                    %strong= "£#{number_with_precision(submission.payment_received.to_f / 100, precision: 2)}"
-
+                    %strong= formatted_amount(submission.payment_received)

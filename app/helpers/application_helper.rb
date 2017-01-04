@@ -18,4 +18,8 @@ module ApplicationHelper
   def add_details_if_blank(str)
     str.blank? ? "Add details" : str
   end
+
+  def formatted_amount(amount)
+    "£#{number_with_precision(amount.to_f / 100, precision: 2)}"
+  end
 end

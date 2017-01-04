@@ -2,11 +2,13 @@ class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
   delegate :submission, to: :payment
+  delegate :batch_no, to: :batch
 
   after_create :build_payment_and_submission
 
   has_one :payment, as: :remittance
   belongs_to :actioned_by, class_name: "User"
+  belongs_to :batch, class_name: "FinanceBatch"
 
   validates :payment_date, presence: true
   validates :part, presence: true
