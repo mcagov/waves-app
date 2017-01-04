@@ -5,10 +5,17 @@ class Finance::BatchesController < InternalPagesController
   def create
     @batch =
       FinanceBatch.create(
-        starts_at: Time.now,
-        started_by: current_user
+        opened_at: Time.now,
+        processed_by: current_user
       )
 
     redirect_to new_finance_batch_payment_path(@batch)
+  end
+
+  def update
+    @batch = FinanceBatch.find(params[:id])
+    @batch.toggle_state!
+
+    redirect_to finance_batch_payments_path(@batch)
   end
 end

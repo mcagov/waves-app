@@ -12,7 +12,13 @@
         = render partial: "payment", locals: { finance_payment: @finance_payment }
 
 .row.no-print
-  .col-xs-12
-    = link_to new_finance_batch_payment_path(@batch), class: 'btn btn-success btn-lg pull-right' do
+  .col-md-12
+    = link_to finance_batch_path(@batch), method: :patch,
+      class: 'btn btn-primary btn-lg' do
+      %i.fa.fa-check
+      End Batch
+
+    = link_to new_finance_batch_payment_path(@batch),
+      class: 'btn btn-success btn-lg pull-right' do
       %i.fa.fa-plus
       New Fee Entry

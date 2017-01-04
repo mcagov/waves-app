@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :finance do
-    resources :batches, only: [:index, :create] do
+    resources :batches, only: [:index, :create, :update] do
       resources :payments, only: [:new, :create, :show, :index]
     end
   end
