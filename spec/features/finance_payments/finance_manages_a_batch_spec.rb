@@ -9,10 +9,16 @@ describe "Finance manages a batch", type: :feature do
     visit finance_batch_payment_path(@batch, finance_payment)
   end
 
-  scenario "ending a batch" do
+  scenario "ending and re-opening a batch" do
     click_on("End Batch")
 
     expect(page).to have_current_path(finance_batch_payments_path(@batch))
     expect(page).to have_text("End Date: ")
+
+    click_on("Re-Open Batch")
+
+    expect(page).to have_current_path(finance_batch_payments_path(@batch))
+    expect(page).not_to have_text("End Date: ")
+    expect(page).to have_link("New Fee Entry")
   end
 end

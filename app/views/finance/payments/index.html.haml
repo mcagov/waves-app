@@ -23,3 +23,5 @@
               %td= finance_payment.part_description
               %td= finance_payment.payment_type_description
               %td= finance_payment.formatted_payment_amount
+
+= render partial: "/finance/batches/actions", locals: { batch: @batch }
