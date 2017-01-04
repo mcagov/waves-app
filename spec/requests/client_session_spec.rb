@@ -9,13 +9,14 @@ describe "Client session" do
         .to receive(:obfuscated_recipient_phone_number).and_return([1, 2])
 
       allow_any_instance_of(ClientSession)
-        .to receive(:save).and_return(bln)
+        .to receive(:save).and_return(successfully_created)
+
       post api_v1_client_sessions_path, params: create_params
     end
 
-    context "when the client_session is created" do
-      let(:bln) { true }
+    let(:successfully_created) { true }
 
+    context "when the client_session is created" do
       it "has the status :created" do
         expect(response).to have_http_status(:created)
       end
@@ -30,7 +31,7 @@ describe "Client session" do
     end
 
     context "when the client_session is not created" do
-      let(:bln) { false }
+      let(:successfully_created) { false }
 
       it "has status 404" do
         expect(response).to have_http_status(404)
@@ -39,6 +40,19 @@ describe "Client session" do
       it "does not create a submission" do
         expect(ClientSession.count).to eq(0)
       end
+    end
+  end
+
+  context "#create raises an API error" do
+    before do
+      allow_any_instance_of(ClientSession)
+        .to receive(:save).and_raise(WavesError::SmsProviderError)
+
+      post api_v1_client_sessions_path, params: create_params
+    end
+
+    it "has status 404" do
+      expect(response).to have_http_status(404)
     end
   end
 end

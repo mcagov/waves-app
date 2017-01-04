@@ -9,6 +9,9 @@ module Api
         else
           render status: 404
         end
+
+      rescue WavesError::SmsProviderError
+        render status: 404
       end
 
       private
