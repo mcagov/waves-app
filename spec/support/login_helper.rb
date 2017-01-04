@@ -15,5 +15,5 @@ end
 
 def login_to_finance(user = create(:user))
   login(user, :finance)
-  visit "/finance/batches/new"
+  visit "/finance/batches/"
 end
