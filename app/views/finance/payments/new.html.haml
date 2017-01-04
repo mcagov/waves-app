@@ -1,8 +1,6 @@
+= render partial: "/finance/payments/heading"
+
 = simple_form_for @finance_payment, url: finance_batch_payments_path(@batch) do |f|
-  .row
-    .col-sm-12
-      %h1{style: "margin-top: 0px !important;"}
-        Finance: Fee Entry
   .row
     .col-md-12
       .x_panel
