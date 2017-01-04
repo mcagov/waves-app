@@ -7,7 +7,7 @@ class Payment::FinancePayment < ApplicationRecord
 
   has_one :payment, as: :remittance
   belongs_to :actioned_by, class_name: "User"
-  belongs_to :batch, class_name: "FinancePaymentBatch"
+  belongs_to :batch, class_name: "FinanceBatch"
 
   validates :payment_date, presence: true
   validates :part, presence: true

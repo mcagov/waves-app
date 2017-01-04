@@ -4,7 +4,7 @@ class Finance::BatchesController < InternalPagesController
 
   def create
     @batch =
-      FinancePaymentBatch.create(
+      FinanceBatch.create(
         starts_at: Time.now,
         started_by: current_user
       )

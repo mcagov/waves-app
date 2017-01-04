@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170104093613) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  create_table "finance_payment_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "finance_payment_id"
     t.datetime "starts_at"
     t.uuid     "started_by_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170104093613) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "batch_no"
-    t.index ["finance_payment_id"], name: "index_finance_payment_batches_on_finance_payment_id", using: :btree
+    t.index ["finance_payment_id"], name: "index_finance_batches_on_finance_payment_id", using: :btree
   end
 
   create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
