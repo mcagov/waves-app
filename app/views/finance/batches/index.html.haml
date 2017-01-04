@@ -21,3 +21,5 @@
         %td= batch.closed_at.to_s(:date_time) if batch.closed?
         %td= batch.processed_by
         %td= formatted_amount(batch.total_amount)
+
+= will_paginate @batches, renderer: BootstrapPagination::Rails
