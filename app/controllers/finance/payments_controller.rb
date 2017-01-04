@@ -14,9 +14,11 @@ class Finance::PaymentsController < InternalPagesController
   def create
     @finance_payment = Payment::FinancePayment.new(finance_payment_params)
     @finance_payment.actioned_by = current_user
+    @finance_payment.batch = @batch
 
     if @finance_payment.save
-      redirect_to finance_batch_payment_path(@finance_payment, prompt: :success)
+      redirect_to finance_batch_payment_path(
+        @batch, @finance_payment, prompt: :success)
     else
       render :new
     end
