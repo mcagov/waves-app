@@ -2,6 +2,7 @@ class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
   delegate :submission, to: :payment
+  delegate :batch_no, to: :batch
 
   after_create :build_payment_and_submission
 

@@ -2,7 +2,7 @@
   %thead
     %th Receipt Date
     %th Payment Type
-    %th Order Code
+    %th Reference
     %th Customer IP
     %th Amount
   %tbody
@@ -11,14 +11,14 @@
         - if payment.remittance.is_a?(Payment::WorldPay)
           %td= payment.remittance.created_at
           %td World Pay
-          %td= payment.remittance.wp_order_code
+          %td Order Code #{payment.remittance.wp_order_code}
           %td= payment.remittance.customer_ip
 
         - elsif payment.remittance.is_a?(Payment::FinancePayment)
           - finance_payment = Decorators::FinancePayment.new(payment.remittance)
           %td= finance_payment.payment_date
           %td= finance_payment.payment_type_description
-          %td N/A
+          %td Batch: #{finance_payment.batch_no}
           %td N/A
         %td
           %strong= formatted_amount(payment.amount)
