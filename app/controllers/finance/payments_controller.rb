@@ -26,7 +26,7 @@ class Finance::PaymentsController < InternalPagesController
 
   def index
     @finance_payments =
-      Payment::FinancePayment.paginate(page: params[:page], per_page: 20)
+      @batch.finance_payments.paginate(page: params[:page], per_page: 20)
   end
 
   protected
