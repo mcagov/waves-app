@@ -17,7 +17,7 @@
   %tbody
     - @batches.each do |batch|
       %tr.batch
-        %td= batch.opened_at.to_s(:date_time)
+        %td= link_to batch.opened_at.to_s(:date_time), finance_batch_payments_path(batch)
         %td= batch.closed_at.to_s(:date_time) if batch.closed?
         %td= batch.processed_by
         %td
