@@ -40,6 +40,7 @@ class Finance::PaymentsController < InternalPagesController
   end
 
   def load_batch
-    @batch = FinanceBatch.find(params[:batch_id])
+    @batch = FinanceBatch.includes(finance_payments: [:payment])
+                         .find(params[:batch_id])
   end
 end

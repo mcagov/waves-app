@@ -42,7 +42,7 @@ class Finance::BatchesController < InternalPagesController
   def default_scope
     FinanceBatch
       .paginate(page: params[:page], per_page: 20)
-      .includes(:finance_payments)
+      .includes(:processed_by, finance_payments: [:payment])
       .order("opened_at desc")
   end
 
