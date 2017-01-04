@@ -1,9 +1,23 @@
 .row
   .col-md-9
     %h1{style: "margin-top: 0px !important;"}
-      Finance: Payment Batches
+      Finance: #{@heading}
   .col-md-3.pull-right
     = link_to "Start a Batch",
       finance_batches_path,
       method: :post,
       class: "btn btn-primary pull-right"
+
+%table.table.table-striped
+  %thead
+    %th Start
+    %th End
+    %th Person
+    %th Amount
+  %tbody
+    - @batches.each do |batch|
+      %tr.batch
+        %td= batch.opened_at.to_s(:date_time)
+        %td= batch.closed_at.to_s(:date_time) if batch.closed?
+        %td= batch.processed_by
+        %td

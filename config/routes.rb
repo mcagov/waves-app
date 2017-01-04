@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   namespace :finance do
     resources :batches, only: [:index, :create, :update] do
       resources :payments, only: [:new, :create, :show, :index]
+      collection do
+        get :this_week
+        get :this_month
+        get :this_year
+      end
     end
   end
 

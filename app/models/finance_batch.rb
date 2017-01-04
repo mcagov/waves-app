@@ -1,5 +1,7 @@
 class FinanceBatch < ApplicationRecord
   belongs_to :processed_by, class_name: "User"
+  has_many :finance_payments, foreign_key: :batch_id,
+                              class_name: "Payment::FinancePayment"
 
   protokoll :batch_no, pattern: "1#####"
 
