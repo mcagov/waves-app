@@ -10,3 +10,12 @@
 a.search-result {
   font-size: 1.2em;
 }
+.thick {
+  border-top: 3px solid #888888;
+  border-bottom: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  height: 0px !important;
+  font-size: 1.2em;
+  font-weight: bold;
+}
