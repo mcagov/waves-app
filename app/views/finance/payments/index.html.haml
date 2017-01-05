@@ -11,7 +11,7 @@
               %th Application Type
               %th Part of Register
               %th Payment Type
-              %th Fee Amount
+              %th.text-right Fee Amount
           %tbody
           - @finance_payments.each do |finance_payment|
             - finance_payment = Decorators::FinancePayment.new(finance_payment)
@@ -22,6 +22,11 @@
               %td= finance_payment.task_description
               %td= finance_payment.part_description
               %td= finance_payment.payment_type_description
-              %td= formatted_amount(finance_payment.payment.amount)
+              %td.text-right= formatted_amount(finance_payment.payment.amount)
+          %tr
+            %td{colspan: 4}
+            %td.thick.text-right
+              TOTAL:
+              = formatted_amount(@batch.total_amount)
 
 = render partial: "/finance/batches/actions", locals: { batch: @batch }
