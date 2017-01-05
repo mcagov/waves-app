@@ -22,6 +22,7 @@
                 %i.fa.fa-print
                 = t("print_job.print_all_button_text.#{@template}")
             %th Proccessed by
+            %th Processed date
 
         - @print_jobs.each do |print_job|
           %tbody
@@ -32,3 +33,4 @@
                 %i.fa.fa-print
                 Print
             %td= print_job.printable.actioned_by
+            %td= print_job.created_at.to_s(:date_time) if print_job.created_at
