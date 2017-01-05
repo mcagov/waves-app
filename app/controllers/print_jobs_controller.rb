@@ -12,7 +12,7 @@ class PrintJobsController < InternalPagesController
 
   def index
     @template = params[:template]
-    @print_jobs = scoped_print_job.where(template: @template).unprinted
+    load_print_jobs(@template)
 
     respond_to do |format|
       format.html
@@ -40,5 +40,10 @@ class PrintJobsController < InternalPagesController
 
   def scoped_print_job
     PrintJob.in_part(current_activity.part)
+  end
+
+  def load_print_jobs(template)
+    @print_jobs = scoped_print_job.where(template: template)
+                                  .order("created_at asc").unprinted
   end
 end
