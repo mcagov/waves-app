@@ -1,4 +1,4 @@
-class Vessel::ColdStorageController < InternalPagesController
+class RegisteredVessel::ColdStorageController < InternalPagesController
   before_action :load_vessel
 
   def create

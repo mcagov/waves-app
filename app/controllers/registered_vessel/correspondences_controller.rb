@@ -1,4 +1,4 @@
-class Vessel::CorrespondencesController < InternalPagesController
+class RegisteredVessel::CorrespondencesController < InternalPagesController
   before_action :load_vessel
 
   def create

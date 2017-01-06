@@ -1,4 +1,4 @@
-class Vessel::ManualOverrideController < InternalPagesController
+class RegisteredVessel::ManualOverrideController < InternalPagesController
   before_action :load_vessel
 
   def create

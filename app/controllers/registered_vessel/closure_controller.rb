@@ -1,4 +1,4 @@
-class Vessel::ClosureController < InternalPagesController
+class RegisteredVessel::ClosureController < InternalPagesController
   before_action :load_vessel
 
   def create

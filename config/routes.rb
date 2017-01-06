@@ -86,28 +86,28 @@ Rails.application.routes.draw do
   resources :vessels, only: [:show, :index] do
     resource :closure,
              only: [:create],
-             controller: "vessel/closure"
+             controller: "registered_vessel/closure"
     resource :cold_storage,
              only: [:create],
-             controller: "vessel/cold_storage"
+             controller: "registered_vessel/cold_storage"
     resource :current_transcript,
              only: [:show],
-             controller: "vessel/current_transcript"
+             controller: "registered_vessel/current_transcript"
     resource :correspondence,
              only: [:create],
-             controller: "vessel/correspondences"
+             controller: "registered_vessel/correspondences"
     resource :historic_transcript,
              only: [:show],
-             controller: "vessel/historic_transcript"
+             controller: "registered_vessel/historic_transcript"
     resource :note,
              only: [:create],
-             controller: "vessel/notes"
+             controller: "registered_vessel/notes"
     resource :registration_certificate,
              only: [:show],
-             controller: "vessel/registration_certificate"
+             controller: "registered_vessel/registration_certificate"
     resource :manual_override,
              only: [:create],
-             controller: "vessel/manual_override"
+             controller: "registered_vessel/manual_override"
   end
 
   %w(
