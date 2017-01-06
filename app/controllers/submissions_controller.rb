@@ -3,7 +3,8 @@ class SubmissionsController < InternalPagesController
                 only: [:show, :edit, :update]
   before_action :check_officer_intervention_required,
                 only: [:show, :edit, :update]
-
+  before_action :check_approved_name_required,
+                only: [:show, :edit, :update]
   def new
     @submission =
       Submission.new(
@@ -70,6 +71,12 @@ class SubmissionsController < InternalPagesController
   def check_officer_intervention_required
     if @submission.officer_intervention_required?
       return redirect_to submission_finance_payment_path(@submission)
+    end
+  end
+
+  def check_approved_name_required
+    if Policies::Workflow.approved_name_required?(@submission)
+      redirect_to submission_name_reservation_path(@submission)
     end
   end
 
