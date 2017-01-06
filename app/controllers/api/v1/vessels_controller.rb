@@ -14,6 +14,15 @@ module Api
       private
 
       def load_vessel
+        if params[:filter] && params[:filter][:reg_no]
+          Register::Vessel.find_by(reg_no: params[:filter][:reg_no])
+
+        elsif params[:id]
+          load_from_client_session
+        end
+      end
+
+      def load_from_client_session
         vessel_params = params[:id].split(";")
 
         client_session = ClientSession.find_by(

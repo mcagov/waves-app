@@ -11,7 +11,8 @@ describe Builders::ApplicantBuilder do
             correspondent: correspondent,
             owners: [{
               id: :owners_1, name: "Oliver", email: "oliver@example.com" }],
-            agent: { name: "Ali", email: "ali@example.com" } })
+            agent: { name: "Ali", email: "ali@example.com" },
+            customer: { name: "Charlie", email: "charlie@example.com" } })
       end
 
       context "when the correspondent is :owners_1" do
@@ -26,6 +27,13 @@ describe Builders::ApplicantBuilder do
 
         it { expect(subject.applicant_name).to eq("Ali") }
         it { expect(subject.applicant_email).to eq("ali@example.com") }
+      end
+
+      context "when the correspondent is :customer" do
+        let(:correspondent) { :customer }
+
+        it { expect(subject.applicant_name).to eq("Charlie") }
+        it { expect(subject.applicant_email).to eq("charlie@example.com") }
       end
     end
 
