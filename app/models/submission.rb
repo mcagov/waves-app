@@ -49,15 +49,15 @@ class Submission < ApplicationRecord
   end
 
   def actionable?
-    Policies::Submission.actionable?(self)
+    Policies::Actions.actionable?(self)
   end
 
   def approvable?(_registration_start_date = nil)
-    Policies::Submission.approvable?(self)
+    Policies::Actions.approvable?(self)
   end
 
   def editable?
-    Policies::Submission.editable?(self)
+    Policies::Actions.editable?(self)
   end
 
   def uneditable?
@@ -104,7 +104,7 @@ class Submission < ApplicationRecord
   end
 
   def registered_vessel_exists
-    if Policies::Submission.registered_vessel_required?(self)
+    if Policies::Actions.registered_vessel_required?(self)
       unless registered_vessel
         errors.add(
           :vessel_reg_no,

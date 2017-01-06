@@ -77,7 +77,7 @@ describe Submission, type: :model do
     let!(:submission) { build(:submission) }
 
     before do
-      allow(Policies::Submission)
+      allow(Policies::Actions)
         .to receive(:registered_vessel_required?)
         .with(submission)
         .and_return(registered_vessel_required_policy)
@@ -137,7 +137,7 @@ describe Submission, type: :model do
       let!(:payment) { Payment.create(amount: 100, submission: submission) }
 
       before do
-        allow(Policies::Submission)
+        allow(Policies::Actions)
           .to receive(:actionable?)
           .with(submission)
           .and_return(true)

@@ -8,6 +8,11 @@ def login_to_part_1(user = create(:user))
   visit "/tasks/my-tasks"
 end
 
+def login_to_part_2(user = create(:user))
+  login(user, :part_2)
+  visit "/tasks/my-tasks"
+end
+
 def login_to_part_3(user = create(:user))
   login(user, :part_3)
   visit "/tasks/my-tasks"
