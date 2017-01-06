@@ -10,9 +10,4 @@
       %i.fa.fa-trash
       Cancel Application
 
-    - if @submission.approvable?
-      = render partial: "submissions/modals/approve", locals: {submission: @submission}
-      = link_to "#approve-application", "data-target" => "#approve-application", "data-toggle" => "modal", class: "btn btn-success btn-lg pull-right" do
-        %i.fa.fa-check
-        = t("submission.approval.inline-btn.#{submission.task}")
-
+    = yield :submission_approval_buttons
