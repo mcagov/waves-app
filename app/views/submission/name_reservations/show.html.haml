@@ -1,0 +1,32 @@
+= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
+= render partial: "submissions/info/heading", locals: {submission: @submission}
+= render partial: "submissions/info/summary", locals: {submission: @submission}
+
+= simple_form_for @name_reservation, url: submission_name_reservation_path, method: :patch do |f|
+  .x_panel
+    .x_title
+      %h2 Name Approval Process
+      .clearfix
+    .x_content
+      .row{style: 'padding-bottom: 15px;'}
+        .col-md-3
+          = f.input :name,
+            label: "Approved Vessel Name",
+            input_html: { class: "upcase" },
+            required: false
+
+        .col-md-2
+          = f.input :registration_type, as: :select,
+            collection: ["Simple", "Full", "Provisional"],
+            label: "Registration Type",
+            include_blank: false,
+            input_html: { class: "select2 select2_single" }
+
+        .col-md-2
+          = f.input :port_name, as: :select,
+          collection: ["SOUTHAMPTON"],
+          label: "Port of Choice",
+          input_html: { class: "select2 select2_single" }
+
+        .col-md-2= f.input :port_no, label: "Port No"
+        .col-md-2= f.input :net_tonnage, label: "Net Tonnage"
