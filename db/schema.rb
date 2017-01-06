@@ -99,6 +99,21 @@ ActiveRecord::Schema.define(version: 20170105155353) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "documentation_pages", force: :cascade do |t|
+    t.string   "title"
+    t.string   "permalink"
+    t.text     "content"
+    t.text     "compiled_content"
+    t.integer  "parent_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documentation_screenshots", force: :cascade do |t|
+    t.string "alt_text"
+  end
+
   create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "finance_payment_id"
     t.datetime "opened_at"
@@ -128,6 +143,19 @@ ActiveRecord::Schema.define(version: 20170105155353) do
     t.string   "application_ref_no"
     t.uuid     "batch_id"
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
+  end
+
+  create_table "nifty_attachments", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.string   "token"
+    t.string   "digest"
+    t.string   "role"
+    t.string   "file_name"
+    t.string   "file_type"
+    t.binary   "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

@@ -1,4 +1,21 @@
 GIT
+  remote: https://github.com/oceanshq/documentation.git
+  revision: 87fe45349acbdc4aeebf3abb22ee9ac1280900bc
+  specs:
+    documentation (1.0.10)
+      coffee-rails (~> 4)
+      dynamic_form (~> 1.1, >= 1.1.4)
+      haml (~> 4.0)
+      jquery-rails (>= 3.0, < 5)
+      nifty-attachments (>= 1.0.3, < 2)
+      nifty-dialog (~> 1)
+      pygments.rb (>= 0.5, < 1.0)
+      rails (>= 4.0.0)
+      redcarpet (>= 3.1.0, < 4.0)
+      sass-rails (>= 4.0, < 6)
+      uglifier (>= 2.2)
+
+GIT
   remote: https://github.com/oceanshq/waves-utilities.git
   revision: 0ee20c813189dac38a00aa7ba54035db4c2d91fd
   specs:
@@ -137,6 +154,7 @@ GEM
     dotenv-rails (2.1.1)
       dotenv (= 2.1.1)
       railties (>= 4.0, < 5.1)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -209,6 +227,8 @@ GEM
     momentjs-rails (2.15.1)
       railties (>= 3.1)
     nenv (0.3.0)
+    nifty-attachments (1.0.4)
+    nifty-dialog (1.1.1)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -241,6 +261,7 @@ GEM
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
+    posix-spawn (0.3.12)
     powerpack (0.1.1)
     prawn (2.1.0)
       pdf-core (~> 0.6.1)
@@ -258,6 +279,9 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    pygments.rb (0.6.3)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.2.0)
     rack (2.0.1)
     rack-cors (0.4.0)
     rack-test (0.6.3)
@@ -298,6 +322,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redcarpet (3.4.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rspec (3.5.0)
@@ -404,6 +429,7 @@ GEM
       will_paginate (>= 3.0.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
@@ -427,6 +453,7 @@ DEPENDENCIES
   database_cleaner
   delayed_job_active_record
   devise
+  documentation!
   dotenv-rails
   factory_girl
   factory_girl_rails
