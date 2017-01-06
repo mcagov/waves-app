@@ -1,0 +1,1 @@
+Documentation.config.authorizer = WavesDocsAuthorizer
