@@ -1,4 +1,5 @@
-class Vessel::HistoricTranscriptController < InternalPagesController
+class RegisteredVessel::RegistrationCertificateController <
+  InternalPagesController
   def show
     @vessel = Register::Vessel.find(params[:vessel_id])
     respond_to do |format|
@@ -11,7 +12,7 @@ class Vessel::HistoricTranscriptController < InternalPagesController
   def build_and_render_pdf
     registration = @vessel.current_registration
     if registration
-      pdf = Pdfs::Processor.run(:historic_transcript, registration)
+      pdf = Pdfs::Processor.run(:registration_certificate, registration)
       render_pdf(pdf, pdf.filename)
     end
   end
