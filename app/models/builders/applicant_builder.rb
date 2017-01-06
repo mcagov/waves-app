@@ -16,23 +16,20 @@ class Builders::ApplicantBuilder
     private
 
     def load_correspondent
-      correspondent_key == :agent ? load_agent : load_owner
+      case correspondent_key
+      when :agent then @changeset[:agent]
+      when :customer then @changeset[:customer]
+      else
+        load_owner
+      end
     end
 
     def correspondent_key
       (@changeset[:correspondent] || :owners_1).to_sym
     end
 
-    def load_agent
-      @changeset[:agent]
-    end
-
-    def load_owners
-      @changeset[:owners] || []
-    end
-
     def load_owner
-      load_owners.select do |owner|
+      (@changeset[:owners] || []).select do |owner|
         owner[:id].to_sym == correspondent_key
       end.first
     end
