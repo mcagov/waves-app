@@ -13,5 +13,7 @@ feature "User approves a part 2 name", type: :feature do
     select("SOUTHAMPTON", from: "Port of Choice")
     fill_in("Port No", with: "12345")
     fill_in("Net Tonnage", with: "10000")
+
+    click_on("Validate Name")
   end
 end
