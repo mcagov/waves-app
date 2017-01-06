@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Api::V1::VesselsController, type: :controller do
-  context "#show" do
+  context "#show by access_code" do
     let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
     let(:registered_vessel) { build(:registered_vessel) }
 
@@ -39,6 +39,32 @@ describe Api::V1::VesselsController, type: :controller do
 
     context "when the client_session is not found" do
       let(:client_session) { nil }
+
+      it { expect(response).to have_http_status(404) }
+    end
+  end
+
+  context "#show by reg_no" do
+    let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
+    let(:registered_vessel) { create(:registered_vessel) }
+
+    before { get :show, params: { id: 1, filter: { reg_no: reg_no } } }
+
+    context "when the vessel is found" do
+      let(:reg_no) { registered_vessel.reg_no }
+
+      it "sets the content type" do
+        expect(response.content_type).to eq("application/json")
+      end
+
+      it "returns the registry_info" do
+        expect(parsed_attrs["registry_info"]["vessel_info"]["name"])
+          .to eq(registered_vessel.name)
+      end
+    end
+
+    context "when the client_session is not found" do
+      let(:reg_no) { "foo" }
 
       it { expect(response).to have_http_status(404) }
     end
