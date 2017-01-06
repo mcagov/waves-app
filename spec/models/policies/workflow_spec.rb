@@ -22,6 +22,14 @@ describe Policies::Workflow do
       let(:part) { :part_2 }
 
       it { expect(subject).to be_truthy }
+
+      context "when the submission is for an existing vessel" do
+        let(:submission) do
+          create(:unassigned_change_vessel_submission, part: :part_2)
+        end
+
+        it { expect(subject).to be_falsey }
+      end
     end
   end
 end
