@@ -8,8 +8,14 @@ class Submission::NameReservationsController < InternalPagesController
 
   def update
     @name_reservation = Submission::NameReservation.new(name_reservation_params)
-    @name_reservation.valid?
-    render :show
+    @name_validated = @name_reservation.valid?
+
+    if @name_validated && params[:validated] && @name_reservation.save
+      @submission.update_attribute(:registered_vessel_id, @name_reservation.id)
+      redirect_to edit_submission_path(@submission)
+    else
+      render :show
+    end
   end
 
   protected

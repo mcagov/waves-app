@@ -42,13 +42,15 @@
         .col-md-2
           = f.input :net_tonnage, as: :string, label: "Net Tonnage"
 
+        - if @name_validated
+          = hidden_field_tag "validated", "1"
+
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do
-    = link_to '#',
-      id: "validate_name",
-      class: 'btn btn-primary btn-lg pull-right' do
-      %i.fa.fa-crosshairs
-      Validate Name Availability & PLN
+    - if @name_validated
+      = render partial: "submission/name_reservations/actions/validated"
+    - else
+      = render partial: "submission/name_reservations/actions/not_validated"
 
 = render partial: "submissions/actions",
   locals: { submission: @submission }
