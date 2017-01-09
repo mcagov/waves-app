@@ -35,9 +35,11 @@
 
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do
-    = link_to "#", class: "btn btn-primary btn-lg pull-right" do
+    = link_to '#checking-valid-name', "data-target" => "#checking-valid-name", "data-toggle" => "modal", class: 'btn btn-primary btn-lg pull-right' do
       %i.fa.fa-crosshairs
       Validate Name Availability & PLN
 
-  = render partial: "submissions/actions",
-    locals: { submission: @submission }
+  = render partial: "submission/name_reservations/modals/validate_name"
+
+= render partial: "submissions/actions",
+  locals: { submission: @submission }
