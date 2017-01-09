@@ -45,13 +45,12 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     fill_in("Net Tonnage", with: "10000")
 
     click_on("Validate Name")
-    click_on("Continue")
-    # within(".modal-content") do
-    #   check("Send carving and marking")
-    #   choose("Send via email automatically")
-    #   click_button("Approve Name")
-    # end
 
-    # expect(page).to have_current_path(edit_submission_path(Submission.last))
+    click_on("Continue")
+    within(".modal-content") do
+      click_on("Approve Name")
+    end
+
+    expect(page).to have_current_path(edit_submission_path(Submission.last))
   end
 end
