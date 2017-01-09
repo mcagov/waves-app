@@ -15,6 +15,7 @@ class Submission::NameReservation
   end
 
   def valid?
-    errors.add(:name, "Vessel name is not available in SOUTHAMPTON")
+    errors.add(:name, "is not available in SOUTHAMPTON")
+    errors.add(:port_no, "is not available in SOUTHAMPTON")
   end
 end
