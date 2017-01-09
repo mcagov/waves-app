@@ -2,7 +2,8 @@
 = render partial: "submissions/info/heading", locals: {submission: @submission}
 = render partial: "submissions/info/summary", locals: {submission: @submission}
 
-= simple_form_for @name_reservation, url: submission_name_reservation_path, method: :patch do |f|
+= simple_form_for @name_reservation, url: submission_name_reservation_path(@submission), method: :patch do |f|
+  = f.input :part, as: :hidden
   .x_panel
     .x_title
       %h2 Name Approval Process
@@ -32,14 +33,13 @@
         .col-md-2= f.input :port_no, label: "Port No"
         .col-md-2= f.input :net_tonnage, label: "Net Tonnage"
 
-
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do
-    = link_to '#checking-valid-name', "data-target" => "#checking-valid-name", "data-toggle" => "modal", class: 'btn btn-primary btn-lg pull-right' do
+    = link_to '#',
+      id: "validate_name",
+      class: 'btn btn-primary btn-lg pull-right' do
       %i.fa.fa-crosshairs
       Validate Name Availability & PLN
-
-  = render partial: "submission/name_reservations/modals/validate_name"
 
 = render partial: "submissions/actions",
   locals: { submission: @submission }

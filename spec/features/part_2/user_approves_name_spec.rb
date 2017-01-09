@@ -10,7 +10,12 @@ feature "User approves a part 2 name", type: :feature do
   end
 
   scenario "with an unavailable name" do
+    fill_in("Approved Vessel Name", with: "DUPLICATE NAME")
+    select("SOUTHAMPTON", from: "Port of Choice")
+    fill_in("Port No", with: "12345")
+    click_on("Validate Name")
 
+    expect(page).to have_text("Vessel name is not available in SOUTHAMPTON")
   end
 
   scenario "with an unavailable port_no" do

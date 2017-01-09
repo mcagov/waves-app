@@ -13,4 +13,8 @@ class Submission::NameReservation
   def ports
     WavesUtilities::Port.all(part)
   end
+
+  def valid?
+    errors.add(:name, "Vessel name is not available in SOUTHAMPTON")
+  end
 end
