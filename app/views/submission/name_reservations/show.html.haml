@@ -29,11 +29,15 @@
           collection: @name_reservation.ports,
           label: "Port of Choice",
           include_blank: false,
-            required: false,
+          required: false,
           input_html: { class: "select2 select2_single" }
 
         .col-md-2.reservation_port-no
-          = f.input :port_no, as: :string, label: "Port Number", required: false
+          = f.input :port_no,
+            as: :string,
+            hint: "leave blank for system-generated port number",
+            label: "Port Number",
+            required: false
 
         .col-md-2
           = f.input :net_tonnage, as: :string, label: "Net Tonnage"
