@@ -2,7 +2,8 @@ class Submission::NameReservationsController < InternalPagesController
   before_action :load_submission
 
   def show
-    @name_reservation = Submission::NameReservation.new
+    @name_reservation =
+      Submission::NameReservation.new(part: @submission.part)
   end
 
   protected
