@@ -72,5 +72,15 @@ describe Submission::NameReservation do
         it { expect(name_reservation.errors).not_to include(:port_no) }
       end
     end
+
+    context "with an invalid port_no" do
+      let(:name_reservation_port_no) { "A1" }
+      it { expect(name_reservation.errors).to include(:port_no) }
+    end
+
+    context "with an blank port_no" do
+      let(:name_reservation_port_no) { "" }
+      it { expect(name_reservation.errors).not_to include(:port_no) }
+    end
   end
 end

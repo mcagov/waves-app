@@ -3,6 +3,7 @@ class Submission::NameReservation < ApplicationRecord
 
   validates :name, presence: true
   validates :port_code, presence: true
+  validates :port_no, numericality: { only_integer: true, allow_nil: true }
 
   validate :unique_name_in_port
   validate :unique_port_no_in_port
@@ -26,6 +27,7 @@ class Submission::NameReservation < ApplicationRecord
   end
 
   def unique_port_no_in_port
+    return unless port_no
     errors.add(:port_no, "is not available in #{port_name}") if port_no_in_use?
   end
 
