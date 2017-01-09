@@ -12,7 +12,7 @@ class Submission::NameReservationsController < InternalPagesController
 
     if @name_validated && params[:name_validated]
       if Builders::NameReservationBuilder.build(@submission, @name_reservation)
-        redirect_to edit_submission_path(@submission)
+        return redirect_to edit_submission_path(@submission)
       end
     end
 
