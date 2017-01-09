@@ -10,7 +10,7 @@
       .clearfix
     .x_content
       .row{style: 'padding-bottom: 15px;'}
-        .col-md-3
+        .col-md-3.reservation_name
           = f.input :name,
             label: "Approved Vessel Name",
             input_html: { class: "upcase" },
@@ -21,17 +21,22 @@
             collection: @name_reservation.registration_types,
             label: "Registration Type",
             include_blank: false,
+            required: false,
             input_html: { class: "select2 select2_single" }
 
         .col-md-2
-          = f.input :port_name, as: :select,
+          = f.input :port_code, as: :select,
           collection: @name_reservation.ports,
           label: "Port of Choice",
           include_blank: false,
+            required: false,
           input_html: { class: "select2 select2_single" }
 
-        .col-md-2= f.input :port_no, label: "Port Number"
-        .col-md-2= f.input :net_tonnage, label: "Net Tonnage"
+        .col-md-2.reservation_port-no
+          = f.input :port_no, as: :string, label: "Port Number", required: false
+
+        .col-md-2
+          = f.input :net_tonnage, as: :string, label: "Net Tonnage"
 
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do

@@ -18,12 +18,16 @@ class Submission::NameReservation < ApplicationRecord
     WavesUtilities::Port.all(part)
   end
 
+  def port_name
+    ports.find { |port| port[1] == port_code }.first
+  end
+
   def unique_name_in_port
-    errors.add(:name, "is not available") if name_in_use?
+    errors.add(:name, "is not available in #{port_name}") if name_in_use?
   end
 
   def unique_port_no_in_port
-    errors.add(:port_no, "is not available") if port_no_in_use?
+    errors.add(:port_no, "is not available in #{port_name}") if port_no_in_use?
   end
 
   private

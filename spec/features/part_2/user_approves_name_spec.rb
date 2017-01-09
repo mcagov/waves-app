@@ -4,7 +4,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
   before do
     create(:registered_vessel,
            part: :part_2,
-           port_code: "SY",
+           port_code: "SU",
            port_no: "12345",
            name: "DUPLICATE")
 
@@ -17,23 +17,23 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
   scenario "with an unavailable name" do
     fill_in("Approved Vessel Name", with: "DUPLICATE")
-    select2("SOUTHAMPTON", from: "submission_name_reservation_port_name")
+    select2("SOUTHAMPTON", from: "submission_name_reservation_port_code")
     fill_in("Port Number", with: "0001")
     click_on("Validate Name")
 
     expect(page).to have_css(
-      ".submission_name_reservation_name",
+      ".reservation_name",
       text: "is not available in SOUTHAMPTON")
   end
 
   scenario "with an unavailable port_no" do
     fill_in("Approved Vessel Name", with: "NEW NAME")
-    select2("SOUTHAMPTON", from: "submission_name_reservation_port_name")
+    select2("SOUTHAMPTON", from: "submission_name_reservation_port_code")
     fill_in("Port Number", with: "12345")
     click_on("Validate Name")
 
     expect(page).to have_css(
-      ".submission_name_reservation_port_no",
+      ".reservation_port-no",
       text: "is not available in SOUTHAMPTON")
   end
 

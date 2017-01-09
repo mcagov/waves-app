@@ -21,6 +21,6 @@ class Submission::NameReservationsController < InternalPagesController
 
   def name_reservation_params
     params.require(:submission_name_reservation).permit(
-      :part, :name, :registration_type, :port_name, :port_no, :net_tonnage)
+      :part, :name, :registration_type, :port_code, :port_no, :net_tonnage)
   end
 end
