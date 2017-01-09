@@ -314,7 +314,7 @@ ActiveRecord::Schema.define(version: 20170109125330) do
     t.integer  "port_no"
     t.integer  "net_tonnage"
     t.integer  "gross_tonnage"
-    t.date     "name_reserved_until"
+    t.datetime "name_reserved_until"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
