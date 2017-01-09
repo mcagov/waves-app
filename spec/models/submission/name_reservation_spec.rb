@@ -4,6 +4,7 @@ describe Submission::NameReservation do
   context ".valid?" do
     let!(:registered_vessel) do
       create(:registered_vessel,
+             part: :part_2,
              name: "BOBS BOAT",
              name_reserved_until: name_reserved_until,
              port_code: "SU",
@@ -14,10 +15,12 @@ describe Submission::NameReservation do
     let(:name_reservation) do
       Submission::NameReservation.new(
         name: "BOBS BOAT",
+        part: name_reservation_part,
         port_code: name_reservation_port_code,
         port_no: name_reservation_port_no)
     end
 
+    let(:name_reservation_part) { :part_2 }
     let(:name_reservation_port_code) { "SU" }
     let(:name_reservation_port_no) { 1234 }
     let(:name_reserved_until) { 2.days.from_now }
@@ -48,6 +51,18 @@ describe Submission::NameReservation do
 
     context "in a different port" do
       let(:name_reservation_port_code) { "A" }
+
+      context "the name is valid" do
+        it { expect(name_reservation.errors).not_to include(:name) }
+      end
+
+      context "the port_no is valid" do
+        it { expect(name_reservation.errors).not_to include(:port_no) }
+      end
+    end
+
+    context "in a different part of the registry" do
+      let(:name_reservation_part) { :part_1 }
 
       context "the name is valid" do
         it { expect(name_reservation.errors).not_to include(:name) }

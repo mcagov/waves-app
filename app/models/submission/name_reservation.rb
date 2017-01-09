@@ -30,6 +30,7 @@ class Submission::NameReservation < ApplicationRecord
 
   def name_in_use?
     Register::Vessel
+      .in_part(part)
       .where(name: name)
       .where(port_code: port_code)
       .where("name_reserved_until is null or name_reserved_until > now()")
@@ -38,6 +39,7 @@ class Submission::NameReservation < ApplicationRecord
 
   def port_no_in_use?
     Register::Vessel
+      .in_part(part)
       .where(port_no: port_no)
       .where(port_code: port_code)
       .where("name_reserved_until is null or name_reserved_until > now()")
