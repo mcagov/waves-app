@@ -53,4 +53,6 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
     expect(page).to have_current_path(edit_submission_path(Submission.last))
   end
+
+  scenario "name approval builds a work log"
 end
