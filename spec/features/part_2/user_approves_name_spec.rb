@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User approves a part 2 name", type: :feature do
+feature "User approves a part 2 name", type: :feature, js: :true do
   before do
     login_to_part_2
 
@@ -11,7 +11,7 @@ feature "User approves a part 2 name", type: :feature do
 
   scenario "with an unavailable name" do
     fill_in("Approved Vessel Name", with: "DUPLICATE NAME")
-    select("SOUTHAMPTON", from: "Port of Choice")
+    select2("SOUTHAMPTON", from: "submission_name_reservation_port_name")
     fill_in("Port No", with: "12345")
     click_on("Validate Name")
 
@@ -24,8 +24,8 @@ feature "User approves a part 2 name", type: :feature do
 
   xscenario "with valid data" do
     fill_in("Approved Vessel Name", with: "BOBS BOAT")
-    select("Simple", from: "Registration Type")
-    select("SOUTHAMPTON", from: "Port of Choice")
+    select2("Simple", from: "Registration Type")
+    select2("SOUTHAMPTON", from: "Port of Choice")
     fill_in("Port No", with: "12345")
     fill_in("Net Tonnage", with: "10000")
 

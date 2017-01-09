@@ -16,10 +16,10 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
+//= require select2
 //= require tinymce
 //
 //= require ./vendor/nprogress
-//= require ./vendor/select2
 //= require ./vendor/pace.min
 //= require ./vendor/custom
 //= require ./vendor/jquery.postcodes
