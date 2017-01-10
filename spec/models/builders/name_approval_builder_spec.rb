@@ -17,7 +17,14 @@ describe Builders::NameApprovalBuilder do
       net_tonnage: 999)
   end
 
-  before { described_class.create(submission, name_approval) }
+  before do
+    expect(SequenceNumber::Generator)
+      .to receive(:reg_no!)
+      .with(name_approval.part)
+      .with(name_approval)
+
+    described_class.create(submission, name_approval)
+  end
 
   context ".create" do
     context "with valid data" do

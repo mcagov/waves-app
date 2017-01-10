@@ -5,11 +5,11 @@ class Builders::NameApprovalBuilder
       @name_approval = name_approval
 
       @name_approval.name_approved_until = 3.months.from_now
+      @name_approval.reg_no =
+        SequenceNumber::Generator.reg_no!(@name_approval.part)
 
-      # sequence numbers to be defined
-      @name_approval.reg_no = rand(1..10000)
-      # sequence numbers to be defined
-      @name_approval.port_no = rand(1..10000) if @name_approval.port_no.blank?
+      # port numbers to be defined
+      @name_approval.port_no = rand(1..100) unless @name_approval.port_no.blank?
 
       if @name_approval.valid? && @name_approval.save
         @submission.update_attribute(
