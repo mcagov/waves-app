@@ -77,10 +77,5 @@ describe Submission::NameApproval do
       let(:name_approval_port_no) { "A1" }
       it { expect(name_approval.errors).to include(:port_no) }
     end
-
-    context "with an blank port_no" do
-      let(:name_approval_port_no) { "" }
-      it { expect(name_approval.errors).not_to include(:port_no) }
-    end
   end
 end
