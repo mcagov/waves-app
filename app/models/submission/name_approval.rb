@@ -1,4 +1,4 @@
-class Submission::NameReservation < ApplicationRecord
+class Submission::NameApproval < ApplicationRecord
   self.table_name = "vessels"
 
   validates :name, presence: true
@@ -38,7 +38,7 @@ class Submission::NameReservation < ApplicationRecord
       .in_part(part)
       .where(name: name)
       .where(port_code: port_code)
-      .where("name_reserved_until is null or name_reserved_until > now()")
+      .where("name_approved_until is null or name_approved_until > now()")
       .exists?
   end
 
@@ -47,7 +47,7 @@ class Submission::NameReservation < ApplicationRecord
       .in_part(part)
       .where(port_no: port_no)
       .where(port_code: port_code)
-      .where("name_reserved_until is null or name_reserved_until > now()")
+      .where("name_approved_until is null or name_approved_until > now()")
       .exists?
   end
 end

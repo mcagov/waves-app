@@ -47,8 +47,8 @@ Rails.application.routes.draw do
         post :complete
       end
     end
-    resource :name_reservation,
-             controller: "submission/name_reservations",
+    resource :name_approval,
+             controller: "submission/name_approvals",
              only: [:show, :update]
     resource :signature,
              controller: "submission/signatures",

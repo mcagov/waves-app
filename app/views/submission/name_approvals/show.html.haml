@@ -2,7 +2,7 @@
 = render partial: "submissions/info/heading", locals: {submission: @submission}
 = render partial: "submissions/info/summary", locals: {submission: @submission}
 
-= simple_form_for @name_reservation, url: submission_name_reservation_path(@submission), method: :patch do |f|
+= simple_form_for @name_approval, url: submission_name_approval_path(@submission), method: :patch do |f|
   = f.input :part, as: :hidden
 
   - if @name_validated
@@ -22,7 +22,7 @@
 
         .col-md-2
           = f.input :registration_type, as: :select,
-            collection: @name_reservation.registration_types,
+            collection: @name_approval.registration_types,
             label: "Registration Type",
             include_blank: false,
             required: false,
@@ -30,7 +30,7 @@
 
         .col-md-2
           = f.input :port_code, as: :select,
-          collection: @name_reservation.ports,
+          collection: @name_approval.ports,
           label: "Port of Choice",
           include_blank: false,
           required: false,
@@ -49,9 +49,9 @@
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do
     - if @name_validated
-      = render partial: "submission/name_reservations/actions/validated"
+      = render partial: "submission/name_approvals/actions/validated"
     - else
-      = render partial: "submission/name_reservations/actions/not_validated"
+      = render partial: "submission/name_approvals/actions/not_validated"
 
 = render partial: "submissions/actions",
   locals: { submission: @submission }

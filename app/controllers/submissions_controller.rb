@@ -76,7 +76,7 @@ class SubmissionsController < InternalPagesController
 
   def check_approved_name_required
     if Policies::Workflow.approved_name_required?(@submission)
-      redirect_to submission_name_reservation_path(@submission)
+      redirect_to submission_name_approval_path(@submission)
     end
   end
 

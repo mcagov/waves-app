@@ -17,7 +17,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
   scenario "with an unavailable name" do
     fill_in("Approved Vessel Name", with: "DUPLICATE")
-    select2("SOUTHAMPTON", from: "submission_name_reservation_port_code")
+    select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
     fill_in("Port Number", with: "0001")
     click_on("Validate Name")
 
@@ -28,7 +28,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
   scenario "with an unavailable port_no" do
     fill_in("Approved Vessel Name", with: "NEW NAME")
-    select2("SOUTHAMPTON", from: "submission_name_reservation_port_code")
+    select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
     fill_in("Port Number", with: "12345")
     click_on("Validate Name")
 
@@ -39,8 +39,8 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
   scenario "with valid data" do
     fill_in("Approved Vessel Name", with: "BOBS BOAT")
-    select2("Full", from: "submission_name_reservation_registration_type")
-    select2("SOUTHAMPTON", from: "submission_name_reservation_port_code")
+    select2("Full", from: "submission_name_approval_registration_type")
+    select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
     fill_in("Port Number", with: "0001")
     fill_in("Net Tonnage", with: "10000")
 
