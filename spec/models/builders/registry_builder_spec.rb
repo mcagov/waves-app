@@ -60,6 +60,18 @@ describe Builders::RegistryBuilder do
         expect(registered_vessel.owners[1].name).to eq("DAVE")
         expect(registered_vessel.owners[2].name).to eq("ELLEN")
       end
+
+      context "when the registered vessel has name_approved_until set" do
+        before do
+          registered_vessel
+            .update_attribute(:name_approved_until, 1.week.from_now)
+          described_class.create(change_vessel_submission)
+        end
+
+        it "unsets name_approved_until" do
+          expect(registered_vessel.name_approved_until).to be_blank
+        end
+      end
     end
   end
 end
