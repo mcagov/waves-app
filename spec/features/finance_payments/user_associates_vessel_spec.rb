@@ -4,15 +4,15 @@ describe "User associates vessel to finance_payment",
          type: :feature, js: true do
 
   scenario "changing the Offical No. for a change_vessel submission" do
-    vessel_1 = create(:registered_vessel)
-    vessel_2 = create(:registered_vessel, name: "FOOBAR")
+    vessel_a = create(:registered_vessel)
+    vessel_b = create(:registered_vessel, name: "FOOBAR")
 
     create(:finance_payment, task: :change_vessel,
-                             vessel_reg_no: vessel_1.reg_no)
+                             vessel_reg_no: vessel_a.reg_no)
 
     claim_submission_and_visit
 
-    expect(page).to have_css(".official_no", text: vessel_1.reg_no)
+    expect(page).to have_css(".official_no", text: vessel_a.reg_no)
     within("#finance_info .official_no") { click_on("Change") }
 
     within("#change-vessel") do
@@ -21,7 +21,7 @@ describe "User associates vessel to finance_payment",
     end
 
     within("#finance_info") do
-      expect(page).to have_css(".official_no", text: vessel_2.reg_no)
+      expect(page).to have_css(".official_no", text: vessel_b.reg_no)
     end
   end
 
