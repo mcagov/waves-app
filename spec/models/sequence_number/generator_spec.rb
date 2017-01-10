@@ -28,4 +28,21 @@ describe SequenceNumber::Generator do
       it { expect(subject).to match(/8[0-9]{5}/) }
     end
   end
+
+  context ".port_no!" do
+    before do
+      @su_one = described_class.port_no!("SU")
+      @su_two = described_class.port_no!("SU")
+      @py_one = described_class.port_no!("PY")
+    end
+
+    it "creates sequential numbers within the same port" do
+      expect(@su_one).to eq(1)
+      expect(@su_two).to eq(2)
+    end
+
+    it "creates a unique sequence number for a different port" do
+      expect(@py_one).to eq(1)
+    end
+  end
 end

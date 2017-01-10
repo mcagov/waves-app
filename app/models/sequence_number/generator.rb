@@ -17,5 +17,9 @@ class SequenceNumber::Generator < ApplicationRecord
         SequenceNumber::PartFour.create!.generated_number
       end
     end
+
+    def port_no!(port_code)
+      SequenceNumber::PortNo.create!(context: port_code).generated_number.to_i
+    end
   end
 end

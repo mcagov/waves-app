@@ -29,7 +29,8 @@ class Builders::NameApprovalBuilder
     end
 
     def assign_port_code
-      @registered_vessel.port_no = rand(1..1000)
+      @registered_vessel.port_no =
+        SequenceNumber::Generator.port_no!(@name_approval.port_code)
     end
 
     def persist_registered_vessel
