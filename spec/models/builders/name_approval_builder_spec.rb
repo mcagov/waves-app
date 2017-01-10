@@ -14,7 +14,7 @@ describe Builders::NameApprovalBuilder do
       port_code: "SU",
       port_no: port_no,
       registration_type: :full,
-      gross_tonnage: 888,
+      register_tonnage: 888,
       net_tonnage: 999)
   end
 
@@ -40,8 +40,8 @@ describe Builders::NameApprovalBuilder do
         expect(registered_vessel.port_code).to eq("SU")
       end
 
-      it "saves the vessel gross_tonnage" do
-        expect(registered_vessel.gross_tonnage).to eq(888)
+      it "saves the vessel register_tonnage" do
+        expect(registered_vessel.register_tonnage).to eq(888)
       end
 
       it "saves the vessel net_tonnage" do

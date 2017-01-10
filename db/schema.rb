@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110163231) do
+ActiveRecord::Schema.define(version: 20170110171001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 20170110163231) do
     t.decimal  "net_tonnage"
     t.decimal  "gross_tonnage"
     t.datetime "name_approved_until"
+    t.decimal  "register_tonnage"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
