@@ -17,19 +17,19 @@
             The expiry date of this application will be set to
             = 3.months.from_now
             (3 months from today).
-          .row
-            .col-md-12
-              .form-group
-                %label
-                  %input{name: "send_cm", type: "checkbox"}
-                  Send carving and marking
-          .row
-            .col-md-12
-              .form-group
-                %label{style: 'display: none;'} Carving and Marking Note
-                %select.select2_single.form-control{style: 'width: 100%;'}
-                  %option Send via email automatically
-                  %option Add to print queue and send via post
+          / .row
+          /   .col-md-12
+          /     .form-group
+          /       %label
+          /         %input{name: "send_cm", type: "checkbox"}
+          /         Send carving and marking
+          / .row
+          /   .col-md-12
+          /     .form-group
+          /       %label{style: 'display: none;'} Carving and Marking Note
+          /       %select.select2_single.form-control{style: 'width: 100%;'}
+          /         %option Send via email automatically
+          /         %option Add to print queue and send via post
         .modal-footer
           = link_to "#",
             id: "confirm_name_validation",
