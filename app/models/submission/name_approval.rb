@@ -3,7 +3,7 @@ class Submission::NameApproval
 
   attr_accessor(
     :part, :name, :port_code, :port_no, :registration_type,
-    :net_tonnage, :gross_tonnage)
+    :net_tonnage, :register_tonnage)
 
   validates :name, presence: true
   validates :port_code, presence: true
