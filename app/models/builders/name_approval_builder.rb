@@ -19,6 +19,7 @@ class Builders::NameApprovalBuilder
         part: @name_approval.part,
         name: @name_approval.name,
         port_code: @name_approval.port_code,
+        port_no: @name_approval.port_no,
         net_tonnage: @name_approval.net_tonnage,
         gross_tonnage: @name_approval.gross_tonnage,
         registration_type: @name_approval.registration_type)
@@ -29,7 +30,7 @@ class Builders::NameApprovalBuilder
     end
 
     def assign_port_code
-      @registered_vessel.port_no =
+      @registered_vessel.port_no ||=
         SequenceNumber::Generator.port_no!(@name_approval.port_code)
     end
 

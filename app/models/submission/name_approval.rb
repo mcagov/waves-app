@@ -7,7 +7,7 @@ class Submission::NameApproval
 
   validates :name, presence: true
   validates :port_code, presence: true
-  validates :port_no, numericality: { only_integer: true, allow_nil: true }
+  validates :port_no, allow_blank: true, numericality: { only_integer: true }
 
   validate :unique_name_in_port
   validate :unique_port_no_in_port

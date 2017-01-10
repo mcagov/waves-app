@@ -29,7 +29,7 @@ describe Builders::NameApprovalBuilder do
       end
 
       it "saves the vessel port_no" do
-        expect(registered_vessel.port_no).to be_present
+        expect(registered_vessel.port_no).to eq(123)
       end
 
       it "saves the vessel name" do
@@ -57,7 +57,7 @@ describe Builders::NameApprovalBuilder do
       end
 
       context "but no port_no" do
-        let(:port_no) { "" }
+        let(:port_no) { nil }
 
         it { expect(registered_vessel.port_no).not_to be_blank }
       end
