@@ -14,7 +14,7 @@ describe SequenceNumber::Generator do
     context "part_2" do
       let(:part) { :part_2 }
 
-      it { expect(subject).to match(/4[0-9]{5}/) }
+      it { expect(subject).to match(/C[0-9]{5}/) }
     end
 
     context "part_3" do
