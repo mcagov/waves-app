@@ -2,8 +2,7 @@ require "rails_helper"
 
 describe SequenceNumber::Generator do
   context ".reg_no!" do
-    let(:registered_vessel) { build(:registered_vessel, part: part) }
-    subject { described_class.reg_no!(registered_vessel) }
+    subject { described_class.reg_no!(part) }
 
     context "part_1" do
       let(:part) { :part_1 }

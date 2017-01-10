@@ -33,7 +33,7 @@ module Register
     before_validation :build_reg_no, on: :create
 
     def build_reg_no
-      self.reg_no = SequenceNumber::Generator.reg_no!(self)
+      self.reg_no = SequenceNumber::Generator.reg_no!(part)
     end
 
     def to_s
