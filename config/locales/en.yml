@@ -50,7 +50,6 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
         manual_override: Approve Manual Override
       modal-title:
@@ -64,7 +63,6 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        reserve_name: Complete Name Reservation
         enquiry: Complete General Enquiry
         manual_override: Manual Override
       modal-btn:
@@ -78,7 +76,6 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        reserve_name: Complete Name Reservation
         enquiry: Approve General Enquiry
         manual_override: Approve
       confirmation:
@@ -89,7 +86,6 @@ en:
         change_vessel: The applicant has been notified via email that their request for a Change of Vessel details has been approved.
         change_address: The applicant has been notified via email that their request for a Change of Address has been approved.
         duplicate_certificate: The applicant has been notified via email that their request for a Duplicate Certificate of Registry has been approved.
-        reserve_name: The applicant has been notified via email that their request for a Name Reservation has been approved.
         closure: The applicant has been notified via email that their request for a Registration Closure has been approved.
         current_transcript: The applicant has been notified via email that their request for a Current Transcript of Registry has been approved.
         historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
