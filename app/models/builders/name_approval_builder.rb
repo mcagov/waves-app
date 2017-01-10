@@ -4,16 +4,38 @@ class Builders::NameApprovalBuilder
       @submission = submission
       @name_approval = name_approval
 
-      @name_approval.name_approved_until = 3.months.from_now
-      @name_approval.reg_no =
-        SequenceNumber::Generator.reg_no!(@name_approval.part)
+      build_registered_vessel
+      assign_name_approved_until
+      assign_port_code
+      persist_registered_vessel
 
-      # port numbers to be defined
-      @name_approval.port_no = rand(1..100) unless @name_approval.port_no.blank?
+      @registered_vessel
+    end
 
-      if @name_approval.valid? && @name_approval.save
+    private
+
+    def build_registered_vessel
+      @registered_vessel = Register::Vessel.new(
+        part: @name_approval.part,
+        name: @name_approval.name,
+        port_code: @name_approval.port_code,
+        net_tonnage: @name_approval.net_tonnage,
+        gross_tonnage: @name_approval.gross_tonnage,
+        registration_type: @name_approval.registration_type)
+    end
+
+    def assign_name_approved_until
+      @registered_vessel.name_approved_until = 3.months.from_now
+    end
+
+    def assign_port_code
+      @registered_vessel.port_no = rand(1..1000)
+    end
+
+    def persist_registered_vessel
+      if @registered_vessel.save
         @submission.update_attribute(
-          :registered_vessel_id, @name_approval.id)
+          :registered_vessel_id, @registered_vessel.id)
       end
     end
   end

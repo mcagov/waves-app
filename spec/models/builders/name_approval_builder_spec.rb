@@ -14,29 +14,22 @@ describe Builders::NameApprovalBuilder do
       port_code: "SU",
       port_no: port_no,
       registration_type: :full,
+      gross_tonnage: 888,
       net_tonnage: 999)
   end
 
-  before do
-    expect(SequenceNumber::Generator)
-      .to receive(:reg_no!)
-      .with(name_approval.part)
-      .with(name_approval)
-
-    described_class.create(submission, name_approval)
-  end
+  let(:registered_vessel) { described_class.create(submission, name_approval) }
 
   context ".create" do
     context "with valid data" do
       let(:port_no) { 123 }
-      let(:registered_vessel) { submission.reload.registered_vessel }
 
-      it "builds the vessel reg_no" do
+      it "assigns the vessel reg_no" do
         expect(registered_vessel.reg_no).to be_present
       end
 
       it "saves the vessel port_no" do
-        expect(registered_vessel.port_no).to eq(123)
+        expect(registered_vessel.port_no).to be_present
       end
 
       it "saves the vessel name" do
@@ -45,6 +38,10 @@ describe Builders::NameApprovalBuilder do
 
       it "saves the vessel port_code" do
         expect(registered_vessel.port_code).to eq("SU")
+      end
+
+      it "saves the vessel gross_tonnage" do
+        expect(registered_vessel.gross_tonnage).to eq(888)
       end
 
       it "saves the vessel net_tonnage" do
