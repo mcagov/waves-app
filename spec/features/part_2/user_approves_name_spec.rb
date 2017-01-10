@@ -52,7 +52,6 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     end
 
     expect(page).to have_current_path(edit_submission_path(Submission.last))
+    creates_a_work_log_entry("Submission", :name_approval)
   end
-
-  scenario "name approval builds a work log"
 end
