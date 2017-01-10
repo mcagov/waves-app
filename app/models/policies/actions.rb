@@ -1,4 +1,4 @@
-class Policies::Submission
+class Policies::Actions
   class << self
     def actionable?(submission)
       @submission = submission

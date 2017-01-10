@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe Policies::Submission do
+describe Policies::Actions do
   context "#registered_vessel_required?" do
     let(:submission) { build(:submission) }
 
-    subject { Policies::Submission.registered_vessel_required?(submission) }
+    subject { Policies::Actions.registered_vessel_required?(submission) }
 
     context "when the task is :new_registration or :unknown" do
       before { submission.task = [:new_registration, :unknown].sample }
@@ -56,7 +56,7 @@ describe Policies::Submission do
 
     context "when the source is :online" do
       before do
-        allow(Policies::Submission)
+        allow(Policies::Actions)
           .to receive(:approvable?).with(submission)
           .and_return(true)
       end

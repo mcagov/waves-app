@@ -21,6 +21,7 @@ class Builders::RegistryBuilder
       @vessel ||= Register::Vessel.new(part: @submission.part)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def update_vessel_details
       @vessel.name = @submission.vessel.name
       @vessel.hin = @submission.vessel.hin
@@ -30,6 +31,7 @@ class Builders::RegistryBuilder
       @vessel.mmsi_number = @submission.vessel.mmsi_number
       @vessel.radio_call_sign = @submission.vessel.radio_call_sign
       @vessel.vessel_type = @submission.vessel.type_of_vessel
+      @vessel.name_approved_until = nil
       @vessel.save
     end
 

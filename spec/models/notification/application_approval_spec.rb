@@ -70,4 +70,6 @@ describe Notification::ApplicationApproval, type: :model do
       end
     end
   end
+
+  context "for a name reservation, it unsets vessel#name_registered_until"
 end

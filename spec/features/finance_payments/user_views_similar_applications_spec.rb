@@ -4,14 +4,16 @@ describe "User views similar applications for a finance_payment",
          type: :feature, js: true do
 
   before do
-    create(:registered_vessel, reg_no: "SSR200000")
-    create(:finance_payment, task: :change_vessel, vessel_reg_no: "SSR200000")
+    @vessel_reg_no = create(:registered_vessel).reg_no
+    create(:finance_payment,
+           task: :change_vessel,
+           vessel_reg_no: @vessel_reg_no)
   end
 
   scenario "with similar applications" do
     suggested_submission =
       create(:assigned_submission,
-             task: :change_owner, vessel_reg_no: "SSR200000")
+             task: :change_owner, vessel_reg_no: @vessel_reg_no)
 
     claim_submission_and_visit
 

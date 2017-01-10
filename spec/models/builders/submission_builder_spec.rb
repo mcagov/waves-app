@@ -4,6 +4,7 @@ describe Builders::SubmissionBuilder do
   describe "#build_defaults" do
     let!(:submission) do
       Submission.new(
+        part: :part_3,
         changeset: changeset,
         registry_info: registry_info,
         registered_vessel: registered_vessel,
@@ -167,6 +168,7 @@ end
 
 def vessel_sample_data
   {
+    part: :part_3,
     name: "MY BOAT", number_of_hulls: 1,
     owners: owner_sample_data.map { |owner| Register::Owner.new(owner) }
   }
