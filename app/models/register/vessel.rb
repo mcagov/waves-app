@@ -4,8 +4,6 @@ module Register
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign]
 
-    protokoll :reg_no, pattern: "SSR2#####"
-
     validates :part, presence: true
 
     has_one :agent, class_name: "Register::Agent"
@@ -31,6 +29,12 @@ module Register
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
     delegate :registered_until, to: :current_registration
+
+    before_validation :build_reg_no, on: :create
+
+    def build_reg_no
+      self.reg_no = SequenceNumber::Generator.reg_no!(self)
+    end
 
     def to_s
       name.upcase
