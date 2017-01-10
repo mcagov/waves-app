@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109161126) do
+ActiveRecord::Schema.define(version: 20170110101654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,6 +248,17 @@ ActiveRecord::Schema.define(version: 20170109161126) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sequence_numbers", force: :cascade do |t|
+    t.string   "type"
+    t.string   "scope"
+    t.string   "generated_number"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["generated_number"], name: "index_sequence_numbers_on_generated_number", using: :btree
+    t.index ["scope"], name: "index_sequence_numbers_on_scope", using: :btree
+    t.index ["type"], name: "index_sequence_numbers_on_type", using: :btree
   end
 
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
