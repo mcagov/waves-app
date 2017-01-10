@@ -38,13 +38,16 @@
 
         .col-md-2.reservation_port-no
           = f.input :port_no,
-            as: :string,
+            as: :feedback_left,
             hint: "leave blank for system-generated port number",
             label: "Port Number",
             required: false
 
         .col-md-2
-          = f.input :net_tonnage, as: :string, label: "Net Tonnage"
+          = f.input :net_tonnage, as: :feedback_right, label: "Net Tonnage"
+          = link_to '#' do
+            %i.fa.fa-refresh
+            Switch to Register Tonnage
 
 - if @submission.actionable?
   - content_for(:submission_approval_buttons) do
