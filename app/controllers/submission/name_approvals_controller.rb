@@ -11,7 +11,7 @@ class Submission::NameApprovalsController < InternalPagesController
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
-      if Builders::NameApprovalBuilder.build(@submission, @name_approval)
+      if Builders::NameApprovalBuilder.create(@submission, @name_approval)
         return redirect_to edit_submission_path(@submission)
       end
     end
