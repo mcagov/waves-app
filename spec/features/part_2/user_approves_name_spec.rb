@@ -10,7 +10,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
     login_to_part_2
 
-    click_on("Start a New Application")
+    click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
     click_on("Save Application")
   end

@@ -4,7 +4,7 @@ feature "User creates a new submission", type: :feature do
   scenario "for a new registration" do
     @vessel = create(:registered_vessel)
     login_to_part_3
-    click_on("Start a New Application")
+    click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
     click_on("Save Application")
 
@@ -15,9 +15,11 @@ feature "User creates a new submission", type: :feature do
   scenario "for another task, retrieve a vessel", js: true do
     @vessel = create(:registered_vessel)
     login_to_part_3
-    click_on("Start a New Application")
+    click_on("Document Entry")
 
-    within(".modal#start-new-application") { click_on("Other Task") }
+    within(".modal#start-new-application") do
+      click_on("Task for a Registered Vessel")
+    end
 
     within(".modal#search-for-vessel") do
       search_for(@vessel.name)
