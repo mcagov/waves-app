@@ -15,7 +15,7 @@ describe "User views similar applications for a finance_payment",
       create(:assigned_submission,
              task: :change_owner, vessel_reg_no: @vessel_reg_no)
 
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
 
     within("#similar-applications") do
       expect(page)
@@ -25,7 +25,7 @@ describe "User views similar applications for a finance_payment",
   end
 
   scenario "with no similar applications" do
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
 
     within("#similar-applications") do
       expect(page).to have_text("No Linked Applications")

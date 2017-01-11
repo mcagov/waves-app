@@ -10,7 +10,7 @@ describe "User associates vessel to finance_payment",
     create(:finance_payment, task: :change_vessel,
                              vessel_reg_no: vessel_a.reg_no)
 
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
 
     expect(page).to have_css(".official_no", text: vessel_a.reg_no)
     within("#finance_info .official_no") { click_on("Change") }
@@ -28,7 +28,7 @@ describe "User associates vessel to finance_payment",
   scenario "hiding the Official No. for a new_registration submission" do
     create(:finance_payment, task: :new_registration)
 
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
 
     within("#finance_info") do
       expect(page).to have_css(".official_no", text: "N/A")
@@ -38,7 +38,7 @@ describe "User associates vessel to finance_payment",
   scenario "disabling the Convert button when there is no vessel_reg_no" do
     create(:finance_payment, task: :change_vessel)
 
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
 
     expect(page).to have_css("a.disabled")
   end
