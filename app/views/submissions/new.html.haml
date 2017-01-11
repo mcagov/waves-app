@@ -39,7 +39,9 @@
                 %label
                   %input{name: "new_submission_actions", value: "application_receipt", type: "checkbox"}
                   Send an Application Receipt email
-
+          .row
+            .col-md-8
+              = f.input :documents_received
   .row.no-print
     .col-md-12
       = button_tag(type: 'submit', class: "btn btn-success btn-lg pull-right") do

@@ -48,14 +48,13 @@ class Payment::FinancePayment < ApplicationRecord
 
   def build_submission
     Submission.create(
-      part: part,
-      task: task,
-      vessel_reg_no: vessel_reg_no,
+      part: part, task: task, vessel_reg_no: vessel_reg_no,
       officer_intervention_required: true,
       source: :manual_entry,
       applicant_name: applicant_name,
       applicant_email: applicant_email,
       applicant_is_agent: applicant_is_agent,
+      documents_received: documents_received,
       changeset: { linkable_ref_no: application_ref_no })
   end
 end

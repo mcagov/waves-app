@@ -60,7 +60,7 @@ class SubmissionsController < InternalPagesController
     return {} unless params[:submission]
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name, :applicant_is_agent,
-      :applicant_email, :vessel_reg_no,
+      :applicant_email, :vessel_reg_no, :documents_received,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
