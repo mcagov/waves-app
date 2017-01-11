@@ -9,7 +9,9 @@ class SubmissionsController < InternalPagesController
     @submission =
       Submission.new(
         submission_params.merge(
-          received_at: Date.today, part: current_activity.part))
+          state: :initializing,
+          received_at: Date.today,
+          part: current_activity.part))
   end
 
   def create
