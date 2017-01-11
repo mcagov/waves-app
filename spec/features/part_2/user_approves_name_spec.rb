@@ -8,11 +8,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
            port_no: "12345",
            name: "DUPLICATE")
 
-    login_to_part_2
-
-    click_on("Document Entry")
-    within(".modal#start-new-application") { click_on("New Registration") }
-    click_on("Save Application")
+    visit_assigned_part_2_submission
   end
 
   scenario "with an unavailable name" do

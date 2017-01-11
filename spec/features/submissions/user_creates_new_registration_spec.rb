@@ -1,9 +1,10 @@
 require "rails_helper"
 
-feature "User adds a new registration", type: :feature do
+feature "User creates a new registration", type: :feature do
   before do
     login_to_part_3
-    visit new_submission_path
+    click_on("Document Entry")
+    within(".modal#start-new-application") { click_on("New Registration") }
 
     select("New Registration", from: "Application Type")
     fill_in("Vessel Name", with: "MY BOAT")
@@ -13,12 +14,16 @@ feature "User adds a new registration", type: :feature do
     fill_in("Applicant's Email Address", with: "bob@example.com")
   end
 
+  scenario "in general" do
+    click_on("Save Application")
+    expect(page).to have_text("saved to the unclaimed tasks queue")
+    expect(page).to have_current_path(tasks_my_tasks_path)
+    expect(Submission.last).to be_unassigned
+  end
+
   scenario "with an application receipt email" do
     check("Send an Application Receipt email")
     click_on("Save Application")
-
-    expect(page).to have_css("h1", text: "New Registration ID: ")
-    expect(page).to have_css("td.vessel-name", text: "MY BOAT")
 
     expect(Notification::ApplicationReceipt.last.recipient_email)
       .to eq("bob@example.com")
@@ -28,7 +33,7 @@ feature "User adds a new registration", type: :feature do
 
   scenario "without an application receipt email" do
     click_on("Save Application")
-    expect(page).to have_css("h1", text: "New Registration ID: ")
+
     expect(Notification::ApplicationReceipt.last).to be_nil
   end
 

@@ -17,8 +17,8 @@ describe SubmissionsController, type: :controller do
           task: :change_vessel } }
     end
 
-    it "sets the user as the claimant" do
-      expect(assigns(:submission).claimant).to eq(user)
+    it "sets the state to unassigned" do
+      expect(assigns(:submission)).to be_unassigned
     end
 
     it "sets the source to manual entry" do

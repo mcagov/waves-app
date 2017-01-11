@@ -25,3 +25,9 @@ def claim_submission_and_visit
   click_on("Claim")
   click_on("Process Next Application")
 end
+
+def visit_assigned_part_2_submission
+  submission = create(:assigned_submission, part: :part_2)
+  login_to_part_2(submission.claimant)
+  visit submission_path(submission)
+end

@@ -17,8 +17,9 @@ class SubmissionsController < InternalPagesController
 
     if @submission.save
       send_application_receipt_email
-
-      redirect_to submission_path(@submission)
+      flash[:notice] ||=
+        "The application has been saved to the unclaimed tasks queue"
+      redirect_to tasks_my_tasks_path
     else
       render :new
     end
@@ -100,7 +101,6 @@ class SubmissionsController < InternalPagesController
 
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
-    @submission.state = :assigned
-    @submission.claimant = current_user
+    @submission.state = :unassigned
   end
 end
