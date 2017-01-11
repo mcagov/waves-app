@@ -13,6 +13,11 @@ module Submission::StateMachine
         state :referred
         state :cancelled
 
+        # This state is used when initializing a new submission.
+        # This prevents the :incomplete enter: build_defaults
+        # from firing.
+        state :initializing
+
         event :unassigned do
           transitions to: :unassigned, from: :incomplete,
                       on_transition: :init_processing_dates,

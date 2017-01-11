@@ -14,7 +14,8 @@ describe Payment::FinancePayment do
         applicant_name: "Bob",
         applicant_email: "bob@example.com",
         applicant_is_agent: true,
-        application_ref_no: "ABC123"
+        application_ref_no: "ABC123",
+        documents_received: "some files"
       )
     end
 
@@ -61,6 +62,10 @@ describe Payment::FinancePayment do
     it "sets the linkable_ref_no in the changeset" do
       linkable_ref_no = submission.symbolized_changeset[:linkable_ref_no]
       expect(linkable_ref_no).to eq("ABC123")
+    end
+
+    it "sets the documents_received" do
+      expect(submission.documents_received).to eq("some files")
     end
   end
 

@@ -93,7 +93,6 @@ If the `submission#referred_until` date has been reached, applications should be
 Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different tasks.
 
 The full list of tasks can be retrieved from `Task.all_task_types`. Note that the Task  class is in the WavesUtilities gem.
-
 ##### State Machine
 Submissions travel through a state machine `app/models/submission/state_machine.rb`. When a submission has reached the `:unassigned` state, it can be claimed by a Registration Officer for processing. When a submission has been claimed (state: `assigned`), it can be `referred`, `cancelled` or `approved`. Business rules apply to the action taken when one of these states is initiated, e.g. sending a notification email, setting the processing target date, creating or updating an entry in the registry.
 
@@ -104,6 +103,8 @@ There are three points of entry for a submission:
 3. Via a manual entry by a Registration Officer (submission#source `:manual_entry`)
 
 The initial state of an `:online` entry is `:incomplete`. When payment is completed and all the owners have made their declarations, then it moves to `:unassigned` and can be claimed by a Registration Officer.
+
+When a submission enters the default :incomplete state, it fires an event `build_default`, invoking the `SubmissionBuilder` and setting up all the defaults. If you want to initialize a submission object to build a form or any other instance when you don't want a record to be created, you need to forecfully set the state to :initializing. For example: `Submission.new(state: :initializing)`.
 
 The initial state of a `:manual_entry` is `:unassigned` so that it can be claimed. Note that a submission created by the Finance Team sets the flag `submission#officer_intervention_required` to ensure that the Registration Officer checks the details before they can action it.
 

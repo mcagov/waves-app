@@ -9,7 +9,9 @@ class SubmissionsController < InternalPagesController
     @submission =
       Submission.new(
         submission_params.merge(
-          received_at: Date.today, part: current_activity.part))
+          state: :initializing,
+          received_at: Date.today,
+          part: current_activity.part))
   end
 
   def create
@@ -17,8 +19,9 @@ class SubmissionsController < InternalPagesController
 
     if @submission.save
       send_application_receipt_email
-
-      redirect_to submission_path(@submission)
+      flash[:notice] ||=
+        "The application has been saved to the unclaimed tasks queue"
+      redirect_to tasks_my_tasks_path
     else
       render :new
     end
@@ -60,7 +63,7 @@ class SubmissionsController < InternalPagesController
     return {} unless params[:submission]
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name, :applicant_is_agent,
-      :applicant_email, :vessel_reg_no,
+      :applicant_email, :vessel_reg_no, :documents_received,
       vessel: [
         :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
         :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
@@ -100,7 +103,6 @@ class SubmissionsController < InternalPagesController
 
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
-    @submission.state = :assigned
-    @submission.claimant = current_user
+    @submission.state = :unassigned
   end
 end
