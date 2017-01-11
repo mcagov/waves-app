@@ -1,26 +1,27 @@
 require "rails_helper"
 
 describe Builders::NameApprovalBuilder do
-  let!(:submission) do
-    create(:assigned_submission,
-           part: :part_2,
-           task: :new_registration)
-  end
-
-  let(:name_approval) do
-    Submission::NameApproval.new(
-      name: "BOBS BOAT",
-      part: :part_2,
-      port_code: "SU",
-      port_no: port_no,
-      registration_type: :full,
-      register_tonnage: 888,
-      net_tonnage: 999)
-  end
-
-  let(:registered_vessel) { described_class.create(submission, name_approval) }
-
   context ".create" do
+    let(:name_approval) do
+      Submission::NameApproval.new(
+        name: "BOBS BOAT",
+        part: :part_2,
+        port_code: "SU",
+        port_no: port_no,
+        registration_type: :full,
+        register_tonnage: 888,
+        net_tonnage: 999)
+    end
+
+    subject do
+      described_class.create(
+        create(:submission, part: :part_2, task: :new_registration),
+        name_approval)
+    end
+
+    let(:submission) { subject }
+    let(:registered_vessel) { submission.registered_vessel }
+
     context "with valid data" do
       let(:port_no) { 123 }
 
@@ -54,6 +55,10 @@ describe Builders::NameApprovalBuilder do
 
       it "sets the name_approved_until" do
         expect(registered_vessel.name_approved_until).to be_present
+      end
+
+      it "sets the submission vessel (in the changeset)" do
+        expect(submission.reload.vessel.name).to eq("BOBS BOAT")
       end
 
       context "but no port_no" do
