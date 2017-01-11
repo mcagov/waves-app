@@ -65,7 +65,10 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     expect(page).to have_current_path(edit_submission_path(Submission.last))
     creates_a_work_log_entry("Submission", :name_approval)
 
-    vessel = Submission.last.registered_vessel
+    submission = Submission.last
+    expect(submission.vessel.name).to eq("BOBS BOAT")
+
+    vessel = submission.registered_vessel
     expect(vessel.name).to eq("BOBS BOAT")
     expect(vessel.registration_type).to eq("full")
     expect(vessel.port_code).to eq("SU")

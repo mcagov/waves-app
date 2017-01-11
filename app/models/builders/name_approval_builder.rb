@@ -8,8 +8,9 @@ class Builders::NameApprovalBuilder
       assign_name_approved_until
       assign_port_code
       persist_registered_vessel
+      assign_submission_changeset
 
-      @registered_vessel
+      @submission
     end
 
     private
@@ -39,6 +40,11 @@ class Builders::NameApprovalBuilder
         @submission.update_attribute(
           :registered_vessel_id, @registered_vessel.id)
       end
+    end
+
+    def assign_submission_changeset
+      @submission.changeset = @registered_vessel.registry_info
+      @submission.save
     end
   end
 end
