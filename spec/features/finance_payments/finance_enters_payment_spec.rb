@@ -48,4 +48,21 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("bits and bobs")
     end
   end
+
+  scenario "creating and then editing on the index page" do
+    fill_in("Fee Amount", with: "25")
+    click_on("Save Fee Entry")
+
+    click_on("Batch #{FinanceBatch.last.batch_no}")
+    click_on("£25.00")
+
+    fill_in("Fee Amount", with: "50")
+    click_on("Update Fee Entry")
+
+    expect(page).to have_css(
+      ".alert",
+      text: "Fee entry successfully updated")
+
+    expect(page).to have_link("£50.00")
+  end
 end

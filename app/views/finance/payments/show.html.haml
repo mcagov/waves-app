@@ -8,7 +8,16 @@
           .alert.alert-success
             %p.text-center{style: 'font-size: 1.4em;'}
               Fee entry successfully recorded.
-
         = render partial: "payment", locals: { finance_payment: @finance_payment }
 
-= render partial: "/finance/batches/actions", locals: { batch: @batch }
+.row.no-print#actions
+  .col-md-12
+    = link_to finance_batch_payments_path(@batch),
+      class: 'btn btn-primary btn-lg' do
+      %i.fa.fa-arrow-left
+      Batch #{@batch.batch_no}
+    - unless @batch.locked?
+      = link_to new_finance_batch_payment_path(@batch),
+        class: 'btn btn-success btn-lg pull-right' do
+        %i.fa.fa-plus
+        New Fee Entry

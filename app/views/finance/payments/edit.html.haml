@@ -1,0 +1,10 @@
+= render partial: "/finance/payments/heading"
+
+= simple_form_for @finance_payment, url: finance_batch_payment_path(@batch, @finance_payment), method: :patch do |f|
+  = render partial: "form", locals: { f: f }
+
+  .row.no-print
+  .col-xs-12
+    = button_tag(type: 'submit', class: "btn-warning btn-lg pull-right") do
+      %i.fa.fa-check
+      Update Fee Entry

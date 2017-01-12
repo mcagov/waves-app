@@ -22,7 +22,13 @@
               %td= finance_payment.task_description
               %td= finance_payment.part_description
               %td= finance_payment.payment_type_description
-              %td.text-right= formatted_amount(finance_payment.payment.amount)
+              %td.text-right
+                - if @batch.locked?
+                  = formatted_amount(finance_payment.payment_amount)
+                - else
+                  = link_to edit_finance_batch_payment_path(@batch, finance_payment) do
+                    = formatted_amount(finance_payment.payment_amount)
+                    %i.fa.fa-pencil-square-o
           %tr
             %td{colspan: 4}
             %td.thick.text-right
