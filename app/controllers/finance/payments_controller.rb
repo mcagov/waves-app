@@ -2,7 +2,9 @@ class Finance::PaymentsController < InternalPagesController
   before_action :load_batch
 
   def new
-    @finance_payment = Payment::FinancePayment.new(payment_date: Date.today)
+    @finance_payment =
+      Payment::FinancePayment.new(
+        payment_date: Date.today, part: @batch.default_part)
   end
 
   def show

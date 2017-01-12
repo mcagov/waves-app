@@ -55,4 +55,14 @@ describe FinanceBatch do
 
     it { expect(batch.total_amount).to eq(3131) }
   end
+
+  context ".default_part" do
+    it "retrieves the batch's last finance_payment#part" do
+      expect(batch.default_part.to_sym).to eq(:part_3)
+    end
+
+    it "returns nothing when the batch has no finance_payments" do
+      expect(build(:finance_batch).default_part).to be_blank
+    end
+  end
 end

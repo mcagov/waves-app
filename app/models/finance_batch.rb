@@ -38,4 +38,8 @@ class FinanceBatch < ApplicationRecord
   def unset_closed_at!
     update_attributes(closed_at: nil)
   end
+
+  def default_part
+    finance_payments.last.part if finance_payments.last
+  end
 end
