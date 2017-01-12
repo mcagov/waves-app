@@ -4,8 +4,8 @@ describe FinanceBatch do
   let!(:batch) { create(:finance_batch) }
 
   context ".toggle_state!" do
-    it "is not closed" do
-      expect(batch).not_to be_closed
+    it "is open" do
+      expect(batch).to be_open
     end
 
     context "ending a batch" do
@@ -14,7 +14,7 @@ describe FinanceBatch do
 
       context "reopening a closed batch" do
         before { batch.toggle_state! }
-        it { expect(batch).not_to be_closed }
+        it { expect(batch).to be_open }
       end
     end
   end
@@ -28,6 +28,11 @@ describe FinanceBatch do
 
     it "locks the finance_payments" do
       expect(batch.finance_payments.first).to be_locked
+    end
+
+    it "is neither open nor closed" do
+      expect(batch).not_to be_open
+      expect(batch).not_to be_closed
     end
   end
 

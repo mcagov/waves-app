@@ -14,7 +14,11 @@ class FinanceBatch < ApplicationRecord
   end
 
   def closed?
-    closed_at.present?
+    closed_at.present? && !locked?
+  end
+
+  def open?
+    closed_at.blank? && !locked?
   end
 
   def close_batch!
