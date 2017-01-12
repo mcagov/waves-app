@@ -48,4 +48,21 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("bits and bobs")
     end
   end
+
+  scenario "creating and then editing" do
+    fill_in("Fee Amount", with: "25")
+    click_on("Save Fee Entry")
+    click_on("Edit Fee Entry")
+
+    fill_in("Fee Amount", with: "50")
+    click_on("Update Fee Entry")
+
+    expect(page).to have_css(
+      ".alert",
+      text: "Fee entry successfully updated")
+
+    within("#finance_payment") do
+      expect(page).to have_text("50.00")
+    end
+  end
 end

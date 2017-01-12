@@ -7,8 +7,13 @@ class Finance::PaymentsController < InternalPagesController
 
   def show
     @prompt_success = (params[:prompt] == "success")
+    @prompt_update = (params[:prompt] == "update")
     finance_payment = Payment::FinancePayment.find(params[:id])
     @finance_payment = Decorators::FinancePayment.new(finance_payment)
+  end
+
+  def edit
+    @finance_payment = Payment::FinancePayment.find(params[:id])
   end
 
   def create
@@ -21,6 +26,18 @@ class Finance::PaymentsController < InternalPagesController
         @batch, @finance_payment, prompt: :success)
     else
       render :new
+    end
+  end
+
+  def update
+    @finance_payment = Payment::FinancePayment.find(params[:id])
+    @finance_payment.actioned_by = current_user
+
+    if @finance_payment.update_attributes(finance_payment_params)
+      redirect_to finance_batch_payment_path(
+        @batch, @finance_payment, prompt: :update)
+    else
+      render :edit
     end
   end
 

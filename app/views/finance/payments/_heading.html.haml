@@ -7,6 +7,8 @@
     - if @batch.closed?
       %h5 End Date:  #{@batch.closed_at.to_s(:date_time)}
   .col-md-4
-    %h5 Batch: #{@batch.batch_no}
+    %h5
+      Batch:
+      = link_to @batch.batch_no, finance_batch_payments_path(@batch)
     %h5 Officer: #{@batch.processed_by}
 
