@@ -19,6 +19,18 @@ describe FinanceBatch do
     end
   end
 
+  context ".lock!" do
+    before { batch.lock! }
+
+    it "locks the batch" do
+      expect(batch).to be_locked
+    end
+
+    it "locks the finance_payments" do
+      expect(batch.finance_payments.first).to be_locked
+    end
+  end
+
   context ".total_amount" do
     before do
       expect(batch)

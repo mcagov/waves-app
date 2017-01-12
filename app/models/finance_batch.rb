@@ -24,4 +24,13 @@ class FinanceBatch < ApplicationRecord
   def reopen_batch!
     update_attributes(closed_at: nil)
   end
+
+  def lock!
+    finance_payments.map(&:lock!)
+    update_attributes(locked_at: Time.now)
+  end
+
+  def locked?
+    locked_at.present?
+  end
 end

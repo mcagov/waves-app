@@ -4,8 +4,6 @@ class Payment::FinancePayment < ApplicationRecord
   delegate :submission, to: :payment
   delegate :batch_no, to: :batch
 
-  after_create :build_payment_and_submission
-
   has_one :payment, as: :remittance
   belongs_to :actioned_by, class_name: "User"
   belongs_to :batch, class_name: "FinanceBatch"
@@ -26,6 +24,14 @@ class Payment::FinancePayment < ApplicationRecord
     ["PO", :postal_order],
     ["CARD", :card],
   ].freeze
+
+  def lock!
+    build_payment_and_submission
+  end
+
+  def locked?
+    payment.present?
+  end
 
   private
 
