@@ -8,8 +8,20 @@ class TasksController < InternalPagesController
     @submissions = submission_scope.assigned.order("target_date asc")
   end
 
+  def fee_entry
+    @submissions =
+      submission_scope
+      .unassigned
+      .where(officer_intervention_required: true)
+      .order("target_date asc")
+  end
+
   def unclaimed
-    @submissions = submission_scope.unassigned.order("target_date asc")
+    @submissions =
+      submission_scope
+      .unassigned
+      .where(officer_intervention_required: false)
+      .order("target_date asc")
   end
 
   def incomplete

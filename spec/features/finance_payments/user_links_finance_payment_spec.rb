@@ -24,7 +24,7 @@ describe "User links finance_payment", type: :feature, js: true do
       task: :new_registration,
       application_ref_no: "ABC123")
 
-    claim_submission_and_visit
+    claim_fee_entry_and_visit
   end
 
   scenario "to the prompted application" do
