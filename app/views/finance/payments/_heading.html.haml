@@ -3,12 +3,13 @@
     %h1{style: "margin-top: 0px !important;"}
       Finance: Fee Entry
   .col-md-4
-    %h5 Start Date:  #{@batch.opened_at.to_s(:date_time)}
-    - if @batch.closed?
-      %h5 End Date:  #{@batch.closed_at.to_s(:date_time)}
-  .col-md-4
+    %h5 Start Date:  #{@batch.open_date}
+    %h5 End Date:  #{@batch.closed_date}
+    %h5 Lock Date:  #{@batch.locked_date}
+  .col-md-3
     %h5
       Batch:
-      = link_to @batch.batch_no, finance_batch_payments_path(@batch)
+      = link_to finance_batch_payments_path(@batch) do
+        = @batch.title
     %h5 Officer: #{@batch.processed_by}
 
