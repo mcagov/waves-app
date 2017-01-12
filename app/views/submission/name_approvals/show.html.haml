@@ -1,6 +1,13 @@
 = render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
 = render partial: "submissions/info/heading", locals: {submission: @submission}
-= render partial: "submissions/info/summary", locals: {submission: @submission}
+
+- if @name_validated
+  .alert.bg-success
+    %h3
+      %i.fa.fa-check
+      The name #{@name_approval.name} is available in #{@name_approval.port_name}.
+- else
+  = render partial: "submissions/info/summary", locals: {submission: @submission}
 
 = simple_form_for @name_approval, url: submission_name_approval_path(@submission), method: :patch do |f|
   = f.input :part, as: :hidden

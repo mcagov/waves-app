@@ -53,6 +53,10 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
     click_on("Validate Name")
 
+    expect(page).to have_css(
+      ".alert",
+      text: "The name BOBS BOAT is available in SOUTHAMPTON")
+
     click_on("Continue")
     within(".modal-content") do
       click_on("Approve Name")
