@@ -19,7 +19,7 @@ class Finance::PaymentsController < InternalPagesController
   def create
     @finance_payment = Payment::FinancePayment.new(finance_payment_params)
     @finance_payment.actioned_by = current_user
-    @finance_payment.batch = @batch
+    @finance_payment.batch_id = @batch.id
 
     if @finance_payment.save
       redirect_to finance_batch_payment_path(
@@ -34,8 +34,9 @@ class Finance::PaymentsController < InternalPagesController
     @finance_payment.actioned_by = current_user
 
     if @finance_payment.update_attributes(finance_payment_params)
-      redirect_to finance_batch_payment_path(
-        @batch, @finance_payment, prompt: :update)
+      flash[:notice] = "Fee entry successfully updated"
+      redirect_to finance_batch_payments_path(
+        @batch, @finance_payment)
     else
       render :edit
     end
@@ -57,7 +58,9 @@ class Finance::PaymentsController < InternalPagesController
   end
 
   def load_batch
-    @batch = FinanceBatch.includes(finance_payments: [:payment])
-                         .find(params[:batch_id])
+    @batch =
+      Decorators::FinanceBatch.new(
+        FinanceBatch.includes(finance_payments: [:payment])
+                    .find(params[:batch_id]))
   end
 end

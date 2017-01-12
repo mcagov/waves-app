@@ -39,11 +39,7 @@ describe "Finance views batches", type: :feature, js: true do
 
   scenario "viewing a batch" do
     click_link("All Batches")
-
-    within(first("tr.batch")) do
-      expect(page).to have_text("£25.00")
-      click_on(FinanceBatch.last.batch_no)
-    end
+    click_on(@first_batch.batch_no)
 
     expect(page).to have_current_path(finance_batch_payments_path(@first_batch))
   end

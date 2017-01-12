@@ -49,10 +49,12 @@ describe "Finance enters a payment", type: :feature do
     end
   end
 
-  scenario "creating and then editing" do
+  scenario "creating and then editing on the index page" do
     fill_in("Fee Amount", with: "25")
     click_on("Save Fee Entry")
-    click_on("Edit Fee Entry")
+
+    click_on("Batch #{FinanceBatch.last.batch_no}")
+    click_on("£25.00")
 
     fill_in("Fee Amount", with: "50")
     click_on("Update Fee Entry")
@@ -61,8 +63,6 @@ describe "Finance enters a payment", type: :feature do
       ".alert",
       text: "Fee entry successfully updated")
 
-    within("#finance_payment") do
-      expect(page).to have_text("50.00")
-    end
+    expect(page).to have_link("£50.00")
   end
 end
