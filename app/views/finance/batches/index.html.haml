@@ -10,15 +10,20 @@
 
 %table.table.table-striped
   %thead
-    %th Start
-    %th End
+    %th Batch No
+    %th Started
+    %th Ended
+    %th Locked
     %th Person
     %th Amount
   %tbody
     - @batches.each do |batch|
+      - batch = Decorators::FinanceBatch.new(batch)
       %tr.batch
-        %td= link_to batch.opened_at.to_s(:date_time), finance_batch_payments_path(batch)
-        %td= batch.closed_at.to_s(:date_time) if batch.closed?
+        %td= link_to batch.title, finance_batch_payments_path(batch)
+        %td= batch.open_date
+        %td= batch.closed_date
+        %td= batch.locked_date
         %td= batch.processed_by
         %td= formatted_amount(batch.total_amount)
 
