@@ -5,7 +5,7 @@ describe "User views similar applications for a finance_payment",
 
   before do
     @vessel_reg_no = create(:registered_vessel).reg_no
-    create(:finance_payment,
+    create(:submitted_finance_payment,
            task: :change_vessel,
            vessel_reg_no: @vessel_reg_no)
   end

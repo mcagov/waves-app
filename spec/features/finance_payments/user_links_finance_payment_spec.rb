@@ -19,7 +19,7 @@ describe "User links finance_payment", type: :feature, js: true do
       ref_no: "FOOBAR")
 
     create(
-      :finance_payment,
+      :submitted_finance_payment,
       part: :part_3,
       task: :new_registration,
       application_ref_no: "ABC123")

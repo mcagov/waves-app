@@ -7,8 +7,8 @@ describe "User associates vessel to finance_payment",
     vessel_a = create(:registered_vessel)
     vessel_b = create(:registered_vessel, name: "FOOBAR")
 
-    create(:finance_payment, task: :change_vessel,
-                             vessel_reg_no: vessel_a.reg_no)
+    create(:submitted_finance_payment, task: :change_vessel,
+                                       vessel_reg_no: vessel_a.reg_no)
 
     claim_fee_entry_and_visit
 
@@ -26,7 +26,7 @@ describe "User associates vessel to finance_payment",
   end
 
   scenario "hiding the Official No. for a new_registration submission" do
-    create(:finance_payment, task: :new_registration)
+    create(:submitted_finance_payment, task: :new_registration)
 
     claim_fee_entry_and_visit
 
@@ -36,7 +36,7 @@ describe "User associates vessel to finance_payment",
   end
 
   scenario "disabling the Convert button when there is no vessel_reg_no" do
-    create(:finance_payment, task: :change_vessel)
+    create(:submitted_finance_payment, task: :change_vessel)
 
     claim_fee_entry_and_visit
 

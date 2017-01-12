@@ -8,7 +8,7 @@ describe Submission::FinancePaymentsController, type: :controller do
   let!(:claimant) { create(:user) }
 
   describe "#convert" do
-    let!(:submission) { create(:finance_payment).submission }
+    let!(:submission) { create(:submitted_finance_payment).submission }
 
     before do
       submission.update_attributes(state: :assigned, task: task)
