@@ -19,3 +19,8 @@ a.search-result {
   font-size: 1.2em;
   font-weight: bold;
 }
+.select2-container--default .select2-selection--single {
+  border-radius: 0px !important;
+  height: 34px !important;
+  border: 1px solid #ccc !important;
+}
