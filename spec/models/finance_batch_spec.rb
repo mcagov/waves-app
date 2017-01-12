@@ -3,36 +3,43 @@ require "rails_helper"
 describe FinanceBatch do
   let!(:batch) { create(:finance_batch) }
 
-  context ".toggle_state!" do
-    it "is open" do
-      expect(batch).to be_open
+  context ".close!" do
+    before { batch.close! }
+
+    it "is closed" do
+      expect(batch).to be_closed
     end
 
-    context "ending a batch" do
-      before { batch.toggle_state! }
-      it { expect(batch).to be_closed }
+    it "sets the closed_at timestamp" do
+      expect(batch.closed_at).to be_present
+    end
 
-      context "reopening a closed batch" do
-        before { batch.toggle_state! }
-        it { expect(batch).to be_open }
+    context ".re_open!" do
+      before { batch.re_open! }
+
+      it "is open" do
+        expect(batch).to be_open
+      end
+
+      it "unsets the closed_at timestamp" do
+        expect(batch.closed_at).to be_blank
       end
     end
-  end
 
-  context ".lock!" do
-    before { batch.lock! }
+    context ".lock!" do
+      before { batch.lock! }
 
-    it "locks the batch" do
-      expect(batch).to be_locked
-    end
+      it "locks the batch" do
+        expect(batch).to be_locked
+      end
 
-    it "locks the finance_payments" do
-      expect(batch.finance_payments.first).to be_locked
-    end
+      it "sets the locked_at timestamp" do
+        expect(batch.locked_at).to be_present
+      end
 
-    it "is neither open nor closed" do
-      expect(batch).not_to be_open
-      expect(batch).not_to be_closed
+      it "locks the finance_payments" do
+        expect(batch.finance_payments.first).to be_locked
+      end
     end
   end
 
