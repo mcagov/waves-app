@@ -2,12 +2,11 @@ class FinanceBatch < ApplicationRecord
   belongs_to :processed_by, class_name: "User"
   has_many :finance_payments, foreign_key: :batch_id,
                               class_name: "Payment::FinancePayment"
-  has_many :payments, through: :finance_payments
 
   protokoll :batch_no, pattern: "1#####"
 
   def total_amount
-    payments.sum(&:amount)
+    finance_payments.sum(&:payment_amount)
   end
 
   def toggle_state!

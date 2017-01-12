@@ -20,6 +20,7 @@ module ApplicationHelper
   end
 
   def formatted_amount(amount)
-    "£#{number_with_precision(amount.to_f / 100, precision: 2)}"
+    amount = amount.is_a?(Integer) ? amount.to_f / 100 : amount.to_f
+    "£#{number_with_precision(amount, precision: 2)}"
   end
 end

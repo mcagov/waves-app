@@ -22,8 +22,10 @@ describe FinanceBatch do
   context ".total_amount" do
     before do
       expect(batch)
-        .to receive(:payments).and_return(
-          [create(:payment, amount: 2020), create(:payment, amount: 1111)]
+        .to receive(:finance_payments).and_return(
+          [
+            create(:finance_payment, payment_amount: 2020),
+            create(:finance_payment, payment_amount: 1111)]
         )
     end
 
