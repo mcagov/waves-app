@@ -11,17 +11,17 @@
         .x_content
           .row
             .col-md-3
-              = f.input :received_at, as: :string, label: "Date Document Received", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}, required: false
+              = f.input :received_at, as: :string, label: "Date Document Received", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
           .row
             .col-md-3
-              = f.input :task, collection: Task.default_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }, required: false
+              = f.input :task, collection: Task.default_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
             .col-md-3
               #submission_vessel_reg_no
                 = f.input :vessel_reg_no, label: "Official No.".html_safe, input_html: { class: "upcase" }
               #submission_vessel_name
                 = f.simple_fields_for :vessel do |vessel_f|
                   - vessel_f.object = f.object.vessel
-                  = vessel_f.input :name, label: "Vessel Name", input_html: { class: "upcase" }, required: false
+                  = vessel_f.input :name, label: "Vessel Name", input_html: { class: "upcase" }
           .row
             .col-md-3
               = f.input :applicant_name, label: "Applicant Name", input_html: { class: "upcase" }

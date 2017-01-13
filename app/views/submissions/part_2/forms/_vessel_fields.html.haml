@@ -3,5 +3,11 @@
   %fieldset{ disabled: disabled }
     - vessel_f.object = submission_f.object.vessel
     .row
-      .col-md-3
-        = vessel_f.input :name, label: "Approved Vessel Name change", input_html: { class: "upcase" }, required: false
+      .col-md-4
+        = vessel_f.input :name,
+          label: "Approved Vessel Name change",
+          input_html: { class: "upcase" },
+          disable: true
+
+      .col-md-2
+        = vessel_f.input :registration_type, label: "Registration Type"
