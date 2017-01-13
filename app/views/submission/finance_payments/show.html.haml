@@ -1,11 +1,11 @@
-= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
-= render partial: "submissions/info/heading", locals: {submission: @submission}
-= render partial: "summary", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: { submission: @submission }
+= render partial: "submissions/info/heading", locals: { submission: @submission }
+= render partial: "summary", locals: { submission: @submission }
 
 - if @linkable_submission
   = render partial: "linkable_submission", locals: {submission: @submission, linkable_submission: @linkable_submission}
 - else
-  = render partial: "convertible_submission", locals: {submission: @submission}
+  = render partial: "convertible_submission", locals: { submission: @submission }
 
 - if @submission.claimant == current_user
   .row.no-print#actions

@@ -1,5 +1,5 @@
-= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
-= render partial: "submissions/info/heading", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: { submission: @submission }
+= render partial: "submissions/info/heading", locals: { submission: @submission }
 
 = simple_form_for @submission, url: submission_signature_path, method: :patch do |f|
   .x_panel
