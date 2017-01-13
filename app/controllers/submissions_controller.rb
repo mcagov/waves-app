@@ -64,10 +64,7 @@ class SubmissionsController < InternalPagesController
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name, :applicant_is_agent,
       :applicant_email, :vessel_reg_no, :documents_received,
-      vessel: [
-        :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
-        :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
-        :alt_name_1, :alt_name_2, :alt_name_3]
+      vessel: WavesUtilities::Vessel::ATTRIBUTES
     )
   end
 
