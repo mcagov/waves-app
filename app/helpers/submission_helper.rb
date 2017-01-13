@@ -48,6 +48,7 @@ module SubmissionHelper
 
   def display_edit_application_link?(submission)
     return false if request.path == edit_submission_path(submission)
+    return false unless submission.part.to_sym == :part_3
     submission.editable? && submission.claimant == current_user
   end
 end

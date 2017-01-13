@@ -1,0 +1,25 @@
+= simple_form_for @submission, class: "form-vertical" do |submission_f|
+  .row
+    .col-md-12
+      .x_panel
+        .x_title
+          %h2 Application Details
+          .clearfix
+        .x_content
+          %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+            %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+
+              %li{:role => "presentation", class: "active"}
+                %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessel_tab", :role => "tab"} Vessel Details
+
+            #myTabContent.tab-content
+
+              #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+                = render partial: "submissions/part_2/forms/vessel_fields",
+                  locals: { submission_f: submission_f, disabled: !@submission.vessel_can_be_edited? }
+
+  .row.no-print
+    .col-sm-12
+      = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
+        %i.fa.fa-floppy-o
+        Save Details

@@ -1,2 +1,2 @@
 = render partial: "submissions/info/base", locals: { submission: @submission }
-= render partial: "submissions/part_3/show", locals: { submission: @submission }
+= render partial: "submissions/#{@submission.part}/show", locals: { submission: @submission }
