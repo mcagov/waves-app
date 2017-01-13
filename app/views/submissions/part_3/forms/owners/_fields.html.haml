@@ -45,7 +45,7 @@
         .col-md-4
           = owner_f.input :country, collection: ["UNITED KINGDOM"], required: false, include_blank: false
 
-      = render partial: "submissions/forms/owners/declaration_fields", locals: { f: f }
+      = render partial: "submissions/part_3/forms/owners/declaration_fields", locals: { f: f }
 .modal-footer
   = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
     Save Individual Owner

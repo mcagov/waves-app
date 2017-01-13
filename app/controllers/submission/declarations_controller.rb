@@ -59,7 +59,7 @@ class Submission::DeclarationsController < InternalPagesController
     respond_to do |format|
       format.js do
         @submission = Decorators::Submission.new(load_submission)
-        render "/submissions/forms/owners/update.js"
+        render "/submissions/#{@submission.part}/forms/owners/update.js"
       end
     end
   end

@@ -31,7 +31,7 @@ class Submission::AgentsController < InternalPagesController
     respond_to do |format|
       format.js do
         @submission = Decorators::Submission.new(load_submission)
-        render "/submissions/forms/agent/update.js"
+        render "/submissions/#{@submission.part}/forms/agent/update.js"
       end
     end
   end
