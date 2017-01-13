@@ -4,10 +4,26 @@
     - vessel_f.object = submission_f.object.vessel
     .row
       .col-md-4
-        = vessel_f.input :name,
-          label: "Approved Vessel Name change",
-          input_html: { class: "upcase" },
-          disable: true
+        = vessel_f.input :name, label: "Approved Vessel Name change",
+          input_html: { class: "upcase", readonly: "readonly" }
 
       .col-md-2
-        = vessel_f.input :registration_type, label: "Registration Type"
+        = vessel_f.input :registration_type, label: "Registration Type",
+          as: :select,
+          collection: registration_types_collection,
+          include_blank: false,
+          input_html: { class: "select2 select2_single" }
+
+      .col-md-2
+        = vessel_f.input :vessel_category, label: "Vessel Category",
+          as: :select,
+          collection: categories_collection(:part_2),
+          include_blank: false,
+          input_html: { class: "select2 select2_single" }
+
+      .col-md-2
+        = vessel_f.input :vessel_type_other, label: "Type of **General Cargo Ship**"
+
+      .col-md-2
+        = vessel_f.input :imo_number, label: "IMO Number", as: :numeric
+

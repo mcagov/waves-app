@@ -161,6 +161,7 @@ SimpleForm.setup do |config|
     date: :multi_select,
     time: :multi_select,
     currency: :has_feedback,
+    numeric: :has_feedback,
     feedback_left: :has_feedback,
     feedback_right: :has_feedback
   }

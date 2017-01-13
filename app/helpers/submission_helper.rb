@@ -61,4 +61,8 @@ module SubmissionHelper
   def ports_collection(part)
     WavesUtilities::Port.all(part)
   end
+
+  def categories_collection(_part)
+    ["Fishing Vessel"]
+  end
 end
