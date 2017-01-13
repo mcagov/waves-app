@@ -20,6 +20,7 @@ describe "Finance enters a payment", type: :feature do
     fill_in("Official No.", with: "")
     fill_in("Vessel Name", with: "MY BOAT")
 
+    fill_in("Payer Name", with: "PERCIVAL")
     select("CHQ", from: "Payment Type")
     fill_in("Fee Amount", with: "25")
 
@@ -41,6 +42,7 @@ describe "Finance enters a payment", type: :feature do
       expect(page).to have_text("Part III")
       expect(page).to have_text("New Registration")
       expect(page).to have_text("MY BOAT")
+      expect(page).to have_text("PERCIVAL")
       expect(page).to have_text("CHQ")
       expect(page).to have_text("25.00")
       expect(page).to have_text("BOB (Agent)")

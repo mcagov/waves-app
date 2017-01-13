@@ -16,6 +16,7 @@ en:
         vessel_reg_no: Official No.
         vessel_name: Vessel Name
         service_level: Service Level
+        payer_name: Payer Name
         payment_type: Payment Type
         payment_amount: Fee Amount
         applicant_name: Applicant Name

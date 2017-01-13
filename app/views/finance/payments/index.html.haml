@@ -10,6 +10,7 @@
               %th Fee Receipt Date
               %th Application Type
               %th Part of Register
+              %th Payer Name
               %th Payment Type
               %th.text-right Fee Amount
           %tbody
@@ -21,6 +22,7 @@
                   = finance_payment.payment_date
               %td= finance_payment.task_description
               %td= finance_payment.part_description
+              %td= finance_payment.payer_name
               %td= finance_payment.payment_type_description
               %td.text-right
                 - if @batch.locked?
