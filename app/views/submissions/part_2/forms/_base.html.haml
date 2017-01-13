@@ -18,8 +18,10 @@
                 = render partial: "submissions/part_2/forms/vessel_fields",
                   locals: { submission_f: submission_f, disabled: !@submission.vessel_can_be_edited? }
 
-  .row.no-print
-    .col-sm-12
-      = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
-        %i.fa.fa-floppy-o
-        Save Details
+
+= content_for :submission_save_buttons do
+  = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
+    %i.fa.fa-floppy-o
+    Save Details
+
+= render partial: "submissions/actions/base", locals: {submission: submission}

@@ -3,5 +3,4 @@
 - unless @submission.registered_vessel
   = render partial: "submissions/part_3/similar_vessels", locals: {submission: submission}
 
-- if @submission.actionable?
-  = render partial: "submissions/actions/actions", locals: {submission: submission}
+= render partial: "submissions/actions/base", locals: {submission: submission}
