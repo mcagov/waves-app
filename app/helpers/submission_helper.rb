@@ -51,4 +51,14 @@ module SubmissionHelper
     return false unless submission.part.to_sym == :part_3
     submission.editable? && submission.claimant == current_user
   end
+
+  def registration_types_collection
+    WavesUtilities::RegistrationType.all.map do |registration_type|
+      [registration_type.to_s.humanize, registration_type]
+    end
+  end
+
+  def ports_collection(part)
+    WavesUtilities::Port.all(part)
+  end
 end
