@@ -1,11 +1,2 @@
-= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
-= render partial: "submissions/info/heading", locals: {submission: @submission}
-= render partial: "submissions/info/summary", locals: {submission: @submission}
-= render partial: "submissions/info/prompts", locals: {submission: @submission}
-= render partial: "tabs", locals: {submission: @submission}
-
-- unless @submission.registered_vessel
-  = render partial: "similar_vessels", locals: {submission: @submission}
-
-- if @submission.actionable?
-  = render partial: "actions", locals: {submission: @submission}
+= render partial: "submissions/info/base", locals: { submission: @submission }
+= render partial: "submissions/part_3/show", locals: { submission: @submission }

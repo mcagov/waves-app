@@ -1,5 +1,5 @@
-= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
-= render partial: "submissions/info/heading", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: { submission: @submission }
+= render partial: "submissions/info/heading", locals: { submission: @submission }
 
 - if @name_validated
   .alert.bg-success.text-center.name-validated
@@ -70,5 +70,5 @@
     - else
       = render partial: "submission/name_approvals/actions/not_validated"
 
-= render partial: "submissions/actions",
+= render partial: "submissions/actions/actions",
   locals: { submission: @submission }

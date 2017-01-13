@@ -1,0 +1,7 @@
+= render partial: "submissions/part_3/tabs", locals: {submission: submission}
+
+- unless @submission.registered_vessel
+  = render partial: "submissions/part_3/similar_vessels", locals: {submission: submission}
+
+- if @submission.actionable?
+  = render partial: "submissions/actions/actions", locals: {submission: submission}

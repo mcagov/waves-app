@@ -1,0 +1,15 @@
+- if @submission.approvable?
+  - content_for(:submission_approval_buttons) do
+    = render partial: "submissions/modals/approve", locals: {submission: @submission}
+    = link_to "#approve-application", "data-target" => "#approve-application", "data-toggle" => "modal", class: "btn btn-success btn-lg pull-right" do
+      %i.fa.fa-check
+      = t("submission.approval.inline-btn.#{submission.task}")
+
+- if @submission.claimant == current_user
+  = render partial: "submissions/actions/assigned", locals: {submission: @submission}
+
+- elsif @submission.cancelled?
+  = render partial: "submissions/actions/cancelled", locals: {submission: @submission}
+
+- elsif @submission.referred?
+  = render partial: "submissions/actions/referred", locals: {submission: @submission}
