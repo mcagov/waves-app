@@ -2,7 +2,7 @@
 = render partial: "submissions/info/heading", locals: {submission: @submission}
 
 - if @name_validated
-  .alert.bg-success
+  .alert.bg-success.text-center.name-validated
     %h3
       %i.fa.fa-check
       The name #{@name_approval.name} is available in #{@name_approval.port_name}.
