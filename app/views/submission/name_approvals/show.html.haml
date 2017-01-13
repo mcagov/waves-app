@@ -61,7 +61,7 @@
               %i.fa.fa-refresh
               Switch to Net Tonnage
 
-- if @submission.actionable?
+- if @submission.actionable? && @submission.claimant == current_user
   - content_for(:submission_approval_buttons) do
     - if @name_validated
       = render partial: "submission/name_approvals/actions/validated"
