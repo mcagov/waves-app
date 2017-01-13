@@ -9,10 +9,9 @@ class FeedbackInput < SimpleForm::Inputs::FileInput
   end
 
   def input_html_options
-    super.deep_merge({
+    super.deep_merge(
       readonly: options[:readonly],
-      class: "form-control has-feedback-#{placement}"
-    })
+      class: "form-control has-feedback-#{placement}")
   end
 
   def feedback_label

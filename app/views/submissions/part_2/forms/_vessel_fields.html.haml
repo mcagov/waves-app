@@ -27,3 +27,18 @@
       .col-md-2
         = vessel_f.input :imo_number, label: "IMO Number", as: :numeric
 
+    .row
+      .col-md-2
+        = vessel_f.input :port_code, label: "Port of Registry",
+          as: :select,
+          collection: ports_collection(@submission.part),
+          include_blank: false,
+          disabled: true,
+          input_html: { class: "select2 select2_single searchable" }
+
+      .col-md-2
+        = vessel_f.input :port_no, label: "Port Number",
+          as: :feedback,
+          feedback_label: vessel_f.object.port_code,
+          placement: :left,
+          readonly: :readonly

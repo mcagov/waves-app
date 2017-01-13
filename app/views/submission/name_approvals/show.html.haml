@@ -43,20 +43,29 @@
 
         .col-md-2.approval_port-no
           = f.input :port_no,
-            as: :feedback_left,
+            as: :feedback,
+            feedback_label: f.object.port_code || "A",
+            placement: :left,
             hint: "leave blank for system-generated port number",
             label: "Port Number",
             required: false
 
         .col-md-2
           #approval_net-tonnage{ class: "#{'hidden' if @name_approval.register_tonnage.present?}"  }
-            = f.input :net_tonnage, as: :feedback_right, label: "Net Tonnage"
+            = f.input :net_tonnage, label: "Net Tonnage",
+              as: :feedback,
+              placement: :right,
+              feedback_label: "NT"
             = link_to '#', id: "display_approval_register_tonnage" do
               %i.fa.fa-refresh
               Switch to Register Tonnage
 
           #approval_register-tonnage{  class: "#{'hidden' unless @name_approval.register_tonnage.present?}"  }
-            = f.input :register_tonnage, as: :feedback_right, label: "Register Tonnage"
+            = f.input :register_tonnage, label: "Register Tonnage",
+              as: :feedback,
+              placement: :right,
+              feedback_label: "RT"
+
             = link_to '#', id: "display_approval_net_tonnage" do
               %i.fa.fa-refresh
               Switch to Net Tonnage
