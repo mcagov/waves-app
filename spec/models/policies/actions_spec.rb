@@ -42,6 +42,16 @@ describe Policies::Actions do
 
       it { expect(subject).to be_falsey }
     end
+
+    context "when Policies::Workflow.approved_name_required?" do
+      before do
+        allow(Policies::Workflow)
+          .to receive(:approved_name_required?)
+          .and_return(true)
+      end
+
+      it { expect(subject).to be_falsey }
+    end
   end
 
   context "#actionable?" do

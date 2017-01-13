@@ -2,7 +2,7 @@
 = render partial: "submissions/info/heading", locals: {submission: @submission}
 
 - if @name_validated
-  .alert.bg-success
+  .alert.bg-success.text-center.name-validated
     %h3
       %i.fa.fa-check
       The name #{@name_approval.name} is available in #{@name_approval.port_name}.
@@ -41,7 +41,7 @@
           label: "Port of Choice",
           include_blank: false,
           required: false,
-          input_html: { class: "select2 select2_single" }
+          input_html: { class: "select2 select2_single searchable" }
 
         .col-md-2.approval_port-no
           = f.input :port_no,
