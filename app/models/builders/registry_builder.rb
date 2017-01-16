@@ -21,7 +21,7 @@ class Builders::RegistryBuilder
       @vessel ||= Register::Vessel.new(part: @submission.part)
     end
 
-    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable all
     def update_vessel_details
       @vessel.name = @submission.vessel.name
       @vessel.hin = @submission.vessel.hin
@@ -32,8 +32,46 @@ class Builders::RegistryBuilder
       @vessel.radio_call_sign = @submission.vessel.radio_call_sign
       @vessel.vessel_type = @submission.vessel.type_of_vessel
       @vessel.name_approved_until = nil
+
+      # added to support extended#Identity section
+      @vessel.registration_type = @submission.vessel.registration_type
+      @vessel.vessel_category = @submission.vessel.vessel_category
+      @vessel.imo_number = @submission.vessel.imo_number
+      @vessel.port_code = @submission.vessel.port_code
+      @vessel.port_no = @submission.vessel.port_no
+      @vessel.ec_number = @submission.vessel.ec_number
+      @vessel.last_registry_country = @submission.vessel.last_registry_country
+      @vessel.last_registry_no = @submission.vessel.last_registry_no
+      @vessel.last_registry_port = @submission.vessel.last_registry_port
+
+      # added to support extended#Operational Information section
+      @vessel.classification_society = @submission.vessel.classification_society
+      @vessel.classification_society_other = @submission.vessel.classification_society_other
+      @vessel.entry_into_service_at = @submission.vessel.entry_into_service_at
+      @vessel.area_of_operation = @submission.vessel.area_of_operation
+      @vessel.alternative_activity = @submission.vessel.alternative_activity
+
+      # added to support extended#Description section
+      @vessel.gross_tonnage = @submission.vessel.gross_tonnage
+      @vessel.net_tonnage = @submission.vessel.net_tonnage
+      @vessel.register_tonnage = @submission.vessel.register_tonnage
+      @vessel.register_length = @submission.vessel.register_length
+      @vessel.length_overall = @submission.vessel.length_overall
+      @vessel.breadth = @submission.vessel.breadth
+      @vessel.depth = @submission.vessel.depth
+      @vessel.propulsion_system = @submission.vessel.propulsion_system
+
+      # added to support extended#Construction section
+      @vessel.name_of_builder = @submission.vessel.name_of_builder
+      @vessel.builders_address = @submission.vessel.builders_address
+      @vessel.place_of_build = @submission.vessel.place_of_build
+      @vessel.keel_laying_date = @submission.vessel.keel_laying_date
+      @vessel.hull_construction_material = @submission.vessel.hull_construction_material
+      @vessel.yard_number = @submission.vessel.yard_number
+
       @vessel.save
     end
+    # rubocop:enable all
 
     def assign_vessel_to_submission
       unless @submission.registered_vessel

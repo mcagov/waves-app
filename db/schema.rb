@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113095239) do
+ActiveRecord::Schema.define(version: 20170116162413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,12 +313,12 @@ ActiveRecord::Schema.define(version: 20170113095239) do
   end
 
   create_table "vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",                null: false
+    t.string   "name",                         null: false
     t.string   "hin"
     t.string   "make_and_model"
     t.string   "number_of_hulls"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "mmsi_number"
     t.string   "radio_call_sign"
     t.string   "vessel_type"
@@ -333,6 +333,28 @@ ActiveRecord::Schema.define(version: 20170113095239) do
     t.decimal  "gross_tonnage"
     t.datetime "name_approved_until"
     t.decimal  "register_tonnage"
+    t.string   "vessel_category"
+    t.string   "imo_number"
+    t.string   "ec_number"
+    t.string   "last_registry_country"
+    t.string   "last_registry_no"
+    t.string   "last_registry_port"
+    t.string   "classification_society"
+    t.string   "classification_society_other"
+    t.datetime "entry_into_service_at"
+    t.string   "area_of_operation"
+    t.string   "alternative_activity"
+    t.string   "register_length"
+    t.string   "length_overall"
+    t.string   "breadth"
+    t.string   "depth"
+    t.string   "propulsion_system"
+    t.string   "name_of_builder"
+    t.string   "builders_address"
+    t.string   "place_of_build"
+    t.datetime "keel_laying_date"
+    t.string   "hull_construction_material"
+    t.string   "yard_number"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
