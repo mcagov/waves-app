@@ -105,7 +105,7 @@
       .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
         = vessel_f.input :entry_into_service_at,
           label: vessel_change_label(:entry_into_service_at),
-          input_html: { data: { provide: "datepicker", date: { autoclose: true, format: "dd/mm/yyyy" }}}
+          input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
 
       .col-md-2{ class: vessel_change_css(:area_of_operation) }
         = vessel_f.input :area_of_operation,
@@ -205,7 +205,7 @@
       .col-md-3{ class: vessel_change_css(:keel_laying_date) }
         = vessel_f.input :keel_laying_date,
           label: vessel_change_label(:keel_laying_date),
-          input_html: { data: { provide: "datepicker", date: { autoclose: true, format: "dd/mm/yyyy" }}}
+          input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
 
       .col-md-3{ class: vessel_change_css(:hull_construction_material) }
         = vessel_f.input :hull_construction_material,
