@@ -1,4 +1,4 @@
-class CurrencyInput < SimpleForm::Inputs::Base
+class CurrencyInput < SimpleForm::Inputs::TextInput
   def input(_wrapper_options)
     @builder.text_field(
       attribute_name, class: "form-control has-feedback-left") +

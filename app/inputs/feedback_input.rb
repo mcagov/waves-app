@@ -1,4 +1,4 @@
-class FeedbackInput < SimpleForm::Inputs::FileInput
+class FeedbackInput < SimpleForm::Inputs::TextInput
   def input(_wrapper_options)
     @builder.text_field(
       attribute_name, input_html_options) +
