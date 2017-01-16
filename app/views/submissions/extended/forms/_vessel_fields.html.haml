@@ -45,3 +45,19 @@
           placement: :left,
           readonly: :readonly,
           input_html: { class: "#{vessel_change_css(:port_no)}" }
+
+      .col-md-2
+        = vessel_f.input :ec_number, label: "EC Number",
+          input_html: { class: "#{vessel_change_css(:ec_number)}" }
+
+      .col-md-2
+        = vessel_f.input :radio_call_sign, label: "Radio call sign",
+          input_html: { class: "#{vessel_change_css(:radio_call_sign)}" }
+
+      .col-md-2
+        = vessel_f.input :mmsi_number, label: "MMSI",
+          input_html: { class: "#{vessel_change_css(:mmsi_number)}" }
+
+      .col-md-2
+        = vessel_f.input :hin, label: "HIN",
+          input_html: { class: "#{vessel_change_css(:hin)}" }
