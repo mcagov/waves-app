@@ -65,4 +65,8 @@ module SubmissionHelper
   def categories_collection(_part)
     ["Fishing Vessel"]
   end
+
+  def vessel_change_css(_attr_name)
+    ""
+  end
 end

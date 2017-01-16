@@ -5,27 +5,29 @@
     .row
       .col-md-4
         = vessel_f.input :name, label: "Approved Vessel Name change",
-          input_html: { class: "upcase", readonly: "readonly" }
+          input_html: { class: "upcase #{vessel_change_css(:name)}", readonly: "readonly" }
 
       .col-md-2
         = vessel_f.input :registration_type, label: "Registration Type",
           as: :select,
           collection: registration_types_collection,
           include_blank: false,
-          input_html: { class: "select2 select2_single" }
+          input_html: { class: "select2 select2_single #{vessel_change_css(:registration_type)}" }
 
       .col-md-2
         = vessel_f.input :vessel_category, label: "Vessel Category",
           as: :select,
           collection: categories_collection(:extended),
           include_blank: false,
-          input_html: { class: "select2 select2_single" }
+          input_html: { class: "select2 select2_single #{vessel_change_css(:vessel_category)}" }
 
       .col-md-2
-        = vessel_f.input :vessel_type_other, label: "Type of **General Cargo Ship**"
+        = vessel_f.input :vessel_type_other, label: "Type of **General Cargo Ship**",
+          input_html: { class: "#{vessel_change_css(:vessel_type)}" }
 
       .col-md-2
-        = vessel_f.input :imo_number, label: "IMO Number", as: :numeric
+        = vessel_f.input :imo_number, label: "IMO Number", as: :numeric,
+          input_html: { class: "#{vessel_change_css(:imo_number)}" }
 
     .row
       .col-md-2
@@ -34,11 +36,12 @@
           collection: ports_collection(@submission.part),
           include_blank: false,
           disabled: true,
-          input_html: { class: "select2 select2_single searchable" }
+          input_html: { class: "select2 select2_single searchable #{vessel_change_css(:port_code)}" }
 
       .col-md-2
         = vessel_f.input :port_no, label: "Port Number",
           as: :feedback,
           feedback_label: vessel_f.object.port_code,
           placement: :left,
-          readonly: :readonly
+          readonly: :readonly,
+          input_html: { class: "#{vessel_change_css(:port_no)}" }
