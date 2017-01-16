@@ -21,14 +21,14 @@
             #myTabContent.tab-content
 
               #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "submissions/forms/vessel_fields",
+                = render partial: "submissions/basic/forms/vessel_fields",
                   locals: { submission_f: f, disabled: !@submission.vessel_can_be_edited? }
 
               #owners_tab.tab-pane{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-                #owners_list= render partial: "submissions/forms/owners/list"
+                #owners_list= render partial: "submissions/basic/forms/owners/list"
 
               #agent_tab.tab-pane{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "submissions/forms/agent/list"
+                = render partial: "submissions/basic/forms/agent/list"
 
   .row.no-print
     .col-sm-12
@@ -37,6 +37,6 @@
         Save Application
 
 #owners_modals
-  = render partial: "/submissions/forms/owners/modals"
+  = render partial: "/submissions/basic/forms/owners/modals"
 #agent_modal
-  = render partial: "/submissions/forms/agent/modal"
+  = render partial: "/submissions/basic/forms/agent/modal"

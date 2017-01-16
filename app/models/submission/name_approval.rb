@@ -12,18 +12,8 @@ class Submission::NameApproval
   validate :unique_name_in_port
   validate :unique_port_no_in_port
 
-  def registration_types
-    WavesUtilities::RegistrationType.all.map do |registration_type|
-      [registration_type.to_s.humanize, registration_type]
-    end
-  end
-
-  def ports
-    WavesUtilities::Port.all(part)
-  end
-
   def port_name
-    ports.find { |port| port[1] == port_code }.first
+    WavesUtilities::Port.all.find { |port| port[1] == port_code }.first
   end
 
   def unique_name_in_port

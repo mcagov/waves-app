@@ -48,6 +48,33 @@ module SubmissionHelper
 
   def display_edit_application_link?(submission)
     return false if request.path == edit_submission_path(submission)
+    return false unless submission.part.to_sym == :part_3
     submission.editable? && submission.claimant == current_user
+  end
+
+  def registration_types_collection
+    WavesUtilities::RegistrationType.all.map do |registration_type|
+      [registration_type.to_s.humanize, registration_type]
+    end
+  end
+
+  def ports_collection(part)
+    WavesUtilities::Port.all(part)
+  end
+
+  def categories_collection(_part)
+    ["Fishing Vessel"]
+  end
+
+  def vessel_change_css(attr_name)
+    if @submission.vessel_attribute_changed?(attr_name)
+      "has-changed"
+    else
+      ""
+    end
+  end
+
+  def vessel_change_label(attr_name, label = nil)
+    label || t("simple_form.labels.submission.vessel.#{attr_name}")
   end
 end

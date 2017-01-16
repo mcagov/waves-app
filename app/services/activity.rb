@@ -43,4 +43,8 @@ class Activity
       "/tasks/my-tasks"
     end
   end
+
+  def view_mode
+    @part == :part_3 ? :basic : :extended
+  end
 end

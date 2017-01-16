@@ -99,6 +99,11 @@ class Decorators::Submission < SimpleDelegator
     Task.new(task) == :new_registration
   end
 
+  def vessel_attribute_changed?(attr_name)
+    return false if new_registration?
+    registry_vessel.send(attr_name) != @submission.vessel.send(attr_name)
+  end
+
   def delivery_description
     if electronic_delivery?
       "Electronic delivery"

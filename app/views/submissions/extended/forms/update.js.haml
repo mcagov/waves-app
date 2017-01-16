@@ -1,0 +1,6 @@
+:plain
+  $(".modal-content").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/saved",
+       locals: { submission: @submission })}'
+  );

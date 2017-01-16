@@ -1,5 +1,5 @@
-= render partial: "submissions/info/breadcrumbs", locals: {submission: @submission}
-= render partial: "submissions/info/heading", locals: {submission: @submission}
+= render partial: "submissions/info/breadcrumbs", locals: { submission: @submission }
+= render partial: "submissions/info/heading", locals: { submission: @submission }
 
 - if @name_validated
   .alert.bg-success.text-center.name-validated
@@ -7,7 +7,7 @@
       %i.fa.fa-check
       The name #{@name_approval.name} is available in #{@name_approval.port_name}.
 - else
-  = render partial: "submissions/info/summary", locals: {submission: @submission}
+  = render partial: "submissions/info/summary", locals: { submission: @submission }
 
 = simple_form_for @name_approval, url: submission_name_approval_path(@submission), method: :patch do |f|
   = f.input :part, as: :hidden
@@ -29,46 +29,53 @@
 
         .col-md-2
           = f.input :registration_type, as: :select,
-            collection: @name_approval.registration_types,
+            collection: registration_types_collection,
             label: "Registration Type",
             include_blank: false,
-            required: false,
             input_html: { class: "select2 select2_single" }
 
         .col-md-2
           = f.input :port_code, as: :select,
-          collection: @name_approval.ports,
+          collection: ports_collection(@name_approval.part),
           label: "Port of Choice",
           include_blank: false,
-          required: false,
           input_html: { class: "select2 select2_single searchable" }
 
         .col-md-2.approval_port-no
           = f.input :port_no,
-            as: :feedback_left,
+            as: :feedback,
+            feedback_label: f.object.port_code || "A",
+            placement: :left,
             hint: "leave blank for system-generated port number",
             label: "Port Number",
             required: false
 
         .col-md-2
           #approval_net-tonnage{ class: "#{'hidden' if @name_approval.register_tonnage.present?}"  }
-            = f.input :net_tonnage, as: :feedback_right, label: "Net Tonnage"
+            = f.input :net_tonnage, label: "Net Tonnage",
+              as: :feedback,
+              placement: :right,
+              feedback_label: "NT"
             = link_to '#', id: "display_approval_register_tonnage" do
               %i.fa.fa-refresh
               Switch to Register Tonnage
 
           #approval_register-tonnage{  class: "#{'hidden' unless @name_approval.register_tonnage.present?}"  }
-            = f.input :register_tonnage, as: :feedback_right, label: "Register Tonnage"
+            = f.input :register_tonnage, label: "Register Tonnage",
+              as: :feedback,
+              placement: :right,
+              feedback_label: "RT"
+
             = link_to '#', id: "display_approval_net_tonnage" do
               %i.fa.fa-refresh
               Switch to Net Tonnage
 
-- if @submission.actionable?
+- if @submission.actionable? && @submission.claimant == current_user
   - content_for(:submission_approval_buttons) do
     - if @name_validated
       = render partial: "submission/name_approvals/actions/validated"
     - else
       = render partial: "submission/name_approvals/actions/not_validated"
 
-= render partial: "submissions/actions",
+= render partial: "submissions/actions/base",
   locals: { submission: @submission }

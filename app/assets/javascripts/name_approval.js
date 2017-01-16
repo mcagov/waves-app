@@ -33,5 +33,4 @@ $(document).ready(function() {
 
   // on load
   feedback_port_no();
-  feedback_tonnage();
 });

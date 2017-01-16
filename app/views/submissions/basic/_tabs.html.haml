@@ -27,13 +27,13 @@
 
       #submissionTabContent.tab-content
         #tab_content1.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/vessel", locals: { vessel: submission.vessel }
+          = render partial: "submissions/basic/body/vessel", locals: { vessel: submission.vessel }
 
         #tab_content2.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/owners"
+          = render partial: "submissions/basic/body/owners"
 
         #tab_content3.tab-pane.fade{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/documents", locals: { documents: submission.documents }
+          = render partial: "submissions/basic/body/documents", locals: { documents: submission.documents }
 
         #tab_content4.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "shared/notification_list/base",
@@ -42,12 +42,12 @@
             = render partial: "submissions/actions/add_correspondence", locals: { submission: submission }
 
         #tab_content5.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/payments", locals: { submission: submission }
+          = render partial: "submissions/basic/body/payments", locals: { submission: submission }
 
-          = render partial: "submissions/body/delivery_address", locals: { submission: submission }
+          = render partial: "submissions/basic/body/delivery_address", locals: { submission: submission }
 
         #tab_content6.tab-pane.fade{"aria-labelledby" => "agent-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/agent", locals: { agent: submission.agent }
+          = render partial: "submissions/basic/body/agent", locals: { agent: submission.agent }
 
         #tab_content7.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
-          = render partial: "submissions/body/history"
+          = render partial: "submissions/basic/body/history"

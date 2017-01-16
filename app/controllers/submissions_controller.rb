@@ -37,8 +37,7 @@ class SubmissionsController < InternalPagesController
 
   def update
     if @submission.update_attributes(submission_params)
-      flash[:notice] = "The application has been updated"
-      redirect_to submission_path(@submission)
+      render_update_js
     else
       render :edit
     end
@@ -64,10 +63,7 @@ class SubmissionsController < InternalPagesController
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name, :applicant_is_agent,
       :applicant_email, :vessel_reg_no, :documents_received,
-      vessel: [
-        :name, :hin, :make_and_model, :length_in_meters, :number_of_hulls,
-        :vessel_type, :vessel_type_other, :mmsi_number, :radio_call_sign,
-        :alt_name_1, :alt_name_2, :alt_name_3]
+      vessel: WavesUtilities::Vessel::ATTRIBUTES
     )
   end
 
@@ -104,5 +100,18 @@ class SubmissionsController < InternalPagesController
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
     @submission.state = :unassigned
+  end
+
+  def render_update_js
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "The application has been updated"
+        redirect_to submission_path(@submission)
+      end
+      format.js do
+        view_mode = Activity.new(@submission.part).view_mode
+        render "/submissions/#{view_mode}/forms/update.js"
+      end
+    end
   end
 end

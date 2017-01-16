@@ -15,11 +15,11 @@
                 - agent_f.object = f.object.agent
                 .row
                   .col-md-6
-                    = agent_f.input :name, label: "Full Name", input_html: { class: "upcase agent-name"}, required: false
+                    = agent_f.input :name, label: "Full Name", input_html: { class: "upcase agent-name"}
                   .col-md-3
-                    = agent_f.input :email, label: "Email Address", required: false
+                    = agent_f.input :email, label: "Email Address"
                   .col-md-3
-                    = agent_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }, required: false
+                    = agent_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
 
                 .row
                   .col-md-6
@@ -36,18 +36,18 @@
                 .clearfix
                 .row
                   .col-md-4
-                    = agent_f.input :address_1, input_html: { class: "upcase address-1" }, required: false
+                    = agent_f.input :address_1, input_html: { class: "upcase address-1" }
                   .col-md-4
-                    = agent_f.input :address_2, input_html: { class: "upcase address-2" }, required: false
+                    = agent_f.input :address_2, input_html: { class: "upcase address-2" }
                   .col-md-4
-                    = agent_f.input :address_3, input_html: { class: "upcase address-3" }, required: false
+                    = agent_f.input :address_3, input_html: { class: "upcase address-3" }
                 .row
                   .col-md-4
-                    = agent_f.input :town, label: "Town or City", input_html: { class: "upcase town" }, required: false
+                    = agent_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
                   .col-md-4
-                    = agent_f.input :postcode, input_html: { class: "upcase postcode" }, required: false
+                    = agent_f.input :postcode, input_html: { class: "upcase postcode" }
                   .col-md-4
-                    = agent_f.input :country, collection: WavesUtilities::Country.all, required: false, include_blank: false, selected: (@submission.agent.country || "UNITED KINGDOM")
+                    = agent_f.input :country, collection: WavesUtilities::Country.all, include_blank: false, selected: (@submission.agent.country || "UNITED KINGDOM")
 
           .modal-footer
             = button_tag(type: 'submit', class: "btn btn-primary pull-right") do

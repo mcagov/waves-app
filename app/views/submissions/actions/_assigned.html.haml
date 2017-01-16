@@ -1,13 +1,18 @@
-.row.no-print#actions
-  .col-xs-12
-    = render partial: "submissions/modals/refer", locals: {submission: @submission}
-    = link_to "#refer-application", "data-target" => "#refer-application", "data-toggle" => "modal", class: "btn btn-warning" do
-      %i.fa.fa-pause
-      Refer Application
+= render partial: "submissions/modals/refer", locals: { submission: @submission }
+= link_to "#refer-application", "data-target" => "#refer-application", "data-toggle" => "modal", class: "btn btn-warning" do
+  %i.fa.fa-pause
+  Refer Application
 
-    = render partial: "submissions/modals/cancel", locals: {submission: @submission}
-    = link_to "#cancel-application", "data-target" => "#cancel-application", "data-toggle" => "modal", class: "btn btn-link" do
-      %i.fa.fa-trash
-      Cancel Application
+= render partial: "submissions/modals/cancel", locals: { submission: @submission }
+= link_to "#cancel-application", "data-target" => "#cancel-application", "data-toggle" => "modal", class: "btn btn-link" do
+  %i.fa.fa-trash
+  Cancel Application
 
-    = yield :submission_approval_buttons
+- if @submission.approvable?
+  - content_for(:submission_approval_buttons) do
+    = render partial: "submissions/modals/approve", locals: { submission: @submission }
+    = link_to "#approve-application",
+      data: { target: "#approve-application", toggle: "modal" },
+      class: "btn btn-success btn-lg pull-right" do
+      %i.fa.fa-check
+      = t("submission.approval.inline-btn.#{submission.task}")

@@ -4,10 +4,10 @@
   $('.modal-backdrop').remove();
 
   var agent_list_html = '#{escape_javascript(
-              render partial: "/submissions/forms/agent/list")}';
+              render partial: "/submissions/basic/forms/agent/list")}';
 
   var agent_modal_html = '#{escape_javascript(
-              render partial: "/submissions/forms/agent/modal")}';
+              render partial: "/submissions/basic/forms/agent/modal")}';
 
   $("#agent_list").html(agent_list_html);
   $("#agent_modal").html(agent_modal_html);
