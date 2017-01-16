@@ -37,8 +37,7 @@ class SubmissionsController < InternalPagesController
 
   def update
     if @submission.update_attributes(submission_params)
-      flash[:notice] = "The application has been updated"
-      redirect_to submission_path(@submission)
+      render_update_js
     else
       render :edit
     end
@@ -101,5 +100,18 @@ class SubmissionsController < InternalPagesController
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
     @submission.state = :unassigned
+  end
+
+  def render_update_js
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "The application has been updated"
+        redirect_to submission_path(@submission)
+      end
+      format.js do
+        view_mode = Activity.new(@submission.part).view_mode
+        render "/submissions/#{view_mode}/forms/update.js"
+      end
+    end
   end
 end

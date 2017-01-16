@@ -68,7 +68,7 @@ module SubmissionHelper
 
   def vessel_change_css(attr_name)
     if @submission.registry_info["vessel_info"][attr_name] !=
-      @submission.vessel.send(attr_name)
+       @submission.vessel.send(attr_name)
       "has-changed"
     else
       ""

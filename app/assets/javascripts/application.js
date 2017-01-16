@@ -24,6 +24,7 @@
 //= require ./vendor/custom
 //= require ./vendor/jquery.postcodes
 //
+//= require modals
 //= require name_approval
 //= require postcode_lookup
 //= require submission
