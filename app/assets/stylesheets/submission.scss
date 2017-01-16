@@ -15,6 +15,9 @@ input.radio_buttons.inline label.radio{
 .name-validated {
   border: 1px solid green !important;
 }
-.has-changed {
+.has-changed input {
+  background-color: #E1ED93 !important;
+}
+.has-changed span.select2-selection {
   background-color: #E1ED93 !important;
 }

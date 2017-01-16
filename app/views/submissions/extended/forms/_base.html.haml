@@ -1,4 +1,4 @@
-= simple_form_for @submission, class: "form-vertical" do |submission_f|
+= simple_form_for @submission, remote: true, class: "form-vertical" do |submission_f|
   .row
     .col-md-12
       .x_panel
@@ -20,8 +20,21 @@
 
 
 = content_for :submission_save_buttons do
-  = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
+  = button_tag type: 'submit',
+    data: { target: "#save-incomplete-application", toggle: "modal" },
+    class: "btn btn-primary btn-lg pull-right" do
     %i.fa.fa-floppy-o
     Save Details
 
-= render partial: "submissions/actions/base", locals: {submission: submission}
+  .modal.fade{id: 'save-incomplete-application', role: "dialog", tabindex: "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Saving Application Details
+        %form
+          .modal-body
+            %p.text-center
+              = image_tag 'ajax-loader.gif'
+
