@@ -71,6 +71,6 @@ module SubmissionHelper
   end
 
   def vessel_change_label(attr_name, label = nil)
-    t("simple_form.labels.submission.vessel.#{attr_name}")
+    label || t("simple_form.labels.submission.vessel.#{attr_name}")
   end
 end

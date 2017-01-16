@@ -33,16 +33,38 @@ en:
           alt_name_1: "Alternative Vessel Name #1"
           alt_name_2: "Alternative Vessel Name #2"
           alt_name_3: "Alternative Vessel Name #3"
+          alternative_activity: Alternative Activity
+          area_of_operation: Area
+          builders_address: Builders Address
+          breadth: Breadth
+          classification_society: Classification Society
+          classification_society_other: Any Other Classification Society
+          depth: Depth
           ec_number: EC Number
+          entry_into_service_at: Date of Entry into Service
+          gross_tonnage: Gross Tonnage
           hin: Hull Identification Number (HIN)
+          hull_construction_material: Hull Construction Material
           imo_number: IMO Number
+          keel_laying_date: Keel Laying Date
+          last_registry_country: "Last Registry: Country"
+          last_registry_no: "Last Registry: Identity Number"
+          last_registry_port: "Last Registry: Port"
           length_in_meters: Length
+          length_overall: Length Overall
           make_and_model: Make and Model
           mmsi_number: MMSI Number
+          name_of_builder: Name of Builder
+          net_tonnage: Net Tonnage
           number_of_hulls: Number of Hulls
+          place_of_build: Place of Build
           port_code: Port of Registry
           port_no: Port Number
+          propulsion_system: Propulsion System
+          register_tonnage: Register Tonnage
+          register_length: Registered Length
           radio_call_sign: Radio Call Sign
           vessel_category: Vessel Category
           vessel_type: Vessel Type
           vessel_type_other: Vessel Type (other)
+          yard_number: Yard Number

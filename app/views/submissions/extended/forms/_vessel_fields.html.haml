@@ -2,6 +2,7 @@
 = submission_f.simple_fields_for :vessel do |vessel_f|
   %fieldset{ disabled: disabled }
     - vessel_f.object = submission_f.object.vessel
+    %h2 Identity
     .row
       .col-md-4
         = vessel_f.input :name,
@@ -22,12 +23,12 @@
           as: :select,
           collection: categories_collection(:extended),
           include_blank: false,
-          input_html: { class: "select2 select2_single #{vessel_change_css(:vessel_category)}" }
+          input_html: { class: "upcase select2 select2_single #{vessel_change_css(:vessel_category)}" }
 
       .col-md-2
         = vessel_f.input :vessel_type_other,
           label: vessel_change_label(:vessel_type, "Type of **General Cargo Ship**"),
-          input_html: { class: "#{vessel_change_css(:vessel_type)}" }
+          input_html: { class: "upcase #{vessel_change_css(:vessel_type)}" }
 
       .col-md-2
         = vessel_f.input :imo_number,
@@ -57,19 +58,173 @@
       .col-md-2
         = vessel_f.input :ec_number,
           label: vessel_change_label(:ec_number),
-          input_html: { class: "#{vessel_change_css(:ec_number)}" }
+          input_html: { class: "upcase #{vessel_change_css(:ec_number)}" }
 
       .col-md-2
         = vessel_f.input :radio_call_sign,
           label: vessel_change_label(:radio_call_sign),
-          input_html: { class: "#{vessel_change_css(:radio_call_sign)}" }
+          input_html: { class: "upcase #{vessel_change_css(:radio_call_sign)}" }
 
       .col-md-2
         = vessel_f.input :mmsi_number,
           label: vessel_change_label(:mmsi_number),
-          input_html: { class: "#{vessel_change_css(:mmsi_number)}" }
+          input_html: { class: "upcase #{vessel_change_css(:mmsi_number)}" }
 
       .col-md-2
         = vessel_f.input :hin,
           label: vessel_change_label(:hin),
-          input_html: { class: "#{vessel_change_css(:hin)}" }
+          input_html: { class: "upcase #{vessel_change_css(:hin)}" }
+
+    .row
+      .col-md-2
+        = vessel_f.input :last_registry_country,
+          label: vessel_change_label(:last_registry_country),
+          input_html: { class: "upcase #{vessel_change_css(:last_registry_country)}" }
+
+      .col-md-2
+        = vessel_f.input :last_registry_no,
+          label: vessel_change_label(:last_registry_no),
+          input_html: { class: "upcase #{vessel_change_css(:last_registry_no)}" }
+
+      .col-md-2
+        = vessel_f.input :last_registry_port,
+          label: vessel_change_label(:last_registry_port),
+          input_html: { class: "upcase #{vessel_change_css(:last_registry_port)}" }
+
+    %hr
+    %h2 Operational Information
+    .row
+      .col-md-2
+        = vessel_f.input :classification_society,
+          label: vessel_change_label(:classification_society),
+          input_html: { class: "upcase #{vessel_change_css(:classification_society)}" }
+
+      .col-md-2
+        = vessel_f.input :classification_society_other,
+          label: vessel_change_label(:classification_society_other),
+          input_html: { class: "upcase #{vessel_change_css(:classification_society_other)}" }
+
+      .col-md-2
+        = vessel_f.input :entry_into_service_at,
+          label: vessel_change_label(:entry_into_service_at),
+          input_html: { class: "upcase #{vessel_change_css(:entry_into_service_at)} datepicker" }
+
+      .col-md-2
+        = vessel_f.input :area_of_operation,
+          label: vessel_change_label(:area_of_operation),
+          input_html: { class: "upcase #{vessel_change_css(:area_of_operation)}" }
+
+      .col-md-4
+        = vessel_f.input :alternative_activity,
+          label: vessel_change_label(:alternative_activity),
+          input_html: { class: "upcase #{vessel_change_css(:alternative_activity)}" }
+
+    %hr
+    %h2 Description
+    .row
+      .col-md-2
+        = vessel_f.input :gross_tonnage,
+          label: vessel_change_label(:gross_tonnage),
+          as: :feedback,
+          feedback_label: "GT",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:gross_tonnage)}" }
+
+      .col-md-2
+        = vessel_f.input :net_tonnage,
+          label: vessel_change_label(:net_tonnage),
+          as: :feedback,
+          feedback_label: "NT",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:net_tonnage)}" }
+
+      .col-md-2
+        = vessel_f.input :register_tonnage,
+          label: vessel_change_label(:register_tonnage),
+          as: :feedback,
+          feedback_label: "T",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:register_tonnage)}" }
+
+      .col-md-2
+        = vessel_f.input :register_length,
+          label: vessel_change_label(:register_length),
+          as: :feedback,
+          feedback_label: "m",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:register_length)}" }
+
+      .col-md-2
+        = vessel_f.input :length_overall,
+          label: vessel_change_label(:length_overall),
+          as: :feedback,
+          feedback_label: "m",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:length_overall)}" }
+
+      .col-md-2
+        = vessel_f.input :breadth,
+          label: vessel_change_label(:breadth),
+          as: :feedback,
+          feedback_label: "m",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:breadth)}" }
+
+    .row
+      .col-md-2
+        = vessel_f.input :depth,
+          label: vessel_change_label(:depth),
+          as: :feedback,
+          feedback_label: "m",
+          placement: :right,
+          input_html: { class: "#{vessel_change_css(:depth)}" }
+
+      .col-md-2
+        = vessel_f.input :propulsion_system,
+          label: vessel_change_label(:propulsion_system),
+          input_html: { class: "upcase #{vessel_change_css(:propulsion_system)}" }
+
+      .col-md-2
+        = vessel_f.input :number_of_hulls,
+          label: vessel_change_label(:number_of_hulls),
+          collection: 1..9,
+          as: :select,
+          include_blank: false,
+          input_html: { class: "select2 select2_single #{vessel_change_css(:number_of_hulls)}" }
+
+    %hr
+    %h2 Construction
+    .row
+      .col-md-3
+        = vessel_f.input :name_of_builder,
+          label: vessel_change_label(:name_of_builder),
+          input_html: { class: "upcase #{vessel_change_css(:name_of_builder)}" }
+
+      .col-md-6
+        = vessel_f.input :builders_address,
+          label: vessel_change_label(:builders_address),
+          input_html: { class: "upcase #{vessel_change_css(:builders_address)}" }
+
+      .col-md-3
+        = vessel_f.input :place_of_build,
+          label: vessel_change_label(:place_of_build),
+          input_html: { class: "upcase #{vessel_change_css(:place_of_build)}" }
+
+    .row
+      .col-md-3
+        = vessel_f.input :keel_laying_date,
+          label: vessel_change_label(:keel_laying_date),
+          input_html: { class: "upcase #{vessel_change_css(:keel_laying_date)} datepicker" }
+
+      .col-md-3
+        = vessel_f.input :hull_construction_material,
+          label: vessel_change_label(:hull_construction_material),
+          collection: WavesUtilities::HullConstructionMaterial.all,
+          include_blank: false,
+          input_html: { class: "select2 select2_single #{vessel_change_css(:hull_construction_material)}" }
+
+      .col-md-3
+        = vessel_f.input :yard_number,
+          label: vessel_change_label(:yard_number),
+          input_html: { class: "upcase #{vessel_change_css(:yard_number)}" }
+
