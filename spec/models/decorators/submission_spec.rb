@@ -91,6 +91,34 @@ describe Decorators::Submission, type: :model do
     end
   end
 
+  context "#vessel_attribute_changed?" do
+    subject do
+      described_class.new(submission).vessel_attribute_changed?(:name)
+    end
+
+    context "for a new registration" do
+      let(:submission) { build(:submission, task: :new_registration) }
+      it { expect(subject).to be_falsey }
+    end
+
+    context "when there is a registered_vessel" do
+      context "when the name has not been changed" do
+        let(:submission) { create(:unassigned_change_vessel_submission) }
+        it { expect(subject).to be_falsey }
+      end
+
+      context "when the name has been changed" do
+        let(:submission) do
+          create(
+            :unassigned_change_vessel_submission,
+            changeset: { vessel_info: { name: "NEW NAME" } })
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+    end
+  end
+
   context "#service_level" do
     it "prefers the service_level as :standard over is_urgent?"
   end
