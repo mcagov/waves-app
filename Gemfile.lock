@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/oceanshq/waves-utilities.git
-  revision: e24462ac33dfdd8e3c62355ea781a16fd89fac48
+  revision: ab9d7f477385bf2347e7cce6ac85aef567fe79e1
   specs:
     waves-utilities (0.1.0)
 
