@@ -59,7 +59,8 @@ class Submission::DeclarationsController < InternalPagesController
     respond_to do |format|
       format.js do
         @submission = Decorators::Submission.new(load_submission)
-        render "/submissions/#{@submission.part}/forms/owners/update.js"
+        view_mode = Activity.new(@submission.part).view_mode
+        render "/submissions/#{view_mode}/forms/owners/update.js"
       end
     end
   end

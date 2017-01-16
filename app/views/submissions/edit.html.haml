@@ -1,2 +1,3 @@
 = render partial: "submissions/info/base", locals: { submission: @submission }
-= render partial: "submissions/#{@submission.part}/edit", locals: { submission: @submission }
+= render partial: "submissions/#{Activity.new(@submission.part).view_mode}/edit",
+  locals: { submission: @submission }
