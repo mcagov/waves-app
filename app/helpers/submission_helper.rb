@@ -69,4 +69,8 @@ module SubmissionHelper
   def vessel_change_css(_attr_name)
     ""
   end
+
+  def vessel_change_label(attr_name, label = nil)
+    t("simple_form.labels.submission.vessel.#{attr_name}")
+  end
 end

@@ -33,11 +33,16 @@ en:
           alt_name_1: "Alternative Vessel Name #1"
           alt_name_2: "Alternative Vessel Name #2"
           alt_name_3: "Alternative Vessel Name #3"
+          ec_number: EC Number
+          hin: Hull Identification Number (HIN)
+          imo_number: IMO Number
+          length_in_meters: Length
+          make_and_model: Make and Model
+          mmsi_number: MMSI Number
+          number_of_hulls: Number of Hulls
+          port_code: Port of Registry
+          port_no: Port Number
+          radio_call_sign: Radio Call Sign
+          vessel_category: Vessel Category
           vessel_type: Vessel Type
           vessel_type_other: Vessel Type (other)
-          hin: Hull Identification Number (HIN)
-          make_and_model: Make and Model
-          length_in_meters: Length
-          number_of_hulls: Number of Hulls
-          mmsi_number: MMSI Number
-          radio_call_sign: Radio Call Sign

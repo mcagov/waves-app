@@ -4,34 +4,41 @@
     - vessel_f.object = submission_f.object.vessel
     .row
       .col-md-4
-        = vessel_f.input :name, label: "Approved Vessel Name change",
+        = vessel_f.input :name,
+          label: vessel_change_label(:name, "Approved Vessel Name change"),
           input_html: { class: "upcase #{vessel_change_css(:name)}", readonly: "readonly" }
 
       .col-md-2
-        = vessel_f.input :registration_type, label: "Registration Type",
+        = vessel_f.input :registration_type,
+          label: vessel_change_label(:registration_type, "Registration Type"),
           as: :select,
           collection: registration_types_collection,
           include_blank: false,
           input_html: { class: "select2 select2_single #{vessel_change_css(:registration_type)}" }
 
       .col-md-2
-        = vessel_f.input :vessel_category, label: "Vessel Category",
+        = vessel_f.input :vessel_category,
+          label: vessel_change_label(:vessel_category),
           as: :select,
           collection: categories_collection(:extended),
           include_blank: false,
           input_html: { class: "select2 select2_single #{vessel_change_css(:vessel_category)}" }
 
       .col-md-2
-        = vessel_f.input :vessel_type_other, label: "Type of **General Cargo Ship**",
+        = vessel_f.input :vessel_type_other,
+          label: vessel_change_label(:vessel_type, "Type of **General Cargo Ship**"),
           input_html: { class: "#{vessel_change_css(:vessel_type)}" }
 
       .col-md-2
-        = vessel_f.input :imo_number, label: "IMO Number", as: :numeric,
+        = vessel_f.input :imo_number,
+          label: vessel_change_label(:imo_number),
+          as: :numeric,
           input_html: { class: "#{vessel_change_css(:imo_number)}" }
 
     .row
       .col-md-2
-        = vessel_f.input :port_code, label: "Port of Registry",
+        = vessel_f.input :port_code,
+          label: vessel_change_label(:port_code),
           as: :select,
           collection: ports_collection(@submission.part),
           include_blank: false,
@@ -39,7 +46,8 @@
           input_html: { class: "select2 select2_single searchable #{vessel_change_css(:port_code)}" }
 
       .col-md-2
-        = vessel_f.input :port_no, label: "Port Number",
+        = vessel_f.input :port_no,
+          label: vessel_change_label(:port_no),
           as: :feedback,
           feedback_label: vessel_f.object.port_code,
           placement: :left,
@@ -47,17 +55,21 @@
           input_html: { class: "#{vessel_change_css(:port_no)}" }
 
       .col-md-2
-        = vessel_f.input :ec_number, label: "EC Number",
+        = vessel_f.input :ec_number,
+          label: vessel_change_label(:ec_number),
           input_html: { class: "#{vessel_change_css(:ec_number)}" }
 
       .col-md-2
-        = vessel_f.input :radio_call_sign, label: "Radio call sign",
+        = vessel_f.input :radio_call_sign,
+          label: vessel_change_label(:radio_call_sign),
           input_html: { class: "#{vessel_change_css(:radio_call_sign)}" }
 
       .col-md-2
-        = vessel_f.input :mmsi_number, label: "MMSI",
+        = vessel_f.input :mmsi_number,
+          label: vessel_change_label(:mmsi_number),
           input_html: { class: "#{vessel_change_css(:mmsi_number)}" }
 
       .col-md-2
-        = vessel_f.input :hin, label: "HIN",
+        = vessel_f.input :hin,
+          label: vessel_change_label(:hin),
           input_html: { class: "#{vessel_change_css(:hin)}" }
