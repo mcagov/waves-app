@@ -949,11 +949,11 @@ Metrics/BlockNesting:
 
 Metrics/ClassLength:
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 120
 
 Metrics/ModuleLength:
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 120
 
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:
