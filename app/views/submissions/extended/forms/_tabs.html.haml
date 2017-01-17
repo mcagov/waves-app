@@ -39,7 +39,7 @@
               WIP: Engines
 
             #owners_tab.tab-pane{class: "active", "aria-labelledby" => "owners-tab", :role => "tabpanel"}
-              = render partial: "submissions/extended/forms/owners/base",
+              #owners_list= render partial: "submissions/extended/forms/owners/base",
                 locals: { submission_f: submission_f }
 
             #mortgages_tab.tab-pane{class: "active", "aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
