@@ -18,6 +18,9 @@ class Declaration < ApplicationRecord
 
   attr_accessor :declaration_signed
 
+  scope :individual, -> { where("entity_type = 'individual'") }
+  scope :corporate, -> { where("entity_type = 'corporate'") }
+
   def owner
     owner = Declaration::Owner.new(changeset || {})
     owner.declared_at = completed_at
