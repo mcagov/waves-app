@@ -1,0 +1,29 @@
+%h2 Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th Nationality
+    %th Address
+    %th
+  %tbody
+    - @submission.declarations.each do |declaration|
+      - owner = declaration.owner
+      %tr
+        %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
+        %td.owner-email= owner.email
+        %td.owner-phone_number= owner.phone_number
+        %td.owner-nationality= owner.nationality
+        %td.owner-address= owner.inline_address
+        %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
+
+    - @submission.removed_registry_owners.each do |owner|
+      %tr
+        %td.owner-name.strike= owner
+        %td.strike= owner.email
+        %td.strike= owner.phone_number
+        %td.strike= owner.nationality
+        %td.strike{ colspan: 2 }= owner.inline_address
+
+= render partial: "submissions/basic/forms/owners/actions/add_owner"
