@@ -5,8 +5,18 @@
         method: :post,
         remote: true,
         url: submission_declarations_path(@submission) do |f|
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title New Individual Owner
-        = render partial: "submissions/extended/forms/owners/fields/base", locals: { f: f }
+
+
+        / WIP - enable a New Corporate Owner form
+
+        - if modal_id == "new_declaration"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Individual Owner
+          = render partial: "submissions/extended/forms/owners/fields/base", locals: { f: f }
+        - else
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title WIP: New Corporate Owner
