@@ -84,7 +84,7 @@ class Builders::RegistryBuilder
       @submission.owners.each { |owner| build_owner(owner) }
     end
 
-    def build_owner(owner)
+    def build_owner(owner) # rubocop:disable Metrics/MethodLength
       @vessel.owners.create(
         name: owner.name, nationality: owner.nationality,
         email: owner.email, phone_number: owner.phone_number,
@@ -93,7 +93,9 @@ class Builders::RegistryBuilder
         town: owner.town, postcode: owner.postcode,
         country: owner.country,
         imo_number: owner.imo_number,
-        eligibility_status: owner.eligibility_status)
+        eligibility_status: owner.eligibility_status,
+        registration_number: owner.registration_number,
+        date_of_incorporation: owner.date_of_incorporation)
     end
 
     def build_agent
