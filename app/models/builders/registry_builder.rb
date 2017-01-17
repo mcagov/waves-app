@@ -91,7 +91,9 @@ class Builders::RegistryBuilder
         address_1: owner.address_1, address_2: owner.address_2,
         address_3: owner.address_3,
         town: owner.town, postcode: owner.postcode,
-        country: owner.country)
+        country: owner.country,
+        imo_number: owner.imo_number,
+        eligibility_status: owner.eligibility_status)
     end
 
     def build_agent

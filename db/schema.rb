@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116162413) do
+ActiveRecord::Schema.define(version: 20170117141942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,10 @@ ActiveRecord::Schema.define(version: 20170116162413) do
     t.string   "county"
     t.string   "postcode"
     t.string   "country"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "imo_number"
+    t.string   "eligibility_status"
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
