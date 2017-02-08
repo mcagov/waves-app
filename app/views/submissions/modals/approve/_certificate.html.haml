@@ -1,7 +1,7 @@
 - unless Task.new(submission.task).duplicates_certificate?
   .row
     .col-md-12
-      - approval_f.object.registration_starts_at = Date.today
+      - approval_f.object.registration_starts_at = Time.now.to_s(:datetimepicker)
       = approval_f.input :registration_starts_at, label: "Date and Time to take effect from", input_html: { class: "datetimepicker" }
 .row
   .col-md-12
