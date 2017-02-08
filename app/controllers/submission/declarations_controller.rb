@@ -36,6 +36,12 @@ class Submission::DeclarationsController < InternalPagesController
     render_update_js
   end
 
+  def shares_held
+    load_declaration
+    @declaration.update_attributes(
+      shares_held: declaration_params[:shares_held])
+  end
+
   protected
 
   def load_submission
@@ -50,7 +56,7 @@ class Submission::DeclarationsController < InternalPagesController
 
   def declaration_params
     params.require(:declaration).permit(
-      :id, :_destroy, :declaration_signed, :entity_type,
+      :id, :_destroy, :declaration_signed, :entity_type, :shares_held,
       owner: [:name, :email, :phone_number, :imo_number, :eligibility_status,
               :nationality, :address_1, :address_2, :address_3, :town,
               :postcode, :registration_number, :date_of_incorporation])

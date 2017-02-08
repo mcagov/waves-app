@@ -11,3 +11,6 @@ $(document).ready(function() {
 $(document).on('keyup','.upcase.form-control', {} ,function(e){
   $(this).val($(this).val().toUpperCase());
 })
+$(document).ready(function() {
+  $('a.edit_in_place').editable();
+});

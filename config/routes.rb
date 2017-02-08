@@ -50,6 +50,7 @@ Rails.application.routes.draw do
               only: [:create, :update, :destroy] do
       member do
         post :complete
+        put :shares_held
       end
     end
     resource :name_approval,

@@ -14,8 +14,12 @@
           %tr
             %td= declaration.owner.name
             %td
-              %a{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"}
-                = declaration.shares_held
+              = link_to declaration.shares_held, "#",
+                class: :edit_in_place,
+                data: { title: "Shares Held Outright",
+                name: "declaration[shares_held]",
+                value: declaration.shares_held,
+                url: shares_held_submission_declaration_path(@submission, declaration) }
 
   .col-md-6
     %h4 Shares Held Jointly
