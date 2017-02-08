@@ -19,15 +19,15 @@ describe "User save owner details", js: :true do
       .to eq(:status_b)
   end
 
-  xscenario "Corporate owner" do
+  scenario "Corporate owner" do
     visit_name_approved_part_2_submission
     click_on("Owners & Shareholding")
     click_on("Add Corporate Owner")
 
-    fill_in("Name", with: "Bob Inc")
+    fill_in("Company Name", with: "Bob Inc")
     fill_in("Registration Number", with: "1234567")
-    fill_in("Date of Incorporation ", with: "12/01/2017")
-    click_on("Save Individual Owner")
+    fill_in("Date of Incorporation", with: "12/01/2017")
+    click_on("Save Corporate Owner")
 
     expect(page).to have_css(".owner-registration_number", text: "1234567")
   end
