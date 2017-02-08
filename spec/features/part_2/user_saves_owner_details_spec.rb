@@ -30,5 +30,7 @@ describe "User save owner details", js: :true do
     click_on("Save Corporate Owner")
 
     expect(page).to have_css(".owner-registration_number", text: "1234567")
+    expect(Declaration.corporate.last.owner.date_of_incorporation)
+      .to eq("12/01/2017")
   end
 end
