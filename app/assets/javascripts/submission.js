@@ -24,16 +24,6 @@ $(document).ready(function() {
     return false;
   });
 
-  // Submission#edit: Validate the owner name field (in modal)
-  $('form#new_declaration').on('submit', function() {
-    var owner_name_field = 'form#new_declaration #declaration_owner_name';
-
-    if ($(owner_name_field).val().length == 0) {
-      $(owner_name_field).addClass('field-error');
-      return false;
-    }
-  });
-
   // On the the submission details page we display a font-awesome star next
   // to "similar" attributes in the "similar vessels" pane.
   // With this script, we set the reciprocal attribute in the vessel pane.
