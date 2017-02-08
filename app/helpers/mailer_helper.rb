@@ -16,13 +16,14 @@ module MailerHelper
   end
 
   def if_no_certificate
-    "If you do not receive a Certificate of British Registry within 20 days "\
-    "of today's date, please contact #{contact_us_for_part}"
+    "If you do not receive a response from us within 20 days (or 5 days if "\
+    "you paid for a Premium Service) of today's date, please contact "\
+    "#{contact_us_for_part}"\
   end
 
   def quote_ref_no
-    "Please quote the Application Reference No. "\
-    "listed above in all correspondence."
+    "Please quote the Application Reference Number listed above in all "\
+    "correspondence relating to this application."
   end
 
   def will_be_sent
@@ -36,7 +37,9 @@ module MailerHelper
   end
 
   def application_processing_time
-    "Your application may take up to 20 days to process. Please make a "\
-    "note of the Application Reference No detailed below:"
+    "Please be aware that your application may take up to 20 working days "\
+    "to process, unless a premium service was applied for in which case it "\
+    "may take up to 3 working days to process. Please make a note "\
+    "of the Application Reference Number detailed below:"
   end
 end
