@@ -1,0 +1,74 @@
+%hr
+%h2
+  Total shares allocated:
+  %strong 64
+.row
+  .col-md-6
+    %h4 Shares Held Outright
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Name
+        %th.col-md-3 Shares
+      %tbody
+        %tr
+          %td John Smith
+          %td
+            %a#owner-shares-numbers-1{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 20
+        %tr
+          %td Sally Smith
+          %td
+            %a#owner-shares-numbers-3{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 20
+
+  .col-md-6
+    %h4 Shares Held Jointly
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Owners
+        %th.col-md-3 Shares
+      %tbody
+        %tr
+          %td
+            %table.table{style: 'margin-bottom: 0px !important;'}
+              %tbody
+                %tr
+                  %td
+                    Sally Smith
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+                %tr
+                  %td
+                    John Smith
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+            = link_to '#add-owner-to-group', class: 'btn btn-link', "data-target" => "#add-owner-to-group", "data-toggle" => "modal", style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+              %i.fa.fa-plus
+              Add Owner to Group
+          %td
+            %a#owner-shares-numbers-2{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 10
+        %tr
+          %td
+            %table.table{style: 'margin-bottom: 0px !important;'}
+              %tbody
+                %tr
+                  %td
+                    Sally Smith
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+                %tr
+                  %td
+                    ZTanker Corp Ltd
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+                %tr
+                  %td
+                    GreenCore Inc
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+                %tr
+                  %td
+                    Beefcake Inc
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+                %tr
+                  %td
+                    Lavafire LLC
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+          %td
+            %a#owner-shares-numbers-4{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 14
+    = link_to '#', class: 'btn btn-link', style: 'color: green; padding: 0px !important' do
+      %i.fa.fa-plus
+      Add Group of Joint Shareholders
