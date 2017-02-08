@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require select2
 //= require tinymce
 //

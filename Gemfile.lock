@@ -67,6 +67,9 @@ GEM
     bcrypt (3.1.11)
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
+    bootstrap-editable-rails (0.0.9)
+      railties (>= 3.1)
+      sass-rails
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -415,6 +418,7 @@ DEPENDENCIES
   auto_increment
   awesome_print
   bootstrap-datepicker-rails
+  bootstrap-editable-rails
   bootstrap-sass (~> 3.3.6)
   bootstrap3-datetimepicker-rails
   brakeman
