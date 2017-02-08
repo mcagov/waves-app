@@ -19,7 +19,6 @@ describe "User save owner details", js: :true do
       .to eq(:status_b)
 
     click_on("BOB BOLD")
-    save_and_open_page
     fill_in("IMO Number", with: "7654321")
     click_on("Save Individual Owner")
 
@@ -31,7 +30,7 @@ describe "User save owner details", js: :true do
     click_on("Owners & Shareholding")
     click_on("Add Corporate Owner")
 
-    fill_in("Company Name", with: "Bob Inc")
+    fill_in("Company Name", with: "BOB INC")
     fill_in("Registration Number", with: "1234567")
     fill_in("Date of Incorporation", with: "12/01/2017")
     click_on("Save Corporate Owner")
@@ -39,5 +38,11 @@ describe "User save owner details", js: :true do
     expect(page).to have_css(".owner-registration_number", text: "1234567")
     expect(Declaration.corporate.last.owner.date_of_incorporation)
       .to eq("12/01/2017")
+
+    click_on("BOB INC")
+    fill_in("Registration Number", with: "7654321")
+    click_on("Save Corporate Owner")
+
+    expect(page).to have_css(".owner-registration_number", text: "7654321")
   end
 end
