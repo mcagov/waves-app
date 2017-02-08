@@ -6,7 +6,7 @@ describe "User save owner details", js: :true do
     click_on("Owners & Shareholding")
     click_on("Add Individual Owner")
 
-    fill_in("Name", with: "Bob")
+    fill_in("Name", with: "BOB BOLD")
     fill_in("IMO Number", with: "1234567")
     select("(b)", from: "Status")
     within(".declaration_declaration_signed") { choose("Yes") }
@@ -17,6 +17,13 @@ describe "User save owner details", js: :true do
 
     expect(Submission.last.declarations.last.owner.eligibility_status.to_sym)
       .to eq(:status_b)
+
+    click_on("BOB BOLD")
+    save_and_open_page
+    fill_in("IMO Number", with: "7654321")
+    click_on("Save Individual Owner")
+
+    expect(page).to have_css(".owner-imo_number", text: "7654321")
   end
 
   scenario "Corporate owner" do
