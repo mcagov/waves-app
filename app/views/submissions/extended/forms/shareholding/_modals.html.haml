@@ -1,4 +1,5 @@
 - @submission.declaration_groups.each do |declaration_group|
+  / Add an owner to an existing declaration_group, id: #{declaration_group.id}
   .modal.fade{id: "add-owner-to-group_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
     .modal-dialog.modal-sm
       .modal-content
@@ -15,7 +16,7 @@
           .modal-body
             .row
               .col-md-6
-                = f.input :declaration_group_id, as: :select,
+                = f.input :declaration_id, as: :select,
                   collection: @submission.declarations.map{ |d| [d.owner.name, d.id] },
                   include_blank: false,
                   input_html: { class: "select2 select2_single" },
@@ -23,6 +24,7 @@
           .modal-footer
             = f.submit "Add Owner to Group", class: "btn btn-primary"
 
+/ Create a new declaration_group and add an owner to that group
 .modal.fade{id: 'add-new-group', role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-sm
     .modal-content

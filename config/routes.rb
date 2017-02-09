@@ -57,7 +57,10 @@ Rails.application.routes.draw do
               controller: "submission/declaration_groups",
               only: [:create] do
     end
-
+    resources :declaration_group_members,
+              controller: "submission/declaration_group_members",
+              only: [:create] do
+    end
     resource :shareholding,
              controller: "submission/shareholdings",
              only: [:show]
