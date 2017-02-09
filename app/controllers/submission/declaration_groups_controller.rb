@@ -6,8 +6,10 @@ class Submission::DeclarationGroupsController < InternalPagesController
     @declaration_group.submission = @submission
     @declaration_group.save
 
+    @modal_id = params[:modal_id]
+
     respond_to do |format|
-      format.js
+      format.js { render "/submissions/extended/forms/shareholding/update" }
     end
   end
 

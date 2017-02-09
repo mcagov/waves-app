@@ -35,6 +35,8 @@
         = simple_form_for Declaration::Group.new,
           remote: true,
           url: submission_declaration_groups_path(@submission) do |f|
+          = hidden_field_tag "modal_id", "add-new-group"
+
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} ×
