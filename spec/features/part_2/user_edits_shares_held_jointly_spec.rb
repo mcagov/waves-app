@@ -41,4 +41,14 @@ describe "User edits shares held jointly", js: :true do
     end
     expect(Declaration::Group.count).to eq(0)
   end
+
+  scenario "editing the number of shares" do
+    expect(page).to have_css("#total_shares", text: "allocated: 0")
+
+    within("#shares_held_jointly") { click_on("0") }
+    find(".editable-input input").set("16")
+
+    first(".editable-submit").click
+    expect(page).to have_css("#total_shares", text: "allocated: 16")
+  end
 end
