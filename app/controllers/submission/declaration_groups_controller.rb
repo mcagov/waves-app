@@ -13,6 +13,13 @@ class Submission::DeclarationGroupsController < InternalPagesController
     end
   end
 
+  def shares_held
+    @declaration_group = Declaration::Group.find(params[:id])
+
+    @declaration_group.update_attributes(
+      shares_held: declaration_group_params[:shares_held])
+  end
+
   protected
 
   def load_submission
@@ -22,6 +29,7 @@ class Submission::DeclarationGroupsController < InternalPagesController
   end
 
   def declaration_group_params
-    params.require(:declaration_group).permit(:default_group_member)
+    params.require(:declaration_group)
+          .permit(:default_group_member, :shares_held)
   end
 end

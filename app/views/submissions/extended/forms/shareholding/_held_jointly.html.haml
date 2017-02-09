@@ -28,7 +28,12 @@
             %i.fa.fa-plus
             Add Owner to Group
         %td.shares_held
-          = declaration_group.shares_held
+          = link_to declaration_group.shares_held, "#",
+            class: :edit_in_place,
+            data: { title: "Shares Held Outright",
+            name: "declaration_group[shares_held]",
+            value: declaration_group.shares_held,
+            url: shares_held_submission_declaration_group_path(@submission, declaration_group) }
 
 = link_to '#add-new-group',
   class: 'btn btn-link',
