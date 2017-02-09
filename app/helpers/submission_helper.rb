@@ -77,4 +77,12 @@ module SubmissionHelper
   def vessel_change_label(attr_name, label = nil)
     label || t("simple_form.labels.submission.vessel.#{attr_name}")
   end
+
+  def declaration_select_options
+    list = @submission.declarations.map do |d|
+      [d.owner.name, d.id]
+    end
+
+    list.sort { |a, b| a[0] <=> b[0] }
+  end
 end

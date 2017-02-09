@@ -17,7 +17,7 @@
             .row
               .col-md-6
                 = f.input :declaration_id, as: :select,
-                  collection: @submission.declarations.map{ |d| [d.owner.name, d.id] },
+                  collection: declaration_select_options,
                   include_blank: false,
                   input_html: { class: "select2 select2_single" },
                   label: "Owner Name"
@@ -41,7 +41,7 @@
           .row
             .col-md-6
               = f.input :default_group_member, as: :select,
-                collection: @submission.declarations.map{ |d| [d.owner.name, d.id] },
+                collection: declaration_select_options,
                 include_blank: false,
                 input_html: { class: "select2 select2_single" },
                 label: "Owner Name"
