@@ -1,0 +1,16 @@
+%h4 Shares Held Outright
+%table.table.table-striped.table-bordered#shares_held_outright
+  %thead
+    %th Name
+    %th.col-md-3 Shares
+  %tbody
+    - @submission.declarations.each do |declaration|
+      %tr
+        %td= declaration.owner.name
+        %td
+          = link_to declaration.shares_held, "#",
+            class: :edit_in_place,
+            data: { title: "Shares Held Outright",
+            name: "declaration[shares_held]",
+            value: declaration.shares_held,
+            url: shares_held_submission_declaration_path(@submission, declaration) }

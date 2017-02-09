@@ -1,0 +1,29 @@
+%h4 Shares Held Jointly
+%table.table.table-striped.table-bordered
+  %thead
+    %th Owners
+    %th.col-md-3 Shares
+  %tbody
+    - @submission.declaration_groups.each do |declaration_group|
+      %tr
+        %td
+          %table.table{style: 'margin-bottom: 0px !important;'}
+            %tbody
+              - declaration_group.declarations.each do |declaration|
+                %tr
+                  %td.owner_name
+                    = declaration.owner
+                    %a.pull-right{href: '#', style: 'color: red'} remove
+
+          = link_to '#add-owner-to-group', class: 'btn btn-link', "data-target" => "#add-owner-to-group", "data-toggle" => "modal", style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+            %i.fa.fa-plus
+            Add Owner to Group
+        %td.shares_held
+          = declaration_group.shares_held
+
+= link_to '#add-new-group',
+  class: 'btn btn-link',
+  data: { target: "#add-new-group", toggle: "modal" },
+  style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+  %i.fa.fa-plus
+  Add Group of Joint Shareholders

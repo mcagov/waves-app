@@ -3,39 +3,10 @@
   = render partial: "/submissions/extended/forms/shareholding/total",
     locals: { submission: @submission }
 .row
-  .col-md-6
-    %h4 Shares Held Outright
-    %table.table.table-striped.table-bordered#shares_held_outright
-      %thead
-        %th Name
-        %th.col-md-3 Shares
-      %tbody
-        - @submission.declarations.each do |declaration|
-          %tr
-            %td= declaration.owner.name
-            %td
-              = link_to declaration.shares_held, "#",
-                class: :edit_in_place,
-                data: { title: "Shares Held Outright",
-                name: "declaration[shares_held]",
-                value: declaration.shares_held,
-                url: shares_held_submission_declaration_path(@submission, declaration) }
-
-
-  .col-md-6
-    %h4 Shares Held Jointly
-    %table.table.table-striped.table-bordered
-      %thead
-        %th Owners
-        %th.col-md-3 Shares
-      %tbody
-
-    = link_to '#add-new-group',
-      class: 'btn btn-link',
-      data: { target: "#add-new-group", toggle: "modal" },
-      style: 'color: green; padding: 0px !important; margin-top: 20px;' do
-      %i.fa.fa-plus
-      Add Group of Joint Shareholders
+  .col-md-6#shares_held_outright
+    = render partial: "/submissions/extended/forms/shareholding/held_outright"
+  .col-md-6#shares_held_jointly
+    = render partial: "/submissions/extended/forms/shareholding/held_jointly"
 
 
 - content_for :shareholding_modals do
