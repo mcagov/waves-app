@@ -21,6 +21,46 @@
                 value: declaration.shares_held,
                 url: shares_held_submission_declaration_path(@submission, declaration) }
 
+
+  .col-md-6
+    %h4 Shares Held Jointly
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Owners
+        %th.col-md-3 Shares
+      %tbody
+
+    = link_to '#add-new-group',
+      class: 'btn btn-link',
+      data: { target: "#add-new-group", toggle: "modal" },
+      style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+      %i.fa.fa-plus
+      Add Group of Joint Shareholders
+
+
+- content_for :shareholding_modals do
+  .modal.fade{id: 'add-new-group', role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-sm
+      .modal-content
+        = simple_form_for Declaration::Group.new,
+          remote: true,
+          url: submission_declaration_groups_path(@submission) do |f|
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title Add Owner to New Group
+          .modal-body
+            .row
+              .col-md-6
+                = f.input :default_group_member, as: :select,
+                  collection: @submission.declarations.map{ |d| [d.owner.name, d.id] },
+                  include_blank: false,
+                  input_html: { class: "select2 select2_single" },
+                  label: "Owner Name"
+          .modal-footer
+            = f.submit "Add Owner to New Group", class: "btn btn-primary"
+
+.row
   .col-md-6
     %h4 Shares Held Jointly
     %table.table.table-striped.table-bordered
@@ -71,6 +111,4 @@
                     %a.pull-right{href: '#', style: 'color: red'} remove
           %td
             %a#owner-shares-numbers-4{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 14
-    = link_to '#', class: 'btn btn-link', style: 'color: green; padding: 0px !important' do
-      %i.fa.fa-plus
-      Add Group of Joint Shareholders
+

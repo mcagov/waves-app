@@ -53,6 +53,11 @@ Rails.application.routes.draw do
         put :shares_held
       end
     end
+    resources :declaration_groups,
+              controller: "submission/declaration_groups",
+              only: [:create] do
+    end
+
     resource :shareholding,
              controller: "submission/shareholdings",
              only: [:show]

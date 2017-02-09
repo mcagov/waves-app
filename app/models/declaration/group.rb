@@ -4,4 +4,6 @@ class Declaration::Group < ApplicationRecord
            class_name: "Declaration::GroupMember",
            foreign_key: :declaration_group_id
   has_many :declarations, through: :declaration_group_members
+
+  attr_accessor :default_group_member
 end
