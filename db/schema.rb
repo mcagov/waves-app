@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208165545) do
+ActiveRecord::Schema.define(version: 20170209114300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(version: 20170208165545) do
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
+  end
+
+  create_table "declaration_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "declaration_id"
+    t.uuid     "declaration_group_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "declaration_groups", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.integer  "shares_held",   default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "declarations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

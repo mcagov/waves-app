@@ -25,8 +25,8 @@ module Submission::Associations
       base.has_many :incomplete_declarations, lambda {
         where("state = 'incomplete'")
           .order("created_at asc")
-      },
-                    class_name: "Declaration"
+      }, class_name: "Declaration"
+      base.has_many :declaration_groups, class_name: "Declaration::Group"
     end
 
     def misc_associations(base)
