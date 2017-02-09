@@ -8,3 +8,8 @@
        render partial: "/submissions/extended/forms/shareholding/held_jointly",
        locals: { submission: @submission })}'
   );
+
+  $("#shareholding_modals").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/shareholding/modals")}'
+  );
