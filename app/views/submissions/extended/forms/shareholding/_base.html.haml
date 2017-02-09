@@ -8,7 +8,6 @@
   .col-md-6#shares_held_jointly
     = render partial: "/submissions/extended/forms/shareholding/held_jointly"
 
-
 - content_for :shareholding_modals do
   .modal.fade{id: 'add-new-group', role: "dialog", tabindex: "-1"}
     .modal-dialog.modal-sm
@@ -30,56 +29,3 @@
                   label: "Owner Name"
           .modal-footer
             = f.submit "Add Owner to New Group", class: "btn btn-primary"
-
-.row
-  .col-md-6
-    %h4 Shares Held Jointly
-    %table.table.table-striped.table-bordered
-      %thead
-        %th Owners
-        %th.col-md-3 Shares
-      %tbody
-        %tr
-          %td
-            %table.table{style: 'margin-bottom: 0px !important;'}
-              %tbody
-                %tr
-                  %td
-                    Sally Smith
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-                %tr
-                  %td
-                    John Smith
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-            = link_to '#add-owner-to-group', class: 'btn btn-link', "data-target" => "#add-owner-to-group", "data-toggle" => "modal", style: 'color: green; padding: 0px !important; margin-top: 20px;' do
-              %i.fa.fa-plus
-              Add Owner to Group
-          %td
-            %a#owner-shares-numbers-2{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 10
-        %tr
-          %td
-            %table.table{style: 'margin-bottom: 0px !important;'}
-              %tbody
-                %tr
-                  %td
-                    Sally Smith
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-                %tr
-                  %td
-                    ZTanker Corp Ltd
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-                %tr
-                  %td
-                    GreenCore Inc
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-                %tr
-                  %td
-                    Beefcake Inc
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-                %tr
-                  %td
-                    Lavafire LLC
-                    %a.pull-right{href: '#', style: 'color: red'} remove
-          %td
-            %a#owner-shares-numbers-4{"data-placement" => "bottom", "data-title" => "Shares held outright", "data-type" => "text", :href => "#"} 14
-
