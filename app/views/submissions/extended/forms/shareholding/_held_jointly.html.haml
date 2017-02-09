@@ -9,11 +9,17 @@
         %td
           %table.table{style: 'margin-bottom: 0px !important;'}
             %tbody
-              - declaration_group.declarations.each do |declaration|
+              - declaration_group.declaration_group_members.each do |declaration_group_member|
                 %tr
                   %td.owner_name
-                    = declaration.owner
-                    %a.pull-right{href: '#', style: 'color: red'} remove
+                    = declaration_group_member.declaration.owner
+                    = link_to "remove",
+                      submission_declaration_group_member_path(@submission, declaration_group_member),
+                      id: "destroy_group_member_#{declaration_group_member.id}",
+                      remote: true,
+                      method: :delete,
+                      style: "color: red",
+                      class: "pull-right"
 
           = link_to "#add-owner-to-group_#{declaration_group.id}",
             class: 'btn btn-link',

@@ -12,6 +12,16 @@ class Submission::DeclarationGroupMembersController < InternalPagesController
     end
   end
 
+  def destroy
+    Declaration::GroupMember.find(params[:id]).destroy
+
+    @modal_id = params[:modal_id]
+
+    respond_to do |format|
+      format.js { render "/submissions/extended/forms/shareholding/update" }
+    end
+  end
+
   protected
 
   def load_submission
