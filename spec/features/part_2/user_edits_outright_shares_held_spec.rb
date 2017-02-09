@@ -9,9 +9,6 @@ describe "User edits outright shares held", js: :true do
     find(".editable-input input").set("16")
 
     first(".editable-submit").click
-
-    # WIP: save shares_held,
-    # see: ac13ebe "User edits vessel details"
-    # expect(page).to have_css("#total_shares", text: "allocated: 16")
+    expect(page).to have_css("#total_shares", text: "allocated: 16")
   end
 end

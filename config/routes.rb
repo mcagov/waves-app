@@ -53,6 +53,9 @@ Rails.application.routes.draw do
         put :shares_held
       end
     end
+    resource :shareholding,
+             controller: "submission/shareholdings",
+             only: [:show]
     resource :name_approval,
              controller: "submission/name_approvals",
              only: [:show, :update]

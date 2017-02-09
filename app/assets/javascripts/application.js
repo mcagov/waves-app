@@ -29,6 +29,7 @@
 //= require modals
 //= require name_approval
 //= require postcode_lookup
+//= require shareholding
 //= require submission
 //= require ui-helpers
 

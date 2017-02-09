@@ -1,8 +1,9 @@
 class Submission::ShareHolding
-  def initialize(_submission)
+  def initialize(submission)
+    @submission = submission
   end
 
   def total
-    0
+    @submission.declarations.sum(&:shares_held)
   end
 end
