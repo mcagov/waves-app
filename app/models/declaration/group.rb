@@ -6,4 +6,12 @@ class Declaration::Group < ApplicationRecord
   has_many :declarations, through: :declaration_group_members
 
   attr_accessor :default_group_member
+
+  after_create :save_default_group_member
+
+  def save_default_group_member
+    if default_group_member
+      declaration_group_members.create(declaration_id: default_group_member)
+    end
+  end
 end
