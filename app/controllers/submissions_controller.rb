@@ -50,7 +50,7 @@ class SubmissionsController < InternalPagesController
       Submission.in_part(current_activity.part).includes(
         [
           { payments: [:remittance] }, { declarations: [:notification] },
-          { declaration_groups: [:declaration_group_members] },
+          { declaration_groups: [:declarations] },
           { documents: [:assets, :actioned_by] },
           { work_logs: [:actioned_by] },
           :incomplete_declarations,
