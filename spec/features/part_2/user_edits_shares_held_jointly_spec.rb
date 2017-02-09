@@ -3,6 +3,8 @@ require "rails_helper"
 describe "User edits shares held jointly", js: :true do
   before do
     visit_name_approved_part_2_submission
+    click_on("Owners & Shareholding")
+
     @owner_name = Declaration.last.owner.name
 
     click_on("Add Group of Joint Shareholders")
