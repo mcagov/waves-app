@@ -1,0 +1,10 @@
+:plain
+  $("#add-new-group").modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+
+  $("#shares_held_jointly").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/shareholding/held_jointly",
+       locals: { submission: @submission })}'
+  );
