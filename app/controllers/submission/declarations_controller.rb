@@ -31,7 +31,7 @@ class Submission::DeclarationsController < InternalPagesController
 
   def destroy
     load_declaration
-    @declaration.delete
+    @declaration.destroy
 
     render_update_js
   end
