@@ -5,7 +5,12 @@
     $('.modal-backdrop').remove();
   }
 
-  var owners_list_html = '#{escape_javascript(
-              render :partial => "/submissions/extended/forms/owners/base")}';
+  $("#owners_list").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/owners/base")}'
+  );
 
-  $("#owners_list").html(owners_list_html);
+  $("#shareholding").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/shareholding/base")}'
+  );

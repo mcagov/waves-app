@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "User edits shares held outright", js: :true do
-  scenario "with one owner" do
+  scenario "in general" do
     visit_name_approved_part_2_submission
     click_on("Owners & Shareholding")
 
@@ -9,8 +9,20 @@ describe "User edits shares held outright", js: :true do
 
     within("#shares_held_outright") { click_on("0") }
     find(".editable-input input").set("16")
-
     first(".editable-submit").click
+
     expect(page).to have_css("#total_shares", text: "allocated: 16")
+
+    # Here we add Bob via the UI and check that the shareholding div
+    # is re-rendered, allowing us to assign him some shares
+    click_on("Add Individual Owner")
+    fill_in("Name", with: "BOB BOLD")
+    click_on("Save Individual Owner")
+
+    within("#shares_held_outright") { click_on("0") }
+    find(".editable-input input").set("1")
+    first(".editable-submit").click
+
+    expect(page).to have_css("#total_shares", text: "allocated: 17")
   end
 end
