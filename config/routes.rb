@@ -93,6 +93,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :managing_owner,
+             only: [:update],
+             controller: "submission/managing_owners"
+
     resource :name_approval,
              controller: "submission/name_approvals",
              only: [:show, :update]
