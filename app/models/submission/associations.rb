@@ -21,6 +21,9 @@ module Submission::Associations
     end
 
     def declaration_associations(base)
+      base.belongs_to :correspondent,
+                      class_name: "Submission::Correspondent",
+                      required: false
       base.has_many :declarations, -> { order("created_at asc") }
       base.has_many :incomplete_declarations, lambda {
         where("state = 'incomplete'")
