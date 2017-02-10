@@ -7,12 +7,14 @@ class ShareHolding
     shares_held_outright + shares_held_jointly
   end
 
-  def complete?
-
-  end
-
-  def invalid?
-
+  def status
+    if total < 64
+      :incomplete
+    elsif total == 64
+      :complete
+    else
+      :excessive
+    end
   end
 
   private
