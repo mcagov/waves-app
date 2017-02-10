@@ -9,3 +9,12 @@
     = render partial: "/submissions/extended/forms/shareholding/held_jointly"
 
 = render partial: "/submissions/extended/forms/shareholding/modals"
+
+:javascript
+  $('a.edit_in_place').editable({
+    success:
+      function(e, editable) {
+        var submission_id = $('#submission-id').html();
+        $.ajax({  url: '/submissions/' + submission_id + '/shareholding' });
+      }
+  });

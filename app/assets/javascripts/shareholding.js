@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $('a.edit_in_place').editable({
     success:
       function(e, editable) {
