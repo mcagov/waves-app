@@ -26,10 +26,10 @@
 //= require ./vendor/custom
 //= require ./vendor/jquery.postcodes
 //
+//= require edit_in_place
 //= require modals
 //= require name_approval
 //= require postcode_lookup
-//= require shareholding
 //= require submission
 //= require ui-helpers
 
