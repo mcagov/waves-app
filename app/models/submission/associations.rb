@@ -20,6 +20,7 @@ module Submission::Associations
       base.has_many :documents, as: :noteable
     end
 
+    # rubocop:disable Metrics/MethodLength
     def declaration_associations(base)
       base.belongs_to :correspondent,
                       class_name: "Submission::Correspondent",
@@ -33,13 +34,16 @@ module Submission::Associations
       }, class_name: "Declaration"
 
       base.has_many :declaration_groups, class_name: "Declaration::Group"
+
+      base.belongs_to :managing_owner,
+                      class_name: "Submission::ManagingOwner",
+                      required: false
     end
 
     def misc_associations(base)
       base.has_many :work_logs
     end
 
-    # rubocop:disable Metrics/MethodLength
     def notification_associations(base)
       base.has_many :notifications, as: :notifiable
 
