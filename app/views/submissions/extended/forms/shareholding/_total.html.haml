@@ -1,4 +1,11 @@
 Total shares allocated:
-%strong= Submission::ShareHolding.new(submission).total
+%strong= ShareHolding.new(submission).total
+
 .hidden
   #submission-id= submission.id
+
+
+/ "14 shares un-allocated"
+/ and
+/ "Invalid share allocation"
+/ (if they've allocated too many shares)

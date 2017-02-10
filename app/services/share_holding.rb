@@ -1,10 +1,18 @@
-class Submission::ShareHolding
+class ShareHolding
   def initialize(submission)
     @submission = submission
   end
 
   def total
     shares_held_outright + shares_held_jointly
+  end
+
+  def complete?
+
+  end
+
+  def invalid?
+
   end
 
   private
