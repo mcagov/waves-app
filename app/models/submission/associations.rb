@@ -24,11 +24,14 @@ module Submission::Associations
       base.belongs_to :correspondent,
                       class_name: "Submission::Correspondent",
                       required: false
+
       base.has_many :declarations, -> { order("created_at asc") }
+
       base.has_many :incomplete_declarations, lambda {
         where("state = 'incomplete'")
           .order("created_at asc")
       }, class_name: "Declaration"
+
       base.has_many :declaration_groups, class_name: "Declaration::Group"
     end
 
@@ -39,12 +42,15 @@ module Submission::Associations
     # rubocop:disable Metrics/MethodLength
     def notification_associations(base)
       base.has_many :notifications, as: :notifiable
+
       base.has_one :cancellation, -> { order("created_at desc").limit(1) },
                    as: :notifiable,
                    class_name: "Notification::Cancellation"
+
       base.has_one :referral, -> { order("created_at desc").limit(1) },
                    as: :notifiable,
                    class_name: "Notification::Referral"
+
       base.has_one :application_receipt,
                    -> { order("created_at desc").limit(1) },
                    as: :notifiable,
