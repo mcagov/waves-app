@@ -15,6 +15,11 @@
        render partial: "/submissions/extended/forms/shareholding/base")}'
   );
 
+  $("#correspondent").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/correspondent/base")}'
+  );
+
   $('a.edit_shareholding_in_place').editable({
     success:
       function(e, editable) {

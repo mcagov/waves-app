@@ -53,6 +53,10 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "submission/correspondences"
 
+    resource :correspondent,
+             only: [:update],
+             controller: "submission/correspondents"
+
     resources :declaration_group_members,
               controller: "submission/declaration_group_members",
               only: [:create, :destroy]
