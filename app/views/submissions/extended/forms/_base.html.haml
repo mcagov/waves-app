@@ -1,5 +1,4 @@
-= simple_form_for @submission, remote: true, class: "form-vertical" do |submission_f|
-  = render partial: "submissions/extended/forms/tabs", locals: { submission_f: submission_f}
+= render partial: "submissions/extended/forms/tabs"
 
 = content_for :submission_save_buttons do
   = button_tag type: 'submit',
