@@ -4,6 +4,10 @@ class Declaration < ApplicationRecord
 
   has_one :notification, as: :notifiable
 
+  has_many :declaration_group_members,
+           class_name: "Declaration::GroupMember",
+           dependent: :destroy
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
