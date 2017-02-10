@@ -17,6 +17,10 @@ class ShareHolding
     end
   end
 
+  def unallocated
+    status == :incomplete ? 64 - total : 0
+  end
+
   private
 
   def shares_held_outright
