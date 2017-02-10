@@ -18,10 +18,3 @@
           .modal-body
             %p.text-center
               = image_tag 'ajax-loader.gif'
-
-/ Note, we ensure that the modals are rendered **outside** the form.
-#owners_modals
-  = render partial: "/submissions/extended/forms/owners/modals"
-
-#shareholding_modals
-  = render partial: "/submissions/extended/forms/shareholding/modals"
