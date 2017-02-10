@@ -1,11 +1,12 @@
-Total shares allocated:
-%strong= ShareHolding.new(submission).total
+- shareholding = ShareHolding.new(submission)
+%h2
+  Total shares allocated:
+  %strong= shareholding.total
+  - if shareholding.status == :incomplete
+    %small
+      (#{shareholding.unallocated} shares un-allocated)
+  - elsif shareholding.status == :excessive
+    %small.red (Invalid share allocation)
 
-.hidden
-  #submission-id= submission.id
-
-
-/ "14 shares un-allocated"
-/ and
-/ "Invalid share allocation"
-/ (if they've allocated too many shares)
+  .hidden
+    #submission-id= submission.id
