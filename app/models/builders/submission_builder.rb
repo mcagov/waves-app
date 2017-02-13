@@ -35,7 +35,7 @@ class Builders::SubmissionBuilder
     end
 
     def build_declarations
-      # Here we need to protect against re-building the owner declaraions
+      # Here we need to protect against re-building the owner declarations.
       # We can never be sure how many times a submission will pass through
       # this builder, so the rule is: if there are some declarations,
       # don't build anymore!
