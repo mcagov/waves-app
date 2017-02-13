@@ -12,8 +12,8 @@ describe Builders::DeclarationBuilder do
     end
 
     let(:declarations_required) { true }
-    let(:alice) { build(:declaration_owner, email: "alice@example.com") }
-    let(:bob) { build(:declaration_owner) }
+    let(:alice) { build(:registered_owner, email: "alice@example.com") }
+    let(:bob) { build(:registered_owner) }
     let!(:submission) { Submission.last }
 
     it "has a completed declaration for alice" do
