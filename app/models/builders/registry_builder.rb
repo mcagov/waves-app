@@ -100,7 +100,8 @@ class Builders::RegistryBuilder
         date_of_incorporation: owner.date_of_incorporation,
         managing_owner: @submission.managing_owner_id == declaration.id,
         correspondent: @submission.correspondent_id == declaration.id,
-        entity_type: declaration.entity_type)
+        entity_type: declaration.entity_type,
+        shares_held: declaration.shares_held)
     end
     # rubocop:enable all
 

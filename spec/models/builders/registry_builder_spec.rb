@@ -86,6 +86,14 @@ describe Builders::RegistryBuilder do
         expect(registered_vessel.owners.last).to be_correspondent
       end
     end
+
+    context "shareholding" do
+      let(:alice) { registered_vessel.owners.first }
+
+      it "notes that alice has 20 shares" do
+        expect(alice.shares_held).to eq(20)
+      end
+    end
   end
 end
 
@@ -97,7 +105,7 @@ def init_basic_submission
              agent: build(:submission_agent),
            })
 
-  submission.declarations.create(owner: { name: "ALICE" })
+  submission.declarations.create(owner: { name: "ALICE" }, shares_held: 20)
 
   submission.declarations.create(
     entity_type: :corporate, owner: { name: "BOB LTD" })
