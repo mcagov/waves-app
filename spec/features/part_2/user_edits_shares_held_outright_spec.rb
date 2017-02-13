@@ -26,13 +26,5 @@ describe "User edits shares held outright", js: :true do
     first(".editable-submit").click
 
     expect(page).to have_css("#total_shares", text: "allocated: 64")
-
-    within("#shares_held_outright") { click_on("48") }
-    find(".editable-input input").set("49")
-    first(".editable-submit").click
-
-    expect(page)
-      .to have_css(
-        "#total_shares", text: "allocated: 65 (Invalid share allocation)")
   end
 end
