@@ -130,6 +130,7 @@ Payments come in two flavours and have a polymorphic association with the `Payme
 
 ##### Declarations
 In the submission context, we store owner details in the declarations table. The changes requested are stored as JSON objects in declaration#changeset. One owner maps to one declaration, and a submission can have many declarations.
+Note that, while a changeset may contain `owners`, these are ignored once the `Builder::SubmissionBuilder` has run and the declarations have been built.
 
 ##### The Registry
 The Registry consists of:
