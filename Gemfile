@@ -51,6 +51,7 @@ gem "will_paginate-bootstrap"
 
 group :development do
   gem "guard-rspec", require: false
+  gem "rails-erd"
   gem "web-console"
 end
 
