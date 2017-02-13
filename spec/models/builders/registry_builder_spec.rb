@@ -2,18 +2,10 @@ require "rails_helper"
 
 describe Builders::RegistryBuilder do
   context ".create" do
+    let(:submission) { init_basic_submission }
     before { described_class.create(submission) }
 
-    let!(:submission) do
-      create(:assigned_submission,
-             changeset: {
-               vessel_info: build(:submission_vessel, name: "BOB BARGE"),
-               owners: [{ name: "ALICE" }, { name: "BOB" }],
-               agent: build(:submission_agent),
-             })
-    end
-
-    let(:registered_vessel) { submission.reload.registered_vessel }
+    let(:registered_vessel) { Register::Vessel.last }
 
     it "creates the expected vessel name" do
       expect(registered_vessel.name).to eq("BOB BARGE")
@@ -74,4 +66,17 @@ describe Builders::RegistryBuilder do
       end
     end
   end
+end
+
+def init_basic_submission
+  submission =
+    create(:submission,
+           changeset: {
+             vessel_info: build(:submission_vessel, name: "BOB BARGE"),
+             agent: build(:submission_agent),
+           })
+
+  submission.declarations.create(owner: { name: "ALICE" })
+  submission.declarations.create(owner: { name: "BOB" })
+  submission
 end
