@@ -65,6 +65,20 @@ describe Builders::RegistryBuilder do
         end
       end
     end
+
+    context "with an extended submission type (ie. not part_3)" do
+      let(:submission) { init_extended_submission }
+
+      it "creates the managing_owner" do
+        expect(registered_vessel.owners.first).to be_managing_owner
+        expect(registered_vessel.owners.last).not_to be_managing_owner
+      end
+
+      it "creates the correspondent" do
+        expect(registered_vessel.owners.first).not_to be_correspondent
+        expect(registered_vessel.owners.last).to be_correspondent
+      end
+    end
   end
 end
 
@@ -78,5 +92,13 @@ def init_basic_submission
 
   submission.declarations.create(owner: { name: "ALICE" })
   submission.declarations.create(owner: { name: "BOB" })
+  submission
+end
+
+def init_extended_submission
+  submission = init_basic_submission
+  submission.update_attributes(
+    managing_owner_id: submission.declarations.first.id,
+    correspondent_id: submission.declarations.last.id)
   submission
 end

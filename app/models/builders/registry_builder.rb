@@ -81,10 +81,12 @@ class Builders::RegistryBuilder
 
     def build_owners
       @vessel.owners.delete_all
-      @submission.owners.each { |owner| build_owner(owner) }
+      @submission.declarations.each { |declaration| build_owner(declaration) }
     end
 
-    def build_owner(owner) # rubocop:disable Metrics/MethodLength
+    # rubocop:disable all
+    def build_owner(declaration)
+      owner = declaration.owner
       @vessel.owners.create(
         name: owner.name, nationality: owner.nationality,
         email: owner.email, phone_number: owner.phone_number,
@@ -95,8 +97,11 @@ class Builders::RegistryBuilder
         imo_number: owner.imo_number,
         eligibility_status: owner.eligibility_status,
         registration_number: owner.registration_number,
-        date_of_incorporation: owner.date_of_incorporation)
+        date_of_incorporation: owner.date_of_incorporation,
+        managing_owner: @submission.managing_owner_id == declaration.id,
+        correspondent: @submission.correspondent_id == declaration.id)
     end
+    # rubocop:enable all
 
     def build_agent
       return unless @submission.agent
