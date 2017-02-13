@@ -1,0 +1,7 @@
+- shareholding = ShareHolding.new(submission)
+%h2
+  Total shares allocated:
+  %strong= shareholding.total
+  = share_allocation_message(shareholding).html_safe
+  .hidden
+    #submission-id= submission.id

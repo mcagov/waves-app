@@ -1,0 +1,49 @@
+- @submission.declaration_groups.each do |declaration_group|
+  / Add an owner to an existing declaration_group, id: #{declaration_group.id}
+  .modal.fade{id: "add-owner-to-group_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-sm
+      .modal-content
+        = simple_form_for Declaration::GroupMember.new(declaration_group: declaration_group),
+          remote: true,
+          url: submission_declaration_group_members_path(@submission) do |f|
+          = f.input :declaration_group_id, as: :hidden
+          = hidden_field_tag "modal_id", "add-owner-to-group_#{declaration_group.id}"
+
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title Add Owner to Group
+          .modal-body
+            .row
+              .col-md-6
+                = f.input :declaration_id, as: :select,
+                  collection: declaration_select_options,
+                  include_blank: false,
+                  input_html: { class: "select2 select2_single" },
+                  label: "Owner Name"
+          .modal-footer
+            = f.submit "Add Owner to Group", class: "btn btn-primary"
+
+/ Create a new declaration_group and add an owner to that group
+.modal.fade{id: 'add-new-group', role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      = simple_form_for Declaration::Group.new,
+        remote: true,
+        url: submission_declaration_groups_path(@submission) do |f|
+        = hidden_field_tag "modal_id", "add-new-group"
+
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Add Owner to New Group
+        .modal-body
+          .row
+            .col-md-6
+              = f.input :default_group_member, as: :select,
+                collection: declaration_select_options,
+                include_blank: false,
+                input_html: { class: "select2 select2_single" },
+                label: "Owner Name"
+        .modal-footer
+          = f.submit "Add Owner to New Group", class: "btn btn-primary"

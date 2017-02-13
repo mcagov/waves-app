@@ -1,0 +1,12 @@
+%hr
+#total_shares
+  = render partial: "/submissions/extended/forms/shareholding/total",
+    locals: { submission: @submission }
+.row
+  .col-md-6#shares_held_outright
+    = render partial: "/submissions/extended/forms/shareholding/held_outright"
+  .col-md-6#shares_held_jointly
+    = render partial: "/submissions/extended/forms/shareholding/held_jointly"
+
+= render partial: "/submissions/extended/forms/shareholding/modals"
+

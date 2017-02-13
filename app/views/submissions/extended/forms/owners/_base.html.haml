@@ -1,0 +1,69 @@
+%h2 Individual Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th IMO #
+    %th Nationality
+    %th Email
+    %th Phone
+    %th Declaration
+    %th
+  %tbody
+    - @submission.declarations.individual.each do |declaration|
+      - owner = declaration.owner
+      %tr
+        %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
+        %td.owner-imo_number= owner.imo_number
+        %td.owner-nationality= owner.nationality
+        %td.owner-email= owner.email
+        %td.owner-phone_number= owner.phone_number
+        %td.owner-declaration= "Signed" if declaration.completed?
+        %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
+
+    - @submission.removed_registry_owners.each do |owner|
+      %tr
+        %td.owner-name.strike= owner
+        %td.owner-imo_number.strike= owner.imo_number
+        %td.owner-nationality.strike= owner.nationality
+        %td.owner-email.strike= owner.email
+        %td.owner-phone_number.strike= owner.phone_number
+        %td.owner-phone_number.strike{ colspan: 2 }= owner.phone_number
+
+= render partial: "submissions/basic/forms/owners/actions/add_owner"
+
+%h2 Corporate Owners
+%table.table.table-striped
+  %thead
+    %th Company Name
+    %th IMO #
+    %th Country of Incorporation
+    %th Registration Number
+    %th Email
+    %th Phone
+    %th Declaration
+    %th
+  %tbody
+    - @submission.declarations.corporate.each do |declaration|
+      - owner = declaration.owner
+      %tr
+        %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
+        %td.owner-imo_number= owner.imo_number
+        %td.owner-nationality= owner.nationality
+        %td.owner-registration_number= owner.registration_number
+        %td.owner-email= owner.email
+        %td.owner-phone_number= owner.phone_number
+        %td.owner-declaration= "Signed" if declaration.completed?
+        %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
+
+    - @submission.removed_registry_owners.each do |owner|
+      %tr
+        %td.owner-name.strike= owner
+        %td.owner-imo_number.strike= owner.imo_number
+        %td.owner-nationality.strike= owner.nationality
+        %td.owner-registration_number.strike= owner.registration_number
+        %td.owner-email.strike= owner.email
+        %td.owner-phone_number.strike= owner.phone_number
+        %td.owner-phone_number.strike{ colspan: 2 }= owner.phone_number
+
+= render partial: "submissions/extended/forms/owners/actions/add_corporate_owner"
+= render partial: "/submissions/extended/forms/owners/modals"

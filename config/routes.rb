@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :declarations, only: [:show, :update]
-      resources :submissions, only: [:create]
-      resources :payments, only: [:create]
-      resources :vessel_types, only: [:index]
       resources :client_sessions, only: [:create]
+      resources :declarations, only: [:show, :update]
+      resources :payments, only: [:create]
+      resources :submissions, only: [:create]
+      resources :vessel_types, only: [:index]
       resources :vessels, only: [:show]
     end
   end
@@ -24,7 +24,9 @@ Rails.application.routes.draw do
         post :re_open
         post :lock
       end
+
       resources :payments
+
       collection do
         get :this_week
         get :this_month
@@ -44,27 +46,42 @@ Rails.application.routes.draw do
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
+
     resource :approval, controller: "submission/approvals", only: [:create]
+
+    resource :correspondence,
+             only: [:create],
+             controller: "submission/correspondences"
+
+    resource :correspondent,
+             only: [:update],
+             controller: "submission/correspondents"
+
+    resources :declaration_group_members,
+              controller: "submission/declaration_group_members",
+              only: [:create, :destroy]
+
+    resources :declaration_groups,
+              controller: "submission/declaration_groups",
+              only: [:create] do
+      member do
+        put :shares_held
+      end
+    end
+
     resources :declarations,
               controller: "submission/declarations",
               only: [:create, :update, :destroy] do
       member do
         post :complete
+        put :shares_held
       end
     end
-    resource :name_approval,
-             controller: "submission/name_approvals",
-             only: [:show, :update]
-    resource :signature,
-             controller: "submission/signatures",
-             only: [:show, :update]
-    resource :states, controller: "submission/states", only: [:show] do
-      member do
-        post :claim
-        post :unclaim
-        post :claim_referral
-      end
-    end
+
+    resource :documents,
+             only: [:create],
+             controller: "submission/documents"
+
     resource :finance_payment,
              only: [:show, :edit],
              controller: "submission/finance_payments" do
@@ -75,12 +92,30 @@ Rails.application.routes.draw do
         patch :unlink
       end
     end
-    resource :correspondence,
-             only: [:create],
-             controller: "submission/correspondences"
-    resource :documents,
-             only: [:create],
-             controller: "submission/documents"
+
+    resource :managing_owner,
+             only: [:update],
+             controller: "submission/managing_owners"
+
+    resource :name_approval,
+             controller: "submission/name_approvals",
+             only: [:show, :update]
+
+    resource :shareholding,
+             controller: "submission/shareholdings",
+             only: [:show]
+
+    resource :signature,
+             controller: "submission/signatures",
+             only: [:show, :update]
+
+    resource :states, controller: "submission/states", only: [:show] do
+      member do
+        post :claim
+        post :unclaim
+        post :claim_referral
+      end
+    end
   end
 
   resources :print_jobs, only: [:show, :index]
@@ -95,24 +130,31 @@ Rails.application.routes.draw do
     resource :closure,
              only: [:create],
              controller: "registered_vessel/closure"
+
     resource :cold_storage,
              only: [:create],
              controller: "registered_vessel/cold_storage"
+
     resource :current_transcript,
              only: [:show],
              controller: "registered_vessel/current_transcript"
+
     resource :correspondence,
              only: [:create],
              controller: "registered_vessel/correspondences"
+
     resource :historic_transcript,
              only: [:show],
              controller: "registered_vessel/historic_transcript"
+
     resource :note,
              only: [:create],
              controller: "registered_vessel/notes"
+
     resource :registration_certificate,
              only: [:show],
              controller: "registered_vessel/registration_certificate"
+
     resource :manual_override,
              only: [:create],
              controller: "registered_vessel/manual_override"

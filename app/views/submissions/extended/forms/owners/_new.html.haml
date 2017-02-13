@@ -1,0 +1,20 @@
+.modal.fade{id: modal_id, role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for Declaration.new(submission_id: @submission.id),
+        method: :post,
+        remote: true,
+        url: submission_declarations_path(@submission) do |f|
+
+        - if modal_id == "new_declaration"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Individual Owner
+          = render partial: "submissions/extended/forms/owners/fields/individual", locals: { f: f }
+        - else
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-titleNew Corporate Owner
+            = render partial: "submissions/extended/forms/owners/fields/corporate", locals: { f: f }

@@ -4,6 +4,10 @@ class Declaration < ApplicationRecord
 
   has_one :notification, as: :notifiable
 
+  has_many :declaration_group_members,
+           class_name: "Declaration::GroupMember",
+           dependent: :destroy
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
@@ -17,6 +21,9 @@ class Declaration < ApplicationRecord
   end
 
   attr_accessor :declaration_signed
+
+  scope :individual, -> { where("entity_type = 'individual'") }
+  scope :corporate, -> { where("entity_type = 'corporate'") }
 
   def owner
     owner = Declaration::Owner.new(changeset || {})

@@ -1,0 +1,5 @@
+- @submission.declarations.each do |declaration|
+  = render partial: "submissions/extended/forms/owners/edit",
+           locals: { declaration: declaration, modal_id:  "declaration_#{declaration.id}" }
+= render partial: "submissions/extended/forms/owners/new", locals: { modal_id:  "new_declaration" }
+= render partial: "submissions/extended/forms/owners/new", locals: { modal_id:  "new_corporate_declaration" }

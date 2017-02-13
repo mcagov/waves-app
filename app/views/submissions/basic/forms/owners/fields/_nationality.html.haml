@@ -1,0 +1,2 @@
+- label ||= "Country of Nationality"
+= owner_f.input :nationality, label: label, as: :select, collection: WavesUtilities::Nationality.all, input_html: { class: "upcase" }

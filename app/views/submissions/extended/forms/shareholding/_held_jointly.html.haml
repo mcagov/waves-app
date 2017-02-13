@@ -1,0 +1,43 @@
+%h4 Shares Held Jointly
+%table.table.table-striped.table-bordered
+  %thead
+    %th Owners
+    %th.col-md-3 Shares
+  %tbody
+    - @submission.declaration_groups.each do |declaration_group|
+      %tr
+        %td
+          %table.table{style: 'margin-bottom: 0px !important;'}
+            %tbody
+              - declaration_group.declaration_group_members.each do |declaration_group_member|
+                %tr
+                  %td.owner_name
+                    = declaration_group_member.declaration.owner
+                    = link_to "remove",
+                      submission_declaration_group_member_path(@submission, declaration_group_member),
+                      id: "destroy_group_member_#{declaration_group_member.id}",
+                      remote: true,
+                      method: :delete,
+                      style: "color: red",
+                      class: "pull-right"
+
+          = link_to "#add-owner-to-group_#{declaration_group.id}",
+            class: 'btn btn-link',
+            data: { target: "#add-owner-to-group_#{declaration_group.id}", toggle: "modal" },
+            style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+            %i.fa.fa-plus
+            Add Owner to Group
+        %td.shares_held
+          = link_to declaration_group.shares_held, "#",
+            class: :edit_shareholding_in_place,
+            data: { title: "Shares Held Outright",
+            name: "declaration_group[shares_held]",
+            value: declaration_group.shares_held,
+            url: shares_held_submission_declaration_group_path(@submission, declaration_group) }
+
+= link_to '#add-new-group',
+  class: 'btn btn-link',
+  data: { target: "#add-new-group", toggle: "modal" },
+  style: 'color: green; padding: 0px !important; margin-top: 20px;' do
+  %i.fa.fa-plus
+  Add Group of Joint Shareholders

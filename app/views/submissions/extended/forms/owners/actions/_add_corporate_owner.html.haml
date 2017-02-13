@@ -1,0 +1,8 @@
+- if @submission.ownership_can_be_changed?
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_corporate_declaration",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Corporate Owner

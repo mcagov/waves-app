@@ -1,0 +1,29 @@
+:plain
+  if ("#{ @modal_id }".length > 0) {
+    $("##{ @modal_id }").modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
+
+  $("#owners_list").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/owners/base")}'
+  );
+
+  $("#shareholding").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/shareholding/base")}'
+  );
+
+  $("#correspondent").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/correspondent/base")}'
+  );
+
+  $('a.edit_shareholding_in_place').editable({
+    success:
+      function(e, editable) {
+        var submission_id = $('#submission-id').html();
+        $.ajax({  url: '/submissions/' + submission_id + '/shareholding' });
+      }
+  });

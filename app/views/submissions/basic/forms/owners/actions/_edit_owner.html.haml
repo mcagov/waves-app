@@ -1,0 +1,7 @@
+- if @submission.address_can_be_changed?
+  = link_to '#',
+    "data-target" => "#declaration_#{declaration.id}",
+    "data-toggle" => "modal" do
+    = declaration.owner
+- else
+  = declaration.owner

@@ -1,0 +1,9 @@
+- if @submission.ownership_can_be_changed?
+  = link_to submission_declaration_path(@submission, declaration),
+    class: 'btn-link pull-right',
+    method: :delete,
+    remote: true,
+    data: { confirm: "Are you sure you want to remove this owner?" },
+    style: 'color: red;' do
+    %i.fa.fa-trash
+    Remove

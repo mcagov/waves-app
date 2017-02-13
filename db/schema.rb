@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116162413) do
+ActiveRecord::Schema.define(version: 20170210161431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,22 +64,42 @@ ActiveRecord::Schema.define(version: 20170116162413) do
     t.string   "county"
     t.string   "postcode"
     t.string   "country"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "imo_number"
+    t.string   "eligibility_status"
+    t.string   "registration_number"
+    t.datetime "date_of_incorporation"
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
   end
 
+  create_table "declaration_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "declaration_id"
+    t.uuid     "declaration_group_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "declaration_groups", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.integer  "shares_held",   default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "declarations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
     t.string   "state"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.uuid     "notification_id"
     t.datetime "completed_at"
     t.json     "changeset"
     t.uuid     "completed_by_id"
+    t.string   "entity_type",     default: "individual"
+    t.integer  "shares_held",     default: 0
     t.index ["completed_by_id"], name: "index_declarations_on_completed_by_id", using: :btree
     t.index ["notification_id"], name: "index_declarations_on_notification_id", using: :btree
     t.index ["state"], name: "index_declarations_on_state", using: :btree
@@ -288,6 +308,8 @@ ActiveRecord::Schema.define(version: 20170116162413) do
     t.string   "applicant_email"
     t.boolean  "applicant_is_agent",            default: false
     t.string   "documents_received"
+    t.uuid     "correspondent_id"
+    t.uuid     "managing_owner_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree

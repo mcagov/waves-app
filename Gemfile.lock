@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/oceanshq/waves-utilities.git
-  revision: ab9d7f477385bf2347e7cce6ac85aef567fe79e1
+  revision: 9c38babf2559d0020d84edb4804ddfa50f9facd4
   specs:
     waves-utilities (0.1.0)
 
@@ -67,6 +67,9 @@ GEM
     bcrypt (3.1.11)
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
+    bootstrap-editable-rails (0.0.9)
+      railties (>= 3.1)
+      sass-rails
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -415,6 +418,7 @@ DEPENDENCIES
   auto_increment
   awesome_print
   bootstrap-datepicker-rails
+  bootstrap-editable-rails
   bootstrap-sass (~> 3.3.6)
   bootstrap3-datetimepicker-rails
   brakeman

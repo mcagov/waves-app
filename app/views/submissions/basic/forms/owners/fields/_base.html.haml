@@ -1,0 +1,20 @@
+.modal-body
+  .postcode-lookup
+    = f.simple_fields_for :owner do |owner_f|
+      - owner_f.object = f.object.owner
+      .row
+        .col-md-3
+          = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: owner_f, f: f }
+        .col-md-3
+          = owner_f.input :email
+        .col-md-3
+          = owner_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
+        .col-md-3
+          = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: owner_f }
+
+      = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: owner_f }
+
+      = render partial: "submissions/basic/forms/owners/fields/declaration", locals: { f: f }
+.modal-footer
+  = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
+    Save Individual Owner

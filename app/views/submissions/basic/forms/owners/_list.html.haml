@@ -11,28 +11,12 @@
     - @submission.declarations.each do |declaration|
       - owner = declaration.owner
       %tr
-        %td.owner-name
-          - if @submission.address_can_be_changed?
-            = link_to '#',
-              "data-target" => "#declaration_#{declaration.id}",
-              "data-toggle" => "modal" do
-              = owner
-          - else
-            = owner
+        %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
         %td.owner-email= owner.email
         %td.owner-phone_number= owner.phone_number
         %td.owner-nationality= owner.nationality
         %td.owner-address= owner.inline_address
-        %td
-          - if @submission.ownership_can_be_changed?
-            = link_to submission_declaration_path(@submission, declaration),
-              class: 'btn-link',
-              method: :delete,
-              remote: true,
-              data: { confirm: "Are you sure you want to remove this owner?" },
-              style: 'color: red;' do
-              %i.fa.fa-trash
-              Remove
+        %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
     - @submission.removed_registry_owners.each do |owner|
       %tr
@@ -42,11 +26,4 @@
         %td.strike= owner.nationality
         %td.strike{ colspan: 2 }= owner.inline_address
 
-- if @submission.ownership_can_be_changed?
-  .row
-    .col-md-12
-      = link_to '#', class: 'btn btn-primary',
-        "data-target" => "#new_declaration",
-        "data-toggle" => "modal" do
-        %i.fa.fa-plus
-        Add Individual Owner
+= render partial: "submissions/basic/forms/owners/actions/add_owner"
