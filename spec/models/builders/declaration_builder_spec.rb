@@ -11,8 +11,11 @@ describe Builders::DeclarationBuilder do
         create(:submission), [alice, bob], ["alice@example.com"])
     end
 
+    let(:alice) do
+      build(:registered_owner, email: "alice@example.com", shares_held: 20)
+    end
+
     let(:declarations_required) { true }
-    let(:alice) { build(:registered_owner, email: "alice@example.com") }
     let(:bob) { build(:registered_owner, entity_type: :corporate) }
     let!(:submission) { Submission.last }
 
@@ -34,6 +37,10 @@ describe Builders::DeclarationBuilder do
     it "notes that bob is a corporate owner" do
       expect(submission.declarations.last.entity_type.to_sym)
         .to eq(:corporate)
+    end
+
+    it "notes that alice owns 20 shares" do
+      expect(submission.declarations.first.shares_held).to eq(20)
     end
 
     it "does not build a notification for the completed declaration" do
