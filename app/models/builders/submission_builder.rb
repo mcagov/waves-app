@@ -6,7 +6,12 @@ class Builders::SubmissionBuilder
 
       build_registry_info if @submission.registered_vessel
       build_changeset if @submission.registered_vessel
-      build_declarations if @submission.changeset
+
+      if @submission.changeset
+        build_declarations
+        build_managing_owner_and_correspondent
+      end
+
       build_agent if @submission.applicant_is_agent
 
       @submission
@@ -61,6 +66,18 @@ class Builders::SubmissionBuilder
       end
 
       @submission.agent = agent_attrs
+    end
+
+    def build_managing_owner_and_correspondent
+      Declaration.where(submission: @submission).each do |declaration|
+        if declaration.owner.managing_owner
+          @submission.managing_owner_id = declaration.id
+        end
+
+        if declaration.owner.correspondent
+          @submission.correspondent_id = declaration.id
+        end
+      end
     end
   end
 end

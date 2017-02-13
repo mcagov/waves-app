@@ -144,6 +144,13 @@ describe Builders::SubmissionBuilder do
           end
         end
       end
+
+      context "with managing_owner and correspondent" do
+        it "assigns the managing_owner_id and correspondent_id" do
+          expect(submission.managing_owner.name).to eq("ALICE")
+          expect(submission.correspondent.name).to eq("BOB")
+        end
+      end
     end
   end
 end
@@ -176,7 +183,7 @@ end
 
 def owner_sample_data
   [
-    { name: "ALICE", email: "alice@example.com" },
-    { name: "BOB", email: "bob@example.com" },
+    { name: "ALICE", email: "alice@example.com", managing_owner: true },
+    { name: "BOB", email: "bob@example.com", correspondent: true },
   ]
 end
