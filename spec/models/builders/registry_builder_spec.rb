@@ -18,7 +18,14 @@ describe Builders::RegistryBuilder do
     it "creates registered owners in the expect order" do
       expect(registered_vessel.owners.length).to eq(2)
       expect(registered_vessel.owners.first.name).to eq("ALICE")
-      expect(registered_vessel.owners.last.name).to eq("BOB")
+      expect(registered_vessel.owners.last.name).to eq("BOB LTD")
+    end
+
+    it "sets the registered owners entity type" do
+      expect(registered_vessel.owners.first.entity_type.to_sym)
+        .to eq(:individual)
+      expect(registered_vessel.owners.last.entity_type.to_sym)
+        .to eq(:corporate)
     end
 
     it "creates the registered agent" do
@@ -91,7 +98,9 @@ def init_basic_submission
            })
 
   submission.declarations.create(owner: { name: "ALICE" })
-  submission.declarations.create(owner: { name: "BOB" })
+
+  submission.declarations.create(
+    entity_type: :corporate, owner: { name: "BOB LTD" })
   submission
 end
 
