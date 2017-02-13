@@ -13,7 +13,7 @@ describe Builders::DeclarationBuilder do
 
     let(:declarations_required) { true }
     let(:alice) { build(:registered_owner, email: "alice@example.com") }
-    let(:bob) { build(:registered_owner) }
+    let(:bob) { build(:registered_owner, entity_type: :corporate) }
     let!(:submission) { Submission.last }
 
     it "has a completed declaration for alice" do
@@ -24,6 +24,16 @@ describe Builders::DeclarationBuilder do
     it "has an incomplete declaration for bob" do
       expect(submission.declarations.incomplete.first.owner.name)
         .to eq(bob.name)
+    end
+
+    it "notes that alice is an individual owner" do
+      expect(submission.declarations.first.entity_type.to_sym)
+        .to eq(:individual)
+    end
+
+    it "notes that bob is a corporate owner" do
+      expect(submission.declarations.last.entity_type.to_sym)
+        .to eq(:corporate)
     end
 
     it "does not build a notification for the completed declaration" do

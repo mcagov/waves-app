@@ -14,9 +14,9 @@ class Builders::DeclarationBuilder
       @owners.each do |owner|
         declaration =
           Declaration.create(
-            submission: @submission,
-            changeset: owner,
-            state: initial_state_for_task)
+            submission: @submission, changeset: owner,
+            state: initial_state_for_task,
+            entity_type: owner[:entity_type] || :individual)
 
         if @declared_by_emails.include?(declaration.owner.email)
           declaration.declared! if declaration.can_transition? :declared
