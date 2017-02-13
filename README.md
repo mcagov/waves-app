@@ -73,6 +73,10 @@ This is implemented in `app/services/sms_provider.rb`.
 Ensure that the API key is set as `ENV['NOTIFY_API_KEY']`,
 And the Template ID as `ENV['NOTIFY_TEMPLATE_ID']`.
 
+##### Postcode Lookup
+Postcode lookups are performed by a Javascript API call to https://ideal-postcodes.co.uk. The account is managed by the MCA and the code uses Ideal Postcode's [JQuery API](https://github.com/ideal-postcodes/jquery.postcodes).
+Ensure that the API key is set as `POSTCODE_LOOKUP_API_KEY`
+
 ##### Cron jobs
 
 Cron jobs are managed with the [whenever](https://github.com/javan/whenever) gem.
