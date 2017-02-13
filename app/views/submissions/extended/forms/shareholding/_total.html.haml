@@ -2,11 +2,6 @@
 %h2
   Total shares allocated:
   %strong= shareholding.total
-  - if shareholding.status == :incomplete
-    %small
-      (#{shareholding.unallocated} shares un-allocated)
-  - elsif shareholding.status == :excessive
-    %small.red (Invalid share allocation)
-
+  = share_allocation_message(shareholding).html_safe
   .hidden
     #submission-id= submission.id
