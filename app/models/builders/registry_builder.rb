@@ -88,11 +88,15 @@ class Builders::RegistryBuilder
     def build_owner(declaration)
       owner = declaration.owner
       @vessel.owners.create(
-        name: owner.name, nationality: owner.nationality,
-        email: owner.email, phone_number: owner.phone_number,
-        address_1: owner.address_1, address_2: owner.address_2,
+        name: owner.name,
+        nationality: owner.nationality,
+        email: owner.email,
+        phone_number: owner.phone_number,
+        address_1: owner.address_1,
+        address_2: owner.address_2,
         address_3: owner.address_3,
-        town: owner.town, postcode: owner.postcode,
+        town: owner.town,
+        postcode: owner.postcode,
         country: owner.country,
         imo_number: owner.imo_number,
         eligibility_status: owner.eligibility_status,
