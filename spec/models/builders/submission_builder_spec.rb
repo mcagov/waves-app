@@ -77,7 +77,7 @@ describe Builders::SubmissionBuilder do
     end
 
     context "when the changeset is populated" do
-      let!(:changeset) { vessel_owner_sample_data }
+      let!(:changeset) { submission_changeset_sample_data }
 
       it "builds a declaration for each of the two owners" do
         expect(submission.declarations.count).to eq(2)
@@ -123,14 +123,6 @@ describe Builders::SubmissionBuilder do
         end
       end
 
-      context "when the changeset is already populated" do
-        let!(:changeset) { { foo: "bar" } }
-
-        it "does not alter the changeset" do
-          expect(submission.symbolized_changeset[:foo]).to eq("bar")
-        end
-      end
-
       context "when there are no declarations" do
         it "builds the declarations from the changeset" do
           expect(submission.reload.declarations[0].owner.name).to eq("ALICE")
@@ -166,7 +158,7 @@ def agent_sample_data
   }
 end
 
-def vessel_owner_sample_data
+def submission_changeset_sample_data
   {
     owners: owner_sample_data,
     vessel_info: vessel_sample_data,
