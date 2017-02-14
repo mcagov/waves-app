@@ -75,20 +75,18 @@ describe Builders::RegistryBuilder do
 
     context "with an extended submission type (ie. not part_3)" do
       let(:submission) { init_extended_submission }
+      let(:alice) { registered_vessel.owners.first }
+      let(:bob) { registered_vessel.owners.last }
 
-      it "creates the managing_owner" do
-        expect(registered_vessel.owners.first).to be_managing_owner
-        expect(registered_vessel.owners.last).not_to be_managing_owner
+      it "sets alice as the managing_owner" do
+        expect(alice).to be_managing_owner
+        expect(bob).not_to be_managing_owner
       end
 
-      it "creates the correspondent" do
-        expect(registered_vessel.owners.first).not_to be_correspondent
+      it "bob as the correspondent" do
+        expect(alice).not_to be_correspondent
         expect(registered_vessel.owners.last).to be_correspondent
       end
-    end
-
-    context "shareholding" do
-      let(:alice) { registered_vessel.owners.first }
 
       it "notes that alice has 20 shares" do
         expect(alice.shares_held).to eq(20)
