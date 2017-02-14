@@ -124,15 +124,22 @@ describe Builders::SubmissionBuilder do
       end
 
       context "when there are no declarations" do
+        let!(:changeset) { submission_changeset_sample_data }
+
         it "builds the declarations from the changeset" do
           expect(submission.reload.declarations[0].owner.name).to eq("ALICE")
           expect(submission.declarations[1].owner.name).to eq("BOB")
         end
 
+        it "builds the declaration_groups" do
+          expect(submission.reload.declaration_groups.length).to eq(1)
+        end
+
         context "running #build_defaults again" do
-          it "does not alter the declarations" do
+          it "does not alter the declarations or declaration_groups" do
             described_class.build_defaults(submission)
             expect(submission.reload.declarations.length).to eq(2)
+            expect(submission.reload.declaration_groups.length).to eq(1)
           end
         end
       end
@@ -162,6 +169,7 @@ def submission_changeset_sample_data
   {
     owners: owner_sample_data,
     vessel_info: vessel_sample_data,
+    shareholder_groups: shareholder_groups_sample_data,
   }
 end
 
@@ -178,4 +186,8 @@ def owner_sample_data
     { name: "ALICE", email: "alice@example.com", managing_owner: true },
     { name: "BOB", email: "bob@example.com", correspondent: true },
   ]
+end
+
+def shareholder_groups_sample_data
+  [{ shares_held: 10, group_members: ["alice@example.com"] }]
 end
