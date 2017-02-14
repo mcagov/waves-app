@@ -42,20 +42,24 @@ class Builders::SubmissionBuilder
       @submission.changeset = @submission.registry_info
     end
 
-    def build_declarations
-      # Here we need to protect against re-building the owner declarations.
-      # We can never be sure how many times a submission will pass through
-      # this builder, so the rule is: if there are some declarations,
-      # don't build anymore!
+    # Here we need to protect against re-building the owner declarations.
+    # We can never be sure how many times a submission will pass through
+    # this builder, so the rule is: if there are some declarations,
+    # don't build anymore!
+    def build_declarations # rubocop:disable Metrics/MethodLength
       if @submission.persisted?
         return unless Declaration.where(submission: @submission).empty?
       end
 
       submitted_owners = @submission.symbolized_changeset[:owners]
       completed_declarations = @submission.symbolized_changeset[:declarations]
+      shareholder_groups = @submission.symbolized_changeset[:shareholder_groups]
 
       Builders::DeclarationBuilder.create(
-        @submission, submitted_owners, completed_declarations)
+        @submission,
+        submitted_owners,
+        completed_declarations,
+        shareholder_groups)
     end
 
     def build_agent

@@ -8,11 +8,18 @@ describe Builders::DeclarationBuilder do
         .and_return(declarations_required)
 
       Builders::DeclarationBuilder.create(
-        create(:submission), [alice, bob], ["alice@example.com"])
+        create(:submission),
+        [alice, bob],
+        ["alice@example.com"],
+        shareholder_groups)
     end
 
     let(:alice) do
       build(:registered_owner, email: "alice@example.com", shares_held: 20)
+    end
+
+    let(:shareholder_groups) do
+      [{ shares_held: 10, group_members: ["alice@example.com"] }]
     end
 
     let(:declarations_required) { true }
@@ -51,6 +58,19 @@ describe Builders::DeclarationBuilder do
     it "builds a notification for the incomplete declaration" do
       expect(submission.declarations.incomplete.first.notification)
         .to be_a(Notification::OutstandingDeclaration)
+    end
+
+    context "declaration_groups" do
+      let(:declaration_group) { submission.reload.declaration_groups.first }
+
+      it "builds the declaration_group and assigns shares_held" do
+        expect(declaration_group.shares_held).to eq(10)
+      end
+
+      it "adds declaration_group_member to the declaration_group" do
+        group_member = declaration_group.declaration_group_members.first
+        expect(group_member.declaration.owner.email).to eq("alice@example.com")
+      end
     end
 
     context "when declarations are not required" do
