@@ -91,6 +91,14 @@ describe Builders::RegistryBuilder do
       it "notes that alice has 20 shares" do
         expect(alice.shares_held).to eq(20)
       end
+
+      it "notes that bob is a member of a group holding 10 shares jointly" do
+        shareholder_group = registered_vessel.shareholder_groups.first
+
+        expect(shareholder_group.shares_held).to eq(10)
+        expect(shareholder_group.shareholder_group_members.map(&:owner))
+          .to include(bob)
+      end
     end
   end
 end
@@ -115,5 +123,10 @@ def init_extended_submission
   submission.update_attributes(
     managing_owner_id: submission.declarations.first.id,
     correspondent_id: submission.declarations.last.id)
+
+  submission.declaration_groups.create(
+    shares_held: 10,
+    default_group_member: submission.declarations.last.id)
+
   submission
 end

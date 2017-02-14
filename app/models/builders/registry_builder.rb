@@ -9,6 +9,7 @@ class Builders::RegistryBuilder
         assign_vessel_to_submission
         build_owners
         build_agent
+        build_shares_held_jointly
       end
 
       @vessel
@@ -119,6 +120,21 @@ class Builders::RegistryBuilder
       agent.email = @submission.agent.email
       agent.phone_number = @submission.agent.phone_number
       agent.save
+    end
+
+    def build_shares_held_jointly
+      @vessel.shareholder_groups.destroy_all
+
+      @submission.declaration_groups.each do |declaration_group|
+        shareholder_group =
+          @vessel.shareholder_groups.create(
+            shares_held: declaration_group.shares_held)
+
+        declaration_group.declaration_group_members.each do |dec_group_member|
+          shareholder_group.shareholder_group_members.create(
+            owner_id: dec_group_member.declaration.registered_owner_id)
+        end
+      end
     end
   end
 end

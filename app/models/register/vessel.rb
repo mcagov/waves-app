@@ -12,6 +12,8 @@ module Register
              -> { order("updated_at asc") },
              class_name: "Register::Owner"
 
+    has_many :shareholder_groups, dependent: :destroy
+
     has_many :registrations, -> { order("created_at desc") }
     has_one :current_registration,
             -> { order("created_at desc").limit(1) },
