@@ -59,6 +59,7 @@ module Register
         vessel_info: attributes,
         owners: owners.map(&:attributes),
         agent: (agent || Register::Agent.new).attributes,
+        shareholder_groups: shareholder_groups_info,
       }
     end
 
@@ -73,6 +74,17 @@ module Register
     def historic_registrations
       registrations.map { |r| r.registered_at.to_date }.uniq.map do |reg_date|
         registrations.where("DATE(registered_at) = ?", reg_date).first
+      end
+    end
+
+    private
+
+    def shareholder_groups_info
+      shareholder_groups.map do |sharedholder_group|
+        {
+          group_members: sharedholder_group.group_member_emails,
+          shares_held: sharedholder_group.shares_held,
+        }
       end
     end
   end

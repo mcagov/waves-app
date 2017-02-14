@@ -164,5 +164,17 @@ describe Register::Vessel do
         expect(subject[:agent]["name"]).to eq(vessel.agent.name)
       end
     end
+
+    context "shareholder_groups" do
+      before do
+        group = vessel.shareholder_groups.create(shares_held: 10)
+        group.shareholder_group_members.create(owner_id: vessel.owners.first.id)
+      end
+
+      it "has the shareholder_groups" do
+        expect(subject[:shareholder_groups]).to eq(
+          [{ group_members: [vessel.owners.first.email], shares_held: 10 }])
+      end
+    end
   end
 end
