@@ -10,13 +10,15 @@ class Builders::DeclarationBuilder
 
     private
 
-    def build_declarations
+    def build_declarations # rubocop:disable Metrics/MethodLength
       @owners.each do |owner|
         declaration =
           Declaration.create(
             submission: @submission,
             changeset: owner,
-            state: initial_state_for_task)
+            state: initial_state_for_task,
+            shares_held: owner[:shares_held].to_i,
+            entity_type: owner[:entity_type] || :individual)
 
         if @declared_by_emails.include?(declaration.owner.email)
           declaration.declared! if declaration.can_transition? :declared

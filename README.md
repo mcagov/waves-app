@@ -130,6 +130,7 @@ Payments come in two flavours and have a polymorphic association with the `Payme
 
 ##### Declarations
 In the submission context, we store owner details in the declarations table. The changes requested are stored as JSON objects in declaration#changeset. One owner maps to one declaration, and a submission can have many declarations.
+Note that, while a changeset may contain `owners`, these are ignored once the `Builder::SubmissionBuilder` has run and the declarations have been built.
 
 ##### The Registry
 The Registry consists of:
@@ -154,3 +155,13 @@ To rebuild the (e.g. Submission) indexes after making changes to the configurati
 `PgSearch::Multisearch.rebuild(Submission)`
 Global search configuration can be added to:
 `config/initializers/pg_search.rb`
+
+##### Extending the data model
+Adding attributes to the data model can be a fairly complex process as there are a number of moving parts to consider. In the example below, we want to record the number of `shares_held` by an owner. If adding additional tables (e.g. groups of shareholders), be mindful that the table(s) will need to exist in both the `submission` domain and the `registry`.
+1. Add a column `shares_held` to the `declarations` table. Note that `declarations` are the owners associated with a submission.
+2. Build out the model, controller and views in Waves so that a reg officer can record the `shares_held` by an owner.
+3. Add a column `shares_held` to the `customers` table. Note that all entities associated with a registered vessel are sub-classed from this table.
+4. Extend `Builder::RegistryBuilder` to add the `shares_held` by an owner to the `customers` table.
+5. Extend `Register::Vessel#registry_info` to ensure that the `shares_held` is captured. `#registry_info` is used to store a snapshot of the registered vessel in the `registrations` table. For our `shares_held` example we don't need to make any changes to `Register::Vessel#registry_info` because all owner attributes are assigned by default: `owners: owners.map(&:attributes)`
+6. If the new data attribute will *not* be stored and edited in the `Submission#changeset` (i.e. it's not vessel_info), then extend `Builder::SubmissionBuilder` or `Builder::DeclarationBuilder` to enable the new attribute. For our `shares_held` example, we add the line `shares_held: owner[:shares_held].to_i` to `Builder::DeclarationBuilder#build_declarations`.
+7. The `shares_held` name / value should also be added somewhere on the registered vessel page (`app/views/vessels`).

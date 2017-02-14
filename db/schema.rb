@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213111256) do
+ActiveRecord::Schema.define(version: 20170213172205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,12 +64,16 @@ ActiveRecord::Schema.define(version: 20170213111256) do
     t.string   "county"
     t.string   "postcode"
     t.string   "country"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "imo_number"
     t.string   "eligibility_status"
     t.string   "registration_number"
     t.datetime "date_of_incorporation"
+    t.boolean  "managing_owner",        default: false
+    t.boolean  "correspondent",         default: false
+    t.string   "entity_type",           default: "individual"
+    t.integer  "shares_held"
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
     t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
@@ -92,14 +96,15 @@ ActiveRecord::Schema.define(version: 20170213111256) do
   create_table "declarations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "submission_id"
     t.string   "state"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.uuid     "notification_id"
     t.datetime "completed_at"
     t.json     "changeset"
     t.uuid     "completed_by_id"
-    t.string   "entity_type",     default: "individual"
-    t.integer  "shares_held",     default: 0
+    t.string   "entity_type",         default: "individual"
+    t.integer  "shares_held",         default: 0
+    t.uuid     "registered_owner_id"
     t.index ["completed_by_id"], name: "index_declarations_on_completed_by_id", using: :btree
     t.index ["notification_id"], name: "index_declarations_on_notification_id", using: :btree
     t.index ["state"], name: "index_declarations_on_state", using: :btree
@@ -278,6 +283,20 @@ ActiveRecord::Schema.define(version: 20170213111256) do
     t.index ["context"], name: "index_sequence_numbers_on_context", using: :btree
     t.index ["generated_number"], name: "index_sequence_numbers_on_generated_number", using: :btree
     t.index ["type"], name: "index_sequence_numbers_on_type", using: :btree
+  end
+
+  create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "shareholder_group_id"
+    t.uuid     "owner_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "shareholder_groups", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "vessel_id"
+    t.integer  "shares_held"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

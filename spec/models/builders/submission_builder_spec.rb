@@ -77,7 +77,7 @@ describe Builders::SubmissionBuilder do
     end
 
     context "when the changeset is populated" do
-      let!(:changeset) { vessel_owner_sample_data }
+      let!(:changeset) { submission_changeset_sample_data }
 
       it "builds a declaration for each of the two owners" do
         expect(submission.declarations.count).to eq(2)
@@ -123,14 +123,6 @@ describe Builders::SubmissionBuilder do
         end
       end
 
-      context "when the changeset is already populated" do
-        let!(:changeset) { { foo: "bar" } }
-
-        it "does not alter the changeset" do
-          expect(submission.symbolized_changeset[:foo]).to eq("bar")
-        end
-      end
-
       context "when there are no declarations" do
         it "builds the declarations from the changeset" do
           expect(submission.reload.declarations[0].owner.name).to eq("ALICE")
@@ -142,6 +134,13 @@ describe Builders::SubmissionBuilder do
             described_class.build_defaults(submission)
             expect(submission.reload.declarations.length).to eq(2)
           end
+        end
+      end
+
+      context "with managing_owner and correspondent" do
+        it "assigns the managing_owner_id and correspondent_id" do
+          expect(submission.managing_owner.name).to eq("ALICE")
+          expect(submission.correspondent.name).to eq("BOB")
         end
       end
     end
@@ -159,7 +158,7 @@ def agent_sample_data
   }
 end
 
-def vessel_owner_sample_data
+def submission_changeset_sample_data
   {
     owners: owner_sample_data,
     vessel_info: vessel_sample_data,
@@ -176,7 +175,7 @@ end
 
 def owner_sample_data
   [
-    { name: "ALICE", email: "alice@example.com" },
-    { name: "BOB", email: "bob@example.com" },
+    { name: "ALICE", email: "alice@example.com", managing_owner: true },
+    { name: "BOB", email: "bob@example.com", correspondent: true },
   ]
 end
