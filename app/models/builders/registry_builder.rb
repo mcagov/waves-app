@@ -87,7 +87,7 @@ class Builders::RegistryBuilder
     # rubocop:disable all
     def build_owner(declaration)
       owner = declaration.owner
-      @vessel.owners.create(
+      registered_owner = @vessel.owners.create(
         name: owner.name,
         nationality: owner.nationality,
         email: owner.email,
@@ -106,6 +106,9 @@ class Builders::RegistryBuilder
         correspondent: @submission.correspondent_id == declaration.id,
         entity_type: declaration.entity_type,
         shares_held: declaration.shares_held)
+
+      declaration.update_attribute(
+        :registered_owner_id, registered_owner.id)
     end
     # rubocop:enable all
 
