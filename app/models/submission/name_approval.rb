@@ -13,7 +13,7 @@ class Submission::NameApproval
   validate :unique_port_no_in_port
 
   def port_name
-    WavesUtilities::Port.all.find { |port| port[1] == port_code }.first
+    WavesUtilities::Port.new(port_code).name
   end
 
   def unique_name_in_port
