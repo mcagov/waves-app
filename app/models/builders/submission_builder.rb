@@ -3,16 +3,7 @@ class Builders::SubmissionBuilder
     def build_defaults(submission)
       @submission = submission
       ensure_defaults
-
-      build_registry_info if @submission.registered_vessel
-      build_changeset if @submission.registered_vessel
-
-      if @submission.changeset
-        build_declarations
-        build_managing_owner_and_correspondent
-      end
-
-      build_agent if @submission.applicant_is_agent
+      perform
 
       @submission
     end
@@ -24,6 +15,18 @@ class Builders::SubmissionBuilder
       @submission.task ||= :new_registration
       @submission.source ||= :online
       @submission.ref_no ||= RefNo.generate_for(@submission)
+    end
+
+    def perform
+      build_registry_info if @submission.registered_vessel
+      build_changeset if @submission.registered_vessel
+
+      if @submission.changeset
+        build_declarations
+        build_managing_owner_and_correspondent
+      end
+
+      build_agent if @submission.applicant_is_agent
     end
 
     def build_registry_info
