@@ -29,7 +29,7 @@
 
   #myTabContent.tab-content
     #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-      WIP: Vessel Info
+      = render partial: "vessels/extended/tabs/vessel", locals: { vessel: @vessel }
 
     #engines_tab.tab-pane{"aria-labelledby" => "engines-tab", :role => "tabpanel"}
       WIP: Engines

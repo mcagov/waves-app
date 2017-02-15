@@ -1,0 +1,56 @@
+%h2 Operational Information
+%table.table.table-striped
+  %thead
+    %th Classification Society
+    %th Any Other Classification Society
+    %th Date of Entry into Service
+    %th Area
+    %th Alternative Activity
+  %tbody
+    %tr
+      %td= @vessel.classification_society
+      %td= @vessel.classification_society_other
+      %td= @vessel.entry_into_service_at
+      %td= @vessel.area_of_operation
+      %td= @vessel.alternative_activity
+%hr
+%h2 Description
+%table.table.table-striped
+  %thead
+    %th Gross Tonnage
+    %th Net Tonnage
+    %th Register Tonnage
+    %th Registered Length
+    %th Length Overall
+    %th Breadth
+    %th Depth
+    %th Propulsion System
+    %th Number of Hulls
+  %tbody
+    %tr
+      %td #{@vessel.gross_tonnage.to_i}GT
+      %td #{@vessel.net_tonnage.to_i}NT
+      %td #{@vessel.register_tonnage.to_i}T
+      %td #{@vessel.register_length.to_i} metres
+      %td #{@vessel.length_overall.to_i} metres
+      %td #{@vessel.breadth.to_i} metres
+      %td #{@vessel.depth.to_i} metres
+      %td= @vessel.propulsion_system
+      %td= @vessel.number_of_hulls
+
+%hr
+%h2 Construction
+%table.table.table-striped
+  %thead
+    %th Name of Builder
+    %th Builders Address
+    %th Place of Build
+    %th Keel Laying Date
+    %th Hull Construction Material
+  %tbody
+    %tr
+      %td= @vessel.name_of_builder
+      %td= @vessel.builders_address
+      %td= @vessel.place_of_build
+      %td= @vessel.keel_laying_date
+      %td= @vessel.hull_construction_material
