@@ -101,7 +101,8 @@ class Decorators::Submission < SimpleDelegator
 
   def vessel_attribute_changed?(attr_name)
     return false if new_registration?
-    registry_vessel.send(attr_name) != @submission.vessel.send(attr_name)
+    registry_vessel.send(attr_name).to_s.strip !=
+      @submission.vessel.send(attr_name).to_s.strip
   end
 
   def delivery_description
