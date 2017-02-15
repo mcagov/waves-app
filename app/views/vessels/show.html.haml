@@ -10,61 +10,15 @@
         Registrar Tools
       = render partial: "vessels/modals/registrar_tools", locals: { vessel: @vessel }
 .row
-  .x_panel
-    .x_title
-      %h2 Vessel Details
-      .pull-right
-        %h4= render partial: "registration_status", locals: { registration_status: @vessel.registration_status }
-      .clearfix
-    .x_content
-      .row{style: 'padding-bottom: 15px;'}
-        .col-sm-4
-          %table.table
-            %tbody
-              %tr
-                %td.soft-label.no-top-border Official Number:
-                %td.no-top-border
-                  %strong= @vessel.reg_no
-              %tr
-                %td.soft-label Make and model:
-                %td
-                  %strong= @vessel.make_and_model
-              %tr
-                %td.soft-label Length:
-                %td
-                  %strong #{ @vessel.length_in_meters }m
-              %tr
-                %td.soft-label Type:
-                %td
-                  %strong= @vessel.vessel_type
-        .col-sm-4
-          %table.table
-            %tbody
-              %tr
-                %td.soft-label.no-top-border MMSI Number:
-                %td.no-top-border
-                  %strong= @vessel.mmsi_number
-              %tr
-                %td.soft-label Radio Call Sign:
-                %td
-                  %strong= @vessel.radio_call_sign
-              %tr
-                %td.soft-label Hulls:
-                %td
-                  %strong= @vessel.number_of_hulls
-              %tr
-                %td.soft-label HIN:
-                %td
-                  %strong= @vessel.hin
-        .col-sm-4
-          %table.table
-            %tbody
-              %tr
-                %td.soft-label.no-top-border Registration Date:
-                %td.no-top-border
-                  %strong= @vessel.current_registration.created_at if @vessel.current_registration
-              %tr
-                %td.soft-label Reg Expiry Date:
-                %td
-                  %strong= @vessel.current_registration.registered_until if @vessel.current_registration
-      = render partial: "tabs"
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2 Vessel Details
+        .pull-right
+          %h4= render partial: "registration_status", locals: { registration_status: @vessel.registration_status }
+        .clearfix
+      .x_content
+        .row{style: 'padding-bottom: 15px;'}
+          = render partial: "/vessels/#{Activity.new(@vessel.part).view_mode}/summary"
+
+        = render partial: "/vessels/#{Activity.new(@vessel.part).view_mode}/tabs/base"

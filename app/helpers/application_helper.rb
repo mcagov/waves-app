@@ -23,4 +23,8 @@ module ApplicationHelper
     amount = amount.is_a?(Integer) ? amount.to_f / 100 : amount.to_f
     "£#{number_with_precision(amount, precision: 2)}"
   end
+
+  def y_n(val)
+    val ? "Yes" : "No"
+  end
 end

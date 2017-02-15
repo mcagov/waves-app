@@ -58,6 +58,10 @@ module SubmissionHelper
     end
   end
 
+  def countries_collection
+    WavesUtilities::Country.all
+  end
+
   def ports_collection(part)
     WavesUtilities::Port.all(part)
   end

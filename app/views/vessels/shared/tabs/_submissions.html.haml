@@ -13,4 +13,4 @@
         %td= link_to submission.job_type, submission_path(submission)
         %td= submission.received_at
         %td= submission.updated_at if submission.completed?
-        %td= submission.source
+        %td= submission.source.humanize if submission.source

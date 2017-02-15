@@ -1,0 +1,77 @@
+.col-md-4
+  %table.table
+    %tbody
+      %tr
+        %td.soft-label.no-top-border Official Number:
+        %td.no-top-border
+          %strong= @vessel.reg_no
+      %tr
+        %td.soft-label Registration Type:
+        %td
+          %strong= @vessel.registration_type.humanize if @vessel.registration_type
+      %tr
+        %td.soft-label Vessel Category:
+        %td
+          %strong= @vessel.vessel_category
+      %tr
+        %td.soft-label Detailed Type:
+        %td
+          %strong= @vessel.vessel_type
+      %tr
+        %td.soft-label IMO Number:
+        %td
+          %strong= @vessel.imo_number
+.col-md-4
+  %table.table
+    %tbody
+      %tr
+        %td.soft-label.no-top-border Port of Registry:
+        %td.no-top-border
+          %strong= WavesUtilities::Port.new(@vessel.port_code).name
+      %tr
+        %td.soft-label Port Number:
+        %td
+          %strong= @vessel.port_no
+      %tr
+        %td.soft-label EC Number:
+        %td
+          %strong= @vessel.ec_number
+      %tr
+        %td.soft-label MMSI Number:
+        %td
+          %strong= @vessel.mmsi_number
+      %tr
+        %td.soft-label Radio Call Sign:
+        %td
+          %strong= @vessel.radio_call_sign
+      %tr
+        %td.soft-label HIN:
+        %td
+          %strong= @vessel.hin
+.col-md-4
+  %table.table
+    %tbody
+      %tr
+        %td.soft-label.no-top-border Last Registry:
+        %td.no-top-border
+          %strong= @vessel.last_registry_country
+      %tr
+        %td.soft-label Last Registry Identity Number:
+        %td
+          %strong= @vessel.last_registry_no
+      %tr
+        %td.soft-label Last Registry Port:
+        %td
+          %strong= @vessel.last_registry_port
+      %tr
+        %td
+        %td
+
+      %tr
+        %td.soft-label.no-top-border Registration Date:
+        %td.no-top-border
+          %strong= @vessel.current_registration.created_at if @vessel.current_registration
+      %tr
+        %td.soft-label Reg Expiry Date:
+        %td
+          %strong= @vessel.current_registration.registered_until if @vessel.current_registration
