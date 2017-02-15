@@ -9,7 +9,7 @@
   Cancel Application
 
 - if @submission.approvable?
-  - content_for(:submission_approval_buttons) do
+  - content_for(:submission_save_buttons) do
     = render partial: "submissions/modals/approve", locals: { submission: @submission }
     = link_to "#approve-application",
       data: { target: "#approve-application", toggle: "modal" },
