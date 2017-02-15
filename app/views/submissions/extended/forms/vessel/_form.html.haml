@@ -77,7 +77,10 @@
         .col-md-2{ class: vessel_change_css(:last_registry_country) }
           = vessel_f.input :last_registry_country,
             label: vessel_change_label(:last_registry_country),
-            input_html: { class: "select2 select2_single" }
+            as: :select,
+            collection: countries_collection,
+            include_blank: false,
+            input_html: { class: "select2 select2_single searchable" }
 
         .col-md-2{ class: vessel_change_css(:last_registry_no) }
           = vessel_f.input :last_registry_no,
