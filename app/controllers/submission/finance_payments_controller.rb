@@ -35,9 +35,7 @@ class Submission::FinancePaymentsController < InternalPagesController
   end
 
   def unlink
-    load_linkable_submission
-    @submission.update_attribute(
-      :changeset, @submission.symbolized_changeset.except(:linkable_ref_no))
+    @submission.update_attribute(:linkable_ref_no, nil)
     redirect_to submission_path(@submission)
   end
 
@@ -61,7 +59,7 @@ class Submission::FinancePaymentsController < InternalPagesController
   end
 
   def load_linkable_submission
-    linkable_ref_no = @submission.symbolized_changeset[:linkable_ref_no]
+    linkable_ref_no = @submission.linkable_ref_no
     @linkable_submission =
       Submission.find_by(ref_no: linkable_ref_no) if linkable_ref_no
   end

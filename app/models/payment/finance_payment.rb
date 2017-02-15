@@ -61,6 +61,6 @@ class Payment::FinancePayment < ApplicationRecord
       applicant_email: applicant_email,
       applicant_is_agent: applicant_is_agent,
       documents_received: documents_received,
-      changeset: { linkable_ref_no: application_ref_no })
+      linkable_ref_no: application_ref_no)
   end
 end
