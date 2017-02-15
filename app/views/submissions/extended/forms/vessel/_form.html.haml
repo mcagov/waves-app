@@ -43,7 +43,6 @@
             as: :select,
             collection: ports_collection(@submission.part),
             include_blank: false,
-            disabled: true,
             input_html: { class: "select2 select2_single searchable" }
 
         .col-md-2{ class: vessel_change_css(:port_no) }
