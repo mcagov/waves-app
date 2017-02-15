@@ -27,14 +27,14 @@
         = render partial: "vessels/basic/tabs/agent", locals: { agent: @vessel.agent }
 
       #tab_content3.tab-pane.fade.in{"aria-labelledby" => "applications-tab", :role => "tabpanel"}
-        = render partial: "vessels/basic/tabs/submissions", locals: { vessel: @vessel }
+        = render partial: "vessels/shared/tabs/submissions", locals: { vessel: @vessel }
 
       #tab_content4.tab-pane.fade.in{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
         = render partial: "shared/notification_list/base", locals: { notification_list: @vessel.notification_list }
         = render partial: "vessels/actions/add_correspondence", locals: { vessel: @vessel }
 
       #tab_content5.tab-pane.fade.in{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
-        = render partial: "vessels/basic/tabs/notes", locals: { vessel: @vessel }
+        = render partial: "vessels/shared/tabs/notes", locals: { vessel: @vessel }
 
       #tab_content6.tab-pane.fade.in{"aria-labelledby" => "history-tab", :role => "tabpanel"}
         = render partial: "vessels/basic/tabs/contacts", locals: { vessel: @vessel }

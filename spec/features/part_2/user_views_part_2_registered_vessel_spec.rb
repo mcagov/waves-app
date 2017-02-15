@@ -30,11 +30,8 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
     click_on("Agents & Representative Persons")
     expect(page).to have_css("li.active a#agents-tab")
 
-    click_on("Applications")
-    expect(page).to have_css("li.active a#applications-tab")
-
-    click_on("History")
-    expect(page).to have_css("li.active a#history-tab")
+    click_on("Application History")
+    expect(page).to have_css("li.active a#submissions-tab")
 
     click_on("Correspondence")
     expect(page).to have_css("li.active a#correspondence-tab")

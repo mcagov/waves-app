@@ -19,10 +19,7 @@
       %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agents & Representative Persons
 
     %li{:role => "presentation"}
-      %a#applications-tab{"data-toggle" => "tab", :href => "#applications_tab", :role => "tab"} Applications
-
-    %li{:role => "presentation"}
-      %a#history-tab{"data-toggle" => "tab", :href => "#history_tab", :role => "tab"} History
+      %a#submissions-tab{"data-toggle" => "tab", :href => "#submissions_tab", :role => "tab"} Application History
 
     %li{:role => "presentation"}
       %a#correspondence-tab{"data-toggle" => "tab", :href => "#correspondence_tab", :role => "tab"} Correspondence
@@ -49,11 +46,13 @@
     #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
       WIP: Agents
 
-    #history_tab.tab-pane{"aria-labelledby" => "history-tab", :role => "tabpanel"}
-      WIP: History
+    #submissions_tab.tab-pane{"aria-labelledby" => "submissions-tab", :role => "tabpanel"}
+      = render partial: "vessels/shared/tabs/submissions", locals: { vessel: @vessel }
 
     #correspondence_tab.tab-pane{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
-      WIP: Correspondence
+      = render partial: "shared/notification_list/base", locals: { notification_list: @vessel.notification_list }
+      = render partial: "vessels/actions/add_correspondence", locals: { vessel: @vessel }
+
 
     #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
-      WIP: Notes
+      = render partial: "vessels/shared/tabs/notes", locals: { vessel: @vessel }
