@@ -1,0 +1,59 @@
+%div{"extended-vessel-tabse-id" => "togglable-tabs", :role => "tabpanel"}
+  %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+    %li{:role => "presentation", class: "active"}
+      %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessel_tab", :role => "tab"} Vessel Information
+
+    %li{:role => "presentation"}
+      %a#engines-tab{"data-toggle" => "tab", :href => "#engines_tab", :role => "tab"} Engines
+
+    %li{:role => "presentation"}
+      %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
+
+    %li{:role => "presentation"}
+      %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
+
+    %li{:role => "presentation"}
+      %a#certificates-tab{"data-toggle" => "tab", :href => "#certificates_tab", :role => "tab"} Certificates & Documents
+
+    %li{:role => "presentation"}
+      %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agents & Representative Persons
+
+    %li{:role => "presentation"}
+      %a#applications-tab{"data-toggle" => "tab", :href => "#applications_tab", :role => "tab"} Applications
+
+    %li{:role => "presentation"}
+      %a#history-tab{"data-toggle" => "tab", :href => "#history_tab", :role => "tab"} History
+
+    %li{:role => "presentation"}
+      %a#correspondence-tab{"data-toggle" => "tab", :href => "#correspondence_tab", :role => "tab"} Correspondence
+
+    %li{:role => "presentation"}
+      %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
+
+  #myTabContent.tab-content
+    #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+      WIP: Vessel Info
+
+    #engines_tab.tab-pane{"aria-labelledby" => "engines-tab", :role => "tabpanel"}
+      WIP: Engines
+
+    #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
+      WIP: Owners
+
+    #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
+      WIP: Mortgages
+
+    #certificates_tab.tab-pane{"aria-labelledby" => "certificates-tab", :role => "tabpanel"}
+      WIP: Certificates & Documents
+
+    #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
+      WIP: Agents
+
+    #history_tab.tab-pane{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+      WIP: History
+
+    #correspondence_tab.tab-pane{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
+      WIP: Correspondence
+
+    #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
+      WIP: Notes
