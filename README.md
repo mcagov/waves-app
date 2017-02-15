@@ -123,6 +123,9 @@ A submission's behaviour depends on the follwing attributes:
 The changes that the submission will perform are stored as JSON objects in submission#changeset. If the submission is associated with a registered vessel, the 'current information' will be stored as JSON objects in submission#changeset.
 These JSON objects are mounted with the `VirtualModel` class and exposed by the submission as: `submission.vessel`, etc.
 
+Note: Don't use changeset as a miscellaneous data store. I just got burned trying to store `linkable_ref_no` in the
+changeset before the `Builder::SubmissionBuilder` had run. Consequently, the changeset didn't get populated.
+
 ##### Payments
 Payments come in two flavours and have a polymorphic association with the `Payment` model.
 1. World Pay Payments (online)

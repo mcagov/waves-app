@@ -68,8 +68,7 @@ describe Payment::FinancePayment do
         end
 
         it "sets the linkable_ref_no in the changeset" do
-          linkable_ref_no = submission.symbolized_changeset[:linkable_ref_no]
-          expect(linkable_ref_no).to eq("ABC123")
+          expect(submission.linkable_ref_no).to eq("ABC123")
         end
 
         it "sets the documents_received" do
