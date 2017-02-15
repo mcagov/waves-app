@@ -35,7 +35,7 @@
       WIP: Engines
 
     #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
-      WIP: Owners
+      = render partial: "vessels/extended/tabs/owners", locals: { vessel: @vessel }
 
     #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
       WIP: Mortgages
