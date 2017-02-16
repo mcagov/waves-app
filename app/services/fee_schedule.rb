@@ -1,14 +1,15 @@
-class FeeSchedule
+class FeeSchedule < WavesUtilities::FeeSchedule
   def initialize(submission)
     @submission = submission
+    @part = @submission.part.to_sym
   end
 
   def standard_fee_required
-    FeeSchedule.standard_fee(@submission.part.to_sym, @submission.task.to_sym)
+    FeeSchedule.standard_fee(@part)
   end
 
   def premium_fee_required
-    FeeSchedule.premium_fee(@submission.part.to_sym, @submission.task.to_sym)
+    FeeSchedule.premium_fee(@part)
   end
 
   def service_level
@@ -16,16 +17,6 @@ class FeeSchedule
       :premium
     else
       :standard
-    end
-  end
-
-  class << self
-    def standard_fee(_part = :part_3, _task = :new_registration)
-      2500
-    end
-
-    def premium_fee(part = :part_3, task = :new_registration)
-      standard_fee(part, task) + 5000
     end
   end
 end
