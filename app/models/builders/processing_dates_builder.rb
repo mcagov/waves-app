@@ -5,7 +5,7 @@ class Builders::ProcessingDatesBuilder
 
       received_at = Date.today
       referred_until = nil
-      service_level = AccountLedger.new(@submission).service_level
+      service_level = FeeSchedule.new(@submission).service_level
       target_date = TargetDate.new(Date.today, service_level).calculate
 
       @submission.update_attributes(

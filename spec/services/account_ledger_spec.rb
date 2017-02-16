@@ -36,22 +36,6 @@ describe AccountLedger do
     end
   end
 
-  context "#service_level" do
-    subject { account_ledger.service_level }
-
-    context "with full payment" do
-      let(:submission) { create(:paid_submission) }
-
-      it { expect(subject).to eq(:standard) }
-    end
-
-    context "with full payment for premium service" do
-      let(:submission) { create(:paid_premium_submission) }
-
-      it { expect(subject).to eq(:premium) }
-    end
-  end
-
   context "#awaiting_payment?" do
     subject { account_ledger.awaiting_payment? }
 
