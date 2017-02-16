@@ -71,7 +71,7 @@
               Switch to Net Tonnage
 
 - if @submission.actionable? && @submission.claimant == current_user
-  - content_for(:submission_approval_buttons) do
+  - content_for(:submission_save_buttons) do
     - if @name_validated
       = render partial: "submission/name_approvals/actions/validated"
     - else
