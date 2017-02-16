@@ -17,6 +17,15 @@ class Registration < ApplicationRecord
     symbolized_registry_info[:owners] || []
   end
 
+  def delivery_address
+    submission = Submission.find_by(ref_no: submission_ref_no)
+    if submission && submission.delivery_address.exists?
+      submission.delivery_address
+    else
+      Submission::DeliveryAddress.new(owners.first)
+    end
+  end
+
   private
 
   def symbolized_registry_info

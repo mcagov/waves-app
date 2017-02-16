@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :registration do
     registered_at 1.day.ago
     task :vessel_details
+    registry_info { { owners: [build(:registered_owner)] } }
   end
 
   factory :ten_year_old_registration, class: "Registration" do

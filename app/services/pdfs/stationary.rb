@@ -3,7 +3,7 @@ module Pdfs::Stationary
     mca_logos
     mca_address
     date_and_ref
-    correspondent_address
+    delivery_address
     greeting
   end
 
@@ -54,21 +54,16 @@ module Pdfs::Stationary
     @pdf.draw_text Date.today.to_s(:formal), at: [400, 634]
   end
 
-  def correspondent_address
-    @pdf.draw_text @correspondent[:name], at: [l_margin, 660]
+  def delivery_address
     i = 0
-    compacted_address(@correspondent).each do |line|
-      @pdf.draw_text line, at: [l_margin, 646 - i]
+    @deliver_to.stationary_name_and_address.each do |line|
+      @pdf.draw_text line, at: [l_margin, 660 - i]
       i += spacer
     end
   end
 
   def greeting
     set_copy_font
-    @pdf.draw_text "Dear #{@correspondent[:name]}", at: [l_margin, 560]
-  end
-
-  def compacted_address(customer)
-    Customer.new(customer).compacted_address
+    @pdf.draw_text "Dear #{@correspondent[:name]}", at: [l_margin, 555]
   end
 end
