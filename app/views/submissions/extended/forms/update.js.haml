@@ -1,5 +1,5 @@
 :plain
-  $(".modal-content").html(
+  $("#save-incomplete-application  .modal-content").html(
     '#{escape_javascript(
        render partial: "/submissions/extended/forms/saved",
        locals: { submission: @submission })}'
@@ -11,3 +11,7 @@
         render partial: "/submissions/modals/approve/form",
         locals: { submission: @submission })}');
   });
+
+  $("#save-incomplete-application").on('hidden.bs.modal', function () {
+        window.location.reload();
+    });
