@@ -14,8 +14,13 @@ feature "User approves a new registration", type: :feature, js: true do
       fill_in "Date and Time to take effect from", with: "12/12/2020 11:59 AM"
       click_button("Register Vessel")
     end
+
     expect(page).to have_text("The applicant has been notified via email")
     expect(page).to have_text("registered on Part III of the UK Ship Register")
+
+    vessel = Register::Vessel.last
+    expect(page).to have_text("Task Complete: #{vessel.name.upcase}")
+    expect(page).to have_link(vessel.reg_no, href: vessel_path(vessel))
 
     expect(Registration.last.registered_at)
       .to eq("12/12/2020 11:59 AM".to_datetime)

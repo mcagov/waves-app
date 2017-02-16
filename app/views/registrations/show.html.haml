@@ -17,7 +17,11 @@
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
       .x_title
-        %h2 Task Complete
+        %h2
+          Task Complete: #{@registration.registered_vessel}.
+          Official Number:
+          = link_to vessel_path(@registration.registered_vessel) do
+            = @registration.registered_vessel.reg_no
         .clearfix
       .x_content
         %p
