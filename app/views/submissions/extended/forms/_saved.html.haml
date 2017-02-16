@@ -2,15 +2,25 @@
   %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
     %span{"aria-hidden" => "true"} ×
   %h4.modal-title Application Details Saved
-%form
-  .modal-body
-    .alert.alert-success
-      Application details successfully saved.
-  .modal-footer
-    .row
-      .col-md-6
-        = link_to tasks_my_tasks_path, class: 'btn btn-link pull-left' do
-          %i.fa.fa-list
-          Go to Task List
-      .col-md-6
-        = link_to 'Continue', submission_path(@submission), class: 'btn btn-success btn-lg'
+
+.modal-body
+  .row
+    .col-md-12{style: 'text-align: center'}
+      - if @submission.approvable?
+        %h4 The application can now be processed
+        %p
+          = link_to "#",
+            id: "approve-extended-application",
+            class: "btn btn-success btn-lg" do
+            %i.fa.fa-check
+            = t("submission.approval.inline-btn.#{@submission.task}")
+
+      - else
+        %h4 The application is incomplete and can not processed
+
+.modal-footer
+  .row
+    .col-md-6
+      = link_to tasks_my_tasks_path, class: 'btn btn-link pull-left' do
+        %i.fa.fa-list
+        Go to Task List
