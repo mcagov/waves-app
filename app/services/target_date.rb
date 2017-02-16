@@ -12,7 +12,7 @@ class TargetDate
   private
 
   def number_of_days
-    @service_level == :urgent ? 3 : 10
+    @service_level == :premium ? 3 : 10
   end
 
   def set_business_days

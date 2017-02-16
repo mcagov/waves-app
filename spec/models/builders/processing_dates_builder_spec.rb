@@ -46,8 +46,8 @@ describe Builders::ProcessingDatesBuilder do
       end
     end
 
-    context "with urgent service" do
-      let(:service_level) { :urgent }
+    context "with premium service" do
+      let(:service_level) { :premium }
 
       it "sets submission#is_urgent flag" do
         expect(submission.is_urgent).to be_truthy

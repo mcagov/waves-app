@@ -9,7 +9,7 @@ class Builders::ProcessingDatesBuilder
       target_date = TargetDate.new(Date.today, service_level).calculate
 
       @submission.update_attributes(
-        is_urgent: service_level == :urgent,
+        is_urgent: service_level == :premium,
         received_at: received_at,
         referred_until: referred_until,
         target_date: target_date)
