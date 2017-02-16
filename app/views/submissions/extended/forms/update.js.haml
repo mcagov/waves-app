@@ -11,3 +11,7 @@
         render partial: "/submissions/modals/approve/form",
         locals: { submission: @submission })}');
   });
+
+  $("#save-incomplete-application").on('hidden.bs.modal', function () {
+        window.location.reload();
+    });
