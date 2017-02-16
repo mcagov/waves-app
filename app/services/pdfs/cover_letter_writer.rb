@@ -5,6 +5,7 @@ class Pdfs::CoverLetterWriter
     @registration = registration
     @vessel = @registration.vessel
     @correspondent = @registration.owners.first
+    @deliver_to = @registration.delivery_address
     @pdf = pdf
   end
 
