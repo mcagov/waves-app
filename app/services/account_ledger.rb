@@ -11,7 +11,11 @@ class AccountLedger
   end
 
   def amount_due
-    Task.new(@submission.task).payment_required? ? 2500 : 0
+    if Task.new(@submission.task).payment_required?
+      FeeSchedule.new(@submission).standard_fee_required
+    else
+      0
+    end
   end
 
   def amount_paid
@@ -20,9 +24,5 @@ class AccountLedger
 
   def awaiting_payment?
     ![:not_applicable, :paid].include?(payment_status)
-  end
-
-  def service_level
-    amount_paid == 5000 ? :urgent : :standard
   end
 end

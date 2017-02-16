@@ -11,8 +11,8 @@ describe AccountLedger do
       it { expect(subject).to eq(:paid) }
     end
 
-    context "with full payment for urgent service" do
-      let(:submission) { create(:paid_urgent_submission) }
+    context "with full payment for premium service" do
+      let(:submission) { create(:paid_premium_submission) }
 
       it { expect(subject).to eq(:paid) }
     end
@@ -33,22 +33,6 @@ describe AccountLedger do
       let(:submission) { build(:submission, task: :closure) }
 
       it { expect(subject).to eq(:not_applicable) }
-    end
-  end
-
-  context "#service_level" do
-    subject { account_ledger.service_level }
-
-    context "with full payment" do
-      let(:submission) { create(:paid_submission) }
-
-      it { expect(subject).to eq(:standard) }
-    end
-
-    context "with full payment for urgent service" do
-      let(:submission) { create(:paid_urgent_submission) }
-
-      it { expect(subject).to eq(:urgent) }
     end
   end
 

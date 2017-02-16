@@ -3,12 +3,12 @@ require "rails_helper"
 describe Builders::ProcessingDatesBuilder do
   describe ".create" do
     before do
-      account_ledger_instance =
-        double(:account_ledger_instance, service_level: service_level)
-      expect(AccountLedger)
-        .to receive(:new)
-        .with(submission)
-        .and_return(account_ledger_instance)
+      fee_schedule_instance =
+        double(:fee_schedule_instance, service_level: service_level)
+
+      expect(FeeSchedule)
+        .to receive(:new).with(submission)
+        .and_return(fee_schedule_instance)
 
       target_date_instance = double(:target_date_instance)
 
@@ -46,8 +46,8 @@ describe Builders::ProcessingDatesBuilder do
       end
     end
 
-    context "with urgent service" do
-      let(:service_level) { :urgent }
+    context "with premium service" do
+      let(:service_level) { :premium }
 
       it "sets submission#is_urgent flag" do
         expect(submission.is_urgent).to be_truthy
