@@ -34,6 +34,10 @@ describe Submission::FinancePaymentsController, type: :controller do
       it "sends an application_receipt email" do
         expect(Notification::ApplicationReceipt.count).to eq(1)
       end
+
+      it "unassigns the submission" do
+        expect(submission.reload).to be_unassigned
+      end
     end
   end
 
