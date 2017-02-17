@@ -23,8 +23,8 @@ describe Submission::FinancePaymentsController, type: :controller do
         expect(submission.reload.officer_intervention_required).to be_falsey
       end
 
-      it "redirects to submission#show" do
-        expect(response).to redirect_to(submission_path(submission))
+      it "redirects to unclaimed tasks" do
+        expect(response).to redirect_to(tasks_unclaimed_path)
       end
 
       it "generates the ref_no" do

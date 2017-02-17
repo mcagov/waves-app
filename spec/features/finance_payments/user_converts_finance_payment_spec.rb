@@ -24,6 +24,8 @@ describe "User converts finance payment", type: :feature, js: true do
     end
 
     expect(page).to have_css(".alert", text: "successfully converted")
+    expect(page).to have_current_path(tasks_unclaimed_path)
+    expect(Submission.last.vessel.name).to eq("MY BOAT")
   end
 
   scenario "when they have not claimed it they can't 'convert' it" do
