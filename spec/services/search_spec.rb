@@ -11,20 +11,14 @@ describe Search, type: :model do
   end
 
   context ".submissions" do
-    context "search by vessel name" do
-      let!(:submission) { create(:assigned_change_vessel_submission) }
+    context "uses pg_search_scope" do
+      before do
+        expect(Submission).to receive(:scoped_search).with("foo")
+      end
 
-      subject { Search.submissions(submission.vessel.name.slice(0, 3)) }
+      subject { Search.submissions("foo") }
 
-      it { expect(subject.first).to eq(submission) }
-    end
-
-    context "search by submission ref_no" do
-      let!(:submission) { create(:assigned_submission) }
-
-      subject { Search.submissions(submission.ref_no.slice(0, 3)) }
-
-      it { expect(subject.first).to eq(submission) }
+      it { subject }
     end
   end
 
