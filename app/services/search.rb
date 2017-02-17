@@ -5,15 +5,7 @@ class Search
     end
 
     def submissions(term)
-      results =
-        all(term).map(&:searchable).map do |result|
-          if result.is_a?(Register::Vessel)
-            result.submissions
-          else
-            result
-          end
-        end
-      results.flatten.uniq
+      Submission.scoped_search(term)
     end
 
     def vessels(term)
