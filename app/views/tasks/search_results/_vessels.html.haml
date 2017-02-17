@@ -11,9 +11,10 @@
         %tr
           %td= vessel.name
           %td= vessel.reg_no
-          %td.pull-right
-            = form_tag new_submission_path, method: :get do
-              = hidden_field_tag "submission[vessel_reg_no]", vessel.reg_no
-              = hidden_field_tag "submission[task]", :re_registration
-              = hidden_field_tag "submission[part]", current_activity.part
-              = submit_tag "Use this vessel", class: "btn btn-warning btn-xs"
+          %td
+            .pull-right
+              = form_tag new_submission_path, method: :get do
+                = hidden_field_tag "submission[vessel_reg_no]", vessel.reg_no
+                = hidden_field_tag "submission[task]", :re_registration
+                = hidden_field_tag "submission[part]", current_activity.part
+                = submit_tag "Use this vessel", class: "btn btn-warning btn-xs"
