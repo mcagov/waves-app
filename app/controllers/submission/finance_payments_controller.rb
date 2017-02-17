@@ -14,7 +14,7 @@ class Submission::FinancePaymentsController < InternalPagesController
     if @submission.save
       create_notification
       flash[:notice] = "You have successfully converted that application"
-      redirect_to submission_path(@submission)
+      redirect_to tasks_unclaimed_path
     else
       @submission.officer_intervention_required = true
       render :edit
