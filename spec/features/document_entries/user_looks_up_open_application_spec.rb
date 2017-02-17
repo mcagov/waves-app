@@ -17,4 +17,18 @@ describe "User looks up an open application", js: true do
       within("#submissions") { click_on("View this Application") }
     end
   end
+
+  scenario "returning to the document entry modal" do
+    within(".modal#start-new-application") do
+      click_on("Search for Open Application")
+    end
+
+    within(".modal#search-for-submission") do
+      click_on("Back to Document Entry")
+    end
+
+    within(".modal#start-new-application") do
+      expect(page).to have_css("h4", text: "Document Entry")
+    end
+  end
 end

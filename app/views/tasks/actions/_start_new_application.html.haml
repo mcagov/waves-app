@@ -52,3 +52,5 @@
               = hidden_field_tag :response_path, "/tasks/search_results/submissions"
               = render partial: "search/fields"
         #submissions
+      .modal-footer
+        %a.btn.btn-default.pull-left{"data-dismiss" => "modal", "data-target" => "#start-new-application", "data-toggle" => "modal", :href => "#start-new-application"} Back to Document Entry
