@@ -1,0 +1,27 @@
+- if submissions.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#search_results
+    %thead
+      %th Vessel Name
+      %th Reference No.
+      %th Application Type
+      %th Source
+      %th Status
+      %th Target Date
+      %th
+    %tbody
+      - submissions.each do |submission|
+        - submission = Decorators::Submission.new(submission)
+        %tr
+          %td= submission.vessel_name
+          %td= submission.ref_no
+          %td= submission.job_type
+          %td= submission.source_description
+          %td= submission.state.titleize
+          %td= submission.target_date
+          %td
+            .pull-right
+              = link_to submission_path(submission),
+                class: "btn btn-warning btn-xs" do
+                View this Application
