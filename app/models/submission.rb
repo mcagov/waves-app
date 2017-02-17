@@ -5,7 +5,9 @@ class Submission < ApplicationRecord
   include PgSearch
   multisearchable against: :ref_no
 
-  pg_search_scope :scoped_search, against: [:ref_no, :changeset]
+  pg_search_scope :scoped_search,
+                  against: [:ref_no, :changeset],
+                  using: { tsearch: { prefix: true } }
 
   validates :part, presence: true
   validates :source, presence: true
