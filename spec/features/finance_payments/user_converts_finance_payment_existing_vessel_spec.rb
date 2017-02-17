@@ -19,7 +19,8 @@ describe "User converts finance payment for existing vessel", js: true do
     click_on("MY BOAT")
     within("#actions") { click_on("Convert to Application") }
 
-    expect(Submission.last.vessel.hin).to eq("PR-QNTIECMU3FVA")
-    expect(page).to have_css("td#vessel-hin", text: "No change")
+    vessel = Submission.last.vessel
+    expect(vessel.hin).to eq("PR-QNTIECMU3FVA")
+    expect(vessel.name).to eq("MY BOAT")
   end
 end
