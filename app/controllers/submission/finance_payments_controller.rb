@@ -12,7 +12,7 @@ class Submission::FinancePaymentsController < InternalPagesController
     @submission.ref_no = RefNo.generate_for(@submission)
 
     if @submission.save
-      ensure_vessel_name && create_notification
+      process_converted_application
       flash[:notice] = "You have successfully converted that application"
       redirect_to tasks_unclaimed_path
     else
@@ -68,6 +68,12 @@ class Submission::FinancePaymentsController < InternalPagesController
     params.require(:submission).permit(:vessel_reg_no)
   end
 
+  def process_converted_application
+    ensure_vessel_name
+    create_notification
+    unassign_submission
+  end
+
   def create_notification
     Notification::ApplicationReceipt.create(
       notifiable: @submission,
@@ -82,5 +88,10 @@ class Submission::FinancePaymentsController < InternalPagesController
       @submission.vessel = { name: finance_payment.vessel_name }
       @submission.save
     end
+  end
+
+  def unassign_submission
+    proc(&:to_s)
+    @submission.unclaimed!
   end
 end
