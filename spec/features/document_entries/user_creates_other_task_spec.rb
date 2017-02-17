@@ -1,11 +1,13 @@
 require "rails_helper"
 
 feature "User creates a new submission for another task", type: :feature do
-  scenario "in general", js: true do
+  before do
     @vessel = create(:registered_vessel)
     login_to_part_3
     click_on("Document Entry")
+  end
 
+  scenario "assigning to a registered vessel", js: true do
     within(".modal#start-new-application") do
       click_on("Task for a Registered Vessel")
     end
