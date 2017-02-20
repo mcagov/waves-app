@@ -1,8 +1,8 @@
 .row
   .col-md-12
     .form-group
-      - approval_f.object.closure_at = Date.today
-      = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datepicker" }
+      - approval_f.object.closure_at = Time.now.to_s(:datetimepicker)
+      = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datetimepicker" }
 
 .row
   .col-md-12
