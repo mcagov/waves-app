@@ -10,6 +10,8 @@ describe "User edits submission owners", js: true do
   scenario "adding an owner" do
     click_on("Add Individual Owner")
 
+    within(".modal.fade.in") { expect_postcode_lookup }
+
     fill_in("Owner Name", with: "ALICE NEW OWNER")
     select("FRANCE", from: "Nationality")
     fill_in("Email", with: "alice@example.com")

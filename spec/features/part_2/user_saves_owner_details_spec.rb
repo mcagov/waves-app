@@ -6,6 +6,7 @@ describe "User save owner details", js: :true do
     click_on("Owners & Shareholding")
     click_on("Add Individual Owner")
 
+    within(".modal.fade.in") { expect_postcode_lookup }
     fill_in("Name", with: "BOB BOLD")
     fill_in("IMO Number", with: "1234567")
     select("(b)", from: "Status")
@@ -30,6 +31,7 @@ describe "User save owner details", js: :true do
     click_on("Owners & Shareholding")
     click_on("Add Corporate Owner")
 
+    within(".modal.fade.in") { expect_postcode_lookup }
     fill_in("Company Name", with: "BOB INC")
     fill_in("Registration Number", with: "1234567")
     fill_in("Date of Incorporation", with: "12/01/2017")
