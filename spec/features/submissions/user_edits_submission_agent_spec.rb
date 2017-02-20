@@ -11,6 +11,7 @@ describe "User edits submission agent", js: true do
   scenario "editing the agent" do
     click_on(Submission.last.agent.name)
 
+    within(".modal.fade.in") { expect_postcode_lookup }
     fill_in("Full Name", with: "ALICE AGENT")
     fill_in("Email Address", with: "alice@example.com")
     fill_in("Phone Number", with: "012345678")

@@ -108,7 +108,7 @@ class Decorators::Submission < SimpleDelegator
   def delivery_description
     if electronic_delivery?
       "Electronic delivery"
-    else
+    elsif delivery_address.active?
       delivery_address.inline_name_and_address
     end
   end
