@@ -63,7 +63,7 @@ class SubmissionsController < InternalPagesController
     params.require(:submission).permit(
       :part, :task, :received_at, :applicant_name, :applicant_is_agent,
       :applicant_email, :vessel_reg_no, :documents_received,
-      vessel: WavesUtilities::Vessel::ATTRIBUTES
+      vessel: Submission::Vessel::ATTRIBUTES
     )
   end
 
