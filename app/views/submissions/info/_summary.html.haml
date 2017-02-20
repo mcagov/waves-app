@@ -19,6 +19,15 @@
                   %td.soft-label Target Date:
                   %td
                     %strong= submission.target_date
+                %tr
+                  %td.soft-label Declarations:
+                  %td
+                    %strong= submission.declaration_status
+
+                %tr
+                  %td.soft-label Payment Received:
+                  %td
+                    %strong= formatted_amount(submission.payment_received)
           .col-md-4
             %table.table
               %tbody
@@ -45,16 +54,14 @@
                       - if submission.applicant_email.present?
                         (#{submission.applicant_email})
                 %tr
-                  %td.soft-label Declarations:
-                  %td
-                    %strong= submission.declaration_status
-
-                %tr
-                  %td.soft-label Payment Received:
-                  %td
-                    %strong= formatted_amount(submission.payment_received)
-
-                %tr
                   %td.soft-label Documents Received:
                   %td
                     %strong= submission.documents_received
+                %tr
+                  %td.soft-label Delivery Address
+                  %td.delivery-address
+                    %strong
+                      - if submission.delivery_address.active?
+                        = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
+                      -else
+                        Owner #1
