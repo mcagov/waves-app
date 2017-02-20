@@ -14,7 +14,7 @@ class Notification::OutstandingDeclaration < Notification
   private
 
   def vessel_name
-    notifiable.submission.vessel.to_s  if notifiable.submission
+    notifiable.submission.vessel_name  if notifiable.submission
   end
 
   def correspondent_name

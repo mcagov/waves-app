@@ -19,6 +19,6 @@ class Notification::Referral < Notification
   private
 
   def vessel_name
-    notifiable.vessel.name if notifiable.vessel
+    notifiable.vessel_name if notifiable
   end
 end

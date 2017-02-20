@@ -73,6 +73,36 @@ describe Submission, type: :model do
     end
   end
 
+  context "#vessel_name" do
+    subject { submission.vessel_name }
+
+    context "with a registered_vessel" do
+      let(:submission) { build(:unassigned_change_vessel_submission) }
+
+      it { expect(subject).to eq(submission.registered_vessel.name) }
+    end
+
+    context "with a vessel name in the changeset" do
+      let(:submission) { build(:submission) }
+
+      it { expect(subject).to eq(submission.vessel.name) }
+    end
+
+    context "with a vessel name in a finance payment entry" do
+      let(:submission) do
+        create(:submitted_finance_payment, vessel_name: "FP BOAT")
+      end
+
+      it { expect(subject).to eq("FP BOAT") }
+    end
+
+    context "with no vessel name" do
+      let(:submission) { Submission.new }
+
+      it { expect(subject).to eq("UNKNOWN") }
+    end
+  end
+
   context ".registered_vessel_exists" do
     let!(:submission) { build(:submission) }
 

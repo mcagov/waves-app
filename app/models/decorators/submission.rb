@@ -12,15 +12,6 @@ class Decorators::Submission < SimpleDelegator
     Builders::NotificationListBuilder.for_submission(@submission)
   end
 
-  def vessel_name
-    return vessel.name if vessel.name.present?
-    if finance_payment && finance_payment.vessel_name.present?
-      finance_payment.vessel_name
-    else
-      "Unknown"
-    end
-  end
-
   def source_description
     source.titleize if source
   end
@@ -123,11 +114,5 @@ class Decorators::Submission < SimpleDelegator
 
   def convertible?
     new_registration? || registered_vessel.present?
-  end
-
-  private
-
-  def finance_payment
-    payment.remittance if payment && source.to_sym == :manual_entry
   end
 end

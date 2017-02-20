@@ -34,6 +34,9 @@ describe "User edits submission for other tasks", js: true do
     expect(page).not_to have_link(submission.owners.first.name)
 
     click_on("Save Application")
-    expect(page).to have_css(".vessel-name", text: "NEW BOAT NAME")
+
+    within(".submission-vessel") do
+      expect(page).to have_css("#vessel-name", text: "NEW BOAT NAME")
+    end
   end
 end
