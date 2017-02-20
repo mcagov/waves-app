@@ -60,7 +60,8 @@
                 %tr
                   %td.soft-label Delivery Address
                   %td.delivery-address
-                    - if submission.delivery_address.active?
-                      = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
-                    -else
-                      Owner #1
+                    %strong
+                      - if submission.delivery_address.active?
+                        = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
+                      -else
+                        Owner #1
