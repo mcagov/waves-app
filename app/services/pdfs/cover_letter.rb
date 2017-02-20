@@ -24,7 +24,7 @@ class Pdfs::CoverLetter
 
   def single_cover_letter_filename
     registration = @registrations.first
-    title = registration.vessel.to_s.parameterize
+    title = registration.vessel_name.parameterize
     reg_date = registration.registered_at.to_s(:db)
     "#{title}-cover-letter-#{reg_date}.pdf"
   end

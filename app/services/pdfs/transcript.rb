@@ -29,7 +29,7 @@ class Pdfs::Transcript
 
   def single_transcript_filename
     registration = @registrations.first
-    title = registration.vessel.to_s.parameterize
+    title = registration.vessel_name.parameterize
     "#{title}-transcript.pdf"
   end
 end

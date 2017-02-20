@@ -11,7 +11,7 @@ describe Pdfs::Transcript do
 
     it "has a filename" do
       expect(transcript.filename)
-        .to match(/boaty-mcboatfac.*\-transcript\.pdf/)
+        .to match(/registered-boat.*\-transcript\.pdf/)
     end
 
     it "has two pages with the title on page 1" do
