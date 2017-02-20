@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :unregistered_vessel, class: "Register::Vessel" do
     part                      :part_3
-    sequence(:name)           { |n| "Boaty McBoatface #{n}" }
+    sequence(:name)           { |n| "Registered Boat #{n}" }
     number_of_hulls           { rand(1..6) }
     vessel_type               "BARGE"
     owners                    { [build(:registered_owner)] }

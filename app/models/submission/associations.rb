@@ -110,4 +110,10 @@ module Submission::Associations
   def delivery_address=(delivery_address_params)
     changeset[:delivery_address] = delivery_address_params
   end
+
+  private
+
+  def finance_payment
+    payment.remittance if payment && source.to_sym == :manual_entry
+  end
 end

@@ -97,6 +97,16 @@ class Submission < ApplicationRecord
       Register::Vessel.in_part(part).where(reg_no: reg_no).first
   end
 
+  def vessel_name
+    return registered_vessel.name if registered_vessel
+    return vessel.name if vessel.name.present?
+    if finance_payment && finance_payment.vessel_name.present?
+      finance_payment.vessel_name
+    else
+      "UNKNOWN"
+    end
+  end
+
   protected
 
   def remove_claimant

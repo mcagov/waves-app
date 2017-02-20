@@ -18,7 +18,7 @@ class Notification::ApplicationReceipt < Notification
   end
 
   def vessel_name
-    notifiable.vessel.name if notifiable.vessel
+    notifiable.vessel_name if notifiable
   end
 
   def declarations_required
