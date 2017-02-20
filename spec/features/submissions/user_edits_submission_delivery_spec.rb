@@ -28,4 +28,18 @@ feature "User edits Delivery Address details", type: :feature, js: true do
     expect(page).to have_css(
       "#delivery_address", text: "ALICE, MY HOUSE, MY STREET")
   end
+
+  scenario "removing the delivery_address" do
+    click_on("Edit Application")
+
+    within(".submission-delivery-address") do
+      fill_in("Name", with: "")
+      fill_in("Address 1", with: "")
+      fill_in("Postcode", with: "P")
+    end
+
+    click_on("Save Application")
+    click_on("Payment")
+    expect(page).not_to have_css("#delivery_address")
+  end
 end

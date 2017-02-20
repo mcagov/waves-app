@@ -11,7 +11,7 @@ class Submission::DeliveryAddress < WavesUtilities::DeliveryAddress
     ].compact.reject(&:empty?)
   end
 
-  def exists?
-    stationary_name_and_address.present?
+  def active?
+    name.present? && address_1.present? && postcode.present?
   end
 end

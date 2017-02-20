@@ -19,7 +19,7 @@ class Registration < ApplicationRecord
 
   def delivery_address
     submission = Submission.find_by(ref_no: submission_ref_no)
-    if submission && submission.delivery_address.exists?
+    if submission && submission.delivery_address.active?
       submission.delivery_address
     else
       Submission::DeliveryAddress.new(owners.first)
