@@ -75,3 +75,8 @@
         %td.soft-label Reg Expiry Date:
         %td
           %strong= @vessel.current_registration.registered_until if @vessel.current_registration
+      - if @vessel.registration_status == :closed
+        %tr
+          %td.soft-label Date of Closure:
+          %td
+            %strong= @vessel.current_registration.closed_at.to_s(:date_time)

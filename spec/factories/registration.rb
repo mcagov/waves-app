@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :registration do
     registered_at 1.day.ago
+    registered_until 5.years.from_now
     task :vessel_details
     registry_info { { owners: [build(:registered_owner)] } }
   end
