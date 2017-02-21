@@ -1,0 +1,82 @@
+%h2 Engines
+%table.table.table-striped
+  %thead
+    %th Type
+    %th Make / Model
+    %th MCEP per Engine
+    %th Cylinders
+    %th Derating
+    %th RPM
+    %th MCEP After Derating
+    %th Quantity
+    %th
+  %tbody
+    - @submission.engines.each do |engine|
+      %tr
+        %td
+          = link_to engine.engine_type, "#",
+            "data-target" => "#edit_engine_#{engine.id}",
+            "data-toggle" => "modal"
+        %td.make_and_model= engine.make_and_model
+        %td.mcep_per_engine
+          - if engine.mcep_per_engine.present?
+            #{engine.mcep_per_engine.to_f}kW
+        %td.cylinders= engine.cylinders
+        %td.derating= engine.derating
+        %td.rpm= engine.rpm
+        %td.mcep_after_derating
+          - if engine.mcep_after_derating.present?
+            #{engine.mcep_after_derating.to_f}kW
+        %td.quantity= engine.quantity.to_i
+        %td
+          = link_to submission_engine_path(@submission, engine),
+            class: 'btn-link pull-right',
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this engine?" },
+            style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
+- unless @submission.engines.empty?
+  %p.pull-right.total_mcep
+    %strong Total MCEP: #{Engine.total_mcep_for(@submission)}kW
+
+.row
+  .col-md-12
+    = link_to '#', class: 'btn btn-primary',
+      "data-target" => "#new_engine",
+      "data-toggle" => "modal" do
+      %i.fa.fa-plus
+      Add Engine(s)
+
+.modal.fade{id: "new_engine", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for Engine.new, method: :post, remote: true, url: submission_engines_path(@submission) do |engine_f|
+        = hidden_field_tag "modal_id", "new_engine"
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title New Engine
+        .modal-body
+          = render partial: "submissions/extended/forms/engines/fields", locals: { engine_f: engine_f }
+
+        .modal-footer
+          = engine_f.submit "Add Engine", class: "btn btn-primary"
+
+- @submission.engines.each do |engine|
+  .modal.fade{id: "edit_engine_#{engine.id}", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-lg
+      .modal-content
+        = simple_form_for engine, method: :put, remote: true, url: submission_engine_path(@submission, engine) do |engine_f|
+          = hidden_field_tag "modal_id", "new_engine"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Engine
+          .modal-body
+            = render partial: "submissions/extended/forms/engines/fields", locals: { engine_f: engine_f }
+
+          .modal-footer
+            = engine_f.submit "Save Engine", class: "btn btn-primary"
+

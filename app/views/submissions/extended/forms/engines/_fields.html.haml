@@ -1,0 +1,29 @@
+.row
+  .col-md-3
+    = engine_f.input :engine_type, as: :select,
+      label: "Engine Type",
+      collection: Engine::ENGINE_TYPES,
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+  .col-md-3
+    = engine_f.input :make, label: "Engine Make"
+  .col-md-3
+    = engine_f.input :model, label: "Engine Model"
+  .col-md-3
+    = engine_f.input :cylinders, label: "Cylinders"
+.row
+  .col-md-3
+    = engine_f.input :mcep_per_engine, label: "MCEP per Engine"
+  .col-md-3
+    = engine_f.input :derating, as: :select,
+      label: "Derating",
+      collection: Engine::DERATINGS,
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+  .col-md-3
+    = engine_f.input :rpm, label: "RPM"
+  .col-md-3
+    = engine_f.input :mcep_after_derating, label: "MCEP after Derating"
+.row
+  .col-md-3
+    = engine_f.input :quantity
