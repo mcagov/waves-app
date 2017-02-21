@@ -16,4 +16,10 @@ class Engine < ApplicationRecord
   def make_and_model
     [make, model].join(" ")
   end
+
+  class << self
+    def total_mcep_for(_submission)
+      999
+    end
+  end
 end

@@ -28,6 +28,7 @@ describe "User edits engines", js: :true do
       expect(page).to have_css(".rpm", text: "1200")
       expect(page).to have_css(".mcep_after_derating", text: "300.1kW")
       expect(page).to have_css(".quantity", text: "6")
+      expect(page).to have_css(".total_mcep", text: "Total MCEP: 999kW")
 
       click_on("Outboard")
     end
@@ -48,6 +49,4 @@ describe "User edits engines", js: :true do
       expect(Submission.last.engines).to be_empty
     end
   end
-
-  scenario "expect(page).to have_text(\"Total MCEP: 999kW\")"
 end

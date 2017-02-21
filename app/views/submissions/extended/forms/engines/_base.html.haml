@@ -37,7 +37,9 @@
             style: 'color: red;' do
             %i.fa.fa-trash
             Remove
-
+- unless @submission.engines.empty?
+  %p.pull-right.total_mcep
+    %strong Total MCEP: #{Engine.total_mcep_for(@submission)}kW
 
 .row
   .col-md-12
