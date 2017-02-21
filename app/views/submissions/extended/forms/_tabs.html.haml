@@ -36,7 +36,7 @@
                 locals: { disabled: !@submission.vessel_can_be_edited? }
 
             #engines_tab.tab-pane{"aria-labelledby" => "engines-tab", :role => "tabpanel"}
-              WIP: Engines
+              #engines= render partial: "submissions/extended/forms/engines/base"
 
             #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
               = render partial: "submissions/extended/forms/owners/tab_content"

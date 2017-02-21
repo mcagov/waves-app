@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $('select.select2').select2({
-    minimumResultsForSearch: Infinity
+    minimumResultsForSearch: Infinity,
+    width: '100%'
   });
 });
 $(document).ready(function() {
