@@ -1,2 +1,10 @@
 %h1 Vessels: #{Activity.new(current_activity.part)}
-= render partial: "vessels/#{Activity.new(current_activity.part).view_mode}/index"
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2 Registered Vessels
+        .clearfix
+      .x_content
+        = render partial: "vessels/#{Activity.new(current_activity.part).view_mode}/index"
+= will_paginate @vessels, renderer: BootstrapPagination::Rails
