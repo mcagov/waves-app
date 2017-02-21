@@ -21,7 +21,6 @@ describe "User edits engines", js: :true do
     end
 
     within("#engines") do
-      expect(page).to have_link("Outboard")
       expect(page).to have_css(".make_and_model", text: "Honda XT600")
       expect(page).to have_css(".cylinders", text: "4")
       expect(page).to have_css(".mcep_per_engine", text: "100.34kW")
@@ -29,10 +28,21 @@ describe "User edits engines", js: :true do
       expect(page).to have_css(".rpm", text: "1200")
       expect(page).to have_css(".mcep_after_derating", text: "300.1kW")
       expect(page).to have_css(".quantity", text: "6")
+
+      click_on("Outboard")
+    end
+
+    within(".modal.fade.in") do
+      select("Outboard", from: "Engine Type")
+      fill_in("Engine Make", with: "Yamaha")
+      click_on("Save Engine")
+    end
+
+    within("#engines") do
+      expect(page).to have_css(".make_and_model", text: "Yamaha XT600")
     end
   end
 
   scenario "expect(page).to have_text(\"Total MCEP: 999kW\")"
-  scenario "editing an engine"
   scenario "removing an engine"
 end
