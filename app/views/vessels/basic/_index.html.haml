@@ -1,0 +1,25 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Vessel Name
+      %th SSR Number
+      %th Type
+      %th Make and Model
+      %th Length
+      %th HIN
+      %th Callsign
+      %th MMSI
+      %th
+  %tbody
+    - @vessels.each do |vessel|
+      %tr
+        %td= link_to vessel, vessel_path(vessel)
+        %td= vessel.reg_no
+        %td= vessel.vessel_type
+        %td= vessel.make_and_model
+        %td= vessel.length_in_meters
+        %td= vessel.hin
+        %td= vessel.radio_call_sign
+        %td= vessel.mmsi_number
+        %td
+          .pull-right= render partial: "/vessels/registration_status", locals: { registration_status: vessel.registration_status }

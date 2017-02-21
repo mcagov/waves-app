@@ -15,6 +15,7 @@ class VesselsController < InternalPagesController
   def index
     @vessels =
       Register::Vessel.in_part(current_activity.part)
+                      .includes(:current_registration)
                       .paginate(page: params[:page], per_page: 20)
                       .order(:name)
   end
