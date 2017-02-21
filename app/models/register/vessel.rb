@@ -28,6 +28,8 @@ module Register
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id
 
+    has_many :engines, as: :parent
+
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
     delegate :registered_until, to: :current_registration
