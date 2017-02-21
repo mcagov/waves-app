@@ -41,8 +41,13 @@ describe "User edits engines", js: :true do
     within("#engines") do
       expect(page).to have_css(".make_and_model", text: "Yamaha XT600")
     end
+
+    within("#engines") do
+      click_on("Remove")
+      expect(page).not_to have_css(".make_and_model")
+      expect(Submission.last.engines).to be_empty
+    end
   end
 
   scenario "expect(page).to have_text(\"Total MCEP: 999kW\")"
-  scenario "removing an engine"
 end

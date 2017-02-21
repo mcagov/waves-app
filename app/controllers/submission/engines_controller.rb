@@ -16,6 +16,13 @@ class Submission::EnginesController < InternalPagesController
     respond_with_update
   end
 
+  def destroy
+    @engine = Engine.find(params[:id])
+    @engine.destroy
+
+    respond_with_update
+  end
+
   private
 
   def load_submission

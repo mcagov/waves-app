@@ -28,6 +28,16 @@
           - if engine.mcep_after_derating.present?
             #{engine.mcep_after_derating.to_f}kW
         %td.quantity= engine.quantity.to_i
+        %td
+          = link_to submission_engine_path(@submission, engine),
+            class: 'btn-link pull-right',
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this engine?" },
+            style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
+
 
 .row
   .col-md-12
