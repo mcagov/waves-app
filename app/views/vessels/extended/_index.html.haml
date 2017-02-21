@@ -2,24 +2,20 @@
   %thead
     %tr
       %th Vessel Name
-      %th SSR Number
-      %th Type
-      %th Make and model
-      %th Length
-      %th HIN
-      %th Callsign
-      %th MMSI
+      %th Official Number
+      %th Registration Type
+      %th Type of Vessel
+      %th Port
+      %th Port Number
       %th
   %tbody
     - @vessels.each do |vessel|
       %tr
         %td= link_to vessel, vessel_path(vessel)
         %td= vessel.reg_no
+        %td= vessel.registration_type.titleize if vessel.registration_type
         %td= vessel.vessel_type
-        %td= vessel.make_and_model
-        %td= vessel.length_in_meters
-        %td= vessel.hin
-        %td= vessel.radio_call_sign
-        %td= vessel.mmsi_number
+        %td= WavesUtilities::Port.new(vessel.port_code).name if vessel.port_code
+        %td= vessel.port_no
         %td
           .pull-right= render partial: "/vessels/registration_status", locals: { registration_status: vessel.registration_status }
