@@ -18,12 +18,13 @@ class Engine < ApplicationRecord
   end
 
   def total_mcep
-    (quantity.to_i * mcep_after_derating).round(2)
+    (quantity.to_i * mcep_after_derating.to_f)
   end
 
   class << self
-    def total_mcep_for(_submission)
-      999
+    def total_mcep_for(submission)
+      result = submission.engines.sum(&:total_mcep)
+      result == result.to_i ? result : result.round(2)
     end
   end
 end
