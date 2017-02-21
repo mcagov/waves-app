@@ -17,6 +17,10 @@ class Engine < ApplicationRecord
     [make, model].join(" ")
   end
 
+  def total_mcep
+    (quantity.to_i * mcep_after_derating).round(2)
+  end
+
   class << self
     def total_mcep_for(_submission)
       999
