@@ -5,7 +5,8 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
     @submission = create(:completed_submission, part: :part_2)
     @vessel = @submission.registered_vessel
     login_to_part_2
-    visit vessel_path(@vessel)
+    visit vessels_path
+    click_on(@vessel.name.upcase)
   end
 
   scenario "tabs" do

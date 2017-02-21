@@ -1,0 +1,31 @@
+.row
+  .col-md-12.col-sm-12.col-xs-12
+    .x_panel
+      .x_title
+        %h2 Registered Vessels
+        .clearfix
+      .x_content
+        %table.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Vessel Name
+              %th SSR Number
+              %th Type
+              %th Make and model
+              %th Length
+              %th HIN
+              %th Callsign
+              %th MMSI
+          %tbody
+            - @vessels.each do |vessel|
+              %tr
+                %td= link_to vessel, vessel_path(vessel)
+                %td= vessel.reg_no
+                %td= vessel.vessel_type
+                %td= vessel.make_and_model
+                %td= vessel.length_in_meters
+                %td= vessel.hin
+                %td= vessel.radio_call_sign
+                %td= vessel.mmsi_number
+
+= will_paginate @vessels, renderer: BootstrapPagination::Rails
