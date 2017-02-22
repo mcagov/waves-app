@@ -1,0 +1,19 @@
+:plain
+  if ("#{ @modal_id }".length > 0) {
+    $("##{ @modal_id }").modal('hide');
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open');
+  }
+
+  $("#mortgages").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/mortgages/base")}'
+  );
+
+  $('a.edit_shareholding_in_place').editable({
+    success:
+      function(e, editable) {
+        var submission_id = $('#submission-id').html();
+        $.ajax({  url: '/submissions/' + submission_id + '/shareholding' });
+      }
+  });

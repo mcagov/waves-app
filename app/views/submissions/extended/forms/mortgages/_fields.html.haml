@@ -1,0 +1,18 @@
+.row
+  .col-md-3
+    = mortgage_f.input :mortgage_type, as: :select,
+      label: "Mortgage Type",
+      collection: Mortgage.types_for(@submission),
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+  .col-md-3
+    = mortgage_f.input :reference_number, label: "Reference Number"
+  .col-md-2
+    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+  .col-md-2
+    = mortgage_f.input :end_date, as: :string, label: "End Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+  .col-md-2
+    = mortgage_f.input :amount, label: "Mortgage Amount"
+.row
+  .col-md-12
+    = mortgage_f.input :mortgagor, label: "Mortgagor(s)"
