@@ -25,11 +25,21 @@ describe "User edits mortgages", js: :true do
       expect(page).to have_css(".end_date", text: "01/02/2004")
       expect(page).to have_css(".amount", text: "2000 pounds")
       expect(page).to have_css(".mortgagor", text: "Bob, Sally")
+
+      click_on("Intent")
+    end
+
+    within(".modal.fade.in") do
+      fill_in("Reference Number", with: "REF 2")
+      click_on("Save Mortgage")
+    end
+
+    within("#mortgages") do
+      expect(page).to have_css(".reference_number", text: "REF 2")
     end
   end
 
   scenario "adding a mortgagee"
   scenario "removing a mortgagee"
-  scenario "editing a mortgage"
   scenario "removing a mortgage"
 end

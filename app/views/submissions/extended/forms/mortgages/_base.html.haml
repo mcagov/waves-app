@@ -14,7 +14,10 @@
     - @submission.mortgages.order("created_at asc").each_with_index do |mortgage, index|
       %tr
         %td.priority= letter_sequence(index)
-        %td.mortgage_type= mortgage.mortgage_type
+        %td.mortgage_type
+          = link_to mortgage.mortgage_type, "#",
+            "data-target" => "#edit_mortgage_#{mortgage.id}",
+            "data-toggle" => "modal"
         %td.reference_number= mortgage.reference_number
         %td.start_date= mortgage.start_date
         %td.end_date= mortgage.end_date
@@ -43,3 +46,21 @@
 
         .modal-footer
           = mortgage_f.submit "Add Mortgage", class: "btn btn-primary"
+
+
+- @submission.mortgages.each do |mortgage|
+  .modal.fade{id: "edit_mortgage_#{mortgage.id}", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-lg
+      .modal-content
+        = simple_form_for mortgage, method: :put, remote: true, url: submission_mortgage_path(@submission, mortgage) do |mortgage_f|
+          = hidden_field_tag "modal_id", "new_mortgage"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Mortgage
+          .modal-body
+            = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+
+          .modal-footer
+            = mortgage_f.submit "Save Mortgage", class: "btn btn-primary"
+
