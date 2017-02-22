@@ -14,8 +14,8 @@ feature "User views task lists", type: :feature, js: true do
     click_link("Team Tasks")
     expect(page).to have_css("h1", text: "Team Tasks")
 
-    click_link("Fee Entries")
-    expect(page).to have_css("h1", text: "Fee Entries")
+    click_link("Fees Received")
+    expect(page).to have_css("h1", text: "Fees Received")
 
     click_link("Unclaimed Tasks")
     expect(page).to have_css("h1", text: "Unclaimed Tasks")

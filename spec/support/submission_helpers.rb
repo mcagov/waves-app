@@ -28,7 +28,7 @@ end
 
 def claim_fee_entry_and_visit
   login_to_part_3
-  click_on("Fee Entries")
+  click_on("Fees Received")
   click_on("Claim")
   click_on("Process Next Application")
 end
