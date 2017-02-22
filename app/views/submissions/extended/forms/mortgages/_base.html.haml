@@ -24,6 +24,15 @@
         %td.amount= mortgage.amount
         %td.mortgagor= mortgage.mortgagor
         %td.mortgagees
+        %td
+          = link_to submission_mortgage_path(@submission, mortgage),
+            class: 'btn-link pull-right',
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this mortgage?" },
+            style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
 .row
   .col-md-12
     = link_to '#', class: 'btn btn-primary',

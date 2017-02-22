@@ -37,9 +37,14 @@ describe "User edits mortgages", js: :true do
     within("#mortgages") do
       expect(page).to have_css(".reference_number", text: "REF 2")
     end
+
+    within("#mortgages") do
+      click_on("Remove")
+      expect(page).not_to have_css(".reference_number")
+      expect(Submission.last.mortgages).to be_empty
+    end
   end
 
   scenario "adding a mortgagee"
   scenario "removing a mortgagee"
-  scenario "removing a mortgage"
 end
