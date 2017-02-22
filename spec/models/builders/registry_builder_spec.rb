@@ -102,7 +102,9 @@ describe Builders::RegistryBuilder do
 
       it "creates the engines" do
         expect(registered_vessel.reload.engines.map(&:make))
-          .to eq(%w(Honda Yamaha))
+          .to include("Honda")
+        expect(registered_vessel.reload.engines.map(&:make))
+          .to include("Yamaha")
       end
     end
   end
