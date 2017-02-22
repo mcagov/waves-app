@@ -85,7 +85,7 @@ class Builders::RegistryBuilder
     def build_vessel_associations
       build_owners
       @vessel = Builders::Registry::AgentBuilder.create(@submission, @vessel)
-      build_shares_held_jointly
+      @vessel = Builders::Registry::ShareBuilder.create(@submission, @vessel)
       @vessel = Builders::Registry::EngineBuilder.create(@submission, @vessel)
     end
 
@@ -121,20 +121,5 @@ class Builders::RegistryBuilder
         :registered_owner_id, registered_owner.id)
     end
     # rubocop:enable all
-
-    def build_shares_held_jointly
-      @vessel.shareholder_groups.destroy_all
-
-      @submission.declaration_groups.each do |declaration_group|
-        shareholder_group =
-          @vessel.shareholder_groups.create(
-            shares_held: declaration_group.shares_held)
-
-        declaration_group.declaration_group_members.each do |dec_group_member|
-          shareholder_group.shareholder_group_members.create(
-            owner_id: dec_group_member.declaration.registered_owner_id)
-        end
-      end
-    end
   end
 end
