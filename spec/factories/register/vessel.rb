@@ -6,6 +6,7 @@ FactoryGirl.define do
     vessel_type               "BARGE"
     owners                    { [build(:registered_owner)] }
     agent                     { build(:registered_agent) }
+    engines                   { [build(:engine)] }
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do
