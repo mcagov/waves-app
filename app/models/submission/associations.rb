@@ -43,6 +43,7 @@ module Submission::Associations
     def misc_associations(base)
       base.has_many :work_logs
       base.has_many :engines, as: :parent
+      base.has_many :mortgages, as: :parent
     end
 
     def notification_associations(base)

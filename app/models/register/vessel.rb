@@ -29,6 +29,7 @@ module Register
              foreign_key: :registered_vessel_id
 
     has_many :engines, as: :parent
+    has_many :mortgages, as: :parent
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
