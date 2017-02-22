@@ -163,6 +163,10 @@ describe Register::Vessel do
       it "has the agent attributes" do
         expect(subject[:agent]["name"]).to eq(vessel.agent.name)
       end
+
+      it "has the engine attributes" do
+        expect(subject[:engines][0]["make"]).to eq(vessel.engines.first.make)
+      end
     end
 
     context "shareholder_groups" do

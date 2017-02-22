@@ -32,7 +32,7 @@
       = render partial: "vessels/extended/tabs/vessel", locals: { vessel: @vessel }
 
     #engines_tab.tab-pane{"aria-labelledby" => "engines-tab", :role => "tabpanel"}
-      WIP: Engines
+      = render partial: "vessels/extended/tabs/engines", locals: { vessel: @vessel }
 
     #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/owners", locals: { vessel: @vessel }

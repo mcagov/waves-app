@@ -62,6 +62,7 @@ module Register
         owners: owners.map(&:attributes),
         agent: (agent || Register::Agent.new).attributes,
         shareholder_groups: shareholder_groups_info,
+        engines: engines.map(&:attributes),
       }
     end
 

@@ -23,8 +23,7 @@ class Engine < ApplicationRecord
 
   class << self
     def total_mcep_for(submission)
-      result = submission.engines.sum(&:total_mcep)
-      result == result.to_i ? result : result.round(2)
+      submission.engines.sum(&:total_mcep)
     end
   end
 end

@@ -150,6 +150,21 @@ describe Builders::SubmissionBuilder do
           expect(submission.correspondent.name).to eq("BOB")
         end
       end
+
+      context "with engines" do
+        let(:submission_engine) { submission.reload.engines.first }
+
+        it "builds the engines from the changeset" do
+          expect(submission_engine.make).to eq("DUCATI")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the engines" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.engines.first).to eq(submission_engine)
+          end
+        end
+      end
     end
   end
 end
@@ -177,7 +192,8 @@ def vessel_sample_data
   {
     part: :part_3,
     name: "MY BOAT", number_of_hulls: 1,
-    owners: owner_sample_data.map { |owner| Register::Owner.new(owner) }
+    owners: owner_sample_data.map { |owner| Register::Owner.new(owner) },
+    engines: [create(:engine, make: "DUCATI")]
   }
 end
 

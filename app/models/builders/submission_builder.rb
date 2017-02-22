@@ -24,6 +24,7 @@ class Builders::SubmissionBuilder
       if @submission.changeset
         build_declarations
         build_managing_owner_and_correspondent
+        build_engines
       end
 
       build_agent if @submission.applicant_is_agent
@@ -84,6 +85,18 @@ class Builders::SubmissionBuilder
         if declaration.owner.correspondent
           @submission.correspondent_id = declaration.id
         end
+      end
+    end
+
+    def build_engines
+      if @submission.persisted?
+        return unless Engine.where(parent: @submission).empty?
+      end
+
+      (@submission.symbolized_changeset[:engines] || []).each do |engine|
+        submission_engine = Engine.new(engine.except(:id))
+        submission_engine.parent = @submission
+        submission_engine.save
       end
     end
   end

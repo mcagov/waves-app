@@ -28,22 +28,12 @@ describe Engine do
     let(:submission) { create(:submission) }
     subject { described_class.total_mcep_for(submission) }
 
-    context "when the expectation is a floating point number" do
-      before do
-        submission.engines.create(mcep_after_derating: 300.34, quantity: 3)
-        submission.engines.create(mcep_after_derating: 0, quantity: 3)
-        submission.engines.create(mcep_after_derating: 1000.17, quantity: 18)
-      end
-
-      it { expect(subject).to eq(18904.08) }
+    before do
+      submission.engines.create(mcep_after_derating: 300.34, quantity: 3)
+      submission.engines.create(mcep_after_derating: 0, quantity: 3)
+      submission.engines.create(mcep_after_derating: 1000.17, quantity: 18)
     end
 
-    context "when the expectation is an integer" do
-      before do
-        submission.engines.create(mcep_after_derating: 300, quantity: 3)
-      end
-
-      it { expect(subject).to eq(900) }
-    end
+    it { expect(subject.round(2)).to eq(18904.08) }
   end
 end
