@@ -10,6 +10,7 @@ class Builders::RegistryBuilder
         build_owners
         build_agent
         build_shares_held_jointly
+        build_engines
       end
 
       @vessel
@@ -134,6 +135,15 @@ class Builders::RegistryBuilder
           shareholder_group.shareholder_group_members.create(
             owner_id: dec_group_member.declaration.registered_owner_id)
         end
+      end
+    end
+
+    def build_engines
+      @vessel.engines.delete_all
+      @submission.engines.each do |submission_engine|
+        vessel_engine = submission_engine.clone
+        vessel_engine.parent = @vessel
+        vessel_engine.save
       end
     end
   end

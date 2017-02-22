@@ -99,11 +99,16 @@ describe Builders::RegistryBuilder do
         expect(shareholder_group.shareholder_group_members.map(&:owner))
           .to include(bob)
       end
+
+      it "creates the engines" do
+        expect(registered_vessel.reload.engines.map(&:make))
+          .to eq(%w(Honda Yamaha))
+      end
     end
   end
 end
 
-def init_basic_submission
+def init_basic_submission # rubocop:disable Metrics/MethodLength
   submission =
     create(:submission,
            changeset: {
@@ -112,9 +117,12 @@ def init_basic_submission
            })
 
   submission.declarations.create(owner: { name: "ALICE" }, shares_held: 20)
-
   submission.declarations.create(
     entity_type: :corporate, owner: { name: "BOB LTD" })
+
+  submission.engines.create(make: "Honda")
+  submission.engines.create(make: "Yamaha")
+
   submission
 end
 
