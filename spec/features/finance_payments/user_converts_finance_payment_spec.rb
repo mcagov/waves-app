@@ -9,7 +9,7 @@ describe "User converts finance payment", type: :feature, js: true do
       vessel_name: "MY BOAT", applicant_name: "BOB")
 
     login_to_part_3
-    click_on("Fee Entries")
+    click_on("Fees Received")
   end
 
   scenario "when they have claimed it they can 'convert' it" do

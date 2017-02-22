@@ -10,7 +10,7 @@ describe "User converts finance payment for existing vessel", js: true do
       vessel_reg_no: vessel.reg_no)
 
     login_to_part_3
-    click_on("Fee Entries")
+    click_on("Fees Received")
   end
 
   scenario "checking the vessel attributes are populated in the changeset" do
