@@ -27,4 +27,8 @@ module ApplicationHelper
   def y_n(val)
     val ? "Yes" : "No"
   end
+
+  def rounded_int(value)
+    value == value.to_i ? value.to_i : value.round(2)
+  end
 end
