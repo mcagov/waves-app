@@ -1,0 +1,29 @@
+%h2 Engines
+%table.table.table-striped
+  %thead
+    %th Type
+    %th Make / Model
+    %th MCEP per Engine
+    %th Cylinders
+    %th Derating
+    %th RPM
+    %th MCEP After Derating
+    %th Quantity
+  %tbody
+    - vessel.engines.each do |engine|
+      %tr
+        %td.engine_type= engine.engine_type
+        %td.make_and_model= engine.make_and_model
+        %td.mcep_per_engine
+          - if engine.mcep_per_engine.present?
+            #{ rounded_int(engine.mcep_per_engine.to_f) }kW
+        %td.cylinders= engine.cylinders
+        %td.derating= engine.derating
+        %td.rpm= engine.rpm
+        %td.mcep_after_derating
+          - if engine.mcep_after_derating.present?
+            #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+        %td.quantity= engine.quantity.to_i
+
+%p.pull-right.total_mcep
+  %strong Total MCEP: #{ rounded_int(Engine.total_mcep_for(vessel)) }kW
