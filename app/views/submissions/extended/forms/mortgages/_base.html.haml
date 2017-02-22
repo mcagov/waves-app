@@ -11,7 +11,7 @@
     %th Mortgagee(s)
     %th
   %tbody
-    - @submission.mortgages.each do |mortgage|
+    - @submission.mortgages.order("created_at asc").each_with_index do |mortgage, index|
       %tr
         %td.priority A
         %td.mortgage_type= mortgage.mortgage_type

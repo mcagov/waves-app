@@ -29,7 +29,6 @@ describe "User edits mortgages", js: :true do
   end
 
   scenario "displaying priority"
-  scenario "displaying list of mortgage types for registered vessels"
   scenario "adding a mortgagee"
   scenario "removing a mortgagee"
   scenario "editing a mortgage"
