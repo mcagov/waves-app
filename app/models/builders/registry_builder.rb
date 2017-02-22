@@ -3,20 +3,21 @@ class Builders::RegistryBuilder
     def create(submission)
       @submission = submission
 
-      Register::Vessel.transaction do
-        init_vessel
-        update_vessel_details
-        assign_vessel_to_submission
-        build_owners
-        build_agent
-        build_shares_held_jointly
-        build_engines
-      end
+      perform
 
       @vessel
     end
 
     private
+
+    def perform
+      Register::Vessel.transaction do
+        init_vessel
+        update_vessel_details
+        assign_vessel_to_submission
+        build_vessel_associations
+      end
+    end
 
     def init_vessel
       @vessel = @submission.registered_vessel
@@ -81,6 +82,13 @@ class Builders::RegistryBuilder
       end
     end
 
+    def build_vessel_associations
+      build_owners
+      build_agent
+      build_shares_held_jointly
+      @vessel = Builders::Registry::EngineBuilder.create(@submission, @vessel)
+    end
+
     def build_owners
       @vessel.owners.delete_all
       @submission.declarations.each { |declaration| build_owner(declaration) }
@@ -135,15 +143,6 @@ class Builders::RegistryBuilder
           shareholder_group.shareholder_group_members.create(
             owner_id: dec_group_member.declaration.registered_owner_id)
         end
-      end
-    end
-
-    def build_engines
-      @vessel.engines.delete_all
-      @submission.engines.each do |submission_engine|
-        vessel_engine = submission_engine.clone
-        vessel_engine.parent = @vessel
-        vessel_engine.save
       end
     end
   end
