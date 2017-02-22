@@ -31,4 +31,8 @@ module ApplicationHelper
   def rounded_int(value)
     value == value.to_i ? value.to_i : value.round(2)
   end
+
+  def letter_sequence(n)
+    n.to_s(26).each_char.map { |i| ("A".."Z").to_a[i.to_i(26)] }.join
+  end
 end

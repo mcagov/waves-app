@@ -13,7 +13,7 @@
   %tbody
     - @submission.mortgages.order("created_at asc").each_with_index do |mortgage, index|
       %tr
-        %td.priority A
+        %td.priority= letter_sequence(index)
         %td.mortgage_type= mortgage.mortgage_type
         %td.reference_number= mortgage.reference_number
         %td.start_date= mortgage.start_date
