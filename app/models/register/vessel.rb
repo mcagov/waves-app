@@ -29,6 +29,7 @@ module Register
              foreign_key: :registered_vessel_id
 
     has_many :engines, as: :parent
+    has_many :mortgages, as: :parent
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
@@ -63,6 +64,7 @@ module Register
         agent: (agent || Register::Agent.new).attributes,
         shareholder_groups: shareholder_groups_info,
         engines: engines.map(&:attributes),
+        mortgages: mortgages_info,
       }
     end
 
@@ -88,6 +90,13 @@ module Register
           group_members: sharedholder_group.group_member_emails,
           shares_held: sharedholder_group.shares_held,
         }
+      end
+    end
+
+    def mortgages_info
+      mortgages.map do |mortgage|
+        mortgage.attributes.merge(
+          mortgagees: mortgage.mortgagees.map(&:attributes))
       end
     end
   end

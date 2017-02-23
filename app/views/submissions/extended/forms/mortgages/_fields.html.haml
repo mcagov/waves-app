@@ -1,0 +1,35 @@
+.row
+  .col-md-3
+    = mortgage_f.input :mortgage_type, as: :select,
+      label: "Mortgage Type",
+      collection: Mortgage.types_for(@submission),
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+  .col-md-3
+    = mortgage_f.input :reference_number, label: "Reference Number"
+  .col-md-2
+    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+  .col-md-2
+    = mortgage_f.input :end_date, as: :string, label: "End Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+  .col-md-2
+    = mortgage_f.input :amount, label: "Mortgage Amount"
+.row
+  .col-md-12
+    = mortgage_f.input :mortgagor, label: "Mortgagor(s)", input_html: { class: "upcase" }
+
+%hr
+%h4 Mortgagees
+#mortgagees
+  - mortgage_f.object.mortgagees.build if mortgage_f.object.mortgagees.empty?
+  = mortgage_f.simple_fields_for :mortgagees do |mortgagee_f|
+    = render partial: "submissions/extended/forms/mortgages/mortgagee_fields",
+      locals: { mortgagee_f: mortgagee_f }
+
+  .links
+    = link_to_add_association mortgage_f, :mortgagees,
+      partial: "submissions/extended/forms/mortgages/mortgagee_fields",
+      class: "btn btn-link",
+      form_name: :mortgagee_f,
+      style: "color: green; padding: 0px !important" do
+      %i.fa.fa-plus
+      Add Extra Mortgagee

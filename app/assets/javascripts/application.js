@@ -20,6 +20,7 @@
 //= require bootstrap-editable-rails
 //= require select2
 //= require tinymce
+//= require cocoon
 //
 //= require ./vendor/nprogress
 //= require ./vendor/pace.min

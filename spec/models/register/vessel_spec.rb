@@ -167,6 +167,11 @@ describe Register::Vessel do
       it "has the engine attributes" do
         expect(subject[:engines][0]["make"]).to eq(vessel.engines.first.make)
       end
+
+      it "has the mortgage attributes" do
+        expect(subject[:mortgages][0][:mortgagees][0]["name"])
+          .to eq(vessel.mortgages.first.mortgagees.first.name)
+      end
     end
 
     context "shareholder_groups" do

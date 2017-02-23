@@ -25,6 +25,7 @@ class Builders::SubmissionBuilder
         build_declarations
         build_managing_owner_and_correspondent
         build_engines
+        build_mortgages
       end
 
       build_agent if @submission.applicant_is_agent
@@ -97,6 +98,29 @@ class Builders::SubmissionBuilder
         submission_engine = Engine.new(engine.except(:id))
         submission_engine.parent = @submission
         submission_engine.save
+      end
+    end
+
+    def build_mortgages
+      if @submission.persisted?
+        return unless Mortgage.where(parent: @submission).empty?
+      end
+
+      (@submission.symbolized_changeset[:mortgages] || []).each do |mortgage|
+        except_keys = [:id, :mortgagees]
+        submission_mortgage = Mortgage.new(mortgage.except(*except_keys))
+        submission_mortgage.parent = @submission
+        submission_mortgage.save
+
+        build_mortgagees_for(submission_mortgage, mortgage)
+      end
+    end
+
+    def build_mortgagees_for(submission_mortgage, mortgage)
+      mortgage[:mortgagees].each do |mortgagee|
+        submission_mortgagee = Mortgagee.new(mortgagee.except(:id))
+        submission_mortgagee.mortgage = submission_mortgage
+        submission_mortgagee.save
       end
     end
   end

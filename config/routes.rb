@@ -86,6 +86,10 @@ Rails.application.routes.draw do
               controller: "submission/engines",
               only: [:create, :update, :destroy]
 
+    resources :mortgages,
+              controller: "submission/mortgages",
+              only: [:create, :update, :destroy]
+
     resource :finance_payment,
              only: [:show, :edit],
              controller: "submission/finance_payments" do

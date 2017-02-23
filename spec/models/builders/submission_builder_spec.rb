@@ -165,6 +165,21 @@ describe Builders::SubmissionBuilder do
           end
         end
       end
+
+      context "with mortgages" do
+        let(:submission_mortgage) { submission.reload.mortgages.first }
+
+        it "builds the mortgages from the changeset" do
+          expect(submission_mortgage.mortgagees.first.name).to eq("Mary")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the engines" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.mortgages.first).to eq(submission_mortgage)
+          end
+        end
+      end
     end
   end
 end
@@ -193,7 +208,9 @@ def vessel_sample_data
     part: :part_3,
     name: "MY BOAT", number_of_hulls: 1,
     owners: owner_sample_data.map { |owner| Register::Owner.new(owner) },
-    engines: [create(:engine, make: "DUCATI")]
+    engines: [create(:engine, make: "DUCATI")],
+    mortgages: [create(:mortgage,
+                       mortgagees: [create(:mortgagee, name: "Mary")])]
   }
 end
 

@@ -1,0 +1,22 @@
+%h2 Mortgages
+%table.table.table-striped
+  %thead
+    %th Priority
+    %th Mortgage Type
+    %th Reference Number
+    %th Start Date
+    %th End Date
+    %th Amount
+    %th Mortgagor(s)
+    %th Mortgagee(s)
+  %tbody
+    - vessel.mortgages.order("created_at asc").each_with_index do |mortgage, index|
+      %tr
+        %td.priority= letter_sequence(index)
+        %td.mortgage_type= mortgage.mortgage_type
+        %td.reference_number= mortgage.reference_number
+        %td.start_date= mortgage.start_date
+        %td.end_date= mortgage.end_date
+        %td.amount= mortgage.amount
+        %td.mortgagor= mortgage.mortgagor
+        %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")

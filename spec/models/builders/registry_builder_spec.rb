@@ -102,7 +102,20 @@ describe Builders::RegistryBuilder do
 
       it "creates the engines" do
         expect(registered_vessel.reload.engines.map(&:make))
-          .to eq(%w(Honda Yamaha))
+          .to include("Honda")
+        expect(registered_vessel.reload.engines.map(&:make))
+          .to include("Yamaha")
+      end
+
+      it "creates the mortgages" do
+        mortgage = registered_vessel.reload.mortgages.first
+        expect(mortgage.reference_number).to eq("MGT_1")
+        expect(mortgage.mortgagees.first.name).to eq("Mary")
+      end
+
+      it "retains the submission's mortgages" do
+        expect(submission.reload.mortgages.first.reference_number)
+          .to eq("MGT_1")
       end
     end
   end
@@ -123,6 +136,9 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
   submission.engines.create(make: "Honda")
   submission.engines.create(make: "Yamaha")
 
+  submission.mortgages.create(
+    reference_number: "MGT_1",
+    mortgagees: [Mortgagee.new(name: "Mary")])
   submission
 end
 
