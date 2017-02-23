@@ -53,8 +53,8 @@ class SubmissionsController < InternalPagesController
           { declaration_groups: [:declarations] },
           { documents: [:assets, :actioned_by] },
           { work_logs: [:actioned_by] },
-          :incomplete_declarations, :engines, :mortgages,
-          :correspondences,
+          { mortgages: [:mortgagees] },
+          :incomplete_declarations, :engines, :correspondences,
           :notifications]).find(params[:id])
   end
 

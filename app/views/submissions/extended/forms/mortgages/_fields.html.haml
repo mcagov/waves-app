@@ -15,4 +15,21 @@
     = mortgage_f.input :amount, label: "Mortgage Amount"
 .row
   .col-md-12
-    = mortgage_f.input :mortgagor, label: "Mortgagor(s)"
+    = mortgage_f.input :mortgagor, label: "Mortgagor(s)", input_html: { class: "upcase" }
+
+%hr
+%h4 Mortgagees
+#mortgagees
+  - mortgage_f.object.mortgagees.build if mortgage_f.object.mortgagees.empty?
+  = mortgage_f.simple_fields_for :mortgagees do |mortgagee_f|
+    = render partial: "submissions/extended/forms/mortgages/mortgagee_fields",
+      locals: { mortgagee_f: mortgagee_f }
+
+  .links
+    = link_to_add_association mortgage_f, :mortgagees,
+      partial: "submissions/extended/forms/mortgages/mortgagee_fields",
+      class: "btn btn-link",
+      form_name: :mortgagee_f,
+      style: "color: green; padding: 0px !important" do
+      %i.fa.fa-plus
+      Add Extra Mortgagee
