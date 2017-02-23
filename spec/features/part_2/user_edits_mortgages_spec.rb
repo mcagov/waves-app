@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "User edits mortgages", js: :true do
-  scenario "in general" do
+  scenario "adding, editing and removing" do
     visit_name_approved_part_2_submission
     click_on("Mortgages")
     click_on("Add Mortgage")
@@ -41,11 +41,15 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       fill_in("Reference Number", with: "REF 2")
+      within all(".nested-fields")[1] { click_on("Remove") }
+      fill_in("Name of Mortgagee", with: "Doris")
+
       click_on("Save Mortgage")
     end
 
     within("#mortgages_tab") do
       expect(page).to have_css(".reference_number", text: "REF 2")
+      expect(page).to have_css(".mortgagees", text: "DORIS")
     end
 
     within("#mortgages_tab") do
@@ -54,6 +58,4 @@ describe "User edits mortgages", js: :true do
       expect(Submission.last.mortgages).to be_empty
     end
   end
-
-  scenario "removing a mortgagee"
 end
