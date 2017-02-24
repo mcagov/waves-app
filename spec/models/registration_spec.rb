@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Registration do
-  context ".delivery_address" do
+  context "#delivery_address" do
     let(:registration) do
       create(:registration, submission_ref_no: submission_ref_no)
     end
