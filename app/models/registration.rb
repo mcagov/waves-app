@@ -21,6 +21,12 @@ class Registration < ApplicationRecord
     symbolized_registry_info[:owners] || []
   end
 
+  def engines
+    (symbolized_registry_info[:engines] || []).map do |engine|
+      Engine.new(engine)
+    end
+  end
+
   def delivery_address
     submission = Submission.find_by(ref_no: submission_ref_no)
     if submission && submission.delivery_address.active?

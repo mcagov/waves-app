@@ -3,6 +3,7 @@ class Pdfs::CertificateWriter
     @registration = registration
     @vessel = @registration.vessel
     @owners = @registration.owners
+    @engines = @registration.engines
     @pdf = pdf
     @mode = mode
   end
