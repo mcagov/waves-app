@@ -10,7 +10,7 @@ describe Pdfs::Processor do
 
       expect(Pdfs::Processor)
         .to receive(:new)
-        .with(template, printable_items)
+        .with(template, printable_items, :printable)
         .and_return(processor)
 
       expect(processor).to receive(:perform)
@@ -27,7 +27,7 @@ describe Pdfs::Processor do
 
       before do
         expect(Pdfs::Part3::Certificate)
-          .to receive(:new).with(printable_items)
+          .to receive(:new).with(printable_items, :printable)
       end
 
       it { subject }
@@ -49,7 +49,7 @@ describe Pdfs::Processor do
 
       before do
         expect(Pdfs::Transcript)
-          .to receive(:new).with(printable_items)
+          .to receive(:new).with(printable_items, :printable)
       end
 
       it { subject }
@@ -60,7 +60,7 @@ describe Pdfs::Processor do
 
       before do
         expect(Pdfs::HistoricTranscript)
-          .to receive(:new).with(printable_items)
+          .to receive(:new).with(printable_items, :printable)
       end
 
       it { subject }

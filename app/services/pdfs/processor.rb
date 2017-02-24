@@ -1,14 +1,15 @@
 class Pdfs::Processor
   class << self
-    def run(template, printable_items)
-      Pdfs::Processor.new(template, printable_items).perform
+    def run(template, printable_items, mode = :printable)
+      Pdfs::Processor.new(template, printable_items, mode).perform
     end
   end
 
-  def initialize(template, printable_items)
+  def initialize(template, printable_items, mode = :printable)
     @template = template
     @printable_items = printable_items
     @part = Array(@printable_items).first.part.to_sym
+    @mode = mode
   end
 
   def perform
@@ -32,7 +33,7 @@ class Pdfs::Processor
   def registration_certificate
     case @part
     when :part_3
-      Pdfs::Part3::Certificate.new(@printable_items)
+      Pdfs::Part3::Certificate.new(@printable_items, @mode)
     end
   end
 
@@ -41,10 +42,10 @@ class Pdfs::Processor
   end
 
   def current_transcript
-    Pdfs::Transcript.new(@printable_items)
+    Pdfs::Transcript.new(@printable_items, @mode)
   end
 
   def historic_transcript
-    Pdfs::HistoricTranscript.new(@printable_items)
+    Pdfs::HistoricTranscript.new(@printable_items, @mode)
   end
 end
