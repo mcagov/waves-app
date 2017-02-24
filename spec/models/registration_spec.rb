@@ -36,4 +36,22 @@ describe Registration do
       end
     end
   end
+
+  context "#part" do
+    let(:registration) { create(:registration, registry_info: registry_info) }
+
+    context "when the registry_info is not defined (edge case)" do
+      let(:registry_info) { nil }
+
+      it "defaults to part_3" do
+        expect(registration.part.to_sym).to eq(:part_3)
+      end
+    end
+
+    context "when the registry_info#vessel_info is part_1" do
+      let(:registry_info) { { vessel_info: { part: "part_1" } } }
+
+      it { expect(registration.part).to eq(:part_1) }
+    end
+  end
 end

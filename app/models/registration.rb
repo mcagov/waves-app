@@ -13,6 +13,10 @@ class Registration < ApplicationRecord
     vessel[:name] || ""
   end
 
+  def part
+    (vessel[:part] || :part_3).to_sym
+  end
+
   def owners
     symbolized_registry_info[:owners] || []
   end

@@ -36,7 +36,7 @@ describe Submission::ApprovalsController, type: :controller do
 
           expect(Registration)
             .to receive(:find_by)
-            .and_return(double(:registration))
+            .and_return(double(:registration, part: :part_3))
 
           post :create, params: params
         end
