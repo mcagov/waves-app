@@ -116,8 +116,8 @@ class Pdfs::TranscriptWriter
     i = 0
     @owners.each do |owner|
       @pdf.font("Helvetica", size: 12)
-      @pdf.draw_text owner[:name], at: [l_margin, 700 - i]
-      @pdf.text_box Customer.new(owner).inline_address, width: 500,
+      @pdf.draw_text owner.name, at: [l_margin, 700 - i]
+      @pdf.text_box owner.inline_address, width: 500,
         at: [l_margin, 690 - i]
       i += 60
     end

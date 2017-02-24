@@ -40,7 +40,7 @@ class Pdfs::Part3::CertificateWriter < Pdfs::CertificateWriter
   def owners
     offset = 0
     @owners.each do |owner|
-      draw_value owner[:name], at: [40, 157 - offset]
+      draw_value owner.name, at: [40, 157 - offset]
       offset += 12
     end
   end

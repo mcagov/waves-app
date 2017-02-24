@@ -23,7 +23,7 @@ describe Registration do
         let(:submission_ref_no) { submission.ref_no }
 
         it "uses the first owner's delivery address" do
-          expect(subject.name).to eq(registration.owners.first[:name])
+          expect(subject.name).to eq(registration.owners.first.name)
         end
       end
     end
@@ -32,7 +32,7 @@ describe Registration do
       let(:submission_ref_no) { nil }
 
       it "uses the first owner's delivery address" do
-        expect(subject.name).to eq(registration.owners.first[:name])
+        expect(subject.name).to eq(registration.owners.first.name)
       end
     end
   end

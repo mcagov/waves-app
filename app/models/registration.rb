@@ -18,7 +18,9 @@ class Registration < ApplicationRecord
   end
 
   def owners
-    symbolized_registry_info[:owners] || []
+    (symbolized_registry_info[:owners] || []).map do |owner|
+      Register::Owner.new(owner)
+    end
   end
 
   def engines
@@ -32,7 +34,7 @@ class Registration < ApplicationRecord
     if submission && submission.delivery_address.active?
       submission.delivery_address
     else
-      Submission::DeliveryAddress.new(owners.first)
+      Submission::DeliveryAddress.new(owners.first.attributes)
     end
   end
 
