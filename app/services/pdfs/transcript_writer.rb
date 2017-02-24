@@ -49,15 +49,15 @@ class Pdfs::TranscriptWriter
   end
 
   def draw_vessel
-    draw_label_value "SSR NUMBER", @vessel[:reg_no], at: [l_margin, 620]
-    draw_label_value "NAME OF SHIP", @vessel[:name], at: [l_margin, 590]
-    draw_label_value "DESCRIPTION", @vessel[:vessel_type], at: [l_margin, 560]
+    draw_label_value "SSR NUMBER", @vessel.reg_no, at: [l_margin, 620]
+    draw_label_value "NAME OF SHIP", @vessel.name, at: [l_margin, 590]
+    draw_label_value "DESCRIPTION", @vessel.vessel_type, at: [l_margin, 560]
     draw_label_value "OVERALL LENGTH",
-                     "#{@vessel[:length_in_meters]} metres",
+                     "#{@vessel.length_in_meters} metres",
                      at: [l_margin, 530]
     draw_label_value "NUMBER OF HULLS",
-                     @vessel[:number_of_hulls], at: [l_margin, 500]
-    draw_label_value "H. I. NUMBER", @vessel[:hin], at: [l_margin, 470]
+                     @vessel.number_of_hulls, at: [l_margin, 500]
+    draw_label_value "H. I. NUMBER", @vessel.hin, at: [l_margin, 470]
   end
 
   def draw_registration_status
@@ -107,7 +107,7 @@ class Pdfs::TranscriptWriter
     @pdf.draw_text "The following details show the current ownership and "\
                    "shareholding of",
                    at: [l_margin, 760]
-    @pdf.draw_text "#{@vessel[:name]} O.N. #{@vessel[:reg_no]}",
+    @pdf.draw_text "#{@vessel.name} O.N. #{@vessel.reg_no}",
                    at: [l_margin, 746]
 
     @pdf.move_down 60
@@ -161,7 +161,7 @@ class Pdfs::TranscriptWriter
 
   def certification_text
     s = "I certify that this transcript consisting of 2 pages is a true extract"
-    s += " from #{Activity.new(@vessel[:part])} of the Register"
+    s += " from #{Activity.new(@vessel.part)} of the Register"
     s += " now in my charge showing descriptive particulars, registered"
     s += " ownerships and mortgages, if any, as at "
     [

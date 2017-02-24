@@ -6,11 +6,11 @@ class Registration < ApplicationRecord
   validates :task, presence: true
 
   def vessel
-    symbolized_registry_info[:vessel_info] || {}
+    Register::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
 
   def vessel_name
-    vessel[:name] || ""
+    vessel.name
   end
 
   def part
