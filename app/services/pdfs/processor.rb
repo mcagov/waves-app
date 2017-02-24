@@ -34,6 +34,8 @@ class Pdfs::Processor
     case @part
     when :part_3
       Pdfs::Part3::Certificate.new(@printable_items, @mode)
+    when :part_2
+      Pdfs::Part2::Certificate.new(@printable_items, @mode)
     end
   end
 
