@@ -59,7 +59,7 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
 
   def watermark
     @pdf.transparent(0.1) do
-      @pdf.draw_text "COPY OF ORIGINAL", at: [60, 10], rotate: 60, size: 44
+      @pdf.draw_text "COPY OF ORIGINAL", at: [60, 10], rotate: 60, size: 94
     end
   end
 
