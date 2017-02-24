@@ -1,21 +1,7 @@
-class Pdfs::Part3::CertificateWriter
-  def initialize(registration, pdf, mode = :printable)
-    @registration = registration
-    @vessel = @registration.vessel
-    @owners = @registration.owners
-    @pdf = pdf
-    @mode = mode
-  end
-
-  def write
-    write_complete if @mode == :attachment
-    write_printable if @mode == :printable
-    @pdf
-  end
-
+class Pdfs::Part3::CertificateWriter < Pdfs::CertificateWriter
   private
 
-  def write_complete
+  def write_attachable
     @pdf.start_new_page
     @pdf.image page_1_template, scale: 0.48
     watermark
@@ -75,13 +61,5 @@ class Pdfs::Part3::CertificateWriter
     @pdf.transparent(0.1) do
       @pdf.draw_text "COPY OF ORIGINAL", at: [60, 10], rotate: 60, size: 44
     end
-  end
-
-  def default_value_font
-    @pdf.font("Helvetica-BoldOblique", size: 10)
-  end
-
-  def default_label_font
-    @pdf.font("Helvetica-Oblique", size: 10)
   end
 end

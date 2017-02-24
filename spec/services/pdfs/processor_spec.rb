@@ -2,7 +2,11 @@ require "rails_helper"
 
 describe Pdfs::Processor do
   let(:template) { :a_template }
-  let(:printable_items) { [create(:print_job, template: template)] }
+  let(:part) { :part_3 }
+
+  let(:printable_items) do
+    [create(:print_job, template: template, part: part)]
+  end
 
   context ".run" do
     before do
@@ -22,15 +26,28 @@ describe Pdfs::Processor do
   context "#perform" do
     subject { described_class.new(template, printable_items).perform }
 
-    context "with a part_3 registration_certificate" do
+    context "with a registration_certificate" do
       let(:template) { :registration_certificate }
 
-      before do
-        expect(Pdfs::Part3::Certificate)
-          .to receive(:new).with(printable_items, :printable)
+      context "part_3" do
+        before do
+          expect(Pdfs::Part3::Certificate)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
       end
 
-      it { subject }
+      context "part_2" do
+        let(:part) { :part_2 }
+
+        before do
+          expect(Pdfs::Part2::Certificate)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
     end
 
     context "with a generic cover_letter" do
