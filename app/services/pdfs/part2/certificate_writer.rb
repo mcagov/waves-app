@@ -3,11 +3,11 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
 
   def write_attachable
     @pdf.start_new_page
-    @pdf.image page_1_template, scale: 0.48
+    @pdf.image page_1_template, scale: 0.4796
     watermark
     registration_details
     @pdf.start_new_page
-    @pdf.image page_2_template, scale: 0.48
+    @pdf.image page_2_template, scale: 0.4796
     watermark
   end
 
