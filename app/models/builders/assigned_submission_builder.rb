@@ -9,7 +9,7 @@ class Builders::AssignedSubmissionBuilder
       @submission = build_submission
       build_not_required_declarations
 
-      @submission
+      Builders::SubmissionBuilder.build_defaults(@submission)
     end
 
     def current_state
