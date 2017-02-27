@@ -7,6 +7,7 @@ describe "User save vessel details", js: :true do
     fill_in("Classification Society", with: "CLASSIFICATION")
     fill_in("Gross Tonnage", with: "1000")
     fill_in("Name of Builder", with: "BOB BUILDS STUFF")
+    fill_in("Year of Build", with: "1984")
 
     click_on("Save Details")
 
