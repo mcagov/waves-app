@@ -39,12 +39,12 @@ class Builders::DeclarationBuilder
     end
 
     def build_declaration_groups
-      @shareholder_groups.each do |sharedholder_group|
+      @shareholder_groups.each do |shareholder_group|
         declaration_group =
           @submission.declaration_groups.create(
-            shares_held: sharedholder_group[:shares_held])
+            shares_held: shareholder_group[:shares_held])
 
-        sharedholder_group[:group_members].each do |group_member|
+        shareholder_group[:group_member_keys].each do |group_member|
           declaration_group
             .declaration_group_members
             .create(declaration_id: declaration_id_for(group_member))
@@ -54,13 +54,19 @@ class Builders::DeclarationBuilder
 
     def declaration_owners_list
       Declaration.where(submission: @submission).map do |d|
-        [d.id, d.owner.email]
+        [d.id, d.owner.name.to_s, d.owner.email.to_s]
       end
     end
 
-    def declaration_id_for(email)
-      @declaration_owners_list ||= declaration_owners_list
-      declaration_owners_list.find { |owner| owner[1] == email }[0]
+    def declaration_id_for(owner_key)
+      owner_name = owner_key.split(";")[0].to_s
+      owner_email = owner_key.split(";")[1].to_s
+
+      declaration = declaration_owners_list.find do |owner|
+        (owner[1].to_s == owner_name) && (owner[2].to_s == owner_email)
+      end
+
+      declaration[0]
     end
 
     def initial_state_for_task

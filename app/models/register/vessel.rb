@@ -87,7 +87,7 @@ module Register
     def shareholder_groups_info
       shareholder_groups.map do |sharedholder_group|
         {
-          group_members: sharedholder_group.group_member_emails,
+          group_member_keys: sharedholder_group.group_member_keys,
           shares_held: sharedholder_group.shares_held,
         }
       end
