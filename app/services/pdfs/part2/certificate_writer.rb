@@ -6,6 +6,7 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     @pdf.image page_1_template, scale: 0.4796
     watermark
     vessel_details
+    registration_details
     @pdf.start_new_page
     @pdf.image page_2_template, scale: 0.4796
     watermark
@@ -14,6 +15,7 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
   def write_printable
     @pdf.start_new_page
     vessel_details
+    registration_details
   end
 
   def page_1_template
@@ -69,7 +71,16 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     vstart -= vspace
     draw_label_value "Date of Entry into Service", @vessel.entry_into_service_at, at: [lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Type of Registration", @vessel.registration_type, at: [lmargin, vstart]
+    draw_label_value "Type of Registration", @vessel.registration_type.try(:titleize), at: [lmargin, vstart]
+  end
+
+  def registration_details
+    default_label_font
+    @pdf.text_box("This Certificate was issued on:", at: [40, 220], width: 220)
+    @pdf.text_box("This Certificate expires on:", at: [40, 190])
+    default_value_font
+    @pdf.draw_text(@registration.registered_at.to_s(:date_time), at: [240, 213])
+    @pdf.draw_text(@registration.registered_until.to_s(:date_summary), at: [240, 183])
   end
   # rubocop:enable all
 
