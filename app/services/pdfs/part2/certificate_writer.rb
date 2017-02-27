@@ -9,6 +9,7 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     registration_details
     @pdf.start_new_page
     @pdf.image page_2_template, scale: 0.4796
+    owner_details
     watermark
   end
 
@@ -16,6 +17,8 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     @pdf.start_new_page
     vessel_details
     registration_details
+    @pdf.start_new_page
+    owner_details
   end
 
   def page_1_template
@@ -30,7 +33,6 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
   def vessel_details
     vspace = 26
     vstart = 642
-    lmargin = 40
     rcol_lmargin = 350
     draw_label_value "Name of Ship", @vessel.name, at: [lmargin, vstart]
     vstart -= vspace
@@ -76,19 +78,23 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
 
   def registration_details
     default_label_font
-    @pdf.text_box("This Certificate was issued on:", at: [40, 220], width: 220)
-    @pdf.text_box("This Certificate expires on:", at: [40, 190])
+    @pdf.text_box("This Certificate was issued on:", at: [lmargin, 220], width: 220)
+    @pdf.text_box("This Certificate expires on:", at: [lmargin, 190])
     default_value_font
     @pdf.draw_text(@registration.registered_at.to_s(:date_time), at: [240, 213])
     @pdf.draw_text(@registration.registered_until.to_s(:date_summary), at: [240, 183])
   end
   # rubocop:enable all
 
-  def owners
+  def owner_details
     offset = 0
+    y_pos = 730
     @owners.each do |owner|
-      draw_value owner[:name], at: [40, 157 - offset]
-      offset += 12
+      draw_label owner.name, at: [lmargin, y_pos - offset]
+      draw_label owner.inline_address, at: [lmargin, y_pos - 15 - offset]
+      draw_label owner.shares_held, at: [474, y_pos - offset]
+      offset += 30
+      y_pos -= 13
     end
   end
 
@@ -104,17 +110,18 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     @pdf.draw_text(text, opts)
   end
 
+  def draw_label(text, opts = {})
+    default_label_font
+    @pdf.draw_text(text, opts)
+  end
+
+  def lmargin
+    40
+  end
+
   def watermark
     @pdf.transparent(0.1) do
       @pdf.draw_text "COPY OF ORIGINAL", at: [60, 10], rotate: 60, size: 94
     end
-  end
-
-  def default_value_font
-    @pdf.font("Helvetica-BoldOblique", size: 11)
-  end
-
-  def default_label_font
-    @pdf.font("Helvetica-Oblique", size: 11)
   end
 end
