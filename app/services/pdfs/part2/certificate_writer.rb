@@ -84,19 +84,23 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     @pdf.draw_text(@registration.registered_at.to_s(:date_time), at: [240, 213])
     @pdf.draw_text(@registration.registered_until.to_s(:date_summary), at: [240, 183])
   end
-  # rubocop:enable all
 
   def owner_details
-    offset = 0
     y_pos = 730
     @owners.each do |owner|
-      draw_label owner.name, at: [lmargin, y_pos - offset]
-      draw_label owner.inline_address, at: [lmargin, y_pos - 15 - offset]
-      draw_label owner.shares_held, at: [474, y_pos - offset]
-      offset += 30
+      draw_label owner.name, at: [lmargin, y_pos]
+      draw_label owner.inline_address, at: [lmargin, y_pos - 15]
+      draw_label owner.shares_held, at: [474, y_pos]
       y_pos -= 13
     end
+
+    @registration.shareholder_groups.each do |shareholder_group|
+      draw_label shareholder_group[:shareholder_names].join(", "), at: [lmargin, y_pos]
+      draw_label shareholder_group[:shares_held], at: [474, y_pos]
+      y_pos -= 6
+    end
   end
+  # rubocop:enable all
 
   def draw_label_value(label, text, opts)
     default_label_font
