@@ -7,7 +7,6 @@ class Builders::AssignedSubmissionBuilder
       @claimant = claimant
 
       @submission = build_submission
-      build_not_required_declarations
 
       Builders::SubmissionBuilder.build_defaults(@submission)
     end
@@ -27,15 +26,6 @@ class Builders::AssignedSubmissionBuilder
         claimant: @claimant, received_at: Time.now,
         registry_info: @registered_vessel.registry_info,
         changeset: @registered_vessel.registry_info)
-    end
-
-    def build_not_required_declarations
-      @registered_vessel.owners.each do |owner|
-        Declaration.create(
-          submission: @submission,
-          changeset: owner,
-          state: :not_required)
-      end
     end
   end
 end
