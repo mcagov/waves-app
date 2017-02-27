@@ -5,7 +5,9 @@ describe Pdfs::Part2::Certificate do
     let!(:vessel) { create(:registered_vessel, name: "Jolly Roger") }
     let!(:registration) { vessel.current_registration }
 
-    let(:certificate) { Pdfs::Part2::Certificate.new(registration) }
+    let(:certificate) do
+      Pdfs::Part2::Certificate.new(registration, :attachment)
+    end
 
     it "renders a pdf" do
       expect(certificate.render[0, 4]).to eq("%PDF")
@@ -15,12 +17,12 @@ describe Pdfs::Part2::Certificate do
       expect(certificate.paper_size).to eq("A4")
     end
 
-    xcontext "reading the pdf" do
+    context "reading the pdf" do
       let(:io) { StringIO.new(certificate.render) }
 
-      it "has one page and the watermark" do
+      it "has the expected pages" do
         PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
-          expect(reader.page_count).to eq(1)
+          expect(reader.page_count).to eq(2)
           expect(reader.page(1).text).to match(/COPY OF ORIGINAL/)
         end
       end
