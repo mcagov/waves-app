@@ -91,13 +91,13 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
       draw_label owner.name, at: [lmargin, y_pos]
       draw_label owner.inline_address, at: [lmargin, y_pos - 15]
       draw_label owner.shares_held, at: [474, y_pos]
-      y_pos -= 13
+      y_pos -= 40
     end
 
     @registration.shareholder_groups.each do |shareholder_group|
       draw_label shareholder_group[:shareholder_names].join(", "), at: [lmargin, y_pos]
       draw_label shareholder_group[:shares_held], at: [474, y_pos]
-      y_pos -= 6
+      y_pos -= 25
     end
   end
   # rubocop:enable all
