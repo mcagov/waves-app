@@ -37,36 +37,24 @@ describe Notification::ApplicationApproval, type: :model do
       end
     end
 
-    context "attaching a certificate" do
+    context "with an attachment" do
+      before do
+        processor = double(:processor)
+
+        expect(Pdfs::Processor)
+          .to receive(:run)
+          .with(:template, registration, :attachment)
+          .and_return(processor)
+
+        expect(processor).to receive(:render).and_return(:pdf)
+      end
+
       subject do
-        described_class.new(
-          notifiable: submission, attachments: "registration_certificate")
+        described_class.new(notifiable: submission, attachments: :template)
       end
 
-      it "has the certificate as the fifth additional param" do
-        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
-      end
-    end
-
-    context "attaching a current_transcript" do
-      subject do
-        described_class.new(
-          notifiable: submission, attachments: "current_transcript")
-      end
-
-      it "has the certificate as the fifth additional param" do
-        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
-      end
-    end
-
-    context "attaching a historic_transcript" do
-      subject do
-        described_class.new(
-          notifiable: submission, attachments: "historic_transcript")
-      end
-
-      it "has the certificate as the fifth additional param" do
-        expect(subject.additional_params[4][0, 4]).to eq("%PDF")
+      it "has the pdf as the fifth additional param" do
+        expect(subject.additional_params[4][0, 4].to_sym).to eq(:pdf)
       end
     end
   end

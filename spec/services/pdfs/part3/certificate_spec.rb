@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe Pdfs::Certificate do
+describe Pdfs::Part3::Certificate do
   context "for a single registration" do
     let!(:vessel) { create(:registered_vessel, name: "Jolly Roger") }
     let!(:registration) { vessel.current_registration }
 
-    let(:certificate) { Pdfs::Certificate.new(registration, mode) }
+    let(:certificate) { Pdfs::Part3::Certificate.new(registration, mode) }
 
     context "as an attachment" do
       let(:mode) { :attachment }
@@ -17,6 +17,10 @@ describe Pdfs::Certificate do
 
       it "renders a pdf" do
         expect(certificate.render[0, 4]).to eq("%PDF")
+      end
+
+      it "has a paper_size" do
+        expect(certificate.paper_size).to eq("A6")
       end
 
       describe "reading the pdf" do
@@ -48,7 +52,7 @@ describe Pdfs::Certificate do
       3.times { create(:registered_vessel) }
     end
 
-    let(:certificate) { Pdfs::Certificate.new(Registration.all) }
+    let(:certificate) { Pdfs::Part3::Certificate.new(Registration.all) }
     let(:owners) { Registration.all.map { |r| r.owners[0] } }
 
     it "has a filename" do

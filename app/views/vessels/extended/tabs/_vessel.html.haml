@@ -1,11 +1,11 @@
 %h2 Operational Information
 %table.table.table-striped
   %thead
-    %th Classification Society
-    %th Any Other Classification Society
-    %th Date of Entry into Service
-    %th Area
-    %th Alternative Activity
+    %th= vessel_field_title(:classification_society)
+    %th= vessel_field_title(:classification_society_other)
+    %th= vessel_field_title(:entry_into_service_at)
+    %th= vessel_field_title(:area_of_operation)
+    %th= vessel_field_title(:alternative_activity)
   %tbody
     %tr
       %td= vessel.classification_society
@@ -17,15 +17,15 @@
 %h2 Description
 %table.table.table-striped
   %thead
-    %th Gross Tonnage
-    %th Net Tonnage
-    %th Register Tonnage
-    %th Registered Length
-    %th Length Overall
-    %th Breadth
-    %th Depth
-    %th Propulsion System
-    %th Number of Hulls
+    %th= vessel_field_title(:gross_tonnage)
+    %th= vessel_field_title(:net_tonnage)
+    %th= vessel_field_title(:register_tonnage)
+    %th= vessel_field_title(:register_length)
+    %th= vessel_field_title(:length_overall)
+    %th= vessel_field_title(:breadth)
+    %th= vessel_field_title(:depth)
+    %th= vessel_field_title(:propulsion_system)
+    %th= vessel_field_title(:number_of_hulls)
   %tbody
     %tr
       %td #{vessel.gross_tonnage.to_i}GT
@@ -42,15 +42,17 @@
 %h2 Construction
 %table.table.table-striped
   %thead
-    %th Name of Builder
-    %th Builders Address
-    %th Place of Build
-    %th Keel Laying Date
-    %th Hull Construction Material
+    %th= vessel_field_title(:name_of_builder)
+    %th= vessel_field_title(:builders_address)
+    %th= vessel_field_title(:place_of_build)
+    %th= vessel_field_title(:year_of_build)
+    %th= vessel_field_title(:keel_laying_date)
+    %th= vessel_field_title(:hull_construction_material)
   %tbody
     %tr
       %td= vessel.name_of_builder
       %td= vessel.builders_address
       %td= vessel.place_of_build
+      %td= vessel.year_of_build
       %td= vessel.keel_laying_date
       %td= vessel.hull_construction_material

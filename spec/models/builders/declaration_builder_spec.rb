@@ -15,11 +15,13 @@ describe Builders::DeclarationBuilder do
     end
 
     let(:alice) do
-      build(:registered_owner, email: "alice@example.com", shares_held: 20)
+      build(:registered_owner, name: "alice",
+                               email: "alice@example.com",
+                               shares_held: 20)
     end
 
     let(:shareholder_groups) do
-      [{ shares_held: 10, group_members: ["alice@example.com"] }]
+      [{ shares_held: 10, group_member_keys: ["alice;alice@example.com"] }]
     end
 
     let(:declarations_required) { true }

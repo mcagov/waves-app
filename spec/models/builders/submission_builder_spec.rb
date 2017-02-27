@@ -217,10 +217,15 @@ end
 def owner_sample_data
   [
     { name: "ALICE", email: "alice@example.com", managing_owner: true },
-    { name: "BOB", email: "bob@example.com", correspondent: true },
+    { name: "BOB", email: nil, correspondent: true },
   ]
 end
 
 def shareholder_groups_sample_data
-  [{ shares_held: 10, group_members: ["alice@example.com"] }]
+  [
+    {
+      shares_held: 10,
+      group_member_keys: ["ALICE;alice@example.com", "BOB;"],
+    },
+  ]
 end

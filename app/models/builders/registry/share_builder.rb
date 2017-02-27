@@ -6,7 +6,7 @@ class Builders::Registry::ShareBuilder
 
       perform
 
-      @vessel
+      @vessel.reload
     end
 
     private

@@ -5,7 +5,7 @@ class Builders::Registry::VesselBuilder
 
       perform
 
-      @vessel
+      @vessel.reload
     end
 
     private
@@ -75,6 +75,7 @@ class Builders::Registry::VesselBuilder
       @vessel.hull_construction_material =
         @submission.vessel.hull_construction_material
       @vessel.yard_number = @submission.vessel.yard_number
+      @vessel.year_of_build = @submission.vessel.year_of_build
     end
   end
 end

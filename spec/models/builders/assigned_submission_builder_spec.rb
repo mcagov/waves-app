@@ -42,5 +42,21 @@ describe Builders::AssignedSubmissionBuilder do
       expect(submission.declarations.map(&:current_state))
         .to eq([:not_required])
     end
+
+    it "builds the agent" do
+      expect(submission.agent.name).to eq(registered_vessel.agent.name)
+    end
+
+    it "builds the agent" do
+      expect(submission.agent.name).to eq(registered_vessel.agent.name)
+    end
+
+    it "builds the mortgages" do
+      expect(submission.mortgages.count).to eq(1)
+    end
+
+    it "builds the engines" do
+      expect(submission.engines.count).to eq(1)
+    end
   end
 end

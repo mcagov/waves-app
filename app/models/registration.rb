@@ -6,15 +6,27 @@ class Registration < ApplicationRecord
   validates :task, presence: true
 
   def vessel
-    symbolized_registry_info[:vessel_info] || {}
+    Register::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
 
   def vessel_name
-    vessel[:name] || ""
+    vessel.name
+  end
+
+  def part
+    (vessel[:part] || :part_3).to_sym
   end
 
   def owners
-    symbolized_registry_info[:owners] || []
+    (symbolized_registry_info[:owners] || []).map do |owner|
+      Register::Owner.new(owner)
+    end
+  end
+
+  def engines
+    (symbolized_registry_info[:engines] || []).map do |engine|
+      Engine.new(engine)
+    end
   end
 
   def delivery_address
@@ -22,7 +34,17 @@ class Registration < ApplicationRecord
     if submission && submission.delivery_address.active?
       submission.delivery_address
     else
-      Submission::DeliveryAddress.new(owners.first)
+      Submission::DeliveryAddress.new(owners.first.attributes)
+    end
+  end
+
+  def shareholder_groups
+    (symbolized_registry_info[:shareholder_groups] || []).map do |sh_group|
+      {
+        shareholder_names:
+          sh_group[:group_member_keys].map { |key| key.split(";")[0] },
+        shares_held: sh_group[:shares_held],
+      }
     end
   end
 

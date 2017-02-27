@@ -205,6 +205,10 @@
             input_html: { class: "upcase" }
 
       .row
+        .col-md-3{ class: vessel_change_css(:year_of_build) }
+          = vessel_f.input :year_of_build,
+            label: vessel_change_label(:year_of_build)
+
         .col-md-3{ class: vessel_change_css(:keel_laying_date) }
           = vessel_f.input :keel_laying_date,
             label: vessel_change_label(:keel_laying_date),

@@ -13,7 +13,6 @@ describe Submission::ApprovalsController, type: :controller do
 
       let(:approval_params) do
         {
-          notification_attachments: "foo",
           registration_starts_at: "1/1/2011",
           closure_at: "2/2/2022",
           closure_reason: "some text",
@@ -36,7 +35,7 @@ describe Submission::ApprovalsController, type: :controller do
 
           expect(Registration)
             .to receive(:find_by)
-            .and_return(double(:registration))
+            .and_return(double(:registration, part: :part_3))
 
           post :create, params: params
         end

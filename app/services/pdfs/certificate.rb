@@ -3,13 +3,12 @@ class Pdfs::Certificate
     @registrations = Array(registrations)
     @mode = mode
     @pdf = Prawn::Document.new(
-      margin: 0, page_size: "A6", skip_page_creation: true)
+      margin: 0, page_size: paper_size, skip_page_creation: true)
   end
 
   def render
     @registrations.each do |registration|
-      @pdf =
-        Pdfs::CertificateWriter.new(registration, @pdf, @mode).write
+      @pdf = certificate_writer(registration).write
     end
     Pdfs::PdfRender.new(@pdf, @mode).render
   end

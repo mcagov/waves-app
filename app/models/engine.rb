@@ -22,8 +22,8 @@ class Engine < ApplicationRecord
   end
 
   class << self
-    def total_mcep_for(submission)
-      submission.engines.sum(&:total_mcep)
+    def total_mcep_for(parent_obj)
+      parent_obj.engines.sum(&:total_mcep)
     end
   end
 end

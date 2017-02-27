@@ -6,7 +6,7 @@ class Builders::Registry::OwnerBuilder
 
       perform
 
-      @vessel
+      @vessel.reload
     end
 
     private

@@ -34,15 +34,6 @@ class Notification::ApplicationApproval < Notification
   def email_attachments
     return if attachments.blank?
 
-    case attachments.to_sym
-    when :registration_certificate
-      Pdfs::Certificate.new(registration, :attachment).render
-
-    when :current_transcript
-      Pdfs::Transcript.new(registration, :attachment).render
-
-    when :historic_transcript
-      Pdfs::HistoricTranscript.new(registration, :attachment).render
-    end
+    Pdfs::Processor.run(attachments.to_sym, registration, :attachment).render
   end
 end

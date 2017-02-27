@@ -6,7 +6,7 @@ class Builders::Registry::AgentBuilder
 
       perform
 
-      @vessel
+      @vessel.reload
     end
 
     private
