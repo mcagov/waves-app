@@ -18,7 +18,7 @@
         %td
           %strong= @vessel.vessel_type
       %tr
-        %td.soft-label IMO Number:
+        %td.soft-label #{vessel_field_title(:imo_number)}:
         %td
           %strong= @vessel.imo_number
 .col-md-4
@@ -29,23 +29,23 @@
         %td.no-top-border
           %strong= WavesUtilities::Port.new(@vessel.port_code).name
       %tr
-        %td.soft-label Port Number:
+        %td.soft-label #{vessel_field_title(:port_no)}:
         %td
           %strong= @vessel.port_no
       %tr
-        %td.soft-label EC Number:
+        %td.soft-label #{vessel_field_title(:ec_number)}:
         %td
           %strong= @vessel.ec_number
       %tr
-        %td.soft-label MMSI Number:
+        %td.soft-label #{vessel_field_title(:mmsi_number)}:
         %td
           %strong= @vessel.mmsi_number
       %tr
-        %td.soft-label Radio Call Sign:
+        %td.soft-label #{vessel_field_title(:radio_call_sign)}:
         %td
           %strong= @vessel.radio_call_sign
       %tr
-        %td.soft-label HIN:
+        %td.soft-label #{vessel_field_title(:hin)}:
         %td
           %strong= @vessel.hin
 .col-md-4
