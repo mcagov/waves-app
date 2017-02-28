@@ -21,5 +21,11 @@ describe "User edits benifical owners", js: :true do
     click_on("Save Beneficial Owner")
 
     expect(page).to have_css(".beneficial_owner-imo_number", text: "7654321")
+
+    within("#beneficial_owners") do
+      click_on("Remove")
+      expect(page).not_to have_css(".beneficial_owner-name")
+      expect(Submission.last.beneficial_owners).to be_empty
+    end
   end
 end

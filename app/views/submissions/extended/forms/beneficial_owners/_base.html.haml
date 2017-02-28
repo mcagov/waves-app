@@ -21,6 +21,14 @@
         %td.beneficial_owner-email= beneficial_owner.email
         %td.beneficial_owner-phone_number= beneficial_owner.phone_number
         %td
+          = link_to submission_beneficial_owner_path(@submission, beneficial_owner),
+            class: 'btn-link pull-right',
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this beneficial_owner?" },
+            style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
 
 .row
   .col-md-12
