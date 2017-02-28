@@ -15,5 +15,11 @@ describe "User edits benifical owners", js: :true do
     end
 
     expect(page).to have_css(".beneficial_owner-imo_number", text: "1234567")
+
+    click_on("BOB BOLD")
+    fill_in("IMO Number", with: "7654321")
+    click_on("Save Beneficial Owner")
+
+    expect(page).to have_css(".beneficial_owner-imo_number", text: "7654321")
   end
 end
