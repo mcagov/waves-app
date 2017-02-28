@@ -199,12 +199,26 @@
             label: vessel_change_label(:builders_address),
             input_html: { class: "upcase" }
 
+        .col-md-3{ class: vessel_change_css(:hull_construction_material) }
+          = vessel_f.input :hull_construction_material,
+            label: vessel_change_label(:hull_construction_material),
+            collection: WavesUtilities::HullConstructionMaterial.all,
+            include_blank: false,
+            input_html: { class: "select2 select2_single" }
+      .row
         .col-md-3{ class: vessel_change_css(:place_of_build) }
           = vessel_f.input :place_of_build,
             label: vessel_change_label(:place_of_build),
             input_html: { class: "upcase" }
 
-      .row
+        .col-md-3{ class: vessel_change_css(:country_of_build) }
+          = vessel_f.input :country_of_build,
+            label: vessel_change_label(:country_of_build),
+            as: :select,
+            collection: countries_collection,
+            include_blank: false,
+            input_html: { class: "select2 select2_single searchable" }
+
         .col-md-3{ class: vessel_change_css(:year_of_build) }
           = vessel_f.input :year_of_build,
             label: vessel_change_label(:year_of_build)
@@ -213,15 +227,3 @@
           = vessel_f.input :keel_laying_date,
             label: vessel_change_label(:keel_laying_date),
             input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
-
-        .col-md-3{ class: vessel_change_css(:hull_construction_material) }
-          = vessel_f.input :hull_construction_material,
-            label: vessel_change_label(:hull_construction_material),
-            collection: WavesUtilities::HullConstructionMaterial.all,
-            include_blank: false,
-            input_html: { class: "select2 select2_single" }
-
-        .col-md-3{ class: vessel_change_css(:yard_number) }
-          = vessel_f.input :yard_number,
-            label: vessel_change_label(:yard_number),
-            input_html: { class: "upcase" }
