@@ -8,16 +8,16 @@ class Submission::DeclarationGroupsController < InternalPagesController
 
     @modal_id = params[:modal_id]
 
-    respond_to do |format|
-      format.js { render "/submissions/extended/forms/shareholding/update" }
-    end
+    render_update_js
   end
 
-  def shares_held
+  def update
     @declaration_group = Declaration::Group.find(params[:id])
+    @declaration_group.update_attributes(declaration_group_params)
 
-    @declaration_group.update_attributes(
-      shares_held: declaration_group_params[:shares_held])
+    @modal_id = params[:modal_id]
+
+    render_update_js
   end
 
   protected
@@ -31,5 +31,11 @@ class Submission::DeclarationGroupsController < InternalPagesController
   def declaration_group_params
     params.require(:declaration_group)
           .permit(:default_group_member, :shares_held)
+  end
+
+  def render_update_js
+    respond_to do |format|
+      format.js { render "/submissions/extended/forms/shareholding/update" }
+    end
   end
 end

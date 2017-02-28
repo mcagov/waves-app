@@ -4,7 +4,7 @@
     %th Owners
     %th.col-md-3 Shares
   %tbody
-    - @submission.declaration_groups.each do |declaration_group|
+    - @submission.declaration_groups.order("created_at asc").each do |declaration_group|
       %tr
         %td
           %table.table{style: 'margin-bottom: 0px !important;'}
@@ -28,12 +28,26 @@
             %i.fa.fa-plus
             Add Owner to Group
         %td.shares_held
-          = link_to declaration_group.shares_held, "#",
-            class: :edit_shareholding_in_place,
-            data: { title: "Shares Held Outright",
-            name: "declaration_group[shares_held]",
-            value: declaration_group.shares_held,
-            url: shares_held_submission_declaration_group_path(@submission, declaration_group) }
+          = link_to "#shares_held_#{declaration_group.id}",
+            data: { target: "#shares_held_#{declaration_group.id}" , toggle: "modal" } do
+            = declaration_group.shares_held
+
+          .modal.fade{id: "shares_held_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
+            .modal-dialog.modal-sm
+              = simple_form_for declaration_group,
+                remote: true,
+                url: submission_declaration_group_path(@submission, declaration_group) do |f|
+                .modal-content
+                  .modal-header
+                    %h4.modal-title
+                      Shares Held Jointly
+                  .modal-body
+                    = f.input :shares_held,
+                      label: declaration_group.declaration_group_members.map{|gm| gm.declaration.owner}.join(", ")
+                  .modal-footer
+                    = button_tag type: 'submit',
+                      class: "btn btn-primary btn-sm pull-right" do
+                      Save
 
 = link_to '#add-new-group',
   class: 'btn btn-link',

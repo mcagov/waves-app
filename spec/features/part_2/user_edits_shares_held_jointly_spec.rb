@@ -48,9 +48,12 @@ describe "User edits shares held jointly", js: :true do
     expect(page).to have_css("#total_shares", text: "allocated: 0")
 
     within("#shares_held_jointly") { click_on("0") }
-    find(".editable-input input").set("16")
 
-    first(".editable-submit").click
+    within(".modal-content") do
+      find("#declaration_group_shares_held").set("16")
+      click_on("Save")
+    end
+
     expect(page).to have_css("#total_shares", text: "allocated: 16")
   end
 end
