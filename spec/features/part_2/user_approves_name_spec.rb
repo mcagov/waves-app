@@ -33,13 +33,6 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       text: "is not available in SOUTHAMPTON")
   end
 
-  scenario "toggling the tonnage fields" do
-    click_on("Switch to Register Tonnage")
-    fill_in("Register Tonnage", with: "1234.5")
-    click_on("Switch to Net Tonnage")
-    fill_in("Net Tonnage", with: "6789")
-  end
-
   scenario "with valid data" do
     fill_in("Approved Vessel Name", with: "BOBS BOAT")
     select2("Full", from: "submission_name_approval_registration_type")
@@ -49,7 +42,6 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       ".approval_port-no .form-control-feedback", text: "SU")
 
     fill_in("Port Number", with: "99")
-    fill_in("Net Tonnage", with: "10000")
 
     click_on("Validate Name")
 
@@ -73,6 +65,5 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     expect(vessel.registration_type).to eq("full")
     expect(vessel.port_code).to eq("SU")
     expect(vessel.port_no).to eq(99)
-    expect(vessel.net_tonnage.to_i).to eq(10000)
   end
 end

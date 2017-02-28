@@ -1,9 +1,7 @@
 class Submission::NameApproval
   include ActiveModel::Model
 
-  attr_accessor(
-    :part, :name, :port_code, :port_no, :registration_type,
-    :net_tonnage, :register_tonnage)
+  attr_accessor :part, :name, :port_code, :port_no, :registration_type
 
   validates :name, presence: true
   validates :port_code, presence: true

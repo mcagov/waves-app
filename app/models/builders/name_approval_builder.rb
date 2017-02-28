@@ -21,8 +21,6 @@ class Builders::NameApprovalBuilder
         name: @name_approval.name,
         port_code: @name_approval.port_code,
         port_no: @name_approval.port_no,
-        net_tonnage: @name_approval.net_tonnage,
-        register_tonnage: @name_approval.register_tonnage,
         registration_type: @name_approval.registration_type)
     end
 

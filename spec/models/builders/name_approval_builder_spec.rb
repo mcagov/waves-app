@@ -8,9 +8,7 @@ describe Builders::NameApprovalBuilder do
         part: :part_2,
         port_code: "SU",
         port_no: port_no,
-        registration_type: :full,
-        register_tonnage: 888,
-        net_tonnage: 999)
+        registration_type: :full)
     end
 
     subject do
@@ -39,14 +37,6 @@ describe Builders::NameApprovalBuilder do
 
       it "saves the vessel port_code" do
         expect(registered_vessel.port_code).to eq("SU")
-      end
-
-      it "saves the vessel register_tonnage" do
-        expect(registered_vessel.register_tonnage).to eq(888)
-      end
-
-      it "saves the vessel net_tonnage" do
-        expect(registered_vessel.net_tonnage).to eq(999)
       end
 
       it "saves the vessel registration_type" do

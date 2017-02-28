@@ -28,7 +28,7 @@ class Submission::NameApprovalsController < InternalPagesController
 
   def name_approval_params
     params.require(:submission_name_approval).permit(
-      :part, :name, :registration_type, :port_code, :port_no, :net_tonnage)
+      :part, :name, :registration_type, :port_code, :port_no)
   end
 
   def build_name_approval
