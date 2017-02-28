@@ -117,6 +117,11 @@ describe Builders::RegistryBuilder do
         expect(submission.reload.mortgages.first.reference_number)
           .to eq("MGT_1")
       end
+
+      it "creates the beneficial_owners" do
+        beneficial_owner = registered_vessel.reload.beneficial_owners.first
+        expect(beneficial_owner.name).to eq("Barry")
+      end
     end
   end
 end
@@ -139,6 +144,10 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
   submission.mortgages.create(
     reference_number: "MGT_1",
     mortgagees: [Mortgagee.new(name: "Mary")])
+
+  submission.beneficial_owners.create(
+    name: "Barry")
+
   submission
 end
 
