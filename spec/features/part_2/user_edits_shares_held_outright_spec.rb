@@ -8,8 +8,11 @@ describe "User edits shares held outright", js: :true do
     expect(page).to have_css("#total_shares", text: "Total shares allocated: 0")
 
     within("#shares_held_outright") { click_on("0") }
-    find(".editable-input input").set("16")
-    first(".editable-submit").click
+
+    within(".modal-content") do
+      find("#declaration_shares_held").set("16")
+      click_on("Save")
+    end
 
     expect(page)
       .to have_css(
@@ -22,8 +25,11 @@ describe "User edits shares held outright", js: :true do
     click_on("Save Individual Owner")
 
     within("#shares_held_outright") { click_on("0") }
-    find(".editable-input input").set("48")
-    first(".editable-submit").click
+
+    within(".modal-content") do
+      find("#declaration_shares_held").set("48")
+      click_on("Save")
+    end
 
     expect(page).to have_css("#total_shares", text: "allocated: 64")
   end

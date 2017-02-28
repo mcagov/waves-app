@@ -8,9 +8,22 @@
       %tr
         %td= declaration.owner.name
         %td
-          = link_to declaration.shares_held, "#",
-            class: :edit_shareholding_in_place,
-            data: { title: "Shares Held Outright",
-            name: "declaration[shares_held]",
-            value: declaration.shares_held,
-            url: shares_held_submission_declaration_path(@submission, declaration) }
+          = link_to "#shares_held_#{declaration.id}",
+            data: { target: "#shares_held_#{declaration.id}" , toggle: "modal" } do
+            = declaration.shares_held
+
+          .modal.fade{id: "shares_held_#{declaration.id}", role: "dialog", tabindex: "-1"}
+            .modal-dialog.modal-sm
+              = simple_form_for declaration,
+                remote: true,
+                url: submission_declaration_path(@submission, declaration) do |f|
+                .modal-content
+                  .modal-header
+                    %h4.modal-title
+                      Shares Held Outright
+                  .modal-body
+                    = f.input :shares_held, label: declaration.owner.name
+                  .modal-footer
+                    = button_tag type: 'submit',
+                      class: "btn btn-primary btn-sm pull-right" do
+                      Save

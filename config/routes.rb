@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
     resources :declaration_groups,
               controller: "submission/declaration_groups",
-              only: [:create]
+              only: [:create, :update]
 
     resources :declarations,
               controller: "submission/declarations",
