@@ -16,8 +16,6 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
 //= require select2
 //= require tinymce
 //= require cocoon
@@ -27,7 +25,6 @@
 //= require ./vendor/custom
 //= require ./vendor/jquery.postcodes
 //
-//= require edit_in_place
 //= require modals
 //= require name_approval
 //= require postcode_lookup

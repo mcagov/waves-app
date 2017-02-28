@@ -63,18 +63,13 @@ Rails.application.routes.draw do
 
     resources :declaration_groups,
               controller: "submission/declaration_groups",
-              only: [:create] do
-      member do
-        put :shares_held
-      end
-    end
+              only: [:create]
 
     resources :declarations,
               controller: "submission/declarations",
               only: [:create, :update, :destroy] do
       member do
         post :complete
-        put :shares_held
       end
     end
 
