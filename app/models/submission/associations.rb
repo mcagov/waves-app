@@ -44,6 +44,11 @@ module Submission::Associations
       base.has_many :work_logs
       base.has_many :engines, as: :parent
       base.has_many :mortgages, as: :parent
+
+      base.has_many :beneficial_owners,
+                    -> { order("updated_at asc") },
+                    class_name: "Submission::BeneficialOwner",
+                    as: :parent
     end
 
     def notification_associations(base)
