@@ -93,34 +93,6 @@
             input_html: { class: "upcase" }
 
       %hr
-      %h2 Operational Information
-      .row
-        .col-md-2{ class: vessel_change_css(:classification_society) }
-          = vessel_f.input :classification_society,
-            label: vessel_change_label(:classification_society),
-            input_html: { class: "upcase" }
-
-        .col-md-2{ class: vessel_change_css(:classification_society_other) }
-          = vessel_f.input :classification_society_other,
-            label: vessel_change_label(:classification_society_other),
-            input_html: { class: "upcase" }
-
-        .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
-          = vessel_f.input :entry_into_service_at,
-            label: vessel_change_label(:entry_into_service_at),
-            input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
-
-        .col-md-2{ class: vessel_change_css(:area_of_operation) }
-          = vessel_f.input :area_of_operation,
-            label: vessel_change_label(:area_of_operation),
-            input_html: { class: "upcase" }
-
-        .col-md-4{ class: vessel_change_css(:alternative_activity) }
-          = vessel_f.input :alternative_activity,
-            label: vessel_change_label(:alternative_activity),
-            input_html: { class: "upcase" }
-
-      %hr
       %h2 Description
       .row
         .col-md-2{ class: vessel_change_css(:gross_tonnage) }
@@ -199,12 +171,26 @@
             label: vessel_change_label(:builders_address),
             input_html: { class: "upcase" }
 
+        .col-md-3{ class: vessel_change_css(:hull_construction_material) }
+          = vessel_f.input :hull_construction_material,
+            label: vessel_change_label(:hull_construction_material),
+            collection: WavesUtilities::HullConstructionMaterial.all,
+            include_blank: false,
+            input_html: { class: "select2 select2_single" }
+      .row
         .col-md-3{ class: vessel_change_css(:place_of_build) }
           = vessel_f.input :place_of_build,
             label: vessel_change_label(:place_of_build),
             input_html: { class: "upcase" }
 
-      .row
+        .col-md-3{ class: vessel_change_css(:country_of_build) }
+          = vessel_f.input :country_of_build,
+            label: vessel_change_label(:country_of_build),
+            as: :select,
+            collection: countries_collection,
+            include_blank: false,
+            input_html: { class: "select2 select2_single searchable" }
+
         .col-md-3{ class: vessel_change_css(:year_of_build) }
           = vessel_f.input :year_of_build,
             label: vessel_change_label(:year_of_build)
@@ -214,14 +200,30 @@
             label: vessel_change_label(:keel_laying_date),
             input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
 
-        .col-md-3{ class: vessel_change_css(:hull_construction_material) }
-          = vessel_f.input :hull_construction_material,
-            label: vessel_change_label(:hull_construction_material),
-            collection: WavesUtilities::HullConstructionMaterial.all,
-            include_blank: false,
-            input_html: { class: "select2 select2_single" }
+      %hr
+      %h2 Operational Information
+      .row
+        .col-md-2{ class: vessel_change_css(:classification_society) }
+          = vessel_f.input :classification_society,
+            label: vessel_change_label(:classification_society),
+            input_html: { class: "upcase" }
 
-        .col-md-3{ class: vessel_change_css(:yard_number) }
-          = vessel_f.input :yard_number,
-            label: vessel_change_label(:yard_number),
+        .col-md-2{ class: vessel_change_css(:classification_society_other) }
+          = vessel_f.input :classification_society_other,
+            label: vessel_change_label(:classification_society_other),
+            input_html: { class: "upcase" }
+
+        .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
+          = vessel_f.input :entry_into_service_at,
+            label: vessel_change_label(:entry_into_service_at),
+            input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+
+        .col-md-2{ class: vessel_change_css(:area_of_operation) }
+          = vessel_f.input :area_of_operation,
+            label: vessel_change_label(:area_of_operation),
+            input_html: { class: "upcase" }
+
+        .col-md-4{ class: vessel_change_css(:alternative_activity) }
+          = vessel_f.input :alternative_activity,
+            label: vessel_change_label(:alternative_activity),
             input_html: { class: "upcase" }

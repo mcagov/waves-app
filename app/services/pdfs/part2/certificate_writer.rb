@@ -69,7 +69,10 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
     draw_label_value "Net Tonnage", @vessel.net_tonnage, at: [rcol_lmargin, vstart]
     vstart -= vspace
     draw_label_value "Year of Build", @vessel.year_of_build, at: [lmargin, vstart]
-    draw_label_value "Country of Build", @vessel.place_of_build, at: [rcol_lmargin, vstart]
+    vstart -= vspace
+    draw_label_value "Place of Build", @vessel.place_of_build, at: [lmargin, vstart]
+    vstart -= vspace
+    draw_label_value "Country of Build", @vessel.country_of_build, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Date of Entry into Service", @vessel.entry_into_service_at, at: [lmargin, vstart]
     vstart -= vspace

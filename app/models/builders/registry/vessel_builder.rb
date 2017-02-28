@@ -71,10 +71,10 @@ class Builders::Registry::VesselBuilder
       @vessel.name_of_builder = @submission.vessel.name_of_builder
       @vessel.builders_address = @submission.vessel.builders_address
       @vessel.place_of_build = @submission.vessel.place_of_build
+      @vessel.country_of_build = @submission.vessel.country_of_build
       @vessel.keel_laying_date = @submission.vessel.keel_laying_date
       @vessel.hull_construction_material =
         @submission.vessel.hull_construction_material
-      @vessel.yard_number = @submission.vessel.yard_number
       @vessel.year_of_build = @submission.vessel.year_of_build
     end
   end
