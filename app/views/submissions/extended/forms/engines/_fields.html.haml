@@ -13,7 +13,11 @@
     = engine_f.input :cylinders, label: "Cylinders"
 .row
   .col-md-3
-    = engine_f.input :mcep_per_engine, label: "MCEP per Engine"
+    = engine_f.input :mcep_per_engine,
+      label: "MCEP per Engine",
+      as: :feedback,
+      feedback_label: "kW",
+      placement: :right
   .col-md-3
     = engine_f.input :derating, as: :select,
       label: "Derating",
@@ -23,7 +27,11 @@
   .col-md-3
     = engine_f.input :rpm, label: "RPM"
   .col-md-3
-    = engine_f.input :mcep_after_derating, label: "MCEP after Derating"
+    = engine_f.input :mcep_after_derating,
+      label: "MCEP after Derating",
+      as: :feedback,
+      feedback_label: "kW",
+      placement: :right
 .row
   .col-md-3
     = engine_f.input :quantity
