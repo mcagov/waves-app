@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  belongs_to :vessel
+  belongs_to :parent, polymorphic: true
 
   def to_s
     name
