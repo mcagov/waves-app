@@ -9,9 +9,12 @@
     %th Phone
     %th
   %tbody
-    - @submission.beneficial_owners.each do |beneficial_owner|
+    - @submission.beneficial_owners.order('name').each do |beneficial_owner|
       %tr
-        %td.beneficial_owner-name= beneficial_owner.name
+        %td.beneficial_owner-name
+          = link_to beneficial_owner.name, "#",
+            "data-target" => "#edit_beneficial_owner_#{beneficial_owner.id}",
+            "data-toggle" => "modal"
         %td.beneficial_owner-imo_number= beneficial_owner.imo_number
         %td.beneficial_owner-nationality= beneficial_owner.nationality
         %td.beneficial_owner-status= beneficial_owner.eligibility_status
@@ -28,3 +31,6 @@
       Add Beneficial Owner
 
 = render partial: "submissions/extended/forms/beneficial_owners/new"
+
+- @submission.beneficial_owners.each do |beneficial_owner|
+  = render partial: "submissions/extended/forms/beneficial_owners/edit", locals: { beneficial_owner: beneficial_owner }
