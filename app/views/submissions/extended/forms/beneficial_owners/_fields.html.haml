@@ -1,0 +1,29 @@
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4.modal-title New Beneficial Owner
+.modal-body
+  .postcode-lookup
+    .row
+      .col-md-6
+        = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: f, f: f, label: "Beneficial Owner Name" }
+      .col-md-3
+        = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: f }
+      .col-md-3
+        = f.input :imo_number, label: "Owner IMO Number"
+    .row
+      .col-md-6
+        = f.input :eligibility_status, label: "Status",
+          as: :select,
+          collection: WavesUtilities::EligibilityStatus.all
+
+      .col-md-3
+        = f.input :email, label: "Email Address"
+      .col-md-3
+        = f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
+
+    = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f }
+
+.modal-footer
+  = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
+    Save Beneficial Owner
