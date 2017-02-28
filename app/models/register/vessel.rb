@@ -6,11 +6,12 @@ module Register
 
     validates :part, presence: true
 
-    has_one :agent, class_name: "Register::Agent"
-    has_many :customers
+    has_one :agent, as: :parent, class_name: "Register::Agent"
+    has_many :customers, as: :parent
     has_many :owners,
              -> { order("updated_at asc") },
-             class_name: "Register::Owner"
+             class_name: "Register::Owner",
+             as: :parent
 
     has_many :shareholder_groups, dependent: :destroy
 
