@@ -1,0 +1,9 @@
+.modal.fade{id: "new_beneficial_owner", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for BeneficialOwner.new,
+        method: :post,
+        remote: true,
+        url: submission_beneficial_owners_path(@submission) do |f|
+        = hidden_field_tag "modal_id", "new_beneficial_owner"
+        = render partial: "submissions/extended/forms/beneficial_owners/fields", locals: { f: f }

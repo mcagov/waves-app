@@ -6,11 +6,13 @@ module Register
 
     validates :part, presence: true
 
-    has_one :agent, class_name: "Register::Agent"
-    has_many :customers
+    has_one :agent, as: :parent, class_name: "Register::Agent"
+    has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
+    has_many :customers, as: :parent
     has_many :owners,
              -> { order("updated_at asc") },
-             class_name: "Register::Owner"
+             class_name: "Register::Owner",
+             as: :parent
 
     has_many :shareholder_groups, dependent: :destroy
 
@@ -65,6 +67,7 @@ module Register
         shareholder_groups: shareholder_groups_info,
         engines: engines.map(&:attributes),
         mortgages: mortgages_info,
+        beneficial_owners: beneficial_owners.map(&:attributes),
       }
     end
 

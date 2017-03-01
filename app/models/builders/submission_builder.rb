@@ -26,6 +26,7 @@ class Builders::SubmissionBuilder
         build_managing_owner_and_correspondent
         build_engines
         build_mortgages
+        build_beneficial_owners
       end
 
       build_agent if @submission.applicant_is_agent
@@ -121,6 +122,20 @@ class Builders::SubmissionBuilder
         submission_mortgagee = Mortgagee.new(mortgagee.except(:id))
         submission_mortgagee.mortgage = submission_mortgage
         submission_mortgagee.save
+      end
+    end
+
+    def build_beneficial_owners
+      if @submission.persisted?
+        return unless BeneficialOwner.where(parent: @submission).empty?
+      end
+      submission_b_owners =
+        @submission.symbolized_changeset[:beneficial_owners] || []
+
+      submission_b_owners.each do |b_owner|
+        submission_b_owner = BeneficialOwner.new(b_owner.except(:id))
+        submission_b_owner.parent = @submission
+        submission_b_owner.save
       end
     end
   end

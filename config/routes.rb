@@ -49,6 +49,10 @@ Rails.application.routes.draw do
 
     resource :approval, controller: "submission/approvals", only: [:create]
 
+    resources :beneficial_owners,
+              controller: "submission/beneficial_owners",
+              only: [:create, :update, :destroy]
+
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"

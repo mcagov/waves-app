@@ -55,7 +55,7 @@ class SubmissionsController < InternalPagesController
           { work_logs: [:actioned_by] },
           { mortgages: [:mortgagees] },
           :incomplete_declarations, :engines, :correspondences,
-          :notifications]).find(params[:id])
+          :notifications, :beneficial_owners]).find(params[:id])
   end
 
   def submission_params

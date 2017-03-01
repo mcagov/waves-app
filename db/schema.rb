@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228102753) do
+ActiveRecord::Schema.define(version: 20170228145305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20170228102753) do
   end
 
   create_table "customers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "vessel_id"
     t.string   "type"
     t.string   "email"
     t.string   "name"
@@ -74,9 +73,10 @@ ActiveRecord::Schema.define(version: 20170228102753) do
     t.boolean  "correspondent",         default: false
     t.string   "entity_type",           default: "individual"
     t.integer  "shares_held"
+    t.uuid     "parent_id"
+    t.string   "parent_type"
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
-    t.index ["vessel_id"], name: "index_customers_on_vessel_id", using: :btree
   end
 
   create_table "declaration_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -364,6 +364,7 @@ ActiveRecord::Schema.define(version: 20170228102753) do
     t.uuid     "correspondent_id"
     t.uuid     "managing_owner_id"
     t.string   "linkable_ref_no"
+    t.uuid     "name_approval_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
