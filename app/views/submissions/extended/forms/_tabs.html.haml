@@ -52,4 +52,7 @@
               WIP: Documents
 
             #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
-              WIP: Agents
+              #agent_list
+                = render partial: "submissions/basic/forms/agent/list"
+              #agent_modal
+                = render partial: "/submissions/basic/forms/agent/modal"
