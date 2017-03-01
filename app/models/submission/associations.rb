@@ -47,7 +47,7 @@ module Submission::Associations
 
       base.has_many :beneficial_owners,
                     -> { order("updated_at asc") },
-                    class_name: "Submission::BeneficialOwner",
+                    class_name: "BeneficialOwner",
                     as: :parent
     end
 

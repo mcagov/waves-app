@@ -2,7 +2,7 @@ class Submission::BeneficialOwnersController < InternalPagesController
   before_action :load_submission
 
   def create
-    @beneficial_owner = Submission::BeneficialOwner.new(beneficial_owner_params)
+    @beneficial_owner = BeneficialOwner.new(beneficial_owner_params)
     @beneficial_owner.parent = @submission
     @beneficial_owner.save!
 
@@ -10,14 +10,14 @@ class Submission::BeneficialOwnersController < InternalPagesController
   end
 
   def update
-    @beneficial_owner = Submission::BeneficialOwner.find(params[:id])
+    @beneficial_owner = BeneficialOwner.find(params[:id])
     @beneficial_owner.update_attributes(beneficial_owner_params)
 
     respond_with_update
   end
 
   def destroy
-    @beneficial_owner = Submission::BeneficialOwner.find(params[:id])
+    @beneficial_owner = BeneficialOwner.find(params[:id])
     @beneficial_owner.destroy
 
     respond_with_update
@@ -32,7 +32,7 @@ class Submission::BeneficialOwnersController < InternalPagesController
   end
 
   def beneficial_owner_params
-    params.require(:submission_beneficial_owner).permit(
+    params.require(:beneficial_owner).permit(
       :name, :email, :phone_number, :imo_number, :eligibility_status,
       :nationality, :address_1, :address_2, :address_3, :town, :postcode)
   end

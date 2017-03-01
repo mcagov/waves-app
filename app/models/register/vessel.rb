@@ -7,8 +7,7 @@ module Register
     validates :part, presence: true
 
     has_one :agent, as: :parent, class_name: "Register::Agent"
-    has_many :beneficial_owners,
-             as: :parent, class_name: "Register::BeneficialOwner"
+    has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
     has_many :customers, as: :parent
     has_many :owners,
              -> { order("updated_at asc") },

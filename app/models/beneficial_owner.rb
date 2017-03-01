@@ -1,0 +1,2 @@
+class BeneficialOwner < Customer
+end
