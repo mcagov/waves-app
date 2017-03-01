@@ -22,13 +22,6 @@ module CollectionHelper
   end
 
   def vessel_types_collection
-    case current_activity.part.to_sym
-    when :part_1, :part_4
-      ["General Cargo Ship", "Barge"].map(&:upcase).freeze
-    when :part_2
-      ["Fishing Vessel"].map(&:upcase).freeze
-    when :part_3
-      WavesUtilities::VesselType.all
-    end
+    WavesUtilities::VesselType.all(current_activity.part)
   end
 end
