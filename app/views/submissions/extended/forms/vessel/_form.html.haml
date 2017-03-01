@@ -18,17 +18,17 @@
             include_blank: false,
             input_html: { class: "select2 select2_single" }
 
-        .col-md-2{ class: vessel_change_css(:vessel_category) }
+        .col-md-2#vessel_categories{ class: vessel_change_css(:vessel_category) }
           = vessel_f.input :vessel_category,
             label: vessel_change_label(:vessel_category),
             as: :select,
-            collection: categories_collection(:extended),
-            include_blank: false,
-            input_html: { class: "upcase select2 select2_single" }
+            collection: vessel_types_collection,
+            include_blank: false
 
         .col-md-2{ class: vessel_change_css(:vessel_type) }
           = vessel_f.input :vessel_type,
-            label: vessel_change_label(:vessel_type, "Type of **General Cargo Ship**"),
+            label: vessel_change_label(:vessel_type, ""),
+            label_html: { class: "vessel_type_label" },
             input_html: { class: "upcase" }
 
         .col-md-2{ class: vessel_change_css(:imo_number) }
@@ -41,7 +41,7 @@
           = vessel_f.input :port_code,
             label: vessel_change_label(:port_code),
             as: :select,
-            collection: ports_collection(@submission.part),
+            collection: ports_collection,
             include_blank: false,
             input_html: { class: "select2 select2_single searchable" }
 
