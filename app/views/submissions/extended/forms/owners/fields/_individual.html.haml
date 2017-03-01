@@ -14,7 +14,7 @@
         .col-md-6
           = owner_f.input :eligibility_status, label: "Status",
             as: :select,
-            collection: WavesUtilities::EligibilityStatus.all
+            collection: eligibility_status_collection
 
         .col-md-3
           = owner_f.input :email, label: "Email Address"
