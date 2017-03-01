@@ -18,7 +18,7 @@
           = owner.inline_address
         %td= owner.imo_number
         %td= owner.nationality
-        %td= owner.eligibility_status.titleize if owner.eligibility_status
+        %td= owner.eligibility_status.try(:titleize)
         %td= owner.email
         %td= owner.phone_number
         %td= y_n(owner.managing_owner)
@@ -43,7 +43,7 @@
           %br
           = owner.inline_address
         %td= owner.imo_number
-        %td= owner.eligibility_status.titleize if owner.eligibility_status
+        %td= owner.eligibility_status.try(:titleize)
         %td= owner.registration_number
         %td= owner.email
         %td= owner.phone_number
@@ -81,3 +81,25 @@
                     %tr
                       %td= group_member.owner
             %td= shareholder_group.shares_held
+
+%h2 Beneficial Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th IMO #
+    %th Nationality
+    %th Status
+    %th Email
+    %th Phone
+  %tbody
+    - vessel.beneficial_owners.each do |beneficial_owner|
+      %tr
+        %td
+          = beneficial_owner.name
+          %br
+          = beneficial_owner.inline_address
+        %td= beneficial_owner.imo_number
+        %td= beneficial_owner.nationality
+        %td= beneficial_owner.eligibility_status.try(:titleize)
+        %td= beneficial_owner.email
+        %td= beneficial_owner.phone_number
