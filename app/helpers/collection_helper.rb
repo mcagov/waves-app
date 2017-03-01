@@ -18,7 +18,7 @@ module CollectionHelper
   end
 
   def ports_collection
-    WavesUtilities::Port.all(current_activity.part)
+    WavesUtilities::Port.all
   end
 
   def vessel_types_collection
