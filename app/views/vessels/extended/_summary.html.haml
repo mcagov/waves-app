@@ -14,7 +14,11 @@
         %td
           %strong= @vessel.vessel_category
       %tr
-        %td.soft-label Detailed Type:
+        %td#vessel_type_label.soft-label
+          - if @vessel.vessel_category.present?
+            Type of #{@vessel.vessel_category}
+          - else
+            Detailed Type:
         %td
           %strong= @vessel.vessel_type
       %tr
