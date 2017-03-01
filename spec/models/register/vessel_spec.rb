@@ -172,6 +172,11 @@ describe Register::Vessel do
         expect(subject[:mortgages][0][:mortgagees][0]["name"])
           .to eq(vessel.mortgages.first.mortgagees.first.name)
       end
+
+      it "has the beneficial_owners attributes" do
+        expect(subject[:beneficial_owners][0]["name"])
+          .to eq(vessel.beneficial_owners.first.name)
+      end
     end
 
     context "shareholder_groups" do
