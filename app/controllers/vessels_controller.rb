@@ -2,14 +2,7 @@ class VesselsController < InternalPagesController
   def show
     @vessel =
       Register::Vessel.in_part(current_activity.part)
-                      .includes(
-                        :correspondences, :owners, :registrations,
-                        :current_registration, :notes,
-                        submissions: [
-                          :correspondences,
-                          { notifications: :notifiable },
-                          { declarations: :notification }]
-                      ).find(params[:id])
+                      .includes(preload).find(params[:id])
   end
 
   def index
@@ -18,5 +11,20 @@ class VesselsController < InternalPagesController
                       .includes(:current_registration)
                       .paginate(page: params[:page], per_page: 20)
                       .order(:name)
+  end
+
+  private
+
+  def preload
+    [
+      :correspondences, :owners, :registrations, :current_registration,
+      :notes, :engines, :beneficial_owners,
+      mortgages: [:mortgagees],
+      shareholder_groups: [:shareholder_group_members],
+      submissions: [
+        :correspondences,
+        { notifications: :notifiable },
+        { declarations: :notification }]
+    ]
   end
 end
