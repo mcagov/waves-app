@@ -67,6 +67,7 @@ module Register
         shareholder_groups: shareholder_groups_info,
         engines: engines.map(&:attributes),
         mortgages: mortgages_info,
+        beneficial_owners: beneficial_owners.map(&:attributes),
       }
     end
 

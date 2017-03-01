@@ -8,6 +8,7 @@ FactoryGirl.define do
     agent                     { build(:registered_agent) }
     engines                   { [build(:engine)] }
     mortgages                 { [build(:mortgage)] }
+    beneficial_owners         { [build(:beneficial_owner)] }
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do
