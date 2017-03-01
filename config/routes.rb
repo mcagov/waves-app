@@ -108,6 +108,10 @@ Rails.application.routes.draw do
              controller: "submission/name_approvals",
              only: [:show, :update]
 
+    resources :representatives,
+              controller: "submission/representatives",
+              only: [:update, :destroy]
+
     resource :shareholding,
              controller: "submission/shareholdings",
              only: [:show]

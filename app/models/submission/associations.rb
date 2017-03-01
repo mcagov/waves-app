@@ -99,6 +99,10 @@ module Submission::Associations
     Submission::Agent.new(symbolized_changeset[:agent] || {})
   end
 
+  def representative
+    Submission::Representative.new(symbolized_changeset[:representative] || {})
+  end
+
   def vessel=(vessel_params)
     self.changeset ||= {}
     changeset[:vessel_info] = vessel_params
@@ -107,6 +111,11 @@ module Submission::Associations
   def agent=(agent_params)
     self.changeset ||= {}
     changeset[:agent] = agent_params
+  end
+
+  def representative=(representative_params)
+    self.changeset ||= {}
+    changeset[:representative] = representative_params
   end
 
   def delivery_address

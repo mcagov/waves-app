@@ -1,0 +1,9 @@
+:plain
+  $("#edit_representative_modal").modal('hide');
+  $('.modal-backdrop').remove();
+  $('body').removeClass('modal-open');
+
+  $("#representative").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/representatives/base")}'
+  );
