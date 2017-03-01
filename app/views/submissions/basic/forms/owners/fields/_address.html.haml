@@ -24,4 +24,4 @@
   .col-md-4
     = owner_f.input :postcode, input_html: { class: "upcase postcode" }
   .col-md-4
-    = owner_f.input :country, collection: ["UNITED KINGDOM"], include_blank: false
+    = owner_f.input :country, collection: owner_countries_collection, include_blank: false
