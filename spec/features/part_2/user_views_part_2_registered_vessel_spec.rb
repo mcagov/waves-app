@@ -2,8 +2,7 @@ require "rails_helper"
 
 describe "User views Part 2 registered vessel", type: :feature, js: true do
   before do
-    @submission = create(:completed_submission, part: :part_2)
-    @vessel = @submission.registered_vessel
+    @vessel = create(:registered_vessel, part: :part_2)
     login_to_part_2
     visit vessels_path
     click_on(@vessel.name.upcase)
