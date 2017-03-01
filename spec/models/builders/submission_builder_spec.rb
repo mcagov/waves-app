@@ -180,6 +180,22 @@ describe Builders::SubmissionBuilder do
           end
         end
       end
+
+      context "with beneficial_owners" do
+        let(:beneficial_owner) { submission.reload.beneficial_owners.first }
+
+        it "builds the beneficial_owners from the changeset" do
+          expect(beneficial_owner.name).to eq("Barry")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the beneficial_owners" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.beneficial_owners.first)
+              .to eq(beneficial_owner)
+          end
+        end
+      end
     end
   end
 end
@@ -209,6 +225,7 @@ def vessel_sample_data
     name: "MY BOAT", number_of_hulls: 1,
     owners: owner_sample_data.map { |owner| Register::Owner.new(owner) },
     engines: [create(:engine, make: "DUCATI")],
+    beneficial_owners: [create(:beneficial_owner, name: "Barry")],
     mortgages: [create(:mortgage,
                        mortgagees: [create(:mortgagee, name: "Mary")])]
   }
