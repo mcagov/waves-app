@@ -27,7 +27,7 @@
               %a#documents-tab{"data-toggle" => "tab", :href => "#documents_tab", :role => "tab"} Documents
 
             %li{:role => "presentation"}
-              %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agents & Representative Persons
+              %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agent & Representative Person
 
           #myTabContent.tab-content
 
@@ -52,7 +52,5 @@
               WIP: Documents
 
             #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
-              #agent_list
-                = render partial: "submissions/basic/forms/agent/list"
-              #agent_modal
-                = render partial: "/submissions/basic/forms/agent/modal"
+              #agent= render partial: "submissions/extended/forms/agents/base"
+
