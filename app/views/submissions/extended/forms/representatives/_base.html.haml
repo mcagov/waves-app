@@ -23,7 +23,6 @@
         %td.representative-eligibility_status= representative.eligibility_status.try(:titleize)
         %td.representative-email= representative.email
         %td.representative-phone_number= representative.phone_number
-        %td.representative-address{width: "40%"}= representative.inline_address
         %td
           = link_to submission_representative_path(@submission, representative),
             class: 'btn-link',

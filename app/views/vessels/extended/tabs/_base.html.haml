@@ -44,7 +44,7 @@
       WIP: Certificates & Documents
 
     #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
-      WIP: Agents
+      = render partial: "vessels/extended/tabs/agent", locals: { vessel: @vessel }
 
     #submissions_tab.tab-pane{"aria-labelledby" => "submissions-tab", :role => "tabpanel"}
       = render partial: "vessels/shared/tabs/submissions", locals: { vessel: @vessel }
