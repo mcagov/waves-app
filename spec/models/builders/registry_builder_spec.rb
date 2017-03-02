@@ -122,6 +122,11 @@ describe Builders::RegistryBuilder do
         beneficial_owner = registered_vessel.reload.beneficial_owners.first
         expect(beneficial_owner.name).to eq("Barry")
       end
+
+      it "creates the representative" do
+        representative = registered_vessel.reload.representative
+        expect(representative.name).to eq("Ronnie")
+      end
     end
   end
 end
@@ -132,6 +137,7 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
            changeset: {
              vessel_info: build(:submission_vessel, name: "BOB BARGE"),
              agent: build(:submission_agent),
+             representative: build(:submission_representative, name: "Ronnie"),
            })
 
   submission.declarations.create(owner: { name: "ALICE" }, shares_held: 20)
