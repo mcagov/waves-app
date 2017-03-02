@@ -380,7 +380,6 @@ ActiveRecord::Schema.define(version: 20170302161147) do
     t.uuid     "correspondent_id"
     t.uuid     "managing_owner_id"
     t.string   "linkable_ref_no"
-    t.uuid     "name_approval_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
