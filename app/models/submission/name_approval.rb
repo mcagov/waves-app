@@ -26,20 +26,10 @@ class Submission::NameApproval
   private
 
   def name_in_use?
-    Register::Vessel
-      .in_part(part)
-      .where(name: name)
-      .where(port_code: port_code)
-      .where("name_approved_until is null or name_approved_until > now()")
-      .exists?
+    VesselNameValidator.new(self).name_in_use?
   end
 
   def port_no_in_use?
-    Register::Vessel
-      .in_part(part)
-      .where(port_no: port_no)
-      .where(port_code: port_code)
-      .where("name_approved_until is null or name_approved_until > now()")
-      .exists?
+    VesselNameValidator.new(self).port_no_in_use?
   end
 end
