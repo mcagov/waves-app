@@ -3,6 +3,7 @@ class Submission::NameApproval < ApplicationRecord
 
   belongs_to :submission
 
+  validates :submission_id, presence: true
   validates :name, presence: true
   validates :port_code, presence: true
   validates :port_no, allow_blank: true, numericality: { only_integer: true }
@@ -10,9 +11,11 @@ class Submission::NameApproval < ApplicationRecord
   validate :unique_name_in_port
   validate :unique_port_no_in_port
 
+  scope :in_part, ->(part) { where(part: part.to_sym) }
+
   include ActiveModel::Transitions
-  state_machine do
-    state :open, enter: :init_defaults
+  state_machine auto_scopes: true do
+    state :active, enter: :init_defaults
   end
 
   def port_name
@@ -20,12 +23,15 @@ class Submission::NameApproval < ApplicationRecord
   end
 
   def unique_name_in_port
-    errors.add(:name, "is not available in #{port_name}") if name_in_use?
+    unless VesselNameValidator.valid?(part, name, port_code)
+      errors.add(:name, "is not available in #{port_name}")
+    end
   end
 
   def unique_port_no_in_port
-    return unless port_no
-    errors.add(:port_no, "is not available in #{port_name}") if port_no_in_use?
+    unless VesselPortNoValidator.valid?(part, port_no, port_code)
+      errors.add(:port_no, "is not available in #{port_name}")
+    end
   end
 
   private
@@ -39,9 +45,12 @@ class Submission::NameApproval < ApplicationRecord
   end
 
   def init_defaults
-    self.approved_until = 90.days.from_now
+    self.approved_until ||= 90.days.from_now
     self.port_no ||= SequenceNumber::Generator.port_no!(port_code)
+    store_submission_vessel if submission
+  end
 
+  def store_submission_vessel
     vessel = submission.vessel
     vessel.name = name
     vessel.port_no = port_no
