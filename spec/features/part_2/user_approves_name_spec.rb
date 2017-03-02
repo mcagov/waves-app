@@ -49,10 +49,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       ".alert",
       text: "The name BOBS BOAT is available in SOUTHAMPTON")
 
-    click_on("Continue")
-    within(".modal-content") do
-      click_on("Approve Name")
-    end
+    click_on("Approve Name")
 
     expect(page).to have_current_path(edit_submission_path(Submission.last))
     creates_a_work_log_entry("Submission", :name_approval)
