@@ -1,6 +1,18 @@
 %h2 Agent
-= render partial: "vessels/basic/tabs/agent", locals: { agent: vessel.agent }
+- agent = vessel.agent
+%table.table.table-striped#agent
+  %thead
+    %th Name
+    %th Email
+    %th Phone number
+  - if agent
+    %tbody
+      %tr
+        %td.agent-name= agent.name
+        %td= agent.email
+        %td= agent.phone_number
 
+%hr
 %h2 Representative Person
 - representative = vessel.representative
 %table.table.table-striped
