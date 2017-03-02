@@ -177,6 +177,11 @@ describe Register::Vessel do
         expect(subject[:beneficial_owners][0]["name"])
           .to eq(vessel.beneficial_owners.first.name)
       end
+
+      it "has the representative attributes" do
+        expect(subject[:representative]["name"])
+          .to eq(vessel.representative.name)
+      end
     end
 
     context "shareholder_groups" do
