@@ -8,6 +8,7 @@ class Submission::NameApprovalsController < InternalPagesController
 
   def update
     @name_approval = Submission::NameApproval.new(name_approval_params)
+    @name_approval.submission = @submission
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
