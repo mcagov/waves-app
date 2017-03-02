@@ -83,5 +83,5 @@
         .col-md-3
           = delivery_f.input :postcode, input_html: { class: "upcase postcode" }
         .col-md-3
-          = delivery_f.input :country, collection: WavesUtilities::Country.all, include_blank: false, selected: (@submission.delivery_address.country || "UNITED KINGDOM")
+          = delivery_f.input :country, collection: countries_collection, include_blank: false, selected: (@submission.delivery_address.country || "UNITED KINGDOM")
 
