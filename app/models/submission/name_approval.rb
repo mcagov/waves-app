@@ -1,7 +1,5 @@
-class Submission::NameApproval
-  include ActiveModel::Model
-
-  attr_accessor :part, :name, :port_code, :port_no, :registration_type
+class Submission::NameApproval < ApplicationRecord
+  self.table_name = "name_approvals"
 
   validates :name, presence: true
   validates :port_code, presence: true
