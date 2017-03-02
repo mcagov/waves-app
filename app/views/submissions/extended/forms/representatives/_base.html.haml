@@ -1,0 +1,87 @@
+%h2 Representative Person
+- representative = @submission.representative
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Type
+    %th IMO #
+    %th Nationality
+    %th Status
+    %th Email
+    %th Phone
+    %th
+  %tbody
+    - if representative.name.present?
+      %tr
+        %td.representative-name
+          = link_to '#',
+            "data-target" => "#edit_representative_modal", "data-toggle" => "modal" do
+            = representative
+        %td.representative-entity_type= representative.entity_type.try(:titleize)
+        %td.representative-imo_number= representative.imo_number
+        %td.representative-nationality= representative.nationality
+        %td.representative-eligibility_status= representative.eligibility_status.try(:titleize)
+        %td.representative-email= representative.email
+        %td.representative-phone_number= representative.phone_number
+        %td
+          = link_to submission_representative_path(@submission, representative),
+            class: 'btn-link',
+            method: :delete,
+            remote: true,
+            data: { confirm: "Are you sure you want to remove this Representative Person?" },
+            style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
+- if representative.name.blank?
+  %br
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#edit_representative_modal",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Representative Person
+
+.modal.fade{id: "edit_representative_modal", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for @submission,
+        remote: true,
+        method: :put,
+        url: submission_representative_path(@submission) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Representative Person
+          .modal-body
+            .postcode-lookup
+              = f.simple_fields_for :representative do |representative_f|
+                - representative_f.object = f.object.representative
+                .row
+                  .col-md-6
+                    = representative_f.input :name, label: "Full Name", input_html: { class: "upcase representative-name"}
+                  .col-md-3
+                    = representative_f.input :entity_type, label: "Type",
+                      as: :select, collection: ["Individual", "Corporate"],
+                      include_blank: false
+                  .col-md-3
+                    = representative_f.input :imo_number, label: "IMO Number"
+                .row
+                  .col-md-6
+                    = representative_f.input :eligibility_status, label: "Status",
+                      as: :select,
+                      collection: eligibility_status_collection
+                  .col-md-6
+                    = representative_f.input :nationality, label: "Nationality",
+                      as: :select,
+                      collection: countries_collection
+                .row
+                  .col-md-3
+                    = representative_f.input :email, label: "Email Address"
+                  .col-md-3
+                    = representative_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
+
+                = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: representative_f, countries: countries_collection }
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
+              Save Representative Person

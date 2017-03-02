@@ -36,6 +36,8 @@ class Builders::RegistryBuilder
       @vessel = Builders::Registry::MortgageBuilder.create(@submission, @vessel)
       @vessel =
         Builders::Registry::BeneficialOwnerBuilder.create(@submission, @vessel)
+      @vessel =
+        Builders::Registry::RepresentativeBuilder.create(@submission, @vessel)
     end
   end
 end

@@ -9,6 +9,7 @@ module Register
     has_one :agent, as: :parent, class_name: "Register::Agent"
     has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
     has_many :customers, as: :parent
+    has_one :representative, as: :parent, class_name: "Register::Representative"
     has_many :owners,
              -> { order("updated_at asc") },
              class_name: "Register::Owner",
@@ -68,6 +69,7 @@ module Register
         engines: engines.map(&:attributes),
         mortgages: mortgages_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
+        representative: representative_info,
       }
     end
 
@@ -101,6 +103,10 @@ module Register
         mortgage.attributes.merge(
           mortgagees: mortgage.mortgagees.map(&:attributes))
       end
+    end
+
+    def representative_info
+      (representative || Register::Representative.new).attributes
     end
   end
 end

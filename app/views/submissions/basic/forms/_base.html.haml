@@ -28,7 +28,8 @@
                 #owners_list= render partial: "submissions/basic/forms/owners/list"
 
               #agent_tab.tab-pane{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-                = render partial: "submissions/basic/forms/agent/list"
+                #agent_list
+                  = render partial: "submissions/basic/forms/agent/list"
 
   .row.no-print
     .col-sm-12

@@ -24,4 +24,8 @@ module CollectionHelper
   def vessel_types_collection
     WavesUtilities::VesselType.all(current_activity.part)
   end
+
+  def eligibility_status_collection
+    WavesUtilities::EligibilityStatus.all
+  end
 end

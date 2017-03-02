@@ -1,0 +1,25 @@
+%h2 Agent
+= render partial: "vessels/basic/tabs/agent", locals: { agent: vessel.agent }
+
+%h2 Representative Person
+- representative = vessel.representative
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Type
+    %th IMO #
+    %th Nationality
+    %th Status
+    %th Email
+    %th Phone
+  %tbody
+    - if representative
+      %tr
+        %td.representative-name
+          = representative
+        %td.representative-entity_type= representative.entity_type.try(:titleize)
+        %td.representative-imo_number= representative.imo_number
+        %td.representative-nationality= representative.nationality
+        %td.representative-eligibility_status= representative.eligibility_status.try(:titleize)
+        %td.representative-email= representative.email
+        %td.representative-phone_number= representative.phone_number

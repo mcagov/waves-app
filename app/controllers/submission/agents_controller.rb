@@ -31,8 +31,7 @@ class Submission::AgentsController < InternalPagesController
     respond_to do |format|
       format.js do
         @submission = Decorators::Submission.new(load_submission)
-        view_mode = Activity.new(@submission.part).view_mode
-        render "/submissions/#{view_mode}/forms/agent/update.js"
+        render "/submissions/basic/forms/agent/update.js"
       end
     end
   end
