@@ -11,7 +11,7 @@ class Submission::NameApprovalsController < InternalPagesController
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
-      build_name_approval
+      @name_approval.save
       log_work!(@submission, @submission, :name_approval)
       return redirect_to edit_submission_path(@submission)
     end
@@ -29,10 +29,5 @@ class Submission::NameApprovalsController < InternalPagesController
   def name_approval_params
     params.require(:submission_name_approval).permit(
       :part, :name, :registration_type, :port_code, :port_no)
-  end
-
-  def build_name_approval
-    @submission =
-      Builders::NameApprovalBuilder.create(@submission, @name_approval)
   end
 end
