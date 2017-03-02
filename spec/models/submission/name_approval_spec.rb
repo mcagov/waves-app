@@ -1,6 +1,48 @@
 require "rails_helper"
 
 describe Submission::NameApproval do
+  context ".create" do
+    before do
+      vessel_name_validator = double(:vessel_name_validator)
+      expect(VesselNameValidator)
+        .to receive(:new).twice.and_return(vessel_name_validator)
+
+      expect(vessel_name_validator).to receive(:name_in_use?)
+      expect(vessel_name_validator).to receive(:port_no_in_use?)
+    end
+
+    let(:name_approval) do
+      described_class.create(
+        submission: create(:submission),
+        part: :part_2,
+        name: "BOBS BOAT",
+        port_code: "SU",
+        port_no: port_no,
+        registration_type: "full")
+    end
+
+    let(:port_no) { 1234 }
+
+    it "sets the approved_until" do
+      expect(name_approval.approved_until.to_date)
+        .to be_between(89.days.from_now, 91.days.from_now)
+    end
+
+    it "sets the submission vessel (in the changeset)" do
+      vessel = name_approval.submission.vessel
+      expect(vessel.name).to eq("BOBS BOAT")
+      expect(vessel.port_code).to eq("SU")
+      expect(vessel.port_no).to eq(1234)
+      expect(vessel.registration_type).to eq("full")
+    end
+
+    context "without a port_no" do
+      let(:port_no) { nil }
+
+      it { expect(name_approval.port_no).to be_present }
+    end
+  end
+
   context ".valid?" do
     let!(:registered_vessel) do
       create(:registered_vessel,
