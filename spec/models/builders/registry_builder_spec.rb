@@ -95,6 +95,12 @@ describe Builders::RegistryBuilder do
           .to include("Yamaha")
       end
 
+      it "creates the documents" do
+        document = registered_vessel.reload.documents.first
+        expect(document.entity_type.to_sym).to eq(:other)
+        expect(document.asset.file_file_name).to eq("myfile.pdf")
+      end
+
       it "creates the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
         expect(mortgage.reference_number).to eq("MGT_1")
@@ -134,6 +140,10 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
 
   submission.engines.create(make: "Honda")
   submission.engines.create(make: "Yamaha")
+
+  submission.documents.create(
+    entity_type: :other,
+    assets: [Asset.new(file_file_name: "myfile.pdf")])
 
   submission.mortgages.create(
     reference_number: "MGT_1",

@@ -30,7 +30,7 @@ module CollectionHelper
   end
 
   def document_types_collection
-    ["Signed Carving & Marking Note"]
+    ["Other", "Signed Carving & Marking Note"]
   end
 
   def issuing_authorities_collection

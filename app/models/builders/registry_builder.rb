@@ -29,6 +29,7 @@ class Builders::RegistryBuilder
     end
 
     def build_vessel_associations
+      @vessel = Builders::Registry::DocumentBuilder.create(@submission, @vessel)
       @vessel = Builders::Registry::OwnerBuilder.create(@submission, @vessel)
       @vessel = Builders::Registry::AgentBuilder.create(@submission, @vessel)
       @vessel = Builders::Registry::ShareBuilder.create(@submission, @vessel)
