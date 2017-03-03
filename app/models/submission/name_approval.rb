@@ -3,6 +3,7 @@ class Submission::NameApproval < ApplicationRecord
 
   belongs_to :submission
 
+  validates :submission_id, presence: true
   validates :name, presence: true
   validates :port_code, presence: true
   validates :port_no, allow_blank: true, numericality: { only_integer: true }
