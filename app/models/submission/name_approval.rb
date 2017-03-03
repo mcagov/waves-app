@@ -18,14 +18,36 @@ class Submission::NameApproval < ApplicationRecord
   end
 
   def unique_name_in_port
+    return unless name_changed?
+
     unless VesselNameValidator.valid?(part, name, port_code)
       errors.add(:name, "is not available in #{port_name}")
     end
   end
 
   def unique_port_no_in_port
+    return unless port_no_changed?
+
     unless VesselPortNoValidator.valid?(part, port_no, port_code)
       errors.add(:port_no, "is not available in #{port_name}")
     end
+  end
+
+  private
+
+  def submission_vessel
+    @submission_vessel ||= submission.vessel
+  end
+
+  def port_code_changed?
+    submission_vessel.port_code != port_code
+  end
+
+  def name_changed?
+    (submission_vessel.name != name) || port_code_changed?
+  end
+
+  def port_no_changed?
+    (submission_vessel.port_no != port_no) || port_code_changed?
   end
 end
