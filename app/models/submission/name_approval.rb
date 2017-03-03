@@ -3,7 +3,6 @@ class Submission::NameApproval < ApplicationRecord
 
   belongs_to :submission
 
-  validates :submission_id, presence: true
   validates :name, presence: true
   validates :port_code, presence: true
   validates :port_no, allow_blank: true, numericality: { only_integer: true }
@@ -37,21 +36,5 @@ class Submission::NameApproval < ApplicationRecord
 
   def port_no_in_use?
     VesselNameValidator.new(self).port_no_in_use?
-  end
-
-  def init_defaults
-    self.approved_until ||= 90.days.from_now
-    self.port_no ||= SequenceNumber::Generator.port_no!(port_code)
-    store_submission_vessel if submission
-  end
-
-  def store_submission_vessel
-    vessel = submission.vessel
-    vessel.name = name
-    vessel.port_no = port_no
-    vessel.port_code = port_code
-    vessel.registration_type = registration_type
-    submission.vessel = vessel
-    submission.save
   end
 end
