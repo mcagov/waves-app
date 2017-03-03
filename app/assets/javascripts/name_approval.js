@@ -1,10 +1,12 @@
 $(document).ready(function() {
-  $('#validate_name').on('click', function() {
-    $('form#new_submission_name_approval').submit();
+  $('#validate_name').on('click', function(e) {
+    $('#name_approval form').submit();
+    e.preventDefault();
   });
 
-  $('#confirm_name_validation').on('click', function() {
-    $('form#new_submission_name_approval').submit();
+  $('#confirm_name_validation').on('click', function(e) {
+    $('#name_approval form').submit();
+    e.preventDefault();
   });
 
   function feedback_port_no() {

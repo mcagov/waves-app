@@ -8,7 +8,7 @@
         .col-md-4{ class: vessel_change_css(:name) }
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
-            input_html: { class: "upcase", readonly: "readonly" }
+            input_html: { readonly: "readonly" }
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           = vessel_f.input :registration_type,
@@ -38,12 +38,10 @@
 
       .row
         .col-md-2{ class: vessel_change_css(:port_code) }
-          = vessel_f.input :port_code,
+          = vessel_f.input :port_name,
             label: vessel_change_label(:port_code),
-            as: :select,
-            collection: ports_collection,
-            include_blank: false,
-            input_html: { class: "select2 select2_single searchable" }
+            input_html: { readonly: "readonly" }
+          = vessel_f.input :port_code, as: :hidden
 
         .col-md-2{ class: vessel_change_css(:port_no) }
           = vessel_f.input :port_no,
