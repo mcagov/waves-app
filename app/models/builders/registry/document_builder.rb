@@ -31,11 +31,7 @@ class Builders::Registry::DocumentBuilder
 
     def build_assets_for(vessel_document, submission_document)
       submission_document.assets.each do |submission_asset|
-        vessel_document.assets.create(
-          file_file_name: submission_asset.file_file_name,
-          file_content_type: submission_asset.file_content_type,
-          file_file_size: submission_asset.file_file_size,
-          file_updated_at: submission_asset.file_updated_at)
+        vessel_document.assets.create(file: submission_asset.file)
       end
     end
   end

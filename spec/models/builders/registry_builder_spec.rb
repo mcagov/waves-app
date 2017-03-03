@@ -98,7 +98,7 @@ describe Builders::RegistryBuilder do
       it "creates the documents" do
         document = registered_vessel.reload.documents.first
         expect(document.entity_type.to_sym).to eq(:other)
-        expect(document.asset.file_file_name).to eq("myfile.pdf")
+        expect(document.asset.file_file_name).to eq("mca_test.pdf")
       end
 
       it "creates the mortgages" do
@@ -143,7 +143,7 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
 
   submission.documents.create(
     entity_type: :other,
-    assets: [Asset.new(file_file_name: "myfile.pdf")])
+    assets: [create(:asset)])
 
   submission.mortgages.create(
     reference_number: "MGT_1",
