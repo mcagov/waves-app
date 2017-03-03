@@ -6,6 +6,12 @@ feature "User edits part 2 name and PLN", type: :feature, js: :true do
     click_on("Change Name or PLN")
     complete_name_approval_form
   end
+
+  scenario "for an existing vessel" do
+    visit_part_2_change_vessel_submission
+    click_on("Change Name or PLN")
+    complete_name_approval_form
+  end
 end
 
 def complete_name_approval_form
