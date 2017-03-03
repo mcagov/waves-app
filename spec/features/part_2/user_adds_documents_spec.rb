@@ -24,5 +24,10 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
     expect(page).to have_css(".noted_at", "01/02/2016")
     expect(page).to have_css(".expires_at", "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
+
+    within(".remove-document") { click_on("Remove") }
+    expect(page).not_to have_css(".entity_type")
+
+    expect(Document.count).to eq(0)
   end
 end

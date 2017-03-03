@@ -6,6 +6,7 @@
     %th Date Received
     %th Date of Expiry
     %th Attachment(s)
+    %th
   %tbody
     - @submission.documents.order("created_at desc").each do |document|
       %tr
@@ -18,6 +19,15 @@
           - if asset && asset.file.exists?
             %i.fa.fa-file-pdf-o
             = link_to asset.file_file_name, asset.file.url
+        %td.remove-document
+          = link_to submission_document_path(@submission, document),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: :true,
+              data: { confirm: "Are you sure you want to remove this mortgage?" }, style: 'color: red;' do
+            %i.fa.fa-trash
+            Remove
+.row
 .row
   .col-md-12
     = link_to '#', class: 'btn btn-primary',
