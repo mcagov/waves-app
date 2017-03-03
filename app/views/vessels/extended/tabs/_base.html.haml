@@ -41,7 +41,7 @@
       = render partial: "vessels/extended/tabs/mortgages", locals: { vessel: @vessel }
 
     #certificates_tab.tab-pane{"aria-labelledby" => "certificates-tab", :role => "tabpanel"}
-      WIP: Certificates & Documents
+      = render partial: "vessels/extended/tabs/documents", locals: { vessel: @vessel }
 
     #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/agent", locals: { vessel: @vessel }

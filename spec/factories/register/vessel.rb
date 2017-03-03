@@ -7,6 +7,7 @@ FactoryGirl.define do
     owners                    { [build(:registered_owner)] }
     agent                     { build(:registered_agent) }
     engines                   { [build(:engine)] }
+    documents                 { [build(:document)] }
     mortgages                 { [build(:mortgage)] }
     beneficial_owners         { [build(:beneficial_owner)] }
     representative            { build(:registered_representative) }

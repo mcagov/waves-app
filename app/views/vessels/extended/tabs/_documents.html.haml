@@ -1,0 +1,21 @@
+%h2 Certificates & Documents
+%table.table.table-striped
+  %thead
+    %th Type
+    %th Issuing Authority
+    %th Date Received
+    %th Date of Expiry
+    %th Attachment(s)
+  %tbody
+    - vessel.documents.each do |document|
+      %tr
+        %td.entity_type= document.entity_type
+        %td.issuing_authority= document.issuing_authority
+        %td.noted_at= document.noted_at
+        %td.expires_at= document.expires_at
+        %td
+          - asset = document.asset
+          - if asset && asset.file.exists?
+            %i.fa.fa-file-pdf-o
+            = link_to asset.file_file_name, asset.file.url
+
