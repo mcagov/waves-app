@@ -1,38 +1,5 @@
-= link_to '#approve-name',
-  data: { target: "#approve-name", toggle: "modal" },
+= link_to "#",
+  id: "confirm_name_validation",
   class: 'btn btn-success btn-lg pull-right' do
   %i.fa.fa-check
-  Continue
-
-.modal.fade{id: 'approve-name', role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Approve Name
-      %form
-        .modal-body
-          %p
-            The expiry date of this application will be set to
-            = 3.months.from_now
-            (3 months from today).
-          / .row
-          /   .col-md-12
-          /     .form-group
-          /       %label
-          /         %input{name: "send_cm", type: "checkbox"}
-          /         Send carving and marking
-          / .row
-          /   .col-md-12
-          /     .form-group
-          /       %label{style: 'display: none;'} Carving and Marking Note
-          /       %select.select2_single.form-control{style: 'width: 100%;'}
-          /         %option Send via email automatically
-          /         %option Add to print queue and send via post
-        .modal-footer
-          = link_to "#",
-            id: "confirm_name_validation",
-            class: 'btn btn-success btn-lg btn-block' do
-            %i.fa.fa-check
-            Approve Name
+  Approve Name

@@ -4,46 +4,30 @@ class Builders::NameApprovalBuilder
       @submission = submission
       @name_approval = name_approval
 
-      build_registered_vessel
-      assign_name_approved_until
-      assign_port_code
-      persist_registered_vessel
+      init_defaults
       assign_submission_changeset
 
-      @submission
+      @name_approval.save
     end
 
     private
 
-    def build_registered_vessel
-      @registered_vessel = Register::Vessel.new(
-        part: @name_approval.part,
-        name: @name_approval.name,
-        port_code: @name_approval.port_code,
-        port_no: @name_approval.port_no,
-        net_tonnage: @name_approval.net_tonnage,
-        register_tonnage: @name_approval.register_tonnage,
-        registration_type: @name_approval.registration_type)
-    end
+    def init_defaults
+      @name_approval.approved_until ||= 90.days.from_now
 
-    def assign_name_approved_until
-      @registered_vessel.name_approved_until = 3.months.from_now
-    end
-
-    def assign_port_code
-      @registered_vessel.port_no ||=
+      @name_approval.port_no ||=
         SequenceNumber::Generator.port_no!(@name_approval.port_code)
-    end
 
-    def persist_registered_vessel
-      if @registered_vessel.save
-        @submission.update_attribute(
-          :registered_vessel_id, @registered_vessel.id)
-      end
+      @name_approval.submission = @submission
     end
 
     def assign_submission_changeset
-      @submission.changeset = @registered_vessel.registry_info
+      vessel = @submission.vessel
+      vessel.name = @name_approval.name
+      vessel.port_no = @name_approval.port_no
+      vessel.port_code = @name_approval.port_code
+      vessel.registration_type = @name_approval.registration_type
+      @submission.vessel = vessel
       @submission.save
     end
   end

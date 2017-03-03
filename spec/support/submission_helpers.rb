@@ -40,19 +40,17 @@ def visit_assigned_part_2_submission
 end
 
 def visit_name_approved_part_2_submission
-  registered_vessel = create(:registered_vessel, part: :part_2)
-  submission =
-    create(:assigned_submission, part: :part_2,
-                                 registered_vessel: registered_vessel)
+  submission = create(:assigned_submission, part: :part_2)
+  create(:submission_name_approval, submission: submission)
+
   login_to_part_2(submission.claimant)
   visit submission_path(submission)
 end
 
 def visit_name_approved_part_1_submission
-  registered_vessel = create(:registered_vessel, part: :part_1)
-  submission =
-    create(:assigned_submission, part: :part_1,
-                                 registered_vessel: registered_vessel)
+  submission = create(:assigned_submission, part: :part_1)
+  create(:submission_name_approval, submission: submission)
+
   login_to_part_1(submission.claimant)
   visit submission_path(submission)
 end

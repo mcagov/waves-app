@@ -44,6 +44,7 @@ module Submission::Associations
       base.has_many :work_logs
       base.has_many :engines, as: :parent
       base.has_many :mortgages, -> { order("created_at asc") }, as: :parent
+      base.has_one :name_approval, class_name: "Submission::NameApproval"
 
       base.has_many :beneficial_owners,
                     -> { order(:name) },

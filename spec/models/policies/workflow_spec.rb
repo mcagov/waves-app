@@ -30,6 +30,12 @@ describe Policies::Workflow do
 
         it { expect(subject).to be_falsey }
       end
+
+      context "when the submission has a name_approval" do
+        let(:submission) { create(:submission_name_approval).submission }
+
+        it { expect(subject).to be_falsey }
+      end
     end
   end
 end

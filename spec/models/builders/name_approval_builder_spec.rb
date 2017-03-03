@@ -1,71 +1,45 @@
 require "rails_helper"
 
 describe Builders::NameApprovalBuilder do
-  context ".create" do
-    let(:name_approval) do
-      Submission::NameApproval.new(
-        name: "BOBS BOAT",
-        part: :part_2,
-        port_code: "SU",
-        port_no: port_no,
-        registration_type: :full,
-        register_tonnage: 888,
-        net_tonnage: 999)
+  let(:submission) { build(:submission) }
+
+  let(:name_approval) do
+    Submission::NameApproval.new(
+      part: :part_2,
+      name: "BOBS BOAT",
+      port_code: "SU",
+      port_no: port_no,
+      registration_type: "provisional")
+  end
+
+  before { Builders::NameApprovalBuilder.create(submission, name_approval) }
+
+  context "in general" do
+    let(:port_no) { 1234 }
+
+    it "assigns the port_no" do
+      expect(name_approval.port_no).to eq(1234)
     end
 
-    subject do
-      described_class.create(
-        create(:submission, part: :part_2, task: :new_registration),
-        name_approval)
+    it "assigns approved_until" do
+      expect(name_approval.approved_until.to_date)
+        .to be_between(89.days.from_now, 91.days.from_now)
     end
 
-    let(:submission) { subject }
-    let(:registered_vessel) { submission.registered_vessel }
+    it "assigns the submission vessel (in the changeset)" do
+      vessel = name_approval.submission.vessel
+      expect(vessel.name).to eq("BOBS BOAT")
+      expect(vessel.port_code).to eq("SU")
+      expect(vessel.port_no).to eq(1234)
+      expect(vessel.registration_type).to eq("provisional")
+    end
+  end
 
-    context "with valid data" do
-      let(:port_no) { 123 }
+  context "without a port_no" do
+    let(:port_no) { nil }
 
-      it "assigns the vessel reg_no" do
-        expect(registered_vessel.reg_no).to be_present
-      end
-
-      it "saves the vessel port_no" do
-        expect(registered_vessel.port_no).to eq(123)
-      end
-
-      it "saves the vessel name" do
-        expect(registered_vessel.name).to eq("BOBS BOAT")
-      end
-
-      it "saves the vessel port_code" do
-        expect(registered_vessel.port_code).to eq("SU")
-      end
-
-      it "saves the vessel register_tonnage" do
-        expect(registered_vessel.register_tonnage).to eq(888)
-      end
-
-      it "saves the vessel net_tonnage" do
-        expect(registered_vessel.net_tonnage).to eq(999)
-      end
-
-      it "saves the vessel registration_type" do
-        expect(registered_vessel.registration_type).to eq("full")
-      end
-
-      it "sets the name_approved_until" do
-        expect(registered_vessel.name_approved_until).to be_present
-      end
-
-      it "sets the submission vessel (in the changeset)" do
-        expect(submission.reload.vessel.name).to eq("BOBS BOAT")
-      end
-
-      context "but no port_no" do
-        let(:port_no) { nil }
-
-        it { expect(registered_vessel.port_no).not_to be_blank }
-      end
+    it "generates the next available port_no" do
+      expect(name_approval.port_no).to eq(1)
     end
   end
 end

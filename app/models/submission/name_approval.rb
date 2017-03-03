@@ -1,9 +1,7 @@
-class Submission::NameApproval
-  include ActiveModel::Model
+class Submission::NameApproval < ApplicationRecord
+  self.table_name = "name_approvals"
 
-  attr_accessor(
-    :part, :name, :port_code, :port_no, :registration_type,
-    :net_tonnage, :register_tonnage)
+  belongs_to :submission
 
   validates :name, presence: true
   validates :port_code, presence: true
@@ -12,36 +10,31 @@ class Submission::NameApproval
   validate :unique_name_in_port
   validate :unique_port_no_in_port
 
+  scope :in_part, ->(part) { where(part: part.to_sym) }
+
   def port_name
     WavesUtilities::Port.new(port_code).name
   end
 
   def unique_name_in_port
-    errors.add(:name, "is not available in #{port_name}") if name_in_use?
+    unless VesselNameValidator.valid?(part, name, port_code)
+      errors.add(:name, "is not available in #{port_name}")
+    end
   end
 
   def unique_port_no_in_port
-    return unless port_no
-    errors.add(:port_no, "is not available in #{port_name}") if port_no_in_use?
+    unless VesselPortNoValidator.valid?(part, port_no, port_code)
+      errors.add(:port_no, "is not available in #{port_name}")
+    end
   end
 
   private
 
   def name_in_use?
-    Register::Vessel
-      .in_part(part)
-      .where(name: name)
-      .where(port_code: port_code)
-      .where("name_approved_until is null or name_approved_until > now()")
-      .exists?
+    VesselNameValidator.new(self).name_in_use?
   end
 
   def port_no_in_use?
-    Register::Vessel
-      .in_part(part)
-      .where(port_no: port_no)
-      .where(port_code: port_code)
-      .where("name_approved_until is null or name_approved_until > now()")
-      .exists?
+    VesselNameValidator.new(self).port_no_in_use?
   end
 end

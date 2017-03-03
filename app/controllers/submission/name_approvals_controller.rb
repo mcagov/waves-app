@@ -1,17 +1,15 @@
 class Submission::NameApprovalsController < InternalPagesController
   before_action :load_submission
+  before_action :load_name_approval
 
-  def show
-    @name_approval =
-      Submission::NameApproval.new(part: @submission.part)
-  end
+  def show; end
 
   def update
-    @name_approval = Submission::NameApproval.new(name_approval_params)
+    @name_approval.assign_attributes(name_approval_params)
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
-      build_name_approval
+      Builders::NameApprovalBuilder.create(@submission, @name_approval)
       log_work!(@submission, @submission, :name_approval)
       return redirect_to edit_submission_path(@submission)
     end
@@ -26,13 +24,13 @@ class Submission::NameApprovalsController < InternalPagesController
       Submission.in_part(current_activity.part).find(params[:submission_id])
   end
 
-  def name_approval_params
-    params.require(:submission_name_approval).permit(
-      :part, :name, :registration_type, :port_code, :port_no, :net_tonnage)
+  def load_name_approval
+    @name_approval = @submission.name_approval
+    @name_approval ||= Submission::NameApproval.new(part: @submission.part)
   end
 
-  def build_name_approval
-    @submission =
-      Builders::NameApprovalBuilder.create(@submission, @name_approval)
+  def name_approval_params
+    params.require(:submission_name_approval).permit(
+      :part, :name, :registration_type, :port_code, :port_no)
   end
 end
