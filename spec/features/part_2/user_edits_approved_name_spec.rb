@@ -10,6 +10,7 @@ feature "User edits part 2 name and PLN", type: :feature, js: :true do
   scenario "for an existing vessel" do
     visit_part_2_change_vessel_submission
     click_on("Change Name or PLN")
+    expect(page).to have_field("Vessel Name", with: Submission.last.vessel)
     complete_name_approval_form
   end
 end
