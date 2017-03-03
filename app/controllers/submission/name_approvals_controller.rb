@@ -26,7 +26,13 @@ class Submission::NameApprovalsController < InternalPagesController
 
   def load_name_approval
     @name_approval = @submission.name_approval
-    @name_approval ||= Submission::NameApproval.new(part: @submission.part)
+    @name_approval ||=
+      Submission::NameApproval.new(
+        part: @submission.part,
+        name: @submission.vessel.name,
+        port_code: @submission.vessel.port_code,
+        port_no: @submission.vessel.port_no,
+        registration_type: @submission.vessel.registration_type)
   end
 
   def name_approval_params
