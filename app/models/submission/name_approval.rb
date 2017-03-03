@@ -13,11 +13,6 @@ class Submission::NameApproval < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
-  include ActiveModel::Transitions
-  state_machine auto_scopes: true do
-    state :active, enter: :init_defaults
-  end
-
   def port_name
     WavesUtilities::Port.new(port_code).name
   end
