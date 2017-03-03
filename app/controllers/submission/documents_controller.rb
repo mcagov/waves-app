@@ -26,6 +26,7 @@ class Submission::DocumentsController < InternalPagesController
 
   def document_params
     params.require(:document).permit(
+      :entity_type, :issuing_authority, :expires_at,
       :content, :noted_at, assets_attributes: [:file])
   end
 end
