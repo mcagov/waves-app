@@ -1,13 +1,11 @@
 class Submission::NameApprovalsController < InternalPagesController
   before_action :load_submission
+  before_action :load_name_approval
 
-  def show
-    @name_approval =
-      Submission::NameApproval.new(part: @submission.part)
-  end
+  def show; end
 
   def update
-    @name_approval = Submission::NameApproval.new(name_approval_params)
+    @name_approval.assign_attributes(name_approval_params)
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
@@ -24,6 +22,11 @@ class Submission::NameApprovalsController < InternalPagesController
   def load_submission
     @submission =
       Submission.in_part(current_activity.part).find(params[:submission_id])
+  end
+
+  def load_name_approval
+    @name_approval = @submission.name_approval
+    @name_approval ||= Submission::NameApproval.new(part: @submission.part)
   end
 
   def name_approval_params

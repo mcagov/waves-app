@@ -8,7 +8,8 @@
         .col-md-4{ class: vessel_change_css(:name) }
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
-            input_html: { readonly: "readonly" }
+            input_html: { readonly: "readonly" },
+            hint: (link_to "Change Name or PLN", submission_name_approval_path(@submission))
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           = vessel_f.input :registration_type,
