@@ -28,6 +28,7 @@ class Submission::NameApprovalsController < InternalPagesController
     @name_approval = @submission.name_approval
     @name_approval ||=
       Submission::NameApproval.new(
+        submission: @submission,
         part: @submission.part,
         name: @submission.vessel.name,
         port_code: @submission.vessel.port_code,
