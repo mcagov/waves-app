@@ -27,14 +27,4 @@ class Submission::NameApproval < ApplicationRecord
       errors.add(:port_no, "is not available in #{port_name}")
     end
   end
-
-  private
-
-  def name_in_use?
-    VesselNameValidator.new(self).name_in_use?
-  end
-
-  def port_no_in_use?
-    VesselNameValidator.new(self).port_no_in_use?
-  end
 end
