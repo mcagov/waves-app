@@ -13,4 +13,8 @@ class Note < ApplicationRecord
       note
     end
   end
+
+  def asset
+    assets.first
+  end
 end

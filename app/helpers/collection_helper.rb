@@ -28,4 +28,12 @@ module CollectionHelper
   def eligibility_status_collection
     WavesUtilities::EligibilityStatus.all
   end
+
+  def document_types_collection
+    ["Signed Carving & Marking Note"]
+  end
+
+  def issuing_authorities_collection
+    ["Recognised Authority"]
+  end
 end

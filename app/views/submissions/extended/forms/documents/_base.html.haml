@@ -3,18 +3,21 @@
   %thead
     %th Type
     %th Issuing Authority
-    %th Date Uploaded
+    %th Date Received
     %th Date of Expiry
     %th Attachment(s)
-    %th
   %tbody
-    - @submission.documents.order("created_at asc").each do |document|
+    - @submission.documents.order("created_at desc").each do |document|
       %tr
-        %td.document_type
-          = link_to document.document_type, "#",
-            "data-target" => "#edit_document_#{document.id}",
-            "data-toggle" => "modal"
+        %td.entity_type= document.entity_type
+        %td.issuing_authority= document.issuing_authority
+        %td.noted_at= document.noted_at
+        %td.expires_at= document.expires_at
         %td
+          - asset = document.asset
+          - if asset && asset.file.exists?
+            %i.fa.fa-file-pdf-o
+            = link_to asset.file_file_name, asset.file.url
 .row
   .col-md-12
     = link_to '#', class: 'btn btn-primary',
@@ -26,8 +29,9 @@
 .modal.fade{id: "new_document", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
-      = simple_form_for Document.new, method: :post, remote: true, url: submission_documents_path(@submission) do |document_f|
-        = hidden_field_tag "modal_id", "new_document"
+      - document = Document.build(1)
+      - document.noted_at = Date.today
+      = simple_form_for document, method: :post, url: submission_documents_path(@submission) do |document_f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
@@ -37,21 +41,3 @@
 
         .modal-footer
           = document_f.submit "Save Certificate/Document", class: "btn btn-primary"
-
-
-- @submission.documents.each do |document|
-  .modal.fade{id: "edit_document_#{document.id}", role: "dialog", tabindex: "-1"}
-    .modal-dialog.modal-lg
-      .modal-content
-        = simple_form_for document, method: :put, remote: true, url: submission_document_path(@submission, document) do |document_f|
-          = hidden_field_tag "modal_id", "new_document"
-          .modal-header
-            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-              %span{"aria-hidden" => "true"} ×
-            %h4.modal-title New Certificate/Document
-          .modal-body
-            = render partial: "submissions/extended/forms/documents/fields", locals: { document_f: document_f }
-
-          .modal-footer
-            = document_f.submit "Save Certificate/Document", class: "btn btn-primary"
-

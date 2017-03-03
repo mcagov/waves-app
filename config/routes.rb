@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     end
 
     resource :documents,
-             only: [:create],
+             only: [:create, :edit, :update],
              controller: "submission/documents"
 
     resources :engines,
