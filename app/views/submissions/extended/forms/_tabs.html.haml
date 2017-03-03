@@ -21,10 +21,7 @@
               %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
 
             %li{:role => "presentation"}
-              %a#certificates-tab{"data-toggle" => "tab", :href => "#certificates_tab", :role => "tab"} Certificates
-
-            %li{:role => "presentation"}
-              %a#documents-tab{"data-toggle" => "tab", :href => "#documents_tab", :role => "tab"} Documents
+              %a#documents-tab{"data-toggle" => "tab", :href => "#documents_tab", :role => "tab"} Certificates & Documents
 
             %li{:role => "presentation"}
               %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agent & Representative Person
@@ -45,11 +42,8 @@
             #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
               #mortgages= render partial: "submissions/extended/forms/mortgages/base"
 
-            #certificates_tab.tab-pane{"aria-labelledby" => "certificates-tab", :role => "tabpanel"}
-              WIP: Certificates
-
             #documents_tab.tab-pane{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
-              WIP: Documents
+              #documents= render partial: "submissions/extended/forms/documents/base"
 
             #agents_tab.tab-pane{"aria-labelledby" => "agents-tab", :role => "tabpanel"}
               #agent= render partial: "submissions/extended/forms/agents/base"
