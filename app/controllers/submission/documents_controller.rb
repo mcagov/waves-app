@@ -5,7 +5,7 @@ class Submission::DocumentsController < InternalPagesController
     @document = Document.new(document_params)
     @document.actioned_by = current_user
     @document.noteable = @submission
-
+    # fire a state machine event #unreferred if currently referred
     @submission.unreferred! if @submission.can_unreferred?
 
     if @document.save
