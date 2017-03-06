@@ -16,9 +16,10 @@ describe "User issues a Carving & Marking Note", js: true do
     end
 
     within("#carving_and_marking") do
-      expect(page).to have_css(".delivery_method", "Email")
+      expect(page).to have_css(".delivery_method", text: "Email")
     end
 
+    expect(Notification::CarvingAndMarkingNote.count).to eq(1)
     creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
   end
 
