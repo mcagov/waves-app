@@ -18,6 +18,8 @@ describe "User issues a Carving & Marking Note", js: true do
     within("#carving_and_marking") do
       expect(page).to have_css(".delivery_method", "Email")
     end
+
+    creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
   end
 
   scenario "as a printed page"

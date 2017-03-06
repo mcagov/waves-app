@@ -6,7 +6,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
     @carving_and_marking.submission = @submission
     @carving_and_marking.issued_by = current_user
 
-    @carving_and_marking.save
+    process_carving_and_marking if @carving_and_marking.save
 
     render_update_js
   end
@@ -30,5 +30,9 @@ class Submission::CarvingAndMarkingController < InternalPagesController
         render "/submissions/extended/forms/carving_and_marking/update"
       end
     end
+  end
+
+  def process_carving_and_marking
+    log_work!(@submission, @submission, :issued_carving_and_marking_note)
   end
 end
