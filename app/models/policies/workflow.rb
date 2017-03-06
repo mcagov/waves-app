@@ -6,5 +6,9 @@ class Policies::Workflow
       return false if submission.name_approval
       true
     end
+
+    def generate_official_no?(submission)
+      submission.part.to_sym != :part_3
+    end
   end
 end
