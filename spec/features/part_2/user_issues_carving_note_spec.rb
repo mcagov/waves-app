@@ -20,6 +20,8 @@ describe "User issues a Carving & Marking Note", js: true do
     end
   end
 
+  scenario "as a printed page"
+
   scenario "when the pre-requisites have not been met" do
     visit_name_approved_part_2_submission
     click_on("Certificates & Documents")
