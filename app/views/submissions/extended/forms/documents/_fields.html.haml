@@ -1,0 +1,27 @@
+.row
+  .col-md-6
+    = document_f.input :entity_type, as: :select,
+      label: "Type",
+      collection: document_types_collection,
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+  .col-md-6
+    = document_f.input :issuing_authority, as: :select,
+      label: "Issuing Authority",
+      collection: issuing_authorities_collection,
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+.row
+  .col-md-6
+    = document_f.input :expires_at, as: :string, label: "Date of Expiry", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+  .col-md-6
+    %Label Attachment
+    = document_f.fields_for :assets do |asset_f|
+      = asset_f.input :file, label: false, as: :file
+%hr
+.row
+  .col-md-6
+    = document_f.input :content, label: "Notes", as: :text, input_html: { rows: 3 }
+.row
+  .col-md-3
+    = document_f.input :noted_at, as: :string, label: "Date Received", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy" }

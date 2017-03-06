@@ -23,6 +23,11 @@ module Register
             class_name: "Registration"
 
     has_many :correspondences, as: :noteable
+
+    has_many :documents,
+             -> { order("created_at desc") },
+             as: :noteable
+
     has_many :notes,
              -> { where("type is null").order("created_at desc") },
              as: :noteable

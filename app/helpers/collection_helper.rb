@@ -28,4 +28,12 @@ module CollectionHelper
   def eligibility_status_collection
     WavesUtilities::EligibilityStatus.all
   end
+
+  def document_types_collection
+    WavesUtilities::DocumentType.all(current_activity.part)
+  end
+
+  def issuing_authorities_collection
+    WavesUtilities::IssuingAuthority.all
+  end
 end

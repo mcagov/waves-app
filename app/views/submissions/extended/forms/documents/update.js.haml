@@ -1,0 +1,11 @@
+:plain
+  if ("#{ @modal_id }".length > 0) {
+    $("##{ @modal_id }").modal('hide');
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open');
+  }
+
+  $("#documents").html(
+    '#{escape_javascript(
+       render partial: "/submissions/extended/forms/documents/base")}'
+  );

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/oceanshq/waves-utilities.git
-  revision: cafb6bc3ae26721e90c972fe19c9959d1cddb688
+  revision: 3a4c0e060cb7b689382533d1f94ea44e682a0b18
   specs:
     waves-utilities (0.1.0)
 
@@ -305,6 +305,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    remotipart (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rspec (3.5.0)
@@ -469,6 +470,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-erd
   rake
+  remotipart
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
