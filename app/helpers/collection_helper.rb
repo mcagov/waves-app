@@ -30,10 +30,10 @@ module CollectionHelper
   end
 
   def document_types_collection
-    ["Other", "Signed Carving & Marking Note"]
+    WavesUtilities::DocumentType.all(current_activity.part)
   end
 
   def issuing_authorities_collection
-    ["Recognised Authority"]
+    WavesUtilities::IssuingAuthority.all
   end
 end

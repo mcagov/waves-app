@@ -8,8 +8,8 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
 
     page.attach_file("document_assets_attributes_0_file", mca_file)
 
-    select("Signed Carving & Marking Note", from: "Type")
-    select("Recognised Authority", from: "Issuing Authority")
+    select("Carving & Marking Note", from: "Type")
+    select("Recognised Organisation", from: "Issuing Authority")
     fill_in("Date of Expiry", with: "01/02/2016")
     fill_in("Notes", with: "Some text")
     fill_in("Date Received", with: "02/02/2016")
@@ -18,9 +18,9 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
 
     click_on("Certificates & Documents")
     expect(page)
-      .to have_css(".entity_type", text: "Signed Carving & Marking Note")
+      .to have_css(".entity_type", text: "Carving & Marking Note")
     expect(page)
-      .to have_css(".issuing_authority", text: "Recognised Authority")
+      .to have_css(".issuing_authority", text: "Recognised Organisation")
     expect(page).to have_css(".noted_at", "01/02/2016")
     expect(page).to have_css(".expires_at", "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
