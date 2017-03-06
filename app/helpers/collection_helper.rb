@@ -36,4 +36,12 @@ module CollectionHelper
   def issuing_authorities_collection
     WavesUtilities::IssuingAuthority.all
   end
+
+  def tonnage_types_collection
+    [["Net Tonnage", :net_tonnage], ["Register Tonnage", :register_tonnage]]
+  end
+
+  def delivery_methods_collection
+    [["Print a hard copy", :print], ["Send via Email", :email]]
+  end
 end

@@ -1,19 +1,15 @@
-- carving_and_marking = CarvingAndMarking.issued_for(@submission)
 %h2 Carving & Marking
 .row
   .col-md-12.status
-    - if carving_and_marking
+    - if @submission.can_issue_carving_and_marking?
+      = link_to "#", class: "btn btn-primary",
+        "data-target" => "#issue_carving_and_marking",
+        "data-toggle" => "modal" do
+        Issue Carving & Marking Note
 
-    - else
-      - if @submission.can_issue_carving_and_marking?
-        = link_to "#", class: "btn btn-primary",
-          "data-target" => "#issue_carving_and_marking",
-          "data-toggle" => "modal" do
-          Issue Carving & Marking Note
-
-        = render partial: "submissions/extended/forms/carving_and_marking/modal"
-      -else
-        - unless @submission.vessel_reg_no
-          .red Official Number required
-        - unless @submission.tonnage_defined?
-          .red Net or Register Tonnage required
+      = render partial: "submissions/extended/forms/carving_and_marking/modal"
+    -else
+      - unless @submission.vessel_reg_no
+        .red Official Number required
+      - unless @submission.tonnage_defined?
+        .red Net or Register Tonnage required
