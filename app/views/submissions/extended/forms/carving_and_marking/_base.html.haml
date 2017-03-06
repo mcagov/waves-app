@@ -1,4 +1,17 @@
 %h2 Carving & Marking
+%table.table.table-striped
+  %thead
+    %th Delivery Method
+    %th Tonnage Type
+    %th Issue Date
+    %th Officer
+  %tbody
+    - @submission.carving_and_markings.each do |carving_and_marking|
+      %tr
+        %td.delivery_method= carving_and_marking.delivery_method.try(:titleize)
+        %td= carving_and_marking.tonnage_type.try(:titleize)
+        %td= carving_and_marking.created_at
+        %td= carving_and_marking.issued_by
 .row
   .col-md-12.status
     - if @submission.can_issue_carving_and_marking?
