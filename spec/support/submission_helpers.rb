@@ -66,3 +66,13 @@ def visit_part_2_change_vessel_submission
   login_to_part_2(submission.claimant)
   visit submission_path(submission)
 end
+
+def visit_carving_and_marking_ready_submission
+  changeset = { vessel_info: { net_tonnage: 1000, name: "CM BOAT" } }
+  submission = create(:assigned_submission, part: :part_2, changeset: changeset)
+
+  Builders::OfficialNoBuilder.build(submission)
+
+  login_to_part_2(submission.claimant)
+  visit submission_path(submission)
+end

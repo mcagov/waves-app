@@ -115,4 +115,15 @@ class Decorators::Submission < SimpleDelegator
   def convertible?
     new_registration? || registered_vessel.present?
   end
+
+  def tonnage_defined?
+    return false unless vessel
+    return true if vessel.net_tonnage
+    return true if vessel.register_tonnage
+    false
+  end
+
+  def can_issue_carving_and_marking?
+    tonnage_defined? && vessel_reg_no
+  end
 end

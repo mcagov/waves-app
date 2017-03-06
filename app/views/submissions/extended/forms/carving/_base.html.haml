@@ -1,6 +1,15 @@
+- carving_and_marking = CarvingAndMarking.issued_for(@submission)
 %h2 Carving & Marking
 .row
   .col-md-12.status
-    %h4 Status: Not Issued
-    .red Official Number required
-    .red Net or Register Tonnage required
+    - if carving_and_marking
+
+    - else
+      %h4 Status: Not Issued
+      - if @submission.can_issue_carving_and_marking?
+        = link_to "Issue Carving & Marking Note"
+      -else
+        - unless @submission.vessel_reg_no
+          .red Official Number required
+        - unless @submission.tonnage_defined?
+          .red Net or Register Tonnage required

@@ -119,6 +119,70 @@ describe Decorators::Submission, type: :model do
     end
   end
 
+  context "#tonnage_defined?" do
+    let(:submission) do
+      build(:submission, changeset: { vessel_info: vessel_info })
+    end
+
+    subject { described_class.new(submission).tonnage_defined? }
+
+    context "when tonnage has not been defined" do
+      let(:vessel_info) { {} }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "when new_tonnage has been defined" do
+      let(:vessel_info) { { net_tonnage: 100 } }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "when register_tonnage has been defined" do
+      let(:vessel_info) { { register_tonnage: 100 } }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
+
+  context "#can_issue_carving_and_marking?" do
+    let(:decorated_submission) { described_class.new(create(:submission)) }
+    subject { decorated_submission.can_issue_carving_and_marking? }
+
+    context "when it can" do
+      before do
+        expect(decorated_submission)
+          .to receive(:tonnage_defined?).and_return(true)
+
+        expect(decorated_submission)
+          .to receive(:vessel_reg_no).and_return(true)
+      end
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "when it has no vessel_reg_no" do
+      before do
+        expect(decorated_submission)
+          .to receive(:tonnage_defined?).and_return(true)
+
+        expect(decorated_submission)
+          .to receive(:vessel_reg_no).and_return(false)
+      end
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "when it has no tonnage" do
+      before do
+        expect(decorated_submission)
+          .to receive(:tonnage_defined?).and_return(false)
+      end
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
   context "#service_level" do
     it "prefers the service_level as :standard over is_urgent?"
   end
