@@ -10,7 +10,7 @@
   %tbody
     - vessel.documents.each do |document|
       %tr
-        %td.entity_type= document.entity_type
+        %td.entity_type= document.entity_type_name
         %td.issuing_authority= document.issuing_authority
         %td.noted_at= document.noted_at
         %td.expires_at= document.expires_at
