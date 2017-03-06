@@ -13,7 +13,13 @@ class Submission::DocumentsController < InternalPagesController
       log_work!(@submission, @document, :document_entry)
     end
 
-    redirect_to submission_path(@submission)
+    respond_to do |format|
+      format.html { redirect_to submission_path(@submission) }
+      format.js do
+        @modal_id = params[:modal_id]
+        render "/submissions/extended/forms/documents/update"
+      end
+    end
   end
 
   def destroy
