@@ -53,6 +53,10 @@ Rails.application.routes.draw do
               controller: "submission/beneficial_owners",
               only: [:create, :update, :destroy]
 
+    resource :carving_and_marking,
+             controller: "submission/carving_and_marking",
+             only: [:create]
+
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"

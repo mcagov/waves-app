@@ -6,7 +6,12 @@
 
     - else
       - if @submission.can_issue_carving_and_marking?
-        = link_to "Issue Carving & Marking Note"
+        = link_to "#", class: "btn btn-primary",
+          "data-target" => "#issue_carving_and_marking",
+          "data-toggle" => "modal" do
+          Issue Carving & Marking Note
+
+        = render partial: "submissions/extended/forms/carving/modal"
       -else
         - unless @submission.vessel_reg_no
           .red Official Number required
