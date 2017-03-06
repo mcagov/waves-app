@@ -17,5 +17,5 @@
           - asset = document.asset
           - if asset && asset.file.exists?
             %i.fa.fa-file-pdf-o
-            = link_to asset.file_file_name, asset.file.url
+            = link_to asset.file_file_name, asset.file.url, target: "_blank"
 
