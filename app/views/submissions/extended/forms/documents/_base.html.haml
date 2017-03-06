@@ -5,6 +5,7 @@
     %th Issuing Authority
     %th Date Received
     %th Date of Expiry
+    %th Notes
     %th Attachment(s)
     %th
   %tbody
@@ -14,6 +15,7 @@
         %td.issuing_authority= document.issuing_authority
         %td.noted_at= document.noted_at
         %td.expires_at= document.expires_at
+        %td.notes= document.content
         %td
           - asset = document.asset
           - if asset && asset.file.exists?
