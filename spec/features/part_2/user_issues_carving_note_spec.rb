@@ -6,7 +6,6 @@ describe "User issues a Carving & Marking Note", js: true do
     click_on("Certificates & Documents")
 
     within("#carving .status") do
-      expect(page).to have_text("Not Issued")
       click_on("Issue Carving & Marking Note")
     end
   end
@@ -16,7 +15,6 @@ describe "User issues a Carving & Marking Note", js: true do
     click_on("Certificates & Documents")
 
     within("#carving .status") do
-      expect(page).to have_text("Not Issued")
       expect(page).to have_css(".red", text: "Official Number required")
       expect(page).to have_css(".red", text: "Net or Register Tonnage required")
     end

@@ -5,7 +5,6 @@
     - if carving_and_marking
 
     - else
-      %h4 Status: Not Issued
       - if @submission.can_issue_carving_and_marking?
         = link_to "Issue Carving & Marking Note"
       -else
