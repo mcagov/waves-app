@@ -13,13 +13,7 @@ class Submission::DocumentsController < InternalPagesController
       log_work!(@submission, @document, :document_entry)
     end
 
-    respond_to do |format|
-      format.html { redirect_to submission_path(@submission) }
-      format.js do
-        @modal_id = params[:modal_id]
-        render "/submissions/extended/forms/documents/update"
-      end
-    end
+    render_update_js
   end
 
   def destroy
@@ -43,5 +37,15 @@ class Submission::DocumentsController < InternalPagesController
     params.require(:document).permit(
       :entity_type, :issuing_authority, :expires_at,
       :content, :noted_at, assets_attributes: [:file])
+  end
+
+  def render_update_js
+    respond_to do |format|
+      format.html { redirect_to submission_path(@submission) }
+      format.js do
+        @modal_id = params[:modal_id]
+        render "/submissions/extended/forms/documents/update"
+      end
+    end
   end
 end

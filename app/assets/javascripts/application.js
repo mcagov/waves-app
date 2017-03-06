@@ -19,6 +19,7 @@
 //= require select2
 //= require tinymce
 //= require cocoon
+//= require jquery.remotipart
 //
 //= require ./vendor/nprogress
 //= require ./vendor/pace.min

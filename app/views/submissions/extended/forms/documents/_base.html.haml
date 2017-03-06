@@ -40,7 +40,12 @@
     .modal-content
       - document = Document.build(1)
       - document.noted_at = Date.today
-      = simple_form_for document, method: :post, url: submission_documents_path(@submission) do |document_f|
+      = simple_form_for document,
+        method: :post,
+        remote: true,
+        multipart: true,
+        url: submission_documents_path(@submission) do |document_f|
+        = hidden_field_tag "modal_id", "new_document"
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
