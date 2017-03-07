@@ -33,13 +33,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
   end
 
   def process_carving_and_marking
-    Notification::CarvingAndMarkingNote.create(
-      recipient_email: @submission.applicant_email,
-      recipient_name: @submission.applicant_name,
-      notifiable: @carving_and_marking,
-      actioned_by: current_user,
-      attachments: @carving_and_marking.template)
-
+    Builders::CarvingAndMarkingBuilder.build(@carving_and_marking)
     log_work!(@submission, @submission, :issued_carving_and_marking_note)
   end
 end
