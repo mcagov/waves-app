@@ -13,7 +13,7 @@
         %td= carving_and_marking.tonnage_type.try(:titleize)
         %td= carving_and_marking.created_at
         %td= carving_and_marking.template_name
-        %td= carving_and_marking.issued_by
+        %td= carving_and_marking.actioned_by
 .row
   .col-md-12.status
     - if @submission.can_issue_carving_and_marking?
