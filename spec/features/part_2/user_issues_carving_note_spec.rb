@@ -24,7 +24,28 @@ describe "User issues a Carving & Marking Note", js: true do
     creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
   end
 
-  scenario "as a printed page"
+  scenario "as a printed page" do
+    visit_carving_and_marking_ready_submission
+    click_on("Certificates & Documents")
+
+    within("#carving_and_marking .status") do
+      click_on("Issue Carving & Marking Note")
+    end
+
+    within(".modal-content") do
+      select("Net Tonnage", from: "Tonnage Type")
+      select("Print", from: "Delivery Method")
+      select("All fishing vessels", from: "Template")
+      click_on("Issue Carving & Marking note")
+    end
+
+    within("#carving_and_marking") do
+      expect(page).to have_css(".delivery_method", text: "Print")
+    end
+
+    expect(PrintJob.count).to eq(1)
+    creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
+  end
 
   scenario "when the pre-requisites have not been met" do
     visit_name_approved_part_2_submission
