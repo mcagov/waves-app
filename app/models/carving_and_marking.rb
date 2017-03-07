@@ -3,6 +3,7 @@ class CarvingAndMarking < ApplicationRecord
   belongs_to :submission
 
   delegate :vessel_name, to: :submission
+  delegate :part, to: :submission
 
   TEMPLATES = [
     ["All fishing vessels",
@@ -18,5 +19,9 @@ class CarvingAndMarking < ApplicationRecord
   def template_name
     return "" unless template
     TEMPLATES.find { |t| t[1] = template.to_sym }[0]
+  end
+
+  def vessel
+    submission.registered_vessel
   end
 end

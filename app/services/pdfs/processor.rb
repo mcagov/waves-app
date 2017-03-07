@@ -13,19 +13,7 @@ class Pdfs::Processor
   end
 
   def perform
-    case @template.to_sym
-    when :registration_certificate
-      registration_certificate
-
-    when :cover_letter
-      cover_letter
-
-    when :current_transcript
-      current_transcript
-
-    when :historic_transcript
-      historic_transcript
-    end
+    send(@template)
   end
 
   private
@@ -49,5 +37,9 @@ class Pdfs::Processor
 
   def historic_transcript
     Pdfs::HistoricTranscript.new(@printable_items, @mode)
+  end
+
+  def carving_and_marking
+    Pdfs::CarvingAndMarking.new(@printable_items, @mode)
   end
 end

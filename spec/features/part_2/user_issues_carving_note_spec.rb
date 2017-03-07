@@ -43,8 +43,17 @@ describe "User issues a Carving & Marking Note", js: true do
       expect(page).to have_css(".delivery_method", text: "Print")
     end
 
-    expect(PrintJob.count).to eq(1)
     creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
+
+    visit "/print_queue/carving_and_marking"
+
+    pdf_window = window_opened_by do
+      within("#print_queue") { click_on("Print") }
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
   end
 
   scenario "when the pre-requisites have not been met" do
