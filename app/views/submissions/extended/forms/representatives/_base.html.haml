@@ -53,35 +53,35 @@
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
           %h4.modal-title Representative Person
-          .modal-body
-            .postcode-lookup
-              = f.simple_fields_for :representative do |representative_f|
-                - representative_f.object = f.object.representative
-                .row
-                  .col-md-6
-                    = representative_f.input :name, label: "Full Name", input_html: { class: "upcase representative-name"}
-                  .col-md-3
-                    = representative_f.input :entity_type, label: "Type",
-                      as: :select, collection: ["Individual", "Corporate"],
-                      include_blank: false
-                  .col-md-3
-                    = representative_f.input :imo_number, label: "IMO Number"
-                .row
-                  .col-md-6
-                    = representative_f.input :eligibility_status, label: "Status",
-                      as: :select,
-                      collection: eligibility_status_collection
-                  .col-md-6
-                    = representative_f.input :nationality, label: "Nationality",
-                      as: :select,
-                      collection: countries_collection
-                .row
-                  .col-md-3
-                    = representative_f.input :email, label: "Email Address"
-                  .col-md-3
-                    = representative_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
+        .modal-body
+          .postcode-lookup
+            = f.simple_fields_for :representative do |representative_f|
+              - representative_f.object = f.object.representative
+              .row
+                .col-md-6
+                  = representative_f.input :name, label: "Full Name", input_html: { class: "upcase representative-name"}
+                .col-md-3
+                  = representative_f.input :entity_type, label: "Type",
+                    as: :select, collection: ["Individual", "Corporate"],
+                    include_blank: false
+                .col-md-3
+                  = representative_f.input :imo_number, label: "IMO Number"
+              .row
+                .col-md-6
+                  = representative_f.input :eligibility_status, label: "Status",
+                    as: :select,
+                    collection: eligibility_status_collection
+                .col-md-6
+                  = representative_f.input :nationality, label: "Nationality",
+                    as: :select,
+                    collection: countries_collection
+              .row
+                .col-md-3
+                  = representative_f.input :email, label: "Email Address"
+                .col-md-3
+                  = representative_f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
 
-                = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: representative_f, countries: countries_collection }
+              = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: representative_f, countries: countries_collection }
           .modal-footer
             = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
               Save Representative Person
