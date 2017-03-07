@@ -4,7 +4,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
   def create
     @carving_and_marking = CarvingAndMarking.new(carving_and_marking_params)
     @carving_and_marking.submission = @submission
-    @carving_and_marking.issued_by = current_user
+    @carving_and_marking.actioned_by = current_user
 
     process_carving_and_marking if @carving_and_marking.save
 

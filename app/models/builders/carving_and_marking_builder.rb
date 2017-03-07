@@ -19,7 +19,7 @@ class Builders::CarvingAndMarkingBuilder
         recipient_email: @submission.applicant_email,
         recipient_name: @submission.applicant_name,
         notifiable: @carving_and_marking,
-        actioned_by: @carving_and_marking.issued_by,
+        actioned_by: @carving_and_marking.actioned_by,
         attachments: :carving_and_marking)
     end
 

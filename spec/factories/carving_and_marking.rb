@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :carving_and_marking do
     submission      { build(:submission) }
     tonnage_type    { [:net_tonnage, :register_tonnage].sample }
-    issued_by       { build(:user) }
+    actioned_by       { build(:user) }
     template        { CarvingAndMarking::TEMPLATES.sample[1] }
   end
 

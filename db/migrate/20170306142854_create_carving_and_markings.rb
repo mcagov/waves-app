@@ -4,7 +4,7 @@ class CreateCarvingAndMarkings < ActiveRecord::Migration[5.0]
       t.uuid :submission_id
       t.string :tonnage_type
       t.string :delivery_method
-      t.uuid :issued_by_id
+      t.uuid :actioned_by_id
       t.timestamps
     end
   end

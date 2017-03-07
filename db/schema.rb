@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307104644) do
+ActiveRecord::Schema.define(version: 20170307124914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170307104644) do
     t.uuid     "submission_id"
     t.string   "tonnage_type"
     t.string   "delivery_method"
-    t.uuid     "issued_by_id"
+    t.uuid     "actioned_by_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "template"
