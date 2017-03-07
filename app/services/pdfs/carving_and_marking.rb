@@ -9,6 +9,10 @@ class Pdfs::CarvingAndMarking
   end
 
   def render
+    @carving_and_marking_notes.each do |carving_and_marking_note|
+      @pdf = build_content(carving_and_marking_note, @pdf).write
+    end
+
     Pdfs::PdfRender.new(@pdf, @mode).render
   end
 
@@ -26,5 +30,15 @@ class Pdfs::CarvingAndMarking
     carving_and_marking_note = @carving_and_marking_notes.first
     title = carving_and_marking_note.vessel_name.parameterize
     "#{title}-carving_and_marking.pdf"
+  end
+
+  def build_content(carving_and_marking_note, pdf)
+    case carving_and_marking_note.template.to_sym
+    when :all_fishing
+      Pdfs::CarvingAndMarking::AllFishing.new(
+        carving_and_marking_note, pdf)
+    else
+      pdf
+    end
   end
 end
