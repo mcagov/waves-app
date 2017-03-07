@@ -189,7 +189,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    registration_certificate cover_letter
+    carving_and_marking registration_certificate cover_letter
     current_transcript historic_transcript
   ).each do |template|
     get "/print_queue/#{template}",
