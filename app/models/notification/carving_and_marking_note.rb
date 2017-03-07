@@ -1,19 +1,23 @@
 class Notification::CarvingAndMarkingNote < Notification
   def email_template
-    :wysiwyg
+    :carving_and_marking_note
   end
 
   def additional_params
-    [actioned_by]
+    [actioned_by, email_attachments]
   end
 
   def email_subject
-    "Carving & Marking note: #{vessel_name}"
+    "Carving & Marking Note: #{vessel_name}"
   end
 
   private
 
   def vessel_name
     notifiable.vessel_name if notifiable
+  end
+
+  def email_attachments
+    Pdfs::Processor.run(attachments.to_sym, notifiable, :attachment).render
   end
 end
