@@ -23,6 +23,12 @@
                 collection: delivery_methods_collection,
                 label: "Delivery Method",
                 include_blank: false
+          .row
+            .col-md-6
+              = f.input :template, as: :select,
+                collection: carving_and_marking_templates_collection,
+                label: "Template",
+                include_blank: false
 
         .modal-footer
           = f.submit "Issue Carving & Marking note", class: "btn btn-primary"

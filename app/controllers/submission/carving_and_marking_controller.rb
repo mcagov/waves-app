@@ -15,7 +15,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
 
   def carving_and_marking_params
     params.require(:carving_and_marking).permit(
-      :delivery_method, :tonnage_type)
+      :delivery_method, :tonnage_type, :template)
   end
 
   def load_submission
@@ -38,7 +38,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
       recipient_name: @submission.applicant_name,
       notifiable: @carving_and_marking,
       actioned_by: current_user,
-      attachments: :carving_and_marking)
+      attachments: @carving_and_marking.template)
 
     log_work!(@submission, @submission, :issued_carving_and_marking_note)
   end

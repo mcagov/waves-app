@@ -44,4 +44,8 @@ module CollectionHelper
   def delivery_methods_collection
     [["Print a hard copy", :print], ["Send via Email", :email]]
   end
+
+  def carving_and_marking_templates_collection
+    CarvingAndMarking::TEMPLATES
+  end
 end

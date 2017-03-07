@@ -12,6 +12,7 @@ describe "User issues a Carving & Marking Note", js: true do
     within(".modal-content") do
       select("Register Tonnage", from: "Tonnage Type")
       select("Send via Email", from: "Delivery Method")
+      select("Part 1 pleasure vessels under 24m", from: "Template")
       click_on("Issue Carving & Marking note")
     end
 
