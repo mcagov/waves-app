@@ -6,8 +6,8 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
     click_on("Certificates & Documents")
     click_on("Add Certificate/Document")
 
+    # adding a new document
     page.attach_file("document_assets_attributes_0_file", mca_file)
-
     select("Carving & Marking Note", from: "Type")
     select("Recognised Organisation", from: "Issuing Authority")
     fill_in("Date of Expiry", with: "01/02/2016")
@@ -16,14 +16,19 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
 
     click_on("Save Certificate/Document")
 
-    click_on("Certificates & Documents")
-    expect(page)
-      .to have_css(".entity_type", text: "Carving & Marking Note")
     expect(page)
       .to have_css(".issuing_authority", text: "Recognised Organisation")
     expect(page).to have_css(".expires_at", text: "01/02/2016")
     expect(page).to have_css(".noted_at", text: "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
+
+    click_on("Carving & Marking Note")
+
+    # editing the document
+    select("Bill of Sale", from: "Type")
+    click_on("Save Certificate/Document")
+
+    expect(page).to have_css(".entity_type", text: "Bill of Sale")
 
     within(".remove-document") { click_on("Remove") }
     expect(page).not_to have_css(".entity_type")
