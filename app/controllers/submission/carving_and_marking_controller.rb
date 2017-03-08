@@ -11,6 +11,16 @@ class Submission::CarvingAndMarkingController < InternalPagesController
     render_update_js
   end
 
+  def update_state
+    if @submission.carving_and_marking_received_at
+      @submission.update_attribute(:carving_and_marking_received_at, nil)
+    else
+      @submission.update_attribute(:carving_and_marking_received_at, Time.now)
+    end
+
+    render_update_js
+  end
+
   protected
 
   def carving_and_marking_params

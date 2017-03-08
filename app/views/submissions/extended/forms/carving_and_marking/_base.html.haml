@@ -12,8 +12,8 @@
         %td= carving_and_marking.created_at
         %td= carving_and_marking.template_name
         %td= carving_and_marking.actioned_by
-.row
-  .col-md-12.status
+.row.status
+  .col-md-3
     - if @submission.can_issue_carving_and_marking?
       = link_to "#", class: "btn btn-primary",
         "data-target" => "#issue_carving_and_marking",
@@ -24,3 +24,20 @@
     -else
       - unless @submission.vessel_reg_no
         .red Official Number required
+  - if @submission.carving_and_marking_received_at
+    .col-md-6
+      %h4
+        Signed Carving & Marking received on #{@submission.carving_and_marking_received_at}.
+    .col-md-3
+      = link_to update_state_submission_carving_and_marking_path(@submission),
+        remote: true,
+        method: :post,
+        class: "btn btn-warning pull-right" do
+        Mark as Pending
+  - else
+    .col-md-9
+      = link_to update_state_submission_carving_and_marking_path(@submission),
+        method: :post,
+        remote: true,
+        class: "btn btn-success pull-right" do
+        Mark as Received

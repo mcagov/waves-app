@@ -55,7 +55,11 @@ Rails.application.routes.draw do
 
     resource :carving_and_marking,
              controller: "submission/carving_and_marking",
-             only: [:create]
+             only: [:create] do
+      member do
+        post :update_state
+      end
+    end
 
     resource :correspondence,
              only: [:create],
