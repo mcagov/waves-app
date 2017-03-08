@@ -126,12 +126,11 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "4. Lifeboats belonging to R.N.L.I.", at: [lmargin, vpos]
     vpos -= spacer
-    @pdf.draw_text "(i) Stell vessels and glass plastic (GRP) vessels are exempt from all marking requirements", at: [lmargin + 10, vpos]
+    @pdf.draw_text "(i) Steel vessels and glass plastic (GRP) vessels are exempt from all marking requirements", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "except the name which must be marked on the bows or displayed in a permanent manner", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "on each side of the deckhouse.", at: [lmargin + 10, vpos]
-    vpos -= spacer
     vpos -= spacer
     @pdf.draw_text "(ii) Other R.N.L.I. vessels are exempt from marking the name and port of choice on the stern.", at: [lmargin + 10, vpos]
   end
