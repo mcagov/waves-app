@@ -32,6 +32,7 @@ class Pdfs::CarvingAndMarking
     "#{title}-carving_and_marking.pdf"
   end
 
+  # rubocop:disable Metrics/MethodLength
   def build_content(carving_and_marking_note, pdf)
     case carving_and_marking_note.template.to_sym
     when :all_fishing
@@ -40,9 +41,12 @@ class Pdfs::CarvingAndMarking
     when :over_500gt
       Pdfs::CarvingAndMarking::Over500gt.new(
         carving_and_marking_note, pdf)
-
+    when :over_24m_under_500gt
+      Pdfs::CarvingAndMarking::Over24mUnder500gt.new(
+        carving_and_marking_note, pdf)
     else
       raise "Pdfs::CarvingAndMarking.build_content is not implemented"
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end

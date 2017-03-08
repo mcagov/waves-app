@@ -41,7 +41,7 @@ class Pdfs::CarvingAndMarking::Base
     @pdf.draw_text "CARVING AND MARKING NOTE",
                   at: [214, 730]
     @pdf.text_box title_text, at: [100, 720], width: 400, align: :center
-    @pdf.text_box warning_text, at: [lmargin, 690], width: 500
+    @pdf.text_box warning_text, at: [lmargin, 680], width: 500
   end
 
   def draw_certify
