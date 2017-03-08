@@ -16,6 +16,13 @@ class Submission::DocumentsController < InternalPagesController
     render_update_js
   end
 
+  def update
+    @document = Document.find(params[:id])
+    @document.update_attributes(document_params)
+
+    render_update_js
+  end
+
   def destroy
     @document = Document.find(params[:id])
     @document.destroy

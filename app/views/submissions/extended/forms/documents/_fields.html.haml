@@ -14,9 +14,14 @@
   .col-md-6
     = document_f.input :expires_at, as: :string, label: "Date of Expiry", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
   .col-md-6
-    %Label Attachment
+    %label Attachment
     = document_f.fields_for :assets do |asset_f|
-      = asset_f.input :file, label: false, as: :file
+
+      - if document_f.object.new_record?
+        = asset_f.input :file, label: false, as: :file
+      - else
+        %p= asset_f.object.file_file_name
+
 %hr
 .row
   .col-md-6
