@@ -14,8 +14,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
   protected
 
   def carving_and_marking_params
-    params.require(:carving_and_marking).permit(
-      :delivery_method, :tonnage_type, :template)
+    params.require(:carving_and_marking).permit(:delivery_method, :template)
   end
 
   def load_submission

@@ -10,9 +10,8 @@ describe "User issues a Carving & Marking Note", js: true do
     end
 
     within(".modal-content") do
-      select("Register Tonnage", from: "Tonnage Type")
       select("Send via Email", from: "Delivery Method")
-      select("Part 1 pleasure vessels under 24m", from: "Template")
+      select("All fishing vessels", from: "Template")
       click_on("Issue Carving & Marking note")
     end
 
@@ -33,7 +32,6 @@ describe "User issues a Carving & Marking Note", js: true do
     end
 
     within(".modal-content") do
-      select("Net Tonnage", from: "Tonnage Type")
       select("Print", from: "Delivery Method")
       select("All fishing vessels", from: "Template")
       click_on("Issue Carving & Marking note")
@@ -62,7 +60,6 @@ describe "User issues a Carving & Marking Note", js: true do
 
     within("#carving_and_marking .status") do
       expect(page).to have_css(".red", text: "Official Number required")
-      expect(page).to have_css(".red", text: "Net or Register Tonnage required")
     end
   end
 end

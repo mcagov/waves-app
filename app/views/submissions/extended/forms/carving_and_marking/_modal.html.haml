@@ -13,12 +13,6 @@
         .modal-body
           .row
             .col-md-6
-              = f.input :tonnage_type, as: :select,
-                collection: tonnage_types_collection,
-                label: "Tonnage Type",
-                include_blank: false
-          .row
-            .col-md-6
               = f.input :delivery_method, as: :select,
                 collection: delivery_methods_collection,
                 label: "Delivery Method",
