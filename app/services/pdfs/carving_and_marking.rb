@@ -44,6 +44,9 @@ class Pdfs::CarvingAndMarking
     when :over_24m_under_500gt
       Pdfs::CarvingAndMarking::Over24mUnder500gt.new(
         carving_and_marking_note, pdf)
+    when :under_24m
+      Pdfs::CarvingAndMarking::Under24m.new(
+        carving_and_marking_note, pdf)
     else
       raise "Pdfs::CarvingAndMarking.build_content is not implemented"
     end
