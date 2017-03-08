@@ -24,4 +24,16 @@ class CarvingAndMarking < ApplicationRecord
   def vessel
     submission.registered_vessel
   end
+
+  def tonnage_label
+    "NET TONNAGE"
+  end
+
+  def tonnage_value
+    1234.11
+  end
+
+  def tonnage_description
+    "N.T.101,053.00"
+  end
 end

@@ -37,8 +37,12 @@ class Pdfs::CarvingAndMarking
     when :all_fishing
       Pdfs::CarvingAndMarking::AllFishing.new(
         carving_and_marking_note, pdf)
+    when :over_500gt
+      Pdfs::CarvingAndMarking::Over500gt.new(
+        carving_and_marking_note, pdf)
+
     else
-      pdf
+      raise "Pdfs::CarvingAndMarking.build_content is not implemented"
     end
   end
 end
