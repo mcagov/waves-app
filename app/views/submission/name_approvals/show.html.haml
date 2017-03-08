@@ -37,14 +37,14 @@
               include_blank: false,
               input_html: { class: "select2 select2_single" }
 
-          .col-md-3
+          .col-md-2
             = f.input :port_code, as: :select,
             collection: ports_collection,
             label: "Port of Choice",
             include_blank: false,
             input_html: { class: "select2 select2_single searchable" }
 
-          .col-md-3.approval_port-no
+          .col-md-2.approval_port-no
             = f.input :port_no,
               as: :feedback,
               feedback_label: f.object.port_code || "A",
@@ -52,6 +52,11 @@
               hint: "leave blank for system-generated port number",
               label: "Port Number",
               required: false
+          .col-md-2
+            = f.input :approved_until, as: :select,
+              collection: name_approved_until_collection,
+              label: "Approved for",
+              include_blank: false
 
 - if @submission.actionable? && @submission.claimant == current_user
   - content_for(:submission_save_buttons) do

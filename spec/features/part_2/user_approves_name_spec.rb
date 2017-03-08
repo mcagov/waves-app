@@ -34,6 +34,8 @@ feature "User approves a part 2 name", type: :feature, js: :true do
   end
 
   scenario "with valid data" do
+    Timecop.freeze(Time.now)
+
     fill_in("Vessel Name", with: "BOBS BOAT")
     select2("Full", from: "submission_name_approval_registration_type")
     select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
@@ -48,12 +50,15 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     expect(page).to have_css(
       ".alert",
       text: "The name BOBS BOAT is available in SOUTHAMPTON")
-
+    select("10 years", from: "Approved for")
     click_on("Approve Name")
 
     expect(page).to have_current_path(edit_submission_path(Submission.last))
     creates_a_work_log_entry("Submission", :name_approval)
 
-    expect(Submission.last.vessel.name).to eq("BOBS BOAT")
+    visit(submission_path(Submission.last))
+
+    expect(page).to have_css(".vessel-name", text: "BOBS BOAT")
+    expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
   end
 end
