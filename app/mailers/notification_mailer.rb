@@ -53,6 +53,15 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
+  def carving_and_marking_note(defaults, actioned_by, pdf_attachment)
+    @name = defaults[:name]
+    @actioned_by = actioned_by
+    attachments["carving_and_marking_note.pdf"] = pdf_attachment
+    @attachment = true
+
+    mail(to: defaults[:to], subject: defaults[:subject])
+  end
+
   private
 
   def govuk_url(path)

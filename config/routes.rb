@@ -53,6 +53,14 @@ Rails.application.routes.draw do
               controller: "submission/beneficial_owners",
               only: [:create, :update, :destroy]
 
+    resource :carving_and_marking,
+             controller: "submission/carving_and_marking",
+             only: [:create] do
+      member do
+        post :update_state
+      end
+    end
+
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
@@ -88,6 +96,10 @@ Rails.application.routes.draw do
     resources :mortgages,
               controller: "submission/mortgages",
               only: [:create, :update, :destroy]
+
+    resource :official_no,
+             controller: "submission/official_no",
+             only: [:update]
 
     resource :finance_payment,
              only: [:show, :edit],
@@ -181,7 +193,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    registration_certificate cover_letter
+    carving_and_marking registration_certificate cover_letter
     current_transcript historic_transcript
   ).each do |template|
     get "/print_queue/#{template}",

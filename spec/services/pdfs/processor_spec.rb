@@ -82,5 +82,16 @@ describe Pdfs::Processor do
 
       it { subject }
     end
+
+    context "with a carving_and_marking note" do
+      let(:template) { :carving_and_marking }
+
+      before do
+        expect(Pdfs::CarvingAndMarking)
+          .to receive(:new).with(printable_items, :printable)
+      end
+
+      it { subject }
+    end
   end
 end

@@ -26,8 +26,8 @@
 
         - @print_jobs.each do |print_job|
           %tbody
-            %td= print_job.printable.vessel[:name]
-            %td= print_job.printable.vessel[:reg_no]
+            %td= print_job.printable.vessel.name
+            %td= print_job.printable.vessel.reg_no
             %td.certificate.text-center
               = link_to print_job_path(print_job, format: :pdf), target: "_blank" do
                 %i.fa.fa-print

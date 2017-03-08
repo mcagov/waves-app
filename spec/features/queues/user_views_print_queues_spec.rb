@@ -7,6 +7,10 @@ feature "User views print queues", type: :feature, js: true do
   end
 
   scenario "viewing print queues" do
+    click_on("Carving & Marking Notes")
+    expect(page)
+      .to have_css("h1", text: "Print Queue: Carving & Marking Notes")
+
     click_on("Certificates of Registry")
     expect(page)
       .to have_css("h1", text: "Print Queue: Certificates of Registry")

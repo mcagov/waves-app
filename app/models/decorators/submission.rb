@@ -115,4 +115,8 @@ class Decorators::Submission < SimpleDelegator
   def convertible?
     new_registration? || registered_vessel.present?
   end
+
+  def can_issue_carving_and_marking?
+    vessel_reg_no
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303144033) do
+ActiveRecord::Schema.define(version: 20170308132633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20170303144033) do
     t.datetime "updated_at",        null: false
     t.index ["owner_id"], name: "index_assets_on_owner_id", using: :btree
     t.index ["owner_type"], name: "index_assets_on_owner_type", using: :btree
+  end
+
+  create_table "carving_and_markings", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.string   "delivery_method"
+    t.uuid     "actioned_by_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "template"
   end
 
   create_table "client_sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -360,8 +369,8 @@ ActiveRecord::Schema.define(version: 20170303144033) do
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "target_date"
     t.boolean  "is_urgent"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
@@ -372,16 +381,17 @@ ActiveRecord::Schema.define(version: 20170303144033) do
     t.datetime "received_at"
     t.string   "task"
     t.string   "source"
-    t.boolean  "officer_intervention_required", default: false
+    t.boolean  "officer_intervention_required",   default: false
     t.uuid     "registered_vessel_id"
     t.json     "registry_info"
     t.string   "applicant_name"
     t.string   "applicant_email"
-    t.boolean  "applicant_is_agent",            default: false
+    t.boolean  "applicant_is_agent",              default: false
     t.string   "documents_received"
     t.uuid     "correspondent_id"
     t.uuid     "managing_owner_id"
     t.string   "linkable_ref_no"
+    t.datetime "carving_and_marking_received_at"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree

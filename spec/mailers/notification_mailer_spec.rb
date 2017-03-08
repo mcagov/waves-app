@@ -161,6 +161,19 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/02920 448813/)
     end
   end
+
+  describe "carving_and_marking_note" do
+    let(:mail) do
+      NotificationMailer.carving_and_marking_note(
+        default_params, "Sally SSR", "an_attachment")
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the body" do
+      expect(body).to match(/Carving & Marking note/)
+    end
+  end
 end
 
 def default_params

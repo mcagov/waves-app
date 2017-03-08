@@ -38,4 +38,22 @@ describe Policies::Workflow do
       end
     end
   end
+
+  context "#generate_official_no?" do
+    let(:submission) { create(:submission, part: part) }
+
+    subject { described_class.generate_official_no?(submission) }
+
+    context "for part_3" do
+      let(:part) { :part_3 }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "for part_2" do
+      let(:part) { :part_2 }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
 end

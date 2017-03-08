@@ -1,5 +1,5 @@
 - submission = Decorators::Submission.new(submission)
-.row
+#summary.row
   .col-md-12
     .x_panel
       .x_content
@@ -33,9 +33,14 @@
               %tbody
                 %tr
                   %td.soft-label.no-top-border Official No.:
-                  %td.no-top-border
-                    -if submission.vessel_reg_no.present?
+                  %td.no-top-border.official-no
+                    - if submission.vessel_reg_no.present?
                       %strong= link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
+                    - elsif Policies::Workflow.generate_official_no?(submission)
+                      = link_to "Generate Official No.",
+                        submission_official_no_path(@submission),
+                        data: { confirm: "Are you sure this is the right time to generate the Official No.?" },
+                        method: :put
                 %tr
                   %td.soft-label Registration Status
                   %td= render partial: "/vessels/registration_status", locals: { registration_status: submission.registration_status }
