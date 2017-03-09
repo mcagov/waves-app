@@ -2,9 +2,9 @@ class PrintJobsController < InternalPagesController
   def show
     respond_to do |format|
       format.pdf do
-        @print_job = scoped_print_job.find(params[:id])
-        @pdf = build_pdf(@print_job, @print_job.template)
-        mark_as_printed(@print_job)
+        @unprinted_job = scoped_print_job.find(params[:id])
+        @pdf = build_pdf(@unprinted_job, @unprinted_job.template)
+        mark_as_printing(@unprinted_job)
         render_pdf(@pdf, @pdf.filename)
       end
     end
@@ -17,10 +17,19 @@ class PrintJobsController < InternalPagesController
     respond_to do |format|
       format.html
       format.pdf do
-        @pdf = build_pdf(@print_jobs, @template)
-        mark_as_printed(@print_jobs)
+        @pdf = build_pdf(@unprinted_jobs, @template)
+        mark_as_printing(@unprinted_jobs)
         render_pdf(@pdf, "#{@template}.pdf")
       end
+    end
+  end
+
+  def update
+    @print_job = scoped_print_job.find(params[:id])
+    @print_job.printed!(current_user)
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -31,10 +40,9 @@ class PrintJobsController < InternalPagesController
     Pdfs::Processor.run(template, printable_items)
   end
 
-  def mark_as_printed(printed_jobs)
-    Array(printed_jobs).each do |printed_job|
-      printed_job.update_attributes(
-        printed_at: Time.now, printed_by: current_user)
+  def mark_as_printing(print_jobs)
+    Array(print_jobs).each do |print_job|
+      print_job.printing!(current_user)
     end
   end
 
@@ -43,7 +51,12 @@ class PrintJobsController < InternalPagesController
   end
 
   def load_print_jobs(template)
-    @print_jobs = scoped_print_job.where(template: template)
-                                  .order("created_at asc").unprinted
+    @unprinted_jobs = scoped_print_job
+                      .where(template: template)
+                      .order("created_at asc").unprinted
+
+    @printing_jobs = scoped_print_job
+                     .where(template: template)
+                     .order("printing_at asc").printing
   end
 end
