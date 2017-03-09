@@ -171,7 +171,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:body) { mail.body.encoded }
 
     it "renders the body" do
-      expect(body).to match(/Carving & Marking note/)
+      expect(body).to match(/Carving and Marking Note/)
     end
   end
 end

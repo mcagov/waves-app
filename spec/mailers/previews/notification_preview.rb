@@ -144,6 +144,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def carving_and_marking_note
+    NotificationMailer.carving_and_marking_note(
+      default_params, "Officer Bob", :pdf_attachment)
+  end
+
   def name_approval
     NotificationMailer.name_approval(
       default_params, "Officer Bob", "MV Bob", "Southampton"
