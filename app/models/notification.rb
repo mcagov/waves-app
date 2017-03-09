@@ -34,6 +34,7 @@ class Notification < ApplicationRecord
       subject: email_subject,
       to: recipient_email,
       name: recipient_name,
+      part: notifiable.part,
     }
   end
 end

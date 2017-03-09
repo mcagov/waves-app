@@ -167,6 +167,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
       subject: "email subject",
       to: "alice@example.com",
       name: "Alice",
+      part: :part_2,
     }
   end
 end

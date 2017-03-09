@@ -177,7 +177,7 @@ RSpec.describe NotificationMailer, type: :mailer do
 end
 
 def default_params
-  { subject: "subject", to: "test@example.com", name: "Alice" }
+  { subject: "subject", to: "test@example.com", name: "Alice", part: :part_3 }
 end
 
 def declaration_text
