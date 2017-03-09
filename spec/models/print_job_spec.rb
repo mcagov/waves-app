@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe PrintJob do
   describe "state machine" do
-    let(:print_job) {create(:print_job) }
+    let(:print_job) { create(:print_job) }
     let(:user_1) { create(:user) }
     let(:user_2) { create(:user) }
 

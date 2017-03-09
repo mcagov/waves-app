@@ -3,9 +3,9 @@
     Print Queue:
     = t("print_job.menu_title.#{@template}")
 
-.row
+.row#unprinted
   .col-md-12
-    - if @print_jobs.empty?
+    - if @unprinted_jobs.empty?
       .x_panel
         .x_panel
           .x_content
@@ -23,14 +23,31 @@
                 = t("print_job.print_all_button_text.#{@template}")
             %th Proccessed by
             %th Processed date
+        %tbody
+          - @unprinted_jobs.each do |print_job|
+            %tr
+              %td= print_job.printable.vessel.name
+              %td= print_job.printable.vessel.reg_no
+              %td.certificate.text-center
+                = link_to print_job_path(print_job, format: :pdf), target: "_blank" do
+                  %i.fa.fa-print
+                  Print
+              %td= print_job.printable.actioned_by
+              %td= print_job.created_at.to_s(:date_time) if print_job.created_at
 
-        - @print_jobs.each do |print_job|
-          %tbody
+.row#printing
+  .col-md-12
+    %h2 Printing in process
+
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th Vessel
+          %th Offical Number
+          %th Printed by
+      %tbody
+        - @printing_jobs.each do |print_job|
+          %tr
             %td= print_job.printable.vessel.name
             %td= print_job.printable.vessel.reg_no
-            %td.certificate.text-center
-              = link_to print_job_path(print_job, format: :pdf), target: "_blank" do
-                %i.fa.fa-print
-                Print
             %td= print_job.printable.actioned_by
-            %td= print_job.created_at.to_s(:date_time) if print_job.created_at

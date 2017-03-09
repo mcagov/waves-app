@@ -18,6 +18,10 @@ describe "User prints from queue", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "Print Queue: Certificates of Registry")
 
+    within("#unprinted") do
+      expect(page).to have_css("td", text: "Registered Boat")
+    end
+
     pdf_window = window_opened_by do
       click_on("Print Certificates of Registry")
     end
@@ -27,7 +31,14 @@ describe "User prints from queue", type: :feature, js: true do
     end
 
     visit print_jobs_path(template: @template)
-    expect(page).to have_content("There are no items in this queue")
+
+    within("#unprinted") do
+      expect(page).to have_content("There are no items in this queue")
+    end
+
+    within("#printing") do
+      expect(page).to have_css("td", text: "Registered Boat")
+    end
   end
 
   scenario "printing a single item" do
