@@ -1,82 +1,138 @@
 require "rails_helper"
 
 describe VesselNameValidator do
-  context "#valid?" do
-    subject do
-      described_class.valid?(:part_1, "BOBS BOAT", "SU", :pleasure)
-    end
+  describe "#valid?" do
+    context ":part_1" do
+      subject { described_class.valid?(:part_1, "BOBS BOAT", "foo", nil) }
 
-    let(:part) { :part_1 }
-    let(:name) { "BOBS BOAT" }
-    let(:port_code) { "SU" }
-    let(:registration_type) { :pleasure }
+      it { expect(subject).to be_truthy }
 
-    it { expect(subject).to be_truthy }
-
-    context "with a registered_vessel of the same name" do
-      before do
-        create(:registered_vessel, part: part, name: name, port_code: port_code)
-      end
-
-      context "in a different port" do
-        let(:port_code) { "AA" }
-
-        context "for a fishing vessel" do
-          let(:registration_type) { :fishing }
-          it { expect(subject).to be_truthy }
+      context "with a registered_vessel of the same name also in part_1" do
+        before do
+          create(:registered_vessel, part: :part_1, name: "BOBS BOAT")
         end
 
-        context "for any other registration_type" do
-          let(:registration_type) { :something_else }
-          it { expect(subject).to be_falsey }
-        end
-      end
-
-      context "in the same port" do
         it { expect(subject).to be_falsey }
       end
 
-      context "in a different part of the register" do
-        let(:part) { :part_4 }
+      context "with a name_approval of the same name also in part_1" do
+        before do
+          create(:submission_name_approval, part: :part_1, name: "BOBS BOAT")
+        end
+
+        it { expect(subject).to be_falsey }
+      end
+
+      context "with an expired name_approval of the same name also in part_1" do
+        before do
+          create(:submission_name_approval,
+                 part: :part_1,
+                 name: "BOBS BOAT",
+                 approved_until: 1.week.ago)
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+
+      context "with a registered_vessel of the same name but in part_4" do
+        before do
+          create(:registered_vessel, part: :part_4, name: "BOBS BOAT")
+        end
+
         it { expect(subject).to be_truthy }
       end
     end
 
-    context "with a name_approval of the same name" do
-      before do
-        create(
-          :submission_name_approval,
-          part: part, name: name,
-          port_code: port_code, approved_until: approved_until)
-      end
+    context ":part_2" do
+      subject { described_class.valid?(:part_2, "BOBS BOAT", "AB", :simple) }
 
-      let(:approved_until) { 1.day.from_now }
+      it { expect(subject).to be_truthy }
 
-      context "in the same port" do
+      context "with a fishing vessel of the same name/port also in part_2" do
+        before do
+          create(:registered_vessel,
+                 part: :part_2,
+                 port_code: "AB",
+                 name: "BOBS BOAT")
+        end
+
         it { expect(subject).to be_falsey }
       end
 
-      context "in a different port" do
-        let(:port_code) { "AA" }
-
-        context "for a fishing vessel" do
-          let(:registration_type) { :fishing }
-          it { expect(subject).to be_truthy }
+      context "with a fishing vessel of the same name/port but in part_4" do
+        before do
+          create(:registered_vessel,
+                 part: :part_4,
+                 port_code: "AB",
+                 name: "BOBS BOAT",
+                 registration_type: :fishing)
         end
 
-        context "for any other registration_type" do
-          let(:registration_type) { :something_else }
-          it { expect(subject).to be_falsey }
-        end
+        it { expect(subject).to be_falsey }
       end
 
-      context "in a different part of the register" do
-        let(:part) { :part_4 }
+      context "with a fishing vessel of the same name but different port" do
+        before do
+          create(:registered_vessel,
+                 part: :part_2,
+                 port_code: "DIFFERENT",
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
         it { expect(subject).to be_truthy }
       end
 
-      context "when approved_until has expired" do
-        let(:approved_until) { 2.days.ago }
+      context "with a pleasure vessel of the same name/port but in part_4" do
+        before do
+          create(:registered_vessel,
+                 part: :part_4,
+                 port_code: "AB",
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+    end
+
+    context ":part_4 fishing vessel" do
+      subject { described_class.valid?(:part_4, "BOBS BOAT", "AB", :fishing) }
+
+      it { expect(subject).to be_truthy }
+
+      context "with a fishing vessel of the same name/port" do
+        before do
+          create(:registered_vessel,
+                 part: :part_2,
+                 port_code: "AB",
+                 name: "BOBS BOAT")
+        end
+
+        it { expect(subject).to be_falsey }
+      end
+
+      context "with a pleasure vessel of the same name/port/part" do
+        before do
+          create(:registered_vessel,
+                 part: :part_4,
+                 port_code: "AB",
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+
+      context "with a pleasure vessel of the same name/port but in :part_1" do
+        before do
+          create(:registered_vessel,
+                 part: :part_1,
+                 port_code: "AB",
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
         it { expect(subject).to be_truthy }
       end
     end
