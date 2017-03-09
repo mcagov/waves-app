@@ -2,11 +2,14 @@ require "rails_helper"
 
 describe VesselNameValidator do
   context "#valid?" do
-    subject { described_class.valid?(:part_1, "BOBS BOAT", "SU") }
+    subject do
+      described_class.valid?(:part_1, "BOBS BOAT", "SU", :pleasure)
+    end
 
     let(:part) { :part_1 }
     let(:name) { "BOBS BOAT" }
     let(:port_code) { "SU" }
+    let(:registration_type) { :pleasure }
 
     it { expect(subject).to be_truthy }
 
@@ -17,7 +20,16 @@ describe VesselNameValidator do
 
       context "in a different port" do
         let(:port_code) { "AA" }
-        it { expect(subject).to be_truthy }
+
+        context "for a fishing vessel" do
+          let(:registration_type) { :fishing }
+          it { expect(subject).to be_truthy }
+        end
+
+        context "for any other registration_type" do
+          let(:registration_type) { :something_else }
+          it { expect(subject).to be_falsey }
+        end
       end
 
       context "in the same port" do
@@ -46,7 +58,16 @@ describe VesselNameValidator do
 
       context "in a different port" do
         let(:port_code) { "AA" }
-        it { expect(subject).to be_truthy }
+
+        context "for a fishing vessel" do
+          let(:registration_type) { :fishing }
+          it { expect(subject).to be_truthy }
+        end
+
+        context "for any other registration_type" do
+          let(:registration_type) { :something_else }
+          it { expect(subject).to be_falsey }
+        end
       end
 
       context "in a different part of the register" do

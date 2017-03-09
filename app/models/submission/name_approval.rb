@@ -25,7 +25,7 @@ class Submission::NameApproval < ApplicationRecord
   def unique_name_in_port
     return unless name_changed?
 
-    unless VesselNameValidator.valid?(part, name, port_code)
+    unless VesselNameValidator.valid?(part, name, port_code, registration_type)
       errors.add(:name, "is not available in #{port_name}")
     end
   end

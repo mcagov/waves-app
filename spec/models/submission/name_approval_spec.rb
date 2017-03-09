@@ -6,13 +6,14 @@ describe Submission::NameApproval do
           part: :part_2,
           name: "BOBS BOAT",
           port_code: "SU",
-          port_no: 1234)
+          port_no: 1234,
+          registration_type: :simple)
   end
 
   context "#valid?" do
     before do
       expect(VesselNameValidator)
-        .to receive(:valid?).with("BOBS BOAT", "SU")
+        .to receive(:valid?).with("part_2", "BOBS BOAT", "SU", "simple")
 
       expect(VesselPortNoValidator)
         .to receive(:valid?).with(1234, "SU")

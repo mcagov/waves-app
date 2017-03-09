@@ -1,9 +1,10 @@
 class VesselNameValidator
   class << self
-    def valid?(part, name, port_code)
+    def valid?(part, name, port_code, registration_type)
       @part = part
       @name = name
       @port_code = port_code
+      @registration_type = registration_type
 
       return false if vessel_exists?
       return false if name_approval_exists?
