@@ -8,7 +8,8 @@ module CollectionHelper
   end
 
   def registration_types_collection
-    WavesUtilities::RegistrationType.all.map do |registration_type|
+    WavesUtilities::RegistrationType
+      .in_part(current_activity.part).map do |registration_type|
       [registration_type.to_s.humanize, registration_type]
     end
   end
