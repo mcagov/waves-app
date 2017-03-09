@@ -37,17 +37,36 @@
 
 .row#printing
   .col-md-12
-    %h2 Printing in process
-
-    %table.table.table-striped.table-hover
-      %thead
-        %tr
-          %th Vessel
-          %th Offical Number
-          %th Printed by
-      %tbody
-        - @printing_jobs.each do |print_job|
+    %h2 Recently Printed
+    - if @printing_jobs.empty?
+      .x_panel
+        .x_panel
+          .x_content
+            %h2.text-center
+              All items have been marked as printed
+    - else
+      %table.table.table-striped.table-hover
+        %thead
           %tr
-            %td= print_job.printable.vessel.name
-            %td= print_job.printable.vessel.reg_no
-            %td= print_job.printable.actioned_by
+            %th Vessel
+            %th Offical Number
+            %th Printed by
+            %th
+            %th
+        %tbody
+          - @printing_jobs.each do |print_job|
+            %tr{ id: "print_job_#{print_job.id}"}
+              %td= print_job.printable.vessel.name
+              %td= print_job.printable.vessel.reg_no
+              %td= print_job.printing_by
+              %td= print_job.printing_at.to_s(:date_time)
+              %td
+                = link_to print_job_path(print_job, format: :pdf), target: "_blank" do
+                  %i.fa.fa-print
+                  Re-Print
+              %td
+                = link_to print_job_path(print_job),
+                  remote: true,
+                  method: :put,
+                  class: "btn btn-success btn-sm" do
+                  Mark as Printed

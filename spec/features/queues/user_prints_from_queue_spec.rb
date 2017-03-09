@@ -41,13 +41,31 @@ describe "User prints from queue", type: :feature, js: true do
     end
   end
 
-  scenario "printing a single item" do
+  scenario "printing a single item, re-printing, marking as printed" do
     pdf_window = window_opened_by do
       within("td.certificate") { click_on("Print") }
     end
 
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
+    end
+
+    visit print_jobs_path(template: @template)
+
+    pdf_window = window_opened_by do
+      within("#printing") { click_on("Re-Print") }
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
+
+    visit print_jobs_path(template: @template)
+    within("#printing") { click_on("Mark as Printed") }
+
+    visit print_jobs_path(template: @template)
+    within("#printing") do
+      expect(page).to have_content("All items have been marked")
     end
   end
 

@@ -141,7 +141,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :print_jobs, only: [:show, :index]
+  resources :print_jobs, only: [:show, :index, :update]
 
   resources :registrations, only: [:show]
 
