@@ -45,6 +45,15 @@ class NotificationMailer < ApplicationMailer
          template_name: template_name)
   end
 
+  def name_approval(defaults, actioned_by, vessel_name, port_name)
+    @vessel_name = vessel_name
+    @port_name = port_name
+    @name = defaults[:name]
+    @actioned_by = actioned_by
+
+    mail(to: defaults[:to], subject: defaults[:subject])
+  end
+
   def wysiwyg(defaults, body, actioned_by)
     @body = body
     @name = defaults[:name]
