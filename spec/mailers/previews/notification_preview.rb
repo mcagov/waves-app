@@ -144,6 +144,17 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def carving_and_marking_note
+    NotificationMailer.carving_and_marking_note(
+      default_params, "Officer Bob", :pdf_attachment)
+  end
+
+  def name_approval
+    NotificationMailer.name_approval(
+      default_params, "Officer Bob", "MV Bob", "Southampton"
+    )
+  end
+
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
@@ -156,6 +167,7 @@ class EmailTemplatesPreview < ActionMailer::Preview
       subject: "email subject",
       to: "alice@example.com",
       name: "Alice",
+      part: :part_2,
     }
   end
 end

@@ -10,6 +10,7 @@ class Submission::NameApprovalsController < InternalPagesController
 
     if @name_validated && params[:name_validated]
       Builders::NameApprovalBuilder.create(@submission, @name_approval)
+      build_notification
       log_work!(@submission, @submission, :name_approval)
       return redirect_to edit_submission_path(@submission)
     end
@@ -38,6 +39,15 @@ class Submission::NameApprovalsController < InternalPagesController
 
   def name_approval_params
     params.require(:submission_name_approval).permit(
-      :part, :name, :registration_type, :port_code, :port_no)
+      :part, :name, :registration_type, :port_code, :port_no,
+      :approved_until)
+  end
+
+  def build_notification
+    Notification::NameApproval.create(
+      recipient_email: @submission.applicant_email,
+      recipient_name: @submission.applicant_name,
+      notifiable: @submission,
+      actioned_by: current_user)
   end
 end

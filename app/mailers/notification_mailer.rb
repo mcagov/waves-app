@@ -9,6 +9,7 @@ class NotificationMailer < ApplicationMailer
 
   def outstanding_declaration(
       defaults, declaration_id, vessel_name, correspondent_name)
+    @part = defaults[:part].to_sym
     @name = defaults[:name]
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
@@ -20,6 +21,7 @@ class NotificationMailer < ApplicationMailer
 
   def application_receipt(defaults, vessel_name, submission_ref_no,
                           declarations_required, template_name)
+    @part = defaults[:part].to_sym
     @vessel_name = vessel_name
     @submission_ref_no = submission_ref_no
     @name = defaults[:name]
@@ -33,6 +35,7 @@ class NotificationMailer < ApplicationMailer
 
   def application_approval(defaults, reg_no, actioned_by, template_name,
                            vessel_name, pdf_attachment = nil)
+    @part = defaults[:part].to_sym
     @reg_no = reg_no
     @name = defaults[:name]
     @actioned_by = actioned_by
@@ -45,7 +48,18 @@ class NotificationMailer < ApplicationMailer
          template_name: template_name)
   end
 
+  def name_approval(defaults, actioned_by, vessel_name, port_name)
+    @part = defaults[:part].to_sym
+    @vessel_name = vessel_name
+    @port_name = port_name
+    @name = defaults[:name]
+    @actioned_by = actioned_by
+
+    mail(to: defaults[:to], subject: defaults[:subject])
+  end
+
   def wysiwyg(defaults, body, actioned_by)
+    @part = defaults[:part].to_sym
     @body = body
     @name = defaults[:name]
     @actioned_by = actioned_by
@@ -54,6 +68,7 @@ class NotificationMailer < ApplicationMailer
   end
 
   def carving_and_marking_note(defaults, actioned_by, pdf_attachment)
+    @part = defaults[:part].to_sym
     @name = defaults[:name]
     @actioned_by = actioned_by
     attachments["carving_and_marking_note.pdf"] = pdf_attachment

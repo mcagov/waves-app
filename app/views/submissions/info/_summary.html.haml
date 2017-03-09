@@ -23,7 +23,6 @@
                   %td.soft-label Declarations:
                   %td
                     %strong= submission.declaration_status
-
                 %tr
                   %td.soft-label Payment Received:
                   %td
@@ -48,6 +47,12 @@
                   %td.soft-label Vessel Name:
                   %td.vessel-name
                     %strong= submission.vessel_name
+                %tr
+                  %td.soft-label Application Expiry Date:
+                  %td.expiry-date
+                    %strong
+                      - if submission.name_approval
+                        = submission.name_approval.approved_until
           .col-md-4
             %table.table
               %tbody

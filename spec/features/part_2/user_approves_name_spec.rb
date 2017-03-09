@@ -34,26 +34,32 @@ feature "User approves a part 2 name", type: :feature, js: :true do
   end
 
   scenario "with valid data" do
-    fill_in("Vessel Name", with: "BOBS BOAT")
-    select2("Full", from: "submission_name_approval_registration_type")
-    select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
+    Timecop.travel(Time.now) do
+      fill_in("Vessel Name", with: "BOBS BOAT")
+      select2("Full", from: "submission_name_approval_registration_type")
+      select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
 
-    expect(page).to have_css(
-      ".approval_port-no .form-control-feedback", text: "SU")
+      expect(page).to have_css(
+        ".approval_port-no .form-control-feedback", text: "SU")
 
-    fill_in("Port Number", with: "99")
+      fill_in("Port Number", with: "99")
 
-    click_on("Validate Name")
+      click_on("Validate Name")
 
-    expect(page).to have_css(
-      ".alert",
-      text: "The name BOBS BOAT is available in SOUTHAMPTON")
+      expect(page).to have_css(
+        ".alert",
+        text: "The name BOBS BOAT is available in SOUTHAMPTON")
+      select("10 years", from: "Approved for")
+      click_on("Approve Name")
 
-    click_on("Approve Name")
+      expect(page).to have_current_path(edit_submission_path(Submission.last))
+      creates_a_work_log_entry("Submission", :name_approval)
+      expect(Notification::NameApproval.count).to eq(1)
 
-    expect(page).to have_current_path(edit_submission_path(Submission.last))
-    creates_a_work_log_entry("Submission", :name_approval)
+      visit(submission_path(Submission.last))
 
-    expect(Submission.last.vessel.name).to eq("BOBS BOAT")
+      expect(page).to have_css(".vessel-name", text: "BOBS BOAT")
+      expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
+    end
   end
 end

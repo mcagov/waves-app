@@ -26,6 +26,7 @@ class Declaration < ApplicationRecord
   scope :individual, -> { where("entity_type = 'individual'") }
   scope :corporate, -> { where("entity_type = 'corporate'") }
 
+  delegate :part, to: :submission
   def owner
     owner = Declaration::Owner.new(changeset || {})
     owner.declared_at = completed_at

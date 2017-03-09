@@ -13,7 +13,7 @@ class Builders::NameApprovalBuilder
     private
 
     def init_defaults
-      @name_approval.approved_until ||= 90.days.from_now
+      @name_approval.approved_until ||= 3.months.from_now
 
       @name_approval.port_no ||=
         SequenceNumber::Generator.port_no!(@name_approval.port_code)

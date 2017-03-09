@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308132633) do
+ActiveRecord::Schema.define(version: 20170309095245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(version: 20170308132633) do
     t.datetime "approved_until"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.datetime "cancelled_at"
     t.index ["name"], name: "index_name_approvals_on_name", using: :btree
     t.index ["part"], name: "index_name_approvals_on_part", using: :btree
     t.index ["port_code"], name: "index_name_approvals_on_port_code", using: :btree

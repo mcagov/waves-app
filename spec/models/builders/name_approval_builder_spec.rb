@@ -23,7 +23,7 @@ describe Builders::NameApprovalBuilder do
 
     it "assigns approved_until" do
       expect(name_approval.approved_until.to_date)
-        .to be_between(89.days.from_now, 91.days.from_now)
+        .to eq(Date.today.advance(months: 3))
     end
 
     it "assigns the submission vessel (in the changeset)" do

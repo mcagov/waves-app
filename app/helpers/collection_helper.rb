@@ -8,7 +8,8 @@ module CollectionHelper
   end
 
   def registration_types_collection
-    WavesUtilities::RegistrationType.all.map do |registration_type|
+    WavesUtilities::RegistrationType
+      .in_part(current_activity.part).map do |registration_type|
       [registration_type.to_s.humanize, registration_type]
     end
   end
@@ -43,5 +44,12 @@ module CollectionHelper
 
   def carving_and_marking_templates_collection
     CarvingAndMarking::TEMPLATES
+  end
+
+  def name_approved_until_collection
+    [
+      ["3 months", Date.today.advance(months: 3).to_s(:db)],
+      ["10 years", Date.today.advance(years: 10).to_s(:db)],
+    ]
   end
 end

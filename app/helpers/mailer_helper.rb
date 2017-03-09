@@ -4,7 +4,11 @@ module MailerHelper
   end
 
   def part_of_register
-    "Part III of the UK Small Ships Register"
+    if @part == :part_3
+      "Part III of the UK Small Ships Register"
+    else
+      "#{Activity.new(@part)} of the Register"
+    end
   end
 
   def officer_phone_for_part

@@ -13,6 +13,11 @@ class Submission::NameApproval < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
+  scope :active, (lambda do
+    where("approved_until is null or approved_until > now()")
+      .where("cancelled_at is null")
+  end)
+
   def port_name
     WavesUtilities::Port.new(port_code).name
   end
@@ -20,7 +25,7 @@ class Submission::NameApproval < ApplicationRecord
   def unique_name_in_port
     return unless name_changed?
 
-    unless VesselNameValidator.valid?(part, name, port_code)
+    unless VesselNameValidator.valid?(part, name, port_code, registration_type)
       errors.add(:name, "is not available in #{port_name}")
     end
   end
@@ -28,7 +33,7 @@ class Submission::NameApproval < ApplicationRecord
   def unique_port_no_in_port
     return unless port_no_changed?
 
-    unless VesselPortNoValidator.valid?(part, port_no, port_code)
+    unless VesselPortNoValidator.valid?(port_no, port_code)
       errors.add(:port_no, "is not available in #{port_name}")
     end
   end
