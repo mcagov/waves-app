@@ -2,9 +2,8 @@ require "rails_helper"
 
 describe VesselPortNoValidator do
   context "#valid?" do
-    subject { described_class.valid?(:part_1, 123, "SU") }
+    subject { described_class.valid?(123, "SU") }
 
-    let(:part) { :part_1 }
     let(:port_no) { 123 }
     let(:port_code) { "SU" }
 
@@ -13,8 +12,7 @@ describe VesselPortNoValidator do
     context "with a registered_vessel with the same port_no" do
       before do
         create(
-          :registered_vessel,
-          part: part, port_no: port_no, port_code: port_code)
+          :registered_vessel, port_no: port_no, port_code: port_code)
       end
 
       context "in a different port" do
@@ -25,18 +23,13 @@ describe VesselPortNoValidator do
       context "in the same port" do
         it { expect(subject).to be_falsey }
       end
-
-      context "in a different part of the register" do
-        let(:part) { :part_4 }
-        it { expect(subject).to be_truthy }
-      end
     end
 
     context "with a name_approval with the same port_no" do
       before do
         create(
           :submission_name_approval,
-          part: part, port_no: port_no,
+          port_no: port_no,
           port_code: port_code, approved_until: approved_until)
       end
 
@@ -48,11 +41,6 @@ describe VesselPortNoValidator do
 
       context "in a different port" do
         let(:port_code) { "AA" }
-        it { expect(subject).to be_truthy }
-      end
-
-      context "in a different part of the register" do
-        let(:part) { :part_4 }
         it { expect(subject).to be_truthy }
       end
 

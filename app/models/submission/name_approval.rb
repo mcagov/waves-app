@@ -33,7 +33,7 @@ class Submission::NameApproval < ApplicationRecord
   def unique_port_no_in_port
     return unless port_no_changed?
 
-    unless VesselPortNoValidator.valid?(part, port_no, port_code)
+    unless VesselPortNoValidator.valid?(port_no, port_code)
       errors.add(:port_no, "is not available in #{port_name}")
     end
   end

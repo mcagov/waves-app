@@ -12,10 +12,10 @@ describe Submission::NameApproval do
   context "#valid?" do
     before do
       expect(VesselNameValidator)
-        .to receive(:valid?).with("part_2", "BOBS BOAT", "SU")
+        .to receive(:valid?).with("BOBS BOAT", "SU")
 
       expect(VesselPortNoValidator)
-        .to receive(:valid?).with("part_2", 1234, "SU")
+        .to receive(:valid?).with(1234, "SU")
     end
 
     it { name_approval.valid? }

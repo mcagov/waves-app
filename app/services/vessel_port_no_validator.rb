@@ -1,7 +1,6 @@
 class VesselPortNoValidator
   class << self
-    def valid?(part, port_no, port_code)
-      @part = part
+    def valid?(port_no, port_code)
       @port_no = port_no
       @port_code = port_code
 
@@ -15,7 +14,6 @@ class VesselPortNoValidator
 
     def vessel_exists?
       Register::Vessel
-        .in_part(@part)
         .where(port_no: @port_no)
         .where(port_code: @port_code)
         .exists?
@@ -23,7 +21,6 @@ class VesselPortNoValidator
 
     def name_approval_exists?
       Submission::NameApproval
-        .in_part(@part)
         .where(port_no: @port_no)
         .where(port_code: @port_code)
         .active
