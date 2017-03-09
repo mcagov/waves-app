@@ -117,6 +117,11 @@ class Submission < ApplicationRecord
     update_attribute(:claimant, user)
   end
 
+  def cancel_name_approval
+    return unless name_approval
+    name_approval.update_attribute(:cancelled_at, Time.now)
+  end
+
   def registered_vessel_exists
     if Policies::Actions.registered_vessel_required?(self)
       unless registered_vessel

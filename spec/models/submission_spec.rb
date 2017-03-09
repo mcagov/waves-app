@@ -237,5 +237,15 @@ describe Submission, type: :model do
       it { expect(submission.claimant).to be_nil }
       it { expect(submission).to be_completed }
     end
+
+    context "#cancelled (when there is a name_approval)" do
+      let(:name_approval) { create(:submission_name_approval) }
+
+      before { name_approval.submission.cancelled! }
+
+      it "sets the name_approval#cancelled_at" do
+        expect(name_approval.cancelled_at).to be_present
+      end
+    end
   end
 end

@@ -5,6 +5,6 @@ FactoryGirl.define do
     sequence(:port_no)  { |n| n }
     port_code           "AA"
     approved_until      { 90.days.from_now }
-    submission          { create(:submission, part: :part_2) }
+    submission          { create(:assigned_submission, part: :part_2) }
   end
 end
