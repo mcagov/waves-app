@@ -16,12 +16,12 @@ class PrintJob < ApplicationRecord
     state :printed
 
     event :printing, timestamp: true do
-      transitions to: :printing, from: :unprinted,
+      transitions to: :printing, from: [:unprinted, :printing],
                   on_transition: :log_printing_by
     end
 
     event :printed, timestamp: true do
-      transitions to: :printed, from: :printing,
+      transitions to: :printed, from: [:printing, :printed],
                   on_transition: :log_printed_by
     end
   end

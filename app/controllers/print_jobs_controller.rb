@@ -24,6 +24,15 @@ class PrintJobsController < InternalPagesController
     end
   end
 
+  def update
+    @print_job = scoped_print_job.find(params[:id])
+    @print_job.printed!(current_user)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def build_pdf(print_jobs, template)
