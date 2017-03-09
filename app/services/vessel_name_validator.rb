@@ -14,20 +14,19 @@ class VesselNameValidator
     private
 
     def vessel_exists?
-      Register::Vessel
-        .in_part(@part)
-        .where(name: @name)
-        .where(port_code: @port_code)
-        .exists?
+      Register::Vessel.where(query_params).exists?
     end
 
     def name_approval_exists?
-      Submission::NameApproval
-        .in_part(@part)
-        .where(name: @name)
-        .where(port_code: @port_code)
-        .active
-        .exists?
+      Submission::NameApproval.where(query_params).active.exists?
+    end
+
+    def query_params
+      {
+        part: @part,
+        name: @name,
+        port_code: @port_code,
+      }
     end
   end
 end
