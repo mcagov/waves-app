@@ -13,6 +13,11 @@ class Submission::NameApproval < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
+  scope :active, (lambda do
+    where("approved_until is null or approved_until > now()")
+      .where("cancelled_at is null")
+  end)
+
   def port_name
     WavesUtilities::Port.new(port_code).name
   end

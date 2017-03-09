@@ -50,4 +50,34 @@ describe Submission::NameApproval do
   context ".port_name" do
     it { expect(name_approval.port_name).to eq("SOUTHAMPTON") }
   end
+
+  context ".active" do
+    subject { described_class.active }
+
+    context "when the name_approval is active" do
+      before do
+        name_approval.save
+      end
+
+      it { expect(subject).to include(name_approval) }
+    end
+
+    context "when #approved_until has expired" do
+      before do
+        name_approval.approved_until = 1.day.ago
+        name_approval.save
+      end
+
+      it { expect(subject).not_to include(name_approval) }
+    end
+
+    context "when #cancelled_at has been set" do
+      before do
+        name_approval.cancelled_at = Time.now
+        name_approval.save
+      end
+
+      it { expect(subject).not_to include(name_approval) }
+    end
+  end
 end

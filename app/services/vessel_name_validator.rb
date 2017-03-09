@@ -26,7 +26,7 @@ class VesselNameValidator
         .in_part(@part)
         .where(name: @name)
         .where(port_code: @port_code)
-        .where("approved_until is null or approved_until > now()")
+        .active
         .exists?
     end
   end
