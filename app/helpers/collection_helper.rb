@@ -34,6 +34,10 @@ module CollectionHelper
     WavesUtilities::DocumentType.all(current_activity.part)
   end
 
+  def propulsion_system_collection
+    WavesUtilities::PropulsionSystem.all
+  end
+
   def issuing_authorities_collection
     WavesUtilities::IssuingAuthority.all
   end

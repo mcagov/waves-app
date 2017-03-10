@@ -147,6 +147,8 @@
         .col-md-2{ class: vessel_change_css(:propulsion_system) }
           = vessel_f.input :propulsion_system,
             label: vessel_change_label(:propulsion_system),
+            as: :select,
+            collection: propulsion_system_collection,
             input_html: { class: "upcase" }
 
         .col-md-2{ class: vessel_change_css(:number_of_hulls) }
