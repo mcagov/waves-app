@@ -24,7 +24,7 @@ describe Submission::FinancePaymentsController, type: :controller do
       end
 
       it "redirects to unclaimed tasks" do
-        expect(response).to redirect_to(tasks_unclaimed_path)
+        expect(response).to redirect_to(tasks_my_tasks_path)
       end
 
       it "generates the ref_no" do
