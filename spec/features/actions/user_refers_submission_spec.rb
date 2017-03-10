@@ -33,6 +33,12 @@ feature "User refers a submission", type: :feature, js: true do
     expect(page).to have_css("h4", text: "Referral Email")
   end
 
+  scenario "without sending an email" do
+    within("#actions") { click_on "Refer Application" }
+    check("Do not send email to Correspondent")
+    within("#refer-application") { click_on "Refer Application" }
+  end
+
   def referral_prompt
     # rubocop:disable all
     /Application Referred by.*: Unknown vessel type\. Next action due by 12\/12\/2020\./

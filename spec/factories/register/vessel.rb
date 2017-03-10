@@ -21,4 +21,12 @@ FactoryGirl.define do
              registered_at: 1.year.ago)
     end
   end
+
+  factory :fishing_vessel, parent: :registered_vessel do
+    part :part_2
+  end
+
+  factory :pleasure_vessel, parent: :registered_vessel do
+    part :part_1
+  end
 end

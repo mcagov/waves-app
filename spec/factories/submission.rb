@@ -107,4 +107,16 @@ FactoryGirl.define do
       create(:payment, submission: submission, amount: 10)
     end
   end
+
+  factory :fishing_submission, parent: :assigned_submission do
+    task :change_vessel
+    part :part_2
+    vessel_reg_no { create(:fishing_vessel).reg_no }
+  end
+
+  factory :pleasure_submission, parent: :assigned_submission do
+    task :change_vessel
+    part :part_1
+    vessel_reg_no { create(:pleasure_vessel).reg_no }
+  end
 end
