@@ -25,4 +25,8 @@ FactoryGirl.define do
   factory :fishing_vessel, parent: :registered_vessel do
     part :part_2
   end
+
+  factory :pleasure_vessel, parent: :registered_vessel do
+    part :part_1
+  end
 end

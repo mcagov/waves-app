@@ -117,6 +117,6 @@ FactoryGirl.define do
   factory :pleasure_submission, parent: :assigned_submission do
     task :change_vessel
     part :part_1
-    vessel_reg_no { create(:registered_vessel, part: :part_1).reg_no }
+    vessel_reg_no { create(:pleasure_vessel).reg_no }
   end
 end
