@@ -10,7 +10,9 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-    Notification::Referral.create(parsed_notification_params)
+    unless params[:do_not_send_email].present?
+      Notification::Referral.create(parsed_notification_params)
+    end
 
     flash[:notice] = "You have successfully referred that application"
     @submission.update_attribute(
