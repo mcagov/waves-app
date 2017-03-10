@@ -41,6 +41,10 @@
                         data: { confirm: "Are you sure this is the right time to generate the Official No.?" },
                         method: :put
                 %tr
+                  %td.soft-label EC No.:
+                  %td.ec-no
+                    %strong=  EcNo.for_submission(@submission)
+                %tr
                   %td.soft-label Registration Status
                   %td= render partial: "/vessels/registration_status", locals: { registration_status: submission.registration_status }
                 %tr
