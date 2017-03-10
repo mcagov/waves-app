@@ -24,13 +24,13 @@ class VesselNameValidator
 
     def query_params
       if fishing_vessel?
-        [
-          "((part = 'part_2') or "\
-          "(part = 'part_4' and registration_type = 'fishing')) "\
-          "and port_code = ? and name = ?", @port_code, @name
-        ]
+        ["((part = 'part_2') or "\
+         "(part = 'part_4' and registration_type = 'fishing')) "\
+         "and port_code = ? and name = ?", @port_code, @name]
       else
-        ["part = ? and name = ?", @part, @name]
+        ["(name = ?) and "\
+         "(registration_type != 'fishing' or registration_type is null) and "\
+         "(part in ('part_1','part_4'))", @name]
       end
     end
 
