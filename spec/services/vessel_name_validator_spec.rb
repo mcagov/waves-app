@@ -34,12 +34,15 @@ describe VesselNameValidator do
         it { expect(subject).to be_truthy }
       end
 
-      context "with a registered_vessel of the same name but in part_4" do
+      context "with a pleasure vessel of the same name but in part_4" do
         before do
-          create(:registered_vessel, part: :part_4, name: "BOBS BOAT")
+          create(:registered_vessel,
+                 part: :part_4,
+                 name: "BOBS BOAT",
+                 registration_type: :pleasire)
         end
 
-        it { expect(subject).to be_truthy }
+        it { expect(subject).to be_falsey }
       end
     end
 
@@ -134,6 +137,55 @@ describe VesselNameValidator do
         end
 
         it { expect(subject).to be_truthy }
+      end
+    end
+
+    context ":part_4 pleasure vessel" do
+      subject { described_class.valid?(:part_4, "BOBS BOAT", "AB", :pleasure) }
+
+      it { expect(subject).to be_truthy }
+
+      context "with a part_2 fishing vessel of the same name" do
+        before do
+          create(:registered_vessel,
+                 part: :part_2,
+                 name: "BOBS BOAT")
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+
+      context "with a part_4 fishing vessel of the same name" do
+        before do
+          create(:registered_vessel,
+                 part: :part_4,
+                 name: "BOBS BOAT",
+                 registration_type: :fishing)
+        end
+
+        it { expect(subject).to be_truthy }
+      end
+
+      context "with a pleasure vessel of the same name/part" do
+        before do
+          create(:registered_vessel,
+                 part: :part_4,
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
+        it { expect(subject).to be_falsey }
+      end
+
+      context "with a pleasure vessel of the same name but in :part_1" do
+        before do
+          create(:registered_vessel,
+                 part: :part_1,
+                 name: "BOBS BOAT",
+                 registration_type: :pleasure)
+        end
+
+        it { expect(subject).to be_falsey }
       end
     end
   end
