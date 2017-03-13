@@ -8,8 +8,11 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
     click_on(@vessel.name.upcase)
   end
 
-  scenario "summary" do
+  scenario "decorated fields" do
     expect(page).to have_css(".ec-no", text: "GBR000#{@vessel.reg_no}")
+
+    expect(page)
+      .to have_css(".propulsion-system", text: "Outboard diesel, Steam")
   end
 
   scenario "tabs" do

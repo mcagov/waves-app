@@ -6,5 +6,6 @@ FactoryGirl.define do
     alt_name_1                "ALT NAME 1"
     alt_name_2                "ALT NAME 2"
     alt_name_3                "ALT NAME 3"
+    registration_type         "full"
   end
 end

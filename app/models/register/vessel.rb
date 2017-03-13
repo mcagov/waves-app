@@ -45,6 +45,8 @@ module Register
 
     before_validation :build_reg_no, on: :create
 
+    serialize :propulsion_system, Array
+
     def build_reg_no
       self.reg_no = SequenceNumber::Generator.reg_no!(part)
     end

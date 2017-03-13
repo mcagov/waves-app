@@ -34,6 +34,10 @@ module CollectionHelper
     WavesUtilities::DocumentType.all(current_activity.part)
   end
 
+  def propulsion_system_collection
+    WavesUtilities::PropulsionSystem.all
+  end
+
   def issuing_authorities_collection
     WavesUtilities::IssuingAuthority.all
   end
@@ -51,5 +55,9 @@ module CollectionHelper
       ["3 months", Date.today.advance(months: 3).to_s(:db)],
       ["10 years", Date.today.advance(years: 10).to_s(:db)],
     ]
+  end
+
+  def classification_society_collection
+    WavesUtilities::ClassificationSociety.all
   end
 end
