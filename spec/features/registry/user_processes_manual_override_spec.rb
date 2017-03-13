@@ -8,6 +8,7 @@ describe "User processes a manual override", type: :feature, js: true do
     click_on("Manual Override")
 
     expect(page).to have_css("h1", text: "Manual Override")
+    expect_referral_button(false)
 
     click_on("Approve Manual Override")
     expect(page).to have_css(".approve-message", "You are about to approve")

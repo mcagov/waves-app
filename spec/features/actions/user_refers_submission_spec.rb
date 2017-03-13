@@ -7,6 +7,8 @@ feature "User refers a submission", type: :feature, js: true do
   end
 
   scenario "and restores it" do
+    expect_referral_button(true)
+
     within("#actions") { click_on "Refer Application" }
 
     fill_in "Due By", with: "12/12/2020"
