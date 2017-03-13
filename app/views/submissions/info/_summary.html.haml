@@ -43,7 +43,9 @@
                 %tr
                   %td.soft-label EC No.:
                   %td.ec-no
-                    %strong=  EcNo.for_submission(@submission)
+                    %strong
+                      - if @submission.registered_vessel
+                        =  EcNo.for_vessel(@submission.registered_vessel)
                 %tr
                   %td.soft-label Registration Status
                   %td= render partial: "/vessels/registration_status", locals: { registration_status: submission.registration_status }

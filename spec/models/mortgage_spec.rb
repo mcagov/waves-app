@@ -14,7 +14,7 @@ describe Mortgage do
       let(:submission) { build(:submission, task: :change_vessel) }
 
       it do
-        expect(subject).to eq(["Account Current", "Intent", "Principle Sum"])
+        expect(subject).to eq(["Intent", "Account Current", "Principle Sum"])
       end
     end
   end
