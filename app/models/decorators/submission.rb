@@ -119,4 +119,8 @@ class Decorators::Submission < SimpleDelegator
   def can_issue_carving_and_marking?
     vessel_reg_no
   end
+
+  def referrable?
+    Task.new(task).referrable?
+  end
 end
