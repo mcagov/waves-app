@@ -18,6 +18,11 @@ def login_to_part_3(user = create(:user))
   visit "/tasks/my-tasks"
 end
 
+def login_to_part_4(user = create(:user))
+  login(user, :part_4)
+  visit "/tasks/my-tasks"
+end
+
 def login_to_finance(user = create(:user))
   login(user, :finance)
   visit "/finance/batches"

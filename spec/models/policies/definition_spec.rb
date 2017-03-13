@@ -1,6 +1,27 @@
 require "rails_helper"
 
 describe Policies::Definitions do
+  context ".registration_type" do
+    subject { described_class.registration_type(obj) }
+
+    context "for a submission" do
+      let(:obj) do
+        build(:submission,
+              changeset: { vessel_info: { registration_type: :simple } })
+      end
+
+      it { expect(subject).to eq(:simple) }
+    end
+
+    context "for a registered_vessel" do
+      let(:obj) do
+        build(:registered_vessel, registration_type: :full)
+      end
+
+      it { expect(subject).to eq(:full) }
+    end
+  end
+
   context ".mortgageable?" do
     subject { described_class.mortgageable?(vessel) }
 

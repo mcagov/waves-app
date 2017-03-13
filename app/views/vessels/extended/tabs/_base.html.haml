@@ -9,8 +9,9 @@
     %li{:role => "presentation"}
       %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
 
-    %li{:role => "presentation"}
-      %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
+    - if display_mortgages?(@vessel)
+      %li{:role => "presentation"}
+        %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
 
     %li{:role => "presentation"}
       %a#certificates-tab{"data-toggle" => "tab", :href => "#certificates_tab", :role => "tab"} Certificates & Documents

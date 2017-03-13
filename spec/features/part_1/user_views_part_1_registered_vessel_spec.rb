@@ -9,7 +9,9 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     visit vessel_path(@vessel)
   end
 
-  scenario "vessel type label" do
+  scenario "in general" do
     expect(page).to have_css("#vessel_type_label", text: "Type of BARGE")
+
+    expect_mortgages(true)
   end
 end

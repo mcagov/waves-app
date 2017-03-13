@@ -55,6 +55,14 @@ def visit_name_approved_part_1_submission
   visit submission_path(submission)
 end
 
+def visit_name_approved_part_4_submission
+  submission = create(:assigned_submission, part: :part_4)
+  create(:submission_name_approval, submission: submission)
+
+  login_to_part_4(submission.claimant)
+  visit submission_path(submission)
+end
+
 def visit_part_2_change_vessel_submission
   registered_vessel =
     create(:registered_vessel, part: :part_2, gross_tonnage: 100)
