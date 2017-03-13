@@ -8,10 +8,10 @@ class Policies::Definitions
     end
 
     def registration_type(obj)
-      if obj.is_a?(Register::Vessel)
+      if obj.respond_to?(:registration_type)
         obj.registration_type.to_sym
-      elsif obj.is_a?(Submission)
-        obj.vessel.registration_type.to_sym
+      elsif obj.respond_to?(:vessel)
+        obj.vessel.registration_type.try(:to_sym)
       end
     end
 

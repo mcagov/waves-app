@@ -20,6 +20,15 @@ describe Policies::Definitions do
 
       it { expect(subject).to eq(:full) }
     end
+
+    context "for a decorated registered_vessel" do
+      let(:obj) do
+        Decorators::Vessel.new(
+          build(:registered_vessel, registration_type: :full))
+      end
+
+      it { expect(subject).to eq(:full) }
+    end
   end
 
   context ".mortgageable?" do
