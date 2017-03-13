@@ -14,6 +14,7 @@
         %th Print/Email Current Transcript
         %th Print/Email Historic Transcript
         %th Email on Application Approval
+        %th Can be Referred
       %tbody
         - @tasks.each do |task|
           %tr
@@ -25,3 +26,4 @@
             %td= y_n(task.prints_current_transcript?)
             %td= y_n(task.prints_historic_transcript?)
             %td= y_n(task.emails_application_approval?)
+            %td= y_n(task.referrable?)
