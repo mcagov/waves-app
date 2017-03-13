@@ -3,8 +3,7 @@ $(document).ready(function() {
     minimumResultsForSearch: Infinity,
     width: '100%'
   });
-});
-$(document).ready(function() {
+
   $('select.select2.searchable').select2({
     minimumResultsForSearch: 10
   });
