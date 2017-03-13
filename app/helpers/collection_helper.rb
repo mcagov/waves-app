@@ -56,4 +56,8 @@ module CollectionHelper
       ["10 years", Date.today.advance(years: 10).to_s(:db)],
     ]
   end
+
+  def classification_society_collection
+    WavesUtilities::ClassificationSociety.all
+  end
 end

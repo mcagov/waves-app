@@ -205,12 +205,16 @@
         .col-md-2{ class: vessel_change_css(:classification_society) }
           = vessel_f.input :classification_society,
             label: vessel_change_label(:classification_society),
-            input_html: { class: "upcase" }
+            as: :select,
+            collection: classification_society_collection,
+            input_html: { class: "select2 select2_single" }
 
         .col-md-2{ class: vessel_change_css(:classification_society_other) }
           = vessel_f.input :classification_society_other,
             label: vessel_change_label(:classification_society_other),
-            input_html: { class: "upcase" }
+            as: :select,
+            collection: classification_society_collection,
+            input_html: { class: "select2 select2_single" }
 
         .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
           = vessel_f.input :entry_into_service_at,
