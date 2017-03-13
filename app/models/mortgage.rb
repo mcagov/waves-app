@@ -11,7 +11,7 @@ class Mortgage < ApplicationRecord
       if submission.task.to_sym == :new_registration
         %w(Intent)
       else
-        ["Account Current", "Intent", "Principle Sum"]
+        ["Intent", "Account Current", "Principle Sum"]
       end
     end
   end
