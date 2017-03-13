@@ -7,6 +7,10 @@ $(document).ready(function() {
   $('select.select2.searchable').select2({
     minimumResultsForSearch: 10
   });
+
+  $('#submission_vessel_propulsion_system').multiselect({
+    buttonWidth: '100%'
+  });
 });
 $(document).on('keyup','.upcase.form-control', {} ,function(e){
   $(this).val($(this).val().toUpperCase());

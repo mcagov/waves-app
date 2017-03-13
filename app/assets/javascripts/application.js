@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
+//= require bootstrap-multiselect
 //= require select2
 //= require tinymce
 //= require cocoon
