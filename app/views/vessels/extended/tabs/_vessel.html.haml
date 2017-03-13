@@ -19,7 +19,7 @@
       %td #{vessel.length_overall.to_i} metres
       %td #{vessel.breadth.to_i} metres
       %td #{vessel.depth.to_i} metres
-      %td= vessel.propulsion_system
+      %td.propulsion-system= vessel.formatted_propulsion_system
       %td= vessel.number_of_hulls
 
 %hr
