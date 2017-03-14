@@ -27,6 +27,13 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_receipt_mortgage
+    NotificationMailer.application_receipt(
+      default_params,
+      "My Boat", "3N-777EA4", true, :mortgage
+    )
+  end
+
   def application_receipt_change_vessel
     NotificationMailer.application_receipt(
       default_params,
@@ -141,6 +148,12 @@ class EmailTemplatesPreview < ActionMailer::Preview
   def application_approval_historic_transcript
     NotificationMailer.application_approval(
       default_params, "SRXXXXXX", "Officer Bob", :historic_transcript, "MV Bob"
+    )
+  end
+
+  def application_approval_mortgage
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :mortgage, "MV Bob"
     )
   end
 
