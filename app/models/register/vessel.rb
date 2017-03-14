@@ -68,7 +68,7 @@ module Register
       :registered
     end
 
-    def registry_info
+    def registry_info # rubocop:disable Metrics/MethodLength
       {
         vessel_info: attributes,
         owners: owners.map(&:attributes),
@@ -77,6 +77,7 @@ module Register
         engines: engines.map(&:attributes),
         mortgages: mortgages_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
+        directed_bys: directed_bys.map(&:attributes),
         representative: representative_info,
       }
     end

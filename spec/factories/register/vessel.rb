@@ -10,6 +10,7 @@ FactoryGirl.define do
     documents                 { [build(:document)] }
     mortgages                 { [build(:mortgage)] }
     beneficial_owners         { [build(:beneficial_owner)] }
+    directed_bys              { [build(:directed_by)] }
     representative            { build(:registered_representative) }
     propulsion_system         { [:outboard_diesel, :steam] }
     registration_type         "full"

@@ -178,6 +178,11 @@ describe Register::Vessel do
           .to eq(vessel.beneficial_owners.first.name)
       end
 
+      it "has the directed_by attributes" do
+        expect(subject[:directed_bys][0]["name"])
+          .to eq(vessel.directed_bys[0].name)
+      end
+
       it "has the representative attributes" do
         expect(subject[:representative]["name"])
           .to eq(vessel.representative.name)
