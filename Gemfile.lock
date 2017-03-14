@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/oceanshq/paperclip-azure
+  revision: a7a88535dd4f03b6e5a36c42325f0913cc375f82
+  specs:
+    paperclip-azure (0.3.0)
+      addressable
+      azure
+      hashie
+
+GIT
   remote: https://github.com/oceanshq/waves-utilities.git
   revision: ecd7699703024123e7ab60c8f882109270307774
   specs:
@@ -248,10 +257,6 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-    paperclip-azure (0.3.0)
-      addressable
-      azure
-      hashie
     parallel (1.9.0)
     parallel_tests (2.9.0)
       parallel
@@ -483,7 +488,7 @@ DEPENDENCIES
   nokogiri (>= 1.6.8)
   notifications-ruby-client (>= 1.1.2)
   paperclip
-  paperclip-azure (~> 0.3.0)
+  paperclip-azure!
   parallel_tests
   pdf-reader
   pg
