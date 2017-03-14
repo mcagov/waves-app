@@ -8,9 +8,12 @@
       %tr
         %td= declaration.owner.name
         %td
-          = link_to "#shares_held_#{declaration.id}",
-            data: { target: "#shares_held_#{declaration.id}" , toggle: "modal" } do
+          - if @readonly
             = declaration.shares_held
+          - else
+            = link_to "#shares_held_#{declaration.id}",
+              data: { target: "#shares_held_#{declaration.id}" , toggle: "modal" } do
+              = declaration.shares_held
 
           .modal.fade{id: "shares_held_#{declaration.id}", role: "dialog", tabindex: "-1"}
             .modal-dialog.modal-sm
