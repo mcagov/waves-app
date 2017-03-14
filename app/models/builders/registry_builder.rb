@@ -28,17 +28,23 @@ class Builders::RegistryBuilder
       end
     end
 
+    def builder_associations
+      [
+        "Builders::Registry::AgentBuilder",
+        "Builders::Registry::BeneficialOwnerBuilder",
+        "Builders::Registry::DirectedByBuilder",
+        "Builders::Registry::DocumentBuilder",
+        "Builders::Registry::EngineBuilder",
+        "Builders::Registry::MortgageBuilder",
+        "Builders::Registry::OwnerBuilder",
+        "Builders::Registry::RepresentativeBuilder",
+        "Builders::Registry::ShareBuilder"]
+    end
+
     def build_vessel_associations
-      @vessel = Builders::Registry::DocumentBuilder.create(@submission, @vessel)
-      @vessel = Builders::Registry::OwnerBuilder.create(@submission, @vessel)
-      @vessel = Builders::Registry::AgentBuilder.create(@submission, @vessel)
-      @vessel = Builders::Registry::ShareBuilder.create(@submission, @vessel)
-      @vessel = Builders::Registry::EngineBuilder.create(@submission, @vessel)
-      @vessel = Builders::Registry::MortgageBuilder.create(@submission, @vessel)
-      @vessel =
-        Builders::Registry::BeneficialOwnerBuilder.create(@submission, @vessel)
-      @vessel =
-        Builders::Registry::RepresentativeBuilder.create(@submission, @vessel)
+      builder_associations.each do |builder_association|
+        @vessel = builder_association.constantize.create(@submission, @vessel)
+      end
     end
   end
 end

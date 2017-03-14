@@ -1,0 +1,9 @@
+.modal.fade{id: "edit_directed_by_#{directed_by.id}", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for directed_by,
+        method: :put,
+        remote: true,
+        url: submission_directed_by_path(@submission, directed_by) do |f|
+        = hidden_field_tag "modal_id", "new_directed_by"
+        = render partial: "submissions/extended/forms/directed_by/fields", locals: { f: f }

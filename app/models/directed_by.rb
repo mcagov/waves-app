@@ -1,0 +1,2 @@
+class DirectedBy < Customer
+end

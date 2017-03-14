@@ -39,6 +39,7 @@
             #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
               = render partial: "submissions/extended/forms/owners/tab_content"
               #beneficial_owners= render partial: "submissions/extended/forms/beneficial_owners/base"
+              #directed_by= render partial: "submissions/extended/forms/directed_by/base"
 
             #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
               #mortgages= render partial: "submissions/extended/forms/mortgages/base"

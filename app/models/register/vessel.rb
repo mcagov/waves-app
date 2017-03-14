@@ -8,6 +8,7 @@ module Register
 
     has_one :agent, as: :parent, class_name: "Register::Agent"
     has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
+    has_many :directed_bys, as: :parent, class_name: "DirectedBy"
     has_many :customers, as: :parent
     has_one :representative, as: :parent, class_name: "Register::Representative"
     has_many :owners,
@@ -67,7 +68,7 @@ module Register
       :registered
     end
 
-    def registry_info
+    def registry_info # rubocop:disable Metrics/MethodLength
       {
         vessel_info: attributes,
         owners: owners.map(&:attributes),
@@ -76,6 +77,7 @@ module Register
         engines: engines.map(&:attributes),
         mortgages: mortgages_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
+        directed_bys: directed_bys.map(&:attributes),
         representative: representative_info,
       }
     end

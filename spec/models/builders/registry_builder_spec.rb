@@ -121,11 +121,17 @@ describe Builders::RegistryBuilder do
         representative = registered_vessel.reload.representative
         expect(representative.name).to eq("Ronnie")
       end
+
+      it "creates the directed_by" do
+        directed_by = registered_vessel.reload.directed_bys.first
+        expect(directed_by.name).to eq("Dennis")
+      end
     end
   end
 end
 
-def init_basic_submission # rubocop:disable Metrics/MethodLength
+# rubocop:disable all
+def init_basic_submission
   submission =
     create(:submission,
            changeset: {
@@ -152,6 +158,9 @@ def init_basic_submission # rubocop:disable Metrics/MethodLength
   submission.beneficial_owners.create(
     name: "Barry")
 
+  submission.directed_bys.create(
+    name: "Dennis")
+
   submission
 end
 
@@ -167,3 +176,4 @@ def init_extended_submission
 
   submission
 end
+# rubocop:enable all
