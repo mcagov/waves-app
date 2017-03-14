@@ -14,9 +14,8 @@
     - if representative.name.present?
       %tr
         %td.representative-name
-          = link_to '#',
-            "data-target" => "#edit_representative_modal", "data-toggle" => "modal" do
-            = representative
+          = link_to_unless @readonly, representative, "#",
+            "data-target" => "#edit_representative_modal", "data-toggle" => "modal"
         %td.representative-entity_type= representative.entity_type.try(:titleize)
         %td.representative-imo_number= representative.imo_number
         %td.representative-nationality= representative.nationality
@@ -24,23 +23,26 @@
         %td.representative-email= representative.email
         %td.representative-phone_number= representative.phone_number
         %td
-          = link_to submission_representative_path(@submission, representative),
-            class: 'btn-link',
-            method: :delete,
-            remote: true,
-            data: { confirm: "Are you sure you want to remove this Representative Person?" },
-            style: 'color: red;' do
-            %i.fa.fa-trash
-            Remove
-- if representative.name.blank?
-  %br
-  .row
-    .col-md-12
-      = link_to '#', class: 'btn btn-primary',
-        "data-target" => "#edit_representative_modal",
-        "data-toggle" => "modal" do
-        %i.fa.fa-plus
-        Add Representative Person
+          - unless @readonly
+            = link_to submission_representative_path(@submission, representative),
+              class: 'btn-link',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this Representative Person?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
+
+- unless @readonly
+  - if representative.name.blank?
+    %br
+    .row
+      .col-md-12
+        = link_to '#', class: 'btn btn-primary',
+          "data-target" => "#edit_representative_modal",
+          "data-toggle" => "modal" do
+          %i.fa.fa-plus
+          Add Representative Person
 
 .modal.fade{id: "edit_representative_modal", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
