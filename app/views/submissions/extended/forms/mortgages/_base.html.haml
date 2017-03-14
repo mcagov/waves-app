@@ -15,7 +15,7 @@
       %tr
         %td.priority= letter_sequence(index)
         %td.mortgage_type
-          = link_to mortgage.mortgage_type, "#",
+          = link_to_unless @readonly,  mortgage.mortgage_type, "#",
             "data-target" => "#edit_mortgage_#{mortgage.id}",
             "data-toggle" => "modal"
         %td.reference_number= mortgage.reference_number
@@ -25,51 +25,53 @@
         %td.mortgagor= mortgage.mortgagor
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
         %td
-          = link_to submission_mortgage_path(@submission, mortgage),
-            class: 'btn-link pull-right',
-            method: :delete,
-            remote: true,
-            data: { confirm: "Are you sure you want to remove this mortgage?" },
-            style: 'color: red;' do
-            %i.fa.fa-trash
-            Remove
-.row
-  .col-md-12
-    = link_to '#', class: 'btn btn-primary',
-      "data-target" => "#new_mortgage",
-      "data-toggle" => "modal" do
-      %i.fa.fa-plus
-      Add Mortgage
+          - unless @readonly
+            = link_to submission_mortgage_path(@submission, mortgage),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this mortgage?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
 
-.modal.fade{id: "new_mortgage", role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-lg
-    .modal-content
-      = simple_form_for Mortgage.new, method: :post, remote: true, url: submission_mortgages_path(@submission) do |mortgage_f|
-        = hidden_field_tag "modal_id", "new_mortgage"
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title New Mortgage
-        .modal-body
-          = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_mortgage",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Mortgage
 
-        .modal-footer
-          = mortgage_f.submit "Add Mortgage", class: "btn btn-primary"
-
-
-- @submission.mortgages.each do |mortgage|
-  .modal.fade{id: "edit_mortgage_#{mortgage.id}", role: "dialog", tabindex: "-1"}
+  .modal.fade{id: "new_mortgage", role: "dialog", tabindex: "-1"}
     .modal-dialog.modal-lg
       .modal-content
-        = simple_form_for mortgage, method: :put, remote: true, url: submission_mortgage_path(@submission, mortgage) do |mortgage_f|
+        = simple_form_for Mortgage.new, method: :post, remote: true, url: submission_mortgages_path(@submission) do |mortgage_f|
           = hidden_field_tag "modal_id", "new_mortgage"
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} ×
-            %h4.modal-title Edit Mortgage
+            %h4.modal-title New Mortgage
           .modal-body
             = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
 
           .modal-footer
-            = mortgage_f.submit "Save Mortgage", class: "btn btn-primary"
+            = mortgage_f.submit "Add Mortgage", class: "btn btn-primary"
 
+
+  - @submission.mortgages.each do |mortgage|
+    .modal.fade{id: "edit_mortgage_#{mortgage.id}", role: "dialog", tabindex: "-1"}
+      .modal-dialog.modal-lg
+        .modal-content
+          = simple_form_for mortgage, method: :put, remote: true, url: submission_mortgage_path(@submission, mortgage) do |mortgage_f|
+            = hidden_field_tag "modal_id", "new_mortgage"
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+              %h4.modal-title Edit Mortgage
+            .modal-body
+              = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+
+            .modal-footer
+              = mortgage_f.submit "Save Mortgage", class: "btn btn-primary"
