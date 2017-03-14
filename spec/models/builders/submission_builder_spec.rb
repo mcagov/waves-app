@@ -196,6 +196,22 @@ describe Builders::SubmissionBuilder do
           end
         end
       end
+
+      context "with directed_bys" do
+        let(:directed_by) { submission.reload.directed_bys.first }
+
+        it "builds the directed_bys from the changeset" do
+          expect(directed_by.name).to eq("Dennis")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the directed_bys" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.directed_bys.first)
+              .to eq(directed_by)
+          end
+        end
+      end
     end
   end
 end
@@ -226,6 +242,7 @@ def vessel_sample_data
     owners: owner_sample_data.map { |owner| Register::Owner.new(owner) },
     engines: [create(:engine, make: "DUCATI")],
     beneficial_owners: [create(:beneficial_owner, name: "Barry")],
+    directed_bys: [create(:directed_by, name: "Dennis")],
     mortgages: [create(:mortgage,
                        mortgagees: [create(:mortgagee, name: "Mary")])]
   }

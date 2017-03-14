@@ -1,4 +1,4 @@
-class Builders::SubmissionBuilder
+class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
   class << self
     def build_defaults(submission)
       @submission = submission
@@ -21,15 +21,18 @@ class Builders::SubmissionBuilder
       build_registry_info if @submission.registered_vessel
       build_changeset if @submission.registered_vessel
 
-      if @submission.changeset
-        build_declarations
-        build_managing_owner_and_correspondent
-        build_engines
-        build_mortgages
-        build_beneficial_owners
-      end
+      perform_changeset_operations if @submission.changeset
 
       build_agent if @submission.applicant_is_agent
+    end
+
+    def perform_changeset_operations
+      build_declarations
+      build_managing_owner_and_correspondent
+      build_engines
+      build_mortgages
+      build_beneficial_owners
+      build_directed_bys
     end
 
     def build_registry_info
@@ -136,6 +139,20 @@ class Builders::SubmissionBuilder
         submission_b_owner = BeneficialOwner.new(b_owner.except(:id))
         submission_b_owner.parent = @submission
         submission_b_owner.save
+      end
+    end
+
+    def build_directed_bys
+      if @submission.persisted?
+        return unless DirectedBy.where(parent: @submission).empty?
+      end
+      submission_directed_bys =
+        @submission.symbolized_changeset[:directed_bys] || []
+
+      submission_directed_bys.each do |directed_by|
+        submission_directed_by = DirectedBy.new(directed_by.except(:id))
+        submission_directed_by.parent = @submission
+        submission_directed_by.save
       end
     end
   end
