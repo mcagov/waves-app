@@ -10,7 +10,6 @@ module Submission::StateMachine
         state :assigned
         state :referred
         state :completed
-        state :referred
         state :cancelled
 
         # This state is used when initializing a new submission.

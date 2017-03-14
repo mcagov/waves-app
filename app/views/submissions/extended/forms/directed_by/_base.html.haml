@@ -13,7 +13,7 @@
     - @submission.directed_bys.each do |directed_by|
       %tr
         %td.directed_by-name
-          = link_to directed_by.name, "#",
+          = link_to_unless @readonly, directed_by.name, "#",
             "data-target" => "#edit_directed_by_#{directed_by.id}",
             "data-toggle" => "modal"
         %td.directed_by-imo_number= directed_by.imo_number
@@ -22,24 +22,26 @@
         %td.directed_by-email= directed_by.email
         %td.directed_by-phone_number= directed_by.phone_number
         %td
-          = link_to submission_directed_by_path(@submission, directed_by),
-            class: 'btn-link pull-right',
-            method: :delete,
-            remote: true,
-            data: { confirm: "Are you sure you want to remove this directed_by?" },
-            style: 'color: red;' do
-            %i.fa.fa-trash
-            Remove
+          - unless @readonly
+            = link_to submission_directed_by_path(@submission, directed_by),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this directed_by?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
 
-.row
-  .col-md-12
-    = link_to '#', class: 'btn btn-primary',
-      "data-target" => "#new_directed_by",
-      "data-toggle" => "modal" do
-      %i.fa.fa-plus
-      Add Directed & Controlled By
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_directed_by",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Directed & Controlled By
 
-= render partial: "submissions/extended/forms/directed_by/new"
+  = render partial: "submissions/extended/forms/directed_by/new"
 
-- @submission.directed_bys.each do |directed_by|
-  = render partial: "submissions/extended/forms/directed_by/edit", locals: { directed_by: directed_by }
+  - @submission.directed_bys.each do |directed_by|
+    = render partial: "submissions/extended/forms/directed_by/edit", locals: { directed_by: directed_by }

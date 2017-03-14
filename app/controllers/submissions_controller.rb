@@ -28,6 +28,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def show
+    @readonly = Policies::Actions.readonly?(@submission, current_user)
     @submission = Decorators::Submission.new(@submission)
   end
 

@@ -12,7 +12,7 @@
     - @submission.documents.order("created_at desc").each do |document|
       %tr
         %td.entity_type
-          = link_to document.entity_type_name, "#",
+          = link_to_unless @readonly, document.entity_type_name, "#",
             "data-target" => "#edit_document_#{document.id}",
             "data-toggle" => "modal"
         %td.issuing_authority= document.issuing_authority
@@ -25,58 +25,61 @@
             %i.fa.fa-file-pdf-o
             = link_to asset.file_file_name, azure_private_asset_url(asset) , target: "_blank"
         %td.remove-document
-          = link_to submission_document_path(@submission, document),
-              class: 'btn-link pull-right',
-              method: :delete,
-              remote: :true,
-              data: { confirm: "Are you sure you want to remove this mortgage?" }, style: 'color: red;' do
-            %i.fa.fa-trash
-            Remove
-.row
-  .col-md-12
-    = link_to '#', class: 'btn btn-primary',
-      "data-target" => "#new_document",
-      "data-toggle" => "modal" do
-      %i.fa.fa-plus
-      Add Certificate/Document
+          - unless @readonly
+            = link_to submission_document_path(@submission, document),
+                class: 'btn-link pull-right',
+                method: :delete,
+                remote: :true,
+                data: { confirm: "Are you sure you want to remove this mortgage?" }, style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
 
-.modal.fade{id: "new_document", role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-lg
-    .modal-content
-      - document = Document.build(1)
-      - document.noted_at = Date.today
-      = simple_form_for document,
-        method: :post,
-        remote: true,
-        multipart: true,
-        url: submission_documents_path(@submission) do |document_f|
-        = hidden_field_tag "modal_id", "new_document"
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title New Certificate/Document
-        .modal-body
-          = render partial: "submissions/extended/forms/documents/fields", locals: { document_f: document_f }
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_document",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Certificate/Document
 
-        .modal-footer
-          = document_f.submit "Save Certificate/Document", class: "btn btn-primary"
-
-- @submission.documents.each do |document|
-  .modal.fade{id: "edit_document_#{document.id}", role: "dialog", tabindex: "-1"}
+  .modal.fade{id: "new_document", role: "dialog", tabindex: "-1"}
     .modal-dialog.modal-lg
       .modal-content
+        - document = Document.build(1)
+        - document.noted_at = Date.today
         = simple_form_for document,
-          method: :put,
+          method: :post,
           remote: true,
           multipart: true,
-          url: submission_document_path(@submission, document) do |document_f|
+          url: submission_documents_path(@submission) do |document_f|
           = hidden_field_tag "modal_id", "new_document"
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} ×
-            %h4.modal-title Edit Certificate/Document
+            %h4.modal-title New Certificate/Document
           .modal-body
             = render partial: "submissions/extended/forms/documents/fields", locals: { document_f: document_f }
 
           .modal-footer
             = document_f.submit "Save Certificate/Document", class: "btn btn-primary"
+
+  - @submission.documents.each do |document|
+    .modal.fade{id: "edit_document_#{document.id}", role: "dialog", tabindex: "-1"}
+      .modal-dialog.modal-lg
+        .modal-content
+          = simple_form_for document,
+            method: :put,
+            remote: true,
+            multipart: true,
+            url: submission_document_path(@submission, document) do |document_f|
+            = hidden_field_tag "modal_id", "new_document"
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+              %h4.modal-title Edit Certificate/Document
+            .modal-body
+              = render partial: "submissions/extended/forms/documents/fields", locals: { document_f: document_f }
+
+            .modal-footer
+              = document_f.submit "Save Certificate/Document", class: "btn btn-primary"

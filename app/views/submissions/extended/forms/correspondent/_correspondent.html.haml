@@ -1,15 +1,18 @@
 %h2 Correspondent
 
-- if @submission.correspondent.present?
-  = link_to "#edit-correspondent", data: { target: "#edit-correspondent", toggle: "modal" } do
-    %strong.correspondent-name= @submission.correspondent.name
+- if @readonly
+  %strong.correspondent-name= @submission.correspondent
 - else
-  = link_to "#edit-correspondent",
-    class: 'btn btn-link',
-    data: { target: "#edit-correspondent", toggle: "modal" },
-    style: 'color: green; padding: 0px;' do
-    %i.fa.fa-plus
-    Add Correspondent
+  - if @submission.correspondent.present?
+    = link_to "#edit-correspondent", data: { target: "#edit-correspondent", toggle: "modal" } do
+      %strong.correspondent-name= @submission.correspondent.name
+  - else
+    = link_to "#edit-correspondent",
+      class: 'btn btn-link',
+      data: { target: "#edit-correspondent", toggle: "modal" },
+      style: 'color: green; padding: 0px;' do
+      %i.fa.fa-plus
+      Add Correspondent
 
 .modal.fade{id: "edit-correspondent", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-sm

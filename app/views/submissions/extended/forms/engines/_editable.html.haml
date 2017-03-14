@@ -1,0 +1,39 @@
+.row
+  .col-md-12
+    = link_to '#', class: 'btn btn-primary',
+      "data-target" => "#new_engine",
+      "data-toggle" => "modal" do
+      %i.fa.fa-plus
+      Add Engine(s)
+
+.modal.fade{id: "new_engine", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for Engine.new, method: :post, remote: true, url: submission_engines_path(@submission) do |engine_f|
+        = hidden_field_tag "modal_id", "new_engine"
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title New Engine
+        .modal-body
+          = render partial: "submissions/extended/forms/engines/fields", locals: { engine_f: engine_f }
+
+        .modal-footer
+          = engine_f.submit "Add Engine", class: "btn btn-primary"
+
+- @submission.engines.each do |engine|
+  .modal.fade{id: "edit_engine_#{engine.id}", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-lg
+      .modal-content
+        = simple_form_for engine, method: :put, remote: true, url: submission_engine_path(@submission, engine) do |engine_f|
+          = hidden_field_tag "modal_id", "new_engine"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Engine
+          .modal-body
+            = render partial: "submissions/extended/forms/engines/fields", locals: { engine_f: engine_f }
+
+          .modal-footer
+            = engine_f.submit "Save Engine", class: "btn btn-primary"
+

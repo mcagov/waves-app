@@ -1,15 +1,18 @@
 %h2 Managing Owner
 
-- if @submission.managing_owner.present?
-  = link_to "#edit-managing_owner", data: { target: "#edit-managing_owner", toggle: "modal" } do
-    %strong.managing_owner-name= @submission.managing_owner.name
+- if @readonly
+  %strong.managing_owner-name= @submission.managing_owner
 - else
-  = link_to "#edit-managing_owner",
-    class: 'btn btn-link',
-    data: { target: "#edit-managing_owner", toggle: "modal" },
-    style: 'color: green; padding: 0px;' do
-    %i.fa.fa-plus
-    Add Managing Owner
+  - if @submission.managing_owner.present?
+    = link_to "#edit-managing_owner", data: { target: "#edit-managing_owner", toggle: "modal" } do
+      %strong.managing_owner-name= @submission.managing_owner.name
+  - else
+    = link_to "#edit-managing_owner",
+      class: 'btn btn-link',
+      data: { target: "#edit-managing_owner", toggle: "modal" },
+      style: 'color: green; padding: 0px;' do
+      %i.fa.fa-plus
+      Add Managing Owner
 
 .modal.fade{id: "edit-managing_owner", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-sm

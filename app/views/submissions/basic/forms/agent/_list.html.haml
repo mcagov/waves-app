@@ -10,28 +10,28 @@
     - if agent.name.present?
       %tr
         %td.agent-name
-          = link_to '#',
-            "data-target" => "#edit_agent_modal", "data-toggle" => "modal" do
-            = agent
+          = link_to_unless @readonly, agent, "#",
+            "data-target" => "#edit_agent_modal", "data-toggle" => "modal"
         %td.agent-email= agent.email
         %td.agent-phone_number= agent.phone_number
         %td.agent-address{width: "40%"}= agent.inline_address
         %td
-          = link_to submission_agent_path(@submission, agent),
-            class: 'btn-link',
-            method: :delete,
-            remote: true,
-            data: { confirm: "Are you sure you want to remove this agent?" },
-            style: 'color: red;' do
-            %i.fa.fa-trash
-            Remove
-- if agent.name.blank?
-  %br
-  .row
-    .col-md-12
-      = link_to '#', class: 'btn btn-primary',
-        "data-target" => "#edit_agent_modal",
-        "data-toggle" => "modal" do
-        %i.fa.fa-plus
-        Add Agent
-
+          - unless @readonly
+            = link_to submission_agent_path(@submission, agent),
+              class: 'btn-link',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this agent?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
+- unless @readonly
+  - if agent.name.blank?
+    %br
+    .row
+      .col-md-12
+        = link_to '#', class: 'btn btn-primary',
+          "data-target" => "#edit_agent_modal",
+          "data-toggle" => "modal" do
+          %i.fa.fa-plus
+          Add Agent

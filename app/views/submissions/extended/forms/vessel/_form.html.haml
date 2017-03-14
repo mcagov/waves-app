@@ -1,6 +1,6 @@
 = simple_form_for @submission, remote: true, class: "form-vertical" do |submission_f|
   %h2 Vessel Information
-  = submission_f.simple_fields_for :vessel do |vessel_f|
+  = submission_f.simple_fields_for :vessel, defaults: { disabled: @readonly } do |vessel_f|
     %fieldset{ disabled: disabled }
       - vessel_f.object = submission_f.object.vessel
       %h2 Identity
