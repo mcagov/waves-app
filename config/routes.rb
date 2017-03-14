@@ -61,6 +61,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :directed_bys,
+              controller: "submission/directed_bys",
+              only: [:create, :update, :destroy]
+
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"
