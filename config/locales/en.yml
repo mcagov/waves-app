@@ -53,6 +53,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Approve General Enquiry
         manual_override: Approve Manual Override
+        mortgage: Approve Mortgage(s)
       modal-title:
         new_registration: Register Vessel and Issue Certificate of Registry
         renewal: Renew Registration and Issue Certificate of Registry
@@ -66,6 +67,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Complete General Enquiry
         manual_override: Manual Override
+        mortgage: Mortgage(s)
       modal-btn:
         new_registration: Register Vessel
         renewal: Renew Registration
@@ -79,6 +81,7 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Approve General Enquiry
         manual_override: Approve
+        mortgage: Approve Mortgage(s)
       confirmation:
         new_registration: The applicant has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
         renewal: The applicant has been notified via email that their request for a Registration Renewal has been approved.
