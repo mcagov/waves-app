@@ -32,6 +32,7 @@ class Policies::Actions
     end
 
     def readonly?(submission, user)
+      !(submission.current_state == :assigned && submission.claimant == user)
     end
   end
 end
