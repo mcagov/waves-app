@@ -14,7 +14,7 @@
           - note.assets.each do |asset|
             - if asset.file.exists?
               %i.fa.fa-file-pdf-o
-              = link_to asset.file_file_name, asset.file.url
+              = link_to asset.file_file_name, azure_private_asset_url(asset)
               %br
 
         %td{width: '20%'}

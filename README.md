@@ -67,6 +67,15 @@ CORS is configured in `config/initalisers/cors.rb` and the origins are defined b
 
 Emails can be previewed at: /rails/mailers in development.
 
+##### File Uploads
+Files are uploaded with [paperclip](https://github.com/thoughtbot/paperclip) and store on Microsoft Azure. Ensure that the following credentials are set for each environment (except in :test, when the file storage is :filesystem).
+`ENV['AZURE_STORAGE_ACCOUNT']`
+`ENV['AZURE_ACCESS_KEY']`
+`ENV['AZURE_CONTAINER_NAME']`
+Refer to `config/initializers/paperclip.rb` for implementation.
+Note that Private URLs are enabled and the file url should be generated with the helper method: `azure_private_asset_url`, found in `app/helpers/asset_helper.rb`.
+
+
 ##### SMS Notification
 SMS Notifications are delivered by [Gov.UK Notify](https://www.notifications.service.gov.uk).
 This is implemented in `app/services/sms_provider.rb`.

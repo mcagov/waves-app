@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/oceanshq/paperclip-azure
+  revision: a7a88535dd4f03b6e5a36c42325f0913cc375f82
+  specs:
+    paperclip-azure (0.3.0)
+      addressable
+      azure
+      hashie
+
+GIT
   remote: https://github.com/oceanshq/waves-utilities.git
   revision: ecd7699703024123e7ab60c8f882109270307774
   specs:
@@ -50,7 +59,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
     afm (0.2.2)
     arel (7.1.2)
     ast (2.3.0)
@@ -60,6 +70,19 @@ GEM
     autoprefixer-rails (6.5.0.1)
       execjs
     awesome_print (1.7.0)
+    azure (0.7.7)
+      addressable (~> 2.3)
+      azure-core (~> 0.1)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.10)
+      mime-types (>= 1, < 4.0)
+      nokogiri (~> 1.6)
+      systemu (~> 2.6)
+      thor (~> 0.19)
+    azure-core (0.1.7)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.10)
+      nokogiri (~> 1.6)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -150,6 +173,10 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.6)
       i18n (~> 0.5)
+    faraday (0.11.0)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.11.0.1)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.14)
     flutie (2.0.0)
     font-awesome-rails (4.6.3.1)
@@ -179,6 +206,7 @@ GEM
       tilt
     hashdiff (0.3.0)
     hashery (2.1.2)
+    hashie (3.5.5)
     i18n (0.7.0)
     i18n_data (0.7.0)
     jquery-rails (4.2.1)
@@ -212,6 +240,7 @@ GEM
     minitest (5.9.1)
     momentjs-rails (2.15.1)
       railties (>= 3.1)
+    multipart-post (2.0.0)
     nenv (0.3.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
@@ -262,6 +291,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    public_suffix (2.0.5)
     rack (2.0.1)
     rack-cors (0.4.0)
     rack-test (0.6.3)
@@ -376,7 +406,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (0.19.1)
+    systemu (2.6.5)
+    thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
     timecop (0.8.1)
@@ -457,6 +488,7 @@ DEPENDENCIES
   nokogiri (>= 1.6.8)
   notifications-ruby-client (>= 1.1.2)
   paperclip
+  paperclip-azure!
   parallel_tests
   pdf-reader
   pg

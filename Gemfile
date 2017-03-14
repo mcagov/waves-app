@@ -29,6 +29,8 @@ gem "momentjs-rails"
 gem "nokogiri", ">= 1.6.8"
 gem "notifications-ruby-client", ">= 1.1.2"
 gem "paperclip"
+gem "paperclip-azure",
+    git: "https://github.com/oceanshq/paperclip-azure"
 gem "pg_search"
 gem "prawn"
 gem "prawn-print"
