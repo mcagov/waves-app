@@ -8,6 +8,7 @@ module Register
 
     has_one :agent, as: :parent, class_name: "Register::Agent"
     has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
+    has_many :directed_bys, as: :parent, class_name: "DirectedBy"
     has_many :customers, as: :parent
     has_one :representative, as: :parent, class_name: "Register::Representative"
     has_many :owners,
