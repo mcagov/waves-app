@@ -1,22 +1,25 @@
 module MailerHelper
+  def department
+    @department ||=
+      Department.new(
+        @submission.part,
+        Policies::Definitions.registration_type(@submission))
+  end
+
   def contact_us_for_part
-    "the SSR team at: ssr.registry@mcga.gov.uk"
+    department.contact_us
   end
 
   def part_of_register
-    if @part == :part_3
-      "Part III of the UK Small Ships Register"
-    else
-      "#{Activity.new(@part)} of the Register"
-    end
+    department.part_of_register
   end
 
   def officer_phone_for_part
-    "02920 448813"
+    department.phone
   end
 
   def official_number_for_part
-    "SSR Number"
+    department.official_number_for_part
   end
 
   def if_no_certificate
