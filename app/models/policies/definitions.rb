@@ -23,5 +23,11 @@ class Policies::Definitions
       return true if @part == :part_2 && registration_type(obj) == :full
       false
     end
+
+    def manageable?(obj)
+      @part = obj.part.to_sym
+      return true if @part == :part_1
+      false
+    end
   end
 end
