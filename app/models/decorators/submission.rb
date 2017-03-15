@@ -90,10 +90,14 @@ class Decorators::Submission < SimpleDelegator
     Task.new(task) == :new_registration
   end
 
-  def vessel_attribute_changed?(attr_name)
-    return false if new_registration?
-    registry_vessel.send(attr_name).to_s.strip !=
-      @submission.vessel.send(attr_name).to_s.strip
+  def changed_vessel_attribute(attr_name)
+    return if new_registration?
+
+    registry_version = registry_vessel.send(attr_name).to_s.strip
+    changeset_version = @submission.vessel.send(attr_name).to_s.strip
+
+    return if registry_version == changeset_version
+    registry_version
   end
 
   def delivery_description

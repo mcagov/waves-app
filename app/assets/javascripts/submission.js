@@ -63,7 +63,9 @@ $(document).ready(function() {
   // Set the Vessel Type Label for extended submissions
   function set_vessel_type_label() {
     sel_value = $('#submission_vessel_vessel_category').val();
-    $('.vessel_type_label').html('Type of ' + sel_value);
+    var prefix = $('#vessel_type_label_prefix').html();
+
+    $('.vessel_type_label').html(prefix + sel_value);
   };
 
   $('#submission_vessel_vessel_category').on('change', function(){

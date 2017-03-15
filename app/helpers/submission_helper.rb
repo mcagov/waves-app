@@ -53,7 +53,7 @@ module SubmissionHelper
   end
 
   def vessel_change_css(attr_name)
-    if @submission.vessel_attribute_changed?(attr_name)
+    if @submission.changed_vessel_attribute(attr_name)
       "has-changed"
     else
       ""
@@ -61,7 +61,19 @@ module SubmissionHelper
   end
 
   def vessel_change_label(attr_name, label = nil)
-    label || t("simple_form.labels.submission.vessel.#{attr_name}")
+    changed_attribute = @submission.changed_vessel_attribute(attr_name)
+    icon = changed_attribute ? registry_info_tooltip(changed_attribute) : ""
+    icon += label || t("simple_form.labels.submission.vessel.#{attr_name}")
+    icon
+  end
+
+  def registry_info_tooltip(text)
+    @text = text.try(:humanize)
+
+    link_to(
+      "<i class=\"fa fa-warning\"></i> ".html_safe,
+      "#",
+      data: { toggle: "tooltip", placement: "left", title: @text })
   end
 
   def declaration_select_options

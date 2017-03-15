@@ -11,6 +11,8 @@ $(document).ready(function() {
   $('#submission_vessel_propulsion_system').multiselect({
     buttonWidth: '100%'
   });
+
+  $('[data-toggle="tooltip"]').tooltip()
 });
 $(document).on('keyup','.upcase.form-control', {} ,function(e){
   $(this).val($(this).val().toUpperCase());
