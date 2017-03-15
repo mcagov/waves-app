@@ -27,6 +27,9 @@
             include_blank: false
 
         .col-md-2{ class: vessel_change_css(:vessel_type) }
+          #vessel_type_label_prefix.hidden
+            = vessel_change_label(:vessel_type, "Type of ")
+
           = vessel_f.input :vessel_type,
             label: vessel_change_label(:vessel_type, ""),
             label_html: { class: "vessel_type_label" },
