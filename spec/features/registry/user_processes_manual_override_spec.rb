@@ -11,7 +11,8 @@ describe "User processes a manual override", type: :feature, js: true do
     expect_referral_button(false)
 
     click_on("Approve Manual Override")
-    expect(page).to have_css(".approve-message", "You are about to approve")
+    expect(page)
+      .to have_css(".approve-message", text: "You are about to approve")
     within(".modal-content") { click_button("Approve") }
 
     expect(page).to have_text("The Manual Override has been processed.")

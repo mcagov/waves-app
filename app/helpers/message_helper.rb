@@ -1,4 +1,6 @@
 module MessageHelper
+  include MailerHelper
+
   def default_email_text(notification_type, submission)
     case notification_type
     when :cancel
@@ -17,7 +19,7 @@ module MessageHelper
       <p>Where applicable the fee will be refunded using the same
       method and to the same payee as the original payment.</p>
       <p>If you require any further assistance please do not
-      hesitate to contact us at ssr.registry@mcga.gov.uk.</p>
+      hesitate to contact us at #{contact_us_for_part}.</p>
       <p>Please quote your application reference
       #{submission.ref_no} in all correspondence.</p>)
   end
@@ -29,7 +31,7 @@ module MessageHelper
       will require the following:</p>
       <p>[FREE TEXT]</p>
       <p>If you require any further assistance please do not
-      hesitate to contact us at ssr.registry@mcga.gov.uk.</p>
+      hesitate to contact us at #{contact_us_for_part}.</p>
       <p>Please quote your application reference
       #{submission.ref_no} in all correspondence.</p>)
   end

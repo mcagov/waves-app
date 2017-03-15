@@ -34,7 +34,9 @@ class Notification < ApplicationRecord
       subject: email_subject,
       to: recipient_email,
       name: recipient_name,
-      part: notifiable.part,
+      department: Department.new(
+        notifiable.part,
+        Policies::Definitions.registration_type(notifiable)),
     }
   end
 end

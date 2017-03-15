@@ -4,12 +4,13 @@ class NotificationMailer < ApplicationMailer
   default from: ENV.fetch("EMAIL_FROM")
 
   def test_email(email)
+    @department = Department.new(:part_3)
     mail(to: email, subject: "Message from the MCA")
   end
 
   def outstanding_declaration(
       defaults, declaration_id, vessel_name, correspondent_name)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @name = defaults[:name]
     @declaration_url =
       govuk_url("/referral/outstanding_declaration/#{declaration_id}")
@@ -21,7 +22,7 @@ class NotificationMailer < ApplicationMailer
 
   def application_receipt(defaults, vessel_name, submission_ref_no,
                           declarations_required, template_name)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @vessel_name = vessel_name
     @submission_ref_no = submission_ref_no
     @name = defaults[:name]
@@ -35,7 +36,7 @@ class NotificationMailer < ApplicationMailer
 
   def application_approval(defaults, reg_no, actioned_by, template_name,
                            vessel_name, pdf_attachment = nil)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @reg_no = reg_no
     @name = defaults[:name]
     @actioned_by = actioned_by
@@ -49,7 +50,7 @@ class NotificationMailer < ApplicationMailer
   end
 
   def name_approval(defaults, actioned_by, vessel_name, port_name)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @vessel_name = vessel_name
     @port_name = port_name
     @name = defaults[:name]
@@ -59,7 +60,7 @@ class NotificationMailer < ApplicationMailer
   end
 
   def wysiwyg(defaults, body, actioned_by)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @body = body
     @name = defaults[:name]
     @actioned_by = actioned_by
@@ -68,7 +69,7 @@ class NotificationMailer < ApplicationMailer
   end
 
   def carving_and_marking_note(defaults, actioned_by, pdf_attachment)
-    @part = defaults[:part].to_sym
+    @department = defaults[:department]
     @name = defaults[:name]
     @actioned_by = actioned_by
     attachments["carving_and_marking_note.pdf"] = pdf_attachment
