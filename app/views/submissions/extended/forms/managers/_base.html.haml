@@ -1,0 +1,47 @@
+%hr
+%h2 Managers
+%table.table.table-striped
+  %thead
+    %th Name
+    %th IMO #
+    %th Nationality
+    %th Status
+    %th Email
+    %th Phone
+    %th
+  %tbody
+    - @submission.managers.each do |manager|
+      %tr
+        %td.manager-name
+          = link_to_unless @readonly, manager.name, "#",
+            "data-target" => "#edit_manager_#{manager.id}",
+            "data-toggle" => "modal"
+        %td.manager-imo_number= manager.imo_number
+        %td.manager-nationality= manager.nationality
+        %td.manager-status= manager.eligibility_status
+        %td.manager-email= manager.email
+        %td.manager-phone_number= manager.phone_number
+        %td
+          - unless @readonly
+            = link_to submission_manager_path(@submission, manager),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this manager?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
+
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_manager",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Manager
+
+  = render partial: "submissions/extended/forms/managers/new"
+
+  - @submission.managers.each do |manager|
+    = render partial: "submissions/extended/forms/managers/edit", locals: { manager: manager }

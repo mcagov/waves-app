@@ -1,9 +1,13 @@
 def expect_field(bln, css)
-  if bln
+   if bln
     expect(page).to have_css(css)
   else
     expect(page).not_to have_css(css)
   end
+end
+
+def expect_managers(bln)
+  expect_field(bln, "#managers-tab-tab")
 end
 
 def expect_mortgages(bln)

@@ -1,0 +1,9 @@
+.modal.fade{id: "new_manager", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for Manager.new,
+        method: :post,
+        remote: true,
+        url: submission_managers_path(@submission) do |f|
+        = hidden_field_tag "modal_id", "new_manager"
+        = render partial: "submissions/extended/forms/managers/fields", locals: { f: f }
