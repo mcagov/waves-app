@@ -49,7 +49,6 @@
         %td= owner.phone_number
         %td= y_n(owner.managing_owner)
         %td= y_n(owner.correspondent)
-
 %hr
 %h2 Shareholding
 .row
@@ -81,30 +80,6 @@
                     %tr
                       %td= group_member.owner
             %td= shareholder_group.shares_held
-
-%hr
-%h2 Beneficial Owners
-%table.table.table-striped
-  %thead
-    %th Name
-    %th IMO #
-    %th Nationality
-    %th Status
-    %th Email
-    %th Phone
-  %tbody
-    - vessel.beneficial_owners.each do |beneficial_owner|
-      %tr
-        %td
-          = beneficial_owner.name
-          %br
-          = beneficial_owner.inline_address
-        %td= beneficial_owner.imo_number
-        %td= beneficial_owner.nationality
-        %td= beneficial_owner.eligibility_status.try(:titleize)
-        %td= beneficial_owner.email
-        %td= beneficial_owner.phone_number
-
 %hr
 %h2 Directed & Controlled By
 %table.table.table-striped
@@ -127,3 +102,25 @@
         %td= directed_by.eligibility_status.try(:titleize)
         %td= directed_by.email
         %td= directed_by.phone_number
+%hr
+%h2 Beneficial Owners
+%table.table.table-striped
+  %thead
+    %th Name
+    %th IMO #
+    %th Nationality
+    %th Status
+    %th Email
+    %th Phone
+  %tbody
+    - vessel.beneficial_owners.each do |beneficial_owner|
+      %tr
+        %td
+          = beneficial_owner.name
+          %br
+          = beneficial_owner.inline_address
+        %td= beneficial_owner.imo_number
+        %td= beneficial_owner.nationality
+        %td= beneficial_owner.eligibility_status.try(:titleize)
+        %td= beneficial_owner.email
+        %td= beneficial_owner.phone_number
