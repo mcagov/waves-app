@@ -29,6 +29,18 @@ describe Policies::Definitions do
 
       it { expect(subject).to eq(:full) }
     end
+
+    context "for a declaration" do
+      let(:obj) do
+        create(
+          :declaration,
+          submission: build(
+            :submission,
+            changeset: { vessel_info: { registration_type: :fishing } }))
+      end
+
+      it { expect(subject).to eq(:fishing) }
+    end
   end
 
   context ".mortgageable?" do
