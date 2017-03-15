@@ -15,15 +15,27 @@ input.radio_buttons.inline label.radio{
 .name-validated {
   border: 1px solid green !important;
 }
-.has-changed input {
-  background-color: #E1ED93 !important;
-}
-.has-changed span.select2-selection {
-  background-color: #E1ED93 !important;
-}
-.has-changed span.select2-selection {
-  background-color: #E1ED93 !important;
-}
-.has-changed label {
-  color: red;
+
+$has_changed_color: #d9534f;
+
+.has-changed {
+  input {
+    background-color: $has_changed_color !important;
+    color: #fff !important;
+  }
+
+  span.select2-selection {
+    background-color: $has_changed_color !important;
+    color: #fff !important;
+  }
+
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    background-color: $has_changed_color !important;
+    color: #fff !important;
+  }
+
+  .multiselect {
+    background-color: $has_changed_color !important;
+    color: #fff !important;
+  }
 }

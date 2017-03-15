@@ -91,20 +91,20 @@ describe Decorators::Submission, type: :model do
     end
   end
 
-  context "#vessel_attribute_changed?" do
+  context "#changed_vessel_attribute" do
     subject do
-      described_class.new(submission).vessel_attribute_changed?(:name)
+      described_class.new(submission).changed_vessel_attribute(:name)
     end
 
     context "for a new registration" do
       let(:submission) { build(:submission, task: :new_registration) }
-      it { expect(subject).to be_falsey }
+      it { expect(subject).to be_nil }
     end
 
     context "when there is a registered_vessel" do
       context "when the name has not been changed" do
         let(:submission) { create(:unassigned_change_vessel_submission) }
-        it { expect(subject).to be_falsey }
+        it { expect(subject).to be_nil }
       end
 
       context "when the name has been changed" do
@@ -114,7 +114,7 @@ describe Decorators::Submission, type: :model do
             changeset: { vessel_info: { name: "NEW NAME" } })
         end
 
-        it { expect(subject).to be_truthy }
+        it { expect(subject).to eq(submission.registered_vessel.name) }
       end
     end
   end
