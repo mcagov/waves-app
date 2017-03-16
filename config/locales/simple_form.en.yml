@@ -39,6 +39,10 @@ en:
           breadth: Breadth
           classification_society: Classification Society
           classification_society_other: Any Other Classification Society
+          smc_issuing_authority: SMC Issuing Authority
+          smc_auditor : SMC Auditor
+          issc_issuing_authority: ISSC Issuing Authority
+          issc_auditor: ISSC Auditor
           depth: Depth
           ec_number: EC Number
           entry_into_service_at: Date of Entry into Service

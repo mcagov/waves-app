@@ -26,6 +26,10 @@ def expect_underlying_registry_fields(bln)
   expect_field(bln, ".underlying_registry_fields")
 end
 
+def expect_smc_fields(bln)
+  expect_field(bln, ".smc_fields")
+end
+
 def expect_referral_button(bln)
   expect_field(bln, ".btn-refer-submission")
 end

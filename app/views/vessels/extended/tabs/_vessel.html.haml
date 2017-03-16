@@ -49,10 +49,18 @@
   %thead
     %th= vessel_field_title(:classification_society)
     %th= vessel_field_title(:classification_society_other)
+
     - if display_vessel_object?(:entry_into_service_at, @vessel)
       %th.service_description_fields= vessel_field_title(:entry_into_service_at)
       %th= vessel_field_title(:area_of_operation)
       %th= vessel_field_title(:alternative_activity)
+
+    - if display_vessel_object?(:smc_issuing_authority, @vessel)
+      %th.smc_fields= vessel_field_title(:smc_issuing_authority)
+      %th= vessel_field_title(:smc_auditor)
+      %th= vessel_field_title(:issc_issuing_authority)
+      %th= vessel_field_title(:issc_auditor)
+
   %tbody
     %tr
       %td= vessel.classification_society
@@ -62,3 +70,10 @@
         %td.service_description_fields= vessel.entry_into_service_at
         %td= vessel.area_of_operation
         %td= vessel.alternative_activity
+
+      - if display_vessel_object?(:smc_issuing_authority, @vessel)
+        %td.smc_fields= vessel.smc_issuing_authority
+        %td= vessel.smc_auditor
+        %td= vessel.issc_issuing_authority
+        %td= vessel.issc_auditor
+

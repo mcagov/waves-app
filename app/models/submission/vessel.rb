@@ -57,7 +57,7 @@ class Submission::Vessel < WavesUtilities::Vessel
       [
         :smc_issuing_authority,
         :smc_auditor ,
-        :abs_ississuing_authority,
+        :issc_issuing_authority,
         :issc_auditor,
       ]
     end

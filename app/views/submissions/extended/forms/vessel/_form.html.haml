@@ -257,4 +257,34 @@
             .col-md-4{ class: vessel_change_css(:alternative_activity) }
               = vessel_f.input :alternative_activity,
                 label: vessel_change_label(:alternative_activity),
-              input_html: { class: "upcase" }
+                input_html: { class: "upcase" }
+
+        - if display_vessel_object?(:smc_issuing_authority, @submission)
+          .smc_fields
+            .col-md-2{ class: vessel_change_css(:smc_issuing_authority) }
+              = vessel_f.input :smc_issuing_authority,
+                label: vessel_change_label(:smc_issuing_authority),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:smc_auditor) }
+              = vessel_f.input :smc_auditor,
+                label: vessel_change_label(:smc_auditor),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:issc_issuing_authority) }
+              = vessel_f.input :issc_issuing_authority,
+                label: vessel_change_label(:issc_issuing_authority),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:issc_auditor) }
+              = vessel_f.input :issc_auditor,
+                label: vessel_change_label(:issc_auditor),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
