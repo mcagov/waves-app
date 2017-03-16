@@ -46,6 +46,15 @@ describe Submission::NameApproval do
 
       it { name_approval.valid? }
     end
+
+    context "when the port_no is blank (if port_no is not in use)" do
+      before do
+        name_approval.port_no = nil
+        expect(VesselPortNoValidator).not_to receive(:valid?)
+      end
+
+      it { name_approval.valid? }
+    end
   end
 
   context ".port_name" do
