@@ -7,8 +7,8 @@ def expect_mortgages(bln)
   end
 end
 
-def expect_port_no(bln)
-  css = "#port-no"
+def expect_port_no_fields(bln)
+  css = ".port_no_fields"
   if bln
     expect(page).to have_css(css)
   else

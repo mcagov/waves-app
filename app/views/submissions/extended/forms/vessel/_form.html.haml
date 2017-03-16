@@ -48,18 +48,19 @@
           = vessel_f.input :port_code, as: :hidden
 
         - if display_vessel_object?(:port_no, @submission)
-          .col-md-2{ id: "port-no", class: vessel_change_css(:port_no) }
-            = vessel_f.input :port_no,
-              label: vessel_change_label(:port_no),
-              as: :feedback,
-              feedback_label: vessel_f.object.port_code,
-              placement: :left,
-              readonly: :readonly
+          .port_no_fields
+            .col-md-2{ class: vessel_change_css(:port_no) }
+              = vessel_f.input :port_no,
+                label: vessel_change_label(:port_no),
+                as: :feedback,
+                feedback_label: vessel_f.object.port_code,
+                placement: :left,
+                readonly: :readonly
 
-        .col-md-2{ class: vessel_change_css(:ec_number) }
-          = vessel_f.input :ec_number,
-            label: vessel_change_label(:ec_number),
-            input_html: { class: "upcase" }
+            .col-md-2{ class: vessel_change_css(:ec_number) }
+              = vessel_f.input :ec_number,
+                label: vessel_change_label(:ec_number),
+                input_html: { class: "upcase" }
 
         .col-md-2{ class: vessel_change_css(:radio_call_sign) }
           = vessel_f.input :radio_call_sign,

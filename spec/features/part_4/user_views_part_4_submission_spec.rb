@@ -7,6 +7,6 @@ describe "User views Part 4 submission", type: :feature, js: true do
 
   scenario "UI Elements" do
     expect_mortgages(false)
-    expect_port_no(false)
+    expect_port_no_fields(false)
   end
 end
