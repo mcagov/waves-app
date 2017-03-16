@@ -13,5 +13,6 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     expect(page).to have_css("#vessel_type_label", text: "Type of BARGE")
 
     expect_mortgages(true)
+    expect_port_no(false)
   end
 end
