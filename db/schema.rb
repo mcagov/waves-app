@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309153415) do
+ActiveRecord::Schema.define(version: 20170316130157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -421,12 +421,12 @@ ActiveRecord::Schema.define(version: 20170309153415) do
   end
 
   create_table "vessels", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name",                         null: false
+    t.string   "name",                            null: false
     t.string   "hin"
     t.string   "make_and_model"
     t.string   "number_of_hulls"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "mmsi_number"
     t.string   "radio_call_sign"
     t.string   "vessel_type"
@@ -463,6 +463,13 @@ ActiveRecord::Schema.define(version: 20170309153415) do
     t.string   "hull_construction_material"
     t.string   "year_of_build"
     t.string   "country_of_build"
+    t.string   "underlying_registry"
+    t.string   "underlying_registry_identity_no"
+    t.string   "underlying_registry_port"
+    t.string   "smc_issuing_authority"
+    t.string   "abs_smc_auditor"
+    t.string   "abs_issc_issuing_authority"
+    t.string   "abs_issc_auditor"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree

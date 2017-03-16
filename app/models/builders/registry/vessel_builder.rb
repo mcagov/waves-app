@@ -34,7 +34,8 @@ class Builders::Registry::VesselBuilder
       @vessel.vessel_type = @submission.vessel.type_of_vessel
     end
 
-    def build_identity # extended#Identity section
+    # rubocop:disable all
+    def build_identity # # extended#Identity section
       @vessel.registration_type = @submission.vessel.registration_type
       @vessel.vessel_category = @submission.vessel.vessel_category
       @vessel.imo_number = @submission.vessel.imo_number
@@ -44,7 +45,11 @@ class Builders::Registry::VesselBuilder
       @vessel.last_registry_country = @submission.vessel.last_registry_country
       @vessel.last_registry_no = @submission.vessel.last_registry_no
       @vessel.last_registry_port = @submission.vessel.last_registry_port
+      @vessel.underlying_registry = @vessel.underlying_registry
+      @vessel.underlying_registry_identity_no = @vessel.underlying_registry_identity_no
+      @vessel.underlying_registry_port = @vessel.underlying_registry_port
     end
+    # rubocop:enable all
 
     def build_operational_info # extended#Operational Information section
       @vessel.classification_society = @submission.vessel.classification_society
@@ -53,6 +58,10 @@ class Builders::Registry::VesselBuilder
       @vessel.entry_into_service_at = @submission.vessel.entry_into_service_at
       @vessel.area_of_operation = @submission.vessel.area_of_operation
       @vessel.alternative_activity = @submission.vessel.alternative_activity
+      @vessel.smc_issuing_authority = @vessel.smc_issuing_authority
+      @vessel.abs_smc_auditor = @vessel.abs_smc_auditor
+      @vessel.abs_issc_issuing_authority = @vessel.abs_issc_issuing_authority
+      @vessel.abs_issc_auditor = @vessel.abs_issc_auditor
     end
 
     def build_description # extended#Description section
