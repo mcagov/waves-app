@@ -47,13 +47,14 @@
             input_html: { readonly: "readonly" }
           = vessel_f.input :port_code, as: :hidden
 
-        .col-md-2{ class: vessel_change_css(:port_no) }
-          = vessel_f.input :port_no,
-            label: vessel_change_label(:port_no),
-            as: :feedback,
-            feedback_label: vessel_f.object.port_code,
-            placement: :left,
-            readonly: :readonly
+        - if display_port_no?(@submission)
+          .col-md-2{ id: "port-no", class: vessel_change_css(:port_no) }
+            = vessel_f.input :port_no,
+              label: vessel_change_label(:port_no),
+              as: :feedback,
+              feedback_label: vessel_f.object.port_code,
+              placement: :left,
+              readonly: :readonly
 
         .col-md-2{ class: vessel_change_css(:ec_number) }
           = vessel_f.input :ec_number,

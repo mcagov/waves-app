@@ -15,8 +15,12 @@ class Builders::NameApprovalBuilder
     def init_defaults
       @name_approval.approved_until ||= 3.months.from_now
 
-      @name_approval.port_no ||=
-        SequenceNumber::Generator.port_no!(@name_approval.port_code)
+      if Policies::Definitions.port_no?(@submission)
+        @name_approval.port_no ||=
+          SequenceNumber::Generator.port_no!(@name_approval.port_code)
+      else
+        @name_approval.port_no = nil
+      end
 
       @name_approval.submission = @submission
     end

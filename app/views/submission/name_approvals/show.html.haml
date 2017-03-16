@@ -44,14 +44,15 @@
             include_blank: false,
             input_html: { class: "select2 select2_single searchable" }
 
-          .col-md-2.approval_port-no
-            = f.input :port_no,
-              as: :feedback,
-              feedback_label: f.object.port_code || "A",
-              placement: :left,
-              hint: "leave blank for system-generated port number",
-              label: "Port Number",
-              required: false
+          - if display_port_no?(@submission)
+            .col-md-2.approval_port-no
+              = f.input :port_no,
+                as: :feedback,
+                feedback_label: f.object.port_code || "A",
+                placement: :left,
+                hint: "leave blank for system-generated port number",
+                label: "Port Number",
+                required: false
           .col-md-2
             = f.input :approved_until, as: :select,
               collection: name_approved_until_collection,
