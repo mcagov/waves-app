@@ -1,15 +1,7 @@
 class Submission::Vessel < WavesUtilities::Vessel
-  def port_name
-    WavesUtilities::Port.new(port_code).name if port_code
-  end
-
-  def pln
-    "#{port_code}#{port_no}"
-  end
-
   # After implementation, this should be moved to WavesUtilities
+  # rubocop:disable all
   class << self
-    # rubocop:disable Metrics/MethodLength
     def attributes_for(part, fishing_vessel = false)
       @attributes = WavesUtilities::Vessel::ATTRIBUTES
       @part = part.to_sym
@@ -70,4 +62,5 @@ class Submission::Vessel < WavesUtilities::Vessel
       ]
     end
   end
+  # rubocop:enable all
 end
