@@ -16,16 +16,16 @@ class Submission::Vessel < WavesUtilities::Vessel
 
       case part
       when :part_1
-        @attributes - port_no_fields - service_description_fields
+        @attributes - port_no_fields - service_description_fields - underlying_registry_fields
 
       when :part_2
         @attributes - underlying_registry_fields - smc_fields
 
       when :part_4
         if fishing_vessel
-          @attributes
+          @attributes - last_registry_fields
         else
-          @attributes - port_no_fields - service_description_fields
+          @attributes - port_no_fields - last_registry_fields - service_description_fields
         end
       end
     end
@@ -34,6 +34,14 @@ class Submission::Vessel < WavesUtilities::Vessel
       [
         :port_no,
         :ec_number,
+      ]
+    end
+
+    def last_registry_fields
+      [
+        :last_registry_country,
+        :last_registry_no,
+        :last_registry_port,
       ]
     end
 

@@ -18,6 +18,10 @@ def expect_service_description_fields(bln)
   expect_field(bln, ".service_description_fields")
 end
 
+def expect_last_registry_fields(bln)
+  expect_field(bln, ".last_registry_fields")
+end
+
 def expect_underlying_registry_fields(bln)
   expect_field(bln, ".underlying_registry_fields")
 end
