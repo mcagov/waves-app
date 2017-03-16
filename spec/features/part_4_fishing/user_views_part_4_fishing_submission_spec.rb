@@ -9,6 +9,4 @@ describe "User views Part 4 fishing submission", type: :feature, js: true do
     expect_mortgages(false)
     expect_port_no(true)
   end
-
-  scenario "expect_port_no on name approval page"
 end

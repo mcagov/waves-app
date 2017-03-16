@@ -45,7 +45,7 @@
             input_html: { class: "select2 select2_single searchable" }
 
           - if display_vessel_object?(:port_no, @submission)
-            .col-md-2.approval_port-no
+            .col-md-2#port-no.approval_port-no
               = f.input :port_no,
                 as: :feedback,
                 feedback_label: f.object.port_code || "A",
