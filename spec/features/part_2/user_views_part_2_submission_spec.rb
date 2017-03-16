@@ -5,6 +5,7 @@ describe "User views Part 2 submission", type: :feature, js: true do
     visit_name_approved_part_2_submission
     expect_mortgages(true)
     expect_port_no_fields(true)
+    expect_service_description_fields(true)
   end
 
   scenario "Name Approval page" do

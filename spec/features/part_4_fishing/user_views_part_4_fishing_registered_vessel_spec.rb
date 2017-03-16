@@ -11,5 +11,6 @@ describe "User views Part 4 fishing vessel", type: :feature, js: true do
   scenario "UI Elements" do
     expect_mortgages(false)
     expect_port_no_fields(true)
+    expect_service_description_fields(true)
   end
 end

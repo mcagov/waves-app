@@ -49,13 +49,16 @@
   %thead
     %th= vessel_field_title(:classification_society)
     %th= vessel_field_title(:classification_society_other)
-    %th= vessel_field_title(:entry_into_service_at)
-    %th= vessel_field_title(:area_of_operation)
-    %th= vessel_field_title(:alternative_activity)
+    - if display_vessel_object?(:entry_into_service_at, @vessel)
+      %th.service_description_fields= vessel_field_title(:entry_into_service_at)
+      %th= vessel_field_title(:area_of_operation)
+      %th= vessel_field_title(:alternative_activity)
   %tbody
     %tr
       %td= vessel.classification_society
       %td= vessel.classification_society_other
-      %td= vessel.entry_into_service_at
-      %td= vessel.area_of_operation
-      %td= vessel.alternative_activity
+
+      - if display_vessel_object?(:entry_into_service_at, @vessel)
+        %td.service_description_fields= vessel.entry_into_service_at
+        %td= vessel.area_of_operation
+        %td= vessel.alternative_activity

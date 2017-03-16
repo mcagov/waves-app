@@ -5,6 +5,7 @@ describe "User views Part 4 registered vessel", type: :feature, js: true do
     visit_name_approved_part_4_submission
     expect_mortgages(false)
     expect_port_no_fields(false)
+    expect_service_description_fields(false)
   end
 
   scenario "Name Approval page" do

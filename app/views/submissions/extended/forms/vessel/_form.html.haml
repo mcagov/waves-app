@@ -221,17 +221,19 @@
             collection: classification_society_collection,
             input_html: { class: "select2 select2_single" }
 
-        .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
-          = vessel_f.input :entry_into_service_at,
-            label: vessel_change_label(:entry_into_service_at),
-            input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+        - if display_vessel_object?(:entry_into_service_at, @submission)
+          .service_description_fields
+            .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
+              = vessel_f.input :entry_into_service_at,
+                label: vessel_change_label(:entry_into_service_at),
+                input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
 
-        .col-md-2{ class: vessel_change_css(:area_of_operation) }
-          = vessel_f.input :area_of_operation,
-            label: vessel_change_label(:area_of_operation),
-            input_html: { class: "upcase" }
+            .col-md-2{ class: vessel_change_css(:area_of_operation) }
+              = vessel_f.input :area_of_operation,
+                label: vessel_change_label(:area_of_operation),
+                input_html: { class: "upcase" }
 
-        .col-md-4{ class: vessel_change_css(:alternative_activity) }
-          = vessel_f.input :alternative_activity,
-            label: vessel_change_label(:alternative_activity),
-            input_html: { class: "upcase" }
+            .col-md-4{ class: vessel_change_css(:alternative_activity) }
+              = vessel_f.input :alternative_activity,
+                label: vessel_change_label(:alternative_activity),
+              input_html: { class: "upcase" }

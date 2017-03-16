@@ -14,5 +14,6 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
 
     expect_mortgages(true)
     expect_port_no_fields(false)
+    expect_service_description_fields(false)
   end
 end
