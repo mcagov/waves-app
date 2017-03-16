@@ -8,7 +8,8 @@ class Submission::Vessel < WavesUtilities::Vessel
   end
 
   # After implementation, this should be moved to WavesUtilities
-  class << self # rubocop:disable Metrics/MethodLength
+  class << self
+    # rubocop:disable Metrics/MethodLength
     def attributes_for(part, fishing_vessel = false)
       @attributes = WavesUtilities::Vessel::ATTRIBUTES
       @part = part.to_sym
