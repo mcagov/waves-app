@@ -23,9 +23,5 @@ class Policies::Definitions
       return true if @part == :part_2 && registration_type(obj) == :full
       false
     end
-
-    def port_no?(obj)
-      fishing_vessel?(obj)
-    end
   end
 end

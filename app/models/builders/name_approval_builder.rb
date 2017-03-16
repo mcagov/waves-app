@@ -15,7 +15,7 @@ class Builders::NameApprovalBuilder
     def init_defaults
       @name_approval.approved_until ||= 3.months.from_now
 
-      if Policies::Definitions.port_no?(@submission)
+      if Policies::Workflow.uses_port_no?(@submission)
         @name_approval.port_no ||=
           SequenceNumber::Generator.port_no!(@name_approval.port_code)
       else

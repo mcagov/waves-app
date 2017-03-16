@@ -56,4 +56,20 @@ describe Policies::Workflow do
       it { expect(subject).to be_truthy }
     end
   end
+
+  context ".uses_port_no?" do
+    subject { described_class.uses_port_no?(vessel) }
+
+    context "for a fishing vessel" do
+      let(:vessel) { build(:fishing_vessel) }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "for a pleasure vessel" do
+      let(:vessel) { build(:pleasure_vessel) }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
 end
