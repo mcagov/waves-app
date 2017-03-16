@@ -56,9 +56,9 @@ class Submission::Vessel < WavesUtilities::Vessel
     def smc_fields
       [
         :smc_issuing_authority,
-        :abs_smc_auditor,
-        :abs_issc_issuing_authority,
-        :abs_issc_auditor,
+        :smc_auditor ,
+        :abs_ississuing_authority,
+        :issc_auditor,
       ]
     end
 

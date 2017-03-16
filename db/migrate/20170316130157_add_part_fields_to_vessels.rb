@@ -4,8 +4,8 @@ class AddPartFieldsToVessels < ActiveRecord::Migration[5.0]
     add_column :vessels, :underlying_registry_identity_no, :string
     add_column :vessels, :underlying_registry_port, :string
     add_column :vessels, :smc_issuing_authority, :string
-    add_column :vessels, :abs_smc_auditor, :string
-    add_column :vessels, :abs_issc_issuing_authority, :string
-    add_column :vessels, :abs_issc_auditor, :string
+    add_column :vessels, :smc_auditor, :string
+    add_column :vessels, :issc_issuing_authority, :string
+    add_column :vessels, :issc_auditor, :string
   end
 end

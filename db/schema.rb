@@ -467,9 +467,9 @@ ActiveRecord::Schema.define(version: 20170316130157) do
     t.string   "underlying_registry_identity_no"
     t.string   "underlying_registry_port"
     t.string   "smc_issuing_authority"
-    t.string   "abs_smc_auditor"
-    t.string   "abs_issc_issuing_authority"
-    t.string   "abs_issc_auditor"
+    t.string   "smc_auditor"
+    t.string   "issc_issuing_authority"
+    t.string   "issc_auditor"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
