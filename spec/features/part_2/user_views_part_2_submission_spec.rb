@@ -9,4 +9,6 @@ describe "User views Part 2 submission", type: :feature, js: true do
     expect_mortgages(true)
     expect_port_no(true)
   end
+
+  scenario "expect_port_no on name approval page"
 end
