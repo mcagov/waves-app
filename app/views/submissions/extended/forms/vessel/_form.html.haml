@@ -47,7 +47,7 @@
             input_html: { readonly: "readonly" }
           = vessel_f.input :port_code, as: :hidden
 
-        - if display_port_no?(@submission)
+        - if display_vessel_object?(:port_no, @submission)
           .col-md-2{ id: "port-no", class: vessel_change_css(:port_no) }
             = vessel_f.input :port_no,
               label: vessel_change_label(:port_no),

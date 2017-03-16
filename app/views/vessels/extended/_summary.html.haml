@@ -36,7 +36,7 @@
         %td.soft-label.no-top-border Port of Registry:
         %td.no-top-border
           %strong= WavesUtilities::Port.new(@vessel.port_code).name
-      - if display_port_no?(@vessel)
+      - if display_vessel_object?(:port_no, @vessel)
         %tr
           %td.soft-label #{vessel_field_title(:port_no)}:
           %td#port-no
