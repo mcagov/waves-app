@@ -31,6 +31,7 @@ class Submission::NameApproval < ApplicationRecord
   end
 
   def unique_port_no_in_port
+    return if port_no.blank?
     return unless port_no_changed?
 
     unless VesselPortNoValidator.valid?(port_no, port_code)

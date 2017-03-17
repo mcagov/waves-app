@@ -47,18 +47,20 @@
             input_html: { readonly: "readonly" }
           = vessel_f.input :port_code, as: :hidden
 
-        .col-md-2{ class: vessel_change_css(:port_no) }
-          = vessel_f.input :port_no,
-            label: vessel_change_label(:port_no),
-            as: :feedback,
-            feedback_label: vessel_f.object.port_code,
-            placement: :left,
-            readonly: :readonly
+        - if display_vessel_object?(:port_no, @submission)
+          .port_no_fields
+            .col-md-2{ class: vessel_change_css(:port_no) }
+              = vessel_f.input :port_no,
+                label: vessel_change_label(:port_no),
+                as: :feedback,
+                feedback_label: vessel_f.object.port_code,
+                placement: :left,
+                readonly: :readonly
 
-        .col-md-2{ class: vessel_change_css(:ec_number) }
-          = vessel_f.input :ec_number,
-            label: vessel_change_label(:ec_number),
-            input_html: { class: "upcase" }
+            .col-md-2{ class: vessel_change_css(:ec_number) }
+              = vessel_f.input :ec_number,
+                label: vessel_change_label(:ec_number),
+                input_html: { class: "upcase" }
 
         .col-md-2{ class: vessel_change_css(:radio_call_sign) }
           = vessel_f.input :radio_call_sign,
@@ -75,24 +77,45 @@
             label: vessel_change_label(:hin),
             input_html: { class: "upcase" }
 
-      .row
-        .col-md-2{ class: vessel_change_css(:last_registry_country) }
-          = vessel_f.input :last_registry_country,
-            label: vessel_change_label(:last_registry_country),
-            as: :select,
-            collection: countries_collection,
-            include_blank: false,
-            input_html: { class: "select2 select2_single searchable" }
+      - if display_vessel_object?(:last_registry_country, @submission)
+        .row.last_registry_fields
+          .col-md-2{ class: vessel_change_css(:last_registry_country) }
+            = vessel_f.input :last_registry_country,
+              label: vessel_change_label(:last_registry_country),
+              as: :select,
+              collection: countries_collection,
+              include_blank: false,
+              input_html: { class: "select2 select2_single searchable" }
 
-        .col-md-2{ class: vessel_change_css(:last_registry_no) }
-          = vessel_f.input :last_registry_no,
-            label: vessel_change_label(:last_registry_no),
-            input_html: { class: "upcase" }
+          .col-md-2{ class: vessel_change_css(:last_registry_no) }
+            = vessel_f.input :last_registry_no,
+              label: vessel_change_label(:last_registry_no),
+              input_html: { class: "upcase" }
 
-        .col-md-2{ class: vessel_change_css(:last_registry_port) }
-          = vessel_f.input :last_registry_port,
-            label: vessel_change_label(:last_registry_port),
-            input_html: { class: "upcase" }
+          .col-md-2{ class: vessel_change_css(:last_registry_port) }
+            = vessel_f.input :last_registry_port,
+              label: vessel_change_label(:last_registry_port),
+              input_html: { class: "upcase" }
+
+      - if display_vessel_object?(:underlying_registry, @submission)
+        .row.underlying_registry_fields
+          .col-md-2{ class: vessel_change_css(:underlying_registry) }
+            = vessel_f.input :underlying_registry,
+              label: vessel_change_label(:underlying_registry),
+              as: :select,
+              collection: countries_collection,
+              include_blank: false,
+              input_html: { class: "select2 select2_single searchable" }
+
+          .col-md-2{ class: vessel_change_css(:underlying_registry_identity_no) }
+            = vessel_f.input :underlying_registry_identity_no,
+              label: vessel_change_label(:underlying_registry_identity_no),
+              input_html: { class: "upcase" }
+
+          .col-md-2{ class: vessel_change_css(:underlying_registry_port) }
+            = vessel_f.input :underlying_registry_port,
+              label: vessel_change_label(:underlying_registry_port),
+              input_html: { class: "upcase" }
 
       %hr
       %h2 Description
@@ -219,17 +242,49 @@
             collection: classification_society_collection,
             input_html: { class: "select2 select2_single" }
 
-        .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
-          = vessel_f.input :entry_into_service_at,
-            label: vessel_change_label(:entry_into_service_at),
-            input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+        - if display_vessel_object?(:entry_into_service_at, @submission)
+          .service_description_fields
+            .col-md-2{ class: vessel_change_css(:entry_into_service_at) }
+              = vessel_f.input :entry_into_service_at,
+                label: vessel_change_label(:entry_into_service_at),
+                input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
 
-        .col-md-2{ class: vessel_change_css(:area_of_operation) }
-          = vessel_f.input :area_of_operation,
-            label: vessel_change_label(:area_of_operation),
-            input_html: { class: "upcase" }
+            .col-md-2{ class: vessel_change_css(:area_of_operation) }
+              = vessel_f.input :area_of_operation,
+                label: vessel_change_label(:area_of_operation),
+                input_html: { class: "upcase" }
 
-        .col-md-4{ class: vessel_change_css(:alternative_activity) }
-          = vessel_f.input :alternative_activity,
-            label: vessel_change_label(:alternative_activity),
-            input_html: { class: "upcase" }
+            .col-md-4{ class: vessel_change_css(:alternative_activity) }
+              = vessel_f.input :alternative_activity,
+                label: vessel_change_label(:alternative_activity),
+                input_html: { class: "upcase" }
+
+        - if display_vessel_object?(:smc_issuing_authority, @submission)
+          .smc_fields
+            .col-md-2{ class: vessel_change_css(:smc_issuing_authority) }
+              = vessel_f.input :smc_issuing_authority,
+                label: vessel_change_label(:smc_issuing_authority),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:smc_auditor) }
+              = vessel_f.input :smc_auditor,
+                label: vessel_change_label(:smc_auditor),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:issc_issuing_authority) }
+              = vessel_f.input :issc_issuing_authority,
+                label: vessel_change_label(:issc_issuing_authority),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }
+
+            .col-md-2{ class: vessel_change_css(:issc_auditor) }
+              = vessel_f.input :issc_auditor,
+                label: vessel_change_label(:issc_auditor),
+                as: :select,
+                collection: classification_society_collection,
+                input_html: { class: "select2 select2_single" }

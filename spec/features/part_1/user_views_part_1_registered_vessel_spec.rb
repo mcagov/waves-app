@@ -9,9 +9,12 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     visit vessel_path(@vessel)
   end
 
-  scenario "in general" do
+  scenario "UI Elements" do
     expect(page).to have_css("#vessel_type_label", text: "Type of BARGE")
 
     expect_mortgages(true)
+    expect_port_no_fields(false)
+    expect_service_description_fields(false)
+    expect_smc_fields(true)
   end
 end

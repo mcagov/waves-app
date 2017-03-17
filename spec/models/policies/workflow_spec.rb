@@ -56,4 +56,41 @@ describe Policies::Workflow do
       it { expect(subject).to be_truthy }
     end
   end
+
+  context ".uses_port_no?" do
+    subject { described_class.uses_port_no?(vessel) }
+
+    context "for a fishing vessel" do
+      let(:vessel) { build(:fishing_vessel) }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "for a pleasure vessel" do
+      let(:vessel) { build(:pleasure_vessel) }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
+  context ".uses_vessel_attribute?" do
+    before do
+      expect(WavesUtilities::Vessel)
+        .to receive(:attributes_for)
+        .with(:part_4, true).and_return([:name, :port_no])
+    end
+
+    let(:vessel) { build(:part_4_fishing_vessel) }
+    subject { described_class.uses_vessel_attribute?(attr, vessel) }
+
+    context "when the attribute is in use for this vessel" do
+      let(:attr) { :name }
+      it { expect(subject).to be_truthy }
+    end
+
+    context "when the attribute is NOT in use for this vessel" do
+      let(:attr) { :foo }
+      it { expect(subject).to be_falsey }
+    end
+  end
 end

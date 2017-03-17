@@ -10,5 +10,17 @@ class Policies::Workflow
     def generate_official_no?(submission)
       submission.part.to_sym != :part_3
     end
+
+    def uses_port_no?(obj)
+      Policies::Definitions.fishing_vessel?(obj)
+    end
+
+    def uses_vessel_attribute?(attr, obj)
+      @part = obj.part.to_sym
+
+      WavesUtilities::Vessel.attributes_for(
+        @part, Policies::Definitions.fishing_vessel?(obj)
+      ).include?(attr.to_sym)
+    end
   end
 end

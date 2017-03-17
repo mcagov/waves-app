@@ -39,6 +39,10 @@ en:
           breadth: Breadth
           classification_society: Classification Society
           classification_society_other: Any Other Classification Society
+          smc_issuing_authority: SMC Issuing Authority
+          smc_auditor : SMC Auditor
+          issc_issuing_authority: ISSC Issuing Authority
+          issc_auditor: ISSC Auditor
           depth: Depth
           ec_number: EC Number
           entry_into_service_at: Date of Entry into Service
@@ -50,6 +54,9 @@ en:
           last_registry_country: "Last Registry: Country"
           last_registry_no: "Last Registry: Identity Number"
           last_registry_port: "Last Registry: Port"
+          underlying_registry: Underlying Registry
+          underlying_registry_identity_no: "Underlying Registry: Identity Number"
+          underlying_registry_port: "Underlying Registry: Port"
           length_in_meters: Length
           length_overall: Length Overall
           make_and_model: Make and Model
