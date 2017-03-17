@@ -1,3 +1,24 @@
-%h2 Charterers
-
-TO DO
+%h2 Bareboat Charter
+%table.table.table-striped
+  %thead
+    %th Reference Number
+    %th Start Date
+    %th End Date
+    %th Parties
+  %tbody
+    - @vessel.charterers.order("created_at asc").each_with_index do |charterer, index|
+      %tr
+        %td.reference_number= charterer.reference_number
+        %td.start_date= charterer.start_date
+        %td.end_date= charterer.end_date
+        %td.parties
+          - charterer.charter_parties.each do |charter_party|
+            .name
+              Name:
+              %strong= charter_party.name
+            .address
+              Address:
+              %strong= charter_party.address
+            .contact_details
+              Contact Details:
+              %strong= charter_party.contact_details
