@@ -22,9 +22,7 @@ class Submission::AgentsController < InternalPagesController
   end
 
   def submission_agent_params
-    params.require(:submission).permit(
-      agent: [:name, :email, :phone_number, :nationality, :address_1,
-              :address_2, :address_3, :town, :postcode, :country])
+    params.require(:submission).permit(agent: [Customer.attribute_names])
   end
 
   def render_update_js

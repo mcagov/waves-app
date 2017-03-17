@@ -166,6 +166,21 @@ describe Builders::SubmissionBuilder do
         end
       end
 
+      context "with managers" do
+        let(:submission_manager) { submission.reload.managers.first }
+
+        it "builds the managers from the changeset" do
+          expect(submission_manager.safety_management.address_1).to eq("SM1")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the engines" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.managers.first).to eq(submission_manager)
+          end
+        end
+      end
+
       context "with mortgages" do
         let(:submission_mortgage) { submission.reload.mortgages.first }
 
@@ -235,7 +250,7 @@ def submission_changeset_sample_data
   }
 end
 
-def vessel_sample_data
+def vessel_sample_data # rubocop:disable Metrics/MethodLength
   {
     part: :part_3,
     name: "MY BOAT", number_of_hulls: 1,
@@ -243,6 +258,9 @@ def vessel_sample_data
     engines: [create(:engine, make: "DUCATI")],
     beneficial_owners: [create(:beneficial_owner, name: "Barry")],
     directed_bys: [create(:directed_by, name: "Dennis")],
+    managers: [create(:manager,
+                      safety_management: create(:safety_management,
+                                                address_1: "SM1"))],
     mortgages: [create(:mortgage,
                        mortgagees: [create(:mortgagee, name: "Mary")])]
   }

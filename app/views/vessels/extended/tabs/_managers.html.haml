@@ -1,0 +1,24 @@
+%hr
+%h2 Managers
+%table.table.table-striped
+  %thead
+    %th Name
+    %th IMO Number
+    %th Email
+    %th Phone
+    %th Address
+  %tbody
+    - @vessel.managers.each do |manager|
+      %tr
+        %td.manager-name= manager.name
+        %td.manager-imo_number= manager.imo_number
+        %td.manager-email= manager.email
+        %td.manager-phone_number= manager.phone_number
+        %td.manager-address
+          = manager.inline_address
+          .safety_management
+            %strong Safety Management:
+            - if manager.safety_management
+              = manager.safety_management.inline_address
+            - else
+              As above

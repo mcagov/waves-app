@@ -1,0 +1,48 @@
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4.modal-title Manager
+.modal-body
+  #manager
+    .postcode-lookup
+      .row
+        .col-md-9
+          = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: f, f: f, label: "Manager Name" }
+        .col-md-3
+          = f.input :imo_number, label: "IMO Number"
+      .row
+        .col-md-4
+          = f.input :email, label: "Email Address"
+        .col-md-4
+          = f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
+
+      = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f, countries: countries_collection }
+
+  #safety_management
+    %hr
+    %h4 Safety Management Activities
+    - f.object.build_safety_management unless f.object.safety_management
+    = f.fields_for(:safety_management) do |safety_management_f|
+      .row
+        .col-md-12
+          = safety_management_f.input :_destroy, as: :boolean, label: "Use address above", wrapper_html: { class: "padded-checkbox" }
+      #safety_management_fields
+        .row
+          .col-md-4
+            = safety_management_f.input :address_1, input_html: { class: "upcase address-1" }
+          .col-md-4
+            = safety_management_f.input :address_2, input_html: { class: "upcase address-2" }
+          .col-md-4
+            = safety_management_f.input :address_3, input_html: { class: "upcase address-3" }
+        .row
+          .col-md-4
+            = safety_management_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
+          .col-md-4
+            = safety_management_f.input :postcode, input_html: { class: "upcase postcode" }
+          .col-md-4
+            = safety_management_f.input :country, collection: countries_collection, include_blank: false
+
+
+.modal-footer
+  = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
+    Save Manager

@@ -51,9 +51,7 @@ class Submission::DeclarationsController < InternalPagesController
   def declaration_params
     params.require(:declaration).permit(
       :id, :_destroy, :declaration_signed, :entity_type, :shares_held,
-      owner: [:name, :email, :phone_number, :imo_number, :eligibility_status,
-              :nationality, :address_1, :address_2, :address_3, :town,
-              :postcode, :registration_number, :date_of_incorporation])
+      owner: [Customer.attribute_names])
   end
 
   def render_update_js

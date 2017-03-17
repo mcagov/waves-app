@@ -101,6 +101,12 @@ describe Builders::RegistryBuilder do
         expect(document.asset.file_file_name).to eq("mca_test.pdf")
       end
 
+      it "creates the managers" do
+        manager = registered_vessel.reload.managers.first
+        expect(manager.name).to eq("MARY")
+        expect(manager.safety_management.address_1).to eq("SM ADDRESS")
+      end
+
       it "creates the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
         expect(mortgage.reference_number).to eq("MGT_1")
@@ -150,6 +156,10 @@ def init_basic_submission
   submission.documents.create(
     entity_type: :other,
     assets: [create(:asset)])
+
+  submission.managers.create(
+    name: "MARY",
+    safety_management: SafetyManagement.new(address_1: "SM ADDRESS"))
 
   submission.mortgages.create(
     reference_number: "MGT_1",

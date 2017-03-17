@@ -1,0 +1,2 @@
+class SafetyManagement < Customer
+end

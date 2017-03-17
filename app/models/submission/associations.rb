@@ -56,6 +56,11 @@ module Submission::Associations
                     -> { order(:name) },
                     class_name: "DirectedBy",
                     as: :parent
+
+      base.has_many :managers,
+                    -> { order(:name) },
+                    class_name: "Manager",
+                    as: :parent
     end
 
     def notification_associations(base)

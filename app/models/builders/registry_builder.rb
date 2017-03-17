@@ -28,13 +28,14 @@ class Builders::RegistryBuilder
       end
     end
 
-    def builder_associations
+    def builder_associations # rubocop:disable Metrics/MethodLength
       [
         "Builders::Registry::AgentBuilder",
         "Builders::Registry::BeneficialOwnerBuilder",
         "Builders::Registry::DirectedByBuilder",
         "Builders::Registry::DocumentBuilder",
         "Builders::Registry::EngineBuilder",
+        "Builders::Registry::ManagerBuilder",
         "Builders::Registry::MortgageBuilder",
         "Builders::Registry::OwnerBuilder",
         "Builders::Registry::RepresentativeBuilder",

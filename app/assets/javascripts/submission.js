@@ -60,6 +60,11 @@ $(document).ready(function() {
     }
   };
 
+  // Toggle the safety management fields
+  $('#toggle_safety_management_fields').on('click', function(){
+     $('#safety_management_fields').toggle('slow');
+  });
+
   // Set the Vessel Type Label for extended submissions
   function set_vessel_type_label() {
     sel_value = $('#submission_vessel_vessel_category').val();

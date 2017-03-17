@@ -30,6 +30,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       build_declarations
       build_managing_owner_and_correspondent
       build_engines
+      build_managers
       build_mortgages
       build_beneficial_owners
       build_directed_bys
@@ -103,6 +104,30 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_engine.parent = @submission
         submission_engine.save
       end
+    end
+
+    def build_managers
+      if @submission.persisted?
+        return unless Manager.where(parent: @submission).empty?
+      end
+
+      (@submission.symbolized_changeset[:managers] || []).each do |manager|
+        except_keys = [:id, :safety_management]
+        submission_manager = Manager.new(manager.except(*except_keys))
+        submission_manager.parent = @submission
+        submission_manager.save
+
+        build_safety_management_for(submission_manager, manager)
+      end
+    end
+
+    def build_safety_management_for(submission_manager, manager)
+      return unless manager[:safety_management]
+
+      safety_management = SafetyManagement.new(manager[:safety_management])
+      safety_management.id = nil
+      safety_management.parent = submission_manager
+      safety_management.save
     end
 
     def build_mortgages

@@ -32,9 +32,7 @@ class Submission::BeneficialOwnersController < InternalPagesController
   end
 
   def beneficial_owner_params
-    params.require(:beneficial_owner).permit(
-      :name, :email, :phone_number, :imo_number, :eligibility_status,
-      :nationality, :address_1, :address_2, :address_3, :town, :postcode)
+    params.require(:beneficial_owner).permit(Customer.attribute_names)
   end
 
   def respond_with_update
