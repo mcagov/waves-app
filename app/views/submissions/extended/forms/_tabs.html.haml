@@ -17,6 +17,10 @@
             %li{:role => "presentation"}
               %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
 
+            - if display_charterers?(@submission)
+              %li{:role => "presentation"}
+                %a#charterers-tab{"data-toggle" => "tab", :href => "#charterers_tab", :role => "tab"} Charterers
+
             - if display_mortgages?(@submission)
               %li{:role => "presentation"}
                 %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
@@ -47,6 +51,9 @@
 
             #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
               #mortgages= render partial: "submissions/extended/forms/mortgages/base"
+
+            #charterers_tab.tab-pane{"aria-labelledby" => "charterers-tab", :role => "tabpanel"}
+              #charterers= render partial: "submissions/extended/forms/charterers/base"
 
             #managers_tab.tab-pane{"aria-labelledby" => "managers-tab", :role => "tabpanel"}
               #managers= render partial: "submissions/extended/forms/managers/base"

@@ -43,6 +43,22 @@ describe Policies::Definitions do
     end
   end
 
+  context ".charterable?" do
+    subject { described_class.charterable?(vessel) }
+
+    context "by default" do
+      let(:vessel) { build(:registered_vessel, part: :part_2) }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "for a :part_4 vessel" do
+      let(:vessel) { build(:registered_vessel, part: :part_4) }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
+
   context ".mortgageable?" do
     subject { described_class.mortgageable?(vessel) }
 

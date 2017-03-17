@@ -6,6 +6,10 @@ def expect_field(bln, css)
   end
 end
 
+def expect_charterers(bln)
+  expect_field(bln, "#charterers-tab")
+end
+
 def expect_managers(bln)
   expect_field(bln, "#managers-tab")
 end

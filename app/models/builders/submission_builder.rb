@@ -32,6 +32,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       build_engines
       build_managers
       build_mortgages
+      build_charterers
       build_beneficial_owners
       build_directed_bys
     end
@@ -150,6 +151,29 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_mortgagee = Mortgagee.new(mortgagee.except(:id))
         submission_mortgagee.mortgage = submission_mortgage
         submission_mortgagee.save
+      end
+    end
+
+    def build_charterers
+      if @submission.persisted?
+        return unless Charterer.where(parent: @submission).empty?
+      end
+
+      (@submission.symbolized_changeset[:charterers] || []).each do |charterer|
+        except_keys = [:id, :charter_parties]
+        submission_charterer = Charterer.new(charterer.except(*except_keys))
+        submission_charterer.parent = @submission
+        submission_charterer.save
+
+        build_charter_parties_for(submission_charterer, charterer)
+      end
+    end
+
+    def build_charter_parties_for(submission_charterer, charterer)
+      charterer[:charter_parties].each do |charter_party|
+        submission_charter_party = CharterParty.new(charter_party.except(:id))
+        submission_charter_party.charterer = submission_charterer
+        submission_charter_party.save
       end
     end
 

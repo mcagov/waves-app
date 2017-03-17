@@ -1,4 +1,8 @@
 module PoliciesHelper
+  def display_charterers?(obj)
+    Policies::Definitions.charterable?(obj)
+  end
+
   def display_mortgages?(obj)
     Policies::Definitions.mortgageable?(obj)
   end

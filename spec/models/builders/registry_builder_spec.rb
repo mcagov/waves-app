@@ -118,6 +118,17 @@ describe Builders::RegistryBuilder do
           .to eq("MGT_1")
       end
 
+      it "creates the charterers" do
+        charterer = registered_vessel.reload.charterers.first
+        expect(charterer.reference_number).to eq("CH 1")
+        expect(charterer.charter_parties.first.name).to eq("Carol")
+      end
+
+      it "retains the submission's charterers" do
+        expect(submission.reload.charterers.first.reference_number)
+          .to eq("CH 1")
+      end
+
       it "creates the beneficial_owners" do
         beneficial_owner = registered_vessel.reload.beneficial_owners.first
         expect(beneficial_owner.name).to eq("Barry")
@@ -164,6 +175,10 @@ def init_basic_submission
   submission.mortgages.create(
     reference_number: "MGT_1",
     mortgagees: [Mortgagee.new(name: "Mary")])
+
+  submission.charterers.create(
+    reference_number: "CH 1",
+    charter_parties: [build(:charter_party, name: "Carol")])
 
   submission.beneficial_owners.create(
     name: "Barry")

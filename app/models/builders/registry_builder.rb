@@ -37,6 +37,7 @@ class Builders::RegistryBuilder
         "Builders::Registry::EngineBuilder",
         "Builders::Registry::ManagerBuilder",
         "Builders::Registry::MortgageBuilder",
+        "Builders::Registry::ChartererBuilder",
         "Builders::Registry::OwnerBuilder",
         "Builders::Registry::RepresentativeBuilder",
         "Builders::Registry::ShareBuilder"]

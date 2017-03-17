@@ -89,6 +89,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :charterers,
+              controller: "submission/charterers",
+              only: [:create, :update, :destroy]
+
     resources :documents,
               only: [:create, :update, :destroy],
               controller: "submission/documents"

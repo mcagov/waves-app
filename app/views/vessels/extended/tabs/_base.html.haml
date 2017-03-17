@@ -9,6 +9,10 @@
     %li{:role => "presentation"}
       %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
 
+    - if display_charterers?(@vessel)
+      %li{:role => "presentation"}
+        %a#charterers-tab{"data-toggle" => "tab", :href => "#charterers_tab", :role => "tab"} Charterers
+
     - if display_managers?(@vessel)
       %li{:role => "presentation"}
         %a#managers-tab{"data-toggle" => "tab", :href => "#managers_tab", :role => "tab"} Managers
@@ -41,6 +45,9 @@
 
     #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/owners", locals: { vessel: @vessel }
+
+    #charterers_tab.tab-pane{"aria-labelledby" => "charterers-tab", :role => "tabpanel"}
+      = render partial: "vessels/extended/tabs/charterers", locals: { vessel: @vessel }
 
     #managers_tab.tab-pane{"aria-labelledby" => "managers-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/managers", locals: { vessel: @vessel }

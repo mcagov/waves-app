@@ -174,7 +174,7 @@ describe Builders::SubmissionBuilder do
         end
 
         context "running #build_defaults again" do
-          it "does not alter the engines" do
+          it "does not alter the managers" do
             described_class.build_defaults(submission)
             expect(submission.reload.managers.first).to eq(submission_manager)
           end
@@ -189,9 +189,25 @@ describe Builders::SubmissionBuilder do
         end
 
         context "running #build_defaults again" do
-          it "does not alter the engines" do
+          it "does not alter the mortgages" do
             described_class.build_defaults(submission)
             expect(submission.reload.mortgages.first).to eq(submission_mortgage)
+          end
+        end
+      end
+
+      context "with charterers" do
+        let(:submission_charterer) { submission.reload.charterers.first }
+
+        it "builds the charterers from the changeset" do
+          expect(submission_charterer.charter_parties.first.name).to eq("Carol")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the charterers" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.charterers.first)
+              .to eq(submission_charterer)
           end
         end
       end
@@ -262,7 +278,11 @@ def vessel_sample_data # rubocop:disable Metrics/MethodLength
                       safety_management: create(:safety_management,
                                                 address_1: "SM1"))],
     mortgages: [create(:mortgage,
-                       mortgagees: [create(:mortgagee, name: "Mary")])]
+                       mortgagees: [create(:mortgagee, name: "Mary")])],
+
+    charterers: [create(:charterer,
+                        charter_parties: [
+                          create(:charter_party, name: "Carol")])]
   }
 end
 
