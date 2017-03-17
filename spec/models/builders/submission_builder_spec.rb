@@ -196,6 +196,22 @@ describe Builders::SubmissionBuilder do
         end
       end
 
+      context "with charterers" do
+        let(:submission_charterer) { submission.reload.charterers.first }
+
+        it "builds the charterers from the changeset" do
+          expect(submission_charterer.charter_parties.first.name).to eq("Carol")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the charterers" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.charterers.first)
+              .to eq(submission_charterer)
+          end
+        end
+      end
+
       context "with beneficial_owners" do
         let(:beneficial_owner) { submission.reload.beneficial_owners.first }
 
@@ -262,7 +278,11 @@ def vessel_sample_data # rubocop:disable Metrics/MethodLength
                       safety_management: create(:safety_management,
                                                 address_1: "SM1"))],
     mortgages: [create(:mortgage,
-                       mortgagees: [create(:mortgagee, name: "Mary")])]
+                       mortgagees: [create(:mortgagee, name: "Mary")])],
+
+    charterers: [create(:charterer,
+                        charter_parties: [
+                          create(:charter_party, name: "Carol")])]
   }
 end
 
