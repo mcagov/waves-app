@@ -83,6 +83,7 @@ module Register
         engines: engines.map(&:attributes),
         managers: managers_info,
         mortgages: mortgages_info,
+        charterers: charterers_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
         directed_bys: directed_bys.map(&:attributes),
         representative: representative_info,
@@ -125,6 +126,13 @@ module Register
       mortgages.map do |mortgage|
         mortgage.attributes.merge(
           mortgagees: mortgage.mortgagees.map(&:attributes))
+      end
+    end
+
+    def charterers_info
+      charterers.map do |charterer|
+        charterer.attributes.merge(
+          charter_parties: charterer.charter_parties.map(&:attributes))
       end
     end
 

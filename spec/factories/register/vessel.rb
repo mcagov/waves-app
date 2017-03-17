@@ -10,6 +10,7 @@ FactoryGirl.define do
     documents                 { [build(:document)] }
     managers                  { [build(:manager)] }
     mortgages                 { [build(:mortgage)] }
+    charterers                { [build(:charterer)] }
     beneficial_owners         { [build(:beneficial_owner)] }
     directed_bys              { [build(:directed_by)] }
     representative            { build(:registered_representative) }
