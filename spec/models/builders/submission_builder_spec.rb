@@ -174,7 +174,7 @@ describe Builders::SubmissionBuilder do
         end
 
         context "running #build_defaults again" do
-          it "does not alter the engines" do
+          it "does not alter the managers" do
             described_class.build_defaults(submission)
             expect(submission.reload.managers.first).to eq(submission_manager)
           end
@@ -189,7 +189,7 @@ describe Builders::SubmissionBuilder do
         end
 
         context "running #build_defaults again" do
-          it "does not alter the engines" do
+          it "does not alter the mortgages" do
             described_class.build_defaults(submission)
             expect(submission.reload.mortgages.first).to eq(submission_mortgage)
           end
