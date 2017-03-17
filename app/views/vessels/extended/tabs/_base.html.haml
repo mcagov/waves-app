@@ -9,6 +9,10 @@
     %li{:role => "presentation"}
       %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
 
+    - if display_managers?(@vessel)
+      %li{:role => "presentation"}
+        %a#managers-tab{"data-toggle" => "tab", :href => "#managers_tab", :role => "tab"} Managers
+
     - if display_mortgages?(@vessel)
       %li{:role => "presentation"}
         %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
@@ -37,6 +41,9 @@
 
     #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/owners", locals: { vessel: @vessel }
+
+    #managers_tab.tab-pane{"aria-labelledby" => "managers-tab", :role => "tabpanel"}
+      = render partial: "vessels/extended/tabs/managers", locals: { vessel: @vessel }
 
     #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/mortgages", locals: { vessel: @vessel }
