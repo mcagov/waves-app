@@ -75,7 +75,7 @@ describe Policies::Workflow do
 
   context ".uses_vessel_attribute?" do
     before do
-      expect(Submission::Vessel)
+      expect(WavesUtilities::Vessel)
         .to receive(:attributes_for)
         .with(:part_4, true).and_return([:name, :port_no])
     end

@@ -18,7 +18,7 @@ class Policies::Workflow
     def uses_vessel_attribute?(attr, obj)
       @part = obj.part.to_sym
 
-      Submission::Vessel.attributes_for(
+      WavesUtilities::Vessel.attributes_for(
         @part, Policies::Definitions.fishing_vessel?(obj)
       ).include?(attr.to_sym)
     end
