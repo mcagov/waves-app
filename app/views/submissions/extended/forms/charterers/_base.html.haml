@@ -1,0 +1,79 @@
+%h2 Bareboat Charter
+%table.table.table-striped
+  %thead
+    %th Reference Number
+    %th Start Date
+    %th End Date
+    %th Parties
+    %th
+  %tbody
+    - @submission.charterers.order("created_at asc").each_with_index do |charterer, index|
+      %tr
+        %td.reference_number
+          = link_to_unless @readonly, charterer.reference_number, "#",
+            "data-target" => "#edit_charterer_#{charterer.id}",
+            "data-toggle" => "modal"
+        %td.start_date= charterer.start_date
+        %td.end_date= charterer.end_date
+        %td.parties
+          - charterer.charter_parties.each do |charter_party|
+            .name
+              Name:
+              %strong= charter_party.name
+            .address
+              Address:
+              %strong= charter_party.address
+            .contact_details
+              Contact Details:
+              %strong= charter_party.contact_details
+        %td
+          - unless @readonly
+            = link_to submission_charterer_path(@submission, charterer),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this Bareboat Charter?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
+
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_charterer",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Bareboat Charter
+
+  .modal.fade{id: "new_charterer", role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-lg
+      .modal-content
+        = simple_form_for Charterer.new, method: :post, remote: true, url: submission_charterers_path(@submission) do |charterer_f|
+          = hidden_field_tag "modal_id", "new_charterer"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Bareboat Charter
+          .modal-body
+            = render partial: "submissions/extended/forms/charterers/fields", locals: { charterer_f: charterer_f }
+
+          .modal-footer
+            = charterer_f.submit "Add Bareboat Charter", class: "btn btn-primary"
+
+
+  - @submission.charterers.each do |charterer|
+    .modal.fade{id: "edit_charterer_#{charterer.id}", role: "dialog", tabindex: "-1"}
+      .modal-dialog.modal-lg
+        .modal-content
+          = simple_form_for charterer, method: :put, remote: true, url: submission_charterer_path(@submission, charterer) do |charterer_f|
+            = hidden_field_tag "modal_id", "new_charterer"
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+              %h4.modal-title Edit Bareboat Charter
+            .modal-body
+              = render partial: "submissions/extended/forms/charterers/fields", locals: { charterer_f: charterer_f }
+
+            .modal-footer
+              = charterer_f.submit "Save Bareboat Charter", class: "btn btn-primary"
