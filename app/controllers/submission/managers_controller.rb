@@ -6,12 +6,16 @@ class Submission::ManagersController < InternalPagesController
     @manager.parent = @submission
     @manager.save!
 
+    @manager.safety_management.destroy if params[:use_above_address]
+
     respond_with_update
   end
 
   def update
     @manager = Manager.find(params[:id])
     @manager.update_attributes(manager_params)
+
+    @manager.safety_management.destroy if params[:use_above_address]
 
     respond_with_update
   end
@@ -32,7 +36,9 @@ class Submission::ManagersController < InternalPagesController
   end
 
   def manager_params
-    params.require(:manager).permit(Customer.attribute_names)
+    params.require(:manager).permit(
+      Customer.attribute_names,
+      safety_management_attributes: Customer.attribute_names + [:_destroy])
   end
 
   def respond_with_update

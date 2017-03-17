@@ -3,11 +3,10 @@
 %table.table.table-striped
   %thead
     %th Name
-    %th IMO #
-    %th Nationality
-    %th Status
+    %th IMO Number
     %th Email
     %th Phone
+    %th Address
     %th
   %tbody
     - @submission.managers.each do |manager|
@@ -17,10 +16,16 @@
             "data-target" => "#edit_manager_#{manager.id}",
             "data-toggle" => "modal"
         %td.manager-imo_number= manager.imo_number
-        %td.manager-nationality= manager.nationality
-        %td.manager-status= manager.eligibility_status
         %td.manager-email= manager.email
         %td.manager-phone_number= manager.phone_number
+        %td.manager-address
+          = manager.inline_address
+          .safety_management
+            %strong Safety Management:
+            - if manager.safety_management
+              = manager.safety_management.inline_address
+            - else
+              As above
         %td
           - unless @readonly
             = link_to submission_manager_path(@submission, manager),
