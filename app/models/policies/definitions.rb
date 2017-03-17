@@ -17,6 +17,10 @@ class Policies::Definitions
       end
     end
 
+    def charterable?(obj)
+      obj.part.to_sym == :part_4
+    end
+
     def mortgageable?(obj)
       @part = obj.part.to_sym
       return true if @part == :part_1
