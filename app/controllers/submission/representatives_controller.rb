@@ -23,10 +23,7 @@ class Submission::RepresentativesController < InternalPagesController
 
   def submission_representative_params
     params.require(:submission).permit(
-      representative: [
-        :name, :email, :phone_number, :nationality, :address_1,
-        :imo_number, :eligibility_status, :entity_type,
-        :address_2, :address_3, :town, :postcode, :country])
+      representative: [Customer.attribute_names])
   end
 
   def render_update_js

@@ -32,9 +32,7 @@ class Submission::ManagersController < InternalPagesController
   end
 
   def manager_params
-    params.require(:manager).permit(
-      :name, :email, :phone_number, :imo_number, :eligibility_status,
-      :nationality, :address_1, :address_2, :address_3, :town, :postcode)
+    params.require(:manager).permit(Customer.attribute_names)
   end
 
   def respond_with_update
