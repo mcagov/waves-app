@@ -6,16 +6,14 @@
   #manager
     .postcode-lookup
       .row
-        .col-md-6
+        .col-md-9
           = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: f, f: f, label: "Manager Name" }
-        .col-md-3
-          = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: f }
         .col-md-3
           = f.input :imo_number, label: "IMO Number"
       .row
-        .col-md-3
+        .col-md-4
           = f.input :email, label: "Email Address"
-        .col-md-3
+        .col-md-4
           = f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
 
       = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f, countries: countries_collection }
