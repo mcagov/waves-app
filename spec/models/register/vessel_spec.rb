@@ -168,6 +168,11 @@ describe Register::Vessel do
         expect(subject[:engines][0]["make"]).to eq(vessel.engines.first.make)
       end
 
+      it "has the manager attributes" do
+        expect(subject[:managers][0][:safety_management]["address_1"])
+          .to eq(vessel.managers.first.safety_management.address_1)
+      end
+
       it "has the mortgage attributes" do
         expect(subject[:mortgages][0][:mortgagees][0]["name"])
           .to eq(vessel.mortgages.first.mortgagees.first.name)

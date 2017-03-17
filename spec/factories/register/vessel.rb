@@ -8,6 +8,7 @@ FactoryGirl.define do
     agent                     { build(:registered_agent) }
     engines                   { [build(:engine)] }
     documents                 { [build(:document)] }
+    managers                  { [build(:manager)] }
     mortgages                 { [build(:mortgage)] }
     beneficial_owners         { [build(:beneficial_owner)] }
     directed_bys              { [build(:directed_by)] }

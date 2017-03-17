@@ -80,6 +80,7 @@ module Register
         agent: (agent || Register::Agent.new).attributes,
         shareholder_groups: shareholder_groups_info,
         engines: engines.map(&:attributes),
+        managers: managers_info,
         mortgages: mortgages_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
         directed_bys: directed_bys.map(&:attributes),
@@ -109,6 +110,13 @@ module Register
           group_member_keys: sharedholder_group.group_member_keys,
           shares_held: sharedholder_group.shares_held,
         }
+      end
+    end
+
+    def managers_info
+      managers.map do |manager|
+        manager.attributes.merge(
+          safety_management: manager.safety_management.try(:attributes))
       end
     end
 
