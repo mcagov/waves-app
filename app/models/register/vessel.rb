@@ -16,6 +16,11 @@ module Register
              class_name: "Register::Owner",
              as: :parent
 
+    has_many :managers,
+             -> { order(:name) },
+             class_name: "Manager",
+             as: :parent
+
     has_many :shareholder_groups, dependent: :destroy
 
     has_many :registrations, -> { order("created_at desc") }
