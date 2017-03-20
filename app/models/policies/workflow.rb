@@ -19,6 +19,10 @@ class Policies::Workflow
       !Policies::Definitions.fishing_vessel?(obj)
     end
 
+    def uses_extended_owners?(obj)
+      Policies::Definitions.fishing_vessel?(obj)
+    end
+
     def uses_vessel_attribute?(attr, obj)
       @part = obj.part.to_sym
 
