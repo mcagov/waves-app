@@ -16,4 +16,9 @@ describe "User views Part 4 submission", type: :feature, js: true do
     visit_assigned_part_4_submission
     expect_port_no_fields(false)
   end
+
+  scenario "tabs" do
+    expect_mortgages(false)
+    expect_managers(false)
+  end
 end
