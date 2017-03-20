@@ -15,6 +15,7 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
     expect_port_no_fields(true)
     expect_service_description_fields(true)
     expect_smc_fields(false)
+    expect_basic_engines(false)
   end
 
   scenario "decorated fields" do

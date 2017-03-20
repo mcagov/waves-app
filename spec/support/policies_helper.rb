@@ -41,3 +41,10 @@ end
 def expect_referral_button(bln)
   expect_field(bln, ".btn-refer-submission")
 end
+
+def expect_basic_engines(bln)
+  click_on("Engines")
+  within("#engines") do
+    expect_field(bln, ".basic-engine")
+  end
+end
