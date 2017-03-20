@@ -1,6 +1,45 @@
 require "rails_helper"
 
 describe Policies::Definitions do
+  describe ".approval_errors" do
+    subject { described_class.approval_errors(submission) }
+
+    context "in general (i.e. not frozen)" do
+      let!(:submission) { create(:assigned_submission) }
+
+      it { expect(subject).to be_empty }
+    end
+
+    context "manual_override" do
+      let(:submission) { build(:submission, task: :manual_override) }
+
+      it { expect(subject).to be_empty }
+    end
+
+    context "frozen /unfrozen" do
+      let(:submission) { create(:assigned_submission) }
+
+      before do
+        allow(submission)
+          .to receive(:registration_status).and_return(:frozen)
+      end
+
+      it { expect(subject).to include(:vessel_frozen) }
+    end
+
+    context "with outstanding declarations" do
+      let!(:submission) { create(:incomplete_submission) }
+
+      it { expect(subject).to include(:declarations_required) }
+    end
+
+    context "awaiting_payment" do
+      let!(:submission) { create(:incomplete_submission) }
+
+      it { expect(subject).to include(:payment_required) }
+    end
+  end
+
   context ".registration_type" do
     subject { described_class.registration_type(obj) }
 
