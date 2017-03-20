@@ -57,11 +57,6 @@
                 placement: :left,
                 readonly: :readonly
 
-            .col-md-2{ class: vessel_change_css(:ec_number) }
-              = vessel_f.input :ec_number,
-                label: vessel_change_label(:ec_number),
-                input_html: { class: "upcase" }
-
         .col-md-2{ class: vessel_change_css(:radio_call_sign) }
           = vessel_f.input :radio_call_sign,
             label: vessel_change_label(:radio_call_sign),
