@@ -22,8 +22,10 @@ module CollectionHelper
     WavesUtilities::Port.all
   end
 
-  def vessel_types_collection
-    WavesUtilities::VesselType.all(current_activity.part)
+  def vessel_types_collection(submission)
+    WavesUtilities::VesselType.all(
+      submission.part,
+      Policies::Definitions.fishing_vessel?(submission))
   end
 
   def eligibility_status_collection

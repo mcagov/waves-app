@@ -17,6 +17,8 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     expect_port_no_fields(false)
     expect_service_description_fields(false)
     expect_smc_fields(true)
-    expect_basic_engines(true)
+    expect_extended_engine_fields(false)
+    expect_extended_owner_fields(false)
+    expect_shareholding(true)
   end
 end

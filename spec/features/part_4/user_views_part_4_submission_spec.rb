@@ -10,7 +10,9 @@ describe "User views Part 4 submission", type: :feature, js: true do
     expect_smc_fields(true)
     expect_last_registry_fields(false)
     expect_underlying_registry_fields(true)
-    expect_basic_engines(true)
+    expect_extended_engine_fields(false)
+    expect_extended_owner_fields(false)
+    expect_shareholding(false)
   end
 
   scenario "Name Approval page" do

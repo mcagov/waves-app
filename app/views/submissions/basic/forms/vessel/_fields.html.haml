@@ -30,7 +30,7 @@
       .col-md-3
         = vessel_f.input :length_in_meters, input_html: { class: "upcase" }
       .col-md-3
-        = vessel_f.input :vessel_type, collection: vessel_types_collection, as: :select, disabled: disabled,
+        = vessel_f.input :vessel_type, collection: vessel_types_collection(@submission), as: :select, disabled: disabled,
           include_blank: false, input_html: { class: "select2 select2_single" }
       .col-md-3
         = vessel_f.input :vessel_type_other, input_html: { class: "upcase" }

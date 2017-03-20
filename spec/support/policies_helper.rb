@@ -14,6 +14,11 @@ def expect_managers(bln)
   expect_field(bln, "#managers-tab")
 end
 
+def expect_shareholding(bln)
+  click_on("Owners")
+  expect_field(bln, "#shareholding")
+end
+
 def expect_mortgages(bln)
   expect_field(bln, "#mortgages-tab")
 end
@@ -42,9 +47,18 @@ def expect_referral_button(bln)
   expect_field(bln, ".btn-refer-submission")
 end
 
-def expect_basic_engines(bln)
+def expect_extended_engine_fields(bln)
   click_on("Engines")
   within("#engines") do
-    expect_field(bln, ".basic-engine")
+    expect_field(bln, ".extended-engine")
+  end
+end
+
+def expect_extended_owner_fields(bln)
+  click_on("Owners")
+  within("#owners_tab") do
+    expect_field(bln, ".managing_owner")
+    expect_field(bln, "#directed_by")
+    expect_field(bln, "#beneficial_owners")
   end
 end

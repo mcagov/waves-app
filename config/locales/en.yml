@@ -39,6 +39,10 @@ en:
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
   submission:
+    approval_error:
+      vessel_frozen: Vessel registration is frozen
+      payment_required: Payment is not complete
+      declarations_required: Declarations are not complete
     approval:
       inline-btn:
         new_registration: Complete Registration

@@ -1,5 +1,28 @@
 class Policies::Definitions
   class << self
+    def approval_errors(submission)
+      approval_errors = []
+
+      return approval_errors if Task.new(submission.task) == :manual_override
+      approval_errors << :vessel_frozen if frozen?(submission)
+      approval_errors << :declarations_required if undeclared?(submission)
+      approval_errors << :payment_required if unpaid?(submission)
+
+      approval_errors
+    end
+
+    def frozen?(obj)
+      obj.registration_status == :frozen
+    end
+
+    def undeclared?(submission)
+      !submission.incomplete_declarations.empty?
+    end
+
+    def unpaid?(submission)
+      AccountLedger.new(submission).awaiting_payment?
+    end
+
     def fishing_vessel?(obj)
       @part = obj.part.to_sym
       return true if @part == :part_2

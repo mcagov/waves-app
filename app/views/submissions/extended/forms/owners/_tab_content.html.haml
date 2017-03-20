@@ -1,3 +1,10 @@
 #owners_list= render partial: "submissions/extended/forms/owners/base"
-#shareholding= render partial: "submissions/extended/forms/shareholding/base"
+
+- if display_shareholding?(@submission)
+  #shareholding= render partial: "submissions/extended/forms/shareholding/base"
+
 #correspondent= render partial: "submissions/extended/forms/correspondent/base"
+
+- if display_extended_owners?(@submission)
+  #directed_by= render partial: "submissions/extended/forms/directed_by/base"
+  #beneficial_owners= render partial: "submissions/extended/forms/beneficial_owners/base"

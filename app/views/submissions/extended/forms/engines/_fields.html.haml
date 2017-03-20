@@ -9,14 +9,7 @@
     = engine_f.input :make, label: "Engine Make"
   .col-md-3
     = engine_f.input :model, label: "Engine Model"
-  - if display_basic_engines?(@submission)
-    .col-md-3
-      = engine_f.input :mcep_after_derating,
-        label: "Engine Power",
-        as: :feedback,
-        feedback_label: "kW",
-        placement: :right
-  - else
+  - if display_extended_engines?(@submission)
     .col-md-3
       = engine_f.input :cylinders, label: "Cylinders"
     .col-md-3
@@ -36,6 +29,13 @@
     .col-md-3
       = engine_f.input :mcep_after_derating,
         label: "MCEP after Derating",
+        as: :feedback,
+        feedback_label: "kW",
+        placement: :right
+  - else
+    .col-md-3
+      = engine_f.input :mcep_after_derating,
+        label: "Engine Power",
         as: :feedback,
         feedback_label: "kW",
         placement: :right

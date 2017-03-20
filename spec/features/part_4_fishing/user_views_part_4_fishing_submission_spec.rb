@@ -13,6 +13,8 @@ describe "User views Part 4 fishing submission", type: :feature, js: true do
     expect_smc_fields(false)
     expect_last_registry_fields(false)
     expect_underlying_registry_fields(true)
-    expect_basic_engines(false)
+    expect_extended_engine_fields(true)
+    expect_extended_owner_fields(true)
+    expect_shareholding(false)
   end
 end

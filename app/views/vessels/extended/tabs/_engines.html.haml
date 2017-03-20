@@ -3,21 +3,21 @@
   %thead
     %th Type
     %th Make / Model
-    - if display_basic_engines?(@vessel)
-      %th.basic-engine Power
-    - else
-      %th MCEP per Engine
+    - if display_extended_engines?(@vessel)
+      %th.extended-engine MCEP per Engine
       %th Cylinders
       %th Derating
       %th RPM
       %th MCEP After Derating
+    - else
+      %th.basic-engine Power
     %th Quantity
   %tbody
     - vessel.engines.each do |engine|
       %tr
         %td.engine_type= engine.engine_type
         %td.make_and_model= engine.make_and_model
-        - unless display_basic_engines?(@vessel)
+        - if display_extended_engines?(@vessel)
           %td.mcep_per_engine
             - if engine.mcep_per_engine.present?
               #{ rounded_int(engine.mcep_per_engine.to_f) }kW
@@ -32,5 +32,5 @@
 %p.pull-right.total_mcep
   %strong
     Total
-    = display_basic_engines?(@vessel) ? "Power:" : "MCEP:"
+    = display_extended_engines?(@vessel) ? "MCEP:" : "Power:"
     #{ rounded_int(Engine.total_mcep_for(vessel)) }kW

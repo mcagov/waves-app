@@ -120,57 +120,26 @@ describe Policies::Actions do
   end
 
   describe "approvable?" do
+    let(:submission) { build(:submission) }
+
+    before do
+      expect(Policies::Definitions)
+        .to receive(:approval_errors)
+        .and_return(some_approval_errors)
+    end
+
     subject { submission.approvable? }
 
-    context "manual_override" do
-      let(:submission) { build(:submission, task: :manual_override) }
+    context "with approval_errors" do
+      let(:some_approval_errors) { [:unpaid, :frozen] }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "with no approval_errors" do
+      let(:some_approval_errors) { [] }
 
       it { expect(subject).to be_truthy }
-    end
-
-    context "frozen /unfrozen" do
-      let(:submission) { create(:assigned_submission) }
-
-      context "in general (i.e. not frozen)" do
-        it { expect(subject).to be_truthy }
-      end
-
-      context "when the registration_status is :frozen" do
-        before do
-          allow(submission)
-            .to receive(:registration_status).and_return(:frozen)
-        end
-
-        it { expect(subject).to be_falsey }
-      end
-    end
-
-    context "with outstanding declarations" do
-      let!(:submission) { create(:incomplete_submission) }
-      it { expect(subject).to be_falsey }
-
-      context "with completed declarations but awaiting_payment" do
-        before do
-          submission.declarations.incomplete.map(&:declared!)
-
-          account_ledger_instance =
-            double(:account_ledger, awaiting_payment?: awaiting_payment)
-
-          allow(AccountLedger)
-            .to receive(:new).with(submission)
-            .and_return(account_ledger_instance)
-        end
-
-        let(:awaiting_payment) { true }
-
-        it { expect(subject).to be_falsey }
-
-        context "with completed declarations and not awaiting_payment" do
-          let(:awaiting_payment) { false }
-
-          it { expect(subject).to be_truthy }
-        end
-      end
     end
   end
 end

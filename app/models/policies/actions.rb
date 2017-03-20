@@ -14,11 +14,7 @@ class Policies::Actions
     end
 
     def approvable?(submission)
-      return true if Task.new(submission.task) == :manual_override
-      return false if submission.registration_status == :frozen
-      return false unless submission.incomplete_declarations.empty?
-      return false if AccountLedger.new(submission).awaiting_payment?
-      true
+      Policies::Definitions.approval_errors(submission).empty?
     end
 
     def editable?(submission)
