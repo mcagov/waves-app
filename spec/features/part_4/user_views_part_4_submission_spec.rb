@@ -10,7 +10,7 @@ describe "User views Part 4 submission", type: :feature, js: true do
     expect_smc_fields(true)
     expect_last_registry_fields(false)
     expect_underlying_registry_fields(true)
-    expect_basic_engine_fields(true)
+    expect_extended_engine_fields(false)
     expect_extended_owner_fields(false)
   end
 

@@ -3,14 +3,14 @@
   %thead
     %th Type
     %th Make / Model
-    - if display_basic_engines?(@submission)
-      %th.basic-engine Power
-    - else
-      %th MCEP per Engine
+    - if display_extended_engines?(@submission)
+      %th.extended-engine MCEP per Engine
       %th Cylinders
       %th Derating
       %th RPM
       %th MCEP After Derating
+    - else
+      %th Power
     %th Quantity
     %th
   %tbody
@@ -21,7 +21,7 @@
             "data-target" => "#edit_engine_#{engine.id}",
             "data-toggle" => "modal"
         %td.make_and_model= engine.make_and_model
-        - unless display_basic_engines?(@submission)
+        - if display_extended_engines?(@submission)
           %td.mcep_per_engine
             - if engine.mcep_per_engine.present?
               #{ rounded_int(engine.mcep_per_engine.to_f) }kW
@@ -47,7 +47,7 @@
 %p.pull-right.total_mcep
   %strong
     Total
-    = display_basic_engines?(@submission) ? "Power:" : "MCEP:"
+    = display_extended_engines?(@submission) ? "MCEP:" : "Power:"
     #{ rounded_int(Engine.total_mcep_for(@submission)) }kW
 
 - unless @readonly

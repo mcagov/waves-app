@@ -94,19 +94,19 @@ describe Policies::Workflow do
     end
   end
 
-  context ".uses_basic_engines?" do
-    subject { described_class.uses_basic_engines?(vessel) }
+  context ".uses_extended_engines?" do
+    subject { described_class.uses_extended_engines?(vessel) }
 
     context "for a fishing vessel" do
       let(:vessel) { build(:fishing_vessel) }
 
-      it { expect(subject).to be_falsey }
+      it { expect(subject).to be_truthy }
     end
 
     context "for a pleasure vessel" do
       let(:vessel) { build(:pleasure_vessel) }
 
-      it { expect(subject).to be_truthy }
+      it { expect(subject).to be_falsey }
     end
   end
 

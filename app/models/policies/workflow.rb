@@ -15,8 +15,8 @@ class Policies::Workflow
       Policies::Definitions.fishing_vessel?(obj)
     end
 
-    def uses_basic_engines?(obj)
-      !Policies::Definitions.fishing_vessel?(obj)
+    def uses_extended_engines?(obj)
+      Policies::Definitions.fishing_vessel?(obj)
     end
 
     def uses_extended_owners?(obj)
