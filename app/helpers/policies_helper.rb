@@ -22,4 +22,8 @@ module PoliciesHelper
   def display_extended_owners?(obj)
     Policies::Workflow.uses_extended_owners?(obj)
   end
+
+  def display_shareholding?(obj)
+    Policies::Workflow.uses_shareholding?(obj)
+  end
 end

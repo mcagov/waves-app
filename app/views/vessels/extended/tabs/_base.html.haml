@@ -7,7 +7,9 @@
       %a#engines-tab{"data-toggle" => "tab", :href => "#engines_tab", :role => "tab"} Engines
 
     %li{:role => "presentation"}
-      %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
+      %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"}
+        Owners
+        = "& Shareholding" if display_shareholding?(@vessel)
 
     - if display_charterers?(@vessel)
       %li{:role => "presentation"}

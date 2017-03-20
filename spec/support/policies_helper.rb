@@ -14,6 +14,11 @@ def expect_managers(bln)
   expect_field(bln, "#managers-tab")
 end
 
+def expect_shareholding(bln)
+  click_on("Owners")
+  expect_field(bln, "#shareholding")
+end
+
 def expect_mortgages(bln)
   expect_field(bln, "#mortgages-tab")
 end

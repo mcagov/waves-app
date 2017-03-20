@@ -53,37 +53,40 @@
         - if display_extended_owners?(@vessel)
           %td.managing_owner= y_n(owner.managing_owner)
         %td= y_n(owner.correspondent)
-%hr
-%h2 Shareholding
-.row
-  .col-md-6
-    %h4 Shares Held Outright
-    %table.table.table-striped.table-bordered
-      %thead
-        %th Name
-        %th.col-md-3 Shares
-      %tbody
-        - vessel.owners.each do |owner|
-          %tr
-            %td= owner.name
-            %td= owner.shares_held
 
-  .col-md-6
-    %h4 Shares Held Jointly
-    %table.table.table-striped.table-bordered
-      %thead
-        %th Owners
-        %th.col-md-3 Shares
-      %tbody
-        - vessel.shareholder_groups.each do |shareholder_group|
-          %tr
-            %td
-              %table.table{style: 'margin-bottom: 0px !important;'}
-                %tbody
-                  - shareholder_group.shareholder_group_members.each do |group_member|
-                    %tr
-                      %td= group_member.owner
-            %td= shareholder_group.shares_held
+- if display_shareholding?(@vessel)
+  #shareholding
+    %hr
+    %h2 Shareholding
+    .row
+      .col-md-6
+        %h4 Shares Held Outright
+        %table.table.table-striped.table-bordered
+          %thead
+            %th Name
+            %th.col-md-3 Shares
+          %tbody
+            - vessel.owners.each do |owner|
+              %tr
+                %td= owner.name
+                %td= owner.shares_held
+
+      .col-md-6
+        %h4 Shares Held Jointly
+        %table.table.table-striped.table-bordered
+          %thead
+            %th Owners
+            %th.col-md-3 Shares
+          %tbody
+            - vessel.shareholder_groups.each do |shareholder_group|
+              %tr
+                %td
+                  %table.table{style: 'margin-bottom: 0px !important;'}
+                    %tbody
+                      - shareholder_group.shareholder_group_members.each do |group_member|
+                        %tr
+                          %td= group_member.owner
+                %td= shareholder_group.shares_held
 
 - if display_extended_owners?(@vessel)
   #directed_by

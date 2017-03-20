@@ -15,7 +15,9 @@
               %a#engines-tab{"data-toggle" => "tab", :href => "#engines_tab", :role => "tab"} Engines
 
             %li{:role => "presentation"}
-              %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"} Owners & Shareholding
+              %a#owners-tab{"data-toggle" => "tab", :href => "#owners_tab", :role => "tab"}
+                Owners
+                = "& Shareholding" if display_shareholding?(@submission)
 
             - if display_charterers?(@submission)
               %li{:role => "presentation"}
@@ -46,9 +48,6 @@
 
             #owners_tab.tab-pane{"aria-labelledby" => "owners-tab", :role => "tabpanel"}
               = render partial: "submissions/extended/forms/owners/tab_content"
-              - if display_extended_owners?(@submission)
-                #directed_by= render partial: "submissions/extended/forms/directed_by/base"
-                #beneficial_owners= render partial: "submissions/extended/forms/beneficial_owners/base"
 
             #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
               #mortgages= render partial: "submissions/extended/forms/mortgages/base"
