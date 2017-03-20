@@ -17,6 +17,8 @@
 
       - else
         %h4 The application is incomplete and can not processed
+        - Policies::Definitions.approval_errors(@submission).each do |approval_error|
+          .red= t("submission.approval_error.#{approval_error}")
 
 .modal-footer
   .row
