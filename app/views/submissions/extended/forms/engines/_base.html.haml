@@ -3,11 +3,14 @@
   %thead
     %th Type
     %th Make / Model
-    %th MCEP per Engine
-    %th Cylinders
-    %th Derating
-    %th RPM
-    %th MCEP After Derating
+    - if display_basic_engines?(@submission)
+      %th.basic-engine Power
+    - else
+      %th MCEP per Engine
+      %th Cylinders
+      %th Derating
+      %th RPM
+      %th MCEP After Derating
     %th Quantity
     %th
   %tbody
@@ -18,15 +21,17 @@
             "data-target" => "#edit_engine_#{engine.id}",
             "data-toggle" => "modal"
         %td.make_and_model= engine.make_and_model
-        %td.mcep_per_engine
-          - if engine.mcep_per_engine.present?
-            #{ rounded_int(engine.mcep_per_engine.to_f) }kW
-        %td.cylinders= engine.cylinders
-        %td.derating= engine.derating
-        %td.rpm= engine.rpm
+        - unless display_basic_engines?(@submission)
+          %td.mcep_per_engine
+            - if engine.mcep_per_engine.present?
+              #{ rounded_int(engine.mcep_per_engine.to_f) }kW
+          %td.cylinders= engine.cylinders
+          %td.derating= engine.derating
+          %td.rpm= engine.rpm
         %td.mcep_after_derating
           - if engine.mcep_after_derating.present?
             #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+
         %td.quantity= engine.quantity.to_i
         %td
           - unless @readonly
@@ -40,7 +45,10 @@
               Remove
 
 %p.pull-right.total_mcep
-  %strong Total MCEP: #{ rounded_int(Engine.total_mcep_for(@submission)) }kW
+  %strong
+    Total
+    = display_basic_engines?(@submission) ? "Power:" : "MCEP:"
+    #{ rounded_int(Engine.total_mcep_for(@submission)) }kW
 
 - unless @readonly
   = render partial: "submissions/extended/forms/engines/editable"

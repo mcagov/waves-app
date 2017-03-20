@@ -16,5 +16,6 @@ describe "User views Part 4 registered vessel", type: :feature, js: true do
     expect_last_registry_fields(false)
     expect_service_description_fields(false)
     expect_smc_fields(true)
+    expect_basic_engines(true)
   end
 end
