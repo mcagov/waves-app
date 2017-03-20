@@ -125,4 +125,21 @@ describe Policies::Workflow do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context ".uses_shareholding?" do
+    let(:vessel) { build(:registered_vessel, part: part) }
+    subject { described_class.uses_shareholding?(vessel) }
+
+    context "for a part_4 vessel" do
+      let(:part) { :part_4 }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "for a part_1 vessel" do
+      let(:part) { :part_1 }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
 end

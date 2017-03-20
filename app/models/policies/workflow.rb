@@ -23,6 +23,10 @@ class Policies::Workflow
       Policies::Definitions.fishing_vessel?(obj)
     end
 
+    def uses_shareholding?(obj)
+      obj.part.to_sym != :part_4
+    end
+
     def uses_vessel_attribute?(attr, obj)
       @part = obj.part.to_sym
 
