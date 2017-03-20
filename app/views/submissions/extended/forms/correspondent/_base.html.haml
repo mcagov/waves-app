@@ -3,5 +3,7 @@
   .col-md-2
     = render partial: "/submissions/extended/forms/correspondent/correspondent"
 
-  .col-md-2
-    = render partial: "/submissions/extended/forms/correspondent/managing_owner"
+  - if display_extended_owners?(@submission)
+    .col-md-2
+      .managing_owner
+        = render partial: "/submissions/extended/forms/correspondent/managing_owner"

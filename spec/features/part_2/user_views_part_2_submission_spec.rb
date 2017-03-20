@@ -11,6 +11,7 @@ describe "User views Part 2 submission", type: :feature, js: true do
     expect_service_description_fields(true)
     expect_smc_fields(false)
     expect_basic_engine_fields(false)
+    expect_extended_owner_fields(true)
   end
 
   scenario "Name Approval page" do

@@ -18,4 +18,8 @@ module PoliciesHelper
   def display_basic_engines?(obj)
     Policies::Workflow.uses_basic_engines?(obj)
   end
+
+  def display_extended_owners?(obj)
+    Policies::Workflow.uses_extended_owners?(obj)
+  end
 end
