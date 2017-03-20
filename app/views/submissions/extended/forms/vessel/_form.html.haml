@@ -23,7 +23,7 @@
           = vessel_f.input :vessel_category,
             label: vessel_change_label(:vessel_category),
             as: :select,
-            collection: vessel_types_collection,
+            collection: vessel_types_collection(@submission),
             include_blank: false
 
         .col-md-2{ class: vessel_change_css(:vessel_type) }
