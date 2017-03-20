@@ -10,7 +10,7 @@ describe "User views Part 2 submission", type: :feature, js: true do
     expect_underlying_registry_fields(false)
     expect_service_description_fields(true)
     expect_smc_fields(false)
-    expect_basic_engines(false)
+    expect_basic_engine_fields(false)
   end
 
   scenario "Name Approval page" do

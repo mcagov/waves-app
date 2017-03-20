@@ -15,6 +15,6 @@ describe "User views Part 4 fishing vessel", type: :feature, js: true do
     expect_port_no_fields(true)
     expect_service_description_fields(true)
     expect_smc_fields(false)
-    expect_basic_engines(false)
+    expect_basic_engine_fields(false)
   end
 end
