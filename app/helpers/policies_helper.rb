@@ -14,4 +14,8 @@ module PoliciesHelper
   def display_managers?(obj)
     Policies::Definitions.manageable?(obj)
   end
+
+  def display_basic_engines?(obj)
+    Policies::Workflow.uses_basic_engines?(obj)
+  end
 end
