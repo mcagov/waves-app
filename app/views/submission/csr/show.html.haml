@@ -1,0 +1,19 @@
+= render partial: "submissions/info/base", locals: {submission: @submission}
+
+.row
+  .col-md-12
+    .x_panel
+      .x_title
+        Application Details
+      .clearfix
+      .x_content
+        %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+          %ul#myTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+
+            %li{:role => "presentation", class: "active"}
+              %a#csr-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#csr_tab", :role => "tab"}
+                CSR Information
+          #myTabContent.tab-content
+
+          #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+            #csr_form= render partial: "submission/csr/form", locals: {submission: @submission}

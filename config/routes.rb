@@ -61,6 +61,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :csr,
+             controller: "submission/csr",
+             only: [:show, :update, :destroy]
+
     resources :directed_bys,
               controller: "submission/directed_bys",
               only: [:create, :update, :destroy]

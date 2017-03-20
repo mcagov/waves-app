@@ -1,0 +1,96 @@
+= simple_form_for :submission,
+                  url: submission_csr_path(@submission),
+                  method: :put do |f|
+  %table.table.table-striped
+    %thead
+      %th{ width: "50%" } Reference
+      %th Data for CSR
+    %tbody
+      %tr
+        %td 1. This document applies from (date):
+        %td= f.input :created_at, label: false
+      %tr
+        %td 2. Flag State:
+        %td United Kingdom
+      %tr
+        %td 3. Date of registration with the State indicated in 2:
+        %td= "/1/1/1"
+      %tr
+        %td 4. Name of ship:
+        %td= f.input :created_at, label: false
+      %tr
+        %td 5. Port of registration:
+        %td= f.input :created_at, label: false
+      %tr
+        %td
+          6. Name of current registered owner(s):
+          %p
+          Registered address(es):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td 7. Registered owner identification number:
+        %td= f.input :created_at, label: false
+      %tr
+        %td
+          8. If applicable, name of current registered bareboat charterer(s):
+          %p
+          Registered address(es):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td
+          Name of Company (International Safety Management):
+          %p
+          Registered address(es):
+          %p
+          Address(es) of its Safety Management activities (if different):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td 10. Company identification number:
+        %td= f.input :created_at, label: false
+      %tr
+        %td 11. Name of all classification societies with which the ship is classed:
+        %td= f.input :created_at, label: false
+      %tr
+        %td
+          12. Administration / Government / Recognised Organisation which issued the Document of Compliance:
+          %p
+          Body which carried out audit (if different):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td
+          12. Administration / Government / Recognised Organisation which issued the  Safety Management Certificate:
+          %p
+          Body which carried out audit (if different):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td
+          12. Administration / Government / Recognised Organisation which issued the  International Ship Security Certificate:
+          %p
+          Body which carried out the verification (if different):
+        %td
+          = f.input :created_at, label: false
+          %p
+          = f.input :created_at, label: false
+      %tr
+        %td 15. Date on which the ship ceased to be registered with the State indicated in 2:
+        %td -
+      %tr
+        %td 16. Remarks
+        %td= f.input :created_at, label: false
