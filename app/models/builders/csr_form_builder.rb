@@ -45,7 +45,7 @@ class Builders::CsrFormBuilder
     end
 
     def first_registration_date
-      100.years.ago
+      @vessel.first_registration.registered_at if @vessel.first_registration
     end
 
     def safety_management_address

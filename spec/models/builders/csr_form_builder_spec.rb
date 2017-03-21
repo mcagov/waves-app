@@ -16,7 +16,8 @@ describe Builders::CsrFormBuilder do
         smc_issuing_authority: "SMC_I",
         smc_auditor: "SMC_A",
         issc_issuing_authority: "ISSC_I",
-        issc_auditor: "ISSC_A")
+        issc_auditor: "ISSC_A",
+        registrations: [first_registration])
     end
 
     let!(:submission) do
@@ -53,6 +54,12 @@ describe Builders::CsrFormBuilder do
           [build(:charter_party, name: "CHARLIE", address: "MAIN STREET")])
     end
 
+    let(:first_registration) do
+      build(
+        :registration,
+        registered_at: "1/1/2010")
+    end
+
     subject { described_class.build(submission) }
 
     context "with an existing CsrForm" do
@@ -68,6 +75,7 @@ describe Builders::CsrFormBuilder do
       it { expect(subject.vessel_id).to eq(vessel.id) }
       it { expect(subject.issue_number).to eq(1) }
       it { expect(subject.issued_at).to be_present }
+      it { expect(subject.registered_at).to eq(Date.new(2010, 1, 1)) }
 
       it { expect(subject.vessel_name).to eq("PIRATE SHIP") }
       it { expect(subject.port_name).to eq("SOUTHAMPTON") }

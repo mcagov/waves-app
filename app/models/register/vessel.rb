@@ -27,6 +27,9 @@ module Register
     has_one :current_registration,
             -> { order("created_at desc").limit(1) },
             class_name: "Registration"
+    has_one :first_registration,
+            -> { order("registered_at asc").limit(1) },
+            class_name: "Registration"
 
     has_many :correspondences, as: :noteable
 
