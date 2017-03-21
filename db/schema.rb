@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317155134) do
+ActiveRecord::Schema.define(version: 20170321100033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,36 @@ ActiveRecord::Schema.define(version: 20170317155134) do
     t.uuid     "customer_id"
     t.index ["external_session_key"], name: "index_client_sessions_on_external_session_key", using: :btree
     t.index ["vessel_reg_no"], name: "index_client_sessions_on_vessel_reg_no", using: :btree
+  end
+
+  create_table "csr_forms", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "submission_id"
+    t.uuid     "vessel_id"
+    t.integer  "issue_number"
+    t.datetime "issued_at"
+    t.string   "flag_state",                     default: "United Kingdom"
+    t.datetime "registered_at"
+    t.string   "vessel_name"
+    t.string   "port_name"
+    t.string   "owner_names"
+    t.string   "owner_addresses"
+    t.string   "owner_identification_number"
+    t.string   "charterer_names"
+    t.string   "charterer_addresses"
+    t.string   "manager_name"
+    t.string   "manager_address"
+    t.string   "safety_management_address"
+    t.string   "manager_company_number"
+    t.string   "classification_societies"
+    t.string   "document_of_compliance_issuer"
+    t.string   "document_of_compliance_auditor"
+    t.string   "smc_issuer"
+    t.string   "smc_auditor"
+    t.string   "issc_issuer"
+    t.string   "issc_auditor"
+    t.string   "remarks"
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
   end
 
   create_table "custom_auto_increments", force: :cascade do |t|

@@ -4,6 +4,6 @@ describe "User views issues CSR", type: :feature do
   scenario "in general" do
     visit_assigned_csr_submission
 
-    expect(page).to have_css("#csr_form")
+    expect(find("#csr_vessel_name").value).to eq("Registered Boat 1")
   end
 end

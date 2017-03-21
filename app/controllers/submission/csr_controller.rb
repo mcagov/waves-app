@@ -2,6 +2,7 @@ class Submission::CsrController < InternalPagesController
   before_action :load_submission
 
   def show
+    @csr = CsrForm.for(@submission)
   end
 
   protected
