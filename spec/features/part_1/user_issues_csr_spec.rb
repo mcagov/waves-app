@@ -4,7 +4,7 @@ describe "User issues CSR", js: true do
   scenario "in general" do
     visit_assigned_csr_submission
 
-    expect(find("#csr_form_vessel_name").value).to eq("Registered Boat 1")
+    expect(find("#csr_form_vessel_name").value).to match(/Registered Boat.*/)
     find("#csr_form_remarks").set("NO COMMENT")
     click_on("Save Details")
 
