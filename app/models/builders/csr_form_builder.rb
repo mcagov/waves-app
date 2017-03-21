@@ -13,7 +13,7 @@ class Builders::CsrFormBuilder
 
     # rubocop:disable all
     def build_csr
-      CsrForm.new(
+      CsrForm.create(
         submission_id: @submission.id,
         vessel_id: @submission.registered_vessel.id,
         issue_number: csr_issue_number,
