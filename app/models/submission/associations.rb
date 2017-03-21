@@ -47,6 +47,7 @@ module Submission::Associations
       base.has_many :engines, as: :parent
       base.has_many :mortgages, -> { order("created_at asc") }, as: :parent
       base.has_many :charterers, -> { order("created_at asc") }, as: :parent
+      base.has_one  :csr_form
       base.has_one :name_approval, class_name: "Submission::NameApproval"
     end
 

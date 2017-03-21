@@ -1,4 +1,6 @@
 class CsrForm < ApplicationRecord
+  belongs_to :submission
+
   class << self
     def for(submission)
       vessel = submission.registered_vessel
