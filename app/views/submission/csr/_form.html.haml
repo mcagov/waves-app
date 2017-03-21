@@ -1,5 +1,6 @@
 = simple_form_for :csr_form,
                   url: submission_csr_path(@submission),
+                  remote: true,
                   method: :put do |f|
   %table.table.table-striped
     %thead
