@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views issues CSR", js: true do
+describe "User issues CSR", js: true do
   scenario "in general" do
     visit_assigned_csr_submission
 
