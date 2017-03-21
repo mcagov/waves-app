@@ -73,7 +73,7 @@ describe Builders::CsrFormBuilder do
     context "expected attributes" do
       it { expect(subject).to be_persisted }
       it { expect(subject.vessel_id).to eq(vessel.id) }
-      it { expect(subject.issue_number).to eq(1) }
+      it { expect(subject.issue_number).to be_blank }
       it { expect(subject.issued_at).to be_present }
       it { expect(subject.registered_at).to eq(Date.new(2010, 1, 1)) }
 

@@ -16,7 +16,7 @@ class Builders::CsrFormBuilder
       CsrForm.create(
         submission_id: @submission.id,
         vessel_id: @submission.registered_vessel.id,
-        issue_number: csr_issue_number,
+        issue_number: nil, # generate by ApplicationProcessor
         issued_at: Date.today,
         registered_at: first_registration_date,
         vessel_name: @vessel.name,
@@ -39,10 +39,6 @@ class Builders::CsrFormBuilder
         issc_auditor: @vessel.issc_auditor)
     end
     # rubocop:enable all
-
-    def csr_issue_number
-      1
-    end
 
     def first_registration_date
       @vessel.first_registration.registered_at if @vessel.first_registration
