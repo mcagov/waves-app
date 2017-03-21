@@ -2,7 +2,7 @@ class Submission::CsrController < InternalPagesController
   before_action :load_submission
 
   def show
-    @csr = Builders::CsrFormBuilder.build(@submission)
+    @csr_form = Builders::CsrFormBuilder.build(@submission)
   end
 
   protected

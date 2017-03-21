@@ -1,4 +1,4 @@
-= simple_form_for :csr,
+= simple_form_for :csr_form,
                   url: submission_csr_path(@submission),
                   method: :put do |f|
   %table.table.table-striped
@@ -15,10 +15,10 @@
             "data-date-format" => "dd/mm/yyyy"}
       %tr
         %td 2. Flag State:
-        %td= @csr.flag_state
+        %td= @csr_form.flag_state
       %tr
         %td 3. Date of registration with the State indicated in 2:
-        %td= @csr.registered_at
+        %td= @csr_form.registered_at
       %tr
         %td 4. Name of ship:
         %td= f.input :vessel_name, label: false
