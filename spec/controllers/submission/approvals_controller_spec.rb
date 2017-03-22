@@ -33,15 +33,11 @@ describe Submission::ApprovalsController, type: :controller do
             .with(approval_params)
             .and_return(true)
 
-          expect(Registration)
-            .to receive(:find_by)
-            .and_return(double(:registration, part: :part_3))
-
           post :create, params: params
         end
 
-        it "redirects to the registration page" do
-          expect(response).to redirect_to(/registrations/)
+        it "redirects to the submission#registration page" do
+          expect(response).to redirect_to(/submissions\/.*\/registration/)
         end
 
         it "creates a notification for the applicant" do

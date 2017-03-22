@@ -1,10 +1,10 @@
 .row
   .col-sm-6
     %h1{style: "margin-top: 0px !important;"}
-      = Task.new(@registration.task).description
+      = Task.new(@submission.task).description
       %small
         ID:
-        = @registration.submission_ref_no
+        = @submission.ref_no
   .col-sm-6
     .pull-right
       - @print_jobs.each do |print_job|
@@ -18,14 +18,14 @@
     .x_panel
       .x_title
         %h2
-          Task Complete: #{@registration.registered_vessel}.
+          Task Complete: #{@registered_vessel}.
           Official Number:
-          = link_to vessel_path(@registration.registered_vessel) do
-            = @registration.registered_vessel.reg_no
+          = link_to vessel_path(@registered_vessel) do
+            = @registered_vessel.reg_no
         .clearfix
       .x_content
         %p
-          = t("submission.approval.confirmation.#{@registration.task}",
+          = t("submission.approval.confirmation.#{@submission.task}",
             part: Activity.new(@registered_vessel.part).to_s)
 
 .row.no-print

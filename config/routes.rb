@@ -136,6 +136,10 @@ Rails.application.routes.draw do
              controller: "submission/name_approvals",
              only: [:show, :update]
 
+    resource :registration,
+             controller: "submission/registration",
+             only: [:show]
+
     resources :representatives,
               controller: "submission/representatives",
               only: [:update, :destroy]
@@ -158,8 +162,6 @@ Rails.application.routes.draw do
   end
 
   resources :print_jobs, only: [:show, :index, :update]
-
-  resources :registrations, only: [:show]
 
   namespace :reports do
     resources :work_logs, only: [:index]

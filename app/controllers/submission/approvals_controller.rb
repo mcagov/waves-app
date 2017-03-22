@@ -5,8 +5,7 @@ class Submission::ApprovalsController < InternalPagesController
     if @submission.approved!(approval_params.to_h)
       build_notification
       log_work!(@submission, @submission, :processed_application)
-      redirect_to registration_path(
-        Registration.find_by(submission_ref_no: @submission.ref_no))
+      redirect_to submission_registration_path(@submission)
     else
       render "errors"
     end
