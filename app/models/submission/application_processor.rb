@@ -59,7 +59,10 @@ class Submission::ApplicationProcessor
 
       Builders::PrintJobBuilder
         .create(
-          @submission.registration, @submission.part, @task.print_job_templates)
+          @submission,
+          @submission.registration,
+          @submission.part,
+          @task.print_job_templates)
     end
 
     def build_csr_issue_number

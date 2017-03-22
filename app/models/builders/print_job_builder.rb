@@ -1,11 +1,12 @@
 class Builders::PrintJobBuilder
   class << self
-    def create(registration, part, templates)
-      @registration = registration
+    def create(submission, printable_item, part, templates)
+      @submission = submission
+      @printable_item = printable_item
       @templates = templates
       @part = part
 
-      create_templates if @registration
+      create_templates if @printable_item
     end
 
     private
@@ -13,7 +14,8 @@ class Builders::PrintJobBuilder
     def create_templates
       @templates.each do |template|
         PrintJob.create(
-          printable: @registration,
+          submission: @submission,
+          printable: @printable_item,
           part: @part,
           template: template
         )

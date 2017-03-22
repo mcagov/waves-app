@@ -1,8 +1,7 @@
 class Submission::RegistrationController < InternalPagesController
   def show
     @submission = Submission.find(params[:submission_id])
-    @registration = @submission.registration
-    @registered_vessel = @registration.registered_vessel
-    @print_jobs = PrintJob.where(printable: @registration)
+    @registered_vessel = @submission.registered_vessel
+    @print_jobs = PrintJob.where(submission: @submission)
   end
 end
