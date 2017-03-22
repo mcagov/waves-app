@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Submission::Associations
   class << self
     def included(base)
@@ -21,7 +22,6 @@ module Submission::Associations
       base.has_many :documents, as: :noteable
     end
 
-    # rubocop:disable Metrics/MethodLength
     def declaration_associations(base)
       base.belongs_to :correspondent,
                       class_name: "Submission::Correspondent",
@@ -90,6 +90,8 @@ module Submission::Associations
     end
 
     def registration_associations(base)
+      base.belongs_to :registration
+
       base.belongs_to :registered_vessel,
                       lambda { |submission|
                         where("vessels.part = ?", submission.part)
@@ -150,3 +152,4 @@ module Submission::Associations
     payment.remittance if payment && source.to_sym == :manual_entry
   end
 end
+# rubocop:enable all

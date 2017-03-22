@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321100033) do
+ActiveRecord::Schema.define(version: 20170322091620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -384,13 +384,10 @@ ActiveRecord::Schema.define(version: 20170321100033) do
     t.datetime "registered_until"
     t.uuid     "actioned_by_id"
     t.json     "registry_info"
-    t.string   "submission_ref_no"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.datetime "closed_at"
     t.text     "description"
-    t.string   "task"
-    t.index ["submission_ref_no"], name: "index_registrations_on_submission_ref_no", using: :btree
     t.index ["vessel_id"], name: "index_registrations_on_vessel_id", using: :btree
   end
 
@@ -445,6 +442,7 @@ ActiveRecord::Schema.define(version: 20170321100033) do
     t.uuid     "managing_owner_id"
     t.string   "linkable_ref_no"
     t.datetime "carving_and_marking_received_at"
+    t.uuid     "registration_id"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
