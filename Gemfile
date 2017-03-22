@@ -34,6 +34,7 @@ gem "paperclip-azure",
 gem "pg_search"
 gem "prawn"
 gem "prawn-print"
+gem "prawn-table"
 gem "protokoll"
 gem "rack-cors"
 gem "remotipart"
