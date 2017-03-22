@@ -106,12 +106,6 @@ module Register
       registration_status != :pending
     end
 
-    def historic_registrations
-      registrations.map { |r| r.registered_at.to_date }.uniq.map do |reg_date|
-        registrations.where("DATE(registered_at) = ?", reg_date).first
-      end
-    end
-
     private
 
     def shareholder_groups_info

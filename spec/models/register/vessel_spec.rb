@@ -41,28 +41,6 @@ describe Register::Vessel do
     it { expect(subject).to eq(latest_registration) }
   end
 
-  context "#historic_registrations builds unique registered_at dates" do
-    let!(:ten_years_ago_1) do
-      create(:ten_year_old_registration,
-             registered_at: 10.years.ago, vessel_id: vessel.id)
-    end
-
-    let!(:ten_years_ago_2) do
-      create(:nine_year_old_registration,
-             registered_at: 10.years.ago, vessel_id: vessel.id)
-    end
-
-    let!(:latest_registration) do
-      Registration.order("created_at desc").first
-    end
-
-    subject { vessel.historic_registrations }
-
-    it do
-      expect(subject).to eq([latest_registration, ten_years_ago_2])
-    end
-  end
-
   context "#notification_list" do
     let!(:vessel) { build(:registered_vessel) }
 
