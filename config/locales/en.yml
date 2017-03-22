@@ -27,17 +27,20 @@ en:
       registration_certificate: Print Certificate of Registry
       current_transcript: Print Current Transcript
       historic_transcript: Print Historic Transcript
+      csr_form: Print CSR
     print_all_button_text:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
       current_transcript: Print Current Transcripts
       historic_transcript: Print Historic Transcripts
+      csr_form: Print CSRs
     menu_title:
       carving_and_marking: Carving & Marking Notes
       cover_letter: Cover Letters
       registration_certificate: Certificates of Registry
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
+      csr_form: CSRs
   submission:
     approval_error:
       vessel_frozen: Vessel registration is frozen

@@ -54,15 +54,18 @@ class Submission::ApplicationProcessor
     end
 
     def build_print_jobs
-      return unless @task.print_job_templates
-      return if @submission.electronic_delivery?
+      return if !@task.print_job_templates || @submission.electronic_delivery?
 
       Builders::PrintJobBuilder
         .create(
           @submission,
-          @submission.registration,
+          printable,
           @submission.part,
           @task.print_job_templates)
+    end
+
+    def printable
+      @task.issues_csr? ? @submission.csr_form : @submission.registration
     end
 
     def build_csr_issue_number
