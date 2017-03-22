@@ -2,7 +2,8 @@ class Registration < ApplicationRecord
   belongs_to :actioned_by, class_name: "User", required: false
   belongs_to :registered_vessel, class_name: "Register::Vessel",
                                  foreign_key: :vessel_id
-  has_many :submissions
+
+  has_many :submissions, -> { order("created_at desc") }
 
   def vessel
     Register::Vessel.new(symbolized_registry_info[:vessel_info] || {})
@@ -29,7 +30,10 @@ class Registration < ApplicationRecord
   end
 
   def delivery_address
-    submission = Submission.find_by(ref_no: submission_ref_no)
+    # Taking the delivery address from the most recent submission
+    # is probably not the best approach but, for now, that is
+    # what we are going to do
+    submission = submissions.first
     if submission && submission.delivery_address.active?
       submission.delivery_address
     else
