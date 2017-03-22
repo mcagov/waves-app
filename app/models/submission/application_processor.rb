@@ -9,6 +9,7 @@ class Submission::ApplicationProcessor
       assign_registration
 
       build_print_jobs
+      build_csr_issue_number
     end
 
     private
@@ -59,6 +60,10 @@ class Submission::ApplicationProcessor
       Builders::PrintJobBuilder
         .create(
           @submission.registration, @submission.part, @task.print_job_templates)
+    end
+
+    def build_csr_issue_number
+      Builders::CsrIssueNumberBuilder.build(@submission) if @task.issues_csr?
     end
   end
 end

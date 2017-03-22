@@ -54,6 +54,8 @@ module Register
 
     has_many :mortgages, as: :parent
 
+    has_many :csr_forms
+
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
     delegate :registered_until, to: :current_registration
