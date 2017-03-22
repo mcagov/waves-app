@@ -2,7 +2,6 @@
 module Submission::Associations
   class << self
     def included(base)
-      address_associations(base)
       notes_associations(base)
       declaration_associations(base)
       ownership_associations(base)
@@ -11,10 +10,6 @@ module Submission::Associations
       payment_associations(base)
       registration_associations(base)
       user_associations(base)
-    end
-
-    def address_associations(base)
-      base.belongs_to :delivery_address, class_name: "Address", required: false
     end
 
     def notes_associations(base)
