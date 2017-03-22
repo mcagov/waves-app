@@ -37,7 +37,7 @@ describe Submission::ApprovalsController, type: :controller do
         end
 
         it "redirects to the submission#registration page" do
-          expect(response).to redirect_to(/submissions\/.*\/registration/)
+          expect(response).to redirect_to(%r{submissions\/.*\/registration})
         end
 
         it "creates a notification for the applicant" do
