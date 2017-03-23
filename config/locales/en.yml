@@ -40,7 +40,7 @@ en:
       registration_certificate: Certificates of Registry
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
-      csr_form: CSRs
+      csr_form: CSR Forms
   submission:
     approval_error:
       vessel_frozen: Vessel registration is frozen

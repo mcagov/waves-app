@@ -23,5 +23,8 @@ describe "User issues CSR", js: true do
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
     end
+
+    visit "/print_queue/csr_form"
+    expect(page).to have_link("Re-Print")
   end
 end

@@ -5,4 +5,8 @@ class CsrForm < ApplicationRecord
              class_name: "Register::Vessel"
 
   delegate :part, to: :registered_vessel
+
+  def vessel
+    registered_vessel
+  end
 end
