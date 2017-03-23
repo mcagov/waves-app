@@ -73,6 +73,22 @@ describe Policies::Workflow do
     end
   end
 
+  context ".uses_csr_forms?" do
+    subject { described_class.uses_csr_forms?(vessel) }
+
+    context "for a part_1 vessel" do
+      let(:vessel) { build(:registered_vessel, part: :part_1) }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "for a fishing vessel" do
+      let(:vessel) { build(:part_4_fishing_vessel) }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
   context ".uses_vessel_attribute?" do
     before do
       expect(WavesUtilities::Vessel)

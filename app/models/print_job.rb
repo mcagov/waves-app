@@ -1,4 +1,5 @@
 class PrintJob < ApplicationRecord
+  belongs_to :submission
   belongs_to :printable, polymorphic: true
   belongs_to :printing_by, class_name: "User"
   belongs_to :printed_by, class_name: "User"

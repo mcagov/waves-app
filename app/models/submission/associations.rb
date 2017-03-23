@@ -1,9 +1,10 @@
+# rubocop:disable all
 module Submission::Associations
   class << self
     def included(base)
-      address_associations(base)
       notes_associations(base)
       declaration_associations(base)
+      ownership_associations(base)
       misc_associations(base)
       notification_associations(base)
       payment_associations(base)
@@ -11,16 +12,11 @@ module Submission::Associations
       user_associations(base)
     end
 
-    def address_associations(base)
-      base.belongs_to :delivery_address, class_name: "Address", required: false
-    end
-
     def notes_associations(base)
       base.has_many :correspondences, as: :noteable
       base.has_many :documents, as: :noteable
     end
 
-    # rubocop:disable Metrics/MethodLength
     def declaration_associations(base)
       base.belongs_to :correspondent,
                       class_name: "Submission::Correspondent",
@@ -46,8 +42,11 @@ module Submission::Associations
       base.has_many :engines, as: :parent
       base.has_many :mortgages, -> { order("created_at asc") }, as: :parent
       base.has_many :charterers, -> { order("created_at asc") }, as: :parent
+      base.has_one  :csr_form
       base.has_one :name_approval, class_name: "Submission::NameApproval"
+    end
 
+    def ownership_associations(base)
       base.has_many :beneficial_owners,
                     -> { order(:name) },
                     class_name: "BeneficialOwner",
@@ -86,6 +85,8 @@ module Submission::Associations
     end
 
     def registration_associations(base)
+      base.belongs_to :registration
+
       base.belongs_to :registered_vessel,
                       lambda { |submission|
                         where("vessels.part = ?", submission.part)
@@ -146,3 +147,4 @@ module Submission::Associations
     payment.remittance if payment && source.to_sym == :manual_entry
   end
 end
+# rubocop:enable all

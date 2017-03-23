@@ -1,0 +1,17 @@
+%h2 CSR Forms
+%table.table.table-striped
+  %thead
+    %th{ width: 100 } Issue Number
+    %th{ width: 300 } Issue Date
+    %th Date Created
+    %th
+  %tbody
+    - @vessel.csr_forms.each do |csr_form|
+      %tr
+        %td= csr_form.issue_number
+        %td= csr_form.issued_at
+        %td= csr_form.updated_at
+        %td
+          = link_to vessel_csr_path(@vessel, csr_form, format: :pdf), target: "_blank" do
+            %i.fa.fa-file-pdf-o
+            View CSR Form

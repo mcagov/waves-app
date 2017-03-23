@@ -3,7 +3,6 @@ class Builders::ClonedRegistrationBuilder
     def create(submission)
       @submission = submission
       @registered_vessel = @submission.registered_vessel
-      @previous_registration = @registered_vessel.current_registration
 
       create_cloned_registration
     end
@@ -11,14 +10,11 @@ class Builders::ClonedRegistrationBuilder
     private
 
     def create_cloned_registration
-      Registration.create(
-        vessel_id: @registered_vessel.id,
-        registered_at: @previous_registration.try(:registered_at),
-        registered_until: @previous_registration.try(:registered_until),
-        submission_ref_no: @submission.ref_no,
-        task: @submission.task,
-        registry_info: @registered_vessel.registry_info,
-        actioned_by: @submission.claimant)
+      registration = @registered_vessel.current_registration
+
+      @submission.update_attributes(registration: registration)
+
+      registration
     end
   end
 end

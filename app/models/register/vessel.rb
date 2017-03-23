@@ -27,6 +27,9 @@ module Register
     has_one :current_registration,
             -> { order("created_at desc").limit(1) },
             class_name: "Registration"
+    has_one :first_registration,
+            -> { order("registered_at asc").limit(1) },
+            class_name: "Registration"
 
     has_many :correspondences, as: :noteable
 
@@ -43,8 +46,15 @@ module Register
              foreign_key: :registered_vessel_id
 
     has_many :engines, as: :parent
+
     has_many :charterers, as: :parent
+    has_many :charter_parties,
+             -> { order("name") },
+             through: :charterers
+
     has_many :mortgages, as: :parent
+
+    has_many :csr_forms, -> { order("issue_number desc") }
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
@@ -96,12 +106,6 @@ module Register
 
     def prints_transcript?
       registration_status != :pending
-    end
-
-    def historic_registrations
-      registrations.map { |r| r.registered_at.to_date }.uniq.map do |reg_date|
-        registrations.where("DATE(registered_at) = ?", reg_date).first
-      end
     end
 
     private

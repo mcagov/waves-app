@@ -93,5 +93,16 @@ describe Pdfs::Processor do
 
       it { subject }
     end
+
+    context "with a csr_form" do
+      let(:template) { :csr_form }
+
+      before do
+        expect(Pdfs::CsrForm)
+          .to receive(:new).with(printable_items, :printable)
+      end
+
+      it { subject }
+    end
   end
 end

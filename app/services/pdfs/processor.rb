@@ -42,4 +42,8 @@ class Pdfs::Processor
   def carving_and_marking
     Pdfs::CarvingAndMarking.new(@printable_items, @mode)
   end
+
+  def csr_form
+    Pdfs::CsrForm.new(@printable_items, @mode)
+  end
 end

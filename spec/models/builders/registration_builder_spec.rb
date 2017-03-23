@@ -14,9 +14,7 @@ describe Builders::RegistrationBuilder do
              registered_vessel: registered_vessel)
     end
 
-    let(:registration) do
-      Registration.find_by(submission_ref_no: submission.ref_no)
-    end
+    let(:registration) { submission.registration }
 
     it "records the registration date" do
       expect(registration.registered_at)
@@ -37,12 +35,8 @@ describe Builders::RegistrationBuilder do
       expect(registration.vessel[:id]).to eq(registered_vessel.id)
     end
 
-    it "records the submission_ref_no" do
-      expect(registration.submission_ref_no).to eq(submission.ref_no)
-    end
-
-    it "records the task" do
-      expect(registration.task.to_sym).to eq(:change_vessel)
+    it "sets the submission#registration" do
+      expect(submission.registration).to eq(registration)
     end
   end
 end

@@ -23,6 +23,10 @@
       %li{:role => "presentation"}
         %a#mortgages-tab{"data-toggle" => "tab", :href => "#mortgages_tab", :role => "tab"} Mortgages
 
+    - if display_csr_forms?(@vessel)
+      %li{:role => "presentation"}
+        %a#csr_forms-tab{"data-toggle" => "tab", :href => "#csr_forms_tab", :role => "tab"} CSR Forms
+
     %li{:role => "presentation"}
       %a#certificates-tab{"data-toggle" => "tab", :href => "#certificates_tab", :role => "tab"} Certificates & Documents
 
@@ -56,6 +60,9 @@
 
     #mortgages_tab.tab-pane{"aria-labelledby" => "mortgages-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/mortgages", locals: { vessel: @vessel }
+
+    #csr_forms_tab.tab-pane{"aria-labelledby" => "csr_forms-tab", :role => "tabpanel"}
+      = render partial: "vessels/extended/tabs/csr_forms", locals: { vessel: @vessel }
 
     #certificates_tab.tab-pane{"aria-labelledby" => "certificates-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/documents", locals: { vessel: @vessel }

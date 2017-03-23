@@ -61,6 +61,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :csr,
+             controller: "submission/csr",
+             only: [:show, :update, :destroy]
+
     resources :directed_bys,
               controller: "submission/directed_bys",
               only: [:create, :update, :destroy]
@@ -155,8 +159,6 @@ Rails.application.routes.draw do
 
   resources :print_jobs, only: [:show, :index, :update]
 
-  resources :registrations, only: [:show]
-
   namespace :reports do
     resources :work_logs, only: [:index]
   end
@@ -165,6 +167,10 @@ Rails.application.routes.draw do
     resource :closure,
              only: [:create],
              controller: "registered_vessel/closure"
+
+    resources :csrs,
+              only: [:show],
+              controller: "registered_vessel/csrs"
 
     resource :cold_storage,
              only: [:create],
@@ -206,7 +212,7 @@ Rails.application.routes.draw do
 
   %w(
     carving_and_marking registration_certificate cover_letter
-    current_transcript historic_transcript
+    current_transcript historic_transcript csr_form
   ).each do |template|
     get "/print_queue/#{template}",
         controller: :print_jobs,

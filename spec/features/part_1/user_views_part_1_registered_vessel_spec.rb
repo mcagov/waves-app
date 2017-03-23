@@ -20,5 +20,18 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     expect_extended_engine_fields(false)
     expect_extended_owner_fields(false)
     expect_shareholding(true)
+    expect_csr_forms(true)
+  end
+
+  scenario "CSR Forms" do
+    click_on("CSR Forms")
+
+    pdf_window = window_opened_by do
+      click_on("View CSR Form")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
   end
 end

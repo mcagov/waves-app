@@ -1,10 +1,9 @@
 class SubmissionsController < InternalPagesController
   before_action :load_submission,
                 only: [:show, :edit, :update]
-  before_action :check_officer_intervention_required,
+  before_action :check_redirection_policy,
                 only: [:show, :edit, :update]
-  before_action :check_approved_name_required,
-                only: [:show, :edit, :update]
+
   def new
     @submission =
       Submission.new(
@@ -69,15 +68,15 @@ class SubmissionsController < InternalPagesController
     )
   end
 
-  def check_officer_intervention_required
-    if @submission.officer_intervention_required?
-      return redirect_to submission_finance_payment_path(@submission)
-    end
-  end
+  def check_redirection_policy
+    if Task.new(@submission.task).issues_csr?
+      return redirect_to submission_csr_path(@submission)
 
-  def check_approved_name_required
-    if Policies::Workflow.approved_name_required?(@submission)
-      redirect_to submission_name_approval_path(@submission)
+    elsif @submission.officer_intervention_required?
+      return redirect_to submission_finance_payment_path(@submission)
+
+    elsif Policies::Workflow.approved_name_required?(@submission)
+      return redirect_to submission_name_approval_path(@submission)
     end
   end
 

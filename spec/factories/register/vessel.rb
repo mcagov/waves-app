@@ -9,6 +9,7 @@ FactoryGirl.define do
     engines                   { [build(:engine)] }
     documents                 { [build(:document)] }
     managers                  { [build(:manager)] }
+    csr_forms                 { [build(:csr_form)] }
     mortgages                 { [build(:mortgage)] }
     charterers                { [build(:charterer)] }
     beneficial_owners         { [build(:beneficial_owner)] }

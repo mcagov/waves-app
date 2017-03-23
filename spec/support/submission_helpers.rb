@@ -105,3 +105,15 @@ def visit_carving_and_marking_ready_submission
   login_to_part_2(submission.claimant)
   visit submission_path(submission)
 end
+
+def visit_assigned_csr_submission
+  registered_vessel =
+    create(:registered_vessel, part: :part_1)
+  submission =
+    create(:assigned_submission, task: :issue_csr,
+                                 part: :part_1,
+                                 registered_vessel: registered_vessel)
+
+  login_to_part_1(submission.claimant)
+  visit submission_path(submission)
+end

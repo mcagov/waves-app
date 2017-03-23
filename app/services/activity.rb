@@ -47,4 +47,28 @@ class Activity
   def view_mode
     @part == :part_3 ? :basic : :extended
   end
+
+  def printable_templates
+    templates =
+      case @part
+      when :part_1, :part_4
+        default_printable_templates + [:csr_form]
+      else
+        default_printable_templates
+      end
+
+    templates.sort
+  end
+
+  private
+
+  def default_printable_templates
+    [
+      :carving_and_marking,
+      :registration_certificate,
+      :cover_letter,
+      :current_transcript,
+      :historic_transcript,
+    ]
+  end
 end
