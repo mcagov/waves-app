@@ -54,7 +54,7 @@ module Register
 
     has_many :mortgages, as: :parent
 
-    has_many :csr_forms
+    has_many :csr_forms, -> { order("issue_number desc") }
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 

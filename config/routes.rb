@@ -168,6 +168,10 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/closure"
 
+    resources :csrs,
+              only: [:show],
+              controller: "registered_vessel/csrs"
+
     resource :cold_storage,
              only: [:create],
              controller: "registered_vessel/cold_storage"
