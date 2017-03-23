@@ -11,7 +11,7 @@ describe "User issues CSR", js: true do
     expect(page)
       .to have_link("Go to Task List", href: tasks_my_tasks_path)
 
-    expect(CsrForm.last.remarks).to eq("NO COMMENT")
+    expect(Submission.last.csr_form.remarks).to eq("NO COMMENT")
 
     click_on("Issue CSR")
     click_on("Approve & Issue CSR")

@@ -73,31 +73,28 @@ describe Builders::CsrFormBuilder do
     it "assigns the expected attributes" do
       csr_form = subject
       expect(csr_form).to be_persisted
-      expect(csr_form.vessel_id).to eq(vessel.id)
-      expect(csr_form.issue_number).to be_blank
       expect(csr_form.issued_at).to be_present
-      expect(csr_form.registered_at).to eq(Date.new(2010, 1, 1))
 
-      expect(csr_form.vessel_name).to eq("PIRATE SHIP")
-      expect(csr_form.port_name).to eq("SOUTHAMPTON")
-
-      expect(csr_form.owner_names).to eq("ALICE; BOB")
-      expect(csr_form.owner_addresses).to eq("AA ST; BB ST")
-      expect(csr_form.owner_identification_number).to eq("AA1; BB2")
-
-      expect(csr_form.charterer_names).to eq("CHARLIE")
-      expect(csr_form.charterer_addresses).to eq("MAIN STREET")
-
-      expect(csr_form.manager_name).to eq("MIKE")
-      expect(csr_form.manager_address).to eq("MIKES HOUSE")
-      expect(csr_form.safety_management_address).to eq("SM STREET")
-      expect(csr_form.manager_company_number).to eq("12345")
-
-      expect(csr_form.classification_societies).to eq("XX; YY")
-      expect(csr_form.smc_issuer).to eq("SMC_I")
-      expect(csr_form.smc_auditor).to eq("SMC_A")
-      expect(csr_form.issc_issuer).to eq("ISSC_I")
-      expect(csr_form.issc_auditor).to eq("ISSC_A")
+      expect(csr_form).to have_attributes(
+        vessel_id: vessel.id,
+        issue_number: nil,
+        registered_at: Date.new(2010, 1, 1),
+        vessel_name: "PIRATE SHIP",
+        port_name: "SOUTHAMPTON",
+        owner_names: "ALICE; BOB",
+        owner_addresses: "AA ST; BB ST",
+        owner_identification_number: "AA1; BB2",
+        charterer_names: "CHARLIE",
+        charterer_addresses: "MAIN STREET",
+        manager_name: "MIKE",
+        manager_address: "MIKES HOUSE",
+        safety_management_address: "SM STREET",
+        manager_company_number: "12345",
+        classification_societies: "XX; YY",
+        smc_issuer: "SMC_I",
+        smc_auditor: "SMC_A",
+        issc_issuer: "ISSC_I",
+        issc_auditor: "ISSC_A")
     end
   end
 end
