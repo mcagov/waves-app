@@ -19,8 +19,7 @@
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
 
-      - [:carving_and_marking, :registration_certificate, :cover_letter, :csr_form,
-         :current_transcript, :historic_transcript].each do |template|
+      - current_activity.printable_templates.each do |template|
         %li= link_to t("print_job.menu_title.#{template}"), "/print_queue/#{template}"
   %li
     %a
