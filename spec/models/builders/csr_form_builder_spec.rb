@@ -70,33 +70,34 @@ describe Builders::CsrFormBuilder do
       end
     end
 
-    context "expected attributes" do
-      it { expect(subject).to be_persisted }
-      it { expect(subject.vessel_id).to eq(vessel.id) }
-      it { expect(subject.issue_number).to be_blank }
-      it { expect(subject.issued_at).to be_present }
-      it { expect(subject.registered_at).to eq(Date.new(2010, 1, 1)) }
+    it "assigns the expected attributes" do
+      csr_form = subject
+      expect(csr_form).to be_persisted
+      expect(csr_form.vessel_id).to eq(vessel.id)
+      expect(csr_form.issue_number).to be_blank
+      expect(csr_form.issued_at).to be_present
+      expect(csr_form.registered_at).to eq(Date.new(2010, 1, 1))
 
-      it { expect(subject.vessel_name).to eq("PIRATE SHIP") }
-      it { expect(subject.port_name).to eq("SOUTHAMPTON") }
+      expect(csr_form.vessel_name).to eq("PIRATE SHIP")
+      expect(csr_form.port_name).to eq("SOUTHAMPTON")
 
-      it { expect(subject.owner_names).to eq("ALICE; BOB") }
-      it { expect(subject.owner_addresses).to eq("AA ST; BB ST") }
-      it { expect(subject.owner_identification_number).to eq("AA1; BB2") }
+      expect(csr_form.owner_names).to eq("ALICE; BOB")
+      expect(csr_form.owner_addresses).to eq("AA ST; BB ST")
+      expect(csr_form.owner_identification_number).to eq("AA1; BB2")
 
-      it { expect(subject.charterer_names).to eq("CHARLIE") }
-      it { expect(subject.charterer_addresses).to eq("MAIN STREET") }
+      expect(csr_form.charterer_names).to eq("CHARLIE")
+      expect(csr_form.charterer_addresses).to eq("MAIN STREET")
 
-      it { expect(subject.manager_name).to eq("MIKE") }
-      it { expect(subject.manager_address).to eq("MIKES HOUSE") }
-      it { expect(subject.safety_management_address).to eq("SM STREET") }
-      it { expect(subject.manager_company_number).to eq("12345") }
+      expect(csr_form.manager_name).to eq("MIKE")
+      expect(csr_form.manager_address).to eq("MIKES HOUSE")
+      expect(csr_form.safety_management_address).to eq("SM STREET")
+      expect(csr_form.manager_company_number).to eq("12345")
 
-      it { expect(subject.classification_societies).to eq("XX; YY") }
-      it { expect(subject.smc_issuer).to eq("SMC_I") }
-      it { expect(subject.smc_auditor).to eq("SMC_A") }
-      it { expect(subject.issc_issuer).to eq("ISSC_I") }
-      it { expect(subject.issc_auditor).to eq("ISSC_A") }
+      expect(csr_form.classification_societies).to eq("XX; YY")
+      expect(csr_form.smc_issuer).to eq("SMC_I")
+      expect(csr_form.smc_auditor).to eq("SMC_A")
+      expect(csr_form.issc_issuer).to eq("ISSC_I")
+      expect(csr_form.issc_auditor).to eq("ISSC_A")
     end
   end
 end
