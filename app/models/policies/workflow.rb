@@ -15,6 +15,10 @@ class Policies::Workflow
       Policies::Definitions.fishing_vessel?(obj)
     end
 
+    def uses_csr_forms?(obj)
+      !Policies::Definitions.fishing_vessel?(obj)
+    end
+
     def uses_extended_engines?(obj)
       Policies::Definitions.fishing_vessel?(obj)
     end

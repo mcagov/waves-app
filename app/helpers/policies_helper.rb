@@ -1,4 +1,8 @@
 module PoliciesHelper
+  def display_csr_forms?(obj)
+    Policies::Workflow.uses_csr_forms?(obj)
+  end
+
   def display_charterers?(obj)
     Policies::Definitions.charterable?(obj)
   end

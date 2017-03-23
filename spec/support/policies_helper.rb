@@ -6,6 +6,10 @@ def expect_field(bln, css)
   end
 end
 
+def expect_csr_forms(bln)
+  expect_field(bln, "#csr_forms-tab")
+end
+
 def expect_charterers(bln)
   expect_field(bln, "#charterers-tab")
 end
