@@ -10,7 +10,7 @@ class RegisteredVessel::CsrsController < InternalPagesController
 
   def build_and_render_pdf
     if @csr_form
-      pdf = Pdfs::Processor.run(:csr_form, @csr_form)
+      pdf = Pdfs::Processor.run(:csr_form, @csr_form, :attachment)
       render_pdf(pdf, pdf.filename)
     end
   end

@@ -1,14 +1,15 @@
 %h2 CSR Forms
 %table.table.table-striped
   %thead
-    %th{ width: 100 } Issue Number
-    %th{ width: 300 } Issue Date
+    %th Issue Number
+    %th Issue Date
     %th Date Created
     %th
   %tbody
     - @vessel.csr_forms.each do |csr_form|
       %tr
-        %td= csr_form.issue_number
+        %td
+          = (csr_form.issue_number || "In progress")
         %td= csr_form.issued_at
         %td= csr_form.updated_at
         %td
