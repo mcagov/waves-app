@@ -26,7 +26,7 @@ gem "jquery-rails"
 gem "haml"
 gem "pg"
 gem "momentjs-rails"
-gem "nokogiri", ">= 1.6.8"
+gem "nokogiri", ">= 1.7.1"
 gem "notifications-ruby-client", ">= 1.1.2"
 gem "paperclip"
 gem "paperclip-azure",
