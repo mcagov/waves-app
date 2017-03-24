@@ -1,0 +1,21 @@
+= link_to "Generate Official No.", "#generate-official-no",
+  data: { target: "#generate-official-no", toggle: "modal" }
+
+.modal.fade{id: "generate-official-no", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+      = simple_form_for OfficialNo.new,
+                        url:  submission_official_no_path(@submission),
+                        method: :put do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Generate Official No
+        .modal-body
+          = f.input :content,
+                    label: false,
+                    placeholder: "Leave blank for system generated number"
+
+        .modal-footer
+          = f.submit "Continue", class: "btn btn-success"
+

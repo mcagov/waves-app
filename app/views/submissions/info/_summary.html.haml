@@ -37,10 +37,7 @@
                       %strong= link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
                     - elsif Policies::Workflow.generate_official_no?(submission)
                       - unless @readonly
-                        = link_to "Generate Official No.",
-                          submission_official_no_path(@submission),
-                          data: { confirm: "Are you sure this is the right time to generate the Official No.?" },
-                          method: :put
+                        = render partial: "submissions/actions/generate_official_no"
                 %tr
                   %td.soft-label EC No.:
                   %td.ec-no
