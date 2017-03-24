@@ -60,9 +60,10 @@ describe Builders::CsrFormBuilder do
         registered_at: "1/1/2010")
     end
 
-    let(:csr_form) { described_class.build(submission) }
+    subject { described_class.build(submission) }
 
     it "assigns the expected attributes" do
+      csr_form = subject
       expect(csr_form).to be_persisted
       expect(csr_form.issued_at).to be_present
 
@@ -71,12 +72,16 @@ describe Builders::CsrFormBuilder do
         issue_number: nil,
         registered_at: Date.new(2010, 1, 1),
         vessel_name: "PIRATE SHIP",
-        port_name: "SOUTHAMPTON",
+        port_name: "SOUTHAMPTON")
+
+      expect(csr_form).to have_attributes(
         owner_names: "ALICE; BOB",
         owner_addresses: "AA ST; BB ST",
         owner_identification_number: "AA1; BB2",
         charterer_names: "CHARLIE",
-        charterer_addresses: "MAIN STREET",
+        charterer_addresses: "MAIN STREET")
+
+      expect(csr_form).to have_attributes(
         manager_name: "MIKE",
         manager_address: "MIKES HOUSE",
         safety_management_address: "SM STREET",
@@ -92,16 +97,8 @@ describe Builders::CsrFormBuilder do
       let!(:submission_csr_form) { create(:csr_form, submission: submission) }
 
       it "retrieves the existing CsrForm" do
-        expect(csr_form).to eq(submission_csr_form)
+        expect(subject).to eq(submission_csr_form)
       end
     end
   end
-end
-
-def separator
-  "; "
-end
-
-def vessel_registered_at
-  "1/1/2011"
 end
