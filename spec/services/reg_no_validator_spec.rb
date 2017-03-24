@@ -43,5 +43,19 @@ describe RegNoValidator do
         it { expect(subject).to be_falsey }
       end
     end
+
+    context "checking case sensitivity" do
+      let(:invalid_reg_no) { "ssr200001" }
+
+      context "lower case" do
+        let(:reg_no) { invalid_reg_no }
+        it { expect(subject).to be_falsey }
+      end
+
+      context "upper case" do
+        let(:reg_no) { invalid_reg_no.upcase }
+        it { expect(subject).to be_falsey }
+      end
+    end
   end
 end

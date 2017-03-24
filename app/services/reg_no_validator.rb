@@ -1,7 +1,7 @@
 class RegNoValidator
   class << self
     def valid?(reg_no)
-      @reg_no = reg_no
+      @reg_no = reg_no.upcase
 
       return false if reg_no_exists?
       return false if reg_no_pattern_invalid?
