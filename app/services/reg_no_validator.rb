@@ -16,6 +16,12 @@ class RegNoValidator
     end
 
     def reg_no_pattern_invalid?
+      SequenceNumber::Generator::REG_NO_PATTERNS.each_value do |pattern|
+        length_match = pattern.length == @reg_no.length
+        prefix_match = @reg_no.match(/\A#{pattern.delete("#")}.*/)
+
+        return true if length_match && prefix_match
+      end
       false
     end
   end
