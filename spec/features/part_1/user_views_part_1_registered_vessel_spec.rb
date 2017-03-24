@@ -23,8 +23,8 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
     expect_csr_forms(true)
   end
 
-  scenario "CSR Forms" do
-    click_on("CSR Forms")
+  scenario "CSRs" do
+    click_on("CSRs")
 
     pdf_window = window_opened_by do
       click_on("View CSR Form")
