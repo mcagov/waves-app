@@ -1,6 +1,14 @@
 class SequenceNumber::Generator < ApplicationRecord
   self.table_name = "sequence_numbers"
 
+  REG_NO_PATTERNS =
+    {
+      part_1: "6#####",
+      part_2: "C3#####",
+      part_3: "SSR2#####",
+      part_4: "8#####",
+    }.freeze
+
   class << self
     def reg_no!(part)
       case part.to_sym
