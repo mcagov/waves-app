@@ -28,50 +28,41 @@ describe Builders::CsrFormBuilder do
         registered_vessel: vessel)
     end
 
-    let(:owner_1) do
+    let!(:owner_1) do
       build(
         :registered_owner,
         name: "ALICE", address_1: "AA ST", imo_number: "AA1")
     end
 
-    let(:owner_2) do
+    let!(:owner_2) do
       build(
         :registered_owner,
         name: "BOB", address_1: "BB ST", imo_number: "BB2")
     end
 
-    let(:manager) do
+    let!(:manager) do
       build(
         :manager,
         name: "MIKE", address_1: "MIKES HOUSE", imo_number: "12345",
         safety_management: build(:safety_management, address_1: "SM STREET"))
     end
 
-    let(:charterer) do
+    let!(:charterer) do
       build(
         :charterer,
         charter_parties:
           [build(:charter_party, name: "CHARLIE", address: "MAIN STREET")])
     end
 
-    let(:first_registration) do
+    let!(:first_registration) do
       build(
         :registration,
         registered_at: "1/1/2010")
     end
 
-    subject { described_class.build(submission) }
-
-    context "with an existing CsrForm" do
-      let!(:submission_csr_form) { create(:csr_form, submission: submission) }
-
-      it "retrieves the existing CsrForm" do
-        expect(subject).to eq(submission_csr_form)
-      end
-    end
+    let(:csr_form) { described_class.build(submission) }
 
     it "assigns the expected attributes" do
-      csr_form = subject
       expect(csr_form).to be_persisted
       expect(csr_form.issued_at).to be_present
 
@@ -95,6 +86,14 @@ describe Builders::CsrFormBuilder do
         smc_auditor: "SMC_A",
         issc_issuer: "ISSC_I",
         issc_auditor: "ISSC_A")
+    end
+
+    context "with an existing CsrForm" do
+      let!(:submission_csr_form) { create(:csr_form, submission: submission) }
+
+      it "retrieves the existing CsrForm" do
+        expect(csr_form).to eq(submission_csr_form)
+      end
     end
   end
 end
