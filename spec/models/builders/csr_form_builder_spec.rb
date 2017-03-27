@@ -69,28 +69,10 @@ describe Builders::CsrFormBuilder do
 
       expect(csr_form).to have_attributes(
         vessel_id: vessel.id,
-        issue_number: nil,
         registered_at: Date.new(2010, 1, 1),
         vessel_name: "PIRATE SHIP",
-        port_name: "SOUTHAMPTON")
-
-      expect(csr_form).to have_attributes(
         owner_names: "ALICE; BOB",
-        owner_addresses: "AA ST; BB ST",
-        owner_identification_number: "AA1; BB2",
-        charterer_names: "CHARLIE",
-        charterer_addresses: "MAIN STREET")
-
-      expect(csr_form).to have_attributes(
-        manager_name: "MIKE",
-        manager_address: "MIKES HOUSE",
-        safety_management_address: "SM STREET",
-        manager_company_number: "12345",
-        classification_societies: "XX; YY",
-        smc_issuer: "SMC_I",
-        smc_auditor: "SMC_A",
-        issc_issuer: "ISSC_I",
-        issc_auditor: "ISSC_A")
+        owner_addresses: "AA ST; BB ST")
     end
 
     context "with an existing CsrForm" do
