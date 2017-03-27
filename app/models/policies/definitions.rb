@@ -16,7 +16,7 @@ class Policies::Definitions
     end
 
     def undeclared?(submission)
-      !submission.incomplete_declarations.empty?
+      Policies::Declarations.new(submission).undeclared?
     end
 
     def unpaid?(submission)
