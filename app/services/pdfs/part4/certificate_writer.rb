@@ -47,5 +47,27 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Country of Build", @vessel.country_of_build, at: [lmargin, vstart]
   end
+
+
+  def display_charterers(y_pos)
+    y_pos -= 20
+    default_value_font
+    @pdf.draw_text "The following details show the bareboat charter(s):", at: [lmargin, y_pos]
+    y_pos -= 20
+    @pdf.draw_text "Charterer Name & Address", at: [lmargin, y_pos]
+    @pdf.draw_text "Charter Period", at: [420, y_pos]
+    default_label_font
+    y_pos -= 20
+
+    @vessel.charterers.sort.each do |charterer|
+      draw_label charterer.charter_period, at: [420, y_pos]
+
+      charterer.charter_parties.each do |charter_party|
+        draw_label charter_party.name, at: [lmargin, y_pos]
+        draw_label charter_party.address, at: [lmargin, y_pos - 15]
+        y_pos -= 40
+      end
+    end
+  end
   # rubocop:enable all
 end

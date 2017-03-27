@@ -53,8 +53,14 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
       draw_label shareholder_group[:shares_held], at: [474, y_pos]
       y_pos -= 25
     end
+
+    display_charterers(y_pos)
   end
   # rubocop:enable all
+
+  def display_charterers(y_pos)
+    # intentionally left blank
+  end
 
   def draw_label_value(label, text, opts)
     default_label_font
