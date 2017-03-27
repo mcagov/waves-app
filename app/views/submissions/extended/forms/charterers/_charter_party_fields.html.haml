@@ -1,15 +1,21 @@
 .nested-fields
   .row
-    .col-md-3
+    .col-md-2
       = charter_party_f.input :name, label: "Name of Party", input_html: { class: "upcase" }
-    .col-md-4
+    .col-md-3
       = charter_party_f.input :address, label: "Address of Party", input_html: { class: "upcase" }
     .col-md-3
       = charter_party_f.input :contact_details, label: "Contact Details of Party", input_html: { class: "upcase" }
+    .col-md-2
+      %label Declaration Signed
+      = charter_party_f.input :declaration_signed,
+        label: false,
+        as: :radio_buttons,
+        item_label_class: "radio-inline",
+        item_wrapper_tag: false
     .col-md-2
       = link_to_remove_association charter_party_f,
         class: "btn btn-link",
         style: "color: red; padding-top: 25px !important;" do
         %i.fa.fa-trash
         Remove
-
