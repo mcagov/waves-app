@@ -1,4 +1,4 @@
-class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
+class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
   private
 
   # rubocop:disable all

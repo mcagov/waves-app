@@ -20,10 +20,14 @@ class Pdfs::Processor
 
   def registration_certificate
     case @part
-    when :part_3
-      Pdfs::Part3::Certificate.new(@printable_items, @mode)
+    when :part_1
+      Pdfs::Part1::Certificate.new(@printable_items, @mode)
     when :part_2
       Pdfs::Part2::Certificate.new(@printable_items, @mode)
+    when :part_3
+      Pdfs::Part3::Certificate.new(@printable_items, @mode)
+    when :part_4
+      Pdfs::Part4::Certificate.new(@printable_items, @mode)
     end
   end
 

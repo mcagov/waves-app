@@ -29,9 +29,11 @@ describe Pdfs::Processor do
     context "with a registration_certificate" do
       let(:template) { :registration_certificate }
 
-      context "part_3" do
+      context "part_1" do
+        let(:part) { :part_1 }
+
         before do
-          expect(Pdfs::Part3::Certificate)
+          expect(Pdfs::Part1::Certificate)
             .to receive(:new).with(printable_items, :printable)
         end
 
@@ -43,6 +45,28 @@ describe Pdfs::Processor do
 
         before do
           expect(Pdfs::Part2::Certificate)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
+
+      context "part_3" do
+        let(:part) { :part_3 }
+
+        before do
+          expect(Pdfs::Part3::Certificate)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
+
+      context "part_4" do
+        let(:part) { :part_4 }
+
+        before do
+          expect(Pdfs::Part4::Certificate)
             .to receive(:new).with(printable_items, :printable)
         end
 
