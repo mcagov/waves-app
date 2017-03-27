@@ -50,9 +50,9 @@ class Pdfs::Part2::CertificateWriter < Pdfs::CertificateWriter
       vstart -= vspace
       draw_label_value engine_label, engine.make_and_model, at: [lmargin, vstart]
       engine_label = ""
-
+      vstart -= vspace
       derating_label = "Derating"
-      draw_label_value derating_label, engine.derating, at: [rcol_lmargin, vstart]
+      draw_label_value derating_label, engine.derating, at: [lmargin, vstart]
       derating_label = ""
     end
 
