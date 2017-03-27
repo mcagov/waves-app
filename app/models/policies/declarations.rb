@@ -3,12 +3,21 @@ class Policies::Declarations
     @submission = submission
   end
 
+  def declarable_items
+    @declarable_items =
+      if @submission.part.to_sym == :part_4
+        @submission.charter_parties
+      else
+        @submission.declarations
+      end
+  end
+
   def incomplete?
-    !@submission.declarations.incomplete.empty?
+    !declarable_items.incomplete.empty?
   end
 
   def undefined?
-    @submission.declarations.empty?
+    declarable_items.empty?
   end
 
   def declaration_status
