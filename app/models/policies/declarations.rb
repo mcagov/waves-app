@@ -3,17 +3,21 @@ class Policies::Declarations
     @submission = submission
   end
 
-  def undeclared?
-    !@submission.incomplete_declarations.empty?
+  def incomplete?
+    !@submission.declarations.incomplete.empty?
+  end
+
+  def undefined?
+    @submission.declarations.empty?
   end
 
   def declaration_status
-    if @submission.declarations.empty?
+    if undefined?
       "Undefined"
-    elsif @submission.incomplete_declarations.empty?
-      "Complete"
-    else
+    elsif incomplete?
       "Incomplete"
+    else
+      "Complete"
     end
   end
 end

@@ -24,11 +24,6 @@ module Submission::Associations
 
       base.has_many :declarations, -> { order("created_at asc") }
 
-      base.has_many :incomplete_declarations, lambda {
-        where("state = 'incomplete'")
-          .order("created_at asc")
-      }, class_name: "Declaration"
-
       base.has_many :declaration_groups, class_name: "Declaration::Group"
 
       base.belongs_to :managing_owner,
