@@ -5,4 +5,8 @@ class Charterer < ApplicationRecord
   # rubocop:disable Style/AlignHash
   accepts_nested_attributes_for :charter_parties, allow_destroy: true,
     reject_if: proc { |attributes| attributes["name"].blank? }
+
+  def charter_period
+    [start_date, end_date].join(" - ")
+  end
 end

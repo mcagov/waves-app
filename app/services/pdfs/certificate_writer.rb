@@ -1,7 +1,7 @@
 class Pdfs::CertificateWriter
   def initialize(registration, pdf, mode = :printable)
     @registration = registration
-    @vessel = @registration.vessel
+    @vessel = Decorators::Vessel.new(@registration.vessel)
     @owners = @registration.owners
     @engines = @registration.engines
     @pdf = pdf
