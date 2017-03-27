@@ -20,6 +20,7 @@
             .name
               Name:
               %strong= charter_party.name
+              (#{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' })
             .address
               Address:
               %strong= charter_party.address

@@ -18,6 +18,9 @@ describe "User edits charterers", js: :true do
       click_on("Add Extra Party to the Charter")
       within all(".nested-fields")[1] do
         fill_in("Name of Party", with: "Charlie")
+        within(".charterer_charter_parties_declaration_signed") do
+          choose("Yes")
+        end
       end
 
       click_on("Add Bareboat Charter")
@@ -27,7 +30,11 @@ describe "User edits charterers", js: :true do
       expect(page).to have_css(".reference_number", text: "REF 1")
       expect(page).to have_css(".start_date", text: "01/02/2001")
       expect(page).to have_css(".end_date", text: "01/02/2004")
-      expect(page).to have_css(".parties", text: "Name: CHARLIE")
+      expect(page)
+        .to have_css(".parties", text: "Name: ALICE (Pending Declaration")
+
+      expect(page)
+        .to have_css(".parties", text: "Name: CHARLIE (Declaration Signed")
 
       click_on("REF 1")
     end

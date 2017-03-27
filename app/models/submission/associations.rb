@@ -24,11 +24,6 @@ module Submission::Associations
 
       base.has_many :declarations, -> { order("created_at asc") }
 
-      base.has_many :incomplete_declarations, lambda {
-        where("state = 'incomplete'")
-          .order("created_at asc")
-      }, class_name: "Declaration"
-
       base.has_many :declaration_groups, class_name: "Declaration::Group"
 
       base.belongs_to :managing_owner,
@@ -42,6 +37,7 @@ module Submission::Associations
       base.has_many :engines, as: :parent
       base.has_many :mortgages, -> { order("created_at asc") }, as: :parent
       base.has_many :charterers, -> { order("created_at asc") }, as: :parent
+      base.has_many :charter_parties, through: :charterers
       base.has_one  :csr_form
       base.has_one :name_approval, class_name: "Submission::NameApproval"
     end

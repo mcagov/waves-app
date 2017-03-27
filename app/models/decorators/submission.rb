@@ -65,13 +65,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def declaration_status
-    if declarations.empty?
-      "Undefined"
-    elsif incomplete_declarations.empty?
-      "Complete"
-    else
-      "Incomplete"
-    end
+    Policies::Declarations.new(@submission).declaration_status
   end
 
   def vessel_can_be_edited?
