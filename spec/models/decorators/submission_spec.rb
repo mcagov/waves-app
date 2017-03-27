@@ -141,8 +141,4 @@ describe Decorators::Submission, type: :model do
       it { expect(subject).to be_falsey }
     end
   end
-
-  context "#service_level" do
-    it "prefers the service_level as :standard over is_urgent?"
-  end
 end
