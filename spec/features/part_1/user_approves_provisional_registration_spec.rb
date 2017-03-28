@@ -20,4 +20,14 @@ describe "User approves provisional registration", js: :true do
       expect(page).to have_text("%PDF")
     end
   end
+
+  scenario "printing the cover letter" do
+    pdf_window = window_opened_by do
+      click_on("Print Cover Letter")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
+  end
 end
