@@ -1,5 +1,26 @@
-%p Further to your application to register your vessel, please find enclosed the Carving and Marking Note in this respect.  Please arrange for the MCA surveyor or Classification Society surveyor to certify that the Carving and Markings are correct, and return the form to this office.  Regulation 35 of the Merchant Shipping (Registration of Ships) Regulations 1993 states that a carving and marking note should be returned to the Registrar within three months.
+%p Further to your application to register your vessel, please find enclosed the Carving and Marking Note in this respect.
 
-%p We also require the certificate of survey for tonnage and measurement and ITC 69 which is also issued by MCA or classification society surveyor.
+- if @register_length < 24
+  %p Please arrange for an Inspector of Marks to certify that the Carving and Markings are correct, to complete the Certificate of Measurement, and return both forms to this office.
+- else
+  %p Please arrange for the MCA surveyor or Classification Society surveyor to certify that the Carving and Markings are correct, and return the form to this office.
 
-%p Additionally we also require the UKFVC issued by a MCA surveyor.
+%p Regulation 35 of the Merchant Shipping (Registration of Ships) Regulations 1993 states that a carving and marking note should be returned to the Registrar within three months.
+
+- if @register_length < 15
+
+  %p
+    Additionally, please arrange your MSF 1606/MSF1316 (report of inspection) and submit a copy to our office, which is required for completion of your registration. This can be arranged with the local MCA, who will be happy to arrange a mutually convenient time for the inspection to take place, at the same time as the Carving and Marking note and Measurement forms are completed.
+    %br
+    You can download Certificate of Measurement MSF2301A from Gov.uk
+
+- if @register_length.between?(15, 24)
+
+  %p We also require the UKFVC issued by a MCA surveyor. This can be arranged with the local MCA, who will be happy to arrange a mutually convenient time for the inspection to take place, at the same time as the Carving and Marking note and Measurement forms are completed. You can download Certificate of Measurement MSF2301 from Gov.uk
+
+- else
+  %p
+    We also require the certificate of survey for tonnage and measurement and ITC 69 which is also issued by MCA or classification society surveyor.
+    %br Additionally we also require the UKFVC issued by a MCA surveyor.
+
+%p In the meantime, please do not hesitate to contact this office if you require any further information.
