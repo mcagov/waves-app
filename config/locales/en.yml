@@ -25,12 +25,14 @@ en:
     button_text:
       cover_letter: Print Cover Letter
       registration_certificate: Print Certificate of Registry
+      provisional_certificate: Print Provisional Certificate of Registry
       current_transcript: Print Current Transcript
       historic_transcript: Print Historic Transcript
       csr_form: Print CSR
     print_all_button_text:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
+      provisional_certificate: Print Provisional Certificates
       current_transcript: Print Current Transcripts
       historic_transcript: Print Historic Transcripts
       csr_form: Print CSRs
@@ -38,6 +40,7 @@ en:
       carving_and_marking: Carving & Marking Notes
       cover_letter: Cover Letters
       registration_certificate: Certificates of Registry
+      provisional_certificate: Provisional Certificates of Registry
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
       csr_form: CSR Forms
@@ -49,6 +52,7 @@ en:
     approval:
       inline-btn:
         new_registration: Complete Registration
+        provisional: Complete Provisional Registration
         renewal: Renew Registration
         re_registration: Complete Re-Registration
         change_owner: Complete Change of Ownership
@@ -64,6 +68,7 @@ en:
         issue_csr: Issue CSR
       modal-title:
         new_registration: Register Vessel and Issue Certificate of Registry
+        provisional: Register Vessel and Issue Provisional Certificate of Registry
         renewal: Renew Registration and Issue Certificate of Registry
         re_registration: Complete Re-Registration and Issue Certificate of Registry
         change_owner: Change Ownership and Issue Certificate of Registry
@@ -79,6 +84,7 @@ en:
         issue_csr: CSR
       modal-btn:
         new_registration: Register Vessel
+        provisional: Provisionally Register Vessel
         renewal: Renew Registration
         re_registration: Complete Re-Registration
         change_owner: Complete Change of Ownership
@@ -94,6 +100,7 @@ en:
         issue_csr: Approve & Issue CSR
       confirmation:
         new_registration: The applicant has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
+        provisional: The applicant has been notified via email that their vessel is provisionally registered on %{part} of the UK Ship Register.
         renewal: The applicant has been notified via email that their request for a Registration Renewal has been approved.
         re_registration: The applicant has been notified via email that their request for a Re-Registration has been approved.
         change_owner: The applicant has been notified via email that their request for a Change of Ownership has been approved.
