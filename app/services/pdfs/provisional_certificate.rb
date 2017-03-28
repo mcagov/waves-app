@@ -1,5 +1,5 @@
 class Pdfs::ProvisionalCertificate
- def initialize(registrations, mode = :printable)
+  def initialize(registrations, mode = :printable)
     @registrations = Array(registrations)
     @mode = mode
     @pdf = Prawn::Document.new(
@@ -13,7 +13,6 @@ class Pdfs::ProvisionalCertificate
     end
     Pdfs::PdfRender.new(@pdf, @mode).render
   end
-
 
   def filename
     if @registrations.length == 1

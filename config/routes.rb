@@ -212,7 +212,7 @@ Rails.application.routes.draw do
 
   %w(
     carving_and_marking registration_certificate cover_letter
-    current_transcript historic_transcript csr_form
+    current_transcript historic_transcript csr_form provisional_certificate
   ).each do |template|
     get "/print_queue/#{template}",
         controller: :print_jobs,
