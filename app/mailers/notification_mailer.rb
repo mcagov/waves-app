@@ -68,10 +68,12 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  def carving_and_marking_note(defaults, actioned_by, pdf_attachment)
+  def carving_and_marking_note(defaults, register_length, actioned_by,
+                               pdf_attachment)
     @department = defaults[:department]
     @name = defaults[:name]
     @actioned_by = actioned_by
+    @register_length = register_length
     attachments["carving_and_marking_note.pdf"] = pdf_attachment
     @attachment = true
 

@@ -165,7 +165,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "carving_and_marking_note" do
     let(:mail) do
       NotificationMailer.carving_and_marking_note(
-        default_params, "Sally SSR", "an_attachment")
+        default_params, 100.0, "Sally SSR", "an_attachment")
     end
 
     let(:body) { mail.body.encoded }
