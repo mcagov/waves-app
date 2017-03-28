@@ -4,7 +4,7 @@ class Notification::CarvingAndMarkingNote < Notification
   end
 
   def additional_params
-    [actioned_by, email_attachments]
+    [register_length, actioned_by, email_attachments]
   end
 
   def email_subject
@@ -12,6 +12,10 @@ class Notification::CarvingAndMarkingNote < Notification
   end
 
   private
+
+  def register_length
+    (notifiable.register_length if notifiable).to_f
+  end
 
   def vessel_name
     notifiable.vessel_name if notifiable

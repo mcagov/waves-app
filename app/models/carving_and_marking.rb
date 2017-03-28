@@ -27,6 +27,10 @@ class CarvingAndMarking < ApplicationRecord
     submission.registered_vessel
   end
 
+  def register_length
+    vessel.register_length if vessel
+  end
+
   def tonnage_label
     register? ? "REGISTER TONNAGE" : "NET TONNAGE"
   end
