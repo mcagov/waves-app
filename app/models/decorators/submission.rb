@@ -81,7 +81,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def new_registration?
-    Task.new(task) == :new_registration
+    Task.new(task).new_registration?
   end
 
   def changed_vessel_attribute(attr_name)
