@@ -24,7 +24,10 @@ class Policies::Actions
     end
 
     def registered_vessel_required?(submission)
-      ![:unknown, :new_registration].include?(submission.task.to_sym)
+      task = submission.task.to_sym
+      return false if Task.new(task).new_registration?
+      return false if task == :unknown
+      true
     end
 
     def readonly?(submission, user)

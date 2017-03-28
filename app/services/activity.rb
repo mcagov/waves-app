@@ -69,6 +69,7 @@ class Activity
       :cover_letter,
       :current_transcript,
       :historic_transcript,
+      :provisional_certificate,
     ]
   end
 end

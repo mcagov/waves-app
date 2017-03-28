@@ -1,21 +1,23 @@
 class RegistrationDate
   class << self
-    def for(submission)
-      starts_at =
-        if Task.new(submission.task).renews_certificate?
-          submission.registered_vessel.registered_until
-        else
-          DateTime.now
-        end
-      RegistrationDate.new(starts_at)
+    def for(submission, starts_at)
+      RegistrationDate.new(starts_at, duration(submission))
+    end
+
+    def duration(submission)
+      if submission.task.to_sym == :provisional
+        { days: 90 }
+      else
+        { years: 5 }
+      end
     end
   end
 
   attr_reader :starts_at, :ends_at
 
-  def initialize(starts_at)
+  def initialize(starts_at, duration)
     @starts_at = ensure_date(starts_at)
-    @ends_at = @starts_at.advance(years: 5)
+    @ends_at = @starts_at.advance(duration)
   end
 
   private

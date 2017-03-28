@@ -38,6 +38,12 @@ describe Policies::Actions do
       it { expect(subject).to be_falsey }
     end
 
+    context "when the task is :provisional" do
+      before { submission.task = :provisional }
+
+      it { expect(subject).to be_falsey }
+    end
+
     context "when the task is :foo (i.e. any other task)" do
       before { submission.task = :foo }
 

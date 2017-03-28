@@ -50,4 +50,8 @@ class Pdfs::Processor
   def csr_form
     Pdfs::CsrForm.new(@printable_items, @mode)
   end
+
+  def provisional_certificate
+    Pdfs::ProvisionalCertificate.new(@printable_items, @mode)
+  end
 end
