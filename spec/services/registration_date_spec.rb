@@ -2,30 +2,29 @@ require "rails_helper"
 
 describe RegistrationDate do
   context ".for" do
-    subject { described_class.for(submission) }
+    subject { described_class.for(submission, "2012-11-24") }
 
-    context "a new_registration" do
+    context "new registration" do
       let(:submission) { build(:submission) }
 
       it "sets starts_at to today" do
-        expect(subject.starts_at.to_date).to eq(Date.today)
+        expect(subject.starts_at.to_date).to eq(Date.new(2012, 11, 24))
+      end
+
+      it "sets ends_at to 5 years ahead" do
+        expect(subject.ends_at.to_date).to eq(Date.new(2017, 11, 24))
       end
     end
 
-    context "a renewal" do
-      let(:submission) { build(:submission, task: :renewal) }
+    context "a provisional_registration" do
+      let(:submission) { build(:submission, task: :provisional) }
 
-      before do
-        registered_vessel =
-          double(:registered_vessel, registered_until: 1.month.from_now)
-
-        allow(submission)
-          .to receive(:registered_vessel)
-          .and_return(registered_vessel)
+      it "sets starts_at to today" do
+        expect(subject.starts_at.to_date).to eq(Date.new(2012, 11, 24))
       end
 
-      it "sets starts_at to the expiry of current_registration" do
-        expect(subject.starts_at.to_date).to eq(1.month.from_now.to_date)
+      it "sets ends_at to 90 days ahead" do
+        expect(subject.ends_at.to_date).to eq(Date.new(2013, 2, 22))
       end
     end
   end

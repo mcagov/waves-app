@@ -11,7 +11,8 @@ class Builders::RegistrationBuilder
     private
 
     def create_registration
-      registration_date = RegistrationDate.new(@registration_starts_at)
+      registration_date =
+        RegistrationDate.for(@submission, @registration_starts_at)
 
       registration = Registration.create(
         vessel_id: @registered_vessel.id,
