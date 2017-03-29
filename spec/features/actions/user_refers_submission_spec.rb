@@ -15,7 +15,7 @@ feature "User refers a submission", type: :feature, js: true do
       fill_in "Due By", with: "12/12/2020"
       select "Unknown vessel type", from: "Reason for Referral"
 
-      find("#notification_body_trix_input_notification", visible: false)
+      find("#refer_modal_trix_input_notification", visible: false)
         .set("Referred!")
 
       click_on "Refer Application"

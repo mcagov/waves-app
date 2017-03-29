@@ -12,7 +12,7 @@ feature "User cancels a submission", type: :feature, js: true do
     within(".modal.fade.in") do
       select "Rejected (by RSS)", from: "Reason for cancelling application"
 
-      find("#notification_body_trix_input_notification", visible: false)
+      find("#cancel_modal_trix_input_notification", visible: false)
         .set("Sorry!")
 
       click_on "Cancel Application"
