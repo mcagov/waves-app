@@ -8,7 +8,7 @@ class Mortgage < ApplicationRecord
 
   class << self
     def types_for(submission)
-      if submission.task.to_sym == :new_registration
+      if Task.new(submission.task).new_registration?
         %w(Intent)
       else
         ["Intent", "Account Current", "Principle Sum"]

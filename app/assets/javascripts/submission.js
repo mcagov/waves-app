@@ -39,8 +39,10 @@ $(document).ready(function() {
 
   function set_task_type_depenencies() {
     var current_task_type = $('form #submission_task').val();
+    var name_field_array = ['new_registration', 'provisional'];
+    var display_name_field = $.inArray(current_task_type, name_field_array) > -1;
 
-    if (current_task_type == 'new_registration') {
+    if ( display_name_field ) {
       $('#submission_vessel_name').removeClass('hidden');
       $('#submission_vessel_reg_no').addClass('hidden');
     }
