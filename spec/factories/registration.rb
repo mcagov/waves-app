@@ -12,4 +12,8 @@ FactoryGirl.define do
   factory :nine_year_old_registration, class: "Registration" do
     created_at 9.years.ago
   end
+
+  factory :renewable_registration, class: "Registration" do
+    registered_until 89.days.from_now
+  end
 end
