@@ -20,6 +20,7 @@
 //= require select2
 //= require cocoon
 //= require jquery.remotipart
+//= require trix
 //
 //= require ./vendor/nprogress
 //= require ./vendor/pace.min
