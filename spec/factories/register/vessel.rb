@@ -52,4 +52,10 @@ FactoryGirl.define do
       create(:expirable_registration, registered_vessel: vessel)
     end
   end
+
+  factory :terminatable_vessel, parent: :unregistered_vessel do
+    after(:create) do |vessel|
+      create(:terminatable_registration, registered_vessel: vessel)
+    end
+  end
 end

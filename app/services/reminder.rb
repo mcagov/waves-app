@@ -26,6 +26,19 @@ class Reminder
         end
     end
 
+    def process_terminations
+      terminatable_vessel_scope
+        .each do |vessel|
+          PrintJob.create(
+            printable: vessel,
+            part: vessel.part,
+            template: :termination)
+
+          vessel.current_registration
+                .update_attribute(:termination_at, Time.now)
+        end
+    end
+
     private
 
     def vessel_scope
@@ -43,6 +56,12 @@ class Reminder
       vessel_scope
         .where("registrations.expiration_reminder_at IS NULL")
         .where("registrations.registered_until < ?", Time.now)
+    end
+
+    def terminatable_vessel_scope
+      vessel_scope
+        .where("registrations.termination_at IS NULL")
+        .where("registrations.registered_until < ?", 29.days.ago)
     end
   end
 end

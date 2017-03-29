@@ -3,6 +3,7 @@ require "rails_helper"
 describe Reminder do
   let!(:renewable_vessel) { create(:renewable_vessel) }
   let!(:expirable_vessel) { create(:expirable_vessel) }
+  let!(:terminatable_vessel) { create(:terminatable_vessel) }
 
   context ".process_renewals" do
     before { described_class.process_renewals }
@@ -33,6 +34,16 @@ describe Reminder do
   end
 
   context ".process_terminations" do
-    it "processes terminations"
+    before { described_class.process_terminations }
+
+    it "proceses terminations" do
+      expect(PrintJob.where(template: :termination).map(&:printable))
+        .to eq([terminatable_vessel])
+    end
+
+    it "sets termination_at" do
+      expect(terminatable_vessel.current_registration.termination_at)
+        .to be_present
+    end
   end
 end
