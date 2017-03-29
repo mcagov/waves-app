@@ -43,10 +43,13 @@ FactoryGirl.define do
 
   factory :renewable_vessel, parent: :unregistered_vessel do
     after(:create) do |vessel|
-      create(:registration,
-             registered_vessel: vessel,
-             registry_info: vessel.registry_info,
-             registered_until: 89.days.from_now)
+      create(:renewable_registration, registered_vessel: vessel)
+    end
+  end
+
+  factory :expirable_vessel, parent: :unregistered_vessel do
+    after(:create) do |vessel|
+      create(:expirable_registration, registered_vessel: vessel)
     end
   end
 end

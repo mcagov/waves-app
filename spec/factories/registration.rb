@@ -14,6 +14,11 @@ FactoryGirl.define do
   end
 
   factory :renewable_registration, class: "Registration" do
-    registered_until 89.days.from_now
+    registered_until 90.days.from_now
+  end
+
+  factory :expirable_registration, class: "Registration" do
+    renewal_reminder_at      90.days.ago
+    registered_until         1.day.ago
   end
 end

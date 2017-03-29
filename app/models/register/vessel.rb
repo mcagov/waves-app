@@ -64,6 +64,10 @@ module Register
 
     serialize :propulsion_system, Array
 
+    def correspondent
+      Customer.first
+    end
+
     def build_reg_no
       return if reg_no.present?
       self.reg_no = SequenceNumber::Generator.reg_no!(part)
