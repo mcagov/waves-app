@@ -1,5 +1,11 @@
 class Reminder
   class << self
+    def process_all
+      process_renewals
+      process_expirations
+      process_terminations
+    end
+
     def process_renewals
       renewable_vessel_scope
         .each do |vessel|

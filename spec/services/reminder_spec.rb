@@ -46,4 +46,16 @@ describe Reminder do
         .to be_present
     end
   end
+
+  context ".process_all" do
+    subject { described_class.process_all }
+
+    before do
+      expect(Notification::RenewalReminder).to receive(:create).once
+      expect(Notification::ExpirationReminder).to receive(:create).once
+      expect(PrintJob).to receive(:create).once
+    end
+
+    it { subject }
+  end
 end
