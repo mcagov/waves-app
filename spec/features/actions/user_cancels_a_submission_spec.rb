@@ -9,11 +9,18 @@ feature "User cancels a submission", type: :feature, js: true do
   scenario "and restores it" do
     within("#actions") { click_on "Cancel Application" }
 
-    select "Rejected (by RSS)", from: "Reason for cancelling application"
-    page.execute_script("tinyMCE.activeEditor.insertContent('Some stuff')")
-    within("#cancel-application") { click_on "Cancel Application" }
+    within(".modal.fade.in") do
+      select "Rejected (by RSS)", from: "Reason for cancelling application"
+
+      find("#notification_body_trix_input_notification", visible: false)
+        .set("Sorry!")
+
+      click_on "Cancel Application"
+    end
 
     click_on "Cancelled Applications"
+    expect(Notification::Cancellation.last.body).to have_text("Sorry!")
+
     click_on(@submission.vessel.name)
 
     within("#prompt") do
