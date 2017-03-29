@@ -1,2 +1,4 @@
 - f.object.body = default_email_text(message_type, @submission)
-= f.input :body, label: "Message", input_html: { rows: 6, class: "wysiwyg" }
+.form-group
+  %label{ for: "notification_body" } Message
+  = f.trix_editor :body, id: "#{message_type}_modal"

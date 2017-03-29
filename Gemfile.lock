@@ -413,12 +413,12 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.5)
     timecop (0.8.1)
-    tinymce-rails (4.4.3)
-      railties (>= 3.1.1)
     title (0.0.7)
       i18n
       rails (>= 3.1)
     transitions (1.2.0)
+    trix (0.10.1)
+      rails
     ttfunk (1.4.0)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
@@ -519,9 +519,9 @@ DEPENDENCIES
   sprockets (= 3.6.3)
   sprockets-es6
   timecop
-  tinymce-rails
   title
   transitions
+  trix
   uglifier
   validates_email_format_of
   waves-utilities!

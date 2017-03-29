@@ -11,11 +11,19 @@ feature "User refers a submission", type: :feature, js: true do
 
     within("#actions") { click_on "Refer Application" }
 
-    fill_in "Due By", with: "12/12/2020"
-    select "Unknown vessel type", from: "Reason for Referral"
-    within("#refer-application") { click_on "Refer Application" }
+    within(".modal.fade.in") do
+      fill_in "Due By", with: "12/12/2020"
+      select "Unknown vessel type", from: "Reason for Referral"
+
+      find("#refer_modal_trix_input_notification", visible: false)
+        .set("Referred!")
+
+      click_on "Refer Application"
+    end
 
     click_on "Referred Applications"
+    expect(Notification::Referral.last.body).to have_text("Referred!")
+
     click_on @vessel_name
 
     within("#prompt") do

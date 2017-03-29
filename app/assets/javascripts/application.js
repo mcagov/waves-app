@@ -18,9 +18,9 @@
 //= require bootstrap-datetimepicker
 //= require bootstrap-multiselect
 //= require select2
-//= require tinymce
 //= require cocoon
 //= require jquery.remotipart
+//= require trix
 //
 //= require ./vendor/nprogress
 //= require ./vendor/pace.min
