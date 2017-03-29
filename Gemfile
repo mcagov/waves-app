@@ -44,7 +44,6 @@ gem "select2-rails"
 gem "simple_form"
 gem "sprockets", "3.6.3"
 gem "sprockets-es6"
-gem "tinymce-rails"
 gem "title"
 gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "uglifier"

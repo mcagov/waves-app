@@ -18,7 +18,6 @@
 //= require bootstrap-datetimepicker
 //= require bootstrap-multiselect
 //= require select2
-//= require tinymce
 //= require cocoon
 //= require jquery.remotipart
 //

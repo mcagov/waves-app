@@ -1,14 +1,4 @@
 $(document).ready(function() {
-
-  // WYSIWYG
-  tinymce.init({
-    selector: 'textarea.wysiwyg',
-    menubar: false,
-    toolbar: false,
-    statusbar: false,
-    height : 180
-  });
-
   // General: set the datepicker time format
   $('.datetimepicker').datetimepicker({
     format: 'DD/MM/YYYY, h:mm:ss a'
