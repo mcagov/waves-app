@@ -94,7 +94,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def init_new_submission
-    if params[:submission][:task].to_sym != :new_registration
+    unless Task.new(params[:submission][:task]).new_registration?
       params[:submission].delete(:vessel)
     end
 
