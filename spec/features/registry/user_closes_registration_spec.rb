@@ -5,7 +5,7 @@ describe "User closes a vessel's registration", type: :feature, js: true do
     visit_registered_vessel
 
     click_on("Registrar Tools")
-    click_on("Close Registration")
+    click_on("Registration Closure: Owner Request")
 
     expect(page).to have_css("#registration_status", text: "Closed")
     creates_a_work_log_entry("Submission", :registrar_closure)

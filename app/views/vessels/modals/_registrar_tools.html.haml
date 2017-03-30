@@ -26,7 +26,7 @@
               method: :post, class: "btn btn-block btn-danger"
           %hr
           - if vessel.registration_status != :closed
-            %p= link_to "Close Registration", vessel_closure_path(vessel),
+            %p= link_to Task.new(:registrar_closure).description, vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
