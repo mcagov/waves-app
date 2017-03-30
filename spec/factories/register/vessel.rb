@@ -40,4 +40,22 @@ FactoryGirl.define do
   factory :pleasure_vessel, parent: :registered_vessel do
     part :part_1
   end
+
+  factory :renewable_vessel, parent: :unregistered_vessel do
+    after(:create) do |vessel|
+      create(:renewable_registration, registered_vessel: vessel)
+    end
+  end
+
+  factory :expirable_vessel, parent: :unregistered_vessel do
+    after(:create) do |vessel|
+      create(:expirable_registration, registered_vessel: vessel)
+    end
+  end
+
+  factory :terminatable_vessel, parent: :unregistered_vessel do
+    after(:create) do |vessel|
+      create(:terminatable_registration, registered_vessel: vessel)
+    end
+  end
 end

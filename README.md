@@ -63,6 +63,15 @@ We are using the [rack-cors](https://github.com/cyu/rack-cors) gem.
 
 CORS is configured in `config/initalisers/cors.rb` and the origins are defined by `ENV['CORS_ORIGINS']`.
 
+##### Email notifications
+Emails are created in the notifications table and delivered with delayed_job.
+Until we have tested a full data set, it seemed wise to disable the sending of any broadcast emails.
+To disable an email notification, override `Notification#deliverable?` e.g.
+
+    def deliverable?
+        false
+    end
+
 ##### Email previews
 
 Emails can be previewed at: /rails/mailers in development.
