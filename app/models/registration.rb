@@ -41,6 +41,13 @@ class Registration < ApplicationRecord
     end
   end
 
+  def correspondent
+    # Assuming that the first owner is the correspondent is incorrect.
+    # This is a placeholder until we can answer the question:
+    # "Who is the correspondent?"
+    owners.first
+  end
+
   def shareholder_groups
     (symbolized_registry_info[:shareholder_groups] || []).map do |sh_group|
       {
