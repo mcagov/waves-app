@@ -54,4 +54,8 @@ class Pdfs::Processor
   def provisional_certificate
     Pdfs::ProvisionalCertificate.new(@printable_items, @mode)
   end
+
+  def termination_notice
+    Pdfs::TerminationNotice.new(@printable_items, @mode)
+  end
 end

@@ -70,6 +70,7 @@ class Activity
       :current_transcript,
       :historic_transcript,
       :provisional_certificate,
+      :termination_notice,
     ]
   end
 end

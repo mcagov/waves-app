@@ -47,7 +47,8 @@ Rails.application.routes.draw do
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
 
-    resource :approval, controller: "submission/approvals", only: [:create]
+    resource :approval,
+             controller: "submission/approvals", only: [:show, :create]
 
     resources :beneficial_owners,
               controller: "submission/beneficial_owners",
@@ -196,6 +197,10 @@ Rails.application.routes.draw do
              only: [:show],
              controller: "registered_vessel/registration_certificate"
 
+    resource :termination,
+             only: [:create],
+             controller: "registered_vessel/termination"
+
     resource :manual_override,
              only: [:create],
              controller: "registered_vessel/manual_override"
@@ -212,7 +217,8 @@ Rails.application.routes.draw do
 
   %w(
     carving_and_marking registration_certificate cover_letter
-    current_transcript historic_transcript csr_form provisional_certificate
+    current_transcript historic_transcript csr_form
+    provisional_certificate termination_notice
   ).each do |template|
     get "/print_queue/#{template}",
         controller: :print_jobs,

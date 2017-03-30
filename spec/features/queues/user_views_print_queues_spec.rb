@@ -30,5 +30,9 @@ feature "User views print queues", type: :feature, js: true do
     click_on("Provisional Certificates")
     expect(page)
       .to have_css("h1", text: "Print Queue: Provisional Certificates")
+
+    click_on("Notices of Termination")
+    expect(page)
+      .to have_css("h1", text: "Print Queue: Notices of Termination")
   end
 end
