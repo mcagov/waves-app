@@ -139,5 +139,16 @@ describe Pdfs::Processor do
 
       it { subject }
     end
+
+    context "with a termination_notice" do
+      let(:template) { :termination_notice }
+
+      before do
+        expect(Pdfs::TerminationNotice)
+          .to receive(:new).with(printable_items, :printable)
+      end
+
+      it { subject }
+    end
   end
 end
