@@ -15,6 +15,7 @@
         %th Print/Email Historic Transcript
         %th Email on Application Approval
         %th Can be Referred
+        %th Print Job Templates
       %tbody
         - @tasks.each do |task|
           %tr
@@ -27,3 +28,4 @@
             %td= y_n(task.prints_historic_transcript?)
             %td= y_n(task.emails_application_approval?)
             %td= y_n(task.referrable?)
+            %td= (task.print_job_templates || []).map { |t| t.to_s.titleize }.join(", ")
