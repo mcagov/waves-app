@@ -1,10 +1,11 @@
 require "rails_helper"
 
 describe Notification::RenewalReminder do
-  let(:notification) { described_class.new(notifiable: build(:registration)) }
+  let(:notification) do
+    described_class.create(notifiable: build(:registration))
+  end
 
-  it "is disabled" do
-    expect { notification.send_email }
-      .to raise_error(WavesError::BatchNotificationsAreDisabled)
+  it "is not deliverable" do
+    expect(notification.deliverable?).to be_falsey
   end
 end

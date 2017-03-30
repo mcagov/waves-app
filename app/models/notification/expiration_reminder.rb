@@ -1,5 +1,5 @@
 class Notification::ExpirationReminder < Notification
-  def send_email
-    raise WavesError::BatchNotificationsAreDisabled
+  def deliverable?
+    false
   end
 end
