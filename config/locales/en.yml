@@ -112,5 +112,6 @@ en:
         historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
         enquiry: The General Enquiry has been marked as completed.
         manual_override: The Manual Override has been processed.
+        termination_notice: The termination notice has been issued, the vessel has been frozen and the registration will be closed in 7 days.
         issue_csr: The CSR has been issued.
 

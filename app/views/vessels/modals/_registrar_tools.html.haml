@@ -1,5 +1,5 @@
 .modal.fade{id: 'take-action', role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-sm
+  .modal-dialog.modal-md
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -28,6 +28,9 @@
           - if vessel.registration_status != :closed
             %p= link_to Task.new(:registrar_closure).description, vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
+
+            %p= link_to Task.new(:termination_notice).description, vessel_termination_path(vessel),
+                method: :post, class: "btn btn-block btn-danger"
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
