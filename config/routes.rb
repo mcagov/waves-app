@@ -47,7 +47,8 @@ Rails.application.routes.draw do
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
 
-    resource :approval, controller: "submission/approvals", only: [:create]
+    resource :approval,
+             controller: "submission/approvals", only: [:show, :create]
 
     resources :beneficial_owners,
               controller: "submission/beneficial_owners",
@@ -195,6 +196,10 @@ Rails.application.routes.draw do
     resource :registration_certificate,
              only: [:show],
              controller: "registered_vessel/registration_certificate"
+
+    resource :termination,
+             only: [:create],
+             controller: "registered_vessel/termination"
 
     resource :manual_override,
              only: [:create],

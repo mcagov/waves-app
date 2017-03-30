@@ -36,8 +36,8 @@ describe Submission::ApprovalsController, type: :controller do
           post :create, params: params
         end
 
-        it "renders the show page" do
-          expect(response).to render_template("show")
+        it "redirect_to the show page" do
+          expect(response).to be_redirect
         end
 
         it "creates a notification for the applicant" do
