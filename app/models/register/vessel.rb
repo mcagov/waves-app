@@ -33,6 +33,8 @@ module Register
 
     has_many :correspondences, as: :noteable
 
+    has_many :notifications, as: :notifiable
+
     has_many :documents,
              -> { order("created_at desc") },
              as: :noteable

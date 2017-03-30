@@ -34,6 +34,10 @@ describe Builders::NotificationListBuilder do
     context "#for_registered_vessel" do
       let!(:vessel) { create(:registered_vessel) }
 
+      let!(:vessel_notification) do
+        create(:notification, notifiable: vessel, created_at: 1.minute.ago)
+      end
+
       let!(:vessel_correspondence) do
         create(:correspondence, noteable: vessel, created_at: 1.hour.ago)
       end
@@ -46,7 +50,7 @@ describe Builders::NotificationListBuilder do
 
       it "builds the expected list" do
         expect(subject).to eq(
-          [vessel_correspondence, outstanding_declaration,
+          [vessel_notification, vessel_correspondence, outstanding_declaration,
            recent_notification, correspondence, old_notification]
         )
       end
