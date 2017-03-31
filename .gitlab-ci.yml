@@ -15,25 +15,25 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
 
 stages:
-  # - test
+  - test
   - security
   - development
   - staging
   # - production
 
-# rspec:
-#   stage: test
-#   script:
-#     - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
-#   tags:
-#     - ruby2.3
-#
-# rubocop:
-#   stage: test
-#   script:
-#     - bundle exec rubocop
-#   tags:
-#     - ruby2.3
+rspec:
+  stage: test
+  script:
+    - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
+  tags:
+    - ruby2.3
+
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop
+  tags:
+    - ruby2.3
 
 brakeman:
   stage: security
