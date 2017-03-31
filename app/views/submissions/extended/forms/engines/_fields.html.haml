@@ -6,9 +6,11 @@
       include_blank: false,
       input_html: { class: "select2 select2_single" }
   .col-md-3
-    = engine_f.input :make, label: "Engine Make"
+    = engine_f.input :make, label: "Engine Make",
+      input_html: { class: "upcase" }
   .col-md-3
-    = engine_f.input :model, label: "Engine Model"
+    = engine_f.input :model, label: "Engine Model",
+      input_html: { class: "upcase" }
   - if display_extended_engines?(@submission)
     .col-md-3
       = engine_f.input :cylinders, label: "Cylinders"

@@ -21,7 +21,7 @@ describe "User edits engines", js: :true do
     end
 
     within("#engines") do
-      expect(page).to have_css(".make_and_model", text: "Honda XT600")
+      expect(page).to have_css(".make_and_model", text: "HONDA XT600")
       expect(page).to have_css(".cylinders", text: "4")
       expect(page).to have_css(".mcep_per_engine", text: "100.34kW")
       expect(page).to have_css(".derating", text: "Turbo Charger Removed")
@@ -40,7 +40,7 @@ describe "User edits engines", js: :true do
     end
 
     within("#engines") do
-      expect(page).to have_css(".make_and_model", text: "Yamaha XT600")
+      expect(page).to have_css(".make_and_model", text: "YAMAHA XT600")
     end
 
     within("#engines") do
