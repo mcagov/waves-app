@@ -1,13 +1,27 @@
 class Policies::Definitions
   class << self
     def approval_errors(submission)
-      approval_errors = []
+      approval_errors = vessel_errors(submission)
 
-      return approval_errors if Task.new(submission.task) == :manual_override
+      unless Task.new(submission.task) == :manual_override
+        approval_errors << submission_errors(submission)
+      end
+
+      approval_errors.flatten
+    end
+
+    def vessel_errors(submission)
+      approval_errors = []
+      approval_errors << :vessel_required if submission.vessel.name.blank?
+      approval_errors << :owners_required if submission.owners.empty?
+      approval_errors
+    end
+
+    def submission_errors(submission)
+      approval_errors = []
       approval_errors << :vessel_frozen if frozen?(submission)
       approval_errors << :declarations_required if undeclared?(submission)
       approval_errors << :payment_required if unpaid?(submission)
-
       approval_errors
     end
 

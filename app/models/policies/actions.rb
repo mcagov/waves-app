@@ -1,13 +1,11 @@
 class Policies::Actions
   class << self
     def actionable?(submission)
-      @submission = submission
+      return false if submission.completed?
 
-      return false if @submission.completed?
-
-      case @submission.source.to_sym
+      case submission.source.to_sym
       when :online
-        approvable?(submission)
+        Policies::Definitions.submission_errors(submission).empty?
       when :manual_entry
         true
       end

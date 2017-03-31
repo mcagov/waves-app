@@ -11,9 +11,17 @@ describe Policies::Definitions do
     end
 
     context "manual_override" do
-      let(:submission) { build(:submission, task: :manual_override) }
+      let(:submission) do
+        build(:submission, task: :manual_override, changeset: [])
+      end
 
-      it { expect(subject).to be_empty }
+      context "when the vessel name is blank" do
+        it { expect(subject).to include(:vessel_required) }
+      end
+
+      context "when there are no owners" do
+        it { expect(subject).to include(:owners_required) }
+      end
     end
 
     context "frozen /unfrozen" do
