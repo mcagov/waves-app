@@ -27,4 +27,15 @@ describe Builders::ClonedRegistrationBuilder do
         .to eq("NEW NAME")
     end
   end
+
+  context "when the registered vessel is not registered" do
+    let!(:unregistered_vessel) { create(:unregistered_vessel) }
+
+    let!(:submission) do
+      create(:submission,
+             registered_vessel: unregistered_vessel, task: :manual_override)
+    end
+
+    it { expect(described_class.create(submission)).to be_nil }
+  end
 end
