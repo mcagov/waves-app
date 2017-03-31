@@ -14,6 +14,7 @@ $(document).ready(function() {
 
   $('[data-toggle="tooltip"]').tooltip()
 });
-$(document).on('keyup','.upcase.form-control', {} ,function(e){
+
+$(document).on('blur','.upcase.form-control', {} ,function(e){
   $(this).val($(this).val().toUpperCase());
 })
