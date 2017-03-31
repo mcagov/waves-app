@@ -58,6 +58,7 @@ deploy_dev:
   environment:
     name: development
     url: $WAVES_DEV_URL
+  when: manual
   script:
     - bundle exec cap dev deploy
   tags:
@@ -68,6 +69,7 @@ deploy_staging:
   environment:
     name: staging
     url: $WAVES_STAGING_URL
+  when: manual
   only:
     - staging
   script:
