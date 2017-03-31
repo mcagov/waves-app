@@ -1,5 +1,4 @@
 namespace :delayed_job do
-
   def args
     fetch(:delayed_job_args, "")
   end
@@ -8,7 +7,7 @@ namespace :delayed_job do
     fetch(:delayed_job_server_role, :app)
   end
 
-  desc 'Stop the delayed_job process'
+  desc "Stop the delayed_job process"
   task :stop do
     on roles(delayed_job_roles) do
       within release_path do
@@ -19,7 +18,7 @@ namespace :delayed_job do
     end
   end
 
-  desc 'Start the delayed_job process'
+  desc "Start the delayed_job process"
   task :start do
     on roles(delayed_job_roles) do
       within release_path do
@@ -30,7 +29,7 @@ namespace :delayed_job do
     end
   end
 
-  desc 'Restart the delayed_job process'
+  desc "Restart the delayed_job process"
   task :restart do
     on roles(delayed_job_roles) do
       within release_path do
@@ -40,5 +39,4 @@ namespace :delayed_job do
       end
     end
   end
-
 end
