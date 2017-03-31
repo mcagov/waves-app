@@ -12,6 +12,9 @@ class Builders::ClonedRegistrationBuilder
     def create_cloned_registration
       registration = @registered_vessel.current_registration
 
+      registration
+        .update_attribute(:registry_info, @registered_vessel.registry_info)
+
       @submission.update_attributes(registration: registration)
 
       registration
