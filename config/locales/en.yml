@@ -51,6 +51,8 @@ en:
     approval_error:
       vessel_frozen: Vessel registration is frozen
       payment_required: Payment is not complete
+      owners_required: Vessel does not have any owners
+      vessel_required: Vessel does not have a name
       declarations_required: Declarations are not complete
     approval:
       inline-btn:

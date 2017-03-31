@@ -24,14 +24,13 @@ class Submission::ApplicationProcessor
     end
 
     def assign_registration
-      @registration =
-        if @task.builds_registration?
-          build_new_registration
-        elsif @task == :closure
-          build_closed_registration
-        else
-          build_cloned_registration
-        end
+      if @task.builds_registration?
+        build_new_registration
+      elsif @task == :closure
+        build_closed_registration
+      else
+        build_cloned_registration
+      end
     end
 
     def build_new_registration

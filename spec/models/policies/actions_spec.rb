@@ -98,18 +98,13 @@ describe Policies::Actions do
 
     context "when the source is :online" do
       before do
-        allow(Policies::Actions)
-          .to receive(:approvable?).with(submission)
-          .and_return(true)
+        expect(Policies::Definitions)
+          .to receive(:submission_errors)
+          .with(submission)
+          .and_return([])
       end
 
       it { expect(subject).to be_truthy }
-
-      context "and the current_state is :completed" do
-        let(:current_state) { :completed }
-
-        it { expect(subject).to be_falsey }
-      end
     end
 
     context "when the source is :manual_entry" do
