@@ -17,6 +17,7 @@ before_script:
 stages:
   - test
   - security
+  - development
   - staging
   # - production
 
@@ -52,11 +53,21 @@ bundler:audit:
   tags:
     - ruby2.3
 
+deploy_dev:
+  stage: development
+  environment:
+    name: development
+    url: $WAVES_DEV_URL
+  script:
+    - bundle exec cap dev deploy
+  tags:
+    - ruby2.3
+
 deploy_staging:
   stage: staging
   environment:
     name: staging
-    url: $WAVES_URL
+    url: $WAVES_STAGING_URL
   only:
     - staging
   script:

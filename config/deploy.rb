@@ -1,10 +1,6 @@
-set :repo_url, "git@gitlab.wavesapp.uk:waves/wavesapp.git"
+set :repo_url, ENV["CI_REPOSITORY_URL"]
 
-append :linked_files,
-       "config/database.yml",
-       "config/secrets.yml",
-       "config/application.yml",
-       ".env"
+append :linked_files, ".env", "config/database.yml"
 
 append :linked_dirs,
        "log",
