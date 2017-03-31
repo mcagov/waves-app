@@ -2,30 +2,29 @@ require "rails_helper"
 
 describe Builders::ClonedRegistrationBuilder do
   context ".create" do
-    before do
-      allow(registered_vessel)
-        .to receive(:current_registration)
-        .and_return(current_registration)
+    let!(:registered_vessel) { create(:registered_vessel, name: "NEW NAME") }
 
-      described_class.create(submission)
-    end
-
-    let!(:registered_vessel) { create(:registered_vessel) }
-
-    let!(:current_registration) do
+    let!(:old_registration) do
       create(:registration,
-             registered_at: 1.year.ago, registered_until: 4.years.from_now)
+             vessel_id: registered_vessel.id,
+             registered_at: 1.year.ago, registered_until: 4.years.from_now,
+             registry_info: { vessel_info: { name: "OLD NAME" } })
     end
 
     let!(:submission) do
       create(:submission,
-             registered_vessel: registered_vessel, task: :closure)
+             registered_vessel: registered_vessel, task: :manual_override)
     end
 
-    let(:registration) { submission.reload.registration }
+    let!(:cloned_registration) { described_class.create(submission) }
 
     it "assigns the submission#registration" do
-      expect(submission.registration).to eq(current_registration)
+      expect(submission.reload.registration).to eq(cloned_registration)
+    end
+
+    it "updates the registry_info for the current_registration" do
+      expect(registered_vessel.reload.current_registration.vessel.name)
+        .to eq("NEW NAME")
     end
   end
 end
