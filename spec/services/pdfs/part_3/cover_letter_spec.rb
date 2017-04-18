@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Pdfs::CoverLetter do
+describe Pdfs::Part3::CoverLetter do
   context "for a single registration" do
     let(:vessel) { create(:registered_vessel) }
     let(:cover_letter) do
@@ -15,7 +15,7 @@ describe Pdfs::CoverLetter do
 
   context "for multiple registrations" do
     before { 3.times { create(:registered_vessel) } }
-    let(:cover_letter) { Pdfs::CoverLetter.new(Registration.all) }
+    let(:cover_letter) { Pdfs::Part3::CoverLetter.new(Registration.all) }
 
     it "has a filename" do
       expect(cover_letter.filename)
