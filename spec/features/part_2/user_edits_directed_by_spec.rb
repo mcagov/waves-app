@@ -9,18 +9,18 @@ describe "User edits Directed & Controlled By", js: :true do
     within(".modal.fade.in") do
       expect_postcode_lookup
       fill_in("Name", with: "BOB BOLD")
-      fill_in("IMO Number", with: "1234567")
-      select("(b)", from: "Status")
+      select("FRANCE", from: "Nationality")
       click_on("Save")
     end
 
     expect(page).to have_css(".directed_by-name", text: "BOB BOLD")
+    expect(page).to have_css(".directed_by-nationality", text: "FRANCE")
 
     click_on("BOB BOLD")
-    fill_in("IMO Number", with: "7654321")
+    select("SPAIN", from: "Nationality")
     click_on("Save")
 
-    expect(page).to have_css(".directed_by-imo_number", text: "7654321")
+    expect(page).to have_css(".directed_by-nationality", text: "SPAIN")
 
     within("#directed_by") do
       click_on("Remove")

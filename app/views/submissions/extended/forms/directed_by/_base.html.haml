@@ -3,11 +3,7 @@
 %table.table.table-striped
   %thead
     %th Name
-    %th IMO #
     %th Nationality
-    %th Status
-    %th Email
-    %th Phone
     %th
   %tbody
     - @submission.directed_bys.each do |directed_by|
@@ -16,11 +12,7 @@
           = link_to_unless @readonly, directed_by.name, "#",
             "data-target" => "#edit_directed_by_#{directed_by.id}",
             "data-toggle" => "modal"
-        %td.directed_by-imo_number= directed_by.imo_number
         %td.directed_by-nationality= directed_by.nationality
-        %td.directed_by-status= directed_by.eligibility_status
-        %td.directed_by-email= directed_by.email
-        %td.directed_by-phone_number= directed_by.phone_number
         %td
           - unless @readonly
             = link_to submission_directed_by_path(@submission, directed_by),

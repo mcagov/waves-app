@@ -4,10 +4,10 @@
     %th Type
     %th Make / Model
     - if display_extended_engines?(@submission)
-      %th.extended-engine MCEP per Engine
       %th Cylinders
-      %th Derating
       %th RPM
+      %th.extended-engine MCEP per Engine
+      %th Derating
       %th MCEP After Derating
     - else
       %th Power
@@ -22,12 +22,12 @@
             "data-toggle" => "modal"
         %td.make_and_model= engine.make_and_model
         - if display_extended_engines?(@submission)
+          %td.cylinders= engine.cylinders
+          %td.rpm= engine.rpm
           %td.mcep_per_engine
             - if engine.mcep_per_engine.present?
               #{ rounded_int(engine.mcep_per_engine.to_f) }kW
-          %td.cylinders= engine.cylinders
           %td.derating= engine.derating
-          %td.rpm= engine.rpm
         %td.mcep_after_derating
           - if engine.mcep_after_derating.present?
             #{ rounded_int(engine.mcep_after_derating.to_f) }kW

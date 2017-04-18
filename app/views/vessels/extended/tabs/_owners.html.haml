@@ -89,30 +89,6 @@
                 %td= shareholder_group.shares_held
 
 - if display_extended_owners?(@vessel)
-  #directed_by
-    %hr
-    %h2 Directed & Controlled By
-    %table.table.table-striped
-      %thead
-        %th Name
-        %th IMO #
-        %th Nationality
-        %th Status
-        %th Email
-        %th Phone
-      %tbody
-        - vessel.directed_bys.each do |directed_by|
-          %tr
-            %td
-              = directed_by.name
-              %br
-              = directed_by.inline_address
-            %td= directed_by.imo_number
-            %td= directed_by.nationality
-            %td= directed_by.eligibility_status.try(:titleize)
-            %td= directed_by.email
-            %td= directed_by.phone_number
-
   #beneficial_owners
     %hr
     %h2 Beneficial Owners
@@ -136,3 +112,19 @@
             %td= beneficial_owner.eligibility_status.try(:titleize)
             %td= beneficial_owner.email
             %td= beneficial_owner.phone_number
+
+  #directed_by
+    %hr
+    %h2 Directed & Controlled By
+    %table.table.table-striped
+      %thead
+        %th Name
+        %th Nationality
+      %tbody
+        - vessel.directed_bys.each do |directed_by|
+          %tr
+            %td
+              = directed_by.name
+              %br
+              = directed_by.inline_address
+            %td= directed_by.nationality
