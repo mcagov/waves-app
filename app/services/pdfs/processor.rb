@@ -32,7 +32,12 @@ class Pdfs::Processor
   end
 
   def cover_letter
-    Pdfs::CoverLetter.new(@printable_items)
+    case @part
+    when :part_3
+      Pdfs::Part3::CoverLetter.new(@printable_items)
+    else
+      Pdfs::Extended::CoverLetter.new(@printable_items)
+    end
   end
 
   def current_transcript

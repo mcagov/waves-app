@@ -7,7 +7,7 @@ class Pdfs::CoverLetter
 
   def render
     @registrations.each do |registration|
-      @pdf = Pdfs::CoverLetterWriter.new(registration, @pdf).write
+      @pdf = cover_letter_writer(registration).write
     end
     Pdfs::PdfRender.new(@pdf, :foo).render
   end

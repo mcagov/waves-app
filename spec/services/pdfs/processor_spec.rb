@@ -74,26 +74,30 @@ describe Pdfs::Processor do
       end
     end
 
-    context "with a provisional_certificate" do
-      let(:template) { :provisional_certificate }
-
-      before do
-        expect(Pdfs::ProvisionalCertificate)
-          .to receive(:new).with(printable_items, :printable)
-      end
-
-      it { subject }
-    end
-
-    context "with a generic cover_letter" do
+    context "with a cover_letter" do
       let(:template) { :cover_letter }
 
-      before do
-        expect(Pdfs::CoverLetter)
-          .to receive(:new).with(printable_items)
+      context "part_3" do
+        let(:part) { :part_3 }
+
+        before do
+          expect(Pdfs::Part3::CoverLetter)
+            .to receive(:new).with(printable_items)
+        end
+
+        it { subject }
       end
 
-      it { subject }
+      context "extended" do
+        let(:part) { :part_1 }
+
+        before do
+          expect(Pdfs::Extended::CoverLetter)
+            .to receive(:new).with(printable_items)
+        end
+
+        it { subject }
+      end
     end
 
     context "with a generic current_transcript" do
