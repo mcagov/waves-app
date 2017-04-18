@@ -31,6 +31,7 @@ gem "notifications-ruby-client", ">= 1.1.2"
 gem "paperclip"
 gem "paperclip-azure",
     git: "https://github.com/oceanshq/paperclip-azure"
+gem "pg_backup"
 gem "pg_search"
 gem "prawn"
 gem "prawn-print"
@@ -64,6 +65,12 @@ group :development, :test do
   gem "awesome_print"
   gem "bullet"
   gem "bundler-audit", ">= 0.5.0", require: false
+  gem "capistrano", "~> 3.7"
+  gem "capistrano-rails", "~> 1.2"
+  gem "capistrano-passenger"
+  gem "capistrano-delayed_job", require: false
+  gem "rbnacl"
+  gem "bcrypt_pbkdf"
   gem "factory_girl"
   gem "factory_girl_rails"
   gem "parallel_tests"

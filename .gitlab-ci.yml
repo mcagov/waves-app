@@ -15,19 +15,16 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
 
 stages:
-- test
+  - test
+  - security
+  - development
+  - staging
+  # - production
 
 rspec:
   stage: test
   script:
     - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
-  tags:
-    - ruby2.3
-
-brakeman:
-  stage: test
-  script:
-    - bundle exec brakeman
   tags:
     - ruby2.3
 
@@ -38,13 +35,44 @@ rubocop:
   tags:
     - ruby2.3
 
+brakeman:
+  stage: security
+  script:
+    - bundle exec brakeman
+  tags:
+    - ruby2.3
+
 bundler:audit:
-  stage: test
+  stage: security
   only:
     - master
     - staging
   script:
     - "bundle exec bundle-audit update"
     - "bundle exec bundle-audit check"
+  tags:
+    - ruby2.3
+
+deploy_dev:
+  stage: development
+  environment:
+    name: development
+    url: $WAVES_DEV_URL
+  when: manual
+  script:
+    - bundle exec cap dev deploy
+  tags:
+    - ruby2.3
+
+deploy_staging:
+  stage: staging
+  environment:
+    name: staging
+    url: $WAVES_STAGING_URL
+  when: manual
+  only:
+    - staging
+  script:
+    - bundle exec cap staging deploy
   tags:
     - ruby2.3
