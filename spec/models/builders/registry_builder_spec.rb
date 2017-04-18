@@ -88,11 +88,13 @@ describe Builders::RegistryBuilder do
           .to include(bob)
       end
 
-      it "creates the engines" do
+      it "creates the engines (and keeps the submission's engine" do
         expect(registered_vessel.reload.engines.map(&:make))
           .to include("Honda")
         expect(registered_vessel.reload.engines.map(&:make))
           .to include("Yamaha")
+
+        expect(submission.reload.engines.length).to eq(2)
       end
 
       it "creates the documents" do
