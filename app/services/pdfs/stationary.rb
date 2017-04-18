@@ -15,6 +15,10 @@ module Pdfs::Stationary
     14
   end
 
+  def set_headline_font
+    @pdf.font("Helvetica-Bold", size: 15)
+  end
+
   def set_bold_font
     @pdf.font("Helvetica-Bold", size: 11)
   end
