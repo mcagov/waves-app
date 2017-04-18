@@ -14,7 +14,7 @@ class Builders::Registry::EngineBuilder
     def perform
       @vessel.engines.delete_all
       @submission.engines.each do |submission_engine|
-        vessel_engine = submission_engine.clone
+        vessel_engine = submission_engine.dup
         vessel_engine.parent = @vessel
         vessel_engine.save
       end
