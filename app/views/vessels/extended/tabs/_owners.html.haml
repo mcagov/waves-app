@@ -119,11 +119,7 @@
     %table.table.table-striped
       %thead
         %th Name
-        %th IMO #
         %th Nationality
-        %th Status
-        %th Email
-        %th Phone
       %tbody
         - vessel.directed_bys.each do |directed_by|
           %tr
@@ -131,8 +127,4 @@
               = directed_by.name
               %br
               = directed_by.inline_address
-            %td= directed_by.imo_number
             %td= directed_by.nationality
-            %td= directed_by.eligibility_status.try(:titleize)
-            %td= directed_by.email
-            %td= directed_by.phone_number
