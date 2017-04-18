@@ -118,7 +118,7 @@ class Pdfs::Extended::CoverLetterWriter < Pdfs::CoverLetterWriter
     vpos -= trplspacer
     @pdf.font("Helvetica-Bold", size: 10)
     @pdf.draw_text "3.0", at: [l_margin, vpos]
-    @pdf.draw_text "ADDITIONAL VOLUNTARY TRAINING COURSES", at: [col2, vpos]
+    @pdf.draw_text "Additional Voluntary Training Courses", at: [col2, vpos]
 
     vpos -= spacer
     @pdf.font("Helvetica", size: 9)
