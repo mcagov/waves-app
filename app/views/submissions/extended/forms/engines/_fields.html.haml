@@ -1,10 +1,11 @@
 .row
-  .col-md-3
-    = engine_f.input :engine_type, as: :select,
-      label: "Engine Type",
-      collection: Engine::ENGINE_TYPES,
-      include_blank: false,
-      input_html: { class: "select2 select2_single" }
+  - if display_extended_engines?(@submission)
+    .col-md-3
+      = engine_f.input :engine_type, as: :select,
+        label: "Engine Type",
+        collection: Engine::ENGINE_TYPES,
+        include_blank: false,
+        input_html: { class: "select2 select2_single" }
   .col-md-3
     = engine_f.input :make, label: "Engine Make",
       input_html: { class: "upcase" }
@@ -26,7 +27,6 @@
       = engine_f.input :derating, as: :select,
         label: "Derating",
         collection: Engine::DERATINGS,
-        include_blank: false,
         input_html: { class: "select2 select2_single" }
     .col-md-3
       = engine_f.input :mcep_after_derating,
@@ -36,11 +36,11 @@
         placement: :right
   - else
     .col-md-3
-      = engine_f.input :mcep_after_derating,
+      = engine_f.input :mcep_per_engine,
         label: "Engine Power",
         as: :feedback,
         feedback_label: "kW",
         placement: :right
-.row
+
   .col-md-3
     = engine_f.input :quantity

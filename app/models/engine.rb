@@ -4,7 +4,6 @@ class Engine < ApplicationRecord
   ENGINE_TYPES = %w(Inboard Outboard).freeze
 
   DERATINGS = [
-    "None",
     "Fuel Rack Limited",
     "Fuel Pump Changed",
     "Engine Governor Adjusted",
@@ -18,7 +17,8 @@ class Engine < ApplicationRecord
   end
 
   def total_mcep
-    (quantity.to_i * mcep_after_derating.to_f)
+    power = derating.present? ? mcep_after_derating : mcep_per_engine
+    (quantity.to_i * power.to_f)
   end
 
   class << self

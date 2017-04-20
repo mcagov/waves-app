@@ -1,7 +1,8 @@
 %h2 Engines
 %table.table.table-striped
   %thead
-    %th Type
+    - if display_extended_engines?(@vessel)
+      %th Type
     %th Make / Model
     - if display_extended_engines?(@vessel)
       %th Cylinders
@@ -15,7 +16,8 @@
   %tbody
     - vessel.engines.each do |engine|
       %tr
-        %td.engine_type= engine.engine_type
+        - if display_extended_engines?(@vessel)
+          %td.engine_type= engine.engine_type
         %td.make_and_model= engine.make_and_model
         - if display_extended_engines?(@vessel)
           %td.cylinders= engine.cylinders
@@ -24,9 +26,13 @@
             - if engine.mcep_per_engine.present?
               #{ rounded_int(engine.mcep_per_engine.to_f) }kW
           %td.derating= engine.derating
-        %td.mcep_after_derating
-          - if engine.mcep_after_derating.present?
-            #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+          %td.mcep_after_derating
+            - if engine.mcep_after_derating.present?
+              #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+        - else
+          %td.power
+            - if engine.mcep_per_engine.present?
+              #{ rounded_int(engine.mcep_per_engine.to_f) }kW
         %td.quantity= engine.quantity.to_i
 
 %p.pull-right.total_mcep
