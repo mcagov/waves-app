@@ -4,7 +4,6 @@ class Engine < ApplicationRecord
   ENGINE_TYPES = %w(Inboard Outboard).freeze
 
   DERATINGS = [
-    "None",
     "Fuel Rack Limited",
     "Fuel Pump Changed",
     "Engine Governor Adjusted",
