@@ -9,7 +9,7 @@
 .modal.fade{id: "new_engine", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-lg
     .modal-content
-      = simple_form_for Engine.new, method: :post, remote: true, url: submission_engines_path(@submission) do |engine_f|
+      = simple_form_for Engine.new(quantity: 1), method: :post, remote: true, url: submission_engines_path(@submission) do |engine_f|
         = hidden_field_tag "modal_id", "new_engine"
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
