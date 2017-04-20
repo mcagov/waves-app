@@ -11,4 +11,8 @@ class Decorators::Vessel < SimpleDelegator
       end
     ret.reject(&:empty?).join(", ")
   end
+
+  def vessel_type_description
+    vessel_type.present? ? vessel_type : vessel_category
+  end
 end

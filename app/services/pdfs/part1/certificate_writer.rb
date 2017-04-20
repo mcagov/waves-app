@@ -14,7 +14,7 @@ class Pdfs::Part1::CertificateWriter < Pdfs::Extended::CertificateWriter
     draw_label_value "IMO Number/HIN", @vessel.imo_number, at: [lmargin, vstart]
     draw_label_value "Port", WavesUtilities::Port.new(@vessel.port_code).name, at: [rcol_lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Type of Ship", @vessel.vessel_type, at: [lmargin, vstart]
+    draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Method of Propulsion", @vessel.formatted_propulsion_system, at: [lmargin, vstart]
 
