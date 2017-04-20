@@ -179,12 +179,6 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, 55, "Officer Bob", :pdf_attachment)
   end
 
-  def name_approval
-    NotificationMailer.name_approval(
-      default_params, "Officer Bob", "MV Bob", "Southampton"
-    )
-  end
-
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
