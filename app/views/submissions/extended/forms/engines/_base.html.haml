@@ -33,9 +33,13 @@
             - if engine.mcep_per_engine.present?
               #{ rounded_int(engine.mcep_per_engine.to_f) }kW
           %td.derating= engine.derating
-        %td.mcep_after_derating
-          - if engine.mcep_after_derating.present?
-            #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+          %td.mcep_after_derating
+            - if engine.mcep_after_derating.present?
+              #{ rounded_int(engine.mcep_after_derating.to_f) }kW
+        - else
+          %td.power
+            - if engine.mcep_per_engine.present?
+              #{ rounded_int(engine.mcep_per_engine.to_f) }kW
 
         %td.quantity= engine.quantity.to_i
         %td

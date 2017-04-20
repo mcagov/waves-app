@@ -5,7 +5,7 @@ describe Engine do
     let!(:engine) do
       Engine.create(
         parent: build(:submission),
-        mcep_after_derating: mcep,
+        mcep_per_engine: mcep,
         quantity: quantity)
     end
 
@@ -29,9 +29,9 @@ describe Engine do
     subject { described_class.total_mcep_for(submission) }
 
     before do
-      submission.engines.create(mcep_after_derating: 300.34, quantity: 3)
-      submission.engines.create(mcep_after_derating: 0, quantity: 3)
-      submission.engines.create(mcep_after_derating: 1000.17, quantity: 18)
+      submission.engines.create(mcep_per_engine: 300.34, quantity: 3)
+      submission.engines.create(mcep_per_engine: 0, quantity: 3)
+      submission.engines.create(mcep_per_engine: 1000.17, quantity: 18)
     end
 
     it { expect(subject.round(2)).to eq(18904.08) }
