@@ -17,7 +17,8 @@ class Engine < ApplicationRecord
   end
 
   def total_mcep
-    (quantity.to_i * mcep_per_engine.to_f)
+    power = derating.present? ? mcep_after_derating : mcep_per_engine
+    (quantity.to_i * power.to_f)
   end
 
   class << self

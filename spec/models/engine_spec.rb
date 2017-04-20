@@ -6,6 +6,7 @@ describe Engine do
       Engine.create(
         parent: build(:submission),
         mcep_per_engine: mcep,
+        derating: "",
         quantity: quantity)
     end
 
@@ -21,6 +22,23 @@ describe Engine do
       let(:mcep) { nil }
       let(:quantity) { nil }
       it { expect(subject).to eq(0) }
+    end
+  end
+
+  context "#total_mcep for a derated engine" do
+    let!(:engine) do
+      Engine.create(
+        parent: build(:submission),
+        mcep_per_engine: 100,
+        derating: "Fuel Rack Limited",
+        mcep_after_derating: 222,
+        quantity: 1)
+    end
+
+    subject { engine.total_mcep }
+
+    it "calculates total_mcep from mcep_after_derating" do
+      expect(subject).to eq(222)
     end
   end
 
