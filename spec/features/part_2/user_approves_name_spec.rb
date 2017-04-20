@@ -54,7 +54,6 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
       expect(page).to have_current_path(edit_submission_path(Submission.last))
       creates_a_work_log_entry("Submission", :name_approval)
-      expect(Notification::NameApproval.count).to eq(1)
 
       visit(submission_path(Submission.last))
 
