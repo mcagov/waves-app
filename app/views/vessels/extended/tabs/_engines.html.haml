@@ -1,7 +1,8 @@
 %h2 Engines
 %table.table.table-striped
   %thead
-    %th Type
+    - if display_extended_engines?(@vessel)
+      %th Type
     %th Make / Model
     - if display_extended_engines?(@vessel)
       %th Cylinders
@@ -15,7 +16,8 @@
   %tbody
     - vessel.engines.each do |engine|
       %tr
-        %td.engine_type= engine.engine_type
+        - if display_extended_engines?(@vessel)
+          %td.engine_type= engine.engine_type
         %td.make_and_model= engine.make_and_model
         - if display_extended_engines?(@vessel)
           %td.cylinders= engine.cylinders

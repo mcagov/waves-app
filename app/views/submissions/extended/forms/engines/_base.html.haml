@@ -1,7 +1,8 @@
 %h2 Engines
 %table.table.table-striped
   %thead
-    %th Type
+    - if display_extended_engines?(@submission)
+      %th Type
     %th Make / Model
     - if display_extended_engines?(@submission)
       %th Cylinders
@@ -16,11 +17,15 @@
   %tbody
     - @submission.engines.each do |engine|
       %tr
-        %td
-          = link_to engine.engine_type, "#",
+        - if display_extended_engines?(@submission)
+          %td
+            = link_to engine.engine_type, "#",
+              "data-target" => "#edit_engine_#{engine.id}",
+              "data-toggle" => "modal"
+        %td.make_and_model
+          = link_to engine.make_and_model, "#",
             "data-target" => "#edit_engine_#{engine.id}",
             "data-toggle" => "modal"
-        %td.make_and_model= engine.make_and_model
         - if display_extended_engines?(@submission)
           %td.cylinders= engine.cylinders
           %td.rpm= engine.rpm
