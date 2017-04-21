@@ -5,6 +5,7 @@
     %th Issue Date
     %th Template
     %th Officer
+    %th
   %tbody
     - @submission.carving_and_markings.each do |carving_and_marking|
       %tr
@@ -12,6 +13,13 @@
         %td= carving_and_marking.created_at
         %td= carving_and_marking.template_name
         %td= carving_and_marking.actioned_by
+        %td
+          - if carving_and_marking.print_job
+            = link_to print_job_path(carving_and_marking.print_job, format: :pdf),
+              target: "_blank",
+              class: "btn btn-warning pull-right btn-sm" do
+              %i.fa.fa-print
+              Print Carving & Marking Note
 .row.status
   .col-md-3
     - if @submission.can_issue_carving_and_marking?
