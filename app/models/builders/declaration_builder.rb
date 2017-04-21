@@ -7,7 +7,7 @@ class Builders::DeclarationBuilder
       @shareholder_groups = shareholder_groups || []
 
       build_declarations
-      build_notifications
+      build_notifications unless @submission.source.to_sym == :manual_entry
       build_declaration_groups
     end
 

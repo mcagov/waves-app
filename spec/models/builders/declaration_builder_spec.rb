@@ -8,7 +8,7 @@ describe Builders::DeclarationBuilder do
         .and_return(declarations_required)
 
       Builders::DeclarationBuilder.create(
-        create(:submission),
+        create(:submission, source: submission_source),
         [alice, bob],
         ["alice@example.com"],
         shareholder_groups)
@@ -26,6 +26,7 @@ describe Builders::DeclarationBuilder do
 
     let(:declarations_required) { true }
     let(:bob) { build(:registered_owner, entity_type: :corporate) }
+    let(:submission_source) { :online }
     let!(:submission) { Submission.last }
 
     it "has a completed declaration for alice" do
@@ -60,6 +61,14 @@ describe Builders::DeclarationBuilder do
     it "builds a notification for the incomplete declaration" do
       expect(submission.declarations.incomplete.first.notification)
         .to be_a(Notification::OutstandingDeclaration)
+    end
+
+    context "for a manual entry submission" do
+      let(:submission_source) { :manual_entry }
+
+      it "does not build any notifications" do
+        expect(Notification::OutstandingDeclaration.count).to eq(0)
+      end
     end
 
     context "declaration_groups" do
