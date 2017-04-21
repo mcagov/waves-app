@@ -3,7 +3,7 @@ class Pdfs::CarvingAndMarking::AllFishing < Pdfs::CarvingAndMarking::Base
   private
 
   def title_text
-    "FISHING VESSELS ON PART I AND IV OF THE REGISTER"
+    "FISHING VESSELS"
   end
 
   def draw_vessel
