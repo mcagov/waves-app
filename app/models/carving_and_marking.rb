@@ -7,6 +7,8 @@ class CarvingAndMarking < ApplicationRecord
   delegate :vessel_name, to: :submission
   delegate :part, to: :submission
 
+  has_one :print_job, as: :printable, class_name: "PrintJob"
+
   TEMPLATES = [
     ["All fishing vessels",
      :all_fishing],
