@@ -54,6 +54,7 @@ en:
       owners_required: Vessel does not have any owners
       vessel_required: Vessel does not have a name
       declarations_required: Declarations are not complete
+      carving_marking_receipt: Carving & Marking Note has been issued but not marked as received
     approval:
       inline-btn:
         new_registration: Complete Registration

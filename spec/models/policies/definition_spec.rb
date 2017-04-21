@@ -46,6 +46,32 @@ describe Policies::Definitions do
 
       it { expect(subject).to include(:payment_required) }
     end
+
+    context "carving_marking_receipt" do
+      let(:error_key) { :carving_marking_receipt }
+
+      context "in general" do
+        let!(:submission) { create(:incomplete_submission) }
+
+        it { expect(subject).not_to include(error_key) }
+      end
+
+      context "when a Carving & Marking Note has been issued" do
+        let!(:carving_and_marking) { create(:carving_and_marking) }
+        let!(:submission) { carving_and_marking.submission }
+
+        it { expect(subject).to include(error_key) }
+
+        context "when the Carving & Marking note has been received" do
+          before do
+            submission.update_attribute(
+              :carving_and_marking_received_at, Time.now)
+          end
+
+          it { expect(subject).not_to include(error_key) }
+        end
+      end
+    end
   end
 
   context ".registration_type" do

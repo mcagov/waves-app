@@ -22,6 +22,7 @@ class Policies::Definitions
       approval_errors << :vessel_frozen if frozen?(submission)
       approval_errors << :declarations_required if undeclared?(submission)
       approval_errors << :payment_required if unpaid?(submission)
+      approval_errors << :carving_marking_receipt if cm_pending?(submission)
       approval_errors
     end
 
@@ -35,6 +36,11 @@ class Policies::Definitions
 
     def unpaid?(submission)
       AccountLedger.new(submission).awaiting_payment?
+    end
+
+    def cm_pending?(submission)
+      return false if submission.carving_and_markings.empty?
+      submission.carving_and_marking_received_at.blank?
     end
 
     def fishing_vessel?(obj)
