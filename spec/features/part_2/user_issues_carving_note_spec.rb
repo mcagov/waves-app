@@ -12,7 +12,7 @@ describe "User issues a Carving & Marking Note", js: true do
     within(".modal-content") do
       select("Send via Email", from: "Delivery Method")
       select("All fishing vessels", from: "Template")
-      click_on("Issue Carving & Marking note")
+      click_on("Issue Carving & Marking Note")
     end
 
     within("#carving_and_marking") do
@@ -34,7 +34,7 @@ describe "User issues a Carving & Marking Note", js: true do
     within(".modal-content") do
       select("Print", from: "Delivery Method")
       select("All fishing vessels", from: "Template")
-      click_on("Issue Carving & Marking note")
+      click_on("Issue Carving & Marking Note")
     end
 
     pdf_window = window_opened_by do
