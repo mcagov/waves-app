@@ -5,13 +5,13 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
   def owner_details_for_part
     i = 0
 
-    @pdf.font("Helvetica-Bold", size: 12)
+    @pdf.font("Helvetica-Bold", size: 11)
     @pdf.draw_text "Name & Address", at: [l_margin, 710 - i]
     @pdf.draw_text "Shares Held", at: [474, 710 - i]
     i += 20
 
     @owners.each do |owner|
-      @pdf.font("Helvetica", size: 12)
+      @pdf.font("Helvetica", size: 11)
       @pdf.draw_text owner.name, at: [l_margin, 700 - i]
       @pdf.text_box owner.inline_address, width: 400,
         at: [l_margin, 694 - i]
@@ -25,6 +25,12 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       @pdf.draw_text shareholder_group[:shares_held], at: [474, 700 - i]
       i += 25
     end
+
+    charterer_details_for_part(i)
+  end
+
+  def charterer_details_for_part(_vertical_offset)
+    # Intentionally left blank
   end
 end
 # rubocop:enable all
