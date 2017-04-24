@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Pdfs::Transcript do
+describe Pdfs::Part3::Transcript do
   let(:transcript_title) { "TRANSCRIPT OF REGISTRY" }
 
   context "for a single transcript" do

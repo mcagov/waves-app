@@ -10,8 +10,7 @@ class Pdfs::Transcript
 
   def render
     @registrations.each do |registration|
-      @pdf =
-        Pdfs::TranscriptWriter.new(registration, @pdf, @template).write
+      @pdf = transcript_writer(registration).write
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render

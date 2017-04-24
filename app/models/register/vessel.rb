@@ -115,6 +115,10 @@ module Register
       registration_status != :pending
     end
 
+    def ec_number=(_unimplemented)
+      # here we handle legacy changesets with ec_number assigned
+    end
+
     private
 
     def shareholder_groups_info
