@@ -32,5 +32,30 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
   def charterer_details_for_part(_vertical_offset)
     # Intentionally left blank
   end
+
+  def draw_label_value(label, text, opts)
+    default_label_font
+    @pdf.text_box("#{label} :", opts.merge(width: 130))
+    default_value_font
+    @pdf.draw_text(text, at: [opts[:at][0] + 145, opts[:at][1] - 7])
+  end
+
+  def draw_value(text, opts = {})
+    default_value_font
+    @pdf.draw_text(text, opts)
+  end
+
+  def default_value_font
+    @pdf.font("Helvetica-Bold", size: 11)
+  end
+
+  def default_label_font
+    @pdf.font("Helvetica", size: 11)
+  end
+
+  def l_margin
+    40
+  end
+
 end
 # rubocop:enable all
