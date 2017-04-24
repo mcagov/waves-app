@@ -35,7 +35,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
 
   def draw_label_value(label, text, opts)
     default_label_font
-    @pdf.text_box("#{label} :", opts.merge(width: 130))
+    @pdf.text_box("#{label}", opts.merge(width: 130))
     default_value_font
     @pdf.draw_text(text, at: [opts[:at][0] + 145, opts[:at][1] - 7])
   end
