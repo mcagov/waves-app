@@ -44,7 +44,6 @@ en:
           issc_issuing_authority: ISSC Issuing Authority
           issc_auditor: ISSC Auditor
           depth: Depth
-          ec_number: EC Number
           entry_into_service_at: Date of Entry into Service
           gross_tonnage: Gross Tonnage
           hin: Hull Identification Number (HIN)

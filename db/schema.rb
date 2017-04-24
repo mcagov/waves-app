@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330120824) do
+ActiveRecord::Schema.define(version: 20170424123152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -495,7 +495,6 @@ ActiveRecord::Schema.define(version: 20170330120824) do
     t.decimal  "register_tonnage"
     t.string   "vessel_category"
     t.string   "imo_number"
-    t.string   "ec_number"
     t.string   "last_registry_country"
     t.string   "last_registry_no"
     t.string   "last_registry_port"

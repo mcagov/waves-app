@@ -41,7 +41,6 @@ class Builders::Registry::VesselBuilder
       @vessel.imo_number = @submission.vessel.imo_number
       @vessel.port_code = @submission.vessel.port_code
       @vessel.port_no = @submission.vessel.port_no
-      @vessel.ec_number = @submission.vessel.ec_number
       @vessel.last_registry_country = @submission.vessel.last_registry_country
       @vessel.last_registry_no = @submission.vessel.last_registry_no
       @vessel.last_registry_port = @submission.vessel.last_registry_port
