@@ -61,9 +61,12 @@ class Pdfs::Part2::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     draw_label_value "Type of Registration", @vessel.registration_type.try(:titleize), at: [rcol_l_margin, vstart]
     vstart -= vspace
 
-    draw_label_value "Certificate of Registry issued", @registration.registered_at, at: [l_margin, vstart]
-    draw_label_value "Expires on",  @registration.registered_until, at: [rcol_l_margin, vstart]
-
+    if @registration.closed_at.present?
+      draw_label_value "Registration Closed", @registration.closed_at, at: [l_margin, vstart]
+    else
+      draw_label_value "Certificate of Registry issued", @registration.registered_at, at: [l_margin, vstart]
+      draw_label_value "Expires on",  @registration.registered_until, at: [rcol_l_margin, vstart]
+    end
   end
   # rubocop:enable all
 end
