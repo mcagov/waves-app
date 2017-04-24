@@ -14,6 +14,11 @@ describe "User save vessel details", js: :true do
 
     expect(page)
       .to have_link("Go to Task List", href: tasks_my_tasks_path)
+
+    click_on("Save to Unclaimed Tasks")
+
+    expect(page).to have_current_path(tasks_my_tasks_path)
+    expect(Submission.last).to be_unassigned
   end
 
   scenario "for an existing vessel, attribute changes have class has-changed" do
