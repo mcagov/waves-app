@@ -103,12 +103,49 @@ describe Pdfs::Processor do
     context "with a generic current_transcript" do
       let(:template) { :current_transcript }
 
-      before do
-        expect(Pdfs::Transcript)
-          .to receive(:new).with(printable_items, :printable)
+      context "part_1" do
+        let(:part) { :part_1 }
+
+        before do
+          expect(Pdfs::Part1::Transcript)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
       end
 
-      it { subject }
+      context "part_2" do
+        let(:part) { :part_2 }
+
+        before do
+          expect(Pdfs::Part2::Transcript)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
+
+      context "part_3" do
+        let(:part) { :part_3 }
+
+        before do
+          expect(Pdfs::Part3::Transcript)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
+
+      context "part_4" do
+        let(:part) { :part_4 }
+
+        before do
+          expect(Pdfs::Part4::Transcript)
+            .to receive(:new).with(printable_items, :printable)
+        end
+
+        it { subject }
+      end
     end
 
     context "with a generic historic_transcript" do

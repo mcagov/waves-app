@@ -41,7 +41,16 @@ class Pdfs::Processor
   end
 
   def current_transcript
-    Pdfs::Transcript.new(@printable_items, @mode)
+    case @part
+    when :part_1
+      Pdfs::Part1::Transcript.new(@printable_items, @mode)
+    when :part_2
+      Pdfs::Part2::Transcript.new(@printable_items, @mode)
+    when :part_3
+      Pdfs::Part3::Transcript.new(@printable_items, @mode)
+    when :part_4
+      Pdfs::Part4::Transcript.new(@printable_items, @mode)
+    end
   end
 
   def historic_transcript
