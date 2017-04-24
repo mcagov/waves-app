@@ -110,17 +110,11 @@ class Pdfs::TranscriptWriter
     @pdf.draw_text "#{@vessel.name} O.N. #{@vessel.reg_no}",
                    at: [l_margin, 746]
 
-    @pdf.move_down 60
+    @pdf.move_down 50
 
     @pdf.stroke_horizontal_rule
-    i = 0
-    @owners.each do |owner|
-      @pdf.font("Helvetica", size: 12)
-      @pdf.draw_text owner.name, at: [l_margin, 700 - i]
-      @pdf.text_box owner.inline_address, width: 500,
-        at: [l_margin, 690 - i]
-      i += 60
-    end
+
+    owner_details_for_part
 
     @pdf.text_box "Page 2 of 2", width: 500,
         at: [262, 40]
