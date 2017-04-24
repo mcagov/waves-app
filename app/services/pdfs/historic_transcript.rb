@@ -11,8 +11,7 @@ class Pdfs::HistoricTranscript
   def render
     @registered_vessels.each do |registered_vessel|
       registered_vessel.registrations.each do |registration|
-        @pdf =
-          Pdfs::TranscriptWriter.new(registration, @pdf, @template).write
+        @pdf = transcript_writer(registration).write
       end
     end
 
