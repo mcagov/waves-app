@@ -6,7 +6,7 @@ describe Pdfs::Part2::Transcript do
   context "for a single transcript" do
     let(:vessel) { create(:registered_vessel) }
     let(:transcript) do
-      Pdfs::Part2::Transcript.new(vessel.current_registration)
+      described_class.new(vessel.current_registration)
     end
 
     it "has two pages with the title on page 1" do

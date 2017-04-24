@@ -6,7 +6,7 @@ describe Pdfs::Part3::Transcript do
   context "for a single transcript" do
     let(:vessel) { create(:registered_vessel) }
     let(:transcript) do
-      Pdfs::Part3::Transcript.new(vessel.current_registration)
+      described_class.new(vessel.current_registration)
     end
 
     it "has a filename" do
@@ -24,7 +24,7 @@ describe Pdfs::Part3::Transcript do
 
   context "for multiple transcripts" do
     before { 3.times { create(:registered_vessel) } }
-    let(:transcript) { Pdfs::Part3::Transcript.new(Registration.all) }
+    let(:transcript) { described_class.new(Registration.all) }
 
     it "has a filename" do
       expect(transcript.filename)
