@@ -69,8 +69,10 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
 
     @vessel.engines.each do |engine|
       draw_label_value "Engine Make & Model", engine.make_and_model, at: [l_margin, vstart]
-      next unless engine.derating.present?
-      draw_label_value "Derating", engine.derating, at: [rcol_l_margin, vstart]
+      if engine.derating.present?
+        vstart -= vspace/2
+        draw_label_value "Derating", engine.derating, at: [l_margin, vstart]
+      end
       vstart -= vspace
     end
 
