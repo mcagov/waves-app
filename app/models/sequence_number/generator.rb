@@ -4,7 +4,7 @@ class SequenceNumber::Generator < ApplicationRecord
   REG_NO_PATTERNS =
     {
       part_1: "6#####",
-      part_2: "C3#####",
+      part_2: "C#####",
       part_3: "SSR2#####",
       part_4: "8#####",
     }.freeze
