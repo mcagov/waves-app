@@ -1,12 +1,12 @@
 require "rails_helper"
 
-describe Pdfs::Transcript do
+describe Pdfs::Part3::Transcript do
   let(:transcript_title) { "TRANSCRIPT OF REGISTRY" }
 
   context "for a single transcript" do
     let(:vessel) { create(:registered_vessel) }
     let(:transcript) do
-      described_class.new(vessel.current_registration)
+      Pdfs::Part3::Transcript.new(vessel.current_registration)
     end
 
     it "has a filename" do
@@ -24,7 +24,7 @@ describe Pdfs::Transcript do
 
   context "for multiple transcripts" do
     before { 3.times { create(:registered_vessel) } }
-    let(:transcript) { described_class.new(Registration.all) }
+    let(:transcript) { Pdfs::Part3::Transcript.new(Registration.all) }
 
     it "has a filename" do
       expect(transcript.filename)

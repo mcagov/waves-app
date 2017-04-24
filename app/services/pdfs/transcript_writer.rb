@@ -33,7 +33,7 @@ class Pdfs::TranscriptWriter
     @pdf.font("Helvetica-Bold", size: 24)
     @pdf.text_box page_title_line_1,
                   at: [0, 740], width: 590, height: 200, align: :center
-    @pdf.text_box "OF A BRITISH SHIP",
+    @pdf.text_box page_title_for_part,
                   at: [0, 715], width: 590, height: 200, align: :center
     @pdf.font("Helvetica", size: 11)
     @pdf.move_down 65
