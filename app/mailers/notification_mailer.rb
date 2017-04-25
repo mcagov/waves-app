@@ -34,6 +34,7 @@ class NotificationMailer < ApplicationMailer
          template_name: template_name)
   end
 
+  # rubocop:disable all
   def application_approval(defaults, reg_no, actioned_by, template_name,
                            vessel_name, pdf_attachment = nil)
     @department = defaults[:department]
@@ -41,13 +42,14 @@ class NotificationMailer < ApplicationMailer
     @name = defaults[:name]
     @actioned_by = actioned_by
     @vessel_name = vessel_name
-    # rubocop:disable Lint/UselessAssignment
     attachments = enable_attachment(pdf_attachment)
+    @application_approval = true
 
     mail(to: defaults[:to], subject: defaults[:subject],
          template_path: "notification_mailer/application_approval",
          template_name: template_name)
   end
+  # rubocop:enable all
 
   def wysiwyg(defaults, body, actioned_by)
     @department = defaults[:department]
