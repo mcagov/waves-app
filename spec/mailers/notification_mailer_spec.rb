@@ -139,6 +139,10 @@ RSpec.describe NotificationMailer, type: :mailer do
     it "renders the phone number" do
       expect(body).to match(/02920 448813/)
     end
+
+    it "renders the survey link" do
+      expect(body).to have_link("http://www.smartsurvey.co.uk/s/140065DZMRS/")
+    end
   end
 
   describe "wysiwyg" do
