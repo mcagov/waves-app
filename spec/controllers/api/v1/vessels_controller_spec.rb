@@ -61,6 +61,11 @@ describe Api::V1::VesselsController, type: :controller do
         expect(parsed_attrs["registry_info"]["vessel_info"]["name"])
           .to eq(registered_vessel.name)
       end
+
+      it "returns the registration_status" do
+        expect(parsed_attrs["registration_status"].to_sym)
+          .to eq(registered_vessel.registration_status)
+      end
     end
 
     context "when the client_session is not found" do
