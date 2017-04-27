@@ -25,7 +25,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def display_changeset?
-    Task.new(task).builds_registry?
+    Task.new(task).display_changeset?
   end
 
   def registry_vessel
