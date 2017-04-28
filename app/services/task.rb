@@ -1,6 +1,10 @@
 class Task < WavesUtilities::Task
   def new_registration?
-    [:provisional, :new_registration].include?(@key)
+    [:new_registration].include?(@key) || provisional_registration?
+  end
+
+  def provisional_registration?
+    [:provisional].include?(@key)
   end
 
   def re_registration?

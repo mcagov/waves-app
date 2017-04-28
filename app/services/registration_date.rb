@@ -5,7 +5,7 @@ class RegistrationDate
     end
 
     def duration(submission)
-      if submission.task.to_sym == :provisional
+      if Task.new(submission.task).provisional_registration?
         { days: 90 }
       else
         { years: 5 }
