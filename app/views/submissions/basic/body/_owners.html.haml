@@ -18,12 +18,12 @@
         %td.owner-address= owner.inline_address
         %td.declaration-status
           = render partial: "declarations/status", locals: { declaration: declaration}
-
-    - @submission.removed_registry_owners.each do |owner|
-      %tr
-        %td.owner-name.strike= owner
-        %td.strike= owner.email
-        %td.strike= owner.phone_number
-        %td.strike= owner.nationality
-        %td.strike= owner.inline_address
-        %td n/a
+    - if @submission.display_registry_info?
+      - @submission.removed_registry_owners.each do |owner|
+        %tr
+          %td.owner-name.strike= owner
+          %td.strike= owner.email
+          %td.strike= owner.phone_number
+          %td.strike= owner.nationality
+          %td.strike= owner.inline_address
+          %td n/a

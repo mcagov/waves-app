@@ -21,11 +21,12 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def display_registry_info?
+    return false if Task.new(task).re_registration?
     registry_info.present?
   end
 
   def display_changeset?
-    Task.new(task).display_changeset?
+    Task.new(task).builds_registry?
   end
 
   def registry_vessel

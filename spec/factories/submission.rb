@@ -58,6 +58,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :assigned_re_registration_submission, parent: :assigned_submission do
+    task          :re_registration
+    vessel_reg_no { create(:registered_vessel).reg_no }
+  end
+
   factory :assigned_change_address_submission, parent: :assigned_submission do
     task          :change_address
     vessel_reg_no { create(:registered_vessel).reg_no }
