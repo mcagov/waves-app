@@ -1,6 +1,23 @@
 require "rails_helper"
 
 describe Api::V1::VesselsController, type: :controller do
+  context "#index" do
+    let!(:vessel) { create(:registered_vessel) }
+
+    before do
+      expect(Search)
+        .to receive(:vessels)
+        .with("bob")
+        .and_return([vessel])
+
+      get :index, params: { filter: { q: "bob" } }
+    end
+
+    it "returns the search results as a list of vessels" do
+      expect(JSON.parse(response.body)["data"].first["id"]).to eq(vessel.id)
+    end
+  end
+
   context "#show by access_code" do
     let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
     let(:registered_vessel) { build(:registered_vessel) }
