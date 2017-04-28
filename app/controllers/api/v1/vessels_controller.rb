@@ -1,6 +1,10 @@
 module Api
   module V1
     class VesselsController < ApiController
+      def index
+        render json: Search.vessels(params[:filter][:q])
+      end
+
       def show
         @vessel = load_vessel
 

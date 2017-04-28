@@ -2,7 +2,7 @@ module Register
   class Vessel < ApplicationRecord
     include PgSearch
     multisearchable against:
-      [:reg_no, :name, :mmsi_number, :radio_call_sign]
+      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
 
     validates :part, presence: true
 

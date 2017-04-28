@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :payments, only: [:create]
       resources :submissions, only: [:create]
       resources :vessel_types, only: [:index]
-      resources :vessels, only: [:show]
+      resources :vessels, only: [:index, :show]
     end
   end
 
