@@ -98,8 +98,8 @@ class Submission < ApplicationRecord
   end
 
   def vessel_name
-    return registered_vessel.name if registered_vessel
     return vessel.name if vessel.name.present?
+    return registered_vessel.name if registered_vessel
     if finance_payment && finance_payment.vessel_name.present?
       finance_payment.vessel_name
     else
