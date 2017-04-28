@@ -11,6 +11,7 @@ class Search
     def vessels(term)
       PgSearch.multisearch(term)
               .where(searchable_type: "Register::Vessel")
+              .limit(20)
               .map(&:searchable)
     end
 
