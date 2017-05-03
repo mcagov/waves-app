@@ -113,6 +113,10 @@ module Submission::Associations
     Submission::Representative.new(symbolized_changeset[:representative] || {})
   end
 
+  def closure
+    Submission::Closure.new(symbolized_changeset[:closure] || {})
+  end
+
   def vessel=(vessel_params)
     self.changeset ||= {}
     changeset[:vessel_info] = vessel_params

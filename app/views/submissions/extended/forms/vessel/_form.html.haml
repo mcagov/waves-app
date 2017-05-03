@@ -1,5 +1,5 @@
 = simple_form_for @submission, remote: true, class: "form-vertical" do |submission_f|
-  %h2 Vessel Information
+  %h2 Vessel Info
   = submission_f.simple_fields_for :vessel, defaults: { disabled: @readonly } do |vessel_f|
     %fieldset{ disabled: disabled }
       - vessel_f.object = submission_f.object.vessel
