@@ -16,4 +16,10 @@ FactoryGirl.define do
     new_owner_email         "bob@example"
     new_owner_phone_number  "12345"
   end
+
+  factory :closure_registered_elsewhere, parent: :closure do
+    reason                  :registered_elsewhere
+    new_flag                "FRANCE"
+    new_flag_reason         "MOVED HOUSE"
+  end
 end

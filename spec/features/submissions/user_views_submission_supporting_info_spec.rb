@@ -30,4 +30,17 @@ feature "User views submission supporting info", type: :feature, js: true do
       expect(page).to have_css(".closure-new_owner_phone", text: "12345")
     end
   end
+
+  context "closure / registered_elsewhere" do
+    let!(:submission) do
+      create(:assigned_closure_submission,
+             changeset: { closure: build(:closure_registered_elsewhere) })
+    end
+
+    scenario do
+      expect(page).to have_css(".closure-reason", text: "Registered elsewhere")
+      expect(page).to have_css(".closure-new_flag", text: "FRANCE")
+      expect(page).to have_css(".closure-new_flag_reason", text: "MOVED HOUSE")
+    end
+  end
 end

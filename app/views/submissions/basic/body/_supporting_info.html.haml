@@ -35,3 +35,12 @@
         %td New owner phone
         %td.closure-new_owner_phone= @closure.new_owner_phone_number
 
+    - if @closure.new_flag.present?
+      %tr
+        %td New country of registry
+        %td.closure-new_flag= @closure.new_flag
+
+    - if @closure.new_flag_reason.present?
+      %tr
+        %td Reason for move
+        %td.closure-new_flag_reason= @closure.new_flag_reason
