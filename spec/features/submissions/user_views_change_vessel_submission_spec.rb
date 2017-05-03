@@ -14,7 +14,7 @@ feature "User views change of details submission", type: :feature, js: true do
       expect(page).to have_content("Change of Vessel details ID: ")
     end
 
-    click_link("Vessel Information")
+    click_link("Vessel Info")
     within("table.submission-vessel") do
       expect(page).to have_css("th", count: 3)
 

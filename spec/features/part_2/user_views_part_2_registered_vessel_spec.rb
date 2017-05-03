@@ -29,7 +29,7 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
   end
 
   scenario "tabs" do
-    click_on("Vessel Information")
+    click_on("Vessel Info")
     expect(page).to have_css("li.active a#vessel-tab")
 
     click_on("Engines")
