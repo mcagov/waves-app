@@ -1,14 +1,18 @@
 class Report
   class << self
-    def find(template)
+    def build(template, part)
       case template.to_sym
       when :staff_performance
-        StaffPerformance.new
+        StaffPerformance.new(part)
       end
     end
   end
 
   class StaffPerformance
+    def initialize(part)
+      @part = part
+    end
+
     def title
       "Staff Performance"
     end
@@ -19,8 +23,7 @@ class Report
 
     def rows
       Task.all_task_types.map do |task_type|
-        submission_ids = Submission.where(task: task_type).completed.pluck(:id)
-
+        submission_ids = submission_ids_for(task_type)
         [
           Task.new(task_type[1]).description,
           submission_ids.length,
@@ -39,6 +42,10 @@ class Report
 
       return "-" if result.blank? || result.claimant.blank?
       "#{result.claimant} (#{result.total})"
+    end
+
+    def submission_ids_for(task_type)
+      Submission.in_part(@part).where(task: task_type).completed.pluck(:id)
     end
   end
 end

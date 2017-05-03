@@ -6,7 +6,7 @@ describe Report::StaffPerformance do
       create(:completed_submission)
     end
 
-    subject { described_class.new }
+    subject { described_class.new(:part_3) }
 
     it "has a title" do
       expect(subject.title).to eq("Staff Performance")
