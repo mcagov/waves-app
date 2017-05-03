@@ -76,7 +76,13 @@ FactoryGirl.define do
   factory :assigned_closure_submission, parent: :assigned_submission do
     task          :closure
     vessel_reg_no { create(:registered_vessel).reg_no }
-    changeset     { { closure: build(:closure_destroyed) } }
+    changeset do
+      {
+        owners: [build(:declaration_owner)],
+        vessel_info: build(:submission_vessel),
+        closure: build(:closure_destroyed),
+      }
+    end
   end
 
   factory :referred_submission, parent: :assigned_submission do

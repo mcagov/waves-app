@@ -1,9 +1,12 @@
 FactoryGirl.define do
-  factory :closure_destroyed, class: "Submission::Closure" do
-    reason               :destroyed
+  factory :closure, class: "Submission::Closure" do
     actioned_day         { "23" }
     actioned_month       { "6" }
     actioned_year        { "2016" }
-    destruction_method   { "VIKING FUNERAL" }
+  end
+
+  factory :closure_destroyed, parent: :closure do
+    reason               :destroyed
+    destruction_method   { "BOMB" }
   end
 end
