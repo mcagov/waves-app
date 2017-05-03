@@ -1,5 +1,5 @@
 class Admin::ReportsController < InternalPagesController
   def show
-    @report = Report.new(params[:id])
+    @report = Report.find(params[:id])
   end
 end
