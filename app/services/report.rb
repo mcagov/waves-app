@@ -1,16 +1,17 @@
 class Report
   class << self
-    def build(template, part)
+    def build(template, filters)
       case template.to_sym
       when :staff_performance
-        StaffPerformance.new(part)
+        StaffPerformance.new(filters)
       end
     end
   end
 
   class StaffPerformance
-    def initialize(part)
-      @part = part
+    def initialize(filters)
+      @filters = filters
+      @part = @filters[:part] || :part_3
     end
 
     def title
