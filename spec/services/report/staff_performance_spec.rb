@@ -6,7 +6,7 @@ describe Report::StaffPerformance do
       create(:completed_submission)
     end
 
-    let(:filters) { part: :part_3 }
+    let(:filters) { { part: :part_3 } }
 
     subject { described_class.new(filters) }
 
