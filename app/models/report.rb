@@ -12,5 +12,9 @@ class Report
     def title
       "Staff Performance"
     end
+
+    def columns
+      [:task_type, :total_transactions, :top_performer]
+    end
   end
 end

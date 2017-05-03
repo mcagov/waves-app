@@ -9,5 +9,8 @@ describe "User views staff performance report", js: true do
 
   scenario "in general" do
     expect(page).to have_css("h1", text: "Reports: Staff Performance")
+    expect(page).to have_css("th", text: "Task Type")
+    expect(page).to have_css("th", text: "Total Transactions")
+    expect(page).to have_css("th", text: "Top Performer")
   end
 end

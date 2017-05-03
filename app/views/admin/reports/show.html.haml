@@ -1,1 +1,6 @@
 %h1.heading-large Reports: #{@report.title}
+
+%table.table.table-striped
+  %thead
+    - @report.columns.each do |heading|
+      %th= heading.to_s.titleize
