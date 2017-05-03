@@ -12,5 +12,9 @@ describe Report::StaffPerformance do
       columns = [:task_type, :total_transactions, :top_performer]
       expect(subject.columns).to eq(columns)
     end
+
+    it "has one row for each task type" do
+      expect(subject.rows.length).to eq(Task.all_task_types.length)
+    end
   end
 end
