@@ -4,16 +4,34 @@
     %th
   %tbody
     - @closure = @submission.closure
+
     - if @closure.reason.present?
       %tr
         %td Closure reason
         %td.closure-reason= @closure.reason.humanize
+
     - if @closure.actioned_at.present?
       %tr
         %td Date
         %td.closure-actioned_at= @closure.actioned_at
+
     - if @closure.destruction_method.present?
       %tr
         %td Destruction method
         %td.closure-destruction_method= @closure.destruction_method
+
+    - if @closure.new_owner_name.present?
+      %tr
+        %td New owner name
+        %td.closure-new_owner_name= @closure.new_owner_name
+
+    - if @closure.new_owner_email.present?
+      %tr
+        %td New owner email
+        %td.closure-new_owner_email= @closure.new_owner_email
+
+    - if @closure.new_owner_phone_number.present?
+      %tr
+        %td New owner phone
+        %td.closure-new_owner_phone= @closure.new_owner_phone_number
 

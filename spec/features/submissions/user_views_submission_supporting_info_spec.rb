@@ -16,4 +16,18 @@ feature "User views submission supporting info", type: :feature, js: true do
       expect(page).to have_css(".closure-destruction_method", text: "BOMB")
     end
   end
+
+  context "closure / sold" do
+    let!(:submission) do
+      create(:assigned_closure_submission,
+             changeset: { closure: build(:closure_sold) })
+    end
+
+    scenario do
+      expect(page).to have_css(".closure-reason", text: "Sold")
+      expect(page).to have_css(".closure-new_owner_name", text: "BOB")
+      expect(page).to have_css(".closure-new_owner_email", text: "bob@example")
+      expect(page).to have_css(".closure-new_owner_phone", text: "12345")
+    end
+  end
 end
