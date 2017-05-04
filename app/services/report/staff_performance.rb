@@ -7,14 +7,17 @@ class Report::StaffPerformance < Report
     [:task_type, :total_transactions, :top_performer]
   end
 
-  def rows
+  def results
     Task.all_task_types.map do |task_type|
       submission_ids = submission_ids_for(task_type)
-      [
-        Task.new(task_type[1]).description,
-        submission_ids.length,
-        top_performer(submission_ids),
-      ]
+      data_elements =
+        [
+          Task.new(task_type[1]).description,
+          submission_ids.length,
+          top_performer(submission_ids),
+        ]
+
+      Result.new(data_elements, task_type[1])
     end
   end
 

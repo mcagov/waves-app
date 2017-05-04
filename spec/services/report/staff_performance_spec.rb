@@ -19,13 +19,17 @@ describe Report::StaffPerformance do
       expect(subject.columns).to eq(columns)
     end
 
-    it "has one row for each task type" do
-      expect(subject.rows.length).to eq(Task.all_task_types.length)
+    it "has one result for each task type" do
+      expect(subject.results.length).to eq(Task.all_task_types.length)
     end
 
     it "has the expected output for a new registration" do
       new_reg = ["New Registration", 1, "#{Submission.last.claimant} (1)"]
-      expect(subject.rows).to include(new_reg)
+      expect(subject.results.map(&:data_elements)).to include(new_reg)
+    end
+
+    it "has the tasktype as subreport" do
+      expect(subject.results.map(&:subreport)).to include(:new_registration)
     end
   end
 end

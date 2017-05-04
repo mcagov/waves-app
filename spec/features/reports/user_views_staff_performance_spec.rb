@@ -48,4 +48,10 @@ describe "User views staff performance report", js: true do
 
     expect(page).to have_text(date_range_result)
   end
+
+  scenario "viewing the sub report" do
+    within("#results") do
+      expect(page).to have_link("New Registration")
+    end
+  end
 end

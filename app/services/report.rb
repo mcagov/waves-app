@@ -15,6 +15,8 @@ class Report
     @date_end = parse_date_end
   end
 
+  Result = Struct.new(:data_elements, :subreport)
+
   def filter_by_part(scoped_query)
     @part.present? ? scoped_query.in_part(@part) : scoped_query
   end

@@ -30,13 +30,17 @@
         .col-md-2
           = submit_tag "Apply Filter", class: "btn btn-success"
 
-%table.table.table-striped
+%table.table.table-striped#results
   %thead
     - @report.columns.each do |heading|
       %th= heading.to_s.titleize
   %tbody
-    - @report.rows.each do |row|
+    - @report.results.each do |result|
       %tr
-        - row.each do |col|
-          %td= col
+        - result.data_elements.each_with_index do |data_element, index|
+          %td
+            - if index == 0 && result.subreport.present?
+              = link_to data_element, "#"
+            - else
+              = data_element
 
