@@ -7,6 +7,10 @@ class Report::StaffPerformance < Report
     :staff_performance_by_task
   end
 
+  def filter_fields
+    [:filter_part, :filter_date_range]
+  end
+
   def columns
     [:task_type, :total_transactions, :top_performer]
   end

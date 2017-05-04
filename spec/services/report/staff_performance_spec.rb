@@ -14,6 +14,10 @@ describe Report::StaffPerformance do
       expect(subject.title).to eq("Staff Performance")
     end
 
+    it "has some filter_fields" do
+      expect(subject.filter_fields).to eq([:filter_part, :filter_date_range])
+    end
+
     it "has some columns" do
       columns = [:task_type, :total_transactions, :top_performer]
       expect(subject.columns).to eq(columns)

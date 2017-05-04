@@ -5,25 +5,9 @@
     %h4 Filter Data
   .x_content
     = form_tag admin_report_path(params[:id]), method: :get do
-      .form-group
-        .row
-          .col-md-1
-            %label{ for: "filter_part" } Part of Register
-          .col-md-2
-            = select :filter, :part, parts_collection,
-              { include_blank: true, selected: @filter[:part] },
-              class: "form-control"
+      - @report.filter_fields.each do |filter_field|
+        = render partial: filter_field.to_s, locals: { filter: @filter }
 
-      .form-group
-        .row
-          .col-md-1
-            %label Date Range
-          .col-md-2
-            = text_field_tag "filter[date_start]", @filter[:date_start],
-              class: "form-control datepicker"
-          .col-md-2
-            = text_field_tag "filter[date_end]", @filter[:date_end],
-              class: "form-control datepicker"
       %hr
       .row
         .col-md-1
@@ -40,7 +24,6 @@
         - result.data_elements.each_with_index do |data_element, index|
           %td
             - if index == 0 && @report.sub_report
-
               = form_tag admin_report_path(@report.sub_report), method: :get do
                 - @filter.keys.each do |key|
                   = hidden_field_tag "filter[#{key}]", @filter[key]

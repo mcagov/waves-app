@@ -19,6 +19,10 @@ class Report
 
   Result = Struct.new(:data_elements, :sub_report_filters)
 
+  def filter_fields
+    []
+  end
+
   def sub_report
   end
 
