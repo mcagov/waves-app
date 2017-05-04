@@ -47,11 +47,15 @@ describe "User views staff performance report", js: true do
     expect(page).to have_text(date_range_result)
   end
 
-  scenario "viewing the sub report" do
+  scenario "viewing the sub report with an existing filter" do
+    find("#filter_date_start").set("21/01/2017")
+    click_on("Apply Filter")
+
     within("#results") do
       click_on("New Registration")
     end
 
+    expect(find("#filter_date_start").value).to eq("21/01/2017")
     expect(page)
       .to have_css("h1", text: "Reports: Staff Performance by Task")
   end
