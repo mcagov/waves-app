@@ -31,4 +31,21 @@ describe "User views staff performance report", js: true do
 
     expect(page).to have_text(part_three_result)
   end
+
+  scenario "filtering by date range" do
+    date_range_result = "New Registration 1 #{@submission.claimant} (1)"
+    expect(page).to have_text(date_range_result)
+
+    find("#filter_date_start").set("21/01/2017")
+    find("#filter_date_end").set("21/02/2017")
+    click_on("Apply Filter")
+
+    expect(page).not_to have_text(date_range_result)
+
+    find("#filter_date_start").set("21/01/2017")
+    find("#filter_date_end").set("21/02/2121")
+    click_on("Apply Filter")
+
+    expect(page).to have_text(date_range_result)
+  end
 end

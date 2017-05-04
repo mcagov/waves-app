@@ -8,6 +8,6 @@ class Admin::ReportsController < InternalPagesController
 
   def filter_params
     return {} unless params[:filter]
-    params.require(:filter).permit(:part)
+    params.require(:filter).permit(:part, :date_start, :date_end)
   end
 end

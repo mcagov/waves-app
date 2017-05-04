@@ -1,16 +1,34 @@
 %h1.heading-large Reports: #{@report.title}
 
 .x_panel
-  .x_title Filter Data
+  .x_title
+    %h4 Filter Data
   .x_content
     = form_tag admin_report_path(params[:id]), method: :get do
       .form-group
-        %label{ for: "filter_part" } Part of Register
-        = select :filter, :part, parts_collection,
-          include_blank: true,
-          selected: @filter[:part]
+        .row
+          .col-md-1
+            %label{ for: "filter_part" } Part of Register
+          .col-md-2
+            = select :filter, :part, parts_collection,
+              { include_blank: true, selected: @filter[:part] },
+              class: "form-control"
+
       .form-group
-        = submit_tag "Apply Filter"
+        .row
+          .col-md-1
+            %label Date Range
+          .col-md-2
+            = text_field_tag "filter[date_start]", @filter[:date_start],
+              class: "form-control datepicker"
+          .col-md-2
+            = text_field_tag "filter[date_end]", @filter[:date_end],
+              class: "form-control datepicker"
+      %hr
+      .row
+        .col-md-1
+        .col-md-2
+          = submit_tag "Apply Filter", class: "btn btn-success"
 
 %table.table.table-striped
   %thead
