@@ -1,9 +1,4 @@
-class Report::StaffPerformance
-  def initialize(filters)
-    @filters = filters
-    @part = @filters[:part] || :part_3
-  end
-
+class Report::StaffPerformance < Report
   def title
     "Staff Performance"
   end
@@ -36,6 +31,6 @@ class Report::StaffPerformance
   end
 
   def submission_ids_for(task_type)
-    Submission.in_part(@part).where(task: task_type).completed.pluck(:id)
+    apply_filters(Submission.where(task: task_type)).completed.pluck(:id)
   end
 end
