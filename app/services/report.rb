@@ -12,7 +12,7 @@ class Report
     @part = filters[:part]
   end
 
-  def apply_scoped_filters(scoped_query)
+  def filter_by_part(scoped_query)
     @part.present? ? scoped_query.in_part(@part) : scoped_query
   end
 end
