@@ -13,12 +13,10 @@ describe "User views staff performance report", js: true do
     expect(page).to have_css("th", text: "Task Type")
     expect(page).to have_css("th", text: "Total Transactions")
     expect(page).to have_css("th", text: "Top Performer")
-
-    expect(page).to have_css("td", text: "New Registration")
   end
 
   scenario "filtering by part" do
-    part_three_result = "New Registration 1 #{@submission.claimant} (1)"
+    part_three_result = "#{@submission.claimant} (1)"
     expect(page).to have_text(part_three_result)
 
     select("Part II", from: "Part of Register")
@@ -33,7 +31,7 @@ describe "User views staff performance report", js: true do
   end
 
   scenario "filtering by date range" do
-    date_range_result = "New Registration 1 #{@submission.claimant} (1)"
+    date_range_result = "#{@submission.claimant} (1)"
     expect(page).to have_text(date_range_result)
 
     find("#filter_date_start").set("21/01/2017")
@@ -51,7 +49,10 @@ describe "User views staff performance report", js: true do
 
   scenario "viewing the sub report" do
     within("#results") do
-      expect(page).to have_link("New Registration")
+      click_on("New Registration")
     end
+
+    expect(page)
+      .to have_css("h1", text: "Reports: Staff Performance by Task")
   end
 end

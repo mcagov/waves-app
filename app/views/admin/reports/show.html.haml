@@ -39,8 +39,15 @@
       %tr
         - result.data_elements.each_with_index do |data_element, index|
           %td
-            - if index == 0 && result.subreport.present?
-              = link_to data_element, "#"
+            - if index == 0 && @report.sub_report
+
+              = form_tag admin_report_path(@report.sub_report), method: :get do
+                - @filter.keys.each do |key|
+                  = hidden_field_tag "filter[#{key}]", @filter[key]
+
+                - result.sub_report_filters.each do |k, v|
+                  = hidden_field_tag "filter[#{k}]", k
+                = submit_tag data_element, class: "looks-like-link"
             - else
               = data_element
 

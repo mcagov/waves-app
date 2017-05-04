@@ -4,6 +4,8 @@ class Report
       case template.to_sym
       when :staff_performance
         Report::StaffPerformance.new(filters)
+      when :staff_performance_by_task
+        Report::StaffPerformanceByTask.new(filters)
       end
     end
   end
@@ -15,7 +17,20 @@ class Report
     @date_end = parse_date_end
   end
 
-  Result = Struct.new(:data_elements, :subreport)
+  Result = Struct.new(:data_elements, :sub_report_filters)
+
+  def sub_report
+  end
+
+  def columns
+    []
+  end
+
+  def results
+    []
+  end
+
+  protected
 
   def filter_by_part(scoped_query)
     @part.present? ? scoped_query.in_part(@part) : scoped_query

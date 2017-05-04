@@ -3,6 +3,10 @@ class Report::StaffPerformance < Report
     "Staff Performance"
   end
 
+  def sub_report
+    :staff_performance_by_task
+  end
+
   def columns
     [:task_type, :total_transactions, :top_performer]
   end
@@ -17,7 +21,7 @@ class Report::StaffPerformance < Report
           top_performer(submission_ids),
         ]
 
-      Result.new(data_elements, task_type[1])
+      Result.new(data_elements, task: task_type[1])
     end
   end
 

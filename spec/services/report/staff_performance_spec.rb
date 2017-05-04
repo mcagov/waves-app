@@ -28,8 +28,9 @@ describe Report::StaffPerformance do
       expect(subject.results.map(&:data_elements)).to include(new_reg)
     end
 
-    it "has the tasktype as subreport" do
-      expect(subject.results.map(&:subreport)).to include(:new_registration)
+    it "has the task as a sub_report_filter" do
+      new_reg = { task: :new_registration }
+      expect(subject.results.map(&:sub_report_filters)).to include(new_reg)
     end
   end
 end
