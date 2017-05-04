@@ -1,4 +1,8 @@
 module CollectionHelper
+  def parts_collection
+    Activity::PART_TYPES
+  end
+
   def owner_countries_collection
     ["UNITED KINGDOM"]
   end

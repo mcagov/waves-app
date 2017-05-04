@@ -9,7 +9,7 @@
             = f.input :application_ref_no, label: "Application Reference No. <span style='font-weight: normal !important;'>(if known)</span>".html_safe, input_html: { class: "upcase" }
         .row
           .col-md-4
-            = f.input :part, collection: Activity::PART_TYPES, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+            = f.input :part, collection: parts_collection, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
           .col-md-4
             = f.input :task, collection: Task.finance_task_types, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
         .row

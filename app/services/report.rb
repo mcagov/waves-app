@@ -9,10 +9,10 @@ class Report
   end
 
   def initialize(filters = {})
-    @filters = filters
+    @part = filters[:part]
   end
 
-  def apply_filters(scoped_query)
-    @filters[:part] ? scoped_query.in_part(@filters[:part]) : scoped_query
+  def apply_scoped_filters(scoped_query)
+    @part.present? ? scoped_query.in_part(@part) : scoped_query
   end
 end

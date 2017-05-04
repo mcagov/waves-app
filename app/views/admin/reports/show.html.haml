@@ -1,5 +1,17 @@
 %h1.heading-large Reports: #{@report.title}
 
+.x_panel
+  .x_title Filter Data
+  .x_content
+    = form_tag admin_report_path(params[:id]), method: :get do
+      .form-group
+        %label{ for: "filter_part" } Part of Register
+        = select :filter, :part, parts_collection,
+          include_blank: true,
+          selected: @filter[:part]
+      .form-group
+        = submit_tag "Apply Filter"
+
 %table.table.table-striped
   %thead
     - @report.columns.each do |heading|

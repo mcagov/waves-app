@@ -1,11 +1,13 @@
 class Admin::ReportsController < InternalPagesController
   def show
-    @report = Report.build(params[:id], filters)
+    @filter = filter_params
+    @report = Report.build(params[:id], @filter)
   end
 
   protected
 
-  def filters
-    { part: current_activity.part }
+  def filter_params
+    return {} unless params[:filter]
+    params.require(:filter).permit(:part)
   end
 end
