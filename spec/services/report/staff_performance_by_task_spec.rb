@@ -18,5 +18,10 @@ describe Report::StaffPerformanceByTask do
       expect(subject.filter_fields)
         .to eq([:filter_task, :filter_part, :filter_date_range])
     end
+
+    it "has some columns" do
+      columns = [:staff_member, :online_applications, :paper_applications]
+      expect(subject.columns).to eq(columns)
+    end
   end
 end

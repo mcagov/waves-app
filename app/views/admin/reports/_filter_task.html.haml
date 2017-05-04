@@ -1,0 +1,8 @@
+.form-group
+  .row
+    .col-md-1
+      %label{ for: "filter_task" } Task Type
+    .col-md-2
+      = select :filter, :task, Task.all_task_types,
+        { include_blank: false, selected: filter[:task] },
+        class: "form-control"

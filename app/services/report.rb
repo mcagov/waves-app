@@ -15,6 +15,7 @@ class Report
     @part = filters[:part]
     @date_start = parse_date_start
     @date_end = parse_date_end
+    @task = filters[:task]
   end
 
   Result = Struct.new(:data_elements, :sub_report_filters)
@@ -38,6 +39,10 @@ class Report
 
   def filter_by_part(scoped_query)
     @part.present? ? scoped_query.in_part(@part) : scoped_query
+  end
+
+  def filter_by_task(scoped_query)
+    @task.present? ? scoped_query.where(task: @task) : scoped_query
   end
 
   def filter_by_completed_at(scoped_query)
