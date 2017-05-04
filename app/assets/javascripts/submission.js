@@ -1,9 +1,4 @@
 $(document).ready(function() {
-  // General: set the datepicker time format
-  $('.datetimepicker').datetimepicker({
-    format: 'DD/MM/YYYY, h:mm:ss a'
-  });
-
   // Submission#edit: Promote an alternative vessel name
   $('.promote_alt_name').on('click', function() {
     var original_vessel_name = $('#submission_vessel_name').val();

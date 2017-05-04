@@ -13,6 +13,15 @@ $(document).ready(function() {
   });
 
   $('[data-toggle="tooltip"]').tooltip()
+
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });
+
+  $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true
+  });
 });
 
 $(document).on('blur','.upcase.form-control', {} ,function(e){

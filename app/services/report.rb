@@ -1,44 +1,71 @@
 class Report
   class << self
-    def find(template)
+    def build(template, filters = {})
       case template.to_sym
       when :staff_performance
-        StaffPerformance.new
+        Report::StaffPerformance.new(filters)
+      when :staff_performance_by_task
+        Report::StaffPerformanceByTask.new(filters)
       end
     end
   end
 
-  class StaffPerformance
-    def title
-      "Staff Performance"
+  def initialize(filters = {})
+    @filters = filters
+    @part = filters[:part]
+    @date_start = parse_date_start
+    @date_end = parse_date_end
+    @task = filters[:task]
+  end
+
+  Result = Struct.new(:data_elements, :sub_report_filters)
+
+  def filter_fields
+    []
+  end
+
+  def sub_report
+  end
+
+  def columns
+    []
+  end
+
+  def results
+    []
+  end
+
+  protected
+
+  def filter_by_part(scoped_query)
+    @part.present? ? scoped_query.in_part(@part) : scoped_query
+  end
+
+  def filter_by_task(scoped_query)
+    @task.present? ? scoped_query.where(task: @task) : scoped_query
+  end
+
+  def filter_by_completed_at(scoped_query)
+    if @date_start.present?
+      scoped_query = scoped_query.where("completed_at > ?", @date_start)
     end
 
-    def columns
-      [:task_type, :total_transactions, :top_performer]
+    if @date_end.present?
+      scoped_query = scoped_query.where("completed_at < ?", @date_end)
     end
 
-    def rows
-      Task.all_task_types.map do |task_type|
-        submission_ids = Submission.where(task: task_type).completed.pluck(:id)
+    scoped_query
+  end
 
-        [
-          Task.new(task_type[1]).description,
-          submission_ids.length,
-          top_performer(submission_ids),
-        ]
-      end
+  private
+
+  def parse_date_start
+    if @filters[:date_start].present?
+      @filters[:date_start].to_date.at_beginning_of_day
     end
+  end
 
-    def top_performer(submission_ids)
-      result = Submission.select("claimant_id, count(*) AS total")
-                         .includes(:claimant)
-                         .where(id: submission_ids)
-                         .group(:claimant_id)
-                         .order("total desc")
-                         .first
-
-      return "-" if result.blank? || result.claimant.blank?
-      "#{result.claimant} (#{result.total})"
-    end
+  def parse_date_end
+    @filters[:date_end].to_date.at_end_of_day if @filters[:date_end].present?
   end
 end

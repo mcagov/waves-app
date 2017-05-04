@@ -39,7 +39,7 @@ module Submission::StateMachine
                       on_transition: :remove_claimant
         end
 
-        event :approved do
+        event :approved, timestamp: :completed_at do
           transitions to: :completed, from: :assigned,
                       on_transition: :process_application,
                       guard: :approvable?

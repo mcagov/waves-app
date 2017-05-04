@@ -1,0 +1,8 @@
+.form-group
+  .row
+    .col-md-1
+      %label{ for: "filter_part" } Part of Register
+    .col-md-2
+      = select :filter, :part, parts_collection,
+        { include_blank: true, selected: filter[:part] },
+        class: "form-control"

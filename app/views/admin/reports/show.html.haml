@@ -1,12 +1,36 @@
 %h1.heading-large Reports: #{@report.title}
 
-%table.table.table-striped
+.x_panel
+  .x_title
+    %h4 Filter Data
+  .x_content
+    = form_tag admin_report_path(params[:id]), method: :get do
+      - @report.filter_fields.each do |filter_field|
+        = render partial: filter_field.to_s, locals: { filter: @filter }
+
+      %hr
+      .row
+        .col-md-1
+        .col-md-2
+          = submit_tag "Apply Filter", class: "btn btn-success"
+
+%table.table.table-striped#results
   %thead
     - @report.columns.each do |heading|
       %th= heading.to_s.titleize
   %tbody
-    - @report.rows.each do |row|
+    - @report.results.each do |result|
       %tr
-        - row.each do |col|
-          %td= col
+        - result.data_elements.each_with_index do |data_element, index|
+          %td
+            - if index == 0 && @report.sub_report
+              = form_tag admin_report_path(@report.sub_report), method: :get do
+                - @filter.keys.each do |key|
+                  = hidden_field_tag "filter[#{key}]", @filter[key]
+
+                - result.sub_report_filters.each do |k, v|
+                  = hidden_field_tag "filter[#{k}]", k
+                = submit_tag data_element, class: "looks-like-link"
+            - else
+              = data_element
 
