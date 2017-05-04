@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424123152) do
+ActiveRecord::Schema.define(version: 20170504093548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -449,6 +449,7 @@ ActiveRecord::Schema.define(version: 20170424123152) do
     t.string   "linkable_ref_no"
     t.datetime "carving_and_marking_received_at"
     t.uuid     "registration_id"
+    t.datetime "completed_at"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
