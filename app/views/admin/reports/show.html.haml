@@ -1,6 +1,6 @@
 %h1.heading-large Reports: #{@report.title}
 
-.x_panel
+.x_panel.no-print
   .x_title
     %h4 Filter Data
   .x_content
@@ -41,6 +41,9 @@
       - @filter.keys.each do |key|
         = hidden_field_tag "filter[#{key}]", @filter[key]
 
-      = button_tag type="submit", class: "btn btn-info" do
+      = button_tag type="submit", class: "btn btn-primary" do
         %i.fa.fa-file-excel-o
         Export to Excel
+      = link_to "#", class: "btn btn-info", onclick: "window.print();return false;" do
+        %i.fa.fa-print
+        Print

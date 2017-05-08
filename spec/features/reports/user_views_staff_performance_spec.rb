@@ -13,6 +13,7 @@ describe "User views staff performance report", js: true do
     expect(page).to have_css("th", text: "Task Type")
     expect(page).to have_css("th", text: "Total Transactions")
     expect(page).to have_css("th", text: "Top Performer")
+    expect(page).to have_link("Print")
   end
 
   scenario "filtering by part" do
