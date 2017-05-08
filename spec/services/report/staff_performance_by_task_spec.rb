@@ -20,7 +20,8 @@ describe Report::StaffPerformanceByTask do
     end
 
     it "has some columns" do
-      columns = [:staff_member, :online_applications, :paper_applications]
+      columns =
+        [:staff_member, :online_applications, :paper_applications, :total]
       expect(subject.columns).to eq(columns)
     end
   end
