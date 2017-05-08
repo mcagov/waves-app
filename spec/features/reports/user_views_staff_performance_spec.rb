@@ -48,13 +48,16 @@ describe "User views staff performance report", js: true do
   end
 
   scenario "viewing the sub report with an existing filter" do
+    select("Part II", from: "Part of Register")
     find("#filter_date_start").set("21/01/2017")
     click_on("Apply Filter")
 
     within("#results") do
-      click_on("New Registration")
+      click_on("Re-Registration")
     end
 
+    expect(find("#filter_task").value).to eq("re_registration")
+    expect(find("#filter_part").value).to eq("part_2")
     expect(find("#filter_date_start").value).to eq("21/01/2017")
     expect(page)
       .to have_css("h1", text: "Reports: Staff Performance by Task")

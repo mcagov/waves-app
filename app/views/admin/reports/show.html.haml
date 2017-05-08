@@ -29,7 +29,7 @@
                   = hidden_field_tag "filter[#{key}]", @filter[key]
 
                 - result.sub_report_filters.each do |k, v|
-                  = hidden_field_tag "filter[#{k}]", k
+                  = hidden_field_tag "filter[#{k}]", v
                 = submit_tag data_element, class: "looks-like-link"
             - else
               = data_element
