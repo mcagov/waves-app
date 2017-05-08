@@ -19,10 +19,10 @@ describe Report::StaffPerformanceByTask do
         .to eq([:filter_task, :filter_part, :filter_date_range])
     end
 
-    it "has some columns" do
-      columns =
+    it "has some headings" do
+      headings =
         [:staff_member, :online_applications, :paper_applications, :total]
-      expect(subject.columns).to eq(columns)
+      expect(subject.headings).to eq(headings)
     end
   end
 end

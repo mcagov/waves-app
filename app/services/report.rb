@@ -27,7 +27,7 @@ class Report
   def sub_report
   end
 
-  def columns
+  def headings
     []
   end
 

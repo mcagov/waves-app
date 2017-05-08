@@ -7,7 +7,7 @@ class Report::StaffPerformanceByTask < Report
     [:filter_task, :filter_part, :filter_date_range]
   end
 
-  def columns
+  def headings
     [:staff_member, :online_applications, :paper_applications, :total]
   end
 

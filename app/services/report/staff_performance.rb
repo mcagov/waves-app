@@ -11,7 +11,7 @@ class Report::StaffPerformance < Report
     [:filter_part, :filter_date_range]
   end
 
-  def columns
+  def headings
     [:task_type, :total_transactions, :top_performer]
   end
 

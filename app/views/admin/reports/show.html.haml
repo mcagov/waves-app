@@ -16,7 +16,7 @@
 
 %table.table.table-striped#results
   %thead
-    - @report.columns.each do |heading|
+    - @report.headings.each do |heading|
       %th= heading.to_s.titleize
   %tbody
     - @report.results.each do |result|
