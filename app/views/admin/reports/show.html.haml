@@ -34,3 +34,13 @@
             - else
               = data_element
 
+
+.row.no-print#actions
+  .col-md-12
+    = form_tag admin_report_path(params[:id], format: :xls), method: :get do
+      - @filter.keys.each do |key|
+        = hidden_field_tag "filter[#{key}]", @filter[key]
+
+      = button_tag type="submit", class: "btn btn-info" do
+        %i.fa.fa-file-excel-o
+        Export to Excel

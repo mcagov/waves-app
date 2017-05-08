@@ -47,6 +47,13 @@ describe "User views staff performance report", js: true do
     expect(page).to have_text(date_range_result)
   end
 
+  scenario "downloading the xls version" do
+    click_on("Export to Excel")
+    sleep 1
+    expect(page.response_headers["Content-Type"]).to match("application/xls")
+    expect(page.text).to match("Worksheet ss:Name=\"Staff Performance\"")
+  end
+
   scenario "viewing the sub report with an existing filter" do
     select("Part II", from: "Part of Register")
     find("#filter_date_start").set("21/01/2017")

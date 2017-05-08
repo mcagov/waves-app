@@ -2,6 +2,11 @@ class Admin::ReportsController < InternalPagesController
   def show
     @filter = filter_params
     @report = Report.build(params[:id], @filter)
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 
   protected
