@@ -6,6 +6,8 @@ class Report
         Report::StaffPerformance.new(filters)
       when :staff_performance_by_task
         Report::StaffPerformanceByTask.new(filters)
+      when :vessel_registration_status
+        Report::VesselRegistrationStatus.new(filters)
       end
     end
   end
