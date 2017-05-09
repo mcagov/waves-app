@@ -27,5 +27,15 @@ describe Report::VesselRegistrationStatus do
     it "has a date range label" do
       expect(subject.date_range_label).to eq("Expiration Date")
     end
+
+    context "will_paginate-bootstrap" do
+      before { create(:registered_vessel) }
+      let(:report) { subject }
+
+      it "populates the pagination_collection (when the results are loaded)" do
+        report.results
+        expect(report.pagination_collection).to be_present
+      end
+    end
   end
 end

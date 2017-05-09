@@ -1,6 +1,7 @@
 class Admin::ReportsController < InternalPagesController
   def show
     @filter = filter_params
+    @filter[:page] = params[:page] || 1
     @report = Report.build(params[:id], @filter)
 
     respond_to do |format|

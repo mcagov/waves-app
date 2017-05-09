@@ -19,7 +19,8 @@ class Report::VesselRegistrationStatus < Report
   end
 
   def results
-    vessels.map do |vessel|
+    @pagination_collection = vessels
+    @pagination_collection.map do |vessel|
       Result.new(
         [
           vessel.name, Activity.new(vessel.part),
@@ -33,6 +34,7 @@ class Report::VesselRegistrationStatus < Report
     query = Register::Vessel.joins(:current_registration)
     query = filter_by_part(query)
     query = filter_by_registered_until(query)
-    query.includes(:current_registration).order(:name).all
+    query = query.includes(:current_registration).order(:name)
+    paginate(query)
   end
 end

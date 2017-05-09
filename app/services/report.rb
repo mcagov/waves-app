@@ -18,6 +18,13 @@ class Report
     @date_start = parse_date_start
     @date_end = parse_date_end
     @task = filters[:task] || :new_registration
+    @page = filters[:page]
+  end
+
+  attr_accessor :pagination_collection
+
+  def paginate(scoped_query)
+    scoped_query.paginate(page: @page, per_page: 50)
   end
 
   Result = Struct.new(:data_elements, :sub_report_filters)
