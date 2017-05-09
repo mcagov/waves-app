@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe "User views staff performance by task", js: true do
+describe "Manager views staff performance by task", js: true do
   before do
     @submission = create(:completed_submission)
-    login_to_part_3
-    find("a.reports_menu").click
+    login_to_reports
+
     click_on("Staff Performance by Task")
   end
 

@@ -1,0 +1,11 @@
+%ul.nav.side-menu
+  %li
+    %a.reports_menu
+      %i.fa.fa-bar-chart-o
+      Management Reports
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Staff Performance", admin_report_path(:staff_performance)
+      %li= link_to "Staff Performance by Task", admin_report_path(:staff_performance_by_task)
+      %li= link_to "Vessel Registration Status", admin_report_path(:vessel_registration_status)
+

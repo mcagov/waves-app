@@ -12,23 +12,25 @@ class Activity
     @part = part.to_sym
   end
 
-  def to_s
+  def to_s # rubocop:disable Metrics/CyclomaticComplexity
     case @part
     when :part_1 then "Part I"
     when :part_2 then "Part II"
     when :part_3 then "Part III"
     when :part_4 then "Part IV"
     when :finance then "Finance"
+    when :reports then "Management Reports"
     end
   end
 
-  def bs_theme
+  def bs_theme # rubocop:disable Metrics/CyclomaticComplexity
     case @part
     when :part_1 then :success
     when :part_2 then :info
     when :part_3 then :warning
     when :part_4 then :danger
     when :finance then :primary
+    when :reports then :info
     end
   end
 
@@ -39,6 +41,7 @@ class Activity
   def root_path
     case @part
     when :finance then "/finance/batches"
+    when :reports then "/admin/reports"
     else
       "/tasks/my-tasks"
     end

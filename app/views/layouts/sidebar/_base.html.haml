@@ -8,6 +8,8 @@
       .menu_section
         - if current_activity.is?(:finance)
           = render partial: "layouts/sidebar/finance"
+        - elsif current_activity.is?(:reports)
+          = render partial: "layouts/sidebar/reports"
         - else
           = render partial: "layouts/sidebar/registry"
 
