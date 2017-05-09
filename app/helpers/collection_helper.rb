@@ -11,9 +11,9 @@ module CollectionHelper
     WavesUtilities::Nationality.all
   end
 
-  def registration_types_collection
+  def registration_types_collection(part)
     WavesUtilities::RegistrationType
-      .in_part(current_activity.part).map do |registration_type|
+      .in_part(part).map do |registration_type|
       [registration_type.to_s.humanize, registration_type]
     end
   end
