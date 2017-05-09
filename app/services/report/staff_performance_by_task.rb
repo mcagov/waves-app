@@ -40,7 +40,7 @@ class Report::StaffPerformanceByTask < Report
                 .where("claimant_id is not null")
 
     query = filter_by_part(query)
-    query = filter_by_completed_at(query)
+    query = filter_by_received_at(query)
     query.group(:claimant_id)
   end
 

@@ -3,6 +3,7 @@ require "rails_helper"
 describe "User views staff performance report", js: true do
   before do
     @submission = create(:completed_submission)
+    @submission.update_attributes(received_at: "20/01/2017")
     login_to_part_3
     find("a.reports_menu").click
     click_on("Staff Performance")
@@ -36,13 +37,13 @@ describe "User views staff performance report", js: true do
     expect(page).to have_text(date_range_result)
 
     find("#filter_date_start").set("21/01/2017")
-    find("#filter_date_end").set("21/02/2017")
+    find("#filter_date_end").set("22/01/2017")
     click_on("Apply Filter")
 
     expect(page).not_to have_text(date_range_result)
 
-    find("#filter_date_start").set("21/01/2017")
-    find("#filter_date_end").set("21/02/2121")
+    find("#filter_date_start").set("19/01/2017")
+    find("#filter_date_end").set("22/01/2017")
     click_on("Apply Filter")
 
     expect(page).to have_text(date_range_result)

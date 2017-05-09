@@ -47,13 +47,13 @@ class Report
     @part.present? ? scoped_query.in_part(@part) : scoped_query
   end
 
-  def filter_by_completed_at(scoped_query)
+  def filter_by_received_at(scoped_query)
     if @date_start.present?
-      scoped_query = scoped_query.where("completed_at > ?", @date_start)
+      scoped_query = scoped_query.where("received_at > ?", @date_start)
     end
 
     if @date_end.present?
-      scoped_query = scoped_query.where("completed_at < ?", @date_end)
+      scoped_query = scoped_query.where("received_at < ?", @date_end)
     end
 
     scoped_query
