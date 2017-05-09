@@ -26,6 +26,12 @@ module CollectionHelper
     WavesUtilities::Port.all
   end
 
+  def registration_status_collection
+    [:closed, :expired, :frozen, :pending, :registered].map do |status|
+      [status.to_s.humanize, status]
+    end
+  end
+
   def vessel_types_collection(submission)
     WavesUtilities::VesselType.all(
       submission.part,

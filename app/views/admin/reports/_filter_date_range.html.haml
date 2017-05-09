@@ -1,10 +1,13 @@
 .form-group
   .row
-    .col-md-1
-      %label Date Range
     .col-md-2
+      %br
+      %label= @report.date_range_label
+    .col-md-2
+      From:
       = text_field_tag "filter[date_start]", filter[:date_start],
         class: "form-control datepicker"
     .col-md-2
+      To:
       = text_field_tag "filter[date_end]", filter[:date_end],
         class: "form-control datepicker"

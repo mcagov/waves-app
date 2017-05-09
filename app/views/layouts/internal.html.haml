@@ -6,7 +6,8 @@
     %meta{:content => "NOODP", :name => "ROBOTS"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %title= title || "MCA"
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "application", media: :screen
+    = stylesheet_link_tag "print", media: :print
     = csrf_meta_tags
   %body.nav-md
     .container.body

@@ -60,7 +60,7 @@ module Register
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
 
-    delegate :registered_until, to: :current_registration
+    delegate :registered_until, to: :current_registration, allow_nil: true
 
     before_validation :build_reg_no, on: :create
 

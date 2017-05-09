@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= @report.title %>">
+    <Table>
+      <Row>
+        <% @report.headings.each do |heading| %>
+          <Cell>
+            <Data ss:Type="String"><%=  heading.to_s.titleize %></Data>
+          </Cell>
+        <% end %>
+      </Row>
+    <% @report.results.each do |result| %>
+      <Row>
+        <% result.data_elements.each do |data_element| %>
+          <Cell>
+            <Data ss:Type="String"><%= data_element %></Data>
+          </Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

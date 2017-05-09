@@ -11,8 +11,12 @@ class Report::StaffPerformance < Report
     [:filter_part, :filter_date_range]
   end
 
-  def columns
+  def headings
     [:task_type, :total_transactions, :top_performer]
+  end
+
+  def date_range_label
+    "Application Received"
   end
 
   def results
@@ -43,7 +47,7 @@ class Report::StaffPerformance < Report
 
   def submission_ids_for(task_type)
     scoped_query = Submission.where(task: task_type)
-    scoped_query = filter_by_completed_at(scoped_query)
+    scoped_query = filter_by_received_at(scoped_query)
     scoped_query = filter_by_part(scoped_query)
     scoped_query.completed.pluck(:id)
   end

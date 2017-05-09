@@ -18,9 +18,13 @@ describe Report::StaffPerformance do
       expect(subject.filter_fields).to eq([:filter_part, :filter_date_range])
     end
 
-    it "has some columns" do
-      columns = [:task_type, :total_transactions, :top_performer]
-      expect(subject.columns).to eq(columns)
+    it "has some headings" do
+      headings = [:task_type, :total_transactions, :top_performer]
+      expect(subject.headings).to eq(headings)
+    end
+
+    it "has a date range label" do
+      expect(subject.date_range_label).to eq("Application Received")
     end
 
     it "has one result for each task type" do
