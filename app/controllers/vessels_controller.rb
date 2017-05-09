@@ -2,7 +2,6 @@ class VesselsController < InternalPagesController
   def show
     @vessel =
       Decorators::Vessel.new(Register::Vessel
-        .in_part(current_activity.part)
         .includes(preload).find(params[:id]))
   end
 
