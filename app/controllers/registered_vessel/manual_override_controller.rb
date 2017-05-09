@@ -14,7 +14,7 @@ class RegisteredVessel::ManualOverrideController < InternalPagesController
     @submission =
       Builders::AssignedSubmissionBuilder.create(
         :manual_override,
-        current_activity.part,
+        @vessel.part,
         @vessel,
         current_user)
   end
