@@ -30,8 +30,9 @@ class Report::VesselRegistrationStatus < Report
   end
 
   def vessels
-    query = Register::Vessel.includes(:current_registration)
+    query = Register::Vessel.joins(:current_registration)
     query = filter_by_part(query)
-    query.order(:name).all
+    query = filter_by_registered_until(query)
+    query.includes(:current_registration).order(:name).all
   end
 end
