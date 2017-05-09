@@ -49,11 +49,11 @@ class Report
 
   def filter_by_received_at(scoped_query)
     if @date_start.present?
-      scoped_query = scoped_query.where("received_at > ?", @date_start)
+      scoped_query = scoped_query.where("received_at >= ?", @date_start)
     end
 
     if @date_end.present?
-      scoped_query = scoped_query.where("received_at < ?", @date_end)
+      scoped_query = scoped_query.where("received_at <= ?", @date_end)
     end
 
     scoped_query
@@ -62,12 +62,12 @@ class Report
   def filter_by_registered_until(scoped_query)
     if @date_start.present?
       scoped_query =
-        scoped_query.where("registrations.registered_until > ?", @date_start)
+        scoped_query.where("registrations.registered_until >= ?", @date_start)
     end
 
     if @date_end.present?
       scoped_query =
-        scoped_query.where("registrations.registered_until < ?", @date_end)
+        scoped_query.where("registrations.registered_until <= ?", @date_end)
     end
 
     scoped_query

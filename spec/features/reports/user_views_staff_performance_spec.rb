@@ -19,17 +19,17 @@ describe "User views staff performance report", js: true do
 
   scenario "filtering by part" do
     part_three_result = "#{@submission.claimant} (1)"
-    expect(page).to have_text(part_three_result)
+    within("#results") { expect(page).to have_text(part_three_result) }
 
     select("Part II", from: "Part of Register")
     click_on("Apply Filter")
 
-    expect(page).not_to have_text(part_three_result)
+    within("#results") { expect(page).not_to have_text(part_three_result) }
 
     select("Part III", from: "Part of Register")
     click_on("Apply Filter")
 
-    expect(page).to have_text(part_three_result)
+    within("#results") { expect(page).to have_text(part_three_result) }
   end
 
   scenario "filtering by date range" do
@@ -42,7 +42,7 @@ describe "User views staff performance report", js: true do
 
     expect(page).not_to have_text(date_range_result)
 
-    find("#filter_date_start").set("19/01/2017")
+    find("#filter_date_start").set("20/01/2017")
     find("#filter_date_end").set("22/01/2017")
     click_on("Apply Filter")
 
