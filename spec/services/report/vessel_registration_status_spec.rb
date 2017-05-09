@@ -18,7 +18,7 @@ describe Report::VesselRegistrationStatus do
     it "has some headings" do
       headings =
         [
-          :vessel_name, :official_no, :radio_call_sign,
+          :vessel_name, :part, :official_no, :radio_call_sign,
           :expiration_date, :registration_status
         ]
       expect(subject.headings).to eq(headings)

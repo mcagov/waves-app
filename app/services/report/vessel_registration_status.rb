@@ -9,7 +9,7 @@ class Report::VesselRegistrationStatus < Report
 
   def headings
     [
-      :vessel_name, :official_no, :radio_call_sign,
+      :vessel_name, :part, :official_no, :radio_call_sign,
       :expiration_date, :registration_status
     ]
   end
@@ -22,13 +22,16 @@ class Report::VesselRegistrationStatus < Report
     vessels.map do |vessel|
       Result.new(
         [
-          vessel.name, vessel.reg_no, vessel.radio_call_sign,
+          vessel.name, Activity.new(vessel.part),
+          vessel.reg_no, vessel.radio_call_sign,
           vessel.registered_until, vessel.registration_status
         ])
     end
   end
 
   def vessels
-    Register::Vessel.includes(:current_registration).all
+    query = Register::Vessel.includes(:current_registration)
+    query = filter_by_part(query)
+    query.order(:name).all
   end
 end
