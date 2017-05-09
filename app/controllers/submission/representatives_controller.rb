@@ -16,11 +16,6 @@ class Submission::RepresentativesController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def submission_representative_params
     params.require(:submission).permit(
       representative: [Customer.attribute_names])

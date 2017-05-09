@@ -32,11 +32,4 @@ class Submission::StatesController < InternalPagesController
     flash[:notice] = "You have successfully claimed this application"
     redirect_to tasks_my_tasks_path
   end
-
-  protected
-
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part).find(params[:submission_id])
-  end
 end

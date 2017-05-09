@@ -36,4 +36,9 @@ class InternalPagesController < ApplicationController
   def load_vessel
     @vessel = Register::Vessel.find(params[:vessel_id])
   end
+
+  def load_submission
+    @submission =
+      Submission.includes(:declarations).find(params[:submission_id])
+  end
 end

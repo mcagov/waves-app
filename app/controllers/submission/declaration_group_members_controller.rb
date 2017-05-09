@@ -24,12 +24,6 @@ class Submission::DeclarationGroupMembersController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part)
-                .includes(:declarations).find(params[:submission_id])
-  end
-
   def declaration_group_member_params
     params.require(:declaration_group_member)
           .permit(:declaration_id, :declaration_group_id)

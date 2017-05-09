@@ -16,12 +16,6 @@ class Submission::CorrespondentsController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part)
-                .includes(:declarations).find(params[:submission_id])
-  end
-
   def submission_params
     params.require(:submission).permit(:correspondent_id)
   end

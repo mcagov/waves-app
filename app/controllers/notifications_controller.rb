@@ -24,10 +24,6 @@ class NotificationsController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission = Submission.find(params[:id])
-  end
-
   def notification_params
     params.require(:notification).permit(:subject, :body, :actionable_at)
   end
