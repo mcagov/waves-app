@@ -13,12 +13,6 @@ class RegisteredVessel::NotesController < InternalPagesController
 
   private
 
-  def load_vessel
-    @vessel =
-      Register::Vessel
-      .in_part(current_activity.part).find(params[:vessel_id])
-  end
-
   def note_params
     params.require(:note).permit(:content, assets_attributes: [:file])
   end

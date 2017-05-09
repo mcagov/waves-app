@@ -10,12 +10,6 @@ class RegisteredVessel::ManualOverrideController < InternalPagesController
 
   private
 
-  def load_vessel
-    @vessel =
-      Register::Vessel
-      .in_part(current_activity.part).find(params[:vessel_id])
-  end
-
   def create_manual_override_submission
     @submission =
       Builders::AssignedSubmissionBuilder.create(

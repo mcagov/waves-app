@@ -12,12 +12,6 @@ class RegisteredVessel::TerminationController < InternalPagesController
 
   private
 
-  def load_vessel
-    @vessel =
-      Register::Vessel
-      .in_part(current_activity.part).find(params[:vessel_id])
-  end
-
   def build_completed_submission
     @submission =
       Builders::CompletedSubmissionBuilder.create(

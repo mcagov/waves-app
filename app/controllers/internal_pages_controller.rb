@@ -32,4 +32,8 @@ class InternalPagesController < ApplicationController
       actioned_by: current_user,
       part: current_activity.part)
   end
+
+  def load_vessel
+    @vessel = Register::Vessel.find(params[:vessel_id])
+  end
 end
