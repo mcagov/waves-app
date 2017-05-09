@@ -23,6 +23,10 @@ describe Report::StaffPerformance do
       expect(subject.headings).to eq(headings)
     end
 
+    it "has a date range label" do
+      expect(subject.date_range_label).to eq("Application Received")
+    end
+
     it "has one result for each task type" do
       expect(subject.results.length).to eq(Task.all_task_types.length)
     end

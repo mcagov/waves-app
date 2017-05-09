@@ -14,6 +14,10 @@ class Report::VesselRegistrationStatus < Report
     ]
   end
 
+  def date_range_label
+    "Expiration Date"
+  end
+
   def results
     vessels.map do |vessel|
       Result.new(

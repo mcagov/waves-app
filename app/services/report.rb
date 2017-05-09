@@ -37,6 +37,10 @@ class Report
     []
   end
 
+  def date_range_label
+    "Date Range"
+  end
+
   protected
 
   def filter_by_part(scoped_query)

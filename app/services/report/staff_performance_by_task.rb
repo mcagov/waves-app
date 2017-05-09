@@ -11,6 +11,10 @@ class Report::StaffPerformanceByTask < Report
     [:staff_member, :online_applications, :paper_applications, :total]
   end
 
+  def date_range_label
+    "Application Received"
+  end
+
   def results
     submissions.map do |submission|
       Result.new(

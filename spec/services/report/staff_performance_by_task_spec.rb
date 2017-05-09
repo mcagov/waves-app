@@ -19,6 +19,10 @@ describe Report::StaffPerformanceByTask do
         .to eq([:filter_task, :filter_part, :filter_date_range])
     end
 
+    it "has a date range label" do
+      expect(subject.date_range_label).to eq("Application Received")
+    end
+
     it "has some headings" do
       headings =
         [:staff_member, :online_applications, :paper_applications, :total]

@@ -15,6 +15,10 @@ class Report::StaffPerformance < Report
     [:task_type, :total_transactions, :top_performer]
   end
 
+  def date_range_label
+    "Application Received"
+  end
+
   def results
     Task.all_task_types.map do |task_type|
       submission_ids = submission_ids_for(task_type)
