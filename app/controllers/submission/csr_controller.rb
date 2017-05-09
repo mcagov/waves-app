@@ -16,11 +16,6 @@ class Submission::CsrController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def csr_form_params
     params.require(:csr_form).permit(CsrForm.attribute_names)
   end

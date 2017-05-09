@@ -25,12 +25,6 @@ class Submission::BeneficialOwnersController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission
-      .in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def beneficial_owner_params
     params.require(:beneficial_owner).permit(Customer.attribute_names)
   end

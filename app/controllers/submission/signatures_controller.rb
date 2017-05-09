@@ -17,10 +17,6 @@ class Submission::SignaturesController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission = Submission.find(params[:submission_id])
-  end
-
   def submission_params
     params.require(:submission).permit(:part, :task, :vessel_reg_no)
   end

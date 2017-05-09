@@ -27,3 +27,8 @@ def login_to_finance(user = create(:user))
   login(user, :finance)
   visit "/finance/batches"
 end
+
+def login_to_reports(user = create(:user))
+  login(user, :reports)
+  visit "/admin/reports/staff_performance"
+end

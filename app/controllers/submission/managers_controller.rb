@@ -29,12 +29,6 @@ class Submission::ManagersController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission
-      .in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def manager_params
     params.require(:manager).permit(
       Customer.attribute_names,

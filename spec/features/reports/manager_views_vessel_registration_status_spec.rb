@@ -1,13 +1,12 @@
 require "rails_helper"
 
-describe "User views vessel registration status", js: true do
+describe "Manager views vessel registration status", js: true do
   before do
     @vessel = create(:registered_vessel)
     @vessel.current_registration.update_attributes(
       registered_until: "20/01/2017")
+    login_to_reports
 
-    login_to_part_3
-    find("a.reports_menu").click
     click_on("Vessel Registration Status")
   end
 

@@ -34,12 +34,6 @@ class Submission::DocumentsController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission
-      .in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def document_params
     params.require(:document).permit(
       :entity_type, :issuing_authority, :expires_at,

@@ -13,12 +13,6 @@ class RegisteredVessel::CorrespondencesController < InternalPagesController
 
   private
 
-  def load_vessel
-    @vessel =
-      Register::Vessel
-      .in_part(current_activity.part).find(params[:vessel_id])
-  end
-
   def correspondence_params
     params.require(:correspondence)
           .permit(:subject, :format, :noted_at, :content)

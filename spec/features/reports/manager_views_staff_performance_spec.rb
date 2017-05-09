@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe "User views staff performance report", js: true do
+describe "Manager views staff performance report", js: true do
   before do
     @submission = create(:completed_submission)
     @submission.update_attributes(received_at: "20/01/2017")
-    login_to_part_3
-    find("a.reports_menu").click
+    login_to_reports
+
     click_on("Staff Performance")
   end
 

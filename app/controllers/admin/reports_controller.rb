@@ -10,6 +10,10 @@ class Admin::ReportsController < InternalPagesController
     end
   end
 
+  def index
+    redirect_to admin_report_path(:staff_performance)
+  end
+
   protected
 
   def filter_params

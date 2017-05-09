@@ -25,12 +25,6 @@ class Submission::CharterersController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission
-      .in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def charterer_params
     params.require(:charterer).permit(
       :reference_number, :start_date, :end_date,

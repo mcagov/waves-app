@@ -25,12 +25,6 @@ class Submission::DirectedBysController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission
-      .in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def directed_by_params
     params.require(:directed_by).permit(Customer.attribute_names)
   end

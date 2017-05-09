@@ -6,12 +6,4 @@ class Submission::ShareholdingsController < InternalPagesController
       format.js
     end
   end
-
-  protected
-
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part)
-                .includes(:declarations).find(params[:submission_id])
-  end
 end

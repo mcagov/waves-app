@@ -10,12 +10,4 @@ class RegisteredVessel::ColdStorageController < InternalPagesController
 
     redirect_to vessel_path(@vessel)
   end
-
-  private
-
-  def load_vessel
-    @vessel =
-      Register::Vessel
-      .in_part(current_activity.part).find(params[:vessel_id])
-  end
 end

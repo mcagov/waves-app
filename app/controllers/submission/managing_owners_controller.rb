@@ -12,12 +12,6 @@ class Submission::ManagingOwnersController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part)
-                .includes(:declarations).find(params[:submission_id])
-  end
-
   def submission_params
     params.require(:submission).permit(:managing_owner_id)
   end

@@ -13,11 +13,6 @@ class Submission::CorrespondencesController < InternalPagesController
 
   private
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def correspondence_params
     params.require(:correspondence)
           .permit(:subject, :format, :noted_at, :content)

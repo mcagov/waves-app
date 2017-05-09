@@ -16,11 +16,6 @@ class Submission::AgentsController < InternalPagesController
 
   protected
 
-  def load_submission
-    @submission =
-      Submission.in_part(current_activity.part).find(params[:submission_id])
-  end
-
   def submission_agent_params
     params.require(:submission).permit(agent: [Customer.attribute_names])
   end

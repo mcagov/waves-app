@@ -27,10 +27,6 @@ class Submission::CarvingAndMarkingController < InternalPagesController
     params.require(:carving_and_marking).permit(:delivery_method, :template)
   end
 
-  def load_submission
-    @submission = Submission.find(params[:submission_id])
-  end
-
   def render_update_js
     respond_to do |format|
       @modal_id = params[:modal_id]
