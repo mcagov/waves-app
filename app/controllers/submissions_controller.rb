@@ -47,7 +47,7 @@ class SubmissionsController < InternalPagesController
 
   def load_submission
     @submission =
-      Submission.in_part(current_activity.part).includes(
+      Submission.includes(
         [
           { payments: [:remittance] }, { declarations: [:notification] },
           { declaration_groups: [:declarations] },
