@@ -28,6 +28,7 @@ class Report
   end
 
   Result = Struct.new(:data_elements, :sub_report_filters)
+  RenderAsRegistrationStatus = Struct.new(:registration_status)
 
   def filter_fields
     []

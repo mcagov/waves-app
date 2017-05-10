@@ -25,7 +25,8 @@ class Report::VesselRegistrationStatus < Report
         [
           vessel.name, Activity.new(vessel.part),
           vessel.reg_no, vessel.radio_call_sign,
-          vessel.registered_until, vessel.registration_status
+          vessel.registered_until,
+          RenderAsRegistrationStatus.new(vessel.registration_status)
         ])
     end
   end
