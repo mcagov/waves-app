@@ -8,11 +8,9 @@
       = form_tag admin_report_path(params[:id]), method: :get do
         - @report.filter_fields.each do |filter_field|
           = render partial: filter_field.to_s, locals: { filter: @filter }
-
         %hr
         .row
-          .col-md-1
-          .col-md-2
+          .col-md-2.col-md-offset-2
             = submit_tag "Apply Filter", class: "btn btn-success"
 
   %table.table.table-striped#results

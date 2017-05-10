@@ -63,6 +63,10 @@ class Activity
     templates.sort
   end
 
+  def registration_officer?
+    @part.to_s.match(/^part_/)
+  end
+
   private
 
   def default_printable_templates
