@@ -15,7 +15,7 @@
       .x_title
         %h2 Vessel Details
         .pull-right
-          %h4= render partial: "registration_status", locals: { registration_status: @vessel.registration_status }
+          %h4= render partial: "/shared/registration_status", locals: { registration_status: @vessel.registration_status }
         .clearfix
       .x_content
         .row{style: 'padding-bottom: 15px;'}

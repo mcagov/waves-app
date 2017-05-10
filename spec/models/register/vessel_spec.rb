@@ -53,7 +53,7 @@ describe Register::Vessel do
     it { vessel.notification_list }
   end
 
-  context "#registration_status" do
+  context ".registration_status" do
     let!(:vessel) { create(:unregistered_vessel) }
     subject { vessel.registration_status }
 

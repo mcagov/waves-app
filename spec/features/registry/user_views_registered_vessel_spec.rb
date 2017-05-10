@@ -55,18 +55,18 @@ describe "User views a registered vessel", type: :feature, js: true do
 
   scenario "viewing the registration status" do
     expect(page)
-      .to have_css("#registration_status", text: "Registered")
+      .to have_css(".registration_status", text: "Registered")
 
     registration = Registration.last
 
     registration.update_attributes(registered_until: 1.day.ago)
     visit vessel_path(registration.vessel)
     expect(page)
-      .to have_css("#registration_status", text: "Registration Expired")
+      .to have_css(".registration_status", text: "Registration Expired")
 
     registration.update_attributes(closed_at: 1.day.ago)
     visit vessel_path(registration.vessel)
     expect(page)
-      .to have_css("#registration_status", text: "Registration Closed")
+      .to have_css(".registration_status", text: "Registration Closed")
   end
 end

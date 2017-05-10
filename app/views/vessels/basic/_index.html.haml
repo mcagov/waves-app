@@ -22,4 +22,4 @@
         %td= vessel.radio_call_sign
         %td= vessel.mmsi_number
         %td
-          .pull-right= render partial: "/vessels/registration_status", locals: { registration_status: vessel.registration_status }
+          .pull-right= render partial: "/shared/registration_status", locals: { registration_status: vessel.registration_status }
