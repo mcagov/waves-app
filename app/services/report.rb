@@ -1,14 +1,8 @@
 class Report
   class << self
     def build(template, filters = {})
-      case template.to_sym
-      when :staff_performance
-        Report::StaffPerformance.new(filters)
-      when :staff_performance_by_task
-        Report::StaffPerformanceByTask.new(filters)
-      when :vessel_registration_status
-        Report::VesselRegistrationStatus.new(filters)
-      end
+      klass = "Report::#{template.camelize}"
+      klass.constantize.new(filters)
     end
   end
 
