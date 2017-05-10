@@ -1,14 +1,8 @@
 class Report
   class << self
     def build(template, filters = {})
-      case template.to_sym
-      when :staff_performance
-        Report::StaffPerformance.new(filters)
-      when :staff_performance_by_task
-        Report::StaffPerformanceByTask.new(filters)
-      when :vessel_registration_status
-        Report::VesselRegistrationStatus.new(filters)
-      end
+      klass = "Report::#{template.camelize}"
+      klass.constantize.new(filters)
     end
   end
 
@@ -77,6 +71,18 @@ class Report
     if @date_end.present?
       scoped_query =
         scoped_query.where("registrations.registered_until <= ?", @date_end)
+    end
+
+    scoped_query
+  end
+
+  def filter_by_note_expires_at(scoped_query)
+    if @date_start.present?
+      scoped_query = scoped_query.where("notes.expires_at >= ?", @date_start)
+    end
+
+    if @date_end.present?
+      scoped_query = scoped_query.where("notes.expires_at <= ?", @date_end)
     end
 
     scoped_query
