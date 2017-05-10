@@ -46,7 +46,7 @@
                         =  EcNo.for_vessel(@submission.registered_vessel)
                 %tr
                   %td.soft-label Registration Status
-                  %td= render partial: "/vessels/registration_status", locals: { registration_status: submission.registration_status }
+                  %td= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }
                 %tr
                   %td.soft-label Vessel Name:
                   %td.vessel-name

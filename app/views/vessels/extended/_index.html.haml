@@ -18,4 +18,4 @@
         %td= WavesUtilities::Port.new(vessel.port_code).name if vessel.port_code
         %td= vessel.port_no
         %td
-          .pull-right= render partial: "/vessels/registration_status", locals: { registration_status: vessel.registration_status }
+          .pull-right= render partial: "/shared/registration_status", locals: { registration_status: vessel.registration_status }

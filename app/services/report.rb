@@ -28,6 +28,8 @@ class Report
   end
 
   Result = Struct.new(:data_elements, :sub_report_filters)
+  RenderAsRegistrationStatus = Struct.new(:registration_status)
+  RenderAsLinkToVessel = Struct.new(:vessel, :attribute)
 
   def filter_fields
     []

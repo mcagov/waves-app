@@ -17,6 +17,8 @@ describe "Manager views vessel registration status", js: true do
     expect(page).to have_css("th", text: "Radio Call Sign")
     expect(page).to have_css("th", text: "Expiration Date")
     expect(page).to have_css("th", text: "Status")
+    expect(page)
+      .to have_css(".registration_status", text: "Registration Expired")
   end
 
   scenario "filtering by date range" do
@@ -34,5 +36,10 @@ describe "Manager views vessel registration status", js: true do
     click_on("Apply Filter")
 
     within("#results") { expect(page).to have_text(date_range_result) }
+  end
+
+  scenario "linking to a vessel page" do
+    within("#results") { click_on(@vessel.name) }
+    expect(page).to have_current_path(vessel_path(@vessel))
   end
 end
