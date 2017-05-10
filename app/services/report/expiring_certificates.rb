@@ -34,6 +34,7 @@ class Report::ExpiringCertificates < Report
   def certificates
     query = VesselCertificate.joins(:vessel)
     query = filter_by_part(query)
+    query = filter_by_note_expires_at(query)
     paginate(query.all)
   end
 

@@ -76,6 +76,18 @@ class Report
     scoped_query
   end
 
+  def filter_by_note_expires_at(scoped_query)
+    if @date_start.present?
+      scoped_query = scoped_query.where("notes.expires_at >= ?", @date_start)
+    end
+
+    if @date_end.present?
+      scoped_query = scoped_query.where("notes.expires_at <= ?", @date_end)
+    end
+
+    scoped_query
+  end
+
   private
 
   def parse_date_start
