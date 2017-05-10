@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504093548) do
+ActiveRecord::Schema.define(version: 20170510103746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,21 +185,6 @@ ActiveRecord::Schema.define(version: 20170504093548) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  create_table "documentation_pages", force: :cascade do |t|
-    t.string   "title"
-    t.string   "permalink"
-    t.text     "content"
-    t.text     "compiled_content"
-    t.integer  "parent_id"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "documentation_screenshots", force: :cascade do |t|
-    t.string "alt_text"
-  end
-
   create_table "engines", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "parent_id"
     t.string   "parent_type"
@@ -288,19 +273,6 @@ ActiveRecord::Schema.define(version: 20170504093548) do
     t.index ["name"], name: "index_name_approvals_on_name", using: :btree
     t.index ["part"], name: "index_name_approvals_on_part", using: :btree
     t.index ["port_code"], name: "index_name_approvals_on_port_code", using: :btree
-  end
-
-  create_table "nifty_attachments", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.string   "parent_type"
-    t.string   "token"
-    t.string   "digest"
-    t.string   "role"
-    t.string   "file_name"
-    t.string   "file_type"
-    t.binary   "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "notes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
