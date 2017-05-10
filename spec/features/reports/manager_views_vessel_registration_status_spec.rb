@@ -38,7 +38,7 @@ describe "Manager views vessel registration status", js: true do
     within("#results") { expect(page).to have_text(date_range_result) }
   end
 
-  xscenario "linking to a vessel page" do
+  scenario "linking to a vessel page" do
     within("#results") { click_on(@vessel.name) }
     expect(page).to have_current_path(vessel_path(@vessel))
   end

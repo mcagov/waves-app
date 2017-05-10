@@ -25,5 +25,17 @@ describe ReportsHelper, type: :helper do
 
       it { subject }
     end
+
+    context "when the data_element is a RenderAsLinkToVessel" do
+      let(:vessel) { create(:registered_vessel) }
+
+      let(:data_element) do
+        Report::RenderAsLinkToVessel.new(vessel, :name)
+      end
+
+      it do
+        expect(subject).to eq(link_to(vessel.name, vessel_path(vessel.id)))
+      end
+    end
   end
 end
