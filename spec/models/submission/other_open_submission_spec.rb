@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Submission::OtherOpenTask do
+describe Submission::OtherOpenSubmission do
   context ".for(submission" do
     let!(:registered_vessel) { create(:registered_vessel) }
 

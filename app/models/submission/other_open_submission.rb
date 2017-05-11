@@ -1,4 +1,4 @@
-class Submission::OtherOpenTask
+class Submission::OtherOpenSubmission
   class << self
     def for(submission)
       return [] unless submission.registered_vessel_id.present?
