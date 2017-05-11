@@ -83,4 +83,8 @@ module SubmissionHelper
 
     list.sort { |a, b| a[0] <=> b[0] }
   end
+
+  def claimed_by(submission)
+    submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
+  end
 end

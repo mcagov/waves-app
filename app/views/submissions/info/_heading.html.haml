@@ -7,21 +7,32 @@
         for
         #{ @submission.vessel_name }. ID:
         %span.ref-no= submission.ref_no || "Not yet generated"
+    .row
+      .col-md-3
+        %h5.official-no
+          Official No:
+          - if submission.vessel_reg_no.present?
+            = link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
+          - elsif Policies::Workflow.generate_official_no?(submission)
+            - unless @readonly
+              = render partial: "submissions/actions/generate_official_no"
+      .col-md-3
+        %h5.ec_no
+          EC No:
+          - if @submission.registered_vessel
+            = EcNo.for_vessel(@submission.registered_vessel)
+
   .col-md-3.pull-right
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
-  .col-md-3
-    %h5.official-no
-      Official No:
-      - if submission.vessel_reg_no.present?
-        = link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
-      - elsif Policies::Workflow.generate_official_no?(submission)
-        - unless @readonly
-          = render partial: "submissions/actions/generate_official_no"
-  .col-md-3
-    %h5.ec_no
-      EC No:
-      - if @submission.registered_vessel
-        = EcNo.for_vessel(@submission.registered_vessel)
+
+- if other_open_submissions = Submission::OtherOpenSubmission.for(@submission)
+  #other-open-tasks.panel.panel-warning
+    .panel-heading
+      .panel-title
+        Other Open Tasks:
+        - other_open_submissions.map do |other_open_submission|
+          %strong= link_to other_open_submission.job_type, submission_path(other_open_submission)
+          (#{claimed_by(other_open_submission)}).
