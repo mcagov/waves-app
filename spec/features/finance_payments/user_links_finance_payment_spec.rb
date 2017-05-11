@@ -29,13 +29,14 @@ describe "User links finance_payment", type: :feature, js: true do
 
   scenario "to the prompted application" do
     expect(page)
-      .to have_css("h1", text: "New Registration ID: Not yet generated")
+      .to have_css("h1", text: /New Registration for .* ID: Not yet generated/)
 
     within("td.official_no") { expect(page).not_to have_text("Change") }
 
     within("#actions") { click_on("Link to Application") }
 
-    expect(page).to have_css("h1", text: "Change of Ownership ID: ABC123")
+    expect(page)
+      .to have_css("h1", text: /Change of Ownership for .* ID: ABC123/)
   end
 
   scenario "to another application" do
@@ -47,7 +48,7 @@ describe "User links finance_payment", type: :feature, js: true do
     end
 
     expect(page)
-      .to have_css("h1", text: "Change of Vessel details ID: FOOBAR")
+      .to have_css("h1", text: /Change of Vessel details .* ID: FOOBAR/)
   end
 
   scenario "unlinking the application" do

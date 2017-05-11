@@ -4,7 +4,7 @@ describe "User edits submission signature" do
   before do
     create(:registered_vessel, reg_no: "SSR200001")
     visit_assigned_submission
-    click_on("New Registration ID: ")
+    click_on("New Registration")
   end
 
   scenario "toggling the task type and checking registry_info" do
@@ -13,7 +13,7 @@ describe "User edits submission signature" do
     click_on("Save")
 
     expect(Submission.last.registry_info["vessel_info"]).to be_present
-    click_on("Change of Vessel details ID")
+    click_on("Change of Vessel details")
 
     select("New Registration", from: "Application Type")
     fill_in("Official No.", with: "SSR200001")

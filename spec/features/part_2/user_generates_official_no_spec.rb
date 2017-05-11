@@ -4,8 +4,8 @@ describe "User generates an official no", js: true do
   before do
     visit_name_approved_part_2_submission
 
-    within("#summary .official-no") do
-      click_on("Generate Official No.")
+    within("#heading .official-no") do
+      click_on("Generate")
     end
   end
 
@@ -14,7 +14,7 @@ describe "User generates an official no", js: true do
       click_on("Continue")
     end
 
-    within("#summary") do
+    within("#heading") do
       vessel_reg_no = Register::Vessel.last.reg_no
       expect(page).to have_css(".official-no", text: vessel_reg_no)
       expect(page).to have_css(".ec-no", text: "GBR000#{vessel_reg_no}")
@@ -27,7 +27,7 @@ describe "User generates an official no", js: true do
       click_on("Continue")
     end
 
-    within("#summary") do
+    within("#heading") do
       expect(page).to have_css(".official-no", text: "VESSEL_REG_NO")
       expect(page).to have_css(".ec-no", text: "VESSEL_REG_NO")
     end

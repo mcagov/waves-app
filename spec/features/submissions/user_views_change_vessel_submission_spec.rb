@@ -11,7 +11,7 @@ feature "User views change of details submission", type: :feature, js: true do
 
   scenario "rendering vessel, owners and agent tabs" do
     within("h1") do
-      expect(page).to have_content("Change of Vessel details ID: ")
+      expect(page).to have_content(/Change of Vessel details .*ID:/)
     end
 
     click_link("Vessel Info")

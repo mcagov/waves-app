@@ -28,6 +28,8 @@ class Submission < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
   scope :active, -> { where.not(state: [:completed]) }
+  scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
+
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
