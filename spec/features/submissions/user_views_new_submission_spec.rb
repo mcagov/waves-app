@@ -7,7 +7,7 @@ feature "User views new submission", type: :feature, js: true do
 
   scenario "in general" do
     within("h1") do
-      expect(page).to have_content("New Registration ID: ")
+      expect(page).to have_content(/New Registration for .* ID:/)
     end
 
     expect(page).to have_css(".active-register", text: "Active: Part III")

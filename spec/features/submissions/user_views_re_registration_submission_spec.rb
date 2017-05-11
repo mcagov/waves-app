@@ -10,7 +10,7 @@ feature "User views re_registration submission", type: :feature, js: true do
 
   scenario "in general" do
     within("h1") do
-      expect(page).to have_content("Re-Registration ID: ")
+      expect(page).to have_content(/Re-Registration .* ID:/)
     end
 
     within(".submission-vessel") do

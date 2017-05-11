@@ -1,13 +1,27 @@
 - submission = Decorators::Submission.new(submission)
 .row
   .col-md-9
-    %h1{style: "margin-top: 0px !important;"}
+    %h1{style: "margin-top: 0px !important; margin-bottom: 0px !important;"}
       = link_to submission_signature_path(submission) do
         = submission.job_type
-        ID:
-        = submission.ref_no || "Not yet generated"
+        for
+        #{ @submission.vessel_name }. ID:
+        %span.ref-no= submission.ref_no || "Not yet generated"
   .col-md-3.pull-right
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
+  .col-md-3
+    %h5.official-no
+      Official No:
+      - if submission.vessel_reg_no.present?
+        = link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
+      - elsif Policies::Workflow.generate_official_no?(submission)
+        - unless @readonly
+          = render partial: "submissions/actions/generate_official_no"
+  .col-md-3
+    %h5.ec_no
+      EC No:
+      - if @submission.registered_vessel
+        = EcNo.for_vessel(@submission.registered_vessel)
