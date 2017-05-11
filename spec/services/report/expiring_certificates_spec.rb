@@ -10,7 +10,7 @@ describe Report::ExpiringCertificates do
 
     it "has some filter_fields" do
       expect(subject.filter_fields)
-        .to eq([:filter_part, :filter_date_range])
+        .to eq([:filter_document_type, :filter_part, :filter_date_range])
     end
 
     it "has some headings" do

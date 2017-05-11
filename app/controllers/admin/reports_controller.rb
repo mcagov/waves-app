@@ -19,6 +19,7 @@ class Admin::ReportsController < InternalPagesController
   def filter_params
     return {} unless params[:filter]
     params.require(:filter).permit(
-      :part, :date_start, :date_end, :task, :registration_status)
+      :part, :date_start, :date_end,
+      :task, :registration_status, :document_type)
   end
 end

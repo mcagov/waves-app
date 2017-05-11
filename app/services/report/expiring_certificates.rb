@@ -4,7 +4,7 @@ class Report::ExpiringCertificates < Report
   end
 
   def filter_fields
-    [:filter_part, :filter_date_range]
+    [:filter_document_type, :filter_part, :filter_date_range]
   end
 
   def headings
@@ -35,6 +35,7 @@ class Report::ExpiringCertificates < Report
     query = VesselCertificate.joins(:vessel)
     query = filter_by_part(query)
     query = filter_by_note_expires_at(query)
+    query = filter_by_document_type(query)
     paginate(query.all)
   end
 
