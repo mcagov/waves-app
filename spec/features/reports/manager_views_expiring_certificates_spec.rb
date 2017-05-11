@@ -3,7 +3,9 @@ require "rails_helper"
 describe "Manager views expiring certificates", js: true do
   before do
     @vessel = create(:registered_vessel, part: :part_2)
-    @document = create(:document, noteable: @vessel, expires_at: "20/01/2017")
+    @document = create(:document, entity_type: :certificate_of_survey,
+                                  noteable: @vessel,
+                                  expires_at: "20/01/2017")
     login_to_reports
 
     click_on("Expiring Certificates")
@@ -46,6 +48,21 @@ describe "Manager views expiring certificates", js: true do
     click_on("Apply Filter")
 
     expect(page).to have_text(date_range_result)
+  end
+
+  scenario "filtering by document type" do
+    document_type_result = @vessel.name
+    expect(page).to have_text(document_type_result)
+
+    find("#filter_document_type").set(:bill_of_sale)
+    click_on("Apply Filter")
+
+    expect(page).not_to have_text(document_type_result)
+
+    find("#filter_document_type").set("certificate_of_survey")
+    click_on("Apply Filter")
+
+    expect(page).to have_text(document_type_result)
   end
 
   scenario "linking to a vessel page" do

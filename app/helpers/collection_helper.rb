@@ -42,8 +42,8 @@ module CollectionHelper
     WavesUtilities::EligibilityStatus.all
   end
 
-  def document_types_collection
-    WavesUtilities::DocumentType.all(current_activity.part)
+  def document_types_collection(part = nil)
+    WavesUtilities::DocumentType.all(part)
   end
 
   def propulsion_system_collection

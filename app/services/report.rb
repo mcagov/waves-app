@@ -13,6 +13,7 @@ class Report
     @date_end = parse_date_end
     @task = filters[:task] || :new_registration
     @page = filters[:page]
+    @document_type = filters[:document_type]
   end
 
   attr_accessor :pagination_collection
@@ -86,6 +87,14 @@ class Report
     end
 
     scoped_query
+  end
+
+  def filter_by_document_type(scoped_query)
+    if @document_type.present?
+      scoped_query.where("notes.entity_type = ?", @document_type)
+    else
+      scoped_query
+    end
   end
 
   private
