@@ -1,11 +1,11 @@
 - submission = Decorators::Submission.new(submission)
-.row
-  .col-md-9
+#heading.row
+  .col-md-10
     %h1{style: "margin-top: 0px !important; margin-bottom: 0px !important;"}
       = link_to submission_signature_path(submission) do
         = submission.job_type
         for
-        #{ @submission.vessel_name }. ID:
+        %span.vessel-name #{ submission.vessel_name }. ID:
         %span.ref-no= submission.ref_no || "Not yet generated"
     .row
       .col-md-3
@@ -17,18 +17,20 @@
             - unless @readonly
               = render partial: "submissions/actions/generate_official_no"
       .col-md-3
-        %h5.ec_no
+        %h5.ec-no
           EC No:
-          - if @submission.registered_vessel
-            = EcNo.for_vessel(@submission.registered_vessel)
+          - if submission.registered_vessel
+            = EcNo.for_vessel(submission.registered_vessel)
 
-  .col-md-3.pull-right
+  .col-md-2
+    %h2.pull-right= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }
+
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
 
-- if other_open_submissions = Submission::OtherOpenSubmission.for(@submission)
+- if other_open_submissions = Submission::OtherOpenSubmission.for(submission)
   #other-open-tasks.panel.panel-warning
     .panel-heading
       .panel-title

@@ -1,81 +1,68 @@
 - submission = Decorators::Submission.new(submission)
 #summary.row
-  .col-md-12
+  .col-md-4
     .x_panel
+      %h2.x_title Application Information
       .x_content
-        .row
-          .col-md-4
-            %table.table
-              %tbody
-                %tr
-                  %td.soft-label.no-top-border Source:
-                  %td.no-top-border
-                    %strong= submission.source_description
-                %tr
-                  %td.soft-label Date Received:
-                  %td
-                    %strong= submission.received_at
-                %tr
-                  %td.soft-label Target Date:
-                  %td
-                    %strong= submission.target_date
-                %tr
-                  %td.soft-label Declarations:
-                  %td
-                    %strong= submission.declaration_status
-                %tr
-                  %td.soft-label Payment Received:
-                  %td
-                    %strong= formatted_amount(submission.payment_received)
-          .col-md-4
-            %table.table
-              %tbody
-                %tr
-                  %td.soft-label.no-top-border Official No.:
-                  %td.no-top-border.official-no
-                    - if submission.vessel_reg_no.present?
-                      %strong= link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
-                    - elsif Policies::Workflow.generate_official_no?(submission)
-                      - unless @readonly
-                        = render partial: "submissions/actions/generate_official_no"
-                %tr
-                  %td.soft-label EC No.:
-                  %td.ec-no
-                    %strong
-                      - if @submission.registered_vessel
-                        =  EcNo.for_vessel(@submission.registered_vessel)
-                %tr
-                  %td.soft-label Registration Status
-                  %td= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }
-                %tr
-                  %td.soft-label Vessel Name:
-                  %td.vessel-name
-                    %strong= submission.vessel_name
-                %tr
-                  %td.soft-label Application Expiry Date:
-                  %td.expiry-date
-                    %strong
-                      - if submission.name_approval
-                        = submission.name_approval.approved_until
-          .col-md-4
-            %table.table
-              %tbody
-                %tr
-                  %td.soft-label.no-top-border Applicant:
-                  %td.no-top-border.applicant-name
-                    %strong
-                      = submission.applicant_name
-                      - if submission.applicant_email.present?
-                        (#{submission.applicant_email})
-                %tr
-                  %td.soft-label Documents Received:
-                  %td
-                    %strong= submission.documents_received
-                %tr
-                  %td.soft-label Delivery Address
-                  %td.delivery-address
-                    %strong
-                      - if submission.delivery_address.active?
-                        = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
-                      -else
-                        Owner #1
+        %table.table
+          %tbody
+            %tr
+              %td.soft-label.no-top-border Source:
+              %td.no-top-border
+                %strong= submission.source_description
+            %tr
+              %td.soft-label Date Received:
+              %td
+                %strong= submission.received_at
+            %tr
+              %td.soft-label Target Date:
+              %td
+                %strong= submission.target_date
+            %tr
+              %td.soft-label Application Expiry Date:
+              %td.expiry-date
+                %strong
+                  - if submission.name_approval
+                    = submission.name_approval.approved_until
+            %tr
+              %td.soft-label Declarations:
+              %td
+                %strong= submission.declaration_status
+            %tr
+              %td.soft-label Documents Received:
+              %td
+                %strong= submission.documents_received
+
+  .col-md-4
+    .x_panel
+      %h2.x_title Recipient(s)
+      .x_content
+        %table.table
+          %tbody
+            %tr
+              %td.soft-label.no-top-border Applicant:
+              %td.no-top-border.applicant-name
+                %strong
+                  = submission.applicant_name
+                  - if submission.applicant_email.present?
+                    (#{submission.applicant_email})
+            %tr
+              %td.soft-label Delivery Address
+              %td.delivery-address
+                %strong
+                  - if submission.delivery_address.active?
+                    = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
+                  - else
+                    Owner #1
+
+  .col-md-4
+    .x_panel
+      %h2.x_title Payment for this Task
+      .x_content
+        .panel.panel-success
+          .panel-heading
+            .panel-title{align: :center} Payment Received: #{formatted_amount(submission.payment_received)}
+        %table.table
+          %tbody
+
+
