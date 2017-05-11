@@ -30,7 +30,8 @@
         edit_submission_path(submission),
         class: "btn btn-primary pull-right"
 
-- if other_open_submissions = Submission::OtherOpenSubmission.for(submission)
+- other_open_submissions = Submission::OtherOpenSubmission.for(submission)
+- unless other_open_submissions.empty?
   #other-open-tasks.panel.panel-warning
     .panel-heading
       .panel-title
