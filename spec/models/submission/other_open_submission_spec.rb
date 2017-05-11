@@ -32,10 +32,12 @@ describe Submission::OtherOpenSubmission do
       create(:submission, vessel_reg_no: registered_vessel.reg_no)
     end
 
-    subject { described_class.for(this_submission) }
-
     it "returns the expected 'other open tasks'" do
-      expect(subject).to eq(
+      other_open_submissions = described_class.for(this_submission)
+
+      expect(other_open_submissions.length).to eq(3)
+
+      expect(other_open_submissions).to eq(
         [
           unassigned_submission,
           assigned_submission,
