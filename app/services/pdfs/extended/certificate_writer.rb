@@ -66,14 +66,8 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
         end
       end
     end
-
-    display_charterers(y_pos)
   end
   # rubocop:enable all
-
-  def display_charterers(y_pos)
-    # intentionally left blank
-  end
 
   def draw_label_value(label, text, opts)
     default_label_font

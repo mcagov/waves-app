@@ -3,7 +3,7 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
 
   # rubocop:disable all
   def vessel_details
-    vspace = 26
+    vspace = 22
     vstart = 656
     rcol_lmargin = 350
     draw_label_value "Name of Ship", @vessel.name, at: [lmargin, vstart]
@@ -16,7 +16,7 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
     draw_label_value "Port", WavesUtilities::Port.new(@vessel.port_code).name, at: [rcol_lmargin, vstart]
     vstart -= vspace
     draw_label_value "Country of Primary Registration", @vessel.underlying_registry, at: [lmargin, vstart]
-    vstart -= vspace
+    vstart -= vspace + 5
     draw_label_value "Name on Primary Rgister", @vessel.name_on_primary_register, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [lmargin, vstart]
@@ -47,12 +47,22 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
   end
 
 
-  def display_charterers(y_pos)
-    y_pos -= 20
+  def owner_details
+    y_pos = 740
+
+    owner = @owners.first
+    if owner
+      @pdf.draw_text "Primary Owner:", at: [lmargin, y_pos]
+      y_pos -= 20
+      draw_label owner.name, at: [lmargin, y_pos]
+      @pdf.text_box owner.inline_address, width: 400, height: 30, at: [lmargin, y_pos - 5]
+      y_pos -= 20
+    end
+    y_pos -= 40
     default_value_font
     @pdf.draw_text "The following details show the bareboat charter(s):", at: [lmargin, y_pos]
     y_pos -= 20
-    @pdf.draw_text "Charterer Name & Address", at: [lmargin, y_pos]
+    @pdf.draw_text "Charterer:", at: [lmargin, y_pos]
     @pdf.draw_text "Charter Period", at: [420, y_pos]
     default_label_font
     y_pos -= 20
