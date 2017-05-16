@@ -51,8 +51,7 @@ class Registration < ApplicationRecord
   def shareholder_groups
     (symbolized_registry_info[:shareholder_groups] || []).map do |sh_group|
       {
-        shareholder_names:
-          sh_group[:group_member_keys].map { |key| key.split(";")[0] },
+        group_members: sh_group[:group_members],
         shares_held: sh_group[:shares_held],
       }
     end
