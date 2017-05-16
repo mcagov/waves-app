@@ -43,7 +43,7 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
     y_pos = 730
     @owners.each do |owner|
       draw_label owner.name, at: [lmargin, y_pos]
-      draw_label owner.inline_address, at: [lmargin, y_pos - 15]
+      @pdf.text_box owner.inline_address, width: 400, height: 30, at: [lmargin, y_pos - 5]
       draw_label owner.shares_held, at: [474, y_pos]
       y_pos -= 40
     end
