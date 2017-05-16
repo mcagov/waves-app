@@ -4,31 +4,35 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
   end
 
   # rubocop:disable all
-  def charterer_details_for_part(vertical_offset)
-    i = vertical_offset
+   def owner_details_for_part
+    y_pos = 700
 
-    @pdf.font("Helvetica", size: 11)
-    @pdf.bounding_box([l_margin, 700 - i], width: 510) { @pdf.stroke_horizontal_rule }
-    i += 14
+    owner = @owners.first
+    if owner
+      default_value_font
+      @pdf.draw_text "Primary Owner:", at: [l_margin, y_pos]
+      y_pos -= 20
+      default_label_font
+      @pdf.draw_text owner.name, at: [l_margin, y_pos]
+      @pdf.text_box owner.inline_address, width: 400, height: 30, at: [l_margin, y_pos - 5]
+      y_pos -= 20
+    end
+    y_pos -= 40
+    default_value_font
+    @pdf.draw_text "The following details show the bareboat charter(s):", at: [l_margin, y_pos]
+    y_pos -= 20
+    @pdf.draw_text "Charterer:", at: [l_margin, y_pos]
+    @pdf.draw_text "Charter Period", at: [420, y_pos]
+    default_label_font
+    y_pos -= 20
 
-    @pdf.draw_text "The following details show the bareboat charter(s):", at: [l_margin, 700 - i]
-    i += 10
-    @pdf.bounding_box([l_margin, 700 - i], width: 510) { @pdf.stroke_horizontal_rule }
-    i += 20
-    @pdf.font("Helvetica-Bold", size: 11)
-    @pdf.draw_text "Charterer Name & Address", at: [l_margin, 700 - i]
-    @pdf.draw_text "Charter Period", at: [420, 700 - i]
-
-    i += 20
-
-    @pdf.font("Helvetica", size: 11)
     @vessel.charterers.sort.each do |charterer|
-      @pdf.draw_text charterer.charter_period, at: [420, 700 - i]
+      @pdf.draw_text charterer.charter_period, at: [420, y_pos]
 
       charterer.charter_parties.each do |charter_party|
-        @pdf.draw_text charter_party.name, at: [l_margin, 700 - i]
-        @pdf.draw_text charter_party.address, at: [l_margin, 700 - i - 15]
-        i += 40
+        @pdf.draw_text charter_party.name, at: [l_margin, y_pos]
+        @pdf.draw_text charter_party.address, at: [l_margin, y_pos - 15]
+        y_pos -= 40
       end
     end
   end
