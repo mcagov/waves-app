@@ -4,7 +4,7 @@ class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
   # rubocop:disable all
   def vessel_details
     vspace = 26
-    vstart = 642
+    vstart = 656
     rcol_lmargin = 350
     draw_label_value "Name of Ship", @vessel.name, at: [lmargin, vstart]
     vstart -= vspace
@@ -16,19 +16,8 @@ class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [lmargin, vstart]
     draw_label_value "Port Letters and Number", "#{@vessel.port_code} #{@vessel.port_no}", at: [rcol_lmargin, vstart]
-
-    engine_label = "Engine Make/Model"
-    @engines.each do |engine|
-      vstart -= vspace
-      draw_label_value engine_label, engine.make_and_model, at: [lmargin, vstart]
-      engine_label = ""
-      next unless engine.derating.present?
-      vstart -= vspace
-      derating_label = "Derating"
-      draw_label_value derating_label, engine.derating, at: [lmargin, vstart]
-      derating_label = ""
-    end
-
+    vstart -= vspace
+    draw_label_value "Engine Make/Model", @vessel.engine_description, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Total Engine Power", "#{Engine.total_mcep_for(@registration)} kW", at: [lmargin, vstart]
     vstart -= vspace
