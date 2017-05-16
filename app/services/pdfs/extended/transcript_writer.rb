@@ -3,34 +3,34 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
   private
 
   def owner_details_for_part
-    i = 0
-
-    @pdf.font("Helvetica-Bold", size: 11)
-    @pdf.draw_text "Name & Address", at: [l_margin, 710 - i]
-    @pdf.draw_text "Shares Held", at: [474, 710 - i]
-    i += 20
-
+    y_pos = 700
     @owners.each do |owner|
-      @pdf.font("Helvetica", size: 11)
-      @pdf.draw_text owner.name, at: [l_margin, 700 - i]
-      @pdf.text_box owner.inline_address, width: 400,
-        at: [l_margin, 694 - i]
-
-      @pdf.draw_text owner.shares_held, at: [474, 690 - i]
-      i += 60
+      next if owner.shares_held == 0
+      @pdf.draw_text owner.name, at: [l_margin, y_pos]
+      @pdf.text_box owner.inline_address, width: 400, height: 30, at: [l_margin, y_pos - 5]
+      @pdf.draw_text owner.shares_held, at: [474, y_pos]
+      y_pos -= 50
     end
 
     @registration.shareholder_groups.each do |shareholder_group|
-      @pdf.draw_text shareholder_group[:shareholder_names].join(", "), at: [l_margin, 700 - i]
-      @pdf.draw_text shareholder_group[:shares_held], at: [474, 700 - i]
-      i += 25
+      @pdf.draw_text shareholder_group[:shares_held], at: [474, y_pos]
+
+      next unless shareholder_group[:owners].present?
+
+      shareholder_group[:owners].each do |owner|
+        default_label_font
+        @pdf.draw_text owner[:name], at: [l_margin, y_pos]
+        @pdf.text_box owner[:inline_address], width: 400, height: 30, at: [l_margin, y_pos - 5]
+
+        unless owner == shareholder_group[:owners].last
+          default_value_font
+          @pdf.draw_text "jointly with", at: [l_margin - 3, y_pos - 40]
+          y_pos -= 55
+        else
+          y_pos -= 40
+        end
+      end
     end
-
-    charterer_details_for_part(i)
-  end
-
-  def charterer_details_for_part(_vertical_offset)
-    # Intentionally left blank
   end
 
   def draw_label_value(label, text, opts)

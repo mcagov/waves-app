@@ -17,7 +17,7 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Country of Primary Registration", @vessel.underlying_registry, at: [lmargin, vstart]
     vstart -= vspace + 5
-    draw_label_value "Name on Primary Rgister", @vessel.name_on_primary_register, at: [lmargin, vstart]
+    draw_label_value "Name on Primary Register", @vessel.name_on_primary_register, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [lmargin, vstart]
     vstart -= vspace
@@ -34,10 +34,10 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
     draw_label_value "Depth", "#{@vessel.depth} metres", at: [lmargin, vstart]
     draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [rcol_lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Gross Tonnage", @vessel.gross_tonnage, at: [lmargin, vstart]
-    draw_label_value "Net Tonnage", @vessel.net_tonnage, at: [rcol_lmargin, vstart]
+    draw_label_value "Gross Tonnage", Tonnage.new(:gross, @vessel.gross_tonnage), at: [lmargin, vstart]
+    draw_label_value "Net Tonnage", Tonnage.new(:net, @vessel.net_tonnage), at: [rcol_lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Registered Tonnage", @vessel.register_tonnage, at: [lmargin, vstart]
+    draw_label_value "Registered Tonnage", Tonnage.new(:register, @vessel.register_tonnage), at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Year of Build", @vessel.year_of_build, at: [lmargin, vstart]
     vstart -= vspace

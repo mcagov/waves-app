@@ -32,8 +32,8 @@ class Pdfs::CarvingAndMarking::Base
   private
 
   def draw_logo
-    @pdf.image "#{Rails.root}/public/pdf_images/mca_transcript_logo.png",
-               at: [233, 820], scale: 0.3
+    @pdf.image "#{Rails.root}/public/pdf_images/mca_color_logo.png",
+               at: [40, 820], scale: 0.3
   end
 
   def draw_title

@@ -14,8 +14,8 @@ RSpec.describe CarvingAndMarking, type: :model do
       let(:register) { 0 }
 
       it { expect(subject.tonnage_label).to eq("NET TONNAGE") }
-      it { expect(subject.tonnage_value).to eq(0.00) }
-      it { expect(subject.tonnage_description).to eq("N.T.0.00") }
+      it { expect(subject.tonnage_value).to eq("") }
+      it { expect(subject.tonnage_description).to eq("") }
     end
 
     context "with net_tonnage and register_tonnage defined" do
@@ -23,7 +23,7 @@ RSpec.describe CarvingAndMarking, type: :model do
       let(:register) { 45678.9 }
 
       it { expect(subject.tonnage_label).to eq("NET TONNAGE") }
-      it { expect(subject.tonnage_value).to eq(12345.67) }
+      it { expect(subject.tonnage_value).to eq("12,345.67") }
       it { expect(subject.tonnage_description).to eq("N.T.12,345.67") }
     end
 
@@ -32,8 +32,8 @@ RSpec.describe CarvingAndMarking, type: :model do
       let(:register) { 45678.9 }
 
       it { expect(subject.tonnage_label).to eq("REGISTER TONNAGE") }
-      it { expect(subject.tonnage_value).to eq(45678.90) }
-      it { expect(subject.tonnage_description).to eq("R.T.45,678.90") }
+      it { expect(subject.tonnage_value).to eq("45,679") }
+      it { expect(subject.tonnage_description).to eq("R.T.45,679") }
     end
   end
 end

@@ -39,15 +39,15 @@ class CarvingAndMarking < ApplicationRecord
 
   def tonnage_value
     if register?
-      submission.vessel.register_tonnage.to_f
+      Tonnage.new(:register, submission.vessel.register_tonnage).to_s
     else
-      submission.vessel.net_tonnage.to_f
+      Tonnage.new(:net, submission.vessel.net_tonnage).to_s
     end
   end
 
   def tonnage_description
-    amount = number_with_precision(tonnage_value, precision: 2, delimiter: ",")
-    register? ? "R.T.#{amount}" : "N.T.#{amount}"
+    return "" if tonnage_value.blank?
+    register? ? "R.T.#{tonnage_value}" : "N.T.#{tonnage_value}"
   end
 
   private

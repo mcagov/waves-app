@@ -12,9 +12,15 @@
     %th= vessel_field_title(:number_of_hulls)
   %tbody
     %tr
-      %td #{vessel.gross_tonnage.to_i}GT
-      %td #{vessel.net_tonnage.to_i}NT
-      %td #{vessel.register_tonnage.to_i}T
+      %td
+        - if vessel.gross_tonnage.present?
+          #{Tonnage.new(:gross, vessel.gross_tonnage)}GT
+      %td
+        - if vessel.net_tonnage.present?
+          #{Tonnage.new(:net, vessel.net_tonnage)}NT
+      %td
+        - if vessel.register_tonnage.present?
+          #{Tonnage.new(:register, vessel.register_tonnage)}T
       %td #{vessel.register_length.to_i} metres
       %td #{vessel.length_overall.to_i} metres
       %td #{vessel.breadth.to_i} metres

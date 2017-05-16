@@ -36,26 +36,26 @@ class Pdfs::Part2::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     draw_value @vessel.builders_address, at: [l_margin + 145, vstart]
     vstart -= vspace
 
-    @vessel.engines.each do |engine|
-      draw_label_value "Engine Make/Model", engine.make_and_model, at: [l_margin, vstart]
-      if engine.derating.present?
-        vstart -= vspace/2
-        draw_label_value "Derating", engine.derating, at: [l_margin, vstart]
-      end
+    draw_label_value "Engine Make/Model", @vessel.engine_description, at: [l_margin, vstart]
+    vstart -= vspace
+
+    if @vessel.engine_derating_description.present?
+      draw_label_value "Derating", @vessel.engine_derating_description, at: [l_margin, vstart]
       vstart -= vspace
     end
 
     draw_label_value "Total Engine Power", "#{Engine.total_mcep_for(@registration)} kW", at: [l_margin, vstart]
     vstart -= vspace
 
-    draw_label_value "Length", "#{@vessel.length_overall} metres", at: [l_margin, vstart]
-    draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [rcol_l_margin, vstart]
+    draw_label_value "Overall Length", "#{@vessel.length_overall} metres", at: [l_margin, vstart]
+    draw_label_value "Registered Length", "#{@vessel.register_length} metres", at: [rcol_l_margin, vstart]
     vstart -= vspace
 
+    draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [l_margin, vstart]
     draw_label_value "Depth", "#{@vessel.depth} metres", at: [rcol_l_margin, vstart]
     vstart -= vspace
-    draw_label_value "Gross Tonnage", @vessel.gross_tonnage, at: [l_margin, vstart]
-    draw_label_value "Net Tonnage", @vessel.net_tonnage, at: [rcol_l_margin, vstart]
+    draw_label_value "Gross Tonnage", Tonnage.new(:gross, @vessel.gross_tonnage), at: [l_margin, vstart]
+    draw_label_value "Net Tonnage", Tonnage.new(:net, @vessel.net_tonnage), at: [rcol_l_margin, vstart]
     vstart -= vspace
 
     draw_label_value "Entry into Service", @vessel.entry_into_service_at, at: [l_margin, vstart]

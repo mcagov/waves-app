@@ -20,7 +20,7 @@ class Pdfs::CsrFormWriter
   private
 
   def draw_heading
-    @pdf.image "#{Rails.root}/public/pdf_images/mca_transcript_logo.png",
+    @pdf.image "#{Rails.root}/public/pdf_images/mca_color_logo.png",
                at: [l_margin, 810], scale: 0.2
     @pdf.font("Helvetica-Bold", size: 16)
     @pdf.draw_text "FORM 1 CONTINUOUS SYNOPSIS RECORD (CSR)",
