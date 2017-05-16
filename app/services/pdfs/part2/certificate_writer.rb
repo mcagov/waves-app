@@ -29,8 +29,8 @@ class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
     draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [lmargin, vstart]
     draw_label_value "Depth", "#{@vessel.depth} metres", at: [rcol_lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Gross Tonnage", @vessel.gross_tonnage, at: [lmargin, vstart]
-    draw_label_value "Net Tonnage", @vessel.net_tonnage, at: [rcol_lmargin, vstart]
+    draw_label_value "Gross Tonnage", Tonnage.new(:gross, @vessel.gross_tonnage), at: [lmargin, vstart]
+    draw_label_value "Net Tonnage", Tonnage.new(:net, @vessel.net_tonnage), at: [rcol_lmargin, vstart]
     vstart -= vspace
     draw_label_value "Year of Build", @vessel.year_of_build, at: [lmargin, vstart]
     vstart -= vspace

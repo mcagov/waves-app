@@ -94,11 +94,11 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     draw_label_value "Depth", "#{@vessel.depth} metres", at: [rcol_l_margin, vstart]
     vstart -= vspace
 
-    draw_label_value "Gross Tonnage", @vessel.gross_tonnage, at: [l_margin, vstart]
-    draw_label_value "Net Tonnage", @vessel.net_tonnage, at: [rcol_l_margin, vstart]
+    draw_label_value "Gross Tonnage", Tonnage.new(:gross, @vessel.gross_tonnage), at: [l_margin, vstart]
+    draw_label_value "Net Tonnage", Tonnage.new(:net, @vessel.net_tonnage), at: [rcol_l_margin, vstart]
     vstart -= vspace
 
-    draw_label_value "Registered Tonnage", @vessel.register_tonnage, at: [l_margin, vstart]
+    draw_label_value "Registered Tonnage", Tonnage.new(:register, @vessel.register_tonnage), at: [l_margin, vstart]
     vstart -= vspace
 
     @vessel.charterers.each do |charterer|
