@@ -19,4 +19,8 @@ class Customer < ApplicationRecord
       postcode,
     ].compact.reject(&:empty?)
   end
+
+  def details
+    { name: name, inline_address: inline_address }
+  end
 end

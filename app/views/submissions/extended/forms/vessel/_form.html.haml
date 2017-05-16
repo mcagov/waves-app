@@ -113,6 +113,12 @@
               label: vessel_change_label(:underlying_registry_port),
               input_html: { class: "upcase" }
 
+          .col-md-2{ class: vessel_change_css(:name_on_primary_register) }
+            = vessel_f.input :name_on_primary_register,
+              label: vessel_change_label(:name_on_primary_register),
+              input_html: { class: "upcase" }
+
+
       %hr
       %h2 Description
       .row

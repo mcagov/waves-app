@@ -38,10 +38,15 @@ class Pdfs::Part3::CertificateWriter < Pdfs::CertificateWriter
   end
 
   def owners
-    offset = 0
-    @owners.each do |owner|
-      draw_value owner.name, at: [40, 157 - offset]
-      offset += 12
+    if @owners.length > 6
+      @pdf.font("Helvetica-Oblique", size: 9)
+      @pdf.text_box(@owners.map(&:name).join("; "), width: 240, at: [30, 170])
+    else
+      offset = 0
+      @owners.each do |owner|
+        draw_value owner.name, at: [40, 157 - offset]
+        offset += 12
+      end
     end
   end
 

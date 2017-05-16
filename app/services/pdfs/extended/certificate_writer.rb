@@ -40,27 +40,34 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
   end
 
   def owner_details
-    y_pos = 730
+    y_pos = 740
     @owners.each do |owner|
+      next if owner.shares_held == 0
       draw_label owner.name, at: [lmargin, y_pos]
-      draw_label owner.inline_address, at: [lmargin, y_pos - 15]
+      @pdf.text_box owner.inline_address, width: 400, height: 30, at: [lmargin, y_pos - 5]
       draw_label owner.shares_held, at: [474, y_pos]
       y_pos -= 40
     end
 
     @registration.shareholder_groups.each do |shareholder_group|
-      draw_label shareholder_group[:shareholder_names].join(", "), at: [lmargin, y_pos]
       draw_label shareholder_group[:shares_held], at: [474, y_pos]
-      y_pos -= 25
-    end
 
-    display_charterers(y_pos)
+      next unless shareholder_group[:owners].present?
+
+      shareholder_group[:owners].each do |owner|
+        draw_label owner[:name], at: [lmargin, y_pos]
+        @pdf.text_box owner[:inline_address], width: 400, height: 30, at: [lmargin, y_pos - 5]
+
+        unless owner == shareholder_group[:owners].last
+          draw_value "jointly with", at: [lmargin - 3, y_pos - 37]
+          y_pos -= 50
+        else
+          y_pos -= 40
+        end
+      end
+    end
   end
   # rubocop:enable all
-
-  def display_charterers(y_pos)
-    # intentionally left blank
-  end
 
   def draw_label_value(label, text, opts)
     default_label_font

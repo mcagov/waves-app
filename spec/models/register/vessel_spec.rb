@@ -200,7 +200,10 @@ describe Register::Vessel do
       it "has the shareholder_groups" do
         owner_key = "#{vessel.owners.first.name};#{vessel.owners.first.email}"
         expect(subject[:shareholder_groups]).to eq(
-          [{ group_member_keys: [owner_key], shares_held: 10 }])
+          [{
+            owners: vessel.owners.map(&:details),
+            group_member_keys: [owner_key],
+            shares_held: 10 }])
       end
     end
   end
