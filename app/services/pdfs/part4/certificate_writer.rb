@@ -17,7 +17,7 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Country of Primary Registration", @vessel.underlying_registry, at: [lmargin, vstart]
     vstart -= vspace + 5
-    draw_label_value "Name on Primary Rgister", @vessel.name_on_primary_register, at: [lmargin, vstart]
+    draw_label_value "Name on Primary Register", @vessel.name_on_primary_register, at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [lmargin, vstart]
     vstart -= vspace
