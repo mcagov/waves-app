@@ -47,6 +47,7 @@ class Builders::Registry::VesselBuilder
       @vessel.underlying_registry = @submission.vessel.underlying_registry
       @vessel.underlying_registry_identity_no = @submission.vessel.underlying_registry_identity_no
       @vessel.underlying_registry_port = @submission.vessel.underlying_registry_port
+      @vessel.name_on_primary_register = @submission.vessel.name_on_primary_register
     end
     # rubocop:enable all
 

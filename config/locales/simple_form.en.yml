@@ -56,6 +56,7 @@ en:
           underlying_registry: Underlying Registry
           underlying_registry_identity_no: "Underlying Registry: Identity Number"
           underlying_registry_port: "Underlying Registry: Port"
+          name_on_primary_register: Name on Primary Register
           length_in_meters: Length
           length_overall: Length Overall
           make_and_model: Make and Model
