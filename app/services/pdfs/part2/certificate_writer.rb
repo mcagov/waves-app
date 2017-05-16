@@ -19,6 +19,8 @@ class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Engine Make/Model", @vessel.engine_description, at: [lmargin, vstart]
     vstart -= vspace
+    draw_label_value "Derating", @vessel.engine_derating_description, at: [lmargin, vstart]
+    vstart -= vspace
     draw_label_value "Total Engine Power", "#{Engine.total_mcep_for(@registration)} kW", at: [lmargin, vstart]
     vstart -= vspace
     draw_label_value "Overall Length", "#{@vessel.length_overall} metres", at: [lmargin, vstart]

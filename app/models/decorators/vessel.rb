@@ -23,4 +23,8 @@ class Decorators::Vessel < SimpleDelegator
   def engine_description
     engines.map(&:make_and_model).join("; ")
   end
+
+  def engine_derating_description
+    engines.map(&:derating).reject(&:blank?).join("; ")
+  end
 end
