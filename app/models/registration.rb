@@ -49,12 +49,7 @@ class Registration < ApplicationRecord
   end
 
   def shareholder_groups
-    (symbolized_registry_info[:shareholder_groups] || []).map do |sh_group|
-      {
-        group_members: sh_group[:group_members],
-        shares_held: sh_group[:shares_held],
-      }
-    end
+    (symbolized_registry_info[:shareholder_groups] || [])
   end
 
   private
