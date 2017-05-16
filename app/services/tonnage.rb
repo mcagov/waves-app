@@ -9,9 +9,9 @@ class Tonnage
     return "" unless @value
     case @mode
     when :register
-      @value.round.to_s
+      number_with_precision(@value.round, precision: 0, delimiter: ",")
     else
-      number_with_precision(@value, precision: 2)
+      number_with_precision(@value, precision: 2, delimiter: ",")
     end
   end
 end
