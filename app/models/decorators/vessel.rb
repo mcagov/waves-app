@@ -19,4 +19,8 @@ class Decorators::Vessel < SimpleDelegator
   def imo_number_or_hin
     imo_number.present? ? imo_number : hin
   end
+
+  def engine_description
+    engines.map(&:make_and_model).join("; ")
+  end
 end
