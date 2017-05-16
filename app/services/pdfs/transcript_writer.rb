@@ -22,8 +22,8 @@ class Pdfs::TranscriptWriter
   protected
 
   def draw_logo
-    @pdf.image "#{Rails.root}/public/pdf_images/mca_transcript_logo.png",
-               at: [240, 820], scale: 0.25
+    @pdf.image "#{Rails.root}/public/pdf_images/mca_color_logo.png",
+               at: [20, 830], scale: 0.25
   end
 
   def draw_title
