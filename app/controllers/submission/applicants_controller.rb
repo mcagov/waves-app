@@ -15,6 +15,8 @@ class Submission::ApplicantsController < InternalPagesController
   protected
 
   def submission_params
-    params.require(:submission).permit(:applicant_name, :applicant_email)
+    params.require(:submission).permit(
+      :applicant_name, :applicant_email,
+      delivery_address: Submission::DeliveryAddress::ATTRIBUTES)
   end
 end
