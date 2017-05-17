@@ -3,7 +3,6 @@ class Pdfs::TerminationNotice
     @registrations = Array(registrations)
     @template = :current
     @mode = mode
-
     @pdf = Prawn::Document.new(
       margin: 0, page_size: "A4", skip_page_creation: true)
   end
