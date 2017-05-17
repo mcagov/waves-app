@@ -33,22 +33,9 @@
               %td
                 %strong= submission.documents_received
 
-  .col-md-4
-    .x_panel
-      %h2.x_title Applicant (Notification Recipient)
-      .x_content
-        %table.table
-          %tbody
-            %tr
-              %td.soft-label.no-top-border Email:
-              %td.no-top-border.applicant-name
-                %strong
-                  = submission.applicant_description
-            %tr
-              %td.soft-label Postal:
-              %td.delivery-address
-                %strong
-                  = submission.delivery_address_description
+  #applicant
+    = render partial: "submissions/basic/forms/applicant/base",
+      locals: { submission: submission }
 
   .col-md-4
     .x_panel

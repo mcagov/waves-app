@@ -1,0 +1,34 @@
+.col-md-4
+  .x_panel
+    %h2.x_title Applicant (Notification Recipient)
+    .x_content
+      %table.table
+        %tbody
+          %tr
+            %td.soft-label.no-top-border Email:
+            %td.no-top-border.applicant-email
+              %strong
+                = link_to_unless @readonly, submission.applicant_description, "#",
+                  data: { target: "#edit_applicant", toggle: "modal" }
+          %tr
+            %td.soft-label Postal:
+            %td.delivery-address
+              %strong
+                = submission.delivery_address_description
+
+.modal.fade{id: "edit_applicant", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Applicant (Notification Recipient)
+      = simple_form_for submission, url: submission_applicant_path(submission), method: :put, remote: true do |submission_f|
+        .modal-body
+          .row
+            .col-md-3
+              = submission_f.input :applicant_name, input_html: { class: "upcase" }
+            .col-md-3
+              = submission_f.input :applicant_email
+        .modal-footer
+          = submission_f.submit "Save Applicant", class: "btn btn-primary"

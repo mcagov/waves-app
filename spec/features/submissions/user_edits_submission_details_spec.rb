@@ -3,17 +3,41 @@ require "rails_helper"
 describe "User edits submission details", js: true do
   before do
     visit_assigned_submission
-    click_on "Edit Application"
   end
 
-  scenario "vessel and applicant details" do
+  scenario "vessel details" do
+    click_on "Edit Application"
     fill_in("Approved Vessel Name", with: "BOAT")
-    fill_in("Applicant Name", with: "ANNIE")
-    fill_in("Applicant's Email", with: "annie@example.com")
     click_on("Save Application")
 
     expect(page).to have_css(".vessel-name", text: "BOAT")
+  end
+
+  scenario "applicant details" do
+    within("#applicant") { click_on(Submission.last.applicant_name) }
+
+    fill_in("Applicant Name", with: "ANNIE")
+    fill_in("Applicant's Email", with: "annie@example.com")
+    click_on("Save")
+
     expect(page)
-      .to have_css(".applicant-name", text: "ANNIE (annie@example.com)")
+      .to have_css(".applicant-email", text: "ANNIE (annie@example.com)")
+  end
+
+  xscenario "delivery address" do
+    click_on("Not set")
+
+    within(".modal.fade.in") { expect_postcode_lookup }
+
+    fill_in("Name", with: "ALICE")
+    fill_in("Address 1", with: "Address 1")
+    fill_in("Address 2", with: "Address 2")
+    fill_in("Address 3", with: "Address 3")
+    fill_in("Town or City", with: "Town")
+    fill_in("Postcode", with: "POC123")
+    select("France", with: "Country")
+    click_on("Save")
+
+    expect(page).to have_css("#delivery_address", text: "AlICE, ADDRESS 1")
   end
 end
