@@ -33,27 +33,9 @@
               %td
                 %strong= submission.documents_received
 
-  .col-md-4
-    .x_panel
-      %h2.x_title Recipient(s)
-      .x_content
-        %table.table
-          %tbody
-            %tr
-              %td.soft-label.no-top-border Applicant:
-              %td.no-top-border.applicant-name
-                %strong
-                  = submission.applicant_name
-                  - if submission.applicant_email.present?
-                    (#{submission.applicant_email})
-            %tr
-              %td.soft-label Delivery Address
-              %td.delivery-address
-                %strong
-                  - if submission.delivery_address.active?
-                    = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
-                  - else
-                    Owner #1
+  #applicant
+    = render partial: "submissions/basic/forms/applicant/base",
+      locals: { submission: submission }
 
   .col-md-4
     .x_panel
@@ -64,5 +46,3 @@
             .panel-title{align: :center} Payment Received: #{formatted_amount(submission.payment_received)}
         %table.table
           %tbody
-
-

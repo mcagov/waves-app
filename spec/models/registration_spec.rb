@@ -1,34 +1,21 @@
 require "rails_helper"
 
 describe Registration do
-  context "#delivery_address" do
+  context "#delivery_name_and_address" do
     let(:registration) { create(:registration) }
-
-    subject { registration.reload.delivery_address }
+    subject { registration.reload.delivery_name_and_address }
 
     context "with a submission" do
-      context "that has an alternate delivery_address" do
-        let!(:submission) { create(:submission, registration: registration) }
+      let!(:submission) { create(:submission, registration: registration) }
 
-        it "uses the submission's delivery address" do
-          expect(subject.name).to eq(submission.delivery_address.name)
-        end
-      end
-
-      context "that does not have an alternate delivery_address" do
-        let!(:submission) do
-          create(:submission, registration: registration, changeset: {})
-        end
-
-        it "uses the first owner's delivery address" do
-          expect(subject.name).to eq(registration.owners.first.name)
-        end
+      it "uses the submission's delivery address" do
+        expect(subject[0]).to eq(submission.delivery_address.name)
       end
     end
 
     context "without a submission" do
-      it "uses the first owner's delivery address" do
-        expect(subject.name).to eq(registration.owners.first.name)
+      it "is an empty array" do
+        expect(subject).to eq([])
       end
     end
   end

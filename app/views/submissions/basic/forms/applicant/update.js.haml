@@ -1,0 +1,12 @@
+:plain
+  if ("#edit_applicant".length > 0) {
+    $("#edit_applicant").modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
+
+  var applicant_html = '#{escape_javascript(
+              render partial: "/submissions/basic/forms/applicant/base",
+              locals: { submission: @submission })}';
+
+  $("#applicant").html(applicant_html);

@@ -60,7 +60,7 @@ module Pdfs::Stationary
 
   def delivery_address
     i = 0
-    @deliver_to.stationary_name_and_address.each do |line|
+    @delivery_name_and_address.each do |line|
       @pdf.draw_text line, at: [l_margin, 660 - i]
       i += spacer
     end
@@ -68,6 +68,6 @@ module Pdfs::Stationary
 
   def greeting
     set_copy_font
-    @pdf.draw_text "Dear #{@correspondent[:name]}", at: [l_margin, 555]
+    @pdf.draw_text "Dear #{@applicant_name}", at: [l_margin, 555]
   end
 end

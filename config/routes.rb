@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
 
+    resources :applicant,
+              controller: "submission/applicants", only: [:update]
+
     resource :approval,
              controller: "submission/approvals", only: [:show, :create]
 
