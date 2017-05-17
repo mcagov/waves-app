@@ -3,8 +3,6 @@ class Submission::CorrespondentsController < InternalPagesController
 
   def update
     @submission.assign_attributes(submission_params)
-    @submission.applicant_name = @submission.correspondent.name
-    @submission.applicant_email = @submission.correspondent.email
     @submission.save
 
     @modal_id = params[:modal_id]
