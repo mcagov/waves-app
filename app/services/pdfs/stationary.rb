@@ -68,6 +68,6 @@ module Pdfs::Stationary
 
   def greeting
     set_copy_font
-    @pdf.draw_text "Dear #{@correspondent[:name]}", at: [l_margin, 555]
+    @pdf.draw_text "Dear #{@applicant_name}", at: [l_margin, 555]
   end
 end

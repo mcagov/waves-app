@@ -33,19 +33,11 @@ class Registration < ApplicationRecord
     # Taking the delivery address from the most recent submission
     # is probably not the best approach but, for now, that is
     # what we are going to do
-    submission = submissions.first
-    if submission && submission.delivery_address.active?
-      submission.delivery_address
-    else
-      Submission::DeliveryAddress.new(owners.first.attributes)
-    end
+    submission.delivery_address if submission
   end
 
-  def correspondent
-    # Assuming that the first owner is the correspondent is incorrect.
-    # This is a placeholder until we can answer the question:
-    # "Who is the correspondent?"
-    owners.first
+  def applicant_name
+    submission.applicant_name if submission
   end
 
   def shareholder_groups
@@ -53,6 +45,10 @@ class Registration < ApplicationRecord
   end
 
   private
+
+  def submission
+    submissions.first
+  end
 
   def symbolized_registry_info
     if registry_info.blank?

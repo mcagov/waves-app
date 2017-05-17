@@ -4,7 +4,7 @@ class Pdfs::CoverLetterWriter
   def initialize(registration, pdf)
     @registration = registration
     @vessel = @registration.vessel
-    @correspondent = @registration.correspondent
+    @applicant_name = @registration.applicant_name
     @deliver_to = @registration.delivery_address
     @pdf = pdf
   end
