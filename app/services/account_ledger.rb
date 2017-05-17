@@ -25,4 +25,8 @@ class AccountLedger
   def awaiting_payment?
     ![:not_applicable, :paid].include?(payment_status)
   end
+
+  def balance
+    amount_due.to_f - amount_paid.to_f
+  end
 end
