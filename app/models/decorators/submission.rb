@@ -124,9 +124,10 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def applicant_description
-    return "Not set" unless applicant_name
+    return "Not set" unless applicant_name.present?
     description = applicant_name
-    description = "#{description} (#{applicant_email})" if applicant_email
+    description =
+      "#{description} (#{applicant_email})" if applicant_email.present?
     description
   end
 
