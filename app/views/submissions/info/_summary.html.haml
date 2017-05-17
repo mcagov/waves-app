@@ -35,25 +35,20 @@
 
   .col-md-4
     .x_panel
-      %h2.x_title Recipient(s)
+      %h2.x_title Applicant (Notification Recipient)
       .x_content
         %table.table
           %tbody
             %tr
-              %td.soft-label.no-top-border Applicant:
+              %td.soft-label.no-top-border Email:
               %td.no-top-border.applicant-name
                 %strong
-                  = submission.applicant_name
-                  - if submission.applicant_email.present?
-                    (#{submission.applicant_email})
+                  = submission.applicant_description
             %tr
-              %td.soft-label Delivery Address
+              %td.soft-label Postal:
               %td.delivery-address
                 %strong
-                  - if submission.delivery_address.active?
-                    = submission.delivery_address.stationary_name_and_address.join("<br/>").html_safe
-                  - else
-                    Owner #1
+                  = submission.delivery_address_description
 
   .col-md-4
     .x_panel
@@ -64,5 +59,3 @@
             .panel-title{align: :center} Payment Received: #{formatted_amount(submission.payment_received)}
         %table.table
           %tbody
-
-
