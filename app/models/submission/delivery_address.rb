@@ -1,5 +1,5 @@
 class Submission::DeliveryAddress < WavesUtilities::DeliveryAddress
-  def stationary_name_and_address
+  def name_and_address
     [
       name,
       address_1,

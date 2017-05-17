@@ -60,7 +60,7 @@ module Pdfs::Stationary
 
   def delivery_address
     i = 0
-    @deliver_to.stationary_name_and_address.each do |line|
+    @delivery_name_and_address.each do |line|
       @pdf.draw_text line, at: [l_margin, 660 - i]
       i += spacer
     end

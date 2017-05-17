@@ -132,6 +132,6 @@ class Decorators::Submission < SimpleDelegator
 
   def delivery_address_description
     return "Not set" unless delivery_address.active?
-    delivery_address.stationary_name_and_address.join("<br/>").html_safe
+    delivery_address.name_and_address.join("<br/>").html_safe
   end
 end

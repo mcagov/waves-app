@@ -4,7 +4,6 @@ class Pdfs::TerminationNoticeWriter
   def initialize(registration, pdf)
     @registration = registration
     @vessel = @registration.vessel
-    @deliver_to = @registration.delivery_address
     @pdf = pdf
   end
 

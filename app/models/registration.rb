@@ -29,11 +29,11 @@ class Registration < ApplicationRecord
     end
   end
 
-  def delivery_address
+  def delivery_name_and_address
     # Taking the delivery address from the most recent submission
     # is probably not the best approach but, for now, that is
     # what we are going to do
-    submission.delivery_address if submission
+    submission ? submission.delivery_address.name_and_address : []
   end
 
   def applicant_name
