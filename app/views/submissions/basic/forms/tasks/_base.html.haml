@@ -12,7 +12,7 @@
           %tr
             %td= Task.new(submission.task).description
             %td
-              %strong= formatted_amount(2500)
+              %strong= formatted_amount(account_ledger.amount_due)
           %tr
             %td
               .pull-right Balance

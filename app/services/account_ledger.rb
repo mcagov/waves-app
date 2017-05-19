@@ -27,6 +27,6 @@ class AccountLedger
   end
 
   def balance
-    amount_due.to_f - amount_paid.to_f
+    (amount_due.to_f - amount_paid.to_f) / 100
   end
 end
