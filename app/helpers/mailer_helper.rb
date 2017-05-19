@@ -49,4 +49,10 @@ module MailerHelper
     "may take up to 3 working days to process. Please make a note "\
     "of the Application Reference Number detailed below:"
   end
+
+  def application_processing_time_no_premium
+    "Please be aware that your application may take up to 20 working days "\
+    "to process, Please make a note "\
+    "of the Application Reference Number detailed below:"
+  end
 end
