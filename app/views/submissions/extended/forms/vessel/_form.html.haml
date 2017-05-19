@@ -9,7 +9,7 @@
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
             input_html: { readonly: "readonly" },
-            hint: (link_to "Change Name or PLN", submission_name_approval_path(@submission))
+            hint: link_to_change_name_or_pln(@submission)
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           = vessel_f.input :registration_type,

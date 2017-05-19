@@ -87,4 +87,10 @@ module SubmissionHelper
   def claimed_by(submission)
     submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
   end
+
+  def link_to_change_name_or_pln(submission)
+    title = submission.part.to_sym == :part_1 ? "Port" : "PLN"
+    link_to "Change Name or #{title}",
+            submission_name_approval_path(@submission)
+  end
 end
