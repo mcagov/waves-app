@@ -21,13 +21,6 @@ describe "User views Part 2 registered vessel", type: :feature, js: true do
     expect_csr_forms(false)
   end
 
-  scenario "decorated fields" do
-    expect(page).to have_css(".ec-no", text: "GBR000#{@vessel.reg_no}")
-
-    expect(page)
-      .to have_css(".propulsion-system", text: "Outboard diesel, Steam")
-  end
-
   scenario "tabs" do
     click_on("Vessel Info")
     expect(page).to have_css("li.active a#vessel-tab")

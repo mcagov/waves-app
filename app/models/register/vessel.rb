@@ -1,5 +1,5 @@
 module Register
-  class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  class Vessel < ApplicationRecord
     include PgSearch
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
@@ -63,8 +63,6 @@ module Register
     delegate :registered_until, to: :current_registration, allow_nil: true
 
     before_validation :build_reg_no, on: :create
-
-    serialize :propulsion_system, Array
 
     def correspondent
       Customer.first

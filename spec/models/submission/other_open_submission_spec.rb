@@ -36,13 +36,9 @@ describe Submission::OtherOpenSubmission do
       other_open_submissions = described_class.for(this_submission)
 
       expect(other_open_submissions.length).to eq(3)
-
-      expect(other_open_submissions).to eq(
-        [
-          unassigned_submission,
-          assigned_submission,
-          referred_submission,
-        ])
+      expect(other_open_submissions).to include(unassigned_submission)
+      expect(other_open_submissions).to include(assigned_submission)
+      expect(other_open_submissions).to include(referred_submission)
     end
   end
 end

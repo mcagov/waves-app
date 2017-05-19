@@ -9,7 +9,7 @@
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
             input_html: { readonly: "readonly" },
-            hint: (link_to "Change Name or PLN", submission_name_approval_path(@submission))
+            hint: link_to_change_name_or_pln(@submission)
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           = vessel_f.input :registration_type,
@@ -180,11 +180,11 @@
             include_blank: false,
             input_html: { class: "select2 select2_single" }
 
-        .col-md-4{ class: vessel_change_css(:propulsion_system) }
+        .col-md-2{ class: vessel_change_css(:propulsion_system) }
           = vessel_f.input :propulsion_system,
             label: vessel_change_label(:propulsion_system),
-            collection: propulsion_system_collection,
-            input_html: { multiple: true }
+            collection: propulsion_system_collection
+
       %hr
       %h2 Construction
       .row

@@ -62,7 +62,7 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     draw_label_value "Name on Primary Register", @vessel.name_on_primary_register, at: [l_margin, vstart]
     vstart -= vspace + 15
 
-    draw_label_value "Method of Propulsion", @vessel.formatted_propulsion_system, at: [l_margin, vstart]
+    draw_label_value "Method of Propulsion", @vessel.propulsion_system, at: [l_margin, vstart]
     vstart -= vspace
 
     draw_label_value "Where Built", @vessel.place_of_build, at: [l_margin, vstart]

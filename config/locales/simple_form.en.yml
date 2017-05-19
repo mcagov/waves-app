@@ -53,9 +53,9 @@ en:
           last_registry_country: "Last Registry: Country"
           last_registry_no: "Last Registry: Identity Number"
           last_registry_port: "Last Registry: Port"
-          underlying_registry: Underlying Registry
-          underlying_registry_identity_no: "Underlying Registry: Identity Number"
-          underlying_registry_port: "Underlying Registry: Port"
+          underlying_registry: Primary Registry
+          underlying_registry_identity_no: "Primary Registry: Identity Number"
+          underlying_registry_port: "Primary Registry: Port"
           name_on_primary_register: Name on Primary Register
           length_in_meters: Length
           length_overall: Length Overall

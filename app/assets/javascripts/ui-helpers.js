@@ -8,8 +8,8 @@ $(document).ready(function() {
     minimumResultsForSearch: 10, placeholder: "", allowClear: true
   });
 
-  $('#submission_vessel_propulsion_system').multiselect({
-    buttonWidth: '100%'
+  $('#submission_vessel_propulsion_system').select2({
+    tags: true
   });
 
   $('[data-toggle="tooltip"]').tooltip()
