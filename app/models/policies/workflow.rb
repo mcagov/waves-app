@@ -28,7 +28,7 @@ class Policies::Workflow
     end
 
     def uses_shareholding?(obj)
-      obj.part.to_sym != :part_4
+      [:part_1, :part_2].include?(obj.part.to_sym)
     end
 
     def uses_vessel_attribute?(attr, obj)
