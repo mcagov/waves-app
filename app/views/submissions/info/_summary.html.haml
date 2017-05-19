@@ -37,12 +37,6 @@
     = render partial: "submissions/basic/forms/applicant/base",
       locals: { submission: submission }
 
-  .col-md-4
-    .x_panel
-      %h2.x_title Payment for this Task
-      .x_content
-        .panel.panel-success
-          .panel-heading
-            .panel-title{align: :center} Payment Received: #{formatted_amount(submission.payment_received)}
-        %table.table
-          %tbody
+  #tasks
+    = render partial: "submissions/basic/forms/tasks/base",
+      locals:  { submission: submission }
