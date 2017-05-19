@@ -12,18 +12,18 @@
     %h2{style: "font-family: Arial, sans-serif; font-size: 14px; border-bottom-style: dashed; border-bottom-color: #ccc; border-bottom-width: 1px; padding-bottom: 20px; margin: 20px 5%;"}
       = image_tag image_url("mca-logo.png")
 
-    %p.hello{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+    %p.hello
       Dear #{ @name },
 
     = yield
 
     - if @application_approval
-      %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+      %p
         We value your opinions and would be grateful if you could spend a couple of moments giving us some feedback using the link below.
         %br
         = link_to "http://www.smartsurvey.co.uk/s/140065DZMRS/", "http://www.smartsurvey.co.uk/s/140065DZMRS/"
 
-    %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+    %p
       Kind regards,
       %br
       - if @actioned_by
