@@ -17,6 +17,12 @@
 
     = yield
 
+    - if @application_approval
+      %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
+        We value your opinions and would be grateful if you could spend a couple of moments giving us some feedback using the link below.
+        %br
+        = link_to "http://www.smartsurvey.co.uk/s/140065DZMRS/", "http://www.smartsurvey.co.uk/s/140065DZMRS/"
+
     %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
       Kind regards,
       %br
@@ -36,10 +42,5 @@
       %br
       CF24 5JW
 
-    - if @application_approval
-      %p{style: 'font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%;'}
-        We value your opinions and would be grateful if you could spend a couple of moments giving us some feedback using the link below.
-        %br
-        = link_to "http://www.smartsurvey.co.uk/s/140065DZMRS/", "http://www.smartsurvey.co.uk/s/140065DZMRS/"
     %p.footer{:style => "font-family: Arial, sans-serif; font-size: 11px; line-height: 1.5; border-top-style: dashed; border-top-color: #ccc; border-top-width: 1px; padding-top: 20px; color: #999; margin: 20px 5% 15px;"}
       Registered Office: Small Ships Register, Registry of Shipping and Seamen, Anchor Court, KEEN ROAD, Cardiff, CF24 5JW
