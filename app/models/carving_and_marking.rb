@@ -22,7 +22,7 @@ class CarvingAndMarking < ApplicationRecord
 
   def template_name
     return "" unless template
-    TEMPLATES.find { |t| t[1] = template.to_sym }[0]
+    TEMPLATES.find { |t| t[1] == template.to_sym }[0]
   end
 
   def vessel

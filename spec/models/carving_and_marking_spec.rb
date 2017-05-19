@@ -36,4 +36,15 @@ RSpec.describe CarvingAndMarking, type: :model do
       it { expect(subject.tonnage_description).to eq("R.T.45,679") }
     end
   end
+
+  describe "template_name" do
+    let(:carving_and_marking) { described_class.new(template: template) }
+    subject { carving_and_marking.template_name }
+
+    context "under_24m" do
+      let(:template) { "under_24m" }
+
+      it { expect(subject).to eq("Part 1 pleasure vessels under 24m") }
+    end
+  end
 end
