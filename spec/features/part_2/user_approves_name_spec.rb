@@ -37,10 +37,16 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     Timecop.travel(Time.now) do
       fill_in("Vessel Name", with: "BOBS BOAT")
       select2("Full", from: "submission_name_approval_registration_type")
+
+      # chedking port code  and number are updated when the port is changed
+      fill_in("Port Number", with: "100")
       select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
 
       expect(page).to have_css(
         ".approval_port-no .form-control-feedback", text: "SU")
+
+      expect(page).to have_css(
+        "#submission_name_approval_port_no", text: "")
 
       fill_in("Port Number", with: "99")
 
