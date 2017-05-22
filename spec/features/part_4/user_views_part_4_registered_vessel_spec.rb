@@ -9,6 +9,7 @@ describe "User views Part 4 registered vessel", type: :feature, js: true do
   end
 
   scenario "UI Elements" do
+    expect_ec_no(false)
     expect_charterers(true)
     expect_managers(false)
     expect_mortgages(false)

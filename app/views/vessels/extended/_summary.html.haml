@@ -5,10 +5,11 @@
         %td.soft-label.no-top-border Official Number:
         %td.no-top-border
           %strong= @vessel.reg_no
-      %tr
-        %td.soft-label EC No.:
-        %td.ec-no
-          %strong= EcNo.for_vessel(@vessel)
+      - if display_ec_no?(@vessel)
+        %tr
+          %td.soft-label EC No.:
+          %td#ec-no
+            %strong= EcNo.for_vessel(@vessel)
       %tr
         %td.soft-label Registration Type:
         %td
