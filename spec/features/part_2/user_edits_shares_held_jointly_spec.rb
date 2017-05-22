@@ -45,7 +45,7 @@ describe "User edits shares held jointly", js: :true do
   end
 
   scenario "editing the number of shares" do
-    expect(page).to have_css("#total_shares", text: "allocated: 0")
+    expect(page).to have_css("#total_shares", text: "allocated: 64")
 
     within("#shares_held_jointly") { click_on("0") }
 
@@ -54,6 +54,6 @@ describe "User edits shares held jointly", js: :true do
       click_on("Save")
     end
 
-    expect(page).to have_css("#total_shares", text: "allocated: 16")
+    expect(page).to have_css("#total_shares", text: "allocated: 80")
   end
 end

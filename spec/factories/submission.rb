@@ -52,6 +52,13 @@ FactoryGirl.define do
     end
   end
 
+  factory :approvable_submission, parent: :unassigned_submission do
+    after(:create) do |submission|
+      submission.claimed!(create(:user))
+      submission.declarations.first.update_attribute(:shares_held, 64)
+    end
+  end
+
   factory :cancelled_submission, parent: :assigned_submission do
     after(:create) do |submission|
       submission.cancelled!

@@ -88,11 +88,12 @@ describe Policies::Actions do
 
   context "#actionable?" do
     let(:submission) do
-      build(:submission, source: source, state: current_state)
+      build(:submission, source: source, state: current_state, part: part)
     end
 
     let(:source) { :online }
     let(:current_state) { :assigned }
+    let(:part) { :part_3 }
 
     subject { submission.actionable? }
 
@@ -105,6 +106,18 @@ describe Policies::Actions do
       end
 
       it { expect(subject).to be_truthy }
+    end
+
+    context "when the part is not :part_3 and there are submission errors" do
+      let(:part) { :part_2 }
+
+      it { expect(subject).to be_truthy }
+
+      context "and the current_state is :completed" do
+        let(:current_state) { :completed }
+
+        it { expect(subject).to be_falsey }
+      end
     end
 
     context "when the source is :manual_entry" do

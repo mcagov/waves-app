@@ -1,29 +1,30 @@
 class Policies::Definitions
   class << self
     def approval_errors(submission)
-      approval_errors = vessel_errors(submission)
+      errors = vessel_errors(submission)
 
       unless Task.new(submission.task) == :manual_override
-        approval_errors << submission_errors(submission)
+        errors << submission_errors(submission)
       end
 
-      approval_errors.flatten
+      errors.flatten
     end
 
     def vessel_errors(submission)
-      approval_errors = []
-      approval_errors << :vessel_required if submission.vessel.name.blank?
-      approval_errors << :owners_required if submission.owners.empty?
-      approval_errors
+      errors = []
+      errors << :vessel_required if submission.vessel.name.blank?
+      errors << :owners_required if submission.owners.empty?
+      errors
     end
 
     def submission_errors(submission)
-      approval_errors = []
-      approval_errors << :vessel_frozen if frozen?(submission)
-      approval_errors << :declarations_required if undeclared?(submission)
-      approval_errors << :payment_required if unpaid?(submission)
-      approval_errors << :carving_marking_receipt if cm_pending?(submission)
-      approval_errors
+      errors = []
+      errors << :vessel_frozen if frozen?(submission)
+      errors << :declarations_required if undeclared?(submission)
+      errors << :payment_required if unpaid?(submission)
+      errors << :carving_marking_receipt if cm_pending?(submission)
+      errors << :shareholding_count if sh_incomplete?(submission)
+      errors
     end
 
     def frozen?(obj)
@@ -41,6 +42,11 @@ class Policies::Definitions
     def cm_pending?(submission)
       return false if submission.carving_and_markings.empty?
       submission.carving_and_marking_received_at.blank?
+    end
+
+    def sh_incomplete?(submission)
+      return false unless Policies::Workflow.uses_shareholding?(submission)
+      ShareHolding.new(submission).status != :complete
     end
 
     def fishing_vessel?(obj)
@@ -75,6 +81,10 @@ class Policies::Definitions
       @part = obj.part.to_sym
       return true if @part == :part_1
       false
+    end
+
+    def part_3_online?(submission)
+      submission.source.to_sym == :online && submission.part.to_sym == :part_3
     end
   end
 end

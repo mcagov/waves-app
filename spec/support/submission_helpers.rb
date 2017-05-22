@@ -34,25 +34,25 @@ def claim_fee_entry_and_visit
 end
 
 def visit_assigned_part_1_submission
-  submission = create(:assigned_submission, part: :part_1)
+  submission = create(:approvable_submission, part: :part_1)
   login_to_part_1(submission.claimant)
   visit submission_path(submission)
 end
 
 def visit_assigned_part_2_submission
-  submission = create(:assigned_submission, part: :part_2)
+  submission = create(:approvable_submission, part: :part_2)
   login_to_part_2(submission.claimant)
   visit submission_path(submission)
 end
 
 def visit_assigned_part_4_submission
-  submission = create(:assigned_submission, part: :part_4)
+  submission = create(:approvable_submission, part: :part_4)
   login_to_part_4(submission.claimant)
   visit submission_path(submission)
 end
 
 def visit_name_approved_part_2_submission
-  submission = create(:assigned_submission, part: :part_2)
+  submission = create(:approvable_submission, part: :part_2)
   create(:submission_name_approval, submission: submission)
 
   login_to_part_2(submission.claimant)
@@ -60,7 +60,7 @@ def visit_name_approved_part_2_submission
 end
 
 def visit_name_approved_part_1_submission
-  submission = create(:assigned_submission, part: :part_1)
+  submission = create(:approvable_submission, part: :part_1)
   create(:submission_name_approval, submission: submission)
 
   login_to_part_1(submission.claimant)
@@ -68,7 +68,7 @@ def visit_name_approved_part_1_submission
 end
 
 def visit_name_approved_part_1_provisional_submission
-  submission = create(:assigned_submission, part: :part_1, task: :provisional)
+  submission = create(:approvable_submission, part: :part_1, task: :provisional)
   create(:submission_name_approval, submission: submission)
 
   login_to_part_1(submission.claimant)
@@ -76,7 +76,7 @@ def visit_name_approved_part_1_provisional_submission
 end
 
 def visit_name_approved_part_4_submission
-  submission = create(:assigned_submission, part: :part_4)
+  submission = create(:approvable_submission, part: :part_4)
   create(:submission_name_approval, submission: submission)
 
   login_to_part_4(submission.claimant)
@@ -96,9 +96,9 @@ def visit_part_2_change_vessel_submission
   registered_vessel =
     create(:registered_vessel, part: :part_2, gross_tonnage: 100)
   submission =
-    create(:assigned_submission, part: :part_2,
-                                 task: :change_vessel,
-                                 registered_vessel: registered_vessel)
+    create(:approvable_submission, part: :part_2,
+                                   task: :change_vessel,
+                                   registered_vessel: registered_vessel)
 
   login_to_part_2(submission.claimant)
   visit submission_path(submission)
@@ -106,7 +106,8 @@ end
 
 def visit_carving_and_marking_ready_submission
   changeset = { vessel_info: { net_tonnage: 1000, name: "CM BOAT" } }
-  submission = create(:assigned_submission, part: :part_2, changeset: changeset)
+  submission = create(:assigned_submission, part: :part_2,
+                                            changeset: changeset)
 
   Builders::OfficialNoBuilder.build(submission)
 
@@ -118,9 +119,9 @@ def visit_assigned_csr_submission
   registered_vessel =
     create(:registered_vessel, part: :part_1)
   submission =
-    create(:assigned_submission, task: :issue_csr,
-                                 part: :part_1,
-                                 registered_vessel: registered_vessel)
+    create(:approvable_submission, task: :issue_csr,
+                                   part: :part_1,
+                                   registered_vessel: registered_vessel)
 
   login_to_part_1(submission.claimant)
   visit submission_path(submission)
