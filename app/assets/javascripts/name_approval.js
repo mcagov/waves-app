@@ -16,6 +16,7 @@ $(document).ready(function() {
 
   $('#submission_name_approval_port_code').on('change', function(){
     feedback_port_no();
+    $('#submission_name_approval_port_no').val('');
   });
 
   // on load
