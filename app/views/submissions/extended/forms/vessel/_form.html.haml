@@ -183,7 +183,7 @@
         .col-md-2{ class: vessel_change_css(:propulsion_system) }
           = vessel_f.input :propulsion_system,
             label: vessel_change_label(:propulsion_system),
-            collection: propulsion_system_collection
+            collection: (propulsion_system_collection << vessel_f.object.propulsion_system)
 
       %hr
       %h2 Construction
