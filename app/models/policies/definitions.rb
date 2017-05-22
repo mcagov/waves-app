@@ -17,6 +17,7 @@ class Policies::Definitions
       errors
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def submission_errors(submission)
       errors = []
       errors << :vessel_frozen if frozen?(submission)
@@ -24,8 +25,10 @@ class Policies::Definitions
       errors << :payment_required if unpaid?(submission)
       errors << :carving_marking_receipt if cm_pending?(submission)
       errors << :shareholding_count if sh_incomplete?(submission)
+      errors << :correspondent_required if no_correspondent?(submission)
       errors
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def frozen?(obj)
       obj.registration_status == :frozen
@@ -47,6 +50,11 @@ class Policies::Definitions
     def sh_incomplete?(submission)
       return false unless Policies::Workflow.uses_shareholding?(submission)
       ShareHolding.new(submission).status != :complete
+    end
+
+    def no_correspondent?(submission)
+      return false if submission.part.to_sym == :part_3
+      submission.correspondent.blank?
     end
 
     def fishing_vessel?(obj)

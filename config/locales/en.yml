@@ -56,6 +56,7 @@ en:
       declarations_required: Declarations are not complete
       carving_marking_receipt: Carving & Marking Note has been issued but not marked as received
       shareholding_count: All 64 shares must be allocated
+      correspondent_required: A correspondent is required
     approval:
       inline-btn:
         new_registration: Complete Registration
