@@ -47,7 +47,7 @@ describe Policies::Definitions do
       it { expect(subject).to include(:payment_required) }
     end
 
-    context "with shareholding count" do
+    context "shareholding count must total 64" do
       let(:error_key) { :shareholding_count }
       let(:submission) { create(:incomplete_submission, part: part) }
 
