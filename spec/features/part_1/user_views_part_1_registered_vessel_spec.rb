@@ -11,6 +11,7 @@ describe "User views Part 1 registered vessel", type: :feature, js: true do
 
   scenario "UI Elements" do
     expect(page).to have_css("#vessel_type_label", text: "Type of BARGE")
+    expect_ec_no(false)
     expect_charterers(false)
     expect_managers(true)
     expect_mortgages(true)

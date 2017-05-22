@@ -3,6 +3,10 @@ module PoliciesHelper
     Policies::Workflow.uses_csr_forms?(obj)
   end
 
+  def display_ec_no?(obj)
+    Policies::Definitions.fishing_vessel?(obj)
+  end
+
   def display_charterers?(obj)
     Policies::Definitions.charterable?(obj)
   end
