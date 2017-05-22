@@ -6,4 +6,8 @@ namespace :waves do
   task process_reminders: :environment do
     Reminder.process_all
   end
+
+  task unclaim_claimed_submissions: :environment do
+    Submission.assigned.map(&:unclaimed!)
+  end
 end
