@@ -56,6 +56,8 @@ FactoryGirl.define do
     after(:create) do |submission|
       submission.claimed!(create(:user))
       submission.declarations.first.update_attribute(:shares_held, 64)
+      submission.update_attribute(
+        :correspondent_id, submission.declarations.first.id)
     end
   end
 

@@ -47,7 +47,33 @@ describe Policies::Definitions do
       it { expect(subject).to include(:payment_required) }
     end
 
-    context "with shareholding count" do
+    context "correspondent must be set" do
+      let(:error_key) { :correspondent_required }
+      let(:submission) { create(:incomplete_submission, part: part) }
+
+      context "with a part_3 submission" do
+        let(:part) { :part_3 }
+
+        it { expect(subject).not_to include(error_key) }
+      end
+
+      context "with a submission for another part" do
+        let(:part) { :part_2 }
+
+        it { expect(subject).to include(error_key) }
+
+        context "when a correspondent is assigned" do
+          before do
+            submission.correspondent_id = submission.declarations.first.id
+            submission.save!
+          end
+
+          it { expect(subject).not_to include(error_key) }
+        end
+      end
+    end
+
+    context "shareholding count must total 64" do
       let(:error_key) { :shareholding_count }
       let(:submission) { create(:incomplete_submission, part: part) }
 
