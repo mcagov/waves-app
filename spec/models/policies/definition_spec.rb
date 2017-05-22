@@ -47,6 +47,40 @@ describe Policies::Definitions do
       it { expect(subject).to include(:payment_required) }
     end
 
+    context "with shareholding count" do
+      let(:error_key) { :shareholding_count }
+      let(:submission) { create(:incomplete_submission, part: part) }
+
+      context "for a vessel that doesn't use shareholding" do
+        let(:part) { :part_2 }
+
+        before do
+          dbl_shareholding = double("ShareHolding", status: shareholding_status)
+
+          allow(ShareHolding)
+            .to receive(:new).and_return(dbl_shareholding)
+        end
+
+        context "when the shareholding status is :complete" do
+          let(:shareholding_status) { :complete }
+
+          it { expect(subject).not_to include(error_key) }
+        end
+
+        context "when the shareholding status is not :complete" do
+          let(:shareholding_status) { :foo }
+
+          it { expect(subject).to include(error_key) }
+        end
+      end
+
+      context "for a vessel that doesn't use shareholding" do
+        let(:part) { :part_4 }
+
+        it { expect(subject).not_to include(error_key) }
+      end
+    end
+
     context "carving_marking_receipt" do
       let(:error_key) { :carving_marking_receipt }
 
