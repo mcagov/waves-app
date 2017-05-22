@@ -46,8 +46,12 @@ module CollectionHelper
     WavesUtilities::DocumentType.all(part)
   end
 
-  def propulsion_system_collection
-    WavesUtilities::PropulsionSystem.all
+  def propulsion_system_collection(propulsion_system = nil)
+    collection = WavesUtilities::PropulsionSystem.all
+    # note that #to_s is to handle legacy propulsion_systems
+    # that were previously defined as arrays
+    collection << propulsion_system unless propulsion_system.to_s.blank?
+    collection.uniq
   end
 
   def issuing_authorities_collection
