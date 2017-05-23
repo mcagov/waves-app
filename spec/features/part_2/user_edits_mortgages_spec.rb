@@ -51,7 +51,7 @@ describe "User edits mortgages", js: :true do
     end
 
     within("#mortgages_tab") do
-      click_on("Remove")
+      click_on("Discharge")
       expect(page).not_to have_css(".reference_number")
       expect(Submission.last.mortgages).to be_empty
     end
