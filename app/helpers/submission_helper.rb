@@ -89,6 +89,7 @@ module SubmissionHelper
   end
 
   def link_to_change_name_or_pln(submission)
+    return "" if @readonly
     title = submission.part.to_sym == :part_1 ? "Port" : "PLN"
     link_to "Change Name or #{title}",
             submission_name_approval_path(@submission)

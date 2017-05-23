@@ -1,4 +1,19 @@
 $(document).ready(function() {
+  $('#submission_name_approval_registration_type').on('change', function() {
+    var registration_type = $(this).val();
+    var part = $('#submission_name_approval_part').val();
+
+    if (part != 'part_4'){ return }
+
+    if (registration_type == 'fishing') {
+      $('.port_no_fields').removeClass('hidden');
+    }
+    else
+    {
+      $('.port_no_fields').addClass('hidden');
+    }
+  });
+
   $('#validate_name').on('click', function(e) {
     $('#name_approval form').submit();
     e.preventDefault();
