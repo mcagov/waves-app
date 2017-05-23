@@ -44,16 +44,16 @@
             include_blank: false,
             input_html: { class: "select2 select2_single searchable" }
 
-          - if display_vessel_object?(:port_no, @submission)
-            .port_no_fields
-              .col-md-2.approval_port-no
-                = f.input :port_no,
-                  as: :feedback,
-                  feedback_label: f.object.port_code || "A",
-                  placement: :left,
-                  hint: "leave blank for system-generated port number",
-                  label: "Port Number",
-                  required: false
+
+          .port_no_fields{ class: ("hidden" unless display_vessel_object?(:port_no, @name_approval)) }
+            .col-md-2.approval_port-no
+              = f.input :port_no,
+                as: :feedback,
+                feedback_label: f.object.port_code || "A",
+                placement: :left,
+                hint: "leave blank for system-generated port number",
+                label: "Port Number",
+                required: false
 
           .col-md-2
             = f.input :approved_until, as: :select,
