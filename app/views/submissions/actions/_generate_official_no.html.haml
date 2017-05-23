@@ -6,6 +6,7 @@
     .modal-content
       = simple_form_for OfficialNo.new,
                         url:  submission_official_no_path(@submission),
+                        remote: true,
                         method: :put do |f|
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}

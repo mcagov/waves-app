@@ -34,12 +34,13 @@ describe "User generates an official no", js: true do
   end
 
   scenario "with invalid user-input" do
+    create(:registered_vessel, reg_no: "SSR200001")
+
     within(".modal.fade.in") do
       find_field("official_no_content").set("SSR200001")
       click_on("Continue")
     end
 
-    expect(page)
-      .to have_css(".alert", text: "Official Number is not available")
+    expect(page).to have_css(".modal.fade.in", text: "Generate Official No")
   end
 end

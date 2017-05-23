@@ -1,0 +1,10 @@
+:plain
+  $("#generate-official-no").modal('hide');
+  $('.modal-backdrop').remove();
+  $('body').removeClass('modal-open');
+
+  $('#official-and-ec-no').html(
+    '#{escape_javascript(
+      render partial: "/submissions/info/official_no",
+      locals: { submission: @submission })}'
+  );
