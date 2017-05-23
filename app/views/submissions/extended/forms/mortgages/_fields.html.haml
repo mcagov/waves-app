@@ -7,9 +7,9 @@
       input_html: { class: "select2 select2_single" }
   .col-md-3
     = mortgage_f.input :reference_number, label: "Reference Number"
-  .col-md-2
-    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
-  .col-md-2
+  .col-md-3
+    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { class: "datetimepicker" }
+  .col-md-3
     = mortgage_f.input :amount, label: "Mortgage Amount"
 .row
   .col-md-12

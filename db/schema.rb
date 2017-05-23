@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516095603) do
+ActiveRecord::Schema.define(version: 20170523135640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,8 +250,7 @@ ActiveRecord::Schema.define(version: 20170516095603) do
     t.string   "parent_type"
     t.string   "mortgage_type"
     t.string   "reference_number"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.datetime "start_date"
     t.string   "amount"
     t.string   "mortgagor"
     t.datetime "created_at",       null: false

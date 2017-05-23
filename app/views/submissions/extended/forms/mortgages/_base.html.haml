@@ -18,7 +18,7 @@
             "data-target" => "#edit_mortgage_#{mortgage.id}",
             "data-toggle" => "modal"
         %td.reference_number= mortgage.reference_number
-        %td.start_date= mortgage.start_date
+        %td.start_date= mortgage.start_date.to_s(:date_time) if mortgage.start_date
         %td.amount= mortgage.amount
         %td.mortgagor= mortgage.mortgagor
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")

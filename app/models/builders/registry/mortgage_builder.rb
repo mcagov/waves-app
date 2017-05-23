@@ -23,7 +23,6 @@ class Builders::Registry::MortgageBuilder
         mortgage_type: submission_mortgage.mortgage_type,
         reference_number: submission_mortgage.reference_number,
         start_date: submission_mortgage.start_date,
-        end_date: submission_mortgage.end_date,
         amount: submission_mortgage.amount,
         mortgagor: submission_mortgage.mortgagor)
 
