@@ -25,7 +25,6 @@ describe Submission::ApplicationProcessor do
         expect_registration_builder
         dont_expect_cloned_registration_builder
         expect_print_job_builder
-        dont_expect_csr_issue_number_builder
       end
 
       it { subject }
@@ -45,7 +44,6 @@ describe Submission::ApplicationProcessor do
           expect_registration_builder
           dont_expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -59,7 +57,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           dont_expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -73,7 +70,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -87,7 +83,6 @@ describe Submission::ApplicationProcessor do
           expect_registration_builder
           dont_expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -102,7 +97,6 @@ describe Submission::ApplicationProcessor do
           expect_closed_registration_builder
           dont_expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -116,7 +110,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -131,7 +124,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           dont_expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -145,7 +137,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -159,7 +150,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           expect_print_job_builder
-          expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -173,7 +163,6 @@ describe Submission::ApplicationProcessor do
           dont_expect_registration_builder
           expect_cloned_registration_builder
           dont_expect_print_job_builder
-          dont_expect_csr_issue_number_builder
         end
 
         it { subject }
@@ -224,12 +213,4 @@ end
 
 def dont_expect_print_job_builder
   expect(Builders::PrintJobBuilder).not_to receive(:create)
-end
-
-def expect_csr_issue_number_builder
-  expect(Builders::CsrIssueNumberBuilder).to receive(:build)
-end
-
-def dont_expect_csr_issue_number_builder
-  expect(Builders::CsrIssueNumberBuilder).not_to receive(:build)
 end
