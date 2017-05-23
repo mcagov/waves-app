@@ -238,13 +238,40 @@ describe Submission, type: :model do
       it { expect(submission).to be_completed }
     end
 
-    context "#cancelled (when there is a name_approval)" do
+    context "#cancelled (cleaning up the name_approval)" do
       let(:name_approval) { create(:submission_name_approval) }
 
       before { name_approval.submission.cancelled! }
 
       it "sets the name_approval#cancelled_at" do
         expect(name_approval.cancelled_at).to be_present
+      end
+    end
+
+    context "#cancelled (cleaning up the registered_vessel)" do
+      let!(:submission) do
+        create(:assigned_submission, registered_vessel: vessel)
+      end
+
+      before do
+        submission.cancelled!
+        submission.reload
+      end
+
+      context "with the vessel's registration is pending" do
+        let!(:vessel) { create(:pending_vessel) }
+
+        it "removes the registered_vessel" do
+          expect(submission.registered_vessel).to be_nil
+        end
+      end
+
+      context "with the vessel is already registered" do
+        let!(:vessel) { create(:registered_vessel) }
+
+        it "retains the registered_vessel" do
+          expect(submission.registered_vessel).to eq(vessel)
+        end
       end
     end
   end
