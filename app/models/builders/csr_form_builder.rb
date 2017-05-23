@@ -16,7 +16,7 @@ class Builders::CsrFormBuilder
       CsrForm.create(
         submission_id: @submission.id,
         vessel_id: @submission.registered_vessel.id,
-        issue_number: nil, # generate by ApplicationProcessor
+        issue_number: next_issue_number,
         issued_at: Date.today,
         registered_at: first_registration_date,
         vessel_name: @vessel.name,
@@ -60,6 +60,10 @@ class Builders::CsrFormBuilder
 
     def listify(arr)
       arr.reject(&:blank?).join("; ")
+    end
+
+    def next_issue_number
+      @submission.registered_vessel.csr_forms.maximum(:issue_number).to_i + 1
     end
   end
 end

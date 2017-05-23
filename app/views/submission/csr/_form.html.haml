@@ -8,6 +8,9 @@
       %th Data for CSR
     %tbody
       %tr
+        %td CSR Number
+        %td= f.input :issue_number, label: false
+      %tr
         %td 1. This document applies from (date):
         %td
           = f.input :issued_at, label: false,
