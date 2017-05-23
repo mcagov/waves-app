@@ -5,7 +5,6 @@
     %th Mortgage Type
     %th Reference Number
     %th Start Date
-    %th End Date
     %th Amount
     %th Mortgagor(s)
     %th Mortgagee(s)
@@ -19,8 +18,7 @@
             "data-target" => "#edit_mortgage_#{mortgage.id}",
             "data-toggle" => "modal"
         %td.reference_number= mortgage.reference_number
-        %td.start_date= mortgage.start_date
-        %td.end_date= mortgage.end_date
+        %td.start_date= mortgage.start_date.to_s(:date_time) if mortgage.start_date
         %td.amount= mortgage.amount
         %td.mortgagor= mortgage.mortgagor
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
@@ -33,7 +31,7 @@
               data: { confirm: "Are you sure you want to remove this mortgage?" },
               style: 'color: red;' do
               %i.fa.fa-trash
-              Remove
+              Discharge
 
 - unless @readonly
   .row

@@ -52,7 +52,7 @@
               %tr.submission{ id: "submission_#{ submission.id }"}
                 %td.vessel-name= link_to submission.vessel_name, submission_path(submission)
                 %td= submission.vessel_reg_no
-                %td= submission.job_type
+                %td= link_to submission.job_type, submission_path(submission)
                 %td= submission.received_at
                 %td= submission.referred? ? submission.referred_until : "n/a"
                 %td= submission.target_date
