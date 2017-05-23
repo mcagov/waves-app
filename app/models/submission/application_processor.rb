@@ -9,7 +9,6 @@ class Submission::ApplicationProcessor
       assign_registration
 
       build_print_jobs
-      build_csr_issue_number
     end
 
     private
@@ -65,10 +64,6 @@ class Submission::ApplicationProcessor
 
     def printable
       @task.issues_csr? ? @submission.csr_form : @submission.registration
-    end
-
-    def build_csr_issue_number
-      Builders::CsrIssueNumberBuilder.build(@submission) if @task.issues_csr?
     end
   end
 end
