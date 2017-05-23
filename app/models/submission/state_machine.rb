@@ -52,7 +52,10 @@ module Submission::StateMachine
 
         event :cancelled do
           transitions to: :cancelled, from: :assigned,
-                      on_transition: [:remove_claimant, :cancel_name_approval]
+                      on_transition: [
+                        :remove_claimant,
+                        :cancel_name_approval,
+                        :remove_pending_vessel]
         end
 
         event :referred do

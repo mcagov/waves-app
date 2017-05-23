@@ -28,6 +28,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :pending_vessel, class: "Register::Vessel" do
+    part              :part_3
+    sequence(:name)   { |n| "Registered Boat #{n}" }
+  end
+
   factory :fishing_vessel, parent: :registered_vessel do
     part :part_2
   end

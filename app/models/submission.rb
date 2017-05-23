@@ -124,6 +124,11 @@ class Submission < ApplicationRecord
     name_approval.update_attribute(:cancelled_at, Time.now)
   end
 
+  def remove_pending_vessel
+    return unless registration_status == :pending
+    registered_vessel.destroy
+  end
+
   def registered_vessel_exists
     if Policies::Actions.registered_vessel_required?(self)
       unless registered_vessel
