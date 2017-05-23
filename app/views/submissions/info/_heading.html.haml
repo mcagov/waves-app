@@ -7,21 +7,8 @@
         for
         %span.vessel-name #{ submission.vessel_name }. ID:
         %span.ref-no= submission.ref_no || "Not yet generated"
-    .row
-      .col-md-3
-        %h5.official-no
-          Official No:
-          - if submission.vessel_reg_no.present?
-            = link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
-          - elsif Policies::Workflow.generate_official_no?(submission)
-            - unless @readonly
-              = render partial: "submissions/actions/generate_official_no"
-      - if display_ec_no?(submission)
-        .col-md-3
-          %h5#ec-no
-            EC No:
-            - if submission.registered_vessel
-              = EcNo.for_vessel(submission.registered_vessel)
+    .row#official-and-ec-no
+      = render partial: "/submissions/info/official_no", locals: { submission: submission }
 
   .col-md-2
     %h2.pull-right= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }

@@ -1,4 +1,6 @@
 class Submission::OfficialNoController < InternalPagesController
+  respond_to :js
+
   def update
     @submission = Submission.find(params[:submission_id])
     @official_no = OfficialNo.new(official_no_params)
@@ -6,12 +8,11 @@ class Submission::OfficialNoController < InternalPagesController
     reg_no = official_no_params[:content]
 
     if reg_no && !RegNoValidator.valid?(reg_no)
-      flash[:notice] = "That Official Number is not available"
+      render :error
     else
       Builders::OfficialNoBuilder.build(@submission, reg_no)
+      render :update
     end
-
-    redirect_to @submission
   end
 
   protected
