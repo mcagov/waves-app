@@ -6,6 +6,8 @@ class NotificationsController < InternalPagesController
     case params[:template]
     when "refer"
       render :refer
+    when "cancel"
+      render :cancel
     end
   end
 

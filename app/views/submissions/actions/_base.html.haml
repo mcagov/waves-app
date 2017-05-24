@@ -15,7 +15,10 @@
 
         / cancel button and modal
         = render partial: "submissions/modals/cancel", locals: { submission: @submission }
-        = link_to "#cancel-application", "data-target" => "#cancel-application", "data-toggle" => "modal", class: "btn btn-link" do
+        = link_to notification_path(@submission, template: :cancel),
+                  data: { target: "#cancel-application", toggle: "modal" },
+                  class: "btn btn-link",
+                  remote: true do
           %i.fa.fa-trash
           Cancel Application
 
