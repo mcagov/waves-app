@@ -19,6 +19,10 @@ class Declaration < ApplicationRecord
     event :declared, timestamp: true do
       transitions to: :completed, from: :incomplete
     end
+
+    event :incomplete do
+      transitions to: :incomplete, from: :completed
+    end
   end
 
   attr_accessor :declaration_signed

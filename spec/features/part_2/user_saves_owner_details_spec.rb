@@ -21,9 +21,11 @@ describe "User save owner details", js: :true do
 
     click_on("BOB BOLD")
     fill_in("IMO Number", with: "7654321")
+    within(".declaration_declaration_signed") { choose("No") }
     click_on("Save Individual Owner")
 
     expect(page).to have_css(".owner-imo_number", text: "7654321")
+    expect(Submission.last.declarations.last.current_state).to eq(:incomplete)
   end
 
   scenario "Corporate owner" do
