@@ -16,6 +16,7 @@ describe NotificationsController, type: :controller do
         message: "something to tell you",
         actionable_at: 30.days.from_now,
       },
+      send_email: "yes",
     }
   end
 

@@ -1,14 +1,12 @@
 - if submission.cancelled?
   #prompt.alert.alert-info
-    Application Cancelled by #{ submission.previous_update_by }
+    Application Cancelled.
     - if submission.cancellation
-      \:
       #{ submission.cancellation.subject }.
 
 - elsif submission.referred?
   #prompt.alert.alert-warning
-    Application Referred by #{ submission.previous_update_by }
+    Application Referred.
     - if submission.referral
-      \:
       #{ submission.referral.subject.to_s.humanize }.
     Next action due by #{ submission.referred_until }.

@@ -1,16 +1,30 @@
 class NotificationsController < InternalPagesController
   before_action :load_submission
 
+  def show
+    @submission = Decorators::Submission.new(@submission)
+    case params[:template]
+    when "refer"
+      render :refer
+    when "cancel"
+      render :cancel
+    end
+  end
+
   def cancel
-    Notification::Cancellation.create(parsed_notification_params)
+    if params[:send_email].present?
+      Notification::Cancellation.create(parsed_notification_params)
+    end
 
     flash[:notice] = "You have successfully cancelled that application"
     @submission.cancelled!
+
+    log_work!(@submission, @submission, :cancellation)
     redirect_to tasks_my_tasks_path
   end
 
   def refer
-    unless params[:do_not_send_email].present?
+    if params[:send_email].present?
       Notification::Referral.create(parsed_notification_params)
     end
 
@@ -19,6 +33,8 @@ class NotificationsController < InternalPagesController
       :referred_until, notification_params[:actionable_at])
 
     @submission.referred!
+
+    log_work!(@submission, @submission, :referred)
     redirect_to tasks_my_tasks_path
   end
 

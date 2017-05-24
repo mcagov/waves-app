@@ -1,31 +1,10 @@
 .modal.fade{id: "refer-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for Notification.new(actionable_at: default_referred_until), url: refer_notification_path(submission) do |f|
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title Refer Application
-        .modal-body
-          .row
-            .col-sm-9
-              .form-group
-                = f.input :subject, as: :select, label: "Reason for Referral",
-                  collection: Notification::Referral::REASONS.map{|r| [r.to_s.humanize,r.to_s]},
-                  include_blank: false
-            .col-sm-3
-              .form-group
-                = f.input :actionable_at, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
-          .row
-            .col-sm-12
-              .form-group
-                = render partial: "shared/fields/message_editor",
-                  locals: { f: f, message_type: :refer }
-          .row
-            .col-md-12
-              .form-group
-                %label
-                  %input{name: "do_not_send_email", value: "application_receipt", type: "checkbox"}
-                  Do not send email to Correspondent
-        .modal-footer
-          = f.submit "Refer Application", class: "btn btn-lg btn-warning"
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Refer Application
+      .modal-body
+        %p.text-center
+          = image_tag 'ajax-loader.gif'
