@@ -16,10 +16,6 @@ class Decorators::Submission < SimpleDelegator
     source.titleize if source
   end
 
-  def previous_update_by
-    ""
-  end
-
   def display_registry_info?
     return false if Task.new(task).re_registration?
     registry_info.present?

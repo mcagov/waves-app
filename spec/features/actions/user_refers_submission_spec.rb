@@ -23,6 +23,7 @@ feature "User refers a submission", type: :feature, js: true do
 
     click_on "Referred Applications"
     expect(Notification::Referral.last.body).to have_text("Referred!")
+    creates_a_work_log_entry("Submission", :referred)
 
     click_on @vessel_name
 
@@ -40,7 +41,9 @@ feature "User refers a submission", type: :feature, js: true do
       first(
         "a", text: "Application Referred - Action Required").click
     end
+
     expect(page).to have_css("h4", text: "Referral Email")
+    creates_a_work_log_entry("Submission", :referral_reclaimed)
   end
 
   scenario "without sending an email" do
@@ -51,7 +54,7 @@ feature "User refers a submission", type: :feature, js: true do
 
   def referral_prompt
     # rubocop:disable all
-    /Application Referred by.*: Unknown vessel type\. Next action due by 12\/12\/2020\./
+    /Application Referred. Unknown vessel type\. Next action due by 12\/12\/2020\./
     # rubocop:enable all
   end
 end

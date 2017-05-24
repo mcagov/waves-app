@@ -20,12 +20,13 @@ feature "User cancels a submission", type: :feature, js: true do
 
     click_on "Cancelled Applications"
     expect(Notification::Cancellation.last.body).to have_text("Sorry!")
+    creates_a_work_log_entry("Submission", :cancellation)
 
     click_on(@submission.vessel.name)
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Cancelled by.*: Rejected \(by RSS\)/
+        /Application Cancelled. Rejected \(by RSS\)/
       )
     end
 

@@ -6,6 +6,8 @@ class NotificationsController < InternalPagesController
 
     flash[:notice] = "You have successfully cancelled that application"
     @submission.cancelled!
+
+    log_work!(@submission, @submission, :cancellation)
     redirect_to tasks_my_tasks_path
   end
 
@@ -19,6 +21,8 @@ class NotificationsController < InternalPagesController
       :referred_until, notification_params[:actionable_at])
 
     @submission.referred!
+
+    log_work!(@submission, @submission, :referred)
     redirect_to tasks_my_tasks_path
   end
 

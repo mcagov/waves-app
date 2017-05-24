@@ -29,6 +29,7 @@ class Submission::StatesController < InternalPagesController
     @submission.unreferred!
     @submission.claimed!(current_user)
 
+    log_work!(@submission, @submission, :referral_reclaimed)
     flash[:notice] = "You have successfully claimed this application"
     redirect_to tasks_my_tasks_path
   end
