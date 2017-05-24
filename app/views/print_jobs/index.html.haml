@@ -32,7 +32,7 @@
                 = link_to print_job_path(print_job, format: :pdf), target: "_blank" do
                   %i.fa.fa-print
                   Print
-              %td= print_job.printable.actioned_by
+              %td= print_job.printed_by
               %td= print_job.created_at.to_s(:date_time) if print_job.created_at
 
 .row#printing
