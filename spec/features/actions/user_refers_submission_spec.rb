@@ -43,7 +43,6 @@ feature "User refers a submission", type: :feature, js: true do
     end
 
     expect(page).to have_css("h4", text: "Referral Email")
-    creates_a_work_log_entry("Submission", :referral_reclaimed)
   end
 
   scenario "without sending an email" do

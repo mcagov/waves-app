@@ -4,7 +4,7 @@
     %th Activity
     %th Officer
   %tbody
-    - @submission.work_logs.reverse.each do |work_log|
+    - @submission.work_logs.each do |work_log|
       %tr
         %td= work_log.created_at.in_time_zone.to_s(:date_time)
         %td= work_log.description.humanize
