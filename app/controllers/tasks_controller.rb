@@ -50,6 +50,7 @@ class TasksController < InternalPagesController
     Submission
       .in_part(current_activity.part)
       .includes(:claimant, :declarations, payments: [:remittance])
+      .paginate(page: params[:page], per_page: 50)
       .active
   end
 end
