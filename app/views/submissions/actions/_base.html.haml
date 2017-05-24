@@ -6,7 +6,10 @@
         - if @submission.referrable?
           / refer button and modal
           = render partial: "submissions/modals/refer", locals: { submission: @submission }
-          = link_to "#refer-application", "data-target" => "#refer-application", "data-toggle" => "modal", class: "btn btn-warning btn-refer-submission" do
+          = link_to notification_path(@submission, template: :refer),
+            data: { target: "#refer-application", toggle: "modal" },
+            class: "btn btn-warning btn-refer-submission",
+            remote: true do
             %i.fa.fa-pause
             Refer Application
 

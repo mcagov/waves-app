@@ -1,6 +1,14 @@
 class NotificationsController < InternalPagesController
   before_action :load_submission
 
+  def show
+    @submission = Decorators::Submission.new(@submission)
+    case params[:template]
+    when "refer"
+      render :refer
+    end
+  end
+
   def cancel
     if params[:send_email].present?
       Notification::Cancellation.create(parsed_notification_params)
