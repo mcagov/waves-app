@@ -61,4 +61,6 @@
                 %td= submission.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
 
+      = will_paginate @submissions, renderer: BootstrapPagination::Rails
+
 
