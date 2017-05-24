@@ -17,6 +17,7 @@ class Submission::DeclarationsController < InternalPagesController
     @declaration.update_attributes(declaration_params)
 
     sign_declaration if @declaration.declaration_signed == "true"
+    unsign_declaration if @declaration.declaration_signed == "false"
 
     @modal_id = "declaration_#{@declaration.id}"
     render_update_js
@@ -59,7 +60,14 @@ class Submission::DeclarationsController < InternalPagesController
   end
 
   def sign_declaration
+    return if @declaration.completed?
     @declaration.completed_by = current_user
     @declaration.declared! if @declaration.save
+  end
+
+  def unsign_declaration
+    return if @declaration.incomplete?
+    @declaration.completed_by = nil
+    @declaration.incomplete! if @declaration.save
   end
 end
