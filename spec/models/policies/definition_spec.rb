@@ -10,6 +10,15 @@ describe Policies::Definitions do
       it { expect(subject).to be_empty }
     end
 
+    context "for a task that does not write to the registry" do
+      let(:submission) do
+        create(:submission, task: :issue_csr,
+                            registered_vessel: create(:registered_vessel))
+      end
+
+      it { expect(subject).to be_empty }
+    end
+
     context "manual_override" do
       let(:submission) do
         build(:submission, task: :manual_override, changeset: [])

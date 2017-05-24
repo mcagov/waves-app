@@ -1,6 +1,7 @@
 class Policies::Definitions
   class << self
     def approval_errors(submission)
+      return [] unless Task.new(submission.task).validates_on_approval?
       errors = vessel_errors(submission)
 
       unless Task.new(submission.task) == :manual_override
