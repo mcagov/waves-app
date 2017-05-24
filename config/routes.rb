@@ -39,7 +39,6 @@ Rails.application.routes.draw do
   resources :notifications, only: [:show] do
     member do
       post :cancel
-      post :reject
       post :refer
     end
   end
