@@ -10,4 +10,8 @@ class Task < WavesUtilities::Task
   def re_registration?
     [:re_registration].include?(@key)
   end
+
+  def validates_on_approval?
+    ![:issue_csr].include?(@key)
+  end
 end
