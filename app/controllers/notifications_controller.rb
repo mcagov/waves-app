@@ -12,7 +12,7 @@ class NotificationsController < InternalPagesController
   end
 
   def refer
-    unless params[:do_not_send_email].present?
+    if params[:send_email].present?
       Notification::Referral.create(parsed_notification_params)
     end
 

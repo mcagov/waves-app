@@ -23,9 +23,12 @@
                   locals: { f: f, message_type: :refer }
           .row
             .col-md-12
-              .form-group
-                %label
-                  %input{name: "do_not_send_email", value: "application_receipt", type: "checkbox"}
-                  Do not send email to Correspondent
+              - if submission.applicant_name.present?
+                .form-group
+                  %label
+                    %input{name: "send_email", value: "application_receipt", type: "checkbox", checked: true}
+                    Send a referral email to #{submission.applicant_description}
+              - else
+                %p.red A referral email cannot be sent without an Email Recipient
         .modal-footer
           = f.submit "Refer Application", class: "btn btn-lg btn-warning"
