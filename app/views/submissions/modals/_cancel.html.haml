@@ -18,5 +18,14 @@
               .form-group
                 = render partial: "shared/fields/message_editor",
                   locals: { f: f, message_type: :cancel }
+          .row
+            .col-md-12
+              - if submission.applicant_name.present?
+                .form-group
+                  %label
+                    %input{name: "send_email", value: "application_receipt", type: "checkbox", checked: true}
+                    Send a cancellation email to #{submission.applicant_description}
+              - else
+                %p.red A cancellation email cannot be sent without an Email Recipient
         .modal-footer
           = f.submit "Cancel Application", class: "btn btn-lg btn-info"

@@ -2,7 +2,9 @@ class NotificationsController < InternalPagesController
   before_action :load_submission
 
   def cancel
-    Notification::Cancellation.create(parsed_notification_params)
+    if params[:send_email].present?
+      Notification::Cancellation.create(parsed_notification_params)
+    end
 
     flash[:notice] = "You have successfully cancelled that application"
     @submission.cancelled!
