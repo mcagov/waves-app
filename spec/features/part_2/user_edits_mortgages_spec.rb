@@ -46,6 +46,7 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       fill_in("Reference Number", with: "REF 2")
+      within all("#mortgagors .nested-fields")[1] { click_on("Remove") }
       within all("#mortgagees .nested-fields")[1] { click_on("Remove") }
       fill_in("Name of Mortgagee", with: "Doris")
 
@@ -54,6 +55,7 @@ describe "User edits mortgages", js: :true do
 
     within("#mortgages_tab") do
       expect(page).to have_css(".reference_number", text: "REF 2")
+      expect(page).to have_css(".mortgagors", text: "MARY")
       expect(page).to have_css(".mortgagees", text: "DORIS")
     end
 
