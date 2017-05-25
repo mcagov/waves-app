@@ -1,0 +1,26 @@
+.nested-fields
+  .row
+    .col-md-4
+      = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
+  .row
+    .col-md-4
+      = mortgagor_f.input :address_1, input_html: { class: "upcase address-1" }
+    .col-md-4
+      = mortgagor_f.input :address_2, input_html: { class: "upcase address-2" }
+    .col-md-4
+      = mortgagor_f.input :address_3, input_html: { class: "upcase address-3" }
+  .row
+    .col-md-4
+      = mortgagor_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
+    .col-md-4
+      = mortgagor_f.input :postcode, input_html: { class: "upcase postcode" }
+    .col-md-4
+      = mortgagor_f.input :country, collection: countries_collection, include_blank: false
+  / .row
+  /   .col-md-2
+  /     = link_to_remove_association mortgagor_f,
+  /       class: "btn btn-link",
+  /       style: "color: red; padding-top: 25px !important;" do
+  /       %i.fa.fa-trash
+  /       Remove
+  %hr

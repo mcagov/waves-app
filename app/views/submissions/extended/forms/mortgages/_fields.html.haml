@@ -23,9 +23,24 @@
     = mortgage_f.input :registered_at, as: :string, label: "Date Registered", disabled: true, hint: "(System generated)"
   .col-md-3
     = mortgage_f.input :discharged_at, as: :string, label: "Date Discharged", input_html: { class: "datetimepicker" }
-.row
-  .col-md-9
-    = mortgage_f.input :mortgagor, label: "Mortgagor(s)", input_html: { class: "upcase" }
+
+%hr
+%h4 Mortgagor(s)
+#mortgagors
+  - mortgage_f.object.mortgagors.build if mortgage_f.object.mortgagors.empty?
+  = mortgage_f.simple_fields_for :mortgagors do |mortgagor_f|
+    = render partial: "submissions/extended/forms/mortgages/mortgagor_fields",
+      locals: { mortgagor_f: mortgagor_f }
+  .links
+    = link_to_add_association mortgage_f, :mortgagors,
+      partial: "submissions/extended/forms/mortgages/mortgagor_fields",
+      class: "btn btn-link",
+      form_name: :mortgagor_f,
+      style: "color: green; padding: 0px !important" do
+      %i.fa.fa-plus
+      Add Extra Mortgagor
+
+
 %hr
 %h4 Mortgagees
 #mortgagees
