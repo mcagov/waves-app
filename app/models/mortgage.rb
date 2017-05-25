@@ -1,6 +1,6 @@
 class Mortgage < ApplicationRecord
   belongs_to :parent, polymorphic: true
-  has_many :mortgagees, inverse_of: :mortgage, dependent: :destroy
+  has_many :mortgagees, inverse_of: :mortgage, as: :parent, dependent: :destroy
   has_many :mortgagors, inverse_of: :mortgage, as: :parent, dependent: :destroy
 
   # rubocop:disable Style/AlignHash
