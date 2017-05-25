@@ -57,7 +57,7 @@
               %span{"aria-hidden" => "true"} ×
             %h4.modal-title New Mortgage
           .modal-body
-            = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+            = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f, submission: @submission }
 
           .modal-footer
             = mortgage_f.submit "Add Mortgage", class: "btn btn-primary"
@@ -74,7 +74,7 @@
                 %span{"aria-hidden" => "true"} ×
               %h4.modal-title Edit Mortgage
             .modal-body
-              = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+              = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f, submission: @submission }
 
             .modal-footer
               = mortgage_f.submit "Save Mortgage", class: "btn btn-primary"
