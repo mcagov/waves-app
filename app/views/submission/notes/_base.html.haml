@@ -8,30 +8,29 @@
       %tr
         %td{width: '15%'}= note.actioned_by
         %td{width: '65%'}
-          = link_to truncate(note.content, length: 100), "#note-#{ note.id }", "data-target" => "#note-#{ note.id }", "data-toggle" => "modal"
+          = link_to truncate(note.content, length: 100), "#edit-note-#{ note.id }", "data-target" => "#edit-note-#{ note.id }", "data-toggle" => "modal"
         %td{width: '20%'}
           = note.created_at.to_s(:date_time)
-          = render partial: "submission/notes/note", locals: { note: note }
+          = render partial: "submission/notes/edit", locals: { note: note, submission: submission }
 
 = link_to '#note-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#note-content-add", "data-toggle" => "modal" do
   %i.fa.fa-plus
   Add Note
 
 .modal.fade{id: 'note-content-add', role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-lg
+  .modal-dialog.modal-md
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title Add Note
       = simple_form_for Note.new,
-                        url: submission_note_path(submission),
+                        url: submission_notes_path(submission),
                         method: :post,
                         remote: true do |f|
         .modal-body
           .row
-            .col-sm-12
-              .form-group
-                = f.input :content, label: "Content", as: :text, input_html: { rows: 6 }
+            .col-md-12
+              = f.input :content, label: "Content", as: :text, input_html: { rows: 6 }
         .modal-footer
           = f.submit "Save Note", class: "btn btn-primary"

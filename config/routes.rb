@@ -140,9 +140,9 @@ Rails.application.routes.draw do
              controller: "submission/name_approvals",
              only: [:show, :update]
 
-    resource :note,
-             only: [:create],
-             controller: "submission/notes"
+    resources :notes,
+              only: [:create, :update],
+              controller: "submission/notes"
 
     resources :representatives,
               controller: "submission/representatives",

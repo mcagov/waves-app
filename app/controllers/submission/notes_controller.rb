@@ -13,6 +13,18 @@ class Submission::NotesController < InternalPagesController
     end
   end
 
+  def update
+    @note = Note.find(params[:id])
+    @note.actioned_by = current_user
+    @note.content = note_params[:content]
+    @note.save
+
+    @modal_id = "edit-note-#{@note.id}"
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def note_params
