@@ -1,5 +1,8 @@
 .row
   .col-md-3
+    = mortgage_f.input :priority_code, label: "Priority Code"
+.row
+  .col-md-3
     = mortgage_f.input :mortgage_type, as: :select,
       label: "Mortgage Type",
       collection: Mortgage.types_for(@submission),
@@ -8,13 +11,17 @@
   .col-md-3
     = mortgage_f.input :reference_number, label: "Reference Number"
   .col-md-3
-    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { class: "datetimepicker" }
-  .col-md-3
     = mortgage_f.input :amount, label: "Mortgage Amount"
 .row
-  .col-md-12
+  .col-md-3
+    = mortgage_f.input :executed_at, as: :string, label: "Date Executed", input_html: { class: "datetimepicker" }
+  .col-md-3
+    = mortgage_f.input :registered_at, as: :string, label: "Date Registered", disabled: true, hint: "(System generated)"
+  .col-md-3
+    = mortgage_f.input :discharged_at, as: :string, label: "Date Discharged", input_html: { class: "datetimepicker" }
+.row
+  .col-md-9
     = mortgage_f.input :mortgagor, label: "Mortgagor(s)", input_html: { class: "upcase" }
-
 %hr
 %h4 Mortgagees
 #mortgagees

@@ -20,9 +20,12 @@ class Builders::Registry::MortgageBuilder
 
     def build_mortgage(submission_mortgage)
       vessel_mortgage = @vessel.mortgages.create(
+        priority_code: submission_mortgage.priority_code,
         mortgage_type: submission_mortgage.mortgage_type,
         reference_number: submission_mortgage.reference_number,
-        start_date: submission_mortgage.start_date,
+        executed_at: submission_mortgage.executed_at,
+        registered_at: submission_mortgage.registered_at,
+        discharged_at: submission_mortgage.discharged_at,
         amount: submission_mortgage.amount,
         mortgagor: submission_mortgage.mortgagor)
 

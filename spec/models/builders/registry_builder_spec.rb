@@ -111,13 +111,12 @@ describe Builders::RegistryBuilder do
 
       it "creates the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
-        expect(mortgage.reference_number).to eq("MGT_1")
+        expect(mortgage.priority_code).to eq("A")
         expect(mortgage.mortgagees.first.name).to eq("Mary")
       end
 
       it "retains the submission's mortgages" do
-        expect(submission.reload.mortgages.first.reference_number)
-          .to eq("MGT_1")
+        expect(submission.reload.mortgages.first.priority_code).to eq("A")
       end
 
       it "creates the charterers" do
@@ -175,7 +174,7 @@ def init_basic_submission
     safety_management: SafetyManagement.new(address_1: "SM ADDRESS"))
 
   submission.mortgages.create(
-    reference_number: "MGT_1",
+    priority_code: "A",
     mortgagees: [Mortgagee.new(name: "Mary")])
 
   submission.charterers.create(

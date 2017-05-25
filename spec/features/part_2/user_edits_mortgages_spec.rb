@@ -7,9 +7,10 @@ describe "User edits mortgages", js: :true do
     click_on("Add Mortgage")
 
     within(".modal.fade.in") do
+      fill_in("Priority Code", with: "A")
       select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
-      fill_in("Start Date", with: "01/02/2001")
+      fill_in("Date Executed", with: "01/02/2001")
       fill_in("Mortgage Amount", with: "2000 pounds")
       fill_in("Mortgagor(s)", with: "Bob, Sally")
 
@@ -29,7 +30,7 @@ describe "User edits mortgages", js: :true do
       expect(page).to have_css(".priority", text: "A")
       expect(page).to have_css(".mortgage_type", text: "Intent")
       expect(page).to have_css(".reference_number", text: "REF 1")
-      expect(page).to have_css(".start_date", text: "Thu Feb 01, 2001")
+      expect(page).to have_css(".executed_at", text: "Thu Feb 01, 2001")
       expect(page).to have_css(".amount", text: "2000 pounds")
       expect(page).to have_css(".mortgagor", text: "BOB, SALLY")
       expect(page).to have_css(".mortgagees", text: "ALICE, CHARLIE")
@@ -51,7 +52,7 @@ describe "User edits mortgages", js: :true do
     end
 
     within("#mortgages_tab") do
-      click_on("Discharge")
+      click_on("Remove")
       expect(page).not_to have_css(".reference_number")
       expect(Submission.last.mortgages).to be_empty
     end

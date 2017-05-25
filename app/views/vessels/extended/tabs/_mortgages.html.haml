@@ -1,20 +1,32 @@
 %h2 Mortgages
 %table.table.table-striped
   %thead
-    %th Priority
+    %th Priority Code
     %th Mortgage Type
     %th Reference Number
-    %th Start Date
     %th Amount
     %th Mortgagor(s)
     %th Mortgagee(s)
+    %th Date Executed
+    %th Date Registered
+    %th Date Discharged
   %tbody
     - vessel.mortgages.order("created_at asc").each_with_index do |mortgage, index|
       %tr
-        %td.priority= letter_sequence(index)
+        %td.priority= mortgage.priority_code
         %td.mortgage_type= mortgage.mortgage_type
         %td.reference_number= mortgage.reference_number
-        %td.start_date= mortgage.start_date.to_s(:date_time) if mortgage.start_date
         %td.amount= mortgage.amount
         %td.mortgagor= mortgage.mortgagor
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
+        %td.executed_at= mortgage.executed_at.to_s(:date_time) if mortgage.executed_at
+        %td.registered_at= mortgage.registered_at.to_s(:date_time) if mortgage.registered_at
+        %td.discharged_at= mortgage.discharged_at.to_s(:date_time) if mortgage.discharged_at
+
+
+
+
+
+/ def letter_sequence(n)
+/   n.to_s(26).each_char.map { |i| ("A".."Z").to_a[i.to_i(26)] }.join
+/ end
