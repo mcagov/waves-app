@@ -17,16 +17,8 @@
         %td.mortgage_type= mortgage.mortgage_type
         %td.reference_number= mortgage.reference_number
         %td.amount= mortgage.amount
-        %td.mortgagor= mortgage.mortgagor
+        %td.mortgagor= mortgage.mortgagors.map(&:name).join(", ")
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
         %td.executed_at= mortgage.executed_at.to_s(:date_time) if mortgage.executed_at
         %td.registered_at= mortgage.registered_at.to_s(:date_time) if mortgage.registered_at
         %td.discharged_at= mortgage.discharged_at.to_s(:date_time) if mortgage.discharged_at
-
-
-
-
-
-/ def letter_sequence(n)
-/   n.to_s(26).each_char.map { |i| ("A".."Z").to_a[i.to_i(26)] }.join
-/ end

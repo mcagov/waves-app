@@ -26,18 +26,25 @@ class Builders::Registry::MortgageBuilder
         executed_at: submission_mortgage.executed_at,
         registered_at: submission_mortgage.registered_at,
         discharged_at: submission_mortgage.discharged_at,
-        amount: submission_mortgage.amount,
-        mortgagor: submission_mortgage.mortgagor)
+        amount: submission_mortgage.amount)
 
+      build_mortgagors_for(vessel_mortgage, submission_mortgage)
       build_mortgagees_for(vessel_mortgage, submission_mortgage)
+    end
+
+    def build_mortgagors_for(vessel_mortgage, submission_mortgage)
+      submission_mortgage.mortgagors.each do |submission_mortgagor|
+        mortgagor = Mortgagor.new(submission_mortgagor.attributes.except("id"))
+        mortgagor.parent = vessel_mortgage
+        mortgagor.save
+      end
     end
 
     def build_mortgagees_for(vessel_mortgage, submission_mortgage)
       submission_mortgage.mortgagees.each do |submission_mortgagee|
-        vessel_mortgage.mortgagees.create(
-          name: submission_mortgagee.name,
-          address: submission_mortgagee.address,
-          contact_details: submission_mortgagee.contact_details)
+        mortgagee = Mortgagee.new(submission_mortgagee.attributes.except("id"))
+        mortgagee.parent = vessel_mortgage
+        mortgagee.save
       end
     end
   end

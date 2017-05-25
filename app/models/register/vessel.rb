@@ -141,6 +141,7 @@ module Register
     def mortgages_info
       mortgages.map do |mortgage|
         mortgage.attributes.merge(
+          mortgagors: mortgage.mortgagors.map(&:attributes),
           mortgagees: mortgage.mortgagees.map(&:attributes))
       end
     end

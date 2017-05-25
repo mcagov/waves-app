@@ -112,6 +112,7 @@ describe Builders::RegistryBuilder do
       it "creates the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
         expect(mortgage.priority_code).to eq("A")
+        expect(mortgage.mortgagors.first.name).to eq("Phil")
         expect(mortgage.mortgagees.first.name).to eq("Mary")
       end
 
@@ -175,6 +176,7 @@ def init_basic_submission
 
   submission.mortgages.create(
     priority_code: "A",
+    mortgagors: [Mortgagor.new(name: "Phil")],
     mortgagees: [Mortgagee.new(name: "Mary")])
 
   submission.charterers.create(
