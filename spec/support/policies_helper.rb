@@ -70,3 +70,8 @@ def expect_extended_owner_fields(bln)
     expect_field(bln, "#beneficial_owners")
   end
 end
+
+def expect_notes_tab(_bln)
+  click_on("Notes")
+  within("#notes_tab #notes") { expect(page).to have_link("Add Note") }
+end

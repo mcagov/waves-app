@@ -37,6 +37,9 @@
             %li{:role => "presentation"}
               %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agent & Representative Person
 
+            %li{:role => "presentation"}
+              %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
+
           #myTabContent.tab-content
 
             #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -67,3 +70,6 @@
               #agent= render partial: "submissions/extended/forms/agents/base"
               %hr
               #representative= render partial: "submissions/extended/forms/representatives/base"
+
+            #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
+              #notes= render partial: "submission/notes/base", locals: { submission: @submission }
