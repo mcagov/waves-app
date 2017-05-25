@@ -15,6 +15,9 @@ module Submission::Associations
     def notes_associations(base)
       base.has_many :correspondences, as: :noteable
       base.has_many :documents, as: :noteable
+      base.has_many :notes,
+                    -> { where("type is null").order("created_at desc") },
+                    as: :noteable
     end
 
     def declaration_associations(base)
