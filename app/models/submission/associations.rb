@@ -38,7 +38,7 @@ module Submission::Associations
       base.has_many :work_logs
       base.has_many :carving_and_markings, -> { order("created_at asc") }
       base.has_many :engines, as: :parent
-      base.has_many :mortgages, -> { order("created_at asc") }, as: :parent
+      base.has_many :mortgages, -> { order("priority_code asc") }, as: :parent
       base.has_many :charterers, -> { order("created_at asc") }, as: :parent
       base.has_many :charter_parties, through: :charterers
       base.has_one  :csr_form
