@@ -7,7 +7,7 @@ describe "User edits mortgages", js: :true do
     click_on("Add Mortgage")
 
     within(".modal.fade.in") do
-      fill_in("Priority Code", with: "A")
+      select("A", from: "Priority Code")
       select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
