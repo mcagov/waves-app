@@ -47,7 +47,7 @@ describe Builders::RegistryBuilder do
       end
 
       before do
-        described_class.create(change_vessel_submission, )
+        described_class.create(change_vessel_submission, {})
         registered_vessel.reload
       end
 
@@ -111,8 +111,9 @@ describe Builders::RegistryBuilder do
         expect(manager.safety_management.address_1).to eq("SM ADDRESS")
       end
 
-      it "creates the mortgages" do
+      it "creates (and registers) the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
+        expect(mortgage.registered_at).to eq("21/12/2012".to_date)
         expect(mortgage.priority_code).to eq("A")
         expect(mortgage.mortgagors.first.name).to eq("Phil")
         expect(mortgage.mortgagees.first.name).to eq("Mary")
@@ -178,6 +179,7 @@ def init_basic_submission
 
   submission.mortgages.create(
     priority_code: "A",
+    mortgage_type: "Principle Sum",
     mortgagors: [Mortgagor.new(name: "Phil")],
     mortgagees: [Mortgagee.new(name: "Mary")])
 

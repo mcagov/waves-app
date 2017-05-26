@@ -1,8 +1,9 @@
 class Builders::Registry::MortgageBuilder
   class << self
-    def create(submission, vessel)
+    def create(submission, vessel, approval_params)
       @submission = submission
       @vessel = vessel
+      @submission_completed_at = approval_params[:registration_starts_at]
 
       perform
 
@@ -14,7 +15,7 @@ class Builders::Registry::MortgageBuilder
     def perform
       @vessel.mortgages.delete_all
       @submission.mortgages.each do |submission_mortgage|
-        build_mortgage(submission_mortgage)
+        build_mortgage(submission_mortgage.register!(@submission_completed_at))
       end
     end
 
