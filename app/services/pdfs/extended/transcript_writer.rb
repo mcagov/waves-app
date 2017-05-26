@@ -48,7 +48,15 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
     @pdf.bounding_box([l_margin, y_pos - 44], width: 510) { @pdf.stroke_horizontal_rule }
 
     y_pos -= 70
-    @vessel.mortgages.not_discharged.each do |mortgage|
+
+    mortgages = @vessel.mortgages.not_discharged
+
+    if mortgages.empty?
+      default_value_font
+      @pdf.draw_text "None", at: [l_margin, y_pos]
+    end
+
+    mortgages.each do |mortgage|
       default_value_font
       @pdf.draw_text "Current Ownership", at: [l_margin, y_pos]
       y_pos -= 15
