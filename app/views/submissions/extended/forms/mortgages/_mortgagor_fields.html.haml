@@ -1,26 +1,34 @@
 .nested-fields
   .row
     .col-md-4
-      = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
-    .col-md-8
+      = mortgagor_f.input :declaration_owner_id, as: :select,
+        collection: declaration_select_options,
+        include_blank: true,
+        input_html: { class: "select_owner_mortgagor" },
+        label: "Select an Owner"
+    .col-md-4
+      .name-field
+        = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
+    .col-md-4
       .pull-right
         = link_to_remove_association mortgagor_f,
           class: "btn btn-link",
           style: "color: red; padding-top: 25px !important;" do
           %i.fa.fa-trash
           Remove
-  .row
-    .col-md-4
-      = mortgagor_f.input :address_1, input_html: { class: "upcase address-1" }
-    .col-md-4
-      = mortgagor_f.input :address_2, input_html: { class: "upcase address-2" }
-    .col-md-4
-      = mortgagor_f.input :address_3, input_html: { class: "upcase address-3" }
-  .row
-    .col-md-4
-      = mortgagor_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
-    .col-md-4
-      = mortgagor_f.input :postcode, input_html: { class: "upcase postcode" }
-    .col-md-4
-      = mortgagor_f.input :country, collection: countries_collection, include_blank: false
+  .address-fields
+    .row
+      .col-md-4
+        = mortgagor_f.input :address_1, input_html: { class: "upcase address-1" }
+      .col-md-4
+        = mortgagor_f.input :address_2, input_html: { class: "upcase address-2" }
+      .col-md-4
+        = mortgagor_f.input :address_3, input_html: { class: "upcase address-3" }
+    .row
+      .col-md-4
+        = mortgagor_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
+      .col-md-4
+        = mortgagor_f.input :postcode, input_html: { class: "upcase postcode" }
+      .col-md-4
+        = mortgagor_f.input :country, collection: countries_collection, include_blank: false
   %hr
