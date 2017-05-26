@@ -30,6 +30,6 @@ class Mortgage < ApplicationRecord
       end
     end
 
-    self.reload
+    reload
   end
 end
