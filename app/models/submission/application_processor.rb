@@ -1,6 +1,6 @@
 class Submission::ApplicationProcessor
   class << self
-    def run(submission, approval_params = {})
+    def run(submission, approval_params)
       @submission = submission
       @task = Task.new(@submission.task)
       @approval_params = approval_params
@@ -16,7 +16,7 @@ class Submission::ApplicationProcessor
     def assign_registered_vessel
       @registered_vessel =
         if @task.builds_registry?
-          Builders::RegistryBuilder.create(@submission)
+          Builders::RegistryBuilder.create(@submission, @approval_params)
         else
           @submission.registered_vessel
         end

@@ -3,7 +3,9 @@ require "rails_helper"
 describe Builders::RegistryBuilder do
   context ".create" do
     let(:submission) { init_basic_submission }
-    before { described_class.create(submission) }
+    let(:approval_params) { { registration_starts_at: "21/12/2012" } }
+
+    before { described_class.create(submission, approval_params) }
 
     let(:registered_vessel) { Register::Vessel.last }
 
@@ -45,7 +47,7 @@ describe Builders::RegistryBuilder do
       end
 
       before do
-        described_class.create(change_vessel_submission)
+        described_class.create(change_vessel_submission, )
         registered_vessel.reload
       end
 

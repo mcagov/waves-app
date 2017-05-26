@@ -1,6 +1,6 @@
 class Builders::Registry::ChartererBuilder
   class << self
-    def create(submission, vessel)
+    def create(submission, vessel, _approval_params)
       @submission = submission
       @vessel = vessel
 
