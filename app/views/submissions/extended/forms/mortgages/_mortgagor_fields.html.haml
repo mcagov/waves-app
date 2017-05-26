@@ -1,8 +1,14 @@
 .nested-fields
   .row
     .col-md-4
+      = mortgagor_f.input :entity_type, as: :select,
+        collection: declaration_select_options,
+        include_blank: true,
+        input_html: { class: "select2 select2_single" },
+        label: "Select an Owner"
+    .col-md-4
       = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
-    .col-md-8
+    .col-md-4
       .pull-right
         = link_to_remove_association mortgagor_f,
           class: "btn btn-link",
