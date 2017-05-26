@@ -1,7 +1,7 @@
 .nested-fields
   .row
     .col-md-4
-      = mortgagor_f.input :owner_id, as: :select,
+      = mortgagor_f.input :declaration_owner_id, as: :select,
         collection: declaration_select_options,
         include_blank: true,
         input_html: { class: "select_owner_mortgagor" },

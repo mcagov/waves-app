@@ -7,8 +7,7 @@ class Mortgage < ApplicationRecord
   accepts_nested_attributes_for :mortgagees, allow_destroy: true,
     reject_if: proc { |attributes| attributes["name"].blank? }
 
-  accepts_nested_attributes_for :mortgagors, allow_destroy: true,
-    reject_if: proc { |attributes| attributes["name"].blank? }
+  accepts_nested_attributes_for :mortgagors, allow_destroy: true
 
   scope :not_discharged, -> { where(discharged_at: nil) }
 
