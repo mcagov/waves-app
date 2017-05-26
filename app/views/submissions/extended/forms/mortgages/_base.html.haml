@@ -13,7 +13,7 @@
     %th
   %tbody
     - @submission.mortgages.order("created_at asc").each_with_index do |mortgage, index|
-      %tr
+      %tr{ class: ("strike" if mortgage.discharged_at?)}
         %td.priority= mortgage.priority_code
         %td.mortgage_type
           = link_to_unless @readonly,  mortgage.mortgage_type, "#",

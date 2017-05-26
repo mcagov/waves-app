@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User edits mortgages", js: :true do
   scenario "adding, editing and removing" do
-    visit_name_approved_part_2_submission
+    visit_name_approved_part_1_submission
     click_on("Mortgages")
     click_on("Add Mortgage")
 
@@ -44,11 +44,12 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       fill_in("Reference Number", with: "REF 2")
+      fill_in("Date Discharged", with: "02/02/2012")
       click_on("Save Mortgage")
     end
 
     within("#mortgages_tab") do
-      expect(page).to have_css(".reference_number", text: "REF 2")
+      expect(page).to have_css("tr.strike .reference_number", text: "REF 2")
     end
 
     within("#mortgages_tab") do
