@@ -19,4 +19,17 @@ class Mortgage < ApplicationRecord
       end
     end
   end
+
+  def register!(submission_completed_at)
+    case mortgage_type
+    when "Intent"
+      update_attribute(:registered_at, nil) if registered_at.present?
+    else
+      unless registered_at.present?
+        update_attribute(:registered_at, submission_completed_at)
+      end
+    end
+
+    self.reload
+  end
 end
