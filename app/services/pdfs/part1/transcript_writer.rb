@@ -22,7 +22,9 @@ class Pdfs::Part1::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     vstart -= vspace
 
     draw_label_value "Type of Ship", @vessel.vessel_type_description, at: [l_margin, vstart]
-    draw_label_value "Year of Build", @vessel.year_of_build, at: [rcol_l_margin, vstart]
+    vstart -= vspace
+
+    draw_label_value "Year of Build", @vessel.year_of_build, at: [l_margin, vstart]
     vstart -= vspace
 
     draw_label_value "Method of Propulsion", @vessel.propulsion_system, at: [l_margin, vstart]
