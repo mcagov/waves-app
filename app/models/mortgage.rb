@@ -23,7 +23,7 @@ class Mortgage < ApplicationRecord
   def register!(datetime_to_register)
     case mortgage_type
     when "Intent"
-      update_attribute(:registered_at, nil) if registered_at.present?
+      update_attribute(:registered_at, nil) if registered_at?
     else
       unless registered_at.present?
         update_attribute(:registered_at, datetime_to_register || Time.now)
