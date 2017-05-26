@@ -10,6 +10,8 @@ class Mortgage < ApplicationRecord
   accepts_nested_attributes_for :mortgagors, allow_destroy: true,
     reject_if: proc { |attributes| attributes["name"].blank? }
 
+  scope :not_discharged, -> { where(discharged_at: nil) }
+
   class << self
     def types_for(submission)
       if Task.new(submission.task).new_registration?
