@@ -174,7 +174,7 @@ end
 def expect_registry_builder
   expect(Builders::RegistryBuilder)
     .to receive(:create)
-    .with(submission)
+    .with(submission, approval_params)
     .and_return(registered_vessel)
 end
 

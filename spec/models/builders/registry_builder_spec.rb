@@ -3,7 +3,9 @@ require "rails_helper"
 describe Builders::RegistryBuilder do
   context ".create" do
     let(:submission) { init_basic_submission }
-    before { described_class.create(submission) }
+    let(:approval_params) { { registration_starts_at: "21/12/2012" } }
+
+    before { described_class.create(submission, approval_params) }
 
     let(:registered_vessel) { Register::Vessel.last }
 
@@ -45,7 +47,7 @@ describe Builders::RegistryBuilder do
       end
 
       before do
-        described_class.create(change_vessel_submission)
+        described_class.create(change_vessel_submission, {})
         registered_vessel.reload
       end
 
@@ -109,15 +111,16 @@ describe Builders::RegistryBuilder do
         expect(manager.safety_management.address_1).to eq("SM ADDRESS")
       end
 
-      it "creates the mortgages" do
+      it "creates (and registers) the mortgages" do
         mortgage = registered_vessel.reload.mortgages.first
-        expect(mortgage.reference_number).to eq("MGT_1")
+        expect(mortgage.registered_at).to eq("21/12/2012".to_date)
+        expect(mortgage.priority_code).to eq("A")
+        expect(mortgage.mortgagors.first.name).to eq("Phil")
         expect(mortgage.mortgagees.first.name).to eq("Mary")
       end
 
       it "retains the submission's mortgages" do
-        expect(submission.reload.mortgages.first.reference_number)
-          .to eq("MGT_1")
+        expect(submission.reload.mortgages.first.priority_code).to eq("A")
       end
 
       it "creates the charterers" do
@@ -175,7 +178,9 @@ def init_basic_submission
     safety_management: SafetyManagement.new(address_1: "SM ADDRESS"))
 
   submission.mortgages.create(
-    reference_number: "MGT_1",
+    priority_code: "A",
+    mortgage_type: "Principle Sum",
+    mortgagors: [Mortgagor.new(name: "Phil")],
     mortgagees: [Mortgagee.new(name: "Mary")])
 
   submission.charterers.create(

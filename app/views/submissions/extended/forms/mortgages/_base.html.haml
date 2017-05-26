@@ -1,27 +1,31 @@
 %h2 Mortgages
 %table.table.table-striped
   %thead
-    %th Priority
+    %th Priority Code
     %th Mortgage Type
     %th Reference Number
-    %th Start Date
-    %th Amount
+    %th Shares Mortgaged
     %th Mortgagor(s)
     %th Mortgagee(s)
+    %th Date Executed
+    %th Date Registered
+    %th Date Discharged
     %th
   %tbody
     - @submission.mortgages.order("created_at asc").each_with_index do |mortgage, index|
-      %tr
-        %td.priority= letter_sequence(index)
+      %tr{ class: ("strike" if mortgage.discharged_at?)}
+        %td.priority= mortgage.priority_code
         %td.mortgage_type
           = link_to_unless @readonly,  mortgage.mortgage_type, "#",
             "data-target" => "#edit_mortgage_#{mortgage.id}",
             "data-toggle" => "modal"
         %td.reference_number= mortgage.reference_number
-        %td.start_date= mortgage.start_date.to_s(:date_time) if mortgage.start_date
         %td.amount= mortgage.amount
-        %td.mortgagor= mortgage.mortgagor
+        %td.mortgagors= mortgage.mortgagors.map(&:name).join(", ")
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
+        %td.executed_at= mortgage.executed_at.to_s(:date_time) if mortgage.executed_at
+        %td.registered_at= mortgage.registered_at.to_s(:date_time) if mortgage.registered_at
+        %td.discharged_at= mortgage.discharged_at.to_s(:date_time) if mortgage.discharged_at
         %td
           - unless @readonly
             = link_to submission_mortgage_path(@submission, mortgage),
@@ -31,7 +35,7 @@
               data: { confirm: "Are you sure you want to remove this mortgage?" },
               style: 'color: red;' do
               %i.fa.fa-trash
-              Discharge
+              Remove
 
 - unless @readonly
   .row
@@ -52,7 +56,7 @@
               %span{"aria-hidden" => "true"} ×
             %h4.modal-title New Mortgage
           .modal-body
-            = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+            = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f, submission: @submission }
 
           .modal-footer
             = mortgage_f.submit "Add Mortgage", class: "btn btn-primary"
@@ -69,7 +73,7 @@
                 %span{"aria-hidden" => "true"} ×
               %h4.modal-title Edit Mortgage
             .modal-body
-              = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f }
+              = render partial: "submissions/extended/forms/mortgages/fields", locals: { mortgage_f: mortgage_f, submission: @submission }
 
             .modal-footer
               = mortgage_f.submit "Save Mortgage", class: "btn btn-primary"

@@ -131,25 +131,34 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       safety_management.save
     end
 
-    def build_mortgages
+    def build_mortgages # rubocop:disable Metrics/MethodLength
       if @submission.persisted?
         return unless Mortgage.where(parent: @submission).empty?
       end
 
       (@submission.symbolized_changeset[:mortgages] || []).each do |mortgage|
-        except_keys = [:id, :mortgagees]
+        except_keys = [:id, :mortgagors, :mortgagees]
         submission_mortgage = Mortgage.new(mortgage.except(*except_keys))
         submission_mortgage.parent = @submission
         submission_mortgage.save
 
+        build_mortgagors_for(submission_mortgage, mortgage)
         build_mortgagees_for(submission_mortgage, mortgage)
+      end
+    end
+
+    def build_mortgagors_for(submission_mortgage, mortgage)
+      mortgage[:mortgagors].each do |mortgagor|
+        submission_mortgagor = Mortgagor.new(mortgagor.except(:id))
+        submission_mortgagor.parent = submission_mortgage
+        submission_mortgagor.save
       end
     end
 
     def build_mortgagees_for(submission_mortgage, mortgage)
       mortgage[:mortgagees].each do |mortgagee|
         submission_mortgagee = Mortgagee.new(mortgagee.except(:id))
-        submission_mortgagee.mortgage = submission_mortgage
+        submission_mortgagee.parent = submission_mortgage
         submission_mortgagee.save
       end
     end

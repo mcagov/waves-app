@@ -1,5 +1,5 @@
 module Register
-  class Vessel < ApplicationRecord
+  class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
@@ -54,7 +54,9 @@ module Register
              -> { order("name") },
              through: :charterers
 
-    has_many :mortgages, as: :parent
+    has_many :mortgages,
+             -> { order("priority_code asc") },
+             as: :parent
 
     has_many :csr_forms, -> { order("issue_number desc") }
 
@@ -139,6 +141,7 @@ module Register
     def mortgages_info
       mortgages.map do |mortgage|
         mortgage.attributes.merge(
+          mortgagors: mortgage.mortgagors.map(&:attributes),
           mortgagees: mortgage.mortgagees.map(&:attributes))
       end
     end

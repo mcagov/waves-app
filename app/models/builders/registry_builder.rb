@@ -1,7 +1,8 @@
 class Builders::RegistryBuilder
   class << self
-    def create(submission)
+    def create(submission, approval_params)
       @submission = submission
+      @approval_params = approval_params
 
       perform
 
@@ -45,7 +46,9 @@ class Builders::RegistryBuilder
 
     def build_vessel_associations
       builder_associations.each do |builder_association|
-        @vessel = builder_association.constantize.create(@submission, @vessel)
+        @vessel =
+          builder_association
+          .constantize.create(@submission, @vessel, @approval_params)
       end
     end
   end

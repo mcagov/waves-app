@@ -1,19 +1,45 @@
 .row
   .col-md-3
+    = mortgage_f.input :priority_code, as: :select,
+      label: "Priority Code",
+      collection: available_priority_codes_collection(submission),
+      include_blank: false,
+      input_html: { class: "select2 select2_single" }
+.row
+  .col-md-3
     = mortgage_f.input :mortgage_type, as: :select,
       label: "Mortgage Type",
-      collection: Mortgage.types_for(@submission),
+      collection: Mortgage.types_for(submission),
       include_blank: false,
       input_html: { class: "select2 select2_single" }
   .col-md-3
     = mortgage_f.input :reference_number, label: "Reference Number"
   .col-md-3
-    = mortgage_f.input :start_date, as: :string, label: "Start Date", input_html: { class: "datetimepicker" }
-  .col-md-3
     = mortgage_f.input :amount, label: "Mortgage Amount"
 .row
-  .col-md-12
-    = mortgage_f.input :mortgagor, label: "Mortgagor(s)", input_html: { class: "upcase" }
+  .col-md-3
+    = mortgage_f.input :executed_at, as: :string, label: "Date Executed", input_html: { class: "datetimepicker" }
+  .col-md-3
+    = mortgage_f.input :registered_at, as: :string, label: "Date Registered", disabled: true, hint: "(System generated)"
+  .col-md-3
+    = mortgage_f.input :discharged_at, as: :string, label: "Date Discharged", input_html: { class: "datetimepicker" }
+
+%hr
+%h4 Mortgagor(s)
+#mortgagors
+  - mortgage_f.object.mortgagors.build if mortgage_f.object.mortgagors.empty?
+  = mortgage_f.simple_fields_for :mortgagors do |mortgagor_f|
+    = render partial: "submissions/extended/forms/mortgages/mortgagor_fields",
+      locals: { mortgagor_f: mortgagor_f }
+  .links
+    = link_to_add_association mortgage_f, :mortgagors,
+      partial: "submissions/extended/forms/mortgages/mortgagor_fields",
+      class: "btn btn-link",
+      form_name: :mortgagor_f,
+      style: "color: green; padding: 0px !important" do
+      %i.fa.fa-plus
+      Add Extra Mortgagor
+
 
 %hr
 %h4 Mortgagees

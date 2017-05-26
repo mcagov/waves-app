@@ -11,7 +11,7 @@ class RegisteredVessel::CurrentTranscriptController < InternalPagesController
   def build_and_render_pdf
     registration = @vessel.current_registration
     if registration
-      pdf = Pdfs::Processor.run(:current_transcript, registration)
+      pdf = Pdfs::Processor.run(:current_transcript, registration, :attachment)
       render_pdf(pdf, pdf.filename)
     end
   end

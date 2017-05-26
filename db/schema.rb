@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523135640) do
+ActiveRecord::Schema.define(version: 20170525141737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,25 +236,18 @@ ActiveRecord::Schema.define(version: 20170523135640) do
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id", using: :btree
   end
 
-  create_table "mortgagees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "mortgage_id"
-    t.string   "name"
-    t.string   "address"
-    t.string   "contact_details"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "mortgages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "parent_id"
     t.string   "parent_type"
     t.string   "mortgage_type"
     t.string   "reference_number"
-    t.datetime "start_date"
+    t.datetime "executed_at"
     t.string   "amount"
-    t.string   "mortgagor"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "priority_code"
+    t.datetime "registered_at"
+    t.datetime "discharged_at"
     t.index ["parent_type"], name: "index_mortgages_on_parent_type", using: :btree
   end
 

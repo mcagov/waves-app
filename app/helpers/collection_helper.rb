@@ -32,6 +32,10 @@ module CollectionHelper
     end
   end
 
+  def available_priority_codes_collection(submission)
+    ("A".."Z").to_a - submission.mortgages.map(&:priority_code)
+  end
+
   def vessel_types_collection(submission)
     WavesUtilities::VesselType.all(
       submission.part,

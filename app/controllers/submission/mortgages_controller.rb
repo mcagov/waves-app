@@ -33,10 +33,10 @@ class Submission::MortgagesController < InternalPagesController
 
   def mortgage_params
     params.require(:mortgage).permit(
-      :mortgage_type, :reference_number, :start_date,
-      :end_date, :amount, :mortgagor,
-      mortgagees_attributes: [
-        :id, :name, :address, :contact_details, :_destroy])
+      :priority_code, :mortgage_type, :reference_number, :executed_at,
+      :discharged_at, :amount,
+      mortgagors_attributes: Customer.attribute_names + [:id, :_destroy],
+      mortgagees_attributes: Customer.attribute_names + [:id, :_destroy])
   end
 
   def respond_with_update
