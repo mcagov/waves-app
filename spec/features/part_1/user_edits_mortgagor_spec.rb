@@ -12,6 +12,11 @@ describe "User edits mortgagors", js: :true do
 
     click_on("Mortgages")
     click_on("Add Mortgage")
-    select("BOB BOLD", from: "Select an Owner")
+
+    within("#mortgagors") do
+      expect(page).to have_field("Name of Mortgagor")
+      select("BOB BOLD", from: "Select an Owner")
+      expect(page).not_to have_field("Name of Mortgagor")
+    end
   end
 end

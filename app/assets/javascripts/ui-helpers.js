@@ -27,3 +27,16 @@ $(document).ready(function() {
 $(document).on('blur','.upcase.form-control', {} ,function(e){
   $(this).val($(this).val().toUpperCase());
 })
+
+ $(document).on('change', '.select_owner_mortgagor', function() {
+    var fields = $(this).closest('.nested-fields');
+    if ($(this).val().length > 0) {
+      $(fields).find('.name-field').addClass('hidden');
+      $(fields).find('.address-fields').addClass('hidden');
+    }
+    else
+    {
+      $(fields).find('.name-field').removeClass('hidden');
+      $(fields).find('.address-fields').removeClass('hidden');
+    }
+  });
