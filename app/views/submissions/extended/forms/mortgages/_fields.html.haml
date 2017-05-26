@@ -5,7 +5,6 @@
       collection: available_priority_codes_collection(submission),
       include_blank: false,
       input_html: { class: "select2 select2_single" }
-.row
   .col-md-3
     = mortgage_f.input :mortgage_type, as: :select,
       label: "Mortgage Type",
@@ -15,7 +14,7 @@
   .col-md-3
     = mortgage_f.input :reference_number, label: "Reference Number"
   .col-md-3
-    = mortgage_f.input :amount, label: "Mortgage Amount"
+    = mortgage_f.input :amount, label: "Shares Mortgaged"
 .row
   .col-md-3
     = mortgage_f.input :executed_at, as: :string, label: "Date Executed", input_html: { class: "datetimepicker" }

@@ -11,7 +11,7 @@ describe "User edits mortgages", js: :true do
       select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
-      fill_in("Mortgage Amount", with: "2000 pounds")
+      fill_in("Shares Mortgaged", with: "2000 pounds")
 
       fill_in("Name of Mortgagor", with: "Bob")
       click_on("Add Extra Mortgagor")
