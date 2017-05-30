@@ -2,7 +2,7 @@ class Pdfs::Part2::TranscriptWriter < Pdfs::Extended::TranscriptWriter
   private
 
   def page_title_for_part
-    "OF A BRITISH FISHING VESSEL"
+    "OF A UK FISHING VESSEL"
   end
 
   # rubocop:disable all

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Pdfs::Part1::Transcript do
-  let(:transcript_title) { "OF A BRITISH SHIP" }
+  let(:transcript_title) { "OF A UK SHIP" }
 
   context "for a single transcript" do
     let(:vessel) { create(:registered_vessel) }

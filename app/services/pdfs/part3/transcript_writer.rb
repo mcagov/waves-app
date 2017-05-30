@@ -2,7 +2,7 @@ class Pdfs::Part3::TranscriptWriter < Pdfs::TranscriptWriter
   private
 
   def page_title_for_part
-    "OF A BRITISH SHIP"
+    "OF A UK SHIP"
   end
 
   def owner_details_for_part
