@@ -25,7 +25,8 @@ describe Notification::ApplicationApproval, type: :model do
 
       it "has the expected email_subject" do
         expect(subject.email_subject)
-          .to match(/Application Approved: Registered Boat.* - SSR2.*/)
+          .to match(
+            /Application Approved: Registered Boat.* - #{submission.ref_no}.*/)
       end
 
       it "has additional_params" do
