@@ -1,5 +1,5 @@
 module Register
-  class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  class Vessel < ApplicationRecord
     include PgSearch
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
@@ -84,11 +84,7 @@ module Register
     end
 
     def registration_status
-      return :frozen if frozen_at.present?
-      return :pending unless current_registration
-      return :closed if current_registration.closed_at?
-      return :expired if Time.now.to_i > registered_until.to_i
-      :registered
+      RegistrationStatus.new(self)
     end
 
     def registry_info # rubocop:disable Metrics/MethodLength
