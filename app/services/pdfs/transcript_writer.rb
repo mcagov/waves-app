@@ -74,7 +74,7 @@ class Pdfs::TranscriptWriter
     @pdf.start_new_page
     @pdf.font("Helvetica", size: 11)
     @pdf.draw_text "For the purposes of registration there "\
-                   "are 64 shares in a British Ship",
+                   "are 64 shares in a UK Ship",
                    at: [l_margin, 800]
 
     @pdf.move_down 60
