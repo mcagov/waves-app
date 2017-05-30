@@ -46,7 +46,7 @@ class RegistrationStatus
 
   private
 
-  def registered_descriotion
+  def registered_description
     if @vessel.current_registration.provisional?
       "Registered Provisionally"
     else
