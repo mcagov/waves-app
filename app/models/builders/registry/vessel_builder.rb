@@ -1,7 +1,8 @@
 class Builders::Registry::VesselBuilder
   class << self
-    def create(submission)
+    def create(submission, approval_params)
       @submission = submission
+      @approval_params = approval_params
 
       perform
 
@@ -55,7 +56,7 @@ class Builders::Registry::VesselBuilder
       @vessel.classification_society = @submission.vessel.classification_society
       @vessel.classification_society_other =
         @submission.vessel.classification_society_other
-      @vessel.entry_into_service_at = @submission.vessel.entry_into_service_at
+      @vessel.entry_into_service_at = entry_into_service_at
       @vessel.area_of_operation = @submission.vessel.area_of_operation
       @vessel.alternative_activity = @submission.vessel.alternative_activity
       @vessel.smc_issuing_authority = @submission.vessel.smc_issuing_authority
@@ -84,6 +85,14 @@ class Builders::Registry::VesselBuilder
       @vessel.hull_construction_material =
         @submission.vessel.hull_construction_material
       @vessel.year_of_build = @submission.vessel.year_of_build
+    end
+
+    def entry_into_service_at
+      if @submission.vessel.entry_into_service_at.present?
+        @submission.vessel.entry_into_service_at
+      else
+        @approval_params[:registration_starts_at]
+      end
     end
   end
 end

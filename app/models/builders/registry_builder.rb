@@ -20,7 +20,8 @@ class Builders::RegistryBuilder
     end
 
     def build_vessel
-      @vessel = Builders::Registry::VesselBuilder.create(@submission)
+      @vessel =
+        Builders::Registry::VesselBuilder.create(@submission, @approval_params)
     end
 
     def assign_vessel_to_submission
