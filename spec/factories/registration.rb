@@ -5,6 +5,10 @@ FactoryGirl.define do
     registry_info { { owners: [build(:registered_owner)] } }
   end
 
+  factory :provisional_registration, parent: :registration do
+    provisional :true
+  end
+
   factory :ten_year_old_registration, class: "Registration" do
     created_at 10.years.ago
   end

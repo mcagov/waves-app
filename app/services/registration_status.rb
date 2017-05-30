@@ -18,7 +18,7 @@ class RegistrationStatus
     when :pending then "In Progress"
     when :closed then "Registration Closed"
     when :expired then "Registration Expired"
-    when :registered then "Registered"
+    when :registered then registered_description
     end
   end
 
@@ -42,5 +42,15 @@ class RegistrationStatus
 
   def to_json
     @key
+  end
+
+  private
+
+  def registered_descriotion
+    if @vessel.current_registration.provisional?
+      "Registered Provisionally"
+    else
+      "Registered"
+    end
   end
 end
