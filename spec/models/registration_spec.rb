@@ -37,4 +37,30 @@ describe Registration do
       it { expect(registration.part).to eq(:part_1) }
     end
   end
+
+  context "#prints_duplicate_certificate?" do
+    let!(:registration) { create(:registration) }
+
+    before do
+      submission = double(:submission, task: task)
+
+      allow(registration)
+        .to receive(:submission)
+        .and_return(submission)
+    end
+
+    subject { registration.prints_duplicate_certificate? }
+
+    context "when the submission was for a duplicate_certificate" do
+      let(:task) { :duplicate_certificate }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "when the submission was for a new_registration" do
+      let(:task) { :new_registration }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
 end
