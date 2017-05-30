@@ -44,10 +44,18 @@ class Registration < ApplicationRecord
     (symbolized_registry_info[:shareholder_groups] || [])
   end
 
+  def prints_duplicate_certificate?
+    Task.new(task).duplicates_certificate?
+  end
+
   private
 
   def submission
     submissions.first
+  end
+
+  def task
+    submission ? submission.task : :new_registration
   end
 
   def symbolized_registry_info

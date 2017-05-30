@@ -20,6 +20,10 @@ describe Pdfs::Part2::Certificate do
     context "reading the pdf" do
       let(:io) { StringIO.new(certificate.render) }
 
+      before do
+        expect(registration).to receive(:prints_duplicate_certificate?).once
+      end
+
       it "has the expected pages" do
         PDF::Reader.open(StringIO.new(certificate.render)) do |reader|
           expect(reader.page_count).to eq(2)

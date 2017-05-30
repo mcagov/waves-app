@@ -4,7 +4,7 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
   def write_attachable
     @pdf.start_new_page
     @pdf.image page_1_template, scale: 0.4796
-    duplicate_message
+    duplicate_message_warning
     watermark
     vessel_details
     registration_details
@@ -16,6 +16,7 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
 
   def write_printable
     @pdf.start_new_page
+    duplicate_message_warning
     vessel_details
     registration_details
     @pdf.start_new_page
@@ -91,8 +92,10 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
     40
   end
 
-  def duplicate_message
-    @pdf.draw_text "DUPLICATE", at: [265, 667], size: 20
+  def duplicate_message_warning
+    if @registration.prints_duplicate_certificate?
+      @pdf.draw_text "DUPLICATE", at: [265, 667], size: 20
+    end
   end
 
   def watermark
