@@ -81,7 +81,7 @@ describe Api::V1::VesselsController, type: :controller do
 
       it "returns the registration_status" do
         expect(parsed_attrs["registration_status"].to_sym)
-          .to eq(registered_vessel.registration_status)
+          .to eq(registered_vessel.registration_status.to_json)
       end
     end
 

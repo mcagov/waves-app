@@ -4,7 +4,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def email_subject
-    "Application Approved: #{vessel_name} - #{vessel_reg_no}"
+    "Application Approved: #{vessel_name} - #{submission_ref_no}"
   end
 
   def additional_params
@@ -13,6 +13,10 @@ class Notification::ApplicationApproval < Notification
   end
 
   private
+
+  def submission_ref_no
+    notifiable.ref_no
+  end
 
   def registration
     @registration ||= notifiable.registration
