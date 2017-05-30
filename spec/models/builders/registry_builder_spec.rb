@@ -34,6 +34,10 @@ describe Builders::RegistryBuilder do
       expect(registered_vessel.reload.agent.name).to eq("Annabel Agent")
     end
 
+    it "ensures the entry_into_service_at is present" do
+      expect(registered_vessel.entry_into_service_at).to eq("21/12/2012")
+    end
+
     context "with a task that changes registry details" do
       let!(:change_vessel_submission) do
         create(:assigned_submission,
