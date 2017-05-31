@@ -9,6 +9,10 @@ class Builders::OfficialNoBuilder
           part: @submission.part,
           reg_no: vessel_reg_no)
 
+      vessel = @submission.vessel
+      vessel.ec_no = "GBR000#{@submission.registered_vessel.reg_no}"
+      @submission.vessel = vessel
+
       @submission.save
     end
   end
