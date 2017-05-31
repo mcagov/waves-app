@@ -5,12 +5,7 @@ class Submission::Approval
     :notification_attachments,
     :registration_starts_at,
     :closure_at,
-    :closure_reason
+    :closure_reason,
+    :supporting_info
   )
-
-  CLOSURE_REASONS = [
-    "Registered Owner Request",
-    "Failed to Renew",
-    "No Longer Eligible",
-    "Non Registered Owner Request"].freeze
 end
