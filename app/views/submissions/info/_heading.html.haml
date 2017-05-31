@@ -16,7 +16,8 @@
     - if display_edit_application_link?(submission)
       = link_to "Edit Application",
         edit_submission_path(submission),
-        class: "btn btn-primary pull-right"
+        class: "btn btn-primary pull-right",
+        id: "edit_application"
 
 - other_open_submissions = Submission::OtherOpenSubmission.for(submission)
 - unless other_open_submissions.empty?

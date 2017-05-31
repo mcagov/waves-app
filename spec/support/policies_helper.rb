@@ -75,3 +75,11 @@ def expect_notes_tab(_bln)
   click_on("Notes")
   within("#notes_tab #notes") { expect(page).to have_link("Add Note") }
 end
+
+def expect_edit_application_button(bln)
+  expect_field(bln, "#heading #edit_application")
+end
+
+def expect_restricted_submission(bln)
+  expect_field(bln, "#restricted")
+end
