@@ -3,7 +3,7 @@ class EcNo
     def for_vessel(vessel)
       return unless Policies::Definitions.fishing_vessel?(vessel)
 
-      "#{prefix}#{vessel.reg_no}"
+      vessel.ec_no.present? ? vessel.ec_no : "#{prefix}#{vessel.reg_no}"
     end
 
     private
