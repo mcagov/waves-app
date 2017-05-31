@@ -10,6 +10,11 @@
         %td Closure reason
         %td.closure-reason= @closure.reason.humanize
 
+    - if @closure.other_reason.present?
+      %tr
+        %td Other reason
+        %td.closure-reason= @closure.other_reason
+
     - if @closure.actioned_at.present?
       %tr
         %td Date
