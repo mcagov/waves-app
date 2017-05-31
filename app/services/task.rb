@@ -14,4 +14,8 @@ class Task < WavesUtilities::Task
   def validates_on_approval?
     ![:issue_csr].include?(@key)
   end
+
+  def prevented_from_editing?
+    [:closure, :current_transcript, :historic_transcript].include?(@key)
+  end
 end

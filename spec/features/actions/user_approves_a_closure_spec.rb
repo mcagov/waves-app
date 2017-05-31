@@ -5,6 +5,9 @@ feature "User approves a closure", type: :feature, js: true do
     submission = create(:assigned_closure_submission)
     login_to_part_3(submission.claimant)
     visit submission_path(submission)
+    expect_edit_application_button(false)
+    expect_restricted_submission(true)
+
     click_link("Close Registration", href: "#approve-application")
   end
 

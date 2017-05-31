@@ -9,6 +9,9 @@ feature "User approves a historic transcript", type: :feature, js: true do
 
     login_to_part_3(submission.claimant)
     visit submission_path(submission)
+    expect_edit_application_button(false)
+    expect_restricted_submission(true)
+
     click_link(
       "Issue Historic Transcript of Registry", href: "#approve-application")
   end

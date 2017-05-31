@@ -1,0 +1,23 @@
+#restricted.row
+  .col-md-12
+    .x_panel
+      .x_content
+        %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+
+          %ul#submissionTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+            %li.active{:role => "presentation"}
+              %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content_vessel", :role => "tab"} Vessel Info
+
+            %li{:role => "presentation"}
+              %a#supporting-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_supporting", :role => "tab"} Supporting Info
+
+
+          #submissionTabContent.tab-content
+            #tab_content_vessel.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+              This transaction does not permit updating registered particulars
+
+            #tab_content_supporting.tab-pane.fade{"aria-labelledby" => "supporting-tab", :role => "tabpanel"}
+              = render partial: "submissions/basic/body/supporting_info"
+
+= render partial: "submissions/actions/base", locals: {submission: submission}
+
