@@ -80,4 +80,10 @@ module CollectionHelper
   def classification_society_collection
     WavesUtilities::ClassificationSociety.all
   end
+
+  def closure_reasons_collection
+    reasons = WavesUtilities::Closure::REASONS
+    reasons += WavesUtilities::Closure::INTERNAL_REASONS
+    reasons.map { |r| r.to_s.humanize }
+  end
 end

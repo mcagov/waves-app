@@ -89,7 +89,7 @@ FactoryGirl.define do
       {
         owners: [build(:declaration_owner)],
         vessel_info: build(:submission_vessel),
-        closure: build(:closure_destroyed),
+        closure: build(:closure_other),
       }
     end
   end

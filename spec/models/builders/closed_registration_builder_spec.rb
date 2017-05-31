@@ -10,7 +10,8 @@ describe Builders::ClosedRegistrationBuilder do
       described_class.create(
         submission,
         "10/10/2012 12:23 PM".to_datetime,
-        "Mi Razon")
+        "Mi Razon",
+        "additional details")
     end
 
     let!(:registered_vessel) { create(:registered_vessel) }
@@ -33,6 +34,10 @@ describe Builders::ClosedRegistrationBuilder do
 
     it "records the closure reason" do
       expect(registration.description).to eq("Mi Razon")
+    end
+
+    it "records the supporting_info" do
+      expect(registration.supporting_info).to eq("additional details")
     end
 
     it "records the registration#actioned_by" do

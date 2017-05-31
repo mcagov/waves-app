@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530142531) do
+ActiveRecord::Schema.define(version: 20170531104409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -359,6 +359,7 @@ ActiveRecord::Schema.define(version: 20170530142531) do
     t.datetime "termination_at"
     t.datetime "termination_notice_at"
     t.boolean  "provisional",            default: false
+    t.string   "supporting_info"
     t.index ["vessel_id"], name: "index_registrations_on_vessel_id", using: :btree
   end
 

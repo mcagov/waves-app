@@ -22,7 +22,8 @@ class Submission::ApprovalsController < InternalPagesController
       :notification_attachments,
       :registration_starts_at,
       :closure_at,
-      :closure_reason)
+      :closure_reason,
+      :supporting_info)
   end
 
   def build_notification

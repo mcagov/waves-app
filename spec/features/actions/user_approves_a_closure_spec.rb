@@ -12,7 +12,7 @@ feature "User approves a closure", type: :feature, js: true do
     within(".modal-content") do
       expect(page).not_to have_field("registration_starts_at")
 
-      select("Failed to Renew", from: "Closure Reason")
+      select("Failed to renew", from: "Closure Reason")
       fill_in("Closure Date", with: "01/09/2011")
       click_button("Close Registration")
     end
@@ -27,6 +27,24 @@ feature "User approves a closure", type: :feature, js: true do
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
     end
+  end
+
+  scenario "checking prepopulaton of reason and entering supporting info" do
+    within(".modal-content") do
+      expect(find_field("submission_approval_closure_reason").value)
+        .to eq("Other")
+
+      expect(find_field("submission_approval_supporting_info").value)
+        .to eq("DONT WANT")
+
+      fill_in("Supporting Info", with: "DONT WANT IT")
+      click_button("Close Registration")
+    end
+
+    expect(page).to have_css("h1", text: "Registration Closure")
+    last_registration = Submission.last.registration
+    expect(last_registration.description).to eq("Other")
+    expect(last_registration.supporting_info).to eq("DONT WANT IT")
   end
 
   scenario "attaching certificate to the email" do

@@ -22,4 +22,9 @@ FactoryGirl.define do
     new_flag                "FRANCE"
     new_flag_reason         "MOVED HOUSE"
   end
+
+  factory :closure_other, parent: :closure do
+    reason               :other
+    other_reason         "DONT WANT"
+  end
 end
