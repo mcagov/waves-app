@@ -7,9 +7,6 @@
           %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content_vessel", :role => "tab"} Vessel Info
 
         %li{:role => "presentation"}
-          %a#supporting-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_supporting", :role => "tab"} Supporting Info
-
-        %li{:role => "presentation"}
           %a#owner-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_owners", :role => "tab"} Owners
 
         %li{:role => "presentation"}
@@ -34,9 +31,6 @@
       #submissionTabContent.tab-content
         #tab_content_vessel.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
           = render partial: "submissions/basic/body/vessel", locals: { vessel: submission.vessel }
-
-        #tab_content_supporting.tab-pane.fade{"aria-labelledby" => "supporting-tab", :role => "tabpanel"}
-          = render partial: "submissions/basic/body/supporting_info"
 
         #tab_content_owners.tab-pane.fade{"aria-labelledby" => "owner-tab", :role => "tabpanel"}
           = render partial: "submissions/basic/body/owners"

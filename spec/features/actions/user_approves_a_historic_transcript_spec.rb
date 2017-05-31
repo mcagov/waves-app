@@ -17,7 +17,6 @@ feature "User approves a historic transcript", type: :feature, js: true do
   end
 
   scenario "in general" do
-
     within(".modal-content") do
       click_button("Issue Historic Transcript of Registry")
     end
