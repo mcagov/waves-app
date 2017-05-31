@@ -44,7 +44,8 @@ class Submission::ApplicationProcessor
         .create(
           @submission,
           @approval_params[:closure_at],
-          @approval_params[:closure_reason])
+          @approval_params[:closure_reason],
+          @approval_params[:supporting_info])
     end
 
     def build_cloned_registration

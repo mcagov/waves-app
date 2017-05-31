@@ -195,7 +195,7 @@ end
 def expect_closed_registration_builder
   expect(Builders::ClosedRegistrationBuilder)
     .to receive(:create)
-    .with(submission, "02/02/2012", "a reason")
+    .with(submission, "02/02/2012", "a reason", nil)
 end
 
 def dont_expect_cloned_registration_builder
