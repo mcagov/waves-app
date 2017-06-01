@@ -6,9 +6,9 @@ class Builders::AssignedSubmissionBuilder
       @registered_vessel = registered_vessel
       @claimant = claimant
 
-      @submission = build_submission
+      perform
 
-      Builders::SubmissionBuilder.build_defaults(@submission)
+      @submission
     end
 
     def current_state
@@ -17,8 +17,8 @@ class Builders::AssignedSubmissionBuilder
 
     private
 
-    def build_submission
-      Submission.create(
+    def perform
+      @submission = Submission.create(
         task: @task, part: @part,
         vessel_reg_no: @registered_vessel.reg_no,
         source: :manual_entry, state: current_state,
@@ -26,6 +26,9 @@ class Builders::AssignedSubmissionBuilder
         claimant: @claimant, received_at: Time.now,
         registry_info: @registered_vessel.registry_info,
         changeset: @registered_vessel.registry_info)
+
+      @submission = Builders::SubmissionBuilder.build_defaults(@submission)
+      @submission.save!
     end
   end
 end

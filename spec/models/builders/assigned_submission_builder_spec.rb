@@ -10,6 +10,10 @@ describe Builders::AssignedSubmissionBuilder do
         :registrar_closure, :part_3, registered_vessel, claimant)
     end
 
+    it "persists the record" do
+      expect(submission).to be_persisted
+    end
+
     it "builds an assigned submission" do
       expect(submission).to be_assigned
     end
