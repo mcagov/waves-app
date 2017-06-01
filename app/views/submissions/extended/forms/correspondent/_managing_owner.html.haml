@@ -1,7 +1,7 @@
 %h2 Managing Owner
 
 - if @readonly
-  %strong.managing_owner-name= @submission.managing_owner.name
+  %strong.managing_owner-name= @submission.managing_owner.try(:name)
 - else
   - if @submission.managing_owner.present?
     = link_to "#edit-managing_owner", data: { target: "#edit-managing_owner", toggle: "modal" } do
