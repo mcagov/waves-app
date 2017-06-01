@@ -39,20 +39,12 @@ describe SubmissionsController, type: :controller do
   end
 
   context "#show" do
-    let(:readonly_double) { double(:readonly) }
-    let(:submission) { create(:submission) }
-
     before do
-      expect(Policies::Actions)
-        .to receive(:readonly?)
-        .with(submission, user)
-        .and_return(readonly_double)
-
-      get :show, params: { id: submission.id }
+      get :show, params: { id: create(:submission).id }
     end
 
-    it "assigns @readonly to the readonly? Policy" do
-      expect(assigns(:readonly)).to eq(readonly_double)
+    it "assigns @readonly for an unassigned submissio" do
+      expect(assigns(:readonly)).to be_truthy
     end
   end
 end

@@ -41,4 +41,8 @@ class InternalPagesController < ApplicationController
     @submission =
       Submission.includes(:declarations).find(params[:submission_id])
   end
+
+  def enable_readonly
+    @readonly = Policies::Actions.readonly?(@submission, current_user)
+  end
 end
