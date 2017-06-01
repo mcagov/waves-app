@@ -7,7 +7,7 @@
     %th Status
     %th Email
     %th Phone
-    - if display_extended_owners?(@vessel)
+    - if display_managing_owner?(@vessel)
       %th.managing_owner Managing Owner
     %th Correspondent
   %tbody
@@ -22,7 +22,7 @@
         %td= owner.eligibility_status.try(:titleize)
         %td= owner.email
         %td= owner.phone_number
-        - if display_extended_owners?(@vessel)
+        - if display_managing_owner?(@vessel)
           %td.managing_owner= y_n(owner.managing_owner)
         %td= y_n(owner.correspondent)
 %hr

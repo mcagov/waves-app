@@ -31,6 +31,10 @@ class Policies::Workflow
       [:part_1, :part_2].include?(obj.part.to_sym)
     end
 
+    def uses_managing_owner?(obj)
+      [:part_1, :part_2].include?(obj.part.to_sym)
+    end
+
     def uses_vessel_attribute?(attr, obj)
       @part = obj.part.to_sym
 
