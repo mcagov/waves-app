@@ -43,8 +43,12 @@
       %tr
         %td
           = owner.name
-          %br
-          = owner.inline_address
+          %p
+            %strong Registered Office:
+            = owner.inline_address
+          %p
+            %strong Place of Business:
+            = owner.alt_inline_address
         %td= owner.imo_number
         %td= owner.eligibility_status.try(:titleize)
         %td= owner.registration_number

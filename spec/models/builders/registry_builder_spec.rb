@@ -20,6 +20,7 @@ describe Builders::RegistryBuilder do
     it "creates registered owners in the expect order" do
       expect(registered_vessel.owners.length).to eq(2)
       expect(registered_vessel.owners.first.name).to eq("ALICE")
+      expect(registered_vessel.owners.first.alt_address_1).to eq("ALT 1")
       expect(registered_vessel.owners.last.name).to eq("BOB LTD")
     end
 
@@ -171,7 +172,8 @@ def init_basic_submission
              representative: build(:submission_representative, name: "Ronnie"),
            })
 
-  submission.declarations.create(owner: { name: "ALICE" }, shares_held: 20)
+  submission.declarations.create(
+    owner: { name: "ALICE", alt_address_1: "ALT 1" }, shares_held: 20)
   submission.declarations.create(
     entity_type: :corporate, owner: { name: "BOB LTD" })
 
