@@ -100,6 +100,7 @@
         %th Status
         %th Email
         %th Phone
+        %th Shares Held
       %tbody
         - vessel.beneficial_owners.each do |beneficial_owner|
           %tr
@@ -112,6 +113,7 @@
             %td= beneficial_owner.eligibility_status.try(:titleize)
             %td= beneficial_owner.email
             %td= beneficial_owner.phone_number
+            %td= beneficial_owner.shares_held
 
   #directed_by
     %hr

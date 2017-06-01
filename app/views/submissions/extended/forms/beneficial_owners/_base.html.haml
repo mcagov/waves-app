@@ -8,6 +8,7 @@
     %th Status
     %th Email
     %th Phone
+    %th Shares Held
     %th
   %tbody
     - @submission.beneficial_owners.each do |beneficial_owner|
@@ -21,6 +22,7 @@
         %td.beneficial_owner-status= beneficial_owner.eligibility_status
         %td.beneficial_owner-email= beneficial_owner.email
         %td.beneficial_owner-phone_number= beneficial_owner.phone_number
+        %td.beneficial_owner-shares_held=beneficial_owner.shares_held
         %td
           - unless @readonly
             = link_to submission_beneficial_owner_path(@submission, beneficial_owner),
