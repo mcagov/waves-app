@@ -1,7 +1,7 @@
 %h2 Correspondent
 
 - if @readonly
-  %strong.correspondent-name= @submission.correspondent.name
+  %strong.correspondent-name= @submission.correspondent.try(:name)
 - else
   - if @submission.correspondent.present?
     = link_to "#edit-correspondent", data: { target: "#edit-correspondent", toggle: "modal" } do
