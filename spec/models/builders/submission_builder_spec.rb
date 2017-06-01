@@ -243,6 +243,22 @@ describe Builders::SubmissionBuilder do
           end
         end
       end
+
+      context "with managed_bys" do
+        let(:managed_by) { submission.reload.managed_bys.first }
+
+        it "builds the managed_bys from the changeset" do
+          expect(managed_by.name).to eq("Marvin")
+        end
+
+        context "running #build_defaults again" do
+          it "does not alter the managed_bys" do
+            described_class.build_defaults(submission)
+            expect(submission.reload.managed_bys.first)
+              .to eq(managed_by)
+          end
+        end
+      end
     end
   end
 end
@@ -274,6 +290,7 @@ def vessel_sample_data # rubocop:disable Metrics/MethodLength
     engines: [create(:engine, make: "DUCATI")],
     beneficial_owners: [create(:beneficial_owner, name: "Barry")],
     directed_bys: [create(:directed_by, name: "Dennis")],
+    managed_bys: [create(:managed_by, name: "Marvin")],
     managers: [create(:manager,
                       safety_management: create(:safety_management,
                                                 address_1: "SM1"))],
