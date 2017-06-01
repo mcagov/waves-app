@@ -89,6 +89,21 @@
                 %td= shareholder_group.shares_held
 
 - if display_extended_owners?(@vessel)
+  #managed_by
+    %hr
+    %h2 Manged By
+    %table.table.table-striped
+      %thead
+        %th Name
+        %th Nationality
+      %tbody
+        - vessel.managed_bys.each do |managed_by|
+          %tr
+            %td
+              = managed_by.name
+              %br
+              = managed_by.inline_address
+            %td= managed_by.nationality
   #beneficial_owners
     %hr
     %h2 Beneficial Owners

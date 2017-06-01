@@ -152,6 +152,11 @@ describe Builders::RegistryBuilder do
         directed_by = registered_vessel.reload.directed_bys.first
         expect(directed_by.name).to eq("Dennis")
       end
+
+      it "creates the managed_by" do
+        managed_by = registered_vessel.reload.managed_bys.first
+        expect(managed_by.name).to eq("Marvin")
+      end
     end
   end
 end
@@ -196,6 +201,9 @@ def init_basic_submission
 
   submission.directed_bys.create(
     name: "Dennis")
+
+  submission.managed_bys.create(
+    name: "Marvin")
 
   submission
 end

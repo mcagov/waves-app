@@ -35,6 +35,7 @@ class Builders::RegistryBuilder
         "Builders::Registry::AgentBuilder",
         "Builders::Registry::BeneficialOwnerBuilder",
         "Builders::Registry::DirectedByBuilder",
+        "Builders::Registry::ManagedByBuilder",
         "Builders::Registry::DocumentBuilder",
         "Builders::Registry::EngineBuilder",
         "Builders::Registry::ManagerBuilder",
