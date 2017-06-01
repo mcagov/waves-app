@@ -73,6 +73,10 @@ Rails.application.routes.draw do
               controller: "submission/directed_bys",
               only: [:create, :update, :destroy]
 
+    resources :managed_bys,
+              controller: "submission/managed_bys",
+              only: [:create, :update, :destroy]
+
     resource :correspondence,
              only: [:create],
              controller: "submission/correspondences"

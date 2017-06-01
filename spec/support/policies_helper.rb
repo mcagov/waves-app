@@ -65,8 +65,9 @@ end
 def expect_extended_owner_fields(bln)
   click_on("Owners")
   within("#owners_tab") do
-    expect_field(bln, "#directed_by")
+    expect_field(bln, "#managed_by")
     expect_field(bln, "#beneficial_owners")
+    expect_field(bln, "#directed_by")
   end
 end
 

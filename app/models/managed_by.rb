@@ -1,0 +1,2 @@
+class ManagedBy < Customer
+end
