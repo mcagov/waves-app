@@ -1,8 +1,2 @@
 - label ||= "Owner Name"
-
-- if f.object.new_record?
-  = owner_f.input :name, label: label, input_html: { class: "upcase owner-name"}
-- else
-  = owner_f.input :name, label: label, input_html: { class: "upcase owner-name"},
-    disabled: true
-  = owner_f.input :name, as: :hidden
+= owner_f.input :name, label: label, input_html: { class: "upcase owner-name"}
