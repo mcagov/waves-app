@@ -40,8 +40,6 @@ describe "User edits submission owners", js: true do
     owner_name = Declaration.last.owner.name
     click_on(owner_name)
 
-    expect(page).to have_css("input.owner-name:disabled")
-
     fill_in("Email", with: "edited_alice@example.com")
     click_on("Save Individual Owner")
 
