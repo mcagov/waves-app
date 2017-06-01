@@ -11,7 +11,7 @@ class Pdfs::Part2::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     vstart = 642
     rcol_l_margin = 300
     draw_label_value "Official Number", @vessel.reg_no, at: [l_margin, vstart]
-    draw_label_value "EC Number", EcNo.for_vessel(@vessel), at: [rcol_l_margin, vstart]
+    draw_label_value "EC Number", @vessel.ec_no, at: [rcol_l_margin, vstart]
     vstart -= vspace
 
     draw_label_value "IMO Number/HIN", @vessel.imo_number_or_hin, at: [l_margin, vstart]

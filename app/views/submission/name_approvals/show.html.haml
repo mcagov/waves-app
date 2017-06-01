@@ -12,6 +12,7 @@
 #name_approval
   = simple_form_for @name_approval,
     url: submission_name_approval_path(@submission),
+    defaults: { disabled: @readonly },
     method: :patch do |f|
     = f.input :part, as: :hidden
 
