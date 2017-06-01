@@ -1,0 +1,39 @@
+%hr
+%h2 Managed By
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Nationality
+    %th
+  %tbody
+    - @submission.managed_bys.each do |managed_by|
+      %tr
+        %td.managed_by-name
+          = link_to_unless @readonly, managed_by.name, "#",
+            "data-target" => "#edit_managed_by_#{managed_by.id}",
+            "data-toggle" => "modal"
+        %td.managed_by-nationality= managed_by.nationality
+        %td
+          - unless @readonly
+            = link_to submission_managed_by_path(@submission, managed_by),
+              class: 'btn-link pull-right',
+              method: :delete,
+              remote: true,
+              data: { confirm: "Are you sure you want to remove this managed_by?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
+
+- unless @readonly
+  .row
+    .col-md-12
+      = link_to '#', class: 'btn btn-primary',
+        "data-target" => "#new_managed_by",
+        "data-toggle" => "modal" do
+        %i.fa.fa-plus
+        Add Managed By
+
+  = render partial: "submissions/extended/forms/managed_by/new"
+
+  - @submission.managed_bys.each do |managed_by|
+    = render partial: "submissions/extended/forms/managed_by/edit", locals: { managed_by: managed_by }
