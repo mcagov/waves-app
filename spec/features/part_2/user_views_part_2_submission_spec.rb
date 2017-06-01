@@ -13,6 +13,7 @@ describe "User views Part 2 submission", type: :feature, js: true do
     expect_smc_fields(false)
     expect_extended_engine_fields(true)
     expect_extended_owner_fields(true)
+    expect_managing_owner_fields(true)
     expect_shareholding(true)
     expect_notes_tab(true)
   end
