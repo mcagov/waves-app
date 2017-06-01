@@ -67,26 +67,26 @@
               %label.form-label-bold
                 Postcode
               .input-group
-                / = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
+                = text_field_tag :alt_postcode_lookup_field, "", class: "alt_postcode-lookup-field form-control"
                 %span.input-group-btn
-                  = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
+                  = link_to "Lookup address", "#", class: "alt_postcode-lookup-button btn btn-primary"
           .row
             .col-md-12.form-group
-              .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
-              .postcode-results-field
+              .alt_postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+              .alt_postcode-results-field
           .row
             .col-md-6
-              = owner_f.input :alt_address_1, label: "Address 1", input_html: { class: "upcase address-1" }
+              = owner_f.input :alt_address_1, label: "Address 1", input_html: { class: "upcase alt_address-1" }
             .col-md-6
-              = owner_f.input :alt_address_2, label: "Address 2", input_html: { class: "upcase address-2" }
+              = owner_f.input :alt_address_2, label: "Address 2", input_html: { class: "upcase alt_address-2" }
           .row
             .col-md-6
-              = owner_f.input :alt_address_3, label: "Address 3", input_html: { class: "upcase address-3" }
+              = owner_f.input :alt_address_3, label: "Address 3", input_html: { class: "upcase alt_address-3" }
             .col-md-6
-              = owner_f.input :alt_town, label: "Town or City", input_html: { class: "upcase town" }
+              = owner_f.input :alt_town, label: "Town or City", input_html: { class: "upcase alt_town" }
           .row
             .col-md-6
-              = owner_f.input :alt_postcode, label: "Postcode", input_html: { class: "upcase postcode" }
+              = owner_f.input :alt_postcode, label: "Postcode", input_html: { class: "upcase alt_postcode" }
             .col-md-6
               = owner_f.input :alt_country, label: "Country", collection: countries_collection, include_blank: false
 
