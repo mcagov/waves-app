@@ -185,6 +185,11 @@ describe Register::Vessel do
           .to eq(vessel.directed_bys[0].name)
       end
 
+      it "has the managed_by attributes" do
+        expect(subject[:managed_bys][0]["name"])
+          .to eq(vessel.managed_bys[0].name)
+      end
+
       it "has the representative attributes" do
         expect(subject[:representative]["name"])
           .to eq(vessel.representative.name)

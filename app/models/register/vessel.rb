@@ -1,5 +1,5 @@
 module Register
-  class Vessel < ApplicationRecord
+  class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
@@ -100,6 +100,7 @@ module Register
         charterers: charterers_info,
         beneficial_owners: beneficial_owners.map(&:attributes),
         directed_bys: directed_bys.map(&:attributes),
+        managed_bys: managed_bys.map(&:attributes),
         representative: representative_info,
       }
     end
