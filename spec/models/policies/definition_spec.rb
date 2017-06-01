@@ -244,4 +244,22 @@ describe Policies::Definitions do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context ".part_4_non_fishing?" do
+    subject { described_class.part_4_non_fishing?(vessel) }
+
+    context "for a :part_4 fishing vessel" do
+      let(:vessel) do
+        build(:part_4_fishing_vessel)
+      end
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "for a :part_4 non-fishing vessel" do
+      let(:vessel) { build(:registered_vessel, part: :part_4) }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
 end
