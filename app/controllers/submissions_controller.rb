@@ -1,9 +1,10 @@
 class SubmissionsController < InternalPagesController
   before_action :load_submission,
                 only: [:show, :edit, :update]
-  before_action :enable_readonly, only: [:show, :edit]
   before_action :check_redirection_policy,
                 only: [:show, :edit, :update]
+
+  before_action :enable_readonly, only: [:show, :edit]
 
   def new
     @submission =
@@ -28,7 +29,6 @@ class SubmissionsController < InternalPagesController
   end
 
   def show
-    @readonly = Policies::Actions.readonly?(@submission, current_user)
     @submission = Decorators::Submission.new(@submission)
   end
 
