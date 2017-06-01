@@ -16,7 +16,7 @@
         .col-md-6
           = owner_f.input :eligibility_status, label: "Status",
             as: :select,
-            collection: eligibility_status_collection
+            collection: eligibility_status_collection(@submission)
 
         .col-md-3
           = owner_f.input :email, label: "Email Address"

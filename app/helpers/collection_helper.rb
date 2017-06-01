@@ -42,7 +42,7 @@ module CollectionHelper
       Policies::Definitions.fishing_vessel?(submission))
   end
 
-  def eligibility_status_collection
+  def eligibility_status_collection(_submission)
     WavesUtilities::EligibilityStatus.all
   end
 
