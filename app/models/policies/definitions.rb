@@ -95,5 +95,9 @@ class Policies::Definitions
     def part_3_online?(submission)
       submission.source.to_sym == :online && submission.part.to_sym == :part_3
     end
+
+    def part_4_non_fishing?(obj)
+      obj.part.to_sym == :part_4 && !fishing_vessel?(obj)
+    end
   end
 end
