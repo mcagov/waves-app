@@ -14,7 +14,7 @@
           = t("print_job.button_text.#{print_job.template}")
 
 .row
-  .col-md-12.col-sm-12.col-xs-12
+  .col-md-12.col-sm-12.col-md-12
     .x_panel
       .x_title
         %h2
@@ -30,7 +30,7 @@
 
 - if current_activity.registration_officer?
   .row.no-print
-    .col-xs-12
+    .col-md-12
       = link_to tasks_my_tasks_path, class: "btn btn-info btn-lg" do
         %i.fa.fa-list-ol
         Return to My Tasks
