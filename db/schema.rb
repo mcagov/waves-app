@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531144119) do
+ActiveRecord::Schema.define(version: 20170601152516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,12 @@ ActiveRecord::Schema.define(version: 20170531144119) do
     t.integer  "shares_held"
     t.uuid     "parent_id"
     t.string   "parent_type"
+    t.string   "alt_address_1"
+    t.string   "alt_address_2"
+    t.string   "alt_address_3"
+    t.string   "alt_town"
+    t.string   "alt_country"
+    t.string   "alt_postcode"
     t.index ["email"], name: "index_customers_on_email", using: :btree
     t.index ["type"], name: "index_customers_on_type", using: :btree
   end
