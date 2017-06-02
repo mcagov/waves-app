@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602123126) do
+ActiveRecord::Schema.define(version: 20170602143722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,17 @@ ActiveRecord::Schema.define(version: 20170602123126) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["parent_type"], name: "index_engines_on_parent_type", using: :btree
+  end
+
+  create_table "fees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "category"
+    t.string   "task_variant"
+    t.integer  "price",               default: 0
+    t.integer  "premium_addon_price"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["category"], name: "index_fees_on_category", using: :btree
+    t.index ["task_variant"], name: "index_fees_on_task_variant", using: :btree
   end
 
   create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
