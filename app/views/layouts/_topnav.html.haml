@@ -13,6 +13,8 @@
             %span.fa.fa-angle-down
           %ul.dropdown-menu.pull-right
             %li
+              = link_to "Fee Schedule", admin_fees_path
+            %li
               = link_to "Gov UK", ENV['GOVUK_HOST'], target: "blank"
             %li
               = link_to "Target Date Calculator", admin_target_dates_path
