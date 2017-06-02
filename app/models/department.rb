@@ -29,15 +29,15 @@ class Department
   def description
     case code
     when :pleasure
-      "the Pleasure Vessel team"
+      "Pleasure Vessel team"
     when :commercial
-      "the Commercial Vessel team"
+      "Commercial Vessel team"
     when :fishing
-      "the Fishing Vessel team"
+      "Fishing Vessel team"
     when :ssr
-      "the SSR team"
+      "SSR team"
     when :bareboat
-      "the Bareboat Vessel team"
+      "Bareboat Vessel team"
     end
   end
 
@@ -71,7 +71,7 @@ class Department
     if code == :part_3
       "Part III of the UK Small Ships Register"
     else
-      "#{Activity.new(@part)} of the Register"
+      "#{Activity.new(@part)} of the UK Ships Register"
     end
   end
 

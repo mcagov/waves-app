@@ -50,55 +50,17 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "application_receipt" do
     let(:mail) do
       NotificationMailer.application_receipt(
-        default_params, "Jolly Roger", "Ref_no",
-        declarations_required, :new_registration)
+        default_params, "Jolly Roger", "Ref_no")
     end
 
     let(:body) { mail.body.encoded }
 
-    context "when declarations_required" do
-      let(:declarations_required) { true }
-
-      it "renders the vessel name" do
-        expect(body).to match(/vessel Jolly Roger/)
-      end
-
-      it "renders the submission_ref_no" do
-        expect(body).to match(/Application Reference No: Ref_no/)
-      end
-
-      it "renders the declarations text" do
-        expect(body).to match(/#{declaration_text}/)
-      end
+    it "renders the vessel name" do
+      expect(body).to match(/vessel Jolly Roger/)
     end
 
-    context "when declarations are NOT required" do
-      let(:declarations_required) { false }
-
-      it "renders the vessel name" do
-        expect(body).to match(/vessel Jolly Roger/)
-      end
-
-      it "renders the submission_ref_no" do
-        expect(body).to match(/Application Reference No: Ref_no/)
-      end
-
-      it "does not enders the declarations text" do
-        expect(body).not_to match(/#{declaration_text}/)
-      end
-    end
-  end
-
-  describe "application_receipt templates are present" do
-    it "renders for each task type" do
-      Task.default_task_types.each do |task|
-        next unless Task.new(task[1]).emails_application_receipt?
-        mail =
-          NotificationMailer.application_receipt(
-            default_params, "Jolly Roger", "Ref_no", false, task[1])
-
-        expect(mail.body.encoded).to match(/Jolly Roger/)
-      end
+    it "renders the submission_ref_no" do
+      expect(body).to match(/Application Reference No: Ref_no/)
     end
   end
 
