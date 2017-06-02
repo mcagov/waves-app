@@ -12,7 +12,7 @@ class AccountLedger
 
   def amount_due
     if Task.new(@submission.task).payment_required?
-      FeeSchedule.new(@submission).standard_fee_required
+      2500
     else
       0
     end
