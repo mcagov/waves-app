@@ -19,4 +19,15 @@
             %td
               %strong= formatted_amount(account_ledger.balance)
 
-      %p Fee Category: #{Policies::Definitions.fee_category(submission)}
+      %h4 Fee Category: #{Policies::Definitions.fee_category(submission).titleize}
+      %table.table
+        %thead
+          %th Task
+          %th Chargeable Item
+          %th Premium Addon
+        %tbody
+          - Fee.where(category: Policies::Definitions.fee_category(submission)).each do |fee|
+            %tr
+              %td= fee.task_variant.titleize
+              %td= formatted_amount(fee.price)
+              %td= fee.premium_addon_price ? formatted_amount(fee.premium_addon_price) : "n/a"
