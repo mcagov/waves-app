@@ -5,12 +5,14 @@
 .modal-body
   .postcode-lookup
     .row
-      .col-md-6
+      .col-md-3
         = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: f, f: f, label: "Beneficial Owner Name" }
       .col-md-3
         = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: f }
       .col-md-3
         = f.input :imo_number, label: "Owner IMO Number"
+      .col-md-3
+        = f.input :shares_held, label: "Shares Held"
     .row
       .col-md-6
         = f.input :eligibility_status, label: "Status",

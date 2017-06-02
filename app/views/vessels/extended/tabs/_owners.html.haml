@@ -7,7 +7,7 @@
     %th Status
     %th Email
     %th Phone
-    - if display_extended_owners?(@vessel)
+    - if display_managing_owner?(@vessel)
       %th.managing_owner Managing Owner
     %th Correspondent
   %tbody
@@ -22,7 +22,7 @@
         %td= owner.eligibility_status.try(:titleize)
         %td= owner.email
         %td= owner.phone_number
-        - if display_extended_owners?(@vessel)
+        - if display_managing_owner?(@vessel)
           %td.managing_owner= y_n(owner.managing_owner)
         %td= y_n(owner.correspondent)
 %hr
@@ -35,7 +35,7 @@
     %th Registration Number
     %th Email
     %th Phone
-    - if display_extended_owners?(@vessel)
+    - if display_managing_owner?(@vessel)
       %th.managing_owner Managing Owner
     %th Correspondent
   %tbody
@@ -43,14 +43,18 @@
       %tr
         %td
           = owner.name
-          %br
-          = owner.inline_address
+          %p
+            %strong Registered Office:
+            = owner.inline_address
+          %p
+            %strong Place of Business:
+            = owner.alt_inline_address
         %td= owner.imo_number
         %td= owner.eligibility_status.try(:titleize)
         %td= owner.registration_number
         %td= owner.email
         %td= owner.phone_number
-        - if display_extended_owners?(@vessel)
+        - if display_managing_owner?(@vessel)
           %td.managing_owner= y_n(owner.managing_owner)
         %td= y_n(owner.correspondent)
 
@@ -89,6 +93,21 @@
                 %td= shareholder_group.shares_held
 
 - if display_extended_owners?(@vessel)
+  #managed_by
+    %hr
+    %h2 Manged By
+    %table.table.table-striped
+      %thead
+        %th Name
+        %th Nationality
+      %tbody
+        - vessel.managed_bys.each do |managed_by|
+          %tr
+            %td
+              = managed_by.name
+              %br
+              = managed_by.inline_address
+            %td= managed_by.nationality
   #beneficial_owners
     %hr
     %h2 Beneficial Owners
@@ -100,6 +119,7 @@
         %th Status
         %th Email
         %th Phone
+        %th Shares Held
       %tbody
         - vessel.beneficial_owners.each do |beneficial_owner|
           %tr
@@ -112,6 +132,7 @@
             %td= beneficial_owner.eligibility_status.try(:titleize)
             %td= beneficial_owner.email
             %td= beneficial_owner.phone_number
+            %td= beneficial_owner.shares_held
 
   #directed_by
     %hr

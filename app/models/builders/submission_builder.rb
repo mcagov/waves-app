@@ -35,6 +35,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       build_charterers
       build_beneficial_owners
       build_directed_bys
+      build_managed_bys
     end
 
     def build_registry_info
@@ -211,6 +212,20 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_directed_by = DirectedBy.new(directed_by.except(:id))
         submission_directed_by.parent = @submission
         submission_directed_by.save
+      end
+    end
+
+    def build_managed_bys
+      if @submission.persisted?
+        return unless ManagedBy.where(parent: @submission).empty?
+      end
+      submission_managed_bys =
+        @submission.symbolized_changeset[:managed_bys] || []
+
+      submission_managed_bys.each do |managed_by|
+        submission_managed_by = ManagedBy.new(managed_by.except(:id))
+        submission_managed_by.parent = @submission
+        submission_managed_by.save
       end
     end
   end

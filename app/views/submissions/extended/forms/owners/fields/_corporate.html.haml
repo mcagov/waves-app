@@ -28,8 +28,67 @@
           = owner_f.input :registration_number, label: "Registration Number"
         .col-md-3
           = owner_f.input :date_of_incorporation, label: "Date of Incorporation", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+      %hr
+      .row
+        .col-md-6
+          %h4 Registered Office
+          .row
+            .col-md-8
+              %label.form-label-bold
+                Postcode
+              .input-group
+                = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
+                %span.input-group-btn
+                  = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
+          .row
+            .col-md-12.form-group
+              .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+              .postcode-results-field
+          .row
+            .col-md-6
+              = owner_f.input :address_1, input_html: { class: "upcase address-1" }
+            .col-md-6
+              = owner_f.input :address_2, input_html: { class: "upcase address-2" }
+          .row
+            .col-md-6
+              = owner_f.input :address_3, input_html: { class: "upcase address-3" }
+            .col-md-6
+              = owner_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
+          .row
+            .col-md-6
+              = owner_f.input :postcode, input_html: { class: "upcase postcode" }
+            .col-md-6
+              = owner_f.input :country, collection: owner_countries_collection, include_blank: false
 
-      = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: owner_f }
+        .col-md-6
+          %h4 Place of Business
+          .row
+            .col-md-8
+              %label.form-label-bold
+                Postcode
+              .input-group
+                = text_field_tag :alt_postcode_lookup_field, "", class: "alt_postcode-lookup-field form-control"
+                %span.input-group-btn
+                  = link_to "Lookup address", "#", class: "alt_postcode-lookup-button btn btn-primary"
+          .row
+            .col-md-12.form-group
+              .alt_postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+              .alt_postcode-results-field
+          .row
+            .col-md-6
+              = owner_f.input :alt_address_1, label: "Address 1", input_html: { class: "upcase alt_address-1" }
+            .col-md-6
+              = owner_f.input :alt_address_2, label: "Address 2", input_html: { class: "upcase alt_address-2" }
+          .row
+            .col-md-6
+              = owner_f.input :alt_address_3, label: "Address 3", input_html: { class: "upcase alt_address-3" }
+            .col-md-6
+              = owner_f.input :alt_town, label: "Town or City", input_html: { class: "upcase alt_town" }
+          .row
+            .col-md-6
+              = owner_f.input :alt_postcode, label: "Postcode", input_html: { class: "upcase alt_postcode" }
+            .col-md-6
+              = owner_f.input :alt_country, label: "Country", collection: countries_collection, include_blank: false
 
       = render partial: "submissions/basic/forms/owners/fields/declaration", locals: { f: f }
 .modal-footer

@@ -14,6 +14,7 @@ FactoryGirl.define do
     charterers                { [build(:charterer)] }
     beneficial_owners         { [build(:beneficial_owner)] }
     directed_bys              { [build(:directed_by)] }
+    managed_bys               { [build(:managed_by)] }
     representative            { build(:registered_representative) }
     propulsion_system         { "Fins" }
     registration_type         "full"

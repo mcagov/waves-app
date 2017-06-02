@@ -56,6 +56,11 @@ module Submission::Associations
                     class_name: "DirectedBy",
                     as: :parent
 
+      base.has_many :managed_bys,
+                    -> { order(:name) },
+                    class_name: "ManagedBy",
+                    as: :parent
+
       base.has_many :managers,
                     -> { order(:name) },
                     class_name: "Manager",
