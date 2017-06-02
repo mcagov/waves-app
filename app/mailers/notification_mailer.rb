@@ -20,18 +20,13 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  def application_receipt(defaults, vessel_name, submission_ref_no,
-                          declarations_required, template_name)
+  def application_receipt(defaults, vessel_name, submission_ref_no)
     @department = defaults[:department]
     @vessel_name = vessel_name
     @submission_ref_no = submission_ref_no
     @name = defaults[:name]
-    @declarations_required = declarations_required
 
-    mail(to: defaults[:to],
-         subject: defaults[:subject],
-         template_path: "notification_mailer/application_receipt",
-         template_name: template_name)
+    mail(to: defaults[:to], subject: defaults[:subject])
   end
 
   # rubocop:disable all

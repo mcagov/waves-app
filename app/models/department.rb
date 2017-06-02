@@ -71,7 +71,7 @@ class Department
     if code == :part_3
       "Part III of the UK Small Ships Register"
     else
-      "#{Activity.new(@part)} of the Register"
+      "#{Activity.new(@part)} of the UK Ships Register"
     end
   end
 
