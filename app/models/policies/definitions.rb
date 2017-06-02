@@ -99,5 +99,15 @@ class Policies::Definitions
     def part_4_non_fishing?(obj)
       obj.part.to_sym == :part_4 && !fishing_vessel?(obj)
     end
+
+    def fee_category(submission)
+      part = submission.part.to_sym
+      part = "part_2_#{simple_or_full(submission)}".to_sym if part == :part_2
+      "#{part}_#{submission.task}"
+    end
+
+    def simple_or_full(submission)
+      (submission.vessel.registration_type || "simple").to_sym
+    end
   end
 end
