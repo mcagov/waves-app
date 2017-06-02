@@ -4,7 +4,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def email_subject
-    "Application Approved: #{vessel_name} - #{submission_ref_no}"
+    "UK ship registry, reference no: #{submission_ref_no}"
   end
 
   def additional_params
