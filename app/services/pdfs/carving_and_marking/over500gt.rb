@@ -45,7 +45,7 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "starboard, above the deepest assigned load line or either side of the superstructure, port and", at: [lmargin + 25, vpos]
     vpos -= spacer
-    @pdf.draw_text "starboard or on the the front of the superstructure or, in the case of passenger ships, on a horizontal", at: [lmargin + 25, vpos]
+    @pdf.draw_text "starboard or on the front of the superstructure or, in the case of passenger ships, on a horizontal", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "surface visible from the air and", at: [lmargin + 25, vpos]
     vpos -= spacer
