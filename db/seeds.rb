@@ -52,7 +52,7 @@ FEES = [
   [:part_2_simple_change_owner, :change_owner, 6300, 10000, 1500],
   [:part_2_full_change_owner, :change_owner, 8000, 10000, 1500],
   [:part_3_change_owner, :change_owner, 2500, 5000],
-  [:part_3_change_owner, :change_owner, 8000, 10000],
+  [:part_4_change_owner, :change_owner, 8000, 10000],
 
   [:part_1_change_vessel, :change_vessel, 3700, 10000, 1700],
   [:part_2_simple_change_vessel, :change_vessel, 3700, 10000, 1700],

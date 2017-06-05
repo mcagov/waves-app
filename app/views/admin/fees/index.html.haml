@@ -14,7 +14,7 @@
         - Fee.order(:category).all.each do |fee|
           %tr
             %td= fee.category.titleize
-            %td= fee.task_variant.titleize
+            %td= t("fees.label.#{fee.task_variant}")
             %td= formatted_amount(fee.price)
             %td= fee.premium_addon_price ? formatted_amount(fee.premium_addon_price) : "n/a"
             %td= fee.subsequent_price ? formatted_amount(fee.subsequent_price) : "n/a"

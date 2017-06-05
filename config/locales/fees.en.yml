@@ -1,0 +1,26 @@
+en:
+  fees:
+    label:
+      new_registration: New Registration
+      provisional_registration: Provisional Registration
+      transfer_from_bdt: Transfer from Port in British Possession
+      transfer_to_bdt: Transfer to Port in British Possession
+      renewal: Renewal of Registration
+      re_registration: Re-Registration
+      convert_pleasure_to_or_from_commercial: Convert Pleasure to/from Commercial
+      convert_provisional_to_full: Convert Provisional to Full
+      convert_provisional_to_simple: Convert Provisional to Simple
+      convert_simple_to_full: Convert Simple to Full
+      change_owner: Change of Ownership
+      change_vessel: Change of Vessel HIN, Callsign, MMSI
+      mortgage: Mortgage Registration
+      mortgage_intent: Mortgage Intent
+      current_transcript: Current Transcript
+      historic_transcript: Historic Transcript
+      issue_csr: Issue CSR
+      csr_certified_copy: Certified Copy of CSR
+      duplicate_certificate: Duplicate Certificate
+      copy_of_document: A copy of a document relating to the registration of a ship
+      certificate_of_non_registry: Certificate of non-registry
+
+
