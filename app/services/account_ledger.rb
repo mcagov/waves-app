@@ -4,6 +4,15 @@ class AccountLedger
     @task = Task.new(submission.task)
   end
 
+  def ui_color
+    case payment_status
+    when :not_applicable then "default"
+    when :unpaid then "danger"
+    when :part_paid then "info"
+    when :paid then "success"
+    end
+  end
+
   def payment_status
     return :not_applicable unless @task.payment_required?
     return :unpaid if @submission.payments.empty?

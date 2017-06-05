@@ -2,7 +2,7 @@
 .x_panel
   %h2.x_title Payment for this Task
   .x_content
-    .panel.panel-success
+    .panel{ class: "panel-#{account_ledger.ui_color}" }
       .panel-heading
         .panel-title{align: :center}
           Payment Received: #{formatted_amount(account_ledger.amount_paid)}
