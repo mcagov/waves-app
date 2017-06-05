@@ -11,7 +11,7 @@ end
 Fee.delete_all
 
 FEES = [
-  [:part_1_new_registration, :new_registration, 12400, 1800],
+  [:part_1_new_registration, :new_registration, 12400, 18000],
   [:part_2_simple_new_registration, :new_registration, 11100, nil],
   [:part_2_full_new_registration, :new_registration, 13100, 18000],
   [:part_3_new_registration, :new_registration, 2500, 5000],
