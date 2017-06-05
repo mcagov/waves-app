@@ -1,10 +1,11 @@
 class AccountLedger
   def initialize(submission)
     @submission = submission
+    @task = Task.new(submission.task)
   end
 
   def payment_status
-    return :not_applicable if amount_due.zero?
+    return :not_applicable unless @task.payment_required?
     return :unpaid if @submission.payments.empty?
     return :paid if amount_paid >= amount_due
     :part_paid

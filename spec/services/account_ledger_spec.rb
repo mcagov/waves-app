@@ -6,56 +6,71 @@ describe AccountLedger do
   context "#payment_status" do
     subject { account_ledger.payment_status }
 
-    context "with full payment" do
-      let(:submission) { create(:paid_submission) }
+    context "not_applicable" do
+      let(:submission) { build(:submission, task: :closure) }
 
-      it { expect(subject).to eq(:paid) }
+      it { expect(subject).to eq(:not_applicable) }
     end
 
-    context "with full payment for premium service" do
-      let(:submission) { create(:paid_premium_submission) }
-
-      it { expect(subject).to eq(:paid) }
-    end
-
-    context "with a part payment" do
-      let(:submission) { create(:part_paid_submission) }
-
-      it { expect(subject).to eq(:part_paid) }
-    end
-
-    context "with no payment" do
+    context "unpaid" do
       let(:submission) { build(:submission) }
 
       it { expect(subject).to eq(:unpaid) }
     end
 
-    context "when payment is not required" do
-      let(:submission) { build(:submission, task: :closure) }
+    context "paid" do
+      let(:submission) do
+        submission = create(:line_item, price: 2500).submission
+        create(:payment, submission: submission, amount: 2500)
+        submission.reload
+      end
+      it { expect(subject).to eq(:paid) }
+    end
 
-      it { expect(subject).to eq(:not_applicable) }
+    context "part_paid" do
+      let(:submission) do
+        submission = create(:line_item, price: 2500).submission
+        create(:payment, submission: submission, amount: 1500)
+        submission.reload
+      end
+
+      it { expect(subject).to eq(:part_paid) }
     end
   end
 
   context "#awaiting_payment?" do
+    let(:submission) { build(:submission) }
+
+    before do
+      allow(account_ledger)
+        .to receive(:payment_status)
+        .and_return(payment_status)
+    end
+
     subject { account_ledger.awaiting_payment? }
 
-    context "with no payment" do
-      let(:submission) { build(:submission) }
+    context "not_applicable" do
+      let(:payment_status) { :not_applicable }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "paid" do
+      let(:payment_status) { :paid }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "unpaid" do
+      let(:payment_status) { :unpaid }
 
       it { expect(subject).to be_truthy }
     end
 
-    context "with full payment" do
-      let(:submission) { create(:paid_submission) }
+    context "part_paid" do
+      let(:payment_status) { :part_paid }
 
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when payment is not required" do
-      let(:submission) { build(:submission, task: :closure) }
-
-      it { expect(subject).to be_falsey }
+      it { expect(subject).to be_truthy }
     end
   end
 
@@ -68,7 +83,7 @@ describe AccountLedger do
       it { expect(subject).to eq(0.00) }
     end
 
-    context "by default (no line_items)" do
+    context "with a line item" do
       let!(:submission) { create(:line_item).submission }
 
       it { expect(subject).to eq(2500) }
