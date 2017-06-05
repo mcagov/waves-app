@@ -1,6 +1,7 @@
 class Submission::LineItemsController < InternalPagesController
   before_action :load_submission
-  before_action :load_fee
+  before_action :load_fee, only: :create
+  before_action :load_line_item, only: :destroy
 
   def create
     @line_item =
@@ -8,6 +9,13 @@ class Submission::LineItemsController < InternalPagesController
         submission_id: @submission.id,
         fee_id: @fee.id,
         price: @fee.price)
+
+    load_submission
+    respond_with_update
+  end
+
+  def destroy
+    @line_item.destroy
 
     load_submission
     respond_with_update
@@ -25,6 +33,10 @@ class Submission::LineItemsController < InternalPagesController
 
   def load_fee
     @fee = Fee.find(params[:fee_id])
+  end
+
+  def load_line_item
+    @line_item = Submission::LineItem.find(params[:id])
   end
 
   def respond_with_update

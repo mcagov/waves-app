@@ -7,16 +7,34 @@
         .panel-title{align: :center}
           Payment Received: #{formatted_amount(account_ledger.amount_paid)}
     %table.table
+      %thead
+        %th
+        %th Standard Fee
+        %th Premium Addon
+        %th Subtotal
+        %th
       %tbody
         - @submission.line_items.each do |line_item|
-          %tr
-            %td.line_item-description= t("fees.label.#{line_item.task_variant}")
-            %td.line_item-price= formatted_amount(line_item.price)
+          %tr.line_item
+            %td.description= t("fees.label.#{line_item.task_variant}")
+            %td.li-price= formatted_amount(line_item.price)
+            %td.premium= formatted_amount(line_item.premium_addon_price)
+            %td.subtotal= formatted_amount(line_item.subtotal)
+            %td
+              = link_to submission_line_item_path(@submission, line_item),
+                class: 'btn-link',
+                method: :delete,
+                remote: true,
+                data: { confirm: "Are you sure you want to remove this item?" },
+                style: 'color: red;' do
+                %i.fa.fa-trash
+                Remove
         %tr
-          %td
+          %td{ colspan: 3 }
             .pull-right Balance
           %td#balance
             %strong= formatted_amount(account_ledger.balance)
+          %td
 
     %h2.x_title
       Fee Category:
@@ -24,7 +42,7 @@
     %table.table
       %thead
         %th Task
-        %th Chargeable Item
+        %th Standard Fee
         %th Premium Addon
         %th Subsequent Item
       %tbody

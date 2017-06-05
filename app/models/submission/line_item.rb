@@ -5,4 +5,8 @@ class Submission::LineItem < ApplicationRecord
   belongs_to :submission
 
   delegate :task_variant, to: :fee
+
+  def subtotal
+    (price.to_f + premium_addon_price.to_f) / 100
+  end
 end
