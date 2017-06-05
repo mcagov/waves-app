@@ -25,9 +25,11 @@
           %th Task
           %th Chargeable Item
           %th Premium Addon
+          %th Subsequent Item
         %tbody
-          - Fee.where(category: Policies::Definitions.fee_category(submission)).each do |fee|
+          - Fee.for(Policies::Definitions.fee_category(submission)).each do |fee|
             %tr
               %td= fee.task_variant.titleize
               %td= formatted_amount(fee.price)
               %td= fee.premium_addon_price ? formatted_amount(fee.premium_addon_price) : "n/a"
+              %td= fee.subsequent_price ? formatted_amount(fee.subsequent_price) : "n/a"
