@@ -4,7 +4,7 @@ class Submission::LineItemsController < InternalPagesController
 
   def create
     @line_item =
-      LineItem.create(
+      Submission::LineItem.create(
         submission_id: @submission.id,
         fee_id: @fee.id,
         price: @fee.price)
