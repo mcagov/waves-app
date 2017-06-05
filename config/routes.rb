@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :target_dates, only: [:index]
     resources :reports, only: [:show, :index]
     resources :tasks, only: [:index]
+    resources :fees, only: [:index]
   end
 
   namespace :api do

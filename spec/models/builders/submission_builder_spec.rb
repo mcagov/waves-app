@@ -39,6 +39,18 @@ describe Builders::SubmissionBuilder do
         expect(submission.ref_no).to be_present
       end
 
+      it "builds the service_level as :standard" do
+        expect(submission.service_level.to_sym).to eq(:standard)
+      end
+
+      context "with :premium service_level" do
+        let(:changeset) { { service_level: { level: :premium } } }
+
+        it "builds the service_level as :premium" do
+          expect(submission.service_level.to_sym).to eq(:premium)
+        end
+      end
+
       it "does not build the registry info" do
         expect(submission.registry_info).to be_nil
       end

@@ -1,7 +1,7 @@
 class TargetDate
   def initialize(start_date, service_level)
     @start_date = start_date.advance(days: -1)
-    @service_level = service_level
+    @service_level = service_level.present? ? service_level.to_sym : :standard
     set_business_days
   end
 

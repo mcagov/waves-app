@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601152516) do
+ActiveRecord::Schema.define(version: 20170605091243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,18 @@ ActiveRecord::Schema.define(version: 20170601152516) do
     t.index ["parent_type"], name: "index_engines_on_parent_type", using: :btree
   end
 
+  create_table "fees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "category"
+    t.string   "task_variant"
+    t.integer  "price",               default: 0
+    t.integer  "premium_addon_price"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "subsequent_price"
+    t.index ["category"], name: "index_fees_on_category", using: :btree
+    t.index ["task_variant"], name: "index_fees_on_task_variant", using: :btree
+  end
+
   create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "finance_payment_id"
     t.datetime "opened_at"
@@ -396,9 +408,8 @@ ActiveRecord::Schema.define(version: 20170601152516) do
 
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "target_date"
-    t.boolean  "is_urgent"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.uuid     "delivery_address_id"
     t.json     "changeset"
     t.string   "part"
@@ -422,6 +433,7 @@ ActiveRecord::Schema.define(version: 20170601152516) do
     t.datetime "carving_and_marking_received_at"
     t.uuid     "registration_id"
     t.datetime "completed_at"
+    t.string   "service_level",                   default: "standard"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id", using: :btree
     t.index ["part"], name: "index_submissions_on_part", using: :btree
     t.index ["ref_no"], name: "index_submissions_on_ref_no", using: :btree
