@@ -1,0 +1,6 @@
+:plain
+  $('#fees').html(
+    '#{escape_javascript(
+      render partial: "/submissions/info/fees",
+      locals: { submission: @submission })}'
+  );

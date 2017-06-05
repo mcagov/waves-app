@@ -11,11 +11,7 @@ class AccountLedger
   end
 
   def amount_due
-    if Task.new(@submission.task).payment_required?
-      2500
-    else
-      0
-    end
+    0
   end
 
   def amount_paid
@@ -27,6 +23,6 @@ class AccountLedger
   end
 
   def balance
-    (amount_due.to_f - amount_paid.to_f) / 100
+    (amount_paid.to_f - amount_due.to_f) / 100
   end
 end

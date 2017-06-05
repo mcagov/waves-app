@@ -8,14 +8,14 @@
           Payment Received: #{formatted_amount(account_ledger.amount_paid)}
     %table.table
       %tbody
-        %tr
-          %td= Task.new(submission.task).description
-          %td
-            %strong= formatted_amount(account_ledger.amount_due)
+        - @submission.line_items.each do |line_item|
+          %tr
+            %td.line_item-description= t("fees.label.#{line_item.task_variant}")
+            %td.line_item-price= formatted_amount(line_item.price)
         %tr
           %td
             .pull-right Balance
-          %td
+          %td#balance
             %strong= formatted_amount(account_ledger.balance)
 
     %h2.x_title
@@ -30,7 +30,15 @@
       %tbody
         - Fee.for(Policies::Definitions.fee_category(submission)).each do |fee|
           %tr
-            %td= t("fees.label.#{fee.task_variant}")
+            %td.task_variant
+              - if @readonly
+                = t("fees.label.#{fee.task_variant}")
+              - else
+                = link_to submission_line_items_path(submission, fee_id: fee.id),
+                  method: :post,
+                  remote: true do
+                  %i.fa.fa-cart-plus
+                  = t("fees.label.#{fee.task_variant}")
             %td= formatted_amount(fee.price)
             %td= fee.premium_addon_price ? formatted_amount(fee.premium_addon_price) : "n/a"
             %td= fee.subsequent_price ? formatted_amount(fee.subsequent_price) : "n/a"

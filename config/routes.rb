@@ -114,6 +114,10 @@ Rails.application.routes.draw do
               controller: "submission/engines",
               only: [:create, :update, :destroy]
 
+    resources :line_items,
+              controller: "submission/line_items",
+              only: [:create]
+
     resources :managers,
               controller: "submission/managers",
               only: [:create, :update, :destroy]
