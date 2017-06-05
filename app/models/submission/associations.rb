@@ -35,6 +35,7 @@ module Submission::Associations
     end
 
     def misc_associations(base)
+      base.has_many :line_items
       base.has_many :work_logs
       base.has_many :carving_and_markings, -> { order("created_at asc") }
       base.has_many :engines, as: :parent
