@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe AccountLedger do
   let(:account_ledger) { described_class.new(submission) }
+
   context "#payment_status" do
     subject { account_ledger.payment_status }
 
@@ -55,6 +56,22 @@ describe AccountLedger do
       let(:submission) { build(:submission, task: :closure) }
 
       it { expect(subject).to be_falsey }
+    end
+  end
+
+  context "#amount_due" do
+    subject { account_ledger.amount_due }
+
+    context "by default (no line_items)" do
+      let!(:submission) { create(:submission) }
+
+      it { expect(subject).to eq(0.00) }
+    end
+
+    context "by default (no line_items)" do
+      let!(:submission) { create(:line_item).submission }
+
+      it { expect(subject).to eq(2500) }
     end
   end
 end

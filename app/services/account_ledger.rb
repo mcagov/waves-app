@@ -11,11 +11,15 @@ class AccountLedger
   end
 
   def amount_due
-    0
+    @submission
+      .line_items.map { |line_item| line_item.price.to_i }
+      .inject(:+) || 0
   end
 
   def amount_paid
-    @submission.payments.map { |payment| payment.amount.to_i }.inject(:+)
+    @submission
+      .payments.map { |payment| payment.amount.to_i }
+      .inject(:+) || 0
   end
 
   def awaiting_payment?
