@@ -1,0 +1,36 @@
+- account_ledger = AccountLedger.new(submission)
+.x_panel
+  %h2.x_title Payment for this Task
+  .x_content
+    .panel.panel-success
+      .panel-heading
+        .panel-title{align: :center}
+          Payment Received: #{formatted_amount(account_ledger.amount_paid)}
+    %table.table
+      %tbody
+        %tr
+          %td= Task.new(submission.task).description
+          %td
+            %strong= formatted_amount(account_ledger.amount_due)
+        %tr
+          %td
+            .pull-right Balance
+          %td
+            %strong= formatted_amount(account_ledger.balance)
+
+    %h2.x_title
+      Fee Category:
+      %em #{Policies::Definitions.fee_category(submission).titleize}
+    %table.table
+      %thead
+        %th Task
+        %th Chargeable Item
+        %th Premium Addon
+        %th Subsequent Item
+      %tbody
+        - Fee.for(Policies::Definitions.fee_category(submission)).each do |fee|
+          %tr
+            %td= t("fees.label.#{fee.task_variant}")
+            %td= formatted_amount(fee.price)
+            %td= fee.premium_addon_price ? formatted_amount(fee.premium_addon_price) : "n/a"
+            %td= fee.subsequent_price ? formatted_amount(fee.subsequent_price) : "n/a"
