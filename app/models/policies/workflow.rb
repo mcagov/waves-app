@@ -8,7 +8,7 @@ class Policies::Workflow
     end
 
     def generate_official_no?(submission)
-      submission.part.to_sym != :part_3
+      !Policies::Definitions.part_3?(submission)
     end
 
     def uses_port_no?(obj)

@@ -54,7 +54,7 @@ class Policies::Definitions
     end
 
     def no_correspondent?(submission)
-      return false if submission.part.to_sym == :part_3
+      return false if part_3?(submission)
       submission.correspondent.blank?
     end
 
@@ -92,8 +92,12 @@ class Policies::Definitions
       false
     end
 
+    def part_3?(obj)
+      obj.part.to_sym == :part_3
+    end
+
     def part_3_online?(submission)
-      submission.source.to_sym == :online && submission.part.to_sym == :part_3
+      part_3?(submission) && submission.source.to_sym == :online
     end
 
     def part_4_non_fishing?(obj)
