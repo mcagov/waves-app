@@ -1,10 +1,23 @@
 - @report.filter_attributes.keys.each do |filter_attr|
   - @report.filter_attributes[filter_attr].each do |search_attr|
+
+    - filter[filter_attr] ||= {}
+
     .form-group
       .row
         .col-md-2
-          %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr.name
+          %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }
+            = search_attr.name
+
         .col-md-2
-          - selected_attr = (filter[filter_attr] || {})[search_attr.key.to_sym]
-          = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]", selected_attr,
+          = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
+            [:includes, :excludes],
+            { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
+            class: "form-control"
+
+        .col-md-2
+          - selected_attr = (filter[filter_attr] || {})
+
+          = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]",
+            filter[filter_attr][search_attr.key.to_sym],
             class: "form-control"
