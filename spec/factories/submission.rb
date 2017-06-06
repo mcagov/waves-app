@@ -114,21 +114,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :paid_submission, parent: :unassigned_submission do
-  end
-
-  factory :paid_premium_submission, parent: :submission do
-    after(:create) do |submission|
-      create(:payment, submission: submission, amount: 5000)
-    end
-  end
-
-  factory :part_paid_submission, parent: :submission do
-    after(:create) do |submission|
-      create(:payment, submission: submission, amount: 10)
-    end
-  end
-
   factory :fishing_submission, parent: :assigned_submission do
     task :change_vessel
     part :part_2

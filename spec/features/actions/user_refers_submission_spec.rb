@@ -53,7 +53,7 @@ feature "User refers a submission", type: :feature, js: true do
   end
 
   scenario "without an applicant" do
-    within("#applicant") { click_on(Submission.last.applicant_name) }
+    within("#summary") { click_on(Submission.last.applicant_name) }
     fill_in("Email Recipient Name", with: "")
     click_on("Save Notification Recipient")
 

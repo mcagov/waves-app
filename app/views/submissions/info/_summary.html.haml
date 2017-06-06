@@ -1,42 +1,11 @@
 - submission = Decorators::Submission.new(submission)
-#summary.row
+.row
   .col-md-4
-    .x_panel
-      %h2.x_title Application Information
-      .x_content
-        %table.table
-          %tbody
-            %tr
-              %td.soft-label.no-top-border Source:
-              %td.no-top-border
-                %strong= submission.source_description
-            %tr
-              %td.soft-label Date Received:
-              %td
-                %strong= submission.received_at
-            %tr
-              %td.soft-label Target Date:
-              %td
-                %strong= submission.target_date
-            %tr
-              %td.soft-label Application Expiry Date:
-              %td.expiry-date
-                %strong
-                  - if submission.name_approval
-                    = submission.name_approval.approved_until
-            %tr
-              %td.soft-label Declarations:
-              %td
-                %strong= submission.declaration_status
-            %tr
-              %td.soft-label Documents Received:
-              %td
-                %strong= submission.documents_received
+    #summary
+      = render partial: "submissions/info/application_info",
+               locals: { submission: submission }
 
-  #applicant
-    = render partial: "submissions/basic/forms/applicant/base",
-      locals: { submission: submission }
-
-  #tasks
-    = render partial: "submissions/basic/forms/tasks/base",
-      locals:  { submission: submission }
+  .col-md-8
+    #fees
+      = render partial: "submissions/info/fees",
+        locals:  { submission: submission }

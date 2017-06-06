@@ -5,8 +5,8 @@
     $('.modal-backdrop').remove();
   }
 
-  var applicant_html = '#{escape_javascript(
-              render partial: "/submissions/basic/forms/applicant/base",
+  var application_info_html = '#{escape_javascript(
+              render partial: "/submissions/info/application_info",
               locals: { submission: @submission })}';
 
-  $("#applicant").html(applicant_html);
+  $("#summary").html(application_info_html);
