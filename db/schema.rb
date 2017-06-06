@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605122724) do
+ActiveRecord::Schema.define(version: 20170606113509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -474,7 +474,7 @@ ActiveRecord::Schema.define(version: 20170605122724) do
     t.string   "number_of_hulls"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.integer  "mmsi_number"
+    t.string   "mmsi_number"
     t.string   "radio_call_sign"
     t.string   "vessel_type"
     t.decimal  "length_in_meters"
