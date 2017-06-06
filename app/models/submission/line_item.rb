@@ -9,4 +9,12 @@ class Submission::LineItem < ApplicationRecord
   def subtotal
     (price.to_f + premium_addon_price.to_f) / 100
   end
+
+  def price_in_pounds
+    (price.to_f / 100.0)
+  end
+
+  def price_in_pounds=(val)
+    self.price = (val.to_f * 100).to_i
+  end
 end
