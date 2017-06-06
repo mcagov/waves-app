@@ -23,7 +23,6 @@ stages:
 
 rspec:
   stage: test
-  allow_failure: true
   script:
     - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
   tags:
