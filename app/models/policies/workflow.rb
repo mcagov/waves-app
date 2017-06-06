@@ -8,7 +8,7 @@ class Policies::Workflow
     end
 
     def generate_official_no?(submission)
-      submission.part.to_sym != :part_3
+      !Policies::Definitions.part_3?(submission)
     end
 
     def uses_port_no?(obj)
@@ -16,7 +16,9 @@ class Policies::Workflow
     end
 
     def uses_csr_forms?(obj)
-      !Policies::Definitions.fishing_vessel?(obj)
+      return false if Policies::Definitions.fishing_vessel?(obj)
+      return false if Policies::Definitions.part_3?(obj)
+      true
     end
 
     def uses_extended_engines?(obj)
