@@ -44,7 +44,8 @@ class Submission::LineItemsController < InternalPagesController
   end
 
   def line_item_params
-    params.require(:submission_line_item).permit(:price_in_pounds)
+    params.require(:submission_line_item).permit(
+      :price_in_pounds, :premium_addon_price_in_pounds)
   end
 
   def respond_with_update

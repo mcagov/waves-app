@@ -38,6 +38,7 @@
                           = t("fees.label.#{line_item.task_variant}")
                       .modal-body
                         = f.input :price_in_pounds, label: "Standard Fee"
+                        = f.input :premium_addon_price_in_pounds, label: "Premium Addon"
                       .modal-footer
                         = button_tag type: 'submit',
                           class: "btn btn-primary btn-sm pull-right" do

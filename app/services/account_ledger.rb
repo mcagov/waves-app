@@ -22,7 +22,7 @@ class AccountLedger
 
   def amount_due
     @submission
-      .line_items.map { |line_item| line_item.price.to_i }
+      .line_items.map { |line_item| line_item.subtotal.to_i }
       .inject(:+) || 0
   end
 
