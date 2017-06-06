@@ -1,0 +1,8 @@
+- @report.filter_attributes[:filter_vessel_details].each do |search_attr|
+  .form-group
+    .row
+      .col-md-2
+        %label{ for: "filter_#{search_attr.key}" }= search_attr.name
+      .col-md-2
+        = text_field_tag "filter[vessel_name]", filter[:vessel_name],
+          class: "form-control"

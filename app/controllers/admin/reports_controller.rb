@@ -17,9 +17,11 @@ class Admin::ReportsController < InternalPagesController
   protected
 
   def filter_params
+    # to do: enable dynamic attribute
     return {} unless params[:filter]
     params.require(:filter).permit(
       :part, :date_start, :date_end,
-      :task, :registration_status, :document_type)
+      :task, :registration_status, :document_type,
+      vessel: [:name, :hin])
   end
 end

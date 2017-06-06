@@ -3,7 +3,7 @@
 
   .x_panel.no-print
     .x_title
-      %h4 Filter Data
+      %h4 Search Criteria
     .x_content
       = form_tag admin_report_path(params[:id]), method: :get do
         - @report.filter_fields.each do |filter_field|
