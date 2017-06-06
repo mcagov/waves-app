@@ -16,7 +16,9 @@ class Policies::Workflow
     end
 
     def uses_csr_forms?(obj)
-      !Policies::Definitions.fishing_vessel?(obj)
+      return false if Policies::Definitions.fishing_vessel?(obj)
+      return false if Policies::Definitions.part_3?(obj)
+      true
     end
 
     def uses_extended_engines?(obj)

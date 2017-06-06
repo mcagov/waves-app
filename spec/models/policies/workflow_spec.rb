@@ -87,6 +87,12 @@ describe Policies::Workflow do
 
       it { expect(subject).to be_falsey }
     end
+
+    context "for a part 3 vessel" do
+      let(:vessel) { build(:unregistered_vessel, part: :part_3) }
+
+      it { expect(subject).to be_falsey }
+    end
   end
 
   context ".uses_vessel_attribute?" do
