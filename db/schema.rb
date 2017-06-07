@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606113509) do
+ActiveRecord::Schema.define(version: 20170607124922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -497,10 +497,6 @@ ActiveRecord::Schema.define(version: 20170606113509) do
     t.datetime "entry_into_service_at"
     t.string   "area_of_operation"
     t.string   "alternative_activity"
-    t.string   "register_length"
-    t.string   "length_overall"
-    t.string   "breadth"
-    t.string   "depth"
     t.string   "propulsion_system"
     t.string   "name_of_builder"
     t.string   "builders_address"
@@ -518,6 +514,10 @@ ActiveRecord::Schema.define(version: 20170606113509) do
     t.string   "issc_auditor"
     t.string   "name_on_primary_register"
     t.string   "ec_no"
+    t.decimal  "register_length"
+    t.decimal  "length_overall"
+    t.decimal  "breadth"
+    t.decimal  "depth"
     t.index ["hin"], name: "index_vessels_on_hin", using: :btree
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number", using: :btree
     t.index ["name"], name: "index_vessels_on_name", using: :btree
