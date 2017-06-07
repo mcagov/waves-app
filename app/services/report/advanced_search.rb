@@ -1,4 +1,9 @@
 class Report::AdvancedSearch < Report
+  def initialize(filters = {})
+    @vessel_attributes = filters[:vessel_attributes] || [:name, :gross_tonnage]
+    super
+  end
+
   def title
     "Advanced Search"
   end
@@ -7,17 +12,9 @@ class Report::AdvancedSearch < Report
     [:filter_advanced_search]
   end
 
-  SearchAttr = Struct.new(:name, :key, :dataype)
-
   def filter_attributes
-    # to do: filter attributes are built by the user
     {
-      vessel:
-        [
-          Report::AdvancedSearch::SearchAttr.new("Name", :name, :string),
-          Report::AdvancedSearch::SearchAttr.new("HIN", :hin, :string),
-          Report::AdvancedSearch::SearchAttr.new("Gross Tonnage", :gross_tonnage, :integer),
-        ],
+      vessel: Vessel.new(@vessel_attributes).filter_attributes,
     }
   end
 
@@ -32,6 +29,8 @@ class Report::AdvancedSearch < Report
         ])
     end
   end
+
+  private
 
   def vessels
     query = Register::Vessel

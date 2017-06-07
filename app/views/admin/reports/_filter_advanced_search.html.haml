@@ -6,8 +6,7 @@
     .form-group
       .row
         .col-md-2
-          %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }
-            = search_attr.name
+          %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
 
         .col-md-2
           = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
