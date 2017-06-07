@@ -16,6 +16,7 @@ class Report::AdvancedSearch < Report
         [
           Report::AdvancedSearch::SearchAttr.new("Name", :name, :string),
           Report::AdvancedSearch::SearchAttr.new("HIN", :hin, :string),
+          Report::AdvancedSearch::SearchAttr.new("Gross Tonnage", :gross_tonnage, :integer),
         ],
     }
   end

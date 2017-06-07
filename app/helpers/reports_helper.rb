@@ -12,4 +12,17 @@ module ReportsHelper
       data_element
     end
   end
+
+  def report_operator_collection(datatype)
+    case datatype
+    when :integer
+      [
+        ["Equals", :equals],
+        ["Greater than", :greater_than],
+        ["Less than", :less_than],
+      ]
+    else
+      [["Includes", :includes], ["Excludes", :excludes]]
+    end
+  end
 end

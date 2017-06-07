@@ -11,7 +11,7 @@
 
         .col-md-2
           = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
-            [:includes, :excludes],
+            report_operator_collection(search_attr.dataype),
             { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
             class: "form-control"
 
