@@ -1,6 +1,6 @@
 class Report::AdvancedSearch < Report
   def initialize(filters = {})
-    @vessel_attributes = filters[:vessel_attributes] || [:name, :gross_tonnage]
+    @vessel = Vessel.new(filters[:vessel_attribute_keys])
     super
   end
 
@@ -14,7 +14,13 @@ class Report::AdvancedSearch < Report
 
   def filter_attributes
     {
-      vessel: Vessel.new(@vessel_attributes).selected_attributes.take(20),
+      vessel: @vessel.filter_attributes.take(20),
+    }
+  end
+
+  def selected_attribute_keys
+    {
+      vessel: @vessel.selected_attribute_keys
     }
   end
 

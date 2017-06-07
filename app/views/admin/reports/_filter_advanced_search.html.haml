@@ -4,8 +4,9 @@
     - @report.filter_attributes[filter_attr].each do |search_attr|
 
       - filter[filter_attr] ||= {}
+      - disabled = !@report.selected_attribute_keys[filter_attr].include?(search_attr.key)
 
-      .form-group
+      .form-group{ class: ("hidden" if disabled) }
         .row
           .col-md-3
             %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
@@ -14,11 +15,13 @@
             = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
               report_operator_collection(search_attr.dataype),
               { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
-              class: "form-control"
+              class: "form-control",
+              disabled: disabled
 
           .col-md-2
             - selected_attr = (filter[filter_attr] || {})
 
             = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]",
               filter[filter_attr][search_attr.key.to_sym],
-              class: "form-control"
+              class: "form-control",
+              disabled: disabled

@@ -1,17 +1,18 @@
 class Report::AdvancedSearch::Criteria
-  def initialize(selected_attribute_keys)
-    @selected_attribute_keys = selected_attribute_keys || [:name]
+  def initialize(selected_attribute_keys = [])
+    @selected_attribute_keys = selected_attribute_keys || default_attribute_keys
+  end
+
+  attr_reader :selected_attribute_keys
+
+  def default_attribute_keys
+    []
   end
 
   FilterAttr = Struct.new(:key, :name, :dataype) do
     def to_s
       name
     end
-  end
-
-  def selected_attributes
-    @selected_attributes ||=
-      addable_attributes.select { |x| @selected_attribute_keys.include?(x.key) }
   end
 
   def column_type(val)

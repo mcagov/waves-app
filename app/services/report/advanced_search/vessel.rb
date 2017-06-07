@@ -1,8 +1,12 @@
 class Report::AdvancedSearch::Vessel < Report::AdvancedSearch::Criteria
   include ActionView::Helpers::TranslationHelper
 
-  def addable_attributes
-    @addable_attributes ||= (custom_attributes + dynamic_attributes.compact)
+  def filter_attributes
+    @filter_attributes ||= (custom_attributes + dynamic_attributes.compact)
+  end
+
+  def default_attribute_keys
+    [:name, :hin, :gross_tonnage]
   end
 
   private

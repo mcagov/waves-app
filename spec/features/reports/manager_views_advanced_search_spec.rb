@@ -8,6 +8,7 @@ describe "Manager views advanced search", js: true do
 
   scenario "selecting the search criteria" do
     expect(page).to have_field("Vessel Name")
+    expect(page).to have_field("HIN")
 
     name_operator = "filter[vessel[name_operator]]"
     name_field = "filter[vessel][name]"
