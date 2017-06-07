@@ -1,22 +1,24 @@
 - @report.filter_attributes.keys.each do |filter_attr|
-  - @report.filter_attributes[filter_attr].each do |search_attr|
+  %fieldset{ id: "filter_#{filter_attr}" }
+    %legend= filter_attr.to_s.titleize
+    - @report.filter_attributes[filter_attr].each do |search_attr|
 
-    - filter[filter_attr] ||= {}
+      - filter[filter_attr] ||= {}
 
-    .form-group
-      .row
-        .col-md-3
-          %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
+      .form-group
+        .row
+          .col-md-3
+            %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
 
-        .col-md-2
-          = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
-            report_operator_collection(search_attr.dataype),
-            { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
-            class: "form-control"
+          .col-md-2
+            = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
+              report_operator_collection(search_attr.dataype),
+              { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
+              class: "form-control"
 
-        .col-md-2
-          - selected_attr = (filter[filter_attr] || {})
+          .col-md-2
+            - selected_attr = (filter[filter_attr] || {})
 
-          = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]",
-            filter[filter_attr][search_attr.key.to_sym],
-            class: "form-control"
+            = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]",
+              filter[filter_attr][search_attr.key.to_sym],
+              class: "form-control"
