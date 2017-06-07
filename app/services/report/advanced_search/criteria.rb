@@ -1,6 +1,6 @@
 class Report::AdvancedSearch::Criteria
-  def initialize(attr_keys = [])
-    @attr_keys = attr_keys
+  def initialize(selected_attribute_keys)
+    @selected_attribute_keys = selected_attribute_keys || [:name]
   end
 
   FilterAttr = Struct.new(:key, :name, :dataype) do
@@ -9,10 +9,16 @@ class Report::AdvancedSearch::Criteria
     end
   end
 
-  def filter_attributes
-    @attr_keys.map do |attr_key|
-      attr = attributes.detect { |key, _| key == attr_key }
-      FilterAttr.new(attr_key, attr[1], attr[2])
+  def selected_attributes
+    @selected_attributes ||=
+      addable_attributes.select { |x| @selected_attribute_keys.include?(x.key) }
+  end
+
+  def column_type(val)
+    case val
+    when :decimal, :integer then :numeric
+    else
+      :string
     end
   end
 end

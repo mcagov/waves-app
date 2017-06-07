@@ -15,7 +15,7 @@ module ReportsHelper
 
   def report_operator_collection(datatype)
     case datatype
-    when :integer
+    when :numeric
       [
         ["Equals", :equals],
         ["Greater than", :greater_than],
