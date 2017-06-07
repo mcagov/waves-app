@@ -10,6 +10,10 @@ describe "Manager views advanced search", js: true do
     expect(page).to have_field("Vessel Name")
     expect(page).to have_field("HIN")
 
+    within("#filter_vessel") do
+      find_field("add_criteria[toggle_vessel]").select("Gross Tonnage")
+    end
+
     name_operator = "filter[vessel[name_operator]]"
     name_field = "filter[vessel][name]"
     gt_operator = "filter[vessel[gross_tonnage_operator]]"

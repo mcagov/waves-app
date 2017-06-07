@@ -14,7 +14,7 @@ class Report::AdvancedSearch < Report
 
   def filter_attributes
     {
-      vessel: @vessel.filter_attributes.take(20),
+      vessel: @vessel.filter_attributes,
     }
   end
 

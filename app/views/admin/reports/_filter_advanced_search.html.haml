@@ -6,7 +6,7 @@
       - filter[filter_attr] ||= {}
       - disabled = !@report.selected_attribute_keys[filter_attr].include?(search_attr.key)
 
-      .form-group{ class: ("hidden" if disabled) }
+      .form-group{ id: "fields_#{filter_attr}_#{search_attr.key}", class: ("hidden" if disabled) }
         .row
           .col-md-3
             %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
@@ -25,3 +25,10 @@
               filter[filter_attr][search_attr.key.to_sym],
               class: "form-control",
               disabled: disabled
+    %hr
+    .row
+      .col-md-3
+        %label{ for: "add_criteria[toggle_#{filter_attr}]" } Add search criteria
+      .col-md-2
+        = select "add_criteria", "toggle_#{filter_attr}",
+          [] + @report.filter_attributes[filter_attr].map{ |a| [a.name, "fields_#{filter_attr}_#{a.key}"] }, { include_blank: true }, class: "toggle_search_criteria"
