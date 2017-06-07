@@ -1,12 +1,21 @@
 class Report::AdvancedSearch::Vessel < Report::AdvancedSearch::Criteria
   include ActionView::Helpers::TranslationHelper
 
-  def filter_attributes
-    @filter_attributes ||= (custom_attributes + dynamic_attributes.compact)
+  def initialize(filters)
+    @filters = filters
+  end
+
+  def selected_attribute_keys
+    return default_attribute_keys if @filters[:vessel].empty?
+    @filters[:vessel].keys.map(&:to_sym)
   end
 
   def default_attribute_keys
-    [:name, :hin, :gross_tonnage]
+    [:name, :hin]
+  end
+
+  def filter_attributes
+    @filter_attributes ||= (custom_attributes + dynamic_attributes.compact)
   end
 
   private
