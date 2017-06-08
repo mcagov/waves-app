@@ -27,7 +27,7 @@ module ReportsHelper
   end
 
   def report_criteria_collection(report, filter_attr)
-    [] + report.filter_attributes[filter_attr].map do |attr|
+    [] + report.sections[filter_attr].map do |attr|
       [attr.name, "fields_#{filter_attr}_#{attr.key}"]
     end
   end

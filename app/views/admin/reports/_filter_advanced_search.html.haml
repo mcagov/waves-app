@@ -1,7 +1,9 @@
-- @report.filter_attributes.keys.each do |filter_attr|
-  %fieldset{ id: "filter_#{filter_attr}" }
-    %legend= filter_attr.to_s.titleize
-    - @report.filter_attributes[filter_attr].each do |search_attr|
+- @report.sections.keys.each do |filter_attr|
+  - section = Report::AdvancedSearch::Section.new(filter_attr)
+
+  %fieldset{ id: section.fieldset_id }
+    %legend= section.title
+    - @report.sections[filter_attr].each do |search_attr|
 
       - filter[filter_attr] ||= {}
       - disabled = !@report.selected_attribute_keys[filter_attr].include?(search_attr.key)

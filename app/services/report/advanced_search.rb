@@ -12,9 +12,9 @@ class Report::AdvancedSearch < Report
     [:filter_advanced_search]
   end
 
-  def filter_attributes
+  def sections
     {
-      vessel: @vessel.filter_attributes,
+      vessel: @vessel.sections,
     }
   end
 
