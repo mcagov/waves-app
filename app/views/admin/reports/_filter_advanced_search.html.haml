@@ -28,6 +28,9 @@
               filter[filter_attr][search_attr.key.to_sym],
               class: "form-control",
               disabled: disabled
+          .col-md-1
+            = link_to "#", style: "color: red;", class: "hide_search_criteria" do
+              %i.fa.fa-remove
     %hr
     .row
       .col-md-3
@@ -35,5 +38,5 @@
       .col-md-2
         = select "add_criteria", section.add_search_criteria_field,
           report_criteria_collection(@report, filter_attr),
-          { include_blank: true }, class: "toggle_search_criteria"
+          { include_blank: true }, class: "show_search_criteria"
 

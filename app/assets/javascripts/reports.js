@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if ($("#reports").length === 0) return;
 
-  $('.toggle_search_criteria').on('change', function() {
+  $('.show_search_criteria').on('change', function() {
     var selection = this.value;
     if (selection.length = 0) return;
 

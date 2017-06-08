@@ -30,10 +30,10 @@ class Report::AdvancedSearch::Section
   end
 
   def add_search_criteria_label
-    "add_criteria[toggle_#{@key}]"
+    "add_criteria[show_#{@key}]"
   end
 
   def add_search_criteria_field
-    "toggle_#{@key}"
+    "show_#{@key}"
   end
 end
