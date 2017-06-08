@@ -133,3 +133,15 @@ def visit_assigned_csr_submission
   login_to_part_1(submission.claimant)
   visit submission_path(submission)
 end
+
+def visit_assigned_part_1_closure_submission
+  registered_vessel =
+    create(:registered_vessel, part: :part_1)
+  submission =
+    create(:approvable_submission, task: :closure,
+                                   part: :part_1,
+                                   registered_vessel: registered_vessel)
+
+  login_to_part_1(submission.claimant)
+  visit submission_path(submission)
+end

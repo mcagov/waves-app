@@ -64,6 +64,24 @@ describe Task do
       it { expect(subject).to be_falsey }
     end
 
+    context ":closure" do
+      let(:task_type) { :closure }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context ":current_transcript" do
+      let(:task_type) { :current_transcript }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context ":historic_transcript" do
+      let(:task_type) { :historic_transcript }
+
+      it { expect(subject).to be_falsey }
+    end
+
     context ":new_registration" do
       let(:task_type) { :new_registration }
 

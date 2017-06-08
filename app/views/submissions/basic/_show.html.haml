@@ -3,4 +3,9 @@
 - unless @submission.registered_vessel
   = render partial: "submissions/basic/similar_vessels", locals: {submission: submission}
 
+- if @submission.approvable?
+  / approve button
+  - content_for(:submission_save_buttons) do
+    = render partial: "submissions/basic/actions/approve"
+
 = render partial: "submissions/actions/base", locals: {submission: submission}
