@@ -22,11 +22,6 @@
           %i.fa.fa-trash
           Cancel Application
 
-        - if @submission.approvable?
-          / approve button
-          - content_for(:submission_save_buttons) do
-            = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/actions/approve"
-
       - elsif @submission.cancelled?
         / revert cancellation button
         = form_tag claim_submission_states_path(submission) do

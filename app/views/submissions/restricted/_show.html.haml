@@ -19,5 +19,8 @@
             #tab_content_supporting.tab-pane.fade{"aria-labelledby" => "supporting-tab", :role => "tabpanel"}
               = render partial: "submissions/basic/body/supporting_info"
 
+- content_for(:submission_save_buttons) do
+  = render partial: "submissions/basic/actions/approve"
+
 = render partial: "submissions/actions/base", locals: {submission: submission}
 
