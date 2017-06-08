@@ -3,18 +3,19 @@
 
   %fieldset{ id: section.fieldset_id }
     %legend= section.title
+
     - @report.sections[filter_attr].each do |search_attr|
 
       - filter[filter_attr] ||= {}
       - disabled = !@report.selected_attribute_keys[filter_attr].include?(search_attr.key)
 
-      .form-group{ id: "fields_#{filter_attr}_#{search_attr.key}", class: ("hidden" if disabled) }
+      .form-group{ id: section.form_group_id(search_attr), class: ("hidden" if disabled) }
         .row
           .col-md-3
-            %label{ for: "filter_#{filter_attr}_#{search_attr.key}" }= search_attr
+            %label{ for: section.field_label(search_attr) }= search_attr
 
           .col-md-2
-            = select :filter, "#{filter_attr}[#{search_attr.key}_operator]",
+            = select :filter, section.operator_field(search_attr),
               report_operator_collection(search_attr.dataype),
               { selected: filter[filter_attr]["#{search_attr.key}_operator"] },
               class: "form-control",
@@ -23,16 +24,16 @@
           .col-md-2
             - selected_attr = (filter[filter_attr] || {})
 
-            = text_field_tag "filter[#{filter_attr}][#{search_attr.key}]",
+            = text_field_tag section.text_input_field(search_attr),
               filter[filter_attr][search_attr.key.to_sym],
               class: "form-control",
               disabled: disabled
     %hr
     .row
       .col-md-3
-        %label{ for: "add_criteria[toggle_#{filter_attr}]" } Add search criteria
+        %label{ for: section.add_search_criteria_label } Add search criteria
       .col-md-2
-        = select "add_criteria", "toggle_#{filter_attr}",
+        = select "add_criteria", section.add_search_criteria_field,
           report_criteria_collection(@report, filter_attr),
           { include_blank: true }, class: "toggle_search_criteria"
 
