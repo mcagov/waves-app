@@ -8,4 +8,13 @@ $(document).ready(function() {
     $('#' + selection).removeClass('hidden');
     $('#' + selection + ' :input').removeAttr('disabled');
   });
+
+  $('a.hide_search_criteria').on('click', function() {
+    selection = $(this).closest('.form-group');
+
+    selection.addClass('hidden');
+    selection.find(':input').each(function() {
+      $(this).attr('disabled', 'disabled');
+    });
+  });
 });

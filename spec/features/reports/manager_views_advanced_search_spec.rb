@@ -8,9 +8,17 @@ describe "Manager views advanced search", js: true do
 
   scenario "selecting the search criteria" do
     expect(page).to have_field("Vessel Name")
-    expect(page).to have_field("HIN")
 
+    # remove the vessel name field
+    name_fields = "#fields_vessel_name"
+    within(name_fields) do
+      find(:css, "a.hide_search_criteria").trigger("click")
+    end
+    expect(page).not_to have_css(name_fields)
+
+    # restore the vessel name field and add the gross tonnage field
     within("#filter_vessel") do
+      find_field("add_criteria[show_vessel]").select("Vessel Name")
       find_field("add_criteria[show_vessel]").select("Gross Tonnage")
     end
 
@@ -18,11 +26,13 @@ describe "Manager views advanced search", js: true do
     name_field = "filter[vessel][name]"
     gt_operator = "filter[vessel[gross_tonnage_operator]]"
 
+    # check that the datatypes set the expected operators
     find_field(name_operator).select("Excludes")
     find_field(name_field).set("Bob")
     find_field(gt_operator).select("Greater than")
-    click_on("Apply Filter")
 
+    # ensure that the selection persists when the form is submitted
+    click_on("Apply Filter")
     expect(page).to have_select(name_operator, selected: "Excludes")
     expect(page).to have_field(name_field, with: "Bob")
     expect(page).to have_select(gt_operator, selected: "Greater than")
