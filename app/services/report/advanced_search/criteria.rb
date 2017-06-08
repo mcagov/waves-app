@@ -1,5 +1,5 @@
 class Report::AdvancedSearch::Criteria
-  FilterAttr = Struct.new(:key, :name, :dataype) do
+  Criterium = Struct.new(:key, :name, :datatype) do
     def to_s
       name
     end

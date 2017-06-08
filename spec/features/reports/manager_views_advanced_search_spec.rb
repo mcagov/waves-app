@@ -22,19 +22,21 @@ describe "Manager views advanced search", js: true do
       find_field("add_criteria[show_vessel]").select("Gross Tonnage")
     end
 
-    name_operator = "filter[vessel[name_operator]]"
-    name_field = "filter[vessel][name]"
-    gt_operator = "filter[vessel[gross_tonnage_operator]]"
+    name_operator = "filter[vessel[name][operator]]"
+    name_field = "filter[vessel][name][value]"
+    name_displayed = "filter_vessel_name_result_displayed"
+    gt_operator = "filter[vessel[gross_tonnage][operator]]"
 
-    # check that the datatypes set the expected operators
     find_field(name_operator).select("Excludes")
+    find_field(name_displayed).set(false)
     find_field(name_field).set("Bob")
     find_field(gt_operator).select("Greater than")
 
-    # ensure that the selection persists when the form is submitted
+    # ensure that the selections persist when the form is submitted
     click_on("Apply Filter")
     expect(page).to have_select(name_operator, selected: "Excludes")
     expect(page).to have_field(name_field, with: "Bob")
+    expect(find_field(name_displayed)).not_to be_checked
     expect(page).to have_select(gt_operator, selected: "Greater than")
   end
 end

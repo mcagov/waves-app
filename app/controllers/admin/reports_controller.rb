@@ -1,6 +1,6 @@
 class Admin::ReportsController < InternalPagesController
   def show
-    @filter = filter_params
+    @filter = filter_params || default_filter_params
     @filter[:page] = params[:page] || 1
     @report = Report.build(params[:id], @filter)
 
@@ -17,7 +17,11 @@ class Admin::ReportsController < InternalPagesController
   protected
 
   def filter_params
-    return {} unless params[:filter]
+    return default_filter_params unless params[:filter]
     params.require(:filter).permit!
+  end
+
+  def default_filter_params
+    { vessel: { name: { value: "", result_displayed: "1" } } }
   end
 end

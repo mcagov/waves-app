@@ -18,12 +18,6 @@ class Report::AdvancedSearch < Report
     }
   end
 
-  def selected_attribute_keys
-    {
-      vessel: @vessel.selected_attribute_keys,
-    }
-  end
-
   def results
     @pagination_collection = vessels
     @pagination_collection.map do |vessel|
