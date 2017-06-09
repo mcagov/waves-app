@@ -9,7 +9,7 @@
       <Row>
         <% @report.headings.each do |heading| %>
           <Cell>
-            <Data ss:Type="String"><%=  heading.to_s.titleize %></Data>
+            <Data ss:Type="String"><%=  titleized_report_heading(heading) %></Data>
           </Cell>
         <% end %>
       </Row>

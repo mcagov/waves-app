@@ -1,0 +1,51 @@
+- @report.sections.each do |section|
+  - section = Report::AdvancedSearch::Section.new(section)
+
+  %fieldset{ id: section.fieldset_id }
+    %legend= section.title
+
+    - section.criteria.each do |criteria|
+
+      - criteria_filter = Report::AdvancedSearch::Filter.new(section, criteria, @filter).criteria_filter
+      - field = Report::AdvancedSearch::Field.new(section, criteria, criteria_filter)
+
+      .form-group{ id: field.row_id, class: ("hidden" if field.disabled?) }
+        .row
+          .col-md-3
+            %label{ for: field.label }= field.title
+
+          .col-md-2
+            = select :filter, field.select_operator_field,
+              report_operator_collection(field.datatype),
+              { selected: field.operator },
+              class: "form-control",
+              disabled: field.disabled?
+
+          .col-md-2
+            = text_field_tag field.text_input_field,
+              field.value,
+              class: "form-control",
+              disabled: field.disabled?
+
+          .col-md-1
+            = link_to "#",
+              style: "color: red;",
+              class: "hide_search_criteria" do
+              %i.fa.fa-remove
+
+          .col-md-4
+            = check_box_tag field.result_displayed_field,
+              1, field.result_displayed?,
+              disabled: field.disabled?
+            %label{ for: field.result_displayed_label_for }
+              Show attribute in results
+
+    %hr
+    .row
+      .col-md-3
+        %label{ for: section.add_search_criteria_label } Add search criteria
+      .col-md-2
+        = select "add_criteria", section.add_search_criteria_field,
+          report_criteria_collection(@report, section.key),
+          { include_blank: true }, class: "show_search_criteria"
+

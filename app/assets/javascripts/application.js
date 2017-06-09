@@ -31,6 +31,7 @@
 //= require name_approval
 //= require_owners
 //= require postcode_lookup
+//= require reports
 //= require submission
 //= require ui-helpers
 

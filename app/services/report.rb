@@ -7,7 +7,7 @@ class Report
   end
 
   def initialize(filters = {})
-    @filters = filters
+    @filters = filters.to_h.deep_symbolize_keys
     @part = filters[:part]
     @date_start = parse_date_start
     @date_end = parse_date_end
@@ -23,8 +23,18 @@ class Report
   end
 
   Result = Struct.new(:data_elements, :sub_report_filters)
-  RenderAsRegistrationStatus = Struct.new(:registration_status)
-  RenderAsLinkToVessel = Struct.new(:vessel, :attribute)
+
+  RenderAsRegistrationStatus = Struct.new(:registration_status) do
+    def to_s
+      registration_status
+    end
+  end
+
+  RenderAsLinkToVessel = Struct.new(:vessel, :attribute) do
+    def to_s
+      vessel.to_s
+    end
+  end
 
   def filter_fields
     []
