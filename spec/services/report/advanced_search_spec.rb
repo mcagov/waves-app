@@ -16,4 +16,25 @@ describe Report::AdvancedSearch do
       expect(subject.headings).to eq([])
     end
   end
+
+  context "#results" do
+    let!(:named_boat) { create(:registered_vessel, name: "named_boat") }
+    let(:filters) do
+      { vessel: { name: { operator: operator, value: "named_b" } } }
+    end
+
+    subject { Report::AdvancedSearch.new(filters).results }
+
+    context "with a search that includes the named_boat" do
+      let(:operator) { :includes }
+
+      it { expect(subject.length).to eq(1) }
+    end
+
+    context "with a search that excludes the named_boat" do
+      let(:operator) { :excludes }
+
+      it { expect(subject).to be_empty }
+    end
+  end
 end
