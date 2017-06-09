@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe "Manager views advanced search", js: true do
   before do
+    create(:registered_vessel, name: "Bob", gross_tonnage: 12345)
     login_to_reports
     click_on("Advanced Search")
   end
@@ -9,6 +10,7 @@ describe "Manager views advanced search", js: true do
   scenario "selecting the search criteria" do
     expect(page).to have_css("#results th", text: "Vessel Name")
     expect(page).to have_field("Vessel Name")
+    expect(page).to have_css("#results tr td", text: "Bob")
 
     # remove the vessel name field
     name_fields = "#fields_vessel_name"
@@ -42,5 +44,6 @@ describe "Manager views advanced search", js: true do
     expect(find_field(name_displayed)).not_to be_checked
     expect(page).to have_select(gt_operator, selected: "Greater than")
     expect(page).to have_css("#results th", text: "Gross Tonnage")
+    expect(page).to have_css("#results tr td", text: "12345")
   end
 end

@@ -26,11 +26,7 @@ class Report::AdvancedSearch < Report
     @pagination_collection = vessels
     @pagination_collection.map do |vessel|
       Result.new(
-        # to do: results attributes are built by the user
-        [
-          vessel.name,
-          vessel.hin,
-        ])
+        @vessel_criteria.column_attributes.map { |col| vessel.send(col) })
     end
   end
 
