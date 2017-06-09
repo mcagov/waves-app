@@ -51,4 +51,11 @@ describe "Manager views advanced search", js: true do
 
     expect(page).to have_css("#results tr td", text: "12345")
   end
+
+  scenario "exporting to excel" do
+    click_on("Export to Excel")
+    sleep 1
+    expect(page.response_headers["Content-Type"]).to match("application/xls")
+    expect(page.text).to match("Worksheet ss:Name=\"Advanced Search\"")
+  end
 end
