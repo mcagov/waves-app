@@ -5,8 +5,8 @@ class Report::AdvancedSearch::Vessel < Report::AdvancedSearch::Criteria
     @filters = filters
   end
 
-  def sections
-    @sections ||= (custom_attributes + dynamic_attributes.compact)
+  def section_attributes
+    @section_attributes ||= (custom_attributes + dynamic_attributes.compact)
   end
 
   private

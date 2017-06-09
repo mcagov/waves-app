@@ -14,7 +14,7 @@ class Report::AdvancedSearch < Report
 
   def sections
     {
-      vessel: @vessel.sections,
+      vessel: @vessel.section_attributes,
     }
   end
 
