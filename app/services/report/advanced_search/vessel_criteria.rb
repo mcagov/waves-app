@@ -9,6 +9,8 @@ class Report::AdvancedSearch::VesselCriteria < Report::AdvancedSearch::Criteria
   end
 
   def column_attributes
+    return [] unless @filters[:vessel]
+
     @column_attributes =
       @filters[:vessel].keys.map do |key|
         key if @filters[:vessel][key].keys.include?(:result_displayed)
