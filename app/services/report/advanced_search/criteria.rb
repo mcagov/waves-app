@@ -1,6 +1,4 @@
 class Report::AdvancedSearch::Criteria
-  include ActionView::Helpers::TranslationHelper
-
   def initialize(filters)
     @filters = filters
   end
