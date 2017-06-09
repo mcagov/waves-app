@@ -34,14 +34,27 @@ class Report::AdvancedSearch < Report
 
   def vessels
     query = Register::Vessel
-    query = filter_by_part(query)
     query = filter_by_vessel_details(query)
     query = query.order(:name)
     paginate(query)
   end
 
   def filter_by_vessel_details(query)
-    # to do: query builder
+    @filters[:vessel].each_pair do |k, v|
+      next if v[:value].blank?
+      query = query.where(build_query(v[:operator], k, v[:value]))
+    end
     query
+  end
+
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def build_query(operator, column, value)
+    case (operator || "").to_sym
+    when :includes then ["#{column} LIKE ?", "%#{value}%"]
+    when :excludes then ["#{column} NOT like ?", "%#{value}%"]
+    when :equals then ["#{column} = ?", value.to_f]
+    when :greater_than then ["#{column} > ?", value.to_f]
+    when :less_than then ["#{column} < ?", value.to_f]
+    end
   end
 end

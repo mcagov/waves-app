@@ -9,6 +9,8 @@ class Report::AdvancedSearch::VesselCriteria < Report::AdvancedSearch::Criteria
   end
 
   def column_attributes
+    return [] unless @filters[:vessel]
+
     @column_attributes =
       @filters[:vessel].keys.map do |key|
         key if @filters[:vessel][key].keys.include?(:result_displayed)
@@ -28,13 +30,16 @@ class Report::AdvancedSearch::VesselCriteria < Report::AdvancedSearch::Criteria
   end
 
   def dynamic_attributes
-    Register::Vessel.columns_hash.map do |key, column|
-      translation = Report::AdvancedSearch::VesselCriteria.translation_for(key)
+    attributes =
+      Register::Vessel.columns_hash.map do |key, column|
+        name = Report::AdvancedSearch::VesselCriteria.translation_for(key)
 
-      Criterium.new(
-        key.to_sym,
-        translation,
-        column_type(column.type)) if translation
-    end.compact
+        Criterium.new(
+          key.to_sym,
+          name,
+          column_type(column.type)) if name
+      end
+
+    attributes.compact.sort_by(&:name)
   end
 end
