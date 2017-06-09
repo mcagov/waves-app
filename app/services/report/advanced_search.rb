@@ -1,7 +1,7 @@
 class Report::AdvancedSearch < Report
   def initialize(filters = {})
     super
-    @vessel = Vessel.new(filters)
+    @vessel_criteria = VesselCriteria.new(filters)
   end
 
   def title
@@ -14,8 +14,12 @@ class Report::AdvancedSearch < Report
 
   def sections
     {
-      vessel: @vessel.section_attributes,
+      vessel: @vessel_criteria.section_attributes,
     }
+  end
+
+  def headings
+    []#@vessel.headings
   end
 
   def results

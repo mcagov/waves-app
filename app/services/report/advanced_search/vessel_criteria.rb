@@ -1,14 +1,4 @@
-class Report::AdvancedSearch::Vessel < Report::AdvancedSearch::Criteria
-  include ActionView::Helpers::TranslationHelper
-
-  def initialize(filters)
-    @filters = filters
-  end
-
-  def section_attributes
-    @section_attributes ||= (custom_attributes + dynamic_attributes.compact)
-  end
-
+class Report::AdvancedSearch::VesselCriteria < Report::AdvancedSearch::Criteria
   private
 
   def custom_attributes
@@ -23,6 +13,6 @@ class Report::AdvancedSearch::Vessel < Report::AdvancedSearch::Criteria
         key.to_sym,
         t(label),
         column_type(column.type)) if I18n.exists?(label)
-    end
+    end.compact
   end
 end

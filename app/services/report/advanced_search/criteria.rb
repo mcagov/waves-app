@@ -1,4 +1,14 @@
 class Report::AdvancedSearch::Criteria
+  include ActionView::Helpers::TranslationHelper
+
+  def initialize(filters)
+    @filters = filters
+  end
+
+  def section_attributes
+    @section_attributes ||= (custom_attributes + dynamic_attributes)
+  end
+
   Criterium = Struct.new(:key, :name, :datatype) do
     def to_s
       name
@@ -11,5 +21,15 @@ class Report::AdvancedSearch::Criteria
     else
       :string
     end
+  end
+
+  private
+
+  def custom_attributes
+    []
+  end
+
+  def dynamic_attributes
+    []
   end
 end
