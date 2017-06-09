@@ -7,6 +7,7 @@ describe "Manager views advanced search", js: true do
   end
 
   scenario "selecting the search criteria" do
+    expect(page).to have_css("#results th", text: "Vessel Name")
     expect(page).to have_field("Vessel Name")
 
     # remove the vessel name field
@@ -26,11 +27,13 @@ describe "Manager views advanced search", js: true do
     name_field = "filter[vessel][name][value]"
     name_displayed = "filter_vessel_name_result_displayed"
     gt_operator = "filter[vessel[gross_tonnage][operator]]"
+    gt_displayed = "filter_vessel_gross_tonnage_result_displayed"
 
     find_field(name_operator).select("Excludes")
     find_field(name_displayed).set(false)
     find_field(name_field).set("Bob")
     find_field(gt_operator).select("Greater than")
+    find_field(gt_displayed).set(true)
 
     # ensure that the selections persist when the form is submitted
     click_on("Apply Filter")
@@ -38,5 +41,6 @@ describe "Manager views advanced search", js: true do
     expect(page).to have_field(name_field, with: "Bob")
     expect(find_field(name_displayed)).not_to be_checked
     expect(page).to have_select(gt_operator, selected: "Greater than")
+    expect(page).to have_css("#results th", text: "Gross Tonnage")
   end
 end

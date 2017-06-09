@@ -8,6 +8,19 @@ class Report::AdvancedSearch::VesselCriteria < Report::AdvancedSearch::Criteria
     end
   end
 
+  def column_attributes
+    @column_attributes =
+      @filters[:vessel].keys.map do |key|
+        key if @filters[:vessel][key].keys.include?(:result_displayed)
+      end.compact
+  end
+
+  def headings
+    column_attributes.map do |key|
+      section_attributes.find { |a| a.key == key }.name
+    end
+  end
+
   private
 
   def custom_attributes

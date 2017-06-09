@@ -19,7 +19,7 @@ class Report::AdvancedSearch < Report
   end
 
   def headings
-    []#@vessel.headings
+    @vessel_criteria.headings
   end
 
   def results
