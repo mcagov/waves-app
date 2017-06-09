@@ -1,7 +1,7 @@
 class Report::AdvancedSearch < Report
   def initialize(filters = {})
     super
-    @vessel_criteria = VesselCriteria.new(filters)
+    @vessel_criteria = VesselCriteria.new(@filters)
   end
 
   def title

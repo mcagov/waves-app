@@ -7,7 +7,7 @@ class Report
   end
 
   def initialize(filters = {})
-    @filters = filters
+    @filters = filters.to_h.deep_symbolize_keys
     @part = filters[:part]
     @date_start = parse_date_start
     @date_end = parse_date_end
