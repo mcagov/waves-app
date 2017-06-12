@@ -7,6 +7,14 @@ class Report::MaibQuarterly < Report
     "12m and over"
   end
 
+  def results
+    build_results(scoped_registrations.under_12m)
+  end
+
+  def second_sheet_results
+    build_results(scoped_registrations.over_12m)
+  end
+
   def headings
     [
       "Name", "PLN", "Official No", "Registered Length", "Overall Length",
@@ -16,44 +24,54 @@ class Report::MaibQuarterly < Report
     ]
   end
 
-  def results # rubocop:disable Metrics/MethodLength
-    load_registrations.map do |registration|
-      vessel = load_vessel(registration)
-
-      Result.new(
-        [
-          vessel.name,
-          vessel.pln,
-          vessel.reg_no,
-          vessel.register_length,
-          vessel.length_overall,
-          vessel.depth,
-          vessel.breadth,
-          vessel.gross_tonnage,
-          vessel.net_tonnage,
-          Engine.total_mcep_for(registration),
-          vessel.hull_construction_material,
-          vessel.year_of_build,
-          registration.owner_name_address_shareholding,
-          (registration.closed_at? ? "Closed" : "Registered"),
-          transaction_type(registration),
-          registration.created_at,
-        ])
-    end.sort_by { |r| [r.data_elements[1], r.data_elements[0]] }
-  end
-
   private
 
-  def load_registrations
-    Registration.fishing_vessels.includes(:submissions).all
+  def scoped_registrations
+    Registration
+      .fishing_vessels
+      .includes(:submissions)
+      .where("created_at >= ?", @date_start)
+      .where("created_at <= ?", @date_end)
   end
 
   def load_vessel(registration)
     Decorators::Vessel.new(registration.vessel)
   end
 
+  def build_results(registrations)
+    results =
+      registrations.map do |registration|
+        assign_result(registration)
+      end
+
+    results.sort_by { |r| [r.data_elements[1], r.data_elements[0]] }
+  end
+
   def transaction_type(registration)
     return "" if registration.submissions.empty?
     Task.new(registration.submissions.first.task).description
+  end
+
+  def assign_result(registration) # rubocop:disable Metrics/MethodLength
+    vessel = load_vessel(registration)
+    Result.new(
+      [
+        vessel.name,
+        vessel.pln,
+        vessel.reg_no,
+        vessel.register_length,
+        vessel.length_overall,
+        vessel.depth,
+        vessel.breadth,
+        vessel.gross_tonnage,
+        vessel.net_tonnage,
+        Engine.total_mcep_for(registration),
+        vessel.hull_construction_material,
+        vessel.year_of_build,
+        registration.owner_name_address_shareholding,
+        (registration.closed_at? ? "Closed" : "Registered"),
+        transaction_type(registration),
+        registration.created_at,
+      ])
   end
 end

@@ -12,6 +12,18 @@ class Registration < ApplicationRecord
       "registry_info#>>'{vessel_info, registration_type}' = 'fishing')")
   end)
 
+  scope :under_12m, (lambda do
+    where(
+      "(cast
+        (registry_info#>>'{vessel_info, register_length}' as numeric) < 12.0)")
+  end)
+
+  scope :over_12m, (lambda do
+    where(
+      "(cast
+        (registry_info#>>'{vessel_info, register_length}' as numeric) >= 12.0)")
+  end)
+
   def vessel
     Register::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
