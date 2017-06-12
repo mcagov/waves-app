@@ -17,7 +17,7 @@ class Report::MaibQuarterly < Report
   end
 
   def results # rubocop:disable Metrics/MethodLength
-    Registration.includes(:submissions).all.map do |registration|
+    load_registrations.map do |registration|
       vessel = load_vessel(registration)
 
       Result.new(
@@ -43,6 +43,10 @@ class Report::MaibQuarterly < Report
   end
 
   private
+
+  def load_registrations
+    Registration.fishing_vessels.includes(:submissions).all
+  end
 
   def load_vessel(registration)
     Decorators::Vessel.new(registration.vessel)
