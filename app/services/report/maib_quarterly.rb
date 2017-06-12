@@ -17,7 +17,7 @@ class Report::MaibQuarterly < Report
   end
 
   def results # rubocop:disable Metrics/MethodLength
-    Registration.all.map do |registration|
+    Registration.includes(:submissions).all.map do |registration|
       vessel = load_vessel(registration)
 
       Result.new(
@@ -39,7 +39,7 @@ class Report::MaibQuarterly < Report
           transaction_type(registration),
           registration.created_at,
         ])
-    end
+    end.sort_by { |r| [r.data_elements[1], r.data_elements[0]] }
   end
 
   private
