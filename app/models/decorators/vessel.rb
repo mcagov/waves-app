@@ -19,4 +19,8 @@ class Decorators::Vessel < SimpleDelegator
   def engine_derating_description
     engines.map(&:derating).reject(&:blank?).join("; ")
   end
+
+  def pln
+    "#{port_code}#{port_no}"
+  end
 end

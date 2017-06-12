@@ -55,6 +55,12 @@ class Registration < ApplicationRecord
     Task.new(task).duplicates_certificate?
   end
 
+  def owner_name_address_shareholding
+    arr = owners_and_shares
+    arr += shareholder_groups_and_shares
+    arr.join("; ")
+  end
+
   private
 
   def submission
@@ -70,6 +76,25 @@ class Registration < ApplicationRecord
       {}
     else
       registry_info.deep_symbolize_keys!
+    end
+  end
+
+  def owners_and_shares
+    owners.map do |owner|
+      "#{owner.name}, #{owner.inline_address} (#{owner.shares_held} shares)"
+    end
+  end
+
+  def shareholder_groups_and_shares
+    shareholder_groups.map do |shareholder_group|
+      next unless shareholder_group[:owners].present?
+
+      sh_group_owners =
+        shareholder_group[:owners].map do |owner|
+          "#{owner[:name]}, #{owner[:inline_address]}"
+        end.join(" jointly with ")
+
+      "#{sh_group_owners} (#{shareholder_group[:shares_held]} shares)"
     end
   end
 end
