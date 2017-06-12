@@ -36,7 +36,7 @@ class Report
     end
   end
 
-  RenderAsDownloadLink = Struct.new(:title, :params) do
+  RenderAsDownloadLink = Struct.new(:report_key) do
     def to_s
       ""
     end

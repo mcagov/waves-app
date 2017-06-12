@@ -14,12 +14,12 @@ class Report::Maib < Report
   def results
     return [] unless @date_start && @date_end
     [
-      ["Fishing Vessel Closure", :maib_closure],
-      ["Fishing Vessel Length", :maib_length],
+      ["Fishing Vessel Closure", :maib_vessel_closure],
+      ["Fishing Vessel Length", :maib_vessel_length],
       ["Quarterly Report", :maib_quarterly],
     ].map do |name, key|
       Result.new(
-        [@date_start, @date_end, name, RenderAsDownloadLink.new(name, key)])
+        [@date_start, @date_end, name, RenderAsDownloadLink.new(key)])
     end
   end
 end
