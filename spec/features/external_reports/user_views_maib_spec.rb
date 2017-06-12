@@ -12,6 +12,13 @@ describe "User views MAIB reports", js: true do
     @results = page.all("table#results tr")
   end
 
+  scenario "Registration Closures" do
+    within(@results[1]) { click_on("Download") }
+
+    expect(page.response_headers["Content-Type"]).to match("application/xls")
+    expect(page.text).to match("Worksheet ss:Name=\"Fishing Vessel Closures\"")
+  end
+
   scenario "Quarterly Report" do
     within(@results[3]) { click_on("Download") }
 
