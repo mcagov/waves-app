@@ -2,6 +2,15 @@
   %li
     %a.reports_menu
       %i.fa.fa-bar-chart-o
+      External Reports
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "MAIB", admin_report_path(:maib)
+
+%ul.nav.side-menu
+  %li
+    %a.reports_menu
+      %i.fa.fa-bar-chart-o
       Management Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}

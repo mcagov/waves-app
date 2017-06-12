@@ -36,6 +36,12 @@ class Report
     end
   end
 
+  RenderAsDownloadLink = Struct.new(:title, :params) do
+    def to_s
+      ""
+    end
+  end
+
   def filter_fields
     []
   end
