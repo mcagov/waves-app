@@ -36,6 +36,12 @@ class Report
     end
   end
 
+  RenderAsDownloadLink = Struct.new(:report_key) do
+    def to_s
+      ""
+    end
+  end
+
   def filter_fields
     []
   end
@@ -54,6 +60,8 @@ class Report
   def date_range_label
     "Date Range"
   end
+
+  def second_sheet_title; end
 
   protected
 

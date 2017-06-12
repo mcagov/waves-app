@@ -5,6 +5,25 @@ class Registration < ApplicationRecord
 
   has_many :submissions, -> { order("created_at desc") }
 
+  scope :fishing_vessels, (lambda do
+    where(
+      "(registry_info#>>'{vessel_info, part}' = 'part_2') OR "\
+      "(registry_info#>>'{vessel_info, part}' = 'part_2' AND "\
+      "registry_info#>>'{vessel_info, registration_type}' = 'fishing')")
+  end)
+
+  scope :under_12m, (lambda do
+    where(
+      "(cast
+        (registry_info#>>'{vessel_info, register_length}' as numeric) < 12.0)")
+  end)
+
+  scope :over_12m, (lambda do
+    where(
+      "(cast
+        (registry_info#>>'{vessel_info, register_length}' as numeric) >= 12.0)")
+  end)
+
   def vessel
     Register::Vessel.new(symbolized_registry_info[:vessel_info] || {})
   end
@@ -48,6 +67,12 @@ class Registration < ApplicationRecord
     Task.new(task).duplicates_certificate?
   end
 
+  def owner_name_address_shareholding
+    arr = owners_and_shares
+    arr += shareholder_groups_and_shares
+    arr.join("; ")
+  end
+
   private
 
   def submission
@@ -63,6 +88,25 @@ class Registration < ApplicationRecord
       {}
     else
       registry_info.deep_symbolize_keys!
+    end
+  end
+
+  def owners_and_shares
+    owners.map do |owner|
+      "#{owner.name}, #{owner.inline_address} (#{owner.shares_held} shares)"
+    end
+  end
+
+  def shareholder_groups_and_shares
+    shareholder_groups.map do |shareholder_group|
+      next unless shareholder_group[:owners].present?
+
+      sh_group_owners =
+        shareholder_group[:owners].map do |owner|
+          "#{owner[:name]}, #{owner[:inline_address]}"
+        end.join(" jointly with ")
+
+      "#{sh_group_owners} (#{shareholder_group[:shares_held]} shares)"
     end
   end
 end

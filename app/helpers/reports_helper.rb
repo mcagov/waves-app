@@ -1,12 +1,13 @@
 module ReportsHelper
   def report_field(data_element)
     if data_element.is_a?(Report::RenderAsRegistrationStatus)
-      render partial: "/shared/registration_status",
-             locals: { registration_status: data_element.registration_status }
+      render_registration_status(data_element)
 
     elsif data_element.is_a?(Report::RenderAsLinkToVessel)
-      link_to data_element.vessel.send(data_element.attribute),
-              vessel_path(data_element.vessel.id)
+      render_link_to_vessel(data_element)
+
+    elsif data_element.is_a?(Report::RenderAsDownloadLink)
+      render_link_to_download(data_element)
 
     else
       data_element
@@ -34,5 +35,23 @@ module ReportsHelper
 
   def titleized_report_heading(val)
     val.is_a?(Symbol) ? val.to_s.titleize : val
+  end
+
+  private
+
+  def render_registration_status(data_element)
+    render partial: "/shared/registration_status",
+           locals: { registration_status: data_element.registration_status }
+  end
+
+  def render_link_to_vessel(data_element)
+    link_to data_element.vessel.send(data_element.attribute),
+            vessel_path(data_element.vessel.id)
+  end
+
+  def render_link_to_download(data_element)
+    link_to(
+      "Download",
+      "/admin/reports/#{data_element.report_key}.xls?#{request.query_string}")
   end
 end
