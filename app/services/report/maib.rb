@@ -14,7 +14,7 @@ class Report::Maib < Report
   def results
     return [] unless @date_start && @date_end
     [
-      ["Fishing Vessel Closure", :maib_vessel_closure],
+      ["Fishing Vessel Closures", :maib_vessel_closures],
       ["Fishing Vessel Length", :maib_vessel_length],
       ["Quarterly Report", :maib_quarterly],
     ].map do |name, key|
