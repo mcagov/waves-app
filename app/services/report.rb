@@ -61,6 +61,8 @@ class Report
     "Date Range"
   end
 
+  def second_sheet_title; end
+
   protected
 
   def filter_by_part(scoped_query)

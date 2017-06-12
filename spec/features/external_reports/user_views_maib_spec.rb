@@ -16,6 +16,7 @@ describe "User views MAIB reports", js: true do
     within(@results[3]) { click_on("Download") }
 
     expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"MAIB Quarterly Report\"")
+    expect(page.text).to match("Worksheet ss:Name=\"Under 12m\"")
+    expect(page.text).to match("Worksheet ss:Name=\"12m and over\"")
   end
 end
