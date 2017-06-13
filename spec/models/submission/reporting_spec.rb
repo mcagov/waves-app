@@ -9,7 +9,7 @@ describe Submission::Reporting do
       subject { Submission.flag_in }
 
       it "retrieves the new registration" do
-        expect(subject.first).to eq(new_reg)
+        expect(subject).to eq([new_reg])
       end
     end
 
@@ -17,7 +17,7 @@ describe Submission::Reporting do
       subject { Submission.flag_out }
 
       it "retrieves the closure" do
-        expect(subject.first).to eq(closure)
+        expect(subject).to eq([closure])
       end
     end
   end
