@@ -8,7 +8,7 @@ class Registration < ApplicationRecord
   scope :fishing_vessels, (lambda do
     where(
       "(registry_info#>>'{vessel_info, part}' = 'part_2') OR "\
-      "(registry_info#>>'{vessel_info, part}' = 'part_2' AND "\
+      "(registry_info#>>'{vessel_info, part}' = 'part_4' AND "\
       "registry_info#>>'{vessel_info, registration_type}' = 'fishing')")
   end)
 
