@@ -1,6 +1,7 @@
 class Submission < ApplicationRecord
   include Submission::Associations
   include Submission::StateMachine
+  include Submission::Reporting
 
   include PgSearch
   multisearchable against: :ref_no
