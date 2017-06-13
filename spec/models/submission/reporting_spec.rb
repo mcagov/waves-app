@@ -22,9 +22,27 @@ describe Submission::Reporting do
     end
   end
 
-  xdescribe "merchant/fishing" do
+  describe "merchant/fishing vessels" do
     let!(:fishing) { create(:fishing_submission) }
-    let!(:merchant) { create(:fishing_submission) }
+    let!(:p4_fishing) { create(:part_4_fishing_submission) }
+    let!(:merchant) { create(:merchant_submission) }
+    let!(:p4_merchant) { create(:part_4_merchant_submission) }
+
+    context ".fishing_vessels" do
+      subject { Submission.fishing_vessels }
+
+      it do
+        expect(subject).to match_array([fishing, p4_fishing])
+      end
+    end
+
+    context ".merchant_vessels" do
+      subject { Submission.merchant_vessels }
+
+      it do
+        expect(subject).to match_array([merchant, p4_merchant])
+      end
+    end
   end
 
   describe "by register length" do

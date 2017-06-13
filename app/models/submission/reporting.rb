@@ -1,11 +1,23 @@
 module Submission::Reporting
   class << self
-    def included(base) # rubocop:disable Metrics/MethodLength
+    # rubocop:disable all
+    def included(base)
       base.scope :flag_in, -> { where(task: Task.flag_in) }
       base.scope :flag_out, -> { where(task:  Task.flag_out) }
 
-      base.scope :merchant, -> {}
-      base.scope :fishing, -> {}
+      base.scope :merchant_vessels, (lambda do
+        where(
+          "(part = 'part_1') OR "\
+          "(part = 'part_4' AND "\
+          "changeset#>>'{vessel_info, registration_type}' != 'fishing')")
+      end)
+
+      base.scope :fishing_vessels, (lambda do
+        where(
+          "(part = 'part_2') OR "\
+          "(part = 'part_4' AND "\
+          "changeset#>>'{vessel_info, registration_type}' = 'fishing')")
+      end)
 
       base.scope :under_15m, (lambda do
         where(
@@ -31,5 +43,6 @@ module Submission::Reporting
                 as numeric) > 24.0")
       end)
     end
+    # rubocop:enable all
   end
 end

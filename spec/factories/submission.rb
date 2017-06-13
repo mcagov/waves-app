@@ -137,4 +137,22 @@ FactoryGirl.define do
     part :part_1
     vessel_reg_no { create(:pleasure_vessel).reg_no }
   end
+
+  factory :merchant_submission, parent: :assigned_submission do
+    task :change_vessel
+    part :part_1
+    vessel_reg_no { create(:merchant_vessel).reg_no }
+  end
+
+  factory :part_4_merchant_submission, parent: :assigned_submission do
+    task :change_vessel
+    part :part_4
+    vessel_reg_no { create(:registered_vessel, part: :part_4).reg_no }
+    after(:create) do |submission|
+      vessel = submission.vessel
+      vessel.registration_type = :full
+      submission.vessel = vessel
+      submission.save
+    end
+  end
 end
