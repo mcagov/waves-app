@@ -1,12 +1,17 @@
 class Report::UkActivityReportByType < Report
-  def initialize(filters= {})
+  def initialize(filters = {})
     super
-    @report_type = @filters[:activity_report_type].to_sym
+    @key = @filters[:activity_report_type].to_sym
+    @report_type = REPORT_TYPES.find { |r| r[1] == @key }
+  end
+
+  def title
+    "#{@report_type[0]} (#{@date_start} to #{@date_end})"
   end
 
   # rubocop:disable all
   def submission_scope
-    case @report_type
+    case @key
     when :merchant_flag_in
       Submission.merchant_vessels.flag_in
     when :merchant_flag_out
@@ -30,7 +35,7 @@ class Report::UkActivityReportByType < Report
     end
   end
 
-  def self.report_types
+  REPORT_TYPES =
     [
       ["Merchant Flag in", :merchant_flag_in],
       ["Merchant Flag out", :merchant_flag_out],
@@ -42,7 +47,6 @@ class Report::UkActivityReportByType < Report
       ["Fishing over 24m Flag out", :fishing_over_24m_flag_out],
       ["Fishing under 15m Flag in", :fishing_under_15m_flag_in],
       ["Fishing under 15m Flag out", :fishing_under_15m_flag_out],
-    ]
-  end
+    ].freeze
   # rubocop:enable all
 end

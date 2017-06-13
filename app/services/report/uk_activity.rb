@@ -18,7 +18,7 @@ class Report::UkActivity < Report
   def results
     return [] unless @date_start && @date_end
 
-    UkActivityReportByType.report_types.map do |report_type|
+    UkActivityReportByType::REPORT_TYPES.map do |report_type|
       Result.new(
         [report_type[0], submissions_count(report_type[1])],
         activity_report_type: report_type[1])
@@ -28,8 +28,8 @@ class Report::UkActivity < Report
   private
 
   def submissions_count(uk_activity_report_type)
-    UkActivityReportByType.new(
-      { activity_report_type: uk_activity_report_type }
-      ).submission_scope.count
+    UkActivityReportByType
+      .new(activity_report_type: uk_activity_report_type)
+      .submission_scope.count
   end
 end

@@ -12,10 +12,15 @@ describe "User views UK Activity reports", js: true do
   end
 
   scenario "Merchant Flag in" do
+    expect_filter_fields(true)
     expect_link_to_export_or_print(true)
 
     within("#results") do
-      expect(page).to have_button("Merchant Flag in")
+      click_on("Merchant Flag in")
     end
+
+    expect_filter_fields(false)
+    expect(page)
+      .to have_css("h1", text: "Merchant Flag in (01/01/2017 to 31/03/2017)")
   end
 end
