@@ -1,6 +1,7 @@
 class Submission < ApplicationRecord
   include Submission::Associations
   include Submission::StateMachine
+  include Submission::Reporting
 
   include PgSearch
   multisearchable against: :ref_no
@@ -29,9 +30,6 @@ class Submission < ApplicationRecord
   scope :in_part, ->(part) { where(part: part.to_sym) }
   scope :active, -> { where.not(state: [:completed]) }
   scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
-
-  scope :flag_in, -> { where(task: Task.flag_in) }
-  scope :flag_out, -> { where(task:  Task.flag_out) }
 
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
