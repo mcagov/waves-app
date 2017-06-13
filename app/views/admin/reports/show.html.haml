@@ -37,14 +37,15 @@
 
   .row.no-print#actions
     .col-md-4
-      = link_to "/admin/reports/#{params[:id]}.xls?#{request.query_string}",
-        class: "btn btn-success" do
-        %i.fa.fa-file-excel-o
-        Export to Excel
+      - if @report.links_to_export_or_print?
+        = link_to "/admin/reports/#{params[:id]}.xls?#{request.query_string}",
+          class: "btn btn-success" do
+          %i.fa.fa-file-excel-o
+          Export to Excel
 
-      = link_to "#", class: "btn btn-info", onclick: "window.print();return false;" do
-        %i.fa.fa-print
-        Print
+        = link_to "#", class: "btn btn-info", onclick: "window.print();return false;" do
+          %i.fa.fa-print
+          Print
     - if @report.pagination_collection
       .col-md-8
         .pull-right

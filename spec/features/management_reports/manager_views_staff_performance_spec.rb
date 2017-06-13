@@ -10,6 +10,8 @@ describe "Manager views staff performance report", js: true do
   end
 
   scenario "in general" do
+    expect_link_to_export_or_print(true)
+
     expect(page).to have_css("h1", text: "Reports: Staff Performance")
     expect(page).to have_css("th", text: "Task Type")
     expect(page).to have_css("th", text: "Total Transactions")

@@ -63,6 +63,10 @@ class Report
 
   def second_sheet_title; end
 
+  def links_to_export_or_print?
+    true
+  end
+
   protected
 
   def filter_by_part(scoped_query)

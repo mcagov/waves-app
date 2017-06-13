@@ -9,6 +9,8 @@ describe "Manager views advanced search", js: true do
   end
 
   scenario "selecting the search criteria" do
+    expect_link_to_export_or_print(true)
+
     expect(page).to have_css("#results th", text: "Vessel Name")
     expect(page).to have_field("Vessel Name")
     expect(page).to have_css("#results tr td", text: "BOB")
