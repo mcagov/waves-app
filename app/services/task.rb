@@ -20,4 +20,14 @@ class Task < WavesUtilities::Task
   def prevented_from_editing?
     [:closure, :current_transcript, :historic_transcript].include?(@key)
   end
+
+  class << self
+    def flag_in
+      [:new_registration, :provisional]
+    end
+
+    def flag_out
+      [:closure, :registrar_closure, :termination_notice]
+    end
+  end
 end

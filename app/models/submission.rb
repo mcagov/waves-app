@@ -30,6 +30,9 @@ class Submission < ApplicationRecord
   scope :active, -> { where.not(state: [:completed]) }
   scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
 
+  scope :flag_in, -> { where(task: Task.flag_in) }
+  scope :flag_out, -> { where(task:  Task.flag_out) }
+
   scope :referred_until_expired, lambda {
     where("date(referred_until) <= ?", Date.today)
   }
