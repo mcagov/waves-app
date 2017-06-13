@@ -37,6 +37,10 @@ class Report::Maib < Report
     ]
   end
 
+  def links_to_export_or_print?
+    false
+  end
+
   private
 
   def load_report(report_type_key)

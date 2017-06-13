@@ -11,6 +11,8 @@ describe "User views MAIB reports", js: true do
   end
 
   scenario "Registration Closures" do
+    expect_link_to_export_or_print(false)
+
     select("Fishing Vessel Closures", from: "Report")
     click_on("Apply Filter")
 
@@ -21,6 +23,8 @@ describe "User views MAIB reports", js: true do
   end
 
   scenario "Quarterly Report" do
+    expect_link_to_export_or_print(false)
+
     select("Quarterly Report", from: "Report")
     click_on("Apply Filter")
 

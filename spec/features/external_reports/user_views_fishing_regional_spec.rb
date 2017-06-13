@@ -12,6 +12,8 @@ describe "User views fishing regional reports", js: true do
   end
 
   scenario "in general" do
+    expect_link_to_export_or_print(false)
+
     within("#results") { click_on("Download") }
 
     expect(page.response_headers["Content-Type"]).to match("application/xls")

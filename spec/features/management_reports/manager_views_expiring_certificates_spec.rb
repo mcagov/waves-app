@@ -12,6 +12,7 @@ describe "Manager views expiring certificates", js: true do
   end
 
   scenario "in general" do
+    expect_link_to_export_or_print(true)
     expect(page).to have_css("h1", text: "Reports: Expiring Certificates")
     expect(page).to have_css("th", text: "Vessel Name")
     expect(page).to have_css("th", text: "Certificate")

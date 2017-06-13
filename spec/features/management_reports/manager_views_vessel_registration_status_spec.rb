@@ -11,6 +11,8 @@ describe "Manager views vessel registration status", js: true do
   end
 
   scenario "in general" do
+    expect_link_to_export_or_print(true)
+
     expect(page).to have_css("h1", text: "Reports: Vessel Registration Status")
     expect(page).to have_css("th", text: "Name")
     expect(page).to have_css("th", text: "Official No")

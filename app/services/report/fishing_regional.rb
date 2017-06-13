@@ -23,4 +23,8 @@ class Report::FishingRegional < Report
           RenderAsDownloadLink.new(:fishing_regional_report)]),
     ]
   end
+
+  def links_to_export_or_print?
+    false
+  end
 end
