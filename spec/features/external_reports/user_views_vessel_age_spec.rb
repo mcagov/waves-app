@@ -11,5 +11,7 @@ describe "User views Vessel Age reports", js: true do
   scenario "in general" do
     expect_filter_fields(true)
     expect_link_to_export_or_print(true)
+
+    within("#results") { expect(page).to have_button("BARGE") }
   end
 end
