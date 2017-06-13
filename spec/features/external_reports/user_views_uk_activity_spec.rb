@@ -11,11 +11,11 @@ describe "User views UK Activity reports", js: true do
     click_on("Apply Filter")
   end
 
-  scenario "All Merchant Flag in" do
+  scenario "Merchant Flag in" do
     expect_link_to_export_or_print(true)
 
     within("#results") do
-      expect(page).to have_button("All Merchant Flag in")
+      expect(page).to have_button("Merchant Flag in")
     end
   end
 end
