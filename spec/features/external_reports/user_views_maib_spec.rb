@@ -34,4 +34,16 @@ describe "User views MAIB reports", js: true do
     expect(page.text).to match("Worksheet ss:Name=\"Under 12m\"")
     expect(page.text).to match("Worksheet ss:Name=\"12m and over\"")
   end
+
+  scenario "Vessel Length" do
+    expect_link_to_export_or_print(false)
+
+    select("Fishing Vessel Length", from: "Report")
+    click_on("Apply Filter")
+
+    within("#results") { click_on("Download") }
+
+    expect(page.response_headers["Content-Type"]).to match("application/xls")
+    expect(page.text).to match("Worksheet ss:Name=\"Fishing Vessel Length\"")
+  end
 end

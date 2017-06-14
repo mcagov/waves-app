@@ -19,7 +19,7 @@ class Report::Maib < Report
   def report_types
     [
       ["Fishing Vessel Closures", :maib_vessel_closures],
-      # ["Fishing Vessel Length", :maib_vessel_length],
+      ["Fishing Vessel Length", :maib_vessel_length],
       ["Quarterly Report", :maib_quarterly],
     ]
   end
