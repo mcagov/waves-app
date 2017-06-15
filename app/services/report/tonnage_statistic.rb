@@ -37,7 +37,7 @@ class Report::TonnageStatistic < Report
 
     ["Total Part 1 Merchant vessels", :p1_merchant],
     ["Total Part 1 Pleasure vessels", :p1_pleasure],
-    ["Part I Grand Total (Merchant and Pleasure", :p1],
+    ["Part I Grand Total (Merchant and Pleasure)", :p1],
 
     ["Part II Fishing Vessels (<15m) (overall length)", :p2_under_15m],
     ["Part II Fishing Vessels (15-24m) (overall length)", :p2_between_15_24m],
@@ -50,10 +50,12 @@ class Report::TonnageStatistic < Report
     ["Part IV Bareboat Charter Merchant (F)", :p4_merchant_frozen],
     ["Part IV Bareboat Charter Fishing (R)", :p4_fishing_registered],
     ["Part IV Bareboat Charter Fishing (F)", :p4_fishing_frozen],
+    ["Part IV Bareboat Charter Pleasure (R)", :p4_pleasure_registered],
+    ["Part IV Bareboat Charter Pleasure (F)", :p4_pleasure_frozen],
     ["Total Part IV Bareboat Charter", :p4],
 
     ["All Vessels on the Registry (R)", :registered],
-    ["All Vessels on the Registry (F)", :frozne]].freeze
+    ["All Vessels on the Registry (F)", :frozen]].freeze
   # rubocop:enable Metrics/LineLength
 
   def load_result(key)
@@ -77,9 +79,14 @@ class Report::TonnageStatistic < Report
     query = query.in_part(:part_1) if key =~ /^p1.*/
     query = query.in_part(:part_2) if key =~ /^p2.*/
     query = query.in_part(:part_3) if key =~ /^p3.*/
+    query = query.in_part(:part_4) if key =~ /^p4.*/
 
     query = query.where(p1_merchant) if key =~ /^p1_merchant.*/
     query = query.where(p1_pleasure) if key =~ /^p1_pleasure.*/
+
+    query = query.where(p4_merchant) if key =~ /^p4_merchant.*/
+    query = query.where(p4_fishing) if key =~ /^p4_fishing.*/
+    query = query.where(p4_pleasure) if key =~ /^p4_pleasure.*/
 
     query = query.where(under_100gt) if key =~ /.*under_100gt.*/
     query = query.where(from_100_to_499gt) if key =~ /.*100_to_499gt.*/
@@ -90,7 +97,7 @@ class Report::TonnageStatistic < Report
     query = query.where(over_24m) if key =~ /.*over_24m.*/
 
     query = query.not_frozen if key =~ /.*registered/
-    query = query.frozen if key =~ /.*_frozen/
+    query = query.frozen if key =~ /.*frozen/
 
     query
   end
@@ -101,6 +108,18 @@ class Report::TonnageStatistic < Report
   end
 
   def p1_pleasure
+    "registration_type = 'pleasure'"
+  end
+
+  def p4_merchant
+    "registration_type = 'commercial'"
+  end
+
+  def p4_fishing
+    "registration_type = 'fishing'"
+  end
+
+  def p4_pleasure
     "registration_type = 'pleasure'"
   end
 
