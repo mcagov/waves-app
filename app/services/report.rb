@@ -42,6 +42,12 @@ class Report
     end
   end
 
+  RenderAsCurrency = Struct.new(:amount) do
+    def to_3
+      amount.to_s
+    end
+  end
+
   def filter_fields
     []
   end
