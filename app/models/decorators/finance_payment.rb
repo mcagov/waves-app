@@ -19,4 +19,8 @@ class Decorators::FinancePayment < SimpleDelegator
       t[1] == payment_type.to_sym
     end[0] if payment_type
   end
+
+  def assigned_application_ref_no
+    locked? ? submission.ref_no : application_ref_no
+  end
 end

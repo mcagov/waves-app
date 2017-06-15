@@ -1,5 +1,5 @@
 module ReportsHelper
-  def report_field(data_element)
+  def report_field(data_element) # rubocop:disable Metrics/MethodLength
     if data_element.is_a?(Report::RenderAsRegistrationStatus)
       render_registration_status(data_element)
 
@@ -8,6 +8,9 @@ module ReportsHelper
 
     elsif data_element.is_a?(Report::RenderAsDownloadLink)
       render_link_to_download(data_element)
+
+    elsif data_element.is_a?(Report::RenderAsCurrency)
+      formatted_amount(data_element.amount)
 
     else
       data_element
