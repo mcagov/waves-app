@@ -62,6 +62,8 @@ module Register
     has_many :csr_forms, -> { order("issue_number desc") }
 
     scope :in_part, ->(part) { where(part: part.to_sym) }
+    scope :frozen, -> { where.not(frozen_at: nil) }
+    scope :not_frozen, -> { where(frozen_at: nil) }
 
     delegate :registered_until, to: :current_registration, allow_nil: true
 
