@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.4"
 
-gem "rails", "~> 5.0.2"
+gem "rails", "~> 5.1.2"
 
 gem "auto_increment"
 gem "active_model_serializers"
@@ -27,7 +27,7 @@ gem "haml"
 gem "pg"
 gem "momentjs-rails"
 gem "nokogiri", ">= 1.8.0"
-gem "notifications-ruby-client", ">= 1.1.2"
+gem "notifications-ruby-client", "= 1.1.2"
 gem "paperclip"
 gem "paperclip-azure",
     git: "https://github.com/oceanshq/paperclip-azure"
@@ -77,7 +77,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
-  gem "rubocop"
+  gem "rubocop", "~> 0.43.0", require: false
 end
 
 group :test do
