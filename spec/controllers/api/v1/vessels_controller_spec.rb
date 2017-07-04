@@ -20,7 +20,7 @@ describe Api::V1::VesselsController, type: :controller do
 
   context "#show by access_code" do
     let(:parsed_attrs) { JSON.parse(response.body)["data"]["attributes"] }
-    let(:registered_vessel) { build(:registered_vessel) }
+    let(:registered_vessel) { create(:registered_vessel) }
 
     let(:access_code) { "123456" }
     let(:external_session_key) { "an_external_session_key" }
