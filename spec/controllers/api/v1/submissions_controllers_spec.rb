@@ -4,8 +4,10 @@ describe Api::V1::SubmissionsController, type: :controller do
   context "#create" do
     before do
       headers = { "ACCEPT" => "application/json" }
+      request.headers.merge! headers
+
       params = JSON.parse(File.read("spec/fixtures/new_registration.json"))
-      post :create, params: params, headers: headers
+      post :create, params: params
     end
 
     it "sets the content type" do

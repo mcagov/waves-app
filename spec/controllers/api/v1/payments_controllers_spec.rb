@@ -5,8 +5,10 @@ describe Api::V1::PaymentsController, type: :controller do
     before do
       create(:incomplete_submission)
       headers = { "ACCEPT" => "application/json" }
+      request.headers.merge! headers
+
       params = JSON.parse(File.read("spec/fixtures/new_payment.json"))
-      post :create, params: params, headers: headers
+      post :create, params: params
     end
 
     it "sets the content type" do
