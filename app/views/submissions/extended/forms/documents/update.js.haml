@@ -1,11 +1,14 @@
-:plain
-  if ("#{ @modal_id }".length > 0) {
-    $("##{ @modal_id }").modal('hide');
-    $('.modal-backdrop').remove();
-    $('body').removeClass('modal-open');
-  }
+// Note that remotipart submitted forms require special handling
+// - the output is rendered within a textarea
+// - escaped javascript defaults to rendering with &quot; escaping
 
-  $("#documents").html(
-    '#{escape_javascript(
-       render partial: "/submissions/extended/forms/documents/base")}'
-  );
+- if remotipart_submitted?
+  documents_html = '#{escape_javascript(render partial: "/submissions/extended/forms/documents/base").gsub('&quot;', "'")}'
+
+- else
+  documents_html = '#{escape_javascript(render partial: "/submissions/extended/forms/documents/base")}'
+
+$("##{ @modal_id }").modal('hide');
+$('.modal-backdrop').remove();
+$('body').removeClass('modal-open');
+$("#documents").html(documents_html)
