@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:show, :index]
     resources :tasks, only: [:index]
     resources :fees, only: [:index]
+    resources :users
   end
 
   namespace :api do

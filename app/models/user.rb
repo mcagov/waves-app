@@ -7,6 +7,8 @@ class User < ApplicationRecord
   enum access_level:
     [:read_only, :operational_user, :team_leader, :system_manager]
 
+  validates :name, uniqueness: true, presence: true
+
   def to_s
     name
   end
