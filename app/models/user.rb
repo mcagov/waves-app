@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && !disabled?
   end
+
+  def status
+    disabled? ? "Disabled" : "Active"
+  end
 end

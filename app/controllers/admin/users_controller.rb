@@ -20,9 +20,28 @@ class Admin::UsersController < InternalPagesController
     end
   end
 
+  def edit
+    load_user
+  end
+
+  def update
+    load_user
+
+    if @user.update_attributes(user_params)
+      flash[:notice] = "#{@user.name}'s acount has been updated"
+      redirect_to admin_users_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :access_level)
+    params.require(:user).permit(:name, :email, :access_level, :disabled)
+  end
+
+  def load_user
+    @user = User.find(params[:id])
   end
 end

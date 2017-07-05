@@ -15,7 +15,12 @@
               label: "Role",
               include_blank: false
         .row
+          .col-md-8
+            = f.input :disabled, as: :boolean, label: "Disable Account (User will not be able to login)", wrapper_html: { class: "padded-checkbox" }
+        .row
           .col-md-12
-            .pull-right= f.submit "Save", class: "btn btn-lg btn-info"
+            .pull-right
+              = link_to "Cancel", admin_users_path, class: 'btn btn-lg btn-danger'
+              = f.submit "Save", class: "btn btn-lg btn-success"
 
 

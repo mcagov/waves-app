@@ -1,0 +1,5 @@
+%h1= @user
+.row
+  .col-md-6
+    = simple_form_for @user, url: admin_user_path, method: :put do |f|
+      = render partial: "form", locals: { f: f }

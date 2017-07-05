@@ -3,6 +3,7 @@ require "rails_helper"
 describe "Manager edits users" do
   before do
     reset_mailer
+    create(:user, name: "Alice")
     login_as_system_manager
     click_on("User Management")
   end
@@ -33,5 +34,17 @@ describe "Manager edits users" do
 
     click_first_link_in_email
     expect(page).to have_css("h1", "Change your password")
+  end
+
+  scenario "disabling a user" do
+    within("#users") { click_on("Alice") }
+    find("#user_disabled").set(true)
+    click_on("Save")
+
+    within("#users") do
+      expect(page).to have_css("td.status", text: "Disabled")
+    end
+
+    expect(User.find_by(name: "Alice")).to be_disabled
   end
 end
