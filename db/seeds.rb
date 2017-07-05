@@ -1,10 +1,13 @@
-USERS = %w(alice bob charlie develop).freeze
+USERS = [
+  ["toby.privett@oceanshq.com", "Toby Privett", 3]
+].freeze
 
 USERS.each do |user|
-  u = User.find_or_initialize_by(name: user.humanize)
-  u.email = "#{user}@example.com"
-  u.name = "#{user.titleize} Waves"
+  u = User.find_or_initialize_by(name: user[1])
+  u.email = user[0]
+  u.name = user[1]
   u.password = "password"
+  u.access_level = user[2]
   u.save! if u.valid?
 end
 
