@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def to_s
     name
   end
+
+  def active_for_authentication?
+    super && !disabled?
+  end
 end
