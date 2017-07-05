@@ -32,6 +32,6 @@ describe "Manager edits users" do
     open_email("bob@example.com")
 
     click_first_link_in_email
-    # expect(page).to have_css("h1", "Change your password")
+    expect(page).to have_css("h1", "Change your password")
   end
 end
