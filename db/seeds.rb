@@ -1,5 +1,5 @@
 USERS = [
-  ["toby.privett@oceanshq.com", "Toby Privett", 3]
+  ["toby.privett@oceanshq.com", "Toby Privett", 3],
 ].freeze
 
 USERS.each do |user|
