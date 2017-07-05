@@ -12,6 +12,7 @@ class Admin::UsersController < InternalPagesController
     @user.password = Devise.friendly_token.first(8)
 
     if @user.save
+      @user.send_reset_password_instructions
       flash[:notice] = "#{@user.name} has been added to the system"
       redirect_to admin_users_path
     else

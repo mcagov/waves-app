@@ -1,6 +1,8 @@
 require "simplecov"
 require "webmock/rspec"
 require "rack_session_access/capybara"
+require "email_spec"
+require "email_spec/rspec"
 
 SimpleCov.start
 
