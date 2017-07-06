@@ -1,0 +1,26 @@
+.row
+  .col-md-6
+    %h1 User Management
+  .col-md-6
+    .pull-right
+      = link_to new_admin_user_path, class: "btn btn-info" do
+        %i.fa.fa-plus{style: "font-size: 1.2em;"}
+        Add New User
+#users.row
+  .col-md-12
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Name
+        %th Email Address
+        %th Role
+        %th Status
+        %th Last Login
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td.name= link_to user.name, edit_admin_user_path(user)
+            %td.email= user.email
+            %td.access_level= user.access_level.titleize
+            %td.status= user.status
+            %td= user.last_sign_in_at
+    = will_paginate @users, renderer: BootstrapPagination::Rails

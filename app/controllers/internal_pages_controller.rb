@@ -20,7 +20,7 @@ class InternalPagesController < ApplicationController
 
   def activity_root(activity)
     session[:current_activity] = activity.to_sym
-    current_activity.root_path
+    current_activity.root_path(current_user)
   end
 
   def log_work!(submission, logged_info, description)
@@ -44,5 +44,21 @@ class InternalPagesController < ApplicationController
 
   def enable_readonly
     @readonly = Policies::Actions.readonly?(@submission, current_user)
+  end
+
+  def prevent_read_only!
+    access_denied! if current_user.read_only?
+  end
+
+  def team_leader_only!
+    access_denied! if current_user.read_only? || current_user.operational_user?
+  end
+
+  def system_manager_only!
+    access_denied! unless current_user.system_manager?
+  end
+
+  def access_denied!
+    render file: "public/401.html", status: :unauthorized, layout: false
   end
 end

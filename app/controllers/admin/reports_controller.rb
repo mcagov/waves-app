@@ -1,4 +1,6 @@
 class Admin::ReportsController < InternalPagesController
+  before_action :team_leader_only!
+
   def show
     @filter = filter_params || default_filter_params
     @filter[:page] = params[:page] || 1

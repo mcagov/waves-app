@@ -8,5 +8,7 @@
         = f.input :password, label: false,
           placeholder: "Password", input_html: { class: "form-control" }
         = f.button :submit, "Secure Login", class: "btn btn-success btn-block"
+
+      = link_to "Request a new password", new_password_path(resource_name)
       .separator
       %p &copy; 2016 All Rights Reserved.

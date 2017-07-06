@@ -21,5 +21,6 @@
           = note.created_at.to_s(:date_time)
           = render partial: "vessels/modals/note", locals: { note: note }
 
-= render partial: "vessels/actions/add_note", locals: { vessel: vessel }
-= render partial: "vessels/modals/add_note", locals: { vessel: vessel }
+- unless current_user.read_only?
+  = render partial: "vessels/actions/add_note", locals: { vessel: vessel }
+  = render partial: "vessels/modals/add_note", locals: { vessel: vessel }

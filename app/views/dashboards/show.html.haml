@@ -7,7 +7,9 @@
         %a.btn.btn-info.btn-block{href: "?activity=part_2"} Part 2: Fishing
         %a.btn.btn-warning.btn-block{href: "?activity=part_3"} Part 3: Small Ships Register
         %a.btn.btn-danger.btn-block{href: "?activity=part_4"} Part 4: Bareboat
-        .separator
-        %p or receive payment
-        %a.btn.btn-primary.btn-block{href: "?activity=finance"} Finance Team / Post Room
-        %a.btn.btn-info.btn-block{href: "?activity=reports"} Management Reports
+        - unless current_user.read_only?
+          .separator
+          %p or receive payment
+          %a.btn.btn-primary.btn-block{href: "?activity=finance"} Finance Team / Post Room
+          - unless current_user.operational_user?
+            %a.btn.btn-info.btn-block{href: "?activity=reports"} Management Reports

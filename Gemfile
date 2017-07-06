@@ -83,6 +83,7 @@ end
 group :test do
   gem "brakeman"
   gem "capybara-webkit"
+  gem "email_spec"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"

@@ -1,0 +1,16 @@
+!!!
+%html{:style => "font-family: Arial, sans-serif; font-size: 14px;"}
+  %head
+    :css
+      p { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%; }
+      p.hello { font-weight: bold; }
+      ul { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%; }
+      ol { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; margin: 15px 5%; }
+
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body{style: "font-family: Arial, sans-serif; font-size: 14px;"}
+
+    = yield
+
+    %p.footer{:style => "font-family: Arial, sans-serif; font-size: 11px; line-height: 1.5; border-top-style: dashed; border-top-color: #ccc; border-top-width: 1px; padding-top: 20px; color: #999; margin: 20px 5% 15px;"}
+      Registered Office: Small Ships Register, Registry of Shipping and Seamen, Anchor Court, KEEN ROAD, Cardiff, CF24 5JW

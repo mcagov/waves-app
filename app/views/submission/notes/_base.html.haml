@@ -13,24 +13,25 @@
           = note.created_at.to_s(:date_time)
           = render partial: "submission/notes/edit", locals: { note: note, submission: submission }
 
-= link_to '#note-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#note-content-add", "data-toggle" => "modal" do
-  %i.fa.fa-plus
-  Add Note
+- unless current_user.read_only?
+  = link_to '#note-content-add', class: 'btn btn-primary btn-sm', "data-target" => "#note-content-add", "data-toggle" => "modal" do
+    %i.fa.fa-plus
+    Add Note
 
-.modal.fade{id: 'note-content-add', role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-md
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4.modal-title Add Note
-      = simple_form_for Note.new,
-                        url: submission_notes_path(submission),
-                        method: :post,
-                        remote: true do |f|
-        .modal-body
-          .row
-            .col-md-12
-              = f.input :content, label: "Content", as: :text, input_html: { rows: 6 }
-        .modal-footer
-          = f.submit "Save Note", class: "btn btn-primary"
+  .modal.fade{id: 'note-content-add', role: "dialog", tabindex: "-1"}
+    .modal-dialog.modal-md
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Add Note
+        = simple_form_for Note.new,
+                          url: submission_notes_path(submission),
+                          method: :post,
+                          remote: true do |f|
+          .modal-body
+            .row
+              .col-md-12
+                = f.input :content, label: "Content", as: :text, input_html: { rows: 6 }
+          .modal-footer
+            = f.submit "Save Note", class: "btn btn-primary"

@@ -1,0 +1,15 @@
+#wrapper
+  %h1 Waves Account Activation
+  .row
+    .col-md-12
+      .x_panel
+        .x_content
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+            = f.error_notification
+            = f.input :reset_password_token, as: :hidden
+            = f.full_error :reset_password_token
+
+            = f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+            = f.input :password_confirmation, label: "Confirm your new password", required: true
+
+            = f.button :submit, "Save my password", class: "btn btn-success"
