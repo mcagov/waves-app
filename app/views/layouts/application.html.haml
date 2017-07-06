@@ -8,5 +8,6 @@
     = stylesheet_link_tag "application"
 
   %body{style: "background:#F7F7F7;"}
+    = render partial: "layouts/flash"
     = yield
   = render "javascript"
