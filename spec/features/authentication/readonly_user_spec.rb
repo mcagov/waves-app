@@ -14,5 +14,6 @@ describe "Read only user" do
 
     click_on("READONLY BOAT")
     expect(page).not_to have_link("Registrar Tools")
+    expect(page).not_to have_link("Add Note")
   end
 end
