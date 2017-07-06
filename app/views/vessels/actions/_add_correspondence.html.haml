@@ -1,5 +1,6 @@
-= link_to "#email-content-add", class: "btn btn-primary btn-sm", "data-target" => "#email-content-add", "data-toggle" => "modal" do
-  %i.fa.fa-plus
-  Add Correspondence
-= render partial: "vessels/modals/add_correspondence",
-  locals: { vessel: vessel }
+- unless current_user.read_only?
+  = link_to "#email-content-add", class: "btn btn-primary btn-sm", "data-target" => "#email-content-add", "data-toggle" => "modal" do
+    %i.fa.fa-plus
+    Add Correspondence
+  = render partial: "vessels/modals/add_correspondence",
+    locals: { vessel: vessel }

@@ -2,8 +2,9 @@ require "rails_helper"
 
 describe "Read only user" do
   before do
-    @submission = create(:completed_submission)
-    @vessel = @submission.registered_vessel
+    @vessel = create(:registered_vessel)
+    @submission = create(:assigned_submission)
+
     sign_in(create(:read_only_user))
     visit("/")
 
@@ -16,6 +17,7 @@ describe "Read only user" do
 
     click_on(@vessel.name.upcase)
     expect(page).not_to have_link("Registrar Tools")
+    expect(page).not_to have_link("Add Correspondence")
     expect(page).not_to have_link("Add Note")
   end
 
@@ -24,6 +26,7 @@ describe "Read only user" do
 
     expect(page).not_to have_css("#actions")
     expect(page).not_to have_link("Add Correspondence")
+    expect(page).not_to have_link("Add Document")
     expect(page).not_to have_link("Add Note")
   end
 end
