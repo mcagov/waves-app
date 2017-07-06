@@ -9,4 +9,8 @@ FactoryGirl.define do
   factory :system_manager, parent: :user do
     access_level :system_manager
   end
+
+  factory :read_only_user, parent: :user do
+    access_level :read_only
+  end
 end

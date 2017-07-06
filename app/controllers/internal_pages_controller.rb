@@ -20,7 +20,7 @@ class InternalPagesController < ApplicationController
 
   def activity_root(activity)
     session[:current_activity] = activity.to_sym
-    current_activity.root_path
+    current_activity.root_path(current_user)
   end
 
   def log_work!(submission, logged_info, description)

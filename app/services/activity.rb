@@ -38,7 +38,9 @@ class Activity
     @part == part
   end
 
-  def root_path
+  def root_path(user)
+    return "/vessels" if user.read_only?
+
     case @part
     when :finance then "/finance/batches"
     when :reports then "/admin/reports"

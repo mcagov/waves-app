@@ -11,5 +11,6 @@
         - elsif current_activity.is?(:reports)
           = render partial: "layouts/sidebar/reports"
         - else
-          = render partial: "layouts/sidebar/registry"
+          - unless current_user.read_only?
+            = render partial: "layouts/sidebar/registry"
 
