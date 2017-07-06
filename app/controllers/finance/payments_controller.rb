@@ -1,4 +1,5 @@
 class Finance::PaymentsController < InternalPagesController
+  before_action :prevent_read_only!
   before_action :load_batch
 
   def new

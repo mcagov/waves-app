@@ -9,10 +9,4 @@
       %li= link_to "Batches This Week", this_week_finance_batches_path
       %li= link_to "Batches This Month", this_month_finance_batches_path
       %li= link_to "Batches This Year", this_year_finance_batches_path
-  %li
-    %a.toggle-tasks
-      %i.fa.fa-list-ol
-      Reports
-      %span.fa.fa-chevron-down
-    %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Income Reports", admin_report_path(:finance_income)
+

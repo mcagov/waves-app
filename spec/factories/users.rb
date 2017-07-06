@@ -13,4 +13,12 @@ FactoryGirl.define do
   factory :read_only_user, parent: :user do
     access_level :read_only
   end
+
+  factory :operational_user, parent: :user do
+    access_level :operational_user
+  end
+
+  factory :team_leader, parent: :user do
+    access_level :team_leader
+  end
 end

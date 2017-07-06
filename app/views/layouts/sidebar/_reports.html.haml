@@ -10,7 +10,14 @@
       %li= link_to "Tonnage Statistics", admin_report_path(:tonnage_statistic)
       %li= link_to "UK Activity", admin_report_path(:uk_activity)
       %li= link_to "Vessel Age", admin_report_path(:vessel_age)
-
+%ul.nav.side-menu
+  %li
+    %a.reports_menu
+      %i.fa.fa-list-ol
+      Finance Reports
+      %span.fa.fa-chevron-down
+    %ul.nav.child_menu{:style => "display: none"}
+      %li= link_to "Income Reports", admin_report_path(:finance_income)
 %ul.nav.side-menu
   %li
     %a.reports_menu
@@ -18,7 +25,8 @@
       Management Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Advanced Search", admin_report_path(:advanced_search)
+      - if current_user.system_manager?
+        %li= link_to "Advanced Search", admin_report_path(:advanced_search)
       %li= link_to "Expiring Certificates", admin_report_path(:expiring_certificates)
       %li= link_to "Staff Performance", admin_report_path(:staff_performance)
       %li= link_to "Staff Performance by Task", admin_report_path(:staff_performance_by_task)

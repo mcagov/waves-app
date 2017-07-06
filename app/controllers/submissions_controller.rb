@@ -1,4 +1,5 @@
 class SubmissionsController < InternalPagesController
+  before_action :prevent_read_only!, except: [:show, :edit]
   before_action :load_submission,
                 only: [:show, :edit, :update]
   before_action :check_redirection_policy,
