@@ -4,13 +4,13 @@
       %a.site_title{href: root_path}
         = image_tag 'logo.png'
     .clearfix
-    #sidebar-menu.main_menu_side.hidden-print.main_menu
-      .menu_section
-        - if current_activity.is?(:finance)
-          = render partial: "layouts/sidebar/finance"
-        - elsif current_activity.is?(:reports)
-          = render partial: "layouts/sidebar/reports"
-        - else
-          - unless current_user.read_only?
+    - unless current_user.read_only?
+      #sidebar-menu.main_menu_side.hidden-print.main_menu
+        .menu_section
+          - if current_activity.is?(:finance)
+            = render partial: "layouts/sidebar/finance"
+          - elsif current_activity.is?(:reports)
+            = render partial: "layouts/sidebar/reports"
+          - else
             = render partial: "layouts/sidebar/registry"
 
