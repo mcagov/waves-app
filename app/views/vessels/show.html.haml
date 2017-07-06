@@ -3,12 +3,14 @@
     %h1{style: 'margin-top: 0px !important;'}
       = @vessel.name
       %span (#{ @vessel.vessel_type })
-  .col-sm-3
-    .pull-right
-      = link_to '#take-action', "data-target" => "#take-action", "data-toggle" => "modal", class: 'btn btn-primary' do
-        %i.fa.fa-hand-paper-o{style: 'font-size: 1.2em; font-weight: bold;'}
-        Registrar Tools
-      = render partial: "vessels/modals/registrar_tools", locals: { vessel: @vessel }
+
+  - unless current_user.read_only?
+    .col-sm-3
+      .pull-right
+        = link_to '#take-action', "data-target" => "#take-action", "data-toggle" => "modal", class: 'btn btn-primary' do
+          %i.fa.fa-hand-paper-o{style: 'font-size: 1.2em; font-weight: bold;'}
+          Registrar Tools
+        = render partial: "vessels/modals/registrar_tools", locals: { vessel: @vessel }
 .row
   .col-md-12.col-sm-12.col-xs-12
     .x_panel
