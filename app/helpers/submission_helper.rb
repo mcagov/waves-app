@@ -49,7 +49,7 @@ module SubmissionHelper
   def display_edit_application_link?(submission)
     return false if Task.new(submission.task).prevented_from_editing?
     return false if request.path == edit_submission_path(submission)
-    return false unless submission.part.to_sym == :part_3
+    return false unless Policies::Definitions.part_3?(submission)
 
     submission.editable? && submission.claimant == current_user
   end
@@ -92,7 +92,7 @@ module SubmissionHelper
 
   def link_to_change_name_or_pln(submission)
     return "" if @readonly
-    title = submission.part.to_sym == :part_1 ? "Port" : "PLN"
+    title = Policies::Definitions.part_1?(submission) ? "Port" : "PLN"
     link_to "Change Name or #{title}",
             submission_name_approval_path(@submission)
   end
