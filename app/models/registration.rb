@@ -71,6 +71,10 @@ class Registration < ApplicationRecord
     arr.join("; ")
   end
 
+  def certificate_template
+    provisional? ? :provisional_certificate : :registration_certificate
+  end
+
   private
 
   def submission

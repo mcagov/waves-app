@@ -63,4 +63,20 @@ describe Registration do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context "#certificate_template" do
+    subject { registration.certificate_template }
+
+    context "for a registration" do
+      let(:registration) { build(:registration) }
+
+      it { expect(subject).to eq(:registration_certificate) }
+    end
+
+    context "for a provisional registration" do
+      let(:registration) { build(:provisional_registration) }
+
+      it { expect(subject).to eq(:provisional_certificate) }
+    end
+  end
 end
