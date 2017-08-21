@@ -2,7 +2,7 @@ module Register
   class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
     multisearchable against:
-      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
+      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin, :pln]
 
     validates :part, presence: true
 
@@ -117,6 +117,10 @@ module Register
 
     def ec_number=(_unimplemented)
       # here we handle legacy changesets with ec_number assigned
+    end
+
+    def pln
+      "#{port_code}#{port_no}"
     end
 
     private
