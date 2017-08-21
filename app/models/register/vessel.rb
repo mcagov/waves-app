@@ -2,7 +2,7 @@ module Register
   class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
     multisearchable against:
-      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number]
+      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin]
 
     validates :part, presence: true
 

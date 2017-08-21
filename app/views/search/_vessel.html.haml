@@ -8,7 +8,11 @@
     %br
     = vessel.vessel_type
     %br
-    Callsign: #{vessel.radio_call_sign}, MMSI: #{vessel.mmsi_number}
+    Callsign: #{vessel.radio_call_sign}
+    %br
+    MMSI: #{vessel.mmsi_number}
+    %br
+    HIN: #{vessel.hin}
 
     - unless submissions.empty?
       %br
