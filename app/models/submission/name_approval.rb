@@ -50,7 +50,9 @@ class Submission::NameApproval < ApplicationRecord
   end
 
   def name_changed?
-    (submission_vessel.name != name) || port_code_changed?
+    return true if submission_vessel.name != name
+    return port_code_changed? unless Policies::Definitions.part_1?(self)
+    false
   end
 
   def port_no_changed?

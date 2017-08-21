@@ -92,6 +92,10 @@ class Policies::Definitions
       false
     end
 
+    def part_1?(obj)
+      obj.part.to_sym == :part_1
+    end
+
     def part_3?(obj)
       obj.part.to_sym == :part_3
     end
