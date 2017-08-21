@@ -3,12 +3,14 @@ require "rails_helper"
 describe Submission::NameApproval do
   let(:name_approval) do
     build(:submission_name_approval,
-          part: :part_2,
+          part: part,
           name: "BOBS BOAT",
           port_code: "SU",
           port_no: 1234,
           registration_type: :simple)
   end
+
+  let(:part) { :part_2 }
 
   context "#valid?" do
     before do
@@ -54,6 +56,34 @@ describe Submission::NameApproval do
       end
 
       it { name_approval.valid? }
+    end
+
+    context "for a part_1 submission" do
+      let(:part) { :part_1 }
+
+      context "when the name has changed" do
+        before do
+          name_approval.submission.update_attributes(
+            changeset: { vessel_info:
+              Submission::Vessel.new(name: "NEW NAME", port_code: "SU") })
+
+          expect(VesselNameValidator).to receive(:valid?)
+        end
+
+        it { name_approval.valid? }
+      end
+
+      context "when the port_code has changed, but the name has not" do
+        before do
+          name_approval.submission.update_attributes(
+            changeset: { vessel_info:
+              Submission::Vessel.new(name: "BOBS BOAT", port_code: "AR") })
+
+          expect(VesselNameValidator).not_to receive(:valid?)
+        end
+
+        it { name_approval.valid? }
+      end
     end
   end
 
