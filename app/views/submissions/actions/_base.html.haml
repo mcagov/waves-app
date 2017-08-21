@@ -22,11 +22,6 @@
           %i.fa.fa-trash
           Cancel Application
 
-      - elsif @submission.cancelled?
-        / revert cancellation button
-        = form_tag claim_submission_states_path(submission) do
-          = submit_tag "Revert Cancellation & Claim", class: "btn btn-success"
-
       - elsif @submission.referred?
         / revert referral button
         = form_tag claim_referral_submission_states_path(submission) do

@@ -6,7 +6,7 @@ feature "User cancels a submission", type: :feature, js: true do
     @submission = Submission.last
   end
 
-  scenario "and restores it" do
+  scenario "in general" do
     within("#actions") { click_on "Cancel Application" }
 
     within(".modal.fade.in") do
@@ -29,12 +29,6 @@ feature "User cancels a submission", type: :feature, js: true do
         /Application Cancelled. Rejected \(by RSS\)/
       )
     end
-
-    click_on "Revert Cancellation"
-
-    click_on "My Tasks"
-    expect(page)
-      .to have_css(".vessel-name", text: @submission.vessel.name)
   end
 
   scenario "without sending an email" do
