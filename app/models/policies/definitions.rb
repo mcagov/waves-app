@@ -1,5 +1,33 @@
 class Policies::Definitions
   class << self
+    def part_1?(obj)
+      obj.part.to_sym == :part_1
+    end
+
+    def part_2?(obj)
+      obj.part.to_sym == :part_2
+    end
+
+    def part_3?(obj)
+      obj.part.to_sym == :part_3
+    end
+
+    def part_3_online?(submission)
+      part_3?(submission) && submission.source.to_sym == :online
+    end
+
+    def part_4?(obj)
+      obj.part.to_sym == :part_4
+    end
+
+    def part_4_non_fishing?(obj)
+      part_4?(obj) && registration_type(obj) != :fishing
+    end
+
+    def part_4_fishing?(obj)
+      part_4?(obj) && registration_type(obj) == :fishing
+    end
+
     def approval_errors(submission)
       return [] unless Task.new(submission.task).validates_on_approval?
       errors = vessel_errors(submission)
@@ -59,10 +87,7 @@ class Policies::Definitions
     end
 
     def fishing_vessel?(obj)
-      @part = obj.part.to_sym
-      return true if @part == :part_2
-      return true if @part == :part_4 && registration_type(obj) == :fishing
-      false
+      part_2?(obj) || part_4_fishing?(obj)
     end
 
     def registration_type(obj)
@@ -81,36 +106,23 @@ class Policies::Definitions
 
     def mortgageable?(obj)
       @part = obj.part.to_sym
-      return true if @part == :part_1
-      return true if @part == :part_2 && registration_type(obj) == :full
+      return true if part_1?(obj)
+      return true if part_2?(obj) && registration_type(obj) == :full
       false
     end
 
     def manageable?(obj)
-      @part = obj.part.to_sym
-      return true if @part == :part_1
-      false
-    end
-
-    def part_1?(obj)
-      obj.part.to_sym == :part_1
-    end
-
-    def part_3?(obj)
-      obj.part.to_sym == :part_3
-    end
-
-    def part_3_online?(submission)
-      part_3?(submission) && submission.source.to_sym == :online
-    end
-
-    def part_4_non_fishing?(obj)
-      obj.part.to_sym == :part_4 && !fishing_vessel?(obj)
+      part_1?(obj)
     end
 
     def fee_category(submission)
-      part = submission.part.to_sym
-      part = "part_2_#{simple_or_full(submission)}".to_sym if part == :part_2
+      part =
+        if part_2?(submission)
+          "part_2_#{simple_or_full(submission)}".to_sym
+        else
+          submission.part.to_sym
+        end
+
       "#{part}_#{submission.task}"
     end
 

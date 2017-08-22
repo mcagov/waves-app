@@ -10,7 +10,9 @@
     - @submission.charterers.order("created_at asc").each_with_index do |charterer, index|
       %tr
         %td.reference_number
-          = link_to_unless @readonly, charterer.reference_number, "#",
+          - link_name = charterer.reference_number
+          - link_name = "(edit)" if charterer.reference_number.blank?
+          = link_to_unless @readonly, link_name, "#",
             "data-target" => "#edit_charterer_#{charterer.id}",
             "data-toggle" => "modal"
         %td.start_date= charterer.start_date

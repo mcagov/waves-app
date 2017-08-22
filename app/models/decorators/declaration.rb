@@ -5,7 +5,9 @@ class Decorators::Declaration < SimpleDelegator
   end
 
   def declaration_required?
-    if new_record?
+    if Policies::Definitions.part_4?(submission)
+      false
+    elsif new_record?
       Task.new(submission.task).declarations_required_on_add_owner?
     elsif not_required?
       false

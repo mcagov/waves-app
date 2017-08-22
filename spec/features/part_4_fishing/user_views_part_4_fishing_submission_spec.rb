@@ -18,5 +18,6 @@ describe "User views Part 4 fishing submission", type: :feature, js: true do
     expect_extended_owner_fields(true)
     expect_managing_owner_fields(false)
     expect_shareholding(false)
+    expect_owner_declarations(false)
   end
 end

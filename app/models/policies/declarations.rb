@@ -5,7 +5,7 @@ class Policies::Declarations
 
   def declarable_items
     @declarable_items =
-      if @submission.part.to_sym == :part_4
+      if Policies::Definitions.part_4?(@submission)
         @submission.charter_parties
       else
         @submission.declarations

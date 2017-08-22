@@ -18,6 +18,12 @@ def expect_charterers(bln)
   expect_field(bln, "#charterers-tab")
 end
 
+def expect_owner_declarations(bln)
+  click_on("Owners")
+  click_on("Add Individual Owner")
+  expect_field(bln, ".owner_declaration_fields")
+end
+
 def expect_managers(bln)
   expect_field(bln, "#managers-tab")
 end
