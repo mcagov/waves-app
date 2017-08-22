@@ -5,19 +5,3 @@
     = charterer_f.input :start_date, as: :string, label: "Start Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
   .col-md-2
     = charterer_f.input :end_date, as: :string, label: "End Date", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
-%hr
-%h4 Parties
-#charter-parties
-  - charterer_f.object.charter_parties.build if charterer_f.object.charter_parties.empty?
-  = charterer_f.simple_fields_for :charter_parties do |charter_party_f|
-    = render partial: "submissions/extended/forms/charterers/charter_party_fields",
-      locals: { charter_party_f: charter_party_f }
-
-  .links
-    = link_to_add_association charterer_f, :charter_parties,
-      partial: "submissions/extended/forms/charterers/charter_party_fields",
-      class: "btn btn-link",
-      form_name: :charter_party_f,
-      style: "color: green; padding: 0px !important" do
-      %i.fa.fa-plus
-      Add Extra Party to the Charter

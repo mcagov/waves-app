@@ -1,13 +1,13 @@
 %h2 Bareboat Charter
 %table.table.table-striped
   %thead
-    %th
+    %th{ width: "200" }
     %th
   %tbody
     - @submission.charterers.order("created_at desc").each_with_index do |charterer, index|
       %tr
         %td
-          .reference_number
+          %h4.reference_number
             Reference Number:
             = charterer.reference_number
           .start_date
@@ -38,22 +38,82 @@
               %th Name
               %th Address
               %th Nationality
+              %th Status
               %th Declaration
               %th
             %tbody
-              - charterer.charter_parties.each do |charter_party|
+              - charterer.charter_parties.individual.each do |charter_party|
                 %tr
                   %td.name
-                    Name:
-                    %strong= charter_party.name
-                    (#{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' })
-                  %td.address
-                    Address:
-                    %strong= charter_party.address
-                  %td.contact_details
-                    Contact Details:
-                    %strong= charter_party.contact_details
+                    = link_to_unless @readonly, charter_party.name, "#",
+                      data: { target: "#charter_party_#{charter_party.id}", toggle: "modal" }
+                  %td.address= charter_party.inline_address
+                  %td.nationality= charter_party.nationality
+                  %td.status
+                    = charter_party.eligibility_status.try(:titleize)
+                  %td #{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' }
                   %td
+                    - unless @readonly
+                      = link_to submission_charterer_charter_party_path(@submission, charterer, charter_party),
+                        class: 'btn-link pull-right',
+                        method: :delete,
+                        remote: true,
+                        data: { confirm: "Are you sure you want to remove this charter party?" },
+                        style: 'color: red;' do
+                        %i.fa.fa-trash
+                        Remove
+
+          - unless @readonly
+            .row
+              .col-md-12
+                = link_to '#', class: 'btn btn-primary btn-sm',
+                  "data-target" => "#new_charter_party_individual",
+                  "data-toggle" => "modal" do
+                  %i.fa.fa-plus
+                  Add Individual Party to the Charter
+
+          %hr
+          %h4 Corporate Parties to the Bareboat Charter
+          %table.table.table-striped
+            %thead
+              %th Name
+              %th Registered Office
+              %th Country of Incorporation
+              %th Place of Business
+              %th Status
+              %th Declaration
+              %th
+            %tbody
+              - charterer.charter_parties.corporate.each do |charter_party|
+                %tr
+                  %td.name
+                    = link_to_unless @readonly, charter_party.name, "#",
+                      data: { target: "#charter_party_#{charter_party.id}", toggle: "modal" }
+                  %td.address= charter_party.inline_address
+                  %td.country_of_incorporation= charter_party.nationality
+                  %td.place_of_business= charter_party.alt_inline_address
+                  %td.status
+                    = charter_party.eligibility_status.try(:titleize)
+                  %td #{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' }
+                  %td
+                    - unless @readonly
+                      = link_to submission_charterer_charter_party_path(@submission, charterer, charter_party),
+                        class: 'btn-link pull-right',
+                        method: :delete,
+                        remote: true,
+                        data: { confirm: "Are you sure you want to remove this charter party?" },
+                        style: 'color: red;' do
+                        %i.fa.fa-trash
+                        Remove
+
+          - unless @readonly
+            .row
+              .col-md-12
+                = link_to '#', class: 'btn btn-primary btn-sm',
+                  "data-target" => "#new_charter_party_corporate",
+                  "data-toggle" => "modal" do
+                  %i.fa.fa-plus
+                  Add Corporate Party to the Charter
 
 - unless @readonly
   .row
@@ -95,3 +155,14 @@
 
             .modal-footer
               = charterer_f.submit "Save Bareboat Charter", class: "btn btn-primary"
+
+    - charterer.charter_parties.each do |charter_party|
+      = render partial: "/submissions/extended/forms/charterers/edit",
+        locals: { charterer: charterer, charter_party: charter_party }
+
+    = render partial: "/submissions/extended/forms/charterers/new",
+      locals: { charterer: charterer, modal_id: "new_charter_party_individual" }
+
+    = render partial: "/submissions/extended/forms/charterers/new",
+      locals: { charterer: charterer, modal_id: "new_charter_party_corporate" }
+
