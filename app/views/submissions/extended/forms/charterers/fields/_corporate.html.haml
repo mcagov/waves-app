@@ -85,6 +85,16 @@
         .col-md-6
           = f.input :alt_country, label: "Country", collection: countries_collection, include_blank: false
 
+      .row
+        .col-md-4
+          .form-group
+            %label Declaration Signed
+            = f.input :declaration_signed,
+              label: false,
+              as: :radio_buttons,
+              item_label_class: "radio-inline",
+              item_wrapper_tag: false
+
 .modal-footer
   = button_tag(type: 'submit', class: "btn btn-primary pull-right") do
     Save Corporate Owner
