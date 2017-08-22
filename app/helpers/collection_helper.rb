@@ -88,6 +88,6 @@ module CollectionHelper
   def closure_reasons_collection
     reasons = WavesUtilities::Closure::REASONS
     reasons += WavesUtilities::Closure::INTERNAL_REASONS
-    reasons.map { |r| r.to_s.humanize }
+    reasons.map { |r| r.to_s.humanize }.sort
   end
 end
