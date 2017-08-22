@@ -1,6 +1,11 @@
 class Charterer < ApplicationRecord
   belongs_to :parent, polymorphic: true
-  has_many :charter_parties, -> { order(:name) }, dependent: :destroy
+
+  has_many :charter_parties,
+           -> { order(:name) },
+           as: :parent,
+           class_name: "CharterParty",
+           dependent: :destroy
 
   # rubocop:disable Style/AlignHash
   accepts_nested_attributes_for :charter_parties, allow_destroy: true,
