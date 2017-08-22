@@ -121,7 +121,7 @@ FactoryGirl.define do
   end
 
   factory :part_4_fishing_submission, parent: :assigned_submission do
-    task :change_vessel
+    task :re_registration
     part :part_4
     vessel_reg_no { create(:registered_vessel, part: :part_4).reg_no }
     after(:create) do |submission|
