@@ -105,7 +105,11 @@ Rails.application.routes.draw do
 
     resources :charterers,
               controller: "submission/charterers",
-              only: [:create, :update, :destroy]
+              only: [:create, :update, :destroy] do
+      resources :charter_parties,
+                controller: "submission/charterers/charter_parties",
+                only: [:create, :update, :destroy]
+    end
 
     resources :documents,
               only: [:create, :update, :destroy],
