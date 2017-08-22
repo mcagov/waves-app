@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822124611) do
+ActiveRecord::Schema.define(version: 20170822153309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,16 +36,6 @@ ActiveRecord::Schema.define(version: 20170822124611) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "template"
-  end
-
-  create_table "charter_parties", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "charterer_id"
-    t.string "name"
-    t.string "address"
-    t.string "contact_details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "declaration_signed", default: false
   end
 
   create_table "charterers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
