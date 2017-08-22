@@ -1,44 +1,59 @@
 %h2 Bareboat Charter
 %table.table.table-striped
   %thead
-    %th Reference Number
-    %th Start Date
-    %th End Date
-    %th Parties
+    %th
     %th
   %tbody
-    - @submission.charterers.order("created_at asc").each_with_index do |charterer, index|
+    - @submission.charterers.order("created_at desc").each_with_index do |charterer, index|
       %tr
-        %td.reference_number
-          - link_name = charterer.reference_number
-          - link_name = "(edit)" if charterer.reference_number.blank?
-          = link_to_unless @readonly, link_name, "#",
-            "data-target" => "#edit_charterer_#{charterer.id}",
-            "data-toggle" => "modal"
-        %td.start_date= charterer.start_date
-        %td.end_date= charterer.end_date
-        %td.parties
-          - charterer.charter_parties.each do |charter_party|
-            .name
-              Name:
-              %strong= charter_party.name
-              (#{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' })
-            .address
-              Address:
-              %strong= charter_party.address
-            .contact_details
-              Contact Details:
-              %strong= charter_party.contact_details
         %td
+          .reference_number
+            Reference Number:
+            = charterer.reference_number
+          .start_date
+            Start Date:
+            = charterer.start_date
+          .end_date
+            End Date:
+            = charterer.end_date
+
           - unless @readonly
+            = link_to_unless @readonly, "Edit", "#",
+              class: "btn btn-primary btn-sm",
+              "data-target" => "#edit_charterer_#{charterer.id}",
+              "data-toggle" => "modal"
+
             = link_to submission_charterer_path(@submission, charterer),
-              class: 'btn-link pull-right',
+              class: 'btn-link',
               method: :delete,
               remote: true,
               data: { confirm: "Are you sure you want to remove this Bareboat Charter?" },
               style: 'color: red;' do
               %i.fa.fa-trash
               Remove
+        %td.parties
+          %h4 Individual Parties to the Bareboat Charter
+          %table.table.table-striped
+            %thead
+              %th Name
+              %th Address
+              %th Nationality
+              %th Declaration
+              %th
+            %tbody
+              - charterer.charter_parties.each do |charter_party|
+                %tr
+                  %td.name
+                    Name:
+                    %strong= charter_party.name
+                    (#{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' })
+                  %td.address
+                    Address:
+                    %strong= charter_party.address
+                  %td.contact_details
+                    Contact Details:
+                    %strong= charter_party.contact_details
+                  %td
 
 - unless @readonly
   .row

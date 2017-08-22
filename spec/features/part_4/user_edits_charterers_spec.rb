@@ -36,7 +36,7 @@ describe "User edits charterers", js: :true do
       expect(page)
         .to have_css(".parties", text: "Name: CHARLIE (Declaration Signed")
 
-      click_on("REF 1")
+      click_on("Edit")
     end
 
     within(".modal.fade.in") do
