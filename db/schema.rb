@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705142749) do
+ActiveRecord::Schema.define(version: 20170822124611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170705142749) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "custom_auto_increments", force: :cascade do |t|
+  create_table "custom_auto_increments", id: :serial, force: :cascade do |t|
     t.string "counter_model_name"
     t.integer "counter", default: 0
     t.datetime "created_at"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170705142749) do
     t.string "alt_town"
     t.string "alt_country"
     t.string "alt_postcode"
+    t.boolean "custom_boolean", default: false
     t.index ["email"], name: "index_customers_on_email"
     t.index ["type"], name: "index_customers_on_type"
   end
@@ -176,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170705142749) do
     t.index ["submission_id"], name: "index_declarations_on_submission_id"
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
+  create_table "delayed_jobs", id: :serial, force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
@@ -343,7 +344,7 @@ ActiveRecord::Schema.define(version: 20170705142749) do
     t.index ["submission_id"], name: "index_payments_on_submission_id"
   end
 
-  create_table "pg_search_documents", force: :cascade do |t|
+  create_table "pg_search_documents", id: :serial, force: :cascade do |t|
     t.text "content"
     t.uuid "searchable_id"
     t.string "searchable_type"
@@ -390,7 +391,7 @@ ActiveRecord::Schema.define(version: 20170705142749) do
     t.index ["vessel_id"], name: "index_registrations_on_vessel_id"
   end
 
-  create_table "sequence_numbers", force: :cascade do |t|
+  create_table "sequence_numbers", id: :serial, force: :cascade do |t|
     t.string "type"
     t.string "context"
     t.string "generated_number"
