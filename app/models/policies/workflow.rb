@@ -44,5 +44,9 @@ class Policies::Workflow
         @part, Policies::Definitions.fishing_vessel?(obj)
       ).include?(attr.to_sym)
     end
+
+    def uses_certificates_and_documents?(submission)
+      Task.new(submission.task).builds_registry?
+    end
   end
 end

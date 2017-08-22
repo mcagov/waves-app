@@ -92,7 +92,7 @@ describe Submission::ApplicationProcessor do
         let(:task) { :closure }
 
         before do
-          dont_expect_registry_builder
+          expect_registry_builder
           dont_expect_registration_builder
           expect_closed_registration_builder
           dont_expect_cloned_registration_builder
