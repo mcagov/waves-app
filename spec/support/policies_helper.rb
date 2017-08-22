@@ -96,3 +96,11 @@ end
 def expect_restricted_submission(bln)
   expect_field(bln, "#restricted")
 end
+
+def expect_certificates_and_documents(bln)
+  expect_field(bln, "#documents-tab")
+  if bln
+    click_on("Certificates & Documents")
+    expect_field(bln, "#documents")
+  end
+end

@@ -11,6 +11,9 @@
             %li{:role => "presentation"}
               %a#supporting-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_supporting", :role => "tab"} Supporting Info
 
+            - if display_certificates_and_documents?(submission)
+              %li{:role => "presentation"}
+                %a#documents-tab{"data-toggle" => "tab", :href => "#documents_tab", :role => "tab"} Certificates & Documents
 
           #submissionTabContent.tab-content
             #tab_content_vessel.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
@@ -18,6 +21,9 @@
 
             #tab_content_supporting.tab-pane.fade{"aria-labelledby" => "supporting-tab", :role => "tabpanel"}
               = render partial: "submissions/basic/body/supporting_info"
+
+            #documents_tab.tab-pane{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
+              #documents= render partial: "submissions/extended/forms/documents/base"
 
 - content_for(:submission_save_buttons) do
   = render partial: "submissions/basic/actions/approve"
