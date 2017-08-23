@@ -1,6 +1,6 @@
 class RegistrationDate
   class << self
-    def for(submission, starts_at)
+    def for(submission, starts_at = Time.now)
       RegistrationDate.new(starts_at, duration(submission))
     end
 

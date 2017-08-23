@@ -36,7 +36,9 @@ class Submission::ApplicationProcessor
       Builders::RegistrationBuilder
         .create(
           @submission,
-          @registered_vessel, @approval_params[:registration_starts_at])
+          @registered_vessel,
+          @approval_params[:registration_starts_at],
+          @approval_params[:registration_ends_at])
     end
 
     def build_closed_registration

@@ -185,7 +185,7 @@ end
 def expect_registration_builder
   expect(Builders::RegistrationBuilder)
     .to receive(:create)
-    .with(submission, registered_vessel, "01/01/2011")
+    .with(submission, registered_vessel, "01/01/2011", nil)
 end
 
 def dont_expect_registration_builder
