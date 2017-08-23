@@ -21,6 +21,7 @@ class Submission::ApprovalsController < InternalPagesController
     params.require(:submission_approval).permit(
       :notification_attachments,
       :registration_starts_at,
+      :registration_ends_at,
       :closure_at,
       :closure_reason,
       :supporting_info)

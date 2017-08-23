@@ -1,8 +1,17 @@
 - unless Task.new(submission.task).duplicates_certificate?
+  - registration_date = RegistrationDate.for(submission)
+  - approval_f.object.registration_starts_at = registration_date.starts_at.to_s(:datetimepicker)
+  - approval_f.object.registration_ends_at = registration_date.ends_at.to_s(:datetimepicker)
   .row
     .col-md-12
-      - approval_f.object.registration_starts_at = Time.now.to_s(:datetimepicker)
-      = approval_f.input :registration_starts_at, label: "Date and Time to take effect from", input_html: { class: "datetimepicker" }
+      = approval_f.input :registration_starts_at,
+        label: "Date and Time to take effect from",
+        input_html: { class: "datetimepicker" }
+  .row
+    .col-md-12
+      = approval_f.input :registration_ends_at,
+        label: "Registration Expiry Date",
+        input_html: { class: "datetimepicker" }
 .row
   .col-md-12
     .form-group
