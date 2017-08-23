@@ -86,6 +86,25 @@ module SubmissionHelper
     list.sort { |a, b| a[0] <=> b[0] }
   end
 
+  def shares_held_jointly_declaration_select_options(declaration_group)
+    selected_declarations =
+      declaration_group.declaration_group_members.map(&:declaration_id)
+
+    declaration_select_options.reject do |declaration|
+      selected_declarations.include?(declaration[1])
+    end
+  end
+
+  def can_add_owners_to_declaration_group?(declaration_group)
+    return false if @readonly
+    return false if declaration_group.declaration_group_members.count >= 5
+
+    if shares_held_jointly_declaration_select_options(declaration_group).empty?
+      return false
+    end
+    true
+  end
+
   def claimed_by(submission)
     submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
   end

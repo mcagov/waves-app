@@ -6,6 +6,8 @@ describe "User edits shares held jointly", js: :true do
     click_on("Owners & Shareholding")
 
     @owner_name = Declaration.last.owner.name
+    @second_owner_name =
+      create(:declaration, submission: Submission.last).owner.name
 
     click_on("Add Group of Joint Shareholders")
     select(@owner_name, from: "Owner Name")
@@ -13,23 +15,17 @@ describe "User edits shares held jointly", js: :true do
   end
 
   scenario "adding owners to a group of shareholders" do
-    within("#shares_held_jointly") do
-      expect(page).to have_css(".owner_name", text: @owner_name)
-      expect(page).to have_css(".shares_held", text: "0")
-    end
-
-    second_owner_name =
-      create(:declaration, submission: Submission.last).owner.name
-
-    click_on("Add Owner to Group")
+    click_on(add_owner_to_group_text)
     within(".modal.fade.in") do
-      select(second_owner_name, from: "Owner Name")
+      select(@second_owner_name, from: "Owner Name")
       click_on("Add Owner to Group")
     end
 
     within("#shares_held_jointly") do
-      expect(page).to have_css(".owner_name", text: second_owner_name)
+      expect(page).to have_css(".owner_name", text: @second_owner_name)
     end
+
+    expect(page).not_to have_link(add_owner_to_group_text)
   end
 
   scenario "removing an owner from a group" do
@@ -56,4 +52,8 @@ describe "User edits shares held jointly", js: :true do
 
     expect(page).to have_css("#total_shares", text: "allocated: 80")
   end
+end
+
+def add_owner_to_group_text
+  "Add Owner to Group"
 end
