@@ -21,13 +21,31 @@
                         method: :delete,
                         style: "color: red",
                         class: "pull-right"
-          - unless @readonly || declaration_group.declaration_group_members.count >= 5
+          - if can_add_owners_to_declaration_group?(declaration_group)
             = link_to "#add-owner-to-group_#{declaration_group.id}",
               class: 'btn btn-link',
               data: { target: "#add-owner-to-group_#{declaration_group.id}", toggle: "modal" },
               style: 'color: green; padding: 0px !important; margin-top: 20px;' do
               %i.fa.fa-plus
               Add Owner to Group
+
+
+            .modal.fade{id: "shares_held_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
+              .modal-dialog.modal-sm
+                = simple_form_for declaration_group,
+                  remote: true,
+                  url: submission_declaration_group_path(@submission, declaration_group) do |f|
+                  .modal-content
+                    .modal-header
+                      %h4.modal-title
+                        Shares Held Jointly
+                    .modal-body
+                      = f.input :shares_held,
+                        label: declaration_group.declaration_group_members.map{|gm| gm.declaration.owner}.join(", ")
+                    .modal-footer
+                      = button_tag type: 'submit',
+                        class: "btn btn-primary btn-sm pull-right" do
+                        Save
         %td.shares_held
           - if @readonly
             = declaration_group.shares_held
@@ -36,22 +54,7 @@
               data: { target: "#shares_held_#{declaration_group.id}" , toggle: "modal" } do
               = declaration_group.shares_held
 
-          .modal.fade{id: "shares_held_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
-            .modal-dialog.modal-sm
-              = simple_form_for declaration_group,
-                remote: true,
-                url: submission_declaration_group_path(@submission, declaration_group) do |f|
-                .modal-content
-                  .modal-header
-                    %h4.modal-title
-                      Shares Held Jointly
-                  .modal-body
-                    = f.input :shares_held,
-                      label: declaration_group.declaration_group_members.map{|gm| gm.declaration.owner}.join(", ")
-                  .modal-footer
-                    = button_tag type: 'submit',
-                      class: "btn btn-primary btn-sm pull-right" do
-                      Save
+
 
 - unless @readonly
   = link_to '#add-new-group',
