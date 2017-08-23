@@ -37,6 +37,8 @@
             %tr
               %th Vessel
               %th Official No.
+              - if Policies::Workflow.uses_registration_types?(current_activity.part)
+                %th Registration Type
               %th Application Ref No.
               %th Job Type
               %th Date Received
@@ -53,6 +55,8 @@
               %tr.submission{ id: "submission_#{ submission.id }"}
                 %td.vessel-name= link_to submission.vessel_name, submission_path(submission)
                 %td= submission.vessel_reg_no
+                - if Policies::Workflow.uses_registration_types?(current_activity.part)
+                  %td.registration_type= submission.registration_type.try(:humanize)
                 %td= submission.ref_no
                 %td= link_to submission.job_type, submission_path(submission)
                 %td= submission.received_at
