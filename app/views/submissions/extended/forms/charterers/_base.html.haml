@@ -51,8 +51,8 @@
                   %td.nationality= charter_party.nationality
                   %td.status
                     = charter_party.eligibility_status.try(:titleize)
-                  %td #{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' }
-                  %td
+                  %td.declaration #{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' }
+                  %td.remove-charter-party
                     - unless @readonly
                       = link_to submission_charterer_charter_party_path(@submission, charterer, charter_party),
                         class: 'btn-link pull-right',
@@ -95,7 +95,7 @@
                   %td.status
                     = charter_party.eligibility_status.try(:titleize)
                   %td #{ charter_party.declaration_signed ? 'Declaration Signed' : 'Pending Declaration' }
-                  %td
+                  %td.remove-charter-party
                     - unless @readonly
                       = link_to submission_charterer_charter_party_path(@submission, charterer, charter_party),
                         class: 'btn-link pull-right',

@@ -25,7 +25,8 @@ class Builders::CsrFormBuilder
         owner_addresses: listify(@vessel.owners.map(&:inline_address)),
         owner_identification_number: listify(@vessel.owners.map(&:imo_number)),
         charterer_names: listify(@vessel.charter_parties.map(&:name)),
-        charterer_addresses: listify(@vessel.charter_parties.map(&:address)),
+        charterer_addresses:
+          listify(@vessel.charter_parties.map(&:inline_address)),
         manager_name: (manager.name if manager),
         manager_address: (manager.inline_address if manager),
         safety_management_address: safety_management_address,
