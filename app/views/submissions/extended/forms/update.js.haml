@@ -10,6 +10,10 @@
       '#{escape_javascript(
         render partial: "/submissions/modals/approve/form",
         locals: { submission: @submission })}');
+
+    $('.datetimepicker').datetimepicker({
+      format: 'DD/MM/YYYY, h:mm:ss a'
+    });
   });
 
   $("#save-incomplete-application").on('hidden.bs.modal', function () {
