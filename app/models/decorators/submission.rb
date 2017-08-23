@@ -107,6 +107,10 @@ class Decorators::Submission < SimpleDelegator
     vessel.mmsi_number if vessel
   end
 
+  def registration_type
+    vessel.registration_type if vessel
+  end
+
   def convertible?
     new_registration? || registered_vessel.present?
   end
