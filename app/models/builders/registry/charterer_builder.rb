@@ -28,11 +28,14 @@ class Builders::Registry::ChartererBuilder
     end
 
     def build_charter_parties_for(vessel_charterer, submission_charterer)
+      vessel_charterer.charter_parties.delete_all
       submission_charterer.charter_parties.each do |submission_charter_party|
-        vessel_charterer.charter_parties.create(
-          name: submission_charter_party.name,
-          address: submission_charter_party.address,
-          contact_details: submission_charter_party.contact_details)
+        vessel_charter_party =
+          CharterParty.new(
+            submission_charter_party.attributes.except!("id"))
+
+        vessel_charter_party.parent = vessel_charterer
+        vessel_charter_party.save
       end
     end
   end
