@@ -1,0 +1,22 @@
+.modal.fade{id: modal_id, role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for CharterParty.new(parent: charterer),
+        method: :post,
+        remote: true,
+        url: submission_charterer_charter_parties_path(@submission, charterer) do |f|
+
+        = hidden_field_tag :modal_id, modal_id
+
+        - if modal_id == "new_charter_party_individual"
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-title New Individual Party
+          = render partial: "submissions/extended/forms/charterers/fields/individual", locals: { f: f }
+        - else
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4.modal-titleNew New Corporate Party
+          = render partial: "submissions/extended/forms/charterers/fields/corporate", locals: { f: f }

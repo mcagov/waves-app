@@ -132,6 +132,7 @@ describe Builders::RegistryBuilder do
         charterer = registered_vessel.reload.charterers.first
         expect(charterer.reference_number).to eq("CH 1")
         expect(charterer.charter_parties.first.name).to eq("Carol")
+        expect(charterer.charter_parties.first.declaration_signed).to be_falsey
       end
 
       it "retains the submission's charterers" do

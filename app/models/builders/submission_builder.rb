@@ -183,7 +183,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     def build_charter_parties_for(submission_charterer, charterer)
       charterer[:charter_parties].each do |charter_party|
         submission_charter_party = CharterParty.new(charter_party.except(:id))
-        submission_charter_party.charterer = submission_charterer
+        submission_charter_party.parent = submission_charterer
         submission_charter_party.save
       end
     end

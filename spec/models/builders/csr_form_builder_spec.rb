@@ -51,7 +51,7 @@ describe Builders::CsrFormBuilder do
       build(
         :charterer,
         charter_parties:
-          [build(:charter_party, name: "CHARLIE", address: "MAIN STREET")])
+          [build(:charter_party, name: "CHARLIE", address_1: "MAIN STREET")])
     end
 
     let!(:first_registration) do
@@ -72,7 +72,8 @@ describe Builders::CsrFormBuilder do
         registered_at: Date.new(2010, 1, 1),
         vessel_name: "PIRATE SHIP",
         owner_names: "ALICE; BOB",
-        owner_addresses: "AA ST; BB ST")
+        owner_addresses: "AA ST; BB ST",
+        charterer_addresses: "MAIN STREET")
     end
 
     context "with an existing CsrForm" do

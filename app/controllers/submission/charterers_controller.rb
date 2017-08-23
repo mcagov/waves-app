@@ -27,10 +27,7 @@ class Submission::CharterersController < InternalPagesController
 
   def charterer_params
     params.require(:charterer).permit(
-      :reference_number, :start_date, :end_date,
-      charter_parties_attributes: [
-        :id, :name, :address, :contact_details,
-        :declaration_signed, :_destroy])
+      :reference_number, :start_date, :end_date)
   end
 
   def respond_with_update

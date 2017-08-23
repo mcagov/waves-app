@@ -1,24 +1,59 @@
 %h2 Bareboat Charter
 %table.table.table-striped
   %thead
-    %th Reference Number
-    %th Start Date
-    %th End Date
-    %th Parties
+    %th{ width: "200" }
+    %th
   %tbody
-    - @vessel.charterers.order("created_at asc").each_with_index do |charterer, index|
+    - @vessel.charterers.order("created_at desc").each_with_index do |charterer, index|
       %tr
-        %td.reference_number= charterer.reference_number
-        %td.start_date= charterer.start_date
-        %td.end_date= charterer.end_date
+        %td
+          %h4.reference_number
+            Reference Number:
+            = charterer.reference_number
+          .start_date
+            Start Date:
+            = charterer.start_date
+          .end_date
+            End Date:
+            = charterer.end_date
+
         %td.parties
-          - charterer.charter_parties.each do |charter_party|
-            .name
-              Name:
-              %strong= charter_party.name
-            .address
-              Address:
-              %strong= charter_party.address
-            .contact_details
-              Contact Details:
-              %strong= charter_party.contact_details
+          %h4 Individual Parties to the Bareboat Charter
+          %table.table.table-striped
+            %thead
+              %th Name
+              %th Address
+              %th Nationality
+              %th Status
+            %tbody
+              - charterer.charter_parties.individual.each do |charter_party|
+                %tr
+                  %td.name
+                    = link_to_unless @readonly, charter_party.name, "#",
+                      data: { target: "#charter_party_#{charter_party.id}", toggle: "modal" }
+                  %td.address= charter_party.inline_address
+                  %td.nationality= charter_party.nationality
+                  %td.status
+                    = charter_party.eligibility_status.try(:titleize)
+
+          %hr
+          %h4 Corporate Parties to the Bareboat Charter
+          %table.table.table-striped
+            %thead
+              %th Name
+              %th Registered Office
+              %th Country of Incorporation
+              %th Place of Business
+              %th Status
+            %tbody
+              - charterer.charter_parties.corporate.each do |charter_party|
+                %tr
+                  %td.name
+                    = link_to_unless @readonly, charter_party.name, "#",
+                      data: { target: "#charter_party_#{charter_party.id}", toggle: "modal" }
+                  %td.address= charter_party.inline_address
+                  %td.country_of_incorporation= charter_party.nationality
+                  %td.place_of_business= charter_party.alt_inline_address
+                  %td.status
+                    = charter_party.eligibility_status.try(:titleize)
+
