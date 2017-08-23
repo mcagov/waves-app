@@ -21,7 +21,7 @@
                         method: :delete,
                         style: "color: red",
                         class: "pull-right"
-          - unless @readonly
+          - unless @readonly || declaration_group.declaration_group_members.count >= 5
             = link_to "#add-owner-to-group_#{declaration_group.id}",
               class: 'btn btn-link',
               data: { target: "#add-owner-to-group_#{declaration_group.id}", toggle: "modal" },
