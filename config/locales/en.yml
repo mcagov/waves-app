@@ -48,6 +48,8 @@ en:
       csr_form: CSR Forms
       termination_notice: Notices of Termination
   submission:
+    advisories :
+      fishing_vessel_safety_certificate: The Fishing Vessel Safety Certificate has either expired or not been recorded.
     approval_error:
       vessel_frozen: Vessel registration is frozen
       payment_required: Payment is not complete
@@ -122,4 +124,3 @@ en:
         manual_override: The Manual Override has been processed.
         termination_notice: The termination notice has been issued, the vessel has been frozen and the registration will be closed in 7 days.
         issue_csr: The CSR has been issued.
-
