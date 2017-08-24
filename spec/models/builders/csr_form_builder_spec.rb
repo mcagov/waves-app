@@ -16,8 +16,14 @@ describe Builders::CsrFormBuilder do
         smc_issuing_authority: "SMC_I",
         smc_auditor: "SMC_A",
         issc_issuing_authority: "ISSC_I",
-        issc_auditor: "ISSC_A",
-        registrations: [first_registration])
+        issc_auditor: "ISSC_A")
+    end
+
+    let!(:vessel_with_closed_registration) do
+      vessel.current_registration.update_attributes(
+        registered_at: "1/1/2010",
+        closed_at: "2/2/2010")
+      vessel
     end
 
     let!(:submission) do
@@ -25,7 +31,7 @@ describe Builders::CsrFormBuilder do
         :assigned_submission,
         task: :issue_csr,
         part: :part_1,
-        registered_vessel: vessel)
+        registered_vessel: vessel_with_closed_registration)
     end
 
     let!(:owner_1) do
@@ -54,12 +60,6 @@ describe Builders::CsrFormBuilder do
           [build(:charter_party, name: "CHARLIE", address_1: "MAIN STREET")])
     end
 
-    let!(:first_registration) do
-      build(
-        :registration,
-        registered_at: "1/1/2010")
-    end
-
     subject { described_class.build(submission) }
 
     it "assigns the expected attributes" do
@@ -73,7 +73,8 @@ describe Builders::CsrFormBuilder do
         vessel_name: "PIRATE SHIP",
         owner_names: "ALICE; BOB",
         owner_addresses: "AA ST; BB ST",
-        charterer_addresses: "MAIN STREET")
+        charterer_addresses: "MAIN STREET",
+        registration_closed_at: Date.new(2010, 2, 2))
     end
 
     context "with an existing CsrForm" do

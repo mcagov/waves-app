@@ -37,7 +37,8 @@ class Builders::CsrFormBuilder
         smc_issuer: @vessel.smc_issuing_authority,
         smc_auditor: @vessel.smc_auditor,
         issc_issuer: @vessel.issc_issuing_authority,
-        issc_auditor: @vessel.issc_auditor)
+        issc_auditor: @vessel.issc_auditor,
+        registration_closed_at: registration_closed_at)
     end
     # rubocop:enable all
 
@@ -65,6 +66,10 @@ class Builders::CsrFormBuilder
 
     def next_issue_number
       @submission.registered_vessel.csr_forms.maximum(:issue_number).to_i + 1
+    end
+
+    def registration_closed_at
+      @vessel.current_registration.closed_at if @vessel.current_registration
     end
   end
 end
