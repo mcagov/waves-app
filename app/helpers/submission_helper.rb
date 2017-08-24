@@ -105,6 +105,19 @@ module SubmissionHelper
     true
   end
 
+  def can_delete_mortgage?(mortgage)
+    return false if @readonly
+    return true unless @submission.registered_vessel
+
+    if @submission.registered_vessel
+                  .mortgages
+                  .pluck(:priority_code)
+                  .include?(mortgage.priority_code)
+      return false
+    end
+    true
+  end
+
   def claimed_by(submission)
     submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
   end

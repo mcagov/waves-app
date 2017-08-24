@@ -27,7 +27,7 @@
         %td.registered_at= mortgage.registered_at.to_s(:date_time) if mortgage.registered_at
         %td.discharged_at= mortgage.discharged_at.to_s(:date_time) if mortgage.discharged_at
         %td
-          - unless @readonly
+          - if can_delete_mortgage?(mortgage)
             = link_to submission_mortgage_path(@submission, mortgage),
               class: 'btn-link pull-right',
               method: :delete,
