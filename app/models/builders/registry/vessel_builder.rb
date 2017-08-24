@@ -51,7 +51,6 @@ class Builders::Registry::VesselBuilder
       @vessel.underlying_registry_port = @submission.vessel.underlying_registry_port
       @vessel.name_on_primary_register = @submission.vessel.name_on_primary_register
     end
-    # rubocop:enable all
 
     def build_operational_info # extended#Operational Information section
       @vessel.classification_society = @submission.vessel.classification_society
@@ -64,7 +63,10 @@ class Builders::Registry::VesselBuilder
       @vessel.smc_auditor = @submission.vessel.smc_auditor
       @vessel.issc_issuing_authority = @submission.vessel.issc_issuing_authority
       @vessel.issc_auditor = @submission.vessel.issc_auditor
+      @vessel.doc_issuing_authority = @submission.vessel.doc_issuing_authority
+      @vessel.doc_auditor = @submission.vessel.doc_auditor
     end
+    # rubocop:enable all
 
     def build_description # extended#Description section
       @vessel.gross_tonnage = @submission.vessel.gross_tonnage

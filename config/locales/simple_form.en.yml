@@ -44,6 +44,8 @@ en:
           smc_auditor : SMC Auditor
           issc_issuing_authority: ISSC Issuing Authority
           issc_auditor: ISSC Auditor
+          doc_issuing_authority: DOC Issuing Authority
+          doc_auditor: DOC Auditor
           depth: Depth
           entry_into_service_at: Date of Entry into Service
           gross_tonnage: Gross Tonnage
