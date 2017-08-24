@@ -18,7 +18,9 @@ class Policies::Advisories
     def check_fishing_vessel_safety_certificate
       return unless Policies::Definitions.fishing_vessel?(@submission)
 
-      @advisories << :fishing_vessel_safety_certificate
+      if @submission.documents.safety_certificates.not_expired.empty?
+        @advisories << :fishing_vessel_safety_certificate
+      end
     end
   end
 end
