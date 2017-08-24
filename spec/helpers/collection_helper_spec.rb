@@ -28,19 +28,32 @@ describe CollectionHelper, type: :helper do
   describe "#available_priority_codes_collection" do
     let(:default_collection) { ("A".."Z").to_a }
     let!(:submission) { create(:submission) }
-    subject { helper.available_priority_codes_collection(submission) }
+    let(:mortgage) { Mortgage.new }
+
+    subject do
+      helper.available_priority_codes_collection(submission, mortgage)
+    end
 
     context "with no mortgages" do
       it { expect(subject).to eq(default_collection) }
     end
 
     context "with two mortgages" do
-      before do
+      let!(:mortgage_a) do
         create(:mortgage, priority_code: "A", parent: submission)
+      end
+
+      before do
         create(:mortgage, priority_code: "B", parent: submission)
       end
 
       it { expect(subject).to eq(default_collection - %w(A B)) }
+
+      context "building the list for mortgage_a" do
+        let(:mortgage) { mortgage_a }
+
+        it { expect(subject).to eq(default_collection - %w(B)) }
+      end
     end
   end
 end

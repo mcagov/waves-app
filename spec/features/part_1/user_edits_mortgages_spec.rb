@@ -43,6 +43,7 @@ describe "User edits mortgages", js: :true do
     end
 
     within(".modal.fade.in") do
+      expect(find_field("Priority Code").value).to eq("A")
       fill_in("Reference Number", with: "REF 2")
       fill_in("Date Discharged", with: "02/02/2012")
       click_on("Save Mortgage")
