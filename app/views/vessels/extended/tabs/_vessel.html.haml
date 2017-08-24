@@ -66,6 +66,8 @@
       %th= vessel_field_title(:smc_auditor)
       %th= vessel_field_title(:issc_issuing_authority)
       %th= vessel_field_title(:issc_auditor)
+      %th= vessel_field_title(:doc_issuing_authority)
+      %th= vessel_field_title(:doc_auditor)
 
   %tbody
     %tr
@@ -82,4 +84,5 @@
         %td= vessel.smc_auditor
         %td= vessel.issc_issuing_authority
         %td= vessel.issc_auditor
-
+        %td= vessel.doc_issuing_authority
+        %td= vessel.doc_auditor
