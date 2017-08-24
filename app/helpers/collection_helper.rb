@@ -32,8 +32,9 @@ module CollectionHelper
     end
   end
 
-  def available_priority_codes_collection(submission)
-    ("A".."Z").to_a - submission.mortgages.map(&:priority_code)
+  def available_priority_codes_collection(submission, mortgage)
+    used_codes = (submission.mortgages - [mortgage]).map(&:priority_code)
+    ("A".."Z").to_a - used_codes
   end
 
   def vessel_types_collection(submission)
