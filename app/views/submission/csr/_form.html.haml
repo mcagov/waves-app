@@ -91,7 +91,11 @@
           = f.input :issc_auditor, label: false
       %tr
         %td 15. Date on which the ship ceased to be registered with the State indicated in 2:
-        %td -
+        %td
+          = f.input :registration_closed_at, label: false,
+            input_html: { "data-provide" => "datepicker",
+            "data-date-autoclose" => "true",
+            "data-date-format" => "dd/mm/yyyy"}
       %tr
         %td 16. Remarks
         %td= f.input :remarks, label: false
