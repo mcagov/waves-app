@@ -56,4 +56,30 @@ describe "SubmissionHelper", type: :helper do
       it { expect(subject).to eq("unclaimed") }
     end
   end
+
+  describe "can_delete_mortgage?" do
+    let(:mortgage) { build(:mortgage, priority_code: "A") }
+    subject { helper.can_delete_mortgage?(mortgage) }
+
+    context "when the mortgage has already been recorded against the vessel" do
+      it do
+        assign(:submission, create(:assigned_re_registration_submission))
+        expect(subject).to be_falsey
+      end
+    end
+
+    context "when the submission does not have a registered_vessel" do
+      it do
+        assign(:submission, Submission.new)
+        expect(subject).to be_truthy
+      end
+    end
+
+    context "when the page is readonly" do
+      it do
+        assign(:readonly, true)
+        expect(subject).to be_falsey
+      end
+    end
+  end
 end
