@@ -10,3 +10,8 @@
     - if submission.referral
       #{ submission.referral.subject.to_s.humanize }.
     Next action due by #{ submission.referred_until }.
+
+- unless submission.advisories.empty?
+  #prompt.alert.alert-warning
+    - submission.advisories.each do |advisory|
+      %p= t("submission.advisories.#{advisory}")

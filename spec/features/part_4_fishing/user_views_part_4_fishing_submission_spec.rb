@@ -6,6 +6,7 @@ describe "User views Part 4 fishing submission", type: :feature, js: true do
   end
 
   scenario "UI Elements" do
+    expect_safety_certificate_warning(true)
     expect_ec_no(true)
     expect_charterers(true)
     expect_mortgages(false)

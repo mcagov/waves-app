@@ -135,4 +135,8 @@ class Decorators::Submission < SimpleDelegator
     return "Not set" unless delivery_address.active?
     delivery_address.name_and_address.join("<br/>").html_safe
   end
+
+  def advisories
+    @advisories ||= Policies::Advisories.for_submission(self)
+  end
 end

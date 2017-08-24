@@ -1,9 +1,13 @@
-def expect_field(bln, css)
+def expect_field(bln, css, text = "")
   if bln
-    expect(page).to have_css(css)
+    expect(page).to have_css(css, text: text)
   else
-    expect(page).not_to have_css(css)
+    expect(page).not_to have_css(css, text: text)
   end
+end
+
+def expect_safety_certificate_warning(bln)
+  expect_field(bln, "#prompt.alert", "Safety Certificate")
 end
 
 def expect_csr_forms(bln)
