@@ -24,7 +24,7 @@
       .col-md-3
         = f.input :phone_number, label: "Phone Number", input_html: { class: "upcase" }
 
-    = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f, countries: countries_collection }
+    = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f }
 
 .modal-footer
   = button_tag(type: 'submit', class: "btn btn-primary pull-right") do

@@ -9,9 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/oceanshq/waves-utilities.git
-  revision: 605016ae658147b3b258a94762a4188ea140414e
+  revision: 3abda7b3895f4eb64799719501968e3a18cc61f2
   specs:
     waves-utilities (0.1.0)
+      countries
 
 GEM
   remote: https://rubygems.org/
