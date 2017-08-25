@@ -47,7 +47,7 @@ class SubmissionsController < InternalPagesController
 
   protected
 
-  def load_submission
+  def load_submission # rubocop:disable Metrics/MethodLength
     @submission =
       Submission.includes(
         [
@@ -57,7 +57,8 @@ class SubmissionsController < InternalPagesController
           { work_logs: [:actioned_by] }, { charterers: [:charter_parties] },
           { mortgages: [:mortgagees, :mortgagors] }, :carving_and_markings,
           :managers, :declarations, :engines, :correspondences, :notes,
-          :line_items, :notifications, :beneficial_owners]).find(params[:id])
+          :print_jobs, :line_items, :notifications, :beneficial_owners]
+      ).find(params[:id])
   end
 
   def submission_params

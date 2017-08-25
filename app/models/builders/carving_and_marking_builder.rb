@@ -27,7 +27,8 @@ class Builders::CarvingAndMarkingBuilder
       PrintJob.create(
         printable: @carving_and_marking,
         part: @submission.part,
-        template: :carving_and_marking)
+        template: :carving_and_marking,
+        submission: @submission)
     end
   end
 end

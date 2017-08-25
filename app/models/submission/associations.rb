@@ -44,6 +44,7 @@ module Submission::Associations
       base.has_many :charter_parties, through: :charterers
       base.has_one  :csr_form
       base.has_one :name_approval, class_name: "Submission::NameApproval"
+      base.has_many :print_jobs
     end
 
     def ownership_associations(base)

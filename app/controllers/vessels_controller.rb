@@ -22,7 +22,7 @@ class VesselsController < InternalPagesController
       mortgages: [:mortgagees],
       shareholder_groups: [:shareholder_group_members],
       submissions: [
-        :correspondences,
+        :correspondences, :print_jobs,
         { notifications: :notifiable },
         { declarations: :notification }]
     ]
