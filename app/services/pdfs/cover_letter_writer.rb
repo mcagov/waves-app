@@ -11,7 +11,7 @@ class Pdfs::CoverLetterWriter
 
   def write
     @pdf.start_new_page
-    init_stationary
+    init_stationary(@registration.created_at)
     vessel_name
     message
     @pdf.start_new_page

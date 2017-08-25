@@ -1,5 +1,6 @@
 module Pdfs::Stationary
-  def init_stationary
+  def init_stationary(sent_at)
+    @sent_at = sent_at.to_date
     mca_logos
     mca_address
     date_and_ref
@@ -55,7 +56,7 @@ module Pdfs::Stationary
     set_copy_font
     @pdf.draw_text "", at: [400, 662]
     @pdf.draw_text @vessel[:reg_no], at: [400, 648]
-    @pdf.draw_text Date.today.to_s(:formal), at: [400, 634]
+    @pdf.draw_text @sent_at.to_s(:formal), at: [400, 634]
   end
 
   def delivery_address
