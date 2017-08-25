@@ -3,8 +3,8 @@ module CollectionHelper
     Activity::PART_TYPES
   end
 
-  def owner_countries_collection
-    ["UNITED KINGDOM"]
+  def countries_collection
+    WavesUtilities::Country.all
   end
 
   def nationalities_collection
@@ -16,10 +16,6 @@ module CollectionHelper
       .in_part(part).sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
       [registration_type.to_s.humanize, registration_type]
     end
-  end
-
-  def countries_collection
-    WavesUtilities::Country.all
   end
 
   def ports_collection

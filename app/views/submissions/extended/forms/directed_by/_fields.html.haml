@@ -10,7 +10,7 @@
       .col-md-3
         = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: f }
 
-    = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f, countries: countries_collection }
+    = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: f, f: f }
 
 .modal-footer
   = button_tag(type: 'submit', class: "btn btn-primary pull-right") do

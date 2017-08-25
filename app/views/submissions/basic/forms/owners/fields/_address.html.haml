@@ -1,4 +1,3 @@
-- countries ||= owner_countries_collection
 .row
   .col-md-4
     %label.form-label-bold
@@ -25,4 +24,4 @@
   .col-md-4
     = owner_f.input :postcode, input_html: { class: "upcase postcode" }
   .col-md-4
-    = owner_f.input :country, collection: countries, include_blank: false
+    = owner_f.input :country, collection: countries_collection, include_blank: false

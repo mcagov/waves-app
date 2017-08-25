@@ -52,7 +52,7 @@
         .col-md-6
           = f.input :postcode, input_html: { class: "upcase postcode" }
         .col-md-6
-          = f.input :country, collection: owner_countries_collection, include_blank: false
+          = f.input :country, collection: countries_collection, include_blank: false
 
     .col-md-6
       %h4 Place of Business
