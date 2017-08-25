@@ -38,6 +38,9 @@
               %a#agents-tab{"data-toggle" => "tab", :href => "#agents_tab", :role => "tab"} Agent & Representative Person
 
             %li{:role => "presentation"}
+              %a#notes-tab{"data-toggle" => "tab", :href => "#correspondence_tab", :role => "tab"} Correspondence
+
+            %li{:role => "presentation"}
               %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
 
           #myTabContent.tab-content
@@ -70,6 +73,11 @@
               #agent= render partial: "submissions/extended/forms/agents/base"
               %hr
               #representative= render partial: "submissions/extended/forms/representatives/base"
+
+            #correspondence_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
+              = render partial: "shared/notification_list/base", locals: { notification_list: @submission.notification_list }
+              - if @submission.editable? && !current_user.read_only?
+                = render partial: "submissions/actions/add_correspondence", locals: { submission: @submission }
 
             #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               #notes= render partial: "submission/notes/base", locals: { submission: @submission }

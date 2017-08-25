@@ -11,3 +11,6 @@
       - if row.is_a?(Notification)
         = render partial: "shared/notification_list/tabs/notification",
           locals: { notification: row }
+      - if row.is_a?(PrintJob)
+        = render partial: "shared/notification_list/tabs/print_job",
+          locals: { print_job: row }
