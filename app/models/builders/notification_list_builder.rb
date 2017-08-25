@@ -4,6 +4,7 @@ class Builders::NotificationListBuilder
       (
         submission.correspondences +
         submission.notifications +
+        submission.print_jobs +
         submission.declarations.map(&:notification)
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end
