@@ -69,6 +69,22 @@ class Activity
     @part.to_s.match(/^part_/)
   end
 
+  def task_types # rubocop:disable Metrics/MethodLength
+    default_tasks = Task.default_task_types
+    excluded_tasks =
+      case @part
+      when :part_2
+        [:issue_csr]
+      when :part_3
+        [:issue_csr, :mortgage, :provisional]
+      when :part_4
+        [:provisional, :re_registration, :mortgage]
+      else
+        []
+      end
+    default_tasks.select { |t| !excluded_tasks.include?(t[1]) }
+  end
+
   private
 
   def default_printable_templates
