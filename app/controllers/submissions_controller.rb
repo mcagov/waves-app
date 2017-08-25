@@ -47,7 +47,7 @@ class SubmissionsController < InternalPagesController
 
   protected
 
-  def load_submission
+  def load_submission # rubocop:disable Metrics/MethodLength
     @submission =
       Submission.includes(
         [
