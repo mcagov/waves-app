@@ -6,6 +6,6 @@ FactoryGirl.define do
     town        "LONDON"
     country     "UNITED KINGDOM"
     postcode    "QZ2 3QM"
-    nationality "UNITED KINGDOM"
+    nationality "BRITISH"
   end
 end
