@@ -23,6 +23,7 @@ describe Builders::CarvingAndMarkingBuilder do
         print_job = PrintJob.last
         expect(print_job.printable).to eq(carving_and_marking)
         expect(print_job.template.to_sym).to eq(:carving_and_marking)
+        expect(print_job.submission).to eq(carving_and_marking.submission)
       end
     end
   end
