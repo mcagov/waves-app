@@ -51,7 +51,7 @@ describe "User edits charterers", js: :true do
     within(".modal.fade.in") do
       expect_postcode_lookup
 
-      fill_in("Name", with: "BOB BOLD")
+      fill_in("Charterer Name", with: "BOB BOLD")
       select("(b)", from: "Status")
       within(".charter_party_declaration_signed") { choose("No") }
       click_on("Save Individual Party")
