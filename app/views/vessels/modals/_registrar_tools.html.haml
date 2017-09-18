@@ -22,8 +22,10 @@
             class: "btn btn-block btn-info #{'disabled' unless vessel.prints_transcript?}"
         %hr
         - if vessel.registration_status != :frozen
-          %p= link_to "Freeze Record", vessel_cold_storage_path(vessel),
-              method: :post, class: "btn btn-block btn-danger"
+          %p= link_to "Freeze Record", "#",
+              data: { target: "#freeze-record", toggle: "modal" },
+              class: "btn btn-block btn-danger"
+          = render partial: "vessels/modals/freeze_record", locals: {vessel: vessel}
           %hr
           - if vessel.registration_status != :closed
             %p= link_to Task.new(:registrar_closure).description, vessel_closure_path(vessel),
@@ -38,5 +40,7 @@
               method: :post, class: "btn btn-block btn-success"
 
         - else
-          %p= link_to "Unfreeze Record", vessel_cold_storage_path(vessel),
-              method: :post, class: "btn btn-block btn-danger"
+          %p= link_to "Unfreeze Record", "#",
+              data: { target: "#unfreeze-record", toggle: "modal" },
+              class: "btn btn-block btn-danger"
+          = render partial: "vessels/modals/unfreeze_record", locals: {vessel: vessel}
