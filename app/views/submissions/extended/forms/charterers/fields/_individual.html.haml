@@ -2,7 +2,8 @@
   .postcode-lookup
     .row
       .col-md-6
-        = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: f, f: f }
+        = render partial: "submissions/basic/forms/owners/fields/name",
+          locals: {  owner_f: f, f: f, label: "Charterer Name" }
 
       .col-md-3
         = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: f }
