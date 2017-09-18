@@ -15,6 +15,9 @@ class Payment::FinancePayment < ApplicationRecord
 
   validate :registered_vessel_exists
 
+  scope :payments, -> { where("payment_amount > 0") }
+  scope :refunds, -> { where("payment_amount < 0") }
+
   PAYMENT_TYPES = [
     ["BACS", :bacs],
     ["CHQ", :cheque],

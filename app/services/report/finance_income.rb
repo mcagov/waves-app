@@ -4,7 +4,7 @@ class Report::FinanceIncome < Report
   end
 
   def filter_fields
-    [:filter_date_range]
+    [:filter_date_range, :filter_transaction_type]
   end
 
   def headings
@@ -28,6 +28,8 @@ class Report::FinanceIncome < Report
   def finance_payments
     query = Payment::FinancePayment.includes(:batch)
     query = query.where("payment_date BETWEEN ? AND ?", @date_start, @date_end)
+    query = query.payments if payments?
+    query = query.refunds if refunds?
 
     paginate(query.all)
   end
@@ -44,5 +46,17 @@ class Report::FinanceIncome < Report
       finance_payment.batch_no]
 
     Result.new(data_elements)
+  end
+
+  def payments?
+    transaction_type == :payments
+  end
+
+  def refunds?
+    transaction_type == :refunds
+  end
+
+  def transaction_type
+    (@filters[:transaction_type] || "").to_sym
   end
 end
