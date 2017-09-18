@@ -19,10 +19,10 @@ describe Builders::RegistrationBuilder do
       end
 
       let(:registration) { submission.registration }
-      let(:task) { :change_vessel }
+      let(:task) { :renewal }
       let(:ends_at) { nil }
 
-      context "with a change_vessel task" do
+      context "with a renewal task" do
         it "records the registration date" do
           expect(registration.registered_at)
             .to eq("10/10/2012 12:23 PM".to_datetime)

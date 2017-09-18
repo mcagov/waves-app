@@ -1,23 +1,32 @@
 class RegistrationDate
   class << self
     def for(submission, starts_at = Time.now)
-      RegistrationDate.new(starts_at, duration(submission))
+      @submission = submission
+      @starts_at = starts_at.to_datetime
+
+      RegistrationDate.new(starts_at, ends_at)
     end
 
-    def duration(submission)
-      if Task.new(submission.task).provisional_registration?
-        { days: 90 }
+    private
+
+    def ends_at
+      task = Task.new(@submission.task)
+
+      if task.provisional_registration?
+        @starts_at.advance(days: 90)
+      elsif task.change_vessel?
+        @submission.registered_vessel.registered_until
       else
-        { years: 5 }
+        @starts_at.advance(years: 5)
       end
     end
   end
 
   attr_reader :starts_at, :ends_at
 
-  def initialize(starts_at, duration)
+  def initialize(starts_at, ends_at)
     @starts_at = ensure_date(starts_at)
-    @ends_at = @starts_at.advance(duration)
+    @ends_at = ends_at
   end
 
   private
