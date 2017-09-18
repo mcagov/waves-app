@@ -1,0 +1,16 @@
+.modal.fade{id: 'freeze-record', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Freeze Record
+
+      = simple_form_for Note.new(content: "Vessel Frozen: "), url: vessel_cold_storage_path(vessel), method: :post do |f|
+        .modal-body
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :content, label: "Reason", as: :text, input_html: { rows: 3 }
+        .modal-footer
+          = f.submit "Freeze Record", class: "btn btn-danger submit_freeze_record"
