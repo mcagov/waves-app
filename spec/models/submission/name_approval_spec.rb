@@ -25,6 +25,18 @@ describe Submission::NameApproval do
   end
 
   context "skipping validation" do
+    context "when the name has changed" do
+      before do
+        name_approval.submission.update_attributes(
+          changeset: { vessel_info:
+            Submission::Vessel.new(name: "ALICES BOAT", port_code: "SU") })
+
+        expect(VesselNameValidator).to receive(:valid?)
+      end
+
+      it { name_approval.valid? }
+    end
+
     context "when the name/port_code has not changed" do
       before do
         name_approval.submission.update_attributes(
