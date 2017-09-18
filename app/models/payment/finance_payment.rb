@@ -11,7 +11,7 @@ class Payment::FinancePayment < ApplicationRecord
   validates :payment_date, presence: true
   validates :part, presence: true
   validates :task, presence: true
-  validates :payment_amount, presence: true
+  validates :payment_amount, numericality: { other_than: 0 }
 
   validate :registered_vessel_exists
 
