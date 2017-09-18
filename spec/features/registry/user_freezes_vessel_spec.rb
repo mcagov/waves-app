@@ -9,7 +9,7 @@ describe "User freezes (and unfreezes) a vessel", type: :feature, js: true do
 
     within("#freeze-record") do
       fill_in("Reason", with: "Because Alice said....")
-      find(:css, '.submit_freeze_record').trigger('click')
+      find(:css, ".submit_freeze_record").trigger("click")
     end
 
     expect(page)
@@ -25,7 +25,7 @@ describe "User freezes (and unfreezes) a vessel", type: :feature, js: true do
 
     within("#unfreeze-record") do
       fill_in("Reason", with: "Because Bob said....")
-      find(:css, '.submit_unfreeze_record').trigger('click')
+      find(:css, ".submit_unfreeze_record").trigger("click")
     end
 
     click_on("Notes")
