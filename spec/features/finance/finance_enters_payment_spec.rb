@@ -58,13 +58,13 @@ describe "Finance enters a payment", type: :feature do
     click_on("Batch #{FinanceBatch.last.batch_no}")
     click_on("£25.00")
 
-    fill_in("Fee Amount", with: "50")
+    fill_in("Fee Amount", with: "-15")
     click_on("Update Fee Entry")
 
     expect(page).to have_css(
       ".alert",
       text: "Fee entry successfully updated")
 
-    expect(page).to have_link("£50.00")
+    expect(page).to have_link("£-15.00")
   end
 end
