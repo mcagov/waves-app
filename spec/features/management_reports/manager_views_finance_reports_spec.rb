@@ -7,7 +7,7 @@ describe "User views Finance reports", js: true do
         :finance_payment,
         payment_date: "22/12/2016",
         application_ref_no: "SUB1",
-        payment_amount: 25,
+        payment_amount: -25,
         payment_type: "cheque",
         part: :part_1)
 
@@ -24,10 +24,11 @@ describe "User views Finance reports", js: true do
 
     login_to_reports
     visit admin_report_path(:finance_income)
+
+    click_on("Income Reports")
   end
 
   scenario "Income" do
-    click_on("Income Reports")
     expect_link_to_export_or_print(true)
 
     find("#filter_date_start").set("01/12/2016")
@@ -39,7 +40,7 @@ describe "User views Finance reports", js: true do
 
       within(cells[0]) { expect(page).to have_text("22/12/2016") }
       within(cells[1]) { expect(page).to have_text("SUB1") }
-      within(cells[2]) { expect(page).to have_text("25.00") }
+      within(cells[2]) { expect(page).to have_text("-25.00") }
       within(cells[3]) { expect(page).to have_text("CHQ") }
       within(cells[4]) { expect(page).to have_text("Part I") }
     end
