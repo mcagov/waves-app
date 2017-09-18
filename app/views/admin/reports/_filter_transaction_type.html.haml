@@ -1,0 +1,8 @@
+.form-group
+  .row
+    .col-md-2
+      %label{ for: "filter_transaction_type" } Report
+    .col-md-4
+      = select :filter, :transaction_type, transaction_types_collection,
+        { include_blank: true, selected: filter[:transaction_type] },
+        class: "form-control"

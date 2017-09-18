@@ -51,6 +51,10 @@ module CollectionHelper
     WavesUtilities::DocumentType.all(part)
   end
 
+  def transaction_types_collection
+    [["Income Report", :payments], ["Refunds Report", :refunds]]
+  end
+
   def propulsion_system_collection(propulsion_system = nil)
     collection = WavesUtilities::PropulsionSystem.all
     # note that #to_s is to handle legacy propulsion_systems
