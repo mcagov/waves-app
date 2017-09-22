@@ -27,6 +27,7 @@ class Report::FinanceIncome < Report
 
   def finance_payments
     query = Payment::FinancePayment.includes(:batch)
+    query = query.joins(:payment)
     query = query.where("payment_date BETWEEN ? AND ?", @date_start, @date_end)
     query = query.payments if payments?
     query = query.refunds if refunds?
