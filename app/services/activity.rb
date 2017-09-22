@@ -73,14 +73,14 @@ class Activity
     default_tasks = Task.default_task_types
     excluded_tasks =
       case @part
+      when :part_1
+        [:simple_to_full]
       when :part_2
         [:issue_csr]
       when :part_3
-        [:issue_csr, :mortgage, :provisional]
+        [:issue_csr, :mortgage, :provisional, :simple_to_full]
       when :part_4
-        [:provisional, :re_registration, :mortgage]
-      else
-        []
+        [:provisional, :re_registration, :mortgage, :simple_to_full]
       end
     default_tasks.select { |t| !excluded_tasks.include?(t[1]) }
   end
