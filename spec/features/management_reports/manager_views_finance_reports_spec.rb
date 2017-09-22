@@ -2,16 +2,16 @@ require "rails_helper"
 
 describe "User views Finance reports", js: true do
   before do
-    @incomplete_finance_payment =
+    @check_refund =
       create(
-        :finance_payment,
+        :submitted_finance_payment,
         payment_date: "22/12/2016",
-        application_ref_no: "SUB1",
+        application_ref_no: "to-be-ignored",
         payment_amount: -25,
         payment_type: "cheque",
         part: :part_1)
 
-    @submitted_finance_payment =
+    @cash_income =
       create(
         :submitted_finance_payment,
         payment_date: "23/12/2016",
@@ -20,7 +20,8 @@ describe "User views Finance reports", js: true do
         payment_type: "cash",
         part: :part_2)
 
-    @submitted_finance_payment.submission.update_attribute(:ref_no, "SUB2")
+    @check_refund.submission.update_attribute(:ref_no, "CHK_REFUND")
+    @cash_income.submission.update_attribute(:ref_no, "CASH_INCOME")
 
     login_to_reports
     visit admin_report_path(:finance_income)
@@ -40,7 +41,7 @@ describe "User views Finance reports", js: true do
       cells = find_all("td")
 
       within(cells[0]) { expect(page).to have_text("23/12/2016") }
-      within(cells[1]) { expect(page).to have_text("SUB2") }
+      within(cells[1]) { expect(page).to have_text("CASH_INCOME") }
       within(cells[2]) { expect(page).to have_text("50.00") }
       within(cells[3]) { expect(page).to have_text("CASH") }
       within(cells[4]) { expect(page).to have_text("Part II") }
@@ -59,10 +60,14 @@ describe "User views Finance reports", js: true do
       cells = find_all("td")
 
       within(cells[0]) { expect(page).to have_text("22/12/2016") }
-      within(cells[1]) { expect(page).to have_text("SUB1") }
       within(cells[2]) { expect(page).to have_text("-25.00") }
       within(cells[3]) { expect(page).to have_text("CHQ") }
       within(cells[4]) { expect(page).to have_text("Part I") }
+
+      within(cells[1]) do
+        target = submission_path(@check_refund.submission.id)
+        expect(page).to have_link("CHK_REFUND", href: target)
+      end
     end
 
     expect(find_all("#results tr").length).to eq(2)

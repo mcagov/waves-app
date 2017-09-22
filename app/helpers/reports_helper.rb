@@ -6,6 +6,9 @@ module ReportsHelper
     elsif data_element.is_a?(Report::RenderAsLinkToVessel)
       render_link_to_vessel(data_element)
 
+    elsif data_element.is_a?(Report::RenderAsLinkToSubmission)
+      render_link_to_submission(data_element)
+
     elsif data_element.is_a?(Report::RenderAsDownloadLink)
       render_link_to_download(data_element)
 
@@ -50,6 +53,10 @@ module ReportsHelper
   def render_link_to_vessel(data_element)
     link_to data_element.vessel.send(data_element.attribute),
             vessel_path(data_element.vessel.id)
+  end
+
+  def render_link_to_submission(data_element)
+    link_to data_element.to_s, submission_path(data_element.submission.id)
   end
 
   def render_link_to_download(data_element)
