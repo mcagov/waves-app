@@ -19,6 +19,10 @@ module PoliciesHelper
     Policies::Workflow.uses_vessel_attribute?(attr, obj)
   end
 
+  def display_editable_registration_type?(obj)
+    Policies::Workflow.uses_editable_registration_type?(obj)
+  end
+
   def display_managers?(obj)
     Policies::Definitions.manageable?(obj)
   end

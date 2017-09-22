@@ -145,3 +145,15 @@ def visit_assigned_part_1_closure_submission
   login_to_part_1(submission.claimant)
   visit submission_path(submission)
 end
+
+def visit_name_approved_part_2_simple_to_full_submission
+  registered_vessel =
+    create(:registered_vessel, part: :part_2)
+  submission =
+    create(:approvable_submission, task: :simple_to_full,
+                                   part: :part_2,
+                                   registered_vessel: registered_vessel)
+
+  login_to_part_2(submission.claimant)
+  visit submission_path(submission)
+end

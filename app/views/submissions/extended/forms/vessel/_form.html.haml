@@ -12,13 +12,20 @@
             hint: link_to_change_name_or_pln(@submission)
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
-          = vessel_f.input :registration_type,
-            label: vessel_change_label(:registration_type, "Registration Type"),
-            as: :select,
-            collection: registration_types_collection(@submission.part),
-            input_html: { class: "select2" },
-            disabled: true
-          = vessel_f.input :registration_type, as: :hidden
+          - if display_editable_registration_type?(@submission)
+            = vessel_f.input :registration_type,
+              label: vessel_change_label(:registration_type, "Registration Type"),
+              as: :select,
+              collection: registration_types_collection(@submission.part),
+              input_html: { class: "select2" }
+          - else
+            = vessel_f.input :registration_type,
+              label: vessel_change_label(:registration_type, "Registration Type"),
+              as: :select,
+              collection: registration_types_collection(@submission.part),
+              input_html: { class: "select2" },
+              disabled: true
+            = vessel_f.input :registration_type, as: :hidden
 
         .col-md-2#vessel_categories{ class: vessel_change_css(:vessel_category) }
           = vessel_f.input :vessel_category,

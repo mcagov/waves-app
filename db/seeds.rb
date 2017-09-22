@@ -57,6 +57,10 @@ FEES = [
   [:part_2_simple_change_vessel, :convert_simple_to_full, 6100, 10000],
   [:part_2_full_change_vessel, :convert_provisional_to_full, 5500, 5000],
 
+  # To add to the confusion, we also have a task "simple_to_full"
+  [:part_2_simple_simple_to_full, :convert_simple_to_full, 6100, 10000],
+  [:part_2_full_simple_to_full, :convert_simple_to_full, 6100, 10000],
+
   [:part_1_change_owner, :change_owner, 8000, 10000, 1500],
   [:part_2_simple_change_owner, :change_owner, 6300, 10000, 1500],
   [:part_2_full_change_owner, :change_owner, 8000, 10000, 1500],

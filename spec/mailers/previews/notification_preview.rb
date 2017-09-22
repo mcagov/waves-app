@@ -29,6 +29,12 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_approval_simple_to_full
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :simple_to_full, "MV Bob"
+    )
+  end
+
   def application_approval_renewal
     NotificationMailer.application_approval(
       default_params, "SRXXXXXX", "Officer Bob", :renewal, "MV Bob"
