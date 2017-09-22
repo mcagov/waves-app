@@ -4,7 +4,7 @@ class Submission < ApplicationRecord
   include Submission::Reporting
 
   include PgSearch
-  multisearchable against: :ref_no
+  multisearchable against: [:ref_no, :changeset]
 
   pg_search_scope :scoped_search,
                   against: [:ref_no, :changeset],
