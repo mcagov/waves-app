@@ -1,0 +1,27 @@
+.row
+  .col-md-12
+    .x_panel
+      .x_content
+        .row
+          .col-md-8
+            = f.input :name, input_html: { class: "upcase" }
+        .row
+          .col-md-4
+            = f.input :address_1, input_html: { class: "upcase" }
+          .col-md-4
+            = f.input :address_2, input_html: { class: "upcase" }
+          .col-md-4
+            = f.input :address_3, input_html: { class: "upcase" }
+        .row
+          .col-md-4
+            = f.input :town, label: "Town or City", input_html: { class: "upcase" }
+          .col-md-4
+            = f.input :postcode, input_html: { class: "upcase" }
+          .col-md-4
+            = f.input :country, collection: countries_collection, include_blank: false
+        .row
+          .col-md-12
+            .pull-right
+              = f.submit "Save", class: "btn btn-lg btn-success"
+
+

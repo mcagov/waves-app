@@ -1,0 +1,28 @@
+.row
+  .col-md-6
+    %h1 Commonly-used Mortgagees
+  .col-md-6
+    .pull-right
+      = link_to new_admin_common_mortgagee_path, class: "btn btn-info" do
+        %i.fa.fa-plus{style: "font-size: 1.2em;"}
+        Add Commonly-used Mortgagee
+#common_mortgagees.row
+  .col-md-12
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Name
+        %th Address
+        %th
+      %tbody
+        - @common_mortgagees.each do |common_mortgagee|
+          %tr.mortgagee
+            %td.name= link_to common_mortgagee.name, edit_admin_common_mortgagee_path(common_mortgagee)
+            %td.address= common_mortgagee.inline_address
+            %td
+              = link_to admin_common_mortgagee_path(common_mortgagee),
+                method: :delete,
+                data: { confirm: "Are you sure you want to remove this item?" },
+                style: 'color: red;' do
+                %i.fa.fa-trash
+                Remove
+    = will_paginate @common_mortgagees, renderer: BootstrapPagination::Rails

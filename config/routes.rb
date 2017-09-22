@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :common_mortgagees
     resources :target_dates, only: [:index]
     resources :reports, only: [:show, :index]
     resources :tasks, only: [:index]

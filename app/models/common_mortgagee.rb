@@ -1,0 +1,2 @@
+class CommonMortgagee < Customer
+end
