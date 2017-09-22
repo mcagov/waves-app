@@ -36,6 +36,12 @@ class Report
     end
   end
 
+  RenderAsLinkToSubmission = Struct.new(:submission) do
+    def to_s
+      submission.ref_no
+    end
+  end
+
   RenderAsDownloadLink = Struct.new(:report_key) do
     def to_s
       ""

@@ -41,7 +41,7 @@ class Report::FinanceIncome < Report
 
     data_elements = [
       finance_payment.payment_date,
-      finance_payment.assigned_application_ref_no,
+      assigned_submission_for(finance_payment),
       RenderAsCurrency.new(finance_payment.payment_amount),
       finance_payment.payment_type_description,
       finance_payment.part_description,
@@ -61,5 +61,16 @@ class Report::FinanceIncome < Report
 
   def transaction_type
     (@filters[:transaction_type] || "").to_sym
+  end
+
+  def assigned_submission_for(finance_payment)
+    submission =
+      if finance_payment.assigned_application_ref_no
+        Submission.find_by(ref_no: finance_payment.assigned_application_ref_no)
+      end
+
+    return finance_payment.assigned_application_ref_no unless submission
+
+    RenderAsLinkToSubmission.new(submission)
   end
 end
