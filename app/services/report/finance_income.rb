@@ -10,7 +10,8 @@ class Report::FinanceIncome < Report
   def headings
     [
       "Fee Receipt Date", "Application ID", "Amount",
-      "Payment Type", "Revenue Stream", "Batch Identifier"
+      "Payment Type", "Revenue Stream", "Batch Identifier",
+      "Application Status"
     ]
   end
 
@@ -27,7 +28,7 @@ class Report::FinanceIncome < Report
 
   def finance_payments
     query = Payment::FinancePayment.includes(:batch)
-    query = query.joins(:payment)
+    query = query.joins(:payment).includes(payment: :submission)
     query = query.where("payment_date BETWEEN ? AND ?", @date_start, @date_end)
     query = query.payments if payments?
     query = query.refunds if refunds?
@@ -44,7 +45,8 @@ class Report::FinanceIncome < Report
       RenderAsCurrency.new(finance_payment.payment_amount),
       finance_payment.payment_type_description,
       finance_payment.part_description,
-      finance_payment.batch_no]
+      finance_payment.batch_no,
+      finance_payment.submission.current_state.to_s.try(:humanize)]
 
     Result.new(data_elements)
   end
