@@ -1,5 +1,13 @@
 .nested-fields
   .row
+    .col-md-8.form-group
+      = label_tag :common_mortgagees, "Commonly-used Mortgagees"
+
+      = select_tag :common_mortgagees,
+        options_for_select(CommonMortgagee.all.collect{ |u| [u.name, u.formatted_id] }),
+        include_blank: true,
+        class: "form-control populate-mortgagee"
+  .row
     .col-md-4
       = mortgagee_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagee"
     .col-md-8
@@ -22,5 +30,5 @@
     .col-md-4
       = mortgagee_f.input :postcode, input_html: { class: "upcase postcode" }
     .col-md-4
-      = mortgagee_f.input :country, collection: countries_collection, include_blank: false
+      = mortgagee_f.input :country, collection: countries_collection, include_blank: false, input_html: { class: "country" }
   %hr

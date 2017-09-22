@@ -1,0 +1,5 @@
+%h1 Add Commonly-used Mortgagee
+.row
+  .col-md-6
+    = simple_form_for @common_mortgagee, url: admin_common_mortgagees_path, method: :post do |f|
+      = render partial: "form", locals: { f: f }
