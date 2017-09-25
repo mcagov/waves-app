@@ -141,6 +141,32 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
+  describe "carving_and_marking_reminder" do
+    let(:mail) do
+      NotificationMailer.carving_and_marking_reminder(
+        default_params, "Jolly Roger", "Ref_no")
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the body" do
+      expect(body).to match(/CARVING AND MARKING REMINDER/)
+    end
+  end
+
+  describe "code_certificate_reminder" do
+    let(:mail) do
+      NotificationMailer.code_certificate_reminder(
+        default_params, "Jolly Roger", "Ref_no")
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the body" do
+      expect(body).to match(/CODING EXPIRY/)
+    end
+  end
+
   describe "safety_certificate_reminder" do
     let(:mail) do
       NotificationMailer.safety_certificate_reminder(
