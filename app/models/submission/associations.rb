@@ -84,6 +84,11 @@ module Submission::Associations
                    -> { order("created_at desc").limit(1) },
                    as: :notifiable,
                    class_name: "Notification::ApplicationReceipt"
+
+      base.has_one :carving_and_marking_reminder,
+                   -> { order("created_at desc").limit(1) },
+                   as: :notifiable,
+                   class_name: "Notification::CarvingAndMarkingReminder"
     end
 
     def payment_associations(base)
