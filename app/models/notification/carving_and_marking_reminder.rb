@@ -4,7 +4,7 @@ class Notification::CarvingAndMarkingReminder < Notification
   end
 
   def additional_params
-    []
+    [vessel_name, vessel_reg_no]
   end
 
   def email_subject
@@ -13,7 +13,15 @@ class Notification::CarvingAndMarkingReminder < Notification
 
   private
 
+  def submission
+    notifiable
+  end
+
   def vessel_name
-    notifiable.vessel_name if notifiable
+    submission.vessel_name if submission
+  end
+
+  def vessel_reg_no
+    submission.vessel_reg_no if submission
   end
 end

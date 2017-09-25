@@ -67,6 +67,14 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
+  def carving_and_marking_reminder(defaults, vessel_name, reg_no)
+    @name = defaults[:name]
+    @vessel_name = vessel_name
+    @reg_no = reg_no
+
+    mail(to: defaults[:to], subject: defaults[:subject])
+  end
+
   private
 
   def govuk_url(path)

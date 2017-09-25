@@ -104,6 +104,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, 55, "Officer Bob", :pdf_attachment)
   end
 
+  def carving_and_marking_reminder
+    NotificationMailer.carving_and_marking_reminder(
+      default_params, "My Boat", "3N-777EA4")
+  end
+
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")
