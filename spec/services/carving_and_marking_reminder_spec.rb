@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe CarvingAndMarkingReminder do
   before do
-    create(:carving_and_marking, created_at: 4.months.ago).submission
+    remindable =
+      create(:carving_and_marking, created_at: 4.months.ago).submission
+    remindable.update_attributes(
+      applicant_name: "BOB", applicant_email: "bob@example.com")
 
     reminded =
       create(:carving_and_marking, created_at: 4.months.ago).submission
@@ -17,11 +20,20 @@ describe CarvingAndMarkingReminder do
     Notification::CarvingAndMarkingReminder.count
   end
 
-  it "runs once and sends one notification" do
-    described_class.process
+  context ".process" do
+    before { described_class.process }
 
-    expect(Notification::CarvingAndMarkingReminder.count)
-      .to eq(sent_notification_count + 1)
+    it "sends one email" do
+      expect(Notification::CarvingAndMarkingReminder.count)
+        .to eq(sent_notification_count + 1)
+    end
+
+    it "sets the recipient" do
+      notification = Notification::CarvingAndMarkingReminder.last
+
+      expect(notification.recipient_name).to eq("BOB")
+      expect(notification.recipient_email).to eq("bob@example.com")
+    end
   end
 
   it "runs twice but only sends one notification" do

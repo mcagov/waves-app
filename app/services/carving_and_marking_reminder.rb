@@ -18,7 +18,9 @@ class CarvingAndMarkingReminder
     def build_notifications
       @submissions.each do |submission|
         Notification::CarvingAndMarkingReminder.create(
-          notifiable: submission)
+          notifiable: submission,
+          recipient_name: submission.applicant_name,
+          recipient_email: submission.applicant_email)
       end
     end
   end
