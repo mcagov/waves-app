@@ -42,6 +42,21 @@ module Submission::Reporting
               (changeset#>>'{vessel_info, register_length}'), ''), '0')
                 as numeric) > 24.0")
       end)
+
+      base.scope :commercial, (lambda do
+        where(
+          "(part = 'part_1') AND "\
+          "(changeset#>>'{vessel_info, registration_type}' = 'commercial')"
+          )
+      end)
+
+      base.scope :over_100gt, (lambda do
+        where(
+          "cast
+            (coalesce(nullif(
+              (changeset#>>'{vessel_info, gross_tonnage}'), ''), '0')
+                as numeric) > 100.0")
+      end)
     end
     # rubocop:enable all
   end

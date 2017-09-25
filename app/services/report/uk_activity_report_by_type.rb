@@ -58,6 +58,8 @@ class Report::UkActivityReportByType < Report
         Submission.fishing_vessels.under_15m.flag_in
       when :fishing_under_15m_flag_out
         Submission.fishing_vessels.under_15m.flag_out
+      when :commercial_over_100gt_out
+        Submission.commercial.over_100gt.flag_out
       end
     scope.completed
   end
@@ -74,6 +76,7 @@ class Report::UkActivityReportByType < Report
       ["Fishing over 24m Flag out", :fishing_over_24m_flag_out],
       ["Fishing under 15m Flag in", :fishing_under_15m_flag_in],
       ["Fishing under 15m Flag out", :fishing_under_15m_flag_out],
+      ["Commercial Vessels over 100 GT flag out", :commercial_over_100gt_out]
     ].freeze
   # rubocop:enable all
 end
