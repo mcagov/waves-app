@@ -109,6 +109,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, "My Boat", "3N-777EA4")
   end
 
+  def code_certificate_reminder
+    NotificationMailer.code_certificate_reminder(
+      default_params, "My Boat", "3N-777EA4")
+  end
+
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")

@@ -8,7 +8,7 @@ class Notification::CodeCertificateReminder < Notification
   end
 
   def email_subject
-    "CODING EXPIRY: #{vessel_name}"
+    "CODING EXPIRY"
   end
 
   private

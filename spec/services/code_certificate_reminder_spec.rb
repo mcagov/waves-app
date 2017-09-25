@@ -32,7 +32,8 @@ describe CodeCertificateReminder do
       notification = @remindable.code_certificate_reminder
 
       expect(notification.recipient_name).to eq(@remindable.correspondent.name)
-      expect(notification.recipient_email).to eq(@remindable.correspondent.email)
+      expect(notification.recipient_email)
+        .to eq(@remindable.correspondent.email)
     end
   end
 
