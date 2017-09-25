@@ -41,8 +41,18 @@ module Register
             as: :notifiable,
             class_name: "Notification::CodeCertificateReminder"
 
+    has_one :safety_certificate_reminder,
+            -> { order("created_at desc").limit(1) },
+            as: :notifiable,
+            class_name: "Notification::SafetyCertificateReminder"
+
     has_many :code_certificates,
              -> { where("entity_type = 'code_certificate'") },
+             class_name: "Document",
+             as: :noteable
+
+    has_many :fishing_vessel_safety_certificates,
+             -> { where("entity_type = 'fishing_vessel_safety_certificate'") },
              class_name: "Document",
              as: :noteable
 
