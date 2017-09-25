@@ -4,7 +4,7 @@ namespace :waves do
   end
 
   task process_reminders: :environment do
-    Reminder.process_all
+    RegistrationReminder.process_all
   end
 
   task unclaim_claimed_submissions: :environment do

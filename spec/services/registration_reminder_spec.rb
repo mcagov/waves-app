@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Reminder do
+describe RegistrationReminder do
   let!(:renewable_vessel) { create(:renewable_vessel) }
   let!(:expirable_vessel) { create(:expirable_vessel) }
   let!(:terminatable_vessel) { create(:terminatable_vessel) }

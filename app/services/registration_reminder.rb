@@ -1,4 +1,4 @@
-class Reminder
+class RegistrationReminder
   class << self
     def process_all
       process_renewals
