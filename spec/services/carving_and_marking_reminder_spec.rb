@@ -2,9 +2,9 @@ require "rails_helper"
 
 describe CarvingAndMarkingReminder do
   before do
-    remindable =
+    @remindable =
       create(:carving_and_marking, created_at: 4.months.ago).submission
-    remindable.update_attributes(
+    @remindable.update_attributes(
       applicant_name: "BOB", applicant_email: "bob@example.com")
 
     reminded =
@@ -29,7 +29,7 @@ describe CarvingAndMarkingReminder do
     end
 
     it "sets the recipient" do
-      notification = Notification::CarvingAndMarkingReminder.last
+      notification = @remindable.carving_and_marking_reminder
 
       expect(notification.recipient_name).to eq("BOB")
       expect(notification.recipient_email).to eq("bob@example.com")
