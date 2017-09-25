@@ -6,4 +6,8 @@ FactoryGirl.define do
     issuing_authority "MCA"
     assets            { [build(:asset)] }
   end
+
+  factory :code_certificate, class: "Document" do
+    entity_type       :code_certificate
+  end
 end

@@ -4,7 +4,8 @@ namespace :waves do
   end
 
   task process_reminders: :environment do
-    CertificateReminder.process
+    CarvingAndMarkingReminder.process
+    CodeCertificateReminder.process
     RegistrationReminder.process_all
   end
 

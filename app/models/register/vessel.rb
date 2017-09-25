@@ -36,6 +36,16 @@ module Register
 
     has_many :notifications, as: :notifiable
 
+    has_one :code_certificate_reminder,
+            -> { order("created_at desc").limit(1) },
+            as: :notifiable,
+            class_name: "Notification::CodeCertificateReminder"
+
+    has_many :code_certificates,
+             -> { where("entity_type = 'code_certificate'") },
+             class_name: "Document",
+             as: :noteable
+
     has_many :documents,
              -> { order("created_at desc") },
              as: :noteable

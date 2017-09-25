@@ -7,9 +7,9 @@ describe CarvingAndMarkingReminder do
     @remindable.update_attributes(
       applicant_name: "BOB", applicant_email: "bob@example.com")
 
-    reminded =
+    received =
       create(:carving_and_marking, created_at: 4.months.ago).submission
-    reminded.update_attribute(:carving_and_marking_received_at, 1.day.ago)
+    received.update_attribute(:carving_and_marking_received_at, 1.day.ago)
 
     notified =
       create(:carving_and_marking, created_at: 4.months.ago).submission
