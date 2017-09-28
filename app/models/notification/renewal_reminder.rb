@@ -25,4 +25,3 @@ class Notification::RenewalReminder < Notification
     vessel.registered_until if vessel
   end
 end
-

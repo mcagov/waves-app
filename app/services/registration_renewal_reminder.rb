@@ -12,7 +12,9 @@ class RegistrationRenewalReminder
         Register::Vessel
         .joins(:current_registration)
         .where("registrations.renewal_reminder_at IS NULL")
-        .where("registrations.registered_until < ?", 90.days.from_now)
+        .where(
+          "registrations.registered_until between ? AND ?",
+          Date.today, 90.days.from_now)
     end
 
     def build_reminders
