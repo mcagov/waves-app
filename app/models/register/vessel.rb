@@ -41,6 +41,11 @@ module Register
             as: :notifiable,
             class_name: "Notification::CodeCertificateReminder"
 
+    has_one :renewal_reminder,
+            -> { order("created_at desc").limit(1) },
+            as: :notifiable,
+            class_name: "Notification::RenewalReminder"
+
     has_one :safety_certificate_reminder,
             -> { order("created_at desc").limit(1) },
             as: :notifiable,
