@@ -79,6 +79,12 @@ class Report
     true
   end
 
+  def xls_title
+    t = title
+    t += ": #{@date_start}-#{@date_end}" if @date_start
+    t
+  end
+
   protected
 
   def filter_by_part(scoped_query)
