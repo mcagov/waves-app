@@ -20,6 +20,7 @@ class RegistrationRenewalReminder
     def build_reminders
       @registered_vessels.each do |registered_vessel|
         build_email_notification(registered_vessel)
+        build_print_job(registered_vessel)
 
         registered_vessel
           .current_registration
@@ -33,6 +34,13 @@ class RegistrationRenewalReminder
         recipient_name: registered_vessel.correspondent.name,
         recipient_email: registered_vessel.correspondent.email,
         attachments: :renewal_reminder_letter)
+    end
+
+    def build_print_job(registered_vessel)
+      PrintJob.create(
+        printable: registered_vessel.current_registration,
+        part: registered_vessel.part,
+        template: :renewal_reminder_letter)
     end
   end
 end
