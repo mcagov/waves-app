@@ -95,6 +95,7 @@ class Activity
       :current_transcript,
       :historic_transcript,
       :provisional_certificate,
+      :renewal_reminder_letter,
       :termination_notice,
     ]
   end
