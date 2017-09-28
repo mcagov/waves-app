@@ -9,8 +9,7 @@ class Pdfs::RenewalReminderLetter
 
   def render
     @registrations.each do |registration|
-      @pdf =
-        Pdfs::RenewalReminderLetterWriter.new(registration, @pdf).write
+      @pdf = renewal_reminder_letter_writer(registration)
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render

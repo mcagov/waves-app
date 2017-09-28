@@ -83,6 +83,15 @@ class Pdfs::Processor
   end
 
   def renewal_reminder_letter
-    Pdfs::RenewalReminderLetter.new(@printable_items, @mode)
+    case @part
+    when :part_1
+      Pdfs::Part1::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_2
+      Pdfs::Part2::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_3
+      Pdfs::Part3::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_4
+      Pdfs::Part4::RenewalReminderLetter.new(@printable_items, @mode)
+    end
   end
 end
