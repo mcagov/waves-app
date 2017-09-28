@@ -15,8 +15,10 @@ class Pdfs::RenewalReminderLetterWriter
     draw_bg(1)
     init_stationary(@registration.updated_at)
     vessel_name
+    registered_until
     @pdf.start_new_page
     draw_bg(2)
+    details_box
     @pdf.start_new_page
     draw_bg(3)
     @pdf.start_new_page
@@ -34,5 +36,14 @@ class Pdfs::RenewalReminderLetterWriter
   def vessel_name
     set_bold_font
     @pdf.draw_text @vessel[:name], at: [l_margin, 530]
+  end
+
+  def registered_until
+    @pdf.draw_text @registration.registered_until, at: [330, 476]
+  end
+
+  def details_box
+    @pdf.draw_text @vessel[:name], at: [170, 660]
+    @pdf.draw_text @vessel[:reg_no], at: [170, 630]
   end
 end
