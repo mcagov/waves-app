@@ -23,4 +23,11 @@ describe "User views UK Activity reports", js: true do
     expect(page)
       .to have_css("h1", text: "Merchant Flag in (01/01/2017 to 31/03/2017)")
   end
+
+  scenario "exporting to excel" do
+    click_on("Export to Excel")
+    sleep 1
+    expect(page.response_headers["Content-Type"]).to match("application/xls")
+    expect(page.text).to match("UK Activity: 01/01/2017-31/03/2017")
+  end
 end

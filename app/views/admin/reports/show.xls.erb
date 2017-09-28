@@ -7,6 +7,11 @@
   <Worksheet ss:Name="<%= @report.title %>">
     <Table>
       <Row>
+        <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+          <Data ss:Type="String"><%= @report.xls_title %></Data>
+        </Cell>
+      </Row>
+      <Row>
         <% @report.headings.each do |heading| %>
           <Cell>
             <Data ss:Type="String"><%=  titleized_report_heading(heading) %></Data>
