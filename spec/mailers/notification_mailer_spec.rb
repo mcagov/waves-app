@@ -179,6 +179,19 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(body).to match(/SAFETY EXPIRY/)
     end
   end
+
+  describe "renewal_reminder" do
+    let(:mail) do
+      NotificationMailer.renewal_reminder(
+        default_params, "Jolly Roger", "3/1/2017")
+    end
+
+    let(:body) { mail.body.encoded }
+
+    it "renders the body" do
+      expect(body).to match(%r{/due to expire on 3\/1\/2017/})
+    end
+  end
 end
 
 def default_params

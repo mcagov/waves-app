@@ -91,6 +91,14 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
+  def renewal_reminder(defaults, vessel_name, registered_until)
+    @name = defaults[:name]
+    @vessel_name = vessel_name
+    @registered_until = registered_until
+
+    mail(to: defaults[:to], subject: defaults[:subject])
+  end
+
   private
 
   def govuk_url(path)

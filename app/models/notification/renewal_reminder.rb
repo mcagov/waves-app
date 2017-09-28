@@ -4,7 +4,7 @@ class Notification::RenewalReminder < Notification
   end
 
   def additional_params
-    [vessel_name, vessel_reg_no]
+    [vessel_name, registered_until]
   end
 
   def email_subject
@@ -21,7 +21,8 @@ class Notification::RenewalReminder < Notification
     vessel.name if vessel
   end
 
-  def vessel_reg_no
-    vessel.reg_no if vessel
+  def registered_until
+    vessel.registered_until if vessel
   end
 end
+
