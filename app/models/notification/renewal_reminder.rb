@@ -28,6 +28,7 @@ class Notification::RenewalReminder < Notification
   def email_attachments
     return if attachments.blank?
 
-    Pdfs::Processor.run(attachments.to_sym, vessel, :attachment).render
+    Pdfs::Processor
+      .run(attachments.to_sym, vessel.current_registration, :attachment).render
   end
 end

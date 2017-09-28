@@ -1,9 +1,9 @@
 class Pdfs::RenewalReminderLetterWriter
   include Pdfs::Stationary
 
-  def initialize(vessel, pdf)
-    @vessel = vessel
-    @registration = @vessel.current_registration
+  def initialize(registration, pdf)
+    @registration = registration
+    @vessel = @registration.registered_vessel
     @delivery_name_and_address = @registration.delivery_name_and_address
 
     @pdf = pdf
