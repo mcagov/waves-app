@@ -81,4 +81,8 @@ class Pdfs::Processor
   def termination_notice
     Pdfs::TerminationNotice.new(@printable_items, @mode)
   end
+
+  def renewal_reminder_letter
+    Pdfs::RenewalReminderLetter.new(@printable_items, @mode)
+  end
 end

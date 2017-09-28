@@ -35,6 +35,12 @@ describe RegistrationRenewalReminder do
       expect(notification.recipient_email)
         .to eq(@remindable.correspondent.email)
     end
+
+    it "sets the attachment" do
+      notification = @remindable.renewal_reminder
+
+      expect(notification.attachments.to_sym).to eq(:renewal_reminder_letter)
+    end
   end
 
   it "runs twice but only sends one notification" do

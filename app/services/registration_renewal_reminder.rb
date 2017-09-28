@@ -31,7 +31,8 @@ class RegistrationRenewalReminder
       Notification::RenewalReminder.create(
         notifiable: registered_vessel,
         recipient_name: registered_vessel.correspondent.name,
-        recipient_email: registered_vessel.correspondent.email)
+        recipient_email: registered_vessel.correspondent.email,
+        attachments: :renewal_reminder_letter)
     end
   end
 end

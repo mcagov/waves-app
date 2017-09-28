@@ -4,7 +4,7 @@ class Notification::RenewalReminder < Notification
   end
 
   def additional_params
-    [vessel_name, registered_until]
+    [vessel_name, registered_until, email_attachments]
   end
 
   def email_subject
@@ -23,5 +23,11 @@ class Notification::RenewalReminder < Notification
 
   def registered_until
     vessel.registered_until if vessel
+  end
+
+  def email_attachments
+    return if attachments.blank?
+
+    Pdfs::Processor.run(attachments.to_sym, vessel, :attachment).render
   end
 end
