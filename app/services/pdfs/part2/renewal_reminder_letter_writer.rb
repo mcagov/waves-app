@@ -6,6 +6,7 @@ class Pdfs::Part2::RenewalReminderLetterWriter <
     page_2
     page_3
     page_4
+    page_5
 
     @pdf
   end
@@ -36,6 +37,11 @@ class Pdfs::Part2::RenewalReminderLetterWriter <
   def page_4
     @pdf.start_new_page
     draw_bg(4)
+  end
+
+  def page_5
+    @pdf.start_new_page
+    draw_bg(5)
   end
 
   def draw_bg(p)
