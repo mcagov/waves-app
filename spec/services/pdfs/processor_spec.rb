@@ -228,5 +228,16 @@ describe Pdfs::Processor do
 
       it { subject }
     end
+
+    context "with a mortgagee_reminder_letter" do
+      let(:template) { :mortgagee_reminder_letter }
+
+      before do
+        expect(Pdfs::MortgageeReminderLetter)
+          .to receive(:new).with(printable_items, :printable)
+      end
+
+      it { subject }
+    end
   end
 end

@@ -87,7 +87,7 @@ class Activity
 
   private
 
-  def default_printable_templates
+  def default_printable_templates # rubocop:disable Metrics/MethodLength
     [
       :carving_and_marking,
       :registration_certificate,

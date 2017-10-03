@@ -94,4 +94,8 @@ class Pdfs::Processor
       Pdfs::Part4::RenewalReminderLetter.new(@printable_items, @mode)
     end
   end
+
+  def mortgagee_reminder_letter
+    Pdfs::MortgageeReminderLetter.new(@printable_items, @mode)
+  end
 end
