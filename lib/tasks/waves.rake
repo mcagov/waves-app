@@ -6,7 +6,7 @@ namespace :waves do
   task process_reminders: :environment do
     CarvingAndMarkingReminder.process
     CodeCertificateReminder.process
-    # RegistrationReminder.process_all
+    RegistrationRenewalReminder.process
     SafetyCertificateReminder.process
   end
 

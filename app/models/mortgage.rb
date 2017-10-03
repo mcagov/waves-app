@@ -11,6 +11,12 @@ class Mortgage < ApplicationRecord
 
   scope :not_discharged, -> { where(discharged_at: nil) }
 
+  delegate :part, to: :parent
+
+  def vessel
+    parent if parent.is_a?(Register::Vessel)
+  end
+
   class << self
     def types_for(submission)
       if Task.new(submission.task).new_registration?

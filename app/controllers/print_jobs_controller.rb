@@ -37,7 +37,7 @@ class PrintJobsController < InternalPagesController
 
   def build_pdf(print_jobs, template)
     printable_items = Array(print_jobs).map(&:printable)
-    Pdfs::Processor.run(template, printable_items)
+    Pdfs::Processor.run(template, printable_items, :attachment)
   end
 
   def mark_as_printing(print_jobs)

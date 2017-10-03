@@ -119,6 +119,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, "My Boat", "3N-777EA4")
   end
 
+  def renewal_reminder
+    NotificationMailer.renewal_reminder(
+      default_params, "My Boat", 90.days.from_now, "attachment")
+  end
+
   def wysiwyg
     NotificationMailer.wysiwyg(
       default_params, "<p>Line 1.</p><p>Line 2.</p>", "Alice Abbot")

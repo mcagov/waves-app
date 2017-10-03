@@ -81,4 +81,21 @@ class Pdfs::Processor
   def termination_notice
     Pdfs::TerminationNotice.new(@printable_items, @mode)
   end
+
+  def renewal_reminder_letter
+    case @part
+    when :part_1
+      Pdfs::Part1::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_2
+      Pdfs::Part2::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_3
+      Pdfs::Part3::RenewalReminderLetter.new(@printable_items, @mode)
+    when :part_4
+      Pdfs::Part4::RenewalReminderLetter.new(@printable_items, @mode)
+    end
+  end
+
+  def mortgagee_reminder_letter
+    Pdfs::MortgageeReminderLetter.new(@printable_items, @mode)
+  end
 end

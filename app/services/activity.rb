@@ -87,7 +87,7 @@ class Activity
 
   private
 
-  def default_printable_templates
+  def default_printable_templates # rubocop:disable Metrics/MethodLength
     [
       :carving_and_marking,
       :registration_certificate,
@@ -95,6 +95,8 @@ class Activity
       :current_transcript,
       :historic_transcript,
       :provisional_certificate,
+      :mortgagee_reminder_letter,
+      :renewal_reminder_letter,
       :termination_notice,
     ]
   end
