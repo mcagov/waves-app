@@ -1,6 +1,6 @@
 class Report::Cefas < Report
   def title
-    "MAIB"
+    "CEFAS"
   end
 
   def filter_fields
