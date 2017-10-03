@@ -49,7 +49,7 @@ class Report
   end
 
   RenderAsCurrency = Struct.new(:amount) do
-    def to_3
+    def to_s
       amount.to_s
     end
   end
