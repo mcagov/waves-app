@@ -34,6 +34,11 @@
     <Worksheet ss:Name="<%= @report.second_sheet_title %>">
       <Table>
         <Row>
+          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+            <Data ss:Type="String"><%= @report.xls_title(@report.second_sheet_title) %></Data>
+          </Cell>
+        </Row>
+        <Row>
           <% @report.headings.each do |heading| %>
             <Cell>
               <Data ss:Type="String"><%=  titleized_report_heading(heading) %></Data>
@@ -41,6 +46,34 @@
           <% end %>
         </Row>
       <% @report.second_sheet_results.each do |result| %>
+        <Row>
+          <% result.data_elements.each do |data_element| %>
+            <Cell>
+              <Data ss:Type="String"><%= data_element %></Data>
+            </Cell>
+          <% end %>
+        </Row>
+      <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+
+  <% if @report.third_sheet_title %>
+    <Worksheet ss:Name="<%= @report.third_sheet_title %>">
+      <Table>
+        <Row>
+          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+            <Data ss:Type="String"><%= @report.xls_title(@report.third_sheet_title) %></Data>
+          </Cell>
+        </Row>
+        <Row>
+          <% @report.headings.each do |heading| %>
+            <Cell>
+              <Data ss:Type="String"><%=  titleized_report_heading(heading) %></Data>
+            </Cell>
+          <% end %>
+        </Row>
+      <% @report.third_sheet_results.each do |result| %>
         <Row>
           <% result.data_elements.each do |data_element| %>
             <Cell>
