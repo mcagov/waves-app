@@ -75,12 +75,14 @@ class Report
 
   def second_sheet_title; end
 
+  def third_sheet_title; end
+
   def links_to_export_or_print?
     true
   end
 
-  def xls_title
-    t = title
+  def xls_title(prefix = nil)
+    t = prefix || title
     t += ": #{@date_start}-#{@date_end}" if @date_start
     t
   end
