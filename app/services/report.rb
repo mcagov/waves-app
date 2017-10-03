@@ -77,6 +77,8 @@ class Report
 
   def third_sheet_title; end
 
+  def fourth_sheet_title; end
+
   def links_to_export_or_print?
     true
   end
