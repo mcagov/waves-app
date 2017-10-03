@@ -29,6 +29,7 @@ en:
       current_transcript: Print Current Transcript
       historic_transcript: Print Historic Transcript
       csr_form: Print CSR
+      mortgagee_reminder_letter: Print Mortgagee Reminder Letter
       renewal_reminder_letter: Print Renewal Reminder Letter
       termination_notice: Print Notice of Termination
     print_all_button_text:
@@ -38,6 +39,7 @@ en:
       current_transcript: Print Current Transcripts
       historic_transcript: Print Historic Transcripts
       csr_form: Print CSRs
+      mortgagee_reminder_letter: Print Mortgagee Reminder Letters
       renewal_reminder_letter: Print Renewal Reminder Letters
       termination_notice: Print Notices of Termination
     menu_title:
@@ -48,6 +50,7 @@ en:
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
       csr_form: CSR Forms
+      mortgagee_reminder_letter: Mortgagee Reminder Letters
       renewal_reminder_letter: Renewal Reminder Letters
       termination_notice: Notices of Termination
   submission:

@@ -27,6 +27,10 @@ feature "User views print queues", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "Print Queue: Historic Transcripts")
 
+    click_on("Mortgagee Reminder Letters")
+    expect(page)
+      .to have_css("h1", text: "Print Queue: Mortgagee Reminder Letters")
+
     click_on("Provisional Certificates")
     expect(page)
       .to have_css("h1", text: "Print Queue: Provisional Certificates")

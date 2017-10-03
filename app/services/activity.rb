@@ -95,6 +95,7 @@ class Activity
       :current_transcript,
       :historic_transcript,
       :provisional_certificate,
+      :mortgagee_reminder_letter,
       :renewal_reminder_letter,
       :termination_notice,
     ]
