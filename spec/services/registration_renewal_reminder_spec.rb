@@ -46,11 +46,30 @@ describe RegistrationRenewalReminder do
       end
     end
 
-    context "print job details" do
+    context "renewal_reminder_letter print job details" do
       let(:print_job) do
         PrintJob
           .where(printable: @remindable.current_registration)
           .where(template: :renewal_reminder_letter)
+          .first
+      end
+
+      it "is unprinted" do
+        expect(print_job).to be_unprinted
+      end
+
+      it "sets the part" do
+        expect(print_job.part).to eq(@remindable.part)
+      end
+    end
+
+    context "mortgagee_reminder_letter print job details" do
+      let(:mortgagee) { @remindable.mortgagees.first }
+
+      let(:print_job) do
+        PrintJob
+          .where(printable: mortgagee)
+          .where(template: :mortgagee_reminder_letter)
           .first
       end
 

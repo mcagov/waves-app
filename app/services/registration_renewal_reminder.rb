@@ -20,7 +20,8 @@ class RegistrationRenewalReminder
     def build_reminders
       @registered_vessels.each do |registered_vessel|
         build_email_notification(registered_vessel)
-        build_print_job(registered_vessel)
+        build_renewal_reminder_letter_print_job(registered_vessel)
+        build_mortgagee_reminder_letter_print_jobs(registered_vessel)
 
         registered_vessel
           .current_registration
@@ -36,11 +37,20 @@ class RegistrationRenewalReminder
         attachments: :renewal_reminder_letter)
     end
 
-    def build_print_job(registered_vessel)
+    def build_renewal_reminder_letter_print_job(registered_vessel)
       PrintJob.create(
         printable: registered_vessel.current_registration,
         part: registered_vessel.part,
         template: :renewal_reminder_letter)
+    end
+
+    def build_mortgagee_reminder_letter_print_jobs(registered_vessel)
+      registered_vessel.mortgagees.each do |mortgagee|
+        PrintJob.create(
+          printable: mortgagee,
+          part: registered_vessel.part,
+          template: :mortgagee_reminder_letter)
+      end
     end
   end
 end
