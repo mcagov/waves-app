@@ -35,6 +35,13 @@ class Submission < ApplicationRecord
     where("date(referred_until) <= ?", Date.today)
   }
 
+  scope :fishing_vessels, lambda {
+    where(
+      "(submissions.part = 'part_2') OR "\
+      "(submissions.part = 'part_4' AND "\
+      "changeset#>>'{vessel_info, registration_type}' = 'fishing')")
+  }
+
   after_touch :check_current_state
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
