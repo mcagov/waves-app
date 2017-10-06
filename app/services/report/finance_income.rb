@@ -9,7 +9,7 @@ class Report::FinanceIncome < Report
 
   def headings
     [
-      "Fee Receipt Date", "Application ID", "Amount",
+      "Fee Receipt Date", "Application ID", "Amount", "Payer Name",
       "Payment Type", "Revenue Stream", "Batch Identifier",
       "Application Status"
     ]
@@ -42,6 +42,7 @@ class Report::FinanceIncome < Report
     data_elements = [
       finance_payment.payment_date,
       assigned_submission_for(finance_payment),
+      finance_payment.payer_name,
       RenderAsCurrency.new(finance_payment.payment_amount),
       finance_payment.payment_type_description,
       finance_payment.part_description,
