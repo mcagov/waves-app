@@ -17,4 +17,16 @@ class WavesDate
       end
     end
   end
+
+  def initialize(the_date)
+    @the_date = the_date.try(:to_date)
+  end
+
+  def month_name
+    valid_date? ? @the_date.strftime("%B") : ""
+  end
+
+  def valid_date?
+    @the_date.is_a?(Date)
+  end
 end
