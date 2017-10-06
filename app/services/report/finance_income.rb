@@ -9,8 +9,8 @@ class Report::FinanceIncome < Report
 
   def headings
     [
-      "Fee Receipt Date", "Application ID", "Amount",
-      "Payment Type", "Revenue Stream", "Batch Identifier",
+      "Fee Receipt Date", "Date of Fee Entry", "Application ID", "Amount",
+      "Payer Name", "Payment Type", "Revenue Stream", "Batch Identifier",
       "Application Status"
     ]
   end
@@ -40,12 +40,11 @@ class Report::FinanceIncome < Report
     finance_payment = Decorators::FinancePayment.new(finance_payment)
 
     data_elements = [
-      finance_payment.payment_date,
+      finance_payment.payment_date, finance_payment.created_at,
       assigned_submission_for(finance_payment),
       RenderAsCurrency.new(finance_payment.payment_amount),
-      finance_payment.payment_type_description,
-      finance_payment.part_description,
-      finance_payment.batch_no,
+      finance_payment.payer_name, finance_payment.payment_type_description,
+      finance_payment.part_description, finance_payment.batch_no,
       finance_payment.submission.current_state.to_s.try(:humanize)]
 
     Result.new(data_elements)
