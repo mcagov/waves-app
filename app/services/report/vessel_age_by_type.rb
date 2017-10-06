@@ -29,7 +29,7 @@ class Report::VesselAgeByType < Report
         "(coalesce(now()::DATE - keel_laying_date::DATE, "\
         "0)::FLOAT / 365) age, *")
 
-    query = query.where.not(vessel_type: "")
+    query = query.where(vessel_type: @vessel_type)
     query = filter_by_part(query)
     query = query.order(:name)
     paginate(query)
