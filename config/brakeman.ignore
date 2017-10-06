@@ -1,0 +1,166 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "0f738a84e4010c971ac41ab81c6ee8a3d34401217fa7c4dc97cc2a0c08501ded",
+      "check_name": "MassAssignment",
+      "message": "Parameters should be whitelisted for mass assignment",
+      "file": "app/controllers/api/v1/declarations_controller.rb",
+      "line": 34,
+      "link": "http://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(\"data\").require(:attributes).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Api::V1::DeclarationsController",
+        "method": "declaration_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "31fb2d88781ca622400b775d3a005f06015ccd9ba521107c9eb896267b00a1af",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/controllers/search_controller.rb",
+      "line": 10,
+      "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => params[:response_path], {})",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SearchController",
+        "method": "submissions"
+      },
+      "user_input": "params[:response_path]",
+      "confidence": "High",
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "388897bd87f428cabfab4d0b171a75345c8ec4a88c6064d42d685c850edb3801",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/registration.rb",
+      "line": 16,
+      "link": "http://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "where(\"#{register_length_finder} >= 12.0\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Registration",
+        "method": "over_12m"
+      },
+      "user_input": "register_length_finder",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "6558c0a089512f08ef1d438b2854548f12c35a6c96a06093a0001fb185682d45",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/dashboards_controller.rb",
+      "line": 4,
+      "link": "http://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(activity_root(params[:activity]))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "DashboardsController",
+        "method": "show"
+      },
+      "user_input": "params[:activity]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "79760aef1d492d6605b296ccb0b96a5ed86189739027f594e11cb30bc09a8981",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/registration.rb",
+      "line": 15,
+      "link": "http://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "where(\"#{register_length_finder} < 12.0\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Registration",
+        "method": "under_12m"
+      },
+      "user_input": "register_length_finder",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "a4fb07142600a80f329a996243ecaae403a6d4497924e560747838df7ac1d17e",
+      "check_name": "MassAssignment",
+      "message": "Parameters should be whitelisted for mass assignment",
+      "file": "app/controllers/admin/reports_controller.rb",
+      "line": 23,
+      "link": "http://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:filter).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Admin::ReportsController",
+        "method": "filter_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "b785c13d38942bca08151ef4042c3bffa4d05926f2b6cb0c3018112cacfba392",
+      "check_name": "MassAssignment",
+      "message": "Parameters should be whitelisted for mass assignment",
+      "file": "app/controllers/api/v1/submissions_controller.rb",
+      "line": 21,
+      "link": "http://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(\"data\").require(:attributes).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Api::V1::SubmissionsController",
+        "method": "create_submission_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "cb550f7de68b9e9c05cf196a470ab9c0e43f46aa80e7dc2752940bf802621ad6",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/controllers/search_controller.rb",
+      "line": 18,
+      "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => params[:response_path], {})",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SearchController",
+        "method": "vessels"
+      },
+      "user_input": "params[:response_path]",
+      "confidence": "High",
+      "note": ""
+    }
+  ],
+  "updated": "2017-10-06 15:30:24 +0100",
+  "brakeman_version": "4.0.1"
+}
