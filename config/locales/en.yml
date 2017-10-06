@@ -81,7 +81,8 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Approve General Enquiry
         manual_override: Approve Manual Override
-        mortgage: Approve Mortgage(s)
+        mortgage: "Approve Mortgage(s): Registration"
+        mortgage_other: "Approve Mortgage(s): Other"
         issue_csr: Issue CSR
       modal-title:
         new_registration: Register Vessel and Issue Certificate of Registry
@@ -98,7 +99,8 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Complete General Enquiry
         manual_override: Manual Override
-        mortgage: Mortgage(s)
+        mortgage: "Mortgage(s): Registration"
+        mortgage_other: "Mortgage(s): Other"
         issue_csr: CSR
       modal-btn:
         new_registration: Register Vessel
@@ -115,7 +117,8 @@ en:
         duplicate_certificate: Issue Duplicate Certificate
         enquiry: Approve General Enquiry
         manual_override: Approve
-        mortgage: Approve Mortgage(s)
+        mortgage: "Approve Mortgage(s): Registration"
+        mortgage_other: "Approve Mortgage(s): Other"
         issue_csr: Approve & Issue CSR
       confirmation:
         new_registration: The applicant has been notified via email that their vessel is now registered on %{part} of the UK Ship Register.
@@ -134,3 +137,5 @@ en:
         manual_override: The Manual Override has been processed.
         termination_notice: The termination notice has been issued, the vessel has been frozen and the registration will be closed in 7 days.
         issue_csr: The CSR has been issued.
+        mortgage: The applicant has been notified via email that their mortgage update has been approved.
+        mortgage_other: The applicant has been notified via email that their mortgage update has been approved.

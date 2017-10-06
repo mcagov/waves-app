@@ -78,9 +78,12 @@ class Activity
       when :part_2
         [:issue_csr]
       when :part_3
-        [:issue_csr, :mortgage, :provisional, :simple_to_full]
+        [:issue_csr, :mortgage, :mortgage_other, :provisional, :simple_to_full]
       when :part_4
-        [:provisional, :re_registration, :mortgage, :simple_to_full]
+        [
+          :provisional, :re_registration, :mortgage,
+          :mortgage_other, :simple_to_full
+        ]
       end
     default_tasks.select { |t| !excluded_tasks.include?(t[1]) }
   end
