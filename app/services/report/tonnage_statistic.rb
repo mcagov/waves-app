@@ -4,7 +4,7 @@ class Report::TonnageStatistic < Report
   end
 
   def headings
-    ["Fleet", "Number of Vessels", "Gross Tonnage", "Average Age of Vessels"]
+    ["Fleet", "Number of Vessels", "Average Age of Vessels", "Gross Tonnage"]
   end
 
   def results
