@@ -2,6 +2,13 @@ module Submission::Reporting
   class << self
     # rubocop:disable all
     def included(base)
+      # this association should only be used for reporting
+      # ordinarily we scope a submission's registered_vessel
+      # to the registry part
+      base.belongs_to :reportable_registered_vessel,
+          class_name: "Register::Vessel",
+          foreign_key: :registered_vessel_id
+
       base.scope :flag_in, -> { where(task: Task.flag_in) }
       base.scope :flag_out, -> { where(task:  Task.flag_out) }
 
