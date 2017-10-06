@@ -16,6 +16,8 @@ class Report::VesselAge < Report
   end
 
   def results
+    return [] if @part.blank?
+
     load_results.all.map do |result|
       data_elements =
         [

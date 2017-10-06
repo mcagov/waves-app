@@ -17,8 +17,8 @@ describe "User views Vessel Age reports", js: true do
   end
 
   scenario "in general" do
-    expect_filter_fields(true)
-    expect_link_to_export_or_print(true)
+    select("Part III", from: "Part of Register")
+    click_on("Apply Filter")
 
     within("#results") do
       col = find_all("tr td")
