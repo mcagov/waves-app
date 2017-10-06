@@ -22,6 +22,7 @@ class Payment::FinancePayment < ApplicationRecord
     ["BACS", :bacs],
     ["CHQ", :cheque],
     ["CASH", :cash],
+    ["CLIENT ACCOUNT", :client_account],
     ["CHAPS", :chaps],
     ["PO", :postal_order],
     ["CARD", :card],
