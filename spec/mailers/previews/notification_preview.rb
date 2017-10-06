@@ -89,6 +89,12 @@ class EmailTemplatesPreview < ActionMailer::Preview
     )
   end
 
+  def application_approval_mortgage_other
+    NotificationMailer.application_approval(
+      default_params, "SRXXXXXX", "Officer Bob", :mortgage_other, "MV Bob"
+    )
+  end
+
   def carving_and_marking_note_under_15m
     NotificationMailer.carving_and_marking_note(
       default_params, 14.9, "Officer Bob", :pdf_attachment)
