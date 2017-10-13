@@ -74,6 +74,10 @@ class Report
     "Date Range"
   end
 
+  def first_sheet_title
+    title
+  end
+
   def second_sheet_title; end
 
   def third_sheet_title; end

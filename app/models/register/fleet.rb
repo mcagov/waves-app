@@ -1,4 +1,6 @@
 class Register::Fleet
+  attr_reader :key
+
   def initialize(key)
     @key = key.to_sym
   end
