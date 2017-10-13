@@ -154,7 +154,7 @@ module Register
     end
 
     def pln
-      "#{port_code}#{port_no}"
+      "#{port_code} #{port_no}"
     end
 
     private
