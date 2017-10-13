@@ -81,7 +81,7 @@ class Report::HmrcReport < Report
         vessel.breadth,
         vessel.gross_tonnage,
         vessel.register_tonnage,
-        "Engine.total_mcep_for(vessel)",
+        Engine.total_mcep_for(vessel),
         vessel.hull_construction_material,
         vessel.year_of_build,
         vessel.place_of_build,
