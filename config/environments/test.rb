@@ -49,4 +49,5 @@ Rails.application.configure do
     "#{Rails.root}/spec/test_files/:class/:id_partition/:style.:extension"
 
   config.action_mailer.default_url_options = { host: "http://test.local" }
+  config.active_job.queue_adapter = :inline
 end
