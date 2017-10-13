@@ -3,12 +3,10 @@ class Admin::ReportsController < InternalPagesController
 
   def show
     @filter = filter_params || default_filter_params
-    @filter[:page] = params[:page] || 1
-    @report = Report.build(params[:id], @filter)
 
     respond_to do |format|
-      format.html
-      format.xls
+      format.html { html_report }
+      format.xls { xls_report }
     end
   end
 
@@ -25,5 +23,21 @@ class Admin::ReportsController < InternalPagesController
 
   def default_filter_params
     { vessel: { name: { value: "", result_displayed: "1" } } }
+  end
+
+  def build_report
+    @report = Report.build(params[:id], @filter)
+  end
+
+  def html_report
+    @filter[:page] = params[:page] || 1
+    @filter[:per_page] = 50
+    build_report
+  end
+
+  def xls_report
+    @filter[:page] = 1
+    @filter[:per_page] = 10000
+    build_report
   end
 end
