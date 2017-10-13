@@ -8,6 +8,10 @@ class Report::VesselAgeByType < Report
     "Vessel Age: #{@vessel_type}"
   end
 
+  def first_sheet_title
+    "Vessel Age"
+  end
+
   def headings
     [
       "Vessel Name", "Part", "IMO No", "Official No", "Age", "Gross Tonnage"

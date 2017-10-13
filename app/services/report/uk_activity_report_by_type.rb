@@ -9,6 +9,10 @@ class Report::UkActivityReportByType < Report
     "#{@report_type[0]} (#{@date_start} to #{@date_end})"
   end
 
+  def first_sheet_title
+    "UK Activity"
+  end
+
   def headings
     [
       "Vessel Name", "IMO Number", "Official No", "Type", "Length",

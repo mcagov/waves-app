@@ -1,5 +1,9 @@
 class Report::IhsReport < Report
   def title
+    "IHS/Fairplay"
+  end
+
+  def first_sheet_title
     "IHS Fairplay"
   end
 
