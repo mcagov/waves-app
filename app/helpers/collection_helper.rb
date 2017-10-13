@@ -82,8 +82,10 @@ module CollectionHelper
     ]
   end
 
-  def classification_society_collection
-    WavesUtilities::ClassificationSociety.all
+  def classification_society_collection(classification_society = nil)
+    collection = WavesUtilities::ClassificationSociety.all
+    collection << classification_society unless classification_society.blank?
+    collection.uniq
   end
 
   def closure_reasons_collection

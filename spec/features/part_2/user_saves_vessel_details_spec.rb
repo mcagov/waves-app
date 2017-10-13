@@ -8,7 +8,6 @@ describe "User save vessel details", js: :true do
     fill_in("Name of Builder", with: "BOB BUILDS STUFF")
     fill_in("Year of Build", with: "1984")
     select("Bureau Veritas", from: "Classification Society")
-    select("ClassNK", from: "Any Other Classification Society")
 
     click_on("Save Details")
 

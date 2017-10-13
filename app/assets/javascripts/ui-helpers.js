@@ -8,7 +8,7 @@ $(document).ready(function() {
     minimumResultsForSearch: 10, placeholder: "", allowClear: true
   });
 
-  $('#submission_vessel_propulsion_system').select2({
+  $('.select2_with_tags').select2({
     tags: true
   });
 
