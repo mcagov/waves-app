@@ -197,7 +197,8 @@
         .col-md-2{ class: vessel_change_css(:propulsion_system) }
           = vessel_f.input :propulsion_system,
             label: vessel_change_label(:propulsion_system),
-            collection: propulsion_system_collection(vessel_f.object.propulsion_system.to_s)
+            collection: propulsion_system_collection(vessel_f.object.propulsion_system.to_s),
+            input_html: { class: "select2_with_tags" }
 
       %hr
       %h2 Construction
@@ -248,15 +249,15 @@
           = vessel_f.input :classification_society,
             label: vessel_change_label(:classification_society),
             as: :select,
-            collection: classification_society_collection,
-            input_html: { class: "select2 select2_single" }
+            collection: classification_society_collection(vessel_f.object.classification_society.to_s),
+            input_html: { class: "select2_with_tags" }
 
         .col-md-2{ class: vessel_change_css(:classification_society_other) }
           = vessel_f.input :classification_society_other,
             label: vessel_change_label(:classification_society_other),
             as: :select,
-            collection: classification_society_collection,
-            input_html: { class: "select2 select2_single" }
+            collection: classification_society_collection(vessel_f.object.classification_society_other),
+            input_html: { class: "select2_with_tags" }
 
         - if display_vessel_object?(:entry_into_service_at, @submission)
           .service_description_fields
@@ -282,40 +283,40 @@
               = vessel_f.input :smc_issuing_authority,
                 label: vessel_change_label(:smc_issuing_authority),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.smc_issuing_authority),
+                input_html: { class: "select2_with_tags" }
 
             .col-md-2{ class: vessel_change_css(:smc_auditor) }
               = vessel_f.input :smc_auditor,
                 label: vessel_change_label(:smc_auditor),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.smc_auditor),
+                input_html: { class: "select2_with_tags" }
 
             .col-md-2{ class: vessel_change_css(:issc_issuing_authority) }
               = vessel_f.input :issc_issuing_authority,
                 label: vessel_change_label(:issc_issuing_authority),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.issc_issuing_authority),
+                input_html: { class: "select2_with_tags" }
 
             .col-md-2{ class: vessel_change_css(:issc_auditor) }
               = vessel_f.input :issc_auditor,
                 label: vessel_change_label(:issc_auditor),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.issc_auditor),
+                input_html: { class: "select2_with_tags" }
 
             .col-md-2{ class: vessel_change_css(:doc_issuing_authority) }
               = vessel_f.input :doc_issuing_authority,
                 label: vessel_change_label(:doc_issuing_authority),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.doc_issuing_authority),
+                input_html: { class: "select2_with_tags" }
 
             .col-md-2{ class: vessel_change_css(:doc_auditor) }
               = vessel_f.input :doc_auditor,
                 label: vessel_change_label(:doc_auditor),
                 as: :select,
-                collection: classification_society_collection,
-                input_html: { class: "select2 select2_single" }
+                collection: classification_society_collection(vessel_f.object.doc_auditor),
+                input_html: { class: "select2_with_tags" }
