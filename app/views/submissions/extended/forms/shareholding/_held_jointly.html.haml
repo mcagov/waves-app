@@ -30,6 +30,14 @@
               Add Owner to Group
 
 
+
+        %td.shares_held
+          - if @readonly
+            = declaration_group.shares_held
+          - else
+            = link_to "#shares_held_#{declaration_group.id}",
+              data: { target: "#shares_held_#{declaration_group.id}" , toggle: "modal" } do
+              = declaration_group.shares_held
             .modal.fade{id: "shares_held_#{declaration_group.id}", role: "dialog", tabindex: "-1"}
               .modal-dialog.modal-sm
                 = simple_form_for declaration_group,
@@ -46,13 +54,6 @@
                       = button_tag type: 'submit',
                         class: "btn btn-primary btn-sm pull-right" do
                         Save
-        %td.shares_held
-          - if @readonly
-            = declaration_group.shares_held
-          - else
-            = link_to "#shares_held_#{declaration_group.id}",
-              data: { target: "#shares_held_#{declaration_group.id}" , toggle: "modal" } do
-              = declaration_group.shares_held
 
 
 
