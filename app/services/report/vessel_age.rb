@@ -3,6 +3,10 @@ class Report::VesselAge < Report
     "Vessel Age"
   end
 
+  def xls_title
+    "Vessel Age: #{Date.today}"
+  end
+
   def sub_report
     :vessel_age_by_type
   end
