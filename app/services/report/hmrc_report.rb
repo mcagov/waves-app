@@ -43,7 +43,8 @@ class Report::HmrcReport < Report
       "MCEP", "Construction material", "Year of build", "Place of build",
       "Last task type performed for the vessel",
       "Date of last task completed", "Type of fishing vessel",
-      "Owner name and address"
+      "Correspondent", "Owner name and address", "Shares Held Outright",
+      "Shares Held Jointly"
     ]
   end
 
@@ -53,10 +54,17 @@ class Report::HmrcReport < Report
     Register::Vessel
       .in_part(:part_2)
       .joins(:current_registration)
-      .includes([:owners, :engines, :latest_completed_submission])
+      .includes(eager_includes)
       .where("vessels.frozen_at is null")
       .where("registrations.closed_at is null")
       .where("registrations.registered_until > ?", Date.today)
+  end
+
+  def eager_includes
+    [
+      :customers, :owners, :engines, :latest_completed_submission,
+      :shareholder_groups
+    ]
   end
 
   def build_results(vessels)
@@ -88,7 +96,10 @@ class Report::HmrcReport < Report
         task_description,
         submission.try(:completed_at),
         vessel.vessel_type,
+        vessel.correspondent.try(:inline_name_and_address),
         vessel.owners.map(&:inline_name_and_address).join("; "),
+        vessel.owners.map(&:shares_held).join("; "),
+        vessel.shareholder_groups.map(&:shares_held).join("; "),
       ])
   end
   # rubocop:enable all

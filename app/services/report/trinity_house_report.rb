@@ -36,6 +36,7 @@ class Report::TrinityHouseReport < Report
       "Official number", "Port of registry", "Current registration status",
       "Task type", "Vessel Name", "Registered length",
       "Correspondent's name'", "Owner's name and address",
+      "Shares Held Outright", "Shares Held Jointly",
       "Date of registry", "Date of closure", "Reason for closure"
     ]
   end
@@ -44,7 +45,7 @@ class Report::TrinityHouseReport < Report
 
   def build_results(part)
     Submission
-      .includes(:registration, :declarations)
+      .includes(:registration, :declarations, :declaration_groups)
       .in_part(part)
       .completed
       .where("completed_at >= ?", @date_start)
@@ -69,6 +70,8 @@ class Report::TrinityHouseReport < Report
         vessel.register_length,
         submission.correspondent.try(:name),
         submission.owners.map(&:inline_name_and_address).join("; "),
+        shares_held_outright(submission),
+        shares_held_jointly(submission),
         registration.created_at,
         registration.closed_at,
         closure_reason(registration),
@@ -78,5 +81,15 @@ class Report::TrinityHouseReport < Report
 
   def closure_reason(registration)
     return registration.description if registration.try(:closed_at?)
+  end
+
+  def shares_held_outright(submission)
+    return "" if Policies::Definitions.part_3?(submission)
+    submission.declarations.map(&:shares_held).join("; ")
+  end
+
+  def shares_held_jointly(submission)
+    return "" if Policies::Definitions.part_3?(submission)
+    submission.declaration_groups.map(&:shares_held).join("; ")
   end
 end

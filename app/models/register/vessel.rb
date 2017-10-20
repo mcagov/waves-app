@@ -104,7 +104,7 @@ module Register
     before_validation :build_reg_no, on: :create
 
     def correspondent
-      Customer.first
+      customers.where(correspondent: true).first || customers.first
     end
 
     def build_reg_no
