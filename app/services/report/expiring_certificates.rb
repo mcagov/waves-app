@@ -17,9 +17,8 @@ class Report::ExpiringCertificates < Report
     "Expiry Date"
   end
 
-  def results # rubocop:disable Metrics/MethodLength
-    @pagination_collection = certificates
-    @pagination_collection.map do |certificate|
+  def results
+    certificates.map do |certificate|
       vessel = certificate.vessel
       Result.new(
         [
@@ -36,7 +35,7 @@ class Report::ExpiringCertificates < Report
     query = filter_by_part(query)
     query = filter_by_note_expires_at(query)
     query = filter_by_document_type(query)
-    paginate(query.all)
+    query
   end
 
   class VesselCertificate < ApplicationRecord

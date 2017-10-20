@@ -18,25 +18,29 @@ class Report::VesselRegistrationStatus < Report
     "Expiration Date"
   end
 
-  def results # rubocop:disable Metrics/MethodLength
+  def results
     @pagination_collection = vessels
     @pagination_collection.map do |vessel|
-      Result.new(
-        [
-          RenderAsLinkToVessel.new(vessel, :name),
-          Activity.new(vessel.part),
-          vessel.reg_no, vessel.radio_call_sign,
-          vessel.registered_until,
-          RenderAsRegistrationStatus.new(vessel.registration_status)
-        ])
+      assign_result(vessel)
     end
   end
 
   def vessels
-    query = Register::Vessel.joins(:current_registration)
+    query = Register::Vessel
+    query = query.includes(:registrations, :current_registration)
     query = filter_by_part(query)
-    query = filter_by_registered_until(query)
-    query = query.includes(:current_registration).order(:name)
+    query = query.order(:name)
     paginate(query)
+  end
+
+  def assign_result(vessel)
+    Result.new(
+      [
+        RenderAsLinkToVessel.new(vessel, :name),
+        Activity.new(vessel.part),
+        vessel.reg_no, vessel.radio_call_sign,
+        vessel.registered_until,
+        RenderAsRegistrationStatus.new(vessel.registration_status)
+      ])
   end
 end
