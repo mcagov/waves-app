@@ -9,7 +9,7 @@
         = " by #{declaration.completed_by}"
       - else
         online
-    (#{ declaration.completed_at })
+    (#{ declaration.completed_at.to_s(:date_time) })
 
   - else
     = simple_form_for declaration,
