@@ -70,8 +70,8 @@ class Report::TrinityHouseReport < Report
         vessel.register_length,
         submission.correspondent.try(:name),
         submission.owners.map(&:inline_name_and_address).join("; "),
-        submission.declarations.map(&:shares_held).join("; "),
-        submission.declaration_groups.map(&:shares_held).join("; "),
+        shares_held_outright(submission),
+        shares_held_jointly(submission),
         registration.created_at,
         registration.closed_at,
         closure_reason(registration),
@@ -81,5 +81,15 @@ class Report::TrinityHouseReport < Report
 
   def closure_reason(registration)
     return registration.description if registration.try(:closed_at?)
+  end
+
+  def shares_held_outright(submission)
+    return "" if Policies::Definitions.part_3?(submission)
+    submission.declarations.map(&:shares_held).join("; ")
+  end
+
+  def shares_held_jointly(submission)
+    return "" if Policies::Definitions.part_3?(submission)
+    submission.declaration_groups.map(&:shares_held).join("; ")
   end
 end
