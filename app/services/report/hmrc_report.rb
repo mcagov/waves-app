@@ -43,7 +43,7 @@ class Report::HmrcReport < Report
       "MCEP", "Construction material", "Year of build", "Place of build",
       "Last task type performed for the vessel",
       "Date of last task completed", "Type of fishing vessel",
-      "Correspondent", "Owner name and address", " Shares Held Outright",
+      "Correspondent", "Owner name and address", "Shares Held Outright",
       "Shares Held Jointly"
     ]
   end
