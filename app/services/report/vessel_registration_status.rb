@@ -27,8 +27,10 @@ class Report::VesselRegistrationStatus < Report
 
   def vessels
     query = Register::Vessel
-    query = query.includes(:registrations, :current_registration)
     query = filter_by_part(query)
+    query = filter_by_registered_until(query)
+    query = query.includes(:current_registration)
+    query = query.references(:current_registration)
     query = query.order(:name)
     paginate(query)
   end
