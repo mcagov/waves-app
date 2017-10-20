@@ -43,7 +43,7 @@ class Report::HmrcReport < Report
       "MCEP", "Construction material", "Year of build", "Place of build",
       "Last task type performed for the vessel",
       "Date of last task completed", "Type of fishing vessel",
-      "Owner name and address"
+      "Correspondent", "Owner name and address"
     ]
   end
 
@@ -88,6 +88,7 @@ class Report::HmrcReport < Report
         task_description,
         submission.try(:completed_at),
         vessel.vessel_type,
+        vessel.correspondent.try(:inline_name_and_address),
         vessel.owners.map(&:inline_name_and_address).join("; "),
       ])
   end
