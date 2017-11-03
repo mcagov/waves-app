@@ -27,22 +27,22 @@ class Report::IhsReport < Report
   end
 
   def headings # rubocop:disable Metrics/MethodLength
-    [
-      "IMO number", "Vessel name", "GT", "MMSI", "Port of Registry",
-      "Official Number", "Callsign", "Register tonnage", "Net Tonnage",
-      "Register  Net Tonnage", "Deadweight", "Year of build", "Month of build",
-      "Builder", "Country of build", "Ship Type.", "Ship Type Admin.",
-      "Owner's IMO No.",  "Registered owner's name",
-      "Registered owner's address", "Registered owner's country",
-      "Registered owner date founded.", "IMO DOC Company Number",
-      "IMO Company DOC auditor", "DOC Company name", "DOC Company Country",
-      "DOC Company registration", "DOC Company founded date",
-      "DOC Company full address", "DOC Company Postcode", "DOC Company State",
-      "DOC Company Town", "DOC date issued", "DOC expiry date.",
-      "SMC Auditor", " SMC date issued", "SMC Expiry date", "Parallel register",
-      "Bareboat Charterer", "Flag status", "Ship status",
-      "Date ship entered register."
-    ]
+    %w(
+      Source IMO_Number ShipName GrossTonnage69Convention MMSI
+      PortOfRegistry OfficialNumber CallSign GrossTonnageFlagConvention
+      NetTonnage69Convention NetTonnageFlagConvention DeadWeight
+      YearOfBuild MonthOfBuild Shipbuilder CountryOfShipbuilderDecode
+      LRFShipTypeDecode AdminShipTypeDescription IMO_RegOwnerNumber
+      RegOwnerNameAdminNamestyle RegOwnerNameLRFNamestyle
+      RegOwnerRegisteredAddressAdmin RegOwnerCountryOfRegistrationDecode
+      RegOwnerDateFounded IMO_DOC_CompanyNumber DOC_Auditor
+      DOC_Company_Name DOC_CompanyCountryDomicileDecode
+      DOC_CompanyCountryRegistrationDecode DOC_CompanyFoundedDate
+      DOC_CompanyFullAddress DOC_CompanyPostCode DOC_CompanyState
+      DOC_CompanyTown DOC_DateIssued DOC_ExpiryDate SMC_Auditor
+      SMC_DateIssued SMC_ExpiryDate ParallelRegister BareBoat_Charterer
+      FlagStatusDecode ShipStatusDecode DateShipEnteredRegister
+    )
   end
 
   private
@@ -55,10 +55,12 @@ class Report::IhsReport < Report
 
    # rubocop:disable all
   def assign_result(vessel)
-    owner = vessel.owners.first || Owner.new
+    owner = vessel.owners.first || Register::Owner.new
     manager = vessel.managers.first || Manager.new
+    corporate_owner = vessel.owners.corporate.first || Register::Owner.new
     Result.new(
       [
+        "GBI",
         vessel.imo_number,
         vessel.name,
         vessel.gross_tonnage,
@@ -66,10 +68,10 @@ class Report::IhsReport < Report
         WavesUtilities::Port.new(vessel.port_code).name,
         vessel.reg_no,
         vessel.radio_call_sign,
-        vessel.register_tonnage,
+        "", # GrossTonnageFlagConvention
         vessel.net_tonnage,
-        "", # Register  Net Tonnage
-        "", # Deadweight
+        "", # NetTonnageFlagConvention
+        "", # DeadWeight
         vessel.year_of_build,
         WavesDate.new(vessel.keel_laying_date).month_name,
         vessel.name_of_builder,
@@ -78,30 +80,45 @@ class Report::IhsReport < Report
         vessel.vessel_type,
         owner.imo_number,
         owner.name,
+        "", # RegOwnerNameLRFNamestyle
         owner.inline_address,
-        owner.country,
-        owner.date_of_incorporation,
+        corporate_owner.country,
+        corporate_owner.date_of_incorporation,
         manager.imo_number,
         vessel.doc_auditor,
         manager.name,
         manager.country,
-        "", # DOC Company registration
-        "", # DOC Company founded date
+        "", # DOC_CompanyCountryRegistrationDecode
+        "", # DOC_CompanyFoundedDate
         manager.inline_address,
         manager.postcode,
-        "", # DOC Company State
-        "", # DOC Company Town
-        "", # DOC date issued
-        "", # DOC expiry date.
+        manager.country,
+        manager.town,
+        "", # DOC_DateIssued
+        "", # DOC_ExpiryDate
         vessel.smc_auditor,
-        "", # SMC date issued
-        "", # SMC Expiry date
+        "", # SMC_DateIssued
+        "", # SMC_ExpiryDate
         vessel.part.to_sym == :part_4 ? "YES" : "NO",
         vessel.charter_parties.map(&:name).join("; "),
-        "", # Flag status
-        "", # Ship status
+        flag_status_decode(vessel), # FlagStatusDecode
+        "", # ShipStatusDecode
         vessel.first_registration.try(:registered_at),
       ])
   end
   # rubocop:enable all
+
+  def flag_status_decode(vessel)
+    reg_status = vessel.registration_status.build_key
+
+    if reg_status == :closed
+      "Deleted" if vessel.current_registration.closed_at > 6.months.ago
+    elsif Policies::Definitions.part_4?(vessel)
+      "Parallel IN"
+    elsif vessel.current_registration.try(:provisional?)
+      "Provisional Register"
+    elsif vessel.registration_status == :registered
+      "Permanent Register"
+    end
+  end
 end
