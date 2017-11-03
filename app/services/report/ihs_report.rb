@@ -17,7 +17,9 @@ class Report::IhsReport < Report
         .joins(:current_registration)
         .includes([:owners, :managers, charterers: [:charter_parties]])
         .where("vessels.frozen_at is null")
-        .where("registrations.closed_at is null")
+        .where("
+          (registrations.closed_at is null OR
+          registrations.closed_at > ?)", 6.months.ago)
         .where("registrations.registered_until > ?", Date.today)
         .where(
           "(part = 'part_1') OR "\
