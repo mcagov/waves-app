@@ -13,4 +13,12 @@ namespace :waves do
   task unclaim_claimed_submissions: :environment do
     Submission.assigned.map(&:unclaimed!)
   end
+
+  task assign_vessel_current_registration: :environment do
+    Register::Vessel.all.each do |registered_vessel|
+      registered_vessel
+        .update_columns(
+          current_registration_id: registered_vessel.registrations.first.try(:id))
+    end
+  end
 end
