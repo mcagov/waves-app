@@ -3,6 +3,10 @@ class Report::IhsReport < Report
     "IHS/Fairplay"
   end
 
+  def xls_title
+    :hidden
+  end
+
   def first_sheet_title
     "IHS Fairplay"
   end
