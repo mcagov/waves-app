@@ -1,4 +1,9 @@
 class Report::VesselRegistrationStatus < Report
+  def initialize(filters = {})
+    super
+    @registration_status = (@filters[:registration_status] || :all).to_sym
+  end
+
   def title
     "Vessel Registration Status"
   end
@@ -10,7 +15,6 @@ class Report::VesselRegistrationStatus < Report
   def headings
     [
       :vessel_name, :part, :official_no, :radio_call_sign,
-      :port, "Date of Closure & Reason", :mortgage_registered,
       :expiration_date, :registration_status
     ]
   end
@@ -19,44 +23,52 @@ class Report::VesselRegistrationStatus < Report
     "Expiration Date"
   end
 
-  def results
+  def results # rubocop:disable Metrics/MethodLength
     @pagination_collection = vessels
     @pagination_collection.map do |vessel|
-      assign_result(vessel)
+      Result.new(
+        [
+          RenderAsLinkToVessel.new(vessel, :name),
+          Activity.new(vessel.part),
+          vessel.reg_no, vessel.radio_call_sign,
+          vessel.registered_until,
+          RenderAsRegistrationStatus.new(vessel.registration_status)
+        ])
     end
   end
 
   def vessels
-    query = Register::Vessel
+    query = Register::Vessel.joins(:current_registration)
     query = filter_by_part(query)
     query = filter_by_registered_until(query)
-    query = query.includes(:current_registration, :mortgages)
-    query = query.references(:current_registration)
-    query = query.order(:name)
-    paginate(query)
+    query = filter_by_registration_status(query)
+    paginate(query.order(:name))
   end
 
-  def assign_result(vessel) # rubocop:disable Metrics/MethodLength
-    Result.new(
-      [
-        RenderAsLinkToVessel.new(vessel, :name),
-        Activity.new(vessel.part),
-        vessel.reg_no, vessel.radio_call_sign,
-        WavesUtilities::Port.new(vessel.port_code).name,
-        date_of_closure_and_reason(vessel.current_registration),
-        mortgage_registered?(vessel),
-        vessel.registered_until,
-        RenderAsRegistrationStatus.new(vessel.registration_status)
-      ])
-  end
+  private
 
-  def date_of_closure_and_reason(registration)
-    if registration && registration.closed_at?
-      "#{registration.closed_at}: #{registration.description}"
+   # rubocop:disable all
+  def filter_by_registration_status(query)
+    return query if @registration_status == :all
+
+    if @registration_status == :frozen
+      return query.where("vessels.frozen_at IS NOT NULL")
+    else
+      query = query.where("vessels.frozen_at IS NULL")
+    end
+
+    if @registration_status == :closed
+      return query.where("registrations.closed_at IS NOT NULL")
+    else
+      query = query.where("registrations.closed_at IS NULL")
+    end
+
+    if @registration_status == :expired
+      query.where("date(registrations.registered_until) < ?", Date.today)
+    else
+      # registered
+      query.where("date(registrations.registered_until) >= ?", Date.today)
     end
   end
-
-  def mortgage_registered?(vessel)
-    vessel.mortgages.not_discharged.empty? ? "N" : "Y"
-  end
+  # rubocop:enable all
 end
