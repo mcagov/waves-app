@@ -10,7 +10,7 @@ describe Builders::PrintJobBuilder do
     let(:print_jobs) { PrintJob.all }
 
     context "with valid params" do
-      let(:printable_item) { create(:registration) }
+      let(:printable_item) { create(:registered_vessel).current_registration }
       let(:submission) { create(:submission) }
 
       it "builds two print jobs" do

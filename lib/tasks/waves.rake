@@ -18,7 +18,8 @@ namespace :waves do
     Register::Vessel.all.each do |registered_vessel|
       registered_vessel
         .update_columns(
-          current_registration_id: registered_vessel.registrations.first.try(:id))
+          current_registration_id:
+            registered_vessel.registrations.first.try(:id))
     end
   end
 end
