@@ -6,8 +6,8 @@ class RegistrationStatus
 
   def build_key
     return :frozen if @vessel.frozen_at.present?
-    return :pending unless @vessel.current_registration
-    return :closed if @vessel.current_registration.closed_at?
+    return :pending unless @vessel.registrations.first
+    return :closed if @vessel.registrations.first.try(:closed_at?)
     return :expired if Time.now.to_i > @vessel.registered_until.to_i
     :registered
   end
@@ -47,7 +47,7 @@ class RegistrationStatus
   private
 
   def registered_description
-    if @vessel.current_registration.provisional?
+    if @vessel.registrations.first.try(:provisional?)
       "Registered Provisionally"
     else
       "Registered"

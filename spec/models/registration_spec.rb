@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Registration do
   context "#delivery_name_and_address" do
-    let(:registration) { create(:registration) }
+    let(:registration) { create(:registered_vessel).current_registration }
     subject { registration.reload.delivery_name_and_address }
 
     context "with a submission" do
@@ -21,7 +21,7 @@ describe Registration do
   end
 
   context "#part" do
-    let(:registration) { create(:registration, registry_info: registry_info) }
+    let(:registration) { build(:registration, registry_info: registry_info) }
 
     context "when the registry_info is not defined (edge case)" do
       let(:registry_info) { nil }
@@ -39,7 +39,7 @@ describe Registration do
   end
 
   context "#prints_duplicate_certificate?" do
-    let!(:registration) { create(:registration) }
+    let!(:registration) { create(:registered_vessel).current_registration }
 
     before do
       submission = double(:submission, task: task)

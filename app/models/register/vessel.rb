@@ -24,10 +24,9 @@ module Register
 
     has_many :shareholder_groups, dependent: :destroy
 
+    belongs_to :current_registration, class_name: "Registration"
+
     has_many :registrations, -> { order("created_at desc") }
-    has_one :current_registration,
-            -> { order("created_at desc").limit(1) },
-            class_name: "Registration"
     has_one :first_registration,
             -> { order("registered_at asc").limit(1) },
             class_name: "Registration"

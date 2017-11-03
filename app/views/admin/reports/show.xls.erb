@@ -6,11 +6,13 @@
   xmlns:html="http://www.w3.org/TR/REC-html40">
   <Worksheet ss:Name="<%= @report.first_sheet_title %>">
     <Table>
-      <Row>
-        <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
-          <Data ss:Type="String"><%= @report.xls_title %></Data>
-        </Cell>
-      </Row>
+      <% unless @report.xls_title == :hidden %>
+        <Row>
+          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+            <Data ss:Type="String"><%= @report.xls_title %></Data>
+          </Cell>
+        </Row>
+      <% end %>
       <Row>
         <% @report.headings.each do |heading| %>
           <Cell>

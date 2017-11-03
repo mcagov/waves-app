@@ -12,16 +12,14 @@ describe Report::VesselRegistrationStatus do
 
     it "has some filter_fields" do
       expect(subject.filter_fields)
-        .to eq([:filter_part, :filter_date_range])
+        .to eq([:filter_part, :filter_registration_status, :filter_date_range])
     end
 
     it "has some headings" do
       headings =
         [
-          :vessel_name, :part, :official_no, :radio_call_sign, :port,
-          "Date of Closure & Reason",
-          :mortgage_registered, :expiration_date, :registration_status
-        ]
+          :vessel_name, :part, :official_no, :radio_call_sign,
+          :expiration_date, :registration_status]
       expect(subject.headings).to eq(headings)
     end
 

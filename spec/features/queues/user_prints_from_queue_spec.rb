@@ -3,18 +3,14 @@ require "rails_helper"
 describe "User prints from queue", type: :feature, js: true do
   before do
     @template = :registration_certificate
-
-    registration =
-      create(:registration,
-             registry_info: create(:registered_vessel).registry_info)
-
+    registration = create(:registered_vessel).current_registration
     create(:print_job, template: @template, printable: registration)
-
-    login_to_part_3
-    visit print_jobs_path(template: @template)
   end
 
   scenario "printing all certificates" do
+    login_to_part_3
+    visit print_jobs_path(template: @template)
+
     expect(page)
       .to have_css("h1", text: "Print Queue: Certificates of Registry")
 
@@ -42,6 +38,9 @@ describe "User prints from queue", type: :feature, js: true do
   end
 
   scenario "printing a single item, re-printing, marking as printed" do
+    login_to_part_3
+    visit print_jobs_path(template: @template)
+
     pdf_window = window_opened_by do
       within("td.certificate") { click_on("Print") }
     end

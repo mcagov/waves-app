@@ -55,7 +55,7 @@ describe Register::Vessel do
 
   context ".registration_status" do
     let!(:vessel) { create(:unregistered_vessel) }
-    subject { vessel.registration_status }
+    subject { vessel.reload.registration_status }
 
     context "with an active registration" do
       before do

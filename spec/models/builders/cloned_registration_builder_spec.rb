@@ -5,10 +5,9 @@ describe Builders::ClonedRegistrationBuilder do
     let!(:registered_vessel) { create(:registered_vessel, name: "NEW NAME") }
 
     let!(:old_registration) do
-      create(:registration,
-             vessel_id: registered_vessel.id,
-             registered_at: 1.year.ago, registered_until: 4.years.from_now,
-             registry_info: { vessel_info: { name: "OLD NAME" } })
+      reg = registered_vessel.current_registration
+      reg.update_column(:registry_info, vessel_info: { name: "OLD NAME" })
+      reg
     end
 
     let!(:submission) do
