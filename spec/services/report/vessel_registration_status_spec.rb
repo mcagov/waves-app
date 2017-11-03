@@ -12,7 +12,7 @@ describe Report::VesselRegistrationStatus do
 
     it "has some filter_fields" do
       expect(subject.filter_fields)
-        .to eq([:filter_part, :filter_date_range])
+        .to eq([:filter_part, :filter_registration_status, :filter_date_range])
     end
 
     it "has some headings" do

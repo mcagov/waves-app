@@ -4,7 +4,7 @@ class Report::VesselRegistrationStatus < Report
   end
 
   def filter_fields
-    [:filter_part, :filter_date_range]
+    [:filter_part, :filter_registration_status, :filter_date_range]
   end
 
   def headings
