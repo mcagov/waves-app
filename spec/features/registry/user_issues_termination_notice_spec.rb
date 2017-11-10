@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User issues a 7 Day Notice of termination", type: :feature, js: true do
+describe "User issues a 7 Day Notice", type: :feature, js: true do
   scenario "in general" do
     visit_registered_vessel
 
