@@ -28,12 +28,17 @@
           = render partial: "vessels/modals/freeze_record", locals: {vessel: vessel}
           %hr
           - if vessel.registration_status != :closed
-            %p= link_to Task.new(:registrar_closure).description, vessel_closure_path(vessel),
+            %p
+              = link_to Task.new(:registrar_closure).description,
+                vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
 
-            %p= link_to Task.new(:section_notice).description, vessel_section_notice_path(vessel),
-                method: :post, class: "btn btn-block btn-danger"
+            %p= link_to Task.new(:section_notice).description, "#",
+                data: { target: "#section-notice", toggle: "modal" },
+                class: "btn btn-block btn-danger"
+            = render partial: "vessels/modals/section_notice", locals: {vessel: vessel}
             %hr
+
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
