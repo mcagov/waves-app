@@ -5,6 +5,8 @@ class Note < ApplicationRecord
   has_many :assets, as: :owner, dependent: :destroy
   accepts_nested_attributes_for :assets
 
+  delegate :part, to: :noteable, allow_nil: true
+
   class << self
     def build(counter = 1)
       # rubocop:disable Style/RedundantSelf

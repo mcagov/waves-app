@@ -22,15 +22,20 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
   end
 
   def process_section_notice_submission
-    @vessel.update_attribute(:frozen_at, Time.now)
-    @vessel.issue_section_notice!
+    @vessel.update_attribute(:frozen_at, Time.now) unless @vessel.frozen?
 
     Task.new(:section_notice).print_job_templates.each do |template|
       PrintJob.create(
-        printable: @vessel.current_registration,
+        printable: build_section_notice,
         part: @submission.part,
         template: template,
         submission: @submission)
     end
+
+    @vessel.issue_section_notice!
+  end
+
+  def build_section_notice
+    Register::SectionNotice.create(noteable: @vessel, actioned_by: current_user)
   end
 end

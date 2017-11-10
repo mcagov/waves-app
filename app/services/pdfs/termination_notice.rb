@@ -1,6 +1,6 @@
 class Pdfs::TerminationNotice
-  def initialize(registrations, mode = :printable)
-    @registrations = Array(registrations)
+  def initialize(termination_notices, mode = :printable)
+    @termination_notices = Array(termination_notices)
     @template = :current
     @mode = mode
     @pdf = Prawn::Document.new(
@@ -8,27 +8,15 @@ class Pdfs::TerminationNotice
   end
 
   def render
-    @registrations.each do |registration|
+    @termination_notices.each do |termination_notice|
       @pdf =
-        Pdfs::TerminationNoticeWriter.new(registration, @pdf).write
+        Pdfs::TerminationNoticeWriter.new(termination_notice, @pdf).write
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render
   end
 
   def filename
-    if @registrations.length == 1
-      single_transcript_filename
-    else
-      "termination-notices.pdf"
-    end
-  end
-
-  protected
-
-  def single_transcript_filename
-    registration = @registrations.first
-    title = registration.vessel_name.parameterize
-    "#{title}-termination-notice.pdf"
+    "termination-notices.pdf"
   end
 end

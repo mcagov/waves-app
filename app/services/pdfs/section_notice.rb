@@ -1,6 +1,6 @@
 class Pdfs::SectionNotice
-  def initialize(registrations, mode = :printable)
-    @registrations = Array(registrations)
+  def initialize(section_notices, mode = :printable)
+    @section_notices = Array(section_notices)
     @template = :current
     @mode = mode
     @pdf = Prawn::Document.new(
@@ -8,27 +8,14 @@ class Pdfs::SectionNotice
   end
 
   def render
-    @registrations.each do |registration|
-      @pdf =
-        Pdfs::SectionNoticeWriter.new(registration, @pdf).write
+    @section_notices.each do |section_notice|
+      @pdf = Pdfs::SectionNoticeWriter.new(section_notice, @pdf).write
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render
   end
 
   def filename
-    if @registrations.length == 1
-      single_transcript_filename
-    else
-      "section-notices.pdf"
-    end
-  end
-
-  protected
-
-  def single_transcript_filename
-    registration = @registrations.first
-    title = registration.vessel_name.parameterize
-    "#{title}-section-notice.pdf"
+    "section-notices.pdf"
   end
 end
