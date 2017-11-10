@@ -36,6 +36,14 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
   end
 
   def build_section_notice
-    Register::SectionNotice.create(noteable: @vessel, actioned_by: current_user)
+    Register::SectionNotice.create(
+      noteable: @vessel,
+      actioned_by: current_user,
+      subject: section_notice_params[:subject],
+      content: section_notice_params[:content])
+  end
+
+  def section_notice_params
+    params.require(:register_section_notice).permit(:subject, :content)
   end
 end

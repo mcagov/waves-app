@@ -27,5 +27,9 @@ class Pdfs::SectionNoticeWriter
   def message
     set_copy_font
     @pdf.draw_text "Section Notice!", at: [l_margin, 510]
+    @pdf.draw_text "Regulation/Reason: #{@section_notice.subject}",
+                   at: [l_margin, 410]
+    @pdf.draw_text "Evidence required: #{@section_notice.content}",
+                   at: [l_margin, 310]
   end
 end

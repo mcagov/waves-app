@@ -9,6 +9,7 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
 
     within("#section-notice") do
       # select("56(1)(b)", from: "Regulation / Reason")
+      fill_in("Regulation/Reason", with: "56(1)(b)")
       fill_in("Evidence required", with: "Some text")
       find(:css, ".submit_issue_section_notice").trigger("click")
     end
@@ -18,6 +19,10 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
     vessel = Register::Vessel.last
     expect(vessel.registration_status).to eq(:frozen)
     expect(vessel).to be_section_notice_issued
+
+    section_notice = Register::SectionNotice.last
+    expect(section_notice.subject).to eq("56(1)(b)")
+    expect(section_notice.content).to eq("Some text")
 
     pdf_window = window_opened_by do
       click_on("Print 30 Day Section Notice")
