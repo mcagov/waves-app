@@ -7,17 +7,17 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
     click_on("Registrar Tools")
     click_on("Registration Closure: 30 Day Section Notice")
 
-    select("56(1)(b)", from: "Regulation / Reason")
-    fill_in("Evidence required", with: "Some text")
-    click_on("Issue 30 Day Section Notice")
+    within("#section-notice") do
+      # select("56(1)(b)", from: "Regulation / Reason")
+      fill_in("Evidence required", with: "Some text")
+      find(:css, ".submit_issue_section_notice").trigger("click")
+    end
 
     expect(page).to have_text("Task Complete")
 
     vessel = Register::Vessel.last
     expect(vessel.registration_status).to eq(:frozen)
-    expect(vessel.current_registration.section_notice_at).to be_present
-
-    expect(vessel.section_notice.reason).to be_present
+    expect(vessel).to be_section_notice_issued
 
     pdf_window = window_opened_by do
       click_on("Print 30 Day Section Notice")

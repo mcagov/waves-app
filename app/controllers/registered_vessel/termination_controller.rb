@@ -23,9 +23,7 @@ class RegisteredVessel::TerminationController < InternalPagesController
 
   def process_termination_submission
     @vessel.update_attribute(:frozen_at, Time.now)
-
-    @vessel.current_registration.update_attribute(
-      :termination_notice_at, Time.now)
+    @vessel.issue_termination_notice!
 
     Task.new(:termination_notice).print_job_templates.each do |template|
       PrintJob.create(

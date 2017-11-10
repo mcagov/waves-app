@@ -1,6 +1,8 @@
 module Register
   class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
+    include Register::TerminationStateMachine
+
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin, :pln]
 
@@ -99,7 +101,6 @@ module Register
     scope :not_frozen, -> { where(frozen_at: nil) }
 
     delegate :registered_until, to: :current_registration, allow_nil: true
-    delegate :section_notice_at, to: :current_registration, allow_nil: true
 
     before_validation :build_reg_no, on: :create
 
