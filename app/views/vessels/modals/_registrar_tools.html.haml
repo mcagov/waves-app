@@ -33,6 +33,7 @@
 
             %p= link_to Task.new(:section_notice).description, vessel_section_notice_path(vessel),
                 method: :post, class: "btn btn-block btn-danger"
+            %hr
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
@@ -40,11 +41,12 @@
               method: :post, class: "btn btn-block btn-success"
 
         - else
+          - if vessel.section_notice_at.present?
+            %p= link_to Task.new(:termination_notice).description, vessel_termination_path(vessel),
+                method: :post, class: "btn btn-block btn-danger"
+            %hr
           %p= link_to "Unfreeze Record", "#",
               data: { target: "#unfreeze-record", toggle: "modal" },
               class: "btn btn-block btn-warning"
           = render partial: "vessels/modals/unfreeze_record", locals: {vessel: vessel}
 
-
-          %p= link_to Task.new(:termination_notice).description, vessel_termination_path(vessel),
-              method: :post, class: "btn btn-block btn-danger"
