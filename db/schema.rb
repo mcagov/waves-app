@@ -516,9 +516,6 @@ ActiveRecord::Schema.define(version: 20171110134803) do
     t.string "doc_auditor"
     t.uuid "current_registration_id", default: -> { "uuid_generate_v4()" }
     t.string "state"
-    t.datetime "section_notice_issued_at"
-    t.datetime "termination_notice_issued_at"
-    t.datetime "terminated_at"
     t.index ["hin"], name: "index_vessels_on_hin"
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number"
     t.index ["name"], name: "index_vessels_on_name"
