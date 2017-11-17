@@ -31,7 +31,7 @@ class Pdfs::SectionNoticeWriter
     msg << @vessel.name
     msg << @vessel.reg_no
     @pdf.text_box "RE: #{msg.compact.join(", ")}",
-                  at: [l_margin, 540],
+                  at: [l_margin, 530],
                   width: 480, height: 100, leading: 8
 
   end
@@ -79,7 +79,7 @@ class Pdfs::SectionNoticeWriter
                   at: [l_margin, 720],
                   width: 480, height: 100, leading: 8
 
-    msg = "The Registrar General of Shipping and Seamen considers that regulation"
+    msg = "\n\nThe Registrar General of Shipping and Seamen considers that regulation"
     msg += " #{@section_notice.regulation_key} of the Merchant Shipping (Registration)"
     msg += " Regulations 1993 (as amended) applies to the vessel named"
     msg += " #{@vessel.name}, Official number #{@vessel.reg_no}."
@@ -93,7 +93,7 @@ class Pdfs::SectionNoticeWriter
     msg += "\n - (b) serve a final notice which will close the vessel’s registration. The closure will take place 7 days after the service of that notice."
     msg += "\n\n"
     msg += "Signed:"
-    msg += "\n\n\n\n"
+    msg += "\n\n\n\n\n\n"
     msg += @section_notice.actioned_by.to_s
     msg += "\nDated: #{@section_notice.updated_at}"
     msg += "\nFor and on behalf of the Registrar General of Shipping and Seamen"
