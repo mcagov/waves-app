@@ -1,19 +1,24 @@
 class Pdfs::TerminationNoticeWriter
   include Pdfs::Stationary
 
-  def initialize(termination_notice, pdf)
-    @termination_notice = termination_notice
-    @vessel = @termination_notice.vessel
-    @delivery_name_and_address = []
+  def initialize(section_notice, pdf)
+    @section_notice = section_notice
+    @vessel = @section_notice.vessel
 
     @pdf = pdf
   end
 
   def write
-    @pdf.start_new_page
-    init_stationary(@termination_notice.updated_at)
-    vessel_name
-    message
+    @vessel.owners.each do |owner|
+      @pdf.start_new_page
+      @applicant_name = owner.name
+      @delivery_name_and_address = [owner.name] + owner.compacted_address
+      init_stationary(@section_notice.updated_at)
+      vessel_name
+      page_one
+      @pdf.start_new_page
+      page_two(owner)
+    end
     @pdf
   end
 
@@ -21,11 +26,21 @@ class Pdfs::TerminationNoticeWriter
 
   def vessel_name
     set_bold_font
-    @pdf.draw_text @vessel.name, at: [l_margin, 530]
+    msg = [@vessel.vessel_type]
+    msg << @vessel.name
+    msg << @vessel.reg_no
+    @pdf.text_box "RE: #{msg.compact.join(", ")}",
+                  at: [l_margin, 530],
+                  width: 480, height: 100, leading: 8
   end
 
-  def message
+  def page_one
     set_copy_font
-    @pdf.draw_text "Termination Notice", at: [l_margin, 510]
+    @pdf.draw_text "PAGE 1", at: [l_margin, 510]
+  end
+
+  def page_two(owner)
+    set_copy_font
+    @pdf.draw_text "PAGE 2", at: [l_margin, 510]
   end
 end
