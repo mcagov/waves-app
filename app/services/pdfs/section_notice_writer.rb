@@ -4,16 +4,19 @@ class Pdfs::SectionNoticeWriter
   def initialize(section_notice, pdf)
     @section_notice = section_notice
     @vessel = @section_notice.noteable
-    @delivery_name_and_address = []
 
     @pdf = pdf
   end
 
   def write
-    @pdf.start_new_page
-    init_stationary(@section_notice.created_at)
-    vessel_name
-    message
+    @vessel.owners.each do |owner|
+      @pdf.start_new_page
+      @applicant_name = owner.name
+      @delivery_name_and_address = [owner.name] + owner.compacted_address
+      init_stationary(@section_notice.updated_at)
+      vessel_name
+      message
+    end
     @pdf
   end
 
