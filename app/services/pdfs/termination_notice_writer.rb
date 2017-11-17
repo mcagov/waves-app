@@ -18,6 +18,8 @@ class Pdfs::TerminationNoticeWriter
       page_one
       @pdf.start_new_page
       page_two(owner)
+
+      @pdf = Pdfs::SectionNoticeWriter.new(@section_notice, @pdf).write
     end
     @pdf
   end
