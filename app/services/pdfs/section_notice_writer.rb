@@ -24,15 +24,37 @@ class Pdfs::SectionNoticeWriter
 
   def vessel_name
     set_bold_font
-    @pdf.draw_text @vessel.name, at: [l_margin, 530]
+    msg = [@vessel.vessel_type]
+    msg << @vessel.name
+    msg << @vessel.reg_no
+    @pdf.text_box "RE: #{msg.compact.join(", ")}",
+                  at: [l_margin, 540],
+                  width: 480, height: 100, leading: 8
+
   end
 
   def message
     set_copy_font
-    @pdf.draw_text "Section Notice!", at: [l_margin, 510]
-    @pdf.draw_text "Regulation/Reason: #{@section_notice.subject}",
-                   at: [l_margin, 410]
-    @pdf.draw_text "Evidence required: #{@section_notice.content}",
-                   at: [l_margin, 310]
+    msg = "I am writing to you as the registered owner of the above mentioned vessel."
+    msg += "\n\n"
+    msg += "It has been brought to the attention of the Registrar General of Shipping and Seamen that the vessel named "
+    msg += " #{@vessel.name}, #{@vessel.reg_no}"
+    msg += " is no longer eligible to be registered as a"
+    msg += " #{@vessel.vessel_type}"
+    msg += " due to:\n"
+    msg += "Regulation #{@section_notice.subject}."
+    msg += "\n\n"
+    msg += "I am therefore enclosing a notice issued under regulation 101(1) of the"
+    msg += " Regulations, which tells you to present to the Registrar evidence that the vessel is eligible to remain on the Register."
+    msg += "\n\n"
+    msg += "Failure to comply with the notice will lead to termination of the vessel’s registration."
+    msg += "\n\n"
+    msg += "If you accept that the vessel is no longer eligible for registration please confirm in writing."
+    msg += "\n\n"
+    msg += "Yours sincerely,"
+
+    @pdf.text_box msg,
+                  at: [l_margin, 510],
+                  width: 480, height: 400, leading: 8
   end
 end
