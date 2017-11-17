@@ -100,6 +100,7 @@ class Activity
       :provisional_certificate,
       :mortgagee_reminder_letter,
       :renewal_reminder_letter,
+      :section_notice,
       :termination_notice,
     ]
   end

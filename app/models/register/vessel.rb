@@ -1,6 +1,8 @@
 module Register
   class Vessel < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include PgSearch
+    include Register::TerminationStateMachine
+
     multisearchable against:
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin, :pln]
 
@@ -66,6 +68,13 @@ module Register
 
     has_many :notes,
              -> { where("type is null").order("created_at desc") },
+             as: :noteable
+
+    has_many :section_notices,
+             (lambda do
+                where("type = 'Register::SectionNotice'")
+                  .order("created_at desc")
+              end),
              as: :noteable
 
     has_many :submissions,

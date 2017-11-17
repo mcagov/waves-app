@@ -219,6 +219,10 @@ Rails.application.routes.draw do
              only: [:show],
              controller: "registered_vessel/registration_certificate"
 
+    resource :section_notice,
+             only: [:create],
+             controller: "registered_vessel/section_notice"
+
     resource :termination,
              only: [:create],
              controller: "registered_vessel/termination"
@@ -241,7 +245,7 @@ Rails.application.routes.draw do
     carving_and_marking registration_certificate cover_letter
     current_transcript historic_transcript csr_form
     provisional_certificate termination_notice renewal_reminder_letter
-    mortgagee_reminder_letter ihs
+    mortgagee_reminder_letter ihs section_notice
   ).each do |template|
     get "/print_queue/#{template}",
         controller: :print_jobs,

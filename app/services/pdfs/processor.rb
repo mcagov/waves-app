@@ -82,6 +82,10 @@ class Pdfs::Processor
     Pdfs::TerminationNotice.new(@printable_items, @mode)
   end
 
+  def section_notice
+    Pdfs::SectionNotice.new(@printable_items, @mode)
+  end
+
   def renewal_reminder_letter
     case @part
     when :part_1

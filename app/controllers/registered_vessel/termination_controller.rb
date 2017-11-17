@@ -23,13 +23,16 @@ class RegisteredVessel::TerminationController < InternalPagesController
 
   def process_termination_submission
     @vessel.update_attribute(:frozen_at, Time.now)
+    @vessel.issue_termination_notice!
+    section_notice = @vessel.section_notices.last
+    section_notice.update_column(:updated_at, Time.now)
+    build_print_job(section_notice)
+  end
 
-    @vessel.current_registration.update_attribute(
-      :termination_notice_at, Time.now)
-
+  def build_print_job(section_notice)
     Task.new(:termination_notice).print_job_templates.each do |template|
       PrintJob.create(
-        printable: @vessel.current_registration,
+        printable: section_notice,
         part: @submission.part,
         template: template,
         submission: @submission)

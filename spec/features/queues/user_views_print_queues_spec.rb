@@ -39,8 +39,12 @@ feature "User views print queues", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "Print Queue: Renewal Reminder Letters")
 
-    click_on("Notices of Termination")
+    click_on("7 Day Notices of Termination")
     expect(page)
-      .to have_css("h1", text: "Print Queue: Notices of Termination")
+      .to have_css("h1", text: "Print Queue: 7 Day Notices of Termination")
+
+    click_on("30 Day Section Notices")
+    expect(page)
+      .to have_css("h1", text: "Print Queue: 30 Day Section Notices")
   end
 end

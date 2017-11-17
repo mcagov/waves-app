@@ -1,4 +1,4 @@
-class Pdfs::TerminationNotice
+class Pdfs::SectionNotice
   def initialize(section_notices, mode = :printable)
     @section_notices = Array(section_notices)
     @template = :current
@@ -9,8 +9,7 @@ class Pdfs::TerminationNotice
 
   def render
     @section_notices.each do |section_notice|
-      @pdf =
-        Pdfs::TerminationNoticeWriter.new(section_notice, @pdf).write
+      @pdf = Pdfs::SectionNoticeWriter.new(section_notice, @pdf).write
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render

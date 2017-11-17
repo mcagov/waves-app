@@ -31,7 +31,8 @@ en:
       csr_form: Print CSR
       mortgagee_reminder_letter: Print Mortgagee Reminder Letter
       renewal_reminder_letter: Print Renewal Reminder Letter
-      termination_notice: Print Notice of Termination
+      termination_notice: Print 7 Day Notice of Termination
+      section_notice: Print 30 Day Section Notice
     print_all_button_text:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
@@ -41,7 +42,8 @@ en:
       csr_form: Print CSRs
       mortgagee_reminder_letter: Print Mortgagee Reminder Letters
       renewal_reminder_letter: Print Renewal Reminder Letters
-      termination_notice: Print Notices of Termination
+      termination_notice: Print 7 Day Notices of Termination
+      section_notice: Print 30 Day Section Notices
     menu_title:
       carving_and_marking: Carving & Marking Notes
       cover_letter: Cover Letters
@@ -52,7 +54,8 @@ en:
       csr_form: CSR Forms
       mortgagee_reminder_letter: Mortgagee Reminder Letters
       renewal_reminder_letter: Renewal Reminder Letters
-      termination_notice: Notices of Termination
+      termination_notice: 7 Day Notices of Termination
+      section_notice: 30 Day Section Notices
   submission:
     advisories :
       fishing_vessel_safety_certificate: The Fishing Vessel Safety Certificate has either expired or not been recorded.
@@ -135,7 +138,8 @@ en:
         historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
         enquiry: The General Enquiry has been marked as completed.
         manual_override: The Manual Override has been processed.
-        termination_notice: The termination notice has been issued, the vessel has been frozen and the registration will be closed in 7 days.
+        section_notice: The 30 Day Notice  has been issued and the vessel has been frozen.
+        termination_notice: The 7 Day Notice of termination has been issued and the registration will be closed in 7 days.
         issue_csr: The CSR has been issued.
         mortgage: The applicant has been notified via email that their mortgage update has been approved.
         mortgage_other: The applicant has been notified via email that their mortgage update has been approved.

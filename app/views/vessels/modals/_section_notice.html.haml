@@ -1,0 +1,23 @@
+.modal.fade{id: 'section-notice', role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title 30 Day Section Notice
+
+      = simple_form_for Register::SectionNotice.new, url: vessel_section_notice_path(vessel), method: :post do |f|
+        .modal-body
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :subject, label: "Regulation/Reason",
+                  collection: termination_reasons_collection,
+                  include_blank: false
+        .modal-body
+          .row
+            .col-sm-12
+              .form-group
+                = f.input :content, label: "Evidence required", as: :text, input_html: { rows: 2 }
+        .modal-footer
+          = f.submit "Issue 30 Day Section Notice", class: "btn btn-danger submit_issue_section_notice"
