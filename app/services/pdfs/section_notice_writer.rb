@@ -41,7 +41,7 @@ class Pdfs::SectionNoticeWriter
     msg += " #{@vessel.name}, #{@vessel.reg_no}"
     msg += " is no longer eligible to be registered as a"
     msg += " #{@vessel.vessel_type}"
-    msg += " due to:\n"
+    msg += " due to:\n\n"
     msg += "Regulation #{@section_notice.subject}."
     msg += "\n\n"
     msg += "I am therefore enclosing a notice issued under regulation 101(1) of the"
@@ -55,6 +55,6 @@ class Pdfs::SectionNoticeWriter
 
     @pdf.text_box msg,
                   at: [l_margin, 510],
-                  width: 480, height: 400, leading: 8
+                  width: 480, height: 400, leading: 4
   end
 end
