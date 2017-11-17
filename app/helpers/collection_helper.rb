@@ -93,4 +93,8 @@ module CollectionHelper
     reasons += WavesUtilities::Closure::INTERNAL_REASONS
     reasons.map { |r| r.to_s.humanize }.sort
   end
+
+  def termination_reasons_collection
+    WavesUtilities::TerminationReason.all
+  end
 end
