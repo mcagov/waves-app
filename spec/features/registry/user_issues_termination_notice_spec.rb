@@ -5,6 +5,13 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
     login_to_part_3
     vessel = create(:registered_vessel)
     vessel.issue_section_notice!
+    Register::SectionNotice.create(noteable: vessel)
+
+    # set the SectionNotice#created_at to simulate
+    # the reg officer workflow
+    Register::SectionNotice.last.update_columns(
+      created_at: 20.days.ago, updated_at: 20.days.ago)
+
     visit vessel_path(vessel)
 
     click_on("Registrar Tools")
@@ -23,6 +30,10 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
     end
+
+    # check that the section notice has been updated
+    section_notice = Register::SectionNotice.last
+    expect(section_notice.updated_at).to be > 1.day.ago
 
     creates_a_work_log_entry("Submission", :termination_notice)
   end

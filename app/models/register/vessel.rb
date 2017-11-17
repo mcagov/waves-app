@@ -70,6 +70,13 @@ module Register
              -> { where("type is null").order("created_at desc") },
              as: :noteable
 
+    has_many :section_notices,
+             (lambda do
+                where("type = 'Register::SectionNotice'")
+                  .order("created_at desc")
+              end),
+             as: :noteable
+
     has_many :submissions,
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id
