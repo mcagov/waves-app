@@ -14,7 +14,7 @@ class Pdfs::SectionNoticeWriter
       @pdf.start_new_page
       @applicant_name = owner.name
       @delivery_name_and_address = [owner.name] + owner.compacted_address
-      init_stationary(@section_notice.updated_at)
+      init_stationary(@section_notice.created_at)
       vessel_name
       page_one
       @pdf.start_new_page
