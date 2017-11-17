@@ -1,6 +1,6 @@
 class Register::SectionNotice < Note
   def regulation_key
-    subject.split(" ").first || "n/a"
+    subject.to_s.split(" ").first || "n/a"
   end
 
   def vessel
