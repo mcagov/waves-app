@@ -14,7 +14,7 @@ class Pdfs::SectionNoticeWriter
       @pdf.start_new_page
       @applicant_name = owner.name
       @delivery_name_and_address = [owner.name] + owner.compacted_address
-      init_stationary(@section_notice.created_at)
+      init_stationary(@section_notice.section_notice_date)
       vessel_name
       page_one
       @pdf.start_new_page
@@ -95,7 +95,7 @@ class Pdfs::SectionNoticeWriter
     msg += "Signed:"
     msg += "\n\n\n\n\n\n"
     msg += @section_notice.actioned_by.to_s
-    msg += "\nDated: #{@section_notice.updated_at}"
+    msg += "\nDated: #{@section_notice.section_notice_date}"
     msg += "\nFor and on behalf of the Registrar General of Shipping and Seamen"
     msg += "\n\n"
     @pdf.text_box msg,
