@@ -36,4 +36,24 @@ describe "User freezes (and unfreezes) a vessel", type: :feature, js: true do
     expect(page)
       .to have_css(".registration_status", text: "Registered")
   end
+
+  scenario "when the vessel was frozen due to a section notice" do
+    login_to_part_3
+    vessel = create(:registered_vessel)
+    vessel.issue_section_notice!
+    vessel.update_attribute(:frozen_at, Time.now)
+    visit vessel_path(vessel)
+
+    click_on("Registrar Tools")
+    click_on("Unfreeze Record")
+
+    within("#unfreeze-record") do
+      find(:css, ".submit_unfreeze_record").trigger("click")
+    end
+
+    expect(page)
+      .to have_css(".registration_status", text: "Registered")
+
+    expect(vessel.reload.current_state).to eq(:active)
+  end
 end
