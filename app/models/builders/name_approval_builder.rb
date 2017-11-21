@@ -1,13 +1,13 @@
 class Builders::NameApprovalBuilder
   class << self
-    def create(submission, name_approval)
+    def create(submission, name_approval, perform_validations = true)
       @submission = submission
       @name_approval = name_approval
 
       init_defaults
       assign_submission_changeset
 
-      @name_approval.save
+      @name_approval.save(validate: perform_validations)
     end
 
     private

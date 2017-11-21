@@ -14,6 +14,14 @@ $(document).ready(function() {
     }
   });
 
+  $('#skip-name-approval-validation').on('click', function(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to override this validation?')) {
+      $('#skip_name_validation').val("true");
+      $('#validate_name').click();
+    }
+  });
+
   $('#validate_name').on('click', function(e) {
     $('#name_approval form').submit();
     e.preventDefault();
