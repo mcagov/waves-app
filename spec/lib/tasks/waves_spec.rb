@@ -21,7 +21,7 @@ describe "Waves" do
     end
   end
 
-  context "close_terminated_vessels" do
+  xcontext "close_terminated_vessels" do
     let!(:vessel_1) { create(:registered_vessel) }
     let!(:vessel_2) { create(:registered_vessel) }
     let!(:vessel_3) { create(:registered_vessel) }
