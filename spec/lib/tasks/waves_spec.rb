@@ -3,6 +3,7 @@ require "rake"
 
 describe "Waves" do
   before(:all) do
+    DatabaseCleaner.clean
     load File.expand_path("lib/tasks/waves.rake")
     Rake::Task.define_task(:environment)
   end
