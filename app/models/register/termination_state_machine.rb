@@ -7,7 +7,6 @@ module Register::TerminationStateMachine
         state :active
         state :section_notice_issued
         state :termination_notice_issued
-        state :terminated
 
         event :issue_section_notice do
           transitions to: :section_notice_issued,
@@ -19,16 +18,10 @@ module Register::TerminationStateMachine
                       from: :section_notice_issued
         end
 
-        event :terminate do
-          transitions to: :terminated,
-                      from: :termination_notice_issued
-        end
-
         event :restore_active_state do
           transitions to: :active,
                       from: [:section_notice_issued,
-                             :termination_notice_issued,
-                             :terminated]
+                             :termination_notice_issued]
         end
       end
     end
