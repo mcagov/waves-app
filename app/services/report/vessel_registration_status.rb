@@ -64,11 +64,18 @@ class Report::VesselRegistrationStatus < Report
     end
 
     if @registration_status == :expired
-      query.where("date(registrations.registered_until) < ?", Date.today)
+      return query.where("date(registrations.registered_until) < ?", Date.today)
     else
       # registered
       query.where("date(registrations.registered_until) >= ?", Date.today)
     end
+
+    if @registration_status == :registered_provisionally
+      return query.where("registrations.provisional = TRUE")
+    else
+      query = query.where("registrations.provisional != TRUE")
+    end
+
   end
   # rubocop:enable all
 end
