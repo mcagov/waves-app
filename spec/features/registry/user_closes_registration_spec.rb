@@ -24,9 +24,16 @@ describe "User closes a vessel's registration", type: :feature, js: true do
     click_on("Registrar Tools")
     click_on("Registration Closure: Close Without Notice")
 
-    expect(page).to have_css(".registration_status", text: "Closed")
+    expect(page).to have_text("The Closure Without Notice has been completed")
+    expect(page).to have_link("Print Current Transcript")
     creates_a_work_log_entry("Submission", :forced_closure)
 
-    # print a closure letter and a closed transcript
+    pdf_window = window_opened_by do
+      click_on("Print Cover Letter: Closure Without Notice")
+    end
+
+    within_window(pdf_window) do
+      expect(page).to have_text("%PDF")
+    end
   end
 end

@@ -102,4 +102,8 @@ class Pdfs::Processor
   def mortgagee_reminder_letter
     Pdfs::MortgageeReminderLetter.new(@printable_items, @mode)
   end
+
+  def forced_closure
+    Pdfs::ForcedClosure.new(@printable_items)
+  end
 end

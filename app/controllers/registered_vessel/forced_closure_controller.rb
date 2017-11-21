@@ -3,9 +3,10 @@ class RegisteredVessel::ForcedClosureController < InternalPagesController
 
   def create
     complete_forced_closure_submission
+    build_print_jobs
     log_work!(@submission, @submission, :forced_closure)
 
-    redirect_to vessel_path(@vessel)
+    redirect_to submission_approval_path(@submission)
   end
 
   private
@@ -18,7 +19,17 @@ class RegisteredVessel::ForcedClosureController < InternalPagesController
         @vessel,
         current_user)
 
-    Builders::ClosedRegistrationBuilder
+    @current_registration =
+      Builders::ClosedRegistrationBuilder
       .create(@submission, Time.now, Task.new(:forced_closure).description)
+  end
+
+  def build_print_jobs
+    Builders::PrintJobBuilder
+      .create(
+        @submission,
+        @current_registration,
+        @submission.part,
+        [:forced_closure, :current_transcript])
   end
 end
