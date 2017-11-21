@@ -4,6 +4,6 @@
       %label{ for: "filter_registration_status" } Registration Status
     .col-md-2
       = select :filter, :registration_status,
-        [:all, :registered, :closed, :frozen, :expired].map {|s| [s.to_s.titleize, s] },
+        [:all, :registered, :registered_provisionally, :closed, :frozen, :expired].map {|s| [s.to_s.titleize, s] },
         { include_blank: false, selected: filter[:registration_status] },
         class: "form-control"

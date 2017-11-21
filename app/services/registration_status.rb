@@ -47,7 +47,7 @@ class RegistrationStatus
   private
 
   def registered_description
-    if @vessel.registrations.first.try(:provisional?)
+    if @vessel.current_registration.try(:provisional?)
       "Registered Provisionally"
     else
       "Registered"
