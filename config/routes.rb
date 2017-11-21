@@ -191,6 +191,10 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/closure"
 
+    resource :forced_closure,
+             only: [:create],
+             controller: "registered_vessel/forced_closure"
+
     resources :csrs,
               only: [:show, :create],
               controller: "registered_vessel/csrs"

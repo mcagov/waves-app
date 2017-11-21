@@ -32,6 +32,10 @@
               = link_to Task.new(:registrar_closure).description,
                 vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
+            %p
+              = link_to Task.new(:forced_closure).description,
+                vessel_forced_closure_path(vessel),
+                method: :post, class: "btn btn-block btn-danger"
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
