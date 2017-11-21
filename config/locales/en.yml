@@ -33,6 +33,7 @@ en:
       renewal_reminder_letter: Print Renewal Reminder Letter
       termination_notice: Print 7 Day Notice of Termination
       section_notice: Print 30 Day Section Notice
+      forced_closure: "Print Cover Letter: Closure Without Notice"
     print_all_button_text:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
@@ -44,6 +45,7 @@ en:
       renewal_reminder_letter: Print Renewal Reminder Letters
       termination_notice: Print 7 Day Notices of Termination
       section_notice: Print 30 Day Section Notices
+      forced_closure: "Print Cover Letters: Closure Without Notice"
     menu_title:
       carving_and_marking: Carving & Marking Notes
       cover_letter: Cover Letters
@@ -56,6 +58,7 @@ en:
       renewal_reminder_letter: Renewal Reminder Letters
       termination_notice: 7 Day Notices of Termination
       section_notice: 30 Day Section Notices
+      forced_closure: "Cover Letters: Closure Without Notice"
   submission:
     advisories :
       fishing_vessel_safety_certificate: The Fishing Vessel Safety Certificate has either expired or not been recorded.
@@ -143,3 +146,4 @@ en:
         issue_csr: The CSR has been issued.
         mortgage: The applicant has been notified via email that their mortgage update has been approved.
         mortgage_other: The applicant has been notified via email that their mortgage update has been approved.
+        forced_closure: The Closure Without Notice has been completed
