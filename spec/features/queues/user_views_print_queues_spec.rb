@@ -19,6 +19,11 @@ feature "User views print queues", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: "Print Queue: Cover Letters")
 
+    click_on("Cover Letters: Closure Without Notice")
+    expect(page)
+      .to have_css(
+        "h1", text: "Print Queue: Cover Letters: Closure Without Notice")
+
     click_on("Current Transcripts")
     expect(page)
       .to have_css("h1", text: "Print Queue: Current Transcripts")

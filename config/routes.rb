@@ -249,7 +249,7 @@ Rails.application.routes.draw do
     carving_and_marking registration_certificate cover_letter
     current_transcript historic_transcript csr_form
     provisional_certificate termination_notice renewal_reminder_letter
-    mortgagee_reminder_letter ihs section_notice
+    mortgagee_reminder_letter ihs section_notice forced_closure
   ).each do |template|
     get "/print_queue/#{template}",
         controller: :print_jobs,

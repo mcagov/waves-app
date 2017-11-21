@@ -95,6 +95,7 @@ class Activity
       :carving_and_marking,
       :registration_certificate,
       :cover_letter,
+      :forced_closure,
       :current_transcript,
       :historic_transcript,
       :provisional_certificate,
