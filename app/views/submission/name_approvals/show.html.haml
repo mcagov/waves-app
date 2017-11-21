@@ -18,7 +18,6 @@
 
     - if @name_validated
       = hidden_field_tag "name_validated", "1"
-
     .x_panel
       .x_title
         %h2 Name Approval Process
@@ -30,7 +29,6 @@
               label: "Vessel Name",
               input_html: { class: "upcase" },
               required: false
-
           .col-md-3
             = f.input :registration_type, as: :select,
               collection: registration_types_collection(@submission.part),
@@ -61,6 +59,10 @@
               collection: name_approved_until_collection,
               label: "Approved for",
               include_blank: false
+      - if @name_approval.errors.present?
+        .row
+          = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
+          = hidden_field_tag "skip_name_validation", "false"
 
 - if @submission.actionable? && @submission.claimant == current_user
   - content_for(:submission_save_buttons) do

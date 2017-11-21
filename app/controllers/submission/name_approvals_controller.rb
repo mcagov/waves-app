@@ -10,9 +10,9 @@ class Submission::NameApprovalsController < InternalPagesController
     @name_validated = @name_approval.valid?
 
     if @name_validated && params[:name_validated]
-      Builders::NameApprovalBuilder.create(@submission, @name_approval)
-      log_work!(@submission, @submission, :name_approval)
-      return redirect_to edit_submission_path(@submission)
+      return process_update
+    elsif params[:skip_name_validation] == "true"
+      return process_update(false)
     end
 
     render :show
@@ -36,5 +36,12 @@ class Submission::NameApprovalsController < InternalPagesController
     params.require(:submission_name_approval).permit(
       :part, :name, :registration_type, :port_code, :port_no,
       :approved_until)
+  end
+
+  def process_update(perform_validations = true)
+    Builders::NameApprovalBuilder.create(
+      @submission, @name_approval, perform_validations)
+    log_work!(@submission, @submission, :name_approval)
+    redirect_to edit_submission_path(@submission)
   end
 end

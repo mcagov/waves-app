@@ -11,7 +11,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     visit_assigned_part_2_submission
   end
 
-  scenario "with an unavailable name" do
+  scenario "with an unavailable name (and choosing to override validation" do
     fill_in("Vessel Name", with: "DUPLICATE")
     select2("SOUTHAMPTON", from: "submission_name_approval_port_code")
     fill_in("Port Number", with: "0001")
@@ -20,6 +20,14 @@ feature "User approves a part 2 name", type: :feature, js: :true do
     expect(page).to have_css(
       ".approval_name",
       text: "is not available in SOUTHAMPTON")
+
+    click_on("Override Name/PLN validation and use these details")
+
+    expect(page).to have_current_path(edit_submission_path(Submission.last))
+    creates_a_work_log_entry("Submission", :name_approval)
+
+    visit(submission_path(Submission.last))
+    expect(page).to have_css(".vessel-name", text: "DUPLICATE")
   end
 
   scenario "with an unavailable port_no" do
