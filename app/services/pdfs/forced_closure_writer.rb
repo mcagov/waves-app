@@ -1,11 +1,13 @@
+# rubocop:disable all
 class Pdfs::ForcedClosureWriter
   include Pdfs::Stationary
 
   def initialize(registration, pdf)
     @registration = registration
     @vessel = @registration.vessel
-    @applicant_name = @registration.applicant_name
-    @delivery_name_and_address = @registration.delivery_name_and_address
+    @applicant_name = @vessel.correspondent.name
+    address = @vessel.correspondent.try(:compacted_address)
+    @delivery_name_and_address = [@applicant_name] + address
     @pdf = pdf
   end
 
@@ -14,8 +16,6 @@ class Pdfs::ForcedClosureWriter
     init_stationary(@registration.created_at)
     vessel_name
     message
-    @pdf.start_new_page
-    registration_number
     @pdf
   end
 
@@ -23,30 +23,33 @@ class Pdfs::ForcedClosureWriter
 
   def vessel_name
     set_bold_font
-    @pdf.draw_text @vessel[:name], at: [l_margin, 530]
+    msg = [@vessel.vessel_type]
+    msg << @vessel.name
+    msg << @vessel.reg_no
+    @pdf.text_box "RE: #{msg.compact.join(', ')}",
+                  at: [l_margin, 530],
+                  width: 480, height: 100, leading: 8
   end
 
   def message
     set_copy_font
-    @pdf.formatted_text_box message_text,
-                            at: [l_margin, 510],
-                            width: 495
-  end
+    msg = "Please find enclosed a Transcript of Closed Registry of a British Ship for the above mentioned vessel."
+    msg += "\n\n"
+    msg += "As we have not received an application to renew the Certificate of Registry, which ceased to be valid on"
+    msg += " #{@registration.registered_until}"
+    msg += " the registration of this vessel was terminated on the date shown on the Transcript of Closed Registry of a British ship."
+    msg += "\n\n"
+    msg += "Please do not hesitate in contacting the Registry of Shipping and Seamen if you have any further queries regarding this matter, or if you wish to re-register your vessel"
+    msg += "\n\n"
+    msg += "Yours sincerely,"
+    msg += "\n\n\n\n"
+    msg += @registration.actioned_by.to_s
+    msg += "\n"
+    msg += "Registration Officer"
 
-  def registration_number
-    @pdf.font("Times-Roman", size: 124)
-    @pdf.draw_text @vessel[:reg_no], at: [300, 100], rotate: 90
+    @pdf.text_box msg,
+                  at: [l_margin, 510],
+                  width: 480, height: 400, leading: 4
   end
-
-  # rubocop:disable all
-  def message_text
-    [
-      "Yours sincerely,",
-      "\n\n\n\n",
-      @registration.actioned_by.to_s,
-      "\n",
-      "Registration Officer"
-    ].map { |line| { text: line } }
-  end
-  # rubocop:enable all
 end
+# rubocop:enable all
