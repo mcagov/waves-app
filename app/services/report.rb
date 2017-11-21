@@ -11,7 +11,7 @@ class Report
     @part = filters[:part]
     @date_start = parse_date_start
     @date_end = parse_date_end
-    @task = filters[:task] || :new_registration
+    @task = filters[:task] || "all_tasks"
     @page = filters[:page]
     @per_page = filters[:per_page]
     @document_type = filters[:document_type]
@@ -141,6 +141,14 @@ class Report
   def filter_by_document_type(scoped_query)
     if @document_type.present?
       scoped_query.where("notes.entity_type = ?", @document_type)
+    else
+      scoped_query
+    end
+  end
+
+  def filter_by_task(scoped_query)
+    if @task.present? && @task != "all_tasks"
+      scoped_query.where("task = ?", @task.to_s)
     else
       scoped_query
     end

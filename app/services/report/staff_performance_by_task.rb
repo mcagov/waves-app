@@ -36,9 +36,8 @@ class Report::StaffPerformanceByTask < Report
         #{filter_manual_missed},
         COUNT (*) total")
                 .includes(:claimant)
-                .where(task: @task)
                 .where("claimant_id is not null")
-
+    query = filter_by_task(query)
     query = filter_by_part(query)
     query = filter_by_received_at(query)
     query.group(:claimant_id)

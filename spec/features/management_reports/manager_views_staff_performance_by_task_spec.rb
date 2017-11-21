@@ -9,7 +9,7 @@ describe "Manager views staff performance by task", js: true do
   end
 
   scenario "filtering by task" do
-    expect(find("#filter_task").value.to_sym).to eq(:new_registration)
+    expect(find("#filter_task").value.to_sym).to eq(:all_tasks)
 
     filtered_task_result = @submission.claimant
     within("#results") { expect(page).to have_text(filtered_task_result) }
