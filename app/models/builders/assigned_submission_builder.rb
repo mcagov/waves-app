@@ -19,7 +19,7 @@ class Builders::AssignedSubmissionBuilder
 
     def perform
       @submission = Submission.create(
-        task: @task, part: @part,
+        task: @task, part: @registered_vessel.part,
         vessel_reg_no: @registered_vessel.reg_no,
         source: :manual_entry, state: current_state,
         ref_no: RefNo.generate_for(Submission.new),

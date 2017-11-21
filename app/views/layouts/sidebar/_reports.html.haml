@@ -32,6 +32,7 @@
       - if current_user.system_manager?
         %li= link_to "Advanced Search", admin_report_path(:advanced_search)
       %li= link_to "Expiring Certificates", admin_report_path(:expiring_certificates)
+      %li= link_to "Section Notices", admin_report_path(:section_notices)
       %li= link_to "Staff Performance", admin_report_path(:staff_performance)
       %li= link_to "Staff Performance by Task", admin_report_path(:staff_performance_by_task)
       %li= link_to "Vessel Registration Status", admin_report_path(:vessel_registration_status)
