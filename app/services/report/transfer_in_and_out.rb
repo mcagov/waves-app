@@ -1,7 +1,9 @@
 class Report::TransferInAndOut < Report
   def initialize(filters = {})
     super
-    @filter_transfer_type = @filters[:filter_transfer_type] || :transfer_in
+
+    @filter_transfer_type =
+      (@filters[:transfer_type] || :transfer_in).to_sym
   end
 
   def title
@@ -27,11 +29,10 @@ class Report::TransferInAndOut < Report
   private
 
   def submissions
-    Submission.completed
-  end
-
-  def transfer_status(submission)
-    submission.fees.transfers_in.present? ? "Transfer In" : "Transfer Out"
+    query = Submission.completed.includes(:reportable_registered_vessel)
+    query = query.includes(:fees)
+    query = filter_by_transfer_type(query)
+    query.order("vessels.name")
   end
 
   def result_for(submission)
@@ -43,8 +44,19 @@ class Report::TransferInAndOut < Report
         vessel.imo_number,
         vessel.gross_tonnage,
         submission.completed_at,
-        transfer_status(submission),
+        @filter_transfer_type.to_s.titleize,
       ]
     )
+  end
+
+  def filter_by_transfer_type(query)
+    transfer_type_key =
+      if @filter_transfer_type == :transfer_in
+        :transfer_from_bdt
+      else
+        :transfer_to_bdt
+      end
+
+    query.where("fees.task_variant = ?", transfer_type_key)
   end
 end
