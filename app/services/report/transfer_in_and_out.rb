@@ -1,9 +1,7 @@
 class Report::TransferInAndOut < Report
   def initialize(filters = {})
     super
-
-    @filter_transfer_type =
-      (@filters[:transfer_type] || :transfer_in).to_sym
+    @filters[:transfer_type] ||= :transfer_in
   end
 
   def title
@@ -32,6 +30,7 @@ class Report::TransferInAndOut < Report
     query = Submission.completed.includes(:reportable_registered_vessel)
     query = query.includes(:fees)
     query = filter_by_transfer_type(query)
+    query = filter_by_completed_at(query)
     query.order("vessels.name")
   end
 
@@ -44,12 +43,12 @@ class Report::TransferInAndOut < Report
         vessel.imo_number,
         vessel.gross_tonnage,
         submission.completed_at,
-        @filter_transfer_type.to_s.titleize,
+        @transfer_type.to_s.titleize,
       ]
     )
   end
 
-  def filter_by_transfer_type(query)
+  def filter_by_transfer_type(scoped_query)
     transfer_type_key =
       if @filter_transfer_type == :transfer_in
         :transfer_from_bdt
@@ -57,6 +56,18 @@ class Report::TransferInAndOut < Report
         :transfer_to_bdt
       end
 
-    query.where("fees.task_variant = ?", transfer_type_key)
+    scoped_query.where("fees.task_variant = ?", transfer_type_key)
+  end
+
+  def filter_by_completed_at(scoped_query)
+    if @date_start.present?
+      scoped_query = scoped_query.where("completed_at >= ?", @date_start)
+    end
+
+    if @date_end.present?
+      scoped_query = scoped_query.where("completed_at <= ?", @date_end)
+    end
+
+    scoped_query
   end
 end
