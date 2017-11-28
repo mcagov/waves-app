@@ -4,5 +4,5 @@
       %label{ for: "filter_transfer_type" } Transfer Type
     .col-md-4
       = select :filter, :transfer_type, [["Registry (Transfer In)", "transfer_in"], ["Closure (Transfer Out)", "transfer_out"]] ,
-        { include_blank: false, selected: filter[:filter_transfer_type] },
+        { include_blank: false, selected: filter[:transfer_type] },
         class: "form-control"

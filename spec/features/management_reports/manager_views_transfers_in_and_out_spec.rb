@@ -38,7 +38,7 @@ describe "Manager views report: transfers in and out", js: true do
     click_on("Apply Filter")
 
     page.all("table tr") do |tr|
-      vessel = @transfer_out.registered_vessel
+      vessel = @transfer_in.registered_vessel
       within(tr[1]) do
         expect(page).to have_css("th", text: vessel.name)
         expect(page).to have_css("th", text: vessel.imo_number)
@@ -51,18 +51,18 @@ describe "Manager views report: transfers in and out", js: true do
 
   scenario "closure (transfer_out)" do
     page.all("table tr") do |tr|
-      vessel = @transfer_in.registered_vessel
+      vessel = @transfer_out.registered_vessel
       within(tr[1]) do
         expect(page).to have_css("th", text: vessel.name)
         expect(page).to have_css("th", text: vessel.imo_number)
         expect(page).to have_css("th", text: vessel.gross_tonnage)
-        expect(page).to have_css("th", text: @transfer_in.completed_at.to_s)
+        expect(page).to have_css("th", text: @transfer_out.completed_at.to_s)
         expect(page).to have_css("th", text: "Transfer Out")
       end
     end
 
-    within("#results") { click_on(@transfer_in.vessel.name) }
+    within("#results") { click_on(@transfer_out.vessel.name) }
     expect(page)
-      .to have_current_path(vessel_path(@transfer_in.registered_vessel))
+      .to have_current_path(vessel_path(@transfer_out.registered_vessel))
   end
 end
