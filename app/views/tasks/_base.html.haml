@@ -62,7 +62,10 @@
                 %td= submission.received_at
                 %td= submission.referred? ? submission.referred_until : "n/a"
                 %td= submission.target_date
-                %td= payment_status_icon(submission.payment_status)
+                %td
+                  = payment_status_icon(submission.payment_status)
+                  - if submission.officer_intervention_required?
+                    = formatted_amount(AccountLedger.new(submission).amount_paid)
                 %td= submission.source_description
                 %td= submission.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
