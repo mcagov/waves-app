@@ -237,7 +237,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    incomplete my-tasks team-tasks fee-entry
+    incomplete my-tasks team-tasks fee-entry refunds-due
     referred unclaimed cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",

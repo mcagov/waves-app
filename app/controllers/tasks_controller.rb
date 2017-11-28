@@ -13,6 +13,18 @@ class TasksController < InternalPagesController
       submission_scope
       .unassigned
       .where(officer_intervention_required: true)
+      .joins(:payments)
+      .where("payments.amount >= ?", 0)
+      .order("target_date asc")
+  end
+
+  def refunds_due
+    @submissions =
+      submission_scope
+      .unassigned
+      .where(officer_intervention_required: true)
+      .joins(:payments)
+      .where("payments.amount < ?", 0)
       .order("target_date asc")
   end
 
