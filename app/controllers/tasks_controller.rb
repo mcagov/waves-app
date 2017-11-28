@@ -16,6 +16,14 @@ class TasksController < InternalPagesController
       .order("target_date asc")
   end
 
+  def refunds_due
+    @submissions =
+      submission_scope
+      .unassigned
+      .where(officer_intervention_required: true)
+      .order("target_date asc")
+  end
+
   def unclaimed
     @submissions =
       submission_scope
