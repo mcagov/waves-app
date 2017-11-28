@@ -12,7 +12,7 @@ feature "User views fee task lists", type: :feature, js: true do
     scenario "in general" do
       click_link("Fees Received")
 
-      page.all("table#submissions") do |tr|
+      page.all("table#submissions") do
         within("tr[1]") do
           expect(page).to have_css(".payment", text: "£25.00")
         end
@@ -26,7 +26,7 @@ feature "User views fee task lists", type: :feature, js: true do
     scenario "in general" do
       click_link("Refunds Due")
 
-      page.all("table#submissions") do |tr|
+      page.all("table#submissions") do
         within("tr[1]") do
           expect(page).to have_css(".payment", text: "£-10.99")
         end
