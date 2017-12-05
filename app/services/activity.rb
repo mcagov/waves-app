@@ -84,6 +84,8 @@ class Activity
           :provisional, :re_registration, :mortgage,
           :mortgage_other, :simple_to_full
         ]
+      else
+        []
       end
     default_tasks.select { |t| !excluded_tasks.include?(t[1]) }
   end

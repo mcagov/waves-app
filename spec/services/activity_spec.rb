@@ -61,6 +61,12 @@ describe Activity do
       it { expect(uses_task?(subject, :mortgage)).to be_falsey }
       it { expect(uses_task?(subject, :re_registration)).to be_falsey }
     end
+
+    context "when the 'part' is of another type" do
+      let(:part) { :finance }
+
+      it { expect(uses_task?(subject, :re_registration)).to be_truthy }
+    end
   end
 end
 
