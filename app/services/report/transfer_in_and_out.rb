@@ -19,7 +19,8 @@ class Report::TransferInAndOut < Report
   def results
     return [] unless @date_start && @date_end
 
-    submissions.map do |submission|
+    @pagination_collection = submissions
+    @pagination_collection.map do |submission|
       result_for(submission)
     end
   end
@@ -31,7 +32,7 @@ class Report::TransferInAndOut < Report
     query = query.includes(:fees)
     query = filter_by_transfer_type(query)
     query = filter_by_completed_at(query)
-    query.order("vessels.name")
+    paginate(query.order("vessels.name"))
   end
 
   def result_for(submission)
