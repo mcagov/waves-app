@@ -11,6 +11,7 @@ class TargetDate
 
   class << self
     def days_away(target_date)
+      return "" unless target_date
       TargetDate.set_business_days
       this_day = Date.today
 

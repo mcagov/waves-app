@@ -63,5 +63,10 @@ describe TargetDate do
       let(:the_date) { Date.new(2017, 12, 14) }
       it { expect(subject).to eq("5 days ago") }
     end
+
+    context do
+      let(:the_date) { nil }
+      it { expect(subject).to eq("") }
+    end
   end
 end
