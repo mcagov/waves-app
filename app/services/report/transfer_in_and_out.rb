@@ -1,7 +1,7 @@
 class Report::TransferInAndOut < Report
   def initialize(filters = {})
     super
-    @filters[:transfer_type] ||= :transfer_in
+    @filter_transfer_type = (@filters[:transfer_type] ||= :transfer_in).to_sym
   end
 
   def title
@@ -43,7 +43,7 @@ class Report::TransferInAndOut < Report
         vessel.imo_number,
         vessel.gross_tonnage,
         submission.completed_at,
-        @transfer_type.to_s.titleize,
+        @filter_transfer_type.to_s.titleize,
       ]
     )
   end
