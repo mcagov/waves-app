@@ -61,7 +61,7 @@
                 %td= link_to submission.job_type, submission_path(submission)
                 %td= submission.received_at
                 %td= submission.referred? ? submission.referred_until : "n/a"
-                %td= submission.target_date
+                %td= TargetDate.days_away(submission.target_date)
                 %td.payment
                   = payment_status_icon(submission.payment_status)
                   - if submission.officer_intervention_required?
