@@ -33,10 +33,6 @@ describe "Manager views report: transfers in and out", js: true do
         expect(page).to have_css("th", text: "Status")
       end
     end
-
-    select("Closure", from: "Transfer Type")
-    click_on("Apply Filter")
-
     page.all("table tr") do |tr|
       vessel = @transfer_in.registered_vessel
       within(tr[1]) do
@@ -50,6 +46,9 @@ describe "Manager views report: transfers in and out", js: true do
   end
 
   scenario "closure (transfer_out)" do
+    select("Closure (Transfer Out)", from: "Transfer Type")
+    click_on("Apply Filter")
+
     page.all("table tr") do |tr|
       vessel = @transfer_out.registered_vessel
       within(tr[1]) do

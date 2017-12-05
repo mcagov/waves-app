@@ -1,7 +1,7 @@
 class Report::TransferInAndOut < Report
   def initialize(filters = {})
     super
-    @filters[:transfer_type] ||= :transfer_in
+    @filter_transfer_type = (@filters[:transfer_type] ||= :transfer_in).to_sym
   end
 
   def title
@@ -19,7 +19,8 @@ class Report::TransferInAndOut < Report
   def results
     return [] unless @date_start && @date_end
 
-    submissions.map do |submission|
+    @pagination_collection = submissions
+    @pagination_collection.map do |submission|
       result_for(submission)
     end
   end
@@ -31,7 +32,7 @@ class Report::TransferInAndOut < Report
     query = query.includes(:fees)
     query = filter_by_transfer_type(query)
     query = filter_by_completed_at(query)
-    query.order("vessels.name")
+    paginate(query.order("vessels.name"))
   end
 
   def result_for(submission)
@@ -43,7 +44,7 @@ class Report::TransferInAndOut < Report
         vessel.imo_number,
         vessel.gross_tonnage,
         submission.completed_at,
-        @transfer_type.to_s.titleize,
+        @filter_transfer_type.to_s.titleize,
       ]
     )
   end
