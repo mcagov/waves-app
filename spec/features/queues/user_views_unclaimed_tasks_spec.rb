@@ -12,7 +12,7 @@ feature "User views unclaimed task list", type: :feature, js: true do
         .to have_css(".vessel-name", text: submission.vessel.name)
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
-      expect(page).to have_content(submission.target_date)
+      expect(page).to have_content(" days away")
       expect(page).to have_content("Online")
     end
   end
