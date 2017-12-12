@@ -18,8 +18,8 @@ class Registration < ApplicationRecord
       "registry_info#>>'{vessel_info, registration_type}' = 'fishing')")
   end)
 
-  scope :under_12m, -> { where("#{register_length_finder} < 12.0") }
-  scope :over_12m, -> { where("#{register_length_finder} >= 12.0") }
+  scope :under_12m, -> { where("#{register_length_finder} < ?", 12.0) }
+  scope :over_12m, -> { where("#{register_length_finder} >= ?", 12.0) }
 
   def self.register_length_finder
     "cast
