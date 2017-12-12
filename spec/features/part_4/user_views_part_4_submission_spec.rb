@@ -25,7 +25,8 @@ describe "User views Part 4 submission", type: :feature, js: true do
   end
 
   scenario "tabs" do
+    visit_name_approved_part_4_submission
     expect_mortgages(false)
-    expect_managers(false)
+    expect_managers(true)
   end
 end

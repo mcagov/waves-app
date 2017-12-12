@@ -112,7 +112,7 @@ class Policies::Definitions
     end
 
     def manageable?(obj)
-      part_1?(obj)
+      part_1?(obj) || part_4?(obj)
     end
 
     def fee_category(submission)
