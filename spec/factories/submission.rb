@@ -155,4 +155,32 @@ FactoryGirl.define do
       submission.save
     end
   end
+
+  factory :unassigned_pleasure_submission, parent: :unassigned_submission do
+    part :part_1
+    changeset do
+      {
+        vessel_info: { name: "PLEASURE BOAT", registration_type: "PLEASURE" },
+      }
+    end
+  end
+
+  factory :unassigned_no_reg_type_submission, parent: :unassigned_submission do
+    part :part_1
+    changeset do
+      {
+        vessel_info: { name: "NO REG TYPE BOAT" },
+      }
+    end
+  end
+
+  factory :unassigned_commercial_submission, parent: :unassigned_submission do
+    part :part_1
+    changeset do
+      {
+        vessel_info: {
+          name: "COMMERCIAL BOAT", registration_type: "COMMERCIAL" },
+      }
+    end
+  end
 end
