@@ -12,8 +12,8 @@ module CollectionHelper
   end
 
   def registration_types_collection(part)
-    WavesUtilities::RegistrationType
-      .in_part(part).sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
+    reg_types = WavesUtilities::RegistrationType.in_part(part) || []
+    reg_types.sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
       [registration_type.to_s.humanize, registration_type]
     end
   end
@@ -96,5 +96,11 @@ module CollectionHelper
 
   def termination_reasons_collection
     WavesUtilities::TerminationReason.all
+  end
+
+  def filter_registration_type_collection(part)
+    filter = registration_types_collection(part) || []
+    filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
+    filter << ["Not set", "not_set"]
   end
 end

@@ -29,11 +29,15 @@ class TasksController < InternalPagesController
   end
 
   def unclaimed
-    @submissions =
+    @filter_registration_type = params[:filter_registration_type] || "all"
+
+    query =
       submission_scope
       .unassigned
       .where(officer_intervention_required: false)
-      .order("target_date asc")
+
+    query = filter_by_registration_type(query)
+    @submissions = query.order("target_date asc")
   end
 
   def incomplete
@@ -64,5 +68,18 @@ class TasksController < InternalPagesController
       .includes(:claimant, :declarations, payments: [:remittance])
       .paginate(page: params[:page], per_page: 50)
       .active
+  end
+
+  def filter_by_registration_type(query)
+    case @filter_registration_type
+    when "all"
+      query
+    when "not_set"
+      query.where("(changeset#>>'{vessel_info, registration_type}' is null)")
+    else
+      query.where(
+        "(UPPER(changeset#>>'{vessel_info, registration_type}') = ?)",
+        @filter_registration_type.upcase)
+    end
   end
 end

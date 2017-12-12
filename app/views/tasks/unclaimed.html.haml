@@ -1,1 +1,13 @@
+- content_for :filter_registration_type do
+  = form_tag "/tasks/unclaimed", method: :get do
+    .col-md-2
+      %label{for: :filter_registration_type} Filter by Registration Type
+    .col-md-2
+      = select_tag :filter_registration_type,
+        options_for_select(filter_registration_type_collection(current_activity.part),
+        @filter_registration_type),
+        class: "form-control"
+    .col-md-1
+      = submit_tag "Filter", class: "btn btn-success"
+
 = render partial: "base", locals: { heading:  "Unclaimed Tasks", submissions: @submissions }
