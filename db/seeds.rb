@@ -1,6 +1,6 @@
 # USERS = [
 #   ["toby.privett@oceanshq.com", "Toby Privett", 3],
-#   ["andre.tanguy@oceanshq.com", "André Tanguy", 3],
+#   ["andre.tanguy@oceanshq.com", "Andre Tanguy", 3],
 #   ["Laura.Clark-Theobald@mcga.gov.uk", "Laura Clark-Theobald", 3],
 #   ["Rachel.Miles@mcga.gov.uk", "Rachel Miles", 3],
 #   ["Ugo.Ottanelli@mcga.gov.uk", "Ugo Ottanelli", 3],
