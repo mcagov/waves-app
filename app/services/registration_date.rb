@@ -1,10 +1,21 @@
 class RegistrationDate
   class << self
-    def for(submission, starts_at = Time.now)
+    def for(submission, starts_at)
       @submission = submission
       @starts_at = starts_at.to_datetime
 
       RegistrationDate.new(starts_at, ends_at)
+    end
+
+    def start_date(submission)
+      registered_vessel = submission.registered_vessel
+      return Date.today unless registered_vessel
+
+      if registered_vessel.registered_until < 3.months.from_now
+        registered_vessel.registered_until
+      else
+        Time.now
+      end
     end
 
     private

@@ -1,5 +1,5 @@
 - unless Task.new(submission.task).duplicates_certificate?
-  - registration_date = RegistrationDate.for(submission)
+  - registration_date = RegistrationDate.for(submission, RegistrationDate.start_date(submission))
   - approval_f.object.registration_starts_at = registration_date.starts_at.to_s(:datetimepicker)
   - approval_f.object.registration_ends_at = registration_date.ends_at.to_s(:datetimepicker)
   .row
