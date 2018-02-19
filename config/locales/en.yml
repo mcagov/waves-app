@@ -85,7 +85,7 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        enquiry: Approve General Enquiry
+        enquiry: Approve General notification / non-fee task
         manual_override: Approve Manual Override
         mortgage: "Approve Mortgage(s): Registration"
         mortgage_other: "Approve Mortgage(s): Other"
@@ -103,7 +103,7 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        enquiry: Complete General Enquiry
+        enquiry: Complete General notification / non-fee task
         manual_override: Manual Override
         mortgage: "Mortgage(s): Registration"
         mortgage_other: "Mortgage(s): Other"
@@ -121,7 +121,7 @@ en:
         current_transcript: Issue Current Transcript of Registry
         historic_transcript: Issue Historic Transcript of Registry
         duplicate_certificate: Issue Duplicate Certificate
-        enquiry: Approve General Enquiry
+        enquiry: Approve General notification / non-fee task
         manual_override: Approve
         mortgage: "Approve Mortgage(s): Registration"
         mortgage_other: "Approve Mortgage(s): Other"
@@ -139,7 +139,7 @@ en:
         closure: The applicant has been notified via email that their request for a Registration Closure has been approved.
         current_transcript: The applicant has been notified via email that their request for a Current Transcript of Registry has been approved.
         historic_transcript: The applicant has been notified via email that their request for an Historic Transcript of Registry has been approved.
-        enquiry: The General Enquiry has been marked as completed.
+        enquiry: The General notification / non-fee task has been marked as completed.
         manual_override: The Manual Override has been processed.
         section_notice: The 30 Day Notice  has been issued and the vessel has been frozen.
         termination_notice: The 7 Day Notice of termination has been issued and the registration will be closed in 7 days.

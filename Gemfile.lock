@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/oceanshq/waves-utilities.git
-  revision: cc86396b2b49ccddb769c55aa401d2ea554bb68f
+  revision: 057c395f2c2def19db4125545b63e34595c46927
   specs:
     waves-utilities (0.1.0)
       countries
@@ -161,7 +161,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    countries (2.1.2)
+    countries (2.1.4)
       i18n_data (~> 0.8.0)
       money (~> 6.9)
       sixarm_ruby_unaccent (~> 1.1)
@@ -243,7 +243,7 @@ GEM
     hashery (2.1.2)
     hashie (3.5.5)
     htmlentities (4.3.4)
-    i18n (0.9.1)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     jquery-rails (4.3.1)
@@ -275,7 +275,7 @@ GEM
     minitest (5.10.3)
     momentjs-rails (2.17.1)
       railties (>= 3.1)
-    money (6.10.0)
+    money (6.10.1)
       i18n (>= 0.6.4, < 1.0)
     multipart-post (2.0.0)
     nenv (0.3.0)
