@@ -39,7 +39,7 @@ describe "User save owner details", js: :true do
     end
 
     fill_in("Company Name", with: "BOB INC")
-    fill_in("Registration Number", with: "1234567")
+    fill_in("Company Number", with: "1234567")
     fill_in("Date of Incorporation", with: "12/01/2017")
     click_on("Save Corporate Owner")
 
@@ -48,7 +48,7 @@ describe "User save owner details", js: :true do
       .to eq("12/01/2017")
 
     click_on("BOB INC")
-    fill_in("Registration Number", with: "7654321")
+    fill_in("Company Number", with: "7654321")
     click_on("Save Corporate Owner")
 
     expect(page).to have_css(".owner-registration_number", text: "7654321")

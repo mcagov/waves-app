@@ -34,7 +34,7 @@ class Report::CefasReport < Report
   def headings
     [
       "Country of registration", "CFR / EC no.", "IMO number", "Event type",
-      "Date of event", "Reason for closure", "Registration number", "PLN",
+      "Date of event", "Reason for closure", "Company number", "PLN",
       "Name of Vessel", "Place of registration", "IRCS / RCS", "MMSI",
       "Tonnage GT", "Other tonnage", "Power of Main engine", "Derated method",
       "Make of engine", "Model of engine", "Hull construction material",
