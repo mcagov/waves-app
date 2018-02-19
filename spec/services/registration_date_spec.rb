@@ -41,4 +41,42 @@ describe RegistrationDate do
       end
     end
   end
+
+  context ".start_date" do
+    subject { described_class.start_date(submission) }
+
+    context "for a new registration" do
+      let(:submission) { build(:submission) }
+
+      it "sets starts_at to today" do
+        expect(subject).to eq(Date.today)
+      end
+    end
+
+    context "for a vessel with an existing registration" do
+      let!(:submission) { create(:assigned_re_registration_submission) }
+
+      before do
+        submission.registered_vessel
+                  .current_registration
+                  .update_attribute(:registered_until, registered_until)
+      end
+
+      context "when the current reg expires within the next 3 months" do
+        let(:registered_until) { 2.months.from_now }
+
+        it "sets starts_at to the previous date of expiry" do
+          expect(subject).to eq(registered_until)
+        end
+      end
+
+      context "when the current reg expires more than three months from now" do
+        let(:registered_until) { 4.months.from_now }
+
+        it "sets starts_at to today's date" do
+          expect(subject.to_date).to eq(Date.today)
+        end
+      end
+    end
+  end
 end

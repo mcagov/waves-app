@@ -1,0 +1,23 @@
+%table.table.table-striped#documents
+  %thead
+    %th Date Document Received
+    %th Uploaded Files
+    %th Notes
+    %th Added By
+    %th
+  %tbody
+    - vessel.documents.each do |document|
+      %tr
+        %td{width: '15%'}
+          = document.noted_at
+        %td{width: '35%'}
+          - document.assets.each do |asset|
+            - if asset.file.exists?
+              %i.fa.fa-file-pdf-o
+              = link_to asset.file_file_name, azure_private_asset_url(asset)
+              %br
+        %td{width: '35%'}= link_to document.content
+        %td.added_by{width: '15%'}
+          = document.actioned_by
+          on
+          = document.created_at

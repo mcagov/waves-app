@@ -1,21 +1,21 @@
-USERS = [
-  ["toby.privett@oceanshq.com", "Toby Privett", 3],
-  ["andre.tanguy@oceanshq.com", "André Tanguy", 3],
-  ["Laura.Clark-Theobald@mcga.gov.uk", "Laura Clark-Theobald", 3],
-  ["Rachel.Miles@mcga.gov.uk", "Rachel Miles", 3],
-  ["Ugo.Ottanelli@mcga.gov.uk", "Ugo Ottanelli", 3],
-  ["Charlotte.Clarke@mcga.gov.uk", "Charlotte Clarke", 3],
-  ["Adam.Wheal@mcga.gov.uk", "Adam Wheal", 3],
-].freeze
+# USERS = [
+#   ["toby.privett@oceanshq.com", "Toby Privett", 3],
+#   ["andre.tanguy@oceanshq.com", "Andre Tanguy", 3],
+#   ["Laura.Clark-Theobald@mcga.gov.uk", "Laura Clark-Theobald", 3],
+#   ["Rachel.Miles@mcga.gov.uk", "Rachel Miles", 3],
+#   ["Ugo.Ottanelli@mcga.gov.uk", "Ugo Ottanelli", 3],
+#   ["Charlotte.Clarke@mcga.gov.uk", "Charlotte Clarke", 3],
+#   ["Adam.Wheal@mcga.gov.uk", "Adam Wheal", 3],
+# ].freeze
 
-USERS.each do |user|
-  u = User.find_or_initialize_by(name: user[1])
-  u.email = user[0]
-  u.name = user[1]
-  u.password = Devise.friendly_token.first(8)
-  u.access_level = user[2]
-  u.save! if u.valid?
-end
+# USERS.each do |user|
+#   u = User.find_or_initialize_by(name: user[1])
+#   u.email = user[0]
+#   u.name = user[1]
+#   u.password = Devise.friendly_token.first(8)
+#   u.access_level = user[2]
+#   u.save! if u.valid?
+# end
 
 Fee.delete_all
 
@@ -26,9 +26,9 @@ FEES = [
   [:part_3_new_registration, :new_registration, 2500, 5000],
   [:part_4_new_registration, :new_registration, 12400, 18000],
 
-  [:part_1_provisional, :provisional_registration, 11700, nil],
-  [:part_2_simple_provisional, :provisional_registration, 10500, nil],
-  [:part_2_full_provisional, :provisional_registration, 12200, nil],
+  [:part_1_provisional, :provisional_registration, 11700, 14000],
+  [:part_2_simple_provisional, :provisional_registration, 10500, 14000],
+  [:part_2_full_provisional, :provisional_registration, 12200, 14000],
 
   [:part_1_new_registration, :transfer_from_bdt, 11500, nil],
   [:part_1_transfer_to_bdt, :transfer_to_bdt, 3500, nil],

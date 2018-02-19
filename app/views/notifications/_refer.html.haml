@@ -8,7 +8,7 @@
       .col-sm-9
         .form-group
           = f.input :subject, as: :select, label: "Reason for Referral",
-            collection: Notification::Referral::REASONS.map{|r| [r.to_s.humanize,r.to_s]},
+            collection: Notification::Referral::REASONS.map{|r| [r.to_s,r.to_s]},
             include_blank: false
       .col-sm-3
         .form-group

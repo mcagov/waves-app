@@ -11,6 +11,9 @@
         %a#applications-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content3", :role => "tab"} Application History
 
       %li{:role => "presentation"}
+        %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_contentDocuments", :role => "tab"} Documents
+
+      %li{:role => "presentation"}
         %a#correspondence-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content4", :role => "tab"} Correspondence
 
       %li{:role => "presentation"}
@@ -28,6 +31,9 @@
 
       #tab_content3.tab-pane.fade.in{"aria-labelledby" => "applications-tab", :role => "tabpanel"}
         = render partial: "vessels/shared/tabs/submissions", locals: { vessel: @vessel }
+
+      #tab_contentDocuments.tab-pane.fade.in{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
+        = render partial: "vessels/basic/tabs/documents", locals: { vessel: @vessel }
 
       #tab_content4.tab-pane.fade.in{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
         = render partial: "shared/notification_list/base", locals: { notification_list: @vessel.notification_list }

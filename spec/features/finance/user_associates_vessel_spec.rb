@@ -25,7 +25,7 @@ describe "User associates vessel to finance_payment",
     end
   end
 
-  scenario "hiding the Official No. for a new_registration submission" do
+  scenario "hiding the Official Number for a new_registration submission" do
     create(:submitted_finance_payment, task: :new_registration)
 
     claim_fee_entry_and_visit

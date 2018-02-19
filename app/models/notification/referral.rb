@@ -1,8 +1,16 @@
 class Notification::Referral < Notification
   REASONS = [
-    :unknown_vessel_type,
-    :length_and_vessel_type_do_not_match,
-    :hull_identification_number_appears_incorrect].freeze
+    "Awaiting completed C&M Notice",
+    "Awaiting certificate of measurement",
+    "Documents not filled in correctly",
+    "Missing documentation",
+    "Fee incorrect or missing",
+    "Hull identification number appears incorrect",
+    "Length and vessel type do not match",
+    "Missing survey",
+    "Name and/or port of choice invalid",
+    "Unknown vessel type",
+  ].freeze
 
   def email_template
     :wysiwyg
