@@ -26,9 +26,9 @@ FEES = [
   [:part_3_new_registration, :new_registration, 2500, 5000],
   [:part_4_new_registration, :new_registration, 12400, 18000],
 
-  [:part_1_provisional, :provisional_registration, 11700, nil],
-  [:part_2_simple_provisional, :provisional_registration, 10500, nil],
-  [:part_2_full_provisional, :provisional_registration, 12200, nil],
+  [:part_1_provisional, :provisional_registration, 11700, 14000],
+  [:part_2_simple_provisional, :provisional_registration, 10500, 14000],
+  [:part_2_full_provisional, :provisional_registration, 12200, 14000],
 
   [:part_1_new_registration, :transfer_from_bdt, 11500, nil],
   [:part_1_transfer_to_bdt, :transfer_to_bdt, 3500, nil],
