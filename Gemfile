@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.3.4"
+ruby "~> 2.3.4"
 
 gem "rails", "~> 5.1.4"
 
@@ -26,6 +26,7 @@ gem "font-awesome-rails"
 gem "jquery-rails"
 gem "haml"
 gem "pg"
+gem "puma"
 gem "momentjs-rails"
 gem "nokogiri", ">= 1.8.1"
 gem "notifications-ruby-client", "= 1.1.2"
