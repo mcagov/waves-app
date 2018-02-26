@@ -11,10 +11,24 @@ class Submission::CorrespondencesController < InternalPagesController
     redirect_to submission_path(@submission)
   end
 
+  def destroy
+    @correspondence = Correspondence.find(params[:correspondence_id])
+    if @correspondence
+      @correspondence.destroy
+      flash[:notice] = "That item of correspondence has been removed"
+    end
+
+    redirect_to submission_path(@submission)
+  end
+
   private
 
   def correspondence_params
     params.require(:correspondence)
           .permit(:subject, :format, :noted_at, :content)
+  end
+
+  def load_submission
+    @submission = Submission.find(params[:submission_id])
   end
 end
