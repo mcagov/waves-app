@@ -8,7 +8,7 @@
           = render partial: "submissions/basic/forms/owners/fields/name", locals: { owner_f: owner_f, f: f, label: "Company Name"}
 
         .col-md-3
-          = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: owner_f, label: "Country of Incorporation" }
+          = owner_f.input :nationality, label: "Country of Incorporation", as: :select, collection: countries_collection, input_html: { class: "upcase" }
 
         .col-md-3
           = owner_f.input :imo_number, label: "Owner IMO Number"
