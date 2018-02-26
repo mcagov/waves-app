@@ -4,3 +4,25 @@
   %td
     = link_to correspondence.created_at.to_s(:date_time), "#email-content", "data-target" => "#correspondence-#{ correspondence.id }", "data-toggle" => "modal"
     = render partial:  "shared/notification_list/modals/correspondence", locals: { correspondence: correspondence }
+  %td
+    - unless @readonly
+      - if correspondence.noteable_id == @submission.try(:id)
+        = link_to submission_correspondence_path(@submission, correspondence_id: correspondence.id),
+          class: 'btn-link pull-right',
+          method: :delete,
+          data: { confirm: "Are you sure you want to remove this correspondence?" },
+          style: 'color: red;' do
+          %i.fa.fa-trash
+          Remove
+
+      - if correspondence.noteable_id == @vessel.try(:id)
+        = link_to vessel_correspondence_path(@vessel, correspondence_id: correspondence.id),
+          class: 'btn-link pull-right',
+          method: :delete,
+          data: { confirm: "Are you sure you want to remove this correspondence?" },
+          style: 'color: red;' do
+          %i.fa.fa-trash
+          Remove
+
+
+
