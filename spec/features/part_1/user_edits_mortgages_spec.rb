@@ -11,7 +11,7 @@ describe "User edits mortgages", js: :true do
       select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
-      fill_in("Shares Mortgaged", with: "2000 pounds")
+      select("12", from: "Shares Mortgaged")
 
       fill_in("Name of Mortgagor", with: "Bob")
       click_on("Add Extra Mortgagor")
@@ -35,7 +35,7 @@ describe "User edits mortgages", js: :true do
       expect(page).to have_css(".mortgage_type", text: "Intent")
       expect(page).to have_css(".reference_number", text: "REF 1")
       expect(page).to have_css(".executed_at", text: "Thu Feb 01, 2001")
-      expect(page).to have_css(".amount", text: "2000 pounds")
+      expect(page).to have_css(".amount", text: "12")
       expect(page).to have_css(".mortgagors", text: "BOB")
       expect(page).to have_css(".mortgagees", text: "ALICE")
 
