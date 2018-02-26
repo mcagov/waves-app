@@ -21,6 +21,15 @@
           = document.actioned_by
           on
           = document.created_at
+        %td{nowrap: "nowrap"}
+          - unless @readonly
+            = link_to submission_document_path(@submission, document),
+              class: 'btn-link pull-right',
+              method: :delete,
+              data: { confirm: "Are you sure you want to remove this charter party?" },
+              style: 'color: red;' do
+              %i.fa.fa-trash
+              Remove
 
 = render partial: "submissions/actions/add_document", locals: { submission: @submission }
 = render partial: "submissions/modals/add_document", locals: { submission: @submission }
