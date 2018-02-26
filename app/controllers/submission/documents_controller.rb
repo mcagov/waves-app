@@ -27,9 +27,7 @@ class Submission::DocumentsController < InternalPagesController
     @document = Document.find(params[:id])
     @document.destroy
 
-    respond_to do |format|
-      format.js { render "/submissions/extended/forms/documents/update" }
-    end
+    render_update_js
   end
 
   private

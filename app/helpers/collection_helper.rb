@@ -11,6 +11,10 @@ module CollectionHelper
     WavesUtilities::Nationality.all
   end
 
+  def last_registry_countries_collection
+    WavesUtilities::Country.all.insert(1, "NONE")
+  end
+
   def registration_types_collection(part)
     reg_types = WavesUtilities::RegistrationType.in_part(part) || []
     reg_types.sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
