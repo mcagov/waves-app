@@ -4,7 +4,6 @@
       %span{"aria-hidden" => "true"} ×
     %h4.modal-title
       = t("submission.approval.modal-title.#{submission.task}")
-
   .modal-body.approve-message
     - task = Task.new(submission.task)
     - content_rendered = false
@@ -33,4 +32,7 @@
       %p You are about to approve this submission.
 
   .modal-footer
-    = approval_f.submit t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
+    .col-md-8
+      %p.red= t('submission.approval_alert_text')
+    .col-md-4
+      = approval_f.submit t("submission.approval.modal-btn.#{submission.task}"), class: "btn btn-success btn-lg"
