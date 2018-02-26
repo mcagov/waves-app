@@ -23,7 +23,11 @@ class Department
   end
 
   def contact_us
-    "the #{description} at: #{email}"
+    if @part == :part_1
+      "the commercial vessel team at comm.registry@mcga.gov.uk in the case of an application for a commercial vessel and the pleasure vessel team at part1.registry@mcga.gov.uk in the case of a pleasure vessel application"
+    else
+      "the #{description} at: #{email}"
+    end
   end
 
   def description
