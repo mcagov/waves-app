@@ -7,6 +7,8 @@ feature "User cancels a submission", type: :feature, js: true do
   end
 
   scenario "in general" do
+    reg_officer = @submission.claimant.to_s
+
     within("#actions") { click_on "Cancel Application" }
 
     within(".modal.fade.in") do
@@ -26,7 +28,7 @@ feature "User cancels a submission", type: :feature, js: true do
 
     within("#prompt") do
       expect(page).to have_text(
-        /Application Cancelled. Rejected \(by RSS\)/
+        /Application Cancelled by #{reg_officer} on .*. Rejected \(by RSS\)/
       )
     end
   end
