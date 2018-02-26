@@ -112,7 +112,7 @@ en:
       modal-btn:
         new_registration: Register Vessel
         provisional: Provisionally Register Vessel
-        simple_to_full: Convert Simple Registry to Full Registry
+        simple_to_full: Register this change
         renewal: Renew Registration
         re_registration: Complete Re-Registration
         change_owner: Complete Change of Ownership
