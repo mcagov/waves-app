@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/bcoia/trix.git
+  revision: 19c972e6766452bc3920fddb6beda6411d89dc92
+  specs:
+    trix (0.11.0)
+      rails (> 4.1, < 5.2)
+
+GIT
   remote: https://github.com/oceanshq/paperclip-azure
   revision: a7a88535dd4f03b6e5a36c42325f0913cc375f82
   specs:
@@ -477,8 +484,6 @@ GEM
       i18n
       rails (>= 3.1)
     transitions (1.2.1)
-    trix (0.10.1)
-      rails
     ttfunk (1.5.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -591,7 +596,7 @@ DEPENDENCIES
   timecop
   title
   transitions
-  trix
+  trix!
   uglifier
   validates_email_format_of
   waves-utilities!
