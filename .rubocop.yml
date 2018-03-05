@@ -22,6 +22,7 @@ AllCops:
     - 'db/schema.rb'
     - 'db/migrate/*.rb'
     - 'config/initializers/simple_form*.rb'
+    - 'config/initializers/new_framework_defaults_5_2.rb'
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
   # Cop names are not displayed in offense messages by default. Change behavior
