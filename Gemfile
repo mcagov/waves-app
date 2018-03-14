@@ -33,7 +33,7 @@ gem "paperclip", ">= 5.2.0"
 gem "paperclip-azure",
     git: "https://github.com/oceanshq/paperclip-azure"
 gem "pg_backup"
-gem "pg_search"
+gem "pg_search", ">= 2.1.2"
 gem "prawn"
 gem "prawn-print"
 gem "prawn-table"
