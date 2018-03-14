@@ -6,4 +6,9 @@ FactoryGirl.define do
       create(:finance_payment, batch: batch)
     end
   end
+
+  factory :empty_finance_batch, class: "FinanceBatch" do
+    opened_at      { Date.today }
+    processed_by   { build(:user) }
+  end
 end

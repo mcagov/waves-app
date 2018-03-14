@@ -1,6 +1,6 @@
 class Finance::BatchesController < InternalPagesController
   before_action :prevent_read_only!
-  before_action :load_batch, only: [:close, :re_open, :lock]
+  before_action :load_batch, only: [:close, :re_open, :lock, :destroy]
   def index
     @heading = "All Batches"
     @batches = default_scope
@@ -47,6 +47,14 @@ class Finance::BatchesController < InternalPagesController
   def lock
     @batch.lock! && @batch.save
     redirect_to finance_batch_payments_path(@batch)
+  end
+
+  def destroy
+    if @batch.finance_payments.empty?
+      @batch.destroy
+      flash[:notice] = "The batch has been cancelled"
+    end
+    redirect_to finance_batches_path
   end
 
   private
