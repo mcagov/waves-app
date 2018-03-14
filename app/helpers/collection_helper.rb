@@ -44,10 +44,12 @@ module CollectionHelper
   end
 
   def eligibility_status_collection(submission)
-    if Policies::Definitions.part_4_non_fishing?(submission)
-      WavesUtilities::EligibilityStatus.part_4_non_fishing
+    if Policies::Definitions.part_3?(submission)
+      WavesUtilities::EligibilityStatus.part_3
+    elsif Policies::Definitions.fishing_vessel?(submission)
+      WavesUtilities::EligibilityStatus.fishing_vessels
     else
-      WavesUtilities::EligibilityStatus.all
+      WavesUtilities::EligibilityStatus.part_1_and_part_4_non_fishing
     end
   end
 
