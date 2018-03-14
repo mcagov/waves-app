@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   namespace :finance do
-    resources :batches, only: [:index, :create, :update] do
+    resources :batches, only: [:index, :create, :update, :destroy] do
       member do
         post :close
         post :re_open
