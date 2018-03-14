@@ -21,7 +21,7 @@
       include_blank: false
 .row
   .col-md-3
-    = mortgage_f.input :executed_at, as: :string, label: "Date Executed", input_html: { class: "datetimepicker" }
+    = mortgage_f.input :executed_at, as: :string, label: "Date Executed", input_html: { class: "datepicker" }
   .col-md-3
     = mortgage_f.input :registered_at, as: :string, label: "Date Registered", disabled: true, hint: "(System generated)"
   .col-md-3

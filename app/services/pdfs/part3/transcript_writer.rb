@@ -45,7 +45,7 @@ class Pdfs::Part3::TranscriptWriter < Pdfs::TranscriptWriter
     s = "I certify that this transcript consisting of two pages is a true"
     s += " extract from part III of the Register (Small Ships Register)"
     s += " now in my charge showing the descriptive particulars and"
-    s += " registered ownership/s as at"
+    s += " registered ownership/s as at "
 
     [
       { text: s },
