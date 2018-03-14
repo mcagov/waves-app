@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.4"
 
-gem "rails", "~> 5.1.4"
+gem "rails", "~> 5.2.0.rc1"
 
 gem "auto_increment"
 gem "active_model_serializers"
@@ -49,7 +49,7 @@ gem "sprockets", "3.6.3"
 gem "sprockets-es6"
 gem "title"
 gem "transitions", require: ["transitions", "active_model/transitions"]
-gem "trix"
+gem "trix", git: "https://github.com/bcoia/trix.git"
 gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
