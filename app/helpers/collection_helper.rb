@@ -8,7 +8,7 @@ module CollectionHelper
   end
 
   def nationalities_collection
-    WavesUtilities::Nationality.all
+    (["BRITISH"] << WavesUtilities::Nationality.all.sort).flatten
   end
 
   def last_registry_countries_collection
