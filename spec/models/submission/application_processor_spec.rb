@@ -155,6 +155,34 @@ describe Submission::ApplicationProcessor do
         it { subject }
       end
 
+      context "mortgage" do
+        let(:task) { :mortgage }
+        let(:registered_vessel) { create(:registered_vessel) }
+
+        before do
+          expect_registry_builder
+          expect_mortgage_registration_builder
+          dont_expect_cloned_registration_builder
+          dont_expect_print_job_builder
+        end
+
+        it { subject }
+      end
+
+      context "mortgage_other" do
+        let(:task) { :mortgage_other }
+        let(:registered_vessel) { create(:registered_vessel) }
+
+        before do
+          expect_registry_builder
+          expect_mortgage_registration_builder
+          dont_expect_cloned_registration_builder
+          dont_expect_print_job_builder
+        end
+
+        it { subject }
+      end
+
       context "manual_override" do
         let(:task) { :manual_override }
 
@@ -190,6 +218,16 @@ end
 
 def dont_expect_registration_builder
   expect(Builders::RegistrationBuilder).not_to receive(:create)
+end
+
+def expect_mortgage_registration_builder
+  expect(Builders::RegistrationBuilder)
+    .to receive(:create)
+    .with(
+      submission,
+      registered_vessel,
+      registered_vessel.registered_at,
+      registered_vessel.registered_until)
 end
 
 def expect_closed_registration_builder
