@@ -25,6 +25,10 @@ class Task < WavesUtilities::Task
     [:closure, :current_transcript, :historic_transcript].include?(@key)
   end
 
+  def mortgages?
+    [:mortgage, :mortgage_other].include?(@key)
+  end
+
   class << self
     def flag_in
       [:new_registration, :provisional]

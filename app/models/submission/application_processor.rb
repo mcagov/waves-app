@@ -27,6 +27,8 @@ class Submission::ApplicationProcessor
         build_new_registration
       elsif @task == :closure
         build_closed_registration
+      elsif @task.mortgages?
+        build_mortgage_registration
       else
         build_cloned_registration
       end
@@ -39,6 +41,15 @@ class Submission::ApplicationProcessor
           @registered_vessel,
           @approval_params[:registration_starts_at],
           @approval_params[:registration_ends_at])
+    end
+
+    def build_mortgage_registration
+      Builders::RegistrationBuilder
+        .create(
+          @submission,
+          @registered_vessel,
+          @registered_vessel.registered_at,
+          @registered_vessel.registered_until)
     end
 
     def build_closed_registration

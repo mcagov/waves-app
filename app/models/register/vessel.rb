@@ -107,6 +107,7 @@ module Register
     scope :frozen, -> { where.not(frozen_at: nil) }
     scope :not_frozen, -> { where(frozen_at: nil) }
 
+    delegate :registered_at, to: :current_registration, allow_nil: true
     delegate :registered_until, to: :current_registration, allow_nil: true
 
     before_validation :build_reg_no, on: :create
