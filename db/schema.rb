@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171110134803) do
+ActiveRecord::Schema.define(version: 2018_03_19_094113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "assets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "file_file_name"
-    t.string "file_content_type"
-    t.integer "file_file_size"
-    t.datetime "file_updated_at"
     t.uuid "owner_id"
     t.string "owner_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "file_updated_at"
+    t.integer "file_file_size"
+    t.string "file_content_type"
+    t.string "file_file_name"
     t.index ["owner_id"], name: "index_assets_on_owner_id"
     t.index ["owner_type"], name: "index_assets_on_owner_type"
   end
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 20171110134803) do
     t.string "application_ref_no"
     t.uuid "batch_id"
     t.string "payer_name"
+    t.integer "service_level", default: 0
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id"
   end
 

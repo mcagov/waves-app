@@ -36,5 +36,8 @@
                 %input{name: "payment_finance_payment[applicant_is_agent]", value: "1", type: "checkbox"}
                 Applicant is Agent
         .row
+          .col-md-4
+            = f.input :service_level, collection: service_level_collection, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
+        .row
           .col-md-8
             = f.input :documents_received
