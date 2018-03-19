@@ -7,12 +7,10 @@ en:
       transfer_to_bdt: Transfer to Port in British Possession
       renewal: Renewal of Registration
       re_registration: Re-Registration
-      convert_pleasure_to_or_from_commercial: Convert Pleasure to/from Commercial
       convert_provisional_to_full: Convert Provisional to Full
       convert_provisional_to_simple: Convert Provisional to Simple
       convert_simple_to_full: Convert Simple to Full
       change_owner: Change of Ownership
-      change_vessel: Change of Vessel HIN, Callsign, MMSI
       mortgage: Mortgage Registration
       mortgage_intent: Mortgage Intent
       current_transcript: Issue Current Transcript

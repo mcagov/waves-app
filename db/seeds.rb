@@ -45,7 +45,6 @@ FEES = [
   [:part_2_full_re_registration, :re_registration, 13100, 18000],
   [:part_3_registration, :re_registration, 2500, 5000],
 
-  [:part_1_change_vessel, :convert_pleasure_to_or_from_commercial, 3700, 10000],
   [:part_1_change_vessel, :convert_provisional_to_full, 5500, 5000],
 
   [:part_2_simple_change_vessel, :convert_provisional_to_simple, 5500, 5000],
@@ -63,44 +62,26 @@ FEES = [
   [:part_2_full_simple_to_full, :convert_simple_to_full, 6100, 10000],
 
   [:part_1_change_owner, :change_owner, 8000, 10000, 1500],
-  [:part_1_change_owner, :current_transcript, 2100, 5000],
   [:part_2_simple_change_owner, :change_owner, 6300, 10000, 1500],
-  [:part_2_simple_change_owner, :current_transcript, 2100, 5000],
   [:part_2_full_change_owner, :change_owner, 8000, 10000, 1500],
-  [:part_2_full_change_owner, :current_transcript, 2100, 5000],
   [:part_3_change_owner, :change_owner, 2500, 5000],
-  [:part_3_change_owner, :current_transcript, 2100, 5000],
   [:part_4_change_owner, :change_owner, 8000, 10000],
-  [:part_4_change_owner, :current_transcript, 2100, 5000],
 
-  [:part_1_change_vessel, :change_vessel, 3700, 10000, 1700],
   [:part_1_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
-  [:part_2_simple_change_vessel, :change_vessel, 3700, 10000, 1700],
   [:part_2_simple_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
-  [:part_2_full_change_vessel, :change_vessel, 3700, 10000, 1700],
   [:part_2_full_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
-  [:part_3_change_vessel, :change_vessel, 2500, 5000],
-  [:part_4_change_vessel, :change_vessel, 3700, 10000, 1700],
   [:part_4_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
 
   [:part_1_mortgage, :mortgage, 8400, 10000, 1500],
   [:part_2_full_mortgage, :mortgage, 8400, 10000, 1500],
 
   [:part_1_mortgage, :mortgage_intent, 2500, 5000, 5000],
-  [:part_1_mortgage, :current_transcript, 2100, 5000],
   [:part_1_new_registration, :mortgage_intent, 2500, 5000, 5000],
   [:part_1_re_registration, :mortgage_intent, 2500, 5000, 5000],
 
   [:part_2_full_mortgage, :mortgage_intent, 2500, 5000, 5000],
-  [:part_2_full_mortgage, :current_transcript, 2100, 5000],
   [:part_2_full_new_registration, :mortgage_intent, 2500, 5000, 5000],
   [:part_2_full_re_registration, :mortgage_intent, 2500, 5000, 5000],
-
-  [:part_1_current_transcript, :current_transcript, 2100, 5000],
-  [:part_2_simple_current_transcript, :current_transcript, 2100, 5000],
-  [:part_2_full_current_transcript, :current_transcript, 2100, 5000],
-  [:part_3_current_transcript, :current_transcript, 2500, 5000],
-  [:part_4_current_transcript, :current_transcript, 2100, 5000],
 
   [:part_1_historic_transcript, :historic_transcript, 3200, 5000],
   [:part_2_simple_historic_transcript, :historic_transcript, 3200, 5000],
@@ -109,11 +90,9 @@ FEES = [
   [:part_4_historic_transcript, :historic_transcript, 3200, 5000],
 
   [:part_1_issue_csr, :issue_csr, 2100, 5000],
-  [:part_2_full_issue_csr, :issue_csr, 2100, 5000],
   [:part_4_issue_csr, :issue_csr, 2100, 5000],
 
   [:part_1_csr_certified_copy, :csr_certified_copy, 3200, 5000],
-  [:part_2_full_csr_certified_copy, :csr_certified_copy, 3200, 5000],
   [:part_4_csr_certified_copy, :csr_certified_copy, 3200, 5000],
 
   [:part_1_duplicate_certificate, :duplicate_certificate, 2100, 5000],
@@ -123,7 +102,7 @@ FEES = [
   [:part_4_duplicate_certificate, :duplicate_certificate, 2100, 5000],
 
   [:all_parts, :copy_of_document, 1300, 5000, 1300],
-  [:all_parts, :certificate_of_non_registry, 1300],
+  [:all_parts, :current_transcript, 2100, 5000, 0],
 ].freeze
 
 FEES.each do |seed|
