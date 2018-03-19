@@ -20,7 +20,6 @@ class Payment::FinancePayment < ApplicationRecord
 
   enum service_level: [:standard, :premium]
 
-
   PAYMENT_TYPES = [
     ["BACS", :bacs],
     ["CHQ", :cheque],
