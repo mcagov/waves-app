@@ -45,7 +45,6 @@ FEES = [
   [:part_2_full_re_registration, :re_registration, 13100, 18000],
   [:part_3_registration, :re_registration, 2500, 5000],
 
-  [:part_1_change_vessel, :convert_pleasure_to_or_from_commercial, 3700, 10000],
   [:part_1_change_vessel, :convert_provisional_to_full, 5500, 5000],
 
   [:part_2_simple_change_vessel, :convert_provisional_to_simple, 5500, 5000],
