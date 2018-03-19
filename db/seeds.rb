@@ -109,11 +109,9 @@ FEES = [
   [:part_4_historic_transcript, :historic_transcript, 3200, 5000],
 
   [:part_1_issue_csr, :issue_csr, 2100, 5000],
-  [:part_2_full_issue_csr, :issue_csr, 2100, 5000],
   [:part_4_issue_csr, :issue_csr, 2100, 5000],
 
   [:part_1_csr_certified_copy, :csr_certified_copy, 3200, 5000],
-  [:part_2_full_csr_certified_copy, :csr_certified_copy, 3200, 5000],
   [:part_4_csr_certified_copy, :csr_certified_copy, 3200, 5000],
 
   [:part_1_duplicate_certificate, :duplicate_certificate, 2100, 5000],
