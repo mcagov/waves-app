@@ -40,6 +40,41 @@ class Pdfs::Part3::TranscriptWriter < Pdfs::TranscriptWriter
                        @registration.closed_at, at: [l_margin, 340]
     end
   end
+
+  def certification_text
+    s = "I certify that this transcript consisting of two pages is a true"
+    s += " extract from part III of the Register (Small Ships Register)"
+    s += " now in my charge showing the descriptive particulars and"
+    s += " registered ownership/s as at "
+
+    [
+      { text: s },
+      { text: @registration.created_at.to_s, styles: [:bold] },
+      { text: "." }
+    ]
+  end
+
+  def draw_page_2
+    @pdf.start_new_page
+    @pdf.font("Helvetica", size: 11)
+
+    @pdf.move_down 60
+    @pdf.stroke_horizontal_rule
+
+    @pdf.draw_text "The following details show the current ownership of ",
+                   at: [l_margin, 760]
+    @pdf.draw_text "#{@vessel.name} #{@vessel.reg_no}",
+                   at: [l_margin, 746]
+
+    @pdf.move_down 50
+
+    @pdf.stroke_horizontal_rule
+
+    owner_details_for_part
+
+    @pdf.text_box "Page 2 of 2", width: 500,
+        at: [262, 40]
+  end
   # rubocop:enable all
 
   def draw_label_value(label, text, opts)

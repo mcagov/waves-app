@@ -11,6 +11,16 @@ class RegisteredVessel::CorrespondencesController < InternalPagesController
     redirect_to vessel_path(@vessel)
   end
 
+  def destroy
+    @correspondence = Correspondence.find(params[:correspondence_id])
+    if @correspondence
+      @correspondence.destroy
+      flash[:notice] = "That item of correspondence has been removed"
+    end
+
+    redirect_to vessel_path(@vessel)
+  end
+
   private
 
   def correspondence_params

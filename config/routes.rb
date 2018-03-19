@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   namespace :finance do
-    resources :batches, only: [:index, :create, :update] do
+    resources :batches, only: [:index, :create, :update, :destroy] do
       member do
         post :close
         post :re_open
@@ -81,7 +81,7 @@ Rails.application.routes.draw do
               only: [:create, :update, :destroy]
 
     resource :correspondence,
-             only: [:create],
+             only: [:create, :destroy],
              controller: "submission/correspondences"
 
     resource :correspondent,
@@ -208,7 +208,7 @@ Rails.application.routes.draw do
              controller: "registered_vessel/current_transcript"
 
     resource :correspondence,
-             only: [:create],
+             only: [:create, :destroy],
              controller: "registered_vessel/correspondences"
 
     resource :historic_transcript,

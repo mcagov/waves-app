@@ -4,3 +4,4 @@
     = link_to print_job_path(print_job, template: print_job.template, format: :pdf), target: "_blank" do
       = t("print_job.menu_title.#{print_job.template}").singularize
   %td= print_job.created_at.to_s(:date_time)
+  %td

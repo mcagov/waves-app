@@ -4,6 +4,7 @@
     %th Email
     %th Phone
     %th Nationality
+    %th Status
     %th Address
   %tbody
     - owners.each do |owner|
@@ -12,4 +13,5 @@
         %td= owner.email
         %td= owner.phone_number
         %td= owner.nationality
+        %td= owner.eligibility_status.try(:titleize)
         %td= owner.inline_address

@@ -8,3 +8,4 @@
       render partial: "/submissions/info/official_no",
       locals: { submission: @submission })}'
   );
+  $('#submission_vessel_ec_no').val('#{@submission.vessel.ec_no}');

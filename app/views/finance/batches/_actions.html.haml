@@ -12,10 +12,16 @@
         Lock Batch
 
     - elsif batch.open?
-      = link_to close_finance_batch_path(batch), method: :post,
-        class: 'btn btn-primary btn-lg' do
-        %i.fa.fa-check
-        End Batch
+      - if batch.finance_payments.empty?
+        = link_to finance_batch_path(batch), method: :delete,
+          class: 'btn btn-warning btn-lg' do
+          Cancel Batch
+
+      - else
+        = link_to close_finance_batch_path(batch), method: :post,
+          class: 'btn btn-primary btn-lg' do
+          %i.fa.fa-croz
+          End Batch
 
       = link_to new_finance_batch_payment_path(batch),
         class: 'btn btn-success btn-lg pull-right' do

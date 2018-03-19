@@ -6,19 +6,23 @@
 .modal-body
   .row
     .col-md-12{style: 'text-align: center'}
-      - if @submission.approvable?
-        %h4 The application can now be processed
-        %p
-          = link_to "#",
-            id: "approve-extended-application",
-            class: "btn btn-success btn-lg" do
-            %i.fa.fa-check
-            = t("submission.approval.inline-btn.#{@submission.task}")
+      .col-md-1
+      .col-md-10
+        - if @submission.approvable?
+          %h4 The application can now be processed
+          %p.red= t('submission.approval_alert_text')
+          %p
+            = link_to "#",
+              id: "approve-extended-application",
+              class: "btn btn-success btn-lg" do
+              %i.fa.fa-check
+              = t("submission.approval.inline-btn.#{@submission.task}")
 
-      - else
-        %h4 The application is incomplete and can not processed
-        - Policies::Definitions.approval_errors(@submission).each do |approval_error|
-          .red= t("submission.approval_error.#{approval_error}")
+        - else
+          %h4 The application is incomplete and can not processed
+          - Policies::Definitions.approval_errors(@submission).each do |approval_error|
+            .red= t("submission.approval_error.#{approval_error}")
+      .col-md-1
 
 - if current_activity.registration_officer?
   .modal-footer

@@ -23,7 +23,7 @@
         %td.amount= mortgage.amount
         %td.mortgagors= mortgage.mortgagors.map(&:name).join(", ")
         %td.mortgagees= mortgage.mortgagees.map(&:name).join(", ")
-        %td.executed_at= mortgage.executed_at.to_s(:date_time) if mortgage.executed_at
+        %td.executed_at= mortgage.executed_at.to_s(:date_summary) if mortgage.executed_at
         %td.registered_at= mortgage.registered_at.to_s(:date_time) if mortgage.registered_at
         %td.discharged_at= mortgage.discharged_at.to_s(:date_time) if mortgage.discharged_at
         %td

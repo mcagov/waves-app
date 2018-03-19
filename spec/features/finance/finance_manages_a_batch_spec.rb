@@ -1,33 +1,49 @@
 require "rails_helper"
 
 describe "Finance manages a batch", type: :feature do
-  before do
-    @batch = create(:finance_batch)
+  context "in general" do
+    before do
+      login_to_finance
+      visit finance_batch_payments_path(batch)
+    end
 
-    login_to_finance
-    visit finance_batch_payments_path(@batch)
+    context "with a payment" do
+      let(:batch) { create(:finance_batch) }
 
-    click_on("End Batch")
-  end
+      scenario "ending and re-opening a batch" do
+        expect(page).not_to have_link(cancel_batch_text)
 
-  scenario "re-opening a batch" do
-    click_on(re_open_batch_link_text)
-    expect(page).to have_link(new_fee_entry_link_text)
+        click_on("End Batch")
+        click_on(re_open_batch_link_text)
+        expect(page).to have_link(new_fee_entry_link_text)
 
-    click_on(end_batch_link_text)
-    expect(page).to have_link(re_open_batch_link_text)
-    expect(page).not_to have_link(new_fee_entry_link_text)
-  end
+        click_on(end_batch_link_text)
+        expect(page).to have_link(re_open_batch_link_text)
+        expect(page).not_to have_link(new_fee_entry_link_text)
+      end
 
-  scenario "locking a batch" do
-    click_on("Lock Batch")
+      scenario "ending and locking a batch" do
+        click_on("End Batch")
+        click_on("Lock Batch")
 
-    expect(page).to have_current_path(finance_batch_payments_path(@batch))
-    expect(page).not_to have_link(re_open_batch_link_text)
-    expect(page).not_to have_link(end_batch_link_text)
-    expect(page).not_to have_link(new_fee_entry_link_text)
+        expect(page).to have_current_path(finance_batch_payments_path(batch))
+        expect(page).not_to have_link(re_open_batch_link_text)
+        expect(page).not_to have_link(end_batch_link_text)
+        expect(page).not_to have_link(new_fee_entry_link_text)
 
-    expect(FinanceBatch.last).to be_locked
+        expect(FinanceBatch.last).to be_locked
+      end
+    end
+
+    context "with no payments" do
+      let(:batch) { create(:empty_finance_batch) }
+
+      scenario "deleting an empty batch" do
+        click_on(cancel_batch_text)
+
+        expect { FinanceBatch.find(batch) }.to raise_error
+      end
+    end
   end
 end
 
@@ -41,4 +57,8 @@ end
 
 def new_fee_entry_link_text
   "New Fee Entry"
+end
+
+def cancel_batch_text
+  "Cancel Batch"
 end

@@ -101,7 +101,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       default_label_font
       @pdf.draw_text "Date/Time registered", at: [l_margin, y_pos]
       default_value_font
-      @pdf.draw_text mortgage.registered_at, at: [l_margin + 140, y_pos]
+      @pdf.draw_text mortgage.registered_at.to_s(:date_time), at: [l_margin + 140, y_pos]
       y_pos -= 15
 
       default_label_font

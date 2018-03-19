@@ -47,6 +47,10 @@
       %td
         %strong= finance_payment.applicant_email
     %tr
+      %td Service Level
+      %td
+        %strong= finance_payment.service_level.try(:titleize)
+    %tr
       %td Documents Received
       %td
         %strong= finance_payment.documents_received

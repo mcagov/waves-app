@@ -8,7 +8,11 @@ module CollectionHelper
   end
 
   def nationalities_collection
-    WavesUtilities::Nationality.all
+    (["BRITISH"] << WavesUtilities::Nationality.all.sort).flatten
+  end
+
+  def last_registry_countries_collection
+    WavesUtilities::Country.all.insert(1, "NONE")
   end
 
   def registration_types_collection(part)
@@ -40,10 +44,12 @@ module CollectionHelper
   end
 
   def eligibility_status_collection(submission)
-    if Policies::Definitions.part_4_non_fishing?(submission)
-      WavesUtilities::EligibilityStatus.part_4_non_fishing
+    if Policies::Definitions.part_3?(submission)
+      WavesUtilities::EligibilityStatus.part_3
+    elsif Policies::Definitions.fishing_vessel?(submission)
+      WavesUtilities::EligibilityStatus.fishing_vessels
     else
-      WavesUtilities::EligibilityStatus.all
+      WavesUtilities::EligibilityStatus.part_1_and_part_4_non_fishing
     end
   end
 
@@ -102,5 +108,9 @@ module CollectionHelper
     filter = registration_types_collection(part) || []
     filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
     filter << ["Not set", "not_set"]
+  end
+
+  def service_level_collection
+    [["Standard", :standard], ["Premium", :premium]]
   end
 end

@@ -9,3 +9,12 @@
     '#{escape_javascript(
        render partial: "/submissions/extended/forms/mortgages/base")}'
   );
+
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });
+
+  $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true
+  });

@@ -9,7 +9,7 @@ class RegistrationDate
 
     def start_date(submission)
       registered_vessel = submission.registered_vessel
-      return Date.today unless registered_vessel
+      return Time.now unless registered_vessel.try(:registered_until)
 
       if registered_vessel.registered_until < 3.months.from_now
         registered_vessel.registered_until

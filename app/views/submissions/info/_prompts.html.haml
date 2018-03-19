@@ -1,8 +1,12 @@
 - if submission.cancelled?
   #prompt.alert.alert-info
-    Application Cancelled.
+    Application Cancelled
+    - if worklog = WorkLog.find_by(submission_id: submission.id)
+      by #{worklog.actioned_by}
+      on #{worklog.created_at}.
+
     - if submission.cancellation
-      #{ submission.cancellation.subject }.
+      #{ submission.cancellation.subject }
 
 - elsif submission.referred?
   #prompt.alert.alert-warning
