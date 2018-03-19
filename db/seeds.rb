@@ -121,7 +121,7 @@ FEES = [
   [:part_4_duplicate_certificate, :duplicate_certificate, 2100, 5000],
 
   [:all_parts, :copy_of_document, 1300, 5000, 1300],
-  [:all_parts, :certificate_of_non_registry, 1300],
+  [:all_parts, :current_transcript, 2100, 5000, 0],
 ].freeze
 
 FEES.each do |seed|
