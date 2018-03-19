@@ -15,12 +15,12 @@ en:
       change_vessel: Change of Vessel HIN, Callsign, MMSI
       mortgage: Mortgage Registration
       mortgage_intent: Mortgage Intent
-      current_transcript: Current Transcript
-      historic_transcript: Historic Transcript
+      current_transcript: Issue Current Transcript
+      historic_transcript: Issue Historic Transcript
       issue_csr: Issue CSR
       csr_certified_copy: Certified Copy of CSR
       duplicate_certificate: Duplicate Certificate
       copy_of_document: A copy of a document relating to the registration of a ship
       certificate_of_non_registry: Certificate of non-registry
-
+      name_or_port_of_registry: Change Name or Port of Registry
 
