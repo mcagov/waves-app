@@ -15,8 +15,8 @@ en:
       change_vessel: Change of Vessel HIN, Callsign, MMSI
       mortgage: Mortgage Registration
       mortgage_intent: Mortgage Intent
-      current_transcript: Current Transcript
-      historic_transcript: Historic Transcript
+      current_transcript: Issue Current Transcript
+      historic_transcript: Issue Historic Transcript
       issue_csr: Issue CSR
       csr_certified_copy: Certified Copy of CSR
       duplicate_certificate: Duplicate Certificate
