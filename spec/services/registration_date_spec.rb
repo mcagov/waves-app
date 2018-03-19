@@ -49,7 +49,20 @@ describe RegistrationDate do
       let(:submission) { build(:submission) }
 
       it "sets starts_at to today" do
-        expect(subject).to eq(Date.today)
+        expect(subject.to_date).to eq(Date.today)
+      end
+    end
+
+    context "for an unregistered_vessel" do
+      let!(:submission) do
+        create(
+          :approvable_submission,
+          part: :part_2,
+          registered_vessel: build(:unregistered_vessel))
+      end
+
+      it "sets starts_at to today" do
+        expect(subject.to_date).to eq(Date.today)
       end
     end
 
