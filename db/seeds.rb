@@ -62,15 +62,10 @@ FEES = [
   [:part_2_full_simple_to_full, :convert_simple_to_full, 6100, 10000],
 
   [:part_1_change_owner, :change_owner, 8000, 10000, 1500],
-  [:part_1_change_owner, :current_transcript, 2100, 5000],
   [:part_2_simple_change_owner, :change_owner, 6300, 10000, 1500],
-  [:part_2_simple_change_owner, :current_transcript, 2100, 5000],
   [:part_2_full_change_owner, :change_owner, 8000, 10000, 1500],
-  [:part_2_full_change_owner, :current_transcript, 2100, 5000],
   [:part_3_change_owner, :change_owner, 2500, 5000],
-  [:part_3_change_owner, :current_transcript, 2100, 5000],
   [:part_4_change_owner, :change_owner, 8000, 10000],
-  [:part_4_change_owner, :current_transcript, 2100, 5000],
 
   [:part_1_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
   [:part_2_simple_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
@@ -81,20 +76,13 @@ FEES = [
   [:part_2_full_mortgage, :mortgage, 8400, 10000, 1500],
 
   [:part_1_mortgage, :mortgage_intent, 2500, 5000, 5000],
-  [:part_1_mortgage, :current_transcript, 2100, 5000],
   [:part_1_new_registration, :mortgage_intent, 2500, 5000, 5000],
   [:part_1_re_registration, :mortgage_intent, 2500, 5000, 5000],
 
   [:part_2_full_mortgage, :mortgage_intent, 2500, 5000, 5000],
-  [:part_2_full_mortgage, :current_transcript, 2100, 5000],
   [:part_2_full_new_registration, :mortgage_intent, 2500, 5000, 5000],
   [:part_2_full_re_registration, :mortgage_intent, 2500, 5000, 5000],
 
-  [:part_1_current_transcript, :current_transcript, 2100, 5000],
-  [:part_2_simple_current_transcript, :current_transcript, 2100, 5000],
-  [:part_2_full_current_transcript, :current_transcript, 2100, 5000],
-  [:part_3_current_transcript, :current_transcript, 2500, 5000],
-  [:part_4_current_transcript, :current_transcript, 2100, 5000],
 
   [:part_1_historic_transcript, :historic_transcript, 3200, 5000],
   [:part_2_simple_historic_transcript, :historic_transcript, 3200, 5000],
