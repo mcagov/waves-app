@@ -16,6 +16,7 @@ describe Payment::FinancePayment do
           applicant_email: "bob@example.com",
           applicant_is_agent: true,
           application_ref_no: "ABC123",
+          service_level: "premium",
           documents_received: "some files"
         )
       end
@@ -69,6 +70,10 @@ describe Payment::FinancePayment do
 
         it "sets the linkable_ref_no in the changeset" do
           expect(submission.linkable_ref_no).to eq("ABC123")
+        end
+
+        it "sets the service_level" do
+          expect(submission.service_level).to eq("premium")
         end
 
         it "sets the documents_received" do

@@ -109,4 +109,8 @@ module CollectionHelper
     filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
     filter << ["Not set", "not_set"]
   end
+
+  def service_level_collection
+    [["Standard", :standard], ["Premium", :premium]]
+  end
 end
