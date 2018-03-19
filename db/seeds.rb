@@ -83,7 +83,6 @@ FEES = [
   [:part_2_full_new_registration, :mortgage_intent, 2500, 5000, 5000],
   [:part_2_full_re_registration, :mortgage_intent, 2500, 5000, 5000],
 
-
   [:part_1_historic_transcript, :historic_transcript, 3200, 5000],
   [:part_2_simple_historic_transcript, :historic_transcript, 3200, 5000],
   [:part_2_full_historic_transcript, :historic_transcript, 3200, 5000],
