@@ -8,7 +8,7 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
 
     # adding a new document
     page.attach_file("document_assets_attributes_0_file", mca_file)
-    select("Carving & Marking Note", from: "Type")
+    select("Seafish", from: "Type")
     select("Recognised Organisation", from: "Issuing Authority")
     fill_in("Date of Expiry", with: "01/02/2016")
     fill_in("Notes", with: "Some text")
@@ -22,7 +22,7 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
     expect(page).to have_css(".noted_at", text: "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
 
-    click_on("Carving & Marking Note")
+    click_on("Seafish")
 
     # editing the document
     select("Bill of Sale", from: "Type")
