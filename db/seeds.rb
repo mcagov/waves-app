@@ -66,13 +66,18 @@ FEES = [
   [:part_2_simple_change_owner, :change_owner, 6300, 10000, 1500],
   [:part_2_full_change_owner, :change_owner, 8000, 10000, 1500],
   [:part_3_change_owner, :change_owner, 2500, 5000],
+  [:part_3_change_owner, :current_transcript, 2100, 5000],
   [:part_4_change_owner, :change_owner, 8000, 10000],
 
   [:part_1_change_vessel, :change_vessel, 3700, 10000, 1700],
+  [:part_1_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
   [:part_2_simple_change_vessel, :change_vessel, 3700, 10000, 1700],
+  [:part_2_simple_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
   [:part_2_full_change_vessel, :change_vessel, 3700, 10000, 1700],
+  [:part_2_full_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
   [:part_3_change_vessel, :change_vessel, 2500, 5000],
   [:part_4_change_vessel, :change_vessel, 3700, 10000, 1700],
+  [:part_4_change_vessel, :name_or_port_of_registry, 3700, 10000, 1700],
 
   [:part_1_mortgage, :mortgage, 8400, 10000, 1500],
   [:part_2_full_mortgage, :mortgage, 8400, 10000, 1500],
