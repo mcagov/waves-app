@@ -12,7 +12,6 @@ en:
       convert_provisional_to_simple: Convert Provisional to Simple
       convert_simple_to_full: Convert Simple to Full
       change_owner: Change of Ownership
-      change_vessel: Change of Vessel HIN, Callsign, MMSI
       mortgage: Mortgage Registration
       mortgage_intent: Mortgage Intent
       current_transcript: Issue Current Transcript
