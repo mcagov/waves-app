@@ -47,10 +47,11 @@ class Pdfs::CsrFormWriter
     @pdf.move_down 15
     @pdf.draw_text "Place of Issue: Cardiff", at: [0, @pdf.cursor]
     @pdf.draw_text "Date of issue: #{@csr_form.issued_at}", at: [r_col_pos, @pdf.cursor]
+    @pdf.move_down 12
+    @pdf.image "#{Rails.root}/public/pdf_images/registrar_signature.png", at: [0, @pdf.cursor], scale: 0.2
     @pdf.move_down 20
-    @pdf.draw_text "Signature of authorised person:", at: [0, @pdf.cursor]
-    @pdf.draw_text "Name of authorised person:", at: [r_col_pos, @pdf.cursor]
-    @pdf.move_down 15
+    @pdf.draw_text " David Jones. Registrar General of the United Kingdom Shipping Register.", at: [90, @pdf.cursor]
+    @pdf.move_down 25
     @pdf.text "This document was received by the ship and attached to the ship's CSR file on the following date:"
     @pdf.move_down 30
 
