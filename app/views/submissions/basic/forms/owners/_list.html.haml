@@ -5,6 +5,7 @@
     %th Email
     %th Phone
     %th Nationality
+    %th Status
     %th Address
     %th
   %tbody
@@ -15,6 +16,7 @@
         %td.owner-email= owner.email
         %td.owner-phone_number= owner.phone_number
         %td.owner-nationality= owner.nationality
+        %td.owner-status= owner.eligibility_status.try(:titleize)
         %td.owner-address= owner.inline_address
         %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
