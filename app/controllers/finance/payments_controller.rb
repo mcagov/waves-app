@@ -57,7 +57,7 @@ class Finance::PaymentsController < InternalPagesController
       :payment_date, :application_ref_no, :part,
       :task, :vessel_reg_no, :vessel_name, :payer_name,
       :service_level, :payment_type, :payment_amount, :applicant_is_agent,
-      :applicant_name, :applicant_email, :documents_received)
+      :applicant_name, :applicant_email, :service_level, :documents_received)
   end
 
   def load_batch
