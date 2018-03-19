@@ -29,7 +29,12 @@ describe "User generates an official no", js: true do
 
     within("#heading") do
       expect(page).to have_css(".official-no", text: "VESSEL_REG_NO")
-      expect(page).to have_css("#ec-no", text: "VESSEL_REG_NO")
+      expect(page).to have_css("#ec-no", text: "GBR000VESSEL_REG_NO")
+    end
+
+    within("#vessel_tab") do
+      expect(find_field("submission_vessel_ec_no").value)
+        .to eq("GBR000VESSEL_REG_NO")
     end
   end
 
