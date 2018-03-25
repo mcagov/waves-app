@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "~> 2.3.4"
 
-gem "rails", "~> 5.2.0.rc1"
+gem "rails", "~> 5.2.0.rc2"
 
 gem "auto_increment"
 gem "active_model_serializers"
