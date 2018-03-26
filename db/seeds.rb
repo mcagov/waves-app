@@ -33,6 +33,7 @@ FEES = [
   [:part_1_new_registration, :transfer_from_bdt, 11500, 10000],
   [:part_1_transfer_to_bdt, :transfer_to_bdt, 3500, 10000],
   [:part_1_closure, :transfer_to_bdt, 3500, 10000],
+  [:part_1_registrar_closure, :transfer_to_bdt, 3500, 10000],
 
   [:part_1_renewal, :renewal, 4900, 10000],
   [:part_2_simple_renewal, :renewal, 4900, 10000],
