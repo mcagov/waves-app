@@ -66,12 +66,12 @@ deploy_staging:
     - ruby2.3
 
 #deploy_production:
-#  stage: development
+#  stage: production
 #  environment:
-#    name: development
-#    url: $WAVES_DEV_URL
+#    name: production
+#    url: $WAVES_PRODUCTION_URL
 #  when: manual
 #  script:
-#    - bundle exec cap dev deploy
+#    - bundle exec cap production deploy
 #  tags:
 #    - ruby2.3
