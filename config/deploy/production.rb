@@ -1,4 +1,4 @@
-server ENV["WAVES_PRODUCTION_IP"], user: ENV["WAVES_PRODUCTION_USER"], 
+server ENV["WAVES_PRODUCTION_IP"], user: ENV["WAVES_PRODUCTION_USER"],
                                    roles: %w(app db web)
 set :stage, :production
 set :application, ENV["WAVES_PRODUCTION_USER"]
