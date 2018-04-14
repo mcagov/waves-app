@@ -32,7 +32,7 @@ gem "nokogiri", ">= 1.8.1"
 gem "notifications-ruby-client", "= 1.1.2"
 gem "paperclip", ">= 5.2.0"
 gem "paperclip-azure",
-    git: "https://github.com/oceanshq/paperclip-azure"
+    git: "https://github.com/maritimecoastguardagency/paperclip-azure"
 gem "pg_backup"
 gem "pg_search", ">= 2.1.2"
 gem "prawn"
@@ -54,7 +54,7 @@ gem "trix", git: "https://github.com/bcoia/trix.git"
 gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
-    git: "https://github.com/oceanshq/waves-utilities.git"
+    git: "https://github.com/maritimecoastguardagency/waves-utilities.git"
 gem "whenever", require: false
 gem "will_paginate-bootstrap"
 
