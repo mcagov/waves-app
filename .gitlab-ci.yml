@@ -26,8 +26,6 @@ rspec:
     - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
   tags:
     - ruby2.3
-  when: manual
-  allow_failure: true
 
 rubocop:
   stage: test
