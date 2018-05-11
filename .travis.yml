@@ -1,0 +1,26 @@
+language: ruby
+cache: bundler
+addons:
+    postgresql: "9.5"
+script:
+  - bundle exec rubocop
+  - bundle exec rails db:setup
+  - xvfb-run bundle exec rspec spec
+  - bundle exec brakeman
+  - bundle exec bundle-audit update
+  - bundle exec bundle-audit check --ignore CVE-2017-8418
+env:
+  SMTP_ADDRESS: smtp.example.com
+  SMTP_DOMAIN: example.com
+  SMTP_PASSWORD: password
+  SMTP_USERNAME: username
+  EMAIL_FROM: inbox@example.com
+  APPLICATION_HOST: http://localhost:3000
+  ASSET_HOST: localhost:3000
+  GOVUK_HOST: localhost:3001
+notifications:
+  on_success: never
+  on_failure: never
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres

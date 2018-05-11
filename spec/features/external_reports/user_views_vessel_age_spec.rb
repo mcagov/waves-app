@@ -23,7 +23,7 @@ describe "User views Vessel Age reports", js: true do
     within("#results") do
       col = find_all("tr td")
       within(col[1]) { expect(page).to have_text("1") }
-      within(col[2]) { expect(page).to have_text("1.25") }
+      within(col[2]) { expect(page).to have_text("1.2") }
       within(col[3]) { expect(page).to have_text("100.0") }
       within(col[0]) { click_on("BARGE") }
     end
@@ -38,7 +38,7 @@ describe "User views Vessel Age reports", js: true do
       within(col[1]) { expect(page).to have_text("Part III") }
       within(col[2]) { expect(page).to have_text("IMO1") }
       within(col[3]) { expect(page).to have_text("SSR12345") }
-      within(col[4]) { expect(page).to have_text("1.25") }
+      within(col[4]) { expect(page).to have_text("1.2") }
       within(col[5]) { expect(page).to have_text("100.0") }
     end
   end
