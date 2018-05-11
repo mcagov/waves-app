@@ -4,11 +4,11 @@ module CollectionHelper
   end
 
   def countries_collection
-    WavesUtilities::Country.all
+    WavesUtilities::Country.all.uniq
   end
 
   def nationalities_collection
-    (["BRITISH"] << WavesUtilities::Nationality.all.sort).flatten
+    (["BRITISH"] << WavesUtilities::Nationality.all.uniq.sort).flatten
   end
 
   def last_registry_countries_collection
