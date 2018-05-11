@@ -71,8 +71,6 @@ group :development, :test do
   gem "capistrano-rails", "~> 1.2"
   gem "capistrano-passenger"
   gem "capistrano-delayed_job", require: false
-  gem "rbnacl"
-  gem "bcrypt_pbkdf"
   gem "factory_girl"
   gem "factory_girl_rails"
   gem "parallel_tests"
