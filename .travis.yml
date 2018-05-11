@@ -9,6 +9,12 @@ script:
   - bundle exec bundle-audit check --ignore CVE-2017-8418
 env:
   SMTP_ADDRESS: smtp.example.com
+  SMTP_DOMAIN: example.com
+  SMTP_PASSWORD: password
+  SMTP_USERNAME: username
+  EMAIL_FROM: inbox@example.com
+  APPLICATION_HOST: http://localhost:3000
+  ASSET_HOST: localhost:3000
 notifications:
   on_success: never
   on_failure: never
