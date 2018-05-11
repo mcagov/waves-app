@@ -3,7 +3,7 @@ cache: bundler
 script:
   - bundle exec rubocop
   - bundle exec rails db:setup
-  - bundle exec rspec spec
+  - xvfb-run bundle exec rspec spec
   - bundle exec brakeman
   - bundle exec bundle-audit update
   - bundle exec bundle-audit check --ignore CVE-2017-8418
