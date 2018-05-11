@@ -93,7 +93,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       default_value_font
       mortgage.mortgagees.each do |mortgagee|
         @pdf.draw_text mortgagee.name, at: [l_margin, y_pos]
-        @pdf.text_box mortgagee.inline_address, width: 400, height: 30, at: [l_margin, y_pos - 5]
+        @pdf.text_box mortgagee.inline_address, width: 500, height: 30, at: [l_margin, y_pos - 5]
 
         y_pos -= 30
       end
