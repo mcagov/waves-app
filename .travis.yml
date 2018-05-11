@@ -10,3 +10,6 @@ script:
 notifications:
   on_success: never
   on_failure: never
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
