@@ -7,6 +7,8 @@ script:
   - bundle exec brakeman
   - bundle exec bundle-audit update
   - bundle exec bundle-audit check --ignore CVE-2017-8418
+env:
+  SMTP_ADDRESS: smtp.example.com
 notifications:
   on_success: never
   on_failure: never
