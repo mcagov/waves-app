@@ -1,0 +1,12 @@
+language: ruby
+cache: bundler
+script:
+  - bundle exec rubocop
+  - bundle exec rails db:setup
+  - bundle exec rspec spec
+  - bundle exec brakeman
+  - bundle exec bundle-audit update
+  - bundle exec bundle-audit check --ignore CVE-2017-8418
+notifications:
+  on_success: never
+  on_failure: never
