@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/bcoia/trix.git
-  revision: 19c972e6766452bc3920fddb6beda6411d89dc92
+  revision: 56d84ae42e34488b0bb301bd9bd0f54fac7fc811
   specs:
-    trix (0.11.0)
-      rails (> 4.1, < 5.2)
+    trix (0.11.1)
+      rails (> 4.1, <= 6.0)
 
 GIT
   remote: https://github.com/maritimecoastguardagency/paperclip-azure
