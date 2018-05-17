@@ -63,7 +63,7 @@ describe "User views Finance reports", js: true do
 
       within(cells[0]) { expect(page).to have_text("22/12/2016") }
       within(cells[3]) { expect(page).to have_text("-25.00") }
-      within(cells[5]) { expect(page).to have_text("CHQ") }
+      within(cells[5]) { expect(page).to have_text("CHEQUE") }
       within(cells[6]) { expect(page).to have_text("Part I") }
 
       within(cells[2]) do
