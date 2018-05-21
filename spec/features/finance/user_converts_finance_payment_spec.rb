@@ -33,7 +33,9 @@ describe "User converts finance payment", type: :feature, js: true do
     click_on("My Tasks")
     click_on("MY BOAT")
 
-
+    within(edit_documents_css) do
+      click_on("edit")
+    end
   end
 
   scenario "when they have not claimed it they can't 'convert' it" do
