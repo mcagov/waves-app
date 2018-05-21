@@ -22,12 +22,16 @@ class Payment::FinancePayment < ApplicationRecord
 
   PAYMENT_TYPES = [
     ["BACS", :bacs],
-    ["CHQ", :cheque],
-    ["CASH", :cash],
-    ["CLIENT ACCOUNT", :client_account],
-    ["CHAPS", :chaps],
-    ["PO", :postal_order],
     ["CARD", :card],
+    ["CASH", :cash],
+    ["CHAPS", :chaps],
+    ["CHEQUE", :cheque],
+    ["CLIENT ACCOUNT", :client_account],
+    ["POSTAL ORDER", :postal_order],
+    ["PRE-WAVES", :pre_waves],
+    ["ROLLING ACCOUNT", :rolling_account],
+    ["WORLD PAY", :world_pay],
+    ["ADMIN", :admin],
   ].freeze
 
   def lock!

@@ -12,10 +12,6 @@
       .row
         .col-md-3
           = render partial: "submissions/basic/forms/owners/fields/nationality", locals: { owner_f: owner_f }
-        .col-md-6
-          = owner_f.input :eligibility_status, label: "Status",
-            as: :select,
-            collection: eligibility_status_collection(@submission)
 
       = render partial: "submissions/basic/forms/owners/fields/address", locals: { owner_f: owner_f }
 
