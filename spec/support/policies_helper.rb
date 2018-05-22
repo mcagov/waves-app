@@ -93,6 +93,10 @@ def expect_notes_tab(_bln)
   within("#notes_tab #notes") { expect(page).to have_link("Add Note") }
 end
 
+def expect_payments_tab(bln)
+  expect_field(bln, "#payments-tab")
+end
+
 def expect_edit_application_button(bln)
   expect_field(bln, "#heading #edit_application")
 end
