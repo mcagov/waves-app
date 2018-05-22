@@ -33,17 +33,19 @@ describe "User converts finance payment", type: :feature, js: true do
     click_on("My Tasks")
     click_on("MY BOAT")
 
-    within(edit_documents_css) do
-      click_on("edit")
-    end
+    click_on(edit_finance_payment_link)
+    fill_in("Documents Received", with: "Excel file, C&M")
+    click_button("Save")
+
+    expect(page).to have_css("#documents-received", text: "Excel file, C&M")
   end
 
-  scenario "when they have not claimed it they can't 'convert' it" do
+  scenario "when they have not claimed it they can't 'convert' or edit it" do
     click_on("MY BOAT")
 
     expect(page).to have_css("h1", text: "New Registration")
     expect(page).not_to have_css(actions_css)
-    expect(page).not_to have_css(edit_documents_css)
+    expect(page).not_to have_link(edit_finance_payment_link)
   end
 end
 
@@ -51,6 +53,6 @@ def actions_css
   "#actions"
 end
 
-def edit_documents_css
-  "#edit_documents_received"
+def edit_finance_payment_link
+  "Edit Finance Payment"
 end

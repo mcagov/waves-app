@@ -1,15 +1,20 @@
-
 .row
   .col-md-6
     #finance_info.x_panel
       .x_content
         %table.table
           %thead
-            %th Finance Information
+            %th Finance Payment
           %tbody
             %tr
               %td
                 = render partial: "finance/payments/payment", locals: {finance_payment: @finance_payment }
+                - if @submission.claimant == current_user
+                  = link_to "#edit-finance-payment",
+                    "data-target" => "#edit-finance-payment",
+                    "data-toggle" => "modal",
+                    class: "btn btn-xs btn-info" do
+                    Edit Finance Payment
   .col-md-6
     %table.table
       %tbody
