@@ -5,6 +5,7 @@ FactoryGirl.define do
     task            :new_registration
     payment_amount  25.00
     batch           { build(:finance_batch) }
+    payment_type    :bacs
   end
 
   factory :submitted_finance_payment, parent: :finance_payment do
