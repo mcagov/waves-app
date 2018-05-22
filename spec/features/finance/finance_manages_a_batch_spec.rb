@@ -41,7 +41,9 @@ describe "Finance manages a batch", type: :feature do
       scenario "deleting an empty batch" do
         click_on(cancel_batch_text)
 
-        expect { FinanceBatch.find(batch) }.to raise_error
+        expect do
+          FinanceBatch.find(batch.id)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

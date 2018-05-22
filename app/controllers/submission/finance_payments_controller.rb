@@ -1,9 +1,10 @@
 class Submission::FinancePaymentsController < InternalPagesController
-  before_action :load_submission
+  before_action :load_submission_and_finance_payment
 
   def show
     load_linkable_submission
     @submission = Decorators::Submission.new(@submission)
+    @finance_payment = Decorators::FinancePayment.new(@finance_payment)
     @similar_submissions = Search.similar_submissions(@submission)
   end
 
@@ -54,8 +55,9 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   protected
 
-  def load_submission
+  def load_submission_and_finance_payment
     @submission = Submission.find(params[:submission_id])
+    @finance_payment = @submission.payment.try(:remittance)
   end
 
   def load_linkable_submission
@@ -84,8 +86,7 @@ class Submission::FinancePaymentsController < InternalPagesController
 
   def ensure_vessel_name
     unless @submission.vessel.name
-      finance_payment = @submission.payment.remittance
-      @submission.vessel = { name: finance_payment.vessel_name }
+      @submission.vessel = { name: @finance_payment.vessel_name }
       @submission.save
     end
   end

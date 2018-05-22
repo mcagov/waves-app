@@ -13,16 +13,14 @@ describe "User associates vessel to finance_payment",
     claim_fee_entry_and_visit
 
     expect(page).to have_css(".official_no", text: vessel_a.reg_no)
-    within("#finance_info .official_no") { click_on("Change") }
+    within(".official_no") { click_on("Change") }
 
     within("#change-vessel") do
       search_for("foo")
       within("#vessels") { click_on("Link") }
     end
 
-    within("#finance_info") do
-      expect(page).to have_css(".official_no", text: vessel_b.reg_no)
-    end
+    expect(page).to have_css(".official_no", text: vessel_b.reg_no)
   end
 
   scenario "hiding the Official Number for a new_registration submission" do
@@ -30,9 +28,7 @@ describe "User associates vessel to finance_payment",
 
     claim_fee_entry_and_visit
 
-    within("#finance_info") do
-      expect(page).to have_css(".official_no", text: "N/A")
-    end
+    expect(page).to have_css(".official_no", text: "N/A")
   end
 
   scenario "disabling the Convert button when there is no vessel_reg_no" do

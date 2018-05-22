@@ -1,0 +1,10 @@
+:plain
+  $("#edit-finance-payment").modal('hide');
+  $('.modal-backdrop').remove();
+  $('body').removeClass('modal-open');
+
+  $('#finance_payment').html(
+    '#{escape_javascript(
+      render partial: "finance/payments/payment",
+      locals: { finance_payment: @finance_payment })}'
+  );

@@ -19,7 +19,7 @@ describe "User converts finance payment", type: :feature, js: true do
 
     expect(page).to have_css("h1", text: "New Registration")
 
-    within("#actions") do
+    within(actions_css) do
       click_on("Convert to Application")
     end
 
@@ -28,10 +28,31 @@ describe "User converts finance payment", type: :feature, js: true do
     expect(Submission.last.vessel.name).to eq("MY BOAT")
   end
 
-  scenario "when they have not claimed it they can't 'convert' it" do
+  scenario "when they have claimed it they can edit the documents received" do
+    click_on("Claim")
+    click_on("My Tasks")
+    click_on("MY BOAT")
+
+    click_on(edit_finance_payment_link)
+    fill_in("Documents Received", with: "Excel file, C&M")
+    click_button("Save")
+
+    expect(page).to have_css("#documents-received", text: "Excel file, C&M")
+  end
+
+  scenario "when they have not claimed it they can't 'convert' or edit it" do
     click_on("MY BOAT")
 
     expect(page).to have_css("h1", text: "New Registration")
-    expect(page).not_to have_css("#actions")
+    expect(page).not_to have_css(actions_css)
+    expect(page).not_to have_link(edit_finance_payment_link)
   end
+end
+
+def actions_css
+  "#actions"
+end
+
+def edit_finance_payment_link
+  "Edit Finance Payment"
 end
