@@ -83,7 +83,7 @@
                 = render partial: "submissions/actions/add_correspondence", locals: { submission: @submission }
 
             #payments_tab.tab-pane{"aria-labelledby" => "payments-tab", :role => "tabpanel"}
-              #notes= render partial: "submissions/basic/body/payments", locals: { submission: @submission }
+              #oayments= render partial: "submissions/basic/body/payments", locals: { submission: @submission }
 
             #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               #notes= render partial: "submission/notes/base", locals: { submission: @submission }
