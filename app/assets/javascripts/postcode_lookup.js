@@ -6,7 +6,7 @@ $(document).ready(function () {
   });
 
   $(document).on('focus', '.postcode-lookup-field', function() {
-    var scope = this.closest('.postcode-lookup');
+    var scope = $(this).closest('.postcode-lookup');
 
     if ($(scope).find('.postcode-results-field')[0].innerHTML != '') {
       return false;
@@ -47,7 +47,7 @@ $(document).ready(function () {
   });
 
   $(document).on('focus', '.alt_postcode-lookup-field', function() {
-    var scope = this.closest('.postcode-lookup');
+    var scope = $(this).closest('.postcode-lookup');
 
     if ($(scope).find('.alt_postcode-results-field')[0].innerHTML != '') {
       return false;
