@@ -75,4 +75,9 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
     end
   end
+
+  scenario "viewing the application detail tabs" do
+    expect_payments_tab(true)
+    expect_notes_tab(true)
+  end
 end

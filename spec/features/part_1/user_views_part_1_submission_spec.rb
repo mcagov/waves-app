@@ -17,6 +17,7 @@ describe "User views Part 1 submission", type: :feature, js: true do
     expect_managing_owner_fields(true)
     expect_shareholding(true)
     expect_owner_declarations(true)
+    expect_payments_tab(true)
   end
 
   scenario "Name Approval page" do
