@@ -6,7 +6,7 @@ GIT
       rails (> 4.1, <= 6.0)
 
 GIT
-  remote: https://github.com/maritimecoastguardagency/paperclip-azure
+  remote: https://github.com/mcagov/paperclip-azure
   revision: a7a88535dd4f03b6e5a36c42325f0913cc375f82
   specs:
     paperclip-azure (0.3.0)
@@ -15,7 +15,7 @@ GIT
       hashie
 
 GIT
-  remote: https://github.com/tobyprivett/waves-utilities.git
+  remote: https://github.com/mcagov/waves-utilities.git
   revision: d47b735dcf30d9a5f4cb47d33000f8d22b70ecc3
   specs:
     waves-utilities (0.1.0)
