@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
   $(document).on('change', '#common_mortgagees', function() {
-    var scope = this.closest('.nested-fields');
+    var scope = $(this).closest('.nested-fields');
 
     var fields = $(this).val().split(";");
 
