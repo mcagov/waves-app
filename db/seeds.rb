@@ -44,7 +44,7 @@ FEES = [
   [:part_1_re_registration, :re_registration, 12400, 18000],
   [:part_2_simple_re_registration, :re_registration, 11100, nil],
   [:part_2_full_re_registration, :re_registration, 13100, 18000],
-  [:part_3_registration, :re_registration, 2500, 5000],
+  [:part_3_re_registration, :re_registration, 2500, 5000],
 
   [:part_1_change_vessel, :convert_provisional_to_full, 5500, 5000],
 
