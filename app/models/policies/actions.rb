@@ -30,5 +30,9 @@ class Policies::Actions
     def readonly?(submission, user)
       !(submission.current_state == :assigned && submission.claimant == user)
     end
+
+    def can_edit_official_number?(user)
+      user.system_manager?
+    end
   end
 end

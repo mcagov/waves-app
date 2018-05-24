@@ -221,6 +221,10 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/notes"
 
+    resource :official_no,
+             controller: "registered_vessel/official_no",
+             only: [:update]
+
     resource :registration_certificate,
              only: [:show],
              controller: "registered_vessel/registration_certificate"

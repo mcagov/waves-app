@@ -156,4 +156,20 @@ describe Policies::Actions do
       it { expect(subject).to be_truthy }
     end
   end
+
+  describe "#can_edit_official_number?" do
+    subject { described_class.can_edit_official_number?(user) }
+
+    context "as a system_manager" do
+      let(:user) { build(:system_manager) }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "as an operational_user" do
+      let(:user) { build(:user) }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
 end
