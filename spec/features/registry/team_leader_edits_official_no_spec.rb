@@ -16,6 +16,15 @@ describe "Team leaders edits an official no", type: :feature, js: true do
         find(".submit_edit_official_no").trigger("click")
       end
     end
+
+    within("#edit-official-no") do
+      fill_in("New Official Number", with: "NEW001")
+      find(".submit_edit_official_no").trigger("click")
+    end
+
+    within("#vessel_summary") do
+      expect(page).to have_text("Official Number: NEW001")
+    end
   end
 
   scenario "as an operational user" do
