@@ -10,7 +10,7 @@ class RegisteredVessel::OfficialNoController < InternalPagesController
     if reg_no && reg_no != @vessel.reg_no && !RegNoValidator.valid?(reg_no)
       render :error
     else
-      @vessel.update_attribute :reg_no, reg_no
+      Builders::OfficialNoBuilder.update(@vessel, reg_no)
       render :update
     end
   end

@@ -37,4 +37,21 @@ describe Builders::OfficialNoBuilder do
       end
     end
   end
+
+  context ".update" do
+    let(:registered_vessel) { create(:registered_vessel) }
+
+    before do
+      described_class.update(registered_vessel, "FOOBAR")
+    end
+
+    it "updates the registered vessel reg_no" do
+      expect(registered_vessel.reg_no).to eq("FOOBAR")
+    end
+
+    it "updates the registered vessel's current_registration" do
+      expect(registered_vessel.current_registration.vessel.reg_no)
+        .to eq("FOOBAR")
+    end
+  end
 end
