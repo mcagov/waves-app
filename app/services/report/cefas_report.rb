@@ -73,7 +73,7 @@ class Report::CefasReport < Report
     Result.new(
       [
         country_of_registration(registration),
-        vessel.ec_no,
+        submission.vessel_ec_no,
         vessel.imo_number,
         event_type(submission),
         submission.completed_at,
