@@ -16,6 +16,13 @@ class Builders::OfficialNoBuilder
       @submission.save
     end
 
+    def update(registered_vessel, vessel_reg_no)
+      registered_vessel.update_attribute(:reg_no, vessel_reg_no)
+
+      registered_vessel.current_registration.update_attribute(
+        :registry_info, registered_vessel.registry_info)
+    end
+
     private
 
     def assign_ec_no(submission)
