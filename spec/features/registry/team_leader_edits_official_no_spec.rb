@@ -6,10 +6,15 @@ describe "Team leaders edits an official no", type: :feature, js: true do
     visit_registered_vessel(create(:system_manager))
 
     click_on("Registrar Tools")
-    find(edit_official_number_link).trigger("click")
+    within(".modal-content") do
+      click_on("Edit Official Number (Team Leader only)")
+    end
 
     within("#edit-official-no") do
-      find(".submit_edit_official_no").trigger("click")
+      fill_in("New Official Number", with: "DUPLICATE")
+      page.accept_alert do
+        find(".submit_edit_official_no").trigger("click")
+      end
     end
   end
 
@@ -17,10 +22,12 @@ describe "Team leaders edits an official no", type: :feature, js: true do
     visit_registered_vessel
 
     click_on("Registrar Tools")
-    expect(page).not_to have_css(edit_official_number_link)
+    within(".modal-content") do
+      expect(page).not_to have_text(edit_official_number_link)
+    end
   end
 end
 
 def edit_official_number_link
-  "#edit_official_number_link"
+  "Edit Official Number (Team Leader only)"
 end
