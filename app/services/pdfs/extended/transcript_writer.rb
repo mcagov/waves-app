@@ -55,12 +55,18 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
     if mortgages.empty?
       default_value_font
       @pdf.draw_text "None", at: [l_margin, y_pos]
+      return
     end
 
     # start with an index of 2 to compensate for the owner details
     # printed above the first mortgages
     current_index = 2
-    @total_pages = mortgages.length/4 + 2
+    @total_pages = 2
+
+    if mortgages.length > 2
+      Array.new(mortgages.length - 2, 1).each_slice(4) { @total_pages += 1 }
+    end
+
     mortgages.each do |mortgage|
       if current_index == 0
         draw_page_count
