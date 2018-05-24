@@ -35,6 +35,9 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
         y_pos -= 40
       end
     end
+
+    @pdf.text_box "Page 2 of 2", width: 500,
+        at: [262, 40]
   end
 
   def vessel_details_for_part

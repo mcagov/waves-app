@@ -91,9 +91,6 @@ class Pdfs::TranscriptWriter
     @pdf.stroke_horizontal_rule
 
     owner_details_for_part
-
-    @pdf.text_box "Page 2 of 2", width: 500,
-        at: [262, 40]
   end
 
   def page_title_line_1
