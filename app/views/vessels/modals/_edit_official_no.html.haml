@@ -15,5 +15,6 @@
                     input_html: { class: "upcase" }
 
         .modal-footer
-          = f.submit "Save", class: "btn btn-danger submit_edit_official_no"
+          = button_to "Cancel", "#", class: "btn btn-danger", "data-dismiss" => "modal"
+          = f.submit "Save", class: "btn btn-success submit_edit_official_no"
 
