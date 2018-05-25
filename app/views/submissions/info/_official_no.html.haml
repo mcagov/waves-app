@@ -3,7 +3,7 @@
     Official No:
     - if submission.vessel_reg_no.present?
       = link_to submission.vessel_reg_no, vessel_path(submission.registered_vessel)
-    - elsif Policies::Workflow.generate_official_no?(submission)
+    - elsif Policies::Workflow.generate_official_no?(submission, current_user)
       - unless @readonly
         = render partial: "submissions/actions/generate_official_no"
 - if display_ec_no?(submission)

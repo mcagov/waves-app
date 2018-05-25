@@ -40,9 +40,10 @@ describe Policies::Workflow do
   end
 
   context "#generate_official_no?" do
-    let(:submission) { create(:submission, part: part) }
+    let!(:submission) { create(:unassigned_submission, part: part) }
+    let!(:user) { create(:user) }
 
-    subject { described_class.generate_official_no?(submission) }
+    subject { described_class.generate_official_no?(submission, user) }
 
     context "for part_3" do
       let(:part) { :part_3 }
@@ -53,7 +54,20 @@ describe Policies::Workflow do
     context "for part_2" do
       let(:part) { :part_2 }
 
-      it { expect(subject).to be_truthy }
+      it { expect(subject).to be_falsey }
+
+      context "if it is claimed by the current user" do
+        before { submission.claimed!(user) }
+
+        it { expect(subject).to be_truthy }
+      end
+
+
+      context "if it is claimed by another user" do
+        before { submission.claimed!(create(:user)) }
+
+        it { expect(subject).to be_falsey }
+      end
     end
   end
 

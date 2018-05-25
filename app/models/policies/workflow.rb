@@ -7,8 +7,9 @@ class Policies::Workflow
       true
     end
 
-    def generate_official_no?(submission)
-      !Policies::Definitions.part_3?(submission)
+    def generate_official_no?(submission, user)
+      return false if Policies::Definitions.part_3?(submission)
+      submission.actionable? && submission.claimant == user
     end
 
     def uses_port_no?(obj)
