@@ -12,6 +12,10 @@ class Policies::Workflow
       submission.actionable? && submission.claimant == user
     end
 
+    def can_edit_official_number?(user)
+      user.system_manager?
+    end
+
     def uses_port_no?(obj)
       Policies::Definitions.fishing_vessel?(obj)
     end

@@ -21,7 +21,7 @@
             target: "_blank",
             class: "btn btn-block btn-info #{'disabled' unless vessel.prints_transcript?}"
 
-        - if Policies::Actions.can_edit_official_number?(current_user)
+        - if Policies::Workflow.can_edit_official_number?(current_user)
           %p= link_to "Edit Official Number (Team Leader only)", "#",
                 data: { target: "#edit-official-no", toggle: "modal" },
                 class: "btn btn-block btn-danger"
