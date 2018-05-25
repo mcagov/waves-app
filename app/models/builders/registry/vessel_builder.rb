@@ -26,7 +26,6 @@ class Builders::Registry::VesselBuilder
 
     def build_summary
       @vessel.name = @submission.vessel.name
-      @vessel.ec_no = @submission.vessel.ec_no
       @vessel.hin = @submission.vessel.hin
       @vessel.make_and_model = @submission.vessel.make_and_model
       @vessel.length_in_meters = @submission.vessel.length_in_meters

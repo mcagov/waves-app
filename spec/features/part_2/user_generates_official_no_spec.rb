@@ -15,9 +15,9 @@ describe "User generates an official no", js: true do
     end
 
     within("#heading") do
-      vessel_reg_no = Register::Vessel.last.reg_no
-      expect(page).to have_css(".official-no", text: vessel_reg_no)
-      expect(page).to have_css("#ec-no", text: "GBR000#{vessel_reg_no}")
+      vessel = Register::Vessel.last
+      expect(page).to have_css(".official-no", text: vessel.reg_no)
+      expect(page).to have_css("#ec-no", text: vessel.ec_no)
     end
   end
 
