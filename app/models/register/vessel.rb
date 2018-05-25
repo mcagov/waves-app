@@ -7,6 +7,7 @@ module Register
       [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin, :pln]
 
     validates :part, presence: true
+    validates :reg_no, presence: true
 
     has_one :agent, as: :parent, class_name: "Register::Agent"
     has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"

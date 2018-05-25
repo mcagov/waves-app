@@ -6,6 +6,7 @@ describe Builders::CsrFormBuilder do
       create(
         :registered_vessel,
         part: 1,
+        reg_no: "ABC1234",
         name: "PIRATE SHIP",
         port_code: "SU",
         owners: [owner_1, owner_2],

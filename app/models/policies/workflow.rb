@@ -3,12 +3,20 @@ class Policies::Workflow
     def approved_name_required?(submission)
       return false if Policies::Definitions.part_3?(submission)
       return false if submission.registered_vessel
-      return false if submission.name_approval
+      return false if submission.name_approval.try(:persisted?)
       true
     end
 
-    def generate_official_no?(submission)
-      !Policies::Definitions.part_3?(submission)
+    def generate_official_no?(submission, user)
+      return false if Policies::Definitions.part_3?(submission)
+
+      submission.actionable? &&
+        submission.claimant == user &&
+        !approved_name_required?(submission)
+    end
+
+    def can_edit_official_number?(user)
+      user.system_manager?
     end
 
     def uses_port_no?(obj)
