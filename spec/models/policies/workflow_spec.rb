@@ -36,12 +36,22 @@ describe Policies::Workflow do
 
         it { expect(subject).to be_falsey }
       end
+
+      # On the name approval page, the submission object might have an
+      # associated name approval object that is used by the form builder.
+      # Here we ensure that this temporary object is not treated as a
+      # persisted one
+      context "when the submission has a name_approval that is not persisted" do
+        let(:submission) { build(:submission_name_approval).submission }
+
+        it { expect(subject).to be_truthy }
+      end
     end
   end
 
   context "#generate_official_no?" do
-    let!(:submission) { create(:unassigned_submission, part: part) }
-    let!(:user) { create(:user) }
+    let!(:submission) { create(:assigned_submission, part: part) }
+    let!(:user) { submission.claimant }
 
     subject { described_class.generate_official_no?(submission, user) }
 
@@ -54,19 +64,31 @@ describe Policies::Workflow do
     context "for part_2" do
       let(:part) { :part_2 }
 
-      it { expect(subject).to be_falsey }
-
-      context "if it is claimed by the current user" do
-        before { submission.claimed!(user) }
-
-        it { expect(subject).to be_truthy }
-      end
-
-
       context "if it is claimed by another user" do
-        before { submission.claimed!(create(:user)) }
+        let!(:user) { create(:user) }
 
         it { expect(subject).to be_falsey }
+      end
+
+      context "if it is claimed by the current user" do
+        before do
+          allow(Policies::Workflow)
+            .to receive(:approved_name_required?)
+            .with(submission)
+            .and_return(approved_name_required)
+        end
+
+        context "and approved_name is not required" do
+          let(:approved_name_required) { false }
+
+          it { expect(subject).to be_truthy }
+        end
+
+        context "and approved_name is not required" do
+          let(:approved_name_required) { true }
+
+          it { expect(subject).to be_falsey }
+        end
       end
     end
   end
