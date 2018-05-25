@@ -58,14 +58,11 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       return
     end
 
-    # start with an index of 2 to compensate for the owner details
+    # start with an index of 1 to compensate for the owner details
     # printed above the first mortgages
-    current_index = 2
+    current_index = 1
     @total_pages = 2
-
-    if mortgages.length > 2
-      Array.new(mortgages.length - 2, 1).each_slice(4) { @total_pages += 1 }
-    end
+    @total_pages += mortgages.length / 2 if mortgages.length > 1
 
     mortgages.each do |mortgage|
       if current_index == 0
@@ -78,7 +75,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       current_index += 1
       y_pos = draw_mortgage(mortgage, l_margin, y_pos)
       # allow 4 mortgages per page
-      current_index = 0 if current_index == 4
+      current_index = 0 if current_index == 2
     end
   end
 
@@ -136,7 +133,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
     default_value_font
     @pdf.draw_text mortgage.executed_at, at: [l_margin + 140, y_pos]
     @pdf.bounding_box([l_margin, y_pos - 15], width: 510) { @pdf.stroke_horizontal_rule }
-    y_pos -= 30
+    y_pos -= 35
     y_pos
   end
 
