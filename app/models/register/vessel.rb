@@ -159,12 +159,18 @@ module Register
       registration_status != :pending
     end
 
-    def ec_number=(_unimplemented)
-      # here we handle legacy changesets with ec_number assigned
-    end
+    # here we handle legacy changesets with ec_number assigned
+    def ec_number=(_unimplemented); end
+
+    def ec_no=(_unimplemented); end
 
     def pln
       "#{port_code} #{port_no}"
+    end
+
+    def ec_no
+      return unless reg_no && Policies::Definitions.fishing_vessel?(self)
+      "GBR000#{reg_no}"
     end
 
     private
