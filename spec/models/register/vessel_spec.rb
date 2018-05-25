@@ -212,4 +212,26 @@ describe Register::Vessel do
       end
     end
   end
+
+  context "#ec_no" do
+    subject { vessel.ec_no }
+
+    context "for a fishing vessel" do
+      let(:vessel) { create(:fishing_vessel) }
+
+      it { expect(subject).to eq("GBR000#{vessel.reg_no}") }
+
+      context "when the vessel has no reg_no" do
+        before { allow(vessel).to receive(:reg_no).and_return(nil) }
+
+        it { expect(subject).to be_blank }
+      end
+    end
+
+    context "for a non-fishing vessel" do
+      let(:vessel) { create(:pleasure_vessel) }
+
+      it { expect(subject).to be_blank }
+    end
+  end
 end

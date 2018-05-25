@@ -100,6 +100,10 @@ class Submission < ApplicationRecord
       Register::Vessel.in_part(part).where(reg_no: reg_no).first
   end
 
+  def vessel_ec_no
+    registered_vessel.ec_no if registered_vessel
+  end
+
   def vessel_name
     return vessel.name if vessel.name.present?
     return registered_vessel.name if registered_vessel

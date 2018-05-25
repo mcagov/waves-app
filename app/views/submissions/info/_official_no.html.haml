@@ -12,9 +12,7 @@
   .col-md-3
     %h5#ec-no
       EC No:
-      - if submission.vessel.ec_no.present?
-        = submission.vessel.ec_no
-      - elsif submission.vessel_reg_no.present?
-        GBR000#{submission.vessel_reg_no}
+      - if submission.vessel_ec_no.present?
+        = submission.vessel_ec_no
       - else
         Not yet generated

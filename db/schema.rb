@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_19_094113) do
+ActiveRecord::Schema.define(version: 2018_05_24_141426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -508,7 +508,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "issc_issuing_authority"
     t.string "issc_auditor"
     t.string "name_on_primary_register"
-    t.string "ec_no"
     t.decimal "register_length"
     t.decimal "length_overall"
     t.decimal "breadth"
