@@ -3,8 +3,6 @@ class Submission::OfficialNoController < InternalPagesController
 
   def update
     @submission = Submission.find(params[:submission_id])
-    @official_no = OfficialNo.new(official_no_params)
-
     reg_no = official_no_params[:content]
 
     if reg_no && !RegNoValidator.valid?(reg_no)
