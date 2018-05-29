@@ -198,7 +198,7 @@ Rails.application.routes.draw do
              controller: "registered_vessel/forced_closure"
 
     resources :csrs,
-              only: [:show, :create],
+              only: [:show, :create, :update],
               controller: "registered_vessel/csrs"
 
     resource :cold_storage,

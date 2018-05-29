@@ -8,8 +8,27 @@
   %tbody
     - @vessel.csr_forms.each do |csr_form|
       %tr
-        %td
-          = (csr_form.issue_number || "In progress")
+        %td.issue-number
+          = link_to "#csr_form_#{csr_form.id}",
+            data: { target: "#csr_form_#{csr_form.id}" , toggle: "modal" } do
+            = csr_form.issue_number || "In progress"
+          .modal.fade{id: "csr_form_#{csr_form.id}", role: "dialog", tabindex: "-1"}
+            .modal-dialog.modal-sm
+              = simple_form_for csr_form,
+                remote: true,
+                url: vessel_csr_path(@vessel, csr_form) do |f|
+                = hidden_field_tag :modal_id, "csr_form_#{csr_form.id}"
+                .modal-content
+                  .modal-header
+                    %h4.modal-title
+                      Edit CSR Form
+                  .modal-body
+                    = f.input :issue_number,
+                      label: "CSR Number"
+                  .modal-footer
+                    = button_tag type: 'submit',
+                      class: "btn btn-primary btn-sm pull-right" do
+                      Save
         %td= csr_form.issued_at
         %td= csr_form.updated_at
         %td
