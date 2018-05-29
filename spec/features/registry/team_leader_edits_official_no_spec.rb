@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Team leaders edits an official no", type: :feature, js: true do
   scenario "as a team leader" do
     create(:registered_vessel, reg_no: "DUPLICATE")
-    visit_registered_vessel(create(:system_manager))
+    visit_registered_vessel(create(:team_leader))
 
     click_on("Registrar Tools")
     within(".modal-content") do
