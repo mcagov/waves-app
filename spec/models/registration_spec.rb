@@ -20,6 +20,25 @@ describe Registration do
     end
   end
 
+  context "#submission_ref_no" do
+    let(:registration) { create(:registered_vessel).current_registration }
+    subject { registration.reload.submission_ref_no }
+
+    context "with a submission" do
+      let!(:submission) { create(:submission, registration: registration) }
+
+      it "retrieves the submission's ref_no" do
+        expect(subject).to eq(submission.ref_no)
+      end
+    end
+
+    context "without a submission" do
+      it "is nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
   context "#part" do
     let(:registration) { build(:registration, registry_info: registry_info) }
 
