@@ -55,8 +55,12 @@ module Pdfs::Stationary
     @pdf.draw_text "Date: ", at: [340, 634]
     set_copy_font
     @pdf.draw_text "", at: [400, 662]
-    @pdf.draw_text(@vessel[:reg_no], at: [400, 648]) if @vessel
+    @pdf.draw_text(our_ref, at: [400, 648]) if @vessel
     @pdf.draw_text @sent_at.to_s(:formal), at: [400, 634]
+  end
+
+  def our_ref
+    @registration.try(:submission_ref_no) || (@vessel || {})[:reg_no]
   end
 
   def delivery_address
