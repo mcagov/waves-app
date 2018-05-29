@@ -62,7 +62,7 @@
       = render partial: "vessels/extended/tabs/mortgages", locals: { vessel: @vessel }
 
     #csr_forms_tab.tab-pane{"aria-labelledby" => "csr_forms-tab", :role => "tabpanel"}
-      = render partial: "vessels/extended/tabs/csr_forms", locals: { vessel: @vessel }
+      #csr_forms= render partial: "vessels/extended/tabs/csr_forms", locals: { vessel: @vessel }
 
     #certificates_tab.tab-pane{"aria-labelledby" => "certificates-tab", :role => "tabpanel"}
       = render partial: "vessels/extended/tabs/documents", locals: { vessel: @vessel }

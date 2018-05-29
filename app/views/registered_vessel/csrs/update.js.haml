@@ -1,0 +1,10 @@
+:plain
+  $('##{ @modal_id }').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+
+  $("#csr_forms").html(
+    '#{escape_javascript(
+       render partial: "vessels/extended/tabs/csr_forms", locals: { vessel: @vessel })}'
+  );
+
