@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :finance_payments, only: [:update]
+  resources :finance_payments, only: [:show, :update]
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
     resources :agent,
