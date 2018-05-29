@@ -106,4 +106,8 @@ class Pdfs::Processor
   def forced_closure
     Pdfs::ForcedClosure.new(@printable_items)
   end
+
+  def payment_receipt
+    Pdfs::PaymentReceipt.new(@printable_items)
+  end
 end
