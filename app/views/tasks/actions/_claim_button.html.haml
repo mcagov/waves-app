@@ -12,3 +12,7 @@
   - elsif submission.assigned?
     Claimed by:
     = submission.claimant
+
+    - if Policies::Workflow.can_unclaim_team_tasks?(current_user)
+      = form_tag unclaim_submission_states_path(submission), remote: true do
+        = submit_tag "Unclaim (Team Leader only)"
