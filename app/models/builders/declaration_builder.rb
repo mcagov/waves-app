@@ -18,7 +18,7 @@ class Builders::DeclarationBuilder
         declaration =
           Declaration.create(
             submission: @submission,
-            changeset: owner,
+            owner: build_owner(owner),
             state: initial_state_for_task,
             shares_held: owner[:shares_held].to_i,
             entity_type: owner[:entity_type] || :individual)
@@ -75,6 +75,10 @@ class Builders::DeclarationBuilder
       else
         :not_required
       end
+    end
+
+    def build_owner(owner)
+      Declaration::Owner.new(owner.except!(:id, :type))
     end
   end
 end
