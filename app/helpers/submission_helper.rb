@@ -79,8 +79,9 @@ module SubmissionHelper
   end
 
   def declaration_select_options
-    list = @submission.declarations.map do |d|
-      [d.owner.name, d.id]
+    list = @submission.owners + @submission.charter_parties
+    list.map do |owner|
+      [owner.name, owner.id]
     end
 
     list.sort { |a, b| a[0] <=> b[0] }
