@@ -1,5 +1,5 @@
 class Declaration < ApplicationRecord
-  belongs_to :submission, touch: true
+  belongs_to :submission, touch: true, required: true
   belongs_to :completed_by, class_name: "User"
   belongs_to :registered_owner, class_name: "Owner"
 
