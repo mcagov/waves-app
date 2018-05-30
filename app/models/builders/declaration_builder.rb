@@ -23,7 +23,7 @@ class Builders::DeclarationBuilder
             shares_held: owner[:shares_held].to_i,
             entity_type: owner[:entity_type] || :individual)
 
-        if @declared_by_emails.include?(declaration.owner.email)
+        if @declared_by_emails.include?(declaration.owner_email)
           declaration.declared! if declaration.can_transition? :declared
         end
       end

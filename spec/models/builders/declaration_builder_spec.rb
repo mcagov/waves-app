@@ -80,7 +80,7 @@ describe Builders::DeclarationBuilder do
 
       it "adds declaration_group_member to the declaration_group" do
         group_member = declaration_group.declaration_group_members.first
-        expect(group_member.declaration.owner.email).to eq("alice@example.com")
+        expect(group_member.declaration.owner_email).to eq("alice@example.com")
       end
     end
 

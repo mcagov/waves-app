@@ -44,6 +44,10 @@ class Declaration < ApplicationRecord
   accepts_nested_attributes_for :owner, allow_destroy: true,
     reject_if: proc { |attributes| attributes["name"].blank? }
 
+  def owner_email
+    owner.email if owner
+  end
+
   def vessel
     submission.vessel
   end
