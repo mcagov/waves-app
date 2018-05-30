@@ -5,6 +5,7 @@
         method: :post,
         remote: true,
         url: submission_declarations_path(@submission) do |f|
+        = f.object.build_owner
 
         - if modal_id == "new_declaration"
           .modal-header
