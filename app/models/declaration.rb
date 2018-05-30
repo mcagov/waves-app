@@ -31,15 +31,18 @@ class Declaration < ApplicationRecord
   scope :corporate, -> { where("entity_type = 'corporate'") }
 
   delegate :part, to: :submission
-  def owner
-    owner = Declaration::Owner.new(changeset || {})
-    owner.declared_at = completed_at
-    owner
-  end
 
-  def owner=(owner_params)
-    self.changeset = owner_params
-  end
+  has_one :owner,
+          as: :parent,
+          class_name: "Declaration::Owner",
+          dependent: :destroy
+
+  # TO DO (used by API)
+  # owner.declared_at = completed_at
+
+  # rubocop:disable Style/AlignHash
+  accepts_nested_attributes_for :owner, allow_destroy: true,
+    reject_if: proc { |attributes| attributes["name"].blank? }
 
   def vessel
     submission.vessel
