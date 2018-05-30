@@ -7,7 +7,7 @@ feature "User views owner submission details", type: :feature, js: true do
   let!(:declaration) { submission.declarations.first }
 
   before do
-    declaration.changeset["name"] = "NEW OWNER NAME"
+    declaration.owner.name = "NEW OWNER NAME"
     declaration.save!
 
     login_to_part_3

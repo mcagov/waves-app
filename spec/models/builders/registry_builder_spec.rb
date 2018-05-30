@@ -174,9 +174,11 @@ def init_basic_submission
            })
 
   submission.declarations.create(
-    owner: { name: "ALICE", alt_address_1: "ALT 1" }, shares_held: 20)
+    owner: Declaration::Owner.new({ name: "ALICE", alt_address_1: "ALT 1" }),
+    shares_held: 20)
+
   submission.declarations.create(
-    entity_type: :corporate, owner: { name: "BOB LTD" })
+    entity_type: :corporate, owner: Declaration::Owner.new({ name: "BOB LTD" }))
 
   submission.engines.create(make: "Honda")
   submission.engines.create(make: "Yamaha")
