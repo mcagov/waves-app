@@ -87,13 +87,10 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
 
     def build_managing_owner_and_correspondent
       Declaration.where(submission: @submission).each do |declaration|
-        if declaration.owner.managing_owner
-          @submission.managing_owner_id = declaration.id
-        end
-
-        if declaration.owner.correspondent
-          @submission.correspondent_id = declaration.id
-        end
+        owner = declaration.owner
+        next unless owner
+        @submission.managing_owner_id = owner.id if owner.managing_owner
+        @submission.correspondent_id = owner.id if owner.correspondent
       end
     end
 
