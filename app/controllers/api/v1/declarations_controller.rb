@@ -12,10 +12,6 @@ module Api::V1
 
     def update
       if @declaration
-        if declaration_params[:changeset]
-          @declaration.update_attributes(
-            changeset: declaration_params[:changeset])
-        end
         @declaration.declared!
         render status: :ok
       else
@@ -27,11 +23,6 @@ module Api::V1
 
     def load_declaration
       @declaration = Declaration.incomplete.find_by(id: params[:id])
-    end
-
-    def declaration_params
-      data = params.require("data")
-      data.require(:attributes).permit!
     end
   end
 end
