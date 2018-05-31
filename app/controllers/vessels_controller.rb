@@ -19,7 +19,7 @@ class VesselsController < InternalPagesController
     [
       :correspondences, :owners, :registrations, :current_registration,
       :notes, :engines, :beneficial_owners,
-      mortgages: [:mortgagees],
+      mortgages: [:mortgagees, :mortgagors],
       shareholder_groups: [:shareholder_group_members],
       submissions: [
         :correspondences, :print_jobs,
