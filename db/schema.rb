@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_31_083445) do
+ActiveRecord::Schema.define(version: 2018_05_31_110906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,7 +157,6 @@ ActiveRecord::Schema.define(version: 2018_05_31_083445) do
     t.datetime "updated_at", null: false
     t.uuid "notification_id"
     t.datetime "completed_at"
-    t.json "changeset"
     t.uuid "completed_by_id"
     t.string "entity_type", default: "individual"
     t.integer "shares_held", default: 0
