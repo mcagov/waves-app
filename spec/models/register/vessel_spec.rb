@@ -41,6 +41,31 @@ describe Register::Vessel do
     it { expect(subject).to eq(latest_registration) }
   end
 
+  context "#correspondent" do
+    let(:vessel) { create(:registered_vessel) }
+    subject { vessel.correspondent }
+
+    context "is the second owner" do
+      before do
+        vessel.owners.create(name: "Bob", correspondent: true)
+      end
+
+      it { expect(vessel.correspondent.name).to eq("Bob") }
+    end
+
+    context "is a charter_party" do
+      before do
+        vessel.charter_parties.first.update_attribute :correspondent, true
+      end
+
+      it { expect(vessel.correspondent).to eq(vessel.charter_parties.first) }
+    end
+
+    context "is undefined, defaults to first owner" do
+      it { expect(vessel.correspondent).to eq(vessel.owners.first) }
+    end
+  end
+
   context "#notification_list" do
     let!(:vessel) { build(:registered_vessel) }
 
