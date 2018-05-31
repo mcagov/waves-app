@@ -28,7 +28,6 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
 
     def perform_changeset_operations
       build_declarations
-      build_managing_owner_and_correspondent
       build_engines
       build_managers
       build_mortgages
@@ -70,6 +69,13 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submitted_owners,
         completed_declarations,
         shareholder_groups)
+
+      Declaration.where(submission: @submission).each do |declaration|
+        owner = declaration.owner
+        next unless owner
+        @submission.managing_owner_id = owner.id if owner.managing_owner
+        @submission.correspondent_id = owner.id if owner.correspondent
+      end
     end
 
     def build_agent
@@ -83,15 +89,6 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       end
 
       @submission.agent = agent_attrs
-    end
-
-    def build_managing_owner_and_correspondent
-      Declaration.where(submission: @submission).each do |declaration|
-        owner = declaration.owner
-        next unless owner
-        @submission.managing_owner_id = owner.id if owner.managing_owner
-        @submission.correspondent_id = owner.id if owner.correspondent
-      end
     end
 
     def build_engines
@@ -182,6 +179,10 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_charter_party = CharterParty.new(charter_party.except(:id))
         submission_charter_party.parent = submission_charterer
         submission_charter_party.save
+
+        if submission_charter_party.correspondent
+          @submission.correspondent_id = submission_charter_party.id
+        end
       end
     end
 
