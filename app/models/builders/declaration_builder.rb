@@ -78,7 +78,7 @@ class Builders::DeclarationBuilder
     end
 
     def build_owner(owner)
-      Declaration::Owner.new(owner.except!(:id, :type))
+      Declaration::Owner.new(owner.except(:id, :type))
     end
   end
 end
