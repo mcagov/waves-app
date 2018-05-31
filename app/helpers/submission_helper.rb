@@ -80,11 +80,7 @@ module SubmissionHelper
 
   def customer_select_options
     list = @submission.owners + @submission.charter_parties
-    list.map do |owner|
-      [owner.name, owner.id]
-    end
-
-    list.sort { |a, b| a[0] <=> b[0] }
+    list.sort_by(&:name)
   end
 
   def shares_held_jointly_customer_select_options(declaration_group)
