@@ -29,7 +29,7 @@
         %td.owner-imo_number.strike= owner.imo_number
         %td.owner-nationality.strike= owner.nationality
         %td.owner-email.strike= owner.email
-        %td.owner-phone_number.strike{ colspan: 2 }= owner.phone_number
+        %td.owner-phone_number.strike{ colspan: 3 }= owner.phone_number
 
 - unless @readonly
   = render partial: "submissions/basic/forms/owners/actions/add_owner"

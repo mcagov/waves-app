@@ -26,6 +26,6 @@ class Submission::DeclarationGroupMembersController < InternalPagesController
 
   def declaration_group_member_params
     params.require(:declaration_group_member)
-          .permit(:declaration_id, :declaration_group_id)
+          .permit(:declaration_owner_id, :declaration_group_id)
   end
 end

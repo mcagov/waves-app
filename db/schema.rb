@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_24_141426) do
+ActiveRecord::Schema.define(version: 2018_05_31_083445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2018_05_24_141426) do
   end
 
   create_table "declaration_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "declaration_id"
+    t.uuid "declaration_owner_id"
     t.uuid "declaration_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

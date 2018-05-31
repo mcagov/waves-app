@@ -41,11 +41,6 @@ describe "Oustanding Declaration API" do
         expect(parsed_attrs["other_owners"][0]["name"])
           .to eq("HORATIO NELSON")
       end
-
-      it "has a declared_at date" do
-        expect(parsed_attrs["other_owners"][0]["declared_at"])
-          .to be_present
-      end
     end
   end
 

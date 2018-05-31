@@ -52,7 +52,7 @@ class SubmissionsController < InternalPagesController
       Submission.includes(
         [
           { payments: [:remittance] }, { declarations: [:notification] },
-          { declaration_groups: [:declarations] },
+          { declaration_groups: [:declaration_owners] },
           { documents: [:assets, :actioned_by] },
           { work_logs: [:actioned_by] }, { charterers: [:charter_parties] },
           { mortgages: [:mortgagees, :mortgagors] }, :carving_and_markings,

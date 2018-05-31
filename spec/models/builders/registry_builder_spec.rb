@@ -216,12 +216,12 @@ end
 def init_extended_submission
   submission = init_basic_submission
   submission.update_attributes(
-    managing_owner_id: submission.declarations.first.id,
-    correspondent_id: submission.declarations.last.id)
+    managing_owner_id: submission.declarations.first.owner.id,
+    correspondent_id: submission.declarations.last.owner.id)
 
   submission.declaration_groups.create(
     shares_held: 10,
-    default_group_member: submission.declarations.last.id)
+    default_group_member: submission.declarations.last.owner.id)
 
   submission
 end

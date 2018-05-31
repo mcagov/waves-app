@@ -89,10 +89,10 @@ module SubmissionHelper
 
   def shares_held_jointly_declaration_select_options(declaration_group)
     selected_declarations =
-      declaration_group.declaration_group_members.map(&:declaration_id)
+      declaration_group.declaration_group_members.map(&:declaration_owner_id)
 
-    declaration_select_options.reject do |declaration|
-      selected_declarations.include?(declaration[1])
+    declaration_select_options.reject do |declaration_owner|
+      selected_declarations.include?(declaration_owner.id)
     end
   end
 
