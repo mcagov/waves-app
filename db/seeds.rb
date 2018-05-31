@@ -1,21 +1,8 @@
-# USERS = [
-#   ["toby.privett@oceanshq.com", "Toby Privett", 3],
-#   ["andre.tanguy@oceanshq.com", "Andre Tanguy", 3],
-#   ["Laura.Clark-Theobald@mcga.gov.uk", "Laura Clark-Theobald", 3],
-#   ["Rachel.Miles@mcga.gov.uk", "Rachel Miles", 3],
-#   ["Ugo.Ottanelli@mcga.gov.uk", "Ugo Ottanelli", 3],
-#   ["Charlotte.Clarke@mcga.gov.uk", "Charlotte Clarke", 3],
-#   ["Adam.Wheal@mcga.gov.uk", "Adam Wheal", 3],
-# ].freeze
-
-# USERS.each do |user|
-#   u = User.find_or_initialize_by(name: user[1])
-#   u.email = user[0]
-#   u.name = user[1]
-#   u.password = Devise.friendly_token.first(8)
-#   u.access_level = user[2]
-#   u.save! if u.valid?
-# end
+u = User.find_or_initialize_by(name: "Toby Privett")
+u.email = "toby@snaplab.co.uk"
+u.password = "password"
+u.access_level = :system_manager
+u.save!
 
 Fee.delete_all
 

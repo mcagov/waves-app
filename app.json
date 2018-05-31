@@ -1,6 +1,7 @@
 {
   "name": "waves-app",
   "scripts": {
+    "postdeploy": "OK_TO_SEED=true bundle exec rake db:schema:load db:seed submissions:load"
   },
   "env": {
     "APPLICATION_HOST": {
