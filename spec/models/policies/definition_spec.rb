@@ -73,7 +73,7 @@ describe Policies::Definitions do
 
         context "when a correspondent is assigned" do
           before do
-            submission.correspondent_id = submission.declarations.first.id
+            submission.correspondent_id = submission.owners.first.id
             submission.save!
           end
 
