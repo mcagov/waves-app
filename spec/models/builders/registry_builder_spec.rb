@@ -78,9 +78,10 @@ describe Builders::RegistryBuilder do
         expect(bob).not_to be_managing_owner
       end
 
-      it "bob as the correspondent" do
+      it "sets the charter_party Carol as the correspondent" do
         expect(alice).not_to be_correspondent
-        expect(registered_vessel.owners.last).to be_correspondent
+        expect(bob).not_to be_correspondent
+        expect(registered_vessel.charter_parties.last).to be_correspondent
       end
 
       it "notes that alice has 20 shares" do
@@ -217,7 +218,7 @@ def init_extended_submission
   submission = init_basic_submission
   submission.update_attributes(
     managing_owner_id: submission.declarations.first.owner.id,
-    correspondent_id: submission.declarations.last.owner.id)
+    correspondent_id: submission.charter_parties.last.id)
 
   submission.declaration_groups.create(
     shares_held: 10,
