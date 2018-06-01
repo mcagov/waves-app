@@ -9,8 +9,12 @@
           Email
       .modal-body
         %dl
-          %dt Date sent
-          %dd= notification.created_at
+          %dt Date generated
+          %dd= notification.created_at.to_s(:date_time)
+
+        %dl
+          %dt Date delivered
+          %dd= notification.delivered_at.to_s(:date_time) if notification.delivered_at
         %dl
           %dt Recipient
           %dd= notification.recipient_email

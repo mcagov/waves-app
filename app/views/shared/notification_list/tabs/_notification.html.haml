@@ -4,4 +4,6 @@
   %td
     = link_to notification.created_at.to_s(:date_time), "#email-content", "data-target" => "#notification-#{ notification.id }", "data-toggle" => "modal"
     = render partial:  "shared/notification_list/modals/notification", locals: { notification: notification }
+  %td= notification.delivered_at.to_s(:date_time) if notification.delivered_at
   %td
+
