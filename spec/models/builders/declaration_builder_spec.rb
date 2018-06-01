@@ -17,7 +17,13 @@ describe Builders::DeclarationBuilder do
     let(:alice) do
       build(:registered_owner, name: "alice",
                                email: "alice@example.com",
-                               shares_held: 20)
+                               shares_held: 20
+           ).attributes.deep_symbolize_keys!
+    end
+
+    let(:bob) do
+      build(:registered_owner, entity_type: :corporate
+           ).attributes.deep_symbolize_keys!
     end
 
     let(:shareholder_groups) do
@@ -25,18 +31,17 @@ describe Builders::DeclarationBuilder do
     end
 
     let(:declarations_required) { true }
-    let(:bob) { build(:registered_owner, entity_type: :corporate) }
     let(:submission_source) { :online }
     let!(:submission) { Submission.last }
 
     it "has a completed declaration for alice" do
       expect(submission.declarations.completed.first.owner.name)
-        .to eq(alice.name)
+        .to eq(alice[:name])
     end
 
     it "has an incomplete declaration for bob" do
       expect(submission.declarations.incomplete.first.owner.name)
-        .to eq(bob.name)
+        .to eq(bob[:name])
     end
 
     it "notes that alice is an individual owner" do
@@ -80,7 +85,7 @@ describe Builders::DeclarationBuilder do
 
       it "adds declaration_group_member to the declaration_group" do
         group_member = declaration_group.declaration_group_members.first
-        expect(group_member.declaration.owner.email).to eq("alice@example.com")
+        expect(group_member.declaration_owner.email).to eq("alice@example.com")
       end
     end
 

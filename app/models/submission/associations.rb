@@ -21,17 +21,8 @@ module Submission::Associations
     end
 
     def declaration_associations(base)
-      base.belongs_to :correspondent,
-                      class_name: "Submission::Correspondent",
-                      required: false
-
       base.has_many :declarations, -> { order("created_at asc") }
-
       base.has_many :declaration_groups, class_name: "Declaration::Group"
-
-      base.belongs_to :managing_owner,
-                      class_name: "Submission::ManagingOwner",
-                      required: false
     end
 
     def misc_associations(base)
@@ -49,6 +40,9 @@ module Submission::Associations
     end
 
     def ownership_associations(base)
+      base.belongs_to :correspondent, class_name: "Customer", required: false
+      base.belongs_to :managing_owner, class_name: "Customer", required: false
+
       base.has_many :beneficial_owners,
                     -> { order(:name) },
                     class_name: "BeneficialOwner",

@@ -40,7 +40,7 @@ class Decorators::Submission < SimpleDelegator
 
     @registry_owners ||=
       symbolized_registry_info[:owners].map do |owner|
-        Declaration::Owner.new(owner)
+        Register::Owner.new(owner)
       end
   end
 

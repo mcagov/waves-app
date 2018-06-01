@@ -78,20 +78,17 @@ module SubmissionHelper
       data: { toggle: "tooltip", placement: "left", title: @text })
   end
 
-  def declaration_select_options
-    list = @submission.declarations.map do |d|
-      [d.owner.name, d.id]
-    end
-
-    list.sort { |a, b| a[0] <=> b[0] }
+  def customer_select_options
+    list = @submission.owners + @submission.charter_parties
+    list.sort_by(&:name)
   end
 
-  def shares_held_jointly_declaration_select_options(declaration_group)
+  def shares_held_jointly_customer_select_options(declaration_group)
     selected_declarations =
-      declaration_group.declaration_group_members.map(&:declaration_id)
+      declaration_group.declaration_group_members.map(&:declaration_owner_id)
 
-    declaration_select_options.reject do |declaration|
-      selected_declarations.include?(declaration[1])
+    customer_select_options.reject do |declaration_owner|
+      selected_declarations.include?(declaration_owner.id)
     end
   end
 
@@ -99,7 +96,7 @@ module SubmissionHelper
     return false if @readonly
     return false if declaration_group.declaration_group_members.count >= 5
 
-    if shares_held_jointly_declaration_select_options(declaration_group).empty?
+    if shares_held_jointly_customer_select_options(declaration_group).empty?
       return false
     end
     true

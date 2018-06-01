@@ -24,7 +24,7 @@ describe Declaration::GroupMember do
     context "with more than one declaration_group_member" do
       before do
         Declaration::GroupMember.create(
-          declaration: create(:declaration),
+          declaration_owner: create(:declaration_owner),
           declaration_group: declaration_group
         )
       end

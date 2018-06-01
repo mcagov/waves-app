@@ -12,7 +12,7 @@
               - declaration_group.declaration_group_members.each do |declaration_group_member|
                 %tr
                   %td.owner_name
-                    = declaration_group_member.declaration.owner
+                    = declaration_group_member.declaration_owner
                     - unless @readonly
                       = link_to "remove",
                         submission_declaration_group_member_path(@submission, declaration_group_member),
@@ -49,7 +49,7 @@
                         Shares Held Jointly
                     .modal-body
                       = f.input :shares_held,
-                        label: declaration_group.declaration_group_members.map{|gm| gm.declaration.owner}.join(", ")
+                        label: declaration_group.declaration_group_members.map{|gm| gm.declaration_owner}.join(", ")
                     .modal-footer
                       = button_tag type: 'submit',
                         class: "btn btn-primary btn-sm pull-right" do

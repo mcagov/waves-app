@@ -21,7 +21,7 @@ class Builders::Registry::ShareBuilder
 
         declaration_group.declaration_group_members.each do |dec_group_member|
           shareholder_group.shareholder_group_members.create(
-            owner_id: dec_group_member.declaration.registered_owner_id)
+            owner_id: dec_group_member.declaration_owner.registered_owner_id)
         end
       end
     end

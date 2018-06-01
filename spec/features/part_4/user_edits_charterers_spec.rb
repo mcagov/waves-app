@@ -93,4 +93,20 @@ describe "User edits charterers", js: :true do
     expect(page).to have_css(".country_of_incorporation", text: "ANTIGUA")
     within(".remove-charter-party") { expect(page).to have_link("Remove") }
   end
+
+  scenario "adding a charter party and making them the correspondent" do
+    click_on("Add Individual Party")
+
+    fill_in("Charterer Name", with: "CAROL CORRESPONDENT")
+    click_on("Save Individual Party")
+
+    click_on("Owners")
+    within("#correspondent") do
+      click_on(Submission.last.correspondent)
+      select("CAROL CORRESPONDENT", from: "Name")
+      click_on("Save Correspondent")
+    end
+
+    expect(page).to have_css(".correspondent-name", text: "CAROL CORRESPONDENT")
+  end
 end

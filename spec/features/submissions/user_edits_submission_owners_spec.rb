@@ -30,9 +30,10 @@ describe "User edits submission owners", js: true do
     expect(page).to have_css(".owner-email", text: "alice@example.com")
     expect(page).to have_css(".owner-phone_number", text: "012345678")
     expect(page).to have_css(".owner-nationality", text: "SPANISH")
-    expect(page)
-      .to have_css(".owner-address",
-                   text: "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, POC123")
+
+    inline_address =
+      "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, UNITED KINGDOM, POC123"
+    expect(page).to have_css(".owner-address", text: inline_address)
     expect(Declaration.last).to be_completed
   end
 

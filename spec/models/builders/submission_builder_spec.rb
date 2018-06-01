@@ -130,8 +130,8 @@ describe Builders::SubmissionBuilder do
 
       context "when the changeset is blank" do
         it "builds the changeset from the registry_info" do
-          expect(submission.symbolized_changeset)
-            .to eq(submission.symbolized_registry_info)
+          expect(submission.symbolized_changeset[:vessel_info])
+            .to eq(submission.symbolized_registry_info[:vessel_info])
         end
       end
 
@@ -159,7 +159,7 @@ describe Builders::SubmissionBuilder do
       context "with managing_owner and correspondent" do
         it "assigns the managing_owner_id and correspondent_id" do
           expect(submission.managing_owner.name).to eq("ALICE")
-          expect(submission.correspondent.name).to eq("BOB")
+          expect(submission.correspondent.name).to eq("Carol")
         end
       end
 
@@ -311,14 +311,15 @@ def vessel_sample_data # rubocop:disable Metrics/MethodLength
 
     charterers: [create(:charterer,
                         charter_parties: [
-                          create(:charter_party, name: "Carol")])]
+                          create(:charter_party, name: "Carol",
+                                                 correspondent: true)])]
   }
 end
 
 def owner_sample_data
   [
     { name: "ALICE", email: "alice@example.com", managing_owner: true },
-    { name: "BOB", email: nil, correspondent: true },
+    { name: "BOB", email: nil },
   ]
 end
 

@@ -40,8 +40,8 @@ class Builders::Registry::OwnerBuilder
         eligibility_status: owner.eligibility_status,
         registration_number: owner.registration_number,
         date_of_incorporation: owner.date_of_incorporation,
-        managing_owner: @submission.managing_owner_id == declaration.id,
-        correspondent: @submission.correspondent_id == declaration.id,
+        managing_owner: @submission.managing_owner_id == owner.id,
+        correspondent: @submission.correspondent_id == owner.id,
         entity_type: declaration.entity_type,
         shares_held: declaration.shares_held)
 

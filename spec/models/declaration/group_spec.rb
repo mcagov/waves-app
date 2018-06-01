@@ -7,12 +7,12 @@ describe Declaration::Group do
 
     subject do
       described_class.create(
-        submission: submission, default_group_member: declaration.id)
+        submission: submission, default_group_member: declaration.owner.id)
     end
 
     it "creates a Declaration::GroupMember for the default_group_member" do
-      expect(subject.declaration_group_members.first.declaration)
-        .to eq(declaration)
+      expect(subject.declaration_group_members.first.declaration_owner)
+        .to eq(declaration.owner)
     end
   end
 end
