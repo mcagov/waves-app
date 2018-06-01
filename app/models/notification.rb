@@ -4,7 +4,7 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
   belongs_to :actioned_by, class_name: "User"
 
-  after_create :deliver!
+  before_create :deliver!
 
   include ActiveModel::Transitions
 
