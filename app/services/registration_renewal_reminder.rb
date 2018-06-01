@@ -38,6 +38,8 @@ class RegistrationRenewalReminder
     end
 
     def build_renewal_reminder_letter_print_job(registered_vessel)
+      return unless registered_vessel.correspondent.email.blank?
+
       PrintJob.create(
         printable: registered_vessel.current_registration,
         part: registered_vessel.part,
