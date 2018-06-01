@@ -19,8 +19,12 @@ class RegistrationRenewalReminder
 
     def build_reminders
       @registered_vessels.each do |registered_vessel|
-        build_email_notification(registered_vessel)
-        build_renewal_reminder_letter_print_job(registered_vessel)
+        notification = build_email_notification(registered_vessel)
+
+        unless notification.deliverable?
+          build_renewal_reminder_letter_print_job(registered_vessel)
+        end
+
         build_mortgagee_reminder_letter_print_jobs(registered_vessel)
 
         registered_vessel
@@ -38,8 +42,6 @@ class RegistrationRenewalReminder
     end
 
     def build_renewal_reminder_letter_print_job(registered_vessel)
-      return unless registered_vessel.correspondent.email.blank?
-
       PrintJob.create(
         printable: registered_vessel.current_registration,
         part: registered_vessel.part,
