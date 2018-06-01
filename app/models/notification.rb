@@ -4,11 +4,22 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
   belongs_to :actioned_by, class_name: "User"
 
-  after_create :send_email
+  after_create :deliver!
+
+  include ActiveModel::Transitions
+
+  state_machine do
+    state :ready_for_delivery
+    state :delivered
+
+    event :deliver!, timestamp: true do
+      transitions to: :delivered, from: [:ready_for_delivery],
+                  on_transition: :send_email,
+                  guard: :deliverable?
+    end
+  end
 
   def send_email
-    return unless deliverable?
-
     NotificationMailer.delay.send(
       email_template, default_params, *additional_params)
   end
