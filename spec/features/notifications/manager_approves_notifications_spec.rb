@@ -20,6 +20,8 @@ describe "Manager approves system-generated notifications" do
   end
 
   scenario "in general" do
+    expect(page).to have_text("Total: 2")
+
     within(all(".notification")[0]) do
       expect(page)
         .to have_link(

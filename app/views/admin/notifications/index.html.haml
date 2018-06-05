@@ -2,9 +2,11 @@
   .col-md-12
     %h1 Automated Email Queue
     %p The following emails require approval before they can be sent
-    %p Total: #{@notifications.count}
+    %h4 Total: #{@notifications.count}
 .row
   .col-md-12
+    = will_paginate @notifications, renderer: BootstrapPagination::Rails
+
     %table.table.table-striped.table-bordered
       %thead
         %th Vessel / Application
@@ -26,3 +28,4 @@
               = "#{notification.recipient_name} <#{notification.recipient_email}>"
             %td= notification.email_subject
             %td= notification.created_at.to_s(:datetime)
+    = will_paginate @notifications, renderer: BootstrapPagination::Rails
