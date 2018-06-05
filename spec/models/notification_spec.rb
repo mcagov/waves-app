@@ -60,6 +60,26 @@ describe Notification, type: :model do
       it "sets the initial state" do
         expect(notification.current_state).to eq(:pending_approval)
       end
+
+      context "#approve!" do
+        let(:approved_by) { create(:user) }
+
+        before do
+          notification.approve!(approved_by)
+        end
+
+        it "sets the approved_by" do
+          expect(notification.approved_by).to eq(approved_by)
+        end
+
+        it "sets the approved_at" do
+          expect(notification.approved_at).to be_present
+        end
+
+        it "delivers the email" do
+          expect(notification.reload).to be_delivered
+        end
+      end
     end
   end
 

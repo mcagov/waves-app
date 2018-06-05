@@ -1,7 +1,7 @@
 class NotificationApproval
   class << self
     def run_delayed(user)
-      # NotificationApproval.delay.approve_all!(user)
+      NotificationApproval.delay.approve_all!(user)
     end
 
     private

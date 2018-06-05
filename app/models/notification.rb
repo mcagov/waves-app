@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
 
   belongs_to :notifiable, polymorphic: true
   belongs_to :actioned_by, class_name: "User"
+  belongs_to :approved_by, class_name: "User"
 
   before_save :process!
 
@@ -11,6 +12,7 @@ class Notification < ApplicationRecord
   state_machine auto_scopes: true do
     state :ready_for_delivery
     state :pending_approval
+    state :approved
     state :delivered
 
     event :require_approval do
@@ -19,9 +21,14 @@ class Notification < ApplicationRecord
     end
 
     event :deliver, timestamp: true do
-      transitions to: :delivered, from: [:ready_for_delivery],
+      transitions to: :delivered, from: [:ready_for_delivery, :approved],
                   on_transition: :send_email,
                   guard: :deliverable?
+    end
+
+    event :approve, timestamp: true do
+      transitions to: :approved, from: [:pending_approval],
+                  on_transition: :add_approved_by
     end
   end
 
@@ -51,6 +58,10 @@ class Notification < ApplicationRecord
 
   def system_generated?
     actioned_by.blank?
+  end
+
+  def add_approved_by(user)
+    update_attribute(:approved_by_id, user.id) && process!
   end
 
   private
