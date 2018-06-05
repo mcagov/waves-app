@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    %h1 Automated Email Queue
+    - if @notifications.empty?
+      %p There are no emails waiting approval
+    - else
+      %p The following emails require approval before they can be sent
+      = form_tag approve_all_admin_notifications_path do
+        = submit_tag "Approve & Send #{pluralize(@notifications.count, 'Email')}", class: "btn btn-success"
+      .row
+        .col-md-12
+          = will_paginate @notifications, renderer: BootstrapPagination::Rails
+
+          %table.table.table-striped.table-bordered
+            %thead
+              %th Vessel / Application
+              %th Recipient
+              %th Email Subject
+              %th Date Created
+            %tbody
+              - @notifications.each do |notification|
+                - notifiable = notification.notifiable
+                %tr.notification
+                  %td
+                    - if notifiable.is_a?(Submission)
+                      = link_to notifiable.ref_no, submission_path(notification.notifiable)
+                    - elsif notifiable.is_a?(Register::Vessel)
+                      = link_to notifiable, vessel_path(notifiable)
+                    - else
+                      = notifiable.to_s
+                  %td
+                    = "#{notification.recipient_name} <#{notification.recipient_email}>"
+                  %td= notification.email_subject
+                  %td= notification.created_at.to_s(:datetime)
+          = will_paginate @notifications, renderer: BootstrapPagination::Rails

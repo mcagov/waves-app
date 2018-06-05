@@ -72,6 +72,8 @@ To disable an email notification, override `Notification#deliverable?` e.g.
         false
     end
 
+Automated reminder emails (system-generated) are generated daily. To defend against erroneous processes or bad data, they are created with an inital state of `pending_approval`. Before these emails can be sent, they need to marked as `approved` by a user. See the link `Automated Email Queue` in the top right navigation.
+
 ##### Email previews
 
 Emails can be previewed at: /rails/mailers in development.
