@@ -6,7 +6,7 @@
     - else
       %p The following emails require approval before they can be sent
       = form_tag approve_all_admin_notifications_path do
-        = submit_tag "Approve & Send #{pluralize(@notifications.count, 'Emails')}", class: "btn btn-success"
+        = submit_tag "Approve & Send #{pluralize(@notifications.count, 'Email')}", class: "btn btn-success"
       .row
         .col-md-12
           = will_paginate @notifications, renderer: BootstrapPagination::Rails
