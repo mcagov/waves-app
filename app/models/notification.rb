@@ -8,7 +8,7 @@ class Notification < ApplicationRecord
 
   include ActiveModel::Transitions
 
-  state_machine do
+  state_machine auto_scopes: true do
     state :ready_for_delivery
     state :pending_approval
     state :delivered

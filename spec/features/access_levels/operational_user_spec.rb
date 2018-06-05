@@ -23,4 +23,6 @@ describe "Operational user" do
     visit("/admin/users")
     expect(page).to have_http_status(401)
   end
+
+  scenario "automated email queue"
 end

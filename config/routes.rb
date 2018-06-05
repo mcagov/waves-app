@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :tasks, only: [:index]
     resources :fees, only: [:index]
     resources :users
+    resources :notifications
   end
 
   namespace :api do
