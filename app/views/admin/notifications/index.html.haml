@@ -1,8 +1,10 @@
 .row
   .col-md-12
     %h1 Automated Email Queue
-    %p The following emails require approval before they can be sent
-    %h4 Total: #{@notifications.count}
+    - unless @notifications.empty?
+      %p The following emails require approval before they can be sent
+      = form_tag approve_all_admin_notifications_path do
+        = submit_tag "Approve & Send #{pluralize(@notifications.count, 'Emails')}", class: "btn btn-success"
 .row
   .col-md-12
     = will_paginate @notifications, renderer: BootstrapPagination::Rails

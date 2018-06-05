@@ -20,8 +20,6 @@ describe "Manager approves system-generated notifications" do
   end
 
   scenario "in general" do
-    expect(page).to have_text("Total: 2")
-
     within(all(".notification")[0]) do
       expect(page)
         .to have_link(
@@ -41,5 +39,11 @@ describe "Manager approves system-generated notifications" do
       expect(page).to have_text("Alice <alice@example.com>")
       expect(page).to have_text("Registration Renewal Reminder:")
     end
+  end
+
+  scenario "approving the queue" do
+    click_on("Approve & Send 2 Email")
+
+    expect(page).to have_text("The automated email queue is being processed.")
   end
 end
