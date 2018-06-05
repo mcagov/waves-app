@@ -161,11 +161,6 @@ module Register
       registration_status != :pending
     end
 
-    # here we handle legacy changesets with ec_number assigned
-    def ec_number=(_unimplemented); end
-
-    def ec_no=(_unimplemented); end
-
     def pln
       "#{port_code} #{port_no}"
     end
