@@ -13,5 +13,6 @@
 /spec/test_files
 /tags
 /tmp/*
+/vendor/bundle/*
 .env
 .byebug_history
