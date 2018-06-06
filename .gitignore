@@ -15,4 +15,3 @@
 /tmp/*
 .env
 .byebug_history
-.ruby-version
