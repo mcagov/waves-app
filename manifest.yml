@@ -5,8 +5,10 @@ applications:
   instances: 2
   buildpack: ruby_buildpack
   command: bundle exec rake db:migrate && rails s -p $PORT
+  timeout: 90
 - name: mca-waves-worker
   memory: 512M
   buildpack: ruby_buildpack
   command: bundle exec rake jobs:work
   no-route: true
+  timeout: 90
