@@ -12,3 +12,4 @@ applications:
   command: bundle exec rake jobs:work
   no-route: true
   timeout: 90
+  health-check-type: process
