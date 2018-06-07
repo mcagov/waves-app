@@ -1,13 +1,14 @@
 class SearchController < InternalPagesController
   def index
-    @search_results = Search.all(params[:q])
+    @search_results = submissions
   end
 
   def submissions
-    @submissions = Search.submissions(params[:q])
+    @submissions = Search.submissions(params[:q], current_activity.part)
 
     respond_to do |format|
       format.js { render response_path }
+      format.html { render :submissions }
     end
   end
 

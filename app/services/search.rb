@@ -4,10 +4,10 @@ class Search
       PgSearch.multisearch(term)
     end
 
-    # looks up a submission to help user complete
-    # a finance payment or document entry form
-    def submissions(term)
-      Submission.scoped_search(term)
+    def submissions(term, part = nil)
+      search = Submission
+      search = search.in_part(part) if part
+      search.scoped_search(term)
     end
 
     # looks up a vessel to help user complete

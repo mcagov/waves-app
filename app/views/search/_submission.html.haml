@@ -1,4 +1,4 @@
-- submission = Decorators::Submission.new(searchable)
+- submission = Decorators::Submission.new(submission)
 %tr.submission
   %td
     = link_to submission_path(submission), class: "search-result" do
@@ -6,6 +6,4 @@
     %span.pull-right.label.label-primary APPLICATION
     %br
     Application Reference: #{submission.ref_no}
-    - if show_detail
-      %br
-      Callsign: #{submission.radio_call_sign}, MMSI: #{submission.mmsi_number}
+    Callsign: #{submission.radio_call_sign}, MMSI: #{submission.mmsi_number}
