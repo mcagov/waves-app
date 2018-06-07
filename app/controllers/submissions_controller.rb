@@ -59,6 +59,8 @@ class SubmissionsController < InternalPagesController
           :managers, :declarations, :engines, :correspondences, :notes,
           :print_jobs, :line_items, :notifications, :beneficial_owners]
       ).find(params[:id])
+
+    ensure_current_part_for(@submission.part)
   end
 
   def submission_params

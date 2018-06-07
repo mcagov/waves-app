@@ -35,11 +35,19 @@ class InternalPagesController < ApplicationController
 
   def load_vessel
     @vessel = Register::Vessel.find(params[:vessel_id])
+
+    ensure_current_part_for(@vessel.part)
   end
 
   def load_submission
     @submission =
       Submission.includes(:declarations).find(params[:submission_id])
+
+    ensure_current_part_for(@submission.part)
+  end
+
+  def ensure_current_part_for(part)
+    session[:current_activity] = part unless current_activity.matches?(part)
   end
 
   def enable_readonly
