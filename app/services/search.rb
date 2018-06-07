@@ -11,10 +11,12 @@ class Search
     # looks up a vessel to help user complete
     # a finance payment or document entry form
     def vessels(term, part = nil)
-      PgSearch.multisearch(term)
+      vessels = PgSearch.multisearch(term)
               .where(searchable_type: "Register::Vessel")
               .limit(20)
               .map(&:searchable)
+      # temporary #in_part implementation
+      vessels.select { |vessel| vessel.part.to_sym == part }
     end
 
     # looks for submissions for the same vessel

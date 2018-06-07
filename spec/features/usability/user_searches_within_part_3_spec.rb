@@ -65,7 +65,7 @@ describe "User searches within part 3" do
       end
     end
 
-    xscenario "searching for a vessel in another part" do
+    scenario "searching for a vessel in another part" do
       create(:fishing_vessel, reg_no: "MYBOAT")
 
       within(".nav_menu") { search_for("MYBOAT") }
