@@ -17,6 +17,15 @@ class SearchController < InternalPagesController
     end
   end
 
+  def global
+    @submissions = Search.submissions(params[:q])
+    @vessels = Search.vessels(params[:q])
+
+    respond_to do |format|
+      format.js { render response_path }
+    end
+  end
+
   protected
 
   def response_path

@@ -12,7 +12,11 @@ class Search
                         .limit(20)
                         .map(&:searchable)
       # temporary #in_part implementation
-      vessels.select { |vessel| vessel.part.to_sym == part }
+      if part
+        vessels.select { |vessel| vessel.part.to_sym == part }
+      else
+        vessels
+      end
     end
 
     # looks for submissions for the same vessel
