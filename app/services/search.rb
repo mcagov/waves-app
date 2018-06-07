@@ -4,10 +4,14 @@ class Search
       PgSearch.multisearch(term)
     end
 
+    # looks up a submission to help user complete
+    # a finance payment or document entry form
     def submissions(term)
       Submission.scoped_search(term)
     end
 
+    # looks up a vessel to help user complete
+    # a finance payment or document entry form
     def vessels(term)
       PgSearch.multisearch(term)
               .where(searchable_type: "Register::Vessel")
@@ -15,13 +19,17 @@ class Search
               .map(&:searchable)
     end
 
+    # looks for submissions for the same vessel
+    # to help a reg officer on the convert application
+    # page
     def similar_submissions(submission)
       return [] unless submission.registered_vessel
       submission.registered_vessel.submissions.active.where.not(ref_no: nil)
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def similar_vessels(part, vessel)
+    # looks for similar vessels, to help
+    # a reg officer on a part_3 application page
+    def similar_vessels(part, vessel) # rubocop:disable Metrics/MethodLength
       Register::Vessel
         .in_part(part)
         .where(name: vessel.name)
