@@ -3,13 +3,13 @@
   %div
     %ul#searchResults.nav.nav-tabs.bar_tabs{:role => "tablist"}
       %li.active
-        %a#vessels-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessels_tab", :role => "tab"} Registry
+        %a#vessels-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessels_tab", :role => "tab"} Registry (#{@vessels.count})
 
       %li
-        %a#submissions-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#submissions_tab", :role => "tab"} Applications
+        %a#submissions-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#submissions_tab", :role => "tab"} Applications (#{@submissions.count})
 
 
-    %ul#searchResults.tab-content
+    %ul#searchResultsTab.tab-content
       #vessels_tab.tab-pane.fade.active.in
         = render partial: "vessels", locals: { vessels: @vessels }
 

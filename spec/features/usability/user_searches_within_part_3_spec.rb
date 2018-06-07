@@ -12,6 +12,10 @@ describe "User searches within part 3" do
 
       within(".nav_menu") { search_for("ABC") }
 
+      within("#searchResults") do
+        expect(page).to have_text("Applications (2)")
+      end
+
       within("#submissions") do
         expect(page).to have_css("tr.submission", count: 2)
       end
@@ -51,6 +55,10 @@ describe "User searches within part 3" do
       create(:registered_vessel, reg_no: "MYBOAT")
 
       within(".nav_menu") { search_for("MYBOAT") }
+
+      within("#searchResults") do
+        expect(page).to have_text("Registry (1)")
+      end
 
       within("#vessels") do
         expect(page).to have_css("tr.vessel", count: 1)
