@@ -1,11 +1,7 @@
 class Search
   class << self
-    def all(term)
-      PgSearch.multisearch(term)
-    end
-
     def submissions(term, part = nil)
-      Submission.in_part(part).scoped_search(term).limit(20)
+      Submission.in_part(part).limit(20).scoped_search(term)
     end
 
     # looks up a vessel to help user complete
