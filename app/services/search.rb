@@ -5,14 +5,12 @@ class Search
     end
 
     def submissions(term, part = nil)
-      search = Submission
-      search = search.in_part(part) if part
-      search.scoped_search(term)
+      Submission.in_part(part).scoped_search(term).limit(20)
     end
 
     # looks up a vessel to help user complete
     # a finance payment or document entry form
-    def vessels(term)
+    def vessels(term, part = nil)
       PgSearch.multisearch(term)
               .where(searchable_type: "Register::Vessel")
               .limit(20)

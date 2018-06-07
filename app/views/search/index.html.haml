@@ -1,0 +1,17 @@
+%h1 Search Results
+.row
+  %div
+    %ul#searchResults.nav.nav-tabs.bar_tabs{:role => "tablist"}
+      %li.active
+        %a#vessels-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessels_tab", :role => "tab"} Registry
+
+      %li
+        %a#submissions-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#submissions_tab", :role => "tab"} Applications
+
+
+    %ul#searchResults.tab-content
+      #vessels_tab.tab-pane.fade.active.in
+        = render partial: "vessels", locals: { vessels: @vessels }
+
+      #submissions_tab.tab-pane.fade
+        = render partial: "submissions", locals: { submissions: @submissions }

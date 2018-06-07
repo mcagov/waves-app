@@ -1,8 +1,6 @@
-%h1 Search results
-
 - if @submissions.empty?
   %p Nothing found.
 - else
-  %table.table.table-striped#search_results
+  %table.table.table-striped#submissions
     %tbody
       = render partial: "/search/submission", collection: @submissions
