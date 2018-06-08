@@ -42,6 +42,10 @@ class InternalPagesController < ApplicationController
       Submission.includes(:declarations).find(params[:submission_id])
   end
 
+  def ensure_current_part_for(part)
+    session[:current_activity] = part unless current_activity.matches?(part)
+  end
+
   def enable_readonly
     @readonly = Policies::Actions.readonly?(@submission, current_user)
   end

@@ -1,0 +1,6 @@
+- if @submissions.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#submissions
+    %tbody
+      = render partial: "/search/submission", collection: @submissions

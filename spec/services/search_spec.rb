@@ -1,15 +1,6 @@
 require "rails_helper"
 
 describe Search, type: :model do
-  context ".all" do
-    before do
-      expect(PgSearch)
-        .to receive(:multisearch).with("foo")
-    end
-
-    it { Search.all("foo") }
-  end
-
   context ".submissions" do
     context "uses pg_search_scope" do
       before do

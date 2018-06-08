@@ -3,6 +3,8 @@ class VesselsController < InternalPagesController
     @vessel =
       Decorators::Vessel.new(Register::Vessel
         .includes(preload).find(params[:id]))
+
+    ensure_current_part_for(@vessel.part)
   end
 
   def index

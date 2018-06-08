@@ -1,27 +1,35 @@
 class Search
   class << self
-    def all(term)
-      PgSearch.multisearch(term)
+    def submissions(term, part = nil)
+      Submission.in_part(part).limit(20).scoped_search(term)
     end
 
-    def submissions(term)
-      Submission.scoped_search(term)
+    # looks up a vessel to help user complete
+    # a finance payment or document entry form
+    def vessels(term, part = nil)
+      vessels = PgSearch.multisearch(term)
+                        .where(searchable_type: "Register::Vessel")
+                        .limit(20)
+                        .map(&:searchable)
+      # temporary #in_part implementation
+      if part
+        vessels.select { |vessel| vessel.part.to_sym == part }
+      else
+        vessels
+      end
     end
 
-    def vessels(term)
-      PgSearch.multisearch(term)
-              .where(searchable_type: "Register::Vessel")
-              .limit(20)
-              .map(&:searchable)
-    end
-
+    # looks for submissions for the same vessel
+    # to help a reg officer on the convert application
+    # page
     def similar_submissions(submission)
       return [] unless submission.registered_vessel
       submission.registered_vessel.submissions.active.where.not(ref_no: nil)
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def similar_vessels(part, vessel)
+    # looks for similar vessels, to help
+    # a reg officer on a part_3 application page
+    def similar_vessels(part, vessel) # rubocop:disable Metrics/MethodLength
       Register::Vessel
         .in_part(part)
         .where(name: vessel.name)

@@ -4,8 +4,6 @@ class Submission < ApplicationRecord
   include Submission::Reporting
 
   include PgSearch
-  multisearchable against: [:ref_no, :changeset]
-
   pg_search_scope :scoped_search,
                   against: [:ref_no, :changeset],
                   using: { tsearch: { prefix: true } }
@@ -27,7 +25,7 @@ class Submission < ApplicationRecord
 
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
-  scope :in_part, ->(part) { where(part: part.to_sym) }
+  scope :in_part, ->(part) { where(part: part.to_sym) if part }
   scope :active, -> { where.not(state: [:completed]) }
   scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
 

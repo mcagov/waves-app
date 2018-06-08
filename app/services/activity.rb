@@ -90,6 +90,10 @@ class Activity
     default_tasks.select { |t| !excluded_tasks.include?(t[1]) }
   end
 
+  def matches?(part)
+    @part.to_sym == part.to_sym
+  end
+
   private
 
   def default_printable_templates # rubocop:disable Metrics/MethodLength
