@@ -22,5 +22,5 @@
             %td.email= user.email
             %td.access_level= user.access_level.titleize
             %td.status= user.status
-            %td= user.last_sign_in_at
+            %td= user.current_sign_in_at.to_s(:date_time) if user.current_sign_in_at
     = will_paginate @users, renderer: BootstrapPagination::Rails
