@@ -106,7 +106,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       @pdf.draw_text mortgagor.name, at: [l_margin, y_pos]
       @pdf.text_box mortgagor.inline_address, width: 400, height: 30, at: [l_margin, y_pos - 5]
 
-      y_pos -= 30
+      y_pos -= 50
     end
 
     default_label_font
