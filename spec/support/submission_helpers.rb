@@ -19,6 +19,13 @@ def visit_assigned_submission
   visit submission_path(submission)
 end
 
+def visit_assigned_change_owner_submission
+  submission = create(:assigned_change_owner_submission)
+  login_to_part_3(submission.claimant)
+  visit submission_path(submission)
+  submission
+end
+
 def claim_submission_and_visit
   login_to_part_3
   click_on("Unclaimed Tasks")

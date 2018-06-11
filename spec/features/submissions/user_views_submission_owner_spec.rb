@@ -3,7 +3,7 @@ require "rails_helper"
 feature "User views owner submission details", type: :feature, js: true do
   let!(:submission) { create(:unassigned_change_vessel_submission) }
   let!(:registered_vessel) { submission.registered_vessel }
-  let!(:registry_owner) { registered_vessel.owners.first }
+  let!(:registered_owner) { registered_vessel.owners.first }
   let!(:declaration) { submission.declarations.first }
 
   before do
@@ -24,9 +24,9 @@ feature "User views owner submission details", type: :feature, js: true do
     expect(page).to have_css(".owner-nationality", text: owner.nationality)
     expect(page).to have_css(".declaration-status", text: "n/a")
 
-    expect(page).to have_css(".strike", text: registry_owner.name)
-    expect(page).to have_css(".strike", text: registry_owner.email)
-    expect(page).to have_css(".strike", text: registry_owner.nationality)
-    expect(page).to have_css(".strike", text: registry_owner.inline_address)
+    expect(page).to have_css(".strike", text: registered_owner.name)
+    expect(page).to have_css(".strike", text: registered_owner.email)
+    expect(page).to have_css(".strike", text: registered_owner.nationality)
+    expect(page).to have_css(".strike", text: registered_owner.inline_address)
   end
 end

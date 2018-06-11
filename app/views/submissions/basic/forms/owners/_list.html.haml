@@ -18,12 +18,12 @@
         %td.owner-address= owner.inline_address
         %td= render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
-    - @submission.removed_registry_owners.each do |owner|
+    - @submission.removed_registered_owners.each do |registered_owner|
       %tr
-        %td.owner-name.strike= owner
-        %td.strike= owner.email
-        %td.strike= owner.phone_number
-        %td.strike= owner.nationality
-        %td.strike{ colspan: 2 }= owner.inline_address
+        %td.owner-name.strike= registered_owner
+        %td.strike= registered_owner.email
+        %td.strike= registered_owner.phone_number
+        %td.strike= registered_owner.nationality
+        %td.strike{ colspan: 2 }= registered_owner.inline_address
 
 = render partial: "submissions/basic/forms/owners/actions/add_owner"
