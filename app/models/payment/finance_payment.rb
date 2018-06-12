@@ -42,6 +42,14 @@ class Payment::FinancePayment < ApplicationRecord
     payment.present?
   end
 
+  def searchable_attributes
+    [
+      :vessel_name,
+      :applicant_name,
+      :application_ref_no,
+    ].map { |attr| send(attr) }.join(" ")
+  end
+
   private
 
   def registered_vessel_exists
