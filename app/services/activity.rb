@@ -94,6 +94,10 @@ class Activity
     @part.to_sym == part.to_sym
   end
 
+  def searchable?
+    PART_TYPES.map(&:last).include?(@part)
+  end
+
   private
 
   def default_printable_templates # rubocop:disable Metrics/MethodLength

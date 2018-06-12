@@ -46,4 +46,8 @@ class Customer < ApplicationRecord
   def individual?
     (entity_type || "").to_sym != :corporate
   end
+
+  def name_and_postcode
+    postcode ? "#{name} (#{postcode})" : name
+  end
 end

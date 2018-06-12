@@ -17,7 +17,7 @@
       %br
       PLN: #{vessel.pln}
   %td
-    Owners: #{vessel.owners.map(&:inline_name_and_address).join("<br/>")}
+    Owners: #{vessel.owners.map(&:name_and_postcode).join("; ")}
     %br
     Last updated: #{vessel.updated_at}
 
