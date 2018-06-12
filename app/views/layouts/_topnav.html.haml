@@ -33,6 +33,7 @@
                 Log Out
         %li{style: "width: 250px"}
           .top_search
-            = form_tag "/search", method: :get do
-              = render partial: "search/fields"
+            - if current_activity.searchable?
+              = form_tag "/search", method: :get do
+                = render partial: "search/fields"
   .clearfix
