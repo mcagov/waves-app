@@ -7,19 +7,13 @@ describe "User edits submission signature" do
     click_on("New Registration")
   end
 
-  scenario "toggling the task type and checking registry_info" do
+  scenario "toggling the task type" do
     select("Change of Vessel details", from: "Application Type")
     fill_in("Official Number", with: "SSR200001")
     click_on("Save")
 
-    expect(Submission.last.registry_info["vessel_info"]).to be_present
+    expect(Submission.last.registered_vessel).to be_present
     click_on("Change of Vessel details")
-
-    select("New Registration", from: "Application Type")
-    fill_in("Official Number", with: "SSR200001")
-    click_on("Save")
-
-    expect(Submission.last.registry_info).to be_blank
   end
 
   scenario "changing the part of the registry" do
@@ -27,7 +21,7 @@ describe "User edits submission signature" do
     click_on("Save")
 
     expect(page).to have_text("The application has been moved to Part I")
-    expect(Submission.last.registry_info).to be_blank
+    expect(Submission.last.registered_vessel).to be_falsey
     expect(Submission.last).to be_unassigned
   end
 end

@@ -77,6 +77,11 @@ FactoryGirl.define do
     vessel_reg_no { create(:registered_vessel).reg_no }
   end
 
+  factory :assigned_change_owner_submission, parent: :assigned_submission do
+    task          :change_owner
+    vessel_reg_no { create(:registered_vessel).reg_no }
+  end
+
   factory :assigned_change_vessel_submission, parent: :assigned_submission do
     task          :change_vessel
     vessel_reg_no { create(:registered_vessel).reg_no }

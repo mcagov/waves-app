@@ -22,7 +22,7 @@
           - unless @readonly
             = render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
-    - @submission.removed_registry_owners.each do |owner|
+    - @submission.removed_registered_owners.each do |owner|
       - next unless owner.individual?
       %tr
         %td.owner-name.strike= owner
@@ -60,7 +60,7 @@
           - unless @readonly
             = render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
-    - @submission.removed_registry_owners.each do |owner|
+    - @submission.removed_registered_owners.each do |owner|
       - next if owner.individual?
       %tr
         %td.owner-name.strike= owner

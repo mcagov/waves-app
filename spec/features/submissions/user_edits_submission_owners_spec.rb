@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User edits submission owners", js: true do
   before do
-    visit_assigned_submission
+    @submission = visit_assigned_change_owner_submission
     click_on "Edit Application"
     click_on("Owners")
   end
@@ -34,11 +34,13 @@ describe "User edits submission owners", js: true do
     inline_address =
       "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, UNITED KINGDOM, POC123"
     expect(page).to have_css(".owner-address", text: inline_address)
-    expect(Declaration.last).to be_completed
+
+    alice_declaration = Customer.where(name: "ALICE NEW OWNER").first.parent
+    expect(alice_declaration).to be_completed
   end
 
   scenario "editing an owner" do
-    owner_name = Declaration.last.owner.name
+    owner_name = @submission.owners.last.name
     click_on(owner_name)
 
     fill_in("Email", with: "edited_alice@example.com")
@@ -49,13 +51,7 @@ describe "User edits submission owners", js: true do
   end
 
   scenario "removing an owner" do
-    owner_name = Declaration.last.owner.name
-
-    # insert an owner into the registry info in order
-    # to test that an owner can be "removed" and displays as ".strike"
-    Submission.last.update_attributes(
-      registry_info: { owners: [{ name: owner_name }] })
-
+    owner_name = @submission.registered_vessel.owners.last.name
     expect(page).to have_css(".owner-name", text: owner_name)
 
     page.accept_confirm { click_on("Remove") }

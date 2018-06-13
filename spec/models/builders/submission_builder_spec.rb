@@ -6,7 +6,6 @@ describe Builders::SubmissionBuilder do
       Submission.new(
         part: :part_3,
         changeset: changeset,
-        registry_info: registry_info,
         registered_vessel: registered_vessel,
         declarations: declarations,
         applicant_name: "BOB",
@@ -49,10 +48,6 @@ describe Builders::SubmissionBuilder do
         it "builds the service_level as :premium" do
           expect(submission.service_level.to_sym).to eq(:premium)
         end
-      end
-
-      it "does not build the registry info" do
-        expect(submission.registry_info).to be_nil
       end
 
       it "does not alter the changeset" do
@@ -108,30 +103,10 @@ describe Builders::SubmissionBuilder do
         Register::Vessel.create(vessel_sample_data)
       end
 
-      context "when the registry_info has not been set" do
-        it "builds the registry_info#vessel_info" do
-          expect(submission.symbolized_registry_info[:vessel_info][:name])
-            .to eq("MY BOAT")
-        end
-
-        it "builds the registry_info#owners" do
-          expect(submission.symbolized_registry_info[:owners][0][:name])
-            .to eq("ALICE")
-        end
-      end
-
-      context "when the registry_info is already populated" do
-        let!(:registry_info) { { foo: "bar" } }
-
-        it "does not alter the registry_info" do
-          expect(submission.symbolized_registry_info).to eq(foo: "bar")
-        end
-      end
-
       context "when the changeset is blank" do
-        it "builds the changeset from the registry_info" do
+        it "builds the changeset from the registered_vessel" do
           expect(submission.vessel.name)
-            .to eq(submission.symbolized_registry_info[:vessel_info][:name])
+            .to eq(submission.registered_vessel.name)
         end
       end
 
