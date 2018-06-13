@@ -14,15 +14,6 @@ namespace :waves do
     Submission.assigned.map(&:unclaimed!)
   end
 
-  task assign_vessel_current_registration: :environment do
-    Register::Vessel.all.each do |registered_vessel|
-      registered_vessel
-        .update_columns(
-          current_registration_id:
-            registered_vessel.registrations.first.try(:id))
-    end
-  end
-
   task close_terminated_vessels: :environment do
     Register::Vessel.termination_notice_issued.each do |vessel|
       section_notice = vessel.section_notices.last

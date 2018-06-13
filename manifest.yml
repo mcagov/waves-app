@@ -14,7 +14,7 @@ applications:
   timeout: 90
   health-check-type: process
 - name: mca-waves-scheduler
-  memory: 128M
+  memory: 512M
   buildpack: ruby_buildpack
   command: bundle exec clockwork lib/clock.rb
   no-route: true
