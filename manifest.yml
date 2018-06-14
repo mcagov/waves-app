@@ -9,7 +9,7 @@ applications:
 - name: mca-waves-worker
   memory: 512M
   buildpack: ruby_buildpack
-  command: bundle exec bin/delayed_job start
+  command: bundle exec rake jobs:work
   no-route: true
   timeout: 90
   health-check-type: process
