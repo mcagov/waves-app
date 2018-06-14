@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_133030) do
+ActiveRecord::Schema.define(version: 2018_06_14_131448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,6 +397,13 @@ ActiveRecord::Schema.define(version: 2018_06_08_133030) do
     t.index ["type"], name: "index_sequence_numbers_on_type"
   end
 
+  create_table "services", force: :cascade do |t|
+    t.string "key"
+    t.string "name"
+    t.index ["key"], name: "index_services_on_key"
+    t.index ["name"], name: "index_services_on_name"
+  end
+
   create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "shareholder_group_id"
     t.uuid "owner_id"
@@ -411,6 +418,20 @@ ActiveRecord::Schema.define(version: 2018_06_08_133030) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "submission_tasks", force: :cascade do |t|
+    t.uuid "service_id"
+    t.uuid "submission_id"
+    t.uuid "claimant_id"
+    t.string "ref_no"
+    t.datetime "referred_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["claimant_id"], name: "index_submission_tasks_on_claimant_id"
+    t.index ["ref_no"], name: "index_submission_tasks_on_ref_no"
+    t.index ["service_id"], name: "index_submission_tasks_on_service_id"
+    t.index ["submission_id"], name: "index_submission_tasks_on_submission_id"
+  end
+
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "target_date"
     t.datetime "created_at", null: false
@@ -423,7 +444,6 @@ ActiveRecord::Schema.define(version: 2018_06_08_133030) do
     t.datetime "referred_until"
     t.string "ref_no"
     t.datetime "received_at"
-    t.string "task"
     t.string "source"
     t.boolean "officer_intervention_required", default: false
     t.uuid "registered_vessel_id"

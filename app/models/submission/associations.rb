@@ -37,6 +37,7 @@ module Submission::Associations
       base.has_one :name_approval, class_name: "Submission::NameApproval"
       base.has_many :print_jobs
       base.has_many :fees, through: :line_items
+      base.has_many :tasks, class_name: "Submission::Tasks"
     end
 
     def ownership_associations(base)
