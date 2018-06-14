@@ -8,19 +8,6 @@ describe "Waves" do
     Rake::Task.define_task(:environment)
   end
 
-  context "expire_referrals" do
-    before do
-      create(:expired_referred_submission)
-      create(:referred_submission)
-      Rake::Task["waves:expire_referrals"].invoke
-    end
-
-    it "resets one of the submissions" do
-      expect(Submission.referred.length).to eq(1)
-      expect(Submission.unassigned.length).to eq(1)
-    end
-  end
-
   xcontext "close_terminated_vessels" do
     let!(:vessel_1) { create(:registered_vessel) }
     let!(:vessel_2) { create(:registered_vessel) }

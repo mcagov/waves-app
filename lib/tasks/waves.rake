@@ -1,5 +1,4 @@
 namespace :waves do
-
   # this task should be executed with `clock.rb` (not with rake)
   task close_terminated_vessels: :environment do
     Register::Vessel.termination_notice_issued.each do |vessel|
