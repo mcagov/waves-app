@@ -149,7 +149,7 @@ class Submission < ApplicationRecord
 
   def owner_search_attributes
     return if declarations.empty?
-    owners.map(&:inline_name_and_address).join("; ")
+    owners.compact.map(&:inline_name_and_address).join("; ")
   end
 
   def finance_payment_attributes

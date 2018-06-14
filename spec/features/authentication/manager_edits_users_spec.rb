@@ -5,7 +5,7 @@ describe "Manager edits users" do
     reset_mailer
     create(:user, name: "Alice")
     login_as_system_manager
-    click_on("User Management")
+    visit admin_users_path
   end
 
   scenario "adding an operational user" do
