@@ -6,7 +6,7 @@ describe Builders::ProcessingDatesBuilder do
       target_date_instance = double(:target_date_instance)
 
       expect(TargetDate)
-        .to receive(:new).with(Date.today, service_level.to_s)
+        .to receive(:new).with(Time.zone.today, service_level.to_s)
         .and_return(target_date_instance)
 
       expect(target_date_instance)
@@ -23,7 +23,7 @@ describe Builders::ProcessingDatesBuilder do
       let(:target_date) { Date.civil(2001, 11, 9) }
 
       it "sets submission#received_at" do
-        expect(submission.received_at.to_date).to eq(Date.today)
+        expect(submission.received_at.to_date).to eq(Time.zone.today)
       end
 
       it "ensures submission#referred_until is nil" do

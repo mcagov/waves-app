@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Finance views batches", type: :feature, js: true do
   before do
-    allow(Date).to receive(:today).and_return(Date.new(2016, 6, 18))
+    Timecop.travel(Time.new(2016, 6, 18))
 
     # this week
     @first_batch = create(:finance_batch, opened_at: Time.new(2016, 6, 17))
@@ -17,6 +17,10 @@ describe "Finance views batches", type: :feature, js: true do
     create(:finance_batch, opened_at: Time.new(2015, 1, 6))
 
     login_to_finance
+  end
+
+  after do
+    Timecop.return
   end
 
   scenario "viewing scoped lists" do

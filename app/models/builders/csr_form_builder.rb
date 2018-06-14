@@ -17,7 +17,7 @@ class Builders::CsrFormBuilder
         submission_id: @submission.id,
         vessel_id: @submission.registered_vessel.id,
         issue_number: next_issue_number,
-        issued_at: Date.today,
+        issued_at: Time.zone.today,
         registered_at: first_registration_date,
         vessel_name: @vessel.name,
         port_name: WavesUtilities::Port.new(@vessel.port_code).name,

@@ -12,7 +12,7 @@ class SubmissionsController < InternalPagesController
       Submission.new(
         submission_params.merge(
           state: :initializing,
-          received_at: Date.today,
+          received_at: Time.zone.today,
           part: current_activity.part))
   end
 

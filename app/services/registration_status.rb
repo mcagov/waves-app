@@ -8,7 +8,7 @@ class RegistrationStatus
     return :frozen if @vessel.frozen_at.present?
     return :pending unless @vessel.registrations.first
     return :closed if @vessel.registrations.first.try(:closed_at?)
-    return :expired if Time.now.to_i > @vessel.registered_until.to_i
+    return :expired if Time.zone.now.to_i > @vessel.registered_until.to_i
     :registered
   end
 

@@ -37,7 +37,7 @@ describe "Waves" do
 end
 
 def init_closeable_vessel(vessel)
-  vessel.update_column(:frozen_at, Time.now)
+  vessel.update_column(:frozen_at, Time.zone.now)
   section_notice = Register::SectionNotice.create(noteable: vessel)
   vessel.issue_section_notice!
   vessel.issue_termination_notice!
@@ -45,7 +45,7 @@ def init_closeable_vessel(vessel)
 end
 
 def init_non_closeable_vessel(vessel)
-  vessel.update_column(:frozen_at, Time.now)
+  vessel.update_column(:frozen_at, Time.zone.now)
   section_notice = Register::SectionNotice.create(noteable: vessel)
   vessel.issue_section_notice!
   vessel.issue_termination_notice!

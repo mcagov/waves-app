@@ -8,7 +8,7 @@ describe "User sets end date for new registration", js: :true do
     click_on("Complete Registration")
 
     expect(find_field("Registration Expiry Date").value.to_date)
-      .to eq(Date.today.advance(years: 5))
+      .to eq(Time.zone.today.advance(years: 5))
     fill_in("Registration Expiry Date", with: "13/12/2030")
     click_on("Register Vessel")
 

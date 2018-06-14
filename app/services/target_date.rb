@@ -13,7 +13,7 @@ class TargetDate
     def days_away(target_date)
       return "" unless target_date
       TargetDate.set_business_days
-      this_day = Date.today
+      this_day = Time.zone.today
 
       day_diff = this_day.business_days_until(target_date.to_date)
       return "#{formatted_day_diff(day_diff)} away" if day_diff > 0

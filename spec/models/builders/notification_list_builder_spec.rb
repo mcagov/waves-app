@@ -7,7 +7,7 @@ describe Builders::NotificationListBuilder do
       create(
         :notification,
         notifiable: create(:declaration, submission: submission),
-        created_at: Date.today)
+        created_at: Time.zone.today)
     end
 
     let!(:recent_notification) do

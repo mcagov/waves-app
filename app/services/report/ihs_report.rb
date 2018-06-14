@@ -20,7 +20,7 @@ class Report::IhsReport < Report
         .where("
           (registrations.closed_at is null OR
           registrations.closed_at > ?)", 6.months.ago)
-        .where("registrations.registered_until > ?", Date.today)
+        .where("registrations.registered_until > ?", Time.zone.today)
         .where(
           "(part = 'part_1') OR "\
           "(part = 'part_4' AND "\

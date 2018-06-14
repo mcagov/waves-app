@@ -33,7 +33,7 @@ class Mortgage < ApplicationRecord
       update_attribute(:registered_at, nil) if registered_at?
     else
       unless registered_at.present?
-        update_attribute(:registered_at, datetime_to_register || Time.now)
+        update_attribute(:registered_at, datetime_to_register || Time.zone.now)
       end
     end
 

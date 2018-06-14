@@ -140,18 +140,26 @@ describe Submission, type: :model do
     let!(:submission) { create(:submission, referred_until: referred_until) }
     let(:submissions) { Submission.referred_until_expired }
 
+    before do
+      Timecop.travel(Time.new(2016, 6, 18))
+    end
+
+    after do
+      Timecop.return
+    end
+
     context "tomorrow" do
-      let(:referred_until) { Date.tomorrow }
+      let(:referred_until) { Time.new(2016, 6, 19) }
       it { expect(submissions).to be_empty }
     end
 
     context "today" do
-      let(:referred_until) { Date.today }
+      let(:referred_until) { Time.new(2016, 6, 18) }
       it { expect(submissions.length).to eq(1) }
     end
 
     context "yesterday" do
-      let(:referred_until) { Date.yesterday }
+      let(:referred_until) { Time.new(2016, 6, 17) }
       it { expect(submissions.length).to eq(1) }
     end
 

@@ -57,7 +57,7 @@ class Report::HmrcReport < Report
       .includes(eager_includes)
       .where("vessels.frozen_at is null")
       .where("registrations.closed_at is null")
-      .where("registrations.registered_until > ?", Date.today)
+      .where("registrations.registered_until > ?", Time.zone.today)
   end
 
   def eager_includes

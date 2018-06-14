@@ -5,7 +5,7 @@ class Finance::PaymentsController < InternalPagesController
   def new
     @finance_payment =
       Payment::FinancePayment.new(
-        payment_date: Date.today, part: @batch.default_part)
+        payment_date: Time.zone.today, part: @batch.default_part)
   end
 
   def show

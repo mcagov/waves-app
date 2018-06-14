@@ -14,7 +14,7 @@ class RegistrationRenewalReminder
         .where("registrations.renewal_reminder_at IS NULL")
         .where(
           "registrations.registered_until between ? AND ?",
-          Date.today, 90.days.from_now)
+          Time.zone.today, 90.days.from_now)
     end
 
     def build_reminders
@@ -29,7 +29,7 @@ class RegistrationRenewalReminder
 
         registered_vessel
           .current_registration
-          .update_attribute(:renewal_reminder_at, Time.now)
+          .update_attribute(:renewal_reminder_at, Time.zone.now)
       end
     end
 

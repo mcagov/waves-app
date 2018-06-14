@@ -11,7 +11,7 @@ feature "User approves a new registration", type: :feature, js: true do
   scenario "setting the registration start date" do
     within(".modal-content") do
       expect(find_field("Date and Time to take effect from").value.to_date)
-        .to eq(Date.today)
+        .to eq(Time.zone.today)
 
       fill_in "Date and Time to take effect from", with: "12/12/2020 11:59 AM"
       click_button("Register Vessel")

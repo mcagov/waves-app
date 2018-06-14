@@ -21,7 +21,7 @@ class RegisteredVessel::ForcedClosureController < InternalPagesController
 
     @current_registration =
       Builders::ClosedRegistrationBuilder
-      .create(@submission, Time.now, Task.new(:forced_closure).description)
+      .create(@submission, Time.zone.now, Task.new(:forced_closure).description)
   end
 
   def build_print_jobs
