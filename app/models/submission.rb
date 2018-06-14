@@ -35,7 +35,7 @@ class Submission < ApplicationRecord
   scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
 
   scope :referred_until_expired, lambda {
-    where("date(referred_until) < ?", Time.zone.today)
+    where("referred_until < ?", Time.zone.today.at_end_of_day)
   }
 
   after_touch :check_current_state
