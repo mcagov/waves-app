@@ -13,6 +13,11 @@ class Submission < ApplicationRecord
       :finance_payment_attributes,
     ]
 
+  validates :registered_vessel_id,
+            uniqueness: true,
+            if: :vessel_uniqueness?,
+            on: :create
+
   validates :part, presence: true
   validates :source, presence: true
   validates :task, presence: true
@@ -41,6 +46,12 @@ class Submission < ApplicationRecord
   after_touch :check_current_state
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
+
+  def vessel_uniqueness?
+    return false unless registered_vessel_id
+    Submission
+      .where(registered_vessel_id: registered_vessel.id).active.exists?
+  end
 
   def check_current_state
     unassigned! if incomplete? && actionable?
@@ -92,11 +103,6 @@ class Submission < ApplicationRecord
 
   def vessel_reg_no
     registered_vessel.reg_no if registered_vessel
-  end
-
-  def vessel_reg_no=(reg_no)
-    self.registered_vessel =
-      Register::Vessel.in_part(part).where(reg_no: reg_no).first
   end
 
   def vessel_ec_no

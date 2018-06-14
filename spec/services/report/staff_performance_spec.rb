@@ -28,7 +28,7 @@ describe Report::StaffPerformance do
     end
 
     it "has one result for each task type" do
-      expect(subject.results.length).to eq(Task.all_task_types.length)
+      expect(subject.results.length).to eq(DeprecableTask.all_task_types.length)
     end
 
     it "has the expected output for a new registration" do

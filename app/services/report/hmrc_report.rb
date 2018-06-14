@@ -76,7 +76,12 @@ class Report::HmrcReport < Report
   # rubocop:disable all
   def assign_result(vessel)
     submission = vessel.latest_completed_submission
-    task_description = submission ? DeprecableTask.new(submission.task).description : ""
+    task_description =
+      if submission
+        DeprecableTask.new(submission.document_entry_task).description
+      else
+        ""
+      end
 
     Result.new(
       [

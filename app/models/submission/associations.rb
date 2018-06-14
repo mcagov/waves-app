@@ -109,11 +109,11 @@ module Submission::Associations
   end
 
   def task
-    tasks.first
+    tasks.first || document_entry_task
   end
 
-  def task=(service_key)
-    tasks.create(service: Service.find_by(key: service_key))
+  def task=(val)
+    self.document_entry_task = val
   end
 
   def owners

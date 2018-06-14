@@ -66,8 +66,9 @@ class SubmissionsController < InternalPagesController
   def submission_params
     return {} unless params[:submission]
     params.require(:submission).permit(
-      :part, :task, :received_at, :applicant_name, :applicant_is_agent,
-      :applicant_email, :vessel_reg_no, :documents_received,
+      :part, :document_entry_task, :received_at, :applicant_name,
+      :applicant_is_agent, :applicant_email, :vessel_reg_no,
+      :documents_received,
       vessel: Submission::Vessel::ATTRIBUTES,
       delivery_address: Submission::DeliveryAddress::ATTRIBUTES
     )
@@ -99,7 +100,8 @@ class SubmissionsController < InternalPagesController
   end
 
   def init_new_submission
-    unless DeprecableTask.new(params[:submission][:task]).new_registration?
+    params_task = params[:submission][:document_entry_task]
+    unless DeprecableTask.new(params_task).new_registration?
       params[:submission].delete(:vessel)
     end
 

@@ -29,7 +29,10 @@ class Policies::Definitions
     end
 
     def approval_errors(submission)
-      return [] unless DeprecableTask.new(submission.task).validates_on_approval?
+      unless DeprecableTask.new(submission.task).validates_on_approval?
+        return []
+      end
+
       errors = vessel_errors(submission)
 
       unless DeprecableTask.new(submission.task) == :manual_override

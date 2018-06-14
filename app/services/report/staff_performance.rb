@@ -46,7 +46,7 @@ class Report::StaffPerformance < Report
   end
 
   def submission_ids_for(task_type)
-    scoped_query = Submission.where(task: task_type)
+    scoped_query = Submission.where(document_entry_task: task_type)
     scoped_query = filter_by_received_at(scoped_query)
     scoped_query = filter_by_part(scoped_query)
     scoped_query.completed.pluck(:id)

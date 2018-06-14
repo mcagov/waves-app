@@ -19,8 +19,8 @@ class Builders::AssignedSubmissionBuilder
 
     def perform
       @submission = Submission.create(
-        task: @task, part: @registered_vessel.part,
-        vessel_reg_no: @registered_vessel.reg_no,
+        document_entry_task: @task, part: @registered_vessel.part,
+        registered_vessel: @registered_vessel,
         source: :manual_entry, state: current_state,
         ref_no: RefNo.generate_for(Submission.new),
         claimant: @claimant, received_at: Time.zone.now,

@@ -1,6 +1,6 @@
 class Report::StaffPerformanceByTask < Report
   def title
-    "Staff Performance by DeprecableTask"
+    "Staff Performance by Task"
   end
 
   def filter_fields

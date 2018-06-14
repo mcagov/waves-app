@@ -458,6 +458,7 @@ ActiveRecord::Schema.define(version: 2018_06_14_131448) do
     t.uuid "registration_id"
     t.datetime "completed_at"
     t.string "service_level", default: "standard"
+    t.string "document_entry_task"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"
