@@ -4,7 +4,7 @@ class Report::VesselAge < Report
   end
 
   def xls_title
-    "Vessel Age: #{Date.today}"
+    "Vessel Age: #{Time.zone.today}"
   end
 
   def sub_report

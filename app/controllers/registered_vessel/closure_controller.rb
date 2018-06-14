@@ -24,7 +24,7 @@ class RegisteredVessel::ClosureController < InternalPagesController
         current_user)
 
     Builders::ClosedRegistrationBuilder
-      .create(@submission, Time.now, Task.new(:registrar_closure).description)
+      .create(@submission, Time.zone.now, Task.new(:registrar_closure).description)
   end
 
   def complete_restore_closure_submission

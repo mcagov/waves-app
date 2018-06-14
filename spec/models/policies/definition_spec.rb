@@ -134,7 +134,7 @@ describe Policies::Definitions do
         context "when the Carving & Marking note has been received" do
           before do
             submission.update_attribute(
-              :carving_and_marking_received_at, Time.now)
+              :carving_and_marking_received_at, Time.zone.now)
           end
 
           it { expect(subject).not_to include(error_key) }

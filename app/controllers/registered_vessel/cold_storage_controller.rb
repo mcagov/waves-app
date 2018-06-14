@@ -22,7 +22,7 @@ class RegisteredVessel::ColdStorageController < InternalPagesController
       @vessel.restore_active_state! if @vessel.can_restore_active_state?
       @vessel.update_attribute(:frozen_at, nil)
     else
-      @vessel.update_attribute(:frozen_at, Time.now)
+      @vessel.update_attribute(:frozen_at, Time.zone.now)
     end
   end
 end

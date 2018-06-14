@@ -80,7 +80,7 @@ describe Mortgage do
       let(:mortgage_type) { "Current Account" }
 
       it "uses the current time" do
-        expect(mortgage.registered_at.to_date).to eq(Date.today)
+        expect(mortgage.registered_at.to_date).to eq(Time.zone.today)
       end
     end
   end

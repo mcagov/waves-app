@@ -18,7 +18,7 @@ namespace :waves do
           section_notice.actioned_by)
 
       Builders::ClosedRegistrationBuilder
-        .create(submission, Time.now, Task.new(:termination_notice).description)
+        .create(submission, Time.zone.now, Task.new(:termination_notice).description)
     end
   end
 end

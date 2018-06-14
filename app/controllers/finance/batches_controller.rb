@@ -8,26 +8,26 @@ class Finance::BatchesController < InternalPagesController
 
   def this_week
     @heading = "Batches This Week"
-    @batches = opened_at_scope(Date.today.beginning_of_week)
+    @batches = opened_at_scope(Time.zone.today.beginning_of_week)
     render :index
   end
 
   def this_month
     @heading = "Batches This Month"
-    @batches = opened_at_scope(Date.today.beginning_of_month)
+    @batches = opened_at_scope(Time.zone.today.beginning_of_month)
     render :index
   end
 
   def this_year
     @heading = "Batches This Year"
-    @batches = opened_at_scope(Date.today.beginning_of_year)
+    @batches = opened_at_scope(Time.zone.today.beginning_of_year)
     render :index
   end
 
   def create
     @batch =
       FinanceBatch.create(
-        opened_at: Time.now,
+        opened_at: Time.zone.now,
         processed_by: current_user
       )
 

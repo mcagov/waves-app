@@ -22,7 +22,7 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
   end
 
   def process_section_notice_submission
-    @vessel.update_attribute(:frozen_at, Time.now) unless @vessel.frozen?
+    @vessel.update_attribute(:frozen_at, Time.zone.now) unless @vessel.frozen?
 
     Task.new(:section_notice).print_job_templates.each do |template|
       PrintJob.create(

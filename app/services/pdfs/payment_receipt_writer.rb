@@ -12,7 +12,7 @@ class Pdfs::PaymentReceiptWriter
   def write
     @pdf.start_new_page
     @skip_date_and_ref = true
-    init_stationary(Date.today)
+    init_stationary(Time.zone.today)
 
     @pdf.font("Helvetica-Bold", size: 16)
     @pdf.text_box "Receipt of Fee Received",

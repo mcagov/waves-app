@@ -15,7 +15,7 @@ class Submission::CarvingAndMarkingController < InternalPagesController
     if @submission.carving_and_marking_received_at
       @submission.update_attribute(:carving_and_marking_received_at, nil)
     else
-      @submission.update_attribute(:carving_and_marking_received_at, Time.now)
+      @submission.update_attribute(:carving_and_marking_received_at, Time.zone.now)
     end
 
     render_update_js

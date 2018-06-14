@@ -27,6 +27,6 @@ class Pdfs::CsrForm
   def single_csr_form_filename
     csr_form = @csr_forms.first
     title = csr_form.vessel_name.parameterize
-    "#{title}-csr-form-#{Date.today.to_s(:db)}.pdf"
+    "#{title}-csr-form-#{Time.zone.today.to_s(:db)}.pdf"
   end
 end

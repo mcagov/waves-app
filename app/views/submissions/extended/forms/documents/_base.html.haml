@@ -47,7 +47,7 @@
     .modal-dialog.modal-lg
       .modal-content
         - document = Document.build(1)
-        - document.noted_at = Date.today
+        - document.noted_at = Time.zone.today
         = simple_form_for document,
           method: :post,
           remote: true,

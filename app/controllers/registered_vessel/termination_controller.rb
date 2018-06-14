@@ -22,10 +22,10 @@ class RegisteredVessel::TerminationController < InternalPagesController
   end
 
   def process_termination_submission
-    @vessel.update_attribute(:frozen_at, Time.now)
+    @vessel.update_attribute(:frozen_at, Time.zone.now)
     @vessel.issue_termination_notice!
     section_notice = @vessel.section_notices.last
-    section_notice.update_column(:updated_at, Time.now)
+    section_notice.update_column(:updated_at, Time.zone.now)
     build_print_job(section_notice)
   end
 

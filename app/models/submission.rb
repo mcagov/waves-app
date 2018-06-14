@@ -35,7 +35,7 @@ class Submission < ApplicationRecord
   scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
 
   scope :referred_until_expired, lambda {
-    where("date(referred_until) <= ?", Date.today)
+    where("date(referred_until) <= ?", Time.zone.today)
   }
 
   after_touch :check_current_state
@@ -125,7 +125,7 @@ class Submission < ApplicationRecord
 
   def cancel_name_approval
     return unless name_approval
-    name_approval.update_attribute(:cancelled_at, Time.now)
+    name_approval.update_attribute(:cancelled_at, Time.zone.now)
   end
 
   def remove_pending_vessel

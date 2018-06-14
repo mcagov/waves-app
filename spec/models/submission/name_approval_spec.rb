@@ -125,7 +125,7 @@ describe Submission::NameApproval do
 
     context "when #cancelled_at has been set" do
       before do
-        name_approval.cancelled_at = Time.now
+        name_approval.cancelled_at = Time.zone.now
         name_approval.save
       end
 

@@ -23,7 +23,7 @@ class Builders::AssignedSubmissionBuilder
         vessel_reg_no: @registered_vessel.reg_no,
         source: :manual_entry, state: current_state,
         ref_no: RefNo.generate_for(Submission.new),
-        claimant: @claimant, received_at: Time.now,
+        claimant: @claimant, received_at: Time.zone.now,
         changeset: @registered_vessel.registry_info)
 
       @submission = Builders::SubmissionBuilder.build_defaults(@submission)

@@ -1282,7 +1282,7 @@ Rails/ActionFilter:
 Rails/Date:
   Description: >-
                   Checks the correct usage of date aware methods,
-                  such as Date.today, Date.current etc.
+                  such as Time.zone.today, Date.current etc.
   Enabled: true
 
 Rails/Delegate:

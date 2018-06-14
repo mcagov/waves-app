@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    - approval_f.object.closure_at = Time.now.to_s(:datetimepicker)
+    - approval_f.object.closure_at = Time.zone.now.to_s(:datetimepicker)
     = approval_f.input :closure_at, label: "Closure Date", input_html: { class: "datetimepicker" }
 
 .row

@@ -5,12 +5,12 @@ describe "Manager views section notice report", js: true do
     create(:registered_vessel) # should not appear in the report
 
     @vessel_a = create(:registered_vessel, name: "30 day issued")
-    @vessel_a.update_attribute(:frozen_at, Time.now)
+    @vessel_a.update_attribute(:frozen_at, Time.zone.now)
     @vessel_a.issue_section_notice!
     Register::SectionNotice.create(noteable: @vessel_a, subject: "REG 51")
 
     @vessel_b = create(:registered_vessel, name: "7 day issued")
-    @vessel_b.update_attribute(:frozen_at, Time.now)
+    @vessel_b.update_attribute(:frozen_at, Time.zone.now)
     @vessel_b.issue_section_notice!
     @vessel_b.issue_termination_notice!
     Register::SectionNotice.create(noteable: @vessel_b, subject: "REG 52")

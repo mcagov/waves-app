@@ -2,7 +2,7 @@ class Admin::TargetDatesController < InternalPagesController
   def index
     @holidays = Holiday.all
     @start_date = start_date_params if params[:start_date]
-    @start_date ||= Date.today
+    @start_date ||= Time.zone.today
   end
 
   private

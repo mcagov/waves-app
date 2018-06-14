@@ -42,7 +42,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
   end
 
   scenario "with valid data" do
-    Timecop.travel(Time.now) do
+    Timecop.travel(Time.zone.now) do
       fill_in("Vessel Name", with: "BOBS BOAT")
       select2("Full", from: "submission_name_approval_registration_type")
 

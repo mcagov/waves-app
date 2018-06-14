@@ -9,12 +9,12 @@ class RegistrationDate
 
     def start_date(submission)
       registered_vessel = submission.registered_vessel
-      return Time.now unless registered_vessel.try(:registered_until)
+      return Time.zone.now unless registered_vessel.try(:registered_until)
 
       if registered_vessel.registered_until < 3.months.from_now
         registered_vessel.registered_until
       else
-        Time.now
+        Time.zone.now
       end
     end
 
@@ -43,7 +43,7 @@ class RegistrationDate
   private
 
   def ensure_date(input_date)
-    input_date = DateTime.now if input_date.blank?
+    input_date = DateTime.zone.now if input_date.blank?
     input_date.to_datetime
   end
 end

@@ -141,17 +141,17 @@ describe Submission, type: :model do
     let(:submissions) { Submission.referred_until_expired }
 
     context "tomorrow" do
-      let(:referred_until) { Date.tomorrow }
+      let(:referred_until) { Time.zone.today + 1 }
       it { expect(submissions).to be_empty }
     end
 
     context "today" do
-      let(:referred_until) { Date.today }
+      let(:referred_until) { Time.zone.today }
       it { expect(submissions.length).to eq(1) }
     end
 
     context "yesterday" do
-      let(:referred_until) { Date.yesterday }
+      let(:referred_until) { Time.zone.today - 1 }
       it { expect(submissions.length).to eq(1) }
     end
 

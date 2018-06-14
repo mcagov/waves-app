@@ -49,7 +49,7 @@ describe RegistrationDate do
       let(:submission) { build(:submission) }
 
       it "sets starts_at to today" do
-        expect(subject.to_date).to eq(Date.today)
+        expect(subject.to_date).to eq(Time.zone.today)
       end
     end
 
@@ -62,7 +62,7 @@ describe RegistrationDate do
       end
 
       it "sets starts_at to today" do
-        expect(subject.to_date).to eq(Date.today)
+        expect(subject.to_date).to eq(Time.zone.today)
       end
     end
 
@@ -87,7 +87,7 @@ describe RegistrationDate do
         let(:registered_until) { 4.months.from_now }
 
         it "sets starts_at to today's date" do
-          expect(subject.to_date).to eq(Date.today)
+          expect(subject.to_date).to eq(Time.zone.today)
         end
       end
     end

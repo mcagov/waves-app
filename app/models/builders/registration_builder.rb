@@ -3,7 +3,7 @@ class Builders::RegistrationBuilder
     def create(submission, registered_vessel, starts_at, ends_at = nil)
       @submission = submission
       @registered_vessel = registered_vessel
-      @starts_at = starts_at || Date.today
+      @starts_at = starts_at || Time.zone.today
       @ends_at = ends_at || default_end_date
       perform
     end

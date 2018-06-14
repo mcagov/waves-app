@@ -5,7 +5,7 @@ describe Payment::FinancePayment do
     context ".create" do
       let!(:finance_payment) do
         described_class.create(
-          payment_date: Date.today,
+          payment_date: Time.zone.today,
           part: :part_1,
           task: :unknown,
           vessel_reg_no: "",
@@ -88,7 +88,7 @@ describe Payment::FinancePayment do
 
     let!(:finance_payment) do
       described_class.new(
-        payment_date: Date.today,
+        payment_date: Time.zone.today,
         part: registered_vessel.part,
         vessel_reg_no: registered_vessel.reg_no,
         payment_amount: "25",
