@@ -1,19 +1,6 @@
 namespace :waves do
-  task expire_referrals: :environment do
-    Submission.referred.referred_until_expired.each(&:unreferred!)
-  end
 
-  task process_reminders: :environment do
-    CarvingAndMarkingReminder.process
-    CodeCertificateReminder.process
-    RegistrationRenewalReminder.process
-    SafetyCertificateReminder.process
-  end
-
-  task unclaim_claimed_submissions: :environment do
-    Submission.assigned.map(&:unclaimed!)
-  end
-
+  # this task should be executed with `clock.rb` (not with rake)
   task close_terminated_vessels: :environment do
     Register::Vessel.termination_notice_issued.each do |vessel|
       section_notice = vessel.section_notices.last
