@@ -74,7 +74,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def check_redirection_policy
-    if Task.new(@submission.task).issues_csr?
+    if DeprecableTask.new(@submission.task).issues_csr?
       return redirect_to submission_csr_path(@submission)
 
     elsif @submission.officer_intervention_required?
@@ -99,7 +99,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def init_new_submission
-    unless Task.new(params[:submission][:task]).new_registration?
+    unless DeprecableTask.new(params[:submission][:task]).new_registration?
       params[:submission].delete(:vessel)
     end
 

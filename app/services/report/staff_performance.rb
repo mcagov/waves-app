@@ -20,11 +20,11 @@ class Report::StaffPerformance < Report
   end
 
   def results
-    Task.all_task_types.map do |task_type|
+    DeprecableTask.all_task_types.map do |task_type|
       submission_ids = submission_ids_for(task_type)
       data_elements =
         [
-          Task.new(task_type[1]).description,
+          DeprecableTask.new(task_type[1]).description,
           submission_ids.length,
           top_performer(submission_ids),
         ]

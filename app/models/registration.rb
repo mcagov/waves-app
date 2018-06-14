@@ -72,7 +72,7 @@ class Registration < ApplicationRecord
   end
 
   def prints_duplicate_certificate?
-    Task.new(task).duplicates_certificate?
+    DeprecableTask.new(task).duplicates_certificate?
   end
 
   def owner_name_address_shareholding

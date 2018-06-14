@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Task do
+describe DeprecableTask do
   context "#new_registration?" do
     subject { described_class.new(task_type).new_registration? }
 

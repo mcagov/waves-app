@@ -4,6 +4,12 @@ u.password = "password"
 u.access_level = :system_manager
 u.save!
 
+Service.delete_all
+
+DeprecableTask.all_task_types.each do |task|
+  Service.create(key: task[1], name: task[0])
+end
+
 Fee.delete_all
 
 FEES = [

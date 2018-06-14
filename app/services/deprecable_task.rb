@@ -1,4 +1,4 @@
-class Task < WavesUtilities::Task
+class DeprecableTask < WavesUtilities::Task
   def new_registration?
     [:new_registration].include?(@key) || provisional_registration?
   end

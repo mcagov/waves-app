@@ -36,7 +36,7 @@ describe Decorators::Submission, type: :model do
     before do
       task = double(:task)
 
-      expect(Task).to receive(:new).with(submission.task).and_return(task)
+      expect(DeprecableTask).to receive(:new).with(submission.task).and_return(task)
       expect(task).to receive(:vessel_can_be_edited?)
     end
 
@@ -49,7 +49,7 @@ describe Decorators::Submission, type: :model do
     before do
       task = double(:task)
 
-      expect(Task).to receive(:new).with(submission.task).and_return(task)
+      expect(DeprecableTask).to receive(:new).with(submission.task).and_return(task)
       expect(task).to receive(:ownership_can_be_changed?)
     end
 
@@ -62,7 +62,7 @@ describe Decorators::Submission, type: :model do
     before do
       task = double(:task)
 
-      expect(Task).to receive(:new).with(submission.task).and_return(task)
+      expect(DeprecableTask).to receive(:new).with(submission.task).and_return(task)
       expect(task).to receive(:address_can_be_changed?)
     end
 

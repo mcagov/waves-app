@@ -22,7 +22,7 @@ class Policies::Actions
 
     def registered_vessel_required?(submission)
       task = submission.task.to_sym
-      return false if Task.new(task).new_registration?
+      return false if DeprecableTask.new(task).new_registration?
       return false if task == :unknown
       true
     end

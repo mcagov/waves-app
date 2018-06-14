@@ -37,7 +37,7 @@ module Submission::Associations
       base.has_one :name_approval, class_name: "Submission::NameApproval"
       base.has_many :print_jobs
       base.has_many :fees, through: :line_items
-      base.has_many :tasks, class_name: "Submission::Tasks"
+      base.has_many :tasks, class_name: "Submission::Task"
     end
 
     def ownership_associations(base)
@@ -106,6 +106,14 @@ module Submission::Associations
       base.belongs_to :claimant, class_name: "User", required: false
       base.scope :assigned_to, -> (claimant) { where(claimant: claimant) }
     end
+  end
+
+  def task
+    tasks.first
+  end
+
+  def task=(service_key)
+    tasks.create(service: Service.find_by(key: service_key))
   end
 
   def owners

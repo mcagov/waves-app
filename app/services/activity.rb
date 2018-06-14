@@ -70,7 +70,7 @@ class Activity
   end
 
   def task_types # rubocop:disable Metrics/MethodLength
-    default_tasks = Task.default_task_types
+    default_tasks = DeprecableTask.default_task_types
     excluded_tasks =
       case @part
       when :part_1

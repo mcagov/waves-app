@@ -18,7 +18,7 @@ class Submission::StatesController < InternalPagesController
 
     respond_to do |format|
       format.html do
-        flash[:notice] = "Application has been moved into Unclaimed Tasks"
+        flash[:notice] = "Application has been moved into Unclaimed DeprecableTasks"
         redirect_to tasks_my_tasks_path
       end
       format.js { render "tasks/actions/claim_button" }

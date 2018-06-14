@@ -47,7 +47,7 @@ module SubmissionHelper
   end
 
   def display_edit_application_link?(submission)
-    return false if Task.new(submission.task).prevented_from_editing?
+    return false if DeprecableTask.new(submission.task).prevented_from_editing?
     return false if request.path == edit_submission_path(submission)
     return false unless Policies::Definitions.part_3?(submission)
 

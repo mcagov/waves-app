@@ -11,7 +11,7 @@ class Decorators::FinancePayment < SimpleDelegator
   end
 
   def task_description
-    Task.new(task).description
+    DeprecableTask.new(task).description
   end
 
   def payment_type_description

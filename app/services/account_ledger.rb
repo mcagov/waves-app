@@ -1,7 +1,7 @@
 class AccountLedger
   def initialize(submission)
     @submission = submission
-    @task = Task.new(submission.task)
+    @task = DeprecableTask.new(submission.task)
   end
 
   def ui_color

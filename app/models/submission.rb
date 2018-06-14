@@ -19,7 +19,7 @@ class Submission < ApplicationRecord
 
   validates :task,
             inclusion: {
-              in: Task.validation_helper_task_type_list,
+              in: DeprecableTask.validation_helper_task_type_list,
               message: "must be selected" },
             unless: :officer_intervention_required?
 
@@ -79,7 +79,7 @@ class Submission < ApplicationRecord
   end
 
   def job_type
-    Task.new(task).description
+    DeprecableTask.new(task).description
   end
 
   def symbolized_changeset
