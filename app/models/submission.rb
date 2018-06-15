@@ -13,11 +13,7 @@ class Submission < ApplicationRecord
       :finance_payment_attributes,
     ]
 
-  validates :registered_vessel_id,
-            uniqueness: true,
-            if: :vessel_uniqueness?,
-            on: :create
-
+  validates :registered_vessel_id, uniqueness: true, if: :vessel_uniqueness?
   validates :part, presence: true
   validates :source, presence: true
   validates :task, presence: true
@@ -50,7 +46,9 @@ class Submission < ApplicationRecord
   def vessel_uniqueness?
     return false if registered_vessel_id.blank? || officer_intervention_required
     Submission
-      .where(registered_vessel_id: registered_vessel.id).active.exists?
+      .where(registered_vessel_id: registered_vessel.id)
+      .where.not(id: id)
+      .active.exists?
   end
 
   def check_current_state
