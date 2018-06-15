@@ -48,7 +48,7 @@ class Submission < ApplicationRecord
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
   def vessel_uniqueness?
-    return false unless registered_vessel_id
+    return false if registered_vessel_id.blank? || officer_intervention_required
     Submission
       .where(registered_vessel_id: registered_vessel.id).active.exists?
   end

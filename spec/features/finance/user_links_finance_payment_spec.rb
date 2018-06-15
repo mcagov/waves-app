@@ -14,7 +14,7 @@ describe "User links finance_payment", type: :feature, js: true do
     create(
       :submission,
       part: :part_3,
-      vessel_reg_no: vessel_reg_no,
+      vessel_reg_no: create(:registered_vessel).reg_no,
       task: :change_vessel,
       ref_no: "FOOBAR")
 
