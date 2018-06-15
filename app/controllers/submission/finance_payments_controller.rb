@@ -5,7 +5,6 @@ class Submission::FinancePaymentsController < InternalPagesController
     load_linkable_submission
     @submission = Decorators::Submission.new(@submission)
     @finance_payment = Decorators::FinancePayment.new(@finance_payment)
-    @similar_submissions = Search.similar_submissions(@submission)
   end
 
   def convert
