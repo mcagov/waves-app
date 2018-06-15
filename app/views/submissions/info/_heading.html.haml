@@ -24,14 +24,3 @@
       .pull-right
       = form_tag claim_submission_states_path(@submission) do
         = submit_tag "Claim", class: "btn btn-primary pull-right"
-
-
-- other_open_submissions = Submission::OtherOpenSubmission.for(submission)
-- unless other_open_submissions.empty?
-  #other-open-tasks.panel.panel-warning
-    .panel-heading
-      .panel-title
-        Other Open Tasks:
-        - other_open_submissions.map do |other_open_submission|
-          %strong= link_to other_open_submission.job_type, submission_path(other_open_submission)
-          (#{claimed_by(other_open_submission)}).
