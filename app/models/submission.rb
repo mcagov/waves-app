@@ -105,6 +105,11 @@ class Submission < ApplicationRecord
     registered_vessel.reg_no if registered_vessel
   end
 
+  def vessel_reg_no=(reg_no)
+    self.registered_vessel =
+      Register::Vessel.in_part(part).where(reg_no: reg_no).first
+  end
+
   def vessel_ec_no
     registered_vessel.ec_no if registered_vessel
   end
