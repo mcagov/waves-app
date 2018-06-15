@@ -3,7 +3,7 @@ class SequenceNumber::Generator < ApplicationRecord
 
   REG_NO_PATTERNS =
     {
-      part_1: "######",
+      part_1: "#######",
       part_2: "C#####",
       part_3: "SSR######",
       part_4: "X#####",
