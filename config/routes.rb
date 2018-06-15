@@ -51,7 +51,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :finance_payments, only: [:show, :update]
+  resources :finance_payments, only: [:show, :update] do
+    collection do
+      get :unattached_payments
+      get :unattached_refunds
+    end
+  end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
     resources :agent,
@@ -248,7 +253,7 @@ Rails.application.routes.draw do
   end
 
   %w(
-    incomplete my-tasks team-tasks fee-entry refunds-due
+    incomplete my-tasks team-tasks
     referred unclaimed cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",

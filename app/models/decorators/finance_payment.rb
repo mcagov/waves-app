@@ -23,4 +23,16 @@ class Decorators::FinancePayment < SimpleDelegator
   def assigned_application_ref_no
     locked? ? submission.ref_no : application_ref_no
   end
+
+  def refund?
+    payment_amount < 0
+  end
+
+  def payment?
+    !refund
+  end
+
+  def page_heading
+    refund? ? "Refund Due" : "Fee Received"
+  end
 end

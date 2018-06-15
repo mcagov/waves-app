@@ -8,26 +8,6 @@ class TasksController < InternalPagesController
     @submissions = submission_scope.assigned.order("target_date asc")
   end
 
-  def fee_entry
-    @submissions =
-      submission_scope
-      .unassigned
-      .where(officer_intervention_required: true)
-      .joins(:payments)
-      .where("payments.amount >= ?", 0)
-      .order("target_date asc")
-  end
-
-  def refunds_due
-    @submissions =
-      submission_scope
-      .unassigned
-      .where(officer_intervention_required: true)
-      .joins(:payments)
-      .where("payments.amount < ?", 0)
-      .order("target_date asc")
-  end
-
   def unclaimed
     @filter_registration_type = params[:filter_registration_type] || "all"
 

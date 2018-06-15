@@ -1,11 +1,14 @@
 class FinancePaymentsController < InternalPagesController
-  before_action :load_finance_payment
+  before_action :load_finance_payment, only: [:show, :update]
 
   def show
     respond_to do |format|
       format.pdf do
         @pdf = Pdfs::Processor.run(:payment_receipt, @finance_payment)
         render_pdf(@pdf, @pdf.filename)
+      end
+      format.html do
+        @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
     end
   end
@@ -20,6 +23,18 @@ class FinancePaymentsController < InternalPagesController
     end
   end
 
+  def unattached_payments
+    @finance_payments = unattached_finance_payments.payments
+    @heading = "Fees Received"
+    render :index
+  end
+
+  def unattached_refunds
+    @finance_payments = unattached_finance_payments.refunds
+    @heading = "Refunds Due"
+    render :index
+  end
+
   private
 
   def load_finance_payment
@@ -28,5 +43,12 @@ class FinancePaymentsController < InternalPagesController
 
   def finance_payment_params
     params.require(:payment_finance_payment).permit(:documents_received)
+  end
+
+  def unattached_finance_payments
+    Payment::FinancePayment
+      .in_part(current_activity.part)
+      .paginate(page: params[:page], per_page: 50)
+      .unattached
   end
 end

@@ -18,6 +18,12 @@ class Payment::FinancePayment < ApplicationRecord
   scope :payments, -> { where("payment_amount > 0") }
   scope :refunds, -> { where("payment_amount < 0") }
 
+  scope :unattached, (lambda do
+    joins(:payment).where("payments.submission_id is null")
+  end)
+
+  scope :in_part, ->(part) { where(part: part.to_sym) }
+
   enum service_level: [:standard, :premium]
 
   PAYMENT_TYPES = [
@@ -35,7 +41,7 @@ class Payment::FinancePayment < ApplicationRecord
   ].freeze
 
   def lock!
-    build_payment_and_submission
+    build_payment
   end
 
   def locked?
@@ -62,23 +68,9 @@ class Payment::FinancePayment < ApplicationRecord
     end
   end
 
-  def build_payment_and_submission
+  def build_payment
     Payment.create(
       amount: payment_amount.to_f * 100,
-      remittance: self,
-      submission: build_submission)
-  end
-
-  def build_submission
-    Submission.create(
-      part: part, task: task, vessel_reg_no: vessel_reg_no,
-      officer_intervention_required: true,
-      source: :manual_entry,
-      applicant_name: applicant_name,
-      applicant_email: applicant_email,
-      applicant_is_agent: applicant_is_agent,
-      documents_received: documents_received,
-      service_level: service_level,
-      linkable_ref_no: application_ref_no)
+      remittance: self)
   end
 end
