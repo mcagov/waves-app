@@ -8,17 +8,7 @@ class FinancePaymentsController < InternalPagesController
         render_pdf(@pdf, @pdf.filename)
       end
       format.html do
-        load_linkable_submission
-        @finance_payment = Decorators::FinancePayment.new(@finance_payment)
-      end
-    end
-  end
-
-  def update
-    @finance_payment.update_attributes(finance_payment_params)
-
-    respond_to do |format|
-      format.js do
+        @submission = @finance_payment.submission
         @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
     end
