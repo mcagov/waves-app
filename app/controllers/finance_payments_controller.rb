@@ -8,6 +8,7 @@ class FinancePaymentsController < InternalPagesController
         render_pdf(@pdf, @pdf.filename)
       end
       format.html do
+        load_linkable_submission
         @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
     end
@@ -43,6 +44,12 @@ class FinancePaymentsController < InternalPagesController
 
   def finance_payment_params
     params.require(:payment_finance_payment).permit(:documents_received)
+  end
+
+  def load_linkable_submission
+    ref_no = @finance_payment.application_ref_no
+    @linkable_submission =
+      Submission.find_by(ref_no: @ref_no) if ref_no  
   end
 
   def unattached_finance_payments

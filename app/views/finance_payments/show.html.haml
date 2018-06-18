@@ -11,4 +11,11 @@
           class: "btn btn-xs btn-info" do
           Edit Finance Payment
 
+- if @linkable_submission
+  Link to an Open Application
+  //= render partial: "actions/linkable_submission", locals: { finance_payment: @finance_payment, linkable_submission: @linkable_submission}
+- else
+  Start a New Application
+  //= render partial: "actions/convertible_submission", locals: { submission: @submission }
+
 = render partial: "finance_payments/modals/edit_finance_payment", locals: { finance_payment: @finance_payment }          
