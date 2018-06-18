@@ -31,7 +31,7 @@ class Submission::FinancePaymentsController < InternalPagesController
       redirect_to @submission
     end
   end
-  
+
   def edit; end
 
   def update

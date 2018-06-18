@@ -5,8 +5,6 @@ xdescribe Builders::LinkedSubmissionBuilder do
   let!(:source_submission) { payment.submission }
   let!(:target_submission) { create(:submission, ref_no: "ABC123") }
 
-  let(:target_ref
-
   let!(:result) do
     described_class.create(source_submission, target_ref_no)
   end

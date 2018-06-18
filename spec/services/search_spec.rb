@@ -44,11 +44,11 @@ describe Search, type: :model do
       end
     end
 
-    context "search by finance_payment inputs" do
+    xcontext "search by finance_payment inputs" do
       let!(:finance_payment) do
         create(:locked_finance_payment, vessel_name: "CARIBE",
-                                           application_ref_no: "ABC123",
-                                           applicant_name: "HARRY")
+                                        application_ref_no: "ABC123",
+                                        applicant_name: "HARRY")
       end
 
       subject { Search.submissions(term) }

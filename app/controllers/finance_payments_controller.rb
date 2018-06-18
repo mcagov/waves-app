@@ -49,7 +49,7 @@ class FinancePaymentsController < InternalPagesController
   def load_linkable_submission
     ref_no = @finance_payment.application_ref_no
     @linkable_submission =
-      Submission.find_by(ref_no: @ref_no) if ref_no  
+      Submission.find_by(ref_no: @ref_no) if ref_no
   end
 
   def unattached_finance_payments

@@ -21,10 +21,10 @@ class Submission < ApplicationRecord
   validates :task,
             inclusion: {
               in: DeprecableTask.validation_helper_task_type_list,
-              message: "must be selected" } 
+              message: "must be selected" }
 
-  validate :ref_no 
-  validate :registered_vessel_exists 
+  validate :ref_no
+  validate :registered_vessel_exists
 
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
@@ -41,7 +41,7 @@ class Submission < ApplicationRecord
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
   def vessel_uniqueness?
-    return false if registered_vessel_id.blank?  
+    return false if registered_vessel_id.blank?
     Submission
       .where(registered_vessel_id: registered_vessel.id)
       .where.not(id: id)

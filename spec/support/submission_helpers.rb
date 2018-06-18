@@ -33,7 +33,7 @@ def claim_submission_and_visit
   click_on("Process Next Application")
 end
 
-def visit_fee_entry()
+def visit_fee_entry
   login_to_part_3
   click_on("Fees Received")
   within(".finance-payment") do
