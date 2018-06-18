@@ -90,7 +90,7 @@ describe Submission, type: :model do
 
     context "with a vessel name in a finance payment entry" do
       let(:submission) do
-        create(:submitted_finance_payment, vessel_name: "FP BOAT")
+        create(:locked_finance_payment, vessel_name: "FP BOAT")
       end
 
       it { expect(subject).to eq("FP BOAT") }

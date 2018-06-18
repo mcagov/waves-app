@@ -46,7 +46,7 @@ describe Search, type: :model do
 
     context "search by finance_payment inputs" do
       let!(:finance_payment) do
-        create(:submitted_finance_payment, vessel_name: "CARIBE",
+        create(:locked_finance_payment, vessel_name: "CARIBE",
                                            application_ref_no: "ABC123",
                                            applicant_name: "HARRY")
       end

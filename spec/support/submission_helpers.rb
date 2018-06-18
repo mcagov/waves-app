@@ -33,11 +33,12 @@ def claim_submission_and_visit
   click_on("Process Next Application")
 end
 
-def claim_fee_entry_and_visit
+def visit_fee_entry()
   login_to_part_3
   click_on("Fees Received")
-  click_on("Claim")
-  click_on("Process Next Application")
+  within(".finance-payment") do
+    find(".payment-date").trigger("click")
+  end
 end
 
 def visit_assigned_part_1_submission

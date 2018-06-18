@@ -8,7 +8,7 @@ FactoryGirl.define do
     payment_type    :bacs
   end
 
-  factory :submitted_finance_payment, parent: :finance_payment do
+  factory :locked_finance_payment, parent: :finance_payment do
     after(:create) do |finance_payment|
       finance_payment.lock!
     end

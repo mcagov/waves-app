@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User converts finance payment", type: :feature, js: true do
   before do
     create(
-      :submitted_finance_payment,
+      :locked_finance_payment,
       part: :part_3,
       task: :new_registration,
       vessel_name: "MY BOAT", applicant_name: "BOB")

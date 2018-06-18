@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User views fee task lists", type: :feature, js: true do
   before do
-    create(:submitted_finance_payment, payment_amount: payment_amount)
+    create(:locked_finance_payment, payment_amount: payment_amount)
     login_to_part_3
   end
 

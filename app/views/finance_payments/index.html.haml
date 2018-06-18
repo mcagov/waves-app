@@ -27,7 +27,7 @@
             - @finance_payments.each do |finance_payment|
               - finance_payment = Decorators::FinancePayment.new(finance_payment)
               %tr.finance-payment
-                %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment) 
+                %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment), class: "payment-date"
                 %td= finance_payment.task_description
                 %td= finance_payment.vessel_name
                 %td= finance_payment.vessel_reg_no

@@ -7,7 +7,7 @@ feature "User views submission payment", type: :feature, js: true do
       :payment,
       submission: submission,
       amount: 3000,
-      remittance: build(:submitted_finance_payment, payment_amount: 30))
+      remittance: build(:locked_finance_payment, payment_amount: 30))
     login_to_part_3
     visit submission_path(submission)
     click_link("Payments")

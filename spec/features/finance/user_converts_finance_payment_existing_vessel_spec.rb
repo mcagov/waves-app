@@ -4,7 +4,7 @@ describe "User converts finance payment for existing vessel", js: true do
   before do
     vessel = create(:registered_vessel, name: "MY BOAT", hin: "PR-QNTIECMU3FVA")
     create(
-      :submitted_finance_payment,
+      :locked_finance_payment,
       part: :part_3,
       task: :renewal,
       vessel_reg_no: vessel.reg_no)

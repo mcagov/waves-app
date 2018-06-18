@@ -4,7 +4,7 @@ describe "User views Finance reports", js: true do
   before do
     @check_refund =
       create(
-        :submitted_finance_payment,
+        :locked_finance_payment,
         payment_date: "22/12/2016",
         application_ref_no: "to-be-ignored",
         payment_amount: -25,
@@ -13,7 +13,7 @@ describe "User views Finance reports", js: true do
 
     @cash_income =
       create(
-        :submitted_finance_payment,
+        :locked_finance_payment,
         payment_date: "23/12/2016",
         application_ref_no: "to-be-ignored",
         payer_name: "BOB",
