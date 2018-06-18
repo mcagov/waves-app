@@ -71,4 +71,37 @@ describe Payment::FinancePayment do
     it { expect(finance_payment.errors).to include(:task) }
     it { expect(finance_payment.errors).to include(:vessel_reg_no) }
   end
+
+  context "#submission" do
+    let(:finance_payment) { create(:locked_finance_payment) }
+    subject { finance_payment.submission }
+
+    context "when the payment is attached to a submission" do
+      let!(:submission) { create(:submission) }
+      before do
+        finance_payment.payment.update_attribute(:submission_id, submission.id)
+      end
+
+      it "assigns the submission" do
+        expect(subject).to eq(submission)
+      end
+
+      it { expect(subject).to be_persisted }
+    end
+
+    context "when the payment is not attached to a submission" do
+      it { expect(subject.document_entry_task). to eq("new_registration") }
+      it { expect(subject.vessel_name). to eq("MY BOAT") }
+      it { expect(subject.applicant_name). to eq("ALICE") }
+      it { expect(subject.applicant_email). to eq("alice@example.com") }
+      it { expect(subject.service_level). to eq("premium") }
+      it { expect(subject.applicant_is_agent).to be_truthy }
+      it { expect(subject.documents_received).to eq("Excel file") }
+      it do
+        expect(subject.received_at.to_date).to eq(finance_payment.payment_date)
+      end
+
+      it { expect(subject).to be_new_record }
+    end
+  end
 end

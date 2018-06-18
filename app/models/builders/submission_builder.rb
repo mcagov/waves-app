@@ -221,6 +221,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_service_level
+      return if @submission.service_level
       service_level =
         if @submission.symbolized_changeset[:service_level].present?
           @submission.symbolized_changeset[:service_level][:level]

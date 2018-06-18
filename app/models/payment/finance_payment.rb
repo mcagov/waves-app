@@ -1,7 +1,6 @@
 class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
-  delegate :submission, to: :payment
   delegate :batch_no, to: :batch
 
   has_one :payment, as: :remittance
@@ -54,6 +53,18 @@ class Payment::FinancePayment < ApplicationRecord
       :applicant_name,
       :application_ref_no,
     ].map { |attr| send(attr) }.join(" ")
+  end
+
+  def submission
+    return payment.submission if payment.submission
+    Submission.new(
+      part: part, document_entry_task: task,
+      changeset: { vessel_info: { name: vessel_name } },
+      source: :manual_entry,
+      applicant_name: applicant_name, applicant_email: applicant_email,
+      applicant_is_agent: applicant_is_agent,
+      documents_received: documents_received,
+      service_level: service_level, received_at: payment_date)
   end
 
   private
