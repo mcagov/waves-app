@@ -24,7 +24,7 @@ class Payment::FinancePayment < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
-  enum service_level: [:standard, :premium]
+  enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
   PAYMENT_TYPES = [
     ["BACS", :bacs],

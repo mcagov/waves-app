@@ -40,6 +40,8 @@ class Submission < ApplicationRecord
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
+  enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
+
   def vessel_uniqueness?
     return false if registered_vessel_id.blank?
     Submission

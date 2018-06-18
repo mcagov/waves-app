@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_18_090413) do
+ActiveRecord::Schema.define(version: 2018_06_18_135616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -455,8 +455,8 @@ ActiveRecord::Schema.define(version: 2018_06_18_090413) do
     t.datetime "carving_and_marking_received_at"
     t.uuid "registration_id"
     t.datetime "completed_at"
-    t.string "service_level", default: "standard"
     t.string "document_entry_task"
+    t.integer "service_level", default: 0
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"
