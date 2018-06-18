@@ -55,16 +55,21 @@ class Payment::FinancePayment < ApplicationRecord
     ].map { |attr| send(attr) }.join(" ")
   end
 
-  def submission
+  def submission # rubocop:disable Metrics/MethodLength
     return payment.submission if payment.submission
+
     Submission.new(
-      part: part, document_entry_task: task,
+      part: part,
+      document_entry_task: task,
       changeset: { vessel_info: { name: vessel_name } },
       source: :manual_entry,
-      applicant_name: applicant_name, applicant_email: applicant_email,
+      payment_id: payment.id,
+      applicant_name: applicant_name,
+      applicant_email: applicant_email,
       applicant_is_agent: applicant_is_agent,
       documents_received: documents_received,
-      service_level: service_level, received_at: payment_date)
+      service_level: service_level,
+      received_at: payment_date)
   end
 
   private

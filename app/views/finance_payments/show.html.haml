@@ -4,7 +4,32 @@
   .col-md-6
     #finance_info.x_panel
       .x_content
-        = render partial: "finance/payments/payment", locals: {finance_payment: @finance_payment }
+        %table.table
+          %thead
+            %th Finance Payment
+          %tbody
+            %tr
+              %td
+                = render partial: "finance/payments/payment", locals: {finance_payment: @finance_payment }
+  .col-md-6
+    #submission_info.x_panel
+      .x_content
+        %table.table
+          %thead
+            %th Convert to Application
+          %tbody
+            %tr
+              %td
+                = simple_form_for @submission do |f|
+                  = f.input :part, as: :hidden
+                  = f.input :payment_id, as: :hidden
+                  = render partial: "submissions/fields", locals: { f: f }
+                  .row.no-print
+                    = button_tag(type: 'submit', class: "btn btn-success btn-lg pull-right") do
+                      %i.fa.fa-check
+                      Convert to Application
+
+
 
 .row.no-print#actions
   .col-sm-6
@@ -13,11 +38,3 @@
       "data-toggle" => "modal",
       class: "btn btn-md btn-warning" do
       Link to an Open Application
-  .col-sm
-    = link_to "#new-application",
-      "data-target" => "#new-application",
-      "data-toggle" => "modal",
-      class: "btn btn-lg btn-primary pull-right" do
-      Convert to Application
-
-= render partial: "finance_payments/modals/new_application", locals: { finance_payment: @finance_payment }

@@ -56,6 +56,10 @@ Rails.application.routes.draw do
       get :unattached_payments
       get :unattached_refunds
     end
+    member do
+      patch :update
+      patch :link
+    end
   end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
@@ -147,16 +151,6 @@ Rails.application.routes.draw do
     resource :official_no,
              controller: "submission/official_no",
              only: [:update]
-
-    resource :finance_payment,
-             only: [:show, :edit],
-             controller: "submission/finance_payments" do
-      member do
-        patch :update
-        patch :convert
-        patch :link
-      end
-    end
 
     resource :managing_owner,
              only: [:update],

@@ -90,6 +90,7 @@ describe Payment::FinancePayment do
     end
 
     context "when the payment is not attached to a submission" do
+      it { expect(subject.part).to eq("part_3") }
       it { expect(subject.document_entry_task). to eq("new_registration") }
       it { expect(subject.vessel_name). to eq("MY BOAT") }
       it { expect(subject.applicant_name). to eq("ALICE") }
@@ -97,6 +98,8 @@ describe Payment::FinancePayment do
       it { expect(subject.service_level). to eq("premium") }
       it { expect(subject.applicant_is_agent).to be_truthy }
       it { expect(subject.documents_received).to eq("Excel file") }
+      it { expect(subject.payment_id).to eq(finance_payment.payment.id) }
+
       it do
         expect(subject.received_at.to_date).to eq(finance_payment.payment_date)
       end

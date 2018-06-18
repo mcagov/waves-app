@@ -42,6 +42,8 @@ class Submission < ApplicationRecord
 
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
+  attr_accessor :payment_id
+
   def vessel_uniqueness?
     return false if registered_vessel_id.blank?
     Submission

@@ -36,12 +36,6 @@ class FinancePaymentsController < InternalPagesController
     params.require(:payment_finance_payment).permit(:documents_received)
   end
 
-  def load_linkable_submission
-    ref_no = @finance_payment.application_ref_no
-    @linkable_submission =
-      Submission.find_by(ref_no: @ref_no) if ref_no
-  end
-
   def unattached_finance_payments
     Payment::FinancePayment
       .in_part(current_activity.part)

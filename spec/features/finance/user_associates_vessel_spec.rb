@@ -29,12 +29,4 @@ xdescribe "User associates vessel to finance_payment", type: :feature,
 
     expect(page).to have_css(".official_no", text: "N/A")
   end
-
-  scenario "disabling the Convert button when there is no vessel_reg_no" do
-    create(:locked_finance_payment, task: :change_vessel)
-
-    visit_fee_entry
-
-    expect(page).to have_css("a.disabled")
-  end
 end
