@@ -8,7 +8,7 @@ class Submission::FinancePaymentsController < InternalPagesController
   end
 
   def convert
-    @submission.ref_no = RefNo.generate_for(@submission)
+    @submission.ref_no = RefNo.generate
 
     if @submission.save
       process_converted_application

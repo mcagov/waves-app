@@ -2,9 +2,7 @@ require "rails_helper"
 
 describe RefNo do
   context "in general" do
-    let!(:submission) { build(:submission) }
-
-    subject { described_class.generate_for(submission) }
+    subject { described_class.generate }
 
     context "in general" do
       it "generates a six character ref_no" do

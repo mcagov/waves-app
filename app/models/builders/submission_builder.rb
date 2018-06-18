@@ -14,7 +14,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       @submission.part ||= :part_3
       @submission.document_entry_task ||= :new_registration
       @submission.source ||= :online
-      @submission.ref_no ||= RefNo.generate_for(@submission)
+      @submission.ref_no ||= RefNo.generate
     end
 
     def perform
