@@ -100,10 +100,6 @@ class Decorators::Submission < SimpleDelegator
     vessel.registration_type if vessel
   end
 
-  def convertible?
-    new_registration? || registered_vessel.present?
-  end
-
   def can_issue_carving_and_marking?
     vessel_reg_no
   end
