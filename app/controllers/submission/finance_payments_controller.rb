@@ -8,7 +8,6 @@ class Submission::FinancePaymentsController < InternalPagesController
   end
 
   def convert
-    @submission.officer_intervention_required = false
     @submission.ref_no = RefNo.generate_for(@submission)
 
     if @submission.save
@@ -16,7 +15,6 @@ class Submission::FinancePaymentsController < InternalPagesController
       flash[:notice] = "You have successfully converted that application"
       redirect_to tasks_my_tasks_path
     else
-      @submission.officer_intervention_required = true
       render :edit
     end
   end
@@ -33,12 +31,7 @@ class Submission::FinancePaymentsController < InternalPagesController
       redirect_to @submission
     end
   end
-
-  def unlink
-    @submission.update_attribute(:linkable_ref_no, nil)
-    redirect_to submission_path(@submission)
-  end
-
+  
   def edit; end
 
   def update
@@ -47,7 +40,6 @@ class Submission::FinancePaymentsController < InternalPagesController
     if @submission.save
       redirect_to submission_path(@submission)
     else
-      @submission.update_attribute(:officer_intervention_required, true)
       render :edit
     end
   end

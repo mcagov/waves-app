@@ -14,8 +14,7 @@ class Policies::Actions
       Policies::Definitions.approval_errors(submission).empty?
     end
 
-    def editable?(submission)
-      return false if submission.officer_intervention_required?
+    def editable?(submission) 
       return false if Policies::Workflow.approved_name_required?(submission)
       !submission.completed?
     end

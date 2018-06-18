@@ -78,9 +78,6 @@ class SubmissionsController < InternalPagesController
     if DeprecableTask.new(@submission.task).issues_csr?
       return redirect_to submission_csr_path(@submission)
 
-    elsif @submission.officer_intervention_required?
-      return redirect_to submission_finance_payment_path(@submission)
-
     elsif Policies::Workflow.approved_name_required?(@submission)
       return redirect_to submission_name_approval_path(@submission)
     end

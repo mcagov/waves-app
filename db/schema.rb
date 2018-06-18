@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_131448) do
+ActiveRecord::Schema.define(version: 2018_06_18_090413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -445,7 +445,6 @@ ActiveRecord::Schema.define(version: 2018_06_14_131448) do
     t.string "ref_no"
     t.datetime "received_at"
     t.string "source"
-    t.boolean "officer_intervention_required", default: false
     t.uuid "registered_vessel_id"
     t.string "applicant_name"
     t.string "applicant_email"
@@ -453,7 +452,6 @@ ActiveRecord::Schema.define(version: 2018_06_14_131448) do
     t.string "documents_received"
     t.uuid "correspondent_id"
     t.uuid "managing_owner_id"
-    t.string "linkable_ref_no"
     t.datetime "carving_and_marking_received_at"
     t.uuid "registration_id"
     t.datetime "completed_at"

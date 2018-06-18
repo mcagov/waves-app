@@ -24,15 +24,5 @@ describe RefNo do
         it { expect(subject.length).to eq(6) }
       end
     end
-
-    context "when officer_intervention_required" do
-      before do
-        submission.officer_intervention_required = true
-      end
-
-      it "does not generate a ref_no" do
-        expect(subject).to be_blank
-      end
-    end
   end
 end

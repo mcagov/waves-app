@@ -2,7 +2,6 @@ class Builders::LinkedSubmissionBuilder
   class << self
     def create(source_submission, target_ref_no)
       @source_submission = source_submission
-      return unless @source_submission.officer_intervention_required?
 
       @target_submission = Submission.find_by(ref_no: target_ref_no)
 

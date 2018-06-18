@@ -154,8 +154,7 @@ Rails.application.routes.draw do
       member do
         patch :update
         patch :convert
-        patch :link
-        patch :unlink
+        patch :link 
       end
     end
 

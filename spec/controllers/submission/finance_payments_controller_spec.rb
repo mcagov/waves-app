@@ -19,10 +19,6 @@ describe Submission::FinancePaymentsController, type: :controller do
     context "for a new_registration" do
       let(:task) { :new_registration }
 
-      it "officer intervention is no longer required" do
-        expect(submission.reload.officer_intervention_required).to be_falsey
-      end
-
       it "redirects to unclaimed tasks" do
         expect(response).to redirect_to(tasks_my_tasks_path)
       end

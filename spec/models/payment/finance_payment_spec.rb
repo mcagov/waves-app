@@ -21,8 +21,6 @@ describe Payment::FinancePayment do
         )
       end
 
-      let(:submission) { finance_payment.submission }
-
       it "is actioned_by a user" do
         expect(finance_payment.actioned_by).to be_present
       end
@@ -36,48 +34,6 @@ describe Payment::FinancePayment do
 
         it "creates the payment with the expected amount" do
           expect(finance_payment.payment.amount).to eq(2500)
-        end
-
-        it "sets the officer_intervention_required flag" do
-          expect(submission.officer_intervention_required)
-            .to be_truthy
-        end
-
-        it "sets the source" do
-          expect(submission.source.to_sym).to eq(:manual_entry)
-        end
-
-        it "sets the state to unassigned so it is ready to be claimed" do
-          expect(submission).to be_unassigned
-        end
-
-        it "sets the target date" do
-          expect(submission.target_date).to be_present
-        end
-
-        it "sets the applicant_name" do
-          expect(submission.applicant_name).to eq("Bob")
-        end
-
-        it "sets the applicant_email" do
-          expect(submission.applicant_email)
-            .to eq("bob@example.com")
-        end
-
-        it "sets the applicant_is_agent flag" do
-          expect(finance_payment.submission.applicant_is_agent).to be_truthy
-        end
-
-        it "sets the linkable_ref_no in the changeset" do
-          expect(submission.linkable_ref_no).to eq("ABC123")
-        end
-
-        it "sets the service_level" do
-          expect(submission.service_level).to eq("premium")
-        end
-
-        it "sets the documents_received" do
-          expect(submission.documents_received).to eq("some files")
         end
       end
     end

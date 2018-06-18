@@ -14,7 +14,6 @@ class TasksController < InternalPagesController
     query =
       submission_scope
       .unassigned
-      .where(officer_intervention_required: false)
 
     query = filter_by_registration_type(query)
     @submissions = query.order("target_date asc")

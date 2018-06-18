@@ -47,9 +47,4 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page)
       .to have_css("h1", text: /Change of Vessel details .* ID: FOOBAR/)
   end
-
-  xscenario "unlinking the application" do
-    within(".linkable_ref_no") { click_on("Unlink") }
-    within("#actions") { expect(page).to have_link("Convert to Application") }
-  end
 end
