@@ -54,7 +54,6 @@ class FinancePaymentsController < InternalPagesController
 
   def load_helpers
     @submission = @finance_payment.submission
-    @related_submission =
-      Submission.find_by(ref_no: @finance_payment.application_ref_no)
+    @related_submission = @finance_payment.related_submission
   end
 end

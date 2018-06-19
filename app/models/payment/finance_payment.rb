@@ -72,6 +72,20 @@ class Payment::FinancePayment < ApplicationRecord
       received_at: payment_date)
   end
 
+  def related_submission
+    @related_submission =
+      if application_ref_no
+        Submission.find_by(ref_no: application_ref_no)
+      elsif related_vessel
+        related_vessel.current_submission
+      end
+  end
+
+  def related_vessel
+    @related_vessel ||=
+      Register::Vessel.find_by(reg_no: vessel_reg_no) if vessel_reg_no
+  end
+
   private
 
   def registered_vessel_exists

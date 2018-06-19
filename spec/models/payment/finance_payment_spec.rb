@@ -117,4 +117,29 @@ describe Payment::FinancePayment do
       it { expect(subject.vessel_reg_no).to eq(registered_vessel.reg_no) }
     end
   end
+
+  context "#related_submission" do
+    let!(:submission) { create(:unassigned_change_vessel_submission) }
+    let(:finance_payment) { create(:locked_finance_payment, params) }
+
+    subject { finance_payment.related_submission }
+
+    context "with a valid application_ref_no" do
+      let(:params) { { application_ref_no: submission.ref_no } }
+
+      it { expect(subject).to eq(submission) }
+    end
+
+    context "with an invalid application_ref_no" do
+      let(:params) { { application_ref_no: "foo" } }
+
+      it { expect(subject).to be_nil }
+    end
+
+    context "with a valid vessel_reg_no" do
+      let(:params) { { vessel_reg_no: submission.vessel_reg_no } }
+
+      it { expect(subject).to eq(submission) }
+    end
+  end
 end
