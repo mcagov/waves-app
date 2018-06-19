@@ -1,4 +1,6 @@
 class SubmissionsController < InternalPagesController
+  include InitNewSubmission
+
   before_action :prevent_read_only!, except: [:show, :edit]
   before_action :load_submission,
                 only: [:show, :edit, :update]
@@ -70,8 +72,7 @@ class SubmissionsController < InternalPagesController
       :applicant_is_agent, :applicant_email, :vessel_reg_no,
       :documents_received, :service_level,
       vessel: Submission::Vessel::ATTRIBUTES,
-      delivery_address: Submission::DeliveryAddress::ATTRIBUTES
-    )
+      delivery_address: Submission::DeliveryAddress::ATTRIBUTES)
   end
 
   def check_redirection_policy
@@ -81,30 +82,6 @@ class SubmissionsController < InternalPagesController
     elsif Policies::Workflow.approved_name_required?(@submission)
       return redirect_to submission_name_approval_path(@submission)
     end
-  end
-
-  def send_application_receipt_email
-    return unless params[:new_submission_actions] == "application_receipt"
-
-    Notification::ApplicationReceipt.create(
-      notifiable: @submission,
-      recipient_name: @submission.applicant_name,
-      recipient_email: @submission.applicant_email,
-      actioned_by: current_user)
-
-    flash[:notice] =
-      "An Application Receipt has been sent to #{@submission.applicant_email}"
-  end
-
-  def init_new_submission
-    params_task = params[:submission][:document_entry_task]
-    unless DeprecableTask.new(params_task).new_registration?
-      params[:submission].delete(:vessel)
-    end
-
-    @submission = Submission.new(submission_params)
-    @submission.source = :manual_entry
-    @submission.state = :unassigned
   end
 
   def render_update_js
