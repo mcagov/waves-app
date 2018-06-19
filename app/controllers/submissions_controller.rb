@@ -65,7 +65,7 @@ class SubmissionsController < InternalPagesController
     ensure_current_part_for(@submission.part)
   end
 
-  def submission_params # rubocop:disable Metrics/MethodLength
+  def submission_params
     return {} unless params[:submission]
     params.require(:submission).permit(
       :part, :document_entry_task, :received_at, :applicant_name,
