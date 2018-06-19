@@ -15,6 +15,4 @@ feature "User creates a document entry", type: :feature do
     expect(page)
       .to have_css("#submissions .registration_type", text: "Pleasure")
   end
-
-  scenario "when that vessel already has an active submission"
 end

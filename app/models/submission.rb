@@ -12,7 +12,6 @@ class Submission < ApplicationRecord
       :owner_search_attributes,
     ]
 
-  validates :registered_vessel_id, uniqueness: true, if: :vessel_uniqueness?
   validates :part, presence: true
   validates :source, presence: true
   validates :task, presence: true
@@ -24,6 +23,7 @@ class Submission < ApplicationRecord
 
   validate :ref_no
   validate :registered_vessel_exists
+  validate :vessel_uniqueness
 
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
@@ -40,14 +40,6 @@ class Submission < ApplicationRecord
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
-
-  def vessel_uniqueness?
-    return false if registered_vessel_id.blank?
-    Submission
-      .where(registered_vessel_id: registered_vessel.id)
-      .where.not(id: id)
-      .active.exists?
-  end
 
   def check_current_state
     unassigned! if incomplete? && actionable?
@@ -147,6 +139,21 @@ class Submission < ApplicationRecord
           :vessel_reg_no,
           "was not found in the #{Activity.new(part)} Registry")
       end
+    end
+  end
+
+  def vessel_uniqueness
+    return false if registered_vessel_id.blank?
+
+    existing_submission =
+      Submission.where.not(id: id).active
+                .find_by(registered_vessel_id: registered_vessel.id)
+
+    if existing_submission
+      errors.add(
+        :vessel_reg_no,
+        "An open application already exists for this vessel. "\
+        "Ref No. #{existing_submission.ref_no}")
     end
   end
 

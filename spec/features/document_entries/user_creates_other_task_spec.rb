@@ -2,16 +2,16 @@ require "rails_helper"
 
 feature "User creates a new submission for another task", type: :feature do
   before do
-    @vessel = create(:registered_vessel)
     login_to_part_3
+    @vessel = create(:registered_vessel)
     click_on("Document Entry")
-  end
 
-  scenario "assigning to a registered vessel", js: true do
     within(".modal#start-new-application") do
       click_on("Task for a Registered Vessel")
     end
+  end
 
+  scenario "assigning to a registered vessel", js: true do
     within(".modal#search-for-vessel") do
       search_for(@vessel.name)
       within("#vessels") { click_on("Use this") }
@@ -26,5 +26,21 @@ feature "User creates a new submission for another task", type: :feature do
 
     expect(page).to have_text("saved to the unclaimed tasks queue")
     expect(Submission.last.document_entry_task.to_sym).to eq(:re_registration)
+  end
+
+  scenario "when that vessel has an open application", js: true do
+    create(:submission, registered_vessel: @vessel)
+
+    within(".modal#search-for-vessel") do
+      search_for(@vessel.name)
+      within("#vessels") { click_on("Use this") }
+    end
+
+    click_on("Save Application")
+
+    expect(page)
+      .to have_css(
+        ".submission_vessel_reg_no",
+        text: "An open application already exists for this vessel")
   end
 end
