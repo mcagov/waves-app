@@ -19,10 +19,9 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
 
     def perform
       build_changeset if @submission.registered_vessel
-
       perform_changeset_operations if @submission.changeset
-
       build_agent if @submission.applicant_is_agent
+      build_service_level
     end
 
     def perform_changeset_operations
@@ -34,7 +33,6 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       build_beneficial_owners
       build_directed_bys
       build_managed_bys
-      build_service_level
     end
 
     def build_changeset
@@ -221,13 +219,12 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_service_level
-      return if @submission.service_level
-      service_level =
-        if @submission.symbolized_changeset[:service_level].present?
+      if @submission.symbolized_changeset[:service_level].present?
+        @submission.service_level =
           @submission.symbolized_changeset[:service_level][:level]
-        end
+      end
 
-      @submission.service_level = service_level || :standard
+      @submission.service_level ||= :standard
     end
   end
 end
