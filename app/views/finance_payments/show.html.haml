@@ -21,9 +21,8 @@
           %tbody
             %tr
               %td
-                = simple_form_for @submission do |f|
+                = simple_form_for @submission, url: finance_payment_submissions_path(@finance_payment) do |f|
                   = f.input :part, as: :hidden
-                  = f.input :payment_id, as: :hidden
                   = render partial: "submissions/fields", locals: { f: f }
                   .row.no-print
                     = button_tag(type: 'submit', class: "btn btn-success btn-lg pull-right") do

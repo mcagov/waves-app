@@ -2,40 +2,29 @@ require "rails_helper"
 
 describe "User converts finance payment", type: :feature, js: true do
   before do
-    create(
-      :locked_finance_payment,
-      part: :part_3,
-      task: :new_registration,
-      vessel_name: "MY BOAT", applicant_name: "BOB")
-
-    login_to_part_3
-    click_on("Fees Received")
+    create(:locked_finance_payment)
+    visit_fee_entry
   end
 
-  scenario "when they have claimed it they can 'convert' it" do
-    click_on("Claim")
-    click_on("My Tasks")
-    click_on("MY BOAT")
+  scenario "in general" do
+    click_on("Convert to Application")
 
-    expect(page).to have_css("h1", text: "New Registration")
-
-    within(actions_css) do
-      click_on("Convert to Application")
-    end
-
-    expect(page).to have_css(".alert", text: "successfully converted")
-    expect(page).to have_current_path(tasks_my_tasks_path)
-    expect(Submission.last.vessel.name).to eq("MY BOAT")
+    application_is_saved
   end
 
-  scenario "when they have not claimed it they can't 'convert' or edit it" do
-    click_on("MY BOAT")
+  scenario "rendering the :new template after an error" do
+    select("Re-Registration", from: "Application Type")
+    click_on("Convert to Application")
 
-    expect(page).to have_css("h1", text: "New Registration")
-    expect(page).not_to have_css(actions_css)
+    select("New Registration", from: "Application Type")
+    click_on("Convert to Application")
+
+    application_is_saved
   end
 end
 
-def actions_css
-  "#actions"
+def application_is_saved
+  expect(page).to have_text("application has been saved")
+  expect(page).to have_css("h1", text: "My Tasks")
+  expect(Payment::FinancePayment.unattached).to be_empty
 end

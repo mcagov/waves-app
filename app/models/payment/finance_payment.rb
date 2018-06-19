@@ -63,7 +63,6 @@ class Payment::FinancePayment < ApplicationRecord
       document_entry_task: task,
       changeset: { vessel_info: { name: vessel_name } },
       source: :manual_entry,
-      payment_id: payment.id,
       applicant_name: applicant_name,
       applicant_email: applicant_email,
       applicant_is_agent: applicant_is_agent,

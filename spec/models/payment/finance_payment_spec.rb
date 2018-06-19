@@ -98,7 +98,6 @@ describe Payment::FinancePayment do
       it { expect(subject.service_level). to eq("premium") }
       it { expect(subject.applicant_is_agent).to be_truthy }
       it { expect(subject.documents_received).to eq("Excel file") }
-      it { expect(subject.payment_id).to eq(finance_payment.payment.id) }
 
       it do
         expect(subject.received_at.to_date).to eq(finance_payment.payment_date)
