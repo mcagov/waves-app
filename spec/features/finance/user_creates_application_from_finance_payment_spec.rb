@@ -1,6 +1,7 @@
 require "rails_helper"
 
-describe "User converts finance payment", type: :feature, js: true do
+describe "User creates application from finance payment",
+         type: :feature, js: true do
   before do
     create(:locked_finance_payment)
     visit_fee_entry
