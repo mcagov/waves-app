@@ -15,9 +15,7 @@
               %tr
                 %td No Related Applications
             - else
-              %tr
-                %td
-                  = render partial: "search/submission", locals: { submission: @related_submission }
+              = render partial: "search/submission", locals: { submission: @related_submission }
               %tr
                 %td
                   = simple_form_for @finance_payment.payment,
@@ -27,5 +25,18 @@
                     = f.input :submission_id, as: :hidden
                     = button_tag(type: "submit", class: "btn btn-success pull-right") do
                       Link to this Application
+
+    #related_vessel.x_panel
+      .x_content
+        %table.table
+          %thead
+            %th{colspan: 3} Related Vessel
+          %tbody
+            - if @related_vessel.blank?
+              %tr
+                %td{colspan: 3} No Related Vessels
+            - else
+              = render partial: "search/vessel", locals: { vessel: @related_vessel }
+
 
 = render partial: "actions"

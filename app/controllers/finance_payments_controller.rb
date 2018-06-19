@@ -55,5 +55,6 @@ class FinancePaymentsController < InternalPagesController
   def load_helpers
     @submission = @finance_payment.submission
     @related_submission = @finance_payment.related_submission
+    @related_vessel = @finance_payment.related_vessel
   end
 end
