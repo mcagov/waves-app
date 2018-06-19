@@ -4,5 +4,28 @@
 .row
   .col-md-6
     = render partial: "finance_payment", locals: { finance_payment: @finance_payment }
+  .col-md-6
+    #related_submission.x_panel
+      .x_content
+        %table.table
+          %thead
+            %th Related Application
+          %tbody
+            - if @related_submission.blank?
+              %tr
+                %td No Related Applications
+            - else
+              %tr
+                %td
+                  = render partial: "search/submission", locals: { submission: @related_submission }
+              %tr
+                %td
+                  = simple_form_for @finance_payment.payment,
+                    url: finance_payment_payment_path(@finance_payment, @finance_payment.payment),
+                    method: :put do |f|
+                    - f.object.submission_id = @related_submission.id
+                    = f.input :submission_id, as: :hidden
+                    = button_tag(type: "submit", class: "btn btn-success pull-right") do
+                      Link to this Application
 
 = render partial: "actions"

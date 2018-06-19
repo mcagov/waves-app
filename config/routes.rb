@@ -60,6 +60,9 @@ Rails.application.routes.draw do
       patch :update
       patch :link
     end
+    resources :payments,
+              controller: "finance_payments/payments",
+              only: [:update]
     resources :submissions,
               controller: "finance_payments/submissions",
               only: [:new, :create]

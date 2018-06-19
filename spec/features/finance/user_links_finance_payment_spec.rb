@@ -27,13 +27,13 @@ describe "User links finance_payment", type: :feature, js: true do
     visit_fee_entry
   end
 
-  xscenario "to the prompted application" do
+  scenario "to the prompted application" do
     expect(page).to have_css("h1", text: "Fee Received")
+    within(" #related_submission") { click_on("Link to this Application") }
 
-    within("#actions") { click_on("Link to an Open Application") }
-
-    expect(page)
-      .to have_css("h1", text: /Change of Ownership for .* ID: ABC123/)
+    expect(page).to have_text("application has been saved")
+    expect(page).to have_css("h1", text: "My Tasks")
+    expect(Payment::FinancePayment.unattached).to be_empty
   end
 
   xscenario "to another application" do
