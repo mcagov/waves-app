@@ -105,5 +105,16 @@ describe Payment::FinancePayment do
 
       it { expect(subject).to be_new_record }
     end
+
+    context "when the payment is for a registered vessel" do
+      let(:registered_vessel) { create(:registered_vessel) }
+
+      before do
+        finance_payment
+          .update_attribute(:vessel_reg_no, registered_vessel.reg_no)
+      end
+
+      it { expect(subject.vessel_reg_no).to eq(registered_vessel.reg_no) }
+    end
   end
 end
