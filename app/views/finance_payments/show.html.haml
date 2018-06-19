@@ -3,38 +3,6 @@
 
 .row
   .col-md-6
-    #finance_info.x_panel
-      .x_content
-        %table.table
-          %thead
-            %th Finance Payment
-          %tbody
-            %tr
-              %td
-                = render partial: "finance/payments/payment", locals: {finance_payment: @finance_payment }
-  .col-md-6
-    #submission_info.x_panel
-      .x_content
-        %table.table
-          %thead
-            %th Convert to Application
-          %tbody
-            %tr
-              %td
-                = simple_form_for @submission, url: finance_payment_submissions_path(@finance_payment) do |f|
-                  = f.input :part, as: :hidden
-                  = render partial: "submissions/fields", locals: { f: f }
-                  .row.no-print
-                    = button_tag(type: 'submit', class: "btn btn-success btn-lg pull-right") do
-                      %i.fa.fa-check
-                      Convert to Application
+    = render partial: "finance_payment", locals: { finance_payment: @finance_payment }
 
-
-
-.row.no-print#actions
-  .col-sm-6
-    = link_to  "#link-application",
-      "data-target" => "#link-application",
-      "data-toggle" => "modal",
-      class: "btn btn-md btn-warning" do
-      Link to an Open Application
+= render partial: "actions"

@@ -2,6 +2,10 @@ class FinancePayments::SubmissionsController < InternalPagesController
   include InitNewSubmission
   before_action :load_finance_payment
 
+  def new
+    @submission = @finance_payment.submission
+  end
+
   def create
     init_new_submission
 
@@ -12,7 +16,7 @@ class FinancePayments::SubmissionsController < InternalPagesController
         "The application has been saved to the unclaimed tasks queue"
       redirect_to tasks_my_tasks_path
     else
-      render "finance_payments/show"
+      render :new
     end
   end
 

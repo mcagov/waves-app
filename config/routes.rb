@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     end
     resources :submissions,
               controller: "finance_payments/submissions",
-              only: [:create]
+              only: [:new, :create]
   end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do

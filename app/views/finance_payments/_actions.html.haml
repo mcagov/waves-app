@@ -1,0 +1,11 @@
+.row.no-print#actions
+  .col-md-6
+    = link_to  "#link-application",
+      "data-target" => "#link-application",
+      "data-toggle" => "modal",
+      class: "btn btn-md btn-warning" do
+      Link to an Open Application
+  .col-md-6.pull-right
+    = link_to  new_finance_payment_submission_path(@finance_payment),
+      class: "btn btn-lg btn-success pull-right" do
+      Create New Application

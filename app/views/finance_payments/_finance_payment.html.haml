@@ -1,0 +1,9 @@
+#finance_info.x_panel
+  .x_content
+    %table.table
+      %thead
+        %th Finance Payment
+      %tbody
+        %tr
+          %td
+            = render partial: "finance/payments/payment", locals: {finance_payment: finance_payment }

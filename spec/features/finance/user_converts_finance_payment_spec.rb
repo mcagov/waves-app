@@ -4,20 +4,20 @@ describe "User converts finance payment", type: :feature, js: true do
   before do
     create(:locked_finance_payment)
     visit_fee_entry
+    click_on("Create New Application")
   end
 
   scenario "in general" do
-    click_on("Convert to Application")
-
+    click_on("Save")
     application_is_saved
   end
 
   scenario "rendering the :new template after an error" do
     select("Re-Registration", from: "Application Type")
-    click_on("Convert to Application")
+    click_on("Save")
 
     select("New Registration", from: "Application Type")
-    click_on("Convert to Application")
+    click_on("Save")
 
     application_is_saved
   end
