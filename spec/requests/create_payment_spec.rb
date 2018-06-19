@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "create payments via the API", type: :request do
+xdescribe "create payments via the API", type: :request do
   before do
     post api_v1_payments_path, params: params
   end
