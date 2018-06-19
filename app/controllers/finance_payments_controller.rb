@@ -9,7 +9,6 @@ class FinancePaymentsController < InternalPagesController
       end
       format.html do
         @submission = @finance_payment.submission
-        @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
     end
   end
