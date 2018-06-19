@@ -29,7 +29,7 @@ describe "User links finance_payment", type: :feature, js: true do
 
   scenario "to the prompted application" do
     expect(page).to have_css("h1", text: "Fee Received")
-    within(" #related_submission") { click_on("Link to this Application") }
+    within("#related_submission") { click_on("Link to this Application") }
 
     application_is_linked
   end

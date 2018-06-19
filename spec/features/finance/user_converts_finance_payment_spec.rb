@@ -4,7 +4,7 @@ describe "User converts finance payment", type: :feature, js: true do
   before do
     create(:locked_finance_payment)
     visit_fee_entry
-    click_on("Create New Application")
+    click_on(create_new_application_link)
   end
 
   scenario "in general" do
@@ -21,6 +21,17 @@ describe "User converts finance payment", type: :feature, js: true do
 
     application_is_saved
   end
+
+  scenario "ensuring that an application cannot be created twice" do
+    click_on("Save")
+    visit finance_payment_path(Payment::FinancePayment.last)
+
+    expect(page).not_to have_link(create_new_application_link)
+  end
+end
+
+def create_new_application_link
+  "Create New Application"
 end
 
 def application_is_saved

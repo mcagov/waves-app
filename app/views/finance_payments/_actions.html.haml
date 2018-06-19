@@ -5,9 +5,12 @@
       "data-toggle" => "modal",
       class: "btn btn-md btn-warning" do
       Link to another Application
+    = render partial: "finance_payments/modals/submission"
   .col-md-6.pull-right
-    = link_to  new_finance_payment_submission_path(@finance_payment),
-      class: "btn btn-lg btn-success pull-right" do
-      Create New Application
 
-= render partial: "finance_payments/modals/submission"
+    - if @finance_payment.submission.new_record?
+      = link_to  new_finance_payment_submission_path(@finance_payment),
+        class: "btn btn-lg btn-success pull-right" do
+        Create New Application
+
+
