@@ -63,12 +63,12 @@ class SubmissionsController < InternalPagesController
     ensure_current_part_for(@submission.part)
   end
 
-  def submission_params
+  def submission_params # rubocop:disable Metrics/MethodLength
     return {} unless params[:submission]
     params.require(:submission).permit(
       :part, :document_entry_task, :received_at, :applicant_name,
       :applicant_is_agent, :applicant_email, :vessel_reg_no,
-      :documents_received,
+      :documents_received, :service_level,
       vessel: Submission::Vessel::ATTRIBUTES,
       delivery_address: Submission::DeliveryAddress::ATTRIBUTES
     )
