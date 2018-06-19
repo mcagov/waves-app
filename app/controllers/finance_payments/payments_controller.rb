@@ -4,7 +4,7 @@ class FinancePayments::PaymentsController < InternalPagesController
 
     if @payment.update_attributes(payment_params)
       flash[:notice] ||=
-        "The application has been saved to the unclaimed tasks queue"
+        "The payment has been linked to the selected application"
       redirect_to tasks_my_tasks_path
     end
   end

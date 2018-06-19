@@ -4,8 +4,10 @@
       "data-target" => "#link-application",
       "data-toggle" => "modal",
       class: "btn btn-md btn-warning" do
-      Link to an Open Application
+      Link to another Application
   .col-md-6.pull-right
     = link_to  new_finance_payment_submission_path(@finance_payment),
       class: "btn btn-lg btn-success pull-right" do
       Create New Application
+
+= render partial: "finance_payments/modals/submission"

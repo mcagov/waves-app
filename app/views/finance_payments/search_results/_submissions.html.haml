@@ -20,12 +20,12 @@
           %td= submission.ref_no
           %td
             = link_to "#",
-              onclick: "set_target_ref_no('#{submission.ref_no}')",
+              onclick: "set_target_submission_id('#{submission.id}')",
               class: "btn btn-warning btn-xs" do
               Link
 :javascript
-  function set_target_ref_no(ref_no) {
-    $("#target_ref_no").val(ref_no);
-    $("#target_ref_no").closest("form").submit();
+  function set_target_submission_id(submission_id) {
+    $("#payment_submission_id").val(submission_id);
+    $("#payment_submission_id").closest("form").submit();
   }
 

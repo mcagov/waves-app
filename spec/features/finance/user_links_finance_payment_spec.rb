@@ -31,20 +31,23 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page).to have_css("h1", text: "Fee Received")
     within(" #related_submission") { click_on("Link to this Application") }
 
-    expect(page).to have_text("application has been saved")
-    expect(page).to have_css("h1", text: "My Tasks")
-    expect(Payment::FinancePayment.unattached).to be_empty
+    application_is_linked
   end
 
-  xscenario "to another application" do
-    within("#actions") { click_on("Link to Another Application") }
+  scenario "to another application" do
+    within("#actions") { click_on("Link to another Application") }
 
     within("#link-application") do
       search_for("foo")
       within("#submissions") { click_on("Link") }
     end
 
-    expect(page)
-      .to have_css("h1", text: /Change of Vessel details .* ID: FOOBAR/)
+    application_is_linked
   end
+end
+
+def application_is_linked
+  expect(page).to have_text("payment has been linked")
+  expect(page).to have_css("h1", text: "My Tasks")
+  expect(Payment::FinancePayment.unattached).to be_empty
 end
