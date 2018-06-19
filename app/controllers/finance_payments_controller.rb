@@ -8,7 +8,17 @@ class FinancePaymentsController < InternalPagesController
         render_pdf(@pdf, @pdf.filename)
       end
       format.html do
-        @submission = @finance_payment.submission
+        load_helpers
+      end
+    end
+  end
+
+  def update
+    @finance_payment.update_attributes(finance_payment_params)
+
+    respond_to do |format|
+      format.js do
+        @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
     end
   end
@@ -40,5 +50,11 @@ class FinancePaymentsController < InternalPagesController
       .in_part(current_activity.part)
       .paginate(page: params[:page], per_page: 50)
       .unattached
+  end
+
+  def load_helpers
+    @submission = @finance_payment.submission
+    @related_submission =
+      Submission.find_by(ref_no: @finance_payment.application_ref_no)
   end
 end
