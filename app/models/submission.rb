@@ -10,7 +10,6 @@ class Submission < ApplicationRecord
       :vessel_reg_no,
       :vessel_search_attributes,
       :owner_search_attributes,
-      :finance_payment_attributes,
     ]
 
   validates :registered_vessel_id, uniqueness: true, if: :vessel_uniqueness?
@@ -158,10 +157,5 @@ class Submission < ApplicationRecord
   def owner_search_attributes
     return if declarations.empty?
     owners.compact.map(&:inline_name_and_address).join("; ")
-  end
-
-  def finance_payment_attributes
-    return unless finance_payment
-    finance_payment.searchable_attributes
   end
 end
