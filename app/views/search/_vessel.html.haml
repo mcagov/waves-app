@@ -23,6 +23,8 @@
 
   %td
     = render partial: "/shared/registration_status", locals: { registration_status: vessel.registration_status }
+    %br
+    = Activity.new(vessel.part)
 - unless submissions.empty?
   %tr
     %td{colspan: 3}
