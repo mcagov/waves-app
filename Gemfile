@@ -46,7 +46,7 @@ gem "rake"
 gem "sass-rails", "~> 5.0"
 gem "select2-rails"
 gem "simple_form"
-gem "sprockets", "3.6.3"
+gem "sprockets", ">= 3.7.2"
 gem "sprockets-es6"
 gem "title"
 gem "transitions", require: ["transitions", "active_model/transitions"]
