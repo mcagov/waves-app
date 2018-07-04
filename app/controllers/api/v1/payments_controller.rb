@@ -5,7 +5,7 @@ module Api
         @payment =
           Builders::WorldPayPaymentBuilder.create(create_payment_params)
 
-        if @payment.valid?
+        if submission && @payment.valid?
           process_payment_receipt
           render json: @payment, status: :created
         else
