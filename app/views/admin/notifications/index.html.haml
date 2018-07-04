@@ -26,6 +26,8 @@
                       = link_to notifiable.ref_no, submission_path(notification.notifiable)
                     - elsif notifiable.is_a?(Register::Vessel)
                       = link_to notifiable, vessel_path(notifiable)
+                    - elsif notifiable.is_a?(Declaration)
+                      = link_to notifiable.submission.try(:ref_no), submission_path(notification.notifiable.submission)
                     - else
                       = notifiable.to_s
                   %td
