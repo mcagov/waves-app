@@ -74,11 +74,7 @@ class Payment::FinancePayment < ApplicationRecord
 
   def related_submission
     @related_submission =
-      if application_ref_no
-        Submission.find_by(ref_no: application_ref_no)
-      elsif related_vessel
-        related_vessel.current_submission
-      end
+      submission_by_ref_no || related_vessel.try(:current_submission)
   end
 
   def related_vessel
@@ -102,5 +98,9 @@ class Payment::FinancePayment < ApplicationRecord
     Payment.create(
       amount: payment_amount.to_f * 100,
       remittance: self)
+  end
+
+  def submission_by_ref_no
+    Submission.find_by(ref_no: application_ref_no) if application_ref_no
   end
 end
