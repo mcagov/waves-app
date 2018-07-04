@@ -7,7 +7,7 @@ describe "User edits finance payment", type: :feature, js: true do
   end
 
   scenario "in general" do
-    click_on("Edit Finance Payment")
+    click_on("Edit Documents Received")
     fill_in("Documents Received", with: "Excel file, C&M")
     click_button("Save")
 
