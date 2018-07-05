@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_05_080628) do
+ActiveRecord::Schema.define(version: 2018_07_05_125431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,11 +397,14 @@ ActiveRecord::Schema.define(version: 2018_07_05_080628) do
     t.index ["type"], name: "index_sequence_numbers_on_type"
   end
 
-  create_table "services", force: :cascade do |t|
-    t.string "key"
+  create_table "services", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
-    t.index ["key"], name: "index_services_on_key"
-    t.index ["name"], name: "index_services_on_name"
+    t.integer "standard_days"
+    t.integer "premium_days"
+    t.json "part_1"
+    t.json "part_2"
+    t.json "part_3"
+    t.json "part_4"
   end
 
   create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
