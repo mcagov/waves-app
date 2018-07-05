@@ -108,7 +108,7 @@ bundle exec clockwork lib/clock.rb
 
 Schedule: Daily
 
-If the `submission#referred_until` date has been reached, applications should be restored to the unclaimed tasks queue. To run this task:
+If the `submission#referred_until` date has been reached, applications should be restored to the unclaimed tasks queue. To run this application_type:
 
   `rake waves:expire_referrals`
 
@@ -131,7 +131,7 @@ The initial state of an `:online` entry is `:incomplete`. When payment is comple
 
 When a submission enters the default :incomplete state, it fires an event `build_default`, invoking the `SubmissionBuilder` and setting up all the defaults. If you want to initialize a submission object to build a form or any other instance when you don't want a record to be created, you need to forecfully set the state to :initializing. For example: `Submission.new(state: :initializing)`.
 
-The initial state of a `:manual_entry` is `:unassigned` so that it can be claimed. 
+The initial state of a `:manual_entry` is `:unassigned` so that it can be claimed.
 
 ##### Submission Behaviour
 A submission's behaviour depends on the follwing attributes:

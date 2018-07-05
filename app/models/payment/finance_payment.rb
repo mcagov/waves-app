@@ -9,7 +9,7 @@ class Payment::FinancePayment < ApplicationRecord
 
   validates :payment_date, presence: true
   validates :part, presence: true
-  validates :task, presence: true
+  validates :application_type, presence: true
   validates :payment_amount, numericality: { other_than: 0 }
 
   validate :registered_vessel_exists
@@ -60,7 +60,7 @@ class Payment::FinancePayment < ApplicationRecord
 
     Submission.new(
       part: part,
-      document_entry_task: task,
+      application_type: application_type,
       changeset: { vessel_info: { name: vessel_name } },
       source: :manual_entry,
       vessel_reg_no: vessel_reg_no,

@@ -25,7 +25,7 @@ class FinancePayments::SubmissionsController < InternalPagesController
   def submission_params
     return {} unless params[:submission]
     params.require(:submission).permit(
-      :part, :document_entry_task, :received_at, :applicant_name,
+      :part, :application_type, :received_at, :applicant_name,
       :applicant_is_agent, :applicant_email, :vessel_reg_no,
       :documents_received,
       vessel: Submission::Vessel::ATTRIBUTES

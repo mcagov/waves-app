@@ -76,7 +76,9 @@ def visit_name_approved_part_1_submission
 end
 
 def visit_name_approved_part_1_provisional_submission
-  submission = create(:approvable_submission, part: :part_1, task: :provisional)
+  submission =
+    create(:approvable_submission, part: :part_1,
+                                   application_type: :provisional)
   create(:submission_name_approval, submission: submission)
 
   login_to_part_1(submission.claimant)
@@ -112,7 +114,7 @@ def visit_part_2_change_vessel_submission
     create(:registered_vessel, part: :part_2, gross_tonnage: 100)
   submission =
     create(:approvable_submission, part: :part_2,
-                                   document_entry_task: :change_vessel,
+                                   application_type: :change_vessel,
                                    registered_vessel: registered_vessel)
 
   login_to_part_2(submission.claimant)
@@ -134,7 +136,7 @@ def visit_assigned_csr_submission
   registered_vessel =
     create(:registered_vessel, part: :part_1)
   submission =
-    create(:approvable_submission, document_entry_task: :issue_csr,
+    create(:approvable_submission, application_type: :issue_csr,
                                    part: :part_1,
                                    registered_vessel: registered_vessel)
 
@@ -146,7 +148,7 @@ def visit_assigned_part_1_closure_submission
   registered_vessel =
     create(:registered_vessel, part: :part_1)
   submission =
-    create(:approvable_submission, document_entry_task: :closure,
+    create(:approvable_submission, application_type: :closure,
                                    part: :part_1,
                                    registered_vessel: registered_vessel)
 
@@ -158,7 +160,7 @@ def visit_name_approved_part_2_simple_to_full_submission
   registered_vessel =
     create(:registered_vessel, part: :part_2)
   submission =
-    create(:approvable_submission, document_entry_task: :simple_to_full,
+    create(:approvable_submission, application_type: :simple_to_full,
                                    part: :part_2,
                                    registered_vessel: registered_vessel)
 

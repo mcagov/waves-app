@@ -103,7 +103,10 @@ describe Decorators::Submission, type: :model do
     end
 
     context "for a new registration" do
-      let(:submission) { build(:submission, task: :new_registration) }
+      let(:submission) do
+        build(:submission, application_type: :new_registration)
+      end
+
       it { expect(subject).to be_nil }
     end
 

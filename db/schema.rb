@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_18_135616) do
+ActiveRecord::Schema.define(version: 2018_07_05_080628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_135616) do
 
   create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "part"
-    t.string "task"
+    t.string "application_type"
     t.string "vessel_name"
     t.string "payment_type"
     t.decimal "payment_amount"
@@ -455,7 +455,7 @@ ActiveRecord::Schema.define(version: 2018_06_18_135616) do
     t.datetime "carving_and_marking_received_at"
     t.uuid "registration_id"
     t.datetime "completed_at"
-    t.string "document_entry_task"
+    t.string "application_type"
     t.integer "service_level"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"

@@ -92,7 +92,7 @@ class Registration < ApplicationRecord
   end
 
   def task
-    submission ? submission.task : :new_registration
+    submission ? submission.application_type : :new_registration
   end
 
   def symbolized_registry_info

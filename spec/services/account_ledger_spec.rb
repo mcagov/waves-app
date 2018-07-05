@@ -7,7 +7,7 @@ describe AccountLedger do
     subject { account_ledger.payment_status }
 
     context "not_applicable" do
-      let(:submission) { build(:submission, task: :closure) }
+      let(:submission) { build(:submission, application_type: :closure) }
 
       it { expect(subject).to eq(:not_applicable) }
     end

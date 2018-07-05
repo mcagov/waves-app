@@ -7,7 +7,7 @@ describe Payment::FinancePayment do
         described_class.create(
           payment_date: Time.zone.today,
           part: :part_1,
-          task: :unknown,
+          application_type: :unknown,
           vessel_reg_no: "",
           payment_type: :cash,
           payment_amount: "25",
@@ -49,7 +49,7 @@ describe Payment::FinancePayment do
         vessel_reg_no: registered_vessel.reg_no,
         payment_amount: "25",
         actioned_by: create(:user),
-        task: :change_vessel
+        application_type: :change_vessel
       )
     end
 
@@ -61,14 +61,14 @@ describe Payment::FinancePayment do
       described_class.create(
         part: :part_1,
         payment_amount: "bob",
-        task: nil,
+        application_type: nil,
         vessel_reg_no: "nonexistent"
       )
     end
 
     it { expect(finance_payment.errors).to include(:payment_date) }
     it { expect(finance_payment.errors).to include(:payment_amount) }
-    it { expect(finance_payment.errors).to include(:task) }
+    it { expect(finance_payment.errors).to include(:application_type) }
     it { expect(finance_payment.errors).to include(:vessel_reg_no) }
   end
 
@@ -91,7 +91,7 @@ describe Payment::FinancePayment do
 
     context "when the payment is not attached to a submission" do
       it { expect(subject.part).to eq("part_3") }
-      it { expect(subject.document_entry_task). to eq("new_registration") }
+      it { expect(subject.application_type). to eq("new_registration") }
       it { expect(subject.vessel_name). to eq("MY BOAT") }
       it { expect(subject.applicant_name). to eq("ALICE") }
       it { expect(subject.applicant_email). to eq("alice@example.com") }

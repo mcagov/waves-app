@@ -15,7 +15,7 @@ module InitNewSubmission
   end
 
   def init_new_submission
-    params_task = params[:submission][:document_entry_task]
+    params_task = params[:submission][:application_type]
     unless DeprecableTask.new(params_task).new_registration?
       params[:submission].delete(:vessel)
     end

@@ -8,20 +8,20 @@ describe "User links finance_payment", type: :feature, js: true do
       :submission,
       part: :part_3,
       vessel_reg_no: vessel_reg_no,
-      document_entry_task: :change_owner,
+      application_type: :change_owner,
       ref_no: "ABC123")
 
     create(
       :submission,
       part: :part_3,
       vessel_reg_no: create(:registered_vessel).reg_no,
-      document_entry_task: :change_vessel,
+      application_type: :change_vessel,
       ref_no: "FOOBAR")
 
     create(
       :locked_finance_payment,
       part: :part_3,
-      task: :new_registration,
+      application_type: :new_registration,
       application_ref_no: "ABC123")
 
     visit_fee_entry

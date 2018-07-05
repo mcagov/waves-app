@@ -14,7 +14,7 @@ describe SubmissionsController, type: :controller do
         submission: {
           part: :part_4,
           received_at: "2001-1-1",
-          document_entry_task: :change_vessel } }
+          application_type: :change_vessel } }
     end
 
     it "sets the state to unassigned" do

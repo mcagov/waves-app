@@ -29,7 +29,7 @@
               - finance_payment = Decorators::FinancePayment.new(finance_payment)
               %tr.finance-payment
                 %td= link_to finance_payment.payment_date, finance_payment_path(finance_payment), class: "payment-date"
-                %td= finance_payment.task_description
+                %td= finance_payment.application_type_description
                 %td= finance_payment.application_ref_no
                 %td= finance_payment.vessel_name
                 %td= finance_payment.vessel_reg_no

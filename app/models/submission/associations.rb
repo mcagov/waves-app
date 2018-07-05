@@ -109,11 +109,11 @@ module Submission::Associations
   end
 
   def task
-    tasks.first || document_entry_task
+    tasks.first || application_type
   end
 
   def task=(val)
-    self.document_entry_task = val
+    self.application_type = val
   end
 
   def owners
