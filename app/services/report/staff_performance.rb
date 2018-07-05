@@ -20,7 +20,7 @@ class Report::StaffPerformance < Report
   end
 
   def results
-    DeprecableTask.all_task_types.map do |task_type|
+    ApplicationType.all.map do |task_type|
       submission_ids = submission_ids_for(task_type)
       data_elements =
         [
