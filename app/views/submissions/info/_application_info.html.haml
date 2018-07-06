@@ -41,6 +41,11 @@
             %strong
               = link_to_unless @readonly, submission.delivery_address_description, "#",
                 data: { target: "#edit_applicant", toggle: "modal" }
+        %tr
+          %td.soft-label Payment Received
+          %td
+            %strong
+              #{formatted_amount(AccountLedger.new(submission).amount_paid)}
 
 
 .modal.fade{id: "edit_applicant", role: "dialog", tabindex: "-1"}
