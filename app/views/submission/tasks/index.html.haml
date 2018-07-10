@@ -29,7 +29,7 @@
             %td= link_to service
             %td= service.standard_days
             %td= service.premium_days
-            %td= service.standard_price(current_activity.part)
-            %td= service.premium_supplement(current_activity.part)
-            %td= service.subsequent_price(current_activity.part)
+            %td= formatted_amount service.standard_price(current_activity.part)
+            %td= formatted_amount service.premium_supplement(current_activity.part)
+            %td= formatted_amount service.subsequent_price(current_activity.part)
 

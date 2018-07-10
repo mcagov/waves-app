@@ -6,20 +6,25 @@ class Service < ApplicationRecord
   end
 
   def standard_price(part)
-    price(part)[:standard]
+    pence(price(part)[:standard])
   end
 
   def premium_supplement(part)
-    price(part)[:premium]
+    pence(price(part)[:premium])
   end
 
   def subsequent_price(part)
-    price(part)[:subsequent]
+    pence(price(part)[:subsequent])
   end
 
   private
 
   def price(part)
     (send(part) || {}).symbolize_keys
+  end
+
+  def pence(amount)
+    return unless amount
+    amount * 100
   end
 end
