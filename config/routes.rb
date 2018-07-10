@@ -182,6 +182,10 @@ Rails.application.routes.draw do
              controller: "submission/signatures",
              only: [:show, :update]
 
+    resources :tasks,
+              controller: "submission/tasks",
+              only: [:index]
+
     resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim

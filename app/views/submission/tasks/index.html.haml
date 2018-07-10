@@ -1,0 +1,35 @@
+- submission = Decorators::Submission.new(@submission)
+= render partial: "submissions/info/breadcrumbs", locals: {submission: submission}
+= render partial: "submissions/info/heading", locals: {submission: submission}
+= render partial: "submissions/info/prompts", locals: {submission: submission}
+
+.x_panel
+  %h2.x_title Tasks for this Application
+  .x_content
+    %table.table
+      %thead
+        %th Task
+        %th Price
+        %th Status
+      %tbody
+
+  .x_content#services
+    %h2.x_title Available Services
+    %table.table
+      %thead
+        %th Task
+        %th Standard days
+        %th Premium days
+        %th Standard price
+        %th Premium supplement
+        %th Subsequent price
+      %tbody
+        - Service.in_part(current_activity.part).each do |service|
+          %tr
+            %td= link_to service
+            %td= service.standard_days
+            %td= service.premium_days
+            %td= service.standard_price(current_activity.part)
+            %td= service.premium_supplement(current_activity.part)
+            %td= service.subsequent_price(current_activity.part)
+
