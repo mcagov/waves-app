@@ -1,6 +1,25 @@
 class Service < ApplicationRecord
-  scope :part_1, -> { where.not(part_1: nil) }
-  scope :part_2, -> { where.not(part_2: nil) }
-  scope :part_3, -> { where.not(part_3: nil) }
-  scope :part_4, -> { where.not(part_4: nil) }
+  scope :in_part, ->(part) { where.not(part.to_sym => nil) }
+
+  def to_s
+    name
+  end
+
+  def standard_price(part)
+    price(part)[:standard]
+  end
+
+  def premium_supplement(part)
+    price(part)[:premium]
+  end
+
+  def subsequent_price(part)
+    price(part)[:subsequent]
+  end
+
+  private
+
+  def price(part)
+    (send(part) || {}).symbolize_keys
+  end
 end
