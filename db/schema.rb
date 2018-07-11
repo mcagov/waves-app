@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_05_125431) do
+ActiveRecord::Schema.define(version: 2018_07_10_144848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -429,6 +429,7 @@ ActiveRecord::Schema.define(version: 2018_07_05_125431) do
     t.datetime "referred_until"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price", default: 0
     t.index ["claimant_id"], name: "index_submission_tasks_on_claimant_id"
     t.index ["ref_no"], name: "index_submission_tasks_on_ref_no"
     t.index ["service_id"], name: "index_submission_tasks_on_service_id"
