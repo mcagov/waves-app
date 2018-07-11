@@ -13,7 +13,7 @@ module SubmissionTaskHelper
     submission_task = Submission::Task.new(
       service: service,
       submission: @submission,
-      price: service.premium_supplement(part))
+      price: service.premium_price(part))
 
     render partial: "/submission/tasks/new",
            locals: { submission_task: submission_task }

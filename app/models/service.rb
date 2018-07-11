@@ -9,6 +9,10 @@ class Service < ApplicationRecord
     pence(price(part)[:standard])
   end
 
+  def premium_price(part)
+    premium_supplement(part) + standard_price(part) if premium_supplement(part)
+  end
+
   def premium_supplement(part)
     pence(price(part)[:premium])
   end
