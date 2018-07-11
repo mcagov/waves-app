@@ -109,7 +109,7 @@ module Submission::Associations
   end
 
   def task
-    tasks.first || application_type
+    application_type
   end
 
   def task=(val)
