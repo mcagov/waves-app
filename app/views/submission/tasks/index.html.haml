@@ -5,13 +5,20 @@
 
 .x_panel
   %h2.x_title Tasks for this Application
-  .x_content
+  .x_content#submission_tasks
     %table.table
       %thead
         %th Task
         %th Price
+        %th Reference No
         %th Status
       %tbody
+        - @submission_tasks.each do |task|
+          %tr
+            %td.service_name= task.service.name
+            %td.price= formatted_amount(task.price)
+            %th
+            %th
 
   .x_content#services
     %h2.x_title Available Services
@@ -29,7 +36,6 @@
             %td= link_to service
             %td= service.standard_days
             %td= service.premium_days
-            %td= formatted_amount service.standard_price(current_activity.part)
-            %td= formatted_amount service.premium_supplement(current_activity.part)
-            %td= formatted_amount service.subsequent_price(current_activity.part)
-
+            %td= link_to_create_standard_task(service, current_activity.part)
+            %td= link_to_create_premium_task(service, current_activity.part)
+            %td= link_to_create_subsequent_task(service, current_activity.part)
