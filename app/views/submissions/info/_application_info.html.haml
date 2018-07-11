@@ -1,3 +1,4 @@
+- account_ledger = AccountLedger.new(@submission)
 .x_panel
   %h2.x_title Application Information
   .x_content
@@ -42,9 +43,22 @@
               = link_to_unless @readonly, submission.delivery_address_description, "#",
                 data: { target: "#edit_applicant", toggle: "modal" }
         %tr
-          %td.soft-label Payment Received
-          %td
+          %td.soft-label Payment Due
+          %td.payment_due
             %strong
+              = formatted_amount(account_ledger.payment_due)
+
+        %tr
+          %td.soft-label Payment Received
+          %td.payment_received
+            %strong
+              = formatted_amount(account_ledger.payment_received)
+
+        %tr
+          %td.soft-label Balance
+          %td.balance
+            %strong
+              = formatted_amount(account_ledger.balance)
 
 
 

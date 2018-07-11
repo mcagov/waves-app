@@ -19,7 +19,10 @@ describe "User edits tasks" do
       expect(page).to have_css(".ref_no", text: "/1")
     end
 
-    # verify the submission page can still render (during the refactor)
-    visit submission_path(@submission)
+    within("#summary") do
+      expect(page).to have_css(".payment_due", text: "£25.00")
+      expect(page).to have_css(".payment_received", text: "£25.00")
+      expect(page).to have_css(".balance", text: "£0.00")
+    end
   end
 end
