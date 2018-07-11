@@ -2,24 +2,9 @@
 = render partial: "submissions/info/breadcrumbs", locals: {submission: submission}
 = render partial: "submissions/info/heading", locals: {submission: submission}
 = render partial: "submissions/info/prompts", locals: {submission: submission}
+= render partial: "submissions/info/summary", locals: {submission: submission}
 
 .x_panel
-  %h2.x_title Tasks for this Application
-  .x_content#submission_tasks
-    %table.table
-      %thead
-        %th Task
-        %th Price
-        %th Reference No
-        %th Status
-      %tbody
-        - @submission_tasks.each do |task|
-          %tr
-            %td.service_name= task.service.name
-            %td.formatted_price= formatted_amount(task.price)
-            %th.ref_no= task.ref_no
-            %th
-
   .x_content#services
     %h2.x_title Available Services
     %table.table

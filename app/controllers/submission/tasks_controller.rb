@@ -2,7 +2,6 @@ class Submission::TasksController < InternalPagesController
   before_action :load_submission
 
   def index
-    @submission_tasks = @submission.tasks.includes(:service)
   end
 
   def create

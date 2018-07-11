@@ -1,0 +1,16 @@
+.x_panel
+  %h2.x_title Tasks for this Application
+  .x_content
+    %table.table
+      %thead
+        %th Task
+        %th Price
+        %th Reference No
+        %th Status
+      %tbody
+        - @submission.tasks.includes(:service).each do |task|
+          %tr
+            %td.service_name= task.service.name
+            %td.formatted_price= formatted_amount(task.price)
+            %th.ref_no= task.ref_no
+            %th
