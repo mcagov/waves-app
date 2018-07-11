@@ -1,7 +1,11 @@
 require "rails_helper"
 
 feature "User views unclaimed task list", type: :feature, js: true do
-  let!(:submission) { create(:unassigned_submission) }
+  let!(:submission) do
+    submission = create(:unassigned_submission)
+    create(:submission_task, price: 2500, submission: submission)
+    submission
+  end
 
   scenario "viewing the unclaimed submissions" do
     login_to_part_3

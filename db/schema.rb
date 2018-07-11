@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_11_095356) do
+ActiveRecord::Schema.define(version: 2018_07_11_123628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,18 +199,6 @@ ActiveRecord::Schema.define(version: 2018_07_11_095356) do
     t.index ["parent_type"], name: "index_engines_on_parent_type"
   end
 
-  create_table "fees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "category"
-    t.string "task_variant"
-    t.integer "price", default: 0
-    t.integer "premium_addon_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "subsequent_price"
-    t.index ["category"], name: "index_fees_on_category"
-    t.index ["task_variant"], name: "index_fees_on_task_variant"
-  end
-
   create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "finance_payment_id"
     t.datetime "opened_at"
@@ -244,15 +232,6 @@ ActiveRecord::Schema.define(version: 2018_07_11_095356) do
     t.string "payer_name"
     t.integer "service_level", default: 0
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id"
-  end
-
-  create_table "line_items", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "submission_id"
-    t.uuid "fee_id"
-    t.integer "price"
-    t.integer "premium_addon_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "mortgages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

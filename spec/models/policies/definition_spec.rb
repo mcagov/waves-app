@@ -51,7 +51,7 @@ describe Policies::Definitions do
     end
 
     context "awaiting_payment" do
-      let!(:submission) { create(:incomplete_submission) }
+      let!(:submission) { create(:submission_task, price: 100).submission }
 
       it { expect(subject).to include(:payment_required) }
     end
