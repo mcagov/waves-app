@@ -16,8 +16,8 @@
         - @submission_tasks.each do |task|
           %tr
             %td.service_name= task.service.name
-            %td.price= formatted_amount(task.price)
-            %th
+            %td.formatted_price= formatted_amount(task.price)
+            %th.ref_no= task.ref_no
             %th
 
   .x_content#services

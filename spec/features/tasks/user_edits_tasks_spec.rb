@@ -15,7 +15,8 @@ describe "User edits tasks" do
 
     within("#submission_tasks") do
       expect(page).to have_css(".service_name", text: "Demo Service")
-      expect(page).to have_css(".price", text: "£25.00")
+      expect(page).to have_css(".formatted_price", text: "£25.00")
+      expect(page).to have_css(".ref_no", text: "/1")
     end
   end
 end
