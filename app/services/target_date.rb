@@ -1,7 +1,8 @@
 class TargetDate
-  def initialize(start_date, service_level)
+  def initialize(start_date, service_level, service)
     @start_date = start_date.advance(days: -1)
-    @service_level = service_level.present? ? service_level.to_sym : :standard
+    @service_level = service_level.to_sym
+    @service = service
   end
 
   def calculate
@@ -39,6 +40,6 @@ class TargetDate
   private
 
   def number_of_days
-    @service_level == :premium ? 3 : 10
+    @service_level == :premium ? @service.premium_days : @service.standard_days
   end
 end
