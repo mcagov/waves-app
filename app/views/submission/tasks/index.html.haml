@@ -21,6 +21,9 @@
             %td= link_to service
             %td= service.standard_days
             %td= service.premium_days
-            %td= link_to_create_standard_task(service, current_activity.part)
-            %td= link_to_create_premium_task(service, current_activity.part)
-            %td= link_to_create_subsequent_task(service, current_activity.part)
+            %td.standard_price
+              = link_to_create_task(service, service.standard_price(current_activity.part))
+            %td.premium_price
+              = link_to_create_task(service, service.premium_price(current_activity.part))
+            %td.subsequent_price
+              = link_to_create_task(service, service.subsequent_price(current_activity.part))

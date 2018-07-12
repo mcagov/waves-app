@@ -31,4 +31,10 @@ describe "User edits tasks" do
       expect(page).to have_css(".balance", text: "£0.00")
     end
   end
+
+  scenario "when the service does not exist" do
+    within("#services") do
+      expect(page).to have_css(".subsequent_price", text: "n/a")
+    end
+  end
 end
