@@ -10,6 +10,13 @@ describe Submission::Task do
     end
   end
 
+  context "price is required" do
+    let(:submission_task) { described_class.new(price: nil) }
+    before { submission_task.valid? }
+
+    it { expect(submission_task.errors).to include(:price) }
+  end
+
   context "#target_date" do
     let(:submission) { create(:submission, service_level: service_level) }
     let(:submission_task) { create(:submission_task, submission: submission) }

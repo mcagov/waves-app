@@ -10,6 +10,8 @@ class Submission::Task < ApplicationRecord
 
   before_create :assign_target_date
 
+  validates :price, presence: true
+
   def ref_no
     "#{submission.ref_no}/#{submission_ref_counter}"
   end
