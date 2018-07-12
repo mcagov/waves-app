@@ -2,10 +2,15 @@ require "rails_helper"
 
 describe "User edits tasks" do
   before do
+    Timecop.travel(Time.new(2016, 6, 18))
     create(:demo_service)
     @submission = create(:assigned_submission)
     login_to_part_3(@submission.claimant)
     visit submission_tasks_path(@submission)
+  end
+
+  after do
+    Timecop.return
   end
 
   scenario "in general" do
@@ -17,6 +22,7 @@ describe "User edits tasks" do
       expect(page).to have_css(".service_name", text: "Demo Service")
       expect(page).to have_css(".formatted_price", text: "£25.00")
       expect(page).to have_css(".ref_no", text: "/1")
+      expect(page).to have_css(".target_date", text: "01/07/2016")
     end
 
     within("#summary") do
