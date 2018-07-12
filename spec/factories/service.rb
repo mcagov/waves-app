@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :service do
+    standard_days 10
+    premium_days 3
   end
 
   factory :demo_service, parent: :service do
