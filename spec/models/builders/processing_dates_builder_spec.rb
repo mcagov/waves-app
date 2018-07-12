@@ -3,11 +3,10 @@ require "rails_helper"
 describe Builders::ProcessingDatesBuilder do
   describe ".create" do
     before do
-      service = create(:service)
       target_date_instance = double(:target_date_instance)
 
       expect(TargetDate)
-        .to receive(:new).with(Time.zone.today, service_level.to_s, service)
+        .to receive(:new).with(Time.zone.today, service_level.to_s, nil)
         .and_return(target_date_instance)
 
       expect(target_date_instance)
