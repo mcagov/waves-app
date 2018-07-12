@@ -15,4 +15,4 @@
             %td.formatted_price= formatted_amount(task.price)
             %th.ref_no= task.ref_no
             %th.target_date= task.target_date
-            %th
+            %th.state= task.current_state.to_s.humanize

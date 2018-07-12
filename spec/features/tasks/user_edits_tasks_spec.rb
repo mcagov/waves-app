@@ -23,6 +23,7 @@ describe "User edits tasks" do
       expect(page).to have_css(".formatted_price", text: "£25.00")
       expect(page).to have_css(".ref_no", text: "/1")
       expect(page).to have_css(".target_date", text: "01/07/2016")
+      expect(page).to have_css(".state", text: "Unassigned")
     end
 
     within("#summary") do

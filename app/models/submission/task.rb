@@ -10,7 +10,11 @@ class Submission::Task < ApplicationRecord
 
   before_create :assign_target_date
 
-  validates :price, presence: true
+  include ActiveModel::Transitions
+
+  state_machine auto_scopes: true do
+    state :unassigned
+  end
 
   def ref_no
     "#{submission.ref_no}/#{submission_ref_counter}"
