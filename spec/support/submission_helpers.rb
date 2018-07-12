@@ -34,7 +34,9 @@ def claim_submission_and_visit
 end
 
 def visit_fee_entry
+  create(:finance_payment)
   login_to_part_3
+  visit "/finance_payments/unattached_refunds"
   click_on("Fees Received")
   within(".finance-payment") do
     find(".payment-date").trigger("click")

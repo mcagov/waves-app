@@ -20,7 +20,7 @@ feature "User cancels a submission", type: :feature, js: true do
       click_on "Cancel Application"
     end
 
-    click_on "Cancelled Applications"
+    click_on "Cancelled Tasks"
     expect(Notification::Cancellation.last.body).to have_text("Sorry!")
     creates_a_work_log_entry("Submission", :cancellation)
 

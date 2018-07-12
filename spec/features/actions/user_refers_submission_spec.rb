@@ -21,7 +21,7 @@ feature "User refers a submission", type: :feature, js: true do
       click_on "Refer Application"
     end
 
-    click_on "Referred Applications"
+    click_on "Referred Tasks"
     expect(Notification::Referral.last.body).to have_text("Referred!")
     creates_a_work_log_entry("Submission", :referred)
 

@@ -1,11 +1,7 @@
 require "rails_helper"
 
 feature "User views task lists", type: :feature, js: true do
-  before do
-    create(:unassigned_submission)
-    create(:finance_payment)
-    login_to_part_3
-  end
+  before { login_to_part_3 }
 
   scenario "viewing task lists" do
     click_link("My Tasks")
@@ -14,22 +10,22 @@ feature "User views task lists", type: :feature, js: true do
     click_link("Team Tasks")
     expect(page).to have_css("h1", text: "Team Tasks")
 
+    click_link("Unclaimed Tasks")
+    expect(page).to have_css("h1", text: "Unclaimed Tasks")
+
+    click_link("Referred Tasks")
+    expect(page).to have_css("h1", text: "Referred Tasks")
+
+    click_link("Cancelled Tasks")
+    expect(page).to have_css("h1", text: "Cancelled Tasks")
+  end
+
+  scenario "viewing finance_payments" do
+    visit "/finance_payments/unattached_refunds"
     click_link("Fees Received")
     expect(page).to have_css("h1", text: "Fees Received")
 
     click_link("Refunds Due")
     expect(page).to have_css("h1", text: "Refunds Due")
-
-    click_link("Unclaimed Tasks")
-    expect(page).to have_css("h1", text: "Unclaimed Tasks")
-
-    click_link("Referred Applications")
-    expect(page).to have_css("h1", text: "Referred Applications")
-
-    click_link("Incomplete Applications")
-    expect(page).to have_css("h1", text: "Incomplete Applications")
-
-    click_link("Referred Applications")
-    expect(page).to have_css("h1", text: "Referred Applications")
   end
 end
