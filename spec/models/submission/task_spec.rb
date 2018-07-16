@@ -17,9 +17,17 @@ describe Submission::Task do
     it { expect(submission_task.errors).to include(:price) }
   end
 
+  context "service_level is required" do
+    let(:submission_task) { described_class.new(service_level: nil) }
+    before { submission_task.valid? }
+
+    it { expect(submission_task.errors).to include(:service_level) }
+  end
+
   context "#target_date" do
-    let(:submission) { create(:submission, service_level: service_level) }
-    let(:submission_task) { create(:submission_task, submission: submission) }
+    let(:submission_task) do
+      create(:submission_task, service_level: service_level)
+    end
 
     before do
       Timecop.travel(Time.new(2016, 6, 18))

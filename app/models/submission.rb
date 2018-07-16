@@ -39,8 +39,6 @@ class Submission < ApplicationRecord
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
-  enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
-
   def check_current_state
     unassigned! if incomplete? && actionable?
   end

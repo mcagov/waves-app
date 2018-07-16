@@ -4,6 +4,7 @@
     %table.table
       %thead
         %th Task
+        %th Service Level
         %th Price
         %th Reference No
         %th Target Date
@@ -12,6 +13,7 @@
         - @submission.tasks.includes(:service).each do |task|
           %tr
             %td.service_name= task.service.name
+            %td.service_level= task.service_level.to_s.humanize
             %td.formatted_price= formatted_amount(task.price)
             %th.ref_no= task.ref_no
             %th.target_date= task.target_date

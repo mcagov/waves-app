@@ -4,9 +4,11 @@ class Submission::Task < ApplicationRecord
 
   belongs_to :submission
   delegate :received_at, to: :submission
-  delegate :service_level, to: :submission
 
   validates :price, presence: true
+  validates :service_level, presence: true
+
+  enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
   protokoll :submission_ref_counter, scope_by: :submission_id, pattern: "#"
 

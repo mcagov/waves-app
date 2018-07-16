@@ -7,7 +7,7 @@ class Builders::ProcessingDatesBuilder
         target_date:
           TargetDate.new(
             Time.zone.today,
-            submission.service_level,
+            :standard,
             nil).calculate)
     end
   end

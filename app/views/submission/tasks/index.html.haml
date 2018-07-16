@@ -22,8 +22,8 @@
             %td= service.standard_days
             %td= service.premium_days
             %td.standard_price
-              = link_to_create_task(service, service.standard_price(current_activity.part))
+              = link_to_create_task(service, service.standard_price(current_activity.part), :standard)
             %td.premium_price
-              = link_to_create_task(service, service.premium_price(current_activity.part))
+              = link_to_create_task(service, service.premium_price(current_activity.part), :premium)
             %td.subsequent_price
-              = link_to_create_task(service, service.subsequent_price(current_activity.part))
+              = link_to_create_task(service, service.subsequent_price(current_activity.part), :standard)

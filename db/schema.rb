@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_12_140244) do
+ActiveRecord::Schema.define(version: 2018_07_16_130615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -411,6 +411,7 @@ ActiveRecord::Schema.define(version: 2018_07_12_140244) do
     t.integer "submission_ref_counter"
     t.datetime "target_date"
     t.string "state"
+    t.integer "service_level", default: 0
     t.index ["claimant_id"], name: "index_submission_tasks_on_claimant_id"
     t.index ["service_id"], name: "index_submission_tasks_on_service_id"
     t.index ["submission_id"], name: "index_submission_tasks_on_submission_id"
@@ -440,7 +441,6 @@ ActiveRecord::Schema.define(version: 2018_07_12_140244) do
     t.uuid "registration_id"
     t.datetime "completed_at"
     t.string "application_type"
-    t.integer "service_level"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"

@@ -68,7 +68,6 @@ class Payment::FinancePayment < ApplicationRecord
       applicant_email: applicant_email,
       applicant_is_agent: applicant_is_agent,
       documents_received: documents_received,
-      service_level: service_level,
       received_at: payment_date)
   end
 

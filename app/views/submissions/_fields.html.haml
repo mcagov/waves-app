@@ -43,8 +43,5 @@
         %input{name: "new_submission_actions", value: "application_receipt", type: "checkbox"}
         Send an Application Receipt email
 .row
-  .col-md-6
-    = f.input :service_level, collection: service_level_collection, as: :select, include_blank: false, input_html: { class: "select2 select2_single" }
-.row
   .col-md-12
     = f.input :documents_received

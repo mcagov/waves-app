@@ -16,6 +16,6 @@ class Submission::TasksController < InternalPagesController
   private
 
   def submission_task_params
-    params.require(:submission_task).permit(:service_id, :price)
+    params.require(:submission_task).permit(:service_id, :price, :service_level)
   end
 end

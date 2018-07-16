@@ -95,7 +95,6 @@ describe Payment::FinancePayment do
       it { expect(subject.vessel_name). to eq("MY BOAT") }
       it { expect(subject.applicant_name). to eq("ALICE") }
       it { expect(subject.applicant_email). to eq("alice@example.com") }
-      it { expect(subject.service_level). to eq("premium") }
       it { expect(subject.applicant_is_agent).to be_truthy }
       it { expect(subject.documents_received).to eq("Excel file") }
 
