@@ -44,8 +44,7 @@ module Pdfs::Stationary
     @pdf.draw_text "Cardiff", at: [340, 738]
     @pdf.draw_text "CF24 5JW", at: [340, 724]
 
-    @pdf.draw_text "Tel: 029 2044 8800", at: [340, 700]
-    @pdf.draw_text "Fax: 029 2044 8820", at: [340, 686]
+    @pdf.draw_text "Tel: 0203 90 85200", at: [340, 700]
   end
 
   def date_and_ref
