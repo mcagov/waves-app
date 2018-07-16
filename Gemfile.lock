@@ -312,7 +312,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     nio4r (2.2.0)
-    nokogiri (1.8.2)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -585,7 +585,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   momentjs-rails
-  nokogiri (>= 1.8.1)
+  nokogiri (>= 1.8.3)
   notifications-ruby-client (= 1.1.2)
   paperclip (>= 5.2.0)
   paperclip-azure!
