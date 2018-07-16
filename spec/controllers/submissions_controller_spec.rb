@@ -43,7 +43,7 @@ describe SubmissionsController, type: :controller do
       get :show, params: { id: create(:submission).id }
     end
 
-    it "assigns @readonly for an unassigned submissio" do
+    it "assigns @readonly for an unassigned submission" do
       expect(assigns(:readonly)).to be_truthy
     end
   end
