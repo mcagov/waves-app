@@ -6,6 +6,8 @@ class Submission::Task < ApplicationRecord
   delegate :received_at, to: :submission
   delegate :service_level, to: :submission
 
+  validates :price, presence: true
+
   protokoll :submission_ref_counter, scope_by: :submission_id, pattern: "#"
 
   before_create :assign_target_date
