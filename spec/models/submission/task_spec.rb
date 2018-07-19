@@ -24,7 +24,18 @@ describe Submission::Task do
     it { expect(submission_task.errors).to include(:service_level) }
   end
 
-  context "#target_date" do
+  context "#start_date" do
+    let(:submission) { create(:submission, received_at: "21/07/2016") }
+    let(:submission_task) { create(:submission_task, submission: submission) }
+
+    subject { submission_task.start_date }
+
+    it "assigns the ref_no in the expected format" do
+      expect(subject).to eq("21/07/2016".to_date)
+    end
+  end
+
+  xcontext "#target_date" do
     let(:submission_task) do
       create(:submission_task, service_level: service_level)
     end

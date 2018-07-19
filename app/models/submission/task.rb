@@ -12,11 +12,12 @@ class Submission::Task < ApplicationRecord
 
   protokoll :submission_ref_counter, scope_by: :submission_id, pattern: "#"
 
-  before_create :assign_target_date
+  before_create :assign_start_date
 
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
+    state :initialising
     state :unassigned
   end
 
@@ -25,6 +26,10 @@ class Submission::Task < ApplicationRecord
   end
 
   private
+
+  def assign_start_date
+    self.start_date = submission.received_at || Date.current
+  end
 
   def assign_target_date
     self.target_date =
