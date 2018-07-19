@@ -1,3 +1,4 @@
+- @submission_tasks = @submission.tasks.includes(:submission, :service)
 .x_panel
   %h2.x_title Tasks for this Application
   .x_content
@@ -19,9 +20,11 @@
             %th.start_date= task.start_date
             %th.target_date= task.target_date
             %th.ref_no= task.ref_no
-            %th.state= task.current_state.to_s.humanize
+            %th.state
+              = render partial: "submission/tasks/status", locals: { task: task }
   .x_footer
-    = button_to confirm_submission_tasks_path(@submission),
-      class: "btn btn-success btn-md pull-right" do
-      %i.fa.fa-check
-      Confirm Tasks
+    - unless @submission.tasks.initialising.empty?
+      = button_to confirm_submission_tasks_path(@submission),
+        class: "btn btn-success btn-md pull-right" do
+        %i.fa.fa-check
+        Confirm Tasks

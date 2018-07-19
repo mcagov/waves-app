@@ -20,6 +20,14 @@ class Submission::TasksController < InternalPagesController
     redirect_to submission_tasks_path(@submission)
   end
 
+  def destroy
+    @task = @submission.tasks.find(params[:id])
+    @task.destroy
+
+    flash[:notice] = "The task has been confirmed"
+    redirect_to submission_tasks_path(@submission)
+  end
+
   private
 
   def submission_task_params

@@ -180,7 +180,7 @@ Rails.application.routes.draw do
 
     resources :tasks,
               controller: "submission/tasks",
-              only: [:index, :create] do
+              only: [:index, :create, :destroy] do
       collection do
         post :confirm
       end

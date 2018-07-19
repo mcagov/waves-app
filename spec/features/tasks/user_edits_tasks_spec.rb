@@ -13,7 +13,7 @@ describe "User edits tasks" do
     Timecop.return
   end
 
-  scenario "in general" do
+  scenario "adding and confirming" do
     within("#services") do
       click_on("£25.00")
     end
@@ -23,8 +23,9 @@ describe "User edits tasks" do
       expect(page).to have_css(".service_level", text: "Standard")
       expect(page).to have_css(".formatted_price", text: "25.00")
       expect(page).to have_css(".start_date", text: "18/06/2016")
-      expect(page).to have_css(".state", text: "Initialising")
     end
+
+    click_on(confirm_tasks_link_text)
 
     within("#summary") do
       expect(page).to have_css(".payment_due", text: "25.00")
@@ -32,16 +33,22 @@ describe "User edits tasks" do
       expect(page).to have_css(".balance", text: "0.00")
     end
 
-    click_on("Confirm Tasks")
+    within("#submission_tasks") do
+      expect(page).not_to have_text(confirm_tasks_link_text)
+      expect(page).not_to have_text(remove_task_link_text)
+    end
+  end
+
+  scenario "adding and removing" do
+    within("#services") do
+      click_on("£25.00")
+    end
 
     within("#submission_tasks") do
-      expect(page).to have_css(".service_name", text: "Demo Service")
-      expect(page).to have_css(".service_level", text: "Standard")
-      expect(page).to have_css(".formatted_price", text: "25.00")
-      expect(page).to have_css(".ref_no", text: "/1")
-      expect(page).to have_css(".target_date", text: "01/07/2016")
-      expect(page).to have_css(".state", text: "Unassigned")
+      click_on(remove_task_link_text)
     end
+
+    expect(Submission::Task.count).to eq(0)
   end
 
   scenario "when the service does not exist" do
@@ -49,4 +56,12 @@ describe "User edits tasks" do
       expect(page).to have_css(".subsequent_price", text: "n/a")
     end
   end
+end
+
+def confirm_tasks_link_text
+  "Confirm Tasks"
+end
+
+def remove_task_link_text
+  "Remove"
 end
