@@ -13,6 +13,13 @@ class Submission::TasksController < InternalPagesController
     redirect_to submission_tasks_path(@submission)
   end
 
+  def confirm
+    @submission.tasks.initialising.map(&:confirm!)
+
+    flash[:notice] = "The tasks have been confirmed"
+    redirect_to submission_tasks_path(@submission)
+  end
+
   private
 
   def submission_task_params

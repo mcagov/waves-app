@@ -180,7 +180,11 @@ Rails.application.routes.draw do
 
     resources :tasks,
               controller: "submission/tasks",
-              only: [:index, :create]
+              only: [:index, :create] do
+      collection do
+        post :confirm
+      end
+    end
 
     resource :states, controller: "submission/states", only: [:show] do
       member do

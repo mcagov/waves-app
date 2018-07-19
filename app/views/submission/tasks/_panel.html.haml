@@ -20,3 +20,8 @@
             %th.target_date= task.target_date
             %th.ref_no= task.ref_no
             %th.state= task.current_state.to_s.humanize
+  .x_footer
+    = button_to confirm_submission_tasks_path(@submission),
+      class: "btn btn-success btn-md pull-right" do
+      %i.fa.fa-check
+      Confirm Tasks

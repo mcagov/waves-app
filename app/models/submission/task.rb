@@ -19,6 +19,12 @@ class Submission::Task < ApplicationRecord
   state_machine auto_scopes: true do
     state :initialising
     state :unassigned
+
+    event :confirm do
+      transitions to: :unassigned, from: :initialising,
+                  on_transition: :assign_target_date,
+                  guard: :initialising?
+    end
   end
 
   def ref_no
@@ -28,15 +34,15 @@ class Submission::Task < ApplicationRecord
   private
 
   def assign_start_date
-    self.start_date = submission.received_at || Date.current
+    self.start_date = submission.received_at
   end
 
   def assign_target_date
-    self.target_date =
+    update_attribute(
+      :target_date,
       TargetDate.new(
-        (received_at || Date.current),
+        (start_date || Date.current),
         service_level,
-        service
-      ).calculate
+        service).calculate)
   end
 end
