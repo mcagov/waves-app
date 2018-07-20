@@ -1,6 +1,6 @@
 class Submission::TasksController < InternalPagesController
   before_action :load_submission
-
+  before_action :load_task, only: [:destroy, :update]
   def index
   end
 
@@ -21,16 +21,27 @@ class Submission::TasksController < InternalPagesController
   end
 
   def destroy
-    @task = @submission.tasks.find(params[:id])
     @task.destroy
 
     flash[:notice] = "The task has been confirmed"
     redirect_to submission_tasks_path(@submission)
   end
 
+  def update
+    @task.update_attributes(submission_task_params)
+
+    flash[:notice] = "The task has been updated"
+    redirect_to submission_tasks_path(@submission)
+  end
+
   private
 
   def submission_task_params
-    params.require(:submission_task).permit(:service_id, :price, :service_level)
+    params.require(:submission_task).permit(
+      :service_id, :service_level, :start_date)
+  end
+
+  def load_task
+    @task = @submission.tasks.find(params[:id])
   end
 end
