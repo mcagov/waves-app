@@ -13,6 +13,12 @@ class TargetDate
   end
 
   class << self
+    def for_task(task)
+      TargetDate.new(
+        task.start_date, task.service_level, task.service
+      ).calculate
+    end
+
     def days_away(target_date)
       return "" unless target_date
       TargetDate.set_business_days

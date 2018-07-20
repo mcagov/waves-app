@@ -26,6 +26,21 @@ describe TargetDate do
     end
   end
 
+  context ".for_task" do
+    let(:task) { create(:submission_task) }
+
+    before do
+      dbl_target_date = double(TargetDate, calculate: 99)
+
+      expect(described_class)
+        .to receive(:new)
+        .with(task.start_date, task.service_level, task.service)
+        .and_return(dbl_target_date)
+    end
+
+    it { expect(described_class.for_task(task)).to eq(99) }
+  end
+
   context ".days_away" do
     before do
       Timecop.freeze(Time.local(2017, 12, 21, 10, 10, 0))
