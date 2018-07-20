@@ -24,6 +24,7 @@
                 %th Date Received
                 %th Payment
                 %th Source
+                %th Status
             %tbody
               - @submissions.each do |submission|
                 - submission = Decorators::Submission.new(submission)
@@ -39,6 +40,7 @@
                   %td.payment
                     = payment_status_icon(submission.payment_status)
                   %td= submission.source_description
+                  %td= pluralize(submission.tasks.length, "task")
 
             = will_paginate @submissions, renderer: BootstrapPagination::Rails
 

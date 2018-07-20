@@ -51,7 +51,7 @@ class SubmissionsController < InternalPagesController
     @submissions =
       Submission
       .in_part(current_activity.part)
-      .includes(:claimant, :declarations, payments: [:remittance])
+      .includes(:tasks, payments: [:remittance])
       .paginate(page: params[:page], per_page: 50)
       .active
     @page_title = "Open Applications"

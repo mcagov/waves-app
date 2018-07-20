@@ -18,6 +18,7 @@ feature "User views applications", type: :feature, js: true do
       expect(page).to have_content("New Registration")
       expect(page).to have_css(".fa-check.i.green")
       expect(page).to have_content("Online")
+      expect(page).to have_content("1 task")
     end
   end
 
