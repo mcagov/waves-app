@@ -48,11 +48,18 @@ class SubmissionsController < InternalPagesController
   end
 
   def open
+    @submissions =
+      Submission
+      .in_part(current_activity.part)
+      .includes(:claimant, :declarations, payments: [:remittance])
+      .paginate(page: params[:page], per_page: 50)
+      .active
     @page_title = "Open Applications"
     render :index
   end
 
   def completed
+    @submissions = []
     @page_title = "Completed Applications"
     render :index
   end
