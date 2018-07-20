@@ -16,7 +16,7 @@
             .col-md-12
               = f.input :service_level, as: :select,
                 label: "Service Level",
-                collection: ServiceLevel::SERVICE_LEVEL_TYPES,
+                collection: ServiceLevel.available_types(task.service, @submission.part),
                 include_blank: false
         .modal-footer
           = f.submit "Save", class: "btn btn-primary"

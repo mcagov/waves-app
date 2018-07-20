@@ -29,11 +29,27 @@ describe Submission::Task do
     it { expect(subject).to eq(12400) }
   end
 
-  describe "model validations" do
-    context "service_level is required" do
-      let(:submission_task) { described_class.new(service_level: nil) }
-      before { submission_task.valid? }
+  describe "service_level_validations validations" do
+    let(:submission_task) do
+      build(
+        :submission_task,
+        service_level: service_level,
+        service: create(:standard_only_service))
+    end
+    before { submission_task.valid? }
 
+    context "is required" do
+      let(:service_level) { nil }
+      it { expect(submission_task.errors).to include(:service_level) }
+    end
+
+    context "is an allowed type" do
+      let(:service_level) { :standard }
+      it { expect(submission_task.errors).not_to include(:service_level) }
+    end
+
+    context "is a disallowed type" do
+      let(:service_level) { :premium }
       it { expect(submission_task.errors).to include(:service_level) }
     end
   end

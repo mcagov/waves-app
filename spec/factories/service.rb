@@ -12,4 +12,9 @@ FactoryGirl.define do
     part_3 { { standard: 25, premium: 50 } }
     part_4 { { standard: 124, premium: 180 } }
   end
+
+  factory :standard_only_service, parent: :service do
+    standard_days 10
+    part_3 { { standard: 99 } }
+  end
 end

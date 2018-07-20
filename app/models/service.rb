@@ -16,6 +16,10 @@ class Service < ApplicationRecord
     end
   end
 
+  def supports_premium?(part)
+    premium_supplement(part)
+  end
+
   private
 
   def price(part)
