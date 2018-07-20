@@ -51,10 +51,6 @@ class Submission < ApplicationRecord
     Builders::SubmissionBuilder.build_defaults(self)
   end
 
-  def init_processing_dates
-    Builders::ProcessingDatesBuilder.create(self)
-  end
-
   def actionable?
     Policies::Actions.actionable?(self)
   end
