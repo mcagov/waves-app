@@ -17,6 +17,7 @@ class Submission::Task < ApplicationRecord
 
   scope :in_part, ->(part) { joins(:submission).where("submissions.part = ?", part) if part }
   scope :active, -> { where.not(state: [:completed]) }
+  scope :claimed_by, -> (claimant) { where(claimant: claimant) }
 
   include ActiveModel::Transitions
 

@@ -1,7 +1,7 @@
 class TasksController < InternalPagesController
   def my_tasks
     @tasks =
-      task_scope.assigned_to(current_user).order("target_date asc")
+      task_scope.claimed_by(current_user).order("target_date asc")
   end
 
   def team_tasks
@@ -32,7 +32,7 @@ class TasksController < InternalPagesController
   end
 
   def next_task
-    if (task = task_scope.assigned_to(current_user).first)
+    if (task = task_scope.claimed_by(current_user).first)
       return redirect_to task_path(task)
     else
       return redirect_to tasks_my_tasks_path
