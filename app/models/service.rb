@@ -5,6 +5,28 @@ class Service < ApplicationRecord
     name
   end
 
+  def price_for(part, service_level)
+    case service_level.to_sym
+    when :standard
+      standard_price(part)
+    when :premium
+      premium_price(part)
+    when :subsequent
+      subsequent_price(part)
+    end
+  end
+
+  private
+
+  def price(part)
+    (send(part) || {}).symbolize_keys
+  end
+
+  def pence(amount)
+    return unless amount
+    amount * 100
+  end
+
   def standard_price(part)
     pence(price(part)[:standard])
   end
@@ -19,16 +41,5 @@ class Service < ApplicationRecord
 
   def subsequent_price(part)
     pence(price(part)[:subsequent])
-  end
-
-  private
-
-  def price(part)
-    (send(part) || {}).symbolize_keys
-  end
-
-  def pence(amount)
-    return unless amount
-    amount * 100
   end
 end
