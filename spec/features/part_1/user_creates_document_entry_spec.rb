@@ -3,6 +3,8 @@ require "rails_helper"
 feature "User creates a document entry", type: :feature do
   scenario "in general" do
     login_to_part_1
+    visit open_submissions_path
+
     click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
 

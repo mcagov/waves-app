@@ -3,6 +3,7 @@ require "rails_helper"
 feature "User creates a new submission for another task", type: :feature do
   before do
     login_to_part_3
+    visit open_submissions_path
     @vessel = create(:registered_vessel)
     click_on("Document Entry")
 
