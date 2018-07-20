@@ -8,68 +8,65 @@ describe Submission::Task do
     it { expect(subject).to eq("#{submission_task.submission.ref_no}/1") }
   end
 
-  context "price is required" do
-    let(:submission_task) { described_class.new(price: nil) }
-    before { submission_task.valid? }
-
-    it { expect(submission_task.errors).to include(:price) }
-  end
-
-  context "service_level is required" do
-    let(:submission_task) { described_class.new(service_level: nil) }
-    before { submission_task.valid? }
-
-    it { expect(submission_task.errors).to include(:service_level) }
-  end
-
   context "#start_date" do
     let(:submission) { create(:submission, received_at: "21/07/2016") }
     let(:submission_task) { create(:submission_task, submission: submission) }
-
     subject { submission_task.start_date }
 
-    it "assigns the ref_no in the expected format" do
-      expect(subject).to eq("21/07/2016".to_date)
-    end
+    it { expect(subject).to eq("21/07/2016".to_date) }
   end
 
-  context "#confirm!" do
+  context "#price" do
     let(:submission_task) do
       create(
         :submission_task,
-        service_level: service_level,
-        start_date: Date.current)
+        submission: create(:submission, part: :part_1),
+        service: create(:demo_service),
+        service_level: :standard)
     end
+    subject { submission_task.price }
 
-    before do
-      Timecop.travel(Time.new(2016, 6, 18))
-      submission_task.confirm!
+    it { expect(subject).to eq(12400) }
+  end
+
+  describe "model validations" do
+    context "service_level is required" do
+      let(:submission_task) { described_class.new(service_level: nil) }
+      before { submission_task.valid? }
+
+      it { expect(submission_task.errors).to include(:service_level) }
     end
+  end
 
-    after do
-      Timecop.return
-    end
+  describe "state machine events" do
+    context "#confirm!" do
+      let(:submission_task) { create(:submission_task) }
 
-    context "target_date" do
-      subject { submission_task.target_date }
-
-      context "with standard service" do
-        let(:service_level) { :standard }
-
-        it "sets the target date to the service's standard_days" do
-          expect(submission_task.target_date.to_date)
-            .to eq(Date.civil(2016, 7, 1))
-        end
+      before do
+        expect(submission_task).to receive(:set_defaults)
       end
 
-      context "with premium service" do
-        let(:service_level) { :premium }
+      it { submission_task.confirm! }
+    end
+  end
 
-        it "sets the target date to the service's premium_days" do
-          expect(submission_task.target_date.to_date)
-            .to eq(Date.civil(2016, 6, 20))
-        end
+  context "#target_date" do
+    let(:submission_task) { create(:submission_task) }
+    subject { submission_task.target_date }
+
+    it "is initialised as blank" do
+      expect(subject).to be_blank
+    end
+
+    context "#confirm" do
+      before do
+        expect(TargetDate)
+          .to receive(:for_task).with(submission_task).and_return("13/11/2012")
+
+        submission_task.confirm!
       end
+
+      it { expect(submission_task.target_date).to eq("13/11/2012".to_date) }
     end
   end
 end
