@@ -47,6 +47,16 @@ class SubmissionsController < InternalPagesController
     end
   end
 
+  def open
+    @page_title = "Open Applications"
+    render :index
+  end
+
+  def completed
+    @page_title = "Completed Applications"
+    render :index
+  end
+
   protected
 
   def load_submission # rubocop:disable Metrics/MethodLength

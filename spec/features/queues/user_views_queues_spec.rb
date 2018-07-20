@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User views task lists", type: :feature, js: true do
+feature "User views queues", type: :feature, js: true do
   before { login_to_part_3 }
 
   scenario "viewing task lists" do
@@ -27,5 +27,14 @@ feature "User views task lists", type: :feature, js: true do
 
     click_link("Refunds Due")
     expect(page).to have_css("h1", text: "Refunds Due")
+  end
+
+  scenario "viewing applications" do
+    visit "/submissions/completed"
+    click_link("Open Applications")
+    expect(page).to have_css("h1", text: "Open Applications")
+
+    click_link("Completed Applications")
+    expect(page).to have_css("h1", text: "Completed Applications")
   end
 end

@@ -69,6 +69,11 @@ Rails.application.routes.draw do
   end
 
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
+    collection do
+      get :open
+      get :completed
+    end
+
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
 
