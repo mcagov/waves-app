@@ -6,12 +6,17 @@ class Submission::Task < ApplicationRecord
   delegate :part, to: :submission
   delegate :received_at, to: :submission
 
+  belongs_to :claimant, required: false, class_name: "User"
+
   validate :service_level_validations
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
   protokoll :submission_ref_counter, scope_by: :submission_id, pattern: "#"
 
   before_save :set_defaults
+
+  scope :in_part, ->(part) { joins(:submission).where("submissions.part = ?", part) if part }
+  scope :active, -> { where.not(state: [:completed]) }
 
   include ActiveModel::Transitions
 
