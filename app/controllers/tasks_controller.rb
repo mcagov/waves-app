@@ -1,39 +1,39 @@
 class TasksController < InternalPagesController
   def my_tasks
-    @submissions =
-      submission_scope.assigned_to(current_user).order("target_date asc")
+    @tasks =
+      task_scope.assigned_to(current_user).order("target_date asc")
   end
 
   def team_tasks
-    @submissions = submission_scope.assigned.order("target_date asc")
+    @tasks = task_scope.assigned.order("target_date asc")
   end
 
   def unclaimed
     @filter_registration_type = params[:filter_registration_type] || "all"
 
     query =
-      submission_scope
+      task_scope
       .unassigned
 
     query = filter_by_registration_type(query)
-    @submissions = query.order("target_date asc")
+    @tasks = query.order("target_date asc")
   end
 
   def incomplete
-    @submissions = submission_scope.incomplete.order("target_date asc")
+    @tasks = task_scope.incomplete.order("target_date asc")
   end
 
   def referred
-    @submissions = submission_scope.order("referred_until desc").referred
+    @tasks = task_scope.order("referred_until desc").referred
   end
 
   def cancelled
-    @submissions = submission_scope.order("updated_at desc").cancelled
+    @tasks = task_scope.order("updated_at desc").cancelled
   end
 
   def next_task
-    if (submission = submission_scope.assigned_to(current_user).first)
-      return redirect_to submission_path(submission)
+    if (task = task_scope.assigned_to(current_user).first)
+      return redirect_to task_path(task)
     else
       return redirect_to tasks_my_tasks_path
     end
@@ -41,10 +41,10 @@ class TasksController < InternalPagesController
 
   private
 
-  def submission_scope
-    Submission
+  def task_scope
+    Submission::Task
       .in_part(current_activity.part)
-      .includes(:claimant, :declarations, payments: [:remittance])
+      .includes(:claimant, :submission, :service)
       .paginate(page: params[:page], per_page: 50)
       .active
   end

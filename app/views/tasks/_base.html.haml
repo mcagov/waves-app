@@ -5,7 +5,7 @@
 .row
   .col-md-12
 
-    - if @my_tasks && submissions.empty?
+    - if @my_tasks && @tasks.empty?
       .x_panel
         .x_content
           %p.text-center
@@ -16,7 +16,7 @@
             Your task list is clear.
           %p.text-center
             = link_to 'Get More Work', tasks_unclaimed_path, class: 'btn btn-primary'
-    - elsif submissions.empty?
+    - elsif @tasks.empty?
       .x_panel
         .x_panel
           .x_content
@@ -25,25 +25,23 @@
 
     - else
       .x_panel
-        %table#submissions.table.table-striped.table-hover
+        %table#task.table.table-striped.table-hover
           %thead
             %tr
               %th Vessel
               %th Official Number
               - if Policies::Workflow.uses_registration_types?(current_activity.part)
                 %th Registration Type
-              %th Application Ref No.
-              %th Job Type
+              %th Ref No.
+              %th Task
               %th Date Received
               %th Referred Until
               %th Target Date
-              %th Payment
-              %th Source
               %th Last Update
               %th
           %tbody
-            - submissions.each do |submission|
-              - submission = Decorators::Submission.new(submission)
+            - @tasks.each do |task|
+              - submission = Decorators::Submission.new(task.submission)
 
               %tr.submission{ id: "submission_#{ submission.id }"}
                 %td.vessel-name= link_to submission.vessel_name, submission_path(submission)
@@ -54,13 +52,13 @@
                 %td= link_to submission.job_type, submission_path(submission)
                 %td= submission.received_at
                 %td= submission.referred? ? submission.referred_until : "n/a"
-                %td= TargetDate.days_away(submission.target_date)
+                %td= TargetDate.days_away(task.target_date)
                 %td.payment
                   = payment_status_icon(submission.payment_status)
                 %td= submission.source_description
                 %td= submission.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
 
-      = will_paginate @submissions, renderer: BootstrapPagination::Rails
+      = will_paginate @task, renderer: BootstrapPagination::Rails
 
 
