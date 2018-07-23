@@ -3,8 +3,6 @@
   .col-md-10
     %h1{style: "margin-top: 0px !important; margin-bottom: 0px !important;"}
       = link_to submission_signature_path(submission) do
-        = submission.job_type
-        for
         %span.vessel-name #{ submission.vessel_name }. ID:
         %span.ref-no= submission.ref_no || "Not yet generated"
     .row#official-and-ec-no

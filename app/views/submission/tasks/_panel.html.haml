@@ -1,6 +1,11 @@
 - @tasks = @submission.tasks.includes(:submission, :service).order(:submission_ref_counter)
 .x_panel
-  %h2.x_title Tasks for this Application
+  %h2.x_title
+    Tasks for this Application
+    .pull-right
+      = link_to submission_tasks_path(@submission) do
+        %i.fa.fa-cog
+        Task Manager
   .x_content
     %table.table
       %thead
@@ -11,19 +16,22 @@
         %th Target Date
         %th Reference No
         %th Status
+        %th
       %tbody
         - @tasks.each do |task|
           %tr
-            %td.service_name
-              = link_to task.service.name, "#",
-                data: { target: "#edit_task_#{task.id}", toggle: "modal" }
+            %td.service_name= task.service.name
             %td.service_level= task.service_level.to_s.humanize
             %td.formatted_price= formatted_amount(task.price)
-            %th.start_date= task.start_date
-            %th.target_date= task.target_date
-            %th.ref_no= task.ref_no
-            %th.state
+            %td.start_date= task.start_date
+            %td.target_date= task.target_date
+            %td.ref_no= task.ref_no
+            %td.state
               = render partial: "submission/tasks/status", locals: { task: task }
+            %td
+              = link_to "#", data: { target: "#edit_task_#{task.id}", toggle: "modal" } do
+                %i.fa.fa-cog
+                Edit
   .x_footer
     - unless @submission.tasks.initialising.empty?
       = button_to confirm_submission_tasks_path(@submission),

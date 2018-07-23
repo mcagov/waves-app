@@ -6,7 +6,8 @@ describe "User edits tasks" do
     create(:demo_service)
     @submission = create(:assigned_submission)
     login_to_part_3(@submission.claimant)
-    visit submission_tasks_path(@submission)
+    visit submission_path(@submission)
+    click_on("Task Manager")
     within("#services") { click_on("£25.00") }
   end
 
@@ -24,7 +25,7 @@ describe "User edits tasks" do
 
   scenario "editing" do
     within("#submission_tasks") do
-      click_on("Demo Service")
+      click_on("Edit")
     end
 
     fill_in("Start Date", with: "20/06/2016")
