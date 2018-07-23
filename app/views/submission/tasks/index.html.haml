@@ -1,5 +1,7 @@
 - submission = Decorators::Submission.new(@submission)
-= render partial: "submissions/info/breadcrumbs", locals: {submission: submission}
+- content_for :heading_descriptor do
+  %em Task Manager
+
 = render partial: "submissions/info/heading", locals: {submission: submission}
 = render partial: "submissions/info/prompts", locals: {submission: submission}
 = render partial: "submissions/info/summary", locals: {submission: submission}

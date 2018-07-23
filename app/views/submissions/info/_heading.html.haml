@@ -2,9 +2,11 @@
 #heading.row
   .col-md-10
     %h1{style: "margin-top: 0px !important; margin-bottom: 0px !important;"}
+
       = link_to submission_signature_path(submission) do
         %span.vessel-name #{ submission.vessel_name }. ID:
         %span.ref-no= submission.ref_no || "Not yet generated"
+      = yield(:heading_descriptor)
     .row#official-and-ec-no
       = render partial: "/submissions/info/official_no", locals: { submission: submission }
 
@@ -17,8 +19,7 @@
         class: "btn btn-primary pull-right",
         id: "edit_application"
 
-
-    - if submission.unassigned?
+    - if @task && @task.unclaimed?
       .pull-right
-      = form_tag claim_submission_task_path(@submission) do
+      = form_tag claim_submission_task_path(@task) do
         = submit_tag "Claim", class: "btn btn-primary pull-right"

@@ -14,6 +14,6 @@ feature "User processes next task", type: :feature, js: true do
 
     click_on("Claim")
     click_on("Process Next Task")
-    expect(page).to have_css("h1", text: "New Registration")
+    expect(page).to have_css("h1", text: "Demo Service")
   end
 end
