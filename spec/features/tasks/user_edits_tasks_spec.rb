@@ -7,7 +7,6 @@ describe "User edits tasks" do
     @submission = create(:assigned_submission)
     login_to_part_3(@submission.claimant)
     visit submission_path(@submission)
-    click_on("Task Manager")
     within("#services") { click_on("£25.00") }
   end
 
