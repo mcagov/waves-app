@@ -9,7 +9,7 @@
     = form_tag unclaim_submission_task_path(submission, task), remote: true do
       = submit_tag "Unclaim"
 
-  - elsif task.assigned?
+  - elsif task.claimed?
     Claimed by:
     = task.claimant
 
