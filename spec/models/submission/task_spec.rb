@@ -54,18 +54,6 @@ describe Submission::Task do
     end
   end
 
-  describe "state machine events" do
-    context "#confirm!" do
-      let(:submission_task) { create(:submission_task) }
-
-      before do
-        expect(submission_task).to receive(:set_defaults)
-      end
-
-      it { submission_task.confirm! }
-    end
-  end
-
   context "#target_date" do
     let(:submission_task) { create(:submission_task) }
     subject { submission_task.target_date }
@@ -83,6 +71,79 @@ describe Submission::Task do
       end
 
       it { expect(submission_task.target_date).to eq("13/11/2012".to_date) }
+    end
+  end
+
+  describe "state machine events" do
+    let(:submission_task) { create(:submission_task) }
+    let(:user) { create(:user) }
+
+    context "#confirm!" do
+      before do
+        expect(submission_task).to receive(:set_defaults)
+      end
+
+      it { submission_task.confirm! }
+    end
+
+    context "#claim!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+      end
+
+      it { expect(submission_task.claimant).to eq(user) }
+    end
+
+    context "#refer!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.refer!
+      end
+
+      it { expect(submission_task.claimant).to be_nil }
+    end
+
+    context "#unclaim!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.unclaim!
+      end
+
+      it { expect(submission_task.claimant).to be_nil }
+    end
+
+    context "#complete!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.complete!
+      end
+
+      it { expect(submission_task).to be_completed }
+    end
+
+    context "#cancel!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.cancel!
+      end
+
+      it { expect(submission_task).to be_cancelled }
+    end
+
+    context "#unrefer!" do
+      before do
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.refer!
+        submission_task.unrefer!
+      end
+
+      it { expect(submission_task).to be_unclaimed }
     end
   end
 end

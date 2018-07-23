@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_20_141208) do
+ActiveRecord::Schema.define(version: 2018_07_23_121525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(version: 2018_07_20_141208) do
     t.string "state"
     t.integer "service_level", default: 0
     t.date "start_date"
+    t.datetime "completed_at"
     t.index ["claimant_id"], name: "index_submission_tasks_on_claimant_id"
     t.index ["service_id"], name: "index_submission_tasks_on_service_id"
     t.index ["submission_id"], name: "index_submission_tasks_on_submission_id"
@@ -429,7 +430,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_141208) do
     t.datetime "referred_until"
     t.string "ref_no"
     t.datetime "received_at"
-    t.string "source"
     t.uuid "registered_vessel_id"
     t.string "applicant_name"
     t.string "applicant_email"
@@ -441,6 +441,7 @@ ActiveRecord::Schema.define(version: 2018_07_20_141208) do
     t.uuid "registration_id"
     t.datetime "completed_at"
     t.string "application_type"
+    t.string "source"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"

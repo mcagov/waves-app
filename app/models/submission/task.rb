@@ -15,7 +15,10 @@ class Submission::Task < ApplicationRecord
 
   before_save :set_defaults
 
-  scope :in_part, ->(part) { joins(:submission).where("submissions.part = ?", part) if part }
+  scope :in_part, (lambda do |part|
+    joins(:submission).where("submissions.part = ?", part) if part
+  end)
+
   scope :active, -> { where.not(state: [:completed]) }
   scope :claimed_by, -> (claimant) { where(claimant: claimant) }
 
@@ -23,16 +26,61 @@ class Submission::Task < ApplicationRecord
 
   state_machine auto_scopes: true do
     state :initialising
-    state :unassigned
+    state :unclaimed
+    state :claimed
+    state :referred
+    state :completed
+    state :cancelled
 
     event :confirm do
-      transitions to: :unassigned, from: :initialising,
+      transitions to: :unclaimed, from: :initialising,
                   guard: :initialising?
+    end
+
+    event :claim do
+      transitions to: :claimed,
+                  from: [:unclaimed, :cancelled],
+                  on_transition: :add_claimant
+    end
+
+    event :refer do
+      transitions to: :referred, from: :claimed,
+                  on_transition: :remove_claimant
+    end
+
+    event :unclaim do
+      transitions to: :unclaimed, from: :claimed,
+                  on_transition: :remove_claimant
+    end
+
+    event :complete, timestamp: :completed_at do
+      transitions to: :completed, from: :claimed,
+                  on_transition: :process_task,
+                  guard: :approvable?
+    end
+
+    event :cancel do
+      transitions to: :cancelled, from: :claimed,
+                  on_transition: [
+                    :remove_claimant,
+                    :cancel_name_approval,
+                    :remove_pending_vessel]
+    end
+
+    event :unrefer do
+      transitions to: :unclaimed, from: :referred
     end
   end
 
   def ref_no
     "#{submission.ref_no}/#{submission_ref_counter}"
+  end
+
+  def process_task
+  end
+
+  def approvable?
+    true
   end
 
   private
@@ -49,5 +97,19 @@ class Submission::Task < ApplicationRecord
     elsif service_level.to_sym == :premium && !service.supports_premium?(part)
       errors.add(:service_level, "is not allowed")
     end
+  end
+
+  def add_claimant(user)
+    update_attribute(:claimant, user)
+  end
+
+  def remove_claimant
+    update_attribute(:claimant, nil)
+  end
+
+  def cancel_name_approval
+  end
+
+  def remove_pending_vessel
   end
 end
