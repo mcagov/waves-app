@@ -42,6 +42,10 @@ class Submission::TasksController < InternalPagesController
     @task.claim!(current_user)
 
     respond_to do |format|
+      format.html do
+        flash[:notice] = "You have successfully claimed this task"
+        redirect_to submission_path(@submission)
+      end
       format.js { render "tasks/actions/claim_button" }
     end
   end
@@ -50,6 +54,10 @@ class Submission::TasksController < InternalPagesController
     @task.unclaim!
 
     respond_to do |format|
+      format.html do
+        flash[:notice] = "Task has been moved into Unclaimed Tasks"
+        redirect_to tasks_my_tasks_path
+      end
       format.js { render "tasks/actions/claim_button" }
     end
   end
