@@ -1,6 +1,7 @@
 class Submission::TasksController < InternalPagesController
   before_action :load_submission
-  before_action :load_task, only: [:destroy, :update]
+  before_action :load_task, except: [:index, :create, :confirm]
+
   def index
   end
 
@@ -33,6 +34,31 @@ class Submission::TasksController < InternalPagesController
     flash[:notice] = "The task has been updated"
     redirect_to submission_tasks_path(@submission)
   end
+
+  def claim
+    @task.claim!(current_user)
+
+    respond_to do |format|
+      format.js { render "tasks/actions/claim_button" }
+    end
+  end
+
+  def unclaim
+    @task.unclaim!
+
+    respond_to do |format|
+      format.js { render "tasks/actions/claim_button" }
+    end
+  end
+
+  # def claim_referral
+  #   @submission.unreferred!
+  #   @submission.claimed!(current_user)
+
+  #   log_work!(@submission, @submission, :referral_reclaimed)
+  #   flash[:notice] = "You have successfully claimed this application"
+  #   redirect_to tasks_my_tasks_path
+  # end
 
   private
 

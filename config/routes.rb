@@ -189,9 +189,7 @@ Rails.application.routes.draw do
       collection do
         post :confirm
       end
-    end
 
-    resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim
         post :unclaim

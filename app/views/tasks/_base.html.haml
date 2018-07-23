@@ -42,7 +42,7 @@
             - @tasks.each do |task|
               - submission = Decorators::Submission.new(task.submission)
 
-              %tr.submission{ id: "submission_#{ submission.id }"}
+              %tr.task{ id: "task_#{ task.id }"}
                 %td.vessel-name= link_to submission.vessel_name, submission_path(submission)
                 %td= submission.vessel_reg_no
                 - if Policies::Workflow.uses_registration_types?(current_activity.part)
@@ -53,7 +53,7 @@
                 %td= task.referred? ? task.referred_until : "n/a"
                 %td= TargetDate.days_away(task.target_date)
                 %td= task.updated_at
-                %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
+                %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission, task: task}
 
       = will_paginate @task, renderer: BootstrapPagination::Rails
 
