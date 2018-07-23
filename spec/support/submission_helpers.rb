@@ -30,7 +30,7 @@ def claim_submission_and_visit
   login_to_part_3
   click_on("Unclaimed Tasks")
   click_on("Claim")
-  click_on("Process Next Application")
+  click_on("Process Next Task")
 end
 
 def visit_fee_entry

@@ -33,7 +33,7 @@ class TasksController < InternalPagesController
 
   def next_task
     if (task = task_scope.claimed_by(current_user).first)
-      return redirect_to task_path(task)
+      return redirect_to submission_task_path(task.submission, task)
     else
       return redirect_to tasks_my_tasks_path
     end

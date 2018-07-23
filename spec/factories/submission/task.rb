@@ -10,4 +10,10 @@ FactoryGirl.define do
       submission_task.confirm!
     end
   end
+
+  factory :claimed_submission_task, parent: :unclaimed_submission_task do
+    after(:create) do |submission_task|
+      submission_task.claim!(create(:user))
+    end
+  end
 end

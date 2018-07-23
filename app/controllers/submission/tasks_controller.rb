@@ -35,6 +35,9 @@ class Submission::TasksController < InternalPagesController
     redirect_to submission_tasks_path(@submission)
   end
 
+  def show
+  end
+
   def claim
     @task.claim!(current_user)
 
