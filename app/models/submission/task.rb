@@ -83,6 +83,14 @@ class Submission::Task < ApplicationRecord
     true
   end
 
+  def display_registry_info?
+    true
+  end
+
+  def display_changeset?
+    true
+  end
+
   private
 
   def set_defaults

@@ -36,6 +36,7 @@ class Submission::TasksController < InternalPagesController
   end
 
   def show
+    @submission = Decorators::Submission.new(@submission)
   end
 
   def claim
