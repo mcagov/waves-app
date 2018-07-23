@@ -4,7 +4,6 @@
     = yield :filter_registration_type
 .row
   .col-md-12
-
     - if @my_tasks && @tasks.empty?
       .x_panel
         .x_content
@@ -25,7 +24,7 @@
 
     - else
       .x_panel
-        %table#task.table.table-striped.table-hover
+        %table.table.table-striped.table-hover#tasks
           %thead
             %tr
               %th Vessel
@@ -48,15 +47,12 @@
                 %td= submission.vessel_reg_no
                 - if Policies::Workflow.uses_registration_types?(current_activity.part)
                   %td.registration_type= submission.registration_type.try(:humanize)
-                %td= submission.ref_no
-                %td= link_to submission.job_type, submission_path(submission)
-                %td= submission.received_at
-                %td= submission.referred? ? submission.referred_until : "n/a"
+                %td= task.ref_no
+                %td= link_to task.service, submission_path(submission)
+                %td= task.received_at
+                %td= task.referred? ? task.referred_until : "n/a"
                 %td= TargetDate.days_away(task.target_date)
-                %td.payment
-                  = payment_status_icon(submission.payment_status)
-                %td= submission.source_description
-                %td= submission.updated_at
+                %td= task.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission}
 
       = will_paginate @task, renderer: BootstrapPagination::Rails

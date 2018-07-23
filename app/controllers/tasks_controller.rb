@@ -5,7 +5,7 @@ class TasksController < InternalPagesController
   end
 
   def team_tasks
-    @tasks = task_scope.assigned.order("target_date asc")
+    @tasks = task_scope.claimed.order("target_date asc")
   end
 
   def unclaimed
@@ -13,7 +13,7 @@ class TasksController < InternalPagesController
 
     query =
       task_scope
-      .unassigned
+      .unclaimed
 
     query = filter_by_registration_type(query)
     @tasks = query.order("target_date asc")
@@ -54,11 +54,14 @@ class TasksController < InternalPagesController
     when "all"
       query
     when "not_set"
-      query.where("(changeset#>>'{vessel_info, registration_type}' is null)")
+      query.where("#{reg_type_sql} is null")
     else
       query.where(
-        "(UPPER(changeset#>>'{vessel_info, registration_type}') = ?)",
-        @filter_registration_type.upcase)
+        "(UPPER#{reg_type_sql} = ?)", @filter_registration_type.upcase)
     end
+  end
+
+  def reg_type_sql
+    "(submissions.changeset#>>'{vessel_info, registration_type}')"
   end
 end
