@@ -607,7 +607,7 @@ DEPENDENCIES
   rails (~> 5.2.0.rc1)
   rails-controller-testing
   rails-erd
-  rake
+  rake (~> 12.3.0)
   remotipart
   rspec-rails
   rubocop (~> 0.43.0)
