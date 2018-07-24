@@ -1,8 +1,8 @@
-= simple_form_for Notification.new(actionable_at: default_referred_until), url: refer_notification_path(submission) do |f|
+= simple_form_for Notification.new(actionable_at: default_referred_until), url: refer_submission_task_notification_path(submission, task) do |f|
   .modal-header
     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
       %span{"aria-hidden" => "true"} ×
-    %h4.modal-title Refer Application
+    %h4.modal-title Refer Task
   .modal-body
     .row
       .col-sm-9
@@ -28,4 +28,4 @@
         - else
           %p.red A referral email cannot be sent without an Email Recipient
   .modal-footer
-    = f.submit "Refer Application", class: "btn btn-lg btn-warning"
+    = f.submit "Refer Task", class: "btn btn-lg btn-warning"
