@@ -1,26 +1,25 @@
-- @submission = Decorators::Submission.new(@submission)
-- if @submission.actionable? && !current_user.read_only?
+- if @task.actionable? && !current_user.read_only?
   .row.no-print#actions
     .col-xs-12
-      - if @submission.claimant == current_user
-        - if @submission.referrable?
+      - if @task.claimant == current_user
+        - if @task.referrable?
           / refer button and modal
           = render partial: "submissions/modals/refer", locals: { submission: @submission }
-          = link_to notification_path(@submission, template: :refer),
+          = link_to submission_task_notification_path(@submission, @task, template: :refer),
             data: { target: "#refer-application", toggle: "modal" },
             class: "btn btn-warning btn-refer-submission",
             remote: true do
             %i.fa.fa-pause
-            Refer Application
+            Refer Task
 
         / cancel button and modal
         = render partial: "submissions/modals/cancel", locals: { submission: @submission }
-        = link_to notification_path(@submission, template: :cancel),
-                  data: { target: "#cancel-application", toggle: "modal" },
+        = link_to submission_task_notification_path(@submission, @task, template: :cancel),
+                  data: { target: "#cancel-task", toggle: "modal" },
                   class: "btn btn-link",
                   remote: true do
           %i.fa.fa-trash
-          Cancel Application
+          Cancel Task
 
       - elsif @submission.referred?
         / revert referral button

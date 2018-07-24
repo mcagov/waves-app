@@ -44,13 +44,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [:show] do
-    member do
-      post :cancel
-      post :refer
-    end
-  end
-
   resources :finance_payments, only: [:show, :update] do
     collection do
       get :unattached_payments
@@ -194,6 +187,15 @@ Rails.application.routes.draw do
         post :claim
         post :unclaim
         post :claim_referral
+      end
+
+      resource :notification,
+               controller: "submission/task/notifications",
+               only: [:show] do
+        member do
+          post :cancel
+          post :refer
+        end
       end
     end
   end

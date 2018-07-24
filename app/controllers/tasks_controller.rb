@@ -24,11 +24,11 @@ class TasksController < InternalPagesController
   end
 
   def referred
-    @tasks = task_scope.order("referred_until desc").referred
+    @tasks = task_scope.order("submission_tasks.referred_until desc").referred
   end
 
   def cancelled
-    @tasks = task_scope.order("updated_at desc").cancelled
+    @tasks = task_scope.order("submission_tasks.updated_at desc").cancelled
   end
 
   def next_task

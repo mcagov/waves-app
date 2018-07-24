@@ -1,13 +1,13 @@
-= simple_form_for Notification.new, url: cancel_notification_path(submission) do |f|
+= simple_form_for Notification.new, url: cancel_submission_task_notification_path(submission, task) do |f|
   .modal-header
     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
       %span{"aria-hidden" => "true"} ×
-    %h4.modal-title Cancel Application
+    %h4.modal-title Cancel Task
   .modal-body
     .row
       .col-sm-12
         .form-group
-          = f.input :subject, as: :select, label: "Reason for cancelling application",
+          = f.input :subject, as: :select, label: "Reason for cancelling task",
             collection: Notification::Cancellation::REASONS,
             include_blank: false
     .row
@@ -25,4 +25,4 @@
         - else
           %p.red A cancellation email cannot be sent without an Email Recipient
   .modal-footer
-    = f.submit "Cancel Application", class: "btn btn-lg btn-info"
+    = f.submit "Cancel Task", class: "btn btn-lg btn-info"

@@ -1,15 +1,17 @@
 require "rails_helper"
 
-feature "User refers a submission", type: :feature, js: true do
+feature "User refers a task", type: :feature, js: true do
   before do
-    visit_assigned_submission
-    @vessel_name = Submission.last.vessel.name
+    visit_claimed_task
+    @task = Submission::Task.last
+    @submission = @task.submission
+    @vessel_name = @submission.vessel.name
   end
 
   scenario "and restores it" do
     expect_referral_button(true)
 
-    within("#actions") { click_on "Refer Application" }
+    within("#actions") { click_on "Refer Task" }
 
     within(".modal.fade.in") do
       fill_in "Due By", with: "12/12/2020"
@@ -18,7 +20,7 @@ feature "User refers a submission", type: :feature, js: true do
       find("#refer_modal_trix_input_notification", visible: false)
         .set("Referred!")
 
-      click_on "Refer Application"
+      click_on "Refer Task"
     end
 
     click_on "Referred Tasks"
@@ -46,9 +48,9 @@ feature "User refers a submission", type: :feature, js: true do
   end
 
   scenario "without sending an email" do
-    within("#actions") { click_on "Refer Application" }
+    within("#actions") { click_on "Refer Task" }
     uncheck("Send a referral email to #{Submission.last.applicant_name}")
-    within("#refer-application") { click_on "Refer Application" }
+    within("#refer-task") { click_on "Refer Task" }
     expect(Notification::Referral.count).to eq(0)
   end
 
@@ -57,15 +59,15 @@ feature "User refers a submission", type: :feature, js: true do
     fill_in("Email Recipient Name", with: "")
     click_on("Save Notification Recipient")
 
-    within("#actions") { click_on "Refer Application" }
+    within("#actions") { click_on "Refer Task" }
     expect(page).to have_text("email cannot be sent without an Email Recipient")
-    within("#refer-application") { click_on "Refer Application" }
+    within("#refer-task") { click_on "Refer Task" }
     expect(Notification::Referral.count).to eq(0)
   end
 
   def referral_prompt
     # rubocop:disable all
-    /Application Referred. Unknown vessel type\. Next action due by 12\/12\/2020\./
+    /Task Referred. Unknown vessel type\. Next action due by 12\/12\/2020\./
     # rubocop:enable all
   end
 end

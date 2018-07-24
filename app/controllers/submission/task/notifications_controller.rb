@@ -1,5 +1,6 @@
-class NotificationsController < InternalPagesController
+class Submission::Task::NotificationsController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
 
   def show
     @submission = Decorators::Submission.new(@submission)
@@ -16,10 +17,10 @@ class NotificationsController < InternalPagesController
       Notification::Cancellation.create(parsed_notification_params)
     end
 
-    flash[:notice] = "You have successfully cancelled that application"
-    @submission.cancelled!
+    flash[:notice] = "You have successfully cancelled that task"
+    @task.cancel!
 
-    log_work!(@submission, @submission, :cancellation)
+    log_work!(@submission, @task, :cancellation)
     redirect_to tasks_my_tasks_path
   end
 
@@ -28,20 +29,24 @@ class NotificationsController < InternalPagesController
       Notification::Referral.create(parsed_notification_params)
     end
 
-    flash[:notice] = "You have successfully referred that application"
-    @submission.update_attribute(
+    flash[:notice] = "You have successfully referred that task"
+    @task.update_attribute(
       :referred_until, notification_params[:actionable_at])
 
-    @submission.referred!
+    @task.refer!
 
-    log_work!(@submission, @submission, :referred)
+    log_work!(@submission, @task, :referred)
     redirect_to tasks_my_tasks_path
   end
 
   private
 
   def load_submission
-    @submission = Submission.find(params[:id])
+    @submission = Submission.find(params[:submission_id])
+  end
+
+  def load_task
+    @task = Submission::Task.find(params[:task_id])
   end
 
   def notification_params
