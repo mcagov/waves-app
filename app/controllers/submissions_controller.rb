@@ -4,8 +4,7 @@ class SubmissionsController < InternalPagesController
   before_action :prevent_read_only!, except: [:show, :edit]
   before_action :load_submission,
                 only: [:show, :edit, :update]
-  before_action :check_redirection_policy,
-                only: [:show, :edit, :update]
+  before_action :check_redirection_policy, only: [:show]
 
   before_action :enable_readonly, only: [:show, :edit]
 
@@ -37,6 +36,9 @@ class SubmissionsController < InternalPagesController
 
   def edit
     @submission = Decorators::Submission.new(@submission)
+    @task = Submission::Task.find(params[:task_id])
+
+    raise "Task not found" unless @task
   end
 
   def update
