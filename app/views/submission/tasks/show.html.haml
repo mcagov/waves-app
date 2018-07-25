@@ -1,6 +1,6 @@
 - content_for :heading_descriptor do
   %em #{@task.service}
-= render partial: "submissions/info/base"
+= render partial: "submissions/info/base", locals: { submission: @submission, task: @task}
 
 - if DeprecableTask.new(@submission.task).prevented_from_editing?
   = render partial: "submissions/restricted/show", locals: { submission: @submission }

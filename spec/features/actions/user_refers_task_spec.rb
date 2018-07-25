@@ -29,6 +29,10 @@ feature "User refers a task", type: :feature, js: true do
 
     click_on @vessel_name
 
+    within(".breadcrumb") do
+      expect(page).to have_link("Referred Tasks", href: tasks_referred_path)
+    end
+
     # within("#prompt") do
     #   expect(page).to have_text(referral_prompt)
     # end
