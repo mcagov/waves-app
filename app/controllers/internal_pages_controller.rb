@@ -23,9 +23,9 @@ class InternalPagesController < ApplicationController
     current_activity.root_path(current_user)
   end
 
-  def log_work!(submission, logged_info, description)
+  def log_work!(submission_task, logged_info, description)
     WorkLog.create(
-      submission: submission,
+      submission_task: submission_task,
       logged_info: logged_info,
       logged_type: logged_info.class.to_s,
       description: description,

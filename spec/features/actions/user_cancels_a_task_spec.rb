@@ -21,7 +21,7 @@ feature "User cancels a task", type: :feature, js: true do
 
     click_on "Cancelled Tasks"
     expect(Notification::Cancellation.last.body).to have_text("Sorry!")
-    # creates_a_work_log_entry("Task", :cancellation)
+    creates_a_work_log_entry("Submission::Task", :cancellation)
 
     click_on(@submission.vessel.name)
 
@@ -29,15 +29,12 @@ feature "User cancels a task", type: :feature, js: true do
       expect(page).to have_link("Cancelled Tasks", href: tasks_cancelled_path)
     end
 
-    # within("#prompt") do
-    #   expect(page).to have_text(
-    #     /Task Cancelled by #{@task.claimant.to_s} on .*. Rejected \(by RSS\)/
-    #   )
-    # end
+    within("#prompt") do
+      expect(page).to have_text(
+        /Task Cancelled by #{@task.claimant.to_s} on .*./
+      )
+    end
   end
-
-  scenario "replace test for work log entry"
-  scenario "replace test for notification prompt"
 
   scenario "without sending an email" do
     within("#actions") { click_on "Cancel Task" }

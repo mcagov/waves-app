@@ -25,7 +25,7 @@ feature "User refers a task", type: :feature, js: true do
 
     click_on "Referred Tasks"
     expect(Notification::Referral.last.body).to have_text("Referred!")
-    # creates_a_work_log_entry("Submission", :referred)
+    creates_a_work_log_entry("Submission::Task", :referred)
 
     click_on @vessel_name
 
@@ -33,9 +33,10 @@ feature "User refers a task", type: :feature, js: true do
       expect(page).to have_link("Referred Tasks", href: tasks_referred_path)
     end
 
-    # within("#prompt") do
-    #   expect(page).to have_text(referral_prompt)
-    # end
+    within("#prompt") do
+      expect(page)
+        .to have_text(%r{Task Referred.* Next action due by 12\/12\/2020\.})
+    end
 
     # click_button "Reclaim Referral"
 
@@ -50,9 +51,6 @@ feature "User refers a task", type: :feature, js: true do
 
     # expect(page).to have_css("h4", text: "Referral Email")
   end
-
-  scenario "replace test for work log entry"
-  scenario "replace test for notification prompt"
 
   scenario "without sending an email" do
     within("#actions") { click_on "Refer Task" }
@@ -70,11 +68,5 @@ feature "User refers a task", type: :feature, js: true do
     expect(page).to have_text("email cannot be sent without an Email Recipient")
     within("#refer-task") { click_on "Refer Task" }
     expect(Notification::Referral.count).to eq(0)
-  end
-
-  def referral_prompt
-    # rubocop:disable all
-    /Task Referred. Unknown vessel type\. Next action due by 12\/12\/2020\./
-    # rubocop:enable all
   end
 end

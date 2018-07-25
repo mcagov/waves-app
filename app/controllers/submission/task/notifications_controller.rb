@@ -20,7 +20,7 @@ class Submission::Task::NotificationsController < InternalPagesController
     flash[:notice] = "You have successfully cancelled that task"
     @task.cancel!
 
-    log_work!(@submission, @task, :cancellation)
+    log_work!(@task, @task, :cancellation)
     redirect_to tasks_my_tasks_path
   end
 
@@ -35,7 +35,7 @@ class Submission::Task::NotificationsController < InternalPagesController
 
     @task.refer!
 
-    log_work!(@submission, @task, :referred)
+    log_work!(@task, @task, :referred)
     redirect_to tasks_my_tasks_path
   end
 
