@@ -47,7 +47,7 @@ class InternalPagesController < ApplicationController
   end
 
   def enable_readonly
-    @readonly = Policies::Actions.readonly?(@submission, current_user)
+    @readonly = Policies::Actions.readonly?(@task, current_user)
   end
 
   def prevent_read_only!

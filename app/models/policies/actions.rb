@@ -26,8 +26,8 @@ class Policies::Actions
       true
     end
 
-    def readonly?(submission, user)
-      !(submission.current_state == :assigned && submission.claimant == user)
+    def readonly?(task, user)
+      !(task.current_state == :assigned && task.claimant == user) if task
     end
   end
 end
