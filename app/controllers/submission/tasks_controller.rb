@@ -45,7 +45,7 @@ class Submission::TasksController < InternalPagesController
     respond_to do |format|
       format.html do
         flash[:notice] = "You have successfully claimed this task"
-        redirect_to submission_path(@submission)
+        redirect_to submission_task_path(@submission, @task)
       end
       format.js { render "tasks/actions/claim_button" }
     end
