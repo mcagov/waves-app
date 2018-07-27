@@ -18,7 +18,7 @@ Service.create(
   name: "New Registration - full",
   standard_days: 10,
   premium_days: 1,
-  part_2: { standard: 124, premium: 180 },
+  part_2: { standard: 131, premium: 180 },
   part_4: { standard: 131, premium: 180 })
 
 Service.create(
