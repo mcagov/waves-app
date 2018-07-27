@@ -13,7 +13,7 @@ class FinancePayments::SubmissionsController < InternalPagesController
       assign_payment
       send_application_receipt_email
       flash[:notice] ||= "The application has been created"
-      redirect_to submission_tasks_path(@submission)
+      redirect_to submission_path(@submission)
     else
       render :new
     end
