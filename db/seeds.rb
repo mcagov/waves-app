@@ -175,6 +175,7 @@ Service.create(
 
 Service.create(
   name: "Courier/postage fee (allocate funds, no processing)",
+  standard_days: 10,
   part_1: { standard: 30 },
   part_2: { standard: 30 },
   part_3: { standard: 30 },
