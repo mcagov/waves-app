@@ -21,7 +21,8 @@ class Submission::Task < ApplicationRecord
     joins(:submission).where("submissions.part = ?", part) if part
   end)
 
-  scope :active, -> { where.not(state: [:completed]) }
+  scope :confirmed, -> { where.not(state: [:initialising]) }
+  scope :active, -> { where.not(state: [:completed, :confirmed]) }
   scope :claimed_by, -> (claimant) { where(claimant: claimant) }
 
   include ActiveModel::Transitions

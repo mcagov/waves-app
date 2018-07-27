@@ -1,4 +1,4 @@
-- @tasks = @submission.tasks.includes(:submission, :service).order(:submission_ref_counter)
+- @tasks ||= @submission.tasks.confirmed.includes(:submission, :service).order(:submission_ref_counter)
 
 .x_panel
   %h2.x_title
@@ -23,7 +23,7 @@
         - @tasks.each do |task|
           %tr{class: ("success" if @task == task)}
             %td.service_name
-              = link_to task.service.name, submission_task_path(@submission, task)
+              = link_to_unless task.initialising?, task.service.name, submission_task_path(@submission, task)
             %td.service_level= task.service_level.to_s.humanize
             %td.formatted_price= formatted_amount(task.price)
             %td.start_date= task.start_date

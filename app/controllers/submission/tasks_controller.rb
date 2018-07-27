@@ -3,6 +3,9 @@ class Submission::TasksController < InternalPagesController
   before_action :load_task, except: [:index, :create, :confirm]
 
   def index
+    @tasks = @submission
+             .tasks.includes(:submission, :service)
+             .order(:submission_ref_counter)
   end
 
   def create
