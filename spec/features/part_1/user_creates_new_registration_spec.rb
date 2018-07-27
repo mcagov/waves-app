@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User creates a document entry", type: :feature do
+feature "User creates a new registration for part 1", type: :feature do
   scenario "in general" do
     login_to_part_1
     visit open_submissions_path
@@ -12,7 +12,7 @@ feature "User creates a document entry", type: :feature do
     fill_in("Vessel Name", with: "MY BOAT")
 
     click_on("Save Application")
-    visit tasks_unclaimed_path
+    visit open_submissions_path
 
     expect(page)
       .to have_css("#submissions .registration_type", text: "Pleasure")
