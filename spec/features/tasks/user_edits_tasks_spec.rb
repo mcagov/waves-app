@@ -38,7 +38,7 @@ describe "User edits tasks" do
     end
   end
 
-  scenario "confirming" do
+  scenario "confirming and reviewing" do
     within("#submission_tasks") do
       expect(page).to have_css(".service_name", text: "Demo Service")
       expect(page).to have_css(".service_level", text: "Standard")
@@ -47,7 +47,9 @@ describe "User edits tasks" do
     end
 
     click_on(confirm_tasks_link_text)
+    expect(page).to have_current_path(unattached_payments_finance_payments_path)
 
+    visit(submission_path(Submission.last))
     within("#summary") do
       expect(page).to have_css(".payment_due", text: "25.00")
       expect(page).to have_css(".payment_received", text: "25.00")

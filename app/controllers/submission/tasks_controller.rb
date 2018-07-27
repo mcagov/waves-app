@@ -21,7 +21,7 @@ class Submission::TasksController < InternalPagesController
     @submission.tasks.initialising.map(&:confirm!)
 
     flash[:notice] = "The tasks have been confirmed"
-    redirect_to submission_tasks_path(@submission)
+    redirect_to unattached_payments_finance_payments_path
   end
 
   def destroy
