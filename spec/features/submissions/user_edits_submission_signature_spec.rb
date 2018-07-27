@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User edits submission signature" do
+xdescribe "User edits submission signature" do
   before do
     create(:registered_vessel, reg_no: "SSR200001")
     visit_claimed_task
