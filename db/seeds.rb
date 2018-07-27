@@ -229,9 +229,9 @@ Service.create(
   name: "Carving and marking receipt",
   standard_days: 3,
   premium_days: 1,
-  part_1: { standard: 0 },
-  part_2: { standard: 0 },
-  part_4: { standard: 0 })
+  part_1: { standard: 0, premium: 0 },
+  part_2: { standard: 0, premium: 0 },
+  part_4: { standard: 0, premium: 0 })
 
 Service.create(
   name: "Issue CSR",
