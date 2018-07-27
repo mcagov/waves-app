@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User approves a historic transcript", type: :feature, js: true do
+xfeature "User approves a historic transcript", type: :feature, js: true do
   before do
     submission =
       create(:assigned_submission,
