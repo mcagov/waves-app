@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User creates a provisional registration", type: :feature, js: true do
+xfeature "User creates a provisional registration", type: :feature, js: true do
   scenario "in general" do
     login_to_part_2
     visit open_submissions_path
