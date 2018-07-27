@@ -29,7 +29,7 @@ def create_new_application_link
 end
 
 def application_is_saved
-  expect(page).to have_text("application has been saved")
-  expect(page).to have_css("h1", text: "My Tasks")
+expect(page).to have_text("application has been created")
   expect(Payment::FinancePayment.unattached).to be_empty
+  expect(page).to have_current_path(submission_tasks_path(Submission.last))
 end

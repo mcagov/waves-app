@@ -31,7 +31,7 @@ describe "User links finance_payment", type: :feature, js: true do
     expect(page).to have_css("h1", text: "Fee Received")
     within("#related_submission") { click_on("Link to this Application") }
 
-    application_is_linked
+    application_is_linked_to(Submission.find_by(ref_no: "ABC123"))
   end
 
   scenario "to another application" do
@@ -42,12 +42,12 @@ describe "User links finance_payment", type: :feature, js: true do
       within("#submissions") { click_on("Link") }
     end
 
-    application_is_linked
+    application_is_linked_to(Submission.find_by(ref_no: "FOOBAR"))
   end
 end
 
-def application_is_linked
+def application_is_linked_to(submission)
   expect(page).to have_text("payment has been linked")
-  expect(page).to have_css("h1", text: "My Tasks")
   expect(Payment::FinancePayment.unattached).to be_empty
+  expect(page).to have_current_path(submission_tasks_path(submission))
 end

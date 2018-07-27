@@ -18,9 +18,8 @@ feature "User creates a new registration", type: :feature do
 
   scenario "in general" do
     click_on("Save Application")
-    expect(page).to have_text("saved to the unclaimed tasks queue")
-    expect(page).to have_current_path(tasks_my_tasks_path)
-    expect(Submission.last).to be_unassigned
+    expect(page).to have_text("has been created")
+    expect(page).to have_current_path(submission_tasks_path(Submission.last))
   end
 
   scenario "with an application receipt email" do

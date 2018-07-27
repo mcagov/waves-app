@@ -22,9 +22,8 @@ class SubmissionsController < InternalPagesController
 
     if @submission.save
       send_application_receipt_email
-      flash[:notice] ||=
-        "The application has been saved to the unclaimed tasks queue"
-      redirect_to tasks_my_tasks_path
+      flash[:notice] ||= "The application has been created"
+      redirect_to submission_tasks_path(@submission)
     else
       render :new
     end
