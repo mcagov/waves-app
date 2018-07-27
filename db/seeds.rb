@@ -175,10 +175,10 @@ Service.create(
 
 Service.create(
   name: "Courier/postage fee (allocate funds, no processing)",
-  part_1: { standard: 0 },
-  part_2: { standard: 0 },
-  part_3: { standard: 0 },
-  part_4: { standard: 0 })
+  part_1: { standard: 30 },
+  part_2: { standard: 30 },
+  part_3: { standard: 30 },
+  part_4: { standard: 30 })
 
 Service.create(
   name: "Copy of a document relating to a registration",
