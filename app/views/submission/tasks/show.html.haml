@@ -1,6 +1,8 @@
 - content_for :heading_descriptor do
   %em #{@task.service}
 
+- @bg_class = "bg-green"
+
 = render partial: "submission/task/info/prompts", locals: { task: @task}
 
 = render partial: "submissions/info/base", locals: { submission: @submission, task: @task}
