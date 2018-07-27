@@ -43,19 +43,19 @@
                 data: { target: "#edit_applicant", toggle: "modal" }
         %tr
           %td.soft-label Payment Due
-          %td.payment_due
+          %td.payment_due.blue
             %strong
               = formatted_amount(account_ledger.payment_due)
 
         %tr
           %td.soft-label Payment Received
-          %td.payment_received
+          %td.payment_received.blue
             %strong
               = formatted_amount(account_ledger.payment_received)
 
         %tr
           %td.soft-label Balance
-          %td.balance
+          %td.balance{ class: (account_ledger.balance < 0 ? "red" : "blue")}
             %strong
               = formatted_amount(account_ledger.balance)
 
