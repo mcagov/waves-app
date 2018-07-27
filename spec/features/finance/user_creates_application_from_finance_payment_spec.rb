@@ -22,13 +22,6 @@ describe "User creates application from finance payment",
 
     application_is_saved
   end
-
-  scenario "ensuring that an application cannot be created twice" do
-    click_on("Save")
-    visit finance_payment_path(Payment::FinancePayment.last)
-
-    expect(page).not_to have_link(create_new_application_link)
-  end
 end
 
 def create_new_application_link
