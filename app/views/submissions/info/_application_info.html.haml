@@ -9,6 +9,11 @@
           %td.no-top-border
             %strong= submission.job_type
         %tr
+          %td.soft-label Registration Type:
+          %td
+            %strong= submission.registration_type.to_s.titleize
+
+        %tr
           %td.soft-label Source:
           %td
             %strong= submission.source_description
