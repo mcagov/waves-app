@@ -1,6 +1,7 @@
 class Search
   class << self
     def submissions(term, part = nil)
+      term = term.gsub(%r{\/[0-9]*}, "")
       submissions = PgSearch.multisearch(term)
                             .where(searchable_type: "Submission")
                             .includes(searchable: [declarations: :owner])

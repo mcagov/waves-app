@@ -94,11 +94,12 @@ class SubmissionsController < InternalPagesController
   end
 
   def check_redirection_policy
-    if @submission.tasks.active.empty?
-      return redirect_to(submission_tasks_path(@submission))
-    else
+    default_task = @submission.tasks.confirmed.first
+    if default_task
       return redirect_to(
-        submission_task_path(@submission, @submission.tasks.active.first))
+        submission_task_path(@submission, @submission.tasks.confirmed.first))
+    else
+      return redirect_to(submission_tasks_path(@submission))
     end
     # elsif DeprecableTask.new(@submission.task).issues_csr?
     # return redirect_to submission_csr_path(@submission)

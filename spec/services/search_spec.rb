@@ -43,6 +43,21 @@ describe Search, type: :model do
         it { expect(subject.length).to eq(1) }
       end
     end
+
+    context "search by task ref no" do
+      let!(:submission) { create(:submission) }
+      let!(:part) { nil }
+
+      subject { Search.submissions("#{submission.ref_no}/1", part) }
+
+      it { expect(subject.first).to eq(submission) }
+
+      context "in part_3" do
+        let(:part) { :part_3 }
+
+        it { expect(subject.length).to eq(1) }
+      end
+    end
   end
 
   context ".vessels" do
