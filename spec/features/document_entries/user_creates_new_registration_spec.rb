@@ -8,7 +8,7 @@ feature "User creates a new registration", type: :feature do
     click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
 
-    select("New Registration", from: "Application Type")
+    select("New Registration", from: "Primary Application")
     fill_in("Vessel Name", with: "MY BOAT")
 
     fill_in("Date Received", with: "1/1/2016")

@@ -8,7 +8,7 @@ xdescribe "User edits submission signature" do
   end
 
   scenario "toggling the task type" do
-    select("Change of Vessel details", from: "Application Type")
+    select("Change of Vessel details", from: "Primary Application")
     fill_in("Official Number", with: "SSR200001")
     click_on("Save")
 

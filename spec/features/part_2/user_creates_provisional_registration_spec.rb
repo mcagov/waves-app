@@ -7,7 +7,7 @@ xfeature "User creates a provisional registration", type: :feature, js: true do
 
     click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
-    select("Provisional Registration", from: "Application Type")
+    select("Provisional Registration", from: "Primary Application")
     fill_in("Vessel Name", with: "MY BOAT")
     click_on("Save Application")
 

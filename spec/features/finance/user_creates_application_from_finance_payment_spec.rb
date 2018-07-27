@@ -14,10 +14,10 @@ describe "User creates application from finance payment",
   end
 
   scenario "rendering the :new template after an error" do
-    select("Re-Registration", from: "Application Type")
+    select("Re-Registration", from: "Primary Application")
     click_on("Save")
 
-    select("New Registration", from: "Application Type")
+    select("New Registration", from: "Primary Application")
     click_on("Save")
 
     application_is_saved

@@ -46,7 +46,7 @@
                 %td.vessel-name= link_to submission.vessel_name, submission_task_path(submission, task)
                 %td= submission.vessel_reg_no
                 - if Policies::Workflow.uses_registration_types?(current_activity.part)
-                  %td.registration_type= submission.registration_type.try(:humanize)
+                  %td.registration_type= submission.registration_type.try(:titleize)
                 %td= task.ref_no
                 %td= link_to task.service, submission_path(submission)
                 %td= task.received_at
