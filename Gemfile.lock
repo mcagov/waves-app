@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/mcagov/waves-utilities.git
-  revision: 469bad4f0366c2655ce9b27de91aaadb4a6eba8c
+  revision: 64c71638aee8fa3853572fd05b4129b6d5000042
   specs:
     waves-utilities (0.1.0)
       countries
@@ -300,7 +300,7 @@ GEM
     minitest (5.11.3)
     momentjs-rails (2.17.1)
       railties (>= 3.1)
-    money (6.11.3)
+    money (6.12.0)
       i18n (>= 0.6.4, < 1.1)
     multi_json (1.13.1)
     multipart-post (2.0.0)

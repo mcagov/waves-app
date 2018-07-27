@@ -18,7 +18,7 @@ module CollectionHelper
   def registration_types_collection(part)
     reg_types = WavesUtilities::RegistrationType.in_part(part) || []
     reg_types.sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
-      [registration_type.to_s.humanize, registration_type]
+      [registration_type.to_s.titleize, registration_type]
     end
   end
 
