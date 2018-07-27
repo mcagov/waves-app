@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views Finance reports", js: true do
+xdescribe "User views Finance reports", js: true do
   before do
     @check_refund =
       create(
