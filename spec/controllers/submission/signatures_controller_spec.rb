@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Submission::SignaturesController, type: :controller do
+xdescribe Submission::SignaturesController, type: :controller do
   before do
     sign_in claimant
   end

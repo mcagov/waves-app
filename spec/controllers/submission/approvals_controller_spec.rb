@@ -7,7 +7,7 @@ describe Submission::ApprovalsController, type: :controller do
 
   let!(:claimant) { create(:user) }
 
-  describe "in general" do
+  xdescribe "in general" do
     context "#create" do
       let(:submission) { create(:assigned_submission) }
 
