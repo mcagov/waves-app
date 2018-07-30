@@ -31,7 +31,8 @@ class Submission < ApplicationRecord
     state :completed
 
     event :complete, timestamp: :completed_at do
-      transitions to: :completed, from: :open
+      transitions to: :completed, from: :open,
+                  guard: :completeable?
     end
   end
 
@@ -109,6 +110,10 @@ class Submission < ApplicationRecord
   end
 
   protected
+
+  def completeable?
+    tasks.active.empty?
+  end
 
   def remove_claimant
     update_attribute(:claimant, nil)

@@ -26,6 +26,29 @@ describe Submission, type: :model do
     end
   end
 
+  describe "can be completed?" do
+    let(:submission) { create(:submission) }
+
+    before do
+      tasks = double(:tasks, active: active_tasks)
+      allow(submission).to receive(:tasks).and_return(tasks)
+    end
+
+    subject { submission.can_transition?(:completed) }
+
+    context "with active tasks" do
+      let(:active_tasks) { [1] }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "without active tasks" do
+      let(:active_tasks) { [] }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
+
   context "#electronic_delivery?" do
     let(:submission) { build(:submission, changeset: electronic_delivery) }
 

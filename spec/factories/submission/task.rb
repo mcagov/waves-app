@@ -16,4 +16,22 @@ FactoryGirl.define do
       submission_task.claim!(create(:user))
     end
   end
+
+  factory :referred_submission_task, parent: :claimed_submission_task do
+    after(:create) do |submission_task|
+      submission_task.refer!
+    end
+  end
+
+  factory :cancelled_submission_task, parent: :claimed_submission_task do
+    after(:create) do |submission_task|
+      submission_task.cancel!
+    end
+  end
+
+  factory :completed_submission_task, parent: :claimed_submission_task do
+    after(:create) do |submission_task|
+      submission_task.complete!
+    end
+  end
 end

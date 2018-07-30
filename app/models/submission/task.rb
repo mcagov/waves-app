@@ -20,7 +20,7 @@ class Submission::Task < ApplicationRecord
   end)
 
   scope :confirmed, -> { where.not(state: [:initialising]) }
-  scope :active, -> { where.not(state: [:completed, :confirmed]) }
+  scope :active, -> { where(state: [:unclaimed, :claimed, :referred]) }
   scope :claimed_by, -> (claimant) { where(claimant: claimant) }
 
   include ActiveModel::Transitions

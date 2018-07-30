@@ -149,4 +149,23 @@ describe Submission::Task do
       it { expect(submission_task).to be_unclaimed }
     end
   end
+
+  context "scopes" do
+    let!(:initialising) { create(:submission_task) }
+    let!(:unclaimed) { create(:unclaimed_submission_task) }
+    let!(:claimed) { create(:claimed_submission_task) }
+    let!(:referred) { create(:referred_submission_task) }
+    let!(:cancelled) { create(:cancelled_submission_task) }
+    let!(:completed) { create(:completed_submission_task) }
+
+    it "confirmed" do
+      expect(described_class.confirmed).to match(
+        [unclaimed, claimed, referred, cancelled, completed])
+    end
+
+    it "active" do
+      expect(described_class.active).to match(
+        [unclaimed, claimed, referred])
+    end
+  end
 end
