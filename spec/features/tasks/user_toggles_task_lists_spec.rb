@@ -36,6 +36,6 @@ def expect_page_to_display_task # rubocop:disable Metrics/AbcSize
       .to have_css(".vessel-name", text: submission.vessel.name)
     expect(page).to have_content("Demo Service")
     expect(page).to have_content(submission_task.ref_no)
-    expect(page).to have_content("9 days away")
+    expect(page).to have_content(" days away")
   end
 end
