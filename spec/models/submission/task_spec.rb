@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe Submission::Task do
   context "#ref_no" do
-    let(:submission_task) { create(:submission_task) }
+    let!(:submission_task) { create(:submission_task) }
+    before { submission_task.confirm! }
+
     subject { submission_task.ref_no }
 
     it { expect(subject).to eq("#{submission_task.submission.ref_no}/1") }
@@ -80,6 +82,7 @@ describe Submission::Task do
 
     context "#confirm!" do
       before do
+        expect(submission_task).to receive(:set_submission_ref_counter)
         expect(submission_task).to receive(:set_defaults)
       end
 
