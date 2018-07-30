@@ -4,6 +4,10 @@ class RefNo
       build_unique
     end
 
+    def parse(input)
+      input.gsub(%r{\/[0-9]*}, "") if input
+    end
+
     private
 
     def build_unique

@@ -100,6 +100,9 @@ class Payment::FinancePayment < ApplicationRecord
   end
 
   def submission_by_ref_no
-    Submission.find_by(ref_no: application_ref_no) if application_ref_no
+    if application_ref_no
+      ref_no = RefNo.parse(application_ref_no)
+      Submission.find_by(ref_no: ref_no)
+    end
   end
 end

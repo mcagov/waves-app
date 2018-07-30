@@ -23,4 +23,26 @@ describe RefNo do
       end
     end
   end
+
+  context ".parse" do
+    subject { described_class.parse(input) }
+
+    context "with a task ref_no" do
+      let(:input) { "123456/1" }
+
+      it { expect(subject).to eq("123456") }
+    end
+
+    context "with a submission ref_no" do
+      let(:input) { "123456" }
+
+      it { expect(subject).to eq("123456") }
+    end
+
+    context "with nothing" do
+      let(:input) { nil }
+
+      it { expect(subject).to be_nil }
+    end
+  end
 end

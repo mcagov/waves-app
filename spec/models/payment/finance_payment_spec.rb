@@ -129,6 +129,12 @@ describe Payment::FinancePayment do
       it { expect(subject).to eq(submission) }
     end
 
+    context "with a valid task ref_no" do
+      let(:params) { { application_ref_no: "#{submission.ref_no}/12" } }
+
+      it { expect(subject).to eq(submission) }
+    end
+
     context "with an invalid application_ref_no" do
       let(:params) { { application_ref_no: "foo" } }
 
