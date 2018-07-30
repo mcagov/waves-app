@@ -29,7 +29,7 @@ describe Builders::CsrFormBuilder do
 
     let!(:submission) do
       create(
-        :assigned_submission,
+        :submission,
         application_type: :issue_csr,
         part: :part_1,
         registered_vessel: vessel_with_closed_registration)

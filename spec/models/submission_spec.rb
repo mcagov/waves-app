@@ -72,8 +72,8 @@ describe Submission, type: :model do
   context "#vessel_name" do
     subject { submission.vessel_name }
 
-    context "with a registered_vessel" do
-      let(:submission) { build(:submission_for_part_3_vessel) }
+    context "with a registered_vessel and an empty changeset" do
+      let(:submission) { build(:submission_for_part_3_vessel, changeset: {}) }
 
       it { expect(subject).to eq(submission.registered_vessel.name) }
     end

@@ -29,10 +29,12 @@ describe Builders::NotificationListBuilder do
     subject { described_class.for_submission(submission) }
 
     it "builds the expected list" do
-      expect(subject).to eq(
-        [outstanding_declaration,
-         recent_notification, correspondence, print_job, old_notification]
-      )
+      [
+        outstanding_declaration, recent_notification, correspondence,
+        print_job, old_notification
+      ].each do |notification|
+        expect(subject).to include(notification)
+      end
     end
 
     context "#for_registered_vessel" do
@@ -53,10 +55,12 @@ describe Builders::NotificationListBuilder do
       subject { described_class.for_registered_vessel(vessel) }
 
       it "builds the expected list" do
-        expect(subject).to eq(
-          [vessel_notification, vessel_correspondence, outstanding_declaration,
-           recent_notification, correspondence, print_job, old_notification]
-        )
+        [
+          vessel_notification, vessel_correspondence, outstanding_declaration,
+          recent_notification, correspondence, print_job, old_notification
+        ].each do |notification|
+          expect(subject).to include(notification)
+        end
       end
     end
   end

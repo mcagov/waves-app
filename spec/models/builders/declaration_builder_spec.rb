@@ -34,33 +34,36 @@ describe Builders::DeclarationBuilder do
     let(:submission_source) { :online }
     let!(:submission) { Submission.last }
 
+    let(:alice_declaration) do
+      submission.declarations.find { |d| d.owner.name == alice[:name] }
+    end
+
+    let(:bob_declaration) do
+      submission.declarations.find { |d| d.owner.name == bob[:name] }
+    end
+
     it "has a completed declaration for alice" do
-      expect(submission.declarations.completed.first.owner.name)
-        .to eq(alice[:name])
+      expect(alice_declaration).to be_completed
     end
 
     it "has an incomplete declaration for bob" do
-      expect(submission.declarations.incomplete.first.owner.name)
-        .to eq(bob[:name])
+      expect(bob_declaration).to be_incomplete
     end
 
     it "notes that alice is an individual owner" do
-      expect(submission.declarations.first.entity_type.to_sym)
-        .to eq(:individual)
+      expect(alice_declaration.owner.entity_type.to_sym).to eq(:individual)
     end
 
     it "notes that bob is a corporate owner" do
-      expect(submission.declarations.last.entity_type.to_sym)
-        .to eq(:corporate)
+      expect(bob_declaration.owner.entity_type.to_sym).to eq(:corporate)
     end
 
     it "notes that alice owns 20 shares" do
-      expect(submission.declarations.first.shares_held).to eq(20)
+      expect(alice_declaration.shares_held).to eq(20)
     end
 
     it "does not build a notification for the completed declaration" do
-      expect(submission.declarations.completed.first.notification)
-        .to be_nil
+      expect(submission.declarations.completed.first.notification).to be_nil
     end
 
     it "builds a notification for the incomplete declaration" do
@@ -93,7 +96,8 @@ describe Builders::DeclarationBuilder do
       let(:declarations_required) { false }
 
       it "sets both declarations to not_required" do
-        expect(submission.declarations.not_required.count).to eq(2)
+        expect(submission.declarations.not_required.count)
+          .to eq(submission.declarations.count)
       end
 
       it "does not build any notifications" do

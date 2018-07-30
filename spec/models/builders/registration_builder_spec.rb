@@ -5,7 +5,7 @@ describe Builders::RegistrationBuilder do
     context "with a task for a registered_vessel" do
       let!(:registered_vessel) { create(:registered_vessel) }
       let(:submission) do
-        create(:assigned_submission,
+        create(:submission,
                application_type: task,
                registered_vessel: registered_vessel)
       end

@@ -12,6 +12,9 @@ FactoryGirl.define do
         agent: build(:submission_agent),
       }
     end
+    after(:create) do |submission|
+      submission.build_defaults
+    end
   end
 
   factory :completed_submission, parent: :submission do

@@ -4,12 +4,6 @@ describe Policies::Definitions do
   describe ".approval_errors" do
     subject { described_class.approval_errors(submission) }
 
-    context "in general (i.e. not frozen)" do
-      let!(:submission) { create(:assigned_submission) }
-
-      it { expect(subject).to be_empty }
-    end
-
     context "for a task that does not write to the registry" do
       let(:submission) do
         create(:submission, application_type: :issue_csr,
@@ -34,7 +28,7 @@ describe Policies::Definitions do
     end
 
     context "frozen /unfrozen" do
-      let(:submission) { create(:assigned_submission) }
+      let(:submission) { create(:submission) }
 
       before do
         allow(submission)
@@ -45,7 +39,9 @@ describe Policies::Definitions do
     end
 
     context "with outstanding declarations" do
-      let!(:submission) { create(:incomplete_submission) }
+      let!(:submission) do
+        create(:submission, declarations: [build(:declaration)])
+      end
 
       it { expect(subject).to include(:declarations_required) }
     end
@@ -58,7 +54,7 @@ describe Policies::Definitions do
 
     context "correspondent must be set" do
       let(:error_key) { :correspondent_required }
-      let(:submission) { create(:incomplete_submission, part: part) }
+      let(:submission) { create(:submission, part: part) }
 
       context "with a part_3 submission" do
         let(:part) { :part_3 }
@@ -73,8 +69,9 @@ describe Policies::Definitions do
 
         context "when a correspondent is assigned" do
           before do
-            submission.correspondent_id = submission.owners.first.id
-            submission.save!
+            allow(submission)
+              .to receive(:correspondent)
+              .and_return(double(:correspondent))
           end
 
           it { expect(subject).not_to include(error_key) }
@@ -84,7 +81,7 @@ describe Policies::Definitions do
 
     context "shareholding count must total 64" do
       let(:error_key) { :shareholding_count }
-      let(:submission) { create(:incomplete_submission, part: part) }
+      let(:submission) { create(:submission, part: part) }
 
       context "for a vessel that doesn't use shareholding" do
         let(:part) { :part_2 }
@@ -120,7 +117,7 @@ describe Policies::Definitions do
       let(:error_key) { :carving_marking_receipt }
 
       context "in general" do
-        let!(:submission) { create(:incomplete_submission) }
+        let!(:submission) { create(:submission) }
 
         it { expect(subject).not_to include(error_key) }
       end
