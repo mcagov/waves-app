@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Submission::Reporting do
+xdescribe Submission::Reporting do
   describe "flag_in/out" do
     let!(:new_reg) { create(:submission, application_type: :new_registration) }
     let!(:closure) { create(:assigned_closure_submission) }

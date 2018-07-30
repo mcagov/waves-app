@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User views applications", type: :feature, js: true do
   let!(:submission) do
-    submission = create(:unassigned_submission)
+    submission = create(:submission)
     create(:submission_task, price: 2500, submission: submission)
     submission
   end

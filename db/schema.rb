@@ -425,7 +425,6 @@ ActiveRecord::Schema.define(version: 2018_07_25_090654) do
     t.uuid "delivery_address_id"
     t.json "changeset"
     t.string "part"
-    t.string "state"
     t.uuid "claimant_id"
     t.datetime "referred_until"
     t.string "ref_no"
@@ -442,10 +441,10 @@ ActiveRecord::Schema.define(version: 2018_07_25_090654) do
     t.datetime "completed_at"
     t.string "application_type"
     t.string "source"
+    t.string "state"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"
-    t.index ["state"], name: "index_submissions_on_state"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

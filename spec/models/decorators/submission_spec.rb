@@ -97,7 +97,7 @@ describe Decorators::Submission, type: :model do
     end
   end
 
-  context "#changed_vessel_attribute" do
+  xcontext "#changed_vessel_attribute" do
     subject do
       described_class.new(submission).changed_vessel_attribute(:name)
     end
@@ -112,14 +112,14 @@ describe Decorators::Submission, type: :model do
 
     context "when there is a registered_vessel" do
       context "when the name has not been changed" do
-        let(:submission) { create(:unassigned_change_vessel_submission) }
+        let(:submission) { create(:submission_for_part_3_vessel) }
         it { expect(subject).to be_nil }
       end
 
       context "when the name has been changed" do
         let(:submission) do
           create(
-            :unassigned_change_vessel_submission,
+            :submission_for_part_3_vessel,
             changeset: { vessel_info: { name: "NEW NAME" } })
         end
 

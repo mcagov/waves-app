@@ -7,8 +7,8 @@ def create_submission_from_api!
   Submission.create(data)
 end
 
-def visit_unassigned_submission
-  submission = create(:unassigned_submission)
+def visit_submission
+  submission = create(:submission)
   login_to_part_3
   visit submission_path(submission)
 end

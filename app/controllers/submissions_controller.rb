@@ -12,7 +12,6 @@ class SubmissionsController < InternalPagesController
     @submission =
       Submission.new(
         submission_params.merge(
-          state: :initializing,
           received_at: Time.zone.today,
           part: current_activity.part))
   end
@@ -54,7 +53,7 @@ class SubmissionsController < InternalPagesController
       .in_part(current_activity.part)
       .includes(:tasks, payments: [:remittance])
       .paginate(page: params[:page], per_page: 50)
-      .active
+      .open
     @page_title = "Open Applications"
     render :index
   end

@@ -2,14 +2,10 @@ require "rails_helper"
 
 describe Submission, type: :model do
   context "in general" do
-    let!(:submission) { create(:incomplete_submission) }
+    let!(:submission) { create(:submission) }
 
     it "gets the vessel_info" do
       expect(submission.vessel).to be_a(Submission::Vessel)
-    end
-
-    it "has a state: incomplete" do
-      expect(submission).to be_incomplete
     end
 
     it "gets the delivery_address" do
@@ -56,7 +52,7 @@ describe Submission, type: :model do
 
   context ".vessel_reg_no =" do
     let!(:registered_vessel) { create(:registered_vessel, part: vessel_part) }
-    let(:submission) { create(:incomplete_submission, part: :part_1) }
+    let(:submission) { create(:submission, part: :part_1) }
 
     before { submission.vessel_reg_no = registered_vessel.reg_no }
 
@@ -77,7 +73,7 @@ describe Submission, type: :model do
     subject { submission.vessel_name }
 
     context "with a registered_vessel" do
-      let(:submission) { build(:unassigned_change_vessel_submission) }
+      let(:submission) { build(:submission_for_part_3_vessel) }
 
       it { expect(subject).to eq(submission.registered_vessel.name) }
     end
@@ -166,113 +162,6 @@ describe Submission, type: :model do
     context "nil" do
       let(:referred_until) { nil }
       it { expect(submissions).to be_empty }
-    end
-  end
-
-  context "state machine transitions" do
-    context "to unassigned" do
-      let!(:submission) { create(:incomplete_submission) }
-      let!(:payment) { Payment.create(amount: 100, submission: submission) }
-
-      before do
-        allow(Policies::Actions)
-          .to receive(:actionable?)
-          .with(submission)
-          .and_return(true)
-      end
-
-      it { submission.touch }
-    end
-
-    context "to assigned" do
-      let!(:submission) { create(:unassigned_submission) }
-      let!(:bob) { create(:user) }
-
-      before { submission.claimed!(bob) }
-
-      it { expect(submission.claimant).to eq(bob) }
-    end
-
-    context "from assigned to unassigned" do
-      let!(:submission) { create(:assigned_submission) }
-      let!(:bob) { create(:user) }
-
-      before { submission.unclaimed! }
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from assigned to referred" do
-      let!(:submission) { create(:assigned_submission) }
-
-      before { submission.referred! }
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from referred to unassigned" do
-      let!(:submission) { create(:referred_submission) }
-
-      before do
-        submission.unreferred!
-      end
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from assigned to completed" do
-      let!(:submission) { create(:assigned_submission) }
-      let!(:bob) { create(:user) }
-
-      before { submission.approved! }
-
-      it { expect(submission.claimant).to be_present }
-    end
-
-    context "#approve_electronic_delivery" do
-      let!(:submission) { create(:unassigned_submission) }
-
-      before { submission.approve_electronic_delivery! }
-
-      it { expect(submission.claimant).to be_nil }
-      it { expect(submission).to be_completed }
-    end
-
-    context "#cancelled (cleaning up the name_approval)" do
-      let(:name_approval) { create(:submission_name_approval) }
-
-      before { name_approval.submission.cancelled! }
-
-      it "sets the name_approval#cancelled_at" do
-        expect(name_approval.cancelled_at).to be_present
-      end
-    end
-
-    context "#cancelled (cleaning up the registered_vessel)" do
-      let!(:submission) do
-        create(:assigned_submission, registered_vessel: vessel)
-      end
-
-      before do
-        submission.cancelled!
-        submission.reload
-      end
-
-      context "with the vessel's registration is pending" do
-        let!(:vessel) { create(:pending_vessel) }
-
-        it "removes the registered_vessel" do
-          expect(submission.registered_vessel).to be_nil
-        end
-      end
-
-      context "with the vessel is already registered" do
-        let!(:vessel) { create(:registered_vessel) }
-
-        it "retains the registered_vessel" do
-          expect(submission.registered_vessel).to eq(vessel)
-        end
-      end
     end
   end
 end

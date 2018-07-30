@@ -22,6 +22,5 @@ module InitNewSubmission
 
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
-    @submission.state = :unassigned
   end
 end

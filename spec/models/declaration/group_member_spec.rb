@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Declaration::GroupMember do
   context ".destroy" do
-    let!(:submission) { create(:unassigned_submission) }
+    let!(:submission) { create(:submission) }
     let!(:declaration) { submission.declarations.first }
 
     let!(:declaration_group) do

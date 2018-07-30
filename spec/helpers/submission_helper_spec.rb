@@ -51,7 +51,7 @@ describe "SubmissionHelper", type: :helper do
     end
 
     context "without a claimant" do
-      let(:submission) { create(:unassigned_submission) }
+      let(:submission) { create(:submission) }
 
       it { expect(subject).to eq("unclaimed") }
     end

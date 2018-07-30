@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Submission::NameApproval do
   let(:name_approval) do
-    build(:submission_name_approval,
+    build(:name_approval,
           part: part,
           name: "BOBS BOAT",
           port_code: "SU",

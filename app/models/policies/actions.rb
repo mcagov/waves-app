@@ -26,8 +26,12 @@ class Policies::Actions
       true
     end
 
-    def readonly?(task, user)
-      !(task.current_state == :assigned && task.claimant == user) if task
+    def readonly?(obj, user)
+      if obj.is_a?(Submission)
+        obj.completed?
+      elsif obj.is_a?(Submission::Task)
+        !(obj.current_state == :assigned && obj.claimant == user)
+      end
     end
   end
 end

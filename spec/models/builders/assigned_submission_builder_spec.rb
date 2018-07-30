@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Builders::AssignedSubmissionBuilder do
-  context ".create" do
+  xcontext ".create" do
     let!(:registered_vessel) { create(:registered_vessel) }
     let!(:claimant) { create(:user) }
 

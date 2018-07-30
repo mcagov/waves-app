@@ -5,24 +5,13 @@ describe Policies::Actions do
     let!(:user) { create(:user) }
     subject { described_class.readonly?(submission, user) }
 
-    context "when the submission is assigned to the user" do
-      let(:submission) { create(:assigned_submission) }
-      let(:user) { submission.claimant }
+    context "when the submission is open" do
+      let(:submission) { create(:submission) }
       it { expect(subject).to be_falsey }
     end
 
-    context "when the submission is assigned to a different user" do
-      let(:submission) { build(:assigned_submission) }
-      it { expect(subject).to be_truthy }
-    end
-
-    context "when the submission is unassigned" do
-      let(:submission) { build(:unassigned_submission) }
-      it { expect(subject).to be_truthy }
-    end
-
     context "when the submission is completed" do
-      let(:submission) { build(:completed_submission) }
+      let(:submission) { create(:completed_submission) }
       it { expect(subject).to be_truthy }
     end
   end

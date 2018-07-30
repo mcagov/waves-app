@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Declaration::Group do
   context ".create" do
-    let!(:submission) { create(:unassigned_submission) }
+    let!(:submission) { create(:submission) }
     let!(:declaration) { submission.declarations.first }
 
     subject do

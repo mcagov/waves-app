@@ -1,6 +1,5 @@
 class Submission < ApplicationRecord
   include Submission::Associations
-  include Submission::StateMachine
   include Submission::Reporting
 
   include PgSearch
@@ -25,23 +24,26 @@ class Submission < ApplicationRecord
   validate :registered_vessel_exists
   validate :vessel_uniqueness
 
+  include ActiveModel::Transitions
+
+  state_machine auto_scopes: true do
+    state :open, enter: :build_defaults
+    state :completed
+
+    event :complete, timestamp: :completed_at do
+      transitions to: :completed, from: :open
+    end
+  end
+
   before_update :build_defaults, if: :registered_vessel_id_changed?
 
   scope :in_part, ->(part) { where(part: part.to_sym) if part }
-  scope :active, -> { where.not(state: [:completed]) }
-  scope :in_progress, -> { where(state: [:unassigned, :assigned, :referred]) }
 
   scope :referred_until_expired, lambda {
     where("referred_until < ?", Time.zone.today.at_end_of_day)
   }
 
-  after_touch :check_current_state
-
   delegate :registration_status, to: :registered_vessel, allow_nil: true
-
-  def check_current_state
-    unassigned! if incomplete? && actionable?
-  end
 
   def electronic_delivery?
     symbolized_changeset[:electronic_delivery]
@@ -140,7 +142,7 @@ class Submission < ApplicationRecord
     return false if registered_vessel_id.blank?
 
     existing_submission =
-      Submission.where.not(id: id).active
+      Submission.where.not(id: id).open
                 .find_by(registered_vessel_id: registered_vessel.id)
 
     if existing_submission
