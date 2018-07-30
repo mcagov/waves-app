@@ -2,8 +2,7 @@ require "rails_helper"
 
 describe "User views a registered vessel", type: :feature, js: true do
   before do
-    @submission = create(:completed_submission)
-    @vessel = @submission.registered_vessel
+    @vessel = create(:registered_vessel)
     login_to_part_3
     visit vessel_path(@vessel)
   end
@@ -11,10 +10,10 @@ describe "User views a registered vessel", type: :feature, js: true do
   scenario "viewing vessel details" do
     click_on("Owners")
     expect(page)
-      .to have_css(".owner-name", text: @submission.owners.first.name)
+      .to have_css(".owner-name", text: @vessel.owners.first.name)
 
     click_on("Agent")
-    expect(page).to have_css(".agent-name", text: @submission.agent)
+    expect(page).to have_css(".agent-name", text: @vessel.agent)
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")

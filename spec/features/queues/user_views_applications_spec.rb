@@ -16,7 +16,7 @@ feature "User views applications", type: :feature, js: true do
       expect(page)
         .to have_css(".vessel-name", text: submission.vessel.name)
       expect(page).to have_content("New Registration")
-      expect(page).to have_css(".fa-check.i.green")
+      expect(page).to have_css("td.payment .fa-times.red")
       expect(page).to have_content("Online")
       expect(page).to have_content("1 task")
     end

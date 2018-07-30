@@ -20,7 +20,8 @@ describe "Manager approves system-generated notifications" do
   end
 
   scenario "in general" do
-    within(all(".notification")[0]) do
+    # notification[0] is an outstanding declaration created by the factory
+    within(all(".notification")[1]) do
       expect(page)
         .to have_link(
           @submission.ref_no,
@@ -30,7 +31,7 @@ describe "Manager approves system-generated notifications" do
       expect(page).to have_text("Carving & Marking Reminder:")
     end
 
-    within(all(".notification")[1]) do
+    within(all(".notification")[2]) do
       expect(page)
         .to have_link(
           @registered_vessel.to_s,
@@ -42,7 +43,7 @@ describe "Manager approves system-generated notifications" do
   end
 
   scenario "approving the queue" do
-    click_on("Approve & Send 2 Email")
+    click_on("Approve & Send 3 Email")
 
     expect(page).to have_text("The automated email queue is being processed.")
   end

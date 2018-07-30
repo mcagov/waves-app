@@ -4,8 +4,8 @@ describe "User edits tasks" do
   before do
     Timecop.travel(Time.new(2016, 6, 18))
     create(:demo_service)
-    @submission = create(:assigned_submission)
-    login_to_part_3(@submission.claimant)
+    @submission = create(:submission)
+    login_to_part_3
     visit submission_path(@submission)
     within("#services") { click_on("£25.00") }
   end
@@ -52,8 +52,8 @@ describe "User edits tasks" do
     visit(submission_path(Submission.last))
     within("#summary") do
       expect(page).to have_css(".payment_due", text: "25.00")
-      expect(page).to have_css(".payment_received", text: "25.00")
-      expect(page).to have_css(".balance", text: "0.00")
+      expect(page).to have_css(".payment_received", text: "0.00")
+      expect(page).to have_css(".balance", text: "-25.00")
     end
 
     within("#submission_tasks") do
