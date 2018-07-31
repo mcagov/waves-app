@@ -3,8 +3,8 @@ require "rails_helper"
 describe TargetDate do
   context "#calculate" do
     let(:start_date) { Date.civil(2016, 3, 24) }
-    let(:target_date_standard) { Date.civil(2016, 4, 8) }
-    let(:target_date_premium) { Date.civil(2016, 3, 30) }
+    let(:target_date_standard) { Date.civil(2016, 4, 11) }
+    let(:target_date_premium) { Date.civil(2016, 3, 31) }
     let(:service) { create(:service) }
 
     subject { described_class.new(start_date, service_level, service) }

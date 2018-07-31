@@ -1,6 +1,6 @@
 class TargetDate
   def initialize(start_date, service_level, service)
-    @start_date = start_date.advance(days: -1)
+    @start_date = start_date
     # note the hard-coded failsafe values are intended to be used
     # only during the task refactor
     @service_level = (service_level || :standard).to_sym

@@ -6,12 +6,12 @@ describe "User checks target dates" do
     visit admin_target_dates_path
     expect(page).to have_css("h1", text: "Target Date Calculator")
 
-    select("31", from: "start_date_day")
+    select("30", from: "start_date_day")
     select("October", from: "start_date_month")
     select("2019", from: "start_date_year")
 
     click_on("Calculate")
-    expect(find_field("start_date_day").value).to eq "31"
+    expect(find_field("start_date_day").value).to eq "30"
     expect(find_field("start_date_month").value).to eq "10"
     expect(find_field("start_date_year").value).to eq "2019"
 
