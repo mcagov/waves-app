@@ -8,7 +8,7 @@ xfeature "User claims a task", type: :feature, js: true do
     click_link("Unclaimed Tasks")
   end
 
-  scenario "claim and unclaim a submission" do
+  scenario "claim and unclaim a task" do
     within("tr.task") { click_on("Claim") }
     expect(page).not_to have_css("tr.task")
 
@@ -23,5 +23,8 @@ xfeature "User claims a task", type: :feature, js: true do
     click_on("Claim")
     expect(page)
       .to have_css(".alert-info", text: "successfully claimed this task")
+
+    expect(page).to have_css(
+      ".state", text: "Claimed by #{Submission::Task.last.claimant}")
   end
 end

@@ -6,5 +6,7 @@
     style: 'color: red;' do
     %i.fa.fa-trash
     Remove
+- elsif task.claimed?
+  = "Claimed by #{task.claimant}"
 - else
   = task.current_state.to_s.humanize
