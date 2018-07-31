@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Complete Declaration API" do
-  let!(:submission) { create(:incomplete_submission) }
+  let!(:submission) { create(:submission) }
   let(:outstanding_declaration) { submission.declarations.incomplete.first }
 
   context "with a valid declaration" do
