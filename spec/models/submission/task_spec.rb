@@ -3,11 +3,18 @@ require "rails_helper"
 describe Submission::Task do
   context "#ref_no" do
     let!(:submission_task) { create(:submission_task) }
-    before { submission_task.confirm! }
 
     subject { submission_task.ref_no }
 
-    it { expect(subject).to eq("#{submission_task.submission.ref_no}/1") }
+    context "when the task has been confirmed" do
+      before { submission_task.confirm! }
+
+      it { expect(subject).to eq("#{submission_task.submission.ref_no}/1") }
+    end
+
+    context "when the task has not been confirmed" do
+      it { expect(subject).to be_blank }
+    end
   end
 
   context "#start_date" do

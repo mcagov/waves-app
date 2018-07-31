@@ -75,6 +75,7 @@ class Submission::Task < ApplicationRecord
   end
 
   def ref_no
+    return "" unless submission_ref_counter
     "#{submission.ref_no}/#{submission_ref_counter}"
   end
 
