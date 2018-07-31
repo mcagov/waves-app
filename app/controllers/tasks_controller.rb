@@ -47,15 +47,7 @@ class TasksController < InternalPagesController
   end
 
   def filter_by_registration_type(query)
-    case @filter_registration_type
-    when "all"
-      query
-    when "not_set"
-      query.where("#{reg_type_sql} is null")
-    else
-      query.where(
-        "(UPPER#{reg_type_sql} = ?)", @filter_registration_type.upcase)
-    end
+    query
   end
 
   def reg_type_sql
