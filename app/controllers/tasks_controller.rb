@@ -11,9 +11,7 @@ class TasksController < InternalPagesController
   def unclaimed
     @filter_registration_type = params[:filter_registration_type] || "all"
 
-    query =
-      task_scope
-      .unclaimed
+    query = task_scope.unclaimed
 
     query = filter_by_registration_type(query)
     @tasks = query.order("target_date asc")
@@ -46,7 +44,6 @@ class TasksController < InternalPagesController
       .in_part(current_activity.part)
       .includes(:claimant, :submission, :service)
       .paginate(page: params[:page], per_page: 50)
-      .active
   end
 
   def filter_by_registration_type(query)
