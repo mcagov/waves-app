@@ -115,10 +115,6 @@ module SubmissionHelper
     true
   end
 
-  def claimed_by(submission)
-    submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
-  end
-
   def link_to_change_name_or_pln(submission)
     return "" if @readonly
     title = Policies::Definitions.part_1?(submission) ? "Port" : "PLN"
