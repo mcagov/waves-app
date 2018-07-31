@@ -1,10 +1,8 @@
 class TargetDate
   def initialize(start_date, service_level, service)
     @start_date = start_date
-    # note the hard-coded failsafe values are intended to be used
-    # only during the task refactor
-    @service_level = (service_level || :standard).to_sym
-    @service = service || Service.new(standard_days: 10, premium_days: 1)
+    @service_level = service_level.to_sym
+    @service = service
   end
 
   def calculate
