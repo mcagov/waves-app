@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe RegistrationDate do
+xdescribe RegistrationDate do
   context ".for" do
     subject { described_class.for(submission, "2012-11-24") }
 

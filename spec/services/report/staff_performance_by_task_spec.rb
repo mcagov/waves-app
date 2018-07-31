@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Report::StaffPerformanceByTask do
-  context "in general" do
+  xcontext "in general" do
     before do
       create(:completed_submission)
     end

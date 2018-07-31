@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe VesselPortNoValidator do
-  context "#valid?" do
+  xcontext "#valid?" do
     subject { described_class.valid?(123, "SU") }
 
     let(:port_no) { 123 }
