@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Builders::CompletedSubmissionBuilder do
+xdescribe Builders::CompletedSubmissionBuilder do
   context ".create" do
     let!(:registered_vessel) { create(:registered_vessel) }
     let!(:claimant) { create(:user) }

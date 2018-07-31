@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Builders::NotificationBuilder do
+xdescribe Builders::NotificationBuilder do
   context ".application_approval" do
     let(:submission) { create(:completed_submission) }
 
