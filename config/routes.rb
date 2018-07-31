@@ -64,7 +64,7 @@ Rails.application.routes.draw do
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
     collection do
       get :open
-      get :completed
+      get :closed
     end
 
     resources :agent,

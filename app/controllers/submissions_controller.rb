@@ -58,9 +58,9 @@ class SubmissionsController < InternalPagesController
     render :index
   end
 
-  def completed
+  def closed
     @submissions = []
-    @page_title = "Completed Applications"
+    @page_title = "Closed Applications"
     render :index
   end
 

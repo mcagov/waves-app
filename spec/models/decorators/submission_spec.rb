@@ -5,8 +5,8 @@ describe Decorators::Submission, type: :model do
     let(:submission) { Submission.new(state: submission_state, part: :part_3) }
     subject { described_class.new(submission).editable? }
 
-    context "when the state is completed" do
-      let(:submission_state) { :completed }
+    context "when the state is closed" do
+      let(:submission_state) { :closed }
 
       it { expect(subject).to be_falsey }
     end

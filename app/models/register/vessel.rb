@@ -95,9 +95,9 @@ module Register
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id
 
-    has_one :latest_completed_submission,
+    has_one :latest_closed_submission,
             (lambda do
-              where("completed_at is not null")
+              where("closed_at is not null")
               .order("created_at desc").limit(1)
             end),
             foreign_key: :registered_vessel_id,
@@ -105,7 +105,7 @@ module Register
 
     has_one :current_submission,
             (lambda do
-              where("completed_at is null")
+              where("closed_at is null")
             end),
             foreign_key: :registered_vessel_id,
             class_name: "Submission"

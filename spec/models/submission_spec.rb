@@ -26,7 +26,7 @@ describe Submission, type: :model do
     end
   end
 
-  describe "can be completed?" do
+  describe "#close!" do
     let(:submission) { create(:submission) }
 
     before do
@@ -34,7 +34,7 @@ describe Submission, type: :model do
       allow(submission).to receive(:tasks).and_return(tasks)
     end
 
-    subject { submission.can_transition?(:completed) }
+    subject { submission.close! }
 
     context "with active tasks" do
       let(:active_tasks) { [1] }

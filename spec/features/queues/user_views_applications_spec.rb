@@ -23,7 +23,7 @@ feature "User views applications", type: :feature, js: true do
   end
 
   scenario "that are completed" do
-    visit completed_submissions_path
+    visit closed_submissions_path
 
     expect(page).to have_css("h2", text: "There are no items in this queue")
   end

@@ -28,11 +28,11 @@ class Submission < ApplicationRecord
 
   state_machine auto_scopes: true do
     state :open, enter: :build_defaults
-    state :completed
+    state :closed
 
-    event :complete, timestamp: :completed_at do
-      transitions to: :completed, from: :open,
-                  guard: :completeable?
+    event :close, timestamp: :closed_at do
+      transitions to: :closed, from: :open,
+                  guard: :closeable?
     end
   end
 
@@ -111,7 +111,7 @@ class Submission < ApplicationRecord
 
   protected
 
-  def completeable?
+  def closeable?
     tasks.active.empty?
   end
 

@@ -17,9 +17,9 @@ FactoryGirl.define do
     end
   end
 
-  factory :completed_submission, parent: :submission do
+  factory :closed_submission, parent: :submission do
     after(:create) do |submission|
-      submission.complete!
+      submission.close!
     end
   end
 

@@ -1,7 +1,7 @@
 class Policies::Actions
   class << self
     def actionable?(submission)
-      return false if submission.completed?
+      return false if submission.closed?
 
       if Policies::Definitions.part_3_online?(submission)
         return Policies::Definitions.submission_errors(submission).empty?
@@ -16,7 +16,7 @@ class Policies::Actions
 
     def editable?(submission)
       return false if Policies::Workflow.approved_name_required?(submission)
-      !submission.completed?
+      !submission.closed?
     end
 
     def registered_vessel_required?(submission)
@@ -28,7 +28,7 @@ class Policies::Actions
 
     def readonly?(obj, user)
       if obj.is_a?(Submission)
-        obj.completed?
+        obj.closed?
       elsif obj.is_a?(Submission::Task)
         !(obj.current_state == :assigned && obj.claimant == user)
       end

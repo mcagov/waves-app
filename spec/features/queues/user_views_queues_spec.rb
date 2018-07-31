@@ -30,11 +30,11 @@ feature "User views queues", type: :feature, js: true do
   end
 
   scenario "viewing applications" do
-    visit "/submissions/completed"
+    visit "/submissions/closed"
     click_link("Open Applications")
     expect(page).to have_css("h1", text: "Open Applications")
 
-    click_link("Completed Applications")
-    expect(page).to have_css("h1", text: "Completed Applications")
+    click_link("Closed Applications")
+    expect(page).to have_css("h1", text: "Closed Applications")
   end
 end

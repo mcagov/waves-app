@@ -10,8 +10,8 @@ describe Policies::Actions do
       it { expect(subject).to be_falsey }
     end
 
-    context "when the submission is completed" do
-      let(:submission) { create(:completed_submission) }
+    context "when the submission is closed" do
+      let(:submission) { create(:closed_submission) }
       it { expect(subject).to be_truthy }
     end
   end
@@ -42,18 +42,18 @@ describe Policies::Actions do
 
   context "#editable?" do
     before do
-      allow(submission).to receive(:completed?).and_return(completed)
+      allow(submission).to receive(:closed?).and_return(closed)
     end
 
-    let(:completed) { false }
+    let(:closed) { false }
     let(:submission) { build(:submission) }
 
     subject { submission.editable? }
 
     it { expect(subject).to be_truthy }
 
-    context "when the current_state is completed" do
-      let(:completed) { true }
+    context "when the current_state is closed" do
+      let(:closed) { true }
 
       it { expect(subject).to be_falsey }
     end
@@ -96,8 +96,8 @@ describe Policies::Actions do
 
       it { expect(subject).to be_truthy }
 
-      context "and the current_state is :completed" do
-        let(:current_state) { :completed }
+      context "and the current_state is :closed" do
+        let(:current_state) { :closed }
 
         it { expect(subject).to be_falsey }
       end
@@ -108,8 +108,8 @@ describe Policies::Actions do
 
       it { expect(subject).to be_truthy }
 
-      context "and the current_state is :completed" do
-        let(:current_state) { :completed }
+      context "and the current_state is :closed" do
+        let(:current_state) { :closed }
 
         it { expect(subject).to be_falsey }
       end

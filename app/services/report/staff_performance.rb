@@ -49,6 +49,6 @@ class Report::StaffPerformance < Report
     scoped_query = Submission.where(application_type: task_type)
     scoped_query = filter_by_received_at(scoped_query)
     scoped_query = filter_by_part(scoped_query)
-    scoped_query.completed.pluck(:id)
+    scoped_query.closed.pluck(:id)
   end
 end

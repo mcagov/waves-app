@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_090654) do
+ActiveRecord::Schema.define(version: 2018_07_31_111357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -438,7 +438,7 @@ ActiveRecord::Schema.define(version: 2018_07_25_090654) do
     t.uuid "managing_owner_id"
     t.datetime "carving_and_marking_received_at"
     t.uuid "registration_id"
-    t.datetime "completed_at"
+    t.datetime "closed_at"
     t.string "application_type"
     t.string "source"
     t.string "state"
