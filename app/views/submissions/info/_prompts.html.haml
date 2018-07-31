@@ -2,3 +2,6 @@
   #prompt.alert.alert-warning
     - submission.advisories.each do |advisory|
       %p= t("submission.advisories.#{advisory}")
+- if submission.closed?
+  #prompt.alert.alert-info
+    Application closed on #{submission.closed_at}

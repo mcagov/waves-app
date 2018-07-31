@@ -5,7 +5,7 @@
     Tasks for this Application
 
     .pull-right
-      = link_to submission_tasks_path(@submission), class: ("hidden" if @task_manager) do
+      = link_to submission_tasks_path(@submission), class: ("hidden" if @task_manager || submission.closed?) do
         %i.fa.fa-cog
         Application Manager
   .x_content
@@ -44,3 +44,14 @@
 
 - if @task_manager
   = render partial: "submission/tasks/modals/edit", collection: @tasks, as: :task
+
+  - if @submission.closeable?
+    .row
+      .col-md-12
+        - msg = "Are you sure want to close this application?\n"
+        - msg += "The current balance is "
+        - msg += "#{formatted_amount(AccountLedger.new(@submission).balance)}"
+        = link_to close_submission_path(@submission),
+          data: { confirm: msg, method: :put },
+          class: "btn btn-lg btn-success pull-right" do
+          Close Application

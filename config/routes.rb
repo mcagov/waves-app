@@ -67,6 +67,10 @@ Rails.application.routes.draw do
       get :closed
     end
 
+    member do
+      put :close
+    end
+
     resources :agent,
               controller: "submission/agents", only: [:update, :destroy]
 

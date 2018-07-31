@@ -3,7 +3,7 @@ class SubmissionsController < InternalPagesController
 
   before_action :prevent_read_only!, except: [:show, :edit]
   before_action :load_submission,
-                only: [:show, :edit, :update]
+                only: [:show, :edit, :update, :close]
   before_action :check_redirection_policy, only: [:show]
 
   before_action :enable_readonly, only: [:show, :edit]
@@ -47,19 +47,21 @@ class SubmissionsController < InternalPagesController
     end
   end
 
+  def close
+    @submission.close!
+    flash[:notice] ||= "The application has been closed"
+
+    redirect_to tasks_my_tasks_path
+  end
+
   def open
-    @submissions =
-      Submission
-      .in_part(current_activity.part)
-      .includes(:tasks, payments: [:remittance])
-      .paginate(page: params[:page], per_page: 50)
-      .open
+    @submissions = submissions_scope.open
     @page_title = "Open Applications"
     render :index
   end
 
   def closed
-    @submissions = []
+    @submissions = submissions_scope.closed
     @page_title = "Closed Applications"
     render :index
   end
@@ -118,5 +120,12 @@ class SubmissionsController < InternalPagesController
         render "/submissions/#{view_mode}/forms/update.js"
       end
     end
+  end
+
+  def submissions_scope
+    Submission
+      .in_part(current_activity.part)
+      .includes(:tasks, payments: [:remittance])
+      .paginate(page: params[:page], per_page: 50)
   end
 end

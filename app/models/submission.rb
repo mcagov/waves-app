@@ -46,6 +46,10 @@ class Submission < ApplicationRecord
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
+  def closeable?
+    tasks.active.empty?
+  end
+
   def electronic_delivery?
     symbolized_changeset[:electronic_delivery]
   end
@@ -110,10 +114,6 @@ class Submission < ApplicationRecord
   end
 
   protected
-
-  def closeable?
-    tasks.active.empty?
-  end
 
   def remove_claimant
     update_attribute(:claimant, nil)
