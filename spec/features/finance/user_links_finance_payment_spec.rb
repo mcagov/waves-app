@@ -4,12 +4,17 @@ describe "User links finance_payment", type: :feature, js: true do
   before do
     vessel_reg_no = create(:registered_vessel).reg_no
 
+    submission =
+      create(
+        :submission,
+        part: :part_3,
+        vessel_reg_no: vessel_reg_no,
+        application_type: :change_owner,
+        ref_no: "ABC123")
+
     create(
-      :submission,
-      part: :part_3,
-      vessel_reg_no: vessel_reg_no,
-      application_type: :change_owner,
-      ref_no: "ABC123")
+      :unclaimed_submission_task,
+      submission: submission)
 
     create(
       :submission,

@@ -6,7 +6,7 @@ class FinancePayments::PaymentsController < InternalPagesController
     if @payment.update_attributes(payment_params)
       flash[:notice] ||=
         "The payment has been linked to this application"
-      redirect_to submission_path(@submission)
+      redirect_to submission_tasks_path(@submission)
     end
   end
 
