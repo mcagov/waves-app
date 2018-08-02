@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User views submission payment", type: :feature, js: true do
   before do
-    submission = create(:unclaimed_submission_task).submission
+    submission = create(:unclaimed_task).submission
     create(:payment, submission: submission) # World Pay
     create(
       :payment,

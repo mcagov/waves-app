@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Team leader unclaims tasks", type: :feature, js: true do
   before do
-    create(:claimed_submission_task)
+    create(:claimed_task)
   end
 
   scenario "as a team leader" do

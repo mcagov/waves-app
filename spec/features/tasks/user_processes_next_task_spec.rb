@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User processes next task", type: :feature, js: true do
   before do
-    create(:unclaimed_submission_task)
+    create(:unclaimed_task)
     login_to_part_3
   end
 

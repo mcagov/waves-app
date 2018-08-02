@@ -23,7 +23,7 @@ describe "User close a submission", js: true do
   end
 
   context "when the submission has active tasks" do
-    let(:submission) { create(:claimed_submission_task).submission }
+    let(:submission) { create(:claimed_task).submission }
 
     scenario "the close button is hidden" do
       expect(page).not_to have_link(close_application_link_text)

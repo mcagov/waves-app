@@ -13,7 +13,7 @@ describe "User links finance_payment", type: :feature, js: true do
         ref_no: "ABC123")
 
     create(
-      :unclaimed_submission_task,
+      :unclaimed_task,
       submission: submission)
 
     create(

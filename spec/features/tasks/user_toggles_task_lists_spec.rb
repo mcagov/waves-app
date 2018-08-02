@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User toggles task lists", type: :feature, js: true do
-  let!(:submission_task) { create(:unclaimed_submission_task) }
+  let!(:submission_task) { create(:unclaimed_task) }
   let(:submission) { submission_task.submission }
 
   scenario "moving a task around the queues" do

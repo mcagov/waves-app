@@ -146,10 +146,10 @@ describe Submission::Task do
 
   context "scopes" do
     let!(:initialising) { create(:submission_task) }
-    let!(:unclaimed) { create(:unclaimed_submission_task) }
-    let!(:claimed) { create(:claimed_submission_task) }
-    let!(:referred) { create(:referred_submission_task) }
-    let!(:cancelled) { create(:cancelled_submission_task) }
+    let!(:unclaimed) { create(:unclaimed_task) }
+    let!(:claimed) { create(:claimed_task) }
+    let!(:referred) { create(:referred_task) }
+    let!(:cancelled) { create(:cancelled_task) }
     let!(:completed) { create(:completed_submission_task) }
 
     it "confirmed" do
