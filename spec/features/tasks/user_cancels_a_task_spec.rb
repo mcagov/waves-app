@@ -3,8 +3,6 @@ require "rails_helper"
 feature "User cancels a task", type: :feature, js: true do
   before do
     visit_claimed_task
-    @task = Submission::Task.last
-    @submission = @task.submission
   end
 
   scenario "in general" do
@@ -38,13 +36,13 @@ feature "User cancels a task", type: :feature, js: true do
 
   scenario "without sending an email" do
     within("#actions") { click_on "Cancel Task" }
-    uncheck("Send a cancellation email to #{Submission.last.applicant_name}")
+    uncheck("Send a cancellation email to #{@submission.applicant_name}")
     within("#cancel-task") { click_on "Cancel Task" }
     expect(Notification::Cancellation.count).to eq(0)
   end
 
   scenario "without an applicant" do
-    within("#summary") { click_on(Submission.last.applicant_name) }
+    within("#summary") { click_on(@submission.applicant_name) }
     fill_in("Email Recipient Name", with: "")
     click_on("Save Notification Recipient")
 

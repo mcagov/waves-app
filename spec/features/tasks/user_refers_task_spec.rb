@@ -3,8 +3,6 @@ require "rails_helper"
 feature "User refers a task", type: :feature, js: true do
   before do
     visit_claimed_task
-    @task = Submission::Task.last
-    @submission = @task.submission
     @vessel_name = @submission.vessel.name
   end
 
@@ -54,7 +52,7 @@ feature "User refers a task", type: :feature, js: true do
 
   scenario "without sending an email" do
     within("#actions") { click_on "Refer Task" }
-    uncheck("Send a referral email to #{Submission.last.applicant_name}")
+    uncheck("Send a referral email to #{@submission.applicant_name}")
     within("#refer-task") { click_on "Refer Task" }
     expect(Notification::Referral.count).to eq(0)
   end

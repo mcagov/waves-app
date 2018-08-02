@@ -14,7 +14,7 @@ describe "User edits submission details", js: true do
   end
 
   scenario "notification recipient" do
-    within("#summary") { click_on(Submission.last.applicant_name) }
+    within("#summary") { click_on(@submission.applicant_name) }
 
     within(".modal.fade.in") { expect_postcode_lookup }
 

@@ -9,7 +9,7 @@ describe "User edits submission agent", js: true do
   end
 
   scenario "editing the agent" do
-    click_on(Submission.last.agent.name)
+    click_on(@submission.agent.name)
 
     within(".modal.fade.in") { expect_postcode_lookup }
     fill_in("Full Name", with: "ALICE AGENT")
