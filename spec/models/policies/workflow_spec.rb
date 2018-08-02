@@ -17,7 +17,7 @@ describe Policies::Workflow do
     end
 
     context "when the submission is for an existing vessel" do
-      let(:submission) { create(:submission_for_part_2_vessel) }
+      let(:submission) { create(:submission, :part_2_vessel) }
 
       it { expect(subject).to be_falsey }
     end

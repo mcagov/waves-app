@@ -15,26 +15,25 @@ FactoryGirl.define do
     after(:create) do |submission|
       submission.build_defaults
     end
+
+    trait :part_1_vessel do
+      part :part_1
+      vessel_reg_no { create(:registered_vessel, part: :part_1).reg_no }
+    end
+
+    trait :part_2_vessel do
+      part :part_2
+      vessel_reg_no { create(:registered_vessel, part: :part_2).reg_no }
+    end
+
+    trait :part_3_vessel do
+      vessel_reg_no { create(:registered_vessel, part: :part_3).reg_no }
+    end
   end
 
   factory :closed_submission, parent: :submission do
     after(:create) do |submission|
       submission.close!
     end
-  end
-
-  factory :submission_for_part_1_vessel, parent: :submission do
-    part :part_1
-    vessel_reg_no { create(:registered_vessel, part: :part_1).reg_no }
-  end
-
-  factory :submission_for_part_2_vessel, parent: :submission do
-    part :part_2
-    vessel_reg_no { create(:registered_vessel, part: :part_2).reg_no }
-  end
-
-  factory :submission_for_part_3_vessel, parent: :submission do
-    part :part_3
-    vessel_reg_no { create(:registered_vessel, part: :part_3).reg_no }
   end
 end

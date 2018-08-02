@@ -4,6 +4,10 @@ FactoryGirl.define do
     service       { build(:demo_service) }
     price         2500
     service_level :standard
+
+    trait :premium do
+      service_level :premium
+    end
   end
 
   factory :unclaimed_submission_task, parent: :submission_task do

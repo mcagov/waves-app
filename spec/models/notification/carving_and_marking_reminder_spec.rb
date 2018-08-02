@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Notification::CarvingAndMarkingReminder, type: :model do
-  let!(:submission) { create(:submission_for_part_1_vessel) }
+  let!(:submission) { create(:submission, :part_1_vessel) }
   let(:notification) { described_class.new(notifiable: submission) }
 
   it "has the additional_params" do

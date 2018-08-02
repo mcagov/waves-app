@@ -118,7 +118,7 @@ describe Payment::FinancePayment do
   end
 
   context "#related_submission" do
-    let!(:submission) { create(:submission_for_part_3_vessel) }
+    let!(:submission) { create(:submission, :part_3_vessel) }
     let(:finance_payment) { create(:locked_finance_payment, params) }
 
     subject { finance_payment.related_submission }
