@@ -1,7 +1,19 @@
 = render partial: "heading", locals: { heading: heading }
 .row
   .col-md-12
-    = yield :filter_registration_type
+    = form_tag "#", method: :get do
+      .col-md-2
+        = select_tag :filter_registration_type,
+          options_for_select(filter_registration_type_collection(current_activity.part),
+          @filter_registration_type),
+          class: "form-control"
+      .col-md-2
+        = select_tag :filter_service_level,
+          options_for_select(filter_service_level_collection,
+          params[:filter_service_level]),
+          class: "form-control"
+      .col-md-1
+        = submit_tag "Filter", class: "btn btn-success"
 .row
   .col-md-12
     - if @my_tasks && @tasks.empty?
@@ -35,6 +47,7 @@
               %th Task
               %th Date Received
               %th Referred Until
+              %th Service Level
               %th Target Date
               %th Last Update
               %th
@@ -51,6 +64,7 @@
                 %td= link_to task.service, submission_path(submission)
                 %td= task.received_at
                 %td= task.referred? ? task.referred_until : "n/a"
+                %td.service_level= task.service_level.to_s.titleize
                 %td= TargetDate.days_away(task.target_date)
                 %td= task.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission, task: task}

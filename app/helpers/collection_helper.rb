@@ -104,8 +104,13 @@ module CollectionHelper
 
   def filter_registration_type_collection(part)
     filter = registration_types_collection(part) || []
-    filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
+    filter.unshift(["All Registration Types", "all"])
     filter << ["Not set", "not_set"]
+  end
+
+  def filter_service_level_collection
+    filter = ServiceLevel::SERVICE_LEVEL_TYPES.dup
+    filter.unshift(["All Service Levels", ""])
   end
 
   def service_level_collection

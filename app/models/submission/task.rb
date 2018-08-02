@@ -25,6 +25,10 @@ class Submission::Task < ApplicationRecord
   scope :active, -> { where(state: [:unclaimed, :claimed, :referred]) }
   scope :claimed_by, -> (claimant) { where(claimant: claimant) }
 
+  scope :service_level, (lambda do |service_level|
+    where(service_level: service_level) unless service_level.blank?
+  end)
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
