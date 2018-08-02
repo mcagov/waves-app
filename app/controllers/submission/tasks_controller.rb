@@ -79,7 +79,7 @@ class Submission::TasksController < InternalPagesController
 
   def submission_task_params
     params.require(:submission_task).permit(
-      :service_id, :service_level, :start_date)
+      :service_id, :service_level, :start_date, :price_in_pounds)
   end
 
   def load_task

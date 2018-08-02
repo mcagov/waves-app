@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :submission_task, class: "Submission::Task" do
     submission    { build(:submission) }
     service       { build(:demo_service) }
+    price         2500
     service_level :standard
   end
 

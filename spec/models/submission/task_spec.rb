@@ -25,19 +25,6 @@ describe Submission::Task do
     it { expect(subject).to eq("21/07/2016".to_date) }
   end
 
-  context "#price" do
-    let(:submission_task) do
-      create(
-        :submission_task,
-        submission: create(:submission, part: :part_1),
-        service: create(:demo_service),
-        service_level: :standard)
-    end
-    subject { submission_task.price }
-
-    it { expect(subject).to eq(12400) }
-  end
-
   describe "service_level_validations validations" do
     let(:submission_task) do
       build(

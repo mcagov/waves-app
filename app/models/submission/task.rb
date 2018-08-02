@@ -13,6 +13,8 @@ class Submission::Task < ApplicationRecord
   validate :service_level_validations
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
+  validates :price, presence: true
+
   before_save :set_defaults
 
   scope :in_part, (lambda do |part|
@@ -102,11 +104,18 @@ class Submission::Task < ApplicationRecord
     true
   end
 
+  def price_in_pounds
+    (price / 100).to_i
+  end
+
+  def price_in_pounds=(input)
+    self.price = input.to_i * 100
+  end
+
   private
 
   def set_defaults
     self.start_date ||= submission.received_at || Date.current
-    self.price = service.price_for(part, service_level.to_sym)
     self.target_date = TargetDate.for_task(self) unless initialising?
   end
 

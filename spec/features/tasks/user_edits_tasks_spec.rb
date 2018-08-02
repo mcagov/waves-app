@@ -4,6 +4,7 @@ describe "User edits tasks" do
   before do
     Timecop.travel(Time.new(2016, 6, 18))
     create(:demo_service)
+    create(:subsequent_only_service)
     @submission = create(:submission)
     login_to_part_3
     visit submission_path(@submission)
@@ -27,13 +28,14 @@ describe "User edits tasks" do
       click_on("Edit")
     end
 
-    fill_in("Start Date", with: "20/06/2016")
     select("Premium", from: "Service Level")
+    fill_in("Price", with: "100")
+    fill_in("Start Date", with: "20/06/2016")
     click_on("Save")
 
     within("#submission_tasks") do
       expect(page).to have_css(".service_level", text: "Premium")
-      expect(page).to have_css(".formatted_price", text: "75.00")
+      expect(page).to have_css(".formatted_price", text: "100.00")
       expect(page).to have_css(".start_date", text: "20/06/2016")
     end
   end
@@ -65,6 +67,16 @@ describe "User edits tasks" do
   scenario "when the service does not exist" do
     within("#services") do
       expect(page).to have_css(".subsequent_price", text: "n/a")
+    end
+  end
+
+  scenario "adding a task with a subsequent_price" do
+    within("#services") { click_on("£15.00") }
+
+    within("#submission_tasks") do
+      expect(page).to have_css(".service_name", text: "Subsequent Service")
+      expect(page).to have_css(".service_level", text: "Standard")
+      expect(page).to have_css(".formatted_price", text: "15.00")
     end
   end
 end

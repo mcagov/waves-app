@@ -11,12 +11,15 @@
         .modal-body
           .row
             .col-md-12
-              = f.input :start_date, as: :string, label: "Start Date", input_html: { class: "datepicker" }
-          .row
-            .col-md-12
               = f.input :service_level, as: :select,
                 label: "Service Level",
                 collection: ServiceLevel.available_types(task.service, @submission.part),
                 include_blank: false
+          .row
+            .col-md-12
+              = f.input :price_in_pounds, as: :currency, label: "Price"
+          .row
+            .col-md-12
+              = f.input :start_date, as: :string, label: "Start Date", input_html: { class: "datepicker" }
         .modal-footer
           = f.submit "Save", class: "btn btn-primary"
