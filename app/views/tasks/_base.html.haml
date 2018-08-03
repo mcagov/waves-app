@@ -40,6 +40,7 @@
         %table.table.table-striped.table-hover#tasks
           %thead
             %tr
+              %th
               %th Vessel
               %th Official Number
               - if Policies::Workflow.uses_registration_types?(current_activity.part)
@@ -57,6 +58,7 @@
               - submission = Decorators::Submission.new(task.submission)
 
               %tr.task{ id: "task_#{ task.id }"}
+                %td.service-standard= traffic_light(task)
                 %td.vessel-name= link_to submission.vessel_name, submission_task_path(submission, task)
                 %td= submission.vessel_reg_no
                 - if Policies::Workflow.uses_registration_types?(current_activity.part)

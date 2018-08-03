@@ -32,6 +32,7 @@ end
 
 def expect_page_to_display_task # rubocop:disable Metrics/AbcSize
   within("#tasks") do
+    expect(page).to have_css(".service-standard .label-success", text: "GREEN")
     expect(page)
       .to have_css(".vessel-name", text: submission.vessel.name)
     expect(page).to have_content("Demo Service")

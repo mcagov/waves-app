@@ -11,4 +11,9 @@ module SubmissionTaskHelper
     render partial: "/submission/tasks/new",
            locals: { submission_task: submission_task }
   end
+
+  def traffic_light(task)
+    status = ServiceStandard.status(task)
+    render partial: "submission/tasks/traffic_lights/#{status}"
+  end
 end
