@@ -36,18 +36,19 @@ feature "User refers a task", type: :feature, js: true do
         .to have_text(%r{Task Referred.* Next action due by 12\/12\/2020\.})
     end
 
-    # click_button "Reclaim Referral"
+    click_button "Reclaim Referral"
+    click_on "My Tasks"
+    click_on @vessel_name
+    click_on "Correspondence"
 
-    # click_on "My Tasks"
-    # click_on @vessel_name
-    # click_on "Correspondence"
+    within("#notification-list") do
+      first(
+        "a", text: "Application Referred - Action Required").click
+    end
 
-    # within("#notification-list") do
-    #   first(
-    #     "a", text: "Application Referred - Action Required").click
-    # end
+    expect(page).to have_css("h4", text: "Referral Email")
 
-    # expect(page).to have_css("h4", text: "Referral Email")
+    creates_a_work_log_entry("Submission::Task", :referral_reclaimed)
   end
 
   scenario "without sending an email" do

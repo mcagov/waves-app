@@ -22,9 +22,8 @@
           Cancel Task
 
       - elsif @task.referred?
-        / revert referral button
-        / = form_tag claim_referral_submission_states_path(@task) do
-        /   = submit_tag "Reclaim Referral", class: "btn btn-success"
+        = form_tag claim_referral_submission_task_path(@submission, @task) do
+          = submit_tag "Reclaim Referral", class: "btn btn-success"
 
       - unless @readonly
         = yield :submission_save_buttons

@@ -66,14 +66,13 @@ class Submission::TasksController < InternalPagesController
     end
   end
 
-  # def claim_referral
-  #   @submission.unreferred!
-  #   @submission.claimed!(current_user)
+  def claim_referral
+    @task.claim_referral!(current_user)
 
-  #   log_work!(@submission, @submission, :referral_reclaimed)
-  #   flash[:notice] = "You have successfully claimed this application"
-  #   redirect_to tasks_my_tasks_path
-  # end
+    log_work!(@task, @task, :referral_reclaimed)
+    flash[:notice] = "You have successfully claimed that task"
+    redirect_to tasks_my_tasks_path
+  end
 
   private
 
