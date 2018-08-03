@@ -167,6 +167,20 @@ describe Submission::Task do
       end
 
       it { expect(submission_task).to be_claimed }
+      it { expect(submission_task.claimant).to eq(user) }
+    end
+
+    context "#unrefer!" do
+      before do
+        expect(submission_task).to receive(:reset_dates)
+
+        submission_task.confirm!
+        submission_task.claim!(user)
+        submission_task.refer!
+        submission_task.unrefer!
+      end
+
+      it { expect(submission_task).to be_unclaimed }
     end
   end
 

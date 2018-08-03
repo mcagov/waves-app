@@ -85,6 +85,11 @@ class Submission::Task < ApplicationRecord
       transitions to: :claimed, from: :referred,
                   on_transition: [:add_claimant, :reset_dates]
     end
+
+    event :unrefer do
+      transitions to: :unclaimed, from: :referred,
+                  on_transition: [:reset_dates]
+    end
   end
 
   def ref_no
@@ -123,7 +128,7 @@ class Submission::Task < ApplicationRecord
     self.price = input.to_i * 100
   end
 
-  def reset_dates(_nil)
+  def reset_dates(owner = nil)
     self.start_date = Date.current
     self.target_date = TargetDate.for_task(self)
   end
