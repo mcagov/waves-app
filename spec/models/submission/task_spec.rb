@@ -29,7 +29,7 @@ describe Submission::Task do
     before do
       Timecop.travel(Time.new(2016, 6, 18))
 
-      submission_task.reset_dates(:foo)
+      submission_task.reset_dates
     end
 
     after { Timecop.return }

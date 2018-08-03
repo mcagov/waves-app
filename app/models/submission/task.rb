@@ -128,7 +128,7 @@ class Submission::Task < ApplicationRecord
     self.price = input.to_i * 100
   end
 
-  def reset_dates(owner = nil)
+  def reset_dates(*)
     self.start_date = Date.current
     self.target_date = TargetDate.for_task(self)
   end
