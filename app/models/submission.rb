@@ -40,10 +40,6 @@ class Submission < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part.to_sym) if part }
 
-  scope :referred_until_expired, lambda {
-    where("referred_until < ?", Time.zone.today.at_end_of_day)
-  }
-
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
   def closeable?
