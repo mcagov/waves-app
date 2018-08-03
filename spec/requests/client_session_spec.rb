@@ -8,6 +8,12 @@ describe "Client session" do
       allow_any_instance_of(ClientSession)
         .to receive(:save).and_return(successfully_created)
 
+      # this stub is introduced to fix breaking spec after
+      # upgrade to Rails 2.5.1. Not clear *why* the serialize
+      # is rendered now, versus wasn't rendered before
+      allow_any_instance_of(ClientSessionSerializer)
+        .to receive(:delivered_to).and_return(:foo)
+
       post api_v1_client_sessions_path, params: create_params
     end
 
