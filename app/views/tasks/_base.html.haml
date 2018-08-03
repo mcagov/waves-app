@@ -47,7 +47,7 @@
                 %th Registration Type
               %th Ref No.
               %th Task
-              %th Date Received
+              %th Start Date
               %th Referred Until
               %th Service Level
               %th Target Date
@@ -65,14 +65,16 @@
                   %td.registration_type= submission.registration_type.try(:titleize)
                 %td= task.ref_no
                 %td= link_to task.service, submission_path(submission)
-                %td= task.received_at
+                %td= task.start_date
                 %td
                   - if task.referred_until
                     .red= task.referred_until
                   - else
                     n/a
                 %td.service_level= task.service_level.to_s.titleize
-                %td= TargetDate.days_away(task.target_date)
+                %td
+                  = task.target_date
+                  (#{TargetDate.formatted_days_away(task.target_date)})
                 %td= task.updated_at
                 %td= render partial: "/tasks/actions/claim_button", locals: {submission: submission, task: task}
 

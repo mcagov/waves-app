@@ -18,16 +18,22 @@ class TargetDate
     end
 
     def days_away(target_date)
-      return "" unless target_date
       TargetDate.set_business_days
-      this_day = Time.zone.today
+      day_diff = Date.current.business_days_until(target_date)
+      return day_diff if day_diff > 0
 
-      day_diff = this_day.business_days_until(target_date.to_date)
+      day_diff = target_date.business_days_until(Date.current)
+      0 - day_diff
+    end
+
+    def formatted_days_away(target_date)
+      return "" unless target_date
+
+      day_diff = days_away(target_date)
+
       return "#{formatted_day_diff(day_diff)} away" if day_diff > 0
-
-      day_diff = target_date.to_date.business_days_until(this_day)
       return "Today" if day_diff.zero?
-      "#{formatted_day_diff(day_diff)} ago"
+      "#{formatted_day_diff(0 - day_diff)} ago"
     end
 
     def formatted_day_diff(day_diff)

@@ -41,7 +41,7 @@ describe TargetDate do
     it { expect(described_class.for_task(task)).to eq(99) }
   end
 
-  context ".days_away" do
+  context ".formatted_days_away" do
     before do
       Timecop.freeze(Time.local(2017, 12, 21, 10, 10, 0))
     end
@@ -50,20 +50,20 @@ describe TargetDate do
       Timecop.return
     end
 
-    subject { described_class.days_away(the_date) }
+    subject { described_class.formatted_days_away(the_date) }
 
     context do
-      let(:the_date) { 1.day.from_now }
+      let(:the_date) { Date.new(2017, 12, 22) }
       it { expect(subject).to eq("1 day away") }
     end
 
     context do
-      let(:the_date) { 7.days.from_now }
+      let(:the_date) { Date.new(2017, 12, 28) }
       it { expect(subject).to eq("3 days away") }
     end
 
     context do
-      let(:the_date) { 1.hour.ago }
+      let(:the_date) { Date.new(2017, 12, 21) }
       it { expect(subject).to eq("Today") }
     end
 
