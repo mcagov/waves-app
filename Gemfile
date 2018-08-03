@@ -85,7 +85,8 @@ end
 
 group :test do
   gem "brakeman"
-  gem "capybara-webkit"
+  gem "capybara", "2.13.0"
+  gem "capybara-webkit", "1.14.0"
   gem "email_spec"
   gem "database_cleaner"
   gem "formulaic"
