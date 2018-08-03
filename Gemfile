@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-ruby "~> 2.3.6"
+ruby "~> 2.5.1"
 
-gem "rails", "~> 5.2.0.rc1"
+gem "rails", "~> 5.2.1.rc1"
 
 gem "auto_increment"
 gem "active_model_serializers"
@@ -34,7 +34,7 @@ gem "paperclip", ">= 5.2.0"
 gem "paperclip-azure",
     git: "https://github.com/mcagov/paperclip-azure"
 gem "pg_backup"
-gem "pg_search", ">= 2.1.2"
+gem "pg_search"
 gem "prawn"
 gem "prawn-print"
 gem "prawn-table"
