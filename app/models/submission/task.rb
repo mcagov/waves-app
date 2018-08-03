@@ -29,6 +29,12 @@ class Submission::Task < ApplicationRecord
     where(service_level: service_level) unless service_level.blank?
   end)
 
+  scope :registration_type, (lambda do |registration_type|
+    includes(:submission).where(
+      "(submissions.changeset#>>'{vessel_info, registration_type}') = ?",
+      registration_type) unless registration_type.blank?
+  end)
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do

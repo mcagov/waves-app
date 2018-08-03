@@ -2,11 +2,12 @@
 .row
   .col-md-12
     = form_tag "#", method: :get do
-      .col-md-2
-        = select_tag :filter_registration_type,
-          options_for_select(filter_registration_type_collection(current_activity.part),
-          @filter_registration_type),
-          class: "form-control"
+      - if Policies::Workflow.uses_registration_types?(current_activity.part)
+        .col-md-2
+          = select_tag :filter_registration_type,
+            options_for_select(filter_registration_type_collection(current_activity.part),
+            params[:filter_registration_type]),
+            class: "form-control"
       .col-md-2
         = select_tag :filter_service_level,
           options_for_select(filter_service_level_collection,

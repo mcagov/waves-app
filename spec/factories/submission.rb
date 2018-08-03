@@ -29,6 +29,26 @@ FactoryGirl.define do
     trait :part_3_vessel do
       vessel_reg_no { create(:registered_vessel, part: :part_3).reg_no }
     end
+
+    trait :high_profile do
+      after(:create) do |submission|
+        submission.changeset[:vessel_info][:registration_type] = :high_profile
+        submission.save
+      end
+    end
+
+    trait :commercial do
+      after(:create) do |submission|
+        submission.changeset[:vessel_info][:registration_type] = :commercial
+        submission.save
+      end
+    end
+
+    factory :high_profile_part_1_submission,
+            traits: [:high_profile, :part_1_vessel]
+
+    factory :commercial_part_1_submission,
+            traits: [:commercial, :part_1_vessel]
   end
 
   factory :closed_submission, parent: :submission do

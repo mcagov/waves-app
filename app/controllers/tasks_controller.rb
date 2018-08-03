@@ -41,10 +41,7 @@ class TasksController < InternalPagesController
       .includes(:claimant, :submission, :service)
       .paginate(page: params[:page], per_page: 50)
 
-    task_scope.service_level(params[:filter_service_level])
-  end
-
-  def reg_type_sql
-    "(submissions.changeset#>>'{vessel_info, registration_type}')"
+    task_scope = task_scope.service_level(params[:filter_service_level])
+    task_scope.registration_type(params[:filter_registration_type])
   end
 end

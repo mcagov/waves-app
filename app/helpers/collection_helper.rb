@@ -104,8 +104,7 @@ module CollectionHelper
 
   def filter_registration_type_collection(part)
     filter = registration_types_collection(part) || []
-    filter.unshift(["All Registration Types", "all"])
-    filter << ["Not set", "not_set"]
+    filter.unshift(["All Registration Types", ""])
   end
 
   def filter_service_level_collection
