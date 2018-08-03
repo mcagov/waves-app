@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :finance_batch, class: "FinanceBatch" do
     opened_at      { Time.zone.today }
     processed_by   { build(:user) }

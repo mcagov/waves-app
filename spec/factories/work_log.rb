@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :work_log do
     submission    { create(:submission) }
     actioned_by   { create(:user) }

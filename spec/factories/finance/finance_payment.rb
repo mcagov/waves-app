@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :finance_payment, class: "Payment::FinancePayment" do
     payment_date    { 1.day.ago }
     part            :part_3

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :registered_agent, class: "Register::Agent" do
     name          Faker::Name.name
     email         Faker::Internet.email

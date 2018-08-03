@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :print_job do
     part :part_3
     template :blank

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :declaration do
     owner { build(:declaration_owner) }
     submission { build(:submission) }

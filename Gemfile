@@ -72,8 +72,7 @@ group :development, :test do
   gem "capistrano-rails", "~> 1.2"
   gem "capistrano-passenger"
   gem "capistrano-delayed_job", require: false
-  gem "factory_girl"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "parallel_tests"
   gem "pry-byebug"
   gem "pry-rails"

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :engine do
     make    { "Triump" }
     model   { "Sprint" }

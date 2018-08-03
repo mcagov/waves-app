@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :name_approval, class: "Submission::NameApproval" do
     part                :part_2
     sequence(:name)     { |n| "Name #{n}" }

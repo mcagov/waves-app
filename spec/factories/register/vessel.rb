@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :unregistered_vessel, class: "Register::Vessel" do
     part                      :part_3
     sequence(:name)           { |n| "Registered Boat #{n}" }

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :submission_task, class: "Submission::Task" do
     submission    { build(:submission) }
     service       { build(:demo_service) }

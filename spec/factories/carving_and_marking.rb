@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :carving_and_marking do
     submission      { build(:submission, part: :part_2) }
     actioned_by     { build(:user) }
