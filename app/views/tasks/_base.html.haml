@@ -64,7 +64,11 @@
                 %td= task.ref_no
                 %td= link_to task.service, submission_path(submission)
                 %td= task.received_at
-                %td= task.referred? ? task.referred_until : "n/a"
+                %td
+                  - if task.referred_until
+                    .red= task.referred_until
+                  - else
+                    n/a
                 %td.service_level= task.service_level.to_s.titleize
                 %td= TargetDate.days_away(task.target_date)
                 %td= task.updated_at
