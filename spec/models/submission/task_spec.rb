@@ -156,15 +156,17 @@ describe Submission::Task do
       it { expect(submission_task).to be_cancelled }
     end
 
-    context "#unrefer!" do
+    context "#claim_referral!" do
       before do
+        expect(submission_task).to receive(:reset_dates)
+
         submission_task.confirm!
         submission_task.claim!(user)
         submission_task.refer!
-        submission_task.unrefer!
+        submission_task.claim_referral!(user)
       end
 
-      it { expect(submission_task).to be_unclaimed }
+      it { expect(submission_task).to be_claimed }
     end
   end
 

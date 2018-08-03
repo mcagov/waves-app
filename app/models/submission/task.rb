@@ -81,8 +81,9 @@ class Submission::Task < ApplicationRecord
                     :remove_pending_vessel]
     end
 
-    event :unrefer do
-      transitions to: :unclaimed, from: :referred
+    event :claim_referral do
+      transitions to: :claimed, from: :referred,
+                  on_transition: [:add_claimant, :reset_dates]
     end
   end
 
