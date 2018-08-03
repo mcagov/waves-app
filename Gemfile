@@ -77,7 +77,10 @@ group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
-  gem "rubocop", "~> 0.43.0", require: false
+  gem "rubocop", "= 0.43.0",
+      branch: "release/0.43.0",
+      require: false,
+      git: "https://github.com/mcagov/rubocop.git"
 end
 
 group :test do
