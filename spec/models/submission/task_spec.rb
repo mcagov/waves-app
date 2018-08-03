@@ -25,6 +25,30 @@ describe Submission::Task do
     it { expect(subject).to eq("21/07/2016".to_date) }
   end
 
+  context "#reset_dates" do
+    before do
+      Timecop.travel(Time.new(2016, 6, 18))
+
+      submission_task.reset_dates(:foo)
+    end
+
+    after { Timecop.return }
+
+    let!(:submission_task) do
+      create(:unclaimed_task,
+             start_date: "2011-12-12",
+             target_date: "2011-12-29")
+    end
+
+    it "resets the start date" do
+      expect(submission_task.start_date).to eq(Date.new(2016, 6, 18))
+    end
+
+    it "resets the target_date" do
+      expect(submission_task.target_date).to eq(Date.new(2016, 7, 4))
+    end
+  end
+
   describe "service_level_validations validations" do
     let(:submission_task) do
       build(
