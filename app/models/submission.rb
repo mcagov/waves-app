@@ -27,11 +27,11 @@ class Submission < ApplicationRecord
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
-    state :open, enter: :build_defaults
+    state :active, enter: :build_defaults
     state :closed
 
     event :close, timestamp: :closed_at do
-      transitions to: :closed, from: :open,
+      transitions to: :closed, from: :active,
                   guard: :closeable?
     end
   end
@@ -143,7 +143,7 @@ class Submission < ApplicationRecord
     return false if registered_vessel_id.blank?
 
     existing_submission =
-      Submission.where.not(id: id).open
+      Submission.where.not(id: id).active
                 .find_by(registered_vessel_id: registered_vessel.id)
 
     if existing_submission

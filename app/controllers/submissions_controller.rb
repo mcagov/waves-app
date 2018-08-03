@@ -55,7 +55,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def open
-    @submissions = submissions_scope.open
+    @submissions = submissions_scope.active
     @page_title = "Open Applications"
     render :index
   end
