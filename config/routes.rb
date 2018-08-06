@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :application_types, only: [:index]
     resources :common_mortgagees
     resources :fees, only: [:index]
     resources :reports, only: [:show, :index]
