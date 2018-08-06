@@ -13,7 +13,7 @@ workload of officers of the [Maritime and Coastguard Agency][mca].
 
 ##### Architecture
 
-This is a standard Rails 5.0 web app with a PostgreSQL database.
+This is a standard Rails 5.2 web app with a PostgreSQL database.
 
 ##### Look & Feel
 
@@ -114,6 +114,21 @@ If the `submission#referred_until` date has been reached, applications should be
 
 
 ## Under the hood
+
+#### Services
+The services that can be performed are stored in the `services` table. Each service has:
+1. A name
+2. Service standard (standard_days or premium_days)
+3. Pricing for the part / service standard
+4. UI rules (e.g. validations, form display helpers)
+5. Activities (e.g. generate_new_5_year_registration, update_registry_details)
+6. Print templates (e.g. registration_certificate, cover_letter)
+
+
+
+## NOTE that the following is undergoing a major refactor
+## Documentation will be updated once the work has been completed.
+
 ##### Submissions
 Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different tasks.
 
