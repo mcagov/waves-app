@@ -8,5 +8,5 @@
     - @services.each do |service|
       %tr
         %td.service-name= service.name
-        %td.rules= service.rules.map { |rule| rule.humanize }.join("<br/>")
+        %td.rules= service.rules.map { |rule| rule.humanize }.join("<br/>").html_safe
 
