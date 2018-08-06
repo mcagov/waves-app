@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     resources :common_mortgagees
     resources :target_dates, only: [:index]
     resources :reports, only: [:show, :index]
-    resources :tasks, only: [:index]
     resources :fees, only: [:index]
     resources :users
     resources :notifications, only: [:index] do
