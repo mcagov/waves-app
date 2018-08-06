@@ -1,0 +1,12 @@
+%h1 Service Processes
+
+%table.table
+  %thead
+    %th Name
+    %th Rules
+  %tbody
+    - @services.each do |service|
+      %tr
+        %td.service-name= service.name
+        %td.rules= service.rules.map { |rule| rule.humanize }.join("<br/>")
+
