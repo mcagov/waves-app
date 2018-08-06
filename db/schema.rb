@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_104427) do
+ActiveRecord::Schema.define(version: 2018_08_06_113337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -385,6 +385,8 @@ ActiveRecord::Schema.define(version: 2018_08_06_104427) do
     t.json "part_3"
     t.json "part_4"
     t.json "rules"
+    t.json "activities"
+    t.json "print_templates"
   end
 
   create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
