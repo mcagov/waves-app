@@ -384,9 +384,9 @@ ActiveRecord::Schema.define(version: 2018_08_06_113337) do
     t.json "part_2"
     t.json "part_3"
     t.json "part_4"
-    t.json "rules"
-    t.json "activities"
-    t.json "print_templates"
+    t.json "rules", default: []
+    t.json "activities", default: []
+    t.json "print_templates", default: []
   end
 
   create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
