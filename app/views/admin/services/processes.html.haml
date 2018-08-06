@@ -4,9 +4,13 @@
   %thead
     %th Name
     %th Rules
+    %th Activities
+    %th Print Templates
   %tbody
     - @services.each do |service|
       %tr
         %td.service-name= service.name
         %td.rules= service.rules.map { |rule| rule.humanize }.join("<br/>").html_safe
+        %td.activities= service.activities.map { |activity| activity.humanize }.join("<br/>").html_safe
+        %td.print-templates= service.print_templates.map { |print_template| print_template.humanize }.join("<br/>").html_safe
 

@@ -20,6 +20,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -33,6 +42,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -45,6 +63,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -57,6 +84,14 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_provisional_registration,
+    :update_registry_details,
+  ],
+  print_templates: [
+    :provisional_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -69,6 +104,14 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_provisional_registration,
+    :update_registry_details,
+  ],
+  print_templates: [
+    :provisional_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -80,6 +123,14 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_provisional_registration,
+    :update_registry_details,
+  ],
+  print_templates: [
+    :provisional_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -90,6 +141,15 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -101,6 +161,15 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -116,6 +185,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -130,6 +208,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -143,6 +230,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -155,6 +251,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -169,6 +274,15 @@ Service.create(
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -180,6 +294,15 @@ Service.create(
   rules: [
     :validates_on_approval,
     :ownership_can_be_changed,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -192,6 +315,14 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -205,6 +336,14 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -217,6 +356,11 @@ Service.create(
   part_4: { standard: 21, premium: 50 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
+    :current_transcript,
   ])
 
 Service.create(
@@ -229,6 +373,11 @@ Service.create(
   part_4: { standard: 32, premium: 50 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
+    :historic_transcript,
   ])
 
 Service.create(
@@ -241,6 +390,12 @@ Service.create(
   part_4: { standard: 21, premium: 50 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -251,6 +406,10 @@ Service.create(
   part_2: { standard: 25, premium: 50 },
   rules: [
     :ownership_can_be_changed,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
   ])
 
 Service.create(
@@ -262,6 +421,10 @@ Service.create(
   rules: [
     :validates_on_approval,
     :ownership_can_be_changed,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
   ])
 
 Service.create(
@@ -274,6 +437,15 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
+  ],
+  activities: [
+    :generate_new_5_year_registration,
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
   ])
 
 Service.create(
@@ -283,6 +455,13 @@ Service.create(
   part_1: { standard: 35, premium: 100 },
   rules: [
     :validates_on_approval,
+  ],
+  activities: [
+    :close_registration,
+  ],
+  print_templates: [
+    :current_transcript,
+    :cover_letter,
   ])
 
 Service.create(
@@ -294,6 +473,10 @@ Service.create(
   part_4: { standard: 30 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -306,10 +489,33 @@ Service.create(
   part_4: { standard: 13, premium: 50 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
   ])
 
 Service.create(
   name: "Change of address",
+  standard_days: 10,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :validates_on_approval,
+    :address_can_be_changed,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
+    :registration_certificate,
+    :cover_letter,
+  ])
+
+Service.create(
+  name: "Change of address (Part 3)",
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -318,6 +524,12 @@ Service.create(
   rules: [
     :validates_on_approval,
     :address_can_be_changed,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -328,6 +540,12 @@ Service.create(
   part_3: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -336,6 +554,12 @@ Service.create(
   part_1: { standard: 0 },
   part_2: { standard: 0 },
   rules: [
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -345,6 +569,12 @@ Service.create(
   part_2: { standard: 0 },
   rules: [
     :validates_on_approval,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -356,6 +586,12 @@ Service.create(
   part_4: { standard: 0 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+    :close_registration,
+  ],
+  print_templates: [
+    :current_transcript,
   ])
 
 Service.create(
@@ -367,6 +603,10 @@ Service.create(
   part_4: { standard: 0, premium: 0 },
   rules: [
     :application_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
   ])
 
 Service.create(
@@ -377,6 +617,12 @@ Service.create(
   part_4: { standard: 0 },
   rules: [
     :issues_csr,
+  ],
+  activities: [
+    :issue_csr,
+  ],
+  print_templates: [
+    :csr_form,
   ])
 
 Service.create(
@@ -388,4 +634,10 @@ Service.create(
     :ownership_can_be_changed,
     :vessel_can_be_edited,
     :not_referrable,
+  ],
+  activities: [
+    :update_registry_details,
+    :record_transcript_event,
+  ],
+  print_templates: [
   ])
