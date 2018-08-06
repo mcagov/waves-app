@@ -20,10 +20,9 @@ class Policies::Actions
     end
 
     def registered_vessel_required?(submission)
-      task = submission.task.to_sym
-      return false if DeprecableTask.new(task).new_registration?
-      return false if task == :unknown
-      true
+      ApplicationType
+        .new(submission.application_type)
+        .registered_vessel_required?
     end
 
     def readonly?(obj, user)
