@@ -11,6 +11,7 @@ FactoryBot.define do
     part_1 { { standard: 124, premium: 180, subsequent: 99 } }
     part_3 { { standard: 25, premium: 50 } }
     part_4 { { standard: 124, premium: 180 } }
+    rules { [:validates_on_approval] }
   end
 
   factory :subsequent_only_service, parent: :service do
