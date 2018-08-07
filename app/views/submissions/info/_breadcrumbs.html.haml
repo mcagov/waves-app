@@ -11,7 +11,7 @@
             - when :unclaimed
               = link_to "Unclaimed Tasks", tasks_unclaimed_path
             - when :claimed
-              - if submission.claimant == current_user
+              - if task.claimant == current_user
                 = link_to "My Tasks", tasks_my_tasks_path
               - else
                 = link_to "Team Tasks", tasks_team_tasks_path
