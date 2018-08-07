@@ -142,6 +142,7 @@ Service.create(
   premium_days: 1,
   part_2: { standard: 61, premium: 100 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :vessel_can_be_edited,
   ],
@@ -162,6 +163,7 @@ Service.create(
   part_1: { standard: 55, premium: 50 },
   part_2: { standard: 55, premium: 50 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :vessel_can_be_edited,
     :carving_and_marking_required,
@@ -185,6 +187,7 @@ Service.create(
   part_3: { standard: 25, premium: 50 },
   part_4: { standard: 49, premium: 100 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
@@ -208,6 +211,7 @@ Service.create(
   part_3: { standard: 25, premium: 50 },
   part_4: { standard: 124, premium: 180 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
@@ -230,6 +234,7 @@ Service.create(
   part_2: { standard: 131, premium: 180 },
   part_4: { standard: 131, premium: 180 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
@@ -251,6 +256,7 @@ Service.create(
   part_2: { standard: 111 },
   part_4: { standard: 111 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
@@ -275,6 +281,7 @@ Service.create(
   part_3: { standard: 25, premium: 50 },
   part_4: { standard: 80, premium: 100, subsequent: 15 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
     :ownership_can_be_changed,
@@ -296,6 +303,7 @@ Service.create(
   part_2: { standard: 63, premium: 100, subsequent: 15 },
   part_4: { standard: 63, premium: 100, subsequent: 15 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :ownership_can_be_changed,
   ],
@@ -317,6 +325,7 @@ Service.create(
   part_2: { standard: 37, premium: 100, subsequent: 17 },
   part_4: { standard: 37, premium: 100, subsequent: 17 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :vessel_can_be_edited,
     :carving_and_marking_required,
@@ -339,6 +348,7 @@ Service.create(
   part_3: { standard: 25, premium: 50 },
   part_4: { standard: 37, premium: 100, subsequent: 17 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :vessel_can_be_edited,
   ],
@@ -360,6 +370,7 @@ Service.create(
   part_3: { standard: 21, premium: 50 },
   part_4: { standard: 21, premium: 50 },
   rules: [
+    :registered_vessel_required,
     :application_not_editable,
   ],
   activities: [
@@ -377,6 +388,7 @@ Service.create(
   part_3: { standard: 32, premium: 50 },
   part_4: { standard: 32, premium: 50 },
   rules: [
+    :registered_vessel_required,
     :application_not_editable,
   ],
   activities: [
@@ -394,6 +406,7 @@ Service.create(
   part_3: { standard: 25, premium: 50 },
   part_4: { standard: 21, premium: 50 },
   rules: [
+    :registered_vessel_required,
     :application_not_editable,
   ],
   activities: [
@@ -410,6 +423,7 @@ Service.create(
   part_1: { standard: 25, premium: 50 },
   part_2: { standard: 25, premium: 50 },
   rules: [
+    :registered_vessel_required,
     :ownership_can_be_changed,
   ],
   activities: [
@@ -424,6 +438,7 @@ Service.create(
   part_1: { standard: 84, premium: 100, subsequent: 15 },
   part_2: { standard: 84, premium: 100, subsequent: 15 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :ownership_can_be_changed,
   ],
@@ -460,6 +475,7 @@ Service.create(
   premium_days: 1,
   part_1: { standard: 35, premium: 100 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
   ],
   activities: [
@@ -508,6 +524,7 @@ Service.create(
   part_2: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :address_can_be_changed,
   ],
@@ -528,6 +545,7 @@ Service.create(
   part_3: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
     :address_can_be_changed,
   ],
@@ -560,6 +578,7 @@ Service.create(
   part_1: { standard: 0 },
   part_2: { standard: 0 },
   rules: [
+    :registered_vessel_required,
   ],
   activities: [
     :update_registry_details,
@@ -574,6 +593,7 @@ Service.create(
   part_1: { standard: 0 },
   part_2: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :validates_on_approval,
   ],
   activities: [
@@ -591,6 +611,7 @@ Service.create(
   part_3: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :application_not_editable,
   ],
   activities: [
@@ -608,6 +629,7 @@ Service.create(
   part_2: { standard: 0, premium: 0 },
   part_4: { standard: 0, premium: 0 },
   rules: [
+    :registered_vessel_required,
     :application_not_editable,
   ],
   activities: [
@@ -622,6 +644,7 @@ Service.create(
   part_2: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :issues_csr,
   ],
   activities: [
@@ -637,6 +660,7 @@ Service.create(
   part_2: { standard: 0 },
   part_4: { standard: 0 },
   rules: [
+    :registered_vessel_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
     :not_referrable,
