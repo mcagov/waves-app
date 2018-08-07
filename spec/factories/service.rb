@@ -2,6 +2,10 @@ FactoryBot.define do
   factory :service do
     standard_days 10
     premium_days 3
+
+    trait :issues_csr do
+      rules { [:issues_csr] }
+    end
   end
 
   factory :demo_service, parent: :service do
