@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe Policies::Rules do
-  context ".issues_csr?" do
+  context "checking to see if a rule is enforced" do
     let(:task) { create(:submission_task, service: service) }
 
-    subject { described_class.issues_csr?(task) }
+    subject { described_class.issues_csr(task) }
 
-    context "when the rule is defined" do
+    context "when the rule 'issues_csr' is defined" do
       let(:service) { create(:service, :issues_csr) }
 
       it { expect(subject).to be_truthy }

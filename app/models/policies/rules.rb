@@ -8,8 +8,16 @@ class Policies::Rules
   end
 
   class << self
-    def issues_csr?(task)
-      new(task).rules.include?(:issues_csr)
+    def method_missing(method_name, *args)
+      if args[0].is_a?(Submission::Task)
+        new(args[0]).rules.include?(method_name)
+      else
+        super
+      end
+    end
+
+    def respond_to_missing?(_method_name)
+      false
     end
   end
 end
