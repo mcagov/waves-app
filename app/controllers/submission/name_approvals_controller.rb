@@ -1,5 +1,6 @@
 class Submission::NameApprovalsController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
   before_action :enable_readonly, only: [:show]
   before_action :load_name_approval
 

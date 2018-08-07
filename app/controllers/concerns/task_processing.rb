@@ -1,5 +1,6 @@
 module TaskProcessing
   def check_task_processing_rules
+    name_approval_required
     registered_vessel_required
     issues_csr
   end
@@ -22,6 +23,11 @@ module TaskProcessing
   def rules_policy
     @rules_policy ||= Policies::Rules.new(@task)
   end
-  # elsif Policies::Workflow.approved_name_required?(@submission)
-  # return redirect_to submission_name_approval_path(@submissio
+
+  def name_approval_required
+    if Policies::Workflow.approved_name_required?(@submission)
+      return redirect_to submission_name_approval_path(
+        @submission, task_id: @task.id)
+    end
+  end
 end
