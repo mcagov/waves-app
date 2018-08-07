@@ -7,17 +7,15 @@ class Policies::Rules
     @task.service.rules.map(&:to_sym)
   end
 
-  class << self
-    def method_missing(method_name, *args)
-      if args[0].is_a?(Submission::Task)
-        new(args[0]).rules.include?(method_name)
-      else
-        super
-      end
+  def method_missing(method_name, *args)
+    if @task.is_a?(Submission::Task)
+      rules.include?(method_name)
+    else
+      super
     end
+  end
 
-    def respond_to_missing?(_method_name)
-      false
-    end
+  def respond_to_missing?(_method_name)
+    false
   end
 end
