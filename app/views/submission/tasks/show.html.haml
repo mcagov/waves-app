@@ -1,14 +1,8 @@
-- content_for :heading_descriptor do
-  %em #{@task.service}
+- content_for :task_body do
+  - if DeprecableTask.new(@submission.task).prevented_from_editing?
+    = render partial: "submissions/restricted/show", locals: { submission: @submission }
+  - else
+    = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/show",
+      locals: { submission: @submission }
 
-- @bg_class = "bg-green"
-
-= render partial: "submission/task/info/prompts", locals: { task: @task}
-
-= render partial: "submissions/info/base", locals: { submission: @submission, task: @task}
-
-- if DeprecableTask.new(@submission.task).prevented_from_editing?
-  = render partial: "submissions/restricted/show", locals: { submission: @submission }
-- else
-  = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/show",
-    locals: { submission: @submission }
+= render partial: "base", locals: { task: @task, submission: @submission }

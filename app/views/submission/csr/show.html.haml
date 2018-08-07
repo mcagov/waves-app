@@ -1,21 +1,22 @@
-= render partial: "submissions/info/base", locals: {submission: @submission, task: @task}
+= render partial: "submission/tasks/base", locals: {submission: @submission, task: @task}
 
-.row
-  .col-md-12
-    .x_panel
-      .x_title
-        Application Details
-      .clearfix
-      .x_content
-        %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
-          %ul.nav.nav-tabs.bar_tabs{:role => "tablist"}
+- content_for :task_body
+  .row
+    .col-md-12
+      .x_panel
+        .x_title
+          Application Details
+        .clearfix
+        .x_content
+          %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+            %ul.nav.nav-tabs.bar_tabs{:role => "tablist"}
 
-            %li{:role => "presentation", class: "active"}
-              %a#csr-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#csr_tab", :role => "tab"}
-                CSR Information
+              %li{:role => "presentation", class: "active"}
+                %a#csr-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#csr_tab", :role => "tab"}
+                  CSR Information
 
-          #csr_tab.tab-pane{class: "active", "aria-labelledby" => "csr-tab", :role => "tabpanel"}
-            #csr_form= render partial: "submission/csr/form", locals: {submission: @submission}
+            #csr_tab.tab-pane{class: "active", "aria-labelledby" => "csr-tab", :role => "tabpanel"}
+              #csr_form= render partial: "submission/csr/form", locals: {submission: @submission}
 
-= render partial: "submissions/extended/actions/save"
-= render partial: "submission/task/actions/base", locals: {submission: @submission, task: @task}
+  = render partial: "submissions/extended/actions/save"
+
