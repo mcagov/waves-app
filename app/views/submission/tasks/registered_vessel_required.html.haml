@@ -1,0 +1,15 @@
+- content_for :heading_descriptor do
+  %em #{@task.service}
+
+- @bg_class = "bg-green"
+
+= render partial: "submission/task/info/prompts", locals: { task: @task}
+
+= render partial: "submissions/info/base", locals: { submission: @submission, task: @task}
+
+.x_panel
+  .red This task cannot be processed until the application is associated with a registered vessel.
+
+
+= render partial: "submission/task/actions/base", locals: { submission: @submission, task: @task}
+

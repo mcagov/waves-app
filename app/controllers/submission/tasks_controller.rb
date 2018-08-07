@@ -1,7 +1,9 @@
 class Submission::TasksController < InternalPagesController
+  include TaskProcessing
+
   before_action :load_submission
   before_action :load_task, except: [:index, :create, :confirm]
-  before_action :check_redirection_policy, only: [:show]
+  before_action :check_task_processing_rules, only: [:show]
 
   def index
     @tasks = @submission
@@ -76,14 +78,6 @@ class Submission::TasksController < InternalPagesController
   end
 
   private
-
-  def check_redirection_policy
-    if Policies::Rules.issues_csr(@task)
-      return redirect_to submission_csr_path(@submission, task_id: @task.id)
-    end
-    # elsif Policies::Workflow.approved_name_required?(@submission)
-    # return redirect_to submission_name_approval_path(@submissio
-  end
 
   def submission_task_params
     params.require(:submission_task).permit(

@@ -3,6 +3,10 @@ FactoryBot.define do
     standard_days 10
     premium_days 3
 
+    trait :registered_vessel_required do
+      rules { [:registered_vessel_required] }
+    end
+
     trait :issues_csr do
       rules { [:issues_csr] }
     end
