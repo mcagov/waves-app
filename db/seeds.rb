@@ -20,7 +20,7 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -43,7 +43,7 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -65,7 +65,7 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -164,7 +164,7 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -319,7 +319,7 @@ Service.create(
   rules: [
     :validates_on_approval,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :update_registry_details,
@@ -442,7 +442,7 @@ Service.create(
     :declarations_required,
     :ownership_can_be_changed,
     :vessel_can_be_edited,
-    :c_m_required,
+    :carving_and_marking_required,
   ],
   activities: [
     :generate_new_5_year_registration,
