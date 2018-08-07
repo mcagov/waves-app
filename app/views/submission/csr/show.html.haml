@@ -1,6 +1,4 @@
-= render partial: "submission/tasks/base", locals: {submission: @submission, task: @task}
-
-- content_for :task_body
+- content_for :task_body do
   .row
     .col-md-12
       .x_panel
@@ -20,3 +18,4 @@
 
   = render partial: "submissions/extended/actions/save"
 
+= render partial: "submission/tasks/base", locals: {submission: @submission, task: @task}
