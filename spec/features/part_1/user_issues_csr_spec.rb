@@ -1,8 +1,10 @@
 require "rails_helper"
 
-xdescribe "User issues CSR", js: true do
+describe "User issues CSR", js: true do
   scenario "in general" do
-    visit_assigned_csr_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_1_vessel),
+      service: create(:demo_service, :issues_csr))
 
     expect(find("#csr_form_issue_number").value).to eq("1")
     expect(find("#csr_form_vessel_name").value).to match(/Registered Boat.*/)
@@ -13,7 +15,9 @@ xdescribe "User issues CSR", js: true do
       .to have_link("Go to Task List", href: tasks_my_tasks_path)
 
     expect(Submission.last.csr_form.remarks).to eq("NO COMMENT")
+  end
 
+  xscenario "pending implementation" do
     click_on("Issue CSR")
     click_on("Approve & Issue CSR")
 

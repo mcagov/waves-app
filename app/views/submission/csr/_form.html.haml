@@ -1,5 +1,5 @@
 = simple_form_for :csr_form,
-                  url: submission_csr_path(@submission),
+                  url: submission_csr_path(@submission, task_id: @task.id),
                   remote: true,
                   method: :put do |f|
   %table.table.table-striped

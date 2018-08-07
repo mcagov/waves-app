@@ -42,6 +42,10 @@ class InternalPagesController < ApplicationController
       Submission.includes(:declarations).find(params[:submission_id])
   end
 
+  def load_task
+    @task = Submission::Task.find(params[:task_id]) if params[:task_id]
+  end
+
   def ensure_current_part_for(part)
     session[:current_activity] = part unless current_activity.matches?(part)
   end
