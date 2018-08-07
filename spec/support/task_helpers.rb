@@ -4,7 +4,7 @@ def visit_claimed_task(service: nil, submission: nil)
   @service = service || create(:demo_service)
   @task = create(:claimed_task, submission: @submission, service: @service)
 
-  login_to_part_3(@task.claimant)
+  login(@task.claimant, @submission.part)
   visit submission_task_path(@submission, @task)
 end
 

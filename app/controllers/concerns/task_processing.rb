@@ -1,6 +1,6 @@
 module TaskProcessing
   def check_task_processing_rules
-    registered_vessel_required
+    return render :registered_vessel_required if registered_vessel_required
     issues_csr
     name_approval_required
   end
@@ -8,10 +8,8 @@ module TaskProcessing
   private
 
   def registered_vessel_required
-    if rules_policy.registered_vessel_required &&
-       @submission.registered_vessel.blank?
-      return render :registered_vessel_required
-    end
+    rules_policy.registered_vessel_required &&
+      @submission.registered_vessel.blank?
   end
 
   def issues_csr
