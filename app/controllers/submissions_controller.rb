@@ -102,11 +102,6 @@ class SubmissionsController < InternalPagesController
     else
       return redirect_to(submission_tasks_path(@submission))
     end
-    # elsif DeprecableTask.new(@submission.task).issues_csr?
-    # return redirect_to submission_csr_path(@submission)
-
-    # elsif Policies::Workflow.approved_name_required?(@submission)
-    # return redirect_to submission_name_approval_path(@submission)
   end
 
   def render_update_js
