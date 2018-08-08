@@ -10,8 +10,9 @@ class Policies::Actions
       true
     end
 
-    def approvable?(submission)
-      Policies::Definitions.approval_errors(submission).empty?
+    def approvable?(task, user)
+      task.claimed? && task.claimant == user
+      # Policies::Definitions.approval_errors(task).empty?
     end
 
     def editable?(submission)

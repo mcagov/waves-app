@@ -69,8 +69,7 @@ class Submission::Task < ApplicationRecord
 
     event :complete, timestamp: :completed_at do
       transitions to: :completed, from: :claimed,
-                  on_transition: :process_task,
-                  guard: :approvable?
+                  on_transition: :process_task
     end
 
     event :cancel do
@@ -105,10 +104,6 @@ class Submission::Task < ApplicationRecord
   end
 
   def referrable?
-    true
-  end
-
-  def approvable?
     true
   end
 
