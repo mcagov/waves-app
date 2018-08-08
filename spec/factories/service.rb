@@ -18,6 +18,10 @@ FactoryBot.define do
     trait :update_registry_details do
       activities { [:update_registry_details] }
     end
+
+    trait :validates_on_approval do
+      rules { [:validates_on_approval] }
+    end
   end
 
   factory :demo_service, parent: :service do

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "User views services" do
   before do
-    create(:demo_service)
+    create(:demo_service, :validates_on_approval)
     login_to_part_3
   end
 
