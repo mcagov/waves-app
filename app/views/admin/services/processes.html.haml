@@ -10,7 +10,13 @@
     - @services.each do |service|
       %tr
         %td.service-name= service.name
-        %td.rules= service.rules.map { |rule| rule.humanize }.join("<br/>").html_safe
-        %td.activities= service.activities.map { |activity| activity.humanize }.join("<br/>").html_safe
-        %td.print-templates= service.print_templates.map { |print_template| print_template.humanize }.join("<br/>").html_safe
+        %td.rules
+          - service.rules.each do |rule|
+            %p= rule.humanize
+        %td.activities
+          - service.activities.each do |activity|
+            %p= activity.humanize
+        %td.print-templates
+          - service.print_templates.each do |print_template|
+            %p= print_template.humanize
 
