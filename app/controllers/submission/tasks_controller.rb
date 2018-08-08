@@ -78,8 +78,15 @@ class Submission::TasksController < InternalPagesController
   end
 
   def validate
+    @validation_errors = Policies::Validations.new(@task).errors
     respond_to do |format|
-      format.js { render "submission/tasks/modals/complete" }
+      format.js do
+        if @validation_errors.empty?
+          render "submission/tasks/modals/complete"
+        else
+          render "submission/tasks/modals/validation_errors"
+        end
+      end
     end
   end
 
