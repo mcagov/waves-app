@@ -50,6 +50,10 @@ FactoryBot.define do
     registration_type "fishing"
   end
 
+  factory :part_4_vessel, parent: :registered_vessel do
+    part :part_4
+  end
+
   factory :pleasure_vessel, parent: :registered_vessel do
     part :part_1
     registration_type "pleasure"

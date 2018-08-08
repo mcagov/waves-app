@@ -30,6 +30,20 @@ FactoryBot.define do
       vessel_reg_no { create(:registered_vessel, part: :part_3).reg_no }
     end
 
+    trait :part_4_fishing_vessel do
+      part :part_4
+      vessel_reg_no { create(:part_4_fishing_vessel).reg_no }
+      after(:create) do |submission|
+        submission.changeset[:vessel_info][:registration_type] = :fishing
+        submission.save
+      end
+    end
+
+    trait :part_4_vessel do
+      part :part_4
+      vessel_reg_no { create(:part_4_vessel).reg_no }
+    end
+
     trait :high_profile do
       after(:create) do |submission|
         submission.changeset[:vessel_info][:registration_type] = :high_profile
