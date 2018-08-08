@@ -1,8 +1,10 @@
 module TaskProcessing
   def check_task_processing_rules
     return render :registered_vessel_required if registered_vessel_required
+    return render :registry_not_editable if registry_not_editable
     issues_csr
     name_approval_required
+    registry_not_editable
   end
 
   private
@@ -27,5 +29,9 @@ module TaskProcessing
       return redirect_to submission_name_approval_path(
         @submission, task_id: @task.id)
     end
+  end
+
+  def registry_not_editable
+    rules_policy.registry_not_editable
   end
 end

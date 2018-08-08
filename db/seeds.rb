@@ -371,7 +371,7 @@ Service.create(
   part_4: { standard: 21, premium: 50 },
   rules: [
     :registered_vessel_required,
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],
@@ -389,7 +389,7 @@ Service.create(
   part_4: { standard: 32, premium: 50 },
   rules: [
     :registered_vessel_required,
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],
@@ -407,7 +407,7 @@ Service.create(
   part_4: { standard: 21, premium: 50 },
   rules: [
     :registered_vessel_required,
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],
@@ -494,7 +494,7 @@ Service.create(
   part_3: { standard: 30 },
   part_4: { standard: 30 },
   rules: [
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],
@@ -510,7 +510,7 @@ Service.create(
   part_3: { standard: 13, premium: 50 },
   part_4: { standard: 13, premium: 50 },
   rules: [
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],
@@ -612,7 +612,7 @@ Service.create(
   part_4: { standard: 0 },
   rules: [
     :registered_vessel_required,
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
     :close_registration,
@@ -630,7 +630,7 @@ Service.create(
   part_4: { standard: 0, premium: 0 },
   rules: [
     :registered_vessel_required,
-    :application_not_editable,
+    :registry_not_editable,
   ],
   activities: [
   ],

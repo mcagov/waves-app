@@ -1,0 +1,5 @@
+- content_for :task_body do
+  .x_panel
+    .x_content.red This task does not permit editing of registry details.
+
+= render partial: "base", locals: { task: @task, submission: @submission }
