@@ -2,12 +2,3 @@
 
 - unless @submission.registered_vessel
   = render partial: "submissions/basic/similar_vessels", locals: {submission: submission}
-
-- if Policies::Actions.approvable?(@task, current_user)
-  - content_for(:submission_save_buttons) do
-    / = render partial: "submissions/modals/approve", locals: { submission: @submission }
-    = link_to "#approve-application",
-      data: { target: "#approve-application", toggle: "modal" },
-      class: "btn btn-success btn-lg pull-right" do
-      %i.fa.fa-check
-      Complete Task

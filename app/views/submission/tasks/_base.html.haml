@@ -50,5 +50,11 @@
         = form_tag claim_referral_submission_task_path(@submission, @task) do
           = submit_tag "Reclaim Referral", class: "btn btn-success"
 
-      - unless @readonly
-        = yield :submission_save_buttons
+      - if Policies::Actions.approvable?(@task, current_user)
+        / = render partial: "submissions/modals/approve", locals: { submission: @submission }
+        = link_to "#approve-application",
+          data: { target: "#approve-application", toggle: "modal" },
+          class: "btn btn-success btn-lg pull-right" do
+          %i.fa.fa-check
+          Complete Task
+
