@@ -14,6 +14,10 @@ FactoryBot.define do
     trait :registry_not_editable do
       rules { [:registry_not_editable] }
     end
+
+    trait :update_registry_details do
+      activities { [:update_registry_details] }
+    end
   end
 
   factory :demo_service, parent: :service do
