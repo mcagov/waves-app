@@ -15,7 +15,7 @@
 
             #csr_tab.tab-pane{class: "active", "aria-labelledby" => "csr-tab", :role => "tabpanel"}
               #csr_form= render partial: "submission/csr/form", locals: {submission: @submission}
-
   = render partial: "submissions/extended/actions/save"
+  = yield :submission_save_buttons
 
 = render partial: "submission/tasks/base", locals: {submission: @submission, task: @task}
