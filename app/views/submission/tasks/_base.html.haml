@@ -51,10 +51,12 @@
           = submit_tag "Reclaim Referral", class: "btn btn-success"
 
       - if Policies::Actions.approvable?(@task, current_user)
-        / = render partial: "submissions/modals/approve", locals: { submission: @submission }
-        = link_to "#approve-application",
-          data: { target: "#approve-application", toggle: "modal" },
-          class: "btn btn-success btn-lg pull-right" do
+        / complete button and modal
+        = render partial: "submission/tasks/modals/validate"
+        = link_to validate_submission_task_path(@submission, @task),
+          data: { target: "#complete-task", toggle: "modal" },
+          class: "btn btn-success btn-lg pull-right",
+          remote: true do
           %i.fa.fa-check
           Complete Task
 

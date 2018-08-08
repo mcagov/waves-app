@@ -197,6 +197,8 @@ Rails.application.routes.draw do
         post :claim
         post :unclaim
         post :claim_referral
+        get  :validate
+        patch :complete
       end
 
       resource :notification,

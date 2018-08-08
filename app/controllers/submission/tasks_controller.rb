@@ -77,6 +77,18 @@ class Submission::TasksController < InternalPagesController
     redirect_to tasks_my_tasks_path
   end
 
+  def validate
+    respond_to do |format|
+      format.js { render "submission/tasks/modals/complete" }
+    end
+  end
+
+  def complete
+    @task.complete!
+    flash[:notice] = "The task has been completed"
+    redirect_to submission_path(@submission)
+  end
+
   private
 
   def submission_task_params

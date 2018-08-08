@@ -1,0 +1,6 @@
+:plain
+   $("#complete-task .modal-content").html(
+    '#{escape_javascript(
+      render partial: "/submission/tasks/modals/complete",
+      locals: { submission: @submission, task: @task })}');
+
