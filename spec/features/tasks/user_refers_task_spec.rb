@@ -1,12 +1,10 @@
 require "rails_helper"
 
 feature "User refers a task", type: :feature, js: true do
-  before do
+  scenario "and restores it" do
     visit_claimed_task
     @vessel_name = @submission.vessel.name
-  end
 
-  scenario "and restores it" do
     expect_referral_button(true)
 
     within("#actions") { click_on "Refer Task" }
@@ -52,6 +50,7 @@ feature "User refers a task", type: :feature, js: true do
   end
 
   scenario "without sending an email" do
+    visit_claimed_task
     within("#actions") { click_on "Refer Task" }
     uncheck("Send a referral email to #{@submission.applicant_name}")
     within("#refer-task") { click_on "Refer Task" }
@@ -59,6 +58,7 @@ feature "User refers a task", type: :feature, js: true do
   end
 
   scenario "without an applicant" do
+    visit_claimed_task
     within("#summary") { click_on(Submission.last.applicant_name) }
     fill_in("Email Recipient Name", with: "")
     click_on("Save Notification Recipient")

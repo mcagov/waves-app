@@ -1,11 +1,8 @@
 require "rails_helper"
 
 feature "User cancels a task", type: :feature, js: true do
-  before do
-    visit_claimed_task
-  end
-
   scenario "in general" do
+    visit_claimed_task
     within("#actions") { click_on "Cancel Task" }
 
     within(".modal.fade.in") do
@@ -35,6 +32,7 @@ feature "User cancels a task", type: :feature, js: true do
   end
 
   scenario "without sending an email" do
+    visit_claimed_task
     within("#actions") { click_on "Cancel Task" }
     uncheck("Send a cancellation email to #{@submission.applicant_name}")
     within("#cancel-task") { click_on "Cancel Task" }
@@ -42,6 +40,7 @@ feature "User cancels a task", type: :feature, js: true do
   end
 
   scenario "without an applicant" do
+    visit_claimed_task
     within("#summary") { click_on(@submission.applicant_name) }
     fill_in("Email Recipient Name", with: "")
     click_on("Save Notification Recipient")
