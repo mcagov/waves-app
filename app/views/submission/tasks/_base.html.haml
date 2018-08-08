@@ -29,7 +29,7 @@
       - if @task.claimant == current_user
         - if @task.referrable?
           / refer button and modal
-          = render partial: "submission/tasks/modals/refer", locals: { submission: @submission }
+          = render partial: "submission/tasks/modals/refer"
           = link_to submission_task_notification_path(@submission, @task, template: :refer),
             data: { target: "#refer-task", toggle: "modal" },
             class: "btn btn-warning btn-refer-submission",
@@ -38,7 +38,7 @@
             Refer Task
 
         / cancel button and modal
-        = render partial: "submission/tasks/modals/cancel", locals: { submission: @submission }
+        = render partial: "submission/tasks/modals/cancel"
         = link_to submission_task_notification_path(@submission, @task, template: :cancel),
                   data: { target: "#cancel-task", toggle: "modal" },
                   class: "btn btn-link",
