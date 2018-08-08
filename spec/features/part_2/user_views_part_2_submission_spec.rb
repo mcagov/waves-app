@@ -1,8 +1,11 @@
 require "rails_helper"
 
-xdescribe "User views Part 2 submission", type: :feature, js: true do
+describe "User views Part 2 submission", type: :feature, js: true do
   scenario "UI elements" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      service: create(:service, :update_registry_details),
+      submission: create(:submission, :part_2_vessel))
+
     expect_safety_certificate_warning(true)
     expect_ec_no(true)
     expect_charterers(false)
@@ -22,7 +25,10 @@ xdescribe "User views Part 2 submission", type: :feature, js: true do
   end
 
   scenario "Name Approval page" do
-    visit_assigned_part_2_submission
+    visit_claimed_task(
+      service: create(:service, :update_registry_details),
+      submission: create(:submission, part: :part_2))
+
     expect_port_no_fields(true)
   end
 end
