@@ -39,6 +39,32 @@ describe Policies::Actions do
     end
   end
 
+  context "#editable?" do
+    let(:task) { create(:claimed_task, service: service) }
+
+    subject { described_class.editable?(task, task.claimant) }
+
+    context "with a task that is registry_not_editable" do
+      let(:service) { create(:demo_service, :registry_not_editable) }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "with a task that is editable" do
+      let(:service) { create(:demo_service) }
+
+      it { expect(subject).to be_truthy }
+
+      context "but the application is readonly" do
+        before do
+          allow(Policies::Actions).to receive(:readonly?).and_return(true)
+        end
+
+        it { expect(subject).to be_falsey }
+      end
+    end
+  end
+
   context "#registered_vessel_required?" do
     let(:submission) { build(:submission) }
 

@@ -26,5 +26,10 @@ class Policies::Actions
         !task.claimed_by?(user) ||
         task.submission.closed?
     end
+
+    def editable?(task, user)
+      !readonly?(task, user) &&
+        !Policies::Rules.new(task).registry_not_editable
+    end
   end
 end

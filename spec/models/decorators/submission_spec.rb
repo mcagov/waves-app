@@ -1,23 +1,6 @@
 require "rails_helper"
 
 describe Decorators::Submission, type: :model do
-  context "#editable?" do
-    let(:submission) { Submission.new(state: submission_state, part: :part_3) }
-    subject { described_class.new(submission).editable? }
-
-    context "when the state is closed" do
-      let(:submission_state) { :closed }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when the state is something else" do
-      let(:submission_state) { "" }
-
-      it { expect(subject).to be_truthy }
-    end
-  end
-
   context "#notification_list" do
     let!(:submission) { build(:submission) }
 

@@ -62,14 +62,6 @@ class Submission < ApplicationRecord
     Policies::Actions.approvable?(self)
   end
 
-  def editable?
-    Policies::Actions.editable?(self)
-  end
-
-  def uneditable?
-    !editable?
-  end
-
   def process_application(approval_params = {})
     Submission::ApplicationProcessor.run(self, approval_params)
   end
