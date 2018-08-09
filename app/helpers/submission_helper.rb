@@ -46,14 +46,6 @@ module SubmissionHelper
     end
   end
 
-  def display_edit_application_link?(submission, task)
-    return false if DeprecableTask.new(submission.task).prevented_from_editing?
-    return false if request.path == edit_submission_path(submission)
-    return false unless Policies::Definitions.part_3?(submission)
-
-    submission.editable? && task.claimant == current_user
-  end
-
   def vessel_change_css(attr_name)
     if @submission.changed_vessel_attribute(attr_name)
       "has-changed"

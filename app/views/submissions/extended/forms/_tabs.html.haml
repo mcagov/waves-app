@@ -79,7 +79,7 @@
 
             #correspondence_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               = render partial: "shared/notification_list/base", locals: { notification_list: @submission.notification_list }
-              - if @submission.editable? && !current_user.read_only?
+              - if Policies::Actions.editable?(task, current_user)
                 = render partial: "submissions/actions/add_correspondence", locals: { submission: @submission }
 
             #payments_tab.tab-pane{"aria-labelledby" => "payments-tab", :role => "tabpanel"}

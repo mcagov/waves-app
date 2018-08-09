@@ -14,7 +14,7 @@
   .col-md-2
     %h2.pull-right= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }
 
-    - if display_edit_application_link?(submission, task)
+    - if Policies::Actions.editable?(task, current_user)
       = link_to "Edit Application",
         edit_submission_path(submission, task_id: task.id),
         class: "btn btn-primary pull-right",
