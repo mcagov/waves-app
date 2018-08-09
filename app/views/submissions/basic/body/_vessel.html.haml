@@ -1,4 +1,6 @@
 - registered_vessel = @submission.registered_vessel || Register::Vessel.new
+- submission_cannot_be_edited = !Policies::Actions.editable?(@task, current_user)
+
 %table.table.table-striped.table-fluid.submission-vessel
   %thead
     %th Vessel Details
@@ -18,7 +20,7 @@
       - if @task.display_changeset?
         %td#vessel-name
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.name
             - else
               = compare_reg_info vessel.name, registered_vessel.name
@@ -34,7 +36,7 @@
       - if @task.display_changeset?
         %td#vessel-hin
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.hin
             - else
               = compare_reg_info vessel.hin, registered_vessel.hin
@@ -48,7 +50,7 @@
       - if @task.display_changeset?
         %td#vessel-make_and_model
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.make_and_model
             - else
               = compare_reg_info vessel.make_and_model, registered_vessel.make_and_model
@@ -61,7 +63,7 @@
       - if @task.display_changeset?
         %td#vessel-length_in_meters
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.length_in_meters
             - else
             = compare_reg_info vessel.length_in_meters, registered_vessel.length_in_meters
@@ -74,7 +76,7 @@
       - if @task.display_changeset?
         %td#vessel-number_of_hulls
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.number_of_hulls
             - else
               = compare_reg_info vessel.number_of_hulls, registered_vessel.number_of_hulls
@@ -87,7 +89,7 @@
       - if @task.display_changeset?
         %td#vessel-vessel_type
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.vessel_type
             - else
               = compare_reg_info vessel.vessel_type, registered_vessel.vessel_type
@@ -101,7 +103,7 @@
         %td#vessel-vessel_type_other
           %strong
 
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.vessel_type_other
             - else
               = compare_reg_info vessel.vessel_type_other, registered_vessel.vessel_type
@@ -114,7 +116,7 @@
       - if @task.display_changeset?
         %td#vessel-mmsi_number
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.mmsi_number
             - else
               = compare_reg_info vessel.mmsi_number, registered_vessel.mmsi_number
@@ -128,7 +130,7 @@
       - if @task.display_changeset?
         %td#vessel-radio_call_sign
           %strong
-            - if @submission.uneditable?
+            - if submission_cannot_be_edited
               = vessel.radio_call_sign
             - else
               = compare_reg_info vessel.radio_call_sign, registered_vessel.radio_call_sign
