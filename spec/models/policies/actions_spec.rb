@@ -1,18 +1,41 @@
 require "rails_helper"
 
 describe Policies::Actions do
-  context "#readonly" do
+  context "#readonly?" do
     let!(:user) { create(:user) }
-    subject { described_class.readonly?(submission, user) }
 
-    context "when the submission is open" do
-      let(:submission) { create(:submission) }
-      it { expect(subject).to be_falsey }
+    subject { described_class.readonly?(task, user) }
+
+    context "when there is no task" do
+      let(:task) { nil }
+
+      it { expect(subject).to be_truthy }
     end
 
-    context "when the submission is closed" do
-      let(:submission) { create(:closed_submission) }
-      it { expect(subject).to be_truthy }
+    context "with a task" do
+      let(:task) { create(:submission_task, submission: submission) }
+
+      context "when the submission is open" do
+        let(:submission) { create(:submission) }
+
+        it { expect(subject).to be_truthy }
+
+        context "and the task is claimed by the user" do
+          let(:task) { create(:claimed_task) }
+
+          before do
+            expect(task).to receive(:claimed_by?).with(user).and_return(true)
+          end
+
+          it { expect(subject).to be_falsey }
+        end
+      end
+
+      context "when the submission is closed" do
+        let(:submission) { create(:closed_submission) }
+
+        it { expect(subject).to be_truthy }
+      end
     end
   end
 
@@ -37,35 +60,6 @@ describe Policies::Actions do
       before { submission.task = :foo }
 
       it { expect(subject).to be_truthy }
-    end
-  end
-
-  context "#editable?" do
-    before do
-      allow(submission).to receive(:closed?).and_return(closed)
-    end
-
-    let(:closed) { false }
-    let(:submission) { build(:submission) }
-
-    subject { submission.editable? }
-
-    it { expect(subject).to be_truthy }
-
-    context "when the current_state is closed" do
-      let(:closed) { true }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when Policies::Workflow.approved_name_required?" do
-      before do
-        allow(Policies::Workflow)
-          .to receive(:approved_name_required?)
-          .and_return(true)
-      end
-
-      it { expect(subject).to be_falsey }
     end
   end
 

@@ -15,23 +15,16 @@ class Policies::Actions
       # Policies::Definitions.approval_errors(task).empty?
     end
 
-    def editable?(submission)
-      return false if Policies::Workflow.approved_name_required?(submission)
-      !submission.closed?
-    end
-
     def registered_vessel_required?(submission)
       ApplicationType
         .new(submission.application_type)
         .registered_vessel_required?
     end
 
-    def readonly?(obj, user)
-      if obj.is_a?(Submission)
-        obj.closed?
-      elsif obj.is_a?(Submission::Task)
-        !(obj.current_state == :assigned && obj.claimant == user)
-      end
+    def readonly?(task, user)
+      task.blank? ||
+        !task.claimed_by?(user) ||
+        task.submission.closed?
     end
   end
 end
