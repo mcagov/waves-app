@@ -41,7 +41,7 @@
         #tab_content_correspondence.tab-pane.fade{"aria-labelledby" => "correspondence-tab", :role => "tabpanel"}
           = render partial: "shared/notification_list/base",
             locals: { notification_list: submission.notification_list }
-          - if @submission.editable? && !current_user.read_only?
+          - unless @readonly
             = render partial: "submissions/actions/add_correspondence", locals: { submission: submission }
 
         #tab_content_payment.tab-pane.fade{"aria-labelledby" => "payment-tab", :role => "tabpanel"}
