@@ -3,7 +3,7 @@ cache: bundler
 addons:
   postgresql: '9.5'
 script:
-  - bundle exec rails db:setup
+  - bundle exec rails db:migrate
   - xvfb-run bundle exec rspec spec
   - bundle exec rubocop
   - bundle exec brakeman
