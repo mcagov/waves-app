@@ -15,5 +15,5 @@ describe "Registry not editable" do
 end
 
 def registry_not_editable
-  "This task does not permit editing of registry details."
+  "This task does not permit updating registered particulars"
 end

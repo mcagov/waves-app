@@ -1,8 +1,5 @@
 - content_for :task_body do
-  - if DeprecableTask.new(@submission.task).prevented_from_editing?
-    = render partial: "submissions/restricted/show", locals: { submission: @submission }
-  - else
-    = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/show",
-      locals: { submission: @submission }
+  = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/show",
+    locals: { submission: @submission }
 
 = render partial: "base", locals: { task: @task, submission: @submission }

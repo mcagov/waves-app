@@ -21,10 +21,6 @@ class DeprecableTask < WavesUtilities::Task
     ].include?(@key)
   end
 
-  def prevented_from_editing?
-    [:closure, :current_transcript, :historic_transcript].include?(@key)
-  end
-
   def mortgages?
     [:mortgage, :mortgage_other].include?(@key)
   end

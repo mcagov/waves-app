@@ -1,5 +1,28 @@
 - content_for :task_body do
   .x_panel
-    .x_content.red This task does not permit editing of registry details.
+    .x_content
+      %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
+
+        %ul#submissionTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a#vessel-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_content_vessel", :role => "tab"} Vessel Info
+
+          %li{:role => "presentation"}
+            %a#supporting-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_supporting", :role => "tab"} Supporting Info
+
+
+          %li{:role => "presentation"}
+            %a#documents-tab{"data-toggle" => "tab", :href => "#documents_tab", :role => "tab"} Certificates & Documents
+
+        #submissionTabContent.tab-content
+          #tab_content_vessel.tab-pane.fade.active.in{"aria-labelledby" => "vessel-tab", :role => "tabpanel"}
+            This task does not permit updating registered particulars
+
+          #tab_content_supporting.tab-pane.fade{"aria-labelledby" => "supporting-tab", :role => "tabpanel"}
+            = render partial: "submissions/basic/body/supporting_info"
+
+          #documents_tab.tab-pane{"aria-labelledby" => "documents-tab", :role => "tabpanel"}
+            #documents= render partial: "submissions/extended/forms/documents/base"
+
 
 = render partial: "base", locals: { task: @task, submission: @submission }
