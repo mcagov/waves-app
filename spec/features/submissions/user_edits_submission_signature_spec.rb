@@ -1,10 +1,11 @@
 require "rails_helper"
 
-xdescribe "User edits submission signature" do
+describe "User edits submission signature" do
   before do
     create(:registered_vessel, reg_no: "SSR200001")
     visit_claimed_task
-    click_on("New Registration")
+
+    find("#edit-submission-signature").click
   end
 
   scenario "toggling the task type" do
@@ -12,8 +13,7 @@ xdescribe "User edits submission signature" do
     fill_in("Official Number", with: "SSR200001")
     click_on("Save")
 
-    expect(@submission.registered_vessel).to be_present
-    click_on("Change of Vessel details")
+    expect(Submission.last.registered_vessel).to be_present
   end
 
   scenario "changing the part of the registry" do
@@ -21,7 +21,6 @@ xdescribe "User edits submission signature" do
     click_on("Save")
 
     expect(page).to have_text("The application has been moved to Part I")
-    expect(@submission.registered_vessel).to be_falsey
-    expect(@submission).to be_unassigned
+    expect(Submission.last.registered_vessel).to be_falsey
   end
 end

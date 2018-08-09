@@ -24,7 +24,6 @@ class Submission::SignaturesController < InternalPagesController
     if @submission.part.to_sym == current_activity.part
       redirect_to submission_path(@submission)
     else
-      @submission.unclaimed! if @submission.assigned?
       render :part_changed
     end
   end
