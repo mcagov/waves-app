@@ -96,6 +96,10 @@ class Submission::Task < ApplicationRecord
     "#{submission.ref_no}/#{submission_ref_counter}"
   end
 
+  def claimed_by?(user)
+    claimed? && claimant == user
+  end
+
   def process_task
   end
 
