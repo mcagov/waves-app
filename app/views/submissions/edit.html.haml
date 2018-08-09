@@ -1,3 +1,8 @@
+- content_for :heading_descriptor do
+  %em #{@task.service}
+
+- @bg_class = "bg-green"
+
 = render partial: "submissions/info/base", locals: { submission: @submission, task: @task }
 = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/edit",
   locals: { submission: @submission }
