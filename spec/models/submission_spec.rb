@@ -30,7 +30,7 @@ describe Submission, type: :model do
     let(:submission) { create(:submission) }
 
     before do
-      tasks = double(:tasks, active: active_tasks)
+      tasks = double(:tasks, active: active_tasks, initialising: [])
       allow(submission).to receive(:tasks).and_return(tasks)
     end
 

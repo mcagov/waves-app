@@ -43,7 +43,7 @@ class Submission < ApplicationRecord
   delegate :registration_status, to: :registered_vessel, allow_nil: true
 
   def closeable?
-    tasks.active.empty?
+    tasks.active.empty? && tasks.initialising.empty?
   end
 
   def electronic_delivery?
