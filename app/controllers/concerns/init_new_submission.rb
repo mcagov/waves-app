@@ -15,12 +15,11 @@ module InitNewSubmission
   end
 
   def init_new_submission
-    params_task = params[:submission][:application_type]
-    unless DeprecableTask.new(params_task).new_registration?
-      params[:submission].delete(:vessel)
-    end
-
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
+
+    unless Policies::Actions.registered_vessel_required?(@submission)
+      @submission.vessel_reg_no = nil
+    end
   end
 end

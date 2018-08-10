@@ -20,9 +20,7 @@
           %td.soft-label Official Number
           %td.official_no
             %strong
-              - if submission.new_registration?
-                N/A
-              - else
+              - if Policies::Actions.new(submission).registered_vessel_required?
                 = submission.vessel_reg_no
                 - if @submission.claimant == current_user && !@linkable_submission
                   = link_to "#change-vessel",
@@ -30,6 +28,8 @@
                     "data-toggle" => "modal",
                     class: "btn btn-xs btn-info" do
                     Change
+              - else
+                N/A
         %tr
           %td.soft-label Target Date
           %td

@@ -66,12 +66,8 @@ class Decorators::Submission < SimpleDelegator
     DeprecableTask.new(task).address_can_be_changed?
   end
 
-  def new_registration?
-    DeprecableTask.new(task).new_registration?
-  end
-
   def changed_vessel_attribute(attr_name)
-    return if new_registration? || !registered_vessel
+    return unless registered_vessel
 
     registered_version = registered_vessel.send(attr_name).to_s.strip
     changeset_version = @submission.vessel.send(attr_name).to_s.strip
