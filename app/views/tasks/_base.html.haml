@@ -40,7 +40,7 @@
         %table.table.table-striped.table-hover#tasks
           %thead
             %tr
-              %th
+              %th Status
               %th Vessel
               %th Official Number
               - if Policies::Workflow.uses_registration_types?(current_activity.part)
