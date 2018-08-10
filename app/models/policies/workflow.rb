@@ -9,7 +9,8 @@ class Policies::Workflow
 
     def generate_official_no?(submission)
       return false if Policies::Definitions.part_3?(submission)
-      submission.actionable? && !approved_name_required?(submission)
+      # submission.actionable? && !approved_name_required?(submission)
+      !approved_name_required?(submission)
     end
 
     def can_edit_official_number?(user)
