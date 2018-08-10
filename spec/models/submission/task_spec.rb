@@ -18,23 +18,23 @@ describe Submission::Task do
   end
 
   context "#claimed_by?" do
-    # context "with a claimed_task" do
-    #   let(:task) { create(:claimed_task) }
+    context "with a claimed_task" do
+      let(:task) { create(:claimed_task) }
 
-    #   it "is claimed by the user" do
-    #     expect(task.claimed_by?(task.claimant)).to be_truthy
-    #   end
+      it "is claimed by the user" do
+        expect(task.claimed_by?(task.claimant)).to be_truthy
+      end
 
-    #   it "is claimed by another user" do
-    #     expect(task.claimed_by?(create(:user)).to be_falsey
-    #   end
-    # end
+      it "is claimed by another user" do
+        expect(task.claimed_by?(create(:user))).to be_falsey
+      end
+    end
 
-    # context "with an unclaimed_task" do
-    #   let(:task) { create(:submission_task) }
+    context "with an unclaimed_task" do
+      let(:task) { create(:submission_task) }
 
-    #   it { expect(task.claimed_by?(:foo)).to be_falsey }
-    # end
+      it { expect(task.claimed_by?(:foo)).to be_falsey }
+    end
   end
 
   context "#start_date" do
