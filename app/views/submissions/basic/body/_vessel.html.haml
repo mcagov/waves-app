@@ -5,7 +5,7 @@
   %thead
     %th Vessel Details
 
-    - if @task.display_registry_info?
+    - if @submission.registered_vessel
       %th Current Information
 
     - if @task.display_changeset?
@@ -14,7 +14,7 @@
     %tr
       %td{width: "30%"} Vessel Name
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td#registry-vessel-name{width: "30%"}= registered_vessel.name
 
       - if @task.display_changeset?
@@ -30,7 +30,7 @@
     %tr
       %td Hull Identification Number (HIN)
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.hin
 
       - if @task.display_changeset?
@@ -44,7 +44,7 @@
     %tr
       %td Make and model
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.make_and_model
 
       - if @task.display_changeset?
@@ -57,7 +57,7 @@
     %tr
       %td Length
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.length_in_meters
 
       - if @task.display_changeset?
@@ -70,7 +70,7 @@
     %tr
       %td Number of hulls
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.number_of_hulls
 
       - if @task.display_changeset?
@@ -83,7 +83,7 @@
     %tr
       %td Vessel type
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.vessel_type
 
       - if @task.display_changeset?
@@ -96,7 +96,7 @@
     %tr
       %td Vessel type (other)
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td n/a
 
       - if @task.display_changeset?
@@ -110,7 +110,7 @@
     %tr
       %td MMSI Number
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.mmsi_number
 
       - if @task.display_changeset?
@@ -124,7 +124,7 @@
     %tr
       %td Radio Call Sign
 
-      - if @task.display_registry_info?
+      - if @submission.registered_vessel
         %td= registered_vessel.radio_call_sign
 
       - if @task.display_changeset?

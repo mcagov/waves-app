@@ -16,11 +16,6 @@ class Decorators::Submission < SimpleDelegator
     source.titleize if source
   end
 
-  def display_registry_info?
-    return false if DeprecableTask.new(task).re_registration?
-    registered_vessel
-  end
-
   def display_changeset?
     DeprecableTask.new(task).builds_registry?
   end
