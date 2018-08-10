@@ -1,4 +1,4 @@
 .modal.fade{id: "approve-application", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = render partial: "/submissions/modals/approve/form", locals: { submission: submission }
+      = render partial: "/submissions/modals/approve/form", locals: { submission: submission, task: task }

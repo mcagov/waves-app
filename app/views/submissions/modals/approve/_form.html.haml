@@ -5,28 +5,27 @@
     %h4.modal-title
       = t("submission.approval.modal-title.#{submission.task}")
   .modal-body.approve-message
-    - task = DeprecableTask.new(submission.task)
     - content_rendered = false
 
-    - if task.prints_certificate?
-      - content_rendered = true
-      = render partial: "submissions/modals/approve/certificate",
-        locals: { submission: submission, approval_f: approval_f }
+    / - if task.prints_certificate?
+    /   - content_rendered = true
+    /   = render partial: "submissions/modals/approve/certificate",
+    /     locals: { submission: submission, task: task, approval_f: approval_f }
 
-    - if task == :closure
-      - content_rendered = true
-      = render partial: "submissions/modals/approve/closure",
-        locals: { submission: submission, approval_f: approval_f }
+    / - if task == :closure
+    /   - content_rendered = true
+    /   = render partial: "submissions/modals/approve/closure",
+    /     locals: { submission: submission, approval_f: approval_f }
 
-    - if task.prints_current_transcript?
-      - content_rendered = true
-      = render partial: "submissions/modals/approve/transcript",
-        locals: { attachment: :current_transcript }
+    / - if task.prints_current_transcript?
+    /   - content_rendered = true
+    /   = render partial: "submissions/modals/approve/transcript",
+    /     locals: { attachment: :current_transcript }
 
-    - if task.prints_historic_transcript?
-      - content_rendered = true
-      = render partial: "submissions/modals/approve/transcript",
-        locals: { attachment: :historic_transcript }
+    / - if task.prints_historic_transcript?
+    /   - content_rendered = true
+    /   = render partial: "submissions/modals/approve/transcript",
+    /     locals: { attachment: :historic_transcript }
 
     - unless content_rendered
       %p You are about to approve this submission.
