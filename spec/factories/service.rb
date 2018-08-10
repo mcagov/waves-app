@@ -3,6 +3,14 @@ FactoryBot.define do
     standard_days 10
     premium_days 3
 
+    trait :carving_and_marking_required do
+      rules { [:carving_and_marking_required] }
+    end
+
+    trait :declarations_required do
+      rules { [:declarations_required] }
+    end
+
     trait :issues_csr do
       rules { [:issues_csr] }
     end

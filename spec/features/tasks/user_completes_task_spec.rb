@@ -26,13 +26,14 @@ describe "User completes a task", js: true do
   end
 
   scenario "when the task has validation errors" do
-    service = create(:demo_service, rules: [:validates_on_approval])
-    visit_claimed_task(service: service)
+    visit_claimed_task(
+      submission: create(:submission, part: :part_1, correspondent_id: nil),
+      service: create(:demo_service, :validates_on_approval))
 
     within("#actions") { click_on("Complete Task") }
 
     within("#task-validation-errors") do
-      expect(page).to have_text("Correspondent is required")
+      expect(page).to have_text("correspondent is required")
     end
   end
 end
