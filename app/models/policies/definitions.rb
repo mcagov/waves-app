@@ -28,40 +28,6 @@ class Policies::Definitions
       part_4?(obj) && registration_type(obj) == :fishing
     end
 
-    def approval_errors(submission)
-      unless DeprecableTask.new(submission.task).validates_on_approval?
-        return []
-      end
-
-      errors = vessel_errors(submission)
-
-      unless DeprecableTask.new(submission.task) == :manual_override
-        errors << submission_errors(submission)
-      end
-
-      errors.flatten
-    end
-
-    def vessel_errors(submission)
-      errors = []
-      errors << :vessel_required if submission.vessel.name.blank?
-      errors << :owners_required if submission.owners.empty?
-      errors
-    end
-
-    # rubocop:disable Metrics/CyclomaticComplexity
-    def submission_errors(submission)
-      errors = []
-      errors << :vessel_frozen if frozen?(submission)
-      errors << :declarations_required if undeclared?(submission)
-      errors << :payment_required if unpaid?(submission)
-      errors << :carving_marking_receipt if cm_pending?(submission)
-      errors << :shareholding_count if sh_incomplete?(submission)
-      errors << :correspondent_required if no_correspondent?(submission)
-      errors
-    end
-    # rubocop:enable Metrics/CyclomaticComplexity
-
     def frozen?(obj)
       obj.registration_status == :frozen
     end

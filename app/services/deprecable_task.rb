@@ -11,12 +11,6 @@ class DeprecableTask < WavesUtilities::Task
     [:change_vessel].include?(@key)
   end
 
-  def validates_on_approval?
-    ![
-      :issue_csr, :closure, :current_transcript, :historic_transcript
-    ].include?(@key)
-  end
-
   def mortgages?
     [:mortgage, :mortgage_other].include?(@key)
   end
