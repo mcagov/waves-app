@@ -3,10 +3,6 @@ class DeprecableTask < WavesUtilities::Task
     [:provisional].include?(@key)
   end
 
-  def re_registration?
-    [:re_registration].include?(@key)
-  end
-
   def change_vessel?
     [:change_vessel].include?(@key)
   end

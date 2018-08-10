@@ -40,21 +40,6 @@ class Policies::Definitions
       AccountLedger.new(submission).awaiting_payment?
     end
 
-    def cm_pending?(submission)
-      return false if submission.carving_and_markings.empty?
-      submission.carving_and_marking_received_at.blank?
-    end
-
-    def sh_incomplete?(submission)
-      return false unless Policies::Workflow.uses_shareholding?(submission)
-      ShareHolding.new(submission).status != :complete
-    end
-
-    def no_correspondent?(submission)
-      return false if part_3?(submission)
-      submission.correspondent.blank?
-    end
-
     def fishing_vessel?(obj)
       part_2?(obj) || part_4_fishing?(obj)
     end

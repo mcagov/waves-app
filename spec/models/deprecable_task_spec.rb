@@ -16,20 +16,4 @@ describe DeprecableTask do
       it { expect(subject).to be_falsey }
     end
   end
-
-  context "#re_registration?" do
-    subject { described_class.new(task_type).re_registration? }
-
-    context ":new_registration" do
-      let(:task_type) { :new_registration }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context ":re_registration" do
-      let(:task_type) { :re_registration }
-
-      it { expect(subject).to be_truthy }
-    end
-  end
 end
