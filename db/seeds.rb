@@ -410,6 +410,7 @@ Service.create(
     :registry_not_editable,
   ],
   activities: [
+    :generate_duplicate_certificate,
   ],
   print_templates: [
     :registration_certificate,
