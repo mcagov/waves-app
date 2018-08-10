@@ -106,6 +106,10 @@ module Submission::Associations
     end
   end
 
+  def default_task
+    tasks.order("submission_ref_counter").confirmed.first
+  end
+
   def task
     application_type
   end

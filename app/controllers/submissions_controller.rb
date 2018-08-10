@@ -94,10 +94,9 @@ class SubmissionsController < InternalPagesController
   end
 
   def check_redirection_policy
-    default_task = @submission.tasks.confirmed.first
-    if default_task
+    if @submission.default_task
       return redirect_to(
-        submission_task_path(@submission, @submission.tasks.confirmed.first))
+        submission_task_path(@submission, @submission.default_task))
     else
       return redirect_to(submission_tasks_path(@submission))
     end
