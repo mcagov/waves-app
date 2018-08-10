@@ -23,10 +23,10 @@
 
 = yield :task_body
 
-- if @task.actionable? && !current_user.read_only?
+- unless @readonly
   .row.no-print#actions
     .col-xs-12
-      - if @task.claimant == current_user
+      - if @task.claimed_by?(current_user)
         - if @task.referrable?
           / refer button and modal
           = render partial: "submission/tasks/modals/refer"
@@ -46,11 +46,6 @@
           %i.fa.fa-trash
           Cancel Task
 
-      - elsif @task.referred?
-        = form_tag claim_referral_submission_task_path(@submission, @task) do
-          = submit_tag "Reclaim Referral", class: "btn btn-success"
-
-      - if Policies::Actions.approvable?(@task, current_user)
         / complete button and modal
         = render partial: "submission/tasks/modals/validate"
         = link_to validate_submission_task_path(@submission, @task),
@@ -59,4 +54,10 @@
           remote: true do
           %i.fa.fa-check
           Complete Task
+
+      - elsif @task.referred?
+        = form_tag claim_referral_submission_task_path(@submission, @task) do
+          = submit_tag "Reclaim Referral", class: "btn btn-success"
+
+
 

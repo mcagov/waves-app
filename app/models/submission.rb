@@ -54,14 +54,6 @@ class Submission < ApplicationRecord
     Builders::SubmissionBuilder.build_defaults(self)
   end
 
-  def actionable?
-    Policies::Actions.actionable?(self)
-  end
-
-  def approvable?(_registration_start_date = nil)
-    Policies::Actions.approvable?(self)
-  end
-
   def process_application(approval_params = {})
     Submission::ApplicationProcessor.run(self, approval_params)
   end

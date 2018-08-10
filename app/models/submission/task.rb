@@ -103,10 +103,6 @@ class Submission::Task < ApplicationRecord
   def process_task
   end
 
-  def actionable?
-    true
-  end
-
   def referrable?
     true
   end

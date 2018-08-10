@@ -61,12 +61,11 @@
             = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
             = hidden_field_tag "skip_name_validation", "false"
 
-  - if @submission.actionable? && @submission.claimant == current_user
-    - content_for(:submission_save_buttons) do
-      - if @name_validated
-        = render partial: "submission/name_approvals/actions/validated"
-      - else
-        = render partial: "submission/name_approvals/actions/not_validated"
+  - content_for(:submission_save_buttons) do
+    - if @name_validated
+      = render partial: "submission/name_approvals/actions/validated"
+    - else
+      = render partial: "submission/name_approvals/actions/not_validated"
   .row
     .col-md-12
       .x_panel
