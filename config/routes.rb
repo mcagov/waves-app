@@ -140,7 +140,7 @@ Rails.application.routes.draw do
               controller: "submission/declarations",
               only: [:create, :update, :destroy] do
       member do
-        post :complete
+        post :complete, constraints: ->(request) { request.format == :html }
       end
     end
 
