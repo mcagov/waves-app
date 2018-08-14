@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe VesselNameValidator do
-  xdescribe "#valid?" do
+  describe "#valid?" do
     context ":part_1" do
       subject { described_class.valid?(:part_1, "BOBS BOAT", "foo", nil) }
 
@@ -17,7 +17,7 @@ describe VesselNameValidator do
 
       context "with a name_approval of the same name also in part_1" do
         before do
-          create(:submission_name_approval, part: :part_1, name: "BOBS BOAT")
+          create(:name_approval, part: :part_1, name: "BOBS BOAT")
         end
 
         it { expect(subject).to be_falsey }
@@ -25,10 +25,9 @@ describe VesselNameValidator do
 
       context "with an expired name_approval of the same name also in part_1" do
         before do
-          create(:submission_name_approval,
-                 part: :part_1,
-                 name: "BOBS BOAT",
-                 approved_until: 1.week.ago)
+          create(:name_approval, part: :part_1,
+                                 name: "BOBS BOAT",
+                                 approved_until: 1.week.ago)
         end
 
         it { expect(subject).to be_truthy }
