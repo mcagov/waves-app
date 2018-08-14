@@ -78,23 +78,23 @@ Rails.application.routes.draw do
     end
 
     resources :agent,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/agents", only: [:update, :destroy]
 
     resources :applicant,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/applicants", only: [:update]
 
     resource :approval,
              controller: "submission/approvals", only: [:show, :create]
 
     resources :beneficial_owners,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/beneficial_owners",
               only: [:create, :update, :destroy]
 
     resource :carving_and_marking,
-             constraints: lambda { |req| req.format == :js },
+             constraints: ->(request) { request.format == :js },
              controller: "submission/carving_and_marking",
              only: [:create] do
       member do
@@ -107,12 +107,12 @@ Rails.application.routes.draw do
              only: [:show, :update, :destroy]
 
     resources :directed_bys,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/directed_bys",
               only: [:create, :update, :destroy]
 
     resources :managed_bys,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/managed_bys",
               only: [:create, :update, :destroy]
 
@@ -121,22 +121,22 @@ Rails.application.routes.draw do
              controller: "submission/correspondences"
 
     resource :correspondent,
-             constraints: lambda { |req| req.format == :js },
+             constraints: ->(request) { request.format == :js },
              only: [:update],
              controller: "submission/correspondents"
 
     resources :declaration_group_members,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declaration_group_members",
               only: [:create, :destroy]
 
     resources :declaration_groups,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declaration_groups",
               only: [:create, :update]
 
     resources :declarations,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declarations",
               only: [:create, :update, :destroy] do
       member do
@@ -145,11 +145,11 @@ Rails.application.routes.draw do
     end
 
     resources :charterers,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/charterers",
               only: [:create, :update, :destroy] do
       resources :charter_parties,
-                constraints: lambda { |req| req.format == :js },
+                constraints: ->(request) { request.format == :js },
                 controller: "submission/charterers/charter_parties",
                 only: [:create, :update, :destroy]
     end
@@ -159,27 +159,27 @@ Rails.application.routes.draw do
               controller: "submission/documents"
 
     resources :engines,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/engines",
               only: [:create, :update, :destroy]
 
     resources :managers,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/managers",
               only: [:create, :update, :destroy]
 
     resources :mortgages,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/mortgages",
               only: [:create, :update, :destroy]
 
     resource :official_no,
-             constraints: lambda { |req| req.format == :js },
+             constraints: ->(request) { request.format == :js },
              controller: "submission/official_no",
              only: [:update]
 
     resource :managing_owner,
-             constraints: lambda { |req| req.format == :js },
+             constraints: ->(request) { request.format == :js },
              only: [:update],
              controller: "submission/managing_owners"
 
@@ -188,17 +188,17 @@ Rails.application.routes.draw do
              only: [:show, :update]
 
     resources :notes,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               only: [:create, :update],
               controller: "submission/notes"
 
     resources :representatives,
-              constraints: lambda { |req| req.format == :js },
+              constraints: ->(request) { request.format == :js },
               controller: "submission/representatives",
               only: [:update, :destroy]
 
     resource :shareholding,
-             constraints: lambda { |req| req.format == :js },
+             constraints: ->(request) { request.format == :js },
              controller: "submission/shareholdings",
              only: [:show]
 
