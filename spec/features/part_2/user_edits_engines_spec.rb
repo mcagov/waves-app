@@ -1,8 +1,11 @@
 require "rails_helper"
 
-xdescribe "User edits engines", js: :true do
+describe "User edits engines", js: :true do
   scenario "in general" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Engines")
     click_on("Add Engine(s)")
 

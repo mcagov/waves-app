@@ -1,8 +1,11 @@
 require "rails_helper"
 
-xdescribe "User sets the managing owner", js: true do
+describe "User sets the managing owner", js: true do
   scenario "adding an owner and setting them as managing owner" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Owners & Shareholding")
     click_on("Add Individual Owner")
 

@@ -1,14 +1,19 @@
 require "rails_helper"
 
-xdescribe "User edits shares held outright", js: :true do
+describe "User edits shares held outright", js: :true do
   scenario "in general" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Owners & Shareholding")
 
     expect(page)
-      .to have_css("#total_shares", text: "Total shares allocated: 64")
+      .to have_css(
+        "#total_shares",
+        text: "Total shares allocated: 0 (64 shares un-allocated)")
 
-    within("#shares_held_outright") { click_on("64") }
+    within("#shares_held_outright") { click_on("0") }
 
     within(".modal-content") do
       find("#declaration_shares_held").set("16")

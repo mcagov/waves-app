@@ -1,8 +1,10 @@
 require "rails_helper"
 
-xdescribe "User save vessel details", js: :true do
-  scenario "in general" do
-    visit_name_approved_part_2_submission
+describe "User save vessel details", js: :true do
+  xscenario "in general" do
+    visit_claimed_task(
+      submission: create(:submission, part: :part_2),
+      service: create(:service, :update_registry_details))
 
     fill_in("Gross Tonnage", with: "1000")
     fill_in("Name of Builder", with: "BOB BUILDS STUFF")
@@ -20,8 +22,10 @@ xdescribe "User save vessel details", js: :true do
     expect(Submission.last).to be_unassigned
   end
 
-  scenario "for an existing vessel, attribute changes have class has-changed" do
-    visit_part_2_change_vessel_submission
+  xscenario "for an existing vessel, attribute changes have class has-changed" do
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
 
     fill_in("Gross Tonnage", with: "1000")
     click_on("Save Details")

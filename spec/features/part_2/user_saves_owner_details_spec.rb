@@ -1,8 +1,13 @@
 require "rails_helper"
 
-xdescribe "User save owner details", js: :true do
+describe "User save owner details", js: :true do
+  before do
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+  end
+
   scenario "Individual owner" do
-    visit_name_approved_part_2_submission
     click_on("Owners & Shareholding")
     click_on("Add Individual Owner")
 
@@ -29,7 +34,6 @@ xdescribe "User save owner details", js: :true do
   end
 
   scenario "Corporate owner" do
-    visit_name_approved_part_2_submission
     click_on("Owners & Shareholding")
     click_on("Add Corporate Owner")
 

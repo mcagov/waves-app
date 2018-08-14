@@ -1,16 +1,17 @@
 class Submission::DocumentsController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
 
   def create
     @document = Document.new(document_params)
     @document.actioned_by = current_user
     @document.noteable = @submission
     # fire a state machine event #unreferred if currently referred
-    @submission.unreferred! if @submission.can_unreferred?
+    @task.unrefer! if @task.referred?
 
     if @document.save
       flash[:notice] = "The document has been saved"
-      log_work!(@submission, @document, :document_entry)
+      log_work!(@task, @document, :document_entry)
     end
 
     render_update_js
@@ -40,7 +41,7 @@ class Submission::DocumentsController < InternalPagesController
 
   def render_update_js
     respond_to do |format|
-      format.html { redirect_to submission_path(@submission) }
+      format.html { redirect_to submission_task_path(@submission, @task) }
       format.js do
         @modal_id = params[:modal_id]
         render "/submissions/extended/forms/documents/update"
