@@ -45,10 +45,6 @@ class Submission::Task::NotificationsController < InternalPagesController
     @submission = Submission.find(params[:submission_id])
   end
 
-  def load_task
-    @task = Submission::Task.find(params[:task_id])
-  end
-
   def notification_params
     params.require(:notification).permit(:subject, :body, :actionable_at)
   end
