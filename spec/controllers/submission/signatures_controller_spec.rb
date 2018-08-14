@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe Submission::SignaturesController, type: :controller do
+describe Submission::SignaturesController, type: :controller do
   before do
     sign_in claimant
   end
@@ -8,7 +8,7 @@ xdescribe Submission::SignaturesController, type: :controller do
   let!(:claimant) { create(:user) }
 
   describe "#update" do
-    let!(:submission) { create(:submission, state: :assigned) }
+    let!(:submission) { create(:submission) }
 
     context "for a valid change_vessel" do
       let!(:registered_vessel) { create(:registered_vessel) }
