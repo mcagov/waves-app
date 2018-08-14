@@ -1,13 +1,16 @@
 require "rails_helper"
 
-xdescribe "User edits mortgages", js: :true do
+describe "User edits mortgages", js: :true do
   scenario "adding, editing and removing" do
-    visit_name_approved_part_1_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_1_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Mortgages")
     click_on("Add Mortgage")
 
     within(".modal.fade.in") do
-      select("A", from: "Priority Code")
+      select("B", from: "Priority Code")
       select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
@@ -31,7 +34,7 @@ xdescribe "User edits mortgages", js: :true do
     end
 
     within("#mortgages_tab") do
-      expect(page).to have_css(".priority", text: "A")
+      expect(page).to have_css(".priority", text: "B")
       expect(page).to have_css(".mortgage_type", text: "Intent")
       expect(page).to have_css(".reference_number", text: "REF 1")
       expect(page).to have_css(".executed_at", text: "Thu Feb 01, 2001")
@@ -43,7 +46,7 @@ xdescribe "User edits mortgages", js: :true do
     end
 
     within(".modal.fade.in") do
-      expect(find_field("Priority Code").value).to eq("A")
+      expect(find_field("Priority Code").value).to eq("B")
       fill_in("Reference Number", with: "REF 2")
       fill_in("Date Discharged", with: "02/02/2012")
       click_on("Save Mortgage")

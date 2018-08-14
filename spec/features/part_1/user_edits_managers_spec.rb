@@ -1,11 +1,14 @@
 require "rails_helper"
 
-xdescribe "User edits managers", js: :true do
+describe "User edits managers", js: :true do
   scenario "in general" do
-    visit_name_approved_part_1_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_1_vessel),
+      service: create(:service, :update_registry_details))
+
     expect_managers(true)
 
-    click_on("Manager")
+    click_on("Managers")
     click_on("Add Manager")
 
     within(".modal.fade.in") do
