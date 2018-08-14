@@ -61,10 +61,12 @@ class Policies::Validations
   end
 
   def carving_marking_not_issued?
+    return false if Policies::Definitions.part_3?(submission)
     submission.carving_and_markings.empty?
   end
 
   def carving_marking_not_received?
+    return false if Policies::Definitions.part_3?(submission)
     submission.carving_and_marking_received_at.blank?
   end
 

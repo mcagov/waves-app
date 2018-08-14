@@ -67,8 +67,14 @@ describe Policies::Validations do
                service: create(:service, :carving_and_marking_required))
       end
 
-      context "default" do
+      context "part_3" do
         let(:submission) { create(:submission) }
+
+        it { expect(subject).to be_empty }
+      end
+
+      context "default" do
+        let(:submission) { create(:submission, part: :part_1) }
 
         it { expect(subject).to include(:carving_marking_not_issued) }
       end
@@ -76,6 +82,7 @@ describe Policies::Validations do
       context "when the carving_and_marking has not been received" do
         let(:submission) do
           create(:submission,
+                 part: :part_1,
                  carving_and_markings: [build(:carving_and_marking)])
         end
 
