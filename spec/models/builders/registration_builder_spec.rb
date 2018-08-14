@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Builders::RegistrationBuilder do
+xdescribe Builders::RegistrationBuilder do
   context ".create" do
     context "with a task for a registered_vessel" do
       let!(:registered_vessel) { create(:registered_vessel) }
