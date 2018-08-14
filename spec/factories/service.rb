@@ -11,6 +11,14 @@ FactoryBot.define do
       rules { [:declarations_required] }
     end
 
+    trait :generate_new_5_year_registration do
+      activities { [:generate_new_5_year_registration] }
+    end
+
+    trait :generate_provisional_registration do
+      activities { [:generate_provisional_registration] }
+    end
+
     trait :issues_csr do
       rules { [:issues_csr] }
     end
