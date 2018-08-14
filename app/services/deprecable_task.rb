@@ -3,10 +3,6 @@ class DeprecableTask < WavesUtilities::Task
     [:provisional].include?(@key)
   end
 
-  def change_vessel?
-    [:change_vessel].include?(@key)
-  end
-
   def mortgages?
     [:mortgage, :mortgage_other].include?(@key)
   end
