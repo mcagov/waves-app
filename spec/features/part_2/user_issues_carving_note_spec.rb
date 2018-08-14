@@ -1,8 +1,11 @@
 require "rails_helper"
 
-xdescribe "User issues a Carving & Marking Note", js: true do
+describe "User issues a Carving & Marking Note", js: true do
   scenario "by email" do
-    visit_carving_and_marking_ready_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :carving_and_marking_required))
+
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do
@@ -20,11 +23,13 @@ xdescribe "User issues a Carving & Marking Note", js: true do
     end
 
     expect(Notification::CarvingAndMarkingNote.count).to eq(1)
-    creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
   end
 
   scenario "as a printed page" do
-    visit_carving_and_marking_ready_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :carving_and_marking_required))
+
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do
@@ -45,12 +50,14 @@ xdescribe "User issues a Carving & Marking Note", js: true do
       expect(page).to have_text("%PDF")
     end
 
-    creates_a_work_log_entry("Submission", :issued_carving_and_marking_note)
     expect(PrintJob.last).to be_printing
   end
 
-  scenario "when the pre-requisites have not been met" do
-    visit_name_approved_part_2_submission
+  scenario "when the pre-requisites have not been met (no vessel_reg_no)" do
+    visit_claimed_task(
+      submission: create(:name_approval).submission,
+      service: create(:service, :carving_and_marking_required))
+
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do

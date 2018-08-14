@@ -41,6 +41,5 @@ class Submission::CarvingAndMarkingController < InternalPagesController
 
   def process_carving_and_marking
     Builders::CarvingAndMarkingBuilder.build(@carving_and_marking)
-    log_work!(@submission, @submission, :issued_carving_and_marking_note)
   end
 end
