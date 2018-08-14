@@ -22,7 +22,7 @@ describe "User save vessel details", js: :true do
     expect(Submission.last).to be_unassigned
   end
 
-  xscenario "for an existing vessel, attribute changes have class has-changed" do
+  xscenario "for existing vessel, attribute changes have class has-changed" do
     visit_claimed_task(
       submission: create(:submission, :part_2_vessel),
       service: create(:service, :update_registry_details))
