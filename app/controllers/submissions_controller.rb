@@ -4,7 +4,7 @@ class SubmissionsController < InternalPagesController
   before_action :prevent_read_only!, except: [:show, :edit]
   before_action :load_submission,
                 only: [:show, :edit, :update, :close]
-  before_action :load_task, only: [:edit]
+  before_action :load_task, only: [:edit, :update]
   before_action :check_redirection_policy, only: [:show]
   before_action :enable_readonly, only: [:edit]
 
@@ -106,7 +106,11 @@ class SubmissionsController < InternalPagesController
     respond_to do |format|
       format.html do
         flash[:notice] = "The application has been updated"
-        redirect_to submission_path(@submission)
+        if @task
+          redirect_to submission_task_path(@submission, @task)
+        else
+          redirect_to submission_path(@submission)
+        end
       end
       format.js do
         view_mode = Activity.new(@submission.part).view_mode
