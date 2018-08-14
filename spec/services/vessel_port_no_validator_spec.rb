@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe VesselPortNoValidator do
-  xcontext "#valid?" do
+  context "#valid?" do
     subject { described_class.valid?(123, "SU") }
 
     let(:port_no) { 123 }
@@ -28,7 +28,7 @@ describe VesselPortNoValidator do
     context "with a name_approval with the same port_no" do
       before do
         create(
-          :submission_name_approval,
+          :name_approval,
           port_no: port_no,
           port_code: port_code, approved_until: approved_until)
       end
