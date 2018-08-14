@@ -91,18 +91,5 @@ describe Builders::DeclarationBuilder do
         expect(group_member.declaration_owner.email).to eq("alice@example.com")
       end
     end
-
-    context "when declarations are not required" do
-      let(:declarations_required) { false }
-
-      it "sets both declarations to not_required" do
-        expect(submission.declarations.not_required.count)
-          .to eq(submission.declarations.count)
-      end
-
-      it "does not build any notifications" do
-        expect(Notification::OutstandingDeclaration.count).to eq(0)
-      end
-    end
   end
 end

@@ -10,7 +10,6 @@ class Declaration < ApplicationRecord
   state_machine auto_scopes: true do
     state :incomplete
     state :completed
-    state :not_required
 
     event :declared, timestamp: true do
       transitions to: :completed, from: :incomplete

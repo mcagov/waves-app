@@ -19,7 +19,6 @@ class Builders::DeclarationBuilder
           Declaration.create(
             submission: @submission,
             owner: build_owner(owner),
-            state: initial_state_for_task,
             shares_held: owner[:shares_held].to_i,
             entity_type: owner[:entity_type] || :individual)
 
@@ -70,11 +69,7 @@ class Builders::DeclarationBuilder
     end
 
     def initial_state_for_task
-      if DeprecableTask.new(@submission.task).declarations_required_on_create?
-        :incomplete
-      else
-        :not_required
-      end
+      :incomplete
     end
 
     def build_owner(owner)

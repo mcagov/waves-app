@@ -9,8 +9,6 @@ class Decorators::Declaration < SimpleDelegator
       false
     elsif new_record?
       DeprecableTask.new(submission.task).declarations_required_on_add_owner?
-    elsif not_required?
-      false
     else
       true
     end

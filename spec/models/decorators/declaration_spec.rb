@@ -23,12 +23,6 @@ describe Decorators::Declaration, type: :model do
       let(:declaration) { create(:declaration, state: declaration_state) }
       subject { described_class.new(declaration).declaration_required? }
 
-      context "when the declaration state is :not_required" do
-        let(:declaration_state) { :not_required }
-
-        it { expect(subject).to be_falsey }
-      end
-
       context "when the declaration state is :incomplete" do
         let(:declaration_state) { :incomplete }
 
