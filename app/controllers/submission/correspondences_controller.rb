@@ -1,5 +1,6 @@
 class Submission::CorrespondencesController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
 
   def create
     @correspondence = Correspondence.new(correspondence_params)
@@ -8,7 +9,7 @@ class Submission::CorrespondencesController < InternalPagesController
 
     flash[:notice] = "The correspondence has been saved" if @correspondence.save
 
-    redirect_to submission_path(@submission)
+    redirect_to submission_task_path(@submission, @task)
   end
 
   def destroy
@@ -18,7 +19,7 @@ class Submission::CorrespondencesController < InternalPagesController
       flash[:notice] = "That item of correspondence has been removed"
     end
 
-    redirect_to submission_path(@submission)
+    redirect_to submission_task_path(@submission, @task)
   end
 
   private

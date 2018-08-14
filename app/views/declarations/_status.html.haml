@@ -15,4 +15,5 @@
     = simple_form_for declaration,
                       url: complete_submission_declaration_path(@submission, declaration),
                       method: :post do |f|
+      = hidden_field_tag :task_id, @task.id
       .form-group= f.button :submit, "Complete Declaration"

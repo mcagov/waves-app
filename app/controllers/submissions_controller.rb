@@ -102,7 +102,7 @@ class SubmissionsController < InternalPagesController
     end
   end
 
-  def render_update_js
+  def render_update_js # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       format.html do
         flash[:notice] = "The application has been updated"
