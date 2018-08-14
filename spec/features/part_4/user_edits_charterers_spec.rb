@@ -1,8 +1,11 @@
 require "rails_helper"
 
-xdescribe "User edits charterers", js: :true do
+describe "User edits charterers", js: :true do
   before do
-    visit_name_approved_part_4_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_4_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Charterers")
     click_on("Add Bareboat Charter")
 
