@@ -22,6 +22,12 @@
           %td
             %strong= submission.received_at
         %tr
+          %td.soft-label Application Expiry Date:
+          %td.expiry-date
+            %strong
+              - if submission.name_approval
+                = submission.name_approval.approved_until
+        %tr
           %td.soft-label Declarations:
           %td
             %strong= submission.declaration_status

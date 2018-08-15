@@ -12,6 +12,7 @@
       defaults: { disabled: @readonly },
       method: :patch do |f|
       = f.input :part, as: :hidden
+      = hidden_field_tag :task_id, @task.id
 
       - if @name_validated
         = hidden_field_tag "name_validated", "1"
@@ -56,16 +57,16 @@
                 collection: name_approved_until_collection,
                 label: "Approved for",
                 include_blank: false
-        - if @name_approval.errors.present?
-          .row
-            = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
-            = hidden_field_tag "skip_name_validation", "false"
-
-  - content_for(:submission_save_buttons) do
-    - if @name_validated
-      = render partial: "submission/name_approvals/actions/validated"
-    - else
-      = render partial: "submission/name_approvals/actions/not_validated"
+          - if @name_approval.errors.present?
+            .row
+              .col-md-6
+                = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
+                = hidden_field_tag "skip_name_validation", "false"
+        .x_footer
+          - if @name_validated
+            = render partial: "submission/name_approvals/actions/validated"
+          - else
+            = render partial: "submission/name_approvals/actions/not_validated"
   .row
     .col-md-12
       .x_panel

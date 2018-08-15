@@ -42,7 +42,7 @@ class Submission::NameApprovalsController < InternalPagesController
   def process_update(perform_validations = true)
     Builders::NameApprovalBuilder.create(
       @submission, @name_approval, perform_validations)
-    log_work!(@submission, @submission, :name_approval)
-    redirect_to edit_submission_path(@submission)
+    log_work!(@task, @task, :name_approval)
+    redirect_to submission_task_path(@submission, @task)
   end
 end
