@@ -8,5 +8,9 @@
     Remove
 - elsif task.claimed?
   = "Claimed by #{task.claimant}"
+- elsif task.unclaimed?
+  = form_tag claim_submission_task_path(@submission, task) do
+    = submit_tag "Claim", class: "btn btn-primary btn-xs"
+
 - else
   = task.current_state.to_s.humanize

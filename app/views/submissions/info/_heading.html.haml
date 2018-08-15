@@ -13,8 +13,3 @@
 
   .col-md-2
     %h2.pull-right= render partial: "/shared/registration_status", locals: { registration_status: submission.registration_status }
-
-    - if task && task.unclaimed?
-      .pull-right
-      = form_tag claim_submission_task_path(submission, task) do
-        = submit_tag "Claim", class: "btn btn-primary pull-right"
