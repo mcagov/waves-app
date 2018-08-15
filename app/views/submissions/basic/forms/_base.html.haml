@@ -32,11 +32,11 @@
                 #agent_list
                   = render partial: "submissions/basic/forms/agent/list"
 
-  .row.no-print
-    .col-sm-12
-      = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
-        %i.fa.fa-check
-        Save Application
+            .row.no-print
+              .col-md-12
+                = button_tag(type: 'submit', class: "btn btn-primary btn-lg pull-right") do
+                  %i.fa.fa-check
+                  Save Application
 
 #owners_modals
   = render partial: "/submissions/basic/forms/owners/modals"
