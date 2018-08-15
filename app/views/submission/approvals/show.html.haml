@@ -35,14 +35,6 @@
         %i.fa.fa-list-ol
         Return to My Tasks
       .pull-right
-
-        - if display_csr_forms?(@submission) && DeprecableTask.new(@submission.task).builds_registry?
-          = link_to vessel_csrs_path(@submission.registered_vessel),
-            method: :post,
-            class: 'btn btn-info btn-lg' do
-            %i.fa.fa-cog
-            Issue CSR
-
         = link_to tasks_next_task_path, class: 'btn btn-success btn-lg' do
           %i.fa.fa-arrow-circle-right{style: 'font-size: 1.2em; font-weight: bold;'}
           Process Next Task
