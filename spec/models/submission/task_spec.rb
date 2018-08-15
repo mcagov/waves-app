@@ -18,7 +18,7 @@ describe Submission::Task do
   end
 
   context "#claimed_by?" do
-    context "with a claimed_task" do
+    context "with a claimed task" do
       let(:task) { create(:claimed_task) }
 
       it "is claimed by the user" do
@@ -27,6 +27,13 @@ describe Submission::Task do
 
       it "is claimed by another user" do
         expect(task.claimed_by?(create(:user))).to be_falsey
+      end
+
+      context "that has been completed" do
+        it do
+          task.complete!
+          expect(task.claimed_by?(task.claimant)).to be_falsey
+        end
       end
     end
 

@@ -23,7 +23,10 @@ class Submission::Task < ApplicationRecord
 
   scope :confirmed, -> { where.not(state: [:initialising]) }
   scope :active, -> { where(state: [:unclaimed, :claimed, :referred]) }
-  scope :claimed_by, -> (claimant) { where(claimant: claimant) }
+
+  scope :claimed_by, (lambda do |claimant|
+    where(claimant: claimant).where(state: :claimed)
+  end)
 
   scope :service_level, (lambda do |service_level|
     where(service_level: service_level) unless service_level.blank?
