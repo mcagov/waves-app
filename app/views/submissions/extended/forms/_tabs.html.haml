@@ -88,23 +88,24 @@
             #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               #notes= render partial: "submission/notes/base", locals: { submission: @submission }
 
-        .x_footer
-          .row
-            .col-md-12
-              = button_tag type: 'submit',
-                data: { target: "#save-incomplete-application", toggle: "modal" },
-                class: "btn btn-primary btn-lg pull-right" do
-                %i.fa.fa-floppy-o
-                Save Details
+        - unless @readonly
+          .x_footer
+            .row
+              .col-md-12
+                = button_tag type: 'submit',
+                  data: { target: "#save-incomplete-application", toggle: "modal" },
+                  class: "btn btn-primary btn-lg pull-right" do
+                  %i.fa.fa-floppy-o
+                  Save Details
 
-              .modal.fade{id: 'save-incomplete-application', role: "dialog", tabindex: "-1"}
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-                        %span{"aria-hidden" => "true"} ×
-                      %h4.modal-title Saving Application Details
-                    %form
-                      .modal-body
-                        %p.text-center
-                          = image_tag 'ajax-loader.gif'
+                .modal.fade{id: 'save-incomplete-application', role: "dialog", tabindex: "-1"}
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                          %span{"aria-hidden" => "true"} ×
+                        %h4.modal-title Saving Application Details
+                      %form
+                        .modal-body
+                          %p.text-center
+                            = image_tag 'ajax-loader.gif'

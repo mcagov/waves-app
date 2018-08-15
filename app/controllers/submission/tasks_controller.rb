@@ -3,7 +3,8 @@ class Submission::TasksController < InternalPagesController
 
   before_action :load_submission
   before_action :load_task, except: [:index, :create, :confirm]
-  before_action :check_task_processing_rules, only: [:show]
+  before_action :check_task_processing_rules, only: [:show, :edit]
+  before_action :enable_readonly, only: [:show, :edit]
 
   def index
     @tasks = @submission
