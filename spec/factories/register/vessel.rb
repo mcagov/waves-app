@@ -18,6 +18,7 @@ FactoryBot.define do
     representative            { build(:registered_representative) }
     propulsion_system         { "Fins" }
     registration_type         "full"
+    gross_tonnage             500
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do
