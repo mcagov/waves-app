@@ -6,6 +6,7 @@
     = task.service
 .modal-body#task-validation-errors
   %h5 The following errors prevent this task from being completed:
-  - validation_errors.each do |validation_error|
-    .red= t("submission.validation_error.#{validation_error}")
-    %br
+  %ul
+    - validation_errors.each do |validation_error|
+      %li.red= t("submission.validation_error.#{validation_error}")
+
