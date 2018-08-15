@@ -9,13 +9,14 @@
     %tbody
       %tr
         %td CSR Number
-        %td= f.input :issue_number, label: false
+        %td= f.input :issue_number, label: false, disabled: @readonly
       %tr
         %td 1. This document applies from (date):
         %td
           = f.input :issued_at, label: false,
             input_html: { "data-provide" => "datepicker",
             "data-date-autoclose" => "true",
+            disabled: @readonly,
             "data-date-format" => "dd/mm/yyyy"}
       %tr
         %td 2. Flag State:
@@ -25,29 +26,29 @@
         %td= @csr_form.registered_at
       %tr
         %td 4. Name of ship:
-        %td= f.input :vessel_name, label: false
+        %td= f.input :vessel_name, label: false, disabled: @readonly
       %tr
         %td 5. Port of registration:
-        %td= f.input :port_name, label: false
+        %td= f.input :port_name, label: false, disabled: @readonly
       %tr
         %td
           6. Name of current registered owner(s):
           %p
           Registered address(es):
         %td
-          = f.input :owner_names, label: false
-          = f.input :owner_addresses, label: false
+          = f.input :owner_names, label: false, disabled: @readonly
+          = f.input :owner_addresses, label: false, disabled: @readonly
       %tr
         %td 7. Registered owner identification number:
-        %td= f.input :owner_identification_number, label: false
+        %td= f.input :owner_identification_number, label: false, disabled: @readonly
       %tr
         %td
           8. If applicable, name of current registered bareboat charterer(s):
           %p
           Registered address(es):
         %td
-          = f.input :charterer_names, label: false
-          = f.input :charterer_addresses, label: false
+          = f.input :charterer_names, label: false, disabled: @readonly
+          = f.input :charterer_addresses, label: false, disabled: @readonly
       %tr
         %td
           9. Name of Company (International Safety Management):
@@ -56,46 +57,47 @@
           %p
           Address(es) of its Safety Management activities (if different):
         %td
-          = f.input :manager_name, label: false
-          = f.input :manager_address, label: false
-          = f.input :safety_management_address, label: false
+          = f.input :manager_name, label: false, disabled: @readonly
+          = f.input :manager_address, label: false, disabled: @readonly
+          = f.input :safety_management_address, label: false, disabled: @readonly
       %tr
         %td 10. Company identification number:
-        %td= f.input :manager_company_number, label: false
+        %td= f.input :manager_company_number, label: false, disabled: @readonly
       %tr
         %td 11. Name of all classification societies with which the ship is classed:
-        %td= f.input :classification_societies, label: false
+        %td= f.input :classification_societies, label: false, disabled: @readonly
       %tr
         %td
           12. Administration / Government / Recognised Organisation which issued the Document of Compliance:
           %p
           Body which carried out audit (if different):
         %td
-          = f.input :document_of_compliance_issuer, label: false
-          = f.input :document_of_compliance_auditor, label: false
+          = f.input :document_of_compliance_issuer, label: false, disabled: @readonly
+          = f.input :document_of_compliance_auditor, label: false, disabled: @readonly
       %tr
         %td
           13. Administration / Government / Recognised Organisation which issued the  Safety Management Certificate:
           %p
           Body which carried out audit (if different):
         %td
-          = f.input :smc_issuer, label: false
-          = f.input :smc_auditor, label: false
+          = f.input :smc_issuer, label: false, disabled: @readonly
+          = f.input :smc_auditor, label: false, disabled: @readonly
       %tr
         %td
           14. Administration / Government / Recognised Organisation which issued the  International Ship Security Certificate:
           %p
           Body which carried out the verification (if different):
         %td
-          = f.input :issc_issuer, label: false
-          = f.input :issc_auditor, label: false
+          = f.input :issc_issuer, label: false, disabled: @readonly
+          = f.input :issc_auditor, label: false, disabled: @readonly
       %tr
         %td 15. Date on which the ship ceased to be registered with the State indicated in 2:
         %td
           = f.input :registration_closed_at, label: false,
             input_html: { "data-provide" => "datepicker",
             "data-date-autoclose" => "true",
+            disabled: @readonly,
             "data-date-format" => "dd/mm/yyyy"}
       %tr
         %td 16. Remarks
-        %td= f.input :remarks, label: false
+        %td= f.input :remarks, label: false, disabled: @readonly
