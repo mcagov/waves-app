@@ -1,4 +1,4 @@
-= render partial: "submissions/basic/tabs", locals: {submission: submission}
+= render partial: "submissions/basic/tabs", locals: {submission: submission, task: task}
 
 - unless @submission.registered_vessel
   = render partial: "submissions/basic/similar_vessels", locals: {submission: submission}

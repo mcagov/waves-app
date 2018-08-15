@@ -1,5 +1,13 @@
 .x_panel
   .x_content
+    .row
+      .col-md-12
+        - if Policies::Actions.editable?(task, current_user)
+          = link_to "Edit Application",
+            edit_submission_path(submission, task_id: task.id),
+            class: "btn btn-primary pull-right",
+            id: "edit_application"
+
     %div{"data-example-id" => "togglable-tabs", :role => "tabpanel"}
 
       %ul#submissionTab.nav.nav-tabs.bar_tabs{:role => "tablist"}
