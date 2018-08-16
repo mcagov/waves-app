@@ -104,6 +104,7 @@ class Submission::Task < ApplicationRecord
   end
 
   def process_task
+    ApplicationProcessor.run(self, {})
   end
 
   def price_in_pounds

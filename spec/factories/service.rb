@@ -21,6 +21,11 @@ FactoryBot.define do
 
     trait :issues_csr do
       rules { [:issues_csr] }
+      activities { [:issue_csr] }
+    end
+
+    trait :prints_csr_form do
+      print_templates { [:csr_form] }
     end
 
     trait :registered_vessel_required do

@@ -54,10 +54,6 @@ class Submission < ApplicationRecord
     Builders::SubmissionBuilder.build_defaults(self)
   end
 
-  def process_application(approval_params = {})
-    Submission::ApplicationProcessor.run(self, approval_params)
-  end
-
   def job_type
     DeprecableTask.new(task).description
   end

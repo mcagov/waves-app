@@ -4,7 +4,7 @@ describe "User issues CSR", js: true do
   before do
     visit_claimed_task(
       submission: create(:submission, :part_1_vessel),
-      service: create(:demo_service, :issues_csr))
+      service: create(:demo_service, :issues_csr, :prints_csr_form))
   end
 
   scenario "save details with the Save Details button" do
@@ -27,9 +27,9 @@ describe "User issues CSR", js: true do
     expect(Submission.last.csr_form.remarks).to eq("NO COMMENT")
   end
 
-  xscenario "pending implementation" do
+  scenario "completing the task" do
     click_on("Complete Task")
-    within("modal.fade.in") { click_on("Complete Task") }
+    within(".modal.fade.in") { click_on("Complete Task") }
 
     pdf_window = window_opened_by do
       click_on("Print CSR")
