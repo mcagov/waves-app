@@ -9,7 +9,7 @@ describe ServiceStandard do
         .and_return(days_away)
     end
 
-    let(:task) { create(:submission_task) }
+    let(:task) { create(:task) }
 
     subject { described_class.status(task) }
 

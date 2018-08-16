@@ -13,14 +13,14 @@ describe AccountLedger do
     end
 
     context "unpaid" do
-      let(:submission) { create(:submission_task).submission }
+      let(:submission) { create(:task).submission }
 
       it { expect(subject).to eq(:unpaid) }
     end
 
     context "paid" do
       let(:submission) do
-        submission = create(:submission_task).submission
+        submission = create(:task).submission
         create(:payment, submission: submission, amount: 2500)
         submission.reload
       end
@@ -29,7 +29,7 @@ describe AccountLedger do
 
     context "part_paid" do
       let(:submission) do
-        submission = create(:submission_task).submission
+        submission = create(:task).submission
         create(:payment, submission: submission, amount: 50)
         submission.reload
       end
@@ -120,7 +120,7 @@ describe AccountLedger do
     end
 
     context "with a chargeable task" do
-      let!(:submission) { create(:submission_task).submission }
+      let!(:submission) { create(:task).submission }
 
       it { expect(subject).to eq(2500) }
     end
@@ -137,7 +137,7 @@ describe AccountLedger do
 
     context "with a chargeable task and one (over) payment" do
       let!(:submission) do
-        submission = create(:submission_task).submission
+        submission = create(:task).submission
         create(:payment, submission: submission, amount: 2000)
         submission.reload
       end

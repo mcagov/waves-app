@@ -8,7 +8,7 @@ describe "User close a submission", js: true do
   end
 
   context "when the submission has no active tasks" do
-    let(:submission) { create(:completed_submission_task).submission }
+    let(:submission) { create(:completed_task).submission }
 
     scenario "the submission can be closed" do
       page.accept_confirm { click_on(close_application_link_text) }

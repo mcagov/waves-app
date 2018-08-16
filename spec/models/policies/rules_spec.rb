@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Policies::Rules do
   context "checking to see if a rule is enforced" do
-    let(:task) { create(:submission_task, service: service) }
+    let(:task) { create(:task, service: service) }
 
     subject { described_class.new(task).issues_csr }
 

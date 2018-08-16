@@ -1,8 +1,8 @@
 require "rails_helper"
 
 feature "User toggles task lists", type: :feature, js: true do
-  let!(:submission_task) { create(:unclaimed_task) }
-  let(:submission) { submission_task.submission }
+  let!(:task) { create(:unclaimed_task) }
+  let(:submission) { task.submission }
 
   scenario "moving a task around the queues" do
     login_to_part_3
@@ -36,7 +36,7 @@ def expect_page_to_display_task # rubocop:disable Metrics/AbcSize
     expect(page)
       .to have_css(".vessel-name", text: submission.vessel.name)
     expect(page).to have_content("Demo Service")
-    expect(page).to have_content(submission_task.ref_no)
+    expect(page).to have_content(task.ref_no)
     expect(page).to have_content(" days away")
   end
 end

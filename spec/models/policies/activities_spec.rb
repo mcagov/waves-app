@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Policies::Activities do
   context "checking to see if an activity occurs" do
-    let(:task) { create(:submission_task, service: service) }
+    let(:task) { create(:task, service: service) }
 
     subject { described_class.new(task).generate_provisional_registration }
 

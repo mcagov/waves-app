@@ -5,11 +5,11 @@ describe RefCounter do
     let!(:submission) { create(:submission) }
 
     let!(:submission_task_1) do
-      create(:submission_task, submission: submission)
+      create(:task, submission: submission)
     end
 
     let!(:submission_task_2) do
-      create(:submission_task, submission: submission)
+      create(:task, submission: submission)
     end
 
     context "the first" do

@@ -2,14 +2,14 @@ require "rails_helper"
 
 describe Submission::Task do
   context "#ref_no" do
-    let!(:submission_task) { create(:submission_task) }
+    let!(:task) { create(:task) }
 
-    subject { submission_task.ref_no }
+    subject { task.ref_no }
 
     context "when the task has been confirmed" do
-      before { submission_task.confirm! }
+      before { task.confirm! }
 
-      it { expect(subject).to eq("#{submission_task.submission.ref_no}/1") }
+      it { expect(subject).to eq("#{task.submission.ref_no}/1") }
     end
 
     context "when the task has not been confirmed" do
@@ -38,7 +38,7 @@ describe Submission::Task do
     end
 
     context "with an unclaimed_task" do
-      let(:task) { create(:submission_task) }
+      let(:task) { create(:task) }
 
       it { expect(task.claimed_by?(:foo)).to be_falsey }
     end
@@ -46,8 +46,8 @@ describe Submission::Task do
 
   context "#start_date" do
     let(:submission) { create(:submission, received_at: "21/07/2016") }
-    let(:submission_task) { create(:submission_task, submission: submission) }
-    subject { submission_task.start_date }
+    let(:task) { create(:task, submission: submission) }
+    subject { task.start_date }
 
     it { expect(subject).to eq("21/07/2016".to_date) }
   end
@@ -56,54 +56,54 @@ describe Submission::Task do
     before do
       Timecop.travel(Time.new(2016, 6, 18))
 
-      submission_task.reset_dates
+      task.reset_dates
     end
 
     after { Timecop.return }
 
-    let!(:submission_task) do
+    let!(:task) do
       create(:unclaimed_task,
              start_date: "2011-12-12",
              target_date: "2011-12-29")
     end
 
     it "resets the start date" do
-      expect(submission_task.start_date).to eq(Date.new(2016, 6, 18))
+      expect(task.start_date).to eq(Date.new(2016, 6, 18))
     end
 
     it "resets the target_date" do
-      expect(submission_task.target_date).to eq(Date.new(2016, 7, 4))
+      expect(task.target_date).to eq(Date.new(2016, 7, 4))
     end
   end
 
   describe "service_level_validations validations" do
-    let(:submission_task) do
+    let(:task) do
       build(
-        :submission_task,
+        :task,
         service_level: service_level,
         service: create(:standard_only_service))
     end
-    before { submission_task.valid? }
+    before { task.valid? }
 
     context "is required" do
       let(:service_level) { nil }
-      it { expect(submission_task.errors).to include(:service_level) }
+      it { expect(task.errors).to include(:service_level) }
     end
 
     context "is an allowed type" do
       let(:service_level) { :standard }
-      it { expect(submission_task.errors).not_to include(:service_level) }
+      it { expect(task.errors).not_to include(:service_level) }
     end
 
     context "is a disallowed type" do
       let(:service_level) { :premium }
-      it { expect(submission_task.errors).to include(:service_level) }
+      it { expect(task.errors).to include(:service_level) }
     end
   end
 
   context "#target_date" do
-    let(:submission_task) { create(:submission_task) }
-    subject { submission_task.target_date }
+    let(:task) { create(:task) }
+    subject { task.target_date }
 
     it "is initialised as blank" do
       expect(subject).to be_blank
@@ -112,112 +112,112 @@ describe Submission::Task do
     context "#confirm" do
       before do
         expect(TargetDate)
-          .to receive(:for_task).with(submission_task).and_return("13/11/2012")
+          .to receive(:for_task).with(task).and_return("13/11/2012")
 
-        submission_task.confirm!
+        task.confirm!
       end
 
-      it { expect(submission_task.target_date).to eq("13/11/2012".to_date) }
+      it { expect(task.target_date).to eq("13/11/2012".to_date) }
     end
   end
 
   describe "state machine events" do
-    let(:submission_task) { create(:submission_task) }
+    let(:task) { create(:task) }
     let(:user) { create(:user) }
 
     context "#confirm!" do
       before do
-        expect(submission_task).to receive(:set_submission_ref_counter)
-        expect(submission_task).to receive(:set_defaults)
+        expect(task).to receive(:set_submission_ref_counter)
+        expect(task).to receive(:set_defaults)
       end
 
-      it { submission_task.confirm! }
+      it { task.confirm! }
     end
 
     context "#claim!" do
       before do
-        submission_task.confirm!
-        submission_task.claim!(user)
+        task.confirm!
+        task.claim!(user)
       end
 
-      it { expect(submission_task.claimant).to eq(user) }
+      it { expect(task.claimant).to eq(user) }
     end
 
     context "#refer!" do
       before do
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.refer!
+        task.confirm!
+        task.claim!(user)
+        task.refer!
       end
 
-      it { expect(submission_task.claimant).to be_nil }
+      it { expect(task.claimant).to be_nil }
     end
 
     context "#unclaim!" do
       before do
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.unclaim!
+        task.confirm!
+        task.claim!(user)
+        task.unclaim!
       end
 
-      it { expect(submission_task.claimant).to be_nil }
+      it { expect(task.claimant).to be_nil }
     end
 
     context "#complete!" do
       before do
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.complete!
+        task.confirm!
+        task.claim!(user)
+        task.complete!
       end
 
-      it { expect(submission_task).to be_completed }
+      it { expect(task).to be_completed }
     end
 
     context "#cancel!" do
       before do
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.cancel!
+        task.confirm!
+        task.claim!(user)
+        task.cancel!
       end
 
-      it { expect(submission_task).to be_cancelled }
+      it { expect(task).to be_cancelled }
     end
 
     context "#claim_referral!" do
       before do
-        expect(submission_task).to receive(:reset_dates)
+        expect(task).to receive(:reset_dates)
 
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.refer!
-        submission_task.claim_referral!(user)
+        task.confirm!
+        task.claim!(user)
+        task.refer!
+        task.claim_referral!(user)
       end
 
-      it { expect(submission_task).to be_claimed }
-      it { expect(submission_task.claimant).to eq(user) }
+      it { expect(task).to be_claimed }
+      it { expect(task.claimant).to eq(user) }
     end
 
     context "#unrefer!" do
       before do
-        expect(submission_task).to receive(:reset_dates)
+        expect(task).to receive(:reset_dates)
 
-        submission_task.confirm!
-        submission_task.claim!(user)
-        submission_task.refer!
-        submission_task.unrefer!
+        task.confirm!
+        task.claim!(user)
+        task.refer!
+        task.unrefer!
       end
 
-      it { expect(submission_task).to be_unclaimed }
+      it { expect(task).to be_unclaimed }
     end
   end
 
   context "scopes" do
-    let!(:initialising) { create(:submission_task) }
+    let!(:initialising) { create(:task) }
     let!(:unclaimed) { create(:unclaimed_task) }
     let!(:claimed) { create(:claimed_task) }
     let!(:referred) { create(:referred_task) }
     let!(:cancelled) { create(:cancelled_task) }
-    let!(:completed) { create(:completed_submission_task) }
+    let!(:completed) { create(:completed_task) }
 
     it "confirmed" do
       expect(described_class.confirmed).to match(

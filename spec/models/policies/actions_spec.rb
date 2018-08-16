@@ -13,7 +13,7 @@ describe Policies::Actions do
     end
 
     context "with a task" do
-      let(:task) { create(:submission_task, submission: submission) }
+      let(:task) { create(:task, submission: submission) }
 
       context "when the submission is open" do
         let(:submission) { create(:submission) }

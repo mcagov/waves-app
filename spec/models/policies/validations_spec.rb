@@ -5,14 +5,14 @@ describe Policies::Validations do
     subject { described_class.new(task).errors }
 
     context "default state" do
-      let(:task) { build(:submission_task) }
+      let(:task) { build(:task) }
 
       it { expect(subject).to be_empty }
     end
 
     context "for a service that validates_on_approval" do
       let(:task) do
-        build(:submission_task,
+        build(:task,
               submission: submission,
               service: create(:service, :validates_on_approval))
       end
@@ -51,7 +51,7 @@ describe Policies::Validations do
 
     context "for a service that requires declarations" do
       let(:task) do
-        create(:submission_task,
+        create(:task,
                submission: create(:submission,
                                   declarations: [create(:declaration)]),
                service: create(:service, :declarations_required))
@@ -62,7 +62,7 @@ describe Policies::Validations do
 
     context "carving_and_marking_required" do
       let(:task) do
-        create(:submission_task,
+        create(:task,
                submission: submission,
                service: create(:service, :carving_and_marking_required))
       end

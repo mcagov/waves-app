@@ -27,7 +27,7 @@ describe TargetDate do
   end
 
   context ".for_task" do
-    let(:task) { create(:submission_task) }
+    let(:task) { create(:task) }
 
     before do
       dbl_target_date = double(TargetDate, calculate: 99)
