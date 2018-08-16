@@ -18,8 +18,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -41,8 +39,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -63,8 +59,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -85,8 +79,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_provisional_registration,
@@ -105,8 +97,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_provisional_registration,
@@ -124,8 +114,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_provisional_registration,
@@ -144,7 +132,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -165,7 +152,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -190,8 +176,6 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -214,8 +198,6 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -237,8 +219,6 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -259,8 +239,6 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -284,7 +262,6 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -305,7 +282,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :ownership_can_be_changed,
   ],
   activities: [
     :generate_new_5_year_registration,
@@ -327,7 +303,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -350,7 +325,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :vessel_can_be_edited,
   ],
   activities: [
     :update_registry_details,
@@ -425,7 +399,6 @@ Service.create(
   part_2: { standard: 25, premium: 50 },
   rules: [
     :registered_vessel_required,
-    :ownership_can_be_changed,
   ],
   activities: [
     :update_registry_details,
@@ -441,7 +414,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :ownership_can_be_changed,
   ],
   activities: [
     :update_registry_details,
@@ -456,8 +428,6 @@ Service.create(
   rules: [
     :validates_on_approval,
     :declarations_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
     :carving_and_marking_required,
   ],
   activities: [
@@ -527,7 +497,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :address_can_be_changed,
   ],
   activities: [
     :update_registry_details,
@@ -548,7 +517,6 @@ Service.create(
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
-    :address_can_be_changed,
   ],
   activities: [
     :update_registry_details,
@@ -662,8 +630,6 @@ Service.create(
   part_4: { standard: 0 },
   rules: [
     :registered_vessel_required,
-    :ownership_can_be_changed,
-    :vessel_can_be_edited,
     :not_referrable,
   ],
   activities: [

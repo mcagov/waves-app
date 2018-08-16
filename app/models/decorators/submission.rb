@@ -49,18 +49,6 @@ class Decorators::Submission < SimpleDelegator
     Policies::Declarations.new(@submission).declaration_status
   end
 
-  def vessel_can_be_edited?
-    DeprecableTask.new(task).vessel_can_be_edited?
-  end
-
-  def ownership_can_be_changed?
-    DeprecableTask.new(task).ownership_can_be_changed?
-  end
-
-  def address_can_be_changed?
-    DeprecableTask.new(task).address_can_be_changed?
-  end
-
   def changed_vessel_attribute(attr_name)
     return unless registered_vessel
 
