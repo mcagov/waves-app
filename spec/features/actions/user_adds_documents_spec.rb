@@ -1,8 +1,9 @@
 require "rails_helper"
 
-xfeature "User adds documents to a submission", type: :feature, js: true do
+feature "User adds documents to a submission", type: :feature, js: true do
   scenario "in general" do
-    visit_assigned_submission
+    visit_claimed_task
+
     click_on("Documents")
     click_on("Add Document")
 

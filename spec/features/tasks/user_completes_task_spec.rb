@@ -36,4 +36,8 @@ describe "User completes a task", js: true do
       expect(page).to have_text("correspondent is required")
     end
   end
+
+  scenario "generate_new_5_year_registration"
+  scenario "generate_provisional_registration"
+  scenario "close_registration"
 end
