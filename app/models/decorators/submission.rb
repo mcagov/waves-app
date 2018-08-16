@@ -95,10 +95,6 @@ class Decorators::Submission < SimpleDelegator
     vessel_reg_no
   end
 
-  def referrable?
-    DeprecableTask.new(task).referrable?
-  end
-
   def applicant_description
     return "Not set" unless applicant_name.present?
     description = applicant_name

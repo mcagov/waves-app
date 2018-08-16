@@ -106,14 +106,6 @@ class Submission::Task < ApplicationRecord
   def process_task
   end
 
-  def referrable?
-    true
-  end
-
-  def display_changeset?
-    true
-  end
-
   def price_in_pounds
     (price / 100).to_i
   end

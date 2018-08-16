@@ -27,15 +27,14 @@
   .row.no-print#actions
     .col-md-12
       - if @task.claimed_by?(current_user)
-        - if @task.referrable?
-          / refer button and modal
-          = render partial: "submission/tasks/modals/refer"
-          = link_to submission_task_notification_path(@submission, @task, template: :refer),
-            data: { target: "#refer-task", toggle: "modal" },
-            class: "btn btn-warning btn-refer-submission",
-            remote: true do
-            %i.fa.fa-pause
-            Refer Task
+        / refer button and modal
+        = render partial: "submission/tasks/modals/refer"
+        = link_to submission_task_notification_path(@submission, @task, template: :refer),
+          data: { target: "#refer-task", toggle: "modal" },
+          class: "btn btn-warning btn-refer-submission",
+          remote: true do
+          %i.fa.fa-pause
+          Refer Task
 
         / cancel button and modal
         = render partial: "submission/tasks/modals/cancel"
