@@ -6,6 +6,7 @@ class PrintJob < ApplicationRecord
 
   validates :part, presence: true
   validates :template, presence: true
+  validates :printable, presence: true
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
