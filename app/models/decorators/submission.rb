@@ -72,11 +72,7 @@ class Decorators::Submission < SimpleDelegator
   end
 
   def delivery_description
-    if electronic_delivery?
-      "Electronic delivery"
-    elsif delivery_address.active?
-      delivery_address.inline_name_and_address
-    end
+    delivery_address.inline_name_and_address
   end
 
   def radio_call_sign

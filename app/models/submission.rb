@@ -13,12 +13,6 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
   validates :source, presence: true
-  validates :task, presence: true
-
-  validates :task,
-            inclusion: {
-              in: DeprecableTask.validation_helper_task_type_list,
-              message: "must be selected" }
 
   validate :ref_no
   validate :registered_vessel_exists
@@ -46,16 +40,12 @@ class Submission < ApplicationRecord
     tasks.active.empty? && tasks.initialising.empty?
   end
 
-  def electronic_delivery?
-    symbolized_changeset[:electronic_delivery]
-  end
-
   def build_defaults
     Builders::SubmissionBuilder.build_defaults(self)
   end
 
   def job_type
-    DeprecableTask.new(task).description
+    ApplicationType.new(application_type).description
   end
 
   def symbolized_changeset
@@ -90,14 +80,6 @@ class Submission < ApplicationRecord
   end
 
   protected
-
-  def remove_claimant
-    update_attribute(:claimant, nil)
-  end
-
-  def add_claimant(user)
-    update_attribute(:claimant, user)
-  end
 
   def cancel_name_approval
     return unless name_approval

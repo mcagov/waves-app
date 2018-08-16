@@ -59,25 +59,11 @@ describe Decorators::Submission, type: :model do
   end
 
   context "#delivery_description" do
-    before do
-      allow(submission)
-        .to receive(:electronic_delivery?).and_return(electronic_delivery)
-    end
-
     let!(:submission) { build(:submission) }
+
     subject { described_class.new(submission).delivery_description }
 
-    context "with electronic_delivery" do
-      let(:electronic_delivery) { true }
-
-      it { expect(subject).to eq("Electronic delivery") }
-    end
-
-    context "without electronic_delivery" do
-      let(:electronic_delivery) { false }
-
-      it { expect(subject).to match(/BOB DOLE, 11 DOWNING ST/) }
-    end
+    it { expect(subject).to match(/BOB DOLE, 11 DOWNING ST/) }
   end
 
   xcontext "#changed_vessel_attribute" do

@@ -23,16 +23,7 @@ module Api
       end
 
       def process_payment_receipt
-        if submission.electronic_delivery?
-          # Note: ensure that the submission state has
-          # transitioned before the notification is delivered.
-          # This will ensure that there is a registration object
-          # that can be associated with the submission
-          submission.approve_electronic_delivery!
-          create_application_approval_notification
-        else
-          create_application_receipt_notification
-        end
+        create_application_receipt_notification
       end
 
       def submission

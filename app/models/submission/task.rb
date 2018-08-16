@@ -77,10 +77,7 @@ class Submission::Task < ApplicationRecord
 
     event :cancel do
       transitions to: :cancelled, from: :claimed,
-                  on_transition: [
-                    :remove_claimant,
-                    :cancel_name_approval,
-                    :remove_pending_vessel]
+                  on_transition: [:remove_claimant]
     end
 
     event :claim_referral do
@@ -145,11 +142,5 @@ class Submission::Task < ApplicationRecord
 
   def remove_claimant
     update_attribute(:claimant, nil)
-  end
-
-  def cancel_name_approval
-  end
-
-  def remove_pending_vessel
   end
 end
