@@ -14,7 +14,7 @@ class Builders::ClosedRegistrationBuilder
 
     private
 
-    def create_closed_registration
+    def create_closed_registration # rubocop:disable Metrics/MethodLength
       registration = Registration.create(
         vessel_id: @registered_vessel.id,
         registered_at: @previous_registration.try(:registered_at),
@@ -25,6 +25,7 @@ class Builders::ClosedRegistrationBuilder
         actioned_by: @submission.claimant)
 
       @submission.update_attributes(registration: registration)
+      @registered_vessel.update_attributes(current_registration: registration)
 
       registration
     end

@@ -84,9 +84,11 @@ describe Register::Vessel do
 
     context "with an active registration" do
       before do
-        create(
-          :registration,
-          vessel_id: vessel.id, registered_until: 1.day.from_now)
+        vessel.update_attributes(
+          current_registration:
+            create(
+              :registration,
+              vessel_id: vessel.id, registered_until: 1.day.from_now))
       end
 
       it { expect(subject).to eq(:registered) }

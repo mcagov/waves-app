@@ -38,6 +38,10 @@ describe Builders::RegistrationBuilder do
         expect(subject).to eq(task.reload.submission.registration)
       end
 
+      it "sets the vessel#current_registration" do
+        expect(subject).to eq(registered_vessel.reload.current_registration)
+      end
+
       it { expect(subject).not_to be_provisional }
     end
 

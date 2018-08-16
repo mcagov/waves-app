@@ -23,17 +23,21 @@ FactoryBot.define do
 
   factory :registered_vessel, parent: :unregistered_vessel do
     after(:create) do |vessel|
-      create(:registration,
-             registered_vessel: vessel,
-             registry_info: vessel.registry_info,
-             registered_at: 1.year.ago)
+      registration =
+        create(:registration,
+               registered_vessel: vessel,
+               registry_info: vessel.registry_info,
+               registered_at: 1.year.ago)
+      vessel.update_attributes(current_registration: registration)
     end
   end
 
   factory :provisionally_registered_vessel, parent: :registered_vessel do
     after(:create) do |vessel|
-      create(:provisional_registration,
-             registered_vessel: vessel)
+      provisional_registration =
+        create(:provisional_registration,
+               registered_vessel: vessel)
+      vessel.update_attributes(current_registration: provisional_registration)
     end
   end
 

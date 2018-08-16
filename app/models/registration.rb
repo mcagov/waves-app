@@ -5,12 +5,6 @@ class Registration < ApplicationRecord
 
   has_many :submissions, -> { order("created_at desc") }
 
-  after_create :set_vessel_current_registration
-
-  def set_vessel_current_registration
-    registered_vessel.update_columns(current_registration_id: id)
-  end
-
   scope :fishing_vessels, (lambda do
     where(
       "(registry_info#>>'{vessel_info, part}' = 'part_2') OR "\

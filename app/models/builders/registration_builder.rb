@@ -10,6 +10,7 @@ class Builders::RegistrationBuilder
         provisional: provisional)
 
       task.submission.update_attributes(registration: registration)
+      registered_vessel.update_attributes(current_registration: registration)
 
       registration
     end
