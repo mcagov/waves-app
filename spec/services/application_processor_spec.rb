@@ -1,277 +1,152 @@
 require "rails_helper"
 
 describe ApplicationProcessor do
-
-  # This spec covers scenarios encountered by the following services
-
-  # #activities
-  # "generate_new_5_year_registration",
-  # "update_registry_details",
-  # "record_transcript_event",
-  # "generate_provisional_registration",
-  # "generate_duplicate_certificate",
-  # "close_registration",
-  # "issue_csr"
-
-  # #print_templates
-  # "registration_certificate",
-  # "cover_letter",
-  # "provisional_certificate",
-  # "current_transcript",
-  # "historic_transcript",
-  # "csr_form"
   context "#run" do
+    let(:service) do
+      create(:service, activities: activities, print_templates: print_templates)
+    end
+
+    let(:submission) { create(:submission, :part_1_vessel) }
+    let(:registered_vessel) { submission.registered_vessel }
+    let(:task) { create(:task, submission: submission, service: service) }
     let(:approval_params) { {} }
-    let(:submission) { task.submission }
+    let(:activities) { [] }
+    let(:print_templates) { [] }
 
     subject do
       described_class.run(task, approval_params)
     end
 
-    context "generate_new_5_year_registration" do
+    context "activity: update_registry_details" do
       let(:approval_params) { { registration_starts_at: "01/01/2011" } }
-
-      let(:task) { create(:task, :generate_new_5_year_registration) }
+      let(:activities) { [:update_registry_details] }
 
       before do
-        expect(Builders::RegistrationBuilder)
+        expect(Builders::RegistryBuilder)
           .to receive(:create)
-          .with(submission, registered_vessel, "01/01/2011", nil)
+          .with(submission, approval_params)
       end
 
       it { subject }
     end
+
+    context "activity: generate_new_5_year_registration" do
+      let(:approval_params) do
+        {
+          registration_starts_at: "01/01/2011",
+          registration_ends_at: "01/01/2016",
+        }
+      end
+
+      let(:activities) { [:generate_new_5_year_registration] }
+
+      before do
+        expect(Builders::RegistrationBuilder)
+          .to receive(:create)
+          .with(
+            task,
+            registered_vessel, "01/01/2011", "01/01/2016", false)
+      end
+
+      it { subject }
+    end
+
+    context "activity: generate_provisional_registration" do
+      let(:approval_params) do
+        {
+          registration_starts_at: "01/01/2011",
+          registration_ends_at: "01/04/2011",
+        }
+      end
+
+      let(:activities) { [:generate_provisional_registration] }
+
+      before do
+        expect(Builders::RegistrationBuilder)
+          .to receive(:create)
+          .with(
+            task,
+            registered_vessel, "01/01/2011", "01/04/2011", true)
+      end
+
+      it { subject }
+    end
+
+    context "activity: record_transcript_event" do
+      let(:activities) { [:record_transcript_event] }
+
+      before do
+        expect(Builders::RegistrationBuilder)
+          .to receive(:create)
+          .with(
+            task,
+            submission.registered_vessel,
+            registered_vessel.current_registration.registered_at,
+            registered_vessel.current_registration.registered_until,
+            registered_vessel.current_registration.provisional?)
+      end
+
+      it { subject }
+    end
+
+    context "activity: close_registration" do
+      let(:approval_params) do
+        {
+          closure_at: "02/02/2012",
+          closure_reason: "a reason",
+          supporting_info: "something",
+        }
+      end
+
+      let(:activities) { [:close_registration] }
+
+      before do
+        expect(Builders::ClosedRegistrationBuilder)
+          .to receive(:create)
+          .with(task, "02/02/2012", "a reason", "something")
+      end
+
+      it { subject }
+    end
+
+    context "print: registration_certificate, cover_letter and foo" do
+      let(:print_templates) { [:cover_letter, :registration_certificate, :foo] }
+      let(:registration) { create(:registration) }
+
+      before do
+        allow(submission).to receive(:registration).and_return(registration)
+        subject
+      end
+
+      it "builds a cover_letter print job" do
+        cover_letter = PrintJob.find_by(template: :cover_letter)
+        expect(cover_letter.submission).to eq(submission)
+        expect(cover_letter.printable).to eq(submission.reload.registration)
+        expect(cover_letter.part).to eq(submission.part)
+      end
+
+      it "builds a registration_certificate print job" do
+        expect(
+          PrintJob.find_by(template: :registration_certificate)).to be_present
+      end
+
+      it "builds a foo print job" do
+        expect(PrintJob.find_by(template: :foo)).to be_present
+      end
+    end
+
+    context "print: csr_form" do
+      let(:print_templates) { [:csr_form] }
+      let(:csr_form) { create(:csr_form) }
+
+      before do
+        allow(submission).to receive(:csr_form).and_return(csr_form)
+        subject
+      end
+
+      it "builds a csr_form print job" do
+        expect(PrintJob.find_by(template: :csr_form).printable).to eq(csr_form)
+      end
+    end
   end
 end
-
-
-# let(:approval_params) do
-#   {
-#     registration_starts_at: "01/01/2011",
-#     closure_at: "02/02/2012",
-#     closure_reason: "a reason",
-#   }
-# end
-
-
-    # context "with a registered_vessel" do
-    #   let(:submission) do
-    #     create(:submission,
-    #            application_type: task,
-    #            registered_vessel: create(:registered_vessel))
-    #   end
-
-    #   context "change_vessel" do
-    #     let(:task) { :change_vessel }
-
-    #     before do
-    #       expect_registry_builder
-    #       expect_registration_builder
-    #       dont_expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "change_address" do
-    #     let(:task) { :change_address }
-
-    #     before do
-    #       expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       dont_expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "duplicate_certificate" do
-    #     let(:task) { :duplicate_certificate }
-
-    #     before do
-    #       dont_expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "renewal" do
-    #     let(:task) { :renewal }
-
-    #     before do
-    #       expect_registry_builder
-    #       expect_registration_builder
-    #       dont_expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "closure" do
-    #     let(:task) { :closure }
-
-    #     before do
-    #       expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_closed_registration_builder
-    #       dont_expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "current_transcript" do
-    #     let(:task) { :current_transcript }
-
-    #     before do
-    #       dont_expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "current_transcript (electronic_delivery)" do
-    #     let(:task) { :current_transcript }
-
-    #     before do
-    #       submission.changeset["electronic_delivery"] = true
-    #       dont_expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       dont_expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "historic_transcript" do
-    #     let(:task) { :historic_transcript }
-
-    #     before do
-    #       dont_expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "issue_csr" do
-    #     let(:task) { :issue_csr }
-
-    #     before do
-    #       dont_expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "mortgage" do
-    #     let(:task) { :mortgage }
-    #     let(:registered_vessel) { create(:registered_vessel) }
-
-    #     before do
-    #       expect_registry_builder
-    #       expect_mortgage_registration_builder
-    #       dont_expect_cloned_registration_builder
-    #       dont_expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "mortgage_other" do
-    #     let(:task) { :mortgage_other }
-    #     let(:registered_vessel) { create(:registered_vessel) }
-
-    #     before do
-    #       expect_registry_builder
-    #       expect_mortgage_registration_builder
-    #       dont_expect_cloned_registration_builder
-    #       dont_expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-
-    #   context "manual_override" do
-    #     let(:task) { :manual_override }
-
-    #     before do
-    #       expect_registry_builder
-    #       dont_expect_registration_builder
-    #       expect_cloned_registration_builder
-    #       dont_expect_print_job_builder
-    #     end
-
-    #     it { subject }
-    #   end
-    # end
-
-# def expect_registry_builder
-#   expect(Builders::RegistryBuilder)
-#     .to receive(:create)
-#     .with(submission, approval_params)
-#     .and_return(registered_vessel)
-# end
-
-# def dont_expect_registry_builder
-#   expect(Builders::RegistryBuilder).not_to receive(:create)
-# end
-
-# def expect_registration_builder
-#   expect(Builders::RegistrationBuilder)
-#     .to receive(:create)
-#     .with(submission, registered_vessel, "01/01/2011", nil)
-# end
-
-# def dont_expect_registration_builder
-#   expect(Builders::RegistrationBuilder).not_to receive(:create)
-# end
-
-# def expect_mortgage_registration_builder
-#   expect(Builders::RegistrationBuilder)
-#     .to receive(:create)
-#     .with(
-#       submission,
-#       registered_vessel,
-#       registered_vessel.registered_at,
-#       registered_vessel.registered_until)
-# end
-
-# def expect_closed_registration_builder
-#   expect(Builders::ClosedRegistrationBuilder)
-#     .to receive(:create)
-#     .with(submission, "02/02/2012", "a reason", nil)
-# end
-
-# def dont_expect_cloned_registration_builder
-#   expect(Builders::ClonedRegistrationBuilder).not_to receive(:create)
-# end
-
-# def expect_cloned_registration_builder
-#   expect(Builders::ClonedRegistrationBuilder)
-#     .to receive(:create).with(submission)
-# end
-
-# def expect_print_job_builder
-#   expect(Builders::PrintJobBuilder).to receive(:create)
-# end
-
-# def dont_expect_print_job_builder
-#   expect(Builders::PrintJobBuilder).not_to receive(:create)
-# end
