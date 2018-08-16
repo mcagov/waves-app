@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xfeature "User claims a task", type: :feature, js: true do
+feature "User claims a task", type: :feature, js: true do
   before do
     create(:unclaimed_task)
     login_to_part_3
