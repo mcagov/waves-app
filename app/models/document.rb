@@ -7,6 +7,10 @@ class Document < Note
   scope :not_expired, -> { where("expires_at >= ?", Time.zone.now) }
 
   def entity_type_name
-    WavesUtilities::DocumentType.new(entity_type).name
+    if entity_type
+      WavesUtilities::DocumentType.new(entity_type).name
+    else
+      "UNKNOWN"
+    end
   end
 end
