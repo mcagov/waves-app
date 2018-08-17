@@ -31,7 +31,7 @@ class ApplicationProcessor
       elsif activities_policy.close_registration
         close_registration
       else
-        @registered_vessel.current_registration
+        @registered_vessel.try(:current_registration)
       end
     end
 
