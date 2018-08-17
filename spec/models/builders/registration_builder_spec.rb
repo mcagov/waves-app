@@ -2,7 +2,11 @@ require "rails_helper"
 
 describe Builders::RegistrationBuilder do
   context ".create" do
-    let(:task) { create(:claimed_task) }
+    let(:task) do
+      create(:claimed_task,
+             service: create(:service, :generate_new_5_year_registration))
+    end
+
     let(:registered_vessel) { create(:registered_vessel) }
 
     context "in general" do
@@ -56,6 +60,16 @@ describe Builders::RegistrationBuilder do
       end
 
       it { expect(subject).to be_provisional }
+    end
+
+    context "when the dates are blank" do
+      subject do
+        described_class.create(task, registered_vessel, "", nil, false)
+      end
+
+      it { expect(subject).to be_persisted }
+      it { expect(subject.registered_at).to be_present }
+      it { expect(subject.registered_until).to be_present }
     end
   end
 end
