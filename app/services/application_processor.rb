@@ -31,7 +31,7 @@ class ApplicationProcessor
       elsif activities_policy.close_registration
         close_registration
       else
-        @submission.registration
+        @registered_vessel.current_registration
       end
     end
 

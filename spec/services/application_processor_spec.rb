@@ -25,6 +25,7 @@ describe ApplicationProcessor do
         expect(Builders::RegistryBuilder)
           .to receive(:create)
           .with(submission, approval_params)
+          .and_return(create(:registered_vessel))
       end
 
       it { subject }
@@ -120,8 +121,9 @@ describe ApplicationProcessor do
 
       it "builds a cover_letter print job" do
         cover_letter = PrintJob.find_by(template: :cover_letter)
+        registration = registered_vessel.current_registration
         expect(cover_letter.submission).to eq(submission)
-        expect(cover_letter.printable).to eq(submission.reload.registration)
+        expect(cover_letter.printable).to eq(registration)
         expect(cover_letter.part).to eq(submission.part)
       end
 
