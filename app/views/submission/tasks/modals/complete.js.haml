@@ -1,6 +1,9 @@
 :plain
-   $("#complete-task .modal-content").html(
+  $("#complete-task .modal-content").html(
     '#{escape_javascript(
       render partial: "/submission/tasks/modals/complete",
       locals: { submission: @submission, task: @task })}');
 
+  $('.datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY, h:mm:ss a'
+  });

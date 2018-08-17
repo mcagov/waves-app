@@ -91,6 +91,15 @@ class Submission::Task < ApplicationRecord
     end
   end
 
+  attr_accessor(
+    :notification_attachments,
+    :registration_starts_at,
+    :registration_ends_at,
+    :closure_at,
+    :closure_reason,
+    :supporting_info
+  )
+
   def ref_no
     return "" unless submission_ref_counter
     "#{submission.ref_no}/#{submission_ref_counter}"
@@ -100,8 +109,8 @@ class Submission::Task < ApplicationRecord
     claimed? && claimant == user
   end
 
-  def process_task
-    ApplicationProcessor.run(self, {})
+  def process_task(approval_params)
+    ApplicationProcessor.run(self, approval_params)
   end
 
   def price_in_pounds

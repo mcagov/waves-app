@@ -1,4 +1,6 @@
-= simple_form_for @task, url: complete_submission_task_path(submission, task) do |task_f|
+= simple_form_for @task,
+  url: complete_submission_task_path(submission, task),
+  method: :post do |task_f|
   .modal-header
     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
       %span{"aria-hidden" => "true"} ×
@@ -6,6 +8,8 @@
       Task:
       = task.service
   .modal-body
+    = render partial: "submission/tasks/modals/completion_activities", locals: { task: @task, task_f: task_f }
+
     %h5 The system will perform the following processes:
     #task-activities
       = "N/A" if task.service.activities.empty?
@@ -17,6 +21,7 @@
       = "N/A" if task.service.print_templates.empty?
       - task.service.print_templates.each do |print_template|
         #{print_template.humanize}<br/>
+
 
   .modal-footer
     = task_f.submit "Complete Task", class: "btn btn-success btn-lg"

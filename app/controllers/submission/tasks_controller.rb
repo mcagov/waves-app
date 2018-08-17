@@ -92,7 +92,8 @@ class Submission::TasksController < InternalPagesController
   end
 
   def complete
-    @task.complete!
+    @task.complete!(submission_task_params || {})
+    log_work!(@task, @task, :completed)
     flash[:notice] = "The task has been completed"
     redirect_to submission_path(@submission)
   end
@@ -100,8 +101,12 @@ class Submission::TasksController < InternalPagesController
   private
 
   def submission_task_params
+    return {} unless params[:submission_task]
     params.require(:submission_task).permit(
-      :service_id, :service_level, :start_date, :price_in_pounds)
+      :service_id, :service_level, :start_date,
+      :price_in_pounds,
+      :registration_starts_at, :registration_ends_at,
+      :closure_at, :closure_reason, :supporting_info)
   end
 
   def load_task

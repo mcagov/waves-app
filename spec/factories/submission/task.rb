@@ -36,7 +36,7 @@ FactoryBot.define do
 
   factory :completed_task, parent: :claimed_task do
     after(:create) do |task|
-      task.complete!
+      task.complete!({})
     end
   end
 end

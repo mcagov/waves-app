@@ -31,7 +31,7 @@ describe Submission::Task do
 
       context "that has been completed" do
         it do
-          task.complete!
+          task.complete!({})
           expect(task.claimed_by?(task.claimant)).to be_falsey
         end
       end
@@ -167,7 +167,7 @@ describe Submission::Task do
       before do
         task.confirm!
         task.claim!(user)
-        task.complete!
+        task.complete!({})
       end
 
       it { expect(task).to be_completed }
