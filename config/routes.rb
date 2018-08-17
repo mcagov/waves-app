@@ -85,9 +85,6 @@ Rails.application.routes.draw do
               constraints: ->(request) { request.format == :js },
               controller: "submission/applicants", only: [:update]
 
-    resource :approval,
-             controller: "submission/approvals", only: [:show, :create]
-
     resources :beneficial_owners,
               constraints: ->(request) { request.format == :js },
               controller: "submission/beneficial_owners",

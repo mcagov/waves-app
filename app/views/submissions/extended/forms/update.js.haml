@@ -5,17 +5,6 @@
        locals: { submission: @submission })}'
   );
 
-  $('#save-incomplete-application #approve-extended-application').on('click', function () {
-    $('#save-incomplete-application .modal-content').html(
-      '#{escape_javascript(
-        render partial: "/submissions/modals/approve/form",
-        locals: { submission: @submission, task: @task })}');
-
-    $('.datetimepicker').datetimepicker({
-      format: 'DD/MM/YYYY, h:mm:ss a'
-    });
-  });
-
   $("#save-incomplete-application").on('hidden.bs.modal', function () {
         window.location.reload();
     });
