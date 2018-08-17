@@ -65,10 +65,6 @@ class Registration < ApplicationRecord
     (symbolized_registry_info[:shareholder_groups] || [])
   end
 
-  def prints_duplicate_certificate?
-    DeprecableTask.new(task).duplicates_certificate?
-  end
-
   def owner_name_address_shareholding
     arr = owners_and_shares
     arr += shareholder_groups_and_shares

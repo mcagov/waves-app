@@ -106,6 +106,7 @@ class Activity
     [
       :carving_and_marking,
       :registration_certificate,
+      :duplicate_registration_certificate,
       :cover_letter,
       :forced_closure,
       :current_transcript,

@@ -11,6 +11,10 @@ FactoryBot.define do
       rules { [:declarations_required] }
     end
 
+    trait :duplicate_registration_certificate do
+      print_templates { [:duplicate_registration_certificate] }
+    end
+
     trait :generate_new_5_year_registration do
       activities { [:generate_new_5_year_registration] }
     end

@@ -26,6 +26,7 @@ en:
       cover_letter: Print Cover Letter
       registration_certificate: Print Certificate of Registry
       provisional_certificate: Print Provisional Certificate of Registry
+      duplicate_registration_certificate: Print Duplicate Certificate of Registry
       current_transcript: Print Current Transcript
       historic_transcript: Print Historic Transcript
       csr_form: Print CSR
@@ -38,6 +39,7 @@ en:
       cover_letter: Print Cover Letters
       registration_certificate: Print Certificates of Registry
       provisional_certificate: Print Provisional Certificates
+      duplicate_registration_certificate: Print Duplicate Certificates of Registry
       current_transcript: Print Current Transcripts
       historic_transcript: Print Historic Transcripts
       csr_form: Print CSRs
@@ -51,6 +53,7 @@ en:
       cover_letter: Cover Letters
       registration_certificate: Certificates of Registry
       provisional_certificate: Provisional Certificates of Registry
+      duplicate_registration_certificate: Duplicate Certificates of Registry
       current_transcript: Current Transcripts
       historic_transcript: Historic Transcripts
       csr_form: CSR Forms
