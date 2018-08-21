@@ -182,7 +182,7 @@ Rails.application.routes.draw do
 
     resource :name_approval,
              controller: "submission/name_approvals",
-             only: [:show, :update]
+             only: [:show, :update, :destroy]
 
     resources :notes,
               constraints: ->(request) { request.format == :js },

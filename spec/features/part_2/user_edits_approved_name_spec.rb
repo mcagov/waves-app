@@ -8,6 +8,13 @@ feature "User edits part 2 name and PLN", type: :feature, js: :true do
 
     click_on("Change Name or PLN")
     complete_name_approval_form
+
+    within("#application-tools") do
+      page.accept_confirm { click_on("Cancel Approved Name") }
+    end
+
+    expect(page).to have_text("The approved name has been cancelled")
+    expect(@submission.name_approval).to be_blank
   end
 
   scenario "for an existing vessel" do

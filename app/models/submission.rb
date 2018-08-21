@@ -79,12 +79,11 @@ class Submission < ApplicationRecord
     end
   end
 
-  protected
-
-  def cancel_name_approval
-    return unless name_approval
-    name_approval.update_attribute(:cancelled_at, Time.zone.now)
+  def name_approval
+    Submission::NameApproval.where(submission: self).active[0]
   end
+
+  protected
 
   def remove_pending_vessel
     return unless registration_status == :pending

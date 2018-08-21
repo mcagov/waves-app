@@ -2,8 +2,22 @@
   %h2.x_title
     Application Tools
   .x_content
-    - submission.print_jobs.each do |print_job|
-      = link_to print_job_path(print_job, format: :pdf),
-        target: "_blank", class: "btn btn-warning" do
-        %i.fa.fa-print{style: "font-size: 1.2em;"}
-        = t("print_job.button_text.#{print_job.template}")
+    - unless submission.print_jobs.empty?
+      .row
+        .col-md-12
+          - submission.print_jobs.each do |print_job|
+            = link_to print_job_path(print_job, format: :pdf),
+              target: "_blank", class: "btn btn-warning" do
+              %i.fa.fa-print{style: "font-size: 1.2em;"}
+              = t("print_job.button_text.#{print_job.template}")
+      %hr
+    - if submission.name_approval
+      .row
+        .col-md-12
+          = link_to submission_name_approval_path(@submission), method: :delete,
+            class: "btn btn-danger",
+            data: { confirm: "Are you sure you want to cancel this approved name?" },
+            style: { color: "red" } do
+            Cancel Approved Name
+      %hr
+

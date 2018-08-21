@@ -19,6 +19,13 @@ class Submission::NameApprovalsController < InternalPagesController
     render :show
   end
 
+  def destroy
+    @name_approval.update_attribute(:cancelled_at, Time.zone.now)
+    flash[:notice] = "The approved name has been cancelled"
+
+    redirect_to(submission_path(@submission))
+  end
+
   protected
 
   def load_name_approval
