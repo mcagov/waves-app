@@ -3,6 +3,7 @@ require "rails_helper"
 describe "User views a registered vessel", type: :feature, js: true do
   before do
     @vessel = create(:registered_vessel)
+    @submission = create(:submission, registered_vessel: @vessel)
     login_to_part_3
     visit vessel_path(@vessel)
   end
@@ -38,18 +39,11 @@ describe "User views a registered vessel", type: :feature, js: true do
     expect(page).to have_css(".modal-body", text: "Some stuff")
   end
 
-  xscenario "linking to the submission page" do
-    expect(page).to have_css("h1", text: @submission.vessel.name)
-
+  scenario "linking to the submission page" do
     click_on("Application History")
     click_on("New Registration")
 
-    within("#vessel-name") do
-      expect(page).to have_text(@submission.vessel.name)
-    end
-
-    expect(page).not_to have_css("#actions")
-    expect(page).not_to have_css(".breadcrumb")
+    expect(page).to have_css("#application-info", text: "Application Info")
   end
 
   scenario "viewing the registration status" do
