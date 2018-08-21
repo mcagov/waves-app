@@ -62,11 +62,11 @@ describe Submission::NameApproval do
   context "for a persisted record" do
     let(:name_approval) do
       create(:name_approval,
-        part: part,
-        name: "BOBS BOAT",
-        port_code: "SU",
-        port_no: 1234,
-        registration_type: :simple)
+             part: part,
+             name: "BOBS BOAT",
+             port_code: "SU",
+             port_no: 1234,
+             registration_type: :simple)
     end
 
     context "when the name has changed" do
