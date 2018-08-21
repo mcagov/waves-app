@@ -45,7 +45,10 @@ describe Builders::RegistryBuilder do
                application_type: :re_registration,
                registered_vessel: registered_vessel,
                changeset: {
-                 vessel_info: build(:submission_vessel, name: "DON DINGHY"),
+                 vessel_info:
+                   build(:submission_vessel,
+                         name: "DON DINGHY",
+                         entry_into_service_at: "21/12/2001"),
                  owners: [
                    { name: "ALICE" }, { name: "DAVE" }, { name: "ELLEN" }],
                })
@@ -67,6 +70,10 @@ describe Builders::RegistryBuilder do
         expect(registered_vessel.owners[0].name).to eq("ALICE")
         expect(registered_vessel.owners[1].name).to eq("DAVE")
         expect(registered_vessel.owners[2].name).to eq("ELLEN")
+      end
+
+      it "assigns the entry_into_service_at" do
+        expect(registered_vessel.entry_into_service_at).to eq("21/12/2001")
       end
     end
 
