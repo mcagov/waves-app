@@ -446,7 +446,7 @@ Service.create(
   part_1: { standard: 35, premium: 100 },
   rules: [
     :registered_vessel_required,
-    :validates_on_approval,
+    :registry_not_editable,
   ],
   activities: [
     :close_registration,
