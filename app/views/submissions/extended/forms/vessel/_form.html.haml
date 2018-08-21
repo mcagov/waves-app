@@ -10,7 +10,7 @@
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
             input_html: { readonly: "readonly" },
-            hint: link_to_change_name_or_pln(@submission)
+            hint: link_to_change_name_or_pln(@submission, @task)
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           - if display_editable_registration_type?(@submission)

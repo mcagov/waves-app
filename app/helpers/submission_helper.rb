@@ -107,10 +107,10 @@ module SubmissionHelper
     true
   end
 
-  def link_to_change_name_or_pln(submission)
+  def link_to_change_name_or_pln(submission, task)
     return "" if @readonly
     title = Policies::Definitions.part_1?(submission) ? "Port" : "PLN"
     link_to "Change Name or #{title}",
-            submission_name_approval_path(@submission)
+            submission_name_approval_path(@submission, task_id: task.id)
   end
 end
