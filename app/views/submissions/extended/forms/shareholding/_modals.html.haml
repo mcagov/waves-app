@@ -41,7 +41,7 @@
           .row
             .col-md-12
               = f.input :default_group_member, as: :select,
-                collection: customer_select_options,
+                collection: customer_select_options(@submission),
                 include_blank: false,
                 input_html: { class: "select2 select2_single" },
                 label: "Owner Name"

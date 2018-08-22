@@ -31,7 +31,7 @@ describe "User edits submission details", js: true do
     click_on("Save")
 
     expect(page).to have_css(
-      ".applicant-email", text: "ANNIE (annie@example.com)")
+      ".applicant-email", text: "ANNIE <annie@example.com>")
 
     expect(page).to have_css(
       ".applicant-delivery-address",

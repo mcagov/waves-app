@@ -52,7 +52,7 @@ feature "User refers a task", type: :feature, js: true do
   scenario "without sending an email" do
     visit_claimed_task
     within("#actions") { click_on "Refer Task" }
-    uncheck("Send a referral email to #{@submission.applicant_name}")
+    uncheck("Send a referral email to #{@submission.applicant.email}")
     within("#refer-task") { click_on "Refer Task" }
     expect(Notification::Referral.count).to eq(0)
   end

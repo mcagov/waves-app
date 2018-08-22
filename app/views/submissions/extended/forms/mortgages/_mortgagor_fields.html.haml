@@ -2,7 +2,7 @@
   .row
     .col-md-4
       = mortgagor_f.input :declaration_owner_id, as: :select,
-        collection: customer_select_options,
+        collection: customer_select_options(@submission),
         include_blank: true,
         input_html: { class: "select_owner_mortgagor" },
         label: "Select an Owner"

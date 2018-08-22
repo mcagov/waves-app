@@ -70,16 +70,23 @@ module SubmissionHelper
       data: { toggle: "tooltip", placement: "left", title: @text })
   end
 
-  def customer_select_options
-    list = @submission.owners + @submission.charter_parties
+  def customer_select_options(submission)
+    list = submission.owners + submission.charter_parties
     list.sort_by(&:name)
+  end
+
+  def email_recipient_select_options(submission)
+    list = customer_select_options(submission)
+    list << submission.applicant
+
+    list.reject { |r| r.name.blank? || r.email.blank? }.sort_by(&:name)
   end
 
   def shares_held_jointly_customer_select_options(declaration_group)
     selected_declarations =
       declaration_group.declaration_group_members.map(&:declaration_owner_id)
 
-    customer_select_options.reject do |declaration_owner|
+    customer_select_options(@submission).reject do |declaration_owner|
       selected_declarations.include?(declaration_owner.id)
     end
   end
