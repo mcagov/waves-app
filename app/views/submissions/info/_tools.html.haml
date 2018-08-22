@@ -3,8 +3,9 @@
     Application Tools
   .x_content
     .row
-      .col-md-4
-        = render partial: "/submission/application_approvals/new", locals: {submission: submission, task: @task}
+      - if @task
+        .col-md-4
+          = render partial: "/submission/application_approvals/new", locals: {submission: submission, task: @task}
 
       - if submission.name_approval
         .col-md-4
@@ -14,8 +15,9 @@
             style: { color: "red" } do
             %i.fa.fa-trash
             Cancel Approved Name
-    %hr
+
     - unless submission.print_jobs.empty?
+      %hr
       .row
         - submission.print_jobs.each do |print_job|
           .col-md-4
@@ -23,5 +25,3 @@
               target: "_blank", class: "btn btn-warning" do
               %i.fa.fa-print
               = t("print_job.button_text.#{print_job.template}")
-      %hr
-

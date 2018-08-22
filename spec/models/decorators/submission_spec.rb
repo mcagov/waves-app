@@ -1,18 +1,6 @@
 require "rails_helper"
 
 describe Decorators::Submission, type: :model do
-  context "#notification_list" do
-    let!(:submission) { build(:submission) }
-
-    before do
-      expect(Builders::NotificationListBuilder)
-        .to receive(:for_submission)
-        .with(submission)
-    end
-
-    it { described_class.new(submission).notification_list }
-  end
-
   context "#delivery_description" do
     let!(:submission) { build(:submission) }
 

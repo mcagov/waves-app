@@ -12,7 +12,7 @@
         %h4.modal-titleApplication Application Approval Email
 
       = simple_form_for Notification::ApplicationApproval.new,
-        url: submission_application_approvals_path(submission, task_id: @task.id),
+        url: submission_application_approvals_path(submission, task_id: task.id),
         method: :post do |f|
         .modal-body
           Some stuff

@@ -83,6 +83,10 @@ class Submission < ApplicationRecord
     Submission::NameApproval.where(submission: self).active[0]
   end
 
+  def notification_list
+    Builders::NotificationListBuilder.for_submission(self)
+  end
+
   protected
 
   def registered_vessel_exists

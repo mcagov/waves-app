@@ -130,4 +130,16 @@ describe Submission, type: :model do
       it { expect(submission).to be_valid }
     end
   end
+
+  context "#notification_list" do
+    let!(:submission) { build(:submission) }
+
+    before do
+      expect(Builders::NotificationListBuilder)
+        .to receive(:for_submission)
+        .with(submission)
+    end
+
+    it { submission.notification_list }
+  end
 end

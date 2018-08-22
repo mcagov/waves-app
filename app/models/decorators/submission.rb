@@ -8,10 +8,6 @@ class Decorators::Submission < SimpleDelegator
     Search.similar_vessels(part, vessel)
   end
 
-  def notification_list
-    Builders::NotificationListBuilder.for_submission(@submission)
-  end
-
   def source_description
     source.titleize if source
   end
