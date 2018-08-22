@@ -78,8 +78,8 @@ module SubmissionHelper
   def email_recipient_select_options(submission)
     list = customer_select_options(submission)
     list << submission.applicant
-
-    list.reject { |r| r.name.blank? || r.email.blank? }.sort_by(&:name)
+    list = list.reject { |r| r.name.blank? || r.email.blank? }
+    list.compact.sort_by(&:name)
   end
 
   def shares_held_jointly_customer_select_options(declaration_group)

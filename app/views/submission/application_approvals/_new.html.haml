@@ -11,14 +11,30 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-titleApplication Application Approval Email
 
-      = simple_form_for Notification::ApplicationApproval.new,
+      = simple_form_for Notification::ApplicationApproval.new(notifiable_id: submission.id, notifiable_type: "Submission"),
         url: submission_application_approvals_path(submission, task_id: task.id),
         method: :post do |f|
         .modal-body
-          Some stuff
+          .row
+            .col-md-6
+              %label Select Recipient(s)
+              - email_recipient_select_options(submission).each do |recipient|
+                .form-group
+                  = label_tag do
+                    = check_box_tag "notification_application_approval[recipients][]",
+                      recipient.email_description, true
+                    = recipient.email_description
+          .row
+            .col-md-12
+              .form-group
+                - f.object.subject = f.object.email_subject
+                = f.input :subject, label: "Email Subject"
+
+          .row
+            .col-md-12
+              .form-group
+                %label Message
+                = f.trix_editor :body
 
         .modal-footer
           = f.submit "Send", class: "btn btn-primary"
-
-
-
