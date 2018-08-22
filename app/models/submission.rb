@@ -87,6 +87,10 @@ class Submission < ApplicationRecord
     Builders::NotificationListBuilder.for_submission(self)
   end
 
+  def applicant
+    Customer.new(name: applicant_name, email: applicant_email)
+  end
+
   protected
 
   def registered_vessel_exists

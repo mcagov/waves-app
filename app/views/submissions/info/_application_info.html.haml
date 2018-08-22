@@ -39,7 +39,7 @@
           %td.soft-label Email Recipient:
           %td.applicant-email
             %strong
-              = link_to_unless @readonly, submission.applicant_description, "#",
+              = link_to_unless @readonly, submission.applicant.email_description, "#",
                 data: { target: "#edit_applicant", toggle: "modal" }
         %tr
           %td.soft-label Postal Recipient:

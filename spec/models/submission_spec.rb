@@ -142,4 +142,17 @@ describe Submission, type: :model do
 
     it { submission.notification_list }
   end
+
+  context "#applicant" do
+    let(:submission) do
+      build(:submission,
+            applicant_name: "ALICE",
+            applicant_email: "alice@example.com")
+    end
+
+    subject { submission.applicant }
+
+    it { expect(subject.email).to eq("alice@example.com") }
+    it { expect(subject.name).to eq("ALICE") }
+  end
 end

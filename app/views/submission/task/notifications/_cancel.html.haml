@@ -21,7 +21,7 @@
           .form-group
             %label
               %input{name: "send_email", value: "application_receipt", type: "checkbox", checked: true}
-              Send a cancellation email to #{submission.applicant_description}
+              Send a cancellation email to #{submission.applicant.email_description}
         - else
           %p.red A cancellation email cannot be sent without an Email Recipient
   .modal-footer

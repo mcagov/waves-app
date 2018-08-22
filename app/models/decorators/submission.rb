@@ -75,14 +75,6 @@ class Decorators::Submission < SimpleDelegator
     vessel_reg_no
   end
 
-  def applicant_description
-    return "Not set" unless applicant_name.present?
-    description = applicant_name
-    description =
-      "#{description} (#{applicant_email})" if applicant_email.present?
-    description
-  end
-
   def delivery_address_description
     return "Not set" unless delivery_address.active?
     delivery_address.name_and_address.join("<br/>").html_safe

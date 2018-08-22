@@ -24,7 +24,7 @@
           .form-group
             %label
               %input{name: "send_email", value: "application_receipt", type: "checkbox", checked: true}
-              Send a referral email to #{submission.applicant_description}
+              Send a referral email to #{submission.applicant.email}
         - else
           %p.red A referral email cannot be sent without an Email Recipient
   .modal-footer

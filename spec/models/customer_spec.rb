@@ -27,4 +27,22 @@ describe Customer do
       it { expect(subject).to be_falsey }
     end
   end
+
+  context "#email_description" do
+    let(:customer) { build(:customer, name: "BOB", email: email) }
+
+    subject { customer.email_description }
+
+    context "with no email address" do
+      let(:email) { nil }
+
+      it { expect(subject).to eq("Not set") }
+    end
+
+    context "with name and email address" do
+      let(:email) { "bob@example.com" }
+
+      it { expect(subject).to eq("BOB <bob@example.com>") }
+    end
+  end
 end
