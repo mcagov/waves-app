@@ -2,22 +2,26 @@
   %h2.x_title
     Application Tools
   .x_content
-    - unless submission.print_jobs.empty?
-      .row
-        .col-md-12
-          - submission.print_jobs.each do |print_job|
-            = link_to print_job_path(print_job, format: :pdf),
-              target: "_blank", class: "btn btn-warning" do
-              %i.fa.fa-print{style: "font-size: 1.2em;"}
-              = t("print_job.button_text.#{print_job.template}")
-      %hr
-    - if submission.name_approval
-      .row
-        .col-md-12
+    .row
+      .col-md-4
+        = render partial: "/submission/application_approvals/new", locals: {submission: submission, task: @task}
+
+      - if submission.name_approval
+        .col-md-4
           = link_to submission_name_approval_path(@submission), method: :delete,
             class: "btn btn-danger",
             data: { confirm: "Are you sure you want to cancel this approved name?" },
             style: { color: "red" } do
+            %i.fa.fa-trash
             Cancel Approved Name
+    %hr
+    - unless submission.print_jobs.empty?
+      .row
+        - submission.print_jobs.each do |print_job|
+          .col-md-4
+            = link_to print_job_path(print_job, format: :pdf),
+              target: "_blank", class: "btn btn-warning" do
+              %i.fa.fa-print
+              = t("print_job.button_text.#{print_job.template}")
       %hr
 
