@@ -7,6 +7,8 @@ module MessageHelper
       cancel_email_text(submission)
     when :refer
       refer_email_text(submission)
+    when :application_approval
+      application_approval_email_text(submission)
     end
   end
 
@@ -36,5 +38,11 @@ module MessageHelper
       hesitate to contact us at #{contact_us_for_part}.
       <br><br>Please quote your application reference
       #{submission.ref_no} in all correspondence.</div>)
+  end
+
+  def application_approval_email_text(submission)
+    %(<div>Thank you for your application regarding the vessel
+      #{submission.vessel}.
+      <br><br>Your application has now been completed.)
   end
 end

@@ -13,7 +13,7 @@ describe "User sends application approval notification", js: true do
       check(@submission.applicant.email_description)
       check(@submission.owners.first.email_description)
 
-      expect(find("trix-editor").value).to match(/approved/)
+      expect(find("trix-editor").value).to match(/completed/)
       find("trix-editor").click.set("The message")
 
       click_on("Send")

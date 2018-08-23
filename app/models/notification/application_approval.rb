@@ -1,6 +1,6 @@
 class Notification::ApplicationApproval < Notification
   def email_template
-    :application_approval
+    :wysiwyg
   end
 
   def email_subject
@@ -8,8 +8,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def additional_params
-    [vessel_reg_no, actioned_by,
-     notifiable.task, vessel_name, email_attachments]
+    [body, actioned_by]
   end
 
   private
@@ -20,18 +19,6 @@ class Notification::ApplicationApproval < Notification
 
   def registration
     @registration ||= notifiable.registration
-  end
-
-  def vessel_reg_no
-    registered_vessel.reg_no if registered_vessel
-  end
-
-  def vessel_name
-    registered_vessel.name if registered_vessel
-  end
-
-  def registered_vessel
-    notifiable.registered_vessel if notifiable
   end
 
   def email_attachments

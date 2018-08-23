@@ -41,7 +41,7 @@
               .col-md-12
                 .form-group
                   %label Message
-                  - f.object.body = "approved"
+                  - f.object.body = default_email_text(:application_approval, @submission)
                   = f.trix_editor :body
 
           .modal-footer
