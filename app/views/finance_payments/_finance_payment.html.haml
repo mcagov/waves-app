@@ -3,10 +3,18 @@
   .x_content
     = render partial: "finance/payments/payment", locals: {finance_payment: finance_payment }
 
-    = link_to "#edit-finance-payment",
-      "data-target" => "#edit-finance-payment",
+    = link_to "#edit-documents-received",
+      "data-target" => "#edit-documents-received",
       "data-toggle" => "modal",
       class: "btn btn-xs btn-info" do
       Edit Documents Received
 
-    = render partial: "finance_payments/modals/edit_finance_payment", locals: { finance_payment: @finance_payment }
+    = link_to "#edit-part",
+      "data-target" => "#edit-part",
+      "data-toggle" => "modal",
+      class: "btn btn-xs btn-info" do
+      Edit Part of the Register
+
+    = render partial: "finance_payments/modals/edit_documents_received", locals: { finance_payment: @finance_payment }
+
+    = render partial: "finance_payments/modals/edit_part", locals: { finance_payment: @finance_payment }

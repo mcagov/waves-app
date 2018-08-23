@@ -20,6 +20,10 @@ class FinancePaymentsController < InternalPagesController
       format.js do
         @finance_payment = Decorators::FinancePayment.new(@finance_payment)
       end
+      format.html do
+        flash[:notice] = "The finance payment has been updated"
+        redirect_to finance_payment_path(@finance_payment)
+      end
     end
   end
 
@@ -42,7 +46,8 @@ class FinancePaymentsController < InternalPagesController
   end
 
   def finance_payment_params
-    params.require(:payment_finance_payment).permit(:documents_received)
+    params.require(:payment_finance_payment).permit(
+      :part, :documents_received)
   end
 
   def unattached_finance_payments
