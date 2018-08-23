@@ -624,6 +624,7 @@ Service.create(
 
 Service.create(
   name: "Manual Override",
+  standard_days: 1,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
   part_4: { standard: 0 },
