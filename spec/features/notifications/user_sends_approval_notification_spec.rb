@@ -2,7 +2,13 @@ require "rails_helper"
 
 describe "User sends application approval notification", js: true do
   scenario "in general" do
-    visit_completed_task
+    visit_completed_task(
+      submission: create(:submission, :part_3_vessel,
+        print_jobs: [
+          create(:print_job, template: :registration_certificate),
+          create(:print_job, template: :current_transcript)
+        ]))
+
     within("#application-tools") { click_on(application_approval_email_link) }
 
     within(".modal.fade.in") do
@@ -16,6 +22,8 @@ describe "User sends application approval notification", js: true do
       expect(find("trix-editor").value).to match(/completed/)
       find("trix-editor").click.set("The message")
 
+      check("Certificate of Registry")
+      check("Current Transcript")
       click_on("Send")
     end
 
@@ -28,6 +36,9 @@ describe "User sends application approval notification", js: true do
     expect(notification.recipient_name).to eq(@submission.applicant_name)
     expect(notification.subject).to eq("Hello")
     expect(notification.body).to match(/The message/)
+
+    # expect(notification.attachments)
+    # .to match([:registration_certificate, :current_transcript])
 
     expect(Notification::ApplicationApproval.count).to eq(2)
   end

@@ -8,7 +8,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def additional_params
-    [body, actioned_by]
+    [body, actioned_by, email_attachments]
   end
 
   private

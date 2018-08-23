@@ -22,6 +22,13 @@ en:
     application: Waves
 
   print_job:
+    attachment_text:
+      cover_letter: Cover Letter
+      registration_certificate: Certificate of Registry
+      provisional_certificate: Provisional Certificate of Registry
+      duplicate_registration_certificate: Duplicate Certificate of Registry
+      current_transcript: Current Transcript
+      historic_transcript: Historic Transcript
     button_text:
       cover_letter: Print Cover Letter
       registration_certificate: Print Certificate of Registry

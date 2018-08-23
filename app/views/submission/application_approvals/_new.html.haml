@@ -44,5 +44,15 @@
                   - f.object.body = default_email_text(:application_approval, @submission)
                   = f.trix_editor :body
 
+            .row
+              .col-md-12
+                %label Select Attachment(s)
+                - emailable_attachments(@submission).each do |attachment|
+                  .form-group
+                    = label_tag do
+                      = check_box_tag "notification_application_approval[attachments][]",
+                        attachment, true
+                      = t("print_job.attachment_text.#{attachment}")
+
           .modal-footer
             = f.submit "Send", class: "btn btn-primary"

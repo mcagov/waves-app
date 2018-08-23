@@ -14,7 +14,7 @@ class Submission::ApplicationApprovalsController < InternalPagesController
 
   def notification_application_approval_params
     params.require(:notification_application_approval).permit(
-      :subject, :body, recipients: [])
+      :subject, :body, attachments: [], recipients: [])
   end
 
   def build_notification(recipient)

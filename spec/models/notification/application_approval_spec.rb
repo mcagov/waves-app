@@ -20,7 +20,7 @@ describe Notification::ApplicationApproval, type: :model do
       subject { described_class.new(notifiable: submission) }
 
       it "has the expected email_template" do
-        expect(subject.email_template).to eq(:application_approval)
+        expect(subject.email_template).to eq(:wysiwyg)
       end
 
       it "has the expected email_subject" do

@@ -45,4 +45,13 @@ module MessageHelper
       #{submission.vessel}.
       <br><br>Your application has now been completed.)
   end
+
+  def emailable_attachments(submission)
+    templates = submission.print_jobs.map { |p| p.template.to_sym }
+    [
+      :registration_certificate, :provisional_certificate,
+      :duplicate_registration_certificate,
+      :current_transcript, :historic_transcript,
+    ].select { |attachment| templates.include?(attachment) }
+  end
 end
