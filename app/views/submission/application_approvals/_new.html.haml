@@ -23,7 +23,7 @@
           method: :post do |f|
           .modal-body
             .row
-              .col-md-6
+              .col-md-12
                 %label Select Recipient(s)
                 - recipients.each do |recipient|
                   .form-group
@@ -41,6 +41,7 @@
               .col-md-12
                 .form-group
                   %label Message
+                  - f.object.body = "approved"
                   = f.trix_editor :body
 
           .modal-footer
