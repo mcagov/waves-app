@@ -51,7 +51,7 @@ module MessageHelper
     [
       :registration_certificate, :provisional_certificate,
       :duplicate_registration_certificate,
-      :current_transcript, :historic_transcript,
+      :current_transcript, :historic_transcript
     ].select { |attachment| templates.include?(attachment) }
   end
 end

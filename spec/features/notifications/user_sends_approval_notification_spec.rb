@@ -3,11 +3,11 @@ require "rails_helper"
 describe "User sends application approval notification", js: true do
   scenario "in general" do
     visit_completed_task(
-      submission: create(:submission, :part_3_vessel,
+      submission: create(
+        :submission, :part_3_vessel,
         print_jobs: [
           create(:print_job, template: :registration_certificate),
-          create(:print_job, template: :current_transcript)
-        ]))
+          create(:print_job, template: :current_transcript)]))
 
     within("#application-tools") { click_on(application_approval_email_link) }
 
