@@ -64,49 +64,6 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
-  describe "application_approval templates are present" do
-    it "renders for each task type" do
-      DeprecableTask.default_task_types.each do |task|
-        next unless DeprecableTask.new(task[1]).emails_application_approval?
-        mail =
-          NotificationMailer.application_approval(
-            default_params, "Reg_no", "Bob", task[1], "MV Boat")
-
-        expect(mail.body.encoded).to match(/Dear Alice/)
-      end
-    end
-  end
-
-  describe "application_approval" do
-    let(:mail) do
-      NotificationMailer.application_approval(
-        default_params, "Reg_no",
-        "Sally SSR", :new_registration, "My boat", "an_attachment")
-    end
-
-    let(:body) { mail.body.encoded }
-
-    it "renders the reg no" do
-      expect(body).to match(/your vessel is Reg_no/)
-    end
-
-    it "renders the certificate_attached message" do
-      expect(body).to match(/attached a copy of your certificate/)
-    end
-
-    it "renders the actioned_by signature" do
-      expect(body).to match(/Sally SSR/)
-    end
-
-    it "renders the phone number" do
-      expect(body).to match(/02920 448813/)
-    end
-
-    it "renders the survey link" do
-      expect(body).to have_link("http://www.smartsurvey.co.uk/s/140065DZMRS/")
-    end
-  end
-
   describe "wysiwyg" do
     let(:mail) do
       NotificationMailer.wysiwyg(
