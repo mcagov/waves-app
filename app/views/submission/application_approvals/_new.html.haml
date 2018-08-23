@@ -19,7 +19,7 @@
             .col-md-12.red An email cannot be sent without a recipient
       - else
         = simple_form_for Notification::ApplicationApproval.new(notifiable_id: submission.id, notifiable_type: "Submission"),
-          url: submission_application_approvals_path(submission, task_id: task.id),
+          url: submission_application_approvals_path(submission),
           method: :post do |f|
           .modal-body
             .row

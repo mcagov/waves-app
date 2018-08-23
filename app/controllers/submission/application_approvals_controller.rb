@@ -1,6 +1,5 @@
 class Submission::ApplicationApprovalsController < InternalPagesController
   before_action :load_submission
-  before_action :load_task
 
   def create
     notification_application_approval_params[:recipients].each do |recipient|
@@ -8,7 +7,7 @@ class Submission::ApplicationApprovalsController < InternalPagesController
     end
 
     flash[:notice] = "Emails have been sent to the selected recipients"
-    redirect_to submission_task_path(@submission, @task)
+    redirect_to submission_path(@submission)
   end
 
   private

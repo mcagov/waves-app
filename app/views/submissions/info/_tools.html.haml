@@ -5,7 +5,7 @@
     .row
       - if Policies::Workflow.can_email_application_approval?(submission)
         .col-md-4
-          = render partial: "/submission/application_approvals/new", locals: {submission: submission, task: @task}
+          = render partial: "/submission/application_approvals/new", locals: {submission: submission}
 
       - if submission.name_approval
         .col-md-4
