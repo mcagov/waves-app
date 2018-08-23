@@ -7,7 +7,7 @@ describe "User views finance_payment", type: :feature, js: true do
     create(
       :locked_finance_payment,
       part: :part_3,
-      application_type: :new_registration,
+      application_type: :renewal,
       vessel_reg_no: "SSR99999")
 
     visit_fee_entry
