@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_113337) do
+ActiveRecord::Schema.define(version: 2018_08_23_140502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,11 +297,11 @@ ActiveRecord::Schema.define(version: 2018_08_06_113337) do
     t.string "notifiable_type"
     t.string "recipient_name"
     t.string "recipient_email"
-    t.string "attachments"
     t.string "state"
     t.datetime "delivered_at"
     t.datetime "approved_at"
     t.uuid "approved_by_id"
+    t.json "attachments", default: []
     t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id"
     t.index ["notifiable_type"], name: "index_notifications_on_notifiable_type"
     t.index ["type"], name: "index_notifications_on_type"
