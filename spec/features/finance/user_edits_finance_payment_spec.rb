@@ -22,5 +22,6 @@ describe "User edits finance payment", type: :feature, js: true do
 
     expect(page).to have_text("The finance payment has been updated")
     expect(Payment::FinancePayment.last.part.to_sym).to eq(:part_4)
+    expect(page).to have_current_path(unattached_payments_finance_payments_path)
   end
 end

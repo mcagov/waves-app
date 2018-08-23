@@ -22,7 +22,7 @@ class FinancePaymentsController < InternalPagesController
       end
       format.html do
         flash[:notice] = "The finance payment has been updated"
-        redirect_to finance_payment_path(@finance_payment)
+        redirect_to unattached_payments_finance_payments_path
       end
     end
   end
