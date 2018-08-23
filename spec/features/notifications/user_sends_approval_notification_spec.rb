@@ -1,12 +1,9 @@
 require "rails_helper"
 
 describe "User sends application approval notification", js: true do
-  before do
-    visit_claimed_task
-  end
-
   scenario "in general" do
-    within("#application-tools") { click_on("Application Approval Email") }
+    visit_completed_task
+    within("#application-tools") { click_on(application_approval_email_link) }
 
     within(".modal.fade.in") do
       expect(find_field("notification_application_approval[subject]").value)
@@ -34,5 +31,27 @@ describe "User sends application approval notification", js: true do
     expect(Notification::ApplicationApproval.count).to eq(2)
   end
 
-  scenario "with attachments"
+  scenario "when there is no recipient" do
+    task = create(:completed_task)
+
+    Submission.update_all(applicant_email: nil)
+    Customer.update_all(email: nil)
+    login(task.claimant, task.submission.part)
+    visit submission_task_path(task.submission, task)
+
+    within("#application-tools") do
+      click_on(application_approval_email_link)
+      expect(page).to have_text("An email cannot be sent without a recipient")
+    end
+  end
+
+  scenario "when the submission has no completed task" do
+    visit_claimed_task
+
+    expect(page).not_to have_link(application_approval_email_link)
+  end
+end
+
+def application_approval_email_link
+  "Application Approval Email"
 end

@@ -3,7 +3,7 @@
     Application Tools
   .x_content
     .row
-      - if @task
+      - if Policies::Workflow.can_email_application_approval?(submission)
         .col-md-4
           = render partial: "/submission/application_approvals/new", locals: {submission: submission, task: @task}
 

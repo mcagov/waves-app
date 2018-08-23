@@ -13,6 +13,10 @@ class Policies::Workflow
       !approved_name_required?(submission)
     end
 
+    def can_email_application_approval?(submission)
+      !submission.tasks.completed.empty?
+    end
+
     def can_edit_official_number?(user)
       user.team_leader? || user.system_manager?
     end
