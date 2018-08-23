@@ -54,7 +54,7 @@ class InternalPagesController < ApplicationController
     @readonly = Policies::Actions.readonly?(@task, current_user)
   end
 
-  def prevent_read_only!
+  def prevent_readonly_user!
     access_denied! if current_user.read_only?
   end
 

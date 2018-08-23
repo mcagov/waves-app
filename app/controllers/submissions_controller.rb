@@ -1,7 +1,7 @@
 class SubmissionsController < InternalPagesController
   include InitNewSubmission
 
-  before_action :prevent_read_only!, except: [:show, :edit]
+  before_action :prevent_readonly_user!, except: [:show, :edit]
   before_action :load_submission,
                 only: [:show, :edit, :update, :close]
   before_action :load_task, only: [:edit, :update]
