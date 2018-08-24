@@ -12,10 +12,6 @@ class Decorators::Submission < SimpleDelegator
     source.titleize if source
   end
 
-  def display_changeset?
-    DeprecableTask.new(task).builds_registry?
-  end
-
   def registered_agent
     @registered_agent ||= registered_vessel.try(:agent) || Register::Agent.new
   end
