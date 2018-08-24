@@ -1,10 +1,8 @@
-u = User.find_by(name: "Toby Privett")
-unless u
-  u.email = "toby@snaplab.co.uk"
-  u.password = "password"
-  u.access_level = :system_manager
-  u.save!
-end
+u = User.find_or_initialize_by(name: "Toby Privett")
+u.email = "toby@snaplab.co.uk"
+u.password = "password"
+u.access_level = :system_manager
+u.save!
 
 Service.delete_all
 
