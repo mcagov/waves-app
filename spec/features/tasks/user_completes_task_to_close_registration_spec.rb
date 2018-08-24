@@ -16,6 +16,7 @@ describe "User completes task to close a vessel's registration", js: true do
     end
 
     expect(page).to have_css(".registration_status", text: "Closed")
+    wait_for_ajax
     registration = Registration.last
     expect(registration.description).to eq("Failed to renew")
     expect(registration.closed_at.to_date).to eq("01/09/2011".to_date)

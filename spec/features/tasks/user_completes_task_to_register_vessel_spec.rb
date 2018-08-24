@@ -21,6 +21,7 @@ describe "User completes task to register a vessel", js: true do
       click_on("Complete Task")
     end
 
+    wait_for_ajax
     expect(page).to have_css(".registration_status", text: "Registered")
 
     registration = Registration.last
