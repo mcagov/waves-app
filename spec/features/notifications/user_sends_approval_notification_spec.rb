@@ -5,6 +5,7 @@ describe "User sends application approval notification", js: true do
     visit_completed_task(
       submission: create(
         :submission, :part_3_vessel,
+        registration: create(:registration),
         print_jobs: [
           create(:print_job, template: :registration_certificate),
           create(:print_job, template: :current_transcript)]))
@@ -37,8 +38,8 @@ describe "User sends application approval notification", js: true do
     expect(notification.subject).to eq("Hello")
     expect(notification.body).to match(/The message/)
 
-    # expect(notification.attachments)
-    # .to match([:registration_certificate, :current_transcript])
+    expect(notification.attachments)
+      .to match(%w(registration_certificate current_transcript))
 
     expect(Notification::ApplicationApproval.count).to eq(2)
   end

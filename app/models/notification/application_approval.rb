@@ -22,8 +22,8 @@ class Notification::ApplicationApproval < Notification
   end
 
   def email_attachments
-    return if attachments.blank?
-
-    Pdfs::Processor.run(attachments.to_sym, registration, :attachment).render
+    Array(attachments).map do |attachment|
+      Pdfs::Processor.run(attachment.to_sym, registration, :attachment).render
+    end
   end
 end

@@ -29,12 +29,12 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  def wysiwyg(defaults, body, actioned_by, pdf_attachment = nil)
+  def wysiwyg(defaults, body, actioned_by, pdf_attachments = [])
     @department = defaults[:department]
     @body = body
     @name = defaults[:name]
     @actioned_by = actioned_by
-    enable_attachment(pdf_attachment)
+    enable_attachment(pdf_attachments)
 
     mail(to: defaults[:to], subject: defaults[:subject])
   end
@@ -46,7 +46,6 @@ class NotificationMailer < ApplicationMailer
     @actioned_by = actioned_by
     @register_length = register_length
     attachments["carving_and_marking_note.pdf"] = pdf_attachment
-    @attachment = true
 
     mail(to: defaults[:to], subject: defaults[:subject])
   end
@@ -90,9 +89,11 @@ class NotificationMailer < ApplicationMailer
     File.join(ENV.fetch("GOVUK_HOST"), path)
   end
 
-  def enable_attachment(attachment)
-    return if attachment.nil?
-    attachments["#{@reg_no}.pdf"] = attachment
+  def enable_attachment(files)
+    return if files.nil?
+    Array(files).each_with_index do |file, index|
+      attachments["mca-document-#{index + 1}.pdf"] = file
+    end
     @attachment = true
     attachments
   end

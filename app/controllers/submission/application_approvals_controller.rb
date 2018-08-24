@@ -26,6 +26,6 @@ class Submission::ApplicationApprovalsController < InternalPagesController
       subject: notification_application_approval_params[:subject],
       body: notification_application_approval_params[:body],
       actioned_by: current_user,
-      attachments: nil)
+      attachments: notification_application_approval_params[:attachments])
   end
 end
