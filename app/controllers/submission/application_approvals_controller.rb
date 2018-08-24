@@ -1,6 +1,16 @@
 class Submission::ApplicationApprovalsController < InternalPagesController
   before_action :load_submission
 
+  def new
+    @application_approval =
+      Notification::ApplicationApproval.new(
+        notifiable_id: @submission.id, notifiable_type: "Submission")
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     notification_application_approval_params[:recipients].each do |recipient|
       build_notification(Customer.new(email_description: recipient))
