@@ -1,16 +1,15 @@
-- declaration = Decorators::Declaration.new(f.object)
-- if declaration.declaration_required?
-  %hr
-  .row.owner_declaration_fields
-    .col-md-4
-      .form-group
-        %label Declaration Signed
-        - f.object.declaration_signed = declaration.completed?
-        = f.input :declaration_signed,
-          label: false,
-          as: :radio_buttons,
-          item_label_class: "radio-inline",
-          item_wrapper_tag: false
+- declaration = f.object
+%hr
+.row.owner_declaration_fields
+  .col-md-4
+    .form-group
+      %label Declaration Signed
+      - f.object.declaration_signed = declaration.completed?
+      = f.input :declaration_signed,
+        label: false,
+        as: :radio_buttons,
+        item_label_class: "radio-inline",
+        item_wrapper_tag: false
 
-        - if declaration.completed?
-          %p= render partial: "/declarations/status", locals: { declaration: f.object }
+      - if declaration.completed?
+        %p= render partial: "/declarations/status", locals: { declaration: f.object }

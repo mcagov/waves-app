@@ -4,7 +4,8 @@ describe "User save owner details", js: :true do
   before do
     visit_claimed_task(
       submission: create(:submission, :part_2_vessel),
-      service: create(:service, :update_registry_details))
+      service:
+        create(:service, :update_registry_details, :declarations_required))
   end
 
   scenario "Individual owner" do
