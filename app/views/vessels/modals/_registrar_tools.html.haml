@@ -1,3 +1,4 @@
+- registrar_tools = RegistrarTools.new(vessel)
 .modal.fade{id: 'take-action', role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-md
     .modal-content
@@ -46,7 +47,10 @@
           - else
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
-          %p= link_to "Manual Override", vessel_manual_override_path(vessel),
+
+          - if registrar_tools.manual_override_service
+            %p= link_to "Manual Override",
+              vessel_tasks_path(vessel, service_id: registrar_tools.manual_override_service.id),
               method: :post, class: "btn btn-block btn-success"
 
         - else

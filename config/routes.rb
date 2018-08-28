@@ -288,9 +288,9 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/termination"
 
-    resource :manual_override,
+    resource :tasks,
              only: [:create],
-             controller: "registered_vessel/manual_override"
+             controller: "registered_vessel/tasks"
   end
 
   %w(
