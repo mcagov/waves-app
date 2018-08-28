@@ -23,7 +23,7 @@ describe RegistrationDate do
       end
     end
 
-    context "when the task will provisional_registration" do
+    context "when the task will generate_provisional_registration" do
       let!(:task) do
         create(:claimed_task,
                submission: create(:submission, part: :part_3),
