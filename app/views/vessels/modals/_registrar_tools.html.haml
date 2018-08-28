@@ -36,22 +36,27 @@
           = render partial: "vessels/modals/freeze_record", locals: {vessel: vessel}
           %hr
           - if vessel.registration_status != :closed
-            %p
-              = link_to DeprecableTask.new(:registrar_closure).description,
-                vessel_closure_path(vessel),
-                method: :post, class: "btn btn-block btn-warning"
-            %p
-              = link_to DeprecableTask.new(:forced_closure).description,
-                vessel_forced_closure_path(vessel),
-                method: :post, class: "btn btn-block btn-danger"
+
+            - if registrar_closure_service = registrar_tools.service(:registrar_closure)
+              %p
+                = link_to registrar_closure_service,
+                  vessel_tasks_path(vessel, service_id: registrar_closure_service.id, application_type: :registrar_closure),
+                  method: :post, class: "btn btn-block btn-warning"
+
+            - if forced_closure_service = registrar_tools.service(:forced_closure)
+              %p
+                = link_to forced_closure_service,
+                  vessel_tasks_path(vessel, service_id: forced_closure_service.id, application_type: :forced_closure),
+                  method: :post, class: "btn btn-block btn-danger"
           - else
-            %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
+            %p= link_to "Restore Closed Registration", "#",
                 method: :post, class: "btn btn-block btn-warning"
 
           - if manual_override_service = registrar_tools.service(:manual_override)
-            %p= link_to "Manual Override",
-              vessel_tasks_path(vessel, service_id: manual_override_service.id, application_type: :manual_override),
-              method: :post, class: "btn btn-block btn-success"
+            %p
+              = link_to manual_override_service,
+                vessel_tasks_path(vessel, service_id: manual_override_service.id, application_type: :manual_override),
+                method: :post, class: "btn btn-block btn-success"
 
         - else
           %p= link_to "Unfreeze Record", "#",

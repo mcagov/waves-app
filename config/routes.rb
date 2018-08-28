@@ -240,14 +240,6 @@ Rails.application.routes.draw do
   end
 
   resources :vessels, only: [:show, :index] do
-    resource :closure,
-             only: [:create],
-             controller: "registered_vessel/closure"
-
-    resource :forced_closure,
-             only: [:create],
-             controller: "registered_vessel/forced_closure"
-
     resources :csrs,
               only: [:show, :create, :update],
               controller: "registered_vessel/csrs"
