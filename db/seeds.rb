@@ -674,3 +674,18 @@ Service.create(
     :current_transcript,
     :forced_closure,
   ])
+
+Service.create(
+  name: "Restore Closed Registration",
+  standard_days: 1,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registered_vessel_required,
+    :registry_not_editable,
+  ],
+  activities: [:restore_closure],
+  print_templates: [
+  ])
