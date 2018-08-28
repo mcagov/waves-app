@@ -48,9 +48,9 @@
             %p= link_to "Restore Closed Registration", vessel_closure_path(vessel),
                 method: :post, class: "btn btn-block btn-warning"
 
-          - if registrar_tools.manual_override_service
+          - if manual_override_service = registrar_tools.service(:manual_override)
             %p= link_to "Manual Override",
-              vessel_tasks_path(vessel, service_id: registrar_tools.manual_override_service.id),
+              vessel_tasks_path(vessel, service_id: manual_override_service.id, application_type: :manual_override),
               method: :post, class: "btn btn-block btn-success"
 
         - else

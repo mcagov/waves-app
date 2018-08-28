@@ -11,8 +11,6 @@ class RegisteredVessel::TasksController < InternalPagesController
     @task.confirm!
     @task.claim!(current_user)
 
-    log_work!(@task, @task, :manual_override)
-
     redirect_to submission_task_path(@submission, @task)
   end
 
@@ -24,7 +22,7 @@ class RegisteredVessel::TasksController < InternalPagesController
       vessel_reg_no: @vessel.reg_no,
       part: @vessel.part,
       source: :manual_entry,
-      application_type: :manual_override,
+      application_type: params[:application_type],
       received_at: Time.zone.today)
   end
 end

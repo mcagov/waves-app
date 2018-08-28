@@ -3,7 +3,8 @@ class RegistrarTools
     @registered_vessel = registered_vessel
   end
 
-  def manual_override_service
-    @manual_override_service ||= Service.find_by(name: "Manual Override")
+  def service(key)
+    service_name = ApplicationType.new(key).description
+    Service.find_by(name: service_name) if service_name
   end
 end
