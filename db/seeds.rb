@@ -637,3 +637,40 @@ Service.create(
   ],
   print_templates: [
   ])
+
+Service.create(
+  name: "Registration Closure: Owner Request",
+  standard_days: 10,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registered_vessel_required,
+    :registry_not_editable,
+  ],
+  activities: [
+    :close_registration,
+  ],
+  print_templates: [
+    :current_transcript,
+  ])
+
+Service.create(
+  name: "Registration Closure: Close Without Notice",
+  standard_days: 10,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registered_vessel_required,
+    :registry_not_editable,
+  ],
+  activities: [
+    :close_registration,
+  ],
+  print_templates: [
+    :current_transcript,
+    :forced_closure,
+  ])
