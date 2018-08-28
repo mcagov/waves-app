@@ -30,6 +30,10 @@ FactoryBot.define do
       vessel_reg_no { create(:registered_vessel, part: :part_3).reg_no }
     end
 
+    trait :closed_part_3_vessel do
+      vessel_reg_no { create(:closed_vessel, part: :part_3).reg_no }
+    end
+
     trait :part_4_fishing_vessel do
       part :part_4
       vessel_reg_no { create(:part_4_fishing_vessel).reg_no }

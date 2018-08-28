@@ -110,6 +110,16 @@ describe ApplicationProcessor do
       it { subject }
     end
 
+    context "activity: restore_clousre" do
+      let(:activities) { [:restore_closure] }
+
+      before do
+        expect(Builders::RestoreClosureBuilder).to receive(:create).with(task)
+      end
+
+      it { subject }
+    end
+
     context "print: registration_certificate, cover_letter and foo" do
       let(:print_templates) { [:cover_letter, :registration_certificate, :foo] }
       let(:registration) { create(:registration) }

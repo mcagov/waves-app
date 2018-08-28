@@ -32,6 +32,12 @@ FactoryBot.define do
     end
   end
 
+  factory :closed_vessel, parent: :registered_vessel do
+    after(:create) do |vessel|
+      vessel.current_registration.update_attributes(closed_at: 1.hour.ago)
+    end
+  end
+
   factory :provisionally_registered_vessel, parent: :registered_vessel do
     after(:create) do |vessel|
       provisional_registration =

@@ -30,6 +30,8 @@ class ApplicationProcessor
         record_transcript_event
       elsif activities_policy.close_registration
         close_registration
+      elsif activities_policy.restore_closure
+        restore_closure
       else
         @registered_vessel.try(:current_registration)
       end
@@ -62,6 +64,10 @@ class ApplicationProcessor
           @approval_params[:closure_at],
           @approval_params[:closure_reason],
           @approval_params[:supporting_info])
+    end
+
+    def restore_closure
+      Builders::RestoreClosureBuilder.create(@task)
     end
 
     def build_print_jobs
