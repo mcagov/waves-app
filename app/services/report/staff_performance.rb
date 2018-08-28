@@ -24,7 +24,7 @@ class Report::StaffPerformance < Report
       submission_ids = submission_ids_for(task_type)
       data_elements =
         [
-          DeprecableTask.new(task_type[1]).description,
+          "", # DeprecableTask.new(task_type[1]).description,
           submission_ids.length,
           top_performer(submission_ids),
         ]
