@@ -7,6 +7,16 @@ class Policies::Activities
     @task.service.activities.map(&:to_sym)
   end
 
+  def supports_registration_date_inputs
+    (activities &
+      [
+        :generate_new_5_year_registration,
+        :generate_provisional_registration,
+        :restore_closure,
+      ]
+    ).any?
+  end
+
   def method_missing(method_name, *args)
     if @task.is_a?(Submission::Task)
       activities.include?(method_name)

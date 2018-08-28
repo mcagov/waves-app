@@ -1,6 +1,6 @@
 - activities_policy = Policies::Activities.new(task)
 
-- if activities_policy.generate_new_5_year_registration || activities_policy.generate_provisional_registration
+- if activities_policy.supports_registration_date_inputs
   - registration_date = RegistrationDate.for(task)
   - task.registration_starts_at = registration_date.starts_at.to_s(:datetimepicker)
   - task.registration_ends_at = registration_date.ends_at.to_s(:datetimepicker)

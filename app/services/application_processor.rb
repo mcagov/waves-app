@@ -67,7 +67,10 @@ class ApplicationProcessor
     end
 
     def restore_closure
-      Builders::RestoreClosureBuilder.create(@task)
+      Builders::RestoreClosureBuilder.create(
+        @task,
+        @approval_params[:registration_starts_at],
+        @approval_params[:registration_ends_at])
     end
 
     def build_print_jobs

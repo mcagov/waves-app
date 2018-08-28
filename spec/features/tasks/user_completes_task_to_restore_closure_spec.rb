@@ -4,7 +4,6 @@ describe "User completes task to close a vessel's registration", js: true do
   scenario "in general", js: true do
     service = create(:service, activities: [:restore_closure])
     submission = create(:submission, :closed_part_3_vessel)
-    previous_registration = submission.registered_vessel.current_registration
 
     visit_claimed_task(service: service, submission: submission)
 
@@ -12,15 +11,14 @@ describe "User completes task to close a vessel's registration", js: true do
 
     click_on("Complete Task")
     within(".modal.fade.in") do
+      fill_in("Date and Time", with: "13/12/2010")
+      fill_in("Registration Expiry Date", with: "13/12/2030")
       click_on("Complete Task")
     end
 
     expect(page).to have_css(".registration_status", text: "Registered")
-    registration = submission.registered_vessel.reload.current_registration
-    expect(registration.closed_at).to be_blank
-    expect(registration.registered_at)
-      .to eq(previous_registration.registered_at)
-    expect(registration.registered_until)
-      .to eq(previous_registration.registered_until)
+    registration = submission.reload.registration
+    expect(registration.registered_at.to_date).to eq("13/12/2010".to_date)
+    expect(registration.registered_until.to_date).to eq("13/12/2030".to_date)
   end
 end

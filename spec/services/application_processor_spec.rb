@@ -112,9 +112,16 @@ describe ApplicationProcessor do
 
     context "activity: restore_clousre" do
       let(:activities) { [:restore_closure] }
+      let(:approval_params) do
+        {
+          registration_starts_at: "01/01/2011",
+          registration_ends_at: "03/03/2013",
+        }
+      end
 
       before do
-        expect(Builders::RestoreClosureBuilder).to receive(:create).with(task)
+        expect(Builders::RestoreClosureBuilder)
+          .to receive(:create).with(task, "01/01/2011", "03/03/2013")
       end
 
       it { subject }
