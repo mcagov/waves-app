@@ -1,31 +1,41 @@
 class RegistrationDate
   class << self
     def for(task)
-      starts_at = start_date_for(task)
-      RegistrationDate.new(starts_at, ends_at(task, starts_at))
+      starts_at = calculate_starts_at(task)
+      RegistrationDate.new(starts_at, calculate_ends_at(task, starts_at))
     end
 
     private
 
-    def start_date_for(task)
+    def calculate_starts_at(task)
       registered_vessel = task.submission.try(:registered_vessel)
       return Time.zone.now unless registered_vessel.try(:registered_until)
 
-      if registered_vessel.registered_until < Date.today.advance(months: 3)
+      if activities_policy(task).restore_closure
+        registered_vessel.registered_at
+      elsif registered_vessel.registered_until < Date.today.advance(months: 3)
         registered_vessel.registered_until
       else
         Time.zone.now
       end
     end
 
-    def ends_at(task, starts_at)
-      if Policies::Activities.new(task).generate_provisional_registration
+    def calculate_ends_at(task, starts_at)
+      registered_vessel = task.submission.try(:registered_vessel)
+
+      if activities_policy(task).restore_closure
+        registered_vessel.registered_until
+      elsif activities_policy(task).generate_provisional_registration
         starts_at.advance(days: 90)
-      elsif Policies::Activities.new(task).generate_new_5_year_registration
+      elsif activities_policy(task).generate_new_5_year_registration
         starts_at.advance(years: 5)
       else
         task.submission.registered_vessel.registered_until
       end
+    end
+
+    def activities_policy(task)
+      Policies::Activities.new(task)
     end
   end
 

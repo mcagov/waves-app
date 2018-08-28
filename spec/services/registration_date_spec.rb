@@ -23,6 +23,26 @@ describe RegistrationDate do
       end
     end
 
+    context "when the task will restore_closure" do
+      let!(:task) do
+        create(:claimed_task,
+               submission: create(:submission, :closed_part_3_vessel),
+               service: create(:service, :restore_closure))
+      end
+
+      let!(:previous_registration) do
+        task.submission.registered_vessel.current_registration
+      end
+
+      it do
+        expect(subject.starts_at).to eq(previous_registration.registered_at)
+      end
+
+      it do
+        expect(subject.ends_at).to eq(previous_registration.registered_until)
+      end
+    end
+
     context "when the task will generate_provisional_registration" do
       let!(:task) do
         create(:claimed_task,

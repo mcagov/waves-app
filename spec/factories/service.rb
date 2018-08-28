@@ -32,6 +32,10 @@ FactoryBot.define do
       print_templates { [:csr_form] }
     end
 
+    trait :restore_closure do
+      activities { [:restore_closure] }
+    end
+
     trait :registered_vessel_required do
       rules { [:registered_vessel_required] }
     end
