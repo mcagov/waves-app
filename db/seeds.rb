@@ -689,3 +689,39 @@ Service.create(
   activities: [:restore_closure],
   print_templates: [
   ])
+
+Service.create(
+  name: "Registration Closure: 30 Day Section Notice",
+  standard_days: 1,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registered_vessel_required,
+    :registry_not_editable,
+  ],
+  activities: [
+    :issue_section_notice,
+  ],
+  print_templates: [
+    :section_notice,
+  ])
+
+Service.create(
+  name: "Registration Closure: 7 Day Notice of Termination",
+  standard_days: 1,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registered_vessel_required,
+    :registry_not_editable,
+  ],
+  activities: [
+    :issue_termination_notice,
+  ],
+  print_templates: [
+    :termination_notice,
+  ])
