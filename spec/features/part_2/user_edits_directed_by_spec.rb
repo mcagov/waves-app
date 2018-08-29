@@ -12,18 +12,18 @@ describe "User edits Directed & Controlled By", js: :true do
     within(".modal.fade.in") do
       expect_postcode_lookup
       fill_in("Name", with: "BOB BOLD")
-      select("BELGIAN", from: "Nationality")
+      select("BELGIUM", from: "Nationality")
       click_on("Save")
     end
 
     expect(page).to have_css(".directed_by-name", text: "BOB BOLD")
-    expect(page).to have_css(".directed_by-nationality", text: "BELGIAN")
+    expect(page).to have_css(".directed_by-nationality", text: "BELGIUM")
 
     click_on("BOB BOLD")
-    select("SPANISH", from: "Nationality")
+    select("SPAIN", from: "Nationality")
     click_on("Save")
 
-    expect(page).to have_css(".directed_by-nationality", text: "SPANISH")
+    expect(page).to have_css(".directed_by-nationality", text: "SPAIN")
 
     within("#directed_by") do
       click_on("Remove")

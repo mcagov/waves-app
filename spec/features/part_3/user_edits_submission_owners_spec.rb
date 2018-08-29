@@ -16,7 +16,7 @@ describe "User edits submission owners", js: true do
     within(".modal.fade.in") { expect_postcode_lookup }
 
     fill_in("Owner Name", with: "ALICE NEW OWNER")
-    select("SPANISH", from: "Nationality")
+    select("SPAIN", from: "Nationality")
     fill_in("Email", with: "alice@example.com")
     fill_in("Phone Number", with: "012345678")
 
@@ -32,7 +32,7 @@ describe "User edits submission owners", js: true do
     expect(page).to have_link("ALICE NEW OWNER", href: "#")
     expect(page).to have_css(".owner-email", text: "alice@example.com")
     expect(page).to have_css(".owner-phone_number", text: "012345678")
-    expect(page).to have_css(".owner-nationality", text: "SPANISH")
+    expect(page).to have_css(".owner-nationality", text: "SPAIN")
 
     inline_address =
       "ADDRESS 1, ADDRESS 2, ADDRESS 3, TOWN, UNITED KINGDOM, POC123"
