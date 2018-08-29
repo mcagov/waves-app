@@ -203,10 +203,6 @@ Rails.application.routes.draw do
              controller: "submission/shareholdings",
              only: [:show]
 
-    resource :signature,
-             controller: "submission/signatures",
-             only: [:show, :update]
-
     resources :tasks,
               controller: "submission/tasks",
               only: [:index, :create, :destroy, :update, :show] do

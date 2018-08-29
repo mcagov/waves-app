@@ -3,10 +3,8 @@
 #heading.row
   .col-md-10
     %h1{style: "margin-top: 0px !important; margin-bottom: 0px !important;"}
-
-      = link_to submission_signature_path(submission), id: "edit-submission-signature" do
-        %span.vessel-name #{ submission.vessel_name }. ID:
-        %span.ref-no= submission.ref_no || "Not yet generated"
+      %span.vessel-name #{ submission.vessel_name }. ID:
+      %span.ref-no= submission.ref_no || "Not yet generated"
       = yield(:heading_descriptor)
     .row#official-and-ec-no
       = render partial: "/submissions/info/official_no", locals: { submission: submission }
