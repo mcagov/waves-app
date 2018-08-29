@@ -22,7 +22,7 @@ class Submission < ApplicationRecord
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
-    state :active, enter: :build_defaults
+    state :active, enter: :ensure_defaults
     state :closed
 
     event :close, timestamp: :closed_at do
@@ -31,11 +31,18 @@ class Submission < ApplicationRecord
     end
   end
 
-  before_update :build_defaults, if: :registered_vessel_id_changed?
+  after_create :build_defaults
 
   scope :in_part, ->(part) { where(part: part.to_sym) if part }
 
   delegate :registration_status, to: :registered_vessel, allow_nil: true
+
+  def ensure_defaults
+    self.part ||= :part_3
+    self.application_type ||= :new_registration
+    self.source ||= :online
+    self.ref_no ||= RefNo.generate
+  end
 
   def closeable?
     tasks.active.empty? && tasks.initialising.empty?

@@ -12,9 +12,6 @@ FactoryBot.define do
         agent: build(:submission_agent),
       }
     end
-    after(:create) do |submission|
-      submission.build_defaults
-    end
 
     trait :part_1_vessel do
       part :part_1

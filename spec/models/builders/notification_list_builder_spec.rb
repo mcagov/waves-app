@@ -6,7 +6,7 @@ describe Builders::NotificationListBuilder do
     let!(:outstanding_declaration) do
       create(
         :notification,
-        notifiable: create(:declaration, submission: submission),
+        notifiable: submission.declarations[0],
         created_at: Time.zone.today)
     end
 
