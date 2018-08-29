@@ -29,6 +29,18 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
+  def application_approval(defaults, body, actioned_by, pdf_attachments = [])
+    @department = defaults[:department]
+    @body = body
+    @name = defaults[:name]
+    @actioned_by = actioned_by
+    @application_approval = true
+    enable_attachment(pdf_attachments)
+
+    mail(
+      to: defaults[:to], subject: defaults[:subject], template_name: :wysiwyg)
+  end
+
   def wysiwyg(defaults, body, actioned_by, pdf_attachments = [])
     @department = defaults[:department]
     @body = body

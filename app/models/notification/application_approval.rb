@@ -1,6 +1,6 @@
 class Notification::ApplicationApproval < Notification
   def email_template
-    :wysiwyg
+    :application_approval
   end
 
   def email_subject

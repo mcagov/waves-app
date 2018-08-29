@@ -10,6 +10,11 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, "My Boat", "3N-777EA4")
   end
 
+  def application_approval
+    NotificationMailer.application_approval(
+      default_params, "<p>FREE TEXT</p>", "3N-777EA4")
+  end
+
   def carving_and_marking_note_under_15m
     NotificationMailer.carving_and_marking_note(
       default_params, 14.9, "Officer Bob", :pdf_attachment)

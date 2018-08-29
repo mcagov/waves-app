@@ -26,7 +26,7 @@ describe Notification::ApplicationApproval, type: :model do
       end
 
       it "has the expected email_template" do
-        expect(subject.email_template).to eq(:wysiwyg)
+        expect(subject.email_template).to eq(:application_approval)
       end
 
       it "has the expected email_subject" do
