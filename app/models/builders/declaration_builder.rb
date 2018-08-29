@@ -17,7 +17,7 @@ class Builders::DeclarationBuilder
       @owners.each do |owner|
         declaration =
           Declaration.create(
-            submission: @submission,
+            submission_id: @submission.id,
             owner: build_owner(owner),
             shares_held: owner[:shares_held].to_i,
             entity_type: owner[:entity_type] || :individual)

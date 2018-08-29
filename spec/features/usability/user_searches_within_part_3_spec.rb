@@ -22,7 +22,7 @@ describe "User searches within part 3" do
     end
 
     scenario "searching by owner postcode" do
-      create(:submission, declarations: [build(:declaration)])
+      create(:declaration)
 
       within(".nav_menu") { search_for("QZ2 3Q") }
 

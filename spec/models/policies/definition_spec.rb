@@ -34,7 +34,7 @@ describe Policies::Definitions do
       let(:obj) do
         create(
           :declaration,
-          submission: build(
+          submission: create(
             :submission,
             changeset: { vessel_info: { registration_type: :fishing } }))
       end

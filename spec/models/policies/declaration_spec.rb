@@ -14,9 +14,7 @@ describe Policies::Declarations do
       end
 
       context "when there is an incomplete declaration" do
-        let(:submission) do
-          create(:submission, declarations: [build(:declaration)])
-        end
+        let(:submission) { create(:declaration).submission }
 
         it { expect(subject).to eq("Incomplete") }
       end

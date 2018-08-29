@@ -13,6 +13,7 @@ class Submission < ApplicationRecord
 
   validates :part, presence: true
   validates :source, presence: true
+  validates :application_type, presence: true
 
   validate :ref_no
   validate :registered_vessel_exists
