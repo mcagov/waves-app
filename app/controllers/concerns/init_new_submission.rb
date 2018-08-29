@@ -18,7 +18,9 @@ module InitNewSubmission
     @submission = Submission.new(submission_params)
     @submission.source = :manual_entry
 
-    unless Policies::Actions.registered_vessel_required?(@submission)
+    if Policies::Actions.registered_vessel_required?(@submission)
+      @submission.changeset = nil if @submission.registered_vessel
+    else
       @submission.vessel_reg_no = nil
     end
   end
