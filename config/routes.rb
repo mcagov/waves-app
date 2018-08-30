@@ -237,7 +237,7 @@ Rails.application.routes.draw do
 
   resources :vessels, only: [:show, :index] do
     resources :csrs,
-              only: [:show, :create, :update],
+              only: [:show, :update],
               controller: "registered_vessel/csrs"
 
     resource :cold_storage,
