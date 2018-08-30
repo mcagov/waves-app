@@ -9,7 +9,7 @@ describe Decorators::Submission, type: :model do
     it { expect(subject).to match(/BOB DOLE, 11 DOWNING ST/) }
   end
 
-  xcontext "#changed_vessel_attribute" do
+  context "#changed_vessel_attribute" do
     subject do
       described_class.new(submission).changed_vessel_attribute(:name)
     end
@@ -24,14 +24,23 @@ describe Decorators::Submission, type: :model do
 
     context "when there is a registered_vessel" do
       context "when the name has not been changed" do
-        let(:submission) { create(:submission_for_part_3_vessel) }
+        let(:registered_vessel) { create(:registered_vessel) }
+
+        let(:submission) do
+          create(
+            :submission,
+            registered_vessel: registered_vessel,
+            changeset: { vessel_info: { name: registered_vessel.name } })
+        end
+
         it { expect(subject).to be_nil }
       end
 
       context "when the name has been changed" do
         let(:submission) do
           create(
-            :submission_for_part_3_vessel,
+            :submission,
+            :part_3_vessel,
             changeset: { vessel_info: { name: "NEW NAME" } })
         end
 
