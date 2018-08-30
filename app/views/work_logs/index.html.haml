@@ -1,0 +1,35 @@
+.row
+  .col-md-6
+    %h1.heading_no_top_margin
+      Work Logs
+
+%table.table.table-striped#work_logs
+  %thead
+    %th Date
+    %th Part of the Registry
+    %th Application
+    %th Task
+    %th Activity
+    %th Officer
+    %th
+  %tbody
+    - @work_logs.each do |work_log|
+      - loggable = work_log.loggable
+      - submission = loggable.try(:submission)
+      %tr
+        %td= work_log.created_at.in_time_zone.to_s(:date_time)
+        %td= Activity.new(work_log.part)
+
+        %td
+          - if submission
+            = link_to submission_path(submission) do
+              = "#{ApplicationType.new(submission.application_type).description}: "
+              = submission.ref_no
+        %td
+          - if loggable.is_a?(Submission::Task)
+            = link_to submission_task_path(loggable.submission, loggable) do
+              = "#{loggable.service}: #{loggable.ref_no}"
+        %td.description= work_log.description.humanize
+        %td= work_log.actioned_by
+
+= will_paginate @work_logs, renderer: BootstrapPagination::Rails

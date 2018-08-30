@@ -20,6 +20,21 @@ describe "User views work logs", js: true do
         expect(page).to have_link("Demo Service")
       end
     end
+
+    scenario "from the sidebar" do
+      visit(work_logs_path)
+      within("#sidebar-menu") { click_on("Work Logs") }
+
+      within("#work_logs") do
+        expect(page).to have_css(".description", text: "Task completed")
+        expect(page).to have_link("Demo Service")
+
+        expect(page)
+          .to have_link(
+            ApplicationType.new(submission.application_type).description,
+            href: submission_path(submission))
+      end
+    end
   end
 
   context "part_3" do

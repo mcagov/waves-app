@@ -281,6 +281,8 @@ Rails.application.routes.draw do
              controller: "registered_vessel/tasks"
   end
 
+  resources :work_logs, only: [:index]
+
   %w(
     incomplete my-tasks team-tasks
     referred unclaimed cancelled next-task

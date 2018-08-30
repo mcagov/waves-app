@@ -1,0 +1,16 @@
+%table.table.table-striped#work_logs
+  %thead
+    %th Date
+    %th Task
+    %th Activity
+    %th Officer
+    %th
+  %tbody
+    - @submission.work_logs.each do |work_log|
+      %tr
+        %td= work_log.created_at.in_time_zone.to_s(:date_time)
+        %td
+          - if work_log.loggable.is_a?(Submission::Task)
+            = link_to work_log.loggable.service, submission_task_path(@submission, work_log.loggable)
+        %td.description= work_log.description.humanize
+        %td= work_log.actioned_by
