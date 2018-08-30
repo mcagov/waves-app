@@ -22,7 +22,7 @@ describe Submission::DocumentsController, type: :controller do
         expect(assigns(:task)).to be_unclaimed
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry("Document", :document_added) }
     end
 
     context "when the task is #cancelled" do
@@ -32,7 +32,7 @@ describe Submission::DocumentsController, type: :controller do
         expect(assigns(:task)).to be_cancelled
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry("Document", :document_added) }
     end
 
     context "when the task is #claimed" do
@@ -42,7 +42,7 @@ describe Submission::DocumentsController, type: :controller do
         expect(assigns(:task)).to be_claimed
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry("Document", :document_added) }
     end
   end
 end

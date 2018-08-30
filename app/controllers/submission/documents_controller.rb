@@ -11,7 +11,7 @@ class Submission::DocumentsController < InternalPagesController
 
     if @document.save
       flash[:notice] = "The document has been saved"
-      log_work!(@task, @document, :document_entry)
+      log_work!(@task, @document, :document_added)
     end
 
     render_update_js

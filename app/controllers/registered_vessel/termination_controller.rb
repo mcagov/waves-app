@@ -5,7 +5,7 @@ class RegisteredVessel::TerminationController < InternalPagesController
     build_completed_submission
     process_termination_submission
 
-    log_work!(@submission, @submission, :termination_notice)
+    log_work!(@submission, @submission, :termination_notice_issued)
 
     redirect_to submission_approval_path(@submission)
   end

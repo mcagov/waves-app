@@ -23,7 +23,7 @@ feature "User adds documents to a submission", type: :feature, js: true do
 
     click_on("History")
     within("#history") do
-      expect(page).to have_text("Document entry")
+      expect(page).to have_text("Document added")
     end
   end
 end

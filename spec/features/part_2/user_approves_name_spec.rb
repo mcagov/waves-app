@@ -26,7 +26,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
     expect(page).to have_css(".vessel-name", text: "DUPLICATE")
 
-    creates_a_work_log_entry("Submission::Task", :name_approval)
+    creates_a_work_log_entry("Submission::Task", :name_approved)
   end
 
   scenario "with an unavailable port_no" do
@@ -68,7 +68,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       expect(page).to have_css(".vessel-name", text: "BOBS BOAT")
       expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
 
-      creates_a_work_log_entry("Submission::Task", :name_approval)
+      creates_a_work_log_entry("Submission::Task", :name_approved)
     end
   end
 

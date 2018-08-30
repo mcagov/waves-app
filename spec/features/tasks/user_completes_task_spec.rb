@@ -24,7 +24,7 @@ describe "User completes a task", js: true do
     expect(page).to have_text("The task has been completed")
     expect(@task.reload).to be_completed
 
-    creates_a_work_log_entry("Submission::Task", :completed)
+    creates_a_work_log_entry("Submission::Task", :task_completed)
   end
 
   scenario "when the task has validation errors" do

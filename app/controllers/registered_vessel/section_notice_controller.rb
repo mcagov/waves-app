@@ -5,7 +5,7 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
     build_completed_submission
     process_section_notice_submission
 
-    log_work!(@submission, @submission, :section_notice)
+    log_work!(@submission, @submission, :section_notice_issued)
 
     redirect_to submission_approval_path(@submission)
   end

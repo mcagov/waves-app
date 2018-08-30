@@ -93,7 +93,7 @@ class Submission::TasksController < InternalPagesController
 
   def complete
     @task.complete!(submission_task_params || {})
-    log_work!(@task, @task, :completed)
+    log_work!(@task, @task, :task_completed)
     flash[:notice] = "The task has been completed"
     redirect_to submission_path(@submission)
   end

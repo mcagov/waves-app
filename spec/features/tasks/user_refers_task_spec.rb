@@ -21,7 +21,7 @@ feature "User refers a task", type: :feature, js: true do
 
     click_on "Referred Tasks"
     expect(Notification::Referral.last.body).to have_text("Referred!")
-    creates_a_work_log_entry("Submission::Task", :referred)
+    creates_a_work_log_entry("Submission::Task", :task_referred)
 
     click_on @vessel_name
 
