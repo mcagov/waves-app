@@ -39,8 +39,7 @@ module Api
 
       def create_application_approval_notification
         Builders::NotificationBuilder.application_approval(
-          submission, nil,
-          DeprecableTask.new(submission.task).print_job_templates.first)
+          submission, nil, :print_template)
       end
     end
   end

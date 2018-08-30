@@ -63,10 +63,6 @@ class Policies::Workflow
       ).include?(attr.to_sym)
     end
 
-    def uses_certificates_and_documents?(submission)
-      DeprecableTask.new(submission.task).builds_registry?
-    end
-
     def uses_registration_types?(part)
       part != :part_3
     end

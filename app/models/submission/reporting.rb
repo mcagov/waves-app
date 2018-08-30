@@ -10,11 +10,13 @@ module Submission::Reporting
           foreign_key: :registered_vessel_id
 
       base.scope :flag_in, -> do
-        where(application_type: DeprecableTask.flag_in)
+        where(application_type: [:new_registration, :provisional])
       end
 
       base.scope :flag_out, -> do
-        where(application_type:  DeprecableTask.flag_out)
+        where(
+          application_type:
+          [:closure, :registrar_closure, :termination_notice])
       end
 
       base.scope :merchant_vessels, (lambda do

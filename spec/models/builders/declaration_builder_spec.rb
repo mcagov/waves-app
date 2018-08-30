@@ -3,10 +3,6 @@ require "rails_helper"
 describe Builders::DeclarationBuilder do
   context ".create" do
     before do
-      allow_any_instance_of(WavesUtilities::Task)
-        .to receive(:declarations_required_on_create?)
-        .and_return(declarations_required)
-
       Builders::DeclarationBuilder.create(
         create(:submission, source: submission_source),
         [alice, bob],

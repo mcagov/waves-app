@@ -78,7 +78,7 @@ class Report::HmrcReport < Report
     submission = vessel.latest_closed_submission
     task_description =
       if submission
-        DeprecableTask.new(submission.application_type).description
+        "task_description"
       else
         ""
       end
