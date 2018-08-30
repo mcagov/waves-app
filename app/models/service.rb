@@ -2,7 +2,7 @@ class Service < ApplicationRecord
   scope :in_part, ->(part) { where.not(part.to_sym => nil) }
 
   def to_s
-    name
+    name || "Unknown"
   end
 
   def price_for(part, service_level)
