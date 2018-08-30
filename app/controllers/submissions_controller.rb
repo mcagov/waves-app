@@ -77,7 +77,8 @@ class SubmissionsController < InternalPagesController
           { work_logs: [:actioned_by] }, { charterers: [:charter_parties] },
           { mortgages: [:mortgagees, :mortgagors] }, :carving_and_markings,
           :managers, :declarations, :engines, :correspondences, :notes,
-          :print_jobs, :notifications, :beneficial_owners]
+          :print_jobs, :notifications, :beneficial_owners,
+          work_logs: [:actioned_by]]
       ).find(params[:id])
 
     ensure_current_part_for(@submission.part)

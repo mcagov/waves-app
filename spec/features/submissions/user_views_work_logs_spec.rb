@@ -1,8 +1,34 @@
 require "rails_helper"
 
-describe "User views work logs" do
+describe "User views work logs", js: true do
   before do
-    3.times { create(:work_log, part: part) }
-    login_to_part_3
+    part = submission.part
+    task = create(:task, submission: submission)
+    create(:work_log, part: part, loggable: task, description: :task_completed)
+
+    login(create(:user), part)
+    visit submission_task_path(submission, task)
+  end
+
+  context "part_2" do
+    let(:submission) { create(:name_approval).submission }
+
+    scenario "in general" do
+      click_on("Work Logs")
+      within("#work_logs") do
+        expect(page).to have_css(".description", text: "Task completed")
+      end
+    end
+  end
+
+  context "part_3" do
+    let(:submission) { create(:submission) }
+
+    scenario "in general" do
+      click_on("Work Logs")
+      within("#work_logs") do
+        expect(page).to have_css(".description", text: "Task completed")
+      end
+    end
   end
 end

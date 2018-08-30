@@ -6,6 +6,7 @@ class WorkLog < ApplicationRecord
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
   validates :loggable_id, presence: true
+  validates :description, presence: true
   validates :actioned_by_id, presence: true
   validates :part, presence: true
 
