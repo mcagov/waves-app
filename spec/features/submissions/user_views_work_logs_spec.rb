@@ -8,15 +8,16 @@ describe "User views work logs", js: true do
 
     login(create(:user), part)
     visit submission_task_path(submission, task)
+    click_on("Work Logs")
   end
 
   context "part_2" do
     let(:submission) { create(:name_approval).submission }
 
     scenario "in general" do
-      click_on("Work Logs")
       within("#work_logs") do
         expect(page).to have_css(".description", text: "Task completed")
+        expect(page).to have_link("Demo Service")
       end
     end
   end
@@ -25,7 +26,6 @@ describe "User views work logs", js: true do
     let(:submission) { create(:submission) }
 
     scenario "in general" do
-      click_on("Work Logs")
       within("#work_logs") do
         expect(page).to have_css(".description", text: "Task completed")
       end
