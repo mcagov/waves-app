@@ -73,7 +73,7 @@ class Submission::TasksController < InternalPagesController
   def claim_referral
     @task.claim_referral!(current_user)
 
-    log_work!(@task, @task, :referral_reclaimed)
+    log_work!(@task, @submission, :referral_reclaimed)
     flash[:notice] = "You have successfully claimed that task"
     redirect_to tasks_my_tasks_path
   end
@@ -93,7 +93,7 @@ class Submission::TasksController < InternalPagesController
 
   def complete
     @task.complete!(submission_task_params || {})
-    log_work!(@task, @task, :task_completed)
+    log_work!(@task, @submission, :task_completed)
     flash[:notice] = "The task has been completed"
     redirect_to submission_path(@submission)
   end
