@@ -5,11 +5,12 @@ describe "User views Vessel Age reports", js: true do
     create(
       :registered_vessel,
       keel_laying_date: 15.months.ago,
-      vessel_type: "BARGE",
+      vessel_category: "BARGE",
       gross_tonnage: 100,
       imo_number: "IMO1",
       reg_no: "SSR12345",
-      name: "BOB")
+      name: "BOB",
+      year_of_build: 1989)
 
     login_to_reports
     visit admin_report_path(:fishing_regional)
@@ -40,6 +41,7 @@ describe "User views Vessel Age reports", js: true do
       within(col[3]) { expect(page).to have_text("SSR12345") }
       within(col[4]) { expect(page).to have_text("1.2") }
       within(col[5]) { expect(page).to have_text("100.0") }
+      within(col[6]) { expect(page).to have_text("1989") }
     end
   end
 end

@@ -1,11 +1,11 @@
-class Report::VesselAgeByType < Report
+class Report::VesselAgeByCategory < Report
   def initialize(filters = {})
     super
-    @vessel_type = @filters[:vessel_type]
+    @vessel_category = @filters[:vessel_category]
   end
 
   def title
-    "Vessel Age: #{@vessel_type}"
+    "Vessel Age: #{@vessel_category}"
   end
 
   def first_sheet_title
@@ -14,7 +14,8 @@ class Report::VesselAgeByType < Report
 
   def headings
     [
-      "Vessel Name", "Part", "IMO No", "Official No", "Age", "Gross Tonnage"
+      "Vessel Name", "Part", "IMO No", "Official No", "Age", "Gross Tonnage",
+      "Year of Build"
     ]
   end
 
@@ -33,7 +34,7 @@ class Report::VesselAgeByType < Report
         "(coalesce(now()::DATE - keel_laying_date::DATE, "\
         "0)::FLOAT / 365) age, *")
 
-    query = query.where(vessel_type: @vessel_type)
+    query = query.where(vessel_category: @vessel_category)
     query = filter_by_part(query)
     query = query.order(:name)
     paginate(query)
@@ -46,7 +47,8 @@ class Report::VesselAgeByType < Report
       vessel.imo_number,
       vessel.reg_no,
       vessel.age.to_f.round(2),
-      vessel.gross_tonnage]
+      vessel.gross_tonnage,
+      vessel.year_of_build]
 
     Result.new(data_elements)
   end
