@@ -4,7 +4,7 @@ describe "User views work logs", js: true do
   before do
     part = submission.part
     task = create(:task, submission: submission)
-    create(:work_log, part: part, loggable: task, description: :task_completed)
+    create(:work_log, part: part, task: task, description: :task_completed)
 
     login(create(:user), part)
     visit submission_task_path(submission, task)
@@ -16,7 +16,7 @@ describe "User views work logs", js: true do
 
     scenario "within the application" do
       within("#work_logs") do
-        expect(page).to have_css(".loggable", "Demo Service")
+        expect(page).to have_css(".title", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
       end
     end
@@ -25,7 +25,7 @@ describe "User views work logs", js: true do
       visit "/part_2/work_logs"
 
       within("#work_logs") do
-        expect(page).to have_css(".loggable", "Demo Service")
+        expect(page).to have_css(".title", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
       end
     end
@@ -36,7 +36,7 @@ describe "User views work logs", js: true do
 
     scenario "within the application" do
       within("#work_logs") do
-        expect(page).to have_css(".loggable", "Demo Service")
+        expect(page).to have_css(".title", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
       end
     end

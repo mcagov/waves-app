@@ -12,7 +12,7 @@ class WorkLogsController < InternalPagesController
       .actioned_by(filter_params[:actioned_by_id])
       .date_start(filter_params[:date_start])
       .date_end(filter_params[:date_end])
-      .includes(:actioned_by, :loggable)
+      .includes(:actioned_by, task: [:submission])
       .order(created_at: :desc)
       .paginate(page: params[:page], per_page: 50)
   end

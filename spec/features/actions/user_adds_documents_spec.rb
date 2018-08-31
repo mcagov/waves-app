@@ -21,6 +21,6 @@ feature "User adds documents to a submission", type: :feature, js: true do
       expect(page).to have_link("mca_test_2.pdf", href: /mca_test_2.pdf/)
     end
 
-    creates_a_work_log_entry("Submission::Task", :document_added)
+    creates_a_work_log_entry(:document_added)
   end
 end

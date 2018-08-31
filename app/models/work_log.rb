@@ -1,11 +1,8 @@
 class WorkLog < ApplicationRecord
-  belongs_to :loggable, polymorphic: true
-
+  belongs_to :task, class_name: "Submission::Task"
   belongs_to :actioned_by, class_name: "User"
 
-  scope :in_part, ->(part) { where(part: part.to_sym) }
-
-  validates :loggable_id, presence: true
+  validates :task_id, presence: true
   validates :description, presence: true
   validates :actioned_by_id, presence: true
 
@@ -26,8 +23,8 @@ class WorkLog < ApplicationRecord
   end)
 
   class << self
-    def latest(loggable, description)
-      where(loggable: loggable)
+    def latest(task, description)
+      where(task: task)
         .where(description: description)
         .order(created_at: :desc)
         .first

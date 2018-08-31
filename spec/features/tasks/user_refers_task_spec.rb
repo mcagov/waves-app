@@ -21,7 +21,7 @@ feature "User refers a task", type: :feature, js: true do
 
     click_on "Referred Tasks"
     expect(Notification::Referral.last.body).to have_text("Referred!")
-    creates_a_work_log_entry("Submission::Task", :task_referred)
+    creates_a_work_log_entry(:task_referred)
 
     click_on @vessel_name
 
@@ -46,7 +46,7 @@ feature "User refers a task", type: :feature, js: true do
 
     expect(page).to have_css("h4", text: "Referral Email")
 
-    creates_a_work_log_entry("Submission::Task", :referral_reclaimed)
+    creates_a_work_log_entry(:referral_reclaimed)
   end
 
   scenario "without sending an email" do

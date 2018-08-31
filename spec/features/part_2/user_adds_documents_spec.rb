@@ -24,7 +24,7 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
     expect(page).to have_css(".expires_at", text: "01/02/2016")
     expect(page).to have_css(".noted_at", text: "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
-    creates_a_work_log_entry("Submission::Task", :document_added)
+    creates_a_work_log_entry(:document_added)
 
     click_on("Seafish")
 

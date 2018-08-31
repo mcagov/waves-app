@@ -16,7 +16,7 @@ feature "User cancels a task", type: :feature, js: true do
 
     click_on "Cancelled Tasks"
     expect(Notification::Cancellation.last.body).to have_text("Sorry!")
-    creates_a_work_log_entry("Submission::Task", :task_cancelled)
+    creates_a_work_log_entry(:task_cancelled)
 
     click_on(@submission.vessel.name)
 

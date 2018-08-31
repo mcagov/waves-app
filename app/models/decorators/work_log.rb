@@ -4,8 +4,8 @@ class Decorators::WorkLog < SimpleDelegator
     super
   end
 
-  def loggable_title
-    "#{loggable.service}: #{loggable.ref_no}" if task
+  def title
+    "#{task.service}: #{task.ref_no}"
   end
 
   def part_of_registry
@@ -14,11 +14,5 @@ class Decorators::WorkLog < SimpleDelegator
 
   def date_recorded
     created_at.in_time_zone.to_s(:date_time)
-  end
-
-  private
-
-  def task
-    loggable if loggable.is_a?(Submission::Task)
   end
 end
