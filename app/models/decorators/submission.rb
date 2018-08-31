@@ -33,10 +33,6 @@ class Decorators::Submission < SimpleDelegator
     AccountLedger.new(@submission).payment_status
   end
 
-  def payment_received
-    AccountLedger.new(@submission).amount_paid
-  end
-
   def declaration_status
     Policies::Declarations.new(@submission).declaration_status
   end
