@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe "User views Vessel Age reports", js: true do
+describe "User views Vessel Age reports", js: true do
   before do
     create(
       :registered_vessel,

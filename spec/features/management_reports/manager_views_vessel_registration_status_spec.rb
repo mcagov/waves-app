@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe "Manager views vessel registration status", js: true do
+describe "Manager views vessel registration status", js: true do
   before do
     @vessel = create(:registered_vessel)
     @vessel.current_registration.update_attributes(

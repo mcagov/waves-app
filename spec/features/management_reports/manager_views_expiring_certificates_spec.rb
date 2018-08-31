@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe "Manager views expiring certificates", js: true do
+describe "Manager views expiring certificates", js: true do
   before do
     @vessel = create(:registered_vessel, part: :part_2)
     @document = create(:document, entity_type: :certificate_of_survey,
