@@ -16,8 +16,8 @@ describe "User views work logs", js: true do
 
     scenario "within the application" do
       within("#work_logs") do
+        expect(page).to have_css(".loggable", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
-        expect(page).to have_link("Demo Service")
       end
     end
 
@@ -25,13 +25,8 @@ describe "User views work logs", js: true do
       visit "/part_2/work_logs"
 
       within("#work_logs") do
+        expect(page).to have_css(".loggable", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
-        expect(page).to have_link("Demo Service")
-
-        expect(page)
-          .to have_link(
-            ApplicationType.new(submission.application_type).description,
-            href: submission_path(submission))
       end
     end
   end
@@ -41,6 +36,7 @@ describe "User views work logs", js: true do
 
     scenario "within the application" do
       within("#work_logs") do
+        expect(page).to have_css(".loggable", "Demo Service")
         expect(page).to have_css(".description", text: "Task completed")
       end
     end

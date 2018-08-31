@@ -7,10 +7,9 @@
     %th
   %tbody
     - @submission.work_logs.each do |work_log|
+      - work_log = Decorators::WorkLog.new(work_log)
       %tr
-        %td= work_log.created_at.in_time_zone.to_s(:date_time)
-        %td
-          - if work_log.loggable.is_a?(Submission::Task)
-            = link_to work_log.loggable.service, submission_task_path(@submission, work_log.loggable)
+        %td= work_log.date_recorded
+        %td.loggable= work_log.loggable_title
         %td.description= work_log.description.humanize
         %td= work_log.actioned_by
