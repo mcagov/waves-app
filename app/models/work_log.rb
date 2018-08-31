@@ -15,11 +15,13 @@ class WorkLog < ApplicationRecord
   end)
 
   scope :date_start, (lambda do |date_start|
-    where("created_at >= ?", date_start) if date_start
+    if date_start
+      where("created_at > ?", date_start.to_date.at_beginning_of_day)
+    end
   end)
 
   scope :date_end, (lambda do |date_end|
-    where("created_at <= ?", date_end) if date_end
+    where("created_at < ?", date_end.to_date.at_end_of_day) if date_end
   end)
 
   class << self
