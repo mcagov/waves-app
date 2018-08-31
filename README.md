@@ -124,20 +124,20 @@ The services that can be performed are stored in the `services` table. Each serv
 5. Activities (e.g. generate_new_5_year_registration, update_registry_details)
 6. Print templates (e.g. registration_certificate, cover_letter)
 
-##### Submissions
-Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different application types. The application type will determine whether an application is for a registered vessel or a (flavour of) new registration.
+##### Submissions (aka Applications)
+Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different application types. The application type will determine whether a submission is for a registered vessel or a (flavour of) new registration.
 
-The full list of application typ can be retrieved from `ApplicationType.all_`. Note that the ApplicationType class references the WavesUtilities gem. It is also viewable in the admin section at: `http://localhost:3000/admin/application_types`.
+The full list of application type can be retrieved from `ApplicationType.all_`. Note that the ApplicationType class references the WavesUtilities gem. It is also viewable in the admin section at: `http://localhost:3000/admin/application_types`.
 
-Submissions have a state of `active` (aka `open`) or `closed`. An application can be closed when all tasks have been completed or cancelled.
+Submissions have a state of `active` (aka `open`) or `closed`. A submission can be closed when all tasks have been completed or cancelled.
 
-A registered vessel can have one `open` application at a time.
+A registered vessel can have one `open` submission at a time.
 
 ##### How submissions are created
 There are three points of entry for a submission:
 1. Via a customer entry on the Online portal (submission#source `:online`)
 2. Via Document Entry by a Reg Officer (submission#source `:manual_entry`)
-3. Finance Team create Payments which are linked or converted to applications by a Registration Officer.
+3. Finance Team create Payments which are linked or converted to submissions by a Registration Officer.
 
 When a submission enters the default :incomplete state, it fires an event `build_default`, invoking the `SubmissionBuilder` and setting up all the defaults. If you want to initialize a submission object to build a form or any other instance when you don't want a record to be created, you need to forecfully set the state to :initializing. For example: `Submission.new(state: :initializing)`.
 
