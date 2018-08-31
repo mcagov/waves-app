@@ -29,9 +29,6 @@
         %li{:role => "agent"}
           %a#agent-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_agent", :role => "tab"} Agent
 
-        %li{:role => "history"}
-          %a#history-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_history", :role => "tab"} History
-
         %li{:role => "notes"}
           %a#notes-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_notes", :role => "tab"} Notes
 
@@ -60,9 +57,6 @@
 
         #tab_content_agent.tab-pane.fade{"aria-labelledby" => "agent-tab", :role => "tabpanel"}
           = render partial: "submissions/basic/body/agent", locals: { agent: submission.agent }
-
-        #tab_content_history.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
-          = render partial: "submissions/basic/body/history"
 
         #tab_content_notes.tab-pane.fade{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
           #notes= render partial: "submission/notes/base", locals: { submission: submission }

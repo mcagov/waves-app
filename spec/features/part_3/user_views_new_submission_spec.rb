@@ -21,11 +21,6 @@ feature "User views new submission", type: :feature, js: true do
       expect(page).to have_text("£25.00")
     end
 
-    click_link("History")
-    within("#history") do
-      expect(page).to have_text("Application started")
-    end
-
     click_link("Agent")
     within("#agent") do
       expect(page).to have_css(".agent-name", text: "Annabel Agent")
