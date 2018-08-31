@@ -68,10 +68,6 @@ class Builders::DeclarationBuilder
       declaration[0]
     end
 
-    def initial_state_for_task
-      :incomplete
-    end
-
     def build_owner(owner)
       Declaration::Owner.new(owner.except(:id, :type))
     end

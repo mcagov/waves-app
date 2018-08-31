@@ -59,16 +59,12 @@ describe RegistrationDate do
       end
     end
 
-    context "when a new certificate is not issued" do
-      let!(:task) do
-        create(:claimed_task,
-               submission: create(:submission, part: :part_3),
-               service: create(:service, :generate_provisional_registration))
-      end
-    end
-
     context "for a registered_vessel" do
-      let!(:registered_vessel) { create(:registered_vessel) }
+      let!(:registered_vessel) do
+        create(:pending_vessel,
+               current_registration:
+                  create(:registration, registered_until: registered_until))
+      end
 
       let!(:task) do
         create(:claimed_task,
@@ -76,29 +72,16 @@ describe RegistrationDate do
                                   vessel_reg_no: registered_vessel.reg_no))
       end
 
-      it "sets the ends_at to the vessel's registered_until" do
-        expect(subject.ends_at)
-          .to eq(task.submission.registered_vessel.registered_until)
-      end
-
       context "when current registration expires within next 3 months" do
-        before do
-          allow(registered_vessel)
-            .to receive(:registered_until)
-            .and_return(Date.new(2012, 12, 24))
-        end
+        let(:registered_until) { Date.new(2012, 12, 25) }
 
         it "sets the starts_at to the vessel's registered_until" do
-          expect(subject.starts_at.to_date).to eq(Date.new(2012, 11, 24))
+          expect(subject.starts_at.to_date).to eq(registered_until)
         end
       end
 
       context "when current registration expires more than 3 months away" do
-        before do
-          allow(registered_vessel)
-            .to receive(:registered_until)
-            .and_return(Date.new(2016, 12, 24))
-        end
+        let(:registered_until) { Date.new(2013, 6, 25) }
 
         it "sets the starts_at to today" do
           expect(subject.starts_at.to_date).to eq(Date.new(2012, 11, 24))

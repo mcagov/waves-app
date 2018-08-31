@@ -147,4 +147,15 @@ describe Payment::FinancePayment do
       it { expect(subject).to eq(submission) }
     end
   end
+
+  context "#searchable_attributes" do
+    let(:finance_payment) do
+      build(:finance_payment, application_ref_no: "ABC")
+    end
+
+    it do
+      expect(build(:finance_payment).searchable_attributes)
+        .to match("MY BOAT ALICE")
+    end
+  end
 end
