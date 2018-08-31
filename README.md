@@ -124,37 +124,43 @@ The services that can be performed are stored in the `services` table. Each serv
 5. Activities (e.g. generate_new_5_year_registration, update_registry_details)
 6. Print templates (e.g. registration_certificate, cover_letter)
 
-
-
-## NOTE that the following is undergoing a major refactor
-## Documentation will be updated once the work has been completed.
-
 ##### Submissions
-Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different tasks.
+Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different application types. The application type will determine whether an application is for a registered vessel or a (flavour of) new registration.
 
-The full list of application typ can be retrieved from `ApplicationType.all_`. Note that the ApplicationType class references the WavesUtilities gem.
+The full list of application typ can be retrieved from `ApplicationType.all_`. Note that the ApplicationType class references the WavesUtilities gem. It is also viewable in the admin section at: `http://localhost:3000/admin/application_types`.
 
-##### State Machine
-Submissions travel through a state machine `app/models/submission/state_machine.rb`. When a submission has reached the `:unassigned` state, it can be claimed by a Registration Officer for processing. When a submission has been claimed (state: `assigned`), it can be `referred`, `cancelled` or `approved`. Business rules apply to the action taken when one of these states is initiated, e.g. sending a notification email, setting the processing target date, creating or updating an entry in the registry.
+Submissions have a state of `active` (aka `open`) or `closed`. An application can be closed when all tasks have been completed or cancelled.
+
+A registered vessel can have one `open` application at a time.
 
 ##### How submissions are created
 There are three points of entry for a submission:
 1. Via a customer entry on the Online portal (submission#source `:online`)
-2. Via a manual entry by the Finance Team (submission#source `:manual_entry`)
-3. ~~Via a manual entry by a Registration Officer (submission#source `:manual_entry`)~~ This has been changed: Finance Team create Payments which are linked or converted to applications by a Registration Officer.
-
-The initial state of an `:online` entry is `:incomplete`. When payment is completed and all the owners have made their declarations, then it moves to `:unassigned` and can be claimed by a Registration Officer.
+2. Via Document Entry by a Reg Officer (submission#source `:manual_entry`)
+3. Finance Team create Payments which are linked or converted to applications by a Registration Officer.
 
 When a submission enters the default :incomplete state, it fires an event `build_default`, invoking the `SubmissionBuilder` and setting up all the defaults. If you want to initialize a submission object to build a form or any other instance when you don't want a record to be created, you need to forecfully set the state to :initializing. For example: `Submission.new(state: :initializing)`.
 
-The initial state of a `:manual_entry` is `:unassigned` so that it can be claimed.
+##### Tasks
+Submissions have many tasks (to be performed by a Reg Officer), and they travel through a state machine.
+```
+:initialising - Just added via the Task Manager, pending confirmation
+:unclaimed - Confirmed by a Reg Officer. Target Dates have been assigned
+:claimed - Add to a Reg Officer's Task Queue. Can be actionned.
+:referred - Pending information from the customer.
+:completed - Task is done. Activities have been performed. Print Jobs have been added to the Print Queue
+:cancelled - Irreversible.
+```
 
-##### Submission Behaviour
-A submission's behaviour depends on the follwing attributes:
-1. The `part` of the Registry (I, II, III or IV)
-2. The `source` (`online` or `manual_entry`)
-3. The `task` that the submission will perform
-4. The `registered_vessel` it belongs to (doesn't apply to new registrations)
+##### Task Behaviour
+A task's behaviour depends on the Service, viewable within each part at: `http://localhost:3000/admin/services/processes`
+1. Rules - define the page templates to display and validations to be applied.
+2. Activities - describe what happens when the task is processed (`application_processor.rb`)
+3. Print Templates - determine the printable outputs of a completed task
+
+#### Work Logs
+RSS require monitoring of staff performance, so actions such as completing or referring tasks are logged. There is a helper method available globally: `log_work!`.
+Work logs can be viewed at: `http://localhost:3000/work_logs`
 
 ##### Submission Attributes
 The changes that the submission will perform are stored as JSON objects in submission#changeset. If the submission is associated with a registered vessel, the 'current information' will be stored as JSON objects in submission#changeset.
