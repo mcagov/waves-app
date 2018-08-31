@@ -14,16 +14,15 @@ describe "User views work logs", js: true do
   context "part_2" do
     let(:submission) { create(:name_approval).submission }
 
-    scenario "in general" do
+    scenario "within the application" do
       within("#work_logs") do
         expect(page).to have_css(".description", text: "Task completed")
         expect(page).to have_link("Demo Service")
       end
     end
 
-    scenario "from the sidebar" do
-      visit(work_logs_path)
-      within("#sidebar-menu") { click_on("Work Logs") }
+    scenario "within the part" do
+      visit "/part_2/work_logs"
 
       within("#work_logs") do
         expect(page).to have_css(".description", text: "Task completed")
@@ -40,7 +39,7 @@ describe "User views work logs", js: true do
   context "part_3" do
     let(:submission) { create(:submission) }
 
-    scenario "in general" do
+    scenario "within the application" do
       within("#work_logs") do
         expect(page).to have_css(".description", text: "Task completed")
       end

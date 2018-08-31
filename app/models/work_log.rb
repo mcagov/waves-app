@@ -8,7 +8,10 @@ class WorkLog < ApplicationRecord
   validates :loggable_id, presence: true
   validates :description, presence: true
   validates :actioned_by_id, presence: true
-  validates :part, presence: true
+
+  scope :in_part, (lambda do |part|
+    where(part: part) if part
+  end)
 
   class << self
     def latest(loggable, description)

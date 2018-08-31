@@ -48,4 +48,4 @@
       Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Work Logs", work_logs_path#(part: current_activity.part)
+      %li= link_to "Work Logs", "/#{current_activity.part}/work_logs/"

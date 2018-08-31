@@ -281,7 +281,14 @@ Rails.application.routes.draw do
              controller: "registered_vessel/tasks"
   end
 
-  resources :work_logs, only: [:index]
+  [
+    :part_1, :part_2, :part_3, :part_4
+  ].each do |part|
+    get "/#{part}/work_logs",
+        controller: :work_logs,
+        action: :index,
+        part: part
+  end
 
   %w(
     incomplete my-tasks team-tasks
@@ -304,6 +311,8 @@ Rails.application.routes.draw do
         action: :index,
         template: template
   end
+
+  resources :work_logs, only: [:index]
 
   get "/search", controller: :search, action: :index
   get "/search/submissions", controller: :search, action: :submissions
