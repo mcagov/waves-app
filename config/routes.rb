@@ -231,10 +231,6 @@ Rails.application.routes.draw do
 
   resources :print_jobs, only: [:show, :index, :update]
 
-  namespace :reports do
-    resources :work_logs, only: [:index]
-  end
-
   resources :vessels, only: [:show, :index] do
     resources :csrs,
               only: [:show, :update],
