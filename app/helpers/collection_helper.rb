@@ -26,6 +26,10 @@ module CollectionHelper
     WavesUtilities::Port.all
   end
 
+  def users_collection
+    User.all.pluck(:name, :id)
+  end
+
   def registration_status_collection
     [:closed, :expired, :frozen, :pending, :registered].map do |status|
       [status.to_s.humanize, status]

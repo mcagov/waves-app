@@ -3,11 +3,51 @@
     %h1.heading_no_top_margin
       Work Logs
 
+.x_panel.no-print
+  .x_title
+    %h4 Filters
+  .x_content
+    = form_tag work_logs_path, method: :get do
+      .form-group
+        .row
+          .col-md-2
+            %br
+            %label{ for: "date_start" } Date Range
+          .col-md-2
+            From:
+            = text_field_tag "date_start", params[:date_start],
+              class: "form-control datepicker"
+          .col-md-2
+            To:
+            = text_field_tag "date_end", params[:date_end],
+              class: "form-control datepicker"
+      .form-group
+        .row
+          .col-md-2
+            %label{ for: "part" } Part of Register
+          .col-md-2
+            = select_tag :part,
+              options_for_select(parts_collection, params[:part]),
+              include_blank: true,
+              class: "form-control"
+      .form-group
+        .row
+          .col-md-2
+            %label{ for: "actioned_by_id" } Actioned By
+          .col-md-2
+            = select_tag :actioned_by_id,
+              options_for_select(users_collection, params[:actioned_by_id]),
+              include_blank: true,
+              class: "form-control"
+      .row
+        .col-md-2.col-md-offset-2
+          = submit_tag "Apply Filters", class: "btn btn-success"
+
+
 %table.table.table-striped#work_logs
   %thead
     %th Date
     %th Part of the Registry
-    %th Application
     %th Task
     %th Activity
     %th Officer

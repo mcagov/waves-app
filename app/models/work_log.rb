@@ -13,6 +13,18 @@ class WorkLog < ApplicationRecord
     where(part: part) if part
   end)
 
+  scope :actioned_by, (lambda do |actioned_by_id|
+    where(actioned_by_id: actioned_by_id) if actioned_by_id
+  end)
+
+  scope :date_start, (lambda do |date_start|
+    where("created_at >= ?", date_start) if date_start
+  end)
+
+  scope :date_end, (lambda do |date_end|
+    where("created_at <= ?", date_end) if date_end
+  end)
+
   class << self
     def latest(loggable, description)
       where(loggable: loggable)
