@@ -8,7 +8,10 @@
         APPLICATION
       %br
       = Activity.new(submission.part)
+      %br
+      = ApplicationType.new(submission.application_type).description
     %br
+
     Application Reference: #{submission.ref_no},
     Official No: #{submission.vessel_reg_no || "UNKNOWN"},
     Callsign: #{submission.radio_call_sign},
