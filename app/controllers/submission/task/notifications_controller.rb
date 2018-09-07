@@ -21,6 +21,7 @@ class Submission::Task::NotificationsController < InternalPagesController
     @task.cancel!
 
     log_work!(@task, @submission, :task_cancelled)
+    StaffPerformanceLog.record(@task, :cancelled, current_user)
     redirect_to tasks_my_tasks_path
   end
 
@@ -36,6 +37,7 @@ class Submission::Task::NotificationsController < InternalPagesController
     @task.refer!
 
     log_work!(@task, @submission, :task_referred)
+    StaffPerformanceLog.record(@task, :referred, current_user)
     redirect_to tasks_my_tasks_path
   end
 

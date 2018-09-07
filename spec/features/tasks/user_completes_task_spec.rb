@@ -25,6 +25,7 @@ describe "User completes a task", js: true do
     expect(@task.reload).to be_completed
 
     creates_a_work_log_entry(:task_completed)
+    creates_a_staff_performance_entry(:completed)
   end
 
   scenario "when the task has validation errors" do
