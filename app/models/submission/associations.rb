@@ -34,7 +34,7 @@ module Submission::Associations
       base.has_one  :csr_form
       base.has_many :print_jobs
       base.has_many :tasks, class_name: "Submission::Task"
-      base.has_many :work_logs, through: :tasks
+      base.has_many :work_logs, -> { order("created_at desc") }, through: :tasks
     end
 
     def ownership_associations(base)
