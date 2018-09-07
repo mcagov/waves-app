@@ -33,10 +33,11 @@
             %i.fa.fa-trash
             Cancel Approved Name
 
-    - unless submission.print_jobs.empty?
+    - print_jobs = PrintJob.latest(submission)
+    - unless print_jobs.empty?
       %hr
       .row
-        - submission.print_jobs.each do |print_job|
+        - print_jobs.each do |print_job|
           .col-md-4
             = link_to print_job_path(print_job, format: :pdf),
               target: "_blank", class: "btn btn-warning" do

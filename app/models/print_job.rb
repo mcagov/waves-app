@@ -28,6 +28,14 @@ class PrintJob < ApplicationRecord
     end
   end
 
+  class << self
+    def latest(submission)
+      submission.print_jobs.order("created_at desc")
+                .group_by(&:template)
+                .map { |_k, v| v[0] }
+    end
+  end
+
   private
 
   def log_printing_by(printing_by)
