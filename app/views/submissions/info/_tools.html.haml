@@ -2,9 +2,9 @@
   %h2.x_title
     Application Tools
   .x_content
-    .row
-      - if Policies::Workflow.can_email_application_approval?(submission)
-        .col-md-4
+    - if Policies::Workflow.can_email_application_approval?(submission)
+      .row
+        .col-md-12
           = link_to new_submission_application_approval_path,
             class: "btn btn-primary",
             remote: true,
@@ -22,23 +22,28 @@
                 .modal-body
                   %p.text-center
                     = image_tag 'ajax-loader.gif'
+      %hr
 
 
-      - if submission.name_approval
-        .col-md-4
+    - if submission.name_approval
+      .row
+        .col-md-12
+          Name Approved until:
+          = submission.name_approval.approved_until
+          %br
           = link_to submission_name_approval_path(@submission), method: :delete,
             class: "btn btn-danger",
             data: { confirm: "Are you sure you want to cancel this approved name?" },
             style: { color: "red" } do
             %i.fa.fa-trash
             Cancel Approved Name
+      %hr
 
     - print_jobs = PrintJob.latest(submission)
     - unless print_jobs.empty?
-      %hr
       .row
         - print_jobs.each do |print_job|
-          .col-md-4
+          .col-md-3
             = link_to print_job_path(print_job, format: :pdf),
               target: "_blank", class: "btn btn-warning" do
               %i.fa.fa-print

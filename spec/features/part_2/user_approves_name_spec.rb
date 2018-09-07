@@ -66,7 +66,8 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       click_on("Approve Name")
 
       expect(page).to have_css(".vessel-name", text: "BOBS BOAT")
-      expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
+      expect(page)
+        .to have_text("Name Approved until: #{10.years.from_now.to_date}")
 
       creates_a_work_log_entry(:name_approved)
     end
