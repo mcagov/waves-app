@@ -16,7 +16,7 @@
             .form-group
               = label_tag do
                 = check_box_tag "notification_application_approval[recipients][]",
-                  recipient.email_description, true
+                  recipient.email_description, false
                 = recipient.email_description
       .row
         .col-md-12

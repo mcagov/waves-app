@@ -58,6 +58,23 @@ describe "User sends application approval notification", js: true do
     end
   end
 
+  scenario "when no recipient was selected" do
+    task = create(:completed_task)
+
+    login(task.claimant, task.submission.part)
+    visit submission_task_path(task.submission, task)
+
+    within("#application-tools") do
+      click_on(application_approval_email_link)
+    end
+
+    within(".modal.fade.in") do
+      click_on("Send")
+    end
+
+    expect(page).to have_text("A recipient must be selected")
+  end
+
   scenario "when the submission has no completed task" do
     visit_claimed_task
 

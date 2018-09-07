@@ -12,11 +12,14 @@ class Submission::ApplicationApprovalsController < InternalPagesController
   end
 
   def create
-    notification_application_approval_params[:recipients].each do |recipient|
-      build_notification(Customer.new(email_description: recipient))
+    if recipients
+      recipients.each do |recipient|
+        build_notification(Customer.new(email_description: recipient))
+      end
+      flash[:notice] = "Emails have been sent to the selected recipients"
+    else
+      flash[:notice] = "No emails were sent. A recipient must be selected."
     end
-
-    flash[:notice] = "Emails have been sent to the selected recipients"
     redirect_to submission_path(@submission)
   end
 
@@ -37,5 +40,9 @@ class Submission::ApplicationApprovalsController < InternalPagesController
       body: notification_application_approval_params[:body],
       actioned_by: current_user,
       attachments: notification_application_approval_params[:attachments])
+  end
+
+  def recipients
+    @recipients ||= notification_application_approval_params[:recipients]
   end
 end
