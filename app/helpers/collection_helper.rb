@@ -27,7 +27,7 @@ module CollectionHelper
   end
 
   def users_collection
-    User.all.pluck(:name, :id)
+    User.order(:name).pluck(:name, :id)
   end
 
   def registration_status_collection
