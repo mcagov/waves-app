@@ -1,12 +1,16 @@
 class Submission::CarvingAndMarkingController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
 
   def create
     @carving_and_marking = CarvingAndMarking.new(carving_and_marking_params)
     @carving_and_marking.submission = @submission
     @carving_and_marking.actioned_by = current_user
 
-    process_carving_and_marking if @carving_and_marking.save
+    if @carving_and_marking.save
+      process_carving_and_marking
+      log_work!(@task, @task, :carving_and_marking_issued)
+    end
 
     render_update_js
   end

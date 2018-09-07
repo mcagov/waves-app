@@ -4,7 +4,7 @@
       = simple_form_for CarvingAndMarking.new,
         method: :post,
         remote: true,
-        url: submission_carving_and_marking_path(@submission) do |f|
+        url: submission_carving_and_marking_path(@submission, task_id: @task.id) do |f|
         = hidden_field_tag "modal_id", "issue_carving_and_marking"
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
