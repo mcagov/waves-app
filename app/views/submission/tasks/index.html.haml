@@ -22,7 +22,7 @@
       %tbody
         - Service.in_part(current_activity.part).each do |service|
           %tr
-            %td= link_to service
+            %td= service
             %td= service.standard_days
             %td= service.premium_days
             %td.standard_price
