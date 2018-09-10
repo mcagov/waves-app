@@ -6,6 +6,8 @@ feature "User cancels a task", type: :feature, js: true do
     within("#actions") { click_on "Cancel Task" }
 
     within(".modal.fade.in") do
+      check(@submission.applicant.email_description)
+      check(@submission.owners.first.email_description)
       select "Rejected (by RSS)", from: "Reason for cancelling task"
 
       find("#cancel_modal_trix_input_notification", visible: false)
@@ -14,39 +16,35 @@ feature "User cancels a task", type: :feature, js: true do
       click_on "Cancel Task"
     end
 
-    click_on "Cancelled Tasks"
+    expect_task_to_be_cancelled
     expect(Notification::Cancellation.last.body).to have_text("Sorry!")
-    creates_a_work_log_entry(:task_cancelled)
-    creates_a_staff_performance_entry(:cancelled)
-
-    click_on(@submission.vessel.name)
-
-    within(".breadcrumb") do
-      expect(page).to have_link("Cancelled Tasks", href: tasks_cancelled_path)
-    end
-
-    within("#prompt") do
-      expect(page).to have_text(
-        /Task Cancelled by #{@task.claimant.to_s} on .*./
-      )
-    end
+    expect(Notification::Cancellation.count).to eq(2)
   end
 
   scenario "without sending an email" do
     visit_claimed_task
     within("#actions") { click_on "Cancel Task" }
-    uncheck("Send a cancellation email to #{@submission.applicant_name}")
     within("#cancel-task") { click_on "Cancel Task" }
+
+    expect_task_to_be_cancelled
     expect(Notification::Cancellation.count).to eq(0)
   end
+end
 
-  scenario "without an applicant" do
-    visit_claimed_task
-    within("#summary") { click_on(@submission.applicant_name) }
-    fill_in("Email Recipient Name", with: "")
-    click_on("Save Notification Recipient")
+def expect_task_to_be_cancelled
+  click_on "Cancelled Tasks"
+  click_on(@submission.vessel.name)
 
-    within("#actions") { click_on "Cancel Task" }
-    expect(page).to have_text("email cannot be sent without an Email Recipient")
+  within(".breadcrumb") do
+    expect(page).to have_link("Cancelled Tasks", href: tasks_cancelled_path)
   end
+
+  within("#prompt") do
+    expect(page).to have_text(
+      /Task Cancelled by #{@task.claimant.to_s} on .*./
+    )
+  end
+
+  creates_a_work_log_entry(:task_cancelled)
+  creates_a_staff_performance_entry(:cancelled)
 end

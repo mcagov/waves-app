@@ -13,15 +13,13 @@ class Submission::Task::NotificationsController < InternalPagesController
   end
 
   def cancel
-    if params[:send_email].present?
-      Notification::Cancellation.create(parsed_notification_params)
-    end
-
-    flash[:notice] = "You have successfully cancelled that task"
     @task.cancel!
 
+    process_cancellation_notification if notification_params[:recipients]
     log_work!(@task, @submission, :task_cancelled)
     StaffPerformanceLog.record(@task, :cancelled, current_user)
+     flash[:notice] = "You have successfully cancelled that task"
+
     redirect_to tasks_my_tasks_path
   end
 
@@ -58,6 +56,13 @@ class Submission::Task::NotificationsController < InternalPagesController
       recipient_email: recipient.email,
       recipient_name: recipient.name,
     }
+  end
+
+  def process_cancellation_notification
+    notification_params[:recipients].each do |recipient|
+      Notification::Cancellation.create(
+        parsed_notification_params(Customer.new(email_description: recipient)))
+    end
   end
 
   def process_referral_notification
