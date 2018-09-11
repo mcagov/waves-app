@@ -75,9 +75,10 @@ class SubmissionsController < InternalPagesController
           { declaration_groups: [:declaration_owners] },
           { documents: [:assets, :actioned_by] },
           { work_logs: [:actioned_by] }, { charterers: [:charter_parties] },
-          { mortgages: [:mortgagees, :mortgagors] }, :carving_and_markings,
+          { mortgages: [:mortgagees, :mortgagors] },
           :managers, :declarations, :engines, :correspondences, :notes,
           :print_jobs, :notifications, :beneficial_owners,
+          carving_and_markings: [:print_job, :notifications],
           work_logs: [:actioned_by, { task: [:submission] }]]
       ).find(params[:id])
 

@@ -8,6 +8,7 @@ class CarvingAndMarking < ApplicationRecord
   delegate :part, to: :submission
 
   has_one :print_job, as: :printable, class_name: "PrintJob"
+  has_many :notifications, as: :notifiable
 
   enum delivery_method: [:email, :print]
 

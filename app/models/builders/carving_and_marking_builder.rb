@@ -1,6 +1,6 @@
 class Builders::CarvingAndMarkingBuilder
   class << self
-    def build(carving_and_marking, recipients = [])
+    def build(carving_and_marking, recipients)
       @carving_and_marking = carving_and_marking
       @recipients = recipients
 
@@ -24,7 +24,7 @@ class Builders::CarvingAndMarkingBuilder
           recipient_name: recipient.name,
           notifiable: @carving_and_marking,
           actioned_by: @carving_and_marking.actioned_by,
-          attachments: :carving_and_marking)
+          attachments: [:carving_and_marking])
       end
     end
 

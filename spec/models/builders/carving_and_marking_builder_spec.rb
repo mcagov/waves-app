@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Builders::CarvingAndMarkingBuilder do
   context ".build" do
-    before { described_class.build(carving_and_marking, recipient) }
+    before { described_class.build(carving_and_marking, [recipient]) }
 
     context "with an emailable C&M note" do
       let(:carving_and_marking) { build(:emailable_carving_and_marking) }
@@ -11,7 +11,7 @@ describe Builders::CarvingAndMarkingBuilder do
       it "builds two notifications with the expected attachment" do
         notification = Notification::CarvingAndMarkingNote.last
         expect(notification.notifiable).to eq(carving_and_marking)
-        expect(notification.attachments.to_sym).to eq(:carving_and_marking)
+        expect(notification.attachments).to eq(["carving_and_marking"])
       end
     end
 

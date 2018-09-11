@@ -5,7 +5,8 @@ class Builders::NotificationListBuilder
         submission.correspondences +
         submission.notifications +
         submission.print_jobs +
-        submission.declarations.map(&:notification)
+        submission.declarations.map(&:notification) +
+        carving_and_marking_notifications(submission)
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end
 
@@ -16,6 +17,12 @@ class Builders::NotificationListBuilder
         registered_vessel.notifications +
         submissions.map { |submission| for_submission(submission) }.flatten
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
+    end
+
+    private
+
+    def carving_and_marking_notifications(submission)
+      submission.carving_and_markings.map(&:notifications).flatten.compact
     end
   end
 end
