@@ -24,8 +24,9 @@
   .col-md-3
     - if @submission.can_issue_carving_and_marking?
       - unless @readonly
-        = link_to "#", class: "btn btn-primary",
-          "data-target" => "#issue_carving_and_marking",
+        = link_to new_submission_carving_and_marking_path(@submission, task_id: @task.id), class: "btn btn-primary",
+          remote: true,
+          "data-target" => "#new-carving-and-marking",
           "data-toggle" => "modal" do
           Issue Carving & Marking Note
 

@@ -18,7 +18,7 @@ class Submission::Task::NotificationsController < InternalPagesController
     process_cancellation_notification if notification_params[:recipients]
     log_work!(@task, @submission, :task_cancelled)
     StaffPerformanceLog.record(@task, :cancelled, current_user)
-     flash[:notice] = "You have successfully cancelled that task"
+    flash[:notice] = "You have successfully cancelled that task"
 
     redirect_to tasks_my_tasks_path
   end

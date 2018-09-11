@@ -53,7 +53,7 @@ feature "User refers a task", type: :feature, js: true do
   end
 end
 
-def expect_task_to_be_referred
+def expect_task_to_be_referred # rubocop:disable Metrics/MethodLength
   click_on "Referred Tasks"
   click_on @submission.vessel.name
 

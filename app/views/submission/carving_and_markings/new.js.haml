@@ -1,0 +1,6 @@
+:plain
+   $("#new-carving-and-marking .modal-content").html(
+    '#{escape_javascript(
+      render partial: "/submission/carving_and_markings/new",
+      locals: { submission: @submission, task: @task })}');
+

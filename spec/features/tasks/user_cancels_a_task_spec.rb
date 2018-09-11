@@ -31,7 +31,7 @@ feature "User cancels a task", type: :feature, js: true do
   end
 end
 
-def expect_task_to_be_cancelled
+def expect_task_to_be_cancelled # rubocop:disable Metrics/MethodLength
   click_on "Cancelled Tasks"
   click_on(@submission.vessel.name)
 

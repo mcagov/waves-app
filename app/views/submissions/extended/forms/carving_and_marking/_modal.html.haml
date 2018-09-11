@@ -1,28 +1,10 @@
-.modal.fade{id: "issue_carving_and_marking", role: "dialog", tabindex: "-1"}
+.modal.fade{id: "new-carving-and-marking", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for CarvingAndMarking.new,
-        method: :post,
-        remote: true,
-        url: submission_carving_and_marking_path(@submission, task_id: @task.id) do |f|
-        = hidden_field_tag "modal_id", "issue_carving_and_marking"
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4.modal-title Carving & Marking
-        .modal-body
-          .row
-            .col-md-6
-              = f.input :delivery_method, as: :select,
-                collection: delivery_methods_collection,
-                label: "Delivery Method",
-                include_blank: false
-          .row
-            .col-md-6
-              = f.input :template, as: :select,
-                collection: carving_and_marking_templates_collection,
-                label: "Template",
-                include_blank: false
-
-        .modal-footer
-          = f.submit "Issue Carving & Marking Note", class: "btn btn-primary"
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Issue Carving & Marking Note
+      .modal-body
+        %p.text-center
+          = image_tag 'ajax-loader.gif'

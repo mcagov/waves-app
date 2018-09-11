@@ -95,9 +95,8 @@ Rails.application.routes.draw do
               only: [:create, :update, :destroy]
 
     resource :carving_and_marking,
-             constraints: ->(request) { request.format == :js },
-             controller: "submission/carving_and_marking",
-             only: [:create] do
+             controller: "submission/carving_and_markings",
+             only: [:new, :create] do
       member do
         post :update_state
       end
