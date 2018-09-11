@@ -1,0 +1,5 @@
+:plain
+  $("#approval-notification .modal-content").html(
+    '#{escape_javascript(
+      render partial: "/submission/application_approvals/new",
+      locals: { submission: @submission, application_approval: @application_approval })}');

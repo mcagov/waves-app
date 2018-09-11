@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :submission_agent, class: "Submission::Agent" do
     name "Annabel Agent"
     email "agent@example.com"

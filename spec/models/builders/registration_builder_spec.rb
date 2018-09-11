@@ -2,67 +2,74 @@ require "rails_helper"
 
 describe Builders::RegistrationBuilder do
   context ".create" do
-    context "with a task for a registered_vessel" do
-      let!(:registered_vessel) { create(:registered_vessel) }
-      let(:submission) do
-        create(:assigned_submission,
-               task: task,
-               registered_vessel: registered_vessel)
-      end
+    let(:task) do
+      create(:claimed_task,
+             service: create(:service, :generate_new_5_year_registration))
+    end
 
-      before do
+    let(:registered_vessel) { create(:registered_vessel) }
+
+    context "in general" do
+      subject do
         described_class.create(
-          submission,
+          task,
           registered_vessel,
           "10/10/2012 12:23 PM".to_datetime,
-          ends_at)
+          "10/10/2017 12:23 PM".to_datetime,
+          false)
       end
 
-      let(:registration) { submission.registration }
-      let(:task) { :renewal }
-      let(:ends_at) { nil }
-
-      context "with a renewal task" do
-        it "records the registration date" do
-          expect(registration.registered_at)
-            .to eq("10/10/2012 12:23 PM".to_datetime)
-        end
-
-        it "creates the five year registration" do
-          expect(registration.registered_until)
-            .to eq("10/10/2017 12:23 PM".to_datetime)
-        end
-
-        it "sets the registration#actioned_by" do
-          expect(registration.actioned_by)
-            .to eq(submission.claimant)
-        end
-
-        it "makes a snapshot of the vessel details" do
-          expect(registration.vessel[:id]).to eq(registered_vessel.id)
-        end
-
-        it "sets the submission#registration" do
-          expect(submission.registration).to eq(registration)
-        end
-
-        it { expect(registration).not_to be_provisional }
+      it "records the registration date" do
+        expect(subject.registered_at)
+          .to eq("10/10/2012 12:23 PM".to_datetime)
       end
 
-      context "with a provisional_registration task" do
-        let(:task) { :provisional }
-
-        it { expect(registration).to be_provisional }
+      it "creates the five year registration" do
+        expect(subject.registered_until)
+          .to eq("10/10/2017 12:23 PM".to_datetime)
       end
 
-      context "with an #ends_at param" do
-        let(:ends_at) { "11/11/2012" }
-
-        it "creates the registration until the expected end_date" do
-          expect(registration.registered_until)
-            .to eq("11/11/2012".to_datetime)
-        end
+      it "sets the registration#actioned_by" do
+        expect(subject.actioned_by)
+          .to eq(task.claimant)
       end
+
+      it "makes a snapshot of the vessel details" do
+        expect(subject.vessel[:id]).to eq(registered_vessel.id)
+      end
+
+      it "sets the submission#registration" do
+        expect(subject).to eq(task.reload.submission.registration)
+      end
+
+      it "sets the vessel#current_registration" do
+        expect(subject).to eq(registered_vessel.reload.current_registration)
+      end
+
+      it { expect(subject).not_to be_provisional }
+    end
+
+    context "with the provisional parameter" do
+      subject do
+        described_class.create(
+          task,
+          registered_vessel,
+          "10/10/2012 12:23 PM".to_datetime,
+          "10/10/2017 12:23 PM".to_datetime,
+          true)
+      end
+
+      it { expect(subject).to be_provisional }
+    end
+
+    context "when the dates are blank" do
+      subject do
+        described_class.create(task, registered_vessel, "", nil, false)
+      end
+
+      it { expect(subject).to be_persisted }
+      it { expect(subject.registered_at).to be_present }
+      it { expect(subject.registered_until).to be_present }
     end
   end
 end

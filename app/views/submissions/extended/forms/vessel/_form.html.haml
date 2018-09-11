@@ -1,7 +1,8 @@
 = simple_form_for @submission, remote: true, class: "form-vertical" do |submission_f|
+  = hidden_field_tag :task_id, @task.id
   %h2 Vessel Info
   = submission_f.simple_fields_for :vessel, defaults: { disabled: @readonly } do |vessel_f|
-    %fieldset{ disabled: disabled }
+    %fieldset{ disabled: @readonly }
       - vessel_f.object = submission_f.object.vessel
       %h2 Identity
       .row
@@ -9,7 +10,7 @@
           = vessel_f.input :name,
             label: vessel_change_label(:name, "Approved Vessel Name"),
             input_html: { readonly: "readonly" },
-            hint: link_to_change_name_or_pln(@submission)
+            hint: link_to_change_name_or_pln(@submission, @task)
 
         .col-md-2{ class: vessel_change_css(:registration_type) }
           - if display_editable_registration_type?(@submission)

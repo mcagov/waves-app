@@ -1,0 +1,23 @@
+.modal.fade{id: "edit-part", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Edit Documents Received
+      = simple_form_for @finance_payment,
+        url: finance_payment_path(@finance_payment),
+        method: :put do |f|
+        .modal-body
+          .row
+            .col-sm-12
+              = f.input :part,
+                collection: Activity::PART_TYPES,
+                as: :select,
+                include_blank: false,
+                label: "Part of the Register",
+                input_html: { class: "select2 select2_single" }
+
+        .modal-footer
+          = f.submit "Save", class: "btn btn-primary"

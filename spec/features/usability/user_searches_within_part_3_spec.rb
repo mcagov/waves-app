@@ -5,7 +5,7 @@ describe "User searches within part 3" do
     login_to_part_3
   end
 
-  context "for s submission" do
+  context "for a submission" do
     scenario "searching by part of the submission ref_no" do
       create(:submission, ref_no: "ABC456")
       create(:submission, ref_no: "ABC123")
@@ -22,7 +22,7 @@ describe "User searches within part 3" do
     end
 
     scenario "searching by owner postcode" do
-      create(:unassigned_submission)
+      create(:declaration)
 
       within(".nav_menu") { search_for("QZ2 3Q") }
 
@@ -32,7 +32,7 @@ describe "User searches within part 3" do
     end
 
     scenario "searching for a submission in another part" do
-      create(:fishing_submission, ref_no: "ABC456")
+      create(:submission, part: :part_1, ref_no: "ABC456")
 
       within(".nav_menu") { search_for("ABC") }
 

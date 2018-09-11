@@ -5,7 +5,7 @@ module Api
         @payment =
           Builders::WorldPayPaymentBuilder.create(create_payment_params)
 
-        if @payment.valid?
+        if submission && @payment.valid?
           process_payment_receipt
           render json: @payment, status: :created
         else
@@ -23,16 +23,7 @@ module Api
       end
 
       def process_payment_receipt
-        if submission.electronic_delivery?
-          # Note: ensure that the submission state has
-          # transitioned before the notification is delivered.
-          # This will ensure that there is a registration object
-          # that can be associated with the submission
-          submission.approve_electronic_delivery!
-          create_application_approval_notification
-        else
-          create_application_receipt_notification
-        end
+        create_application_receipt_notification
       end
 
       def submission
@@ -48,8 +39,7 @@ module Api
 
       def create_application_approval_notification
         Builders::NotificationBuilder.application_approval(
-          submission, nil,
-          Task.new(submission.task).print_job_templates.first)
+          submission, nil, :print_template)
       end
     end
   end

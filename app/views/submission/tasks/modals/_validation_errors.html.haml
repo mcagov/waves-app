@@ -1,0 +1,12 @@
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4.modal-title
+    Task:
+    = task.service
+.modal-body#task-validation-errors
+  %h5 The following errors prevent this task from being completed:
+  %ul
+    - validation_errors.each do |validation_error|
+      %li.red= t("submission.validation_error.#{validation_error}")
+

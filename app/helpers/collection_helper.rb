@@ -8,7 +8,7 @@ module CollectionHelper
   end
 
   def nationalities_collection
-    (["BRITISH"] << WavesUtilities::Nationality.all.uniq.sort).flatten
+    countries_collection
   end
 
   def last_registry_countries_collection
@@ -18,12 +18,16 @@ module CollectionHelper
   def registration_types_collection(part)
     reg_types = WavesUtilities::RegistrationType.in_part(part) || []
     reg_types.sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
-      [registration_type.to_s.humanize, registration_type]
+      [registration_type.to_s.titleize, registration_type]
     end
   end
 
   def ports_collection
     WavesUtilities::Port.all
+  end
+
+  def users_collection
+    User.order(:name).pluck(:name, :id)
   end
 
   def registration_status_collection
@@ -104,8 +108,12 @@ module CollectionHelper
 
   def filter_registration_type_collection(part)
     filter = registration_types_collection(part) || []
-    filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
-    filter << ["Not set", "not_set"]
+    filter.unshift(["All Registration Types", ""])
+  end
+
+  def filter_service_level_collection
+    filter = ServiceLevel::SERVICE_LEVEL_TYPES.dup
+    filter.unshift(["All Service Levels", ""])
   end
 
   def service_level_collection

@@ -46,14 +46,6 @@ module SubmissionHelper
     end
   end
 
-  def display_edit_application_link?(submission)
-    return false if Task.new(submission.task).prevented_from_editing?
-    return false if request.path == edit_submission_path(submission)
-    return false unless Policies::Definitions.part_3?(submission)
-
-    submission.editable? && submission.claimant == current_user
-  end
-
   def vessel_change_css(attr_name)
     if @submission.changed_vessel_attribute(attr_name)
       "has-changed"
@@ -78,16 +70,23 @@ module SubmissionHelper
       data: { toggle: "tooltip", placement: "left", title: @text })
   end
 
-  def customer_select_options
-    list = @submission.owners + @submission.charter_parties
+  def customer_select_options(submission)
+    list = submission.owners + submission.charter_parties
     list.sort_by(&:name)
+  end
+
+  def email_recipient_select_options(submission)
+    list = customer_select_options(submission)
+    list << submission.applicant
+    list = list.reject { |r| r.name.blank? || r.email.blank? }
+    list.compact.sort_by(&:name)
   end
 
   def shares_held_jointly_customer_select_options(declaration_group)
     selected_declarations =
       declaration_group.declaration_group_members.map(&:declaration_owner_id)
 
-    customer_select_options.reject do |declaration_owner|
+    customer_select_options(@submission).reject do |declaration_owner|
       selected_declarations.include?(declaration_owner.id)
     end
   end
@@ -115,14 +114,10 @@ module SubmissionHelper
     true
   end
 
-  def claimed_by(submission)
-    submission.claimant ? "claimed by #{submission.claimant}" : "unclaimed"
-  end
-
-  def link_to_change_name_or_pln(submission)
+  def link_to_change_name_or_pln(submission, task)
     return "" if @readonly
     title = Policies::Definitions.part_1?(submission) ? "Port" : "PLN"
     link_to "Change Name or #{title}",
-            submission_name_approval_path(@submission)
+            submission_name_approval_path(@submission, task_id: task.id)
   end
 end

@@ -5,7 +5,7 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
     build_completed_submission
     process_section_notice_submission
 
-    log_work!(@submission, @submission, :section_notice)
+    log_work!(@submission, @submission, :section_notice_issued)
 
     redirect_to submission_approval_path(@submission)
   end
@@ -24,7 +24,7 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
   def process_section_notice_submission
     @vessel.update_attribute(:frozen_at, Time.zone.now) unless @vessel.frozen?
 
-    Task.new(:section_notice).print_job_templates.each do |template|
+    [:print_template].each do |template|
       PrintJob.create(
         printable: build_section_notice,
         part: @submission.part,

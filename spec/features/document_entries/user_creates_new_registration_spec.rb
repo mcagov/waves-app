@@ -3,22 +3,23 @@ require "rails_helper"
 feature "User creates a new registration", type: :feature do
   before do
     login_to_part_3
+    visit open_submissions_path
+
     click_on("Document Entry")
     within(".modal#start-new-application") { click_on("New Registration") }
 
-    select("New Registration", from: "Application Type")
+    select("New Registration", from: "Primary Application")
     fill_in("Vessel Name", with: "MY BOAT")
 
-    fill_in("Date Document Received", with: "1/1/2016")
+    fill_in("Date Received", with: "1/1/2016")
     fill_in("Applicant Name", with: "Bob")
     fill_in("Applicant's Email Address", with: "bob@example.com")
   end
 
   scenario "in general" do
     click_on("Save Application")
-    expect(page).to have_text("saved to the unclaimed tasks queue")
-    expect(page).to have_current_path(tasks_my_tasks_path)
-    expect(Submission.last).to be_unassigned
+    expect(page).to have_text("has been created")
+    expect(page).to have_current_path(submission_tasks_path(Submission.last))
   end
 
   scenario "with an application receipt email" do

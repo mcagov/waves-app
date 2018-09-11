@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Read only user" do
   before do
     @vessel = create(:registered_vessel)
-    @submission = create(:assigned_submission)
+    @submission = create(:submission)
 
     sign_in(create(:read_only_user))
     visit("/")

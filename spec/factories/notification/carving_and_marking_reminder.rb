@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :carving_and_marking_reminder,
           class: "Notification::CarvingAndMarkingReminder" do
     recipient_name  Faker::Name.name

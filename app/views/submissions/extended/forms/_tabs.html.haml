@@ -46,11 +46,13 @@
             %li{:role => "presentation"}
               %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
 
+            %li{:role => "presentation"}
+              %a#notes-tab{"data-toggle" => "tab", :href => "#work_logs_tab", :role => "tab"} Work Logs
+
           #myTabContent.tab-content
 
             #vessel_tab.tab-pane{class: "active", "aria-labelledby" => "vessel-tab", :role => "tabpanel"}
-              = render partial: "submissions/extended/forms/vessel/form",
-                locals: { disabled: !@submission.vessel_can_be_edited? }
+              = render partial: "submissions/extended/forms/vessel/form"
 
             #engines_tab.tab-pane{"aria-labelledby" => "engines-tab", :role => "tabpanel"}
               #engines= render partial: "submissions/extended/forms/engines/base"
@@ -79,7 +81,7 @@
 
             #correspondence_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               = render partial: "shared/notification_list/base", locals: { notification_list: @submission.notification_list }
-              - if @submission.editable? && !current_user.read_only?
+              - unless @readonly
                 = render partial: "submissions/actions/add_correspondence", locals: { submission: @submission }
 
             #payments_tab.tab-pane{"aria-labelledby" => "payments-tab", :role => "tabpanel"}
@@ -87,3 +89,8 @@
 
             #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
               #notes= render partial: "submission/notes/base", locals: { submission: @submission }
+
+            #work_logs_tab.tab-pane{"aria-labelledby" => "work-logs-tab", :role => "tabpanel"}
+              #notes= render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
+
+        = render partial: "submissions/extended/forms/save_details"

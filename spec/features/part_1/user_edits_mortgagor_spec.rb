@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "User edits mortgagors", js: :true do
   scenario "adding an owner, then adding that owner as a mortgagor" do
-    visit_name_approved_part_1_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_1_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Owners")
     click_on("Add Individual Owner")
 

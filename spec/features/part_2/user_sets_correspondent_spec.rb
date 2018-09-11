@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe "User sets the correspondent", js: true do
   scenario "adding an owner and setting them as correspondent" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
 
     # remove the correspondent that was set by the factory
     Submission.last.update_attribute(:correspondent_id, nil)

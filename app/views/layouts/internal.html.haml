@@ -17,10 +17,11 @@
         = render partial: "layouts/sidebar/base"
         = render partial: "layouts/topnav"
 
-        .right_col{role: "main"}
+        .right_col{role: "main", class: "#{@bg_class}"}
           .row
             .col-sm-12
               = render partial: "layouts/flash"
               = yield
+
   = render "javascript"
   = render "css_overrides"

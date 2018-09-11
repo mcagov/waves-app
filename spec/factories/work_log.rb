@@ -1,8 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :work_log do
-    submission    { create(:submission) }
+    task          { create(:task) }
     actioned_by   { create(:user) }
     part          :part_3
-    description   { [:document_entry, :processed_application].sample }
+    description   { [:document_added, :task_completed].sample }
   end
 end

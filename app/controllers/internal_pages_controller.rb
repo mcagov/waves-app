@@ -23,11 +23,10 @@ class InternalPagesController < ApplicationController
     current_activity.root_path(current_user)
   end
 
-  def log_work!(submission, logged_info, description)
+  def log_work!(task, logged_info, description)
     WorkLog.create(
-      submission: submission,
-      logged_info: logged_info,
-      logged_type: logged_info.class.to_s,
+      task: task,
+      logged_info: logged_info.to_json,
       description: description,
       actioned_by: current_user,
       part: current_activity.part)
@@ -42,15 +41,19 @@ class InternalPagesController < ApplicationController
       Submission.includes(:declarations).find(params[:submission_id])
   end
 
+  def load_task
+    @task = Submission::Task.find(params[:task_id]) if params[:task_id]
+  end
+
   def ensure_current_part_for(part)
     session[:current_activity] = part unless current_activity.matches?(part)
   end
 
   def enable_readonly
-    @readonly = Policies::Actions.readonly?(@submission, current_user)
+    @readonly = Policies::Actions.readonly?(@task, current_user)
   end
 
-  def prevent_read_only!
+  def prevent_readonly_user!
     access_denied! if current_user.read_only?
   end
 

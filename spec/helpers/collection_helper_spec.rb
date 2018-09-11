@@ -56,4 +56,24 @@ describe CollectionHelper, type: :helper do
       end
     end
   end
+
+  describe "email_recipient_select_options" do
+    let(:submission) { build(:submission, applicant_name: "ALICE") }
+
+    let(:alice) { double(:applicant, name: "alice", email: "foo") }
+    let(:bob) { double(:owner, name: "bob", email: "foo") }
+    let(:charlie) { double(:charter_party, name: "charlie", email: "foo") }
+    let(:dave) { double(:owner, name: "", email: "foo") }
+    let(:eric) { double(:owner, name: "eric", email: "") }
+
+    before do
+      allow(submission).to receive(:applicant).and_return(alice)
+      allow(submission).to receive(:owners).and_return([bob, dave])
+      allow(submission).to receive(:charter_parties).and_return([charlie])
+    end
+
+    subject { helper.email_recipient_select_options(submission) }
+
+    it { expect(subject).to eq([alice, bob, charlie]) }
+  end
 end

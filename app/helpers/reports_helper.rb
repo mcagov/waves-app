@@ -20,25 +20,6 @@ module ReportsHelper
     end
   end
 
-  def report_operator_collection(datatype)
-    case datatype
-    when :numeric
-      [
-        ["Equals", :equals],
-        ["Greater than", :greater_than],
-        ["Less than", :less_than],
-      ]
-    else
-      [["Includes", :includes], ["Excludes", :excludes]]
-    end
-  end
-
-  def report_criteria_collection(report, filter_attr)
-    [] + report.sections[filter_attr].map do |attr|
-      [attr.name, "fields_#{filter_attr}_#{attr.key}"]
-    end
-  end
-
   def titleized_report_heading(val)
     val.is_a?(Symbol) ? val.to_s.titleize : val
   end

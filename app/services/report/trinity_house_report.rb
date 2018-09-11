@@ -65,7 +65,7 @@ class Report::TrinityHouseReport < Report
         submission.vessel_reg_no,
         vessel.port_name,
         RegistrationStatus.new(submission.registered_vessel).to_s,
-        Task.new(submission.task).description,
+        "task_description",
         vessel.name,
         vessel.register_length,
         submission.correspondent.try(:name),

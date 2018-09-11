@@ -13,7 +13,7 @@ class Builders::OfficialNoBuilder
     end
 
     def update(registered_vessel, vessel_reg_no)
-      registered_vessel.update_attribute(:reg_no, vessel_reg_no)
+      registered_vessel.update_attributes(reg_no: vessel_reg_no)
 
       if registered_vessel.current_registration
         registered_vessel.current_registration.update_attribute(

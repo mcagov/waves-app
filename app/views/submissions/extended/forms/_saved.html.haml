@@ -4,35 +4,14 @@
   %h4.modal-title Application Details Saved
 
 .modal-body
-  .row
-    .col-md-12{style: 'text-align: center'}
-      .col-md-1
-      .col-md-10
-        - if @submission.approvable?
-          %h4 The application can now be processed
-          %p.red= t('submission.approval_alert_text')
-          %p
-            = link_to "#",
-              id: "approve-extended-application",
-              class: "btn btn-success btn-lg" do
-              %i.fa.fa-check
-              = t("submission.approval.inline-btn.#{@submission.task}")
-
-        - else
-          %h4 The application is incomplete and can not processed
-          - Policies::Definitions.approval_errors(@submission).each do |approval_error|
-            .red= t("submission.approval_error.#{approval_error}")
-      .col-md-1
-
-- if current_activity.registration_officer?
-  .modal-footer
+  - if current_activity.registration_officer?
     .row
       .col-md-6
         = link_to tasks_my_tasks_path, class: 'btn btn-link pull-left' do
           %i.fa.fa-list
           Go to Task List
       .col-md-6
-        = link_to unclaim_submission_states_path(@submission),
+        = link_to unclaim_submission_task_path(@submission, @task),
           method: :post,
           class: 'pull-left btn btn-link' do
           %i.fa.fa-save

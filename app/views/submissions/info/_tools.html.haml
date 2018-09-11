@@ -1,0 +1,50 @@
+.x_panel#application-tools
+  %h2.x_title
+    Application Tools
+  .x_content
+    - if Policies::Workflow.can_email_application_approval?(submission)
+      .row
+        .col-md-12
+          = link_to new_submission_application_approval_path,
+            class: "btn btn-primary",
+            remote: true,
+            data: { target: "#approval-notification", toggle: "modal" } do
+            %i.fa.fa-envelope
+            Application Approval Email
+
+          .modal.fade{id: "approval-notification", role: "dialog", tabindex: "-1"}
+            .modal-dialog.modal-md
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4.modal-title Application Approval Email
+                .modal-body
+                  %p.text-center
+                    = image_tag 'ajax-loader.gif'
+      %hr
+
+
+    - if submission.name_approval
+      .row
+        .col-md-12
+          Name Approved until:
+          = submission.name_approval.approved_until
+          %br
+          = link_to submission_name_approval_path(@submission), method: :delete,
+            class: "btn btn-danger",
+            data: { confirm: "Are you sure you want to cancel this approved name?" },
+            style: { color: "red" } do
+            %i.fa.fa-trash
+            Cancel Approved Name
+      %hr
+
+    - print_jobs = PrintJob.latest(submission)
+    - unless print_jobs.empty?
+      .row
+        - print_jobs.each do |print_job|
+          .col-md-3
+            = link_to print_job_path(print_job, format: :pdf),
+              target: "_blank", class: "btn btn-warning" do
+              %i.fa.fa-print
+              = t("print_job.button_text.#{print_job.template}")

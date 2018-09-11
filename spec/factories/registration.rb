@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :registration do
     registered_at 1.day.ago
     registered_until 5.years.from_now

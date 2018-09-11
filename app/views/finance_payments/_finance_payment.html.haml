@@ -1,0 +1,20 @@
+#finance_info.x_panel
+  %h2.x_title Finance Payment
+  .x_content
+    = render partial: "finance/payments/payment", locals: {finance_payment: finance_payment }
+
+    = link_to "#edit-documents-received",
+      "data-target" => "#edit-documents-received",
+      "data-toggle" => "modal",
+      class: "btn btn-xs btn-info" do
+      Edit Documents Received
+
+    = link_to "#edit-part",
+      "data-target" => "#edit-part",
+      "data-toggle" => "modal",
+      class: "btn btn-xs btn-info" do
+      Edit Part of the Register
+
+    = render partial: "finance_payments/modals/edit_documents_received", locals: { finance_payment: @finance_payment }
+
+    = render partial: "finance_payments/modals/edit_part", locals: { finance_payment: @finance_payment }

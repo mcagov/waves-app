@@ -1,7 +1,5 @@
 %strong
-  - if declaration.not_required?
-    n/a
-  - elsif declaration.completed?
+  - if declaration.completed?
     %i.fa.fa-check
     %strong
       Completed
@@ -15,4 +13,5 @@
     = simple_form_for declaration,
                       url: complete_submission_declaration_path(@submission, declaration),
                       method: :post do |f|
+      = hidden_field_tag :task_id, @task.id
       .form-group= f.button :submit, "Complete Declaration"

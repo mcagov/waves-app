@@ -1,0 +1,64 @@
+- content_for :heading_descriptor do
+  %em #{@task.service}
+
+- @bg_class = "bg-green"
+
+- if task.cancelled?
+  #prompt.alert.alert-info
+    Task Cancelled
+    - if worklog = WorkLog.latest(task, :task_cancelled)
+      by #{worklog.actioned_by}
+      on #{worklog.created_at}.
+
+- elsif task.referred?
+  #prompt.alert.alert-warning
+    Task Referred
+    - if worklog = WorkLog.latest(task, :task_referred)
+      by #{worklog.actioned_by}
+      on #{worklog.created_at}.
+    Next action due by #{ task.referred_until }.
+
+
+= render partial: "submissions/info/base", locals: { submission: submission, task: task}
+
+= yield :task_body
+
+- unless @readonly
+  .row.no-print#actions
+    .col-md-12
+      - if @task.claimed_by?(current_user)
+        / refer button and modal
+        = render partial: "submission/tasks/modals/refer"
+        = link_to submission_task_notification_path(@submission, @task, template: :refer),
+          data: { target: "#refer-task", toggle: "modal" },
+          class: "btn btn-warning btn-refer-submission",
+          remote: true do
+          %i.fa.fa-pause
+          Refer Task
+
+        / cancel button and modal
+        = render partial: "submission/tasks/modals/cancel"
+        = link_to submission_task_notification_path(@submission, @task, template: :cancel),
+                  data: { target: "#cancel-task", toggle: "modal" },
+                  class: "btn btn-link",
+                  remote: true do
+          %i.fa.fa-trash
+          Cancel Task
+
+        / complete button and modal
+        = render partial: "submission/tasks/modals/validate"
+        = link_to validate_submission_task_path(@submission, @task),
+          data: { target: "#complete-task", toggle: "modal" },
+          class: "btn btn-success btn-lg pull-right",
+          remote: true do
+          %i.fa.fa-check
+          Complete Task
+
+- if @task.referred?
+  .row.no-print#actions
+    .col-md-12
+      = form_tag claim_referral_submission_task_path(@submission, @task) do
+        = submit_tag "Reclaim Referral", class: "btn btn-success"
+
+
+

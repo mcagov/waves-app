@@ -1,7 +1,8 @@
 class Builders::ClosedRegistrationBuilder
   class << self
-    def create(submission, closure_at, closure_reason, supporting_info = nil)
-      @submission = submission
+    def create(task, closure_at, closure_reason, supporting_info = nil)
+      @task = task
+      @submission = @task.submission
       @closure_at = closure_at
       @closure_reason = closure_reason
       @supporting_info = supporting_info
@@ -14,7 +15,7 @@ class Builders::ClosedRegistrationBuilder
 
     private
 
-    def create_closed_registration
+    def create_closed_registration # rubocop:disable Metrics/MethodLength
       registration = Registration.create(
         vessel_id: @registered_vessel.id,
         registered_at: @previous_registration.try(:registered_at),
@@ -22,9 +23,10 @@ class Builders::ClosedRegistrationBuilder
         closed_at: @closure_at, description: @closure_reason,
         supporting_info: @supporting_info,
         registry_info: @registered_vessel.registry_info,
-        actioned_by: @submission.claimant)
+        actioned_by: @task.claimant)
 
       @submission.update_attributes(registration: registration)
+      @registered_vessel.update_attributes(current_registration: registration)
 
       registration
     end

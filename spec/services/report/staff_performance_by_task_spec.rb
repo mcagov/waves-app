@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe Report::StaffPerformanceByTask do
-  context "in general" do
+  xcontext "in general" do
     before do
       create(:completed_submission)
     end
 
-    let(:filters) { { task: :new_registration } }
+    let(:filters) { { application_type: :new_registration } }
 
     subject { described_class.new(filters) }
 

@@ -4,8 +4,8 @@ describe Policies::Advisories do
   context ".for_submission" do
     subject { described_class.for_submission(submission) }
 
-    context "fishing vessel" do
-      let(:submission) { build(:fishing_submission) }
+    context "part_2 (fishing) vessel" do
+      let(:submission) { build(:submission, :part_2_vessel) }
 
       it { expect(subject).to include(:fishing_vessel_safety_certificate) }
 
@@ -34,8 +34,8 @@ describe Policies::Advisories do
       end
     end
 
-    context "not a fishing vessel" do
-      let(:submission) { build(:pleasure_submission) }
+    context "part_1 (not a fishing) vessel" do
+      let(:submission) { build(:submission, :part_1_vessel) }
 
       it { expect(subject).to be_empty }
     end

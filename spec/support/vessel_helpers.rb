@@ -4,6 +4,12 @@ def visit_registered_vessel(user = create(:user))
   visit vessel_path(vessel)
 end
 
+def visit_closed_vessel(user = create(:user))
+  login_to_part_3(user)
+  vessel = create(:closed_vessel)
+  visit vessel_path(vessel)
+end
+
 def visit_unregistered_vessel(user = create(:user))
   login_to_part_3(user)
   vessel = create(:unregistered_vessel)

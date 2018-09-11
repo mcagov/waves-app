@@ -8,6 +8,9 @@ class CarvingAndMarking < ApplicationRecord
   delegate :part, to: :submission
 
   has_one :print_job, as: :printable, class_name: "PrintJob"
+  has_many :notifications, as: :notifiable
+
+  enum delivery_method: [:email, :print]
 
   TEMPLATES = [
     ["All fishing vessels",
@@ -48,6 +51,10 @@ class CarvingAndMarking < ApplicationRecord
   def tonnage_description
     return "" if tonnage_value.blank?
     register? ? "R.T.#{tonnage_value}" : "N.T.#{tonnage_value}"
+  end
+
+  def emailable?
+    delivery_method.to_sym == :email
   end
 
   private

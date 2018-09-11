@@ -22,6 +22,6 @@ class Notification::CarvingAndMarkingNote < Notification
   end
 
   def email_attachments
-    Pdfs::Processor.run(attachments.to_sym, notifiable, :attachment).render
+    Pdfs::Processor.run(:carving_and_marking, notifiable, :attachment).render
   end
 end

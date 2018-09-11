@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :closure, class: "Submission::Closure" do
     actioned_day         "23"
     actioned_month       "6"

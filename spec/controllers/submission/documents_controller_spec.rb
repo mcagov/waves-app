@@ -9,48 +9,40 @@ describe Submission::DocumentsController, type: :controller do
 
   before do
     post :create, params: {
-      submission_id: submission.id, document: { content: "foo" } }
+      submission_id: create(:submission).id,
+      task_id: task.id,
+      document: { content: "foo" } }
   end
 
   context "#create" do
-    context "when the submission is #referred" do
-      let(:submission) { create(:referred_submission) }
+    context "when the task is #referred" do
+      let(:task) { create(:referred_task) }
 
-      it "moves to #unassigned" do
-        expect(assigns(:submission)).to be_unassigned
+      it "moves to #unclaimed" do
+        expect(assigns(:task)).to be_unclaimed
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry(:document_added) }
     end
 
-    context "when the submission is #cancelled" do
-      let(:submission) { create(:cancelled_submission) }
+    context "when the task is #cancelled" do
+      let(:task) { create(:cancelled_task) }
 
       it "remains to #cancelled" do
-        expect(assigns(:submission)).to be_cancelled
+        expect(assigns(:task)).to be_cancelled
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry(:document_added) }
     end
 
-    context "when the submission is #incomplete" do
-      let(:submission) { create(:incomplete_submission) }
+    context "when the task is #claimed" do
+      let(:task) { create(:claimed_task, claimant: user) }
 
-      it "remains #incomplete (#check_current_state still be called)" do
-        expect(assigns(:submission)).to be_incomplete
+      it "remains #claimed" do
+        expect(assigns(:task)).to be_claimed
       end
 
-      it { creates_a_work_log_entry("Document", :document_entry) }
-    end
-
-    context "when the submission is #assigned" do
-      let(:submission) { create(:assigned_submission, claimant: user) }
-
-      it "remains #assigned" do
-        expect(assigns(:submission)).to be_assigned
-      end
-
-      it { creates_a_work_log_entry("Document", :document_entry) }
+      it { creates_a_work_log_entry(:document_added) }
     end
   end
 end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :common_mortgagee do
     name "MIKE"
     address_1 "10 DOWNING ST"

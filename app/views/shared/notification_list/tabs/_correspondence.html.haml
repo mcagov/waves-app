@@ -8,7 +8,7 @@
   %td
     - unless @readonly
       - if correspondence.noteable_id == @submission.try(:id)
-        = link_to submission_correspondence_path(@submission, correspondence_id: correspondence.id),
+        = link_to submission_correspondence_path(@submission, correspondence_id: correspondence.id, task_id: @task.id),
           class: 'btn-link pull-right',
           method: :delete,
           data: { confirm: "Are you sure you want to remove this correspondence?" },

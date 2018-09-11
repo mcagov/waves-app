@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :manager do
     name              Faker::Name.name
     email             Faker::Internet.email

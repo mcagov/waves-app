@@ -40,18 +40,23 @@ describe Builders::RegistryBuilder do
     end
 
     context "with a task that changes registry details" do
-      let!(:change_vessel_submission) do
-        create(:assigned_submission,
-               task: :re_registration,
+      let(:change_vessel_submission) do
+        create(:submission,
+               application_type: :re_registration,
                registered_vessel: registered_vessel,
                changeset: {
-                 vessel_info: build(:submission_vessel, name: "DON DINGHY"),
+                 vessel_info:
+                   build(:submission_vessel,
+                         name: "DON DINGHY",
+                         entry_into_service_at: "21/12/2001"),
                  owners: [
                    { name: "ALICE" }, { name: "DAVE" }, { name: "ELLEN" }],
                })
       end
 
       before do
+        # workaround the submission validation: vessel_must_be_unique
+        Submission.delete_all
         described_class.create(change_vessel_submission, {})
         registered_vessel.reload
       end
@@ -65,6 +70,10 @@ describe Builders::RegistryBuilder do
         expect(registered_vessel.owners[0].name).to eq("ALICE")
         expect(registered_vessel.owners[1].name).to eq("DAVE")
         expect(registered_vessel.owners[2].name).to eq("ELLEN")
+      end
+
+      it "assigns the entry_into_service_at" do
+        expect(registered_vessel.entry_into_service_at).to eq("21/12/2001")
       end
     end
 

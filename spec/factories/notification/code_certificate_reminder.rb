@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :code_certificate_reminder,
           class: "Notification::CodeCertificateReminder" do
     recipient_name  Faker::Name.name

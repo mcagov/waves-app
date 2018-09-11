@@ -29,28 +29,24 @@ class NotificationMailer < ApplicationMailer
     mail(to: defaults[:to], subject: defaults[:subject])
   end
 
-  # rubocop:disable all
-  def application_approval(defaults, reg_no, actioned_by, template_name,
-                           vessel_name, pdf_attachment = nil)
-    @department = defaults[:department]
-    @reg_no = reg_no
-    @name = defaults[:name]
-    @actioned_by = actioned_by
-    @vessel_name = vessel_name
-    attachments = enable_attachment(pdf_attachment)
-    @application_approval = true
-
-    mail(to: defaults[:to], subject: defaults[:subject],
-         template_path: "notification_mailer/application_approval",
-         template_name: template_name)
-  end
-  # rubocop:enable all
-
-  def wysiwyg(defaults, body, actioned_by)
+  def application_approval(defaults, body, actioned_by, pdf_attachments = [])
     @department = defaults[:department]
     @body = body
     @name = defaults[:name]
     @actioned_by = actioned_by
+    @application_approval = true
+    enable_attachment(pdf_attachments)
+
+    mail(
+      to: defaults[:to], subject: defaults[:subject], template_name: :wysiwyg)
+  end
+
+  def wysiwyg(defaults, body, actioned_by, pdf_attachments = [])
+    @department = defaults[:department]
+    @body = body
+    @name = defaults[:name]
+    @actioned_by = actioned_by
+    enable_attachment(pdf_attachments)
 
     mail(to: defaults[:to], subject: defaults[:subject])
   end
@@ -62,7 +58,6 @@ class NotificationMailer < ApplicationMailer
     @actioned_by = actioned_by
     @register_length = register_length
     attachments["carving_and_marking_note.pdf"] = pdf_attachment
-    @attachment = true
 
     mail(to: defaults[:to], subject: defaults[:subject])
   end
@@ -106,9 +101,11 @@ class NotificationMailer < ApplicationMailer
     File.join(ENV.fetch("GOVUK_HOST"), path)
   end
 
-  def enable_attachment(attachment)
-    return if attachment.nil?
-    attachments["#{@reg_no}.pdf"] = attachment
+  def enable_attachment(files)
+    return if files.nil?
+    Array(files).each_with_index do |file, index|
+      attachments["mca-document-#{index + 1}.pdf"] = file
+    end
     @attachment = true
     attachments
   end

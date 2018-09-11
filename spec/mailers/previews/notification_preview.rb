@@ -5,94 +5,14 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, "a-very-long-id", "Jolly Roger", "Captain Pugwash")
   end
 
-  def application_receipt_new_registration
-    NotificationMailer.application_receipt(
-      default_params,
-      "My Boat", "3N-777EA4", true, :new_registration
-    )
-  end
-
   def application_receipt
     NotificationMailer.application_receipt(
       default_params, "My Boat", "3N-777EA4")
   end
 
-  def application_approval_new_registration
+  def application_approval
     NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :new_registration, "MV Bob"
-    )
-  end
-
-  def application_approval_provisional
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :provisional, "MV Bob"
-    )
-  end
-
-  def application_approval_simple_to_full
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :simple_to_full, "MV Bob"
-    )
-  end
-
-  def application_approval_renewal
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :renewal, "MV Bob"
-    )
-  end
-
-  def application_approval_re_registration
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :re_registration, "MV Bob"
-    )
-  end
-
-  def application_approval_change_owner
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :change_owner, "MV Bob"
-    )
-  end
-
-  def application_approval_change_vessel
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :change_vessel, "MV Bob"
-    )
-  end
-
-  def application_approval_change_address
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :change_address, "MV Bob"
-    )
-  end
-
-  def application_approval_closure
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :closure, "MV Bob"
-    )
-  end
-
-  def application_approval_current_transcript
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :current_transcript, "MV Bob"
-    )
-  end
-
-  def application_approval_historic_transcript
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :historic_transcript, "MV Bob"
-    )
-  end
-
-  def application_approval_mortgage
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :mortgage, "MV Bob"
-    )
-  end
-
-  def application_approval_mortgage_other
-    NotificationMailer.application_approval(
-      default_params, "SRXXXXXX", "Officer Bob", :mortgage_other, "MV Bob"
-    )
+      default_params, "<p>FREE TEXT</p>", "3N-777EA4")
   end
 
   def carving_and_marking_note_under_15m

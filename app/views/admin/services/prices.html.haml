@@ -1,0 +1,22 @@
+%h1 Service Prices
+
+%table.table
+  %thead
+    %th Name
+    %th Service Standard
+    %th Part 1
+    %th Part 2
+    %th Part 3
+    %th Part 4
+  %tbody
+    - @services.each do |service|
+      %tr
+        %td.service-name= service.name
+        %td
+          Standard: #{service.standard_days || 'n/a'}<br/>
+          Premium: #{service.premium_days || 'n/a'}
+        - [:part_1, :part_2, :part_3, :part_4].each do |part|
+          %td.prices= service_price(service, part)
+
+
+

@@ -1,5 +1,5 @@
 class Finance::BatchesController < InternalPagesController
-  before_action :prevent_read_only!
+  before_action :prevent_readonly_user!
   before_action :load_batch, only: [:close, :re_open, :lock, :destroy]
   def index
     @heading = "All Batches"

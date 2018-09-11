@@ -50,4 +50,15 @@ class Customer < ApplicationRecord
   def name_and_postcode
     postcode ? "#{name} (#{postcode})" : name
   end
+
+  def email_description
+    return "Not set" unless name.present? && email.present?
+    "#{name} <#{email}>"
+  end
+
+  def email_description=(input)
+    /(?<parsed_name>.*) <(?<parsed_email>[^>]*)/ =~ input
+    self.name = parsed_name
+    self.email = parsed_email
+  end
 end

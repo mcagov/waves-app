@@ -19,10 +19,10 @@ class Mortgage < ApplicationRecord
 
   class << self
     def types_for(submission)
-      if Task.new(submission.task).new_registration?
-        %w(Intent)
-      else
+      if submission.registered_vessel
         ["Intent", "Account Current", "Principle Sum"]
+      else
+        %w(Intent)
       end
     end
   end

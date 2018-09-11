@@ -1,0 +1,5 @@
+- content_for :task_body do
+  = render partial: "submissions/#{Activity.new(@submission.part).view_mode}/show",
+    locals: { submission: @submission, task: @task }
+
+= render partial: "base", locals: { task: @task, submission: @submission }

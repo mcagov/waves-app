@@ -7,12 +7,14 @@ class Policies::Workflow
       true
     end
 
-    def generate_official_no?(submission, user)
+    def generate_official_no?(submission)
       return false if Policies::Definitions.part_3?(submission)
+      # submission.actionable? && !approved_name_required?(submission)
+      !approved_name_required?(submission)
+    end
 
-      submission.actionable? &&
-        submission.claimant == user &&
-        !approved_name_required?(submission)
+    def can_email_application_approval?(submission)
+      !submission.tasks.completed.empty?
     end
 
     def can_edit_official_number?(user)
@@ -59,10 +61,6 @@ class Policies::Workflow
       WavesUtilities::Vessel.attributes_for(
         @part, Policies::Definitions.fishing_vessel?(obj)
       ).include?(attr.to_sym)
-    end
-
-    def uses_certificates_and_documents?(submission)
-      Task.new(submission.task).builds_registry?
     end
 
     def uses_registration_types?(part)

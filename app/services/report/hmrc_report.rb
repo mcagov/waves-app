@@ -29,7 +29,7 @@ class Report::HmrcReport < Report
         .in_part(:part_2)
         .includes(
           reportable_registered_vessel:
-            [:owners, :engines, :latest_completed_submission])
+            [:owners, :engines, :latest_closed_submission])
         .flag_in
         .where("completed_at >= ?", @date_start)
         .where("completed_at <= ?", @date_end)
@@ -62,7 +62,7 @@ class Report::HmrcReport < Report
 
   def eager_includes
     [
-      :customers, :owners, :engines, :latest_completed_submission,
+      :customers, :owners, :engines, :latest_closed_submission,
       :shareholder_groups
     ]
   end
@@ -75,8 +75,13 @@ class Report::HmrcReport < Report
 
   # rubocop:disable all
   def assign_result(vessel)
-    submission = vessel.latest_completed_submission
-    task_description = submission ? Task.new(submission.task).description : ""
+    submission = vessel.latest_closed_submission
+    task_description =
+      if submission
+        "task_description"
+      else
+        ""
+      end
 
     Result.new(
       [

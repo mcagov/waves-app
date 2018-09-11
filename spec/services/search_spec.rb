@@ -44,37 +44,18 @@ describe Search, type: :model do
       end
     end
 
-    context "search by finance_payment inputs" do
-      let!(:finance_payment) do
-        create(:submitted_finance_payment, vessel_name: "CARIBE",
-                                           application_ref_no: "ABC123",
-                                           applicant_name: "HARRY")
-      end
+    context "search by task ref no" do
+      let!(:submission) { create(:submission) }
+      let!(:part) { nil }
 
-      subject { Search.submissions(term) }
+      subject { Search.submissions("#{submission.ref_no}/1", part) }
 
-      context "vessel_name" do
-        let(:term) { "CARIBE" }
+      it { expect(subject.first).to eq(submission) }
 
-        it { expect(subject.length).to eq(1) }
-      end
-
-      context "application_ref_no" do
-        let(:term) { "ABC123" }
+      context "in part_3" do
+        let(:part) { :part_3 }
 
         it { expect(subject.length).to eq(1) }
-      end
-
-      context "application_name" do
-        let(:term) { "HARRY" }
-
-        it { expect(subject.length).to eq(1) }
-      end
-
-      context "something that does not exist" do
-        let(:term) { "FOOBAR" }
-
-        it { expect(subject).to be_empty }
       end
     end
   end

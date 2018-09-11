@@ -32,6 +32,8 @@ class Notification < ApplicationRecord
     end
   end
 
+  attr_accessor :recipient
+
   def send_email
     NotificationMailer.delay.send(
       email_template, default_params, *additional_params)

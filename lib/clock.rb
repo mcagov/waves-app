@@ -19,11 +19,14 @@ class DailyJob
     private
 
     def unclaim_claimed_submissions
-      Submission.assigned.map(&:unclaimed!)
+      Submission::Task.claimed.map(&:unclaim!)
     end
 
     def expire_referrals
-      Submission.referred.referred_until_expired.each(&:unreferred!)
+      Submission::Task
+        .referred
+        .where("referred_until < ?", Time.zone.today.at_end_of_day)
+        .each(&:unrefer!)
     end
 
     def process_reminders

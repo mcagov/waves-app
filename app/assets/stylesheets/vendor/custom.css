@@ -273,9 +273,9 @@ body .container.body .right_col {
   color: #73879C;
 }
 .bg-green {
-  background: #1ABB9C !important;
-  border: 1px solid #1ABB9C !important;
-  color: #fff;
+  background: #dff0d8 !important;
+ /* border: 1px solid #1ABB9C !important;
+  color: #fff;*/
 }
 .bg-red {
   background: #E74C3C !important;

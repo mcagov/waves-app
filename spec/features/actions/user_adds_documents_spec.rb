@@ -2,7 +2,8 @@ require "rails_helper"
 
 feature "User adds documents to a submission", type: :feature, js: true do
   scenario "in general" do
-    visit_assigned_submission
+    visit_claimed_task
+
     click_on("Documents")
     click_on("Add Document")
 
@@ -20,9 +21,6 @@ feature "User adds documents to a submission", type: :feature, js: true do
       expect(page).to have_link("mca_test_2.pdf", href: /mca_test_2.pdf/)
     end
 
-    click_on("History")
-    within("#history") do
-      expect(page).to have_text("Document entry")
-    end
+    creates_a_work_log_entry(:document_added)
   end
 end

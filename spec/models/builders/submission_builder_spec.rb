@@ -3,7 +3,7 @@ require "rails_helper"
 describe Builders::SubmissionBuilder do
   describe "#build_defaults" do
     let!(:submission) do
-      Submission.new(
+      Submission.create( # create fires the builder
         part: :part_3,
         changeset: changeset,
         registered_vessel: registered_vessel,
@@ -18,8 +18,6 @@ describe Builders::SubmissionBuilder do
     let!(:registered_vessel) { nil }
     let!(:declarations) { [] }
     let!(:applicant_is_agent) { false }
-
-    before { described_class.build_defaults(submission) }
 
     context "in general" do
       it "defaults to task = new_registration" do
@@ -36,18 +34,6 @@ describe Builders::SubmissionBuilder do
 
       it "builds the ref_no" do
         expect(submission.ref_no).to be_present
-      end
-
-      it "builds the service_level as :standard" do
-        expect(submission.service_level.to_sym).to eq(:standard)
-      end
-
-      context "with :premium service_level" do
-        let(:changeset) { { service_level: { level: :premium } } }
-
-        it "builds the service_level as :premium" do
-          expect(submission.service_level.to_sym).to eq(:premium)
-        end
       end
 
       it "does not alter the changeset" do

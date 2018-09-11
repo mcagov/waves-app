@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :registered_owner, class: "Register::Owner" do
     name          Faker::Name.name
     email         Faker::Internet.email

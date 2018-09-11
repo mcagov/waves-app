@@ -1,5 +1,6 @@
 class Submission::NameApprovalsController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
   before_action :enable_readonly, only: [:show]
   before_action :load_name_approval
 
@@ -16,6 +17,13 @@ class Submission::NameApprovalsController < InternalPagesController
     end
 
     render :show
+  end
+
+  def destroy
+    @name_approval.update_attribute(:cancelled_at, Time.zone.now)
+    flash[:notice] = "The approved name has been cancelled"
+
+    redirect_to(submission_path(@submission))
   end
 
   protected
@@ -41,7 +49,7 @@ class Submission::NameApprovalsController < InternalPagesController
   def process_update(perform_validations = true)
     Builders::NameApprovalBuilder.create(
       @submission, @name_approval, perform_validations)
-    log_work!(@submission, @submission, :name_approval)
-    redirect_to edit_submission_path(@submission)
+    log_work!(@task, @submission, :name_approved)
+    redirect_to submission_task_path(@submission, @task)
   end
 end

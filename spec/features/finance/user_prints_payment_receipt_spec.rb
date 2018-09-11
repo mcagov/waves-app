@@ -2,15 +2,13 @@ require "rails_helper"
 
 describe "User prints payment receipt", type: :feature, js: true do
   before do
-    create(:submitted_finance_payment)
+    create(:locked_finance_payment)
 
-    claim_fee_entry_and_visit
+    visit_fee_entry
   end
 
   scenario "in general" do
-    expect(page).to have_link(
-      "Print Payment Receipt",
-      href: finance_payment_path(Payment::FinancePayment.last, format: :pdf))
+    expect(page).to have_css("h1", text: "Fee Received")
 
     pdf_window = window_opened_by do
       click_on("Print Payment Receipt")

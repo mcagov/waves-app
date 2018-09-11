@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-ruby "~> 2.3.6"
+ruby "~> 2.5.1"
 
-gem "rails", "~> 5.2.0.rc1"
+gem "rails", "~> 5.2.1.rc1"
 
 gem "auto_increment"
 gem "active_model_serializers"
@@ -34,7 +34,7 @@ gem "paperclip", ">= 5.2.0"
 gem "paperclip-azure",
     git: "https://github.com/mcagov/paperclip-azure"
 gem "pg_backup"
-gem "pg_search", ">= 2.1.2"
+gem "pg_search"
 gem "prawn"
 gem "prawn-print"
 gem "prawn-table"
@@ -72,18 +72,21 @@ group :development, :test do
   gem "capistrano-rails", "~> 1.2"
   gem "capistrano-passenger"
   gem "capistrano-delayed_job", require: false
-  gem "factory_girl"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "parallel_tests"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
-  gem "rubocop", "~> 0.43.0", require: false
+  gem "rubocop", "= 0.43.0",
+      branch: "release/0.43.0",
+      require: false,
+      git: "https://github.com/mcagov/rubocop.git"
 end
 
 group :test do
   gem "brakeman"
-  gem "capybara-webkit"
+  gem "capybara", "2.13.0"
+  gem "capybara-webkit", "1.14.0"
   gem "email_spec"
   gem "database_cleaner"
   gem "formulaic"

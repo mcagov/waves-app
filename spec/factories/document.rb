@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :document do
     entity_type :carving_and_marking
     noted_at          { 1.day.ago }

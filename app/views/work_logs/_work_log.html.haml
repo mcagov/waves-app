@@ -1,0 +1,8 @@
+- work_log = Decorators::WorkLog.new(work_log)
+%tr
+  %td= work_log.date_recorded
+  %td= work_log.part_of_registry
+  %td.title= work_log.title
+  %td.description= work_log.description.humanize
+  %td= work_log.actioned_by
+

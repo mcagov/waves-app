@@ -1,19 +1,14 @@
 require "rails_helper"
 
-feature "User declares a submission", type: :feature, js: true do
-  let!(:submission) { create(:incomplete_submission) }
-  let!(:bob) { create(:user, name: "Bob") }
-
+feature "User declares a submission", js: true do
   before do
-    login_to_part_3(bob)
-    visit submission_path(submission)
+    visit_claimed_task
   end
 
   scenario "uploading a completed form" do
     click_on("Owners")
     click_on("Complete Declaration")
-
     click_on("Owners")
-    expect(page).to have_text("Completed by Bob")
+    expect(page).to have_text("Completed by")
   end
 end

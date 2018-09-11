@@ -34,7 +34,7 @@ class Department
 
   def description
     case code
-    when :pleasure
+    when :pleasure, :high_profile
       "Pleasure Vessel team"
     when :commercial
       "Commercial Vessel team"
@@ -49,7 +49,7 @@ class Department
 
   def email
     case code
-    when :pleasure
+    when :pleasure, :high_profile
       "part1.registry@mcga.gov.uk"
     when :commercial, :bareboat
       "comm.registry@mcga.gov.uk"
@@ -64,7 +64,7 @@ class Department
     case code
     when :pleasure
       "02920 448866"
-    when :commercial, :bareboat
+    when :commercial, :bareboat, :high_profile
       "02920 448840/41/42/68"
     when :fishing
       "02920 448855"

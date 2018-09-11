@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe "User generates an official no", js: true do
   before do
-    visit_name_approved_part_2_submission
+    # with a submission that has a name approval
+    visit_claimed_task(
+      submission: create(:name_approval).submission)
 
     within("#heading .official-no") do
       click_on("Generate")

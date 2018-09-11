@@ -3,6 +3,8 @@ class Declaration < ApplicationRecord
   belongs_to :completed_by, class_name: "User"
   belongs_to :registered_owner, class_name: "Owner"
 
+  validates :submission_id, presence: true
+
   has_one :notification, as: :notifiable
 
   include ActiveModel::Transitions
@@ -10,7 +12,6 @@ class Declaration < ApplicationRecord
   state_machine auto_scopes: true do
     state :incomplete
     state :completed
-    state :not_required
 
     event :declared, timestamp: true do
       transitions to: :completed, from: :incomplete

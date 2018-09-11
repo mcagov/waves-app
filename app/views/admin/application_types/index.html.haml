@@ -1,0 +1,11 @@
+%h1 Application Types
+
+%table.table.table-striped
+  %thead
+    %th Name
+    %th Requires Registered Vessel
+  %tbody
+    - @application_types.each do |application_type|
+      %tr
+        %td.name= application_type.description
+        %td= y_n(application_type.registered_vessel_required?)

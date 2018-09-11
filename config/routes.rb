@@ -2,11 +2,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :application_types, only: [:index]
     resources :common_mortgagees
-    resources :target_dates, only: [:index]
-    resources :reports, only: [:show, :index]
-    resources :tasks, only: [:index]
     resources :fees, only: [:index]
+    resources :reports, only: [:show, :index]
+    resources :services, only: [:index] do
+      collection do
+        get :prices
+        get :processes
+      end
+    end
+    resources :target_dates, only: [:index]
     resources :users
     resources :notifications, only: [:index] do
       collection do
@@ -44,32 +50,53 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [:show] do
-    member do
-      post :cancel
-      post :refer
+  resources :finance_payments, only: [:show, :update] do
+    collection do
+      get :unattached_payments
+      get :unattached_refunds
     end
+    member do
+      patch :update
+      patch :link
+    end
+    resources :payments,
+              controller: "finance_payments/payments",
+              only: [:update]
+    resources :submissions,
+              controller: "finance_payments/submissions",
+              only: [:new, :create]
   end
 
-  resources :finance_payments, only: [:show, :update]
-
   resources :submissions, only: [:new, :create, :show, :edit, :update] do
+    collection do
+      get :open
+      get :closed
+    end
+
+    member do
+      put :close
+    end
+
     resources :agent,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/agents", only: [:update, :destroy]
 
     resources :applicant,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/applicants", only: [:update]
 
-    resource :approval,
-             controller: "submission/approvals", only: [:show, :create]
+    resources :application_approvals,
+              controller: "submission/application_approvals",
+              only: [:new, :create]
 
     resources :beneficial_owners,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/beneficial_owners",
               only: [:create, :update, :destroy]
 
     resource :carving_and_marking,
-             controller: "submission/carving_and_marking",
-             only: [:create] do
+             controller: "submission/carving_and_markings",
+             only: [:new, :create] do
       member do
         post :update_state
       end
@@ -80,10 +107,12 @@ Rails.application.routes.draw do
              only: [:show, :update, :destroy]
 
     resources :directed_bys,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/directed_bys",
               only: [:create, :update, :destroy]
 
     resources :managed_bys,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/managed_bys",
               only: [:create, :update, :destroy]
 
@@ -92,29 +121,35 @@ Rails.application.routes.draw do
              controller: "submission/correspondences"
 
     resource :correspondent,
+             constraints: ->(request) { request.format == :js },
              only: [:update],
              controller: "submission/correspondents"
 
     resources :declaration_group_members,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declaration_group_members",
               only: [:create, :destroy]
 
     resources :declaration_groups,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declaration_groups",
               only: [:create, :update]
 
     resources :declarations,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/declarations",
               only: [:create, :update, :destroy] do
       member do
-        post :complete
+        post :complete, constraints: ->(request) { request.format == :html }
       end
     end
 
     resources :charterers,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/charterers",
               only: [:create, :update, :destroy] do
       resources :charter_parties,
+                constraints: ->(request) { request.format == :js },
                 controller: "submission/charterers/charter_parties",
                 only: [:create, :update, :destroy]
     end
@@ -124,86 +159,80 @@ Rails.application.routes.draw do
               controller: "submission/documents"
 
     resources :engines,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/engines",
               only: [:create, :update, :destroy]
 
-    resources :line_items,
-              controller: "submission/line_items",
-              only: [:create, :update, :destroy]
-
     resources :managers,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/managers",
               only: [:create, :update, :destroy]
 
     resources :mortgages,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/mortgages",
               only: [:create, :update, :destroy]
 
     resource :official_no,
+             constraints: ->(request) { request.format == :js },
              controller: "submission/official_no",
              only: [:update]
 
-    resource :finance_payment,
-             only: [:show, :edit],
-             controller: "submission/finance_payments" do
-      member do
-        patch :update
-        patch :convert
-        patch :link
-        patch :unlink
-      end
-    end
-
     resource :managing_owner,
+             constraints: ->(request) { request.format == :js },
              only: [:update],
              controller: "submission/managing_owners"
 
     resource :name_approval,
              controller: "submission/name_approvals",
-             only: [:show, :update]
+             only: [:show, :update, :destroy]
 
     resources :notes,
+              constraints: ->(request) { request.format == :js },
               only: [:create, :update],
               controller: "submission/notes"
 
     resources :representatives,
+              constraints: ->(request) { request.format == :js },
               controller: "submission/representatives",
               only: [:update, :destroy]
 
     resource :shareholding,
+             constraints: ->(request) { request.format == :js },
              controller: "submission/shareholdings",
              only: [:show]
 
-    resource :signature,
-             controller: "submission/signatures",
-             only: [:show, :update]
+    resources :tasks,
+              controller: "submission/tasks",
+              only: [:index, :create, :destroy, :update, :show] do
+      collection do
+        post :confirm
+      end
 
-    resource :states, controller: "submission/states", only: [:show] do
       member do
         post :claim
         post :unclaim
         post :claim_referral
+        get  :validate
+        post :complete
+      end
+
+      resource :notification,
+               controller: "submission/task/notifications",
+               only: [:show] do
+        member do
+          post :cancel
+          post :refer
+        end
       end
     end
   end
 
   resources :print_jobs, only: [:show, :index, :update]
 
-  namespace :reports do
-    resources :work_logs, only: [:index]
-  end
-
   resources :vessels, only: [:show, :index] do
-    resource :closure,
-             only: [:create],
-             controller: "registered_vessel/closure"
-
-    resource :forced_closure,
-             only: [:create],
-             controller: "registered_vessel/forced_closure"
-
     resources :csrs,
-              only: [:show, :create, :update],
+              only: [:show, :update],
               controller: "registered_vessel/csrs"
 
     resource :cold_storage,
@@ -242,13 +271,22 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/termination"
 
-    resource :manual_override,
+    resource :tasks,
              only: [:create],
-             controller: "registered_vessel/manual_override"
+             controller: "registered_vessel/tasks"
+  end
+
+  [
+    :part_1, :part_2, :part_3, :part_4
+  ].each do |part|
+    get "/#{part}/work_logs",
+        controller: :work_logs,
+        action: :index,
+        part: part
   end
 
   %w(
-    incomplete my-tasks team-tasks fee-entry refunds-due
+    incomplete my-tasks team-tasks
     referred unclaimed cancelled next-task
   ).each do |action|
     get "/tasks/#{action}",
@@ -257,8 +295,9 @@ Rails.application.routes.draw do
   end
 
   %w(
-    carving_and_marking registration_certificate cover_letter
-    current_transcript historic_transcript csr_form
+    carving_and_marking registration_certificate
+    duplicate_registration_certificate
+    cover_letter current_transcript historic_transcript csr_form
     provisional_certificate termination_notice renewal_reminder_letter
     mortgagee_reminder_letter ihs section_notice forced_closure
   ).each do |template|
@@ -267,6 +306,8 @@ Rails.application.routes.draw do
         action: :index,
         template: template
   end
+
+  resources :work_logs, only: [:index]
 
   get "/search", controller: :search, action: :index
   get "/search/submissions", controller: :search, action: :submissions

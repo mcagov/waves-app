@@ -2,6 +2,7 @@
   "data":
     {
       "type": "features",
+      "application_type": "new_registration",
       "attributes":
         {
           "part": "part_3",

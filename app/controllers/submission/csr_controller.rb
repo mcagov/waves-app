@@ -1,5 +1,7 @@
 class Submission::CsrController < InternalPagesController
   before_action :load_submission
+  before_action :load_task
+  before_action :enable_readonly
 
   def show
     @csr_form = Builders::CsrFormBuilder.build(@submission)

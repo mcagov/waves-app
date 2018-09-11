@@ -1,7 +1,11 @@
 class RefNo
   class << self
-    def generate_for(submission)
-      build_unique unless submission.officer_intervention_required?
+    def generate
+      build_unique
+    end
+
+    def parse(input)
+      input.gsub(%r{\/[0-9]*}, "") if input
     end
 
     private

@@ -1,6 +1,7 @@
 class Search
   class << self
     def submissions(term, part = nil)
+      term = RefNo.parse(term)
       submissions = PgSearch.multisearch(term)
                             .where(searchable_type: "Submission")
                             .includes(searchable: [declarations: :owner])
@@ -14,14 +15,6 @@ class Search
                         .includes(searchable: [:owners, :submissions])
       vessels = vessels_in_part(vessels, part)
       vessels.limit(20).map(&:searchable)
-    end
-
-    # looks for submissions for the same vessel
-    # to help a reg officer on the convert application
-    # page
-    def similar_submissions(submission)
-      return [] unless submission.registered_vessel
-      submission.registered_vessel.submissions.active.where.not(ref_no: nil)
     end
 
     # looks for similar vessels, to help

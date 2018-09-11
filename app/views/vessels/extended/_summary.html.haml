@@ -13,7 +13,7 @@
       %tr
         %td.soft-label Registration Type:
         %td
-          %strong= @vessel.registration_type.humanize if @vessel.registration_type
+          %strong= @vessel.registration_type.titleize if @vessel.registration_type
       %tr
         %td.soft-label Vessel Category:
         %td

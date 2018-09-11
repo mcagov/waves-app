@@ -5,12 +5,6 @@ class Registration < ApplicationRecord
 
   has_many :submissions, -> { order("created_at desc") }
 
-  after_create :set_vessel_current_registration
-
-  def set_vessel_current_registration
-    registered_vessel.update_columns(current_registration_id: id)
-  end
-
   scope :fishing_vessels, (lambda do
     where(
       "(registry_info#>>'{vessel_info, part}' = 'part_2') OR "\
@@ -71,10 +65,6 @@ class Registration < ApplicationRecord
     (symbolized_registry_info[:shareholder_groups] || [])
   end
 
-  def prints_duplicate_certificate?
-    Task.new(task).duplicates_certificate?
-  end
-
   def owner_name_address_shareholding
     arr = owners_and_shares
     arr += shareholder_groups_and_shares
@@ -92,7 +82,7 @@ class Registration < ApplicationRecord
   end
 
   def task
-    submission ? submission.task : :new_registration
+    submission ? submission.application_type : :new_registration
   end
 
   def symbolized_registry_info

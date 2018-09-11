@@ -1,7 +1,8 @@
 class TargetDate
-  def initialize(start_date, service_level)
-    @start_date = start_date.advance(days: -1)
-    @service_level = service_level.present? ? service_level.to_sym : :standard
+  def initialize(start_date, service_level, service)
+    @start_date = start_date
+    @service_level = service_level.to_sym
+    @service = service
   end
 
   def calculate
@@ -10,17 +11,29 @@ class TargetDate
   end
 
   class << self
+    def for_task(task)
+      TargetDate.new(
+        task.start_date, task.service_level, task.service
+      ).calculate
+    end
+
     def days_away(target_date)
-      return "" unless target_date
       TargetDate.set_business_days
-      this_day = Time.zone.today
+      day_diff = Date.current.business_days_until(target_date)
+      return day_diff if day_diff > 0
 
-      day_diff = this_day.business_days_until(target_date.to_date)
+      day_diff = target_date.business_days_until(Date.current)
+      0 - day_diff
+    end
+
+    def formatted_days_away(target_date)
+      return "" unless target_date
+
+      day_diff = days_away(target_date)
+
       return "#{formatted_day_diff(day_diff)} away" if day_diff > 0
-
-      day_diff = target_date.to_date.business_days_until(this_day)
       return "Today" if day_diff.zero?
-      "#{formatted_day_diff(day_diff)} ago"
+      "#{formatted_day_diff(0 - day_diff)} ago"
     end
 
     def formatted_day_diff(day_diff)
@@ -39,6 +52,6 @@ class TargetDate
   private
 
   def number_of_days
-    @service_level == :premium ? 3 : 10
+    @service_level == :premium ? @service.premium_days : @service.standard_days
   end
 end
