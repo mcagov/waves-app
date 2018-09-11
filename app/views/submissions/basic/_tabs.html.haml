@@ -62,4 +62,4 @@
           #notes= render partial: "submission/notes/base", locals: { submission: submission }
 
         #work_logs_tab.tab-pane{"aria-labelledby" => "work-logs-tab", :role => "tabpanel"}
-          #work_logs= render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
+          = render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
