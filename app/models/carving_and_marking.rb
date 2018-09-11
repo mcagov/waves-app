@@ -9,6 +9,8 @@ class CarvingAndMarking < ApplicationRecord
 
   has_one :print_job, as: :printable, class_name: "PrintJob"
 
+  enum delivery_method: [:email, :print]
+
   TEMPLATES = [
     ["All fishing vessels",
      :all_fishing],
