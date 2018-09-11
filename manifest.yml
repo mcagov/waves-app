@@ -1,19 +1,19 @@
 ---
 applications:
-- name: mca-waves
+- name: mca-waves-refactor
   memory: 1G
   instances: 1
   buildpack: ruby_buildpack
   command: bundle exec rake db:migrate && rails s -p $PORT
   timeout: 90
-- name: mca-waves-worker
-  memory: 256M
+- name: mca-waves-refactor-worker
+  memory: 512M
   buildpack: ruby_buildpack
   command: bundle exec rake jobs:work
   no-route: true
   timeout: 90
   health-check-type: process
-- name: mca-waves-scheduler
+- name: mca-waves-refactor-scheduler
   memory: 256M
   buildpack: ruby_buildpack
   command: bundle exec clockwork lib/clock.rb
