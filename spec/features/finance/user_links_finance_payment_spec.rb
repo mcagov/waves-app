@@ -24,8 +24,16 @@ describe "User links finance_payment", type: :feature, js: true do
       ref_no: "FOOBAR")
 
     create(
+      :submission,
+      part: :part_3,
+      changeset: { vessel_info: { name: "CANOE" } },
+      application_type: :new_registration,
+      ref_no: "CANOE123")
+
+    create(
       :locked_finance_payment,
       part: :part_3,
+      vessel_name: "CANOE",
       application_type: :new_registration,
       application_ref_no: "ABC123")
 
@@ -48,6 +56,14 @@ describe "User links finance_payment", type: :feature, js: true do
     end
 
     application_is_linked_to(Submission.find_by(ref_no: "FOOBAR"))
+  end
+
+  scenario "to an open application with a similar vessel name" do
+    within("#similar_open_applications") do
+      click_on("Link to this Application")
+    end
+
+    application_is_linked_to(Submission.find_by(ref_no: "CANOE123"))
   end
 end
 

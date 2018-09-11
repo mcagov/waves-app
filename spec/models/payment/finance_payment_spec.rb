@@ -148,6 +148,30 @@ describe Payment::FinancePayment do
     end
   end
 
+  context "#similar_open_applications" do
+    let(:changeset) { { vessel_info: { name: "BOATY" } } }
+
+    let!(:active_submission) do
+      create(:submission, changeset: changeset)
+    end
+
+    let!(:closed_submission) do
+      create(:closed_submission, changeset: changeset)
+    end
+
+    let!(:submission_in_other_part) do
+      create(:submission, changeset: changeset, part: :part_2)
+    end
+
+    let(:finance_payment) { build(:finance_payment, vessel_name: "BOATY") }
+
+    subject { finance_payment.similar_open_applications }
+
+    it do
+      expect(subject).to match([active_submission])
+    end
+  end
+
   context "#searchable_attributes" do
     let(:finance_payment) do
       build(:finance_payment, application_ref_no: "ABC")

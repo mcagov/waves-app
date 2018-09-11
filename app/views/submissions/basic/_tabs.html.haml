@@ -33,7 +33,7 @@
           %a#notes-tab{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_content_notes", :role => "tab"} Notes
 
         %li{:role => "presentation"}
-          %a#notes-tab{"data-toggle" => "tab", :href => "#work_logs_tab", :role => "tab"} Work Logs
+          %a#work-logs-tab{"data-toggle" => "tab", :href => "#work_logs_tab", :role => "tab"} Work Logs
 
 
       #submissionTabContent.tab-content
@@ -62,4 +62,4 @@
           #notes= render partial: "submission/notes/base", locals: { submission: submission }
 
         #work_logs_tab.tab-pane{"aria-labelledby" => "work-logs-tab", :role => "tabpanel"}
-          #notes= render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
+          = render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }

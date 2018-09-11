@@ -81,6 +81,13 @@ class Payment::FinancePayment < ApplicationRecord
       Register::Vessel.find_by(reg_no: vessel_reg_no) if vessel_reg_no
   end
 
+  def similar_open_applications
+    return [] if vessel_name.blank?
+
+    @similar_open_applications ||=
+      Search.submissions(vessel_name, part).select(&:active?)
+  end
+
   private
 
   def registered_vessel_exists

@@ -79,11 +79,17 @@
               %li{:role => "presentation"}
                 %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
 
+              %li{:role => "presentation"}
+                %a#work-logs-tab{"data-toggle" => "tab", :href => "#work_logs_tab", :role => "tab"} Work Logs
+
             .tab-content
               #payments_tab.tab-pane.active{"aria-labelledby" => "payments-tab", :role => "tabpanel"}
                 #payments= render partial: "submissions/basic/body/payments", locals: { submission: @submission }
 
               #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
                 #notes= render partial: "submission/notes/base", locals: { submission: @submission }
+
+              #work_logs_tab.tab-pane{"aria-labelledby" => "work-logs-tab", :role => "tabpanel"}
+                = render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
 
 = render partial: "submission/tasks/base", locals: { submission: @submission, task: @task }

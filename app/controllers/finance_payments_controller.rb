@@ -61,5 +61,6 @@ class FinancePaymentsController < InternalPagesController
     @submission = @finance_payment.submission
     @related_submission = @finance_payment.related_submission
     @related_vessel = @finance_payment.related_vessel
+    @similar_open_applications = @finance_payment.similar_open_applications
   end
 end

@@ -395,11 +395,9 @@ Service.create(
   part_1: { standard: 25, premium: 50 },
   part_2: { standard: 25, premium: 50 },
   rules: [
-    :registered_vessel_required,
+    :registry_not_editable,
   ],
   activities: [
-    :update_registry_details,
-    :record_transcript_event,
   ])
 
 Service.create(
