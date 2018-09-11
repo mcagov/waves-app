@@ -52,6 +52,10 @@ class CarvingAndMarking < ApplicationRecord
     register? ? "R.T.#{tonnage_value}" : "N.T.#{tonnage_value}"
   end
 
+  def emailable?
+    delivery_method.to_sym == :email
+  end
+
   private
 
   def register?

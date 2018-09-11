@@ -1,34 +1,39 @@
 class Builders::CarvingAndMarkingBuilder
   class << self
-    def build(carving_and_marking)
+    def build(carving_and_marking, recipients = [])
       @carving_and_marking = carving_and_marking
-      @submission = @carving_and_marking.submission
+      @recipients = recipients
 
-      case @carving_and_marking.delivery_method.to_sym
-      when :email
-        build_notification
-      when :print
-        build_print_job
-      end
+      perform
     end
 
     private
 
-    def build_notification
-      Notification::CarvingAndMarkingNote.create(
-        recipient_email: @submission.applicant_email,
-        recipient_name: @submission.applicant_name,
-        notifiable: @carving_and_marking,
-        actioned_by: @carving_and_marking.actioned_by,
-        attachments: :carving_and_marking)
+    def perform
+      if @carving_and_marking.emailable?
+        build_notifications
+      else
+        build_print_job
+      end
+    end
+
+    def build_notifications
+      @recipients.each do |recipient|
+        Notification::CarvingAndMarkingNote.create(
+          recipient_email: recipient.email,
+          recipient_name: recipient.name,
+          notifiable: @carving_and_marking,
+          actioned_by: @carving_and_marking.actioned_by,
+          attachments: :carving_and_marking)
+      end
     end
 
     def build_print_job
       PrintJob.create(
         printable: @carving_and_marking,
-        part: @submission.part,
+        part: @carving_and_marking.part,
         template: :carving_and_marking,
-        submission: @submission)
+        submission: @carving_and_marking.submission)
     end
   end
 end
