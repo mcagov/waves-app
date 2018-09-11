@@ -85,9 +85,7 @@ class Payment::FinancePayment < ApplicationRecord
     return [] if vessel_name.blank?
 
     @similar_open_applications ||=
-      Search.submissions(vessel_name, part).select do |submission|
-        submission.active?
-      end
+      Search.submissions(vessel_name, part).select(&:active?)
   end
 
   private
