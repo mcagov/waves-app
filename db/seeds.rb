@@ -395,7 +395,6 @@ Service.create(
   part_1: { standard: 25, premium: 50 },
   part_2: { standard: 25, premium: 50 },
   rules: [
-    :registry_not_editable,
   ],
   activities: [
   ])
