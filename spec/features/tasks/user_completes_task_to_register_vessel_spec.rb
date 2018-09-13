@@ -39,6 +39,13 @@ describe "User completes task to register a vessel", js: true do
 
     visit_claimed_task(service: service, submission: submission)
     click_on("Complete Task")
-    click_on("High Profile: Carving & Marking to be received later")
+
+    within(".modal.fade.in") do
+      click_on("High Profile: Carving & Marking to be received later")
+      expect(page).to have_button("Complete Task")
+    end
+
+    wait_for_ajax
+    expect(page).to have_css(".registration_status", text: "Registered")
   end
 end

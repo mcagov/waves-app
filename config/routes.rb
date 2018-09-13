@@ -214,6 +214,7 @@ Rails.application.routes.draw do
         post :unclaim
         post :claim_referral
         get  :validate
+        post :skip_cm_receipt
         post :complete
       end
 
