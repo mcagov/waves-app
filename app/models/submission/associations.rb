@@ -35,6 +35,12 @@ module Submission::Associations
       base.has_many :print_jobs
       base.has_many :tasks, class_name: "Submission::Task"
       base.has_many :work_logs, -> { order("created_at desc") }, through: :tasks
+      base.scope :outstanding_carving_and_marking,
+                 (lambda do
+                    where.not(carving_and_marking_receipt_skipped_at: nil).
+                    where(carving_and_marking_received_at: nil).
+                    order(carving_and_marking_receipt_skipped_at: :desc)
+                 end)
     end
 
     def ownership_associations(base)

@@ -214,6 +214,7 @@ Rails.application.routes.draw do
         post :unclaim
         post :claim_referral
         get  :validate
+        post :skip_cm_receipt
         post :complete
       end
 
@@ -308,6 +309,16 @@ Rails.application.routes.draw do
   end
 
   resources :work_logs, only: [:index]
+
+  resources :carving_and_markings, only: [] do
+    collection do
+      get :outstanding
+    end
+
+    member do
+      patch :mark_as_received
+    end
+  end
 
   get "/search", controller: :search, action: :index
   get "/search/submissions", controller: :search, action: :submissions

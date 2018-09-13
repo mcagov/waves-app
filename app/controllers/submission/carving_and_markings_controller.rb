@@ -17,7 +17,7 @@ class Submission::CarvingAndMarkingsController < InternalPagesController
     elsif @carving_and_marking.save
       Builders::CarvingAndMarkingBuilder.build(
         @carving_and_marking, recipients)
-      flash[:notice] = "Carving and marking note has been issued"
+      flash[:notice] = "Carving and Marking Note has been issued"
       log_work!(@task, @task, :carving_and_marking_issued)
     end
 

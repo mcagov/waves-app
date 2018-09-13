@@ -91,6 +91,13 @@ class Submission::TasksController < InternalPagesController
     end
   end
 
+  def skip_cm_receipt
+    @submission.update_attributes(
+      carving_and_marking_receipt_skipped_at: Time.zone.now)
+
+    validate
+  end
+
   def complete
     @task.complete!(submission_task_params || {})
 

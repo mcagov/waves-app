@@ -1,0 +1,7 @@
+%li.red
+  = t("submission.validation_error.#{validation_error}")
+  - if validation_error == :carving_marking_not_received
+
+    - if Policies::Definitions.registration_type(submission) == :high_profile
+      = simple_form_for @task, url: skip_cm_receipt_submission_task_path(submission, task), method: :post, remote: true do |task_f|
+        = task_f.submit "High Profile: Carving & Marking to be received later", class: "btn btn-success"

@@ -20,7 +20,7 @@ describe "User issues a Carving & Marking Note", js: true do
       click_on("Issue Carving & Marking Note")
     end
 
-    expect(page).to have_text("Carving and marking note has been issued")
+    expect(page).to have_text("Carving and Marking Note has been issued")
 
     click_on("Certificates & Documents")
     within("#carving_and_marking") do
@@ -73,7 +73,7 @@ describe "User issues a Carving & Marking Note", js: true do
       click_on("Issue Carving & Marking Note")
     end
 
-    expect(page).to have_text("Carving and marking note has been issued")
+    expect(page).to have_text("Carving and Marking Note has been issued")
 
     click_on("Certificates & Documents")
     pdf_window = window_opened_by { click_on("Print Carving & Marking Note") }
