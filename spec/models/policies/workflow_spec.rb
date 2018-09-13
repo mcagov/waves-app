@@ -215,4 +215,22 @@ describe Policies::Workflow do
       it { expect(subject).to be_truthy }
     end
   end
+
+  context ".uses_carving_and_marking_receipt_override?" do
+    subject do
+      described_class.uses_carving_and_marking_receipt_override?(submission)
+    end
+
+    context "in general" do
+      let(:submission) { build(:submission) }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "with a high profile registration type" do
+      let(:submission) { create(:submission, :high_profile) }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
 end

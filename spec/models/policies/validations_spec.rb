@@ -96,6 +96,15 @@ describe Policies::Validations do
 
           it { expect(subject).to be_empty }
         end
+
+        context "when carving_and_marking_receipt_skipped_at has been set" do
+          before do
+            submission.update_attribute(
+              :carving_and_marking_receipt_skipped_at, 1.day.ago)
+          end
+
+          it { expect(subject).to be_empty }
+        end
       end
     end
   end

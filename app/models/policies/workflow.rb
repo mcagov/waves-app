@@ -66,5 +66,9 @@ class Policies::Workflow
     def uses_registration_types?(part)
       part != :part_3
     end
+
+    def uses_carving_and_marking_receipt_override?(submission)
+      Policies::Definitions.registration_type(submission) == :high_profile
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_073703) do
+ActiveRecord::Schema.define(version: 2018_09_13_080943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -457,6 +457,7 @@ ActiveRecord::Schema.define(version: 2018_09_11_073703) do
     t.string "application_type"
     t.string "source"
     t.string "state"
+    t.datetime "carving_and_marking_receipt_skipped_at"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"

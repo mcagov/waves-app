@@ -67,7 +67,8 @@ class Policies::Validations
 
   def carving_marking_not_received?
     return false if Policies::Definitions.part_3?(submission)
-    submission.carving_and_marking_received_at.blank?
+    submission.carving_and_marking_received_at.blank? &&
+      submission.carving_and_marking_receipt_skipped_at.blank?
   end
 
   def rules_policy
