@@ -12,11 +12,7 @@ class Submission::NameApproval < ApplicationRecord
   validate :unique_port_no_in_port
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
-
-  scope :active, (lambda do
-    where("approved_until is null or approved_until > now()")
-      .where("cancelled_at is null")
-  end)
+  scope :active, -> { where(cancelled_at: nil) }
 
   def port_name
     WavesUtilities::Port.new(port_code).name
