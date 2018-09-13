@@ -59,6 +59,18 @@ FactoryBot.define do
       end
     end
 
+    trait :carving_and_marking_issued do
+      after(:create) do |submission|
+        create(:carving_and_marking, submission: submission)
+      end
+    end
+
+    trait :name_approved do
+      after(:create) do |submission|
+        create(:name_approval, submission: submission)
+      end
+    end
+
     factory :high_profile_part_1_submission,
             traits: [:high_profile, :part_1_vessel]
 

@@ -1,0 +1,8 @@
+%li.red
+  = t("submission.validation_error.#{validation_error}")
+  - if validation_error == :carving_marking_not_received
+
+    - if Policies::Definitions.registration_type(submission) == :high_profile
+      .row
+        = link_to "#", class: "btn btn-success" do
+          High Profile: Carving & Marking to be received later

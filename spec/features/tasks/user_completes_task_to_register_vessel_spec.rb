@@ -28,4 +28,17 @@ describe "User completes task to register a vessel", js: true do
     expect(registration.registered_at.to_date).to eq("13/12/2010".to_date)
     expect(registration.registered_until.to_date).to eq("13/12/2030".to_date)
   end
+
+  scenario "high profile application with carving_and_marking_required" do
+    service = create(:service, :carving_and_marking_required)
+
+    submission =
+      create(:high_profile_part_1_submission,
+             :carving_and_marking_issued,
+             :name_approved)
+
+    visit_claimed_task(service: service, submission: submission)
+    click_on("Complete Task")
+    click_on("High Profile: Carving & Marking to be received later")
+  end
 end
