@@ -24,11 +24,10 @@
                     = image_tag 'ajax-loader.gif'
       %hr
 
-
     - if submission.name_approval
       .row
         .col-md-12
-          Name Approved until:
+          Initial Name Approval expires on:
           = submission.name_approval.approved_until
           %br
           = link_to submission_name_approval_path(@submission), method: :delete,
