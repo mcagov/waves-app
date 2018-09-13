@@ -310,6 +310,16 @@ Rails.application.routes.draw do
 
   resources :work_logs, only: [:index]
 
+  resources :carving_and_markings, only: [] do
+    collection do
+      get :outstanding
+    end
+
+    member do
+      patch :mark_as_received
+    end
+  end
+
   get "/search", controller: :search, action: :index
   get "/search/submissions", controller: :search, action: :submissions
   get "/search/vessels", controller: :search, action: :vessels
