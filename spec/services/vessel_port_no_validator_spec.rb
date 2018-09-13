@@ -43,11 +43,6 @@ describe VesselPortNoValidator do
         let(:port_code) { "AA" }
         it { expect(subject).to be_truthy }
       end
-
-      context "when approved_until has expired" do
-        let(:approved_until) { 2.days.ago }
-        it { expect(subject).to be_truthy }
-      end
     end
   end
 end

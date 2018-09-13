@@ -23,16 +23,6 @@ describe VesselNameValidator do
         it { expect(subject).to be_falsey }
       end
 
-      context "with an expired name_approval of the same name also in part_1" do
-        before do
-          create(:name_approval, part: :part_1,
-                                 name: "BOBS BOAT",
-                                 approved_until: 1.week.ago)
-        end
-
-        it { expect(subject).to be_truthy }
-      end
-
       context "with a pleasure vessel of the same name but in part_4" do
         before do
           create(:registered_vessel,
