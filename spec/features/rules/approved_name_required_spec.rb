@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe "Approved name required" do
   scenario "part_1: without a registered vessel" do
-    visit_claimed_task(submission: create(:submission, part: :part_1))
+    visit_claimed_task(
+      service: create(:service, :update_registry_details),
+      submission: create(:submission, part: :part_1))
 
     expect_task_to_be_active
     expect_application_info_panel
