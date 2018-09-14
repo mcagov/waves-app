@@ -14,7 +14,6 @@
           %th Application Ref No
           %th Registration Type
           %th Date C&M receipt skipped
-          %th
         %tbody
           - @submissions.each do |submission|
             - submission = Decorators::Submission.new(submission)
@@ -24,9 +23,5 @@
               %td= link_to submission.ref_no, submission
               %td= submission.registration_type.try(:titleize)
               %td= submission.carving_and_marking_receipt_skipped_at
-              %td
-                = link_to mark_as_received_carving_and_marking_path(submission),
-                  method: :patch, class: "btn btn-success" do
-                  Mark as Received
 
       = will_paginate @submissions, renderer: BootstrapPagination::Rails

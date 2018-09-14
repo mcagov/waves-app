@@ -9,6 +9,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
            name: "DUPLICATE")
 
     visit_claimed_task(
+      service: create(:service, :update_registry_details),
       submission: create(:submission, part: :part_2))
   end
 

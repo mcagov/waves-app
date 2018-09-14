@@ -75,4 +75,10 @@ class Decorators::Submission < SimpleDelegator
   def advisories
     @advisories ||= Policies::Advisories.for_submission(self)
   end
+
+  def outstanding_carving_and_marking?
+    !carving_and_markings.empty? &&
+      carving_and_marking_received_at.blank? &&
+      carving_and_marking_receipt_skipped_at.present?
+  end
 end

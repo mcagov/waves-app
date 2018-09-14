@@ -54,11 +54,15 @@ class Submission::CarvingAndMarkingsController < InternalPagesController
     end
   end
 
-  def render_update_js
+  def render_update_js # rubocop:disable Metrics/MethodLength
     respond_to do |format|
-      @modal_id = params[:modal_id]
-      @submission = Decorators::Submission.new(@submission)
+      format.html do
+        flash[:notice] = "Carving & Marking Note has been marked as received"
+        redirect_to submission_path(@submission)
+      end
       format.js do
+        @modal_id = params[:modal_id]
+        @submission = Decorators::Submission.new(@submission)
         render :update
       end
     end

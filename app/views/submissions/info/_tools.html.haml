@@ -39,6 +39,15 @@
             Cancel Approved Name
       %hr
 
+    - if submission.outstanding_carving_and_marking?
+      .row
+        .col-md-12
+          = link_to update_state_submission_carving_and_marking_path(submission),
+            method: :post,
+            class: "btn btn-success" do
+            Mark Outstanding Carving & Marking Note as Received
+      %hr
+
     - print_jobs = PrintJob.latest(submission)
     - unless print_jobs.empty?
       .row

@@ -26,8 +26,10 @@ module TaskProcessing
 
   def name_approval_required
     if Policies::Workflow.approved_name_required?(@submission)
-      return redirect_to submission_name_approval_path(
-        @submission, task_id: @task.id)
+      if Policies::Activities.new(@task).update_registry_details
+        return redirect_to submission_name_approval_path(
+          @submission, task_id: @task.id)
+      end
     end
   end
 
