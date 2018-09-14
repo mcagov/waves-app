@@ -314,10 +314,6 @@ Rails.application.routes.draw do
     collection do
       get :outstanding
     end
-
-    member do
-      patch :mark_as_received
-    end
   end
 
   get "/search", controller: :search, action: :index

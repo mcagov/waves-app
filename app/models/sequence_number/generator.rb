@@ -9,6 +9,13 @@ class SequenceNumber::Generator < ApplicationRecord
       part_4: "X#####",
     }.freeze
 
+  REG_NO_START =
+    {
+      part_1: "2000000",
+      part_2: "30000",
+      part_3: "200000",
+    }.freeze
+
   class << self
     def reg_no!(part)
       case part.to_sym

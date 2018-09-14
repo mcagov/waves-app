@@ -79,8 +79,13 @@ module CollectionHelper
     [["Print a hard copy", :print], ["Send via Email", :email]]
   end
 
-  def carving_and_marking_templates_collection
-    CarvingAndMarking::TEMPLATES
+  def carving_and_marking_templates_collection(submission)
+    templates = CarvingAndMarking::TEMPLATES
+    if Policies::Definitions.fishing_vessel?(submission)
+      templates.select { |t| t[1] == :all_fishing }
+    else
+      templates.select { |t| t[1] != :all_fishing }
+    end
   end
 
   def name_approved_until_collection

@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User adds correspondence", type: :feature, js: true do
   scenario "to a submission" do
-    visit_claimed_task
+    visit_claimed_task(service: create(:service, :update_registry_details))
 
     click_on("Correspondence")
     click_link("Add Correspondence")

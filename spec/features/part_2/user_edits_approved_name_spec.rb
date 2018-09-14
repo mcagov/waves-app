@@ -4,7 +4,7 @@ feature "User edits part 2 name and PLN", type: :feature, js: :true do
   scenario "for a new_registration" do
     visit_claimed_task(
       submission: create(:name_approval).submission,
-      service: create(:demo_service, :generate_new_5_year_registration))
+      service: create(:demo_service, :update_registry_details))
 
     click_on("Change Name or PLN")
     complete_name_approval_form

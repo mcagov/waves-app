@@ -32,7 +32,7 @@
     .row
       .col-md-6
         = f.input :template, as: :select,
-          collection: carving_and_marking_templates_collection,
+          collection: carving_and_marking_templates_collection(submission),
           label: "Template",
           include_blank: false
 
