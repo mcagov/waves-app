@@ -36,7 +36,7 @@ describe "User generates an official no", js: true do
   end
 
   scenario "with invalid user-input" do
-    create(:registered_vessel, reg_no: "SSR200001")
+    create(:registered_vessel, part: @submission.part, reg_no: "SSR200001")
 
     within(".modal.fade.in") do
       find_field("official_no_content").set("SSR200001")

@@ -5,12 +5,12 @@ class RegisteredVessel::OfficialNoController < InternalPagesController
     @vessel = Register::Vessel.find(params[:vessel_id])
     @official_no = OfficialNo.new(official_no_params)
 
-    reg_no = official_no_params[:content]
+    @reg_no = official_no_params[:content]
 
-    if reg_no && reg_no != @vessel.reg_no && !RegNoValidator.valid?(reg_no)
+    if reg_no_is_invalid
       render :error
     else
-      Builders::OfficialNoBuilder.update(@vessel, reg_no)
+      Builders::OfficialNoBuilder.update(@vessel, @reg_no)
       render :update
     end
   end
@@ -19,5 +19,10 @@ class RegisteredVessel::OfficialNoController < InternalPagesController
 
   def official_no_params
     params.require(:official_no).permit(:content)
+  end
+
+  def reg_no_is_invalid
+    @reg_no && @reg_no != @vessel.reg_no &&
+      !RegNoValidator.valid?(@reg_no, current_activity.part)
   end
 end
