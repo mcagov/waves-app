@@ -12,12 +12,17 @@
           Registrar Tools
         = render partial: "vessels/modals/registrar_tools", locals: { vessel: @vessel }
 .row
-  .col-md-12.col-sm-12.col-xs-12
+  .col-md-12
     .x_panel
       .x_title
-        %h2 Vessel Details
-        .pull-right
-          %h4= render partial: "/shared/registration_status", locals: { registration_status: @vessel.registration_status }
+        .col-md-4
+          %h2 Vessel Details
+        .col-md-4
+          - if @vessel.section_notice_issued?
+            .red 30 day Section Notice has been issued for this vessel
+        .col-md-4
+          .pull-right
+            %h4= render partial: "/shared/registration_status", locals: { registration_status: @vessel.registration_status }
         .clearfix
       .x_content
         .row{style: 'padding-bottom: 15px;'}

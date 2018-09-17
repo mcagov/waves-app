@@ -1,4 +1,6 @@
 class Register::SectionNotice < Note
+  has_one :print_job, as: :printable
+
   def regulation_key
     subject.to_s.split(" ").first || "n/a"
   end
