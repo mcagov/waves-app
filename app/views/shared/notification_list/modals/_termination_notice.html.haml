@@ -1,0 +1,26 @@
+.modal.fade{id: "termination_notice-#{ termination_notice.id }", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4
+          Termination Notice
+      .modal-body
+        %dl
+          %dt Date issued
+          %dd= termination_notice.created_at.to_s(:date_time)
+        %dl
+          %dt Note
+          %dd= termination_notice.content
+        %dl
+          %dt Actioned by
+          %dd= termination_notice.actioned_by
+
+      .modal-footer
+        - if print_job = termination_notice.print_job
+          = link_to print_job_path(print_job, format: :pdf),
+            target: "_blank", class: "btn btn-warning" do
+            %i.fa.fa-print
+            = t("print_job.button_text.termination_notice")
+

@@ -19,3 +19,6 @@
       - if row.is_a?(Register::SectionNotice)
         = render partial: "shared/notification_list/tabs/section_notice",
           locals: { section_notice: row }
+      - if row.is_a?(Register::TerminationNotice)
+        = render partial: "shared/notification_list/tabs/termination_notice",
+          locals: { termination_notice: row }

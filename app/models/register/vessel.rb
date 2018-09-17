@@ -91,6 +91,13 @@ module Register
               end),
              as: :noteable
 
+    has_many :termination_notices,
+             (lambda do
+                where("type = 'Register::TerminationNotice'")
+                  .order("created_at desc")
+              end),
+             as: :noteable
+
     has_many :submissions,
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id

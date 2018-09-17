@@ -265,7 +265,7 @@ Rails.application.routes.draw do
              controller: "registered_vessel/registration_certificate"
 
     resource :section_notice,
-             only: [:create],
+             only: [:create, :destroy],
              controller: "registered_vessel/section_notice"
 
     resource :termination,

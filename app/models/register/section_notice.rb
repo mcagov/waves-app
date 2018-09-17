@@ -13,10 +13,6 @@ class Register::SectionNotice < Note
     created_at
   end
 
-  def termination_notice_date
-    updated_at
-  end
-
   def termination_date
     termination_notice_date.advance(days: 7)
   end

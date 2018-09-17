@@ -1,6 +1,6 @@
 class Pdfs::TerminationNotice
-  def initialize(section_notices, mode = :printable)
-    @section_notices = Array(section_notices)
+  def initialize(termination_notices, mode = :printable)
+    @termination_notices = Array(termination_notices)
     @template = :current
     @mode = mode
     @pdf = Prawn::Document.new(
@@ -8,9 +8,9 @@ class Pdfs::TerminationNotice
   end
 
   def render
-    @section_notices.each do |section_notice|
+    @termination_notices.each do |termination_notice|
       @pdf =
-        Pdfs::TerminationNoticeWriter.new(section_notice, @pdf).write
+        Pdfs::TerminationNoticeWriter.new(termination_notice, @pdf).write
     end
 
     Pdfs::PdfRender.new(@pdf, @mode).render

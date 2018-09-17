@@ -9,11 +9,11 @@ class Register::TerminationNotice < Note
     noteable
   end
 
-  def termination_notice_date
-    created_at
+  def termination_date
+    created_at.advance(days: 7)
   end
 
-  def termination_date
-    termination_notice_date.advance(days: 7)
+  def related_section_notice
+    vessel.section_notices.where("created_at < ?", created_at).first
   end
 end
