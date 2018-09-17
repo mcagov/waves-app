@@ -14,6 +14,7 @@ class DailyJob
       unclaim_claimed_submissions
       expire_referrals
       process_reminders
+      close_terminated_vessels
     end
 
     private
@@ -34,6 +35,10 @@ class DailyJob
       CodeCertificateReminder.process
       RegistrationRenewalReminder.process
       SafetyCertificateReminder.process
+    end
+
+    def close_terminated_vessels
+      TerminatedVessels.close!
     end
   end
 end
