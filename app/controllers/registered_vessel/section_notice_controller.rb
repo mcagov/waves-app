@@ -8,6 +8,13 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
     redirect_to vessel_path(@vessel)
   end
 
+  def destroy
+    cancel_section_notice
+    flash[:notice] = "Section Notice has been cancelled"
+
+    redirect_to vessel_path(@vessel)
+  end
+
   private
 
   def process_section_notice
@@ -25,6 +32,14 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
       actioned_by: current_user,
       subject: section_notice_params[:subject],
       content: section_notice_params[:content])
+  end
+
+  def cancel_section_notice
+    @vessel.restore_active_state!
+    Note.create(
+      noteable: @vessel,
+      content: "Section Notice cancelled",
+      actioned_by: current_user)
   end
 
   def section_notice_params
