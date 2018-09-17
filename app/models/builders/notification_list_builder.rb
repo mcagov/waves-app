@@ -16,6 +16,7 @@ class Builders::NotificationListBuilder
         registered_vessel.correspondences +
         registered_vessel.notifications +
         registered_vessel.section_notices +
+        registered_vessel.termination_notices +
         submissions.map { |submission| for_submission(submission) }.flatten
       ).compact.sort { |a, b| b.created_at <=> a.created_at }
     end

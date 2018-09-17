@@ -54,8 +54,12 @@ describe Builders::NotificationListBuilder do
         create(:section_notice, noteable: vessel, created_at: 5.minutes.ago)
       end
 
+      let!(:vessel_termination_notice) do
+        create(:termination_notice, noteable: vessel, created_at: 1.hour.ago)
+      end
+
       let!(:vessel_correspondence) do
-        create(:correspondence, noteable: vessel, created_at: 1.hour.ago)
+        create(:correspondence, noteable: vessel, created_at: 5.hour.ago)
       end
 
       before do
@@ -67,7 +71,8 @@ describe Builders::NotificationListBuilder do
       it "builds the expected list" do
         expect(subject).to match(
           [
-            vessel_notification, vessel_section_notice, vessel_correspondence,
+            vessel_notification, vessel_section_notice,
+            vessel_termination_notice, vessel_correspondence,
             outstanding_declaration, recent_notification, correspondence,
             print_job, carving_and_marking_notification, old_notification
           ])
