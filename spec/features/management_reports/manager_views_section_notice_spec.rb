@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe "Manager views section notice report", js: true do
+describe "Manager views section notice report", js: true do
   before do
     create(:registered_vessel) # should not appear in the report
 
@@ -30,7 +30,6 @@ xdescribe "Manager views section notice report", js: true do
         expect(page).to have_css("th", text: "Section Notice Issue Date")
         expect(page).to have_css("th", text: "Section Notice Issue Date + 30")
         expect(page).to have_css("th", text: "Regulation Reference")
-        expect(page).to have_css("th", text: "Termination Notice Issue Date")
         expect(page).to have_css("th", text: "Status")
       end
 

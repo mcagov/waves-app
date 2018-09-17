@@ -1,0 +1,9 @@
+- print_job = termination_notice.print_job
+%tr
+  %td Termination Notice
+  %td
+    = link_to termination_notice.content,
+      "#email-content", "data-target" => "#termination_notice-#{ termination_notice.id }", "data-toggle" => "modal"
+    = render partial:  "shared/notification_list/modals/termination_notice", locals: { termination_notice: termination_notice }
+  %td= termination_notice.created_at.to_s(:date_time)
+  %td= print_job.printed_at.to_s(:date_time) if print_job.try(:printed_at)
