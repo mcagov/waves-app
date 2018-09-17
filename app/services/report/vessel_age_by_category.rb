@@ -31,8 +31,8 @@ class Report::VesselAgeByCategory < Report
   def vessels
     query =
       Register::Vessel.select(
-        "(coalesce(now()::DATE - keel_laying_date::DATE, "\
-        "0)::FLOAT / 365) age, *")
+        "(coalesce(EXTRACT('year' FROM now()::DATE ) "\
+        "- year_of_build, 0)) age, *")
 
     query = query.where(vessel_category: @vessel_category)
     query = filter_by_part(query)
