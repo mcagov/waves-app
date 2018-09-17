@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_080943) do
+ActiveRecord::Schema.define(version: 2018_09_17_103438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -537,6 +537,7 @@ ActiveRecord::Schema.define(version: 2018_09_13_080943) do
     t.string "doc_auditor"
     t.uuid "current_registration_id", default: -> { "uuid_generate_v4()" }
     t.string "state"
+    t.datetime "termination_notice_issued_at"
     t.index ["hin"], name: "index_vessels_on_hin"
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number"
     t.index ["name"], name: "index_vessels_on_name"
