@@ -5,6 +5,12 @@ class StaffPerformanceLog < ApplicationRecord
   enum activity: [:cancelled, :referred, :completed]
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
+  before_create :set_service_standard
+
+  def set_service_standard
+    self.within_standard = (Time.zone.now < target_date.to_time.at_end_of_day)
+  end
+
   class << self
     def record(task, activity, actioned_by)
       create(

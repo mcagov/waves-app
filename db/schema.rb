@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_143434) do
+ActiveRecord::Schema.define(version: 2018_09_18_131034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -412,6 +412,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_143434) do
     t.uuid "actioned_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "within_standard", default: false
     t.index ["task_id"], name: "index_staff_performance_logs_on_task_id"
   end
 
