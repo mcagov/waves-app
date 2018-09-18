@@ -44,8 +44,9 @@ class Report::VesselAge < Report
     Register::Vessel
       .select(
         "vessel_category, COUNT(*) num_reg,
-        avg(coalesce(now()::DATE - keel_laying_date::DATE, 0)::FLOAT / 365) age,
+        avg(coalesce(EXTRACT('year' FROM now()::DATE ) - year_of_build, 0)) age,
         sum(gross_tonnage) as gt")
       .where("vessel_category <> ''")
+      .where("year_of_build is not null")
   end
 end

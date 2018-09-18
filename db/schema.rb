@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_103438) do
+ActiveRecord::Schema.define(version: 2018_09_17_143434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -519,7 +519,6 @@ ActiveRecord::Schema.define(version: 2018_09_17_103438) do
     t.string "place_of_build"
     t.datetime "keel_laying_date"
     t.string "hull_construction_material"
-    t.string "year_of_build"
     t.string "country_of_build"
     t.string "underlying_registry"
     t.string "underlying_registry_identity_no"
@@ -538,6 +537,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_103438) do
     t.uuid "current_registration_id", default: -> { "uuid_generate_v4()" }
     t.string "state"
     t.datetime "termination_notice_issued_at"
+    t.integer "year_of_build"
     t.index ["hin"], name: "index_vessels_on_hin"
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number"
     t.index ["name"], name: "index_vessels_on_name"
