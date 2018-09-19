@@ -1,6 +1,5 @@
 class Submission::Task < ApplicationRecord
   belongs_to :service
-  delegate :to_sym, to: :service
 
   belongs_to :submission
   delegate :part, to: :submission

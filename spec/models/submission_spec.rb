@@ -13,6 +13,22 @@ describe Submission, type: :model do
     end
   end
 
+  context ".create" do
+    let(:submission) { Submission.create }
+
+    it "defaults to source = online" do
+      expect(submission.source.to_sym).to eq(:online)
+    end
+
+    it "defaults to part = part_3" do
+      expect(submission.part.to_sym).to eq(:part_3)
+    end
+
+    it "builds the ref_no" do
+      expect(submission.ref_no).to be_present
+    end
+  end
+
   describe "#close!" do
     let(:submission) { create(:submission) }
 

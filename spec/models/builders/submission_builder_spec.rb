@@ -20,22 +20,6 @@ describe Builders::SubmissionBuilder do
     let!(:applicant_is_agent) { false }
 
     context "in general" do
-      it "defaults to task = new_registration" do
-        expect(submission.task.to_sym).to eq(:new_registration)
-      end
-
-      it "defaults to source = online" do
-        expect(submission.source.to_sym).to eq(:online)
-      end
-
-      it "defaults to part = part_3" do
-        expect(submission.part.to_sym).to eq(:part_3)
-      end
-
-      it "builds the ref_no" do
-        expect(submission.ref_no).to be_present
-      end
-
       it "does not alter the changeset" do
         expect(submission.changeset).to eq(changeset)
       end
