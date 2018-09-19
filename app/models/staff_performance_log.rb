@@ -8,6 +8,8 @@ class StaffPerformanceLog < ApplicationRecord
   scope :within_standard, -> { where(within_standard: true) }
   scope :standard_missed, -> { where(within_standard: false) }
 
+  scope :in_part, ->(part) { where(part: part) if part }
+
   before_create :set_service_standard
 
   def set_service_standard
@@ -21,6 +23,7 @@ class StaffPerformanceLog < ApplicationRecord
         activity: activity,
         service_level: task.service_level,
         target_date: task.target_date,
+        part: task.part,
         actioned_by: actioned_by)
     end
   end
