@@ -5,6 +5,9 @@ class StaffPerformanceLog < ApplicationRecord
   enum activity: [:cancelled, :referred, :completed]
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)
 
+  scope :within_standard, -> { where(within_standard: true) }
+  scope :standard_missed, -> { where(within_standard: false) }
+
   before_create :set_service_standard
 
   def set_service_standard

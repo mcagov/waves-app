@@ -8,6 +8,7 @@ class Submission::Task < ApplicationRecord
   belongs_to :claimant, required: false, class_name: "User"
 
   has_many :work_logs
+  has_many :staff_performance_logs
 
   validate :service_level_validations
   enum service_level: ServiceLevel::SERVICE_LEVEL_TYPES.map(&:last)

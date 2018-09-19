@@ -12,7 +12,10 @@ class Report::StaffPerformance < Report
   end
 
   def headings
-    [:task_type, :total_transactions, :top_performer]
+    [
+      :task_type, :total_transactions,
+      :within_service_standard, :service_standard_missed
+    ]
   end
 
   def date_range_label
@@ -20,35 +23,16 @@ class Report::StaffPerformance < Report
   end
 
   def results
-    ApplicationType.all.map do |task_type|
-      submission_ids = submission_ids_for(task_type)
+    Service.order(:name).includes(:staff_performance_logs).all.map do |service|
       data_elements =
         [
-          "task_description",
-          submission_ids.length,
-          top_performer(submission_ids),
+          service.to_s,
+          service.staff_performance_logs.count,
+          service.staff_performance_logs.within_standard.count,
+          RenderAsRed.new(service.staff_performance_logs.standard_missed.count),
         ]
 
-      Result.new(data_elements, task: task_type[1])
+      Result.new(data_elements, service: service.id)
     end
-  end
-
-  def top_performer(submission_ids)
-    result = Submission.select("claimant_id, count(*) AS total")
-                       .includes(:claimant)
-                       .where(id: submission_ids)
-                       .group(:claimant_id)
-                       .order("total desc")
-                       .first
-
-    return "-" if result.blank? || result.claimant.blank?
-    "#{result.claimant} (#{result.total})"
-  end
-
-  def submission_ids_for(task_type)
-    scoped_query = Submission.where(application_type: task_type)
-    scoped_query = filter_by_received_at(scoped_query)
-    scoped_query = filter_by_part(scoped_query)
-    scoped_query.closed.pluck(:id)
   end
 end

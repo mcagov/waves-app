@@ -55,6 +55,12 @@ class Report
     end
   end
 
+  RenderAsRed = Struct.new(:value) do
+    def to_s
+      "<span class='red'>#{value}</span>".html_safe
+    end
+  end
+
   def filter_fields
     []
   end
