@@ -19,7 +19,7 @@ class Report::StaffPerformance < Report
   end
 
   def date_range_label
-    "Application Received"
+    "Task Actioned"
   end
 
   def user_label
