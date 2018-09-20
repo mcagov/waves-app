@@ -13,7 +13,7 @@ class Report::StaffPerformanceByTask < Report
 
   def headings
     [
-      :actioned_by, :total_transactions,
+      :staff_member, :total_transactions,
       :within_service_standard, :service_standard_missed
     ]
   end
@@ -48,6 +48,7 @@ class Report::StaffPerformanceByTask < Report
   def staff_performance_for(user)
     user
       .staff_performance_logs
+      .in_part(@part)
       .created_after(@date_start)
       .created_before(@date_end)
       .includes(task: [:service])
