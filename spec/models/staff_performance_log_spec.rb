@@ -22,6 +22,7 @@ describe StaffPerformanceLog do
       it { expect(subject.actioned_by).to eq(user) }
       it { expect(subject.within_standard).to be_falsey }
       it { expect(subject.part.to_sym).to eq(:part_3) }
+      it { expect(subject.service_id).to eq(task.service_id) }
     end
 
     context "when the service standard is met - TODAY" do
