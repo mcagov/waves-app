@@ -21,6 +21,10 @@ class StaffPerformanceLog < ApplicationRecord
     where("staff_performance_logs.created_at <= ?", date) if date.present?
   end)
 
+  scope :for_service, (lambda do |service_id|
+    where(service_id: service_id) if service_id.present?
+  end)
+
   before_create :set_service_standard
 
   def set_service_standard
@@ -35,6 +39,7 @@ class StaffPerformanceLog < ApplicationRecord
         service_level: task.service_level,
         target_date: task.target_date,
         part: task.part,
+        service_id: task.service_id,
         actioned_by: actioned_by)
     end
   end

@@ -34,7 +34,7 @@ class Report::StaffPerformance < Report
          staff_performance_logs.count,
          staff_performance_logs.within_standard.count,
          RenderAsRed.new(staff_performance_logs.standard_missed.count)],
-        service: service.id)
+        service_id: service.id)
     end
   end
 

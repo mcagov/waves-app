@@ -124,4 +124,8 @@ module CollectionHelper
   def service_level_collection
     [["Standard", :standard], ["Premium", :premium]]
   end
+
+  def services_collection
+    Service.order(:name).pluck(:name, :id)
+  end
 end

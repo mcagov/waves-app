@@ -16,7 +16,7 @@ describe Report::StaffPerformanceByTask do
 
     it "has some filter_fields" do
       expect(subject.filter_fields)
-        .to eq([:filter_task, :filter_part, :filter_date_range])
+        .to eq([:filter_service, :filter_part, :filter_date_range])
     end
 
     it "has a date range label" do

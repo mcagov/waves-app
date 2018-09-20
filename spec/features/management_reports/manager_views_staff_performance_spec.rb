@@ -21,7 +21,7 @@ describe "Manager views staff performance report", js: true do
   scenario "in general" do
     expect_link_to_export_or_print(true)
 
-    expect(page).to have_css("h1", text: "Reports: Staff Performance")
+    expect(page).to have_css("h1", text: "Staff Performance")
     expect(page).to have_css("th", text: "Service")
     expect(page).to have_css("th", text: "Total Transactions")
     expect(page).to have_css("th", text: "Within Service Standard")
@@ -77,15 +77,17 @@ describe "Manager views staff performance report", js: true do
     expect(page.text).to match("Worksheet ss:Name=\"Staff Performance\"")
   end
 
-  xscenario "viewing the sub report with an existing filter" do
-    select("Part III", from: "Part of Register")
+  scenario "viewing the sub report with an existing filter" do
     find("#filter_date_start").set("20/01/2017")
+    select("Part III", from: "Part of Register")
     click_on("Apply Filter")
 
     within("#results") { click_on("Demo Service") }
 
-    expect(find("#filter_service").value).to eq("demo_service")
     expect(find("#filter_part").value).to eq("part_3")
+    expect(find("#filter_service_id").value)
+      .to eq(missed_in_part_3.task.service_id)
+
     expect(find("#filter_date_start").value).to eq("20/01/2017")
     expect(page)
       .to have_css("h1", text: "Reports: Staff Performance by Task")

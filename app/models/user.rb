@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   validates :name, uniqueness: true, presence: true
 
+  has_many :staff_performance_logs, foreign_key: :actioned_by_id
+
   def to_s
     name
   end
