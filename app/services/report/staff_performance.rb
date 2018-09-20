@@ -23,16 +23,31 @@ class Report::StaffPerformance < Report
   end
 
   def results
-    Service.order(:name).includes(:staff_performance_logs).all.map do |service|
-      data_elements =
-        [
-          service.to_s,
-          service.staff_performance_logs.count,
-          service.staff_performance_logs.within_standard.count,
-          RenderAsRed.new(service.staff_performance_logs.standard_missed.count),
-        ]
-
-      Result.new(data_elements, service: service.id)
+    services.map do |service|
+      staff_performance_logs = staff_performance_for(service)
+      Result.new(
+        [service.to_s,
+         staff_performance_logs.count,
+         staff_performance_logs.within_standard.count,
+         RenderAsRed.new(staff_performance_logs.standard_missed.count)],
+        service: service.id)
     end
+  end
+
+  def services
+    Service
+      .in_part(@part)
+      .order(:name)
+      .includes(:staff_performance_logs)
+      .all
+  end
+
+  def staff_performance_for(service)
+    service
+      .staff_performance_logs
+      .in_part(@part)
+      .created_after(@date_start)
+      .created_before(@date_end)
+      .all
   end
 end

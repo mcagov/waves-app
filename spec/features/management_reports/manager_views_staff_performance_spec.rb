@@ -1,9 +1,14 @@
 require "rails_helper"
 
-xdescribe "Manager views staff performance report", js: true do
+describe "Manager views staff performance report", js: true do
+  let!(:missed_in_part_3) do
+    create(:staff_performance_log,
+           part: :part_3,
+           target_date: "19/01/2017",
+           created_at: "20/01/2017")
+  end
+
   before do
-    @submission = create(:completed_submission)
-    @submission.update_attributes(received_at: "20/01/2017")
     login_to_reports
 
     click_on("Staff Performance")
@@ -15,40 +20,38 @@ xdescribe "Manager views staff performance report", js: true do
     expect(page).to have_css("h1", text: "Reports: Staff Performance")
     expect(page).to have_css("th", text: "Task Type")
     expect(page).to have_css("th", text: "Total Transactions")
-    expect(page).to have_css("th", text: "Top Performer")
-    expect(page).to have_link("Print")
+    expect(page).to have_css("th", text: "Within Service Standard")
+    expect(page).to have_css("th", text: "Standard Missed")
   end
 
   scenario "filtering by part" do
-    part_three_result = "#{@submission.claimant} (1)"
-    within("#results") { expect(page).to have_text(part_three_result) }
+    expect(page).to have_css("#results .red", text: 1)
 
     select("Part II", from: "Part of Register")
     click_on("Apply Filter")
 
-    within("#results") { expect(page).not_to have_text(part_three_result) }
+    expect(page).not_to have_css("#results .red")
 
     select("Part III", from: "Part of Register")
     click_on("Apply Filter")
 
-    within("#results") { expect(page).to have_text(part_three_result) }
+    expect(page).to have_css("#results .red", text: 1)
   end
 
   scenario "filtering by date range" do
-    date_range_result = "#{@submission.claimant} (1)"
-    expect(page).to have_text(date_range_result)
+    expect(page).to have_css("#results .red", text: 1)
 
     find("#filter_date_start").set("21/01/2017")
     find("#filter_date_end").set("22/01/2017")
     click_on("Apply Filter")
 
-    expect(page).not_to have_text(date_range_result)
+    expect(page).to have_css("#results .red", text: 0)
 
     find("#filter_date_start").set("20/01/2017")
     find("#filter_date_end").set("22/01/2017")
     click_on("Apply Filter")
 
-    expect(page).to have_text(date_range_result)
+    expect(page).to have_css("#results .red", text: 1)
   end
 
   scenario "downloading the xls version" do
@@ -58,14 +61,12 @@ xdescribe "Manager views staff performance report", js: true do
     expect(page.text).to match("Worksheet ss:Name=\"Staff Performance\"")
   end
 
-  scenario "viewing the sub report with an existing filter" do
+  xscenario "viewing the sub report with an existing filter" do
     select("Part II", from: "Part of Register")
     find("#filter_date_start").set("21/01/2017")
     click_on("Apply Filter")
 
-    within("#results") do
-      click_on("Re-Registration")
-    end
+    within("#results") { click_on("Demo Service") }
 
     expect(find("#filter_task").value).to eq("re_registration")
     expect(find("#filter_part").value).to eq("part_2")

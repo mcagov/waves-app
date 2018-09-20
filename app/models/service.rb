@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  scope :in_part, ->(part) { where.not(part.to_sym => nil) }
+  scope :in_part, ->(part) { where.not(part.to_sym => nil) if part.present? }
 
   has_many :tasks, class_name: "Submission::Task"
   has_many :staff_performance_logs, through: :tasks

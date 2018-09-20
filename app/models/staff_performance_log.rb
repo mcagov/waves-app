@@ -8,7 +8,14 @@ class StaffPerformanceLog < ApplicationRecord
   scope :within_standard, -> { where(within_standard: true) }
   scope :standard_missed, -> { where(within_standard: false) }
 
-  scope :in_part, ->(part) { where(part: part) if part }
+  scope :in_part, ->(part) { where(part: part) if part.present? }
+
+  scope :created_after, (lambda do |date|
+    where("staff_performance_logs.created_at >= ?", date) if date.present?
+  end)
+  scope :created_before, (lambda do |date|
+    where("staff_performance_logs.created_at <= ?", date) if date.present?
+  end)
 
   before_create :set_service_standard
 
