@@ -21,7 +21,8 @@ describe Report::StaffPerformance do
     end
 
     it "has some filter_fields" do
-      expect(subject.filter_fields).to eq([:filter_part, :filter_date_range])
+      expect(subject.filter_fields)
+        .to eq([:filter_part, :filter_user, :filter_date_range])
     end
 
     it "has some headings" do
@@ -34,7 +35,7 @@ describe Report::StaffPerformance do
     end
 
     it "has a date range label" do
-      expect(subject.date_range_label).to eq("Application Received")
+      expect(subject.date_range_label).to eq("Task Actioned")
     end
 
     it "has one result for each task type" do
@@ -50,7 +51,7 @@ describe Report::StaffPerformance do
     end
 
     it "has the application_type as a sub_report_filter" do
-      new_reg = { service: service.id }
+      new_reg = { service_id: service.id }
       expect(subject.results.map(&:sub_report_filters)).to include(new_reg)
     end
   end
