@@ -9,6 +9,7 @@ class Report
   def initialize(filters = {})
     @filters = filters.to_h.deep_symbolize_keys
     @part = filters[:part]
+    @user_id = filters[:user_id]
     @date_start = parse_date_start
     @date_end = parse_date_end
     @task = filters[:task] || "all_tasks"

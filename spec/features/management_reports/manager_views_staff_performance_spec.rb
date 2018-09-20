@@ -1,11 +1,15 @@
 require "rails_helper"
 
 describe "Manager views staff performance report", js: true do
+  let!(:alice) { create(:user, name: "Alice") }
+  let!(:bob) { create(:user, name: "Bob") }
+
   let!(:missed_in_part_3) do
     create(:staff_performance_log,
            part: :part_3,
            target_date: "19/01/2017",
-           created_at: "20/01/2017")
+           created_at: "20/01/2017",
+           actioned_by: alice)
   end
 
   before do
@@ -54,6 +58,18 @@ describe "Manager views staff performance report", js: true do
     expect(page).to have_css("#results .red", text: 1)
   end
 
+  scenario "filtering by member of staff" do
+    expect(page).to have_css("#results .red", text: 1)
+
+    select("Bob", from: "Member of Staff")
+    click_on("Apply Filter")
+    expect(page).to have_css("#results .red", text: 0)
+
+    select("Alice", from: "Member of Staff")
+    click_on("Apply Filter")
+    expect(page).to have_css("#results .red", text: 1)
+  end
+
   scenario "downloading the xls version" do
     click_on("Export to Excel")
     sleep 1
@@ -62,15 +78,15 @@ describe "Manager views staff performance report", js: true do
   end
 
   xscenario "viewing the sub report with an existing filter" do
-    select("Part II", from: "Part of Register")
-    find("#filter_date_start").set("21/01/2017")
+    select("Part III", from: "Part of Register")
+    find("#filter_date_start").set("20/01/2017")
     click_on("Apply Filter")
 
     within("#results") { click_on("Demo Service") }
 
-    expect(find("#filter_task").value).to eq("re_registration")
-    expect(find("#filter_part").value).to eq("part_2")
-    expect(find("#filter_date_start").value).to eq("21/01/2017")
+    expect(find("#filter_service").value).to eq("demo_service")
+    expect(find("#filter_part").value).to eq("part_3")
+    expect(find("#filter_date_start").value).to eq("20/01/2017")
     expect(page)
       .to have_css("h1", text: "Reports: Staff Performance by Task")
   end

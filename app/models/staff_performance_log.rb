@@ -10,6 +10,10 @@ class StaffPerformanceLog < ApplicationRecord
 
   scope :in_part, ->(part) { where(part: part) if part.present? }
 
+  scope :actioned_by, (lambda do |actioned_by_id|
+    where(actioned_by_id: actioned_by_id) if actioned_by_id.present?
+  end)
+
   scope :created_after, (lambda do |date|
     where("staff_performance_logs.created_at >= ?", date) if date.present?
   end)

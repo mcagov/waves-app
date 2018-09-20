@@ -8,7 +8,7 @@ class Report::StaffPerformance < Report
   end
 
   def filter_fields
-    [:filter_part, :filter_date_range]
+    [:filter_part, :filter_user, :filter_date_range]
   end
 
   def headings
@@ -20,6 +20,10 @@ class Report::StaffPerformance < Report
 
   def date_range_label
     "Application Received"
+  end
+
+  def user_label
+    "Member of Staff"
   end
 
   def results
@@ -45,6 +49,7 @@ class Report::StaffPerformance < Report
   def staff_performance_for(service)
     service
       .staff_performance_logs
+      .actioned_by(@user_id)
       .in_part(@part)
       .created_after(@date_start)
       .created_before(@date_end)
