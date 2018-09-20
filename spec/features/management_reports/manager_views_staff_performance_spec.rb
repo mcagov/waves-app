@@ -22,7 +22,7 @@ describe "Manager views staff performance report", js: true do
     expect_link_to_export_or_print(true)
 
     expect(page).to have_css("h1", text: "Staff Performance")
-    expect(page).to have_css("th", text: "Service")
+    expect(page).to have_css("th", text: "Task Type")
     expect(page).to have_css("th", text: "Total Transactions")
     expect(page).to have_css("th", text: "Within Service Standard")
     expect(page).to have_css("th", text: "Standard Missed")

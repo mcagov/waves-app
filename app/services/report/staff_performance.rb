@@ -13,7 +13,7 @@ class Report::StaffPerformance < Report
 
   def headings
     [
-      :service, :total_transactions,
+      :task_type, :total_transactions,
       :within_service_standard, :service_standard_missed
     ]
   end
