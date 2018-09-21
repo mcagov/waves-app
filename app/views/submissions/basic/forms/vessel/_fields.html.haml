@@ -43,5 +43,12 @@
         = vessel_f.input :radio_call_sign, input_html: { class: "upcase" }
       .col-md-3
         = vessel_f.input :mmsi_number, input_html: { class: "upcase" }
-
+    .row
+      - vessel_f.object.autonomous_vessel ||= false
+      .col-md-3{ class: vessel_change_css(:autonomous_vessel) }
+        = vessel_f.input :autonomous_vessel,
+          label: vessel_change_label(:autonomous_vessel),
+          collection: [["No", 0], ["Yes", 1]],
+          include_blank: false,
+          input_html: { class: "select2 select2_single" }
 

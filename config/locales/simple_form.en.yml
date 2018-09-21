@@ -30,6 +30,7 @@ en:
         applicant_email: Applicant's Email Address
         vessel:
           name: Vessel Name
+          autonomous_vessel: Autonomous Vessel
           alt_name_1: "Alternative Vessel Name #1"
           alt_name_2: "Alternative Vessel Name #2"
           alt_name_3: "Alternative Vessel Name #3"
