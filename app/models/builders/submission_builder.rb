@@ -1,4 +1,4 @@
-class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
+class Builders::SubmissionBuilder
   class << self
     def build_defaults(submission)
       @submission = submission

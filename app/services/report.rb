@@ -9,6 +9,8 @@ class Report
   def initialize(filters = {})
     @filters = filters.to_h.deep_symbolize_keys
     @part = filters[:part]
+    @user_id = filters[:user_id]
+    @service_id = filters[:service_id]
     @date_start = parse_date_start
     @date_end = parse_date_end
     @task = filters[:task] || "all_tasks"
@@ -52,6 +54,12 @@ class Report
   RenderAsCurrency = Struct.new(:amount) do
     def to_s
       amount.to_s
+    end
+  end
+
+  RenderAsRed = Struct.new(:value) do
+    def to_s
+      "<span class='red'>#{value}</span>".html_safe
     end
   end
 

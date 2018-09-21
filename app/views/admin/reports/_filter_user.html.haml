@@ -1,0 +1,8 @@
+.form-group
+  .row
+    .col-md-2
+      %label{ for: "filter_user_id" }= @report.user_label
+    .col-md-4
+      = select :filter, :user_id, [["All", ""]] + users_collection,
+        { include_blank: false, selected: filter[:user_id] },
+        class: "form-control"

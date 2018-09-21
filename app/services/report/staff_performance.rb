@@ -8,47 +8,51 @@ class Report::StaffPerformance < Report
   end
 
   def filter_fields
-    [:filter_part, :filter_date_range]
+    [:filter_part, :filter_user, :filter_date_range]
   end
 
   def headings
-    [:task_type, :total_transactions, :top_performer]
+    [
+      :task_type, :total_transactions,
+      :within_service_standard, :service_standard_missed
+    ]
   end
 
   def date_range_label
-    "Application Received"
+    "Task Actioned"
+  end
+
+  def user_label
+    "Member of Staff"
   end
 
   def results
-    ApplicationType.all.map do |task_type|
-      submission_ids = submission_ids_for(task_type)
-      data_elements =
-        [
-          "task_description",
-          submission_ids.length,
-          top_performer(submission_ids),
-        ]
-
-      Result.new(data_elements, task: task_type[1])
+    services.map do |service|
+      staff_performance_logs = staff_performance_for(service)
+      Result.new(
+        [service.to_s,
+         staff_performance_logs.count,
+         staff_performance_logs.within_standard.count,
+         RenderAsRed.new(staff_performance_logs.standard_missed.count)],
+        service_id: service.id)
     end
   end
 
-  def top_performer(submission_ids)
-    result = Submission.select("claimant_id, count(*) AS total")
-                       .includes(:claimant)
-                       .where(id: submission_ids)
-                       .group(:claimant_id)
-                       .order("total desc")
-                       .first
-
-    return "-" if result.blank? || result.claimant.blank?
-    "#{result.claimant} (#{result.total})"
+  def services
+    Service
+      .in_part(@part)
+      .order(:name)
+      .includes(:staff_performance_logs)
+      .all
   end
 
-  def submission_ids_for(task_type)
-    scoped_query = Submission.where(application_type: task_type)
-    scoped_query = filter_by_received_at(scoped_query)
-    scoped_query = filter_by_part(scoped_query)
-    scoped_query.closed.pluck(:id)
+  def staff_performance_for(service)
+    service
+      .staff_performance_logs
+      .actioned_by(@user_id)
+      .in_part(@part)
+      .created_after(@date_start)
+      .created_before(@date_end)
+      .all
   end
 end
