@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "User saves submission details" do
-  xscenario "part_1" do
+  scenario "part_1" do
     visit_claimed_task(
       submission: create(:submission, :part_1_vessel))
 
