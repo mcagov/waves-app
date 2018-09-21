@@ -195,6 +195,14 @@
             collection: propulsion_system_collection(vessel_f.object.propulsion_system.to_s),
             input_html: { class: "select2_with_tags" }
 
+        - vessel_f.object.autonomous_vessel ||= false
+        .col-md-2{ class: vessel_change_css(:autonomous_vessel) }
+          = vessel_f.input :autonomous_vessel,
+            label: vessel_change_label(:autonomous_vessel),
+            collection: [["No", 0], ["Yes", 1]],
+            include_blank: false,
+            input_html: { class: "select2 select2_single" }
+
       %hr
       %h2 Construction
       .row

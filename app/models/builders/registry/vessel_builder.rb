@@ -33,6 +33,7 @@ class Builders::Registry::VesselBuilder
       @vessel.mmsi_number = @submission.vessel.mmsi_number
       @vessel.radio_call_sign = @submission.vessel.radio_call_sign
       @vessel.vessel_type = @submission.vessel.type_of_vessel
+      @vessel.autonomous_vessel = @submission.vessel.autonomous_vessel
     end
 
     # rubocop:disable all

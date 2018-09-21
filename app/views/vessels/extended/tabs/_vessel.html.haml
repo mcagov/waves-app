@@ -10,6 +10,7 @@
     %th= vessel_field_title(:depth)
     %th= vessel_field_title(:propulsion_system)
     %th= vessel_field_title(:number_of_hulls)
+    %th= vessel_field_title(:autonomous_vessel)
   %tbody
     %tr
       %td
@@ -27,6 +28,7 @@
       %td #{vessel.depth.to_i} metres
       %td.propulsion-system= vessel.propulsion_system
       %td= vessel.number_of_hulls
+      %td= y_n(vessel.autonomous_vessel)
 
 %hr
 %h2 Construction

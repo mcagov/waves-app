@@ -124,3 +124,16 @@
           - else
             = compare_reg_info vessel.radio_call_sign, registered_vessel.radio_call_sign
           .i.fa.fa-star-o.hidden
+    %tr
+      %td Autonomous Vessel
+
+      - if @submission.registered_vessel
+        %td= y_n(registered_vessel.autonomous_vessel)
+
+      %td#vessel-autonomous_vessel
+        %strong
+          - if @readonly
+            = y_n(vessel.autonomous_vessel)
+          - else
+            = compare_reg_info (y_n(vessel.autonomous_vessel || false)), y_n(registered_vessel.autonomous_vessel)
+          .i.fa.fa-star-o.hidden

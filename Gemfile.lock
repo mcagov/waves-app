@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/mcagov/waves-utilities.git
-  revision: 06044f2afb3ced2f1331bd37f0f8bcd311b0cfa9
+  revision: d6b2b680039cb270061410604d8d5b3594a2d717
   specs:
     waves-utilities (0.1.0)
       countries
