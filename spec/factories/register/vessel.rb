@@ -27,7 +27,7 @@ FactoryBot.define do
         create(:registration,
                registered_vessel: vessel,
                registry_info: vessel.registry_info,
-               registered_at: 1.year.ago)
+               registered_at: 1.week.ago)
       vessel.update_attributes(current_registration: registration)
     end
   end

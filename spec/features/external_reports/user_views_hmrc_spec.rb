@@ -3,7 +3,7 @@ require "rails_helper"
 xdescribe "User views HMRC reports", js: true do
   before do
     login_to_reports
-    visit admin_report_path(:fishing_regional)
+    visit admin_report_path(:vessel_age)
     click_on("HMRC")
   end
 

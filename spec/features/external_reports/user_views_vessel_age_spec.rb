@@ -19,8 +19,7 @@ describe "User views Vessel Age reports", js: true do
       year_of_build: Date.today.year - 12)
 
     login_to_reports
-    visit admin_report_path(:fishing_regional)
-    click_on("Vessel Age")
+    visit admin_report_path(:vessel_age)
   end
 
   scenario "in general" do
