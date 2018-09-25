@@ -15,6 +15,7 @@ class DailyJob
       expire_referrals
       process_reminders
       close_terminated_vessels
+      clean_up_sessions
     end
 
     private
@@ -39,6 +40,12 @@ class DailyJob
 
     def close_terminated_vessels
       TerminatedVessels.close!
+    end
+
+    def clean_up_sessions
+      ActiveRecord::SessionStore::Session
+        .where("updated_at < ?", 30.days.ago)
+        .delete_all
     end
   end
 end

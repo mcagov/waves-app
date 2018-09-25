@@ -17,8 +17,4 @@ FactoryBot.define do
   factory :operational_user, parent: :user do
     access_level :operational_user
   end
-
-  factory :team_leader, parent: :user do
-    access_level :team_leader
-  end
 end

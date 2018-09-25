@@ -5,8 +5,8 @@ describe "Team leader unclaims tasks", type: :feature, js: true do
     create(:claimed_task)
   end
 
-  scenario "as a team leader" do
-    login_to_part_3(create(:team_leader))
+  scenario "as a system manager" do
+    login_to_part_3(create(:system_manager))
     visit("/tasks/team-tasks")
     click_on(unclaim_task_link)
     expect(Submission::Task.last).to be_unclaimed
@@ -21,5 +21,5 @@ describe "Team leader unclaims tasks", type: :feature, js: true do
 end
 
 def unclaim_task_link
-  "Unclaim (Team Leader only)"
+  "Unclaim (System Manager only)"
 end

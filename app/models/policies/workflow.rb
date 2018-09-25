@@ -18,11 +18,11 @@ class Policies::Workflow
     end
 
     def can_edit_official_number?(user)
-      user.team_leader? || user.system_manager?
+      user.system_manager?
     end
 
     def can_unclaim_team_tasks?(user)
-      user.team_leader? || user.system_manager?
+      user.system_manager?
     end
 
     def uses_port_no?(obj)

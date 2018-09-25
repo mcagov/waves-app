@@ -1,13 +1,13 @@
 require "rails_helper"
 
-describe "Team leaders edits an official no", type: :feature, js: true do
-  scenario "as a team leader" do
+describe "System Manager edits an official no", type: :feature, js: true do
+  scenario "as a system manager" do
     create(:registered_vessel, reg_no: "DUPLICATE")
-    visit_registered_vessel(create(:team_leader))
+    visit_registered_vessel(create(:system_manager))
 
     click_on("Registrar Tools")
     within(".modal-content") do
-      click_on("Edit Official Number (Team Leader only)")
+      click_on(edit_official_number_link)
     end
 
     within("#edit-official-no") do
@@ -38,5 +38,5 @@ describe "Team leaders edits an official no", type: :feature, js: true do
 end
 
 def edit_official_number_link
-  "Edit Official Number (Team Leader only)"
+  "Edit Official Number (System Manager only)"
 end

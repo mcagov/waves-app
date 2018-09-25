@@ -4,6 +4,7 @@ ruby "~> 2.5.1"
 
 gem "rails", "~> 5.2.1.rc1"
 
+gem "activerecord-session_store"
 gem "auto_increment"
 gem "active_model_serializers"
 gem "bootstrap-datepicker-rails"
