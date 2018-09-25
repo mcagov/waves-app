@@ -57,10 +57,6 @@ class InternalPagesController < ApplicationController
     access_denied! if current_user.read_only?
   end
 
-  def team_leader_only!
-    access_denied! if current_user.read_only? || current_user.operational_user?
-  end
-
   def system_manager_only!
     access_denied! unless current_user.system_manager?
   end

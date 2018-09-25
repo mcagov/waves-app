@@ -23,7 +23,7 @@
             class: "btn btn-block btn-info #{'disabled' unless vessel.prints_transcript?}"
 
         - if Policies::Workflow.can_edit_official_number?(current_user)
-          %p= link_to "Edit Official Number (Team Leader only)", "#",
+          %p= link_to "Edit Official Number (System Manager only)", "#",
                 data: { target: "#edit-official-no", toggle: "modal" },
                 class: "btn btn-block btn-danger"
           = render partial: "vessels/modals/edit_official_no", locals: {vessel: vessel}

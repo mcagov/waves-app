@@ -13,6 +13,6 @@
 
     - if Policies::Workflow.can_unclaim_team_tasks?(current_user)
       = form_tag unclaim_submission_task_path(submission, task), remote: true do
-        = submit_tag "Unclaim (Team Leader only)"
+        = submit_tag "Unclaim (System Manager only)"
   - else
     = task.current_state.to_s.humanize

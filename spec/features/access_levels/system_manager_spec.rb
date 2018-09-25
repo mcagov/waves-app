@@ -1,8 +1,8 @@
 require "rails_helper"
 
-describe "Team leader" do
+describe "System Manager" do
   before do
-    sign_in(create(:team_leader))
+    sign_in(create(:system_manager))
     visit("/")
   end
 
@@ -14,6 +14,6 @@ describe "Team leader" do
     click_on("Part 3:")
 
     visit("/admin/users")
-    expect(page).to have_http_status(401)
+    expect(page).to have_css("h1", text: "User Management")
   end
 end
