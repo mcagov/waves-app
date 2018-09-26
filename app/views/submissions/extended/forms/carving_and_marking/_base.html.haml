@@ -40,7 +40,7 @@
         Signed Carving & Marking received on #{@submission.carving_and_marking_received_at}.
     .col-md-3
       - unless @readonly
-        = link_to update_state_submission_carving_and_marking_path(@submission),
+        = link_to update_state_submission_carving_and_marking_path(@submission, task_id: @task.id),
           remote: true,
           method: :post,
           class: "btn btn-warning pull-right" do
@@ -48,7 +48,7 @@
   - else
     .col-md-9
       - unless @readonly
-        = link_to update_state_submission_carving_and_marking_path(@submission),
+        = link_to update_state_submission_carving_and_marking_path(@submission, task_id: @task.id),
           method: :post,
           remote: true,
           class: "btn btn-success pull-right" do
