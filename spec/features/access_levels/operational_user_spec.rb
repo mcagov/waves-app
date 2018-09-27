@@ -24,5 +24,10 @@ describe "Operational user" do
     expect(page).to have_http_status(401)
   end
 
-  scenario "automated email queue"
+  scenario "automated email queue" do
+    click_on("Part 3:")
+
+    visit("/admin/notifications")
+    expect(page).to have_http_status(401)
+  end
 end
