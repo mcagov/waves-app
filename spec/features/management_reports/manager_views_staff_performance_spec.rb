@@ -29,7 +29,7 @@ describe "Manager views staff performance report", js: true do
   end
 
   scenario "filtering by part" do
-    expect(page).to have_css("#results .red", text: 1)
+    expect(page).to have_css("#results .red", count: 1)
 
     select("Part II", from: "Part of Register")
     click_on("Apply Filter")
