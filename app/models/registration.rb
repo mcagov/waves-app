@@ -46,6 +46,14 @@ class Registration < ApplicationRecord
     end
   end
 
+  def mortgages
+    (symbolized_registry_info[:mortgages] || []).map do |mortgage|
+      mortgage[:mortgagors].map! { |mortgagor| Mortgagor.new(mortgagor) }
+      mortgage[:mortgagees].map! { |mortgagee| Mortgagee.new(mortgagee) }
+      Mortgage.new(mortgage)
+    end
+  end
+
   def delivery_name_and_address
     # Taking the delivery address from the most recent submission
     # is probably not the best approach but, for now, that is

@@ -3,7 +3,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
   private
 
   def mortgages
-    @mortgages ||= @vessel.mortgages.not_discharged
+    @mortgages ||= @registration.mortgages
   end
 
   def display_mortgages?
