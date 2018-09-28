@@ -133,4 +133,21 @@ describe Submission::NameApproval do
       end
     end
   end
+
+  context "validations" do
+    let(:name_approval) do
+      build(:name_approval, part: part, port_code: "")
+    end
+
+    before { name_approval.valid? }
+
+    context "part_2" do
+      it { expect(name_approval.errors).to include(:port_code) }
+    end
+
+    context "part_1" do
+      let(:part) { :part_1 }
+      it { expect(name_approval.errors).not_to include(:port_code) }
+    end
+  end
 end

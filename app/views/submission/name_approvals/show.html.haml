@@ -38,7 +38,7 @@
               = f.input :port_code, as: :select,
               collection: ports_collection,
               label: "Port of Choice",
-              include_blank: false,
+              include_blank: (current_activity.part == :part_1),
               input_html: { class: "select2 select2_single searchable" }
 
 
