@@ -27,6 +27,10 @@ class Report::StaffPerformanceByTask < Report
   end
 
   def results
+    users_results + totals
+  end
+
+  def users_results
     users.map do |user|
       staff_performance_logs = staff_performance_for(user)
       Result.new(
@@ -36,6 +40,14 @@ class Report::StaffPerformanceByTask < Report
          RenderAsRed.new(staff_performance_logs.standard_missed.count)],
         user_id: user.id)
     end
+  end
+
+  def totals
+    [Result.new(
+      ["TOTAL",
+       staff_performance_summary.count,
+       staff_performance_summary.within_standard.count,
+       RenderAsRed.new(staff_performance_summary.standard_missed.count)])]
   end
 
   def users
@@ -54,5 +66,13 @@ class Report::StaffPerformanceByTask < Report
       .includes(task: [:service])
       .for_service(@service_id)
       .all
+  end
+
+  def staff_performance_summary
+    StaffPerformanceLog
+      .for_service(@service_id)
+      .in_part(@part)
+      .created_after(@date_start)
+      .created_before(@date_end)
   end
 end

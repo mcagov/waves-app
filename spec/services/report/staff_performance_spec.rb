@@ -38,8 +38,8 @@ describe Report::StaffPerformance do
       expect(subject.date_range_label).to eq("Task Actioned")
     end
 
-    it "has one result for each task type" do
-      expect(subject.results.length).to eq(1)
+    it "has one result for each task type and a total row" do
+      expect(subject.results.length).to eq(2)
     end
 
     it "has the expected output" do
@@ -48,6 +48,12 @@ describe Report::StaffPerformance do
       expect(results[1]).to eq(2)
       expect(results[2]).to eq(1)
       expect(results[3]).to be_a(Report::RenderAsRed)
+
+      results = subject.results.map(&:data_elements).last
+      expect(results[0]).to eq("TOTAL")
+      expect(results[1]).to eq(2)
+      expect(results[2]).to eq(1)
+      expect(results[3]).to eq(1)
     end
 
     it "has the application_type as a sub_report_filter" do

@@ -33,13 +33,13 @@
           %td.soft-label Email Recipient:
           %td.applicant-email
             %strong
-              = link_to_unless @readonly, submission.applicant.email_description, "#",
+              = link_to_if @submission.active?, submission.applicant.email_description, "#",
                 data: { target: "#edit_applicant", toggle: "modal" }
         %tr
           %td.soft-label Postal Recipient:
           %td.applicant-delivery-address
             %strong
-              = link_to_unless @readonly, submission.delivery_address_description, "#",
+              = link_to_if @submission.active?, submission.delivery_address_description, "#",
                 data: { target: "#edit_applicant", toggle: "modal" }
         %tr
           %td.soft-label Payment Due
