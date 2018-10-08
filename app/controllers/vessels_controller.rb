@@ -3,6 +3,8 @@ class VesselsController < InternalPagesController
     @vessel =
       Decorators::Vessel.new(Register::Vessel
         .includes(preload).find(params[:id]))
+
+    ensure_current_part_for(@vessel.part)
   end
 
   def index
@@ -19,7 +21,7 @@ class VesselsController < InternalPagesController
     [
       :correspondences, :owners, :registrations, :current_registration,
       :notes, :engines, :beneficial_owners,
-      mortgages: [:mortgagees],
+      mortgages: [:mortgagees, :mortgagors],
       shareholder_groups: [:shareholder_group_members],
       submissions: [
         :correspondences, :print_jobs,

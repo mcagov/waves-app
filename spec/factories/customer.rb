@@ -1,6 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :customer do
     name "Bob"
+    email "bob@example.com"
     address_1 "10 DOWNING ST"
     address_2 "WHITEHALL"
     town      "LONDON"

@@ -8,7 +8,7 @@ module CollectionHelper
   end
 
   def nationalities_collection
-    (["BRITISH"] << WavesUtilities::Nationality.all.uniq.sort).flatten
+    countries_collection
   end
 
   def last_registry_countries_collection
@@ -18,12 +18,16 @@ module CollectionHelper
   def registration_types_collection(part)
     reg_types = WavesUtilities::RegistrationType.in_part(part) || []
     reg_types.sort { |a, b| a[0] <=> b[0] }.map do |registration_type|
-      [registration_type.to_s.humanize, registration_type]
+      [registration_type.to_s.titleize, registration_type]
     end
   end
 
   def ports_collection
     WavesUtilities::Port.all
+  end
+
+  def users_collection
+    User.order(:name).pluck(:name, :id)
   end
 
   def registration_status_collection
@@ -44,9 +48,7 @@ module CollectionHelper
   end
 
   def eligibility_status_collection(submission)
-    if Policies::Definitions.part_3?(submission)
-      WavesUtilities::EligibilityStatus.part_3
-    elsif Policies::Definitions.fishing_vessel?(submission)
+    if Policies::Definitions.fishing_vessel?(submission)
       WavesUtilities::EligibilityStatus.fishing_vessels
     else
       WavesUtilities::EligibilityStatus.part_1_and_part_4_non_fishing
@@ -77,14 +79,19 @@ module CollectionHelper
     [["Print a hard copy", :print], ["Send via Email", :email]]
   end
 
-  def carving_and_marking_templates_collection
-    CarvingAndMarking::TEMPLATES
+  def carving_and_marking_templates_collection(submission)
+    templates = CarvingAndMarking::TEMPLATES
+    if Policies::Definitions.fishing_vessel?(submission)
+      templates.select { |t| t[1] == :all_fishing }
+    else
+      templates.select { |t| t[1] != :all_fishing }
+    end
   end
 
   def name_approved_until_collection
     [
-      ["3 months", Date.today.advance(months: 3).to_s(:db)],
-      ["10 years", Date.today.advance(years: 10).to_s(:db)],
+      ["3 months", Time.zone.today.advance(months: 3).to_s(:db)],
+      ["10 years", Time.zone.today.advance(years: 10).to_s(:db)],
     ]
   end
 
@@ -106,11 +113,19 @@ module CollectionHelper
 
   def filter_registration_type_collection(part)
     filter = registration_types_collection(part) || []
-    filter.unshift(["All", "all"]) # rubocop:disable Style/WordArray
-    filter << ["Not set", "not_set"]
+    filter.unshift(["All Registration Types", ""])
+  end
+
+  def filter_service_level_collection
+    filter = ServiceLevel::SERVICE_LEVEL_TYPES.dup
+    filter.unshift(["All Service Levels", ""])
   end
 
   def service_level_collection
     [["Standard", :standard], ["Premium", :premium]]
+  end
+
+  def services_collection
+    Service.order(:name).pluck(:name, :id)
   end
 end

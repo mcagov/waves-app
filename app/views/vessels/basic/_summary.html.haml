@@ -1,9 +1,9 @@
-.col-md-4
+#vessel_summary.col-md-4
   %table.table
     %tbody
       %tr
         %td.soft-label.no-top-border Official Number:
-        %td.no-top-border
+        %td.no-top-border.official_no
           %strong= @vessel.reg_no
       %tr
         %td.soft-label Make and model:
@@ -17,6 +17,10 @@
         %td.soft-label Type:
         %td
           %strong= @vessel.vessel_type
+      %tr
+        %td.soft-label Autonomous Vessel:
+        %td
+          %strong= y_n(@vessel.autonomous_vessel)
 .col-md-4
   %table.table
     %tbody

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Notification::ApplicationReceipt, type: :model do
   context "in general" do
-    let(:submission) { create(:unassigned_submission) }
+    let(:submission) { create(:submission) }
     subject { described_class.new(notifiable: submission) }
 
     it "has the expected email_template" do

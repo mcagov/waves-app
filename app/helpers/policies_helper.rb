@@ -42,8 +42,4 @@ module PoliciesHelper
   def display_shareholding?(obj)
     Policies::Workflow.uses_shareholding?(obj)
   end
-
-  def display_certificates_and_documents?(obj)
-    Policies::Workflow.uses_certificates_and_documents?(obj)
-  end
 end

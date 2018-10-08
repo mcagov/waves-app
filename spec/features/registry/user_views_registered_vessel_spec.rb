@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe "User views a registered vessel", type: :feature, js: true do
   before do
-    @submission = create(:completed_submission)
-    @vessel = @submission.registered_vessel
+    @vessel = create(:registered_vessel)
+    @submission = create(:submission, registered_vessel: @vessel)
     login_to_part_3
     visit vessel_path(@vessel)
   end
@@ -11,10 +11,10 @@ describe "User views a registered vessel", type: :feature, js: true do
   scenario "viewing vessel details" do
     click_on("Owners")
     expect(page)
-      .to have_css(".owner-name", text: @submission.owners.first.name)
+      .to have_css(".owner-name", text: @vessel.owners.first.name)
 
     click_on("Agent")
-    expect(page).to have_css(".agent-name", text: @submission.agent)
+    expect(page).to have_css(".agent-name", text: @vessel.agent)
 
     click_on("Correspondence")
     expect(page).to have_link("Add Correspondence")
@@ -40,17 +40,10 @@ describe "User views a registered vessel", type: :feature, js: true do
   end
 
   scenario "linking to the submission page" do
-    expect(page).to have_css("h1", text: @submission.vessel.name)
-
     click_on("Application History")
     click_on("New Registration")
 
-    within("#vessel-name") do
-      expect(page).to have_text(@submission.vessel.name)
-    end
-
-    expect(page).not_to have_css("#actions")
-    expect(page).not_to have_css(".breadcrumb")
+    expect(page).to have_css("#application-info", text: "Application Info")
   end
 
   scenario "viewing the registration status" do

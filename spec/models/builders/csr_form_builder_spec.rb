@@ -6,6 +6,7 @@ describe Builders::CsrFormBuilder do
       create(
         :registered_vessel,
         part: 1,
+        reg_no: "ABC1234",
         name: "PIRATE SHIP",
         port_code: "SU",
         owners: [owner_1, owner_2],
@@ -28,8 +29,8 @@ describe Builders::CsrFormBuilder do
 
     let!(:submission) do
       create(
-        :assigned_submission,
-        task: :issue_csr,
+        :submission,
+        application_type: :issue_csr,
         part: :part_1,
         registered_vessel: vessel_with_closed_registration)
     end

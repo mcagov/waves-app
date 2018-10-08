@@ -7,7 +7,7 @@ describe SequenceNumber::Generator do
     context "part_1" do
       let(:part) { :part_1 }
 
-      it { expect(subject).to match(/6[0-9]{5}/) }
+      it { expect(subject).to match(/2[0-9]{6}/) }
     end
 
     context "part_2" do
@@ -25,7 +25,7 @@ describe SequenceNumber::Generator do
     context "part_4" do
       let(:part) { :part_4 }
 
-      it { expect(subject).to match(/8[0-9]{5}/) }
+      it { expect(subject).to match(/X[0-9]{5}/) }
     end
   end
 

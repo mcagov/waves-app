@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_19_094113) do
+ActiveRecord::Schema.define(version: 2018_09_25_094538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
 
   create_table "carving_and_markings", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "submission_id"
-    t.string "delivery_method"
     t.uuid "actioned_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "template"
+    t.integer "delivery_method"
   end
 
   create_table "charterers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
   end
 
   create_table "declaration_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "declaration_id"
+    t.uuid "declaration_owner_id"
     t.uuid "declaration_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -157,7 +157,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.datetime "updated_at", null: false
     t.uuid "notification_id"
     t.datetime "completed_at"
-    t.json "changeset"
     t.uuid "completed_by_id"
     t.string "entity_type", default: "individual"
     t.integer "shares_held", default: 0
@@ -200,18 +199,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.index ["parent_type"], name: "index_engines_on_parent_type"
   end
 
-  create_table "fees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "category"
-    t.string "task_variant"
-    t.integer "price", default: 0
-    t.integer "premium_addon_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "subsequent_price"
-    t.index ["category"], name: "index_fees_on_category"
-    t.index ["task_variant"], name: "index_fees_on_task_variant"
-  end
-
   create_table "finance_batches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "finance_payment_id"
     t.datetime "opened_at"
@@ -227,7 +214,7 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
 
   create_table "finance_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "part"
-    t.string "task"
+    t.string "application_type"
     t.string "vessel_name"
     t.string "payment_type"
     t.decimal "payment_amount"
@@ -245,15 +232,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "payer_name"
     t.integer "service_level", default: 0
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id"
-  end
-
-  create_table "line_items", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "submission_id"
-    t.uuid "fee_id"
-    t.integer "price"
-    t.integer "premium_addon_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "mortgages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -319,7 +297,11 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "notifiable_type"
     t.string "recipient_name"
     t.string "recipient_email"
-    t.string "attachments"
+    t.string "state"
+    t.datetime "delivered_at"
+    t.datetime "approved_at"
+    t.uuid "approved_by_id"
+    t.json "attachments", default: []
     t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id"
     t.index ["notifiable_type"], name: "index_notifications_on_notifiable_type"
     t.index ["type"], name: "index_notifications_on_type"
@@ -394,6 +376,29 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.index ["type"], name: "index_sequence_numbers_on_type"
   end
 
+  create_table "services", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "standard_days"
+    t.integer "premium_days"
+    t.json "part_1"
+    t.json "part_2"
+    t.json "part_3"
+    t.json "part_4"
+    t.json "rules", default: []
+    t.json "activities", default: []
+    t.json "print_templates", default: []
+    t.index ["name"], name: "index_services_on_name"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
   create_table "shareholder_group_members", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "shareholder_group_id"
     t.uuid "owner_id"
@@ -408,38 +413,66 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "staff_performance_logs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "task_id"
+    t.integer "activity"
+    t.date "target_date"
+    t.integer "service_level"
+    t.uuid "actioned_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "within_standard", default: false
+    t.string "part"
+    t.uuid "service_id"
+    t.index ["task_id"], name: "index_staff_performance_logs_on_task_id"
+  end
+
+  create_table "submission_tasks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "service_id"
+    t.uuid "submission_id"
+    t.uuid "claimant_id"
+    t.datetime "referred_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "price", default: 0
+    t.integer "submission_ref_counter"
+    t.date "target_date"
+    t.string "state"
+    t.integer "service_level", default: 0
+    t.date "start_date"
+    t.datetime "completed_at"
+    t.index ["claimant_id"], name: "index_submission_tasks_on_claimant_id"
+    t.index ["service_id"], name: "index_submission_tasks_on_service_id"
+    t.index ["submission_id"], name: "index_submission_tasks_on_submission_id"
+  end
+
   create_table "submissions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.datetime "target_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "delivery_address_id"
     t.json "changeset"
     t.string "part"
-    t.string "state"
     t.uuid "claimant_id"
     t.datetime "referred_until"
     t.string "ref_no"
     t.datetime "received_at"
-    t.string "task"
-    t.string "source"
-    t.boolean "officer_intervention_required", default: false
     t.uuid "registered_vessel_id"
-    t.json "registry_info"
     t.string "applicant_name"
     t.string "applicant_email"
     t.boolean "applicant_is_agent", default: false
     t.string "documents_received"
     t.uuid "correspondent_id"
     t.uuid "managing_owner_id"
-    t.string "linkable_ref_no"
     t.datetime "carving_and_marking_received_at"
     t.uuid "registration_id"
-    t.datetime "completed_at"
-    t.string "service_level", default: "standard"
+    t.datetime "closed_at"
+    t.string "application_type"
+    t.string "source"
+    t.string "state"
+    t.datetime "carving_and_marking_receipt_skipped_at"
     t.index ["claimant_id"], name: "index_submissions_on_claimant_id"
     t.index ["part"], name: "index_submissions_on_part"
     t.index ["ref_no"], name: "index_submissions_on_ref_no"
-    t.index ["state"], name: "index_submissions_on_state"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -498,7 +531,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "place_of_build"
     t.datetime "keel_laying_date"
     t.string "hull_construction_material"
-    t.string "year_of_build"
     t.string "country_of_build"
     t.string "underlying_registry"
     t.string "underlying_registry_identity_no"
@@ -508,7 +540,6 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "issc_issuing_authority"
     t.string "issc_auditor"
     t.string "name_on_primary_register"
-    t.string "ec_no"
     t.decimal "register_length"
     t.decimal "length_overall"
     t.decimal "breadth"
@@ -517,6 +548,9 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
     t.string "doc_auditor"
     t.uuid "current_registration_id", default: -> { "uuid_generate_v4()" }
     t.string "state"
+    t.datetime "termination_notice_issued_at"
+    t.integer "year_of_build"
+    t.boolean "autonomous_vessel", default: false
     t.index ["hin"], name: "index_vessels_on_hin"
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number"
     t.index ["name"], name: "index_vessels_on_name"
@@ -528,17 +562,14 @@ ActiveRecord::Schema.define(version: 2018_03_19_094113) do
   end
 
   create_table "work_logs", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "submission_id"
     t.json "logged_info"
-    t.string "logged_type"
     t.string "description"
     t.uuid "actioned_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "part"
+    t.uuid "task_id"
     t.index ["actioned_by_id"], name: "index_work_logs_on_actioned_by_id"
-    t.index ["logged_type"], name: "index_work_logs_on_logged_type"
-    t.index ["submission_id"], name: "index_work_logs_on_submission_id"
   end
 
   create_table "world_pay_payments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

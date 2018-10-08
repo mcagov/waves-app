@@ -1,0 +1,6 @@
+- if @vessels.empty?
+  %p Nothing found.
+- else
+  %table.table.table-striped#vessels
+    %tbody
+      = render partial: "/search/vessel", collection: @vessels

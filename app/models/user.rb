@@ -4,10 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :trackable, :validatable,
          :recoverable, :rememberable, :async
 
-  enum access_level:
-    [:read_only, :operational_user, :team_leader, :system_manager]
+  enum access_level: [:read_only, :operational_user, :system_manager]
 
   validates :name, uniqueness: true, presence: true
+
+  has_many :staff_performance_logs, foreign_key: :actioned_by_id
 
   def to_s
     name

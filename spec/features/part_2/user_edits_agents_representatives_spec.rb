@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "User edits submission agent and representative person", js: true do
   before do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Agent & Representative Person")
   end
 

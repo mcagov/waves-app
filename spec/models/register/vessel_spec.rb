@@ -41,6 +41,31 @@ describe Register::Vessel do
     it { expect(subject).to eq(latest_registration) }
   end
 
+  context "#correspondent" do
+    let(:vessel) { create(:registered_vessel) }
+    subject { vessel.correspondent }
+
+    context "is the second owner" do
+      before do
+        vessel.owners.create(name: "Bob", correspondent: true)
+      end
+
+      it { expect(vessel.correspondent.name).to eq("Bob") }
+    end
+
+    context "is a charter_party" do
+      before do
+        vessel.charter_parties.first.update_attribute :correspondent, true
+      end
+
+      it { expect(vessel.correspondent).to eq(vessel.charter_parties.first) }
+    end
+
+    context "is undefined, defaults to first owner" do
+      it { expect(vessel.correspondent).to eq(vessel.owners.first) }
+    end
+  end
+
   context "#notification_list" do
     let!(:vessel) { build(:registered_vessel) }
 
@@ -59,9 +84,11 @@ describe Register::Vessel do
 
     context "with an active registration" do
       before do
-        create(
-          :registration,
-          vessel_id: vessel.id, registered_until: 1.day.from_now)
+        vessel.update_attributes(
+          current_registration:
+            create(
+              :registration,
+              vessel_id: vessel.id, registered_until: 1.day.from_now))
       end
 
       it { expect(subject).to eq(:registered) }
@@ -210,6 +237,28 @@ describe Register::Vessel do
             group_member_keys: [owner_key],
             shares_held: 10 }])
       end
+    end
+  end
+
+  context "#ec_no" do
+    subject { vessel.ec_no }
+
+    context "for a fishing vessel" do
+      let(:vessel) { create(:fishing_vessel) }
+
+      it { expect(subject).to eq("GBR000#{vessel.reg_no}") }
+
+      context "when the vessel has no reg_no" do
+        before { allow(vessel).to receive(:reg_no).and_return(nil) }
+
+        it { expect(subject).to be_blank }
+      end
+    end
+
+    context "for a non-fishing vessel" do
+      let(:vessel) { create(:pleasure_vessel) }
+
+      it { expect(subject).to be_blank }
     end
   end
 end

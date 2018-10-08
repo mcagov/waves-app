@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :submission_delivery_address, class: "Submission::DeliveryAddress" do
     name      "BOB DOLE"
     address_1 "11 DOWNING ST"

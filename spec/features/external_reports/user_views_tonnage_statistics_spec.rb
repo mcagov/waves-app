@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User views UK Tonnage Statistics report", js: true do
   before do
     login_to_reports
-    visit admin_report_path(:fishing_regional)
+    visit admin_report_path(:vessel_age)
     click_on("Tonnage Statistics")
   end
 

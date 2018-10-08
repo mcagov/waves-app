@@ -53,7 +53,7 @@ class Pdfs::MortgageeReminderLetterWriter
 
     msg = "In accordance with Regulation 63 of the Merchant Shipping"
     msg += " (Registration of Ships) Regulations 1993, we will transfer"
-    msg += " your outstanding mortgage to the clised Register if the owner"
+    msg += " your outstanding mortgage to the closed Register if the owner"
     msg += " fails to renew the Certificate of Registry. It will remain"
     msg += " recorded until you notify us that it has been discharged. I"
     msg += " would point out that this process will not affect the validity"

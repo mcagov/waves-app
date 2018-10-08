@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :declaration do
-    changeset { build(:declaration_owner) }
-    submission { build(:submission) }
+    owner { build(:declaration_owner) }
+    submission { create(:submission) }
   end
 end

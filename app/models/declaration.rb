@@ -1,20 +1,17 @@
 class Declaration < ApplicationRecord
-  belongs_to :submission, touch: true
+  belongs_to :submission, touch: true, required: true
   belongs_to :completed_by, class_name: "User"
   belongs_to :registered_owner, class_name: "Owner"
 
-  has_one :notification, as: :notifiable
+  validates :submission_id, presence: true
 
-  has_many :declaration_group_members,
-           class_name: "Declaration::GroupMember",
-           dependent: :destroy
+  has_one :notification, as: :notifiable
 
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
     state :incomplete
     state :completed
-    state :not_required
 
     event :declared, timestamp: true do
       transitions to: :completed, from: :incomplete
@@ -31,14 +28,18 @@ class Declaration < ApplicationRecord
   scope :corporate, -> { where("entity_type = 'corporate'") }
 
   delegate :part, to: :submission
-  def owner
-    owner = Declaration::Owner.new(changeset || {})
-    owner.declared_at = completed_at
-    owner
-  end
 
-  def owner=(owner_params)
-    self.changeset = owner_params
+  has_one :owner,
+          as: :parent,
+          class_name: "Declaration::Owner",
+          dependent: :destroy
+
+  # rubocop:disable Style/AlignHash
+  accepts_nested_attributes_for :owner, allow_destroy: true,
+    reject_if: proc { |attributes| attributes["name"].blank? }
+
+  def owner_email
+    owner.email if owner
   end
 
   def vessel

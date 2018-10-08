@@ -30,4 +30,29 @@ describe PrintJob do
       end
     end
   end
+
+  describe "latest" do
+    let(:submission) { create(:submission) }
+
+    let!(:foo_1) do
+      create(:print_job,
+             template: :foo, created_at: 1.week.ago, submission: submission)
+    end
+
+    let!(:foo_2) do
+      create(:print_job,
+             template: :foo, created_at: 1.day.ago, submission: submission)
+    end
+
+    let!(:bar) do
+      create(:print_job,
+             template: :bar, created_at: 1.month.ago, submission: submission)
+    end
+
+    subject { described_class.latest(submission) }
+
+    it do
+      expect(subject).to match([foo_2, bar])
+    end
+  end
 end

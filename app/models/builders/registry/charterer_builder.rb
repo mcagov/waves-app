@@ -34,6 +34,9 @@ class Builders::Registry::ChartererBuilder
           CharterParty.new(
             submission_charter_party.attributes.except!("id"))
 
+        vessel_charter_party.correspondent =
+          (@submission.correspondent_id == submission_charter_party.id)
+
         vessel_charter_party.parent = vessel_charterer
         vessel_charter_party.save
       end

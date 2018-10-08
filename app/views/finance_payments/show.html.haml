@@ -1,0 +1,38 @@
+- @finance_payment = Decorators::FinancePayment.new(@finance_payment)
+%h1= @finance_payment.page_heading
+
+.row
+  .col-md-6
+    = render partial: "finance_payment", locals: { finance_payment: @finance_payment }
+  .col-md-6
+    #related_submission.x_panel
+      %h2.x_title Related Application
+      .x_content
+        - if @related_submission.blank?
+          %tr
+            %td No Related Applications
+        - else
+
+          = render partial: "finance_payments/actions/linkable_submission", locals: { submission: @related_submission }
+
+    #related_vessel.x_panel
+      %h2.x_title Related Vessel
+      .x_content
+        - if @related_vessel.blank?
+          %tr
+            %td{colspan: 3} No Related Vessels
+        - else
+          %table.table
+            %tbody
+              = render partial: "search/vessel", locals: { vessel: @related_vessel }
+
+    #similar_open_applications.x_panel
+      %h2.x_title Open Applications for Vessels with Similar Names
+      .x_content
+        - if @similar_open_applications.empty?
+          %tr
+            %td{colspan: 3} No Open Applications
+        - else
+          = render partial: "finance_payments/actions/linkable_submission", collection: @similar_open_applications, as: :submission
+
+= render partial: "actions"

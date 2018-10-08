@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :unregistered_vessel, class: "Register::Vessel" do
     part                      :part_3
     sequence(:name)           { |n| "Registered Boat #{n}" }
@@ -18,21 +18,32 @@ FactoryGirl.define do
     representative            { build(:registered_representative) }
     propulsion_system         { "Fins" }
     registration_type         "full"
+    gross_tonnage             500
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do
     after(:create) do |vessel|
-      create(:registration,
-             registered_vessel: vessel,
-             registry_info: vessel.registry_info,
-             registered_at: 1.year.ago)
+      registration =
+        create(:registration,
+               registered_vessel: vessel,
+               registry_info: vessel.registry_info,
+               registered_at: 1.week.ago)
+      vessel.update_attributes(current_registration: registration)
+    end
+  end
+
+  factory :closed_vessel, parent: :registered_vessel do
+    after(:create) do |vessel|
+      vessel.current_registration.update_attributes(closed_at: 1.hour.ago)
     end
   end
 
   factory :provisionally_registered_vessel, parent: :registered_vessel do
     after(:create) do |vessel|
-      create(:provisional_registration,
-             registered_vessel: vessel)
+      provisional_registration =
+        create(:provisional_registration,
+               registered_vessel: vessel)
+      vessel.update_attributes(current_registration: provisional_registration)
     end
   end
 
@@ -48,6 +59,10 @@ FactoryGirl.define do
   factory :part_4_fishing_vessel, parent: :registered_vessel do
     part :part_4
     registration_type "fishing"
+  end
+
+  factory :part_4_vessel, parent: :registered_vessel do
+    part :part_4
   end
 
   factory :pleasure_vessel, parent: :registered_vessel do

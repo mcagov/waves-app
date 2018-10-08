@@ -41,7 +41,7 @@ describe "User freezes (and unfreezes) a vessel", type: :feature, js: true do
     login_to_part_3
     vessel = create(:registered_vessel)
     vessel.issue_section_notice!
-    vessel.update_attribute(:frozen_at, Time.now)
+    vessel.update_attribute(:frozen_at, Time.zone.now)
     visit vessel_path(vessel)
 
     click_on("Registrar Tools")

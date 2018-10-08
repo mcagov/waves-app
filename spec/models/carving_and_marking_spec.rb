@@ -47,4 +47,24 @@ RSpec.describe CarvingAndMarking, type: :model do
       it { expect(subject).to eq("Part 1 pleasure vessels under 24m") }
     end
   end
+
+  describe "emailable?" do
+    let(:carving_and_marking) do
+      build(:carving_and_marking, delivery_method: delivery_method)
+    end
+
+    subject { carving_and_marking.emailable? }
+
+    context "email" do
+      let(:delivery_method) { :email }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "print" do
+      let(:delivery_method) { :print }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
 end

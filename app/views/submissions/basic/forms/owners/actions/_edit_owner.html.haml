@@ -1,4 +1,4 @@
-- if @submission.address_can_be_changed?
+- unless @readonly
   = link_to '#',
     "data-target" => "#declaration_#{declaration.id}",
     "data-toggle" => "modal" do

@@ -27,7 +27,7 @@
         .col-md-3
           = owner_f.input :registration_number, label: "Company Number"
         .col-md-3
-          = owner_f.input :date_of_incorporation, label: "Date of Incorporation", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+          = owner_f.input :date_of_incorporation, as: :string, label: "Date of Incorporation", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
       %hr
       .row
         .col-md-6

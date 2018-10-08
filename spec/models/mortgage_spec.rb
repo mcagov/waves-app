@@ -4,20 +4,14 @@ describe Mortgage do
   context ".types_for(submission)" do
     subject { described_class.types_for(submission) }
 
-    context "when the submission is for a new_registration" do
+    context "when the submission has no registered vessel" do
       let(:submission) { build(:submission) }
 
       it { expect(subject).to eq(["Intent"]) }
     end
 
-    context "when the submission is for a provisional registratioschemn" do
-      let(:submission) { build(:submission, task: :provisional) }
-
-      it { expect(subject).to eq(["Intent"]) }
-    end
-
-    context "when the submission is not a new_registration" do
-      let(:submission) { build(:submission, task: :change_vessel) }
+    context "when the submission has a registered_vessel" do
+      let(:submission) { build(:submission, :part_1_vessel) }
 
       it do
         expect(subject).to eq(["Intent", "Account Current", "Principle Sum"])
@@ -80,7 +74,7 @@ describe Mortgage do
       let(:mortgage_type) { "Current Account" }
 
       it "uses the current time" do
-        expect(mortgage.registered_at.to_date).to eq(Date.today)
+        expect(mortgage.registered_at.to_date).to eq(Time.zone.today)
       end
     end
   end

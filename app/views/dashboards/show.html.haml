@@ -13,3 +13,22 @@
           %a.btn.btn-primary.btn-block{href: "?activity=finance"} Finance Team / Post Room
           - unless current_user.operational_user?
             %a.btn.btn-info.btn-block{href: "?activity=reports"} Management Reports
+      .separator
+        = link_to "Search the Registry", "#global-search",
+            data: { dismiss: "modal", toggle: "modal", target: "#global-search" },
+            class: "btn btn-block btn-success"
+
+.modal.fade{id: "global-search", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Search the Registry
+      .modal-body
+        .row
+          .col-sm-6
+            = form_tag "/search/global", method: :get, remote: true do
+              = hidden_field_tag :response_path, "/search/index"
+              = render partial: "search/fields"
+        #search_results

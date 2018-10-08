@@ -4,6 +4,6 @@ class Pdfs::Part2::Certificate < Pdfs::Certificate
   end
 
   def certificate_writer(registration)
-    Pdfs::Part2::CertificateWriter.new(registration, @pdf, @mode)
+    Pdfs::Part2::CertificateWriter.new(registration, @pdf, @mode, @duplicate)
   end
 end

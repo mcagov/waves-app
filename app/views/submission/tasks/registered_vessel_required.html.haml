@@ -1,0 +1,5 @@
+- content_for :task_body do
+  .x_panel
+    .x_content.red This task cannot be processed until the application is associated with a registered vessel.
+
+= render partial: "base", locals: { task: @task, submission: @submission }

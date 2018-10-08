@@ -1,5 +1,5 @@
 class Admin::ReportsController < InternalPagesController
-  before_action :team_leader_only!
+  before_action :system_manager_only!
 
   def show
     @filter = filter_params || default_filter_params

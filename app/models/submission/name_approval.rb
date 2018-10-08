@@ -5,18 +5,14 @@ class Submission::NameApproval < ApplicationRecord
 
   validates :submission_id, presence: true
   validates :name, presence: true
-  validates :port_code, presence: true
+  validates :port_code, presence: true, unless: :part_1?
   validates :port_no, allow_blank: true, numericality: { only_integer: true }
 
   validate :unique_name_in_port
   validate :unique_port_no_in_port
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
-
-  scope :active, (lambda do
-    where("approved_until is null or approved_until > now()")
-      .where("cancelled_at is null")
-  end)
+  scope :active, -> { where(cancelled_at: nil) }
 
   def port_name
     WavesUtilities::Port.new(port_code).name
@@ -59,5 +55,9 @@ class Submission::NameApproval < ApplicationRecord
   def port_no_changed?
     return true if new_record?
     (submission_vessel.port_no != port_no) || port_code_changed?
+  end
+
+  def part_1?
+    part.to_sym == :part_1
   end
 end

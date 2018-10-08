@@ -19,10 +19,10 @@ class Mortgage < ApplicationRecord
 
   class << self
     def types_for(submission)
-      if Task.new(submission.task).new_registration?
-        %w(Intent)
-      else
+      if submission.registered_vessel
         ["Intent", "Account Current", "Principle Sum"]
+      else
+        %w(Intent)
       end
     end
   end
@@ -33,7 +33,7 @@ class Mortgage < ApplicationRecord
       update_attribute(:registered_at, nil) if registered_at?
     else
       unless registered_at.present?
-        update_attribute(:registered_at, datetime_to_register || Time.now)
+        update_attribute(:registered_at, datetime_to_register || Time.zone.now)
       end
     end
 

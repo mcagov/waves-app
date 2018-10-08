@@ -43,6 +43,6 @@ class Report::TonnageStatisticByFleet < Report
 
   def age_of(vessel)
     return 0 unless vessel.keel_laying_date
-    (Date.today - vessel.keel_laying_date.to_date) / 365
+    (Time.zone.today - vessel.keel_laying_date.to_date) / 365
   end
 end

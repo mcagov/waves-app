@@ -15,9 +15,9 @@
             %h4.modal-title Add Owner to Group
           .modal-body
             .row
-              .col-md-6
-                = f.input :declaration_id, as: :select,
-                  collection: shares_held_jointly_declaration_select_options(declaration_group),
+              .col-md-12
+                = f.input :declaration_owner_id, as: :select,
+                  collection: shares_held_jointly_customer_select_options(declaration_group),
                   include_blank: false,
                   input_html: { class: "select2 select2_single" },
                   label: "Owner Name"
@@ -39,9 +39,9 @@
           %h4.modal-title Add Owner to New Group
         .modal-body
           .row
-            .col-md-6
+            .col-md-12
               = f.input :default_group_member, as: :select,
-                collection: declaration_select_options,
+                collection: customer_select_options(@submission),
                 include_blank: false,
                 input_html: { class: "select2 select2_single" },
                 label: "Owner Name"

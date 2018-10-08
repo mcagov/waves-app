@@ -5,6 +5,8 @@
         method: :post,
         remote: true,
         url: submission_declarations_path(@submission) do |f|
+        = f.object.build_owner
+
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×

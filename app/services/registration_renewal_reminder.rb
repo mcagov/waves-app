@@ -14,18 +14,22 @@ class RegistrationRenewalReminder
         .where("registrations.renewal_reminder_at IS NULL")
         .where(
           "registrations.registered_until between ? AND ?",
-          Date.today, 90.days.from_now)
+          Time.zone.today, 90.days.from_now)
     end
 
     def build_reminders
       @registered_vessels.each do |registered_vessel|
-        build_email_notification(registered_vessel)
-        build_renewal_reminder_letter_print_job(registered_vessel)
+        notification = build_email_notification(registered_vessel)
+
+        unless notification.deliverable?
+          build_renewal_reminder_letter_print_job(registered_vessel)
+        end
+
         build_mortgagee_reminder_letter_print_jobs(registered_vessel)
 
         registered_vessel
           .current_registration
-          .update_attribute(:renewal_reminder_at, Time.now)
+          .update_attribute(:renewal_reminder_at, Time.zone.now)
       end
     end
 

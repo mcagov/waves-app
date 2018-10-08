@@ -18,8 +18,8 @@
         %td.owner-address= owner.inline_address
         %td.declaration-status
           = render partial: "declarations/status", locals: { declaration: declaration}
-    - if @submission.display_registry_info?
-      - @submission.removed_registry_owners.each do |owner|
+    - if @submission.registered_vessel
+      - @submission.removed_registered_owners.each do |owner|
         %tr
           %td.owner-name.strike= owner
           %td.strike= owner.email

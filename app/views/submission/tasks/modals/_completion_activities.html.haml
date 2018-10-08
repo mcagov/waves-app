@@ -1,0 +1,30 @@
+- activities_policy = Policies::Activities.new(task)
+
+- if activities_policy.supports_registration_date_inputs
+  - registration_date = RegistrationDate.for(task)
+  - task.registration_starts_at = registration_date.starts_at.to_s(:datetimepicker)
+  - task.registration_ends_at = registration_date.ends_at.to_s(:datetimepicker)
+  .row
+    .col-md-12
+      = task_f.input :registration_starts_at,
+        label: "Date and Time to take effect from",
+        input_html: { class: "datetimepicker" }
+  .row
+    .col-md-12
+      = task_f.input :registration_ends_at,
+        label: "Registration Expiry Date",
+        input_html: { class: "datetimepicker" }
+
+- if activities_policy.close_registration
+  .row
+    .col-md-12
+      - task.closure_at = Time.zone.now.to_s(:datetimepicker)
+      = task_f.input :closure_at, label: "Closure Date", input_html: { class: "datetimepicker" }
+  .row
+    .col-md-12
+      = task_f.input :closure_reason, as: :select, label: "Closure Reason",
+        collection: closure_reasons_collection,
+        include_blank: false
+  .row
+    .col-md-12
+      = task_f.input :supporting_info, label: "Supporting Info"

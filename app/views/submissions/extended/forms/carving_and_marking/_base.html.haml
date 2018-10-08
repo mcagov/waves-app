@@ -24,8 +24,9 @@
   .col-md-3
     - if @submission.can_issue_carving_and_marking?
       - unless @readonly
-        = link_to "#", class: "btn btn-primary",
-          "data-target" => "#issue_carving_and_marking",
+        = link_to new_submission_carving_and_marking_path(@submission, task_id: @task.id), class: "btn btn-primary",
+          remote: true,
+          "data-target" => "#new-carving-and-marking",
           "data-toggle" => "modal" do
           Issue Carving & Marking Note
 
@@ -39,7 +40,7 @@
         Signed Carving & Marking received on #{@submission.carving_and_marking_received_at}.
     .col-md-3
       - unless @readonly
-        = link_to update_state_submission_carving_and_marking_path(@submission),
+        = link_to update_state_submission_carving_and_marking_path(@submission, task_id: @task.id),
           remote: true,
           method: :post,
           class: "btn btn-warning pull-right" do
@@ -47,7 +48,7 @@
   - else
     .col-md-9
       - unless @readonly
-        = link_to update_state_submission_carving_and_marking_path(@submission),
+        = link_to update_state_submission_carving_and_marking_path(@submission, task_id: @task.id),
           method: :post,
           remote: true,
           class: "btn btn-success pull-right" do

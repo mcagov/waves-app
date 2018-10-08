@@ -93,9 +93,7 @@ class Pdfs::Extended::CertificateWriter < Pdfs::CertificateWriter
   end
 
   def duplicate_message_warning
-    if @registration.prints_duplicate_certificate?
-      @pdf.draw_text "DUPLICATE", at: [265, 667], size: 20
-    end
+    @pdf.draw_text "DUPLICATE", at: [265, 667], size: 20 if @duplicate
   end
 
   def watermark

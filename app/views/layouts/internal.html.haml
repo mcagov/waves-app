@@ -1,6 +1,8 @@
 !!!
 %html{:lang => "en"}
   %head
+    %meta{}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "NOODP", :name => "ROBOTS"}/
@@ -15,10 +17,11 @@
         = render partial: "layouts/sidebar/base"
         = render partial: "layouts/topnav"
 
-        .right_col{role: "main"}
+        .right_col{role: "main", class: "#{@bg_class}"}
           .row
             .col-sm-12
               = render partial: "layouts/flash"
               = yield
+
   = render "javascript"
   = render "css_overrides"

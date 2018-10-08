@@ -17,13 +17,12 @@ class Builders::DeclarationBuilder
       @owners.each do |owner|
         declaration =
           Declaration.create(
-            submission: @submission,
-            changeset: owner,
-            state: initial_state_for_task,
+            submission_id: @submission.id,
+            owner: build_owner(owner),
             shares_held: owner[:shares_held].to_i,
             entity_type: owner[:entity_type] || :individual)
 
-        if @declared_by_emails.include?(declaration.owner.email)
+        if @declared_by_emails.include?(declaration.owner_email)
           declaration.declared! if declaration.can_transition? :declared
         end
       end
@@ -47,34 +46,30 @@ class Builders::DeclarationBuilder
         shareholder_group[:group_member_keys].each do |group_member|
           declaration_group
             .declaration_group_members
-            .create(declaration_id: declaration_id_for(group_member))
+            .create(declaration_owner_id: owner_id_for(group_member))
         end
       end
     end
 
-    def declaration_owners_list
+    def owners_list
       Declaration.where(submission: @submission).map do |d|
-        [d.id, d.owner.name.to_s, d.owner.email.to_s]
+        [d.owner.id, d.owner.name.to_s, d.owner.email.to_s]
       end
     end
 
-    def declaration_id_for(owner_key)
+    def owner_id_for(owner_key)
       owner_name = owner_key.split(";")[0].to_s
       owner_email = owner_key.split(";")[1].to_s
 
-      declaration = declaration_owners_list.find do |owner|
+      declaration = owners_list.find do |owner|
         (owner[1].to_s == owner_name) && (owner[2].to_s == owner_email)
       end
 
       declaration[0]
     end
 
-    def initial_state_for_task
-      if Task.new(@submission.task).declarations_required_on_create?
-        :incomplete
-      else
-        :not_required
-      end
+    def build_owner(owner)
+      Declaration::Owner.new(owner.except(:id, :type))
     end
   end
 end

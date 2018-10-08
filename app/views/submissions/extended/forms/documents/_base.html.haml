@@ -26,7 +26,7 @@
             = link_to asset.file_file_name, azure_private_asset_url(asset) , target: "_blank"
         %td.remove-document
           - unless @readonly
-            = link_to submission_document_path(@submission, document),
+            = link_to submission_document_path(@submission, document, task_id: @task.id),
                 class: 'btn-link pull-right',
                 method: :delete,
                 remote: :true,
@@ -47,12 +47,12 @@
     .modal-dialog.modal-lg
       .modal-content
         - document = Document.build(1)
-        - document.noted_at = Date.today
+        - document.noted_at = Time.zone.today
         = simple_form_for document,
           method: :post,
           remote: true,
           multipart: true,
-          url: submission_documents_path(@submission) do |document_f|
+          url: submission_documents_path(@submission, task_id: @task.id) do |document_f|
           = hidden_field_tag "modal_id", "new_document"
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -72,7 +72,7 @@
             method: :put,
             remote: true,
             multipart: true,
-            url: submission_document_path(@submission, document) do |document_f|
+            url: submission_document_path(@submission, document, task_id: @task.id) do |document_f|
             = hidden_field_tag "modal_id", "new_document"
             .modal-header
               %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}

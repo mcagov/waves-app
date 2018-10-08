@@ -7,18 +7,29 @@
     %th Amount
   %tbody
     - submission.payments.each do |payment|
-      %tr
-        - if payment.remittance.is_a?(Payment::WorldPay)
+      - if payment.remittance.is_a?(Payment::WorldPay)
+        %tr.world_pay
           %td= payment.remittance.created_at
           %td World Pay
           %td Order Code #{payment.remittance.wp_order_code}
           %td= payment.remittance.customer_ip
+          %td
+            %strong= formatted_amount(payment.amount)
 
-        - elsif payment.remittance.is_a?(Payment::FinancePayment)
-          - finance_payment = Decorators::FinancePayment.new(payment.remittance)
-          %td= finance_payment.payment_date
+      - elsif payment.remittance.is_a?(Payment::FinancePayment)
+        - finance_payment = Decorators::FinancePayment.new(payment.remittance)
+        %tr.finance_payment
+          %td
+            = link_to "#finance-payment-#{finance_payment.id}",
+              "data-target" => "#finance-payment-#{finance_payment.id}",
+              "data-toggle" => "modal" do
+              = finance_payment.payment_date
+              %i.fa.fa-info
+
+            = render partial: "finance_payments/modals/finance_payment", locals: { finance_payment: finance_payment }
+
           %td= finance_payment.payment_type_description
           %td Batch: #{finance_payment.batch_no}
           %td N/A
-        %td
-          %strong= formatted_amount(payment.amount)
+          %td
+            %strong= formatted_amount(payment.amount)

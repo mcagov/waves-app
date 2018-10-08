@@ -28,37 +28,6 @@ class Policies::Definitions
       part_4?(obj) && registration_type(obj) == :fishing
     end
 
-    def approval_errors(submission)
-      return [] unless Task.new(submission.task).validates_on_approval?
-      errors = vessel_errors(submission)
-
-      unless Task.new(submission.task) == :manual_override
-        errors << submission_errors(submission)
-      end
-
-      errors.flatten
-    end
-
-    def vessel_errors(submission)
-      errors = []
-      errors << :vessel_required if submission.vessel.name.blank?
-      errors << :owners_required if submission.owners.empty?
-      errors
-    end
-
-    # rubocop:disable Metrics/CyclomaticComplexity
-    def submission_errors(submission)
-      errors = []
-      errors << :vessel_frozen if frozen?(submission)
-      errors << :declarations_required if undeclared?(submission)
-      errors << :payment_required if unpaid?(submission)
-      errors << :carving_marking_receipt if cm_pending?(submission)
-      errors << :shareholding_count if sh_incomplete?(submission)
-      errors << :correspondent_required if no_correspondent?(submission)
-      errors
-    end
-    # rubocop:enable Metrics/CyclomaticComplexity
-
     def frozen?(obj)
       obj.registration_status == :frozen
     end
@@ -69,21 +38,6 @@ class Policies::Definitions
 
     def unpaid?(submission)
       AccountLedger.new(submission).awaiting_payment?
-    end
-
-    def cm_pending?(submission)
-      return false if submission.carving_and_markings.empty?
-      submission.carving_and_marking_received_at.blank?
-    end
-
-    def sh_incomplete?(submission)
-      return false unless Policies::Workflow.uses_shareholding?(submission)
-      ShareHolding.new(submission).status != :complete
-    end
-
-    def no_correspondent?(submission)
-      return false if part_3?(submission)
-      submission.correspondent.blank?
     end
 
     def fishing_vessel?(obj)

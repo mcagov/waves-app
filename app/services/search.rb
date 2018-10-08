@@ -1,27 +1,25 @@
 class Search
   class << self
-    def all(term)
-      PgSearch.multisearch(term)
+    def submissions(term, part = nil)
+      term = RefNo.parse(term)
+      submissions = PgSearch.multisearch(term)
+                            .where(searchable_type: "Submission")
+                            .includes(searchable: [declarations: :owner])
+      submissions = submissions_in_part(submissions, part)
+      submissions.limit(20).map(&:searchable)
     end
 
-    def submissions(term)
-      Submission.scoped_search(term)
+    def vessels(term, part = nil)
+      vessels = PgSearch.multisearch(term)
+                        .where(searchable_type: "Register::Vessel")
+                        .includes(searchable: [:owners, :submissions])
+      vessels = vessels_in_part(vessels, part)
+      vessels.limit(20).map(&:searchable)
     end
 
-    def vessels(term)
-      PgSearch.multisearch(term)
-              .where(searchable_type: "Register::Vessel")
-              .limit(20)
-              .map(&:searchable)
-    end
-
-    def similar_submissions(submission)
-      return [] unless submission.registered_vessel
-      submission.registered_vessel.submissions.active.where.not(ref_no: nil)
-    end
-
-    # rubocop:disable Metrics/MethodLength
-    def similar_vessels(part, vessel)
+    # looks for similar vessels, to help
+    # a reg officer on a part_3 application page
+    def similar_vessels(part, vessel) # rubocop:disable Metrics/MethodLength
       Register::Vessel
         .in_part(part)
         .where(name: vessel.name)
@@ -33,6 +31,24 @@ class Search
         .or(Register::Vessel
           .where(["radio_call_sign = ? and radio_call_sign <> ''",
                   vessel.radio_call_sign]))
+    end
+
+    private
+
+    def vessels_in_part(arel, part)
+      return arel unless part
+
+      arel.joins("LEFT JOIN vessels ON (vessels.id =
+                 pg_search_documents.searchable_id)"
+                ).where("vessels.part = ?", part)
+    end
+
+    def submissions_in_part(arel, part)
+      return arel unless part
+
+      arel.joins("LEFT JOIN submissions ON (submissions.id =
+                 pg_search_documents.searchable_id)"
+                ).where("submissions.part = ?", part)
     end
   end
 end

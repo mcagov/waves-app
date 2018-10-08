@@ -23,15 +23,27 @@ describe RegistrationRenewalReminder do
   let!(:current_print_job_count) { PrintJob.count }
 
   context ".process" do
-    before { described_class.process }
+    let(:notification) { @remindable.renewal_reminder }
 
-    context "notification details" do
-      it "sends one email" do
+    let(:print_job) do
+      PrintJob
+        .where(printable: @remindable.current_registration)
+        .where(template: :renewal_reminder_letter)
+        .first
+    end
+
+    context "in general" do
+      before { described_class.process }
+
+      it "creates one notification" do
         expect(Notification::RenewalReminder.count)
           .to eq(sent_notification_count + 1)
       end
 
-      let(:notification) { @remindable.renewal_reminder }
+      it "sets the notification status to :pending_approval" do
+        expect(Notification::RenewalReminder.last.current_state)
+          .to eq(:pending_approval)
+      end
 
       it "sets the recipient to the vessel's correspondent" do
         expect(notification.recipient_name)
@@ -44,33 +56,38 @@ describe RegistrationRenewalReminder do
       it "sets the attachment" do
         expect(notification.attachments.to_sym).to eq(:renewal_reminder_letter)
       end
+
+      it "does not build a print job" do
+        expect(print_job).to be_nil
+      end
+
+      context "mortgagee_reminder_letter print job details" do
+        let(:mortgagee) { @remindable.mortgagees.first }
+
+        let(:print_job) do
+          PrintJob
+            .where(printable: mortgagee)
+            .where(template: :mortgagee_reminder_letter)
+            .first
+        end
+
+        it "is unprinted" do
+          expect(print_job).to be_unprinted
+        end
+
+        it "sets the part" do
+          expect(print_job.part).to eq(@remindable.part)
+        end
+      end
     end
 
-    context "renewal_reminder_letter print job details" do
-      let(:print_job) do
-        PrintJob
-          .where(printable: @remindable.current_registration)
-          .where(template: :renewal_reminder_letter)
-          .first
-      end
+    context "when the correspondent email is blank" do
+      before do
+        allow_any_instance_of(Register::Vessel)
+          .to receive(:correspondent)
+          .and_return(Customer.new(email: nil))
 
-      it "is unprinted" do
-        expect(print_job).to be_unprinted
-      end
-
-      it "sets the part" do
-        expect(print_job.part).to eq(@remindable.part)
-      end
-    end
-
-    context "mortgagee_reminder_letter print job details" do
-      let(:mortgagee) { @remindable.mortgagees.first }
-
-      let(:print_job) do
-        PrintJob
-          .where(printable: mortgagee)
-          .where(template: :mortgagee_reminder_letter)
-          .first
+        described_class.process
       end
 
       it "is unprinted" do

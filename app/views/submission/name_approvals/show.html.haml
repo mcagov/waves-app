@@ -1,75 +1,95 @@
-= render partial: "submissions/info/breadcrumbs", locals: { submission: @submission }
-= render partial: "submissions/info/heading", locals: { submission: @submission }
 
-- if @name_validated
-  .alert.bg-success.text-center.name-validated
-    %h3
-      %i.fa.fa-check
-      The name #{@name_approval.name} is available in #{@name_approval.port_name}.
-- else
-  = render partial: "submissions/info/summary", locals: { submission: @submission }
+- content_for :task_body do
+  - if @name_validated
+    .alert.bg-info.text-center.name-validated
+      %h3
+        %i.fa.fa-check
+        The name #{@name_approval.name} is available in #{@name_approval.port_name}.
 
-#name_approval
-  = simple_form_for @name_approval,
-    url: submission_name_approval_path(@submission),
-    defaults: { disabled: @readonly },
-    method: :patch do |f|
-    = f.input :part, as: :hidden
+  #name_approval
+    = simple_form_for @name_approval,
+      url: submission_name_approval_path(@submission),
+      defaults: { disabled: @readonly },
+      method: :patch do |f|
+      = f.input :part, as: :hidden
+      = hidden_field_tag :task_id, @task.id
 
-    - if @name_validated
-      = hidden_field_tag "name_validated", "1"
-    .x_panel
-      .x_title
-        %h2 Name Approval Process
-        .clearfix
-      .x_content
-        .row{style: 'padding-bottom: 15px;'}
-          .col-md-3.approval_name
-            = f.input :name,
-              label: "Vessel Name",
-              input_html: { class: "upcase" },
-              required: false
-          .col-md-3
-            = f.input :registration_type, as: :select,
-              collection: registration_types_collection(@submission.part),
-              label: "Registration Type",
-              include_blank: false,
-              input_html: { class: "select2 select2_single" }
-
-          .col-md-2
-            = f.input :port_code, as: :select,
-            collection: ports_collection,
-            label: "Port of Choice",
-            include_blank: false,
-            input_html: { class: "select2 select2_single searchable" }
-
-
-          .port_no_fields{ class: ("hidden" unless display_vessel_object?(:port_no, @name_approval)) }
-            .col-md-2.approval_port-no
-              = f.input :port_no,
-                as: :feedback,
-                feedback_label: f.object.port_code || "A",
-                placement: :left,
-                hint: "leave blank for system-generated port number",
-                label: "Port Number",
+      - if @name_validated
+        = hidden_field_tag "name_validated", "1"
+      .x_panel
+        .x_title
+          %h2 Name Approval Process
+          .clearfix
+        .x_content
+          .row{style: 'padding-bottom: 15px;'}
+            .col-md-3.approval_name
+              = f.input :name,
+                label: "Vessel Name",
+                input_html: { class: "upcase" },
                 required: false
+            .col-md-3
+              = f.input :registration_type, as: :select,
+                collection: registration_types_collection(@submission.part),
+                label: "Registration Type",
+                include_blank: false,
+                input_html: { class: "select2 select2_single" }
 
-          .col-md-2
-            = f.input :approved_until, as: :select,
-              collection: name_approved_until_collection,
-              label: "Approved for",
-              include_blank: false
-      - if @name_approval.errors.present?
-        .row
-          = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
-          = hidden_field_tag "skip_name_validation", "false"
+            .col-md-2
+              = f.input :port_code, as: :select,
+              collection: ports_collection,
+              label: "Port of Choice",
+              include_blank: (current_activity.part == :part_1),
+              input_html: { class: "select2 select2_single searchable" }
 
-- if @submission.actionable? && @submission.claimant == current_user
-  - content_for(:submission_save_buttons) do
-    - if @name_validated
-      = render partial: "submission/name_approvals/actions/validated"
-    - else
-      = render partial: "submission/name_approvals/actions/not_validated"
 
-= render partial: "submissions/actions/base",
-  locals: { submission: @submission }
+            .port_no_fields{ class: ("hidden" unless display_vessel_object?(:port_no, @name_approval)) }
+              .col-md-2.approval_port-no
+                = f.input :port_no,
+                  as: :feedback,
+                  feedback_label: f.object.port_code || "A",
+                  placement: :left,
+                  hint: "leave blank for system-generated port number",
+                  label: "Port Number",
+                  required: false
+
+            .col-md-2
+              = f.input :approved_until, as: :select,
+                collection: name_approved_until_collection,
+                label: "Approved for",
+                include_blank: false
+          - if @name_approval.errors.present?
+            .row
+              .col-md-6
+                = link_to "Override Name/PLN validation and use these details", "#", id: "skip-name-approval-validation"
+                = hidden_field_tag "skip_name_validation", "false"
+        .x_footer
+          - if @name_validated
+            = render partial: "submission/name_approvals/actions/validated"
+          - else
+            = render partial: "submission/name_approvals/actions/not_validated"
+  .row
+    .col-md-12
+      .x_panel
+        .x_content
+          %div
+            %ul.nav.nav-tabs.bar_tabs{:role => "tablist"}
+              %li.active
+                %a#payments-tab{"data-toggle" => "tab", :href => "#payments_tab", :role => "tab"} Payments
+
+              %li{:role => "presentation"}
+                %a#notes-tab{"data-toggle" => "tab", :href => "#notes_tab", :role => "tab"} Notes
+
+              %li{:role => "presentation"}
+                %a#work-logs-tab{"data-toggle" => "tab", :href => "#work_logs_tab", :role => "tab"} Work Logs
+
+            .tab-content
+              #payments_tab.tab-pane.active{"aria-labelledby" => "payments-tab", :role => "tabpanel"}
+                #payments= render partial: "submissions/basic/body/payments", locals: { submission: @submission }
+
+              #notes_tab.tab-pane{"aria-labelledby" => "notes-tab", :role => "tabpanel"}
+                #notes= render partial: "submission/notes/base", locals: { submission: @submission }
+
+              #work_logs_tab.tab-pane{"aria-labelledby" => "work-logs-tab", :role => "tabpanel"}
+                = render partial: "submissions/basic/body/work_logs", locals: { submission: @submission }
+
+= render partial: "submission/tasks/base", locals: { submission: @submission, task: @task }

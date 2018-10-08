@@ -3,12 +3,26 @@ class Policies::Workflow
     def approved_name_required?(submission)
       return false if Policies::Definitions.part_3?(submission)
       return false if submission.registered_vessel
-      return false if submission.name_approval
+      return false if submission.name_approval.try(:persisted?)
       true
     end
 
     def generate_official_no?(submission)
-      !Policies::Definitions.part_3?(submission)
+      return false if Policies::Definitions.part_3?(submission)
+      # submission.actionable? && !approved_name_required?(submission)
+      !approved_name_required?(submission)
+    end
+
+    def can_email_application_approval?(submission)
+      !submission.tasks.completed.empty?
+    end
+
+    def can_edit_official_number?(user)
+      user.system_manager?
+    end
+
+    def can_unclaim_team_tasks?(user)
+      user.system_manager?
     end
 
     def uses_port_no?(obj)
@@ -47,10 +61,6 @@ class Policies::Workflow
       WavesUtilities::Vessel.attributes_for(
         @part, Policies::Definitions.fishing_vessel?(obj)
       ).include?(attr.to_sym)
-    end
-
-    def uses_certificates_and_documents?(submission)
-      Task.new(submission.task).builds_registry?
     end
 
     def uses_registration_types?(part)

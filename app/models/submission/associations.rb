@@ -21,34 +21,32 @@ module Submission::Associations
     end
 
     def declaration_associations(base)
-      base.belongs_to :correspondent,
-                      class_name: "Submission::Correspondent",
-                      required: false
-
       base.has_many :declarations, -> { order("created_at asc") }
-
       base.has_many :declaration_groups, class_name: "Declaration::Group"
-
-      base.belongs_to :managing_owner,
-                      class_name: "Submission::ManagingOwner",
-                      required: false
     end
 
     def misc_associations(base)
-      base.has_many :line_items, class_name: "Submission::LineItem"
-      base.has_many :work_logs
       base.has_many :carving_and_markings, -> { order("created_at asc") }
       base.has_many :engines, as: :parent
       base.has_many :mortgages, -> { order("priority_code asc") }, as: :parent
       base.has_many :charterers, -> { order("created_at asc") }, as: :parent
       base.has_many :charter_parties, through: :charterers
       base.has_one  :csr_form
-      base.has_one :name_approval, class_name: "Submission::NameApproval"
       base.has_many :print_jobs
-      base.has_many :fees, through: :line_items
+      base.has_many :tasks, class_name: "Submission::Task"
+      base.has_many :work_logs, -> { order("created_at desc") }, through: :tasks
+      base.scope :outstanding_carving_and_marking,
+                 (lambda do
+                    where.not(carving_and_marking_receipt_skipped_at: nil).
+                    where(carving_and_marking_received_at: nil).
+                    order(carving_and_marking_receipt_skipped_at: :desc)
+                 end)
     end
 
     def ownership_associations(base)
+      base.belongs_to :correspondent, class_name: "Customer", required: false
+      base.belongs_to :managing_owner, class_name: "Customer", required: false
+
       base.has_many :beneficial_owners,
                     -> { order(:name) },
                     class_name: "BeneficialOwner",
@@ -111,6 +109,18 @@ module Submission::Associations
       base.belongs_to :claimant, class_name: "User", required: false
       base.scope :assigned_to, -> (claimant) { where(claimant: claimant) }
     end
+  end
+
+  def default_task
+    tasks.order("submission_ref_counter").confirmed.first
+  end
+
+  def task
+    application_type
+  end
+
+  def task=(val)
+    self.application_type = val
   end
 
   def owners

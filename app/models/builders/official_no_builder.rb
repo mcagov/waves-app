@@ -9,20 +9,16 @@ class Builders::OfficialNoBuilder
           part: @submission.part,
           reg_no: vessel_reg_no)
 
-      if Policies::Definitions.fishing_vessel?(@submission)
-        @submission = assign_ec_no(@submission)
-      end
-
       @submission.save
     end
 
-    private
+    def update(registered_vessel, vessel_reg_no)
+      registered_vessel.update_attributes(reg_no: vessel_reg_no)
 
-    def assign_ec_no(submission)
-      vessel = submission.vessel
-      vessel.ec_no = "GBR000#{submission.registered_vessel.reg_no}"
-      submission.vessel = vessel
-      submission
+      if registered_vessel.current_registration
+        registered_vessel.current_registration.update_attribute(
+          :registry_info, registered_vessel.registry_info)
+      end
     end
   end
 end

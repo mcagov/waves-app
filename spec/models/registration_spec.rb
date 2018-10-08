@@ -20,6 +20,25 @@ describe Registration do
     end
   end
 
+  context "#submission_ref_no" do
+    let(:registration) { create(:registered_vessel).current_registration }
+    subject { registration.reload.submission_ref_no }
+
+    context "with a submission" do
+      let!(:submission) { create(:submission, registration: registration) }
+
+      it "retrieves the submission's ref_no" do
+        expect(subject).to eq(submission.ref_no)
+      end
+    end
+
+    context "without a submission" do
+      it "is nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
   context "#part" do
     let(:registration) { build(:registration, registry_info: registry_info) }
 
@@ -35,32 +54,6 @@ describe Registration do
       let(:registry_info) { { vessel_info: { part: "part_1" } } }
 
       it { expect(registration.part).to eq(:part_1) }
-    end
-  end
-
-  context "#prints_duplicate_certificate?" do
-    let!(:registration) { create(:registered_vessel).current_registration }
-
-    before do
-      submission = double(:submission, task: task)
-
-      allow(registration)
-        .to receive(:submission)
-        .and_return(submission)
-    end
-
-    subject { registration.prints_duplicate_certificate? }
-
-    context "when the submission was for a duplicate_certificate" do
-      let(:task) { :duplicate_certificate }
-
-      it { expect(subject).to be_truthy }
-    end
-
-    context "when the submission was for a new_registration" do
-      let(:task) { :new_registration }
-
-      it { expect(subject).to be_falsey }
     end
   end
 

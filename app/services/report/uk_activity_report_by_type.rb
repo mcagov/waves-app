@@ -73,7 +73,7 @@ class Report::UkActivityReportByType < Report
       ["Merchant Flag in", :merchant_flag_in],
       ["Merchant Flag out", :merchant_flag_out],
       ["Flag In", :flag_in],
-      ["Flat Out", :flag_out],
+      ["Flag Out", :flag_out],
       ["Fishing between 15-24m Flag in", :fishing_between_15m_24m_flag_in],
       ["Fishing between 15-24m Flag out", :fishing_between_15m_24m_flag_out],
       ["Fishing over 24m Flag in", :fishing_over_24m_flag_in],

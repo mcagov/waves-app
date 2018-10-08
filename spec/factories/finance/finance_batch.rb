@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :finance_batch, class: "FinanceBatch" do
-    opened_at      { Date.today }
+    opened_at      { Time.zone.today }
     processed_by   { build(:user) }
     after(:create) do |batch|
       create(:finance_payment, batch: batch)
@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   factory :empty_finance_batch, class: "FinanceBatch" do
-    opened_at      { Date.today }
+    opened_at      { Time.zone.today }
     processed_by   { build(:user) }
   end
 end

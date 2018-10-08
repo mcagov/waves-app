@@ -5,14 +5,14 @@
       External Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "CEFAS", admin_report_path(:cefas)
-      %li= link_to "Fishing Regional", admin_report_path(:fishing_regional)
-      %li= link_to "HMRC", admin_report_path(:hmrc)
+      / %li= link_to "CEFAS", admin_report_path(:cefas)
+      / %li= link_to "Fishing Regional", admin_report_path(:fishing_regional)
+      / %li= link_to "HMRC", admin_report_path(:hmrc)
       %li= link_to "IHS/Fairplay", admin_report_path(:ihs)
-      %li= link_to "MAIB", admin_report_path(:maib)
-      %li= link_to "Trinity House", admin_report_path(:trinity_house)
+      / %li= link_to "MAIB", admin_report_path(:maib)
+      / %li= link_to "Trinity House", admin_report_path(:trinity_house)
       %li= link_to "Tonnage Statistics", admin_report_path(:tonnage_statistic)
-      %li= link_to "UK Activity", admin_report_path(:uk_activity)
+      / %li= link_to "UK Activity", admin_report_path(:uk_activity)
       %li= link_to "Vessel Age", admin_report_path(:vessel_age)
 %ul.nav.side-menu
   %li
@@ -29,12 +29,11 @@
       Management Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      - if current_user.system_manager?
-        %li= link_to "Advanced Search", admin_report_path(:advanced_search)
       %li= link_to "Expiring Certificates", admin_report_path(:expiring_certificates)
       %li= link_to "Section Notices", admin_report_path(:section_notices)
       %li= link_to "Staff Performance", admin_report_path(:staff_performance)
       %li= link_to "Staff Performance by Task", admin_report_path(:staff_performance_by_task)
       %li= link_to "Vessel Registration Status", admin_report_path(:vessel_registration_status)
-      %li= link_to "Transfers In/Out", admin_report_path(:transfer_in_and_out)
-      %li= link_to "Work Logs", reports_work_logs_path
+      %li= link_to "Transfers In", admin_report_path(:transfer_in)
+      %li= link_to "Transfers Out", admin_report_path(:transfer_out)
+      %li= link_to "Work Logs", work_logs_path

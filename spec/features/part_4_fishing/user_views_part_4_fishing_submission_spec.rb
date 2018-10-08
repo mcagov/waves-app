@@ -1,11 +1,11 @@
 require "rails_helper"
 
 describe "User views Part 4 fishing submission", type: :feature, js: true do
-  before do
-    visit_name_approved_part_4_fishing_submission
-  end
-
   scenario "UI Elements" do
+    visit_claimed_task(
+      service: create(:service, :update_registry_details),
+      submission: create(:submission, :part_4_fishing_vessel))
+
     expect_safety_certificate_warning(true)
     expect_ec_no(true)
     expect_charterers(true)
@@ -20,5 +20,6 @@ describe "User views Part 4 fishing submission", type: :feature, js: true do
     expect_managing_owner_fields(false)
     expect_shareholding(false)
     expect_owner_declarations(false)
+    expect_payments_tab(true)
   end
 end

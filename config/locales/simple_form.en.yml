@@ -12,7 +12,7 @@ en:
       payment_finance_payment:
         payment_date: Payment Date
         part: Part of the Register
-        task: Application Type
+        application_type: Primary Application
         vessel_reg_no: Official Number
         vessel_name: Vessel Name
         service_level: Service Level
@@ -24,12 +24,13 @@ en:
         documents_received: Documents Received
       submission:
         part: Part of the Register
-        task: Application Type
+        application_type: Primary Application
         vessel_reg_no: Official Number
         applicant_name: Applicant Name
         applicant_email: Applicant's Email Address
         vessel:
           name: Vessel Name
+          autonomous_vessel: Autonomous Vessel
           alt_name_1: "Alternative Vessel Name #1"
           alt_name_2: "Alternative Vessel Name #2"
           alt_name_3: "Alternative Vessel Name #3"
@@ -39,7 +40,6 @@ en:
           breadth: Breadth
           classification_society: Classification Society
           classification_society_other: Any Other Classification Society
-          ec_no: EC No
           smc_issuing_authority: SMC Issuing Authority
           smc_auditor : SMC Auditor
           issc_issuing_authority: ISSC Issuing Authority

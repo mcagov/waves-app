@@ -1,0 +1,29 @@
+.modal.fade{id: "section_notice-#{ section_notice.id }", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4
+          Section Notice
+      .modal-body
+        %dl
+          %dt Date issued
+          %dd= section_notice.created_at.to_s(:date_time)
+        %dl
+          %dt Regulation/Reason
+          %dd= section_notice.subject
+        %dl
+          %dt Evidence required
+          %dd= section_notice.content
+        %dl
+          %dt Actioned by
+          %dd= section_notice.actioned_by
+
+      .modal-footer
+        - if print_job = section_notice.print_job
+          = link_to print_job_path(print_job, format: :pdf),
+            target: "_blank", class: "btn btn-warning" do
+            %i.fa.fa-print
+            = t("print_job.button_text.section_notice")
+

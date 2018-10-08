@@ -1,7 +1,5 @@
-def creates_a_work_log_entry(logged_type, description)
-  expect(
-    WorkLog.where(logged_type: logged_type).last.description.to_sym
-  ).to eq(description)
+def creates_a_work_log_entry(description)
+  expect(WorkLog.find_by(description: description)).to be_present
 end
 
 def does_not_create_a_work_log_entry

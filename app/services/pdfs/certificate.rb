@@ -1,7 +1,8 @@
 class Pdfs::Certificate
-  def initialize(registrations, mode = :printable)
+  def initialize(registrations, mode = :printable, duplicate = false)
     @registrations = Array(registrations)
     @mode = mode
+    @duplicate = duplicate
     @pdf = Prawn::Document.new(
       margin: 0, page_size: paper_size, skip_page_creation: true)
   end

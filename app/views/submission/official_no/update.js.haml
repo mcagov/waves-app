@@ -3,9 +3,4 @@
   $('.modal-backdrop').remove();
   $('body').removeClass('modal-open');
 
-  $('#official-and-ec-no').html(
-    '#{escape_javascript(
-      render partial: "/submissions/info/official_no",
-      locals: { submission: @submission })}'
-  );
-  $('#submission_vessel_ec_no').val('#{@submission.vessel.ec_no}');
+  window.location.reload();

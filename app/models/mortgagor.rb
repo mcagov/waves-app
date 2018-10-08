@@ -12,7 +12,9 @@ class Mortgagor < Customer
 
   def check_declaration_owner_id
     return unless declaration_owner_id.present?
-    owner = Declaration.find(declaration_owner_id).owner
+    owner = Declaration::Owner.find(declaration_owner_id)
+    return unless owner
+
     self.name = owner.name
     self.address_1 = owner.address_1
     self.address_2 = owner.address_2

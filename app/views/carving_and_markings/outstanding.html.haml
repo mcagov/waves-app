@@ -1,0 +1,27 @@
+.row
+  .col-md-6
+    %h1.heading_no_top_margin
+      Outstanding Carving & Marking Notes
+.x_panel
+  .x_content#outstanding_cm
+    - if @submissions.empty?
+      = "There are no outstanding Carving & Marking Notes"
+    - else
+      %table.table.table-striped
+        %thead
+          %th Vessel Name
+          %th Official No
+          %th Application Ref No
+          %th Registration Type
+          %th Date C&M receipt skipped
+        %tbody
+          - @submissions.each do |submission|
+            - submission = Decorators::Submission.new(submission)
+            %tr
+              %td= submission.vessel_name
+              %td= submission.vessel_reg_no
+              %td= link_to submission.ref_no, submission
+              %td= submission.registration_type.try(:titleize)
+              %td= submission.carving_and_marking_receipt_skipped_at
+
+      = will_paginate @submissions, renderer: BootstrapPagination::Rails

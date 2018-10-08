@@ -2,7 +2,10 @@ require "rails_helper"
 
 feature "User adds documents to part_2 submission", type: :feature, js: true do
   scenario "in general" do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Certificates & Documents")
     click_on("Add Certificate/Document")
 
@@ -21,6 +24,7 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
     expect(page).to have_css(".expires_at", text: "01/02/2016")
     expect(page).to have_css(".noted_at", text: "02/02/2016")
     expect(page).to have_link("mca_test.pdf", href: /mca_test.pdf/)
+    creates_a_work_log_entry(:document_added)
 
     click_on("Seafish")
 
@@ -30,9 +34,10 @@ feature "User adds documents to part_2 submission", type: :feature, js: true do
 
     expect(page).to have_css(".entity_type", text: "Bill of Sale")
 
+    document_count = Document.count
     within(".remove-document") { click_on("Remove") }
     expect(page).not_to have_css(".entity_type")
 
-    expect(Document.count).to eq(0)
+    expect(Document.count).to eq(document_count - 1)
   end
 end

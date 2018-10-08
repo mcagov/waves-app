@@ -2,61 +2,59 @@ require "rails_helper"
 
 describe Submission, type: :model do
   context "in general" do
-    let!(:submission) { create(:incomplete_submission) }
+    let!(:submission) { create(:submission) }
 
     it "gets the vessel_info" do
       expect(submission.vessel).to be_a(Submission::Vessel)
     end
 
-    it "has a state: incomplete" do
-      expect(submission).to be_incomplete
-    end
-
     it "gets the delivery_address" do
       expect(submission.delivery_address.country).to eq("UNITED KINGDOM")
     end
+  end
 
-    context "changing the registered_vessel_id" do
-      before do
-        expect(Builders::SubmissionBuilder)
-          .to receive(:build_defaults)
-          .with(submission)
-      end
+  context ".create" do
+    let(:submission) { Submission.create }
 
-      it "invokes the SubmissionBuilder#build_defaults" do
-        submission.registered_vessel_id = create(:registered_vessel).id
-        submission.save
-      end
+    it "defaults to source = online" do
+      expect(submission.source.to_sym).to eq(:online)
+    end
+
+    it "defaults to part = part_3" do
+      expect(submission.part.to_sym).to eq(:part_3)
+    end
+
+    it "builds the ref_no" do
+      expect(submission.ref_no).to be_present
     end
   end
 
-  context "#electronic_delivery?" do
-    let(:submission) { build(:submission, changeset: electronic_delivery) }
+  describe "#close!" do
+    let(:submission) { create(:submission) }
 
-    subject { submission.electronic_delivery? }
+    before do
+      tasks = double(:tasks, active: active_tasks, initialising: [])
+      allow(submission).to receive(:tasks).and_return(tasks)
+    end
 
-    context "when electronic_delivery is true" do
-      let(:electronic_delivery) { { "electronic_delivery" => true } }
+    subject { submission.close! }
+
+    context "with active tasks" do
+      let(:active_tasks) { [1] }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "without active tasks" do
+      let(:active_tasks) { [] }
 
       it { expect(subject).to be_truthy }
-    end
-
-    context "when electronic_delivery is false" do
-      let(:electronic_delivery) { { "electronic_delivery" => false } }
-
-      it { expect(subject).to be_falsey }
-    end
-
-    context "when the electronic_delivery has not been defined" do
-      let(:electronic_delivery) { {} }
-
-      it { expect(subject).to be_falsey }
     end
   end
 
   context ".vessel_reg_no =" do
     let!(:registered_vessel) { create(:registered_vessel, part: vessel_part) }
-    let(:submission) { create(:incomplete_submission, part: :part_1) }
+    let(:submission) { create(:submission, part: :part_1) }
 
     before { submission.vessel_reg_no = registered_vessel.reg_no }
 
@@ -76,8 +74,8 @@ describe Submission, type: :model do
   context "#vessel_name" do
     subject { submission.vessel_name }
 
-    context "with a registered_vessel" do
-      let(:submission) { build(:unassigned_change_vessel_submission) }
+    context "with a registered_vessel and an empty changeset" do
+      let(:submission) { build(:submission, :part_3_vessel, changeset: {}) }
 
       it { expect(subject).to eq(submission.registered_vessel.name) }
     end
@@ -90,7 +88,7 @@ describe Submission, type: :model do
 
     context "with a vessel name in a finance payment entry" do
       let(:submission) do
-        create(:submitted_finance_payment, vessel_name: "FP BOAT")
+        create(:locked_finance_payment, vessel_name: "FP BOAT")
       end
 
       it { expect(subject).to eq("FP BOAT") }
@@ -136,143 +134,28 @@ describe Submission, type: :model do
     end
   end
 
-  context ".referred_until_expired" do
-    let!(:submission) { create(:submission, referred_until: referred_until) }
-    let(:submissions) { Submission.referred_until_expired }
+  context "#notification_list" do
+    let!(:submission) { build(:submission) }
 
-    context "tomorrow" do
-      let(:referred_until) { Date.tomorrow }
-      it { expect(submissions).to be_empty }
+    before do
+      expect(Builders::NotificationListBuilder)
+        .to receive(:for_submission)
+        .with(submission)
     end
 
-    context "today" do
-      let(:referred_until) { Date.today }
-      it { expect(submissions.length).to eq(1) }
-    end
-
-    context "yesterday" do
-      let(:referred_until) { Date.yesterday }
-      it { expect(submissions.length).to eq(1) }
-    end
-
-    context "nil" do
-      let(:referred_until) { nil }
-      it { expect(submissions).to be_empty }
-    end
+    it { submission.notification_list }
   end
 
-  context "state machine transitions" do
-    context "to unassigned" do
-      let!(:submission) { create(:incomplete_submission) }
-      let!(:payment) { Payment.create(amount: 100, submission: submission) }
-
-      before do
-        allow(Policies::Actions)
-          .to receive(:actionable?)
-          .with(submission)
-          .and_return(true)
-
-        expect(Builders::ProcessingDatesBuilder)
-          .to receive(:create)
-          .with(submission)
-      end
-
-      it { submission.touch }
+  context "#applicant" do
+    let(:submission) do
+      build(:submission,
+            applicant_name: "ALICE",
+            applicant_email: "alice@example.com")
     end
 
-    context "to assigned" do
-      let!(:submission) { create(:unassigned_submission) }
-      let!(:bob) { create(:user) }
+    subject { submission.applicant }
 
-      before { submission.claimed!(bob) }
-
-      it { expect(submission.claimant).to eq(bob) }
-    end
-
-    context "from assigned to unassigned" do
-      let!(:submission) { create(:assigned_submission) }
-      let!(:bob) { create(:user) }
-
-      before { submission.unclaimed! }
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from assigned to referred" do
-      let!(:submission) { create(:assigned_submission) }
-
-      before { submission.referred! }
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from referred to unassigned" do
-      let!(:submission) { create(:referred_submission) }
-
-      before do
-        expect(Builders::ProcessingDatesBuilder)
-          .to receive(:create)
-          .with(submission)
-
-        submission.unreferred!
-      end
-
-      it { expect(submission.claimant).to be_nil }
-    end
-
-    context "from assigned to completed" do
-      let!(:submission) { create(:assigned_submission) }
-      let!(:bob) { create(:user) }
-
-      before { submission.approved! }
-
-      it { expect(submission.claimant).to be_present }
-    end
-
-    context "#approve_electronic_delivery" do
-      let!(:submission) { create(:unassigned_submission) }
-
-      before { submission.approve_electronic_delivery! }
-
-      it { expect(submission.claimant).to be_nil }
-      it { expect(submission).to be_completed }
-    end
-
-    context "#cancelled (cleaning up the name_approval)" do
-      let(:name_approval) { create(:submission_name_approval) }
-
-      before { name_approval.submission.cancelled! }
-
-      it "sets the name_approval#cancelled_at" do
-        expect(name_approval.cancelled_at).to be_present
-      end
-    end
-
-    context "#cancelled (cleaning up the registered_vessel)" do
-      let!(:submission) do
-        create(:assigned_submission, registered_vessel: vessel)
-      end
-
-      before do
-        submission.cancelled!
-        submission.reload
-      end
-
-      context "with the vessel's registration is pending" do
-        let!(:vessel) { create(:pending_vessel) }
-
-        it "removes the registered_vessel" do
-          expect(submission.registered_vessel).to be_nil
-        end
-      end
-
-      context "with the vessel is already registered" do
-        let!(:vessel) { create(:registered_vessel) }
-
-        it "retains the registered_vessel" do
-          expect(submission.registered_vessel).to eq(vessel)
-        end
-      end
-    end
+    it { expect(subject.email).to eq("alice@example.com") }
+    it { expect(subject.name).to eq("ALICE") }
   end
 end

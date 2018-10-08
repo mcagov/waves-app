@@ -31,6 +31,19 @@ class Pdfs::Processor
     end
   end
 
+  def duplicate_registration_certificate
+    case @part
+    when :part_1
+      Pdfs::Part1::Certificate.new(@printable_items, @mode, duplicate: true)
+    when :part_2
+      Pdfs::Part2::Certificate.new(@printable_items, @mode, duplicate: true)
+    when :part_3
+      Pdfs::Part3::Certificate.new(@printable_items, @mode, duplicate: true)
+    when :part_4
+      Pdfs::Part4::Certificate.new(@printable_items, @mode, duplicate: true)
+    end
+  end
+
   def cover_letter
     case @part
     when :part_3
@@ -105,5 +118,9 @@ class Pdfs::Processor
 
   def forced_closure
     Pdfs::ForcedClosure.new(@printable_items)
+  end
+
+  def payment_receipt
+    Pdfs::PaymentReceipt.new(@printable_items)
   end
 end

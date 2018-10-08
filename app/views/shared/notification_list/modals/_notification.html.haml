@@ -9,8 +9,12 @@
           Email
       .modal-body
         %dl
-          %dt Date sent
-          %dd= notification.created_at
+          %dt Date generated
+          %dd= notification.created_at.to_s(:date_time)
+
+        %dl
+          %dt Date delivered
+          %dd= notification.delivered_at.to_s(:date_time) if notification.delivered_at
         %dl
           %dt Recipient
           %dd= notification.recipient_email
@@ -18,8 +22,19 @@
           %dl
             %dt Reason
             %dd= notification.subject.humanize if notification.subject
+        - if notification.body.present?
           %dl
             %dt Message
             %dd= notification.body.html_safe
+
+        %dl
+          %dt Attachments
+          %dd
+            = notification.attachments.map { |attachment|  t("print_job.attachment_text.#{attachment}") }.join(", ").html_safe
+
+        %dl
+          %dt Actioned by
+          %dd= notification.actioned_by
+
       .modal-footer
         %button.btn.btn-default{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} Close

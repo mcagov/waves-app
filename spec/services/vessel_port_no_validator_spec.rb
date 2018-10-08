@@ -28,7 +28,7 @@ describe VesselPortNoValidator do
     context "with a name_approval with the same port_no" do
       before do
         create(
-          :submission_name_approval,
+          :name_approval,
           port_no: port_no,
           port_code: port_code, approved_until: approved_until)
       end
@@ -41,11 +41,6 @@ describe VesselPortNoValidator do
 
       context "in a different port" do
         let(:port_code) { "AA" }
-        it { expect(subject).to be_truthy }
-      end
-
-      context "when approved_until has expired" do
-        let(:approved_until) { 2.days.ago }
         it { expect(subject).to be_truthy }
       end
     end

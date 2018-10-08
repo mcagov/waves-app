@@ -1,0 +1,33 @@
+- recipients = email_recipient_select_options(submission)
+
+= simple_form_for Notification.new(actionable_at: default_referred_until), url: refer_submission_task_notification_path(submission, task) do |f|
+  .modal-header
+    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+      %span{"aria-hidden" => "true"} ×
+    %h4.modal-title Refer Task
+  .modal-body
+    .row
+      .col-md-12
+        %label Select Recipient(s)
+        - recipients.each do |recipient|
+          .form-group
+            = label_tag do
+              = check_box_tag "notification[recipients][]",
+                recipient.email_description, false
+              = recipient.email_description
+    .row
+      .col-sm-9
+        .form-group
+          = f.input :subject, as: :select, label: "Reason for Referral",
+            collection: Notification::Referral::REASONS.map{|r| [r.to_s,r.to_s]},
+            include_blank: false
+      .col-sm-3
+        .form-group
+          = f.input :actionable_at, label: "Due By", input_html: { "data-provide" => "datepicker", "data-date-autoclose" => "true", "data-date-format" => "dd/mm/yyyy"}
+    .row
+      .col-sm-12
+        .form-group
+          = render partial: "shared/fields/message_editor",
+            locals: { f: f, message_type: :refer }
+  .modal-footer
+    = f.submit "Refer Task", class: "btn btn-lg btn-warning"

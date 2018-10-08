@@ -2,8 +2,11 @@ require "rails_helper"
 
 describe Declaration::GroupMember do
   context ".destroy" do
-    let!(:submission) { create(:unassigned_submission) }
-    let!(:declaration) { submission.declarations.first }
+    let!(:submission) do
+      create(:submission, declarations: [build(:declaration)])
+    end
+
+    let(:declaration) { submission.declarations.first }
 
     let!(:declaration_group) do
       Declaration::Group.create(
@@ -24,7 +27,7 @@ describe Declaration::GroupMember do
     context "with more than one declaration_group_member" do
       before do
         Declaration::GroupMember.create(
-          declaration: create(:declaration),
+          declaration_owner: create(:declaration_owner),
           declaration_group: declaration_group
         )
       end

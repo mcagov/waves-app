@@ -4,9 +4,23 @@ module Register
     include Register::TerminationStateMachine
 
     multisearchable against:
-      [:reg_no, :name, :mmsi_number, :radio_call_sign, :imo_number, :hin, :pln]
+      [
+        :reg_no,
+        :name,
+        :mmsi_number,
+        :radio_call_sign,
+        :imo_number,
+        :hin,
+        :pln,
+        :owner_info,
+      ]
+
+    def owner_info
+      owners.map(&:inline_name_and_address).join("; ")
+    end
 
     validates :part, presence: true
+    validates :reg_no, presence: true
 
     has_one :agent, as: :parent, class_name: "Register::Agent"
     has_many :beneficial_owners, as: :parent, class_name: "BeneficialOwner"
@@ -77,13 +91,28 @@ module Register
               end),
              as: :noteable
 
+    has_many :termination_notices,
+             (lambda do
+                where("type = 'Register::TerminationNotice'")
+                  .order("created_at desc")
+              end),
+             as: :noteable
+
     has_many :submissions,
              -> { order("created_at desc") },
              foreign_key: :registered_vessel_id
-    has_one :latest_completed_submission,
+
+    has_one :latest_closed_submission,
             (lambda do
-              where("completed_at is not null")
+              where("closed_at is not null")
               .order("created_at desc").limit(1)
+            end),
+            foreign_key: :registered_vessel_id,
+            class_name: "Submission"
+
+    has_one :current_submission,
+            (lambda do
+              where("closed_at is null")
             end),
             foreign_key: :registered_vessel_id,
             class_name: "Submission"
@@ -103,7 +132,7 @@ module Register
 
     has_many :csr_forms, -> { order("issue_number desc") }
 
-    scope :in_part, ->(part) { where(part: part.to_sym) }
+    scope :in_part, ->(part) { where(part: part.to_sym) if part.present? }
     scope :frozen, -> { where.not(frozen_at: nil) }
     scope :not_frozen, -> { where(frozen_at: nil) }
 
@@ -113,7 +142,9 @@ module Register
     before_validation :build_reg_no, on: :create
 
     def correspondent
-      customers.where(correspondent: true).first || customers.first
+      owners.where(correspondent: true).first ||
+        charter_parties.where(correspondent: true).first ||
+        owners.first
     end
 
     def build_reg_no
@@ -158,12 +189,13 @@ module Register
       registration_status != :pending
     end
 
-    def ec_number=(_unimplemented)
-      # here we handle legacy changesets with ec_number assigned
-    end
-
     def pln
       "#{port_code} #{port_no}"
+    end
+
+    def ec_no
+      return unless reg_no && Policies::Definitions.fishing_vessel?(self)
+      "GBR000#{reg_no}"
     end
 
     private

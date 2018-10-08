@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "User edits shares held jointly", js: :true do
   before do
-    visit_name_approved_part_2_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_2_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Owners & Shareholding")
 
     @owner_name = Declaration.last.owner.name
@@ -41,7 +44,7 @@ describe "User edits shares held jointly", js: :true do
   end
 
   scenario "editing the number of shares" do
-    expect(page).to have_css("#total_shares", text: "allocated: 64")
+    expect(page).to have_css("#total_shares", text: "allocated: 0")
 
     within("#shares_held_jointly") { click_on("0") }
 
@@ -50,7 +53,7 @@ describe "User edits shares held jointly", js: :true do
       click_on("Save")
     end
 
-    expect(page).to have_css("#total_shares", text: "allocated: 80")
+    expect(page).to have_css("#total_shares", text: "allocated: 16")
   end
 end
 

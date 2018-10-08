@@ -3,10 +3,17 @@ class SequenceNumber::Generator < ApplicationRecord
 
   REG_NO_PATTERNS =
     {
-      part_1: "6#####",
+      part_1: "#######",
       part_2: "C#####",
-      part_3: "SSR2#####",
-      part_4: "8#####",
+      part_3: "SSR######",
+      part_4: "X#####",
+    }.freeze
+
+  REG_NO_START =
+    {
+      part_1: "2000000",
+      part_2: "30000",
+      part_3: "200000",
     }.freeze
 
   class << self

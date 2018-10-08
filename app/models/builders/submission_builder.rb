@@ -1,34 +1,22 @@
-class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
+class Builders::SubmissionBuilder
   class << self
     def build_defaults(submission)
       @submission = submission
-      ensure_defaults
       perform
 
-      @submission
+      @submission.save
     end
 
     private
 
-    def ensure_defaults
-      @submission.part ||= :part_3
-      @submission.task ||= :new_registration
-      @submission.source ||= :online
-      @submission.ref_no ||= RefNo.generate_for(@submission)
-    end
-
     def perform
-      build_registry_info if @submission.registered_vessel
       build_changeset if @submission.registered_vessel
-
       perform_changeset_operations if @submission.changeset
-
       build_agent if @submission.applicant_is_agent
     end
 
     def perform_changeset_operations
       build_declarations
-      build_managing_owner_and_correspondent
       build_engines
       build_managers
       build_mortgages
@@ -36,30 +24,16 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       build_beneficial_owners
       build_directed_bys
       build_managed_bys
-      build_service_level
-    end
-
-    def build_registry_info
-      return unless @submission.registry_info.blank?
-
-      @submission.registry_info =
-        @submission.registered_vessel.registry_info
     end
 
     def build_changeset
       return unless @submission.changeset.blank?
 
-      @submission.changeset = @submission.registry_info
+      @submission.changeset = @submission.registered_vessel.try(:registry_info)
     end
 
-    # Here we need to protect against re-building the owner declarations.
-    # We can never be sure how many times a submission will pass through
-    # this builder, so the rule is: if there are some declarations,
-    # don't build anymore!
     def build_declarations # rubocop:disable Metrics/MethodLength
-      if @submission.persisted?
-        return unless Declaration.where(submission: @submission).empty?
-      end
+      return unless Declaration.where(submission: @submission).empty?
 
       submitted_owners = @submission.symbolized_changeset[:owners]
       completed_declarations = @submission.symbolized_changeset[:declarations]
@@ -70,6 +44,13 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submitted_owners,
         completed_declarations,
         shareholder_groups)
+
+      Declaration.where(submission: @submission).each do |declaration|
+        owner = declaration.owner
+        next unless owner
+        @submission.managing_owner_id = owner.id if owner.managing_owner
+        @submission.correspondent_id = owner.id if owner.correspondent
+      end
     end
 
     def build_agent
@@ -85,22 +66,8 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       @submission.agent = agent_attrs
     end
 
-    def build_managing_owner_and_correspondent
-      Declaration.where(submission: @submission).each do |declaration|
-        if declaration.owner.managing_owner
-          @submission.managing_owner_id = declaration.id
-        end
-
-        if declaration.owner.correspondent
-          @submission.correspondent_id = declaration.id
-        end
-      end
-    end
-
     def build_engines
-      if @submission.persisted?
-        return unless Engine.where(parent: @submission).empty?
-      end
+      return unless Engine.where(parent: @submission).empty?
 
       (@submission.symbolized_changeset[:engines] || []).each do |engine|
         submission_engine = Engine.new(engine.except(:id))
@@ -110,9 +77,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_managers
-      if @submission.persisted?
-        return unless Manager.where(parent: @submission).empty?
-      end
+      return unless Manager.where(parent: @submission).empty?
 
       (@submission.symbolized_changeset[:managers] || []).each do |manager|
         except_keys = [:id, :safety_management]
@@ -133,10 +98,8 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
       safety_management.save
     end
 
-    def build_mortgages # rubocop:disable Metrics/MethodLength
-      if @submission.persisted?
-        return unless Mortgage.where(parent: @submission).empty?
-      end
+    def build_mortgages
+      return unless Mortgage.where(parent: @submission).empty?
 
       (@submission.symbolized_changeset[:mortgages] || []).each do |mortgage|
         except_keys = [:id, :mortgagors, :mortgagees]
@@ -166,9 +129,7 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_charterers
-      if @submission.persisted?
-        return unless Charterer.where(parent: @submission).empty?
-      end
+      return unless Charterer.where(parent: @submission).empty?
 
       (@submission.symbolized_changeset[:charterers] || []).each do |charterer|
         except_keys = [:id, :charter_parties]
@@ -185,13 +146,16 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_charter_party = CharterParty.new(charter_party.except(:id))
         submission_charter_party.parent = submission_charterer
         submission_charter_party.save
+
+        if submission_charter_party.correspondent
+          @submission.correspondent_id = submission_charter_party.id
+        end
       end
     end
 
     def build_beneficial_owners
-      if @submission.persisted?
-        return unless BeneficialOwner.where(parent: @submission).empty?
-      end
+      return unless BeneficialOwner.where(parent: @submission).empty?
+
       submission_b_owners =
         @submission.symbolized_changeset[:beneficial_owners] || []
 
@@ -203,9 +167,8 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_directed_bys
-      if @submission.persisted?
-        return unless DirectedBy.where(parent: @submission).empty?
-      end
+      return unless DirectedBy.where(parent: @submission).empty?
+
       submission_directed_bys =
         @submission.symbolized_changeset[:directed_bys] || []
 
@@ -217,9 +180,8 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
     end
 
     def build_managed_bys
-      if @submission.persisted?
-        return unless ManagedBy.where(parent: @submission).empty?
-      end
+      return unless ManagedBy.where(parent: @submission).empty?
+
       submission_managed_bys =
         @submission.symbolized_changeset[:managed_bys] || []
 
@@ -228,15 +190,6 @@ class Builders::SubmissionBuilder # rubocop:disable Metrics/ClassLength
         submission_managed_by.parent = @submission
         submission_managed_by.save
       end
-    end
-
-    def build_service_level
-      service_level =
-        if @submission.symbolized_changeset[:service_level].present?
-          @submission.symbolized_changeset[:service_level][:level]
-        end
-
-      @submission.service_level = service_level || :standard
     end
   end
 end

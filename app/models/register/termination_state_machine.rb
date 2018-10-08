@@ -13,7 +13,8 @@ module Register::TerminationStateMachine
                       from: :active
         end
 
-        event :issue_termination_notice do
+        event :issue_termination_notice,
+              timestamp: :termination_notice_issued_at do
           transitions to: :termination_notice_issued,
                       from: :section_notice_issued
         end

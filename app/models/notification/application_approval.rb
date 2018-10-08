@@ -8,8 +8,7 @@ class Notification::ApplicationApproval < Notification
   end
 
   def additional_params
-    [vessel_reg_no, actioned_by,
-     notifiable.task, vessel_name, email_attachments]
+    [body, actioned_by, email_attachments]
   end
 
   private
@@ -22,21 +21,9 @@ class Notification::ApplicationApproval < Notification
     @registration ||= notifiable.registration
   end
 
-  def vessel_reg_no
-    registered_vessel.reg_no if registered_vessel
-  end
-
-  def vessel_name
-    registered_vessel.name if registered_vessel
-  end
-
-  def registered_vessel
-    notifiable.registered_vessel if notifiable
-  end
-
   def email_attachments
-    return if attachments.blank?
-
-    Pdfs::Processor.run(attachments.to_sym, registration, :attachment).render
+    Array(attachments).map do |attachment|
+      Pdfs::Processor.run(attachment.to_sym, registration, :attachment).render
+    end
   end
 end

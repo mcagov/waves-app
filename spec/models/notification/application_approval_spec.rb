@@ -16,8 +16,14 @@ describe Notification::ApplicationApproval, type: :model do
              registered_vessel: registered_vessel)
     end
 
+    let(:user) { create(:user) }
+
     context "in general" do
-      subject { described_class.new(notifiable: submission) }
+      subject do
+        described_class.new(
+          notifiable: submission,
+          body: "A message", actioned_by: user, attachments: [])
+      end
 
       it "has the expected email_template" do
         expect(subject.email_template).to eq(:application_approval)
@@ -31,35 +37,28 @@ describe Notification::ApplicationApproval, type: :model do
 
       it "has additional_params" do
         expect(subject.additional_params)
-          .to eq(
-            [
-              registered_vessel.reg_no,
-              subject.actioned_by, "new_registration",
-              registered_vessel.name, nil])
+          .to eq(["A message", user, []])
       end
     end
 
     context "with an attachment" do
-      before do
-        processor = double(:processor)
+      let(:pdf) { OpenStruct.new(render: :pdf_file, to_sym: true) }
 
+      before do
         expect(Pdfs::Processor)
           .to receive(:run)
           .with(:template, registration, :attachment)
-          .and_return(processor)
-
-        expect(processor).to receive(:render).and_return(:pdf)
+          .and_return(pdf)
       end
 
       subject do
-        described_class.new(notifiable: submission, attachments: :template)
+        described_class.new(
+          notifiable: submission, attachments: :template)
       end
 
-      it "has the pdf as the fifth additional param" do
-        expect(subject.additional_params[4][0, 4].to_sym).to eq(:pdf)
+      it "has the pdf as the third additional param" do
+        expect(subject.additional_params[2]).to eq([:pdf_file])
       end
     end
   end
-
-  context "for a name reservation, it unsets vessel#name_registered_until"
 end

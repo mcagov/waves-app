@@ -1,0 +1,9 @@
+- print_job = section_notice.print_job
+%tr
+  %td Section Notice
+  %td
+    = link_to section_notice.subject,
+      "#email-content", "data-target" => "#section_notice-#{ section_notice.id }", "data-toggle" => "modal"
+    = render partial:  "shared/notification_list/modals/section_notice", locals: { section_notice: section_notice }
+  %td= section_notice.created_at.to_s(:date_time)
+  %td= print_job.printed_at.to_s(:date_time) if print_job.try(:printed_at)

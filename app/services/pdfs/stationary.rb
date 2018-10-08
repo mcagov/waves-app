@@ -3,9 +3,9 @@ module Pdfs::Stationary
     @sent_at = sent_at.to_date
     mca_logos
     mca_address
-    date_and_ref
-    delivery_address
-    greeting
+    date_and_ref unless @skip_date_and_ref
+    delivery_address if @delivery_name_and_address
+    greeting if @applicant_name
   end
 
   def l_margin
@@ -44,8 +44,7 @@ module Pdfs::Stationary
     @pdf.draw_text "Cardiff", at: [340, 738]
     @pdf.draw_text "CF24 5JW", at: [340, 724]
 
-    @pdf.draw_text "Tel: 029 2044 8800", at: [340, 700]
-    @pdf.draw_text "Fax: 029 2044 8820", at: [340, 686]
+    @pdf.draw_text "Tel: 0203 90 85200", at: [340, 700]
   end
 
   def date_and_ref
@@ -55,8 +54,12 @@ module Pdfs::Stationary
     @pdf.draw_text "Date: ", at: [340, 634]
     set_copy_font
     @pdf.draw_text "", at: [400, 662]
-    @pdf.draw_text @vessel[:reg_no], at: [400, 648]
+    @pdf.draw_text(our_ref, at: [400, 648]) if @vessel
     @pdf.draw_text @sent_at.to_s(:formal), at: [400, 634]
+  end
+
+  def our_ref
+    @registration.try(:submission_ref_no) || (@vessel || {})[:reg_no]
   end
 
   def delivery_address

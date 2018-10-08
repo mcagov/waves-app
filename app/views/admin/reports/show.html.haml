@@ -24,7 +24,7 @@
           - result.data_elements.each_with_index do |data_element, index|
             - data_element = report_field(data_element)
             %td
-              - if index == 0 && @report.sub_report
+              - if index == 0 && @report.sub_report && result.sub_report_filters
                 = form_tag admin_report_path(@report.sub_report), method: :get do
                   - @filter.keys.each do |key|
                     = hidden_field_tag "filter[#{key}]", @filter[key]

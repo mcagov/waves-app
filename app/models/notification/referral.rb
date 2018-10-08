@@ -3,11 +3,12 @@ class Notification::Referral < Notification
     "Awaiting completed C&M Notice",
     "Awaiting certificate of measurement",
     "Documents not filled in correctly",
-    "Missing documentation",
     "Fee incorrect or missing",
     "Hull identification number appears incorrect",
     "Length and vessel type do not match",
+    "Missing documentation",
     "Missing survey",
+    "Mortgage Intent Expiry",
     "Name and/or port of choice invalid",
     "Unknown vessel type",
   ].freeze

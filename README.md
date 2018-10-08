@@ -13,7 +13,7 @@ workload of officers of the [Maritime and Coastguard Agency][mca].
 
 ##### Architecture
 
-This is a standard Rails 5.0 web app with a PostgreSQL database.
+This is a standard Rails 5.2 web app with a PostgreSQL database.
 
 ##### Look & Feel
 
@@ -72,6 +72,8 @@ To disable an email notification, override `Notification#deliverable?` e.g.
         false
     end
 
+Automated reminder emails (system-generated) are generated daily. To defend against erroneous processes or bad data, they are created with an inital state of `pending_approval`. Before these emails can be sent, they need to marked as `approved` by a user. See the link `Automated Email Queue` in the top right navigation.
+
 ##### Email previews
 
 Emails can be previewed at: /rails/mailers in development.
@@ -95,54 +97,74 @@ And the Template ID as `ENV['NOTIFY_TEMPLATE_ID']`.
 Postcode lookups are performed by a Javascript API call to https://ideal-postcodes.co.uk. The account is managed by the MCA and the code uses Ideal Postcode's [JQuery API](https://github.com/ideal-postcodes/jquery.postcodes).
 Ensure that the API key is set as `POSTCODE_LOOKUP_API_KEY`
 
-##### Cron jobs
-
-Cron jobs are managed with the [whenever](https://github.com/javan/whenever) gem.
-
-To ensure the crontab is kept up to date, ensure that `whenever --update-crontab` is called on deployment.
-
+##### Scheduled tasks
+Scheduled tasks are managed with the [clockwork](https://github.com/Rykian/clockwork) gem.
+Configuration in `lib/clock.rb`.
+This should be run by the worker app as:
+```
+bundle exec clockwork lib/clock.rb
+```
 ##### Referred applications
 
 Schedule: Daily
 
-If the `submission#referred_until` date has been reached, applications should be restored to the unclaimed tasks queue. To run this task:
+If the `submission#referred_until` date has been reached, applications should be restored to the unclaimed tasks queue. To run this application_type:
 
   `rake waves:expire_referrals`
 
 
 ## Under the hood
-##### Submissions
-Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different tasks.
 
-The full list of tasks can be retrieved from `Task.all_task_types`. Note that the Task  class is in the WavesUtilities gem.
-##### State Machine
-Submissions travel through a state machine `app/models/submission/state_machine.rb`. When a submission has reached the `:unassigned` state, it can be claimed by a Registration Officer for processing. When a submission has been claimed (state: `assigned`), it can be `referred`, `cancelled` or `approved`. Business rules apply to the action taken when one of these states is initiated, e.g. sending a notification email, setting the processing target date, creating or updating an entry in the registry.
+#### Services
+The services that can be performed are stored in the `services` table. Each service has:
+1. A name
+2. Service standard (standard_days or premium_days)
+3. Pricing for the part / service standard
+4. UI rules (e.g. validations, form display helpers)
+5. Activities (e.g. generate_new_5_year_registration, update_registry_details)
+6. Print templates (e.g. registration_certificate, cover_letter)
+
+##### Submissions (aka Applications)
+Submissions are requests to change something in the Registry of Ships. In the UI, we call them 'Applications' but in the Rails world, 'application' is a reserved word. A submission can be for a variety of different application types. The application type will determine whether a submission is for a registered vessel or a (flavour of) new registration.
+
+The full list of application type can be retrieved from `ApplicationType.all_`. Note that the ApplicationType class references the WavesUtilities gem. It is also viewable in the admin section at: `http://localhost:3000/admin/application_types`.
+
+Submissions have a state of `active` (aka `open`) or `closed`. A submission can be closed when all tasks have been completed or cancelled.
+
+A registered vessel can have one `open` submission at a time.
 
 ##### How submissions are created
 There are three points of entry for a submission:
 1. Via a customer entry on the Online portal (submission#source `:online`)
-2. Via a manual entry by the Finance Team (submission#source `:manual_entry`)
-3. Via a manual entry by a Registration Officer (submission#source `:manual_entry`)
-
-The initial state of an `:online` entry is `:incomplete`. When payment is completed and all the owners have made their declarations, then it moves to `:unassigned` and can be claimed by a Registration Officer.
+2. Via Document Entry by a Reg Officer (submission#source `:manual_entry`)
+3. Finance Team create Payments which are linked or converted to submissions by a Registration Officer.
 
 When a submission enters the default :incomplete state, it fires an event `build_default`, invoking the `SubmissionBuilder` and setting up all the defaults. If you want to initialize a submission object to build a form or any other instance when you don't want a record to be created, you need to forecfully set the state to :initializing. For example: `Submission.new(state: :initializing)`.
 
-The initial state of a `:manual_entry` is `:unassigned` so that it can be claimed. Note that a submission created by the Finance Team sets the flag `submission#officer_intervention_required` to ensure that the Registration Officer checks the details before they can action it.
+##### Tasks
+Submissions have many tasks (to be performed by a Reg Officer), and they travel through a state machine.
+```
+:initialising - Just added via the Task Manager, pending confirmation
+:unclaimed - Confirmed by a Reg Officer. Target Dates have been assigned
+:claimed - Add to a Reg Officer's Task Queue. Can be actionned.
+:referred - Pending information from the customer.
+:completed - Task is done. Activities have been performed. Print Jobs have been added to the Print Queue
+:cancelled - Irreversible.
+```
 
-##### Submission Behaviour
-A submission's behaviour depends on the follwing attributes:
-1. The `part` of the Registry (I, II, III or IV)
-2. The `source` (`online` or `manual_entry`)
-3. The `task` that the submission will perform
-4. The `registered_vessel` it belongs to (doesn't apply to new registrations)
+##### Task Behaviour
+A task's behaviour depends on the Service, viewable within each part at: `http://localhost:3000/admin/services/processes`
+1. Rules - define the page templates to display and validations to be applied.
+2. Activities - describe what happens when the task is processed (`application_processor.rb`)
+3. Print Templates - determine the printable outputs of a completed task
+
+#### Work Logs
+RSS require monitoring of staff performance, so actions such as completing or referring tasks are logged. There is a helper method available globally: `log_work!`.
+Work logs can be viewed at: `http://localhost:3000/work_logs`
 
 ##### Submission Attributes
 The changes that the submission will perform are stored as JSON objects in submission#changeset. If the submission is associated with a registered vessel, the 'current information' will be stored as JSON objects in submission#changeset.
 These JSON objects are mounted with the `VirtualModel` class and exposed by the submission as: `submission.vessel`, etc.
-
-Note: Don't use changeset as a miscellaneous data store. I just got burned trying to store `linkable_ref_no` in the
-changeset before the `Builder::SubmissionBuilder` had run. Consequently, the changeset didn't get populated.
 
 ##### Payments
 Payments come in two flavours and have a polymorphic association with the `Payment` model.

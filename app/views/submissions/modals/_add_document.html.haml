@@ -6,8 +6,9 @@
           %span{"aria-hidden" => "true"} ×
         %h4.modal-title Document Entry
       - document = Document.build(3)
-      - document.noted_at = Date.today
+      - document.noted_at = Time.zone.today
       = simple_form_for document, url: submission_documents_path(submission), method: :post do |f|
+        = hidden_field_tag :task_id, @task.id
         .modal-body
           .row
             .col-sm-3

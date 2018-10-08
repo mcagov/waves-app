@@ -1,0 +1,9 @@
+= render partial: "search/submission", locals: { submission: submission }
+%p
+= simple_form_for @finance_payment.payment,
+  url: finance_payment_payment_path(@finance_payment, @finance_payment.payment),
+  method: :put do |f|
+  - f.object.submission_id = submission.id
+  = f.input :submission_id, as: :hidden
+  = button_tag(type: "submit", class: "btn btn-success") do
+    Link to this Application

@@ -6,6 +6,7 @@ class PrintJob < ApplicationRecord
 
   validates :part, presence: true
   validates :template, presence: true
+  validates :printable, presence: true
 
   scope :in_part, ->(part) { where(part: part.to_sym) }
 
@@ -24,6 +25,14 @@ class PrintJob < ApplicationRecord
     event :printed, timestamp: true do
       transitions to: :printed, from: [:printing, :printed],
                   on_transition: :log_printed_by
+    end
+  end
+
+  class << self
+    def latest(submission)
+      submission.print_jobs.order("created_at desc")
+                .group_by(&:template)
+                .map { |_k, v| v[0] }
     end
   end
 

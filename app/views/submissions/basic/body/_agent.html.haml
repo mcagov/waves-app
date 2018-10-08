@@ -1,20 +1,18 @@
-- registry_agent = @submission.registry_agent
 %table.table.table-striped#agent
   %thead
     %th Agent
 
-    - if @submission.display_registry_info?
+    - if @submission.registered_vessel
       %th Current Information
 
-    - if @submission.display_changeset?
-      %th Submitted Information
+    %th Submitted Information
   %tbody
     %tr
       %td{width: "20%"} Agent Name
 
-      - if @submission.display_registry_info?
+      - if @submission.registered_vessel
         %td.registry-agent-name{width: "40%"}
-          = registry_agent.name
+          = @submission.registered_agent.name
 
       %td.agent-name
         %strong= agent.name
@@ -22,18 +20,17 @@
     %tr
       %td{width: "20%"} Agent Email
 
-      - if @submission.display_registry_info?
+      - if @submission.registered_vessel
         %td.registry-agent-email{width: "40%"}
-          = registry_agent.email
+          = @submission.registered_agent.email
 
       %td.agent-email
         %strong= agent.email
 
     %tr
       %td Agent Phone Number
-
-      - if @submission.display_registry_info?
-        %td= registry_agent.phone_number
+      - if @submission.registered_vessel
+        %td= @submission.registered_agent.phone_number
 
       %td.agent-phone_number
         %strong= agent.phone_number

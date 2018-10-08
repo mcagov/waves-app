@@ -4,11 +4,11 @@ class Report::VesselAge < Report
   end
 
   def xls_title
-    "Vessel Age: #{Date.today}"
+    "Vessel Age: #{Time.zone.today}"
   end
 
   def sub_report
-    :vessel_age_by_type
+    :vessel_age_by_category
   end
 
   def filter_fields
@@ -16,21 +16,19 @@ class Report::VesselAge < Report
   end
 
   def headings
-    ["Type of Vessel", "Registered", "Average Age", "Gross Tonnage"]
+    ["Vessel Category", "Registered", "Average Age", "Gross Tonnage"]
   end
 
   def results
-    return [] if @part.blank?
-
     load_results.all.map do |result|
       data_elements =
         [
-          result.vessel_type,
+          result.vessel_category,
           result.num_reg,
           result.age.to_f.round(2),
           result.gt]
 
-      Result.new(data_elements, vessel_type: result.vessel_type)
+      Result.new(data_elements, vessel_category: result.vessel_category)
     end
   end
 
@@ -39,15 +37,16 @@ class Report::VesselAge < Report
   def load_results
     query = load_select
     query = filter_by_part(query)
-    query.group(:vessel_type).order(:vessel_type)
+    query.group(:vessel_category).order(:vessel_category)
   end
 
   def load_select
     Register::Vessel
       .select(
-        "vessel_type, COUNT(*) num_reg,
-        avg(coalesce(now()::DATE - keel_laying_date::DATE, 0)::FLOAT / 365) age,
+        "vessel_category, COUNT(*) num_reg,
+        avg(coalesce(EXTRACT('year' FROM now()::DATE ) - year_of_build, 0)) age,
         sum(gross_tonnage) as gt")
-      .where("vessel_type <> ''")
+      .where("vessel_category <> ''")
+      .where("year_of_build is not null")
   end
 end

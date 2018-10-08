@@ -1,4 +1,4 @@
-- if @submission.ownership_can_be_changed?
+- unless @readonly
   = link_to submission_declaration_path(@submission, declaration),
     class: 'btn-link pull-right',
     method: :delete,

@@ -1,8 +1,9 @@
 %table.table.table-striped#notification-list
   %thead
     %th Format
-    %th Subject
-    %th Date
+    %th Description
+    %th Date Generated
+    %th Date Delivered / Printed
     %th
   %tbody
     - notification_list.each do |row|
@@ -15,3 +16,9 @@
       - if row.is_a?(PrintJob)
         = render partial: "shared/notification_list/tabs/print_job",
           locals: { print_job: row }
+      - if row.is_a?(Register::SectionNotice)
+        = render partial: "shared/notification_list/tabs/section_notice",
+          locals: { section_notice: row }
+      - if row.is_a?(Register::TerminationNotice)
+        = render partial: "shared/notification_list/tabs/termination_notice",
+          locals: { termination_notice: row }

@@ -3,10 +3,9 @@ require "rails_helper"
 describe Builders::SubmissionBuilder do
   describe "#build_defaults" do
     let!(:submission) do
-      Submission.new(
+      Submission.create( # create fires the builder
         part: :part_3,
         changeset: changeset,
-        registry_info: registry_info,
         registered_vessel: registered_vessel,
         declarations: declarations,
         applicant_name: "BOB",
@@ -20,41 +19,7 @@ describe Builders::SubmissionBuilder do
     let!(:declarations) { [] }
     let!(:applicant_is_agent) { false }
 
-    before { described_class.build_defaults(submission) }
-
     context "in general" do
-      it "defaults to task = new_registration" do
-        expect(submission.task.to_sym).to eq(:new_registration)
-      end
-
-      it "defaults to source = online" do
-        expect(submission.source.to_sym).to eq(:online)
-      end
-
-      it "defaults to part = part_3" do
-        expect(submission.part.to_sym).to eq(:part_3)
-      end
-
-      it "builds the ref_no" do
-        expect(submission.ref_no).to be_present
-      end
-
-      it "builds the service_level as :standard" do
-        expect(submission.service_level.to_sym).to eq(:standard)
-      end
-
-      context "with :premium service_level" do
-        let(:changeset) { { service_level: { level: :premium } } }
-
-        it "builds the service_level as :premium" do
-          expect(submission.service_level.to_sym).to eq(:premium)
-        end
-      end
-
-      it "does not build the registry info" do
-        expect(submission.registry_info).to be_nil
-      end
-
       it "does not alter the changeset" do
         expect(submission.changeset).to eq(changeset)
       end
@@ -108,30 +73,10 @@ describe Builders::SubmissionBuilder do
         Register::Vessel.create(vessel_sample_data)
       end
 
-      context "when the registry_info has not been set" do
-        it "builds the registry_info#vessel_info" do
-          expect(submission.symbolized_registry_info[:vessel_info][:name])
-            .to eq("MY BOAT")
-        end
-
-        it "builds the registry_info#owners" do
-          expect(submission.symbolized_registry_info[:owners][0][:name])
-            .to eq("ALICE")
-        end
-      end
-
-      context "when the registry_info is already populated" do
-        let!(:registry_info) { { foo: "bar" } }
-
-        it "does not alter the registry_info" do
-          expect(submission.symbolized_registry_info).to eq(foo: "bar")
-        end
-      end
-
       context "when the changeset is blank" do
-        it "builds the changeset from the registry_info" do
-          expect(submission.symbolized_changeset)
-            .to eq(submission.symbolized_registry_info)
+        it "builds the changeset from the registered_vessel" do
+          expect(submission.vessel.name)
+            .to eq(submission.registered_vessel.name)
         end
       end
 
@@ -159,7 +104,7 @@ describe Builders::SubmissionBuilder do
       context "with managing_owner and correspondent" do
         it "assigns the managing_owner_id and correspondent_id" do
           expect(submission.managing_owner.name).to eq("ALICE")
-          expect(submission.correspondent.name).to eq("BOB")
+          expect(submission.correspondent.name).to eq("Carol")
         end
       end
 
@@ -311,14 +256,15 @@ def vessel_sample_data # rubocop:disable Metrics/MethodLength
 
     charterers: [create(:charterer,
                         charter_parties: [
-                          create(:charter_party, name: "Carol")])]
+                          create(:charter_party, name: "Carol",
+                                                 correspondent: true)])]
   }
 end
 
 def owner_sample_data
   [
     { name: "ALICE", email: "alice@example.com", managing_owner: true },
-    { name: "BOB", email: nil, correspondent: true },
+    { name: "BOB", email: nil },
   ]
 end
 

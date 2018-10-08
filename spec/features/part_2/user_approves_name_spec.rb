@@ -8,7 +8,9 @@ feature "User approves a part 2 name", type: :feature, js: :true do
            port_no: "12345",
            name: "DUPLICATE")
 
-    visit_assigned_part_2_submission
+    visit_claimed_task(
+      service: create(:service, :update_registry_details),
+      submission: create(:submission, part: :part_2))
   end
 
   scenario "with an unavailable name (and choosing to override validation" do
@@ -23,11 +25,9 @@ feature "User approves a part 2 name", type: :feature, js: :true do
 
     click_on("Override Name/PLN validation and use these details")
 
-    expect(page).to have_current_path(edit_submission_path(Submission.last))
-    creates_a_work_log_entry("Submission", :name_approval)
-
-    visit(submission_path(Submission.last))
     expect(page).to have_css(".vessel-name", text: "DUPLICATE")
+
+    creates_a_work_log_entry(:name_approved)
   end
 
   scenario "with an unavailable port_no" do
@@ -42,7 +42,7 @@ feature "User approves a part 2 name", type: :feature, js: :true do
   end
 
   scenario "with valid data" do
-    Timecop.travel(Time.now) do
+    Timecop.travel(Time.zone.now) do
       fill_in("Vessel Name", with: "BOBS BOAT")
       select2("Full", from: "submission_name_approval_registration_type")
 
@@ -66,13 +66,16 @@ feature "User approves a part 2 name", type: :feature, js: :true do
       select("10 years", from: "Approved for")
       click_on("Approve Name")
 
-      expect(page).to have_current_path(edit_submission_path(Submission.last))
-      creates_a_work_log_entry("Submission", :name_approval)
-
-      visit(submission_path(Submission.last))
-
       expect(page).to have_css(".vessel-name", text: "BOBS BOAT")
-      expect(page).to have_css(".expiry-date", text: 10.years.from_now.to_date)
+      expect(page)
+        .to have_text("Name Approval expires on: #{10.years.from_now.to_date}")
+
+      creates_a_work_log_entry(:name_approved)
     end
+  end
+
+  scenario "viewing the application detail tabs" do
+    expect_payments_tab(true)
+    expect_notes_tab(true)
   end
 end

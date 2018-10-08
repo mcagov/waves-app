@@ -5,12 +5,6 @@ class Registration < ApplicationRecord
 
   has_many :submissions, -> { order("created_at desc") }
 
-  after_create :set_vessel_current_registration
-
-  def set_vessel_current_registration
-    registered_vessel.update_columns(current_registration_id: id)
-  end
-
   scope :fishing_vessels, (lambda do
     where(
       "(registry_info#>>'{vessel_info, part}' = 'part_2') OR "\
@@ -52,11 +46,23 @@ class Registration < ApplicationRecord
     end
   end
 
+  def mortgages
+    (symbolized_registry_info[:mortgages] || []).map do |mortgage|
+      mortgage[:mortgagors].map! { |mortgagor| Mortgagor.new(mortgagor) }
+      mortgage[:mortgagees].map! { |mortgagee| Mortgagee.new(mortgagee) }
+      Mortgage.new(mortgage)
+    end
+  end
+
   def delivery_name_and_address
     # Taking the delivery address from the most recent submission
     # is probably not the best approach but, for now, that is
     # what we are going to do
     submission ? submission.delivery_address.name_and_address : []
+  end
+
+  def submission_ref_no
+    submission.try(:ref_no)
   end
 
   def applicant_name
@@ -65,10 +71,6 @@ class Registration < ApplicationRecord
 
   def shareholder_groups
     (symbolized_registry_info[:shareholder_groups] || [])
-  end
-
-  def prints_duplicate_certificate?
-    Task.new(task).duplicates_certificate?
   end
 
   def owner_name_address_shareholding
@@ -88,7 +90,7 @@ class Registration < ApplicationRecord
   end
 
   def task
-    submission ? submission.task : :new_registration
+    submission ? submission.application_type : :new_registration
   end
 
   def symbolized_registry_info

@@ -3,68 +3,76 @@ class Report::StaffPerformanceByTask < Report
     "Staff Performance by Task"
   end
 
+  def sub_report
+    :staff_performance_by_person
+  end
+
   def filter_fields
-    [:filter_task, :filter_part, :filter_date_range]
+    [:filter_part, :filter_service, :filter_date_range]
   end
 
   def headings
-    [:staff_member, :online_applications, :paper_applications, :total]
+    [
+      :staff_member, :total_transactions,
+      :within_service_standard, :service_standard_missed
+    ]
   end
 
   def date_range_label
-    "Application Received"
+    "Task Actioned"
+  end
+
+  def user_label
+    "Member of Staff"
   end
 
   def results
-    submissions.map do |submission|
+    users_results + totals
+  end
+
+  def users_results
+    users.map do |user|
+      staff_performance_logs = staff_performance_for(user)
       Result.new(
-        [
-          submission.claimant.name,
-          "#{submission.online_total} (Missed #{submission.online_missed})",
-          "#{submission.manual_total} (Missed #{submission.manual_missed})",
-          submission.total])
+        [user.to_s,
+         staff_performance_logs.count,
+         staff_performance_logs.within_standard.count,
+         RenderAsRed.new(staff_performance_logs.standard_missed.count)],
+        user_id: user.id)
     end
   end
 
-  def submissions
-    query =
-      Submission.select(
-        "claimant_id,
-        #{filter_online_total},
-        #{filter_online_missed},
-        #{filter_manual_total},
-        #{filter_manual_missed},
-        COUNT (*) total")
-                .includes(:claimant)
-                .where("claimant_id is not null")
-    query = filter_by_task(query)
-    query = filter_by_part(query)
-    query = filter_by_received_at(query)
-    query.group(:claimant_id)
+  def totals
+    [Result.new(
+      ["TOTAL",
+       staff_performance_summary.count,
+       staff_performance_summary.within_standard.count,
+       RenderAsRed.new(staff_performance_summary.standard_missed.count)])]
   end
 
-  def filter_online_total
-    "COUNT (*) FILTER (WHERE submissions.source = 'online') AS online_total"
+  def users
+    User
+      .order(:name)
+      .includes(:staff_performance_logs)
+      .all
   end
 
-  def filter_online_missed
-    "COUNT (*) FILTER "\
-    "(WHERE submissions.source = 'online' AND #{target_date_missed}) "\
-    "AS online_missed"
+  def staff_performance_for(user)
+    user
+      .staff_performance_logs
+      .in_part(@part)
+      .created_after(@date_start)
+      .created_before(@date_end)
+      .includes(task: [:service])
+      .for_service(@service_id)
+      .all
   end
 
-  def filter_manual_total
-    "COUNT (*) FILTER (WHERE submissions.source = 'manual_entry') "\
-    "AS manual_total"
-  end
-
-  def filter_manual_missed
-    "COUNT (*) FILTER "\
-    "(WHERE submissions.source = 'manual' AND #{target_date_missed}) "\
-    "AS manual_missed"
-  end
-
-  def target_date_missed
-    "submissions.completed_at > submissions.target_date"
+  def staff_performance_summary
+    StaffPerformanceLog
+      .for_service(@service_id)
+      .in_part(@part)
+      .created_after(@date_start)
+      .created_before(@date_end)
   end
 end

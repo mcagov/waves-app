@@ -17,11 +17,18 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
     click_on("Registrar Tools")
     click_on(notice_of_termination_link)
 
-    expect(page).to have_text("Task Complete")
+    expect(page).to have_css(".red", text: "Termination Notice has been issued")
 
-    vessel = Register::Vessel.last
-    expect(vessel.registration_status).to eq(:frozen)
-    expect(vessel).to be_termination_notice_issued
+    click_on("Registrar Tools")
+    expect(page).not_to have_link(notice_of_termination_link)
+    find(".close").trigger("click")
+
+    click_on("Correspondence")
+    click_on("Relates to Section Notice, issued on: ")
+
+    within(".modal.fade.in") do
+      expect(page).to have_css("h4", text: "Termination Notice")
+    end
 
     pdf_window = window_opened_by do
       click_on("Print 7 Day Notice of Termination")
@@ -30,12 +37,6 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
     end
-
-    # check that the section notice has been updated
-    section_notice = Register::SectionNotice.last
-    expect(section_notice.updated_at).to be > 1.day.ago
-
-    creates_a_work_log_entry("Submission", :termination_notice)
   end
 
   scenario "when a 30 day section notice has not been generated" do
@@ -46,5 +47,5 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
 end
 
 def notice_of_termination_link
-  "Registration Closure: 7 Day Notice of Termination"
+  "Issue 7 Day Termination Notice"
 end

@@ -1,5 +1,6 @@
 class Submission::DeclarationsController < InternalPagesController
   before_action :load_submission
+  before_action :load_task, only: [:complete]
 
   def create
     @declaration = Declaration.new(declaration_params)
@@ -27,7 +28,7 @@ class Submission::DeclarationsController < InternalPagesController
     load_declaration
     sign_declaration
 
-    redirect_to submission_path(@declaration.submission)
+    redirect_to submission_task_path(@submission, @task)
   end
 
   def destroy
@@ -46,7 +47,7 @@ class Submission::DeclarationsController < InternalPagesController
   def declaration_params
     params.require(:declaration).permit(
       :id, :_destroy, :declaration_signed, :entity_type, :shares_held,
-      owner: [Customer.attribute_names])
+      owner_attributes: [Customer.attribute_names])
   end
 
   def render_update_js

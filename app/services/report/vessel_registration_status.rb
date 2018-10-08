@@ -64,10 +64,10 @@ class Report::VesselRegistrationStatus < Report
     end
 
     if @registration_status == :expired
-      return query.where("date(registrations.registered_until) < ?", Date.today)
+      return query.where("date(registrations.registered_until) < ?", Time.zone.today)
     else
       # registered
-      query.where("date(registrations.registered_until) >= ?", Date.today)
+      query.where("date(registrations.registered_until) >= ?", Time.zone.today)
     end
 
     if @registration_status == :registered_provisionally

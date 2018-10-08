@@ -1,10 +1,8 @@
-- vessel = searchable
 - submissions = vessel.submissions.active
 %tr.vessel
   %td
     = link_to vessel_path(vessel), class: "search-result" do
       = vessel.name
-    %span.pull-right.label.label-success VESSEL
     %br
     = vessel.vessel_type
     %br
@@ -15,11 +13,23 @@
     MMSI: #{vessel.mmsi_number}
     %br
     HIN: #{vessel.hin}
-    %br
-    PLN: #{vessel.pln}
-
-    - unless submissions.empty?
+    - if Policies::Workflow.uses_port_no?(vessel)
       %br
+      PLN: #{vessel.pln}
+    %br
+    Port of Choice: #{WavesUtilities::Port.new(vessel.port_code).name}
+  %td
+    Owners: #{vessel.owners.map(&:name_and_postcode).join("; ")}
+    %br
+    Last updated: #{vessel.updated_at}
+
+  %td
+    = render partial: "/shared/registration_status", locals: { registration_status: vessel.registration_status }
+    %br
+    = Activity.new(vessel.part)
+- unless submissions.empty?
+  %tr
+    %td{colspan: 3}
       = link_to "#",
         "data-target" => "#vessel_submissions_#{vessel.id}",
         "data-toggle" => "collapse" do
@@ -28,6 +38,6 @@
       .collapse{ id: "vessel_submissions_#{vessel.id}" }
         %table.table
           %tbody
-            - submissions.each do |submission|
-              = render partial: "/search/submission",
-                locals: { searchable: submission, show_detail: false }
+            = render partial: "/search/submission", collection: submissions
+
+

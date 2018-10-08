@@ -2,9 +2,7 @@ require "rails_helper"
 
 describe RefNo do
   context "in general" do
-    let!(:submission) { build(:submission) }
-
-    subject { described_class.generate_for(submission) }
+    subject { described_class.generate }
 
     context "in general" do
       it "generates a six character ref_no" do
@@ -24,15 +22,27 @@ describe RefNo do
         it { expect(subject.length).to eq(6) }
       end
     end
+  end
 
-    context "when officer_intervention_required" do
-      before do
-        submission.officer_intervention_required = true
-      end
+  context ".parse" do
+    subject { described_class.parse(input) }
 
-      it "does not generate a ref_no" do
-        expect(subject).to be_blank
-      end
+    context "with a task ref_no" do
+      let(:input) { "123456/1" }
+
+      it { expect(subject).to eq("123456") }
+    end
+
+    context "with a submission ref_no" do
+      let(:input) { "123456" }
+
+      it { expect(subject).to eq("123456") }
+    end
+
+    context "with nothing" do
+      let(:input) { nil }
+
+      it { expect(subject).to be_nil }
     end
   end
 end

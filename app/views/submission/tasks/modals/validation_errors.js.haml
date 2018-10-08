@@ -1,0 +1,5 @@
+:plain
+   $("#complete-task .modal-content").html(
+    '#{escape_javascript(
+      render partial: "/submission/tasks/modals/validation_errors",
+      locals: { submission: @submission, task: @task, validation_errors: @validation_errors })}');

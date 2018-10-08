@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "User edits charterers", js: :true do
   before do
-    visit_name_approved_part_4_submission
+    visit_claimed_task(
+      submission: create(:submission, :part_4_vessel),
+      service: create(:service, :update_registry_details))
+
     click_on("Charterers")
     click_on("Add Bareboat Charter")
 
@@ -92,5 +95,21 @@ describe "User edits charterers", js: :true do
     within(".name") { expect(page).to have_link("BOB INC") }
     expect(page).to have_css(".country_of_incorporation", text: "ANTIGUA")
     within(".remove-charter-party") { expect(page).to have_link("Remove") }
+  end
+
+  scenario "adding a charter party and making them the correspondent" do
+    click_on("Add Individual Party")
+
+    fill_in("Charterer Name", with: "CAROL CORRESPONDENT")
+    click_on("Save Individual Party")
+
+    click_on("Owners")
+    within("#correspondent") do
+      click_on(Submission.last.correspondent)
+      select("CAROL CORRESPONDENT", from: "Name")
+      click_on("Save Correspondent")
+    end
+
+    expect(page).to have_css(".correspondent-name", text: "CAROL CORRESPONDENT")
   end
 end

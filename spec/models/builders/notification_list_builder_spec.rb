@@ -6,8 +6,8 @@ describe Builders::NotificationListBuilder do
     let!(:outstanding_declaration) do
       create(
         :notification,
-        notifiable: create(:declaration, submission: submission),
-        created_at: Date.today)
+        notifiable: submission.declarations[0],
+        created_at: Time.zone.today)
     end
 
     let!(:recent_notification) do
@@ -22,6 +22,13 @@ describe Builders::NotificationListBuilder do
       create(:print_job, submission: submission, created_at: 4.days.ago)
     end
 
+    let!(:carving_and_marking_notification) do
+      create(
+        :notification,
+        notifiable: create(:carving_and_marking, submission: submission),
+        created_at: 5.days.ago)
+    end
+
     let!(:old_notification) do
       create(:notification, notifiable: submission, created_at: 1.year.ago)
     end
@@ -29,10 +36,11 @@ describe Builders::NotificationListBuilder do
     subject { described_class.for_submission(submission) }
 
     it "builds the expected list" do
-      expect(subject).to eq(
-        [outstanding_declaration,
-         recent_notification, correspondence, print_job, old_notification]
-      )
+      expect(subject).to match(
+        [
+          outstanding_declaration, recent_notification, correspondence,
+          print_job, carving_and_marking_notification, old_notification
+        ])
     end
 
     context "#for_registered_vessel" do
@@ -42,8 +50,16 @@ describe Builders::NotificationListBuilder do
         create(:notification, notifiable: vessel, created_at: 1.minute.ago)
       end
 
+      let!(:vessel_section_notice) do
+        create(:section_notice, noteable: vessel, created_at: 5.minutes.ago)
+      end
+
+      let!(:vessel_termination_notice) do
+        create(:termination_notice, noteable: vessel, created_at: 1.hour.ago)
+      end
+
       let!(:vessel_correspondence) do
-        create(:correspondence, noteable: vessel, created_at: 1.hour.ago)
+        create(:correspondence, noteable: vessel, created_at: 5.hour.ago)
       end
 
       before do
@@ -53,10 +69,13 @@ describe Builders::NotificationListBuilder do
       subject { described_class.for_registered_vessel(vessel) }
 
       it "builds the expected list" do
-        expect(subject).to eq(
-          [vessel_notification, vessel_correspondence, outstanding_declaration,
-           recent_notification, correspondence, print_job, old_notification]
-        )
+        expect(subject).to match(
+          [
+            vessel_notification, vessel_section_notice,
+            vessel_termination_notice, vessel_correspondence,
+            outstanding_declaration, recent_notification, correspondence,
+            print_job, carving_and_marking_notification, old_notification
+          ])
       end
     end
   end
