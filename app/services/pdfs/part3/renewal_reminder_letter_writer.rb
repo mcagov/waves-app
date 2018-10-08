@@ -22,7 +22,7 @@ class Pdfs::Part3::RenewalReminderLetterWriter <
     @pdf.draw_text @vessel[:name], at: [l_margin, 530]
 
     @pdf.font("Helvetica-Bold", size: 10)
-    @pdf.draw_text "#{ENV['GOVUK_HOST']}.", at: [80, 384]
+    @pdf.draw_text "#{ENV['APPLICATION_HOST']}.", at: [80, 384]
 
     @pdf.font("Helvetica", size: 9)
     @pdf.draw_text @registration.registered_until, at: [320, 463]
@@ -36,7 +36,7 @@ class Pdfs::Part3::RenewalReminderLetterWriter <
     @pdf.draw_text @vessel[:reg_no], at: [170, 610]
 
     @pdf.font("Helvetica", size: 9, style: :italic)
-    @pdf.draw_text "#{ENV['GOVUK_HOST']}.", at: [216, 498]
+    @pdf.draw_text "#{ENV['APPLICATION_HOST']}.", at: [216, 498]
   end
 
   def page_3

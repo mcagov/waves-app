@@ -98,7 +98,7 @@ class NotificationMailer < ApplicationMailer
   private
 
   def govuk_url(path)
-    File.join(ENV.fetch("GOVUK_HOST"), path)
+    File.join(ENV.fetch("APPLICATION_HOST"), path)
   end
 
   def enable_attachment(files)

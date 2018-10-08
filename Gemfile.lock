@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/bcoia/trix.git
-  revision: 56d84ae42e34488b0bb301bd9bd0f54fac7fc811
+  revision: 46c578f853e7dce595845e05f2c104d9d573a2ad
   specs:
-    trix (0.11.1)
-      rails (> 4.1, <= 6.0)
+    trix-rails (1.0.2)
+      rails (> 4.1, < 6.0)
 
 GIT
   remote: https://github.com/mcagov/paperclip-azure
@@ -633,7 +633,7 @@ DEPENDENCIES
   title
   transitions
   travis
-  trix!
+  trix-rails!
   uglifier
   validates_email_format_of
   waves-utilities!
@@ -642,7 +642,7 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.3.7p456
 
 BUNDLED WITH
    1.16.2

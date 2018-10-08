@@ -1,4 +1,5 @@
 set :repo_url, ENV["CI_REPOSITORY_URL"]
+set :passenger_restart_with_touch, true
 
 append :linked_files, ".env", "config/database.yml"
 
