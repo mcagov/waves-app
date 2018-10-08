@@ -48,8 +48,7 @@ bundler:audit:
     - staging
   script:
     - "bundle exec bundle-audit update"
-    - "bundle exec bundle-audit check --ignore CVE-2017-8418"
-    - "bundle exec bundle-audit check --ignore CVE-2018-3760"
+    - "bundle exec bundle-audit check --ignore CVE-2017-8418 CVE-2018-14404"
   tags:
     - ruby2.3
 
