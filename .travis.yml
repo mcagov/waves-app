@@ -17,7 +17,6 @@ env:
   EMAIL_FROM: inbox@example.com
   APPLICATION_HOST: http://localhost:3000
   ASSET_HOST: localhost:3000
-  GOVUK_HOST: localhost:3001
 notifications:
   on_success: never
   on_failure: never
