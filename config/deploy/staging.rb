@@ -6,3 +6,4 @@ set :deploy_to, "/var/www/#{ENV['WAVES_STAGING_USER']}"
 set :environment, "production"
 set :migration_role, :app
 set :keep_assets, 2
+set :branch, :staging
