@@ -57,6 +57,7 @@ gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
     git: "https://github.com/mcagov/waves-utilities.git"
+gem "whenever", require: false
 gem "will_paginate-bootstrap"
 
 group :development do

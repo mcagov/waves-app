@@ -97,12 +97,12 @@ And the Template ID as `ENV['NOTIFY_TEMPLATE_ID']`.
 Postcode lookups are performed by a Javascript API call to https://ideal-postcodes.co.uk. The account is managed by the MCA and the code uses Ideal Postcode's [JQuery API](https://github.com/ideal-postcodes/jquery.postcodes).
 Ensure that the API key is set as `POSTCODE_LOOKUP_API_KEY`
 
-##### Scheduled tasks
-Scheduled tasks are managed with the [clockwork](https://github.com/Rykian/clockwork) gem.
-Configuration in `lib/clock.rb`.
-This should be run by the worker app as:
-```
-bundle exec clockwork lib/clock.rb
+##### Cron jobs
+
+Cron jobs are managed with the [whenever](https://github.com/javan/whenever) gem.
+
+To ensure the crontab is kept up to date, ensure that `whenever --update-crontab` is called on deployment.
+
 ```
 ##### Referred applications
 
