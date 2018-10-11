@@ -8,7 +8,7 @@ script:
   - bundle exec rubocop
   - bundle exec brakeman
   - bundle exec bundle-audit update
-  - bundle exec bundle-audit check --ignore CVE-2017-8418 CVE-2018-14404
+  - bundle exec bundle-audit check --ignore CVE-2017-8418
 env:
   SMTP_ADDRESS: smtp.example.com
   SMTP_DOMAIN: example.com
