@@ -1,5 +1,5 @@
 cache:
-  key: "ruby23"
+  key: "ruby25"
   paths:
   - vendor
 
@@ -25,21 +25,21 @@ rspec:
   script:
     - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
   tags:
-    - ruby2.3
+    - ruby2.5
 
 rubocop:
   stage: test
   script:
     - bundle exec rubocop
   tags:
-    - ruby2.3
+    - ruby2.5
 
 brakeman:
   stage: security
   script:
     - bundle exec brakeman
   tags:
-    - ruby2.3
+    - ruby2.5
 
 bundler:audit:
   stage: security
@@ -51,7 +51,7 @@ bundler:audit:
     - "bundle exec bundle-audit check --ignore CVE-2017-8418"
     - "bundle exec bundle-audit check --ignore CVE-2018-3760"
   tags:
-    - ruby2.3
+    - ruby2.5
 
 deploy_staging:
   stage: staging
@@ -63,7 +63,7 @@ deploy_staging:
   script:
     - bundle exec cap staging deploy
   tags:
-    - ruby2.3
+    - ruby2.5
 
 #deploy_production:
 #  stage: production
@@ -74,4 +74,4 @@ deploy_staging:
 #  script:
 #    - bundle exec cap production deploy
 #  tags:
-#    - ruby2.3
+#    - ruby2.5
