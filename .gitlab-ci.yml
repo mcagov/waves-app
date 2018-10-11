@@ -1,5 +1,5 @@
 cache:
-  key: "ruby23"
+  key: "ruby25"
   paths:
   - vendor
 
@@ -12,7 +12,6 @@ before_script:
   - which ruby
   - retry bundle install --path vendor/bundle --without production --jobs $(nproc) "${FLAGS[@]}"
   - bin/rails db:environment:set RAILS_ENV=test
-  - RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
 
 stages:
   - test
@@ -23,23 +22,24 @@ stages:
 rspec:
   stage: test
   script:
-    - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rspec
+    - RAILS_ENV=test bundle exec rake parallel:setup
+    - RAILS_ENV=test SIMPLECOV=true xvfb-run -a bundle exec rake parallel:spec
   tags:
-    - ruby2.3
+    - ruby2.5
 
 rubocop:
   stage: test
   script:
     - bundle exec rubocop
   tags:
-    - ruby2.3
+    - ruby2.5
 
 brakeman:
   stage: security
   script:
     - bundle exec brakeman
   tags:
-    - ruby2.3
+    - ruby2.5
 
 bundler:audit:
   stage: security
@@ -48,9 +48,9 @@ bundler:audit:
     - staging
   script:
     - "bundle exec bundle-audit update"
-    - "bundle exec bundle-audit check --ignore CVE-2017-8418 CVE-2018-14404"
+    - "bundle exec bundle-audit check --ignore CVE-2017-8418"
   tags:
-    - ruby2.3
+    - ruby2.5
 
 deploy_staging:
   stage: staging
@@ -62,7 +62,7 @@ deploy_staging:
   script:
     - bundle exec cap staging deploy
   tags:
-    - ruby2.3
+    - ruby2.5
 
 #deploy_production:
 #  stage: production
@@ -73,4 +73,4 @@ deploy_staging:
 #  script:
 #    - bundle exec cap production deploy
 #  tags:
-#    - ruby2.3
+#    - ruby2.5
