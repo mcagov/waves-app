@@ -10,7 +10,7 @@ development: &default
 test:
   <<: *default
   adapter: postgresql
-  database: waves_internal_test<%= ENV['TEST_ENV_NUMBER'] %>
+  database: waves_internal_test
   username: vhqtest
   password: vhqtest
   encoding: utf8
