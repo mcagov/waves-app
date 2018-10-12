@@ -29,9 +29,9 @@ class Builders::ApplicantBuilder
     end
 
     def load_owner
-      (@changeset[:owners] || []).select do |owner|
+      (@changeset[:owners] || []).detect do |owner|
         owner[:id].to_sym == correspondent_key
-      end.first
+      end
     end
   end
 end
