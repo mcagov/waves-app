@@ -20,7 +20,8 @@ class AccountLedger
   end
 
   def payment_due
-    @payment_due ||= @submission.tasks.map(&:price).inject(:+) || 0
+    @payment_due ||=
+      @submission.tasks.chargeable.map(&:price).inject(:+) || 0
   end
 
   def payment_received
