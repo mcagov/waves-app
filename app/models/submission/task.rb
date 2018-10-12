@@ -38,6 +38,8 @@ class Submission::Task < ApplicationRecord
       registration_type) unless registration_type.blank?
   end)
 
+  scope :chargeable, -> { where.not(state: [:initialising, :cancelled]) }
+
   include ActiveModel::Transitions
 
   state_machine auto_scopes: true do
