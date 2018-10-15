@@ -4,13 +4,15 @@
   %thead
     %th Name
     %th Email
-    %th Phone number
+    %th Phone
+    %th Address
   - if agent
     %tbody
       %tr
         %td.agent-name= agent.name
         %td= agent.email
         %td= agent.phone_number
+        %td= agent.inline_address
 
 %hr
 %h2 Representative Person
@@ -20,9 +22,11 @@
     %th Name
     %th Email
     %th Phone
+    %th Address
   %tbody
     - if representative
       %tr
         %td.representative-name= representative
         %td.representative-email= representative.email
         %td.representative-phone_number= representative.phone_number
+        %td=representative.inline_address
