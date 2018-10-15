@@ -1,5 +1,5 @@
 .modal.fade{id: "section_notice-#{ section_notice.id }", role: "dialog", tabindex: "-1"}
-  .modal-dialog.modal-md
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -10,6 +10,13 @@
         %dl
           %dt Date issued
           %dd= section_notice.created_at.to_s(:date_time)
+        %dl
+          %dt Recipient(s)
+          %dd
+            - section_notice.recipients.each do |recipient|
+              %p
+                %strong= recipient[0]
+                = recipient[1]
         %dl
           %dt Regulation/Reason
           %dd= section_notice.subject

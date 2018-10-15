@@ -8,15 +8,11 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
     click_on("Registrar Tools")
     click_on(issue_section_notice)
 
-    within(".modal.fade.in") do
+    within("#section-notice.modal.fade.in") do
+      check(@vessel.owners.first.inline_name_and_address)
+      check(@vessel.agent.inline_name_and_address)
       select("56(1)(b)", from: "Regulation/Reason")
       fill_in("Evidence required", with: "Some evidence")
-
-      owner_link = "#section_notice_recipients_#{@vessel.owners.first.id}"
-      find(:css, owner_link).trigger("click")
-      agent_link = "#section_notice_recipients_#{@vessel.agent.id}"
-      find(:css, agent_link).trigger("click")
-
       find(:css, ".submit_issue_section_notice").trigger("click")
     end
 
@@ -32,6 +28,8 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
     within(".modal.fade.in") do
       expect(page).to have_css("h4", text: "Section Notice")
       expect(page).to have_text("Some evidence")
+      expect(page).to have_text(@vessel.owners.first.name)
+      expect(page).to have_text(@vessel.agent.name)
     end
 
     pdf_window = window_opened_by do
@@ -41,6 +39,20 @@ describe "User issues a 30 day section notice", type: :feature, js: true do
     within_window(pdf_window) do
       expect(page).to have_text("%PDF")
     end
+  end
+
+  scenario "without selecting a recipient" do
+    visit_registered_vessel
+    click_on("Registrar Tools")
+    click_on(issue_section_notice)
+
+    within("#section-notice.modal.fade.in") do
+      find(:css, ".submit_issue_section_notice").trigger("click")
+    end
+
+    expect(page)
+      .to have_text(
+        "Recipient must be selected. Section Notice has not been issued.")
   end
 end
 

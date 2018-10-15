@@ -14,7 +14,7 @@
               - @vessel.communication_recipients.each do |recipient|
                 .form-group
                   = label_tag do
-                    = check_box_tag "section_notice[recipients][#{recipient.id}]",
+                    = check_box_tag "register_section_notice[recipient_ids][]",
                       recipient.id, false
                     = recipient.inline_name_and_address
           .row
