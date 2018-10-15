@@ -3,13 +3,20 @@ require "rails_helper"
 describe "User issues a 30 day section notice", type: :feature, js: true do
   scenario "in general" do
     visit_registered_vessel
+    @vessel = Register::Vessel.last
 
     click_on("Registrar Tools")
     click_on(issue_section_notice)
 
-    within("#section-notice") do
+    within(".modal.fade.in") do
       select("56(1)(b)", from: "Regulation/Reason")
       fill_in("Evidence required", with: "Some evidence")
+
+      owner_link = "#section_notice_recipients_#{@vessel.owners.first.id}"
+      find(:css, owner_link).trigger("click")
+      agent_link = "#section_notice_recipients_#{@vessel.agent.id}"
+      find(:css, agent_link).trigger("click")
+
       find(:css, ".submit_issue_section_notice").trigger("click")
     end
 
