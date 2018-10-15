@@ -73,9 +73,14 @@ describe Builders::CsrFormBuilder do
         registered_at: Date.new(2010, 1, 1),
         vessel_name: "PIRATE SHIP",
         owner_names: "ALICE; BOB",
-        owner_addresses: "AA ST; BB ST",
-        charterer_addresses: "MAIN STREET",
+        owner_addresses: owner_addresses,
+        charterer_addresses: "MAIN STREET, LONDON, UNITED KINGDOM, QZ2 3QM",
         registration_closed_at: Date.new(2010, 2, 2))
+    end
+
+    def owner_addresses
+      "AA ST, LONDON, UNITED KINGDOM, QZ2 3QM; "\
+      "BB ST, LONDON, UNITED KINGDOM, QZ2 3QM"
     end
 
     context "with an existing CsrForm" do

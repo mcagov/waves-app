@@ -261,4 +261,30 @@ describe Register::Vessel do
       it { expect(subject).to be_blank }
     end
   end
+
+  context "#communication_recipients" do
+    let(:vessel) { create(:registered_vessel) }
+    let(:owners) { [vessel.owners.first.name] }
+    let(:agent) { vessel.agent.name }
+    let(:managers) { vessel.managers.map(&:name) }
+    let(:charter_parties) { vessel.charter_parties.map(&:name) }
+    let(:representative) { vessel.representative.name }
+
+    before do
+      vessel.owners.create(name: "ZZ_NOT_RETRIEVED")
+    end
+
+    subject { vessel.communication_recipients }
+
+    it do
+      expect(subject.map(&:name)).to match(
+        [owners + [agent] + managers + charter_parties + [representative]]
+          .flatten.sort
+      )
+    end
+
+    it "does not include people without an address" do
+      expect(subject.map(&:name)).not_to include("ZZ_NOT_RETRIEVED")
+    end
+  end
 end

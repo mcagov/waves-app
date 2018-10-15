@@ -198,6 +198,13 @@ module Register
       "GBR000#{reg_no}"
     end
 
+    def communication_recipients
+      [owners + [agent] + managers + charter_parties + [representative]]
+        .flatten
+        .compact
+        .sort_by(&:name)
+    end
+
     private
 
     def shareholder_groups_info
