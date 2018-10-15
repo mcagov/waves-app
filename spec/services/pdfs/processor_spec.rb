@@ -239,5 +239,16 @@ describe Pdfs::Processor do
 
       it { subject }
     end
+
+    context "with a section_notice" do
+      let(:template) { :section_notice }
+
+      before do
+        expect(Pdfs::SectionNotice)
+          .to receive(:new).with(printable_items, :printable)
+      end
+
+      it { subject }
+    end
   end
 end
