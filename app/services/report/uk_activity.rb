@@ -29,7 +29,10 @@ class Report::UkActivity < Report
 
   def submissions_count(uk_activity_report_type)
     UkActivityReportByType
-      .new(activity_report_type: uk_activity_report_type)
+      .new(
+        activity_report_type: uk_activity_report_type,
+        date_start: @date_start,
+        date_end: @date_end)
       .submission_scope.count
   end
 end

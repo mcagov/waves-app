@@ -18,7 +18,7 @@ describe "User views UK Tonnage Statistics report", js: true do
     report_title =
       "Reports: Tonnage Statistics: Part I Merchant vessels under 100gt (R)"
 
-    expect(page).to have_css("h1", report_title)
+    expect(page).to have_css("h1", text: report_title)
     expect_filter_fields(false)
     expect_link_to_export_or_print(true)
   end

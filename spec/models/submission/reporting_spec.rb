@@ -1,9 +1,12 @@
 require "rails_helper"
 
-xdescribe Submission::Reporting do
+describe Submission::Reporting do
   describe "flag_in/out" do
     let!(:new_reg) { create(:submission, application_type: :new_registration) }
-    let!(:closure) { create(:assigned_closure_submission) }
+
+    let!(:closure) do
+      create(:submission, :part_3_vessel, application_type: :closure)
+    end
 
     context ".flag_in" do
       subject { Submission.flag_in }
@@ -23,10 +26,10 @@ xdescribe Submission::Reporting do
   end
 
   describe "merchant/fishing vessels" do
-    let!(:fishing) { create(:fishing_submission) }
-    let!(:p4_fishing) { create(:part_4_fishing_submission) }
-    let!(:merchant) { create(:merchant_submission) }
-    let!(:p4_merchant) { create(:part_4_merchant_submission) }
+    let!(:fishing) { create(:submission, :part_2_vessel) }
+    let!(:p4_fishing) { create(:submission, :part_4_fishing_vessel) }
+    let!(:merchant) { create(:submission, :part_1_vessel) }
+    let!(:p4_merchant) { create(:submission, :part_4_vessel) }
 
     context ".fishing_vessels" do
       subject { Submission.fishing_vessels }

@@ -14,9 +14,7 @@ module Submission::Reporting
       end
 
       base.scope :flag_out, -> do
-        where(
-          application_type:
-          [:closure, :registrar_closure, :termination_notice])
+        where(application_type: [:closure, :registrar_closure])
       end
 
       base.scope :merchant_vessels, (lambda do

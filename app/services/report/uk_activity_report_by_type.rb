@@ -65,7 +65,10 @@ class Report::UkActivityReportByType < Report
       when :commercial_over_100gt_out
         Submission.commercial.over_100gt.flag_out
       end
-    scope.completed
+    scope
+      .where("closed_at >= ?", @date_start)
+      .where("closed_at <= ?", @date_end)
+      .closed
   end
 
   REPORT_TYPES =

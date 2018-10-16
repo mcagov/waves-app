@@ -1,9 +1,9 @@
 require "rails_helper"
 
-xdescribe "User views CEFAS reports", js: true do
+describe "User views CEFAS reports", js: true do
   before do
     login_to_reports
-    visit admin_report_path(:fishing_regional)
+    visit admin_report_path(:vessel_age)
     click_on("CEFAS")
   end
 

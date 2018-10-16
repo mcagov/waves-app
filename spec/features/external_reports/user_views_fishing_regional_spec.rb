@@ -1,9 +1,9 @@
 require "rails_helper"
 
-xdescribe "User views fishing regional reports", js: true do
+describe "User views fishing regional reports", js: true do
   before do
     login_to_reports
-    visit admin_report_path(:maib)
+    visit admin_report_path(:cefas)
     click_on("Fishing Regional")
 
     find("#filter_date_start").set("01/01/2017")
