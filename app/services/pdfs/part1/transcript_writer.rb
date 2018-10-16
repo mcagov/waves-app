@@ -49,8 +49,8 @@ class Pdfs::Part1::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     draw_label_value "Total Engine Power", "#{Engine.total_mcep_for(@registration)} kW", at: [l_margin, vstart]
     vstart -= vspace
 
-    draw_label_value "Overall Length", "#{@vessel.length_overall} metres", at: [l_margin, vstart]
-    draw_label_value "Registered Length", "#{@vessel.register_length} metres", at: [rcol_l_margin, vstart]
+    draw_label_value "Overall Length", "#{format_decimal @vessel.length_overall} metres", at: [l_margin, vstart]
+    draw_label_value "Registered Length", "#{format_decimal @vessel.register_length} metres", at: [rcol_l_margin, vstart]
     vstart -= vspace
 
     draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [l_margin, vstart]

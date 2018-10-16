@@ -23,8 +23,8 @@ class Pdfs::Part2::CertificateWriter < Pdfs::Extended::CertificateWriter
     vstart -= vspace
     draw_label_value "Total Engine Power", "#{Engine.total_mcep_for(@registration)} kW", at: [lmargin, vstart]
     vstart -= vspace
-    draw_label_value "Overall Length", "#{@vessel.length_overall} metres", at: [lmargin, vstart]
-    draw_label_value "Registered Length", "#{@vessel.register_length} metres", at: [rcol_lmargin, vstart]
+    draw_label_value "Overall Length", "#{format_decimal @vessel.length_overall} metres", at: [lmargin, vstart]
+    draw_label_value "Registered Length", "#{format_decimal @vessel.register_length} metres", at: [rcol_lmargin, vstart]
     vstart -= vspace
     draw_label_value "Breadth", "#{@vessel.breadth} metres", at: [lmargin, vstart]
     draw_label_value "Depth", "#{@vessel.depth} metres", at: [rcol_lmargin, vstart]
