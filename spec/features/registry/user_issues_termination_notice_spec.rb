@@ -1,16 +1,17 @@
 require "rails_helper"
 
-describe "User issues a 7 Day Notice", type: :feature, js: true do
+describe "User issues a 7 Day Termination Notice", type: :feature, js: true do
   scenario "when a 30 day section notice has been issued" do
     login_to_part_3
+
     vessel = create(:registered_vessel)
     vessel.issue_section_notice!
-    Register::SectionNotice.create(noteable: vessel)
+    recipient = %w(BOB LONDON)
 
-    # set the SectionNotice#created_at to simulate
-    # the reg officer workflow
-    Register::SectionNotice.last.update_columns(
-      created_at: 20.days.ago, updated_at: 20.days.ago)
+    section_notice =
+      Register::SectionNotice.create(noteable: vessel, recipients: [recipient])
+    section_notice
+      .update_columns(created_at: 20.days.ago, updated_at: 20.days.ago)
 
     visit vessel_path(vessel)
 
@@ -28,6 +29,7 @@ describe "User issues a 7 Day Notice", type: :feature, js: true do
 
     within(".modal.fade.in") do
       expect(page).to have_css("h4", text: "Termination Notice")
+      expect(page).to have_text("BOB LONDON")
     end
 
     pdf_window = window_opened_by do

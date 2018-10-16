@@ -11,6 +11,13 @@
           %dt Date issued
           %dd= termination_notice.created_at.to_s(:date_time)
         %dl
+          %dt Recipient(s)
+          %dd
+            - termination_notice.recipients.each do |recipient|
+              %p
+                %strong= recipient[0]
+                = recipient[1]
+        %dl
           %dt Note
           %dd= termination_notice.content
         %dl

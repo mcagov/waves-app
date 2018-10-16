@@ -25,6 +25,7 @@ class RegisteredVessel::TerminationController < InternalPagesController
       noteable: @vessel,
       actioned_by: current_user,
       subject: "Termination Notice",
+      recipients: @section_notice.recipients,
       content:
         "Relates to Section Notice, issued on: #{@section_notice.created_at}")
   end
