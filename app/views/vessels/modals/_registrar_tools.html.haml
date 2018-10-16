@@ -71,10 +71,12 @@
           %p= link_to "Issue 30 Day Section Notice", "#",
               data: { target: "#section-notice", toggle: "modal" },
               class: "btn btn-block btn-danger"
-          = render partial: "vessels/modals/section_notice", locals: {vessel: vessel}
         - elsif vessel.can_issue_termination_notice?
           %p= link_to "Cancel Section Notice", vessel_section_notice_path(@vessel), method: :delete, class: "btn btn-block btn-danger"
           %p= link_to "Issue 7 Day Termination Notice",
               vessel_termination_path(vessel),
               method: :post, class: "btn btn-block btn-danger"
 
+/ placing this modal  outside the parent modal so the test
+/ finders can locate the `checkbox'
+= render partial: "vessels/modals/section_notice", locals: {vessel: vessel}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_094538) do
+ActiveRecord::Schema.define(version: 2018_10_15_104655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_094538) do
     t.string "entity_type"
     t.string "issuing_authority"
     t.datetime "expires_at"
+    t.json "recipients", default: []
     t.index ["actioned_by_id"], name: "index_notes_on_actioned_by_id"
     t.index ["entity_type"], name: "index_notes_on_entity_type"
     t.index ["noteable_id"], name: "index_notes_on_noteable_id"

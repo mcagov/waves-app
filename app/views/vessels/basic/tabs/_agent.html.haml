@@ -3,6 +3,7 @@
     %th Name
     %th Email
     %th Phone number
+    %th Address
   - if agent
     %tbody
       %tr
@@ -12,3 +13,5 @@
           %strong= agent.email
         %td
           %strong= agent.phone_number
+        %td
+          %strong= agent.inline_address

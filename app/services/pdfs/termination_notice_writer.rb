@@ -10,15 +10,15 @@ class Pdfs::TerminationNoticeWriter
   end
 
   def write
-    @vessel.owners.each do |owner|
+    @termination_notice.recipients.each do |recipient|
       @pdf.start_new_page
-      @applicant_name = owner.name
-      @delivery_name_and_address = [owner.name] + owner.compacted_address
+      @applicant_name = recipient[0]
+      @delivery_name_and_address = recipient
       init_stationary(@termination_notice.created_at)
       vessel_name
       page_one
       @pdf.start_new_page
-      page_two(owner)
+      page_two(recipient)
 
       @pdf = Pdfs::SectionNoticeWriter.new(@termination_notice.related_section_notice, @pdf).write
     end
@@ -57,7 +57,7 @@ class Pdfs::TerminationNoticeWriter
                   width: 480, height: 400, leading: 4
   end
 
-  def page_two(owner)
+  def page_two(recipient)
     set_bold_font
     msg = "NOTICE PURSUANT TO REGULATION 101 OF THE MERCHANT SHIPPING (REGISTRATION) REGULATIONS 1993 (as amended)"
     @pdf.text_box msg,
@@ -65,8 +65,8 @@ class Pdfs::TerminationNoticeWriter
                   width: 480, height: 100, leading: 8
 
     set_copy_font
-    msg = "To: #{owner.name}\n"
-    msg += "Of: #{owner.inline_address}"
+    msg = "To: #{recipient.shift}\n"
+    msg += "Of: #{recipient.join(", ")}"
     @pdf.text_box msg,
                   at: [l_margin, 720],
                   width: 480, height: 100, leading: 8

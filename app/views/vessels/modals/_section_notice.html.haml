@@ -10,11 +10,19 @@
         .modal-body
           .row
             .col-sm-12
+              %label Select Recipient(s)
+              - @vessel.communication_recipients.each do |recipient|
+                .form-group
+                  = label_tag do
+                    = check_box_tag "register_section_notice[recipient_ids][]",
+                      recipient.id, false
+                    = recipient.inline_name_and_address
+          .row
+            .col-sm-12
               .form-group
                 = f.input :subject, label: "Regulation/Reason",
                   collection: termination_reasons_collection,
                   include_blank: false
-        .modal-body
           .row
             .col-sm-12
               .form-group

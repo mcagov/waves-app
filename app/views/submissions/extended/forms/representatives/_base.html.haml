@@ -5,6 +5,7 @@
     %th Name
     %th Email
     %th Phone
+    %th Address
     %th
   %tbody
     - if representative.name.present?
@@ -14,6 +15,7 @@
             "data-target" => "#edit_representative_modal", "data-toggle" => "modal"
         %td.representative-email= representative.email
         %td.representative-phone_number= representative.phone_number
+        %td= representative.inline_address
         %td
           - unless @readonly
             = link_to submission_representative_path(@submission, representative),
