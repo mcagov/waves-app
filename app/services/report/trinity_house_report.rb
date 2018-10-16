@@ -47,9 +47,9 @@ class Report::TrinityHouseReport < Report
     Submission
       .includes(:registration, :declarations, :declaration_groups)
       .in_part(part)
-      .completed
-      .where("completed_at >= ?", @date_start)
-      .where("completed_at <= ?", @date_end)
+      .closed
+      .where("closed_at >= ?", @date_start)
+      .where("closed_at <= ?", @date_end)
       .map do |submission|
         assign_result(submission)
       end
