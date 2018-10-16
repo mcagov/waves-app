@@ -50,9 +50,9 @@ class Report::CefasReport < Report
     Submission
       .includes(:declarations, :engines, :registration)
       .fishing_vessels
-      .completed
-      .where("completed_at >= ?", @date_start)
-      .where("completed_at <= ?", @date_end)
+      .closed
+      .where("closed_at >= ?", @date_start)
+      .where("closed_at <= ?", @date_end)
   end
 
   def load_vessel(submission)
@@ -77,7 +77,7 @@ class Report::CefasReport < Report
         submission.vessel_ec_no,
         vessel.imo_number,
         event_type(submission),
-        submission.completed_at,
+        submission.closed_at,
         closure_reason(registration),
         submission.vessel_reg_no,
         vessel.pln,
