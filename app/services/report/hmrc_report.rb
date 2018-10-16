@@ -31,8 +31,8 @@ class Report::HmrcReport < Report
           reportable_registered_vessel:
             [:owners, :engines, :latest_closed_submission])
         .flag_in
-        .where("completed_at >= ?", @date_start)
-        .where("completed_at <= ?", @date_end)
+        .where("closed_at >= ?", @date_start)
+        .where("closed_at <= ?", @date_end)
         .map(&:reportable_registered_vessel))
   end
 
@@ -99,7 +99,7 @@ class Report::HmrcReport < Report
         vessel.year_of_build,
         vessel.place_of_build,
         task_description,
-        submission.try(:completed_at),
+        submission.try(:closed_at),
         vessel.vessel_type,
         vessel.correspondent.try(:inline_name_and_address),
         vessel.owners.map(&:inline_name_and_address).join("; "),

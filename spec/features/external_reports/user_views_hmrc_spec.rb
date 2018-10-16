@@ -1,6 +1,6 @@
 require "rails_helper"
 
-xdescribe "User views HMRC reports", js: true do
+describe "User views HMRC reports", js: true do
   before do
     login_to_reports
     visit admin_report_path(:vessel_age)
