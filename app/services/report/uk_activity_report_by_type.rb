@@ -32,7 +32,7 @@ class Report::UkActivityReportByType < Report
           vessel.vessel_type_description,
           vessel.register_length,
           vessel.gross_tonnage,
-          submission.completed_at,
+          submission.closed_at,
           submission.registration.try(:description),
           vessel.year_of_build
         ])
