@@ -83,6 +83,7 @@ en:
       correspondent_required: A correspondent is required
       hin_invalid: HIN is not in a valid format
       radio_call_sign_invalid: Radio Call Sign is not in a valid format
+      year_of_build_invalid: Year of Build is required and must be a valid year
     approval_alert_text: Selecting this option, will register the vessel or the change and will close this task.  Please ensure that all the information necessary to complete the task has been entered.
     approval:
       inline-btn:

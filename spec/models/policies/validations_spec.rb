@@ -78,7 +78,7 @@ describe Policies::Validations do
         end
       end
 
-      context "Radio Call sign" do
+      context "Radio Call Sign" do
         let(:submission) do
           build(
             :submission,
@@ -105,6 +105,38 @@ describe Policies::Validations do
 
         context "is valid" do
           let(:radio_call_sign) { "123AB" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+      end
+
+      context "Year of Build" do
+        let(:submission) do
+          build(
+            :submission,
+            changeset: { vessel_info: { year_of_build: year_of_build } })
+        end
+
+        context "is blank" do
+          let(:year_of_build) { "" }
+
+          it { expect(subject).not_to include(:year_of_build_invalid) }
+        end
+
+        context "is invalid" do
+          let(:year_of_build) { "999" }
+
+          it { expect(subject).to include(:year_of_build_invalid) }
+        end
+
+        context "is valid" do
+          let(:year_of_build) { "1700" }
+
+          it { expect(subject).not_to include(:year_of_build_invalid) }
+        end
+
+        context "is valid" do
+          let(:year_of_build) { "2020" }
 
           it { expect(subject).not_to include(:radio_call_sign_invalid) }
         end

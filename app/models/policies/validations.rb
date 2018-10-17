@@ -16,6 +16,7 @@ class Policies::Validations
       list << :correspondent_required if correspondent_missing?
       list << :hin_invalid if hin_invalid?
       list << :radio_call_sign_invalid if radio_call_sign_invalid?
+      list << :year_of_build_invalid if year_of_build_invalid?
     end
 
     if rules_policy.declarations_required
@@ -82,6 +83,12 @@ class Policies::Validations
   def radio_call_sign_invalid?
     if submission.vessel && submission.vessel.radio_call_sign.present?
       !submission.vessel.radio_call_sign.match(/\A[0-9A-Z]{4,5}\z/)
+    end
+  end
+
+  def year_of_build_invalid?
+    if submission.vessel && submission.vessel.year_of_build.present?
+      !submission.vessel.year_of_build.match(/\A(17|18|19|20)\d{2}\z/)
     end
   end
 
