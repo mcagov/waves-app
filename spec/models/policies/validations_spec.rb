@@ -47,6 +47,36 @@ describe Policies::Validations do
 
         it { expect(subject).to include(:correspondent_required) }
       end
+
+      context "HIN" do
+        let(:submission) do
+          build(:submission, changeset: { vessel_info: { hin: hin } })
+        end
+
+        context "is blank" do
+          let(:hin) { "" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+
+        context "is invalid" do
+          let(:hin) { "foo" }
+
+          it { expect(subject).to include(:hin_invalid) }
+        end
+
+        context "is valid" do
+          let(:hin) { "NL-HXAB7A33G293" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+
+        context "is valid" do
+          let(:hin) { "HXAB7A33G293" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+      end
     end
 
     context "for a service that requires declarations" do

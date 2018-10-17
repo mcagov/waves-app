@@ -81,6 +81,7 @@ en:
       carving_marking_not_received: Carving & Marking Note has been issued but not marked as received
       shareholding_count: All 64 shares must be allocated
       correspondent_required: A correspondent is required
+      hin_invalid: HIN is not in a valid format
     approval_alert_text: Selecting this option, will register the vessel or the change and will close this task.  Please ensure that all the information necessary to complete the task has been entered.
     approval:
       inline-btn:

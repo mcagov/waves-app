@@ -14,6 +14,7 @@ class Policies::Validations
       list << :vessel_frozen if registered_vessel_frozen?
       list << :shareholding_count if shareholding_incomplete?
       list << :correspondent_required if correspondent_missing?
+      list << :hin_invalid if hin_invalid?
     end
 
     if rules_policy.declarations_required
@@ -69,6 +70,12 @@ class Policies::Validations
     return false if Policies::Definitions.part_3?(submission)
     submission.carving_and_marking_received_at.blank? &&
       submission.carving_and_marking_receipt_skipped_at.blank?
+  end
+
+  def hin_invalid?
+    if submission.vessel && submission.vessel.hin.present?
+      !submission.vessel.hin.match(/\A(?:([A-Z]{2}\-)?)[0-9A-Z]{12}?\z/)
+    end
   end
 
   def rules_policy
