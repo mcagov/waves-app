@@ -46,6 +46,7 @@ class Report::TrinityHouseReport < Report
   def build_results(part)
     Submission
       .includes(:registration, :declarations, :declaration_groups)
+      .where.not(registered_vessel_id: nil)
       .in_part(part)
       .closed
       .where("closed_at >= ?", @date_start)

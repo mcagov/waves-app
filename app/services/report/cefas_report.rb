@@ -51,6 +51,7 @@ class Report::CefasReport < Report
       .includes(:declarations, :engines, :registration)
       .fishing_vessels
       .closed
+      .where.not(registered_vessel_id: nil)
       .where("closed_at >= ?", @date_start)
       .where("closed_at <= ?", @date_end)
   end
