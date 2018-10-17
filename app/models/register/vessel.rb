@@ -201,9 +201,10 @@ module Register
     def communication_recipients
       [owners + [agent] + managers + charter_parties + [representative]]
         .flatten
+        .compact
         .select do |customer|
           customer.name.present? && customer.inline_name_and_address.present?
-        end.compact.sort_by(&:name)
+        end.sort_by(&:name)
     end
 
     private
