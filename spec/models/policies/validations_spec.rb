@@ -47,6 +47,100 @@ describe Policies::Validations do
 
         it { expect(subject).to include(:correspondent_required) }
       end
+
+      context "HIN" do
+        let(:submission) do
+          build(:submission, changeset: { vessel_info: { hin: hin } })
+        end
+
+        context "is blank" do
+          let(:hin) { "" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+
+        context "is invalid" do
+          let(:hin) { "foo" }
+
+          it { expect(subject).to include(:hin_invalid) }
+        end
+
+        context "is valid" do
+          let(:hin) { "NL-HXAB7A33G293" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+
+        context "is valid" do
+          let(:hin) { "HXAB7A33G293" }
+
+          it { expect(subject).not_to include(:hin_invalid) }
+        end
+      end
+
+      context "Radio Call Sign" do
+        let(:submission) do
+          build(
+            :submission,
+            changeset: { vessel_info: { radio_call_sign: radio_call_sign } })
+        end
+
+        context "is blank" do
+          let(:radio_call_sign) { "" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+
+        context "is invalid" do
+          let(:radio_call_sign) { "foo" }
+
+          it { expect(subject).to include(:radio_call_sign_invalid) }
+        end
+
+        context "is valid" do
+          let(:radio_call_sign) { "123A" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+
+        context "is valid" do
+          let(:radio_call_sign) { "123AB" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+      end
+
+      context "Year of Build" do
+        let(:submission) do
+          build(
+            :submission,
+            changeset: { vessel_info: { year_of_build: year_of_build } })
+        end
+
+        context "is blank" do
+          let(:year_of_build) { "" }
+
+          it { expect(subject).not_to include(:year_of_build_invalid) }
+        end
+
+        context "is invalid" do
+          let(:year_of_build) { "999" }
+
+          it { expect(subject).to include(:year_of_build_invalid) }
+        end
+
+        context "is valid" do
+          let(:year_of_build) { "1700" }
+
+          it { expect(subject).not_to include(:year_of_build_invalid) }
+        end
+
+        context "is valid" do
+          let(:year_of_build) { "2020" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+      end
     end
 
     context "for a service that requires declarations" do

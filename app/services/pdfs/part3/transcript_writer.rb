@@ -21,7 +21,7 @@ class Pdfs::Part3::TranscriptWriter < Pdfs::TranscriptWriter
     draw_label_value "NAME OF SHIP", @vessel.name, at: [l_margin, 590]
     draw_label_value "DESCRIPTION", @vessel.vessel_type, at: [l_margin, 560]
     draw_label_value "OVERALL LENGTH",
-                     "#{@vessel.length_in_meters} metres",
+                     "#{format_decimal @vessel.length_in_meters} metres",
                      at: [l_margin, 530]
     draw_label_value "NUMBER OF HULLS",
                      @vessel.number_of_hulls, at: [l_margin, 500]

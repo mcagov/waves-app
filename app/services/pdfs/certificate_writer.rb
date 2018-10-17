@@ -24,4 +24,8 @@ class Pdfs::CertificateWriter
   def default_label_font
     @pdf.font("Helvetica-Oblique", size: 10)
   end
+
+  def format_decimal(input)
+    format("%.2f", input || 0)
+  end
 end

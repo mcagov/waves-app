@@ -123,5 +123,9 @@ class Pdfs::TranscriptWriter
     s << "CF24 5JW"
     s
   end
+
+  def format_decimal(input)
+    format("%.2f", input || 0)
+  end
 end
 # rubocop:enable all
