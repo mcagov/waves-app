@@ -15,6 +15,7 @@ class Policies::Validations
       list << :shareholding_count if shareholding_incomplete?
       list << :correspondent_required if correspondent_missing?
       list << :hin_invalid if hin_invalid?
+      list << :radio_call_sign_invalid if radio_call_sign_invalid?
     end
 
     if rules_policy.declarations_required
@@ -75,6 +76,12 @@ class Policies::Validations
   def hin_invalid?
     if submission.vessel && submission.vessel.hin.present?
       !submission.vessel.hin.match(/\A(?:([A-Z]{2}\-)?)[0-9A-Z]{12}?\z/)
+    end
+  end
+
+  def radio_call_sign_invalid?
+    if submission.vessel && submission.vessel.radio_call_sign.present?
+      !submission.vessel.radio_call_sign.match(/\A[0-9A-Z]{4,5}\z/)
     end
   end
 

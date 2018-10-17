@@ -77,6 +77,38 @@ describe Policies::Validations do
           it { expect(subject).not_to include(:hin_invalid) }
         end
       end
+
+      context "Radio Call sign" do
+        let(:submission) do
+          build(
+            :submission,
+            changeset: { vessel_info: { radio_call_sign: radio_call_sign } })
+        end
+
+        context "is blank" do
+          let(:radio_call_sign) { "" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+
+        context "is invalid" do
+          let(:radio_call_sign) { "foo" }
+
+          it { expect(subject).to include(:radio_call_sign_invalid) }
+        end
+
+        context "is valid" do
+          let(:radio_call_sign) { "123A" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+
+        context "is valid" do
+          let(:radio_call_sign) { "123AB" }
+
+          it { expect(subject).not_to include(:radio_call_sign_invalid) }
+        end
+      end
     end
 
     context "for a service that requires declarations" do

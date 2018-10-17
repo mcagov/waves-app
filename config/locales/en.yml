@@ -82,6 +82,7 @@ en:
       shareholding_count: All 64 shares must be allocated
       correspondent_required: A correspondent is required
       hin_invalid: HIN is not in a valid format
+      radio_call_sign_invalid: Radio Call Sign is not in a valid format
     approval_alert_text: Selecting this option, will register the vessel or the change and will close this task.  Please ensure that all the information necessary to complete the task has been entered.
     approval:
       inline-btn:
