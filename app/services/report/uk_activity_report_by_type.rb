@@ -66,6 +66,7 @@ class Report::UkActivityReportByType < Report
         Submission.commercial.over_100gt.flag_out
       end
     scope
+      .where.not(registered_vessel_id: nil)
       .where("closed_at >= ?", @date_start)
       .where("closed_at <= ?", @date_end)
       .closed
