@@ -141,6 +141,53 @@ describe Policies::Validations do
           it { expect(subject).not_to include(:radio_call_sign_invalid) }
         end
       end
+
+      context "part_3_length" do
+        let(:submission) do
+          build(
+            :submission,
+            part: part,
+            changeset: { vessel_info: { length_in_meters: length_in_meters } })
+        end
+
+        context "part_3" do
+          let(:part) { :part_3 }
+
+          context "is blank" do
+            let(:length_in_meters) { "" }
+
+            it { expect(subject).to include(:part_3_length_invalid) }
+          end
+
+          context "is not number" do
+            let(:length_in_meters) { "ABC" }
+
+            it { expect(subject).to include(:part_3_length_invalid) }
+          end
+
+          context "is too long" do
+            let(:length_in_meters) { "24" }
+
+            it { expect(subject).to include(:part_3_length_invalid) }
+          end
+
+          context "is valid" do
+            let(:length_in_meters) { "23.99" }
+
+            it { expect(subject).not_to include(:part_3_length_invalid) }
+          end
+        end
+
+        context "part_1 (all non-part_3)" do
+          let(:part) { :part_1 }
+
+          context "is blank" do
+            let(:length_in_meters) { 24 }
+
+            it { expect(subject).not_to include(:part_3_length_invalid) }
+          end
+        end
+      end
     end
 
     context "for a service that requires declarations" do

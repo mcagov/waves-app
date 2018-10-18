@@ -17,6 +17,7 @@ class Policies::Validations
       list << :hin_invalid if hin_invalid?
       list << :radio_call_sign_invalid if radio_call_sign_invalid?
       list << :year_of_build_invalid if year_of_build_invalid?
+      list << :part_3_length_invalid if part_3_length_invalid?
     end
 
     if rules_policy.declarations_required
@@ -90,6 +91,12 @@ class Policies::Validations
     if submission.vessel && submission.vessel.year_of_build.present?
       !submission.vessel.year_of_build.match(/\A(17|18|19|20)\d{2}\z/)
     end
+  end
+
+  def part_3_length_invalid?
+    return false unless Policies::Definitions.part_3?(submission)
+    length_in_meters = submission.vessel.try(:length_in_meters).to_f
+    length_in_meters.zero? || (length_in_meters >= 24.0)
   end
 
   def rules_policy
