@@ -15,7 +15,9 @@
             - if asset.file.exists?
               %i.fa.fa-file-pdf-o
               = link_to asset.file_file_name, azure_private_asset_url(asset)
-              %br
+            - if @submission.closed?
+              = render partial: "submissions/actions/remove_asset", locals: {asset: asset}
+            %br
         %td{width: '35%'}= document.content
         %td.added_by{width: '15%'}
           = document.actioned_by
@@ -26,7 +28,7 @@
             = link_to submission_document_path(@submission, document),
               class: 'btn-link pull-right',
               method: :delete,
-              data: { confirm: "Are you sure you want to remove this charter party?" },
+              data: { confirm: "Are you sure you want to remove this document?" },
               style: 'color: red;' do
               %i.fa.fa-trash
               Remove
