@@ -81,6 +81,8 @@ Rails.application.routes.draw do
               constraints: ->(request) { request.format == :js },
               controller: "submission/agents", only: [:update, :destroy]
 
+    resources :asset,
+              controller: "submission/assets", only: [:destroy]
     resources :applicant,
               constraints: ->(request) { request.format == :js },
               controller: "submission/applicants", only: [:update]
