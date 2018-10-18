@@ -24,8 +24,9 @@
           - if asset && asset.file.exists?
             %i.fa.fa-file-pdf-o
             = link_to asset.file_file_name, azure_private_asset_url(asset) , target: "_blank"
-          - if @submission.closed?
-            = render partial: "submissions/actions/remove_asset", locals: {asset: asset}
+          - if asset && @readonly
+            = render partial: "submissions/actions/remove_asset",
+              locals: {asset: asset}
         %td.remove-document
           - unless @readonly
             = link_to submission_document_path(@submission, document, task_id: @task.id),

@@ -1,6 +1,4 @@
 - if asset.file.exists?
-  %i.fa.fa-file-pdf-o
-  = link_to asset.file_file_name, azure_private_asset_url(asset), target: "_blank"
   = link_to submission_asset_path(@submission, asset),
     class: 'btn-link pull-right',
     method: :delete,
