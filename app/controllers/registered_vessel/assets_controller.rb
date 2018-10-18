@@ -4,6 +4,7 @@ class RegisteredVessel::AssetsController < InternalPagesController
   def destroy
     asset = Asset.find(params[:id])
     asset.file.clear
+    asset.removed_by = current_user
     asset.save
 
     flash[:notice] = "The file has been removed from the system"

@@ -15,8 +15,8 @@ describe "User removes documents from a registered vessel", js: true do
 
     click_on("Documents")
     within("#documents") do
-      expect(page)
-        .to have_css(".red", text: "File removed")
+      msg = "File removed by #{user} on #{Asset.last.updated_at}"
+      expect(page).to have_css(".red", text: msg)
     end
   end
 end
