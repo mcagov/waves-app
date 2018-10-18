@@ -15,9 +15,4 @@
         %td.noted_at= document.noted_at
         %td.expires_at= document.expires_at
         %td.notes= document.content
-        %td
-          - asset = document.asset
-          - if asset && asset.file.exists?
-            %i.fa.fa-file-pdf-o
-            = link_to asset.file_file_name, azure_private_asset_url(asset) , target: "_blank"
-
+        %td= render partial: "vessels/shared/tabs/document_assets", locals: {document: document}

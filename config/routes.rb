@@ -232,6 +232,10 @@ Rails.application.routes.draw do
   resources :print_jobs, only: [:show, :index, :update]
 
   resources :vessels, only: [:show, :index] do
+    resources :assets,
+              only: [:destroy],
+              controller: "registered_vessel/assets"
+
     resources :csrs,
               only: [:show, :update],
               controller: "registered_vessel/csrs"

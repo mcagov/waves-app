@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_104655) do
+ActiveRecord::Schema.define(version: 2018_10_18_102512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_104655) do
     t.integer "file_file_size"
     t.string "file_content_type"
     t.string "file_file_name"
+    t.uuid "removed_by_id"
     t.index ["owner_id"], name: "index_assets_on_owner_id"
     t.index ["owner_type"], name: "index_assets_on_owner_type"
   end
