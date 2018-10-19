@@ -83,6 +83,14 @@ class Registration < ApplicationRecord
     provisional? ? :provisional_certificate : :registration_certificate
   end
 
+  def task_description
+    if submission
+      ApplicationType.new(submission.application_type).description
+    else
+      ""
+    end
+  end
+
   private
 
   def submission

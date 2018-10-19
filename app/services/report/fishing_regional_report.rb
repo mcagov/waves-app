@@ -35,11 +35,6 @@ class Report::FishingRegionalReport < Report
     Decorators::Vessel.new(registration.vessel)
   end
 
-  def transaction_type(registration)
-    return "" if registration.submissions.empty?
-    "task_description"
-  end
-
   def assign_result(registration) # rubocop:disable Metrics/MethodLength
     vessel = load_vessel(registration)
     Result.new(
@@ -58,7 +53,7 @@ class Report::FishingRegionalReport < Report
         vessel.year_of_build,
         registration.owner_name_address_shareholding,
         (registration.closed_at? ? "Closed" : "Registered"),
-        transaction_type(registration),
+        registration.task_description,
         registration.created_at,
       ])
   end
