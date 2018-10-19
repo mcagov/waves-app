@@ -48,8 +48,9 @@ class Report::MaibQuarterly < Report
   end
 
   def transaction_type(registration)
-    return "" if registration.submissions.empty?
-    "task_description"
+    submission = registration.submissions.first
+    return "" unless submission
+    ApplicationType.new(submission.application_type).description
   end
 
   def assign_result(registration) # rubocop:disable Metrics/MethodLength
@@ -70,7 +71,7 @@ class Report::MaibQuarterly < Report
         vessel.year_of_build,
         registration.owner_name_address_shareholding,
         (registration.closed_at? ? "Closed" : "Registered"),
-        transaction_type(registration),
+        registration.task_description,
         registration.created_at,
       ])
   end
