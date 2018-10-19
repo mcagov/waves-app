@@ -49,7 +49,11 @@
   .modal.fade{id: "new_mortgage", role: "dialog", tabindex: "-1"}
     .modal-dialog.modal-lg
       .modal-content
-        = simple_form_for Mortgage.new, method: :post, remote: true, url: submission_mortgages_path(@submission) do |mortgage_f|
+        = simple_form_for Mortgage.new,
+          method: :post,
+          remote: true,
+          html: { class: "mortgage-form" },
+          url: submission_mortgages_path(@submission) do |mortgage_f|
           = hidden_field_tag "modal_id", "new_mortgage"
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -66,7 +70,11 @@
     .modal.fade{id: "edit_mortgage_#{mortgage.id}", role: "dialog", tabindex: "-1"}
       .modal-dialog.modal-lg
         .modal-content
-          = simple_form_for mortgage, method: :put, remote: true, url: submission_mortgage_path(@submission, mortgage) do |mortgage_f|
+          = simple_form_for mortgage,
+            method: :put,
+            remote: true,
+            html: { class: "mortgage-form" },
+            url: submission_mortgage_path(@submission, mortgage) do |mortgage_f|
             = hidden_field_tag "modal_id", "new_mortgage"
             .modal-header
               %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}

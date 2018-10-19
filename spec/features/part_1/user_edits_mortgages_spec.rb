@@ -11,10 +11,8 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       select("B", from: "Priority Code")
-      select("Intent", from: "Mortgage Type")
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
-      select("12", from: "Shares Mortgaged")
 
       fill_in("Name of Mortgagor", with: "Bob")
       click_on("Add Extra Mortgagor")
@@ -38,7 +36,7 @@ describe "User edits mortgages", js: :true do
       expect(page).to have_css(".mortgage_type", text: "Intent")
       expect(page).to have_css(".reference_number", text: "REF 1")
       expect(page).to have_css(".executed_at", text: "Thu Feb 01, 2001")
-      expect(page).to have_css(".amount", text: "12")
+      expect(page).to have_css(".amount", text: "")
       expect(page).to have_css(".mortgagors", text: "BOB")
       expect(page).to have_css(".mortgagees", text: "ALICE")
 
@@ -47,12 +45,14 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       expect(find_field("Priority Code").value).to eq("B")
+      select("8", from: "Shares Mortgaged")
       fill_in("Reference Number", with: "REF 2")
       fill_in("Date Discharged", with: "02/02/2012")
       click_on("Save Mortgage")
     end
 
     within("#mortgages_tab") do
+      expect(page).to have_css(".amount", text: "8")
       expect(page).to have_css("tr.strike .reference_number", text: "REF 2")
     end
 

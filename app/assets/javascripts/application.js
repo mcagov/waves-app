@@ -29,6 +29,7 @@
 //
 //= require common_mortgagees
 //= require modals
+//= require mortgages
 //= require name_approval
 //= require_owners
 //= require postcode_lookup
