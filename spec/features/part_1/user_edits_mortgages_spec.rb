@@ -14,18 +14,24 @@ describe "User edits mortgages", js: :true do
       fill_in("Reference Number", with: "REF 1")
       fill_in("Date Executed", with: "01/02/2001")
 
-      fill_in("Name of Mortgagor", with: "Bob")
-      click_on("Add Extra Mortgagor")
-      within all("#mortgagors .nested-fields")[1] do
-        fill_in("Name of Mortgagor", with: "Mary")
-        click_on("Remove")
+      within("#mortgagors") do
+        fill_in("Name of Mortgagor", with: "Bob")
+        fill_in("Address 1", with: "MY HOUSE")
+        click_on("Add Extra Mortgagor")
+        within all("#mortgagors .nested-fields")[1] do
+          fill_in("Name of Mortgagor", with: "Mary")
+          click_on("Remove")
+        end
       end
 
-      fill_in("Name of Mortgagee", with: "Alice")
-      click_on("Add Extra Mortgagee")
-      within all("#mortgagees .nested-fields")[1] do
-        fill_in("Name of Mortgagee", with: "Charlie")
-        click_on("Remove")
+      within("#mortgagees") do
+        fill_in("Name of Mortgagee", with: "Alice")
+        fill_in("Address 1", with: "MY HOUSE")
+        click_on("Add Extra Mortgagee")
+        within all("#mortgagees .nested-fields")[1] do
+          fill_in("Name of Mortgagee", with: "Charlie")
+          click_on("Remove")
+        end
       end
 
       click_on("Add Mortgage")
@@ -44,6 +50,7 @@ describe "User edits mortgages", js: :true do
     end
 
     within(".modal.fade.in") do
+      select("Account Current", from: "Mortgage Type")
       expect(find_field("Priority Code").value).to eq("B")
       select("8", from: "Shares Mortgaged")
       fill_in("Reference Number", with: "REF 2")
