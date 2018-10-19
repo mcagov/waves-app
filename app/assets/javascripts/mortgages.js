@@ -5,8 +5,8 @@ function initMortgageForm() {
     var mortgage_type = $(scope).find('.mortgage-type').val();
     var mortgage_amount = $(scope).find('#mortgage_amount').val();
 
-    var errors = 'Please amend the following errors:\n'
-    var validations = true
+    var errors = 'Please amend the following errors:\n';
+    var validations = true;
 
     // shares mortgaged
     if ( mortgage_type == 'Intent') {
@@ -24,14 +24,21 @@ function initMortgageForm() {
     // addresses
     $(scope).find('.address-1').each(function() {
       if ($(this).val() == '') {
-        errors = errors + 'Address 1 is required for Mortgagors and Mortgagees';
+        errors = errors + 'Address 1 is required for Mortgagors and Mortgagees\n';
         validations = false;
-        return false
+        return false;
       }
-    })
+    });
+
+    // date executed
+    if ($(scope).find('#mortgage_executed_at').val() == '') {
+      errors = errors + 'Date Executed cannot be blank';
+      validations = false;
+    }
+
     if (validations == false) {
       alert(errors);
-      return false
+      return false;
     }
   });
 }
