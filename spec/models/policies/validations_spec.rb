@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Policies::Validations do
-  describe ".errors" do
+  describe "#errors" do
     subject { described_class.new(task).errors }
 
     context "default state" do
@@ -246,6 +246,49 @@ describe Policies::Validations do
 
           it { expect(subject).to be_empty }
         end
+      end
+    end
+  end
+
+  describe "#warnings" do
+    subject { described_class.new(task).warnings }
+
+    context "default state" do
+      let(:task) { build(:task) }
+
+      it { expect(subject).to be_empty }
+    end
+
+    context "for a service with prompt_if_registered_mortgage" do
+      let(:task) do
+        create(
+          :task,
+          service: create(:service, :prompt_if_registered_mortgage),
+          submission: build(:submission, mortgages: mortgages))
+      end
+
+      context "with a registered mortgage" do
+        let(:mortgages) { [create(:mortgage, :registered)] }
+
+        it { expect(subject).to include(:registered_mortgage_exists) }
+      end
+
+      context "with a discharged mortgage" do
+        let(:mortgages) { [create(:mortgage, :discharged)] }
+
+        it { expect(subject).to be_empty }
+      end
+
+      context "with a mortgage of intent" do
+        let(:mortgages) { [create(:mortgage, :intent)] }
+
+        it { expect(subject).to be_empty }
+      end
+
+      context "with no mortgage" do
+        let(:mortgages) { [] }
+
+        it { expect(subject).to be_empty }
       end
     end
   end

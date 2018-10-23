@@ -11,6 +11,10 @@ class Mortgage < ApplicationRecord
 
   scope :not_discharged, -> { where(discharged_at: nil) }
 
+  scope :registered, (lambda do
+    where.not(mortgage_type: "Intent").where(discharged_at: nil)
+  end)
+
   delegate :part, to: :parent
 
   def vessel

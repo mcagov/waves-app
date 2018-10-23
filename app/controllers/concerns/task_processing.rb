@@ -36,4 +36,16 @@ module TaskProcessing
   def registry_not_editable
     rules_policy.registry_not_editable
   end
+
+  def respond_to_validations
+    if @validation_errors.empty?
+      if !@validation_warnings.empty?
+        render "submission/tasks/modals/validation_warnings"
+      else
+        render "submission/tasks/modals/complete"
+      end
+    else
+      render "submission/tasks/modals/validation_errors"
+    end
+  end
 end
