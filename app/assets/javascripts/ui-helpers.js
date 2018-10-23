@@ -33,10 +33,12 @@ $(document).on('blur','.upcase.form-control', {} ,function(e){
     if ($(this).val().length > 0) {
       $(fields).find('.name-field').addClass('hidden');
       $(fields).find('.address-fields').addClass('hidden');
+      $(fields).find('.address-fields .address-1').addClass('hidden');
     }
     else
     {
       $(fields).find('.name-field').removeClass('hidden');
       $(fields).find('.address-fields').removeClass('hidden');
+      $(fields).find('.address-fields .address-1').removeClass('hidden');
     }
   });
