@@ -22,6 +22,11 @@ class VesselsController < InternalPagesController
       .autonomous
       .paginate(page: params[:page], per_page: 50)
       .order(:name)
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 
   private

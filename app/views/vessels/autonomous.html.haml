@@ -15,3 +15,9 @@
             %td= vessel.reg_no
 
     = will_paginate @autonomous_vessels, renderer: BootstrapPagination::Rails
+.row.no-print#actions
+  .col-md-6
+    = link_to autonomous_vessels_path(format: :xls),
+      class: "btn btn-success" do
+      %i.fa.fa-file-excel-o
+      Export to Excel
