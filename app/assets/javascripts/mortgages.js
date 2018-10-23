@@ -23,7 +23,7 @@ function initMortgageForm() {
     }
     // addresses
     $(scope).find('.address-1').each(function() {
-      if ($(this).val() == '') {
+      if (($(this).val() == '') && (!$(this).hasClass('hidden'))) {
         errors = errors + 'Address 1 is required for Mortgagors and Mortgagees\n';
         validations = false;
         return false;
