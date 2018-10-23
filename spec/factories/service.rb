@@ -28,6 +28,10 @@ FactoryBot.define do
       activities { [:issue_csr] }
     end
 
+    trait :prompt_if_registered_mortgage do
+      rules { [:prompt_if_registered_mortgage] }
+    end
+
     trait :prints_csr_form do
       print_templates { [:csr_form] }
     end

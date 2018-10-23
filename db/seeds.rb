@@ -260,6 +260,7 @@ Service.create(
     :registered_vessel_required,
     :validates_on_approval,
     :declarations_required,
+    :prompt_if_registered_mortgage,
   ],
   activities: [
     :generate_new_5_year_registration,

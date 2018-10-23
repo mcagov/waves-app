@@ -36,6 +36,16 @@ class Policies::Validations
   end
   # rubocop:enable all
 
+  def warnings
+    list = []
+
+    if rules_policy.prompt_if_registered_mortgage
+      list << :registered_mortgage_exists if registered_mortgage_exists?
+    end
+
+    list
+  end
+
   private
 
   def submission
@@ -101,5 +111,9 @@ class Policies::Validations
 
   def rules_policy
     @rules_policy ||= Policies::Rules.new(@task)
+  end
+
+  def registered_mortgage_exists?
+    submission.mortgages.registered.any?
   end
 end
