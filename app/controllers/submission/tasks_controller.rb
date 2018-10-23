@@ -80,14 +80,10 @@ class Submission::TasksController < InternalPagesController
 
   def validate
     @validation_errors = Policies::Validations.new(@task).errors
+    @validation_warnings = Policies::Validations.new(@task).warnings
+
     respond_to do |format|
-      format.js do
-        if @validation_errors.empty?
-          render "submission/tasks/modals/complete"
-        else
-          render "submission/tasks/modals/validation_errors"
-        end
-      end
+      format.js { respond_to_validations }
     end
   end
 
@@ -96,6 +92,14 @@ class Submission::TasksController < InternalPagesController
       carving_and_marking_receipt_skipped_at: Time.zone.now)
 
     validate
+  end
+
+  def accept_validation_warnings
+    respond_to do |format|
+      format.js do
+        render "submission/tasks/modals/complete"
+      end
+    end
   end
 
   def complete

@@ -1,0 +1,28 @@
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4.modal-title
+    Task:
+    = task.service
+.modal-body
+  #task-validation-errors
+    %h5 Please accept the following warnings before completing this task:
+    %ul
+      = render partial: "submission/tasks/modals/validation_warning", collection: validation_warnings, as: :validation_warning, locals: { submission: submission, task: task }
+
+.modal-footer
+  .row
+    .col-md-6
+      = button_tag 'Cancel',
+        "data-dismiss" => "modal", "aria-hidden" => "true",
+        class: 'pull-left btn btn-warning' do
+        Cancel
+
+    .col-md-6
+      = link_to accept_validation_warnings_submission_task_path(@submission, @task),
+        method: :post,
+        remote: true,
+        class: 'pull-right btn btn-success' do
+        %i.fa.fa-check
+        Accept
+
