@@ -135,6 +135,7 @@ module Register
     scope :in_part, ->(part) { where(part: part.to_sym) if part.present? }
     scope :frozen, -> { where.not(frozen_at: nil) }
     scope :not_frozen, -> { where(frozen_at: nil) }
+    scope :autonomous, -> { where(autonomous_vessel: true) }
 
     delegate :registered_at, to: :current_registration, allow_nil: true
     delegate :registered_until, to: :current_registration, allow_nil: true

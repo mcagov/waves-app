@@ -19,6 +19,10 @@ FactoryBot.define do
     propulsion_system         { "Fins" }
     registration_type         "full"
     gross_tonnage             500
+
+    trait :autonomous do
+      autonomous_vessel true
+    end
   end
 
   factory :registered_vessel, parent: :unregistered_vessel do
