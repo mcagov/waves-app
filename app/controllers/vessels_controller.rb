@@ -15,6 +15,15 @@ class VesselsController < InternalPagesController
                       .order(:name)
   end
 
+  def autonomous
+    @autonomous_vessels =
+      Register::Vessel
+      .in_part(current_activity.part)
+      .autonomous
+      .paginate(page: params[:page], per_page: 50)
+      .order(:name)
+  end
+
   private
 
   def preload

@@ -48,6 +48,7 @@
       Reports
       %span.fa.fa-chevron-down
     %ul.nav.child_menu{:style => "display: none"}
-      %li= link_to "Work Logs", "/#{current_activity.part}/work_logs/"
+      %li= link_to "Autonomous Vessels", autonomous_vessels_path
       - if current_activity.part == :part_1
         %li= link_to "Outstanding Carving & Marking Notes",outstanding_carving_and_markings_path
+      %li= link_to "Work Logs", "/#{current_activity.part}/work_logs/"

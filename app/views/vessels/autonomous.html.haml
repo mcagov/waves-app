@@ -1,0 +1,17 @@
+.row
+  .col-md-6
+    %h1.heading_no_top_margin Autonomous Vessels
+.row
+  .col-md-12
+    %table.table.table-striped#autonomous-vessels
+      %thead
+        %th Vessel Name
+        %th Official No
+
+      %tbody
+        - @autonomous_vessels.each do |vessel|
+          %tr
+            %td= link_to vessel.name, vessel_path(vessel)
+            %td= vessel.reg_no
+
+    = will_paginate @autonomous_vessels, renderer: BootstrapPagination::Rails
