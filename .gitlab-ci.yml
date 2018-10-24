@@ -17,7 +17,7 @@ stages:
   - test
   - security
   - staging
-  # - production
+  - production
 
 rspec:
   stage: test
@@ -64,13 +64,13 @@ deploy_staging:
   tags:
     - ruby2.5
 
-#deploy_production:
-#  stage: production
-#  environment:
-#    name: production
-#    url: $WAVES_PRODUCTION_URL
-#  when: manual
-#  script:
-#    - bundle exec cap production deploy
-#  tags:
-#    - ruby2.5
+deploy_production:
+ stage: production
+ environment:
+   name: production
+   url: $WAVES_PRODUCTION_URL
+ when: manual
+ script:
+   - bundle exec cap production deploy
+ tags:
+   - ruby2.5
