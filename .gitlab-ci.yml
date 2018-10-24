@@ -69,6 +69,8 @@ deploy_production:
  environment:
    name: production
    url: $WAVES_PRODUCTION_URL
+ only:
+   - production
  when: manual
  script:
    - bundle exec cap production deploy
