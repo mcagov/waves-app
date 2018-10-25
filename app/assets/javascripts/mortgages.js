@@ -32,8 +32,10 @@ function initMortgageForm() {
 
     // date executed
     if ($(scope).find('#mortgage_executed_at').val() == '') {
-      errors = errors + 'Date Executed cannot be blank';
-      validations = false;
+      if ( mortgage_type != 'Intent') {
+        errors = errors + 'Date Executed cannot be blank';
+        validations = false;
+      }
     }
 
     if (validations == false) {
