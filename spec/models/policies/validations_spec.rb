@@ -166,13 +166,13 @@ describe Policies::Validations do
           end
 
           context "is too long" do
-            let(:length_in_meters) { "24" }
+            let(:length_in_meters) { "24.1" }
 
             it { expect(subject).to include(:part_3_length_invalid) }
           end
 
           context "is valid" do
-            let(:length_in_meters) { "23.99" }
+            let(:length_in_meters) { "24.0" }
 
             it { expect(subject).not_to include(:part_3_length_invalid) }
           end
@@ -182,7 +182,7 @@ describe Policies::Validations do
           let(:part) { :part_1 }
 
           context "is blank" do
-            let(:length_in_meters) { 24 }
+            let(:length_in_meters) { "" }
 
             it { expect(subject).not_to include(:part_3_length_invalid) }
           end
