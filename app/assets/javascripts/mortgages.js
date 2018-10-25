@@ -9,18 +9,11 @@ function initMortgageForm() {
     var validations = true;
 
     // shares mortgaged
-    if ( mortgage_type == 'Intent') {
-      if (mortgage_amount != '') {
-        errors = errors + 'Shares Mortgaged must be blank for a Mortgage Intent\n';
-        validations = false;
-      }
-    }
-    else {
       if ((mortgage_amount == '') ||  (mortgage_amount == '0')) {
-        errors = errors + ('Shares Mortgaged must be 1 or more for ' + mortgage_type + '\n');
+        errors = errors + ('Shares Mortgaged must be between 1 and 64\n');
         validations = false;
       }
-    }
+
     // addresses
     $(scope).find('.address-1').each(function() {
       if (($(this).val() == '') && (!$(this).hasClass('hidden'))) {
