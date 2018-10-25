@@ -27,7 +27,6 @@
 //= require ./vendor/custom
 //= require ./vendor/jquery.postcodes
 //
-//= require common_mortgagees
 //= require modals
 //= require mortgages
 //= require name_approval

@@ -1,14 +1,15 @@
 .nested-fields
   .row
-    .col-md-4
-      = mortgagor_f.input :declaration_owner_id, as: :select,
-        collection: customer_select_options(@submission),
+    .col-md-4.form-group
+      = label_tag :mortgagors, "Owners"
+
+      = select_tag :common_mortgagors,
+        options_for_select(customer_select_options(@submission).collect{ |u| [u.name, u.formatted_id] }),
         include_blank: true,
-        input_html: { class: "select_owner_mortgagor" },
-        label: "Select an Owner"
+        class: "form-control populate-mortgagor"
+
     .col-md-4
-      .name-field
-        = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
+      = mortgagor_f.input :name, input_html: { class: "upcase name" }, label: "Name of Mortgagor"
     .col-md-4
       .pull-right
         = link_to_remove_association mortgagor_f,
