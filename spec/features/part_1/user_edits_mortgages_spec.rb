@@ -11,8 +11,9 @@ describe "User edits mortgages", js: :true do
 
     within(".modal.fade.in") do
       select("B", from: "Priority Code")
-      fill_in("Reference Number", with: "REF 1")
+      select("1", from: "Shares Mortgaged")
       fill_in("Date Executed", with: "01/02/2001")
+      fill_in("Reference Number", with: "REF 1")
 
       within("#mortgagors") do
         fill_in("Name of Mortgagor", with: "Bob")

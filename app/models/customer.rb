@@ -61,4 +61,16 @@ class Customer < ApplicationRecord
     self.name = parsed_name
     self.email = parsed_email
   end
+
+  def formatted_id
+    [
+      name,
+      address_1,
+      address_2,
+      address_3,
+      town,
+      country,
+      postcode,
+    ].join(";")
+  end
 end
