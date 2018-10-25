@@ -106,7 +106,7 @@ class Policies::Validations
   def part_3_length_invalid?
     return false unless Policies::Definitions.part_3?(submission)
     length_in_meters = submission.vessel.try(:length_in_meters).to_f
-    length_in_meters.zero? || (length_in_meters >= 24.0)
+    length_in_meters.zero? || (length_in_meters > 24.0)
   end
 
   def rules_policy
