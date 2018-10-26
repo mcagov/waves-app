@@ -2,6 +2,7 @@ class InternalPagesController < ApplicationController
   layout "internal"
 
   before_action :authenticate_user!
+  before_action :set_raven_context
 
   def render_pdf(pdf, filename)
     send_data pdf.render,
@@ -63,5 +64,13 @@ class InternalPagesController < ApplicationController
 
   def access_denied!
     render file: "public/401.html", status: :unauthorized, layout: false
+  end
+
+  def set_raven_context
+    Raven.user_context(id: session[:current_user_id])
+    Raven.extra_context(
+      url: request.url,
+      part: session[:current_activity],
+      username: current_user.name)
   end
 end
