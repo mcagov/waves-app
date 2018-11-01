@@ -6,7 +6,7 @@ class Search
                             .where(searchable_type: "Submission")
                             .includes(searchable: [declarations: :owner])
       submissions = submissions_in_part(submissions, part)
-      submissions.limit(20).map(&:searchable)
+      submissions.limit(50).map(&:searchable)
     end
 
     def vessels(term, part = nil)
@@ -14,7 +14,7 @@ class Search
                         .where(searchable_type: "Register::Vessel")
                         .includes(searchable: [:owners, :submissions])
       vessels = vessels_in_part(vessels, part)
-      vessels.limit(20).map(&:searchable)
+      vessels.limit(50).map(&:searchable)
     end
 
     # looks for similar vessels, to help
