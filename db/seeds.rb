@@ -74,7 +74,7 @@ Service.create(
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 175, premium: 140 },
-  part_1: { standard: 175, premium: 140 },
+  part_4: { standard: 175, premium: 140 },
   rules: [
     :validates_on_approval,
     :declarations_required,
