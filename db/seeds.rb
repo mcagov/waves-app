@@ -254,9 +254,9 @@ Service.create(
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 105, premium: 100, subsequent: 20 },
-  part_2: { standard: 105, premium: 100, subsequent: 20 },
+  part_2: { standard: 105, premium: 100, subsequent: 21 },
   part_3: { standard: 35, premium: 50 },
-  part_4: { standard: 105, premium: 100, subsequent: 20 },
+  part_4: { standard: 105, premium: 100, subsequent: 21 },
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
@@ -277,8 +277,8 @@ Service.create(
   name: "Change of ownership - simple",
   standard_days: 10,
   premium_days: 1,
-  part_2: { standard: 88, premium: 100, subsequent: 20 },
-  part_4: { standard: 88, premium: 100, subsequent: 20 },
+  part_2: { standard: 88, premium: 100, subsequent: 21 },
+  part_4: { standard: 88, premium: 100, subsequent: 21 },
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
