@@ -51,7 +51,7 @@ class Pdfs::CoverLetterWriter
       "\n\n",
       "The Hull Identification Number (HIN), has recently been introduced on newly constructed vessels , will only be shown on the Certificate of UK Registry when the number has been submitted on the application form.  HIN's are fixed to the hull by the boat builder and can normally be found on the starboard outboard side of the transom or hull.",
       "\n\n",
-      "Please note that you must return your Certificate of UK Registry to this office if there are any changes to the ownership or other registration particulars of your vessel.  The fee for re-registration, taking any changes into account, is £25.00.",
+      "Please note that you must return your Certificate of UK Registry to this office if there are any changes to the ownership or other registration particulars of your vessel.  The fee for re-registration, taking any changes into account, is £35.00.",
       "\n\n",
       "Yours sincerely,",
       "\n\n\n\n",
