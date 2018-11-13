@@ -71,8 +71,8 @@ module Register
              class_name: "Document",
              as: :noteable
 
-    has_many :fishing_vessel_safety_certificates,
-             -> { where("entity_type = 'fishing_vessel_safety_certificate'") },
+    has_many :safety_certificates,
+             -> { where("entity_type = 'safety_certificate'") },
              class_name: "Document",
              as: :noteable
 

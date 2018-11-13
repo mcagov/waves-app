@@ -71,7 +71,7 @@ en:
       forced_closure: "Cover Letters: Closure Without Notice"
   submission:
     advisories :
-      fishing_vessel_safety_certificate: The Fishing Vessel Safety Certificate has either expired or not been recorded.
+      safety_certificate: The Fishing Vessel Safety Certificate has either expired or not been recorded.
     validation_error:
       vessel_frozen: Vessel registration is frozen
       owners_required: Vessel does not have any owners

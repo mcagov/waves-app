@@ -10,7 +10,7 @@ class SafetyCertificateReminder
     def load_remindable_vessels
       @registered_vessels =
         Register::Vessel
-        .joins(:fishing_vessel_safety_certificates)
+        .joins(:safety_certificates)
         .where("notes.expires_at < ?", 61.days.from_now)
         .includes(:safety_certificate_reminder)
         .where(notifications: { id: nil })
