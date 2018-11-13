@@ -35,17 +35,17 @@ class Finance::BatchesController < InternalPagesController
   end
 
   def close
-    @batch.close! && @batch.save
+    @batch.close! && @batch.save if @batch.can_transition?(:close!)
     redirect_to finance_batch_payments_path(@batch)
   end
 
   def re_open
-    @batch.re_open! && @batch.save
+    (@batch.re_open! && @batch.save) if @batch.can_transition?(:re_open!)
     redirect_to finance_batch_payments_path(@batch)
   end
 
   def lock
-    @batch.lock! && @batch.save
+    @batch.lock! && @batch.save if @batch.can_transition?(:lock!)
     redirect_to finance_batch_payments_path(@batch)
   end
 
