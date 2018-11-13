@@ -11,7 +11,7 @@ FactoryBot.define do
     entity_type       :code_certificate
   end
 
-  factory :fishing_vessel_safety_certificate, class: "Document" do
-    entity_type       :fishing_vessel_safety_certificate
+  factory :safety_certificate, class: "Document" do
+    entity_type       :safety_certificate
   end
 end

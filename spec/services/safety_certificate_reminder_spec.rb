@@ -3,15 +3,15 @@ require "rails_helper"
 describe SafetyCertificateReminder do
   before do
     @remindable = create(:registered_vessel, name: "REMINDABLE")
-    create(:fishing_vessel_safety_certificate,
+    create(:safety_certificate,
            noteable: @remindable, expires_at: 59.days.from_now)
 
     not_due = create(:registered_vessel, name: "NOT DUE")
-    create(:fishing_vessel_safety_certificate,
+    create(:safety_certificate,
            noteable: not_due, expires_at: 62.days.from_now)
 
     reminded = create(:registered_vessel, name: "REMINDED")
-    create(:fishing_vessel_safety_certificate,
+    create(:safety_certificate,
            noteable: reminded, expires_at: 58.days.from_now)
     create(:safety_certificate_reminder, notifiable: reminded)
   end

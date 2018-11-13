@@ -7,13 +7,13 @@ describe Policies::Advisories do
     context "part_2 (fishing) vessel" do
       let(:submission) { build(:submission, :part_2_vessel) }
 
-      it { expect(subject).to include(:fishing_vessel_safety_certificate) }
+      it { expect(subject).to include(:safety_certificate) }
 
-      context "with a fishing_vessel_safety_certificate" do
+      context "with a safety_certificate" do
         before do
           create(
             :document,
-            entity_type: :fishing_vessel_safety_certificate,
+            entity_type: :safety_certificate,
             expires_at: expires_at,
             noteable: submission)
         end
@@ -28,7 +28,7 @@ describe Policies::Advisories do
           let(:expires_at) { 1.month.ago }
 
           it do
-            expect(subject).to include(:fishing_vessel_safety_certificate)
+            expect(subject).to include(:safety_certificate)
           end
         end
       end

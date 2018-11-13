@@ -12,14 +12,14 @@ class Policies::Advisories
     private
 
     def perform
-      check_fishing_vessel_safety_certificate
+      check_safety_certificate
     end
 
-    def check_fishing_vessel_safety_certificate
+    def check_safety_certificate
       return unless Policies::Definitions.fishing_vessel?(@submission)
 
       if @submission.documents.safety_certificates.not_expired.empty?
-        @advisories << :fishing_vessel_safety_certificate
+        @advisories << :safety_certificate
       end
     end
   end
