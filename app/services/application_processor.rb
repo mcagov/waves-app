@@ -48,6 +48,8 @@ class ApplicationProcessor
     end
 
     def record_transcript_event
+      return unless @registered_vessel.current_registration
+
       Builders::RegistrationBuilder
         .create(
           @task,
