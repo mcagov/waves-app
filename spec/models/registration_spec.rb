@@ -72,4 +72,23 @@ describe Registration do
       it { expect(subject).to eq(:provisional_certificate) }
     end
   end
+
+  context "#mortgages" do
+    let(:active_mortgage) { create(:mortgage) }
+    let(:discharged_mortgage) { create(:mortgage, :discharged) }
+
+    let(:registration) do
+      create(
+        :registration,
+        registry_info: {
+          mortgages: [active_mortgage, discharged_mortgage],
+        })
+    end
+
+    subject { registration.mortgages }
+
+    it "only returns the active mortgage" do
+      expect(subject).to eq([active_mortgage])
+    end
+  end
 end

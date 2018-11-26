@@ -79,6 +79,13 @@ describe "User edits tasks" do
       expect(page).to have_css(".formatted_price", text: "15.00")
     end
   end
+
+  scenario "when the submission is closed" do
+    @submission.tasks.delete_all
+    @submission.close!
+    visit submission_path(@submission)
+    expect(page).not_to have_css("#services")
+  end
 end
 
 def confirm_tasks_link_text

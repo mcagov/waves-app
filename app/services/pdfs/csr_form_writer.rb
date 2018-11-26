@@ -121,7 +121,8 @@ class Pdfs::CsrFormWriter
       ["14", "Administration / Government / Recognised Organisation which issued the International Ship Security Certificate:\n\nBody which carried out the verification (if different):]",
         "#{@csr_form.issc_issuer}\n\n#{@csr_form.issc_auditor}"],
 
-      ["15", "Date on which the ship ceased to be registered with the State indicated in 2:", @csr_form.registration_closed_at.to_s],
+      ["15", "Date on which the ship ceased to be registered with the State indicated in 2:",
+        @csr_form.registration_closed_at.present? ? @csr_form.registration_closed_at.to_s : "N/A"],
 
       ["16", "Remarks", @csr_form.remarks.to_s]
     ]

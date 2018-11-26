@@ -19,6 +19,7 @@ describe "User close a submission", js: true do
       click_on("Boaty McBoatface")
 
       expect(page).to have_css("#prompt", text: "closed on ")
+      expect(page).not_to have_link(close_application_link_text)
     end
   end
 
