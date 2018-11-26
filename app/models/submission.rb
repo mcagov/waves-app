@@ -45,7 +45,7 @@ class Submission < ApplicationRecord
   end
 
   def closeable?
-    tasks.active.empty? && tasks.initialising.empty?
+    active? && tasks.active.empty? && tasks.initialising.empty?
   end
 
   def build_defaults
