@@ -47,11 +47,11 @@ class Registration < ApplicationRecord
   end
 
   def mortgages
-    (symbolized_registry_info[:mortgages] || []).map do |mortgage|
-      mortgage[:mortgagors].map! { |mortgagor| Mortgagor.new(mortgagor) }
-      mortgage[:mortgagees].map! { |mortgagee| Mortgagee.new(mortgagee) }
-      Mortgage.new(mortgage)
-    end
+    (symbolized_registry_info[:mortgages] || []).map do |m|
+      (m[:mortgagors] || []).map! { |mortgagor| Mortgagor.new(mortgagor) }
+      (m[:mortgagees] || []).map! { |mortgagee| Mortgagee.new(mortgagee) }
+      Mortgage.new(m) unless m[:discharged_at]
+    end.compact
   end
 
   def delivery_name_and_address
