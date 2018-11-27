@@ -54,7 +54,8 @@ describe RegistrationRenewalReminder do
       end
 
       it "sets the attachment" do
-        expect(notification.attachments.to_sym).to eq(:renewal_reminder_letter)
+        expect(notification.attachments.first.to_sym)
+          .to eq(:renewal_reminder_letter)
       end
 
       it "does not build a print job" do
