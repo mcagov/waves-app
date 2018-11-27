@@ -72,7 +72,7 @@ module SubmissionHelper
 
   def customer_select_options(submission)
     list = submission.owners + submission.charter_parties
-    list.sort_by(&:name)
+    list.compact.sort_by(&:name)
   end
 
   def email_recipient_select_options(submission)
