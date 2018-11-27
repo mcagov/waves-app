@@ -33,6 +33,7 @@ class Declaration < ApplicationRecord
           as: :parent,
           class_name: "Declaration::Owner",
           dependent: :destroy
+  validates :owner, presence: true
 
   # rubocop:disable Style/AlignHash
   accepts_nested_attributes_for :owner, allow_destroy: true,
