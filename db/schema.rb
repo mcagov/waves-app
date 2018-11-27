@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_102512) do
+ActiveRecord::Schema.define(version: 2018_11_27_111735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_102512) do
     t.boolean "managing_owner", default: false
     t.boolean "correspondent", default: false
     t.string "entity_type", default: "individual"
-    t.integer "shares_held"
+    t.integer "shares_held", default: 0
     t.uuid "parent_id"
     t.string "parent_type"
     t.string "alt_address_1"
@@ -410,7 +410,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_102512) do
 
   create_table "shareholder_groups", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "vessel_id"
-    t.integer "shares_held"
+    t.integer "shares_held", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
