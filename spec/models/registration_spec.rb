@@ -20,6 +20,37 @@ describe Registration do
     end
   end
 
+  context "#delivery_name" do
+    let(:registration) { create(:registered_vessel).current_registration }
+    subject { registration.reload.delivery_name }
+
+    context "with a submission" do
+      let!(:submission) { create(:submission, registration: registration) }
+
+      context "with a delivery_address" do
+        it "uses the submission's delivery address name" do
+          expect(subject).to eq(submission.delivery_address.name)
+        end
+      end
+
+      context "without a delivery_address" do
+        before do
+          submission.update_attributes changeset: {}
+        end
+
+        it "uses the submission's applicant name" do
+          expect(subject).to eq(submission.applicant_name)
+        end
+      end
+    end
+
+    context "without a submission" do
+      it "is nil" do
+        expect(subject).to be_nil
+      end
+    end
+  end
+
   context "#submission_ref_no" do
     let(:registration) { create(:registered_vessel).current_registration }
     subject { registration.reload.submission_ref_no }

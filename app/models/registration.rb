@@ -61,6 +61,12 @@ class Registration < ApplicationRecord
     submission ? submission.delivery_address.name_and_address : []
   end
 
+  def delivery_name
+    if submission.try(:delivery_address)
+      submission.delivery_address.try(:name) || submission.applicant_name
+    end
+  end
+
   def submission_ref_no
     submission.try(:ref_no)
   end
