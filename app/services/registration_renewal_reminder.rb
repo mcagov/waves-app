@@ -38,7 +38,7 @@ class RegistrationRenewalReminder
         notifiable: registered_vessel,
         recipient_name: registered_vessel.correspondent.name,
         recipient_email: registered_vessel.correspondent.email,
-        attachments: :renewal_reminder_letter)
+        attachments: [:renewal_reminder_letter])
     end
 
     def build_renewal_reminder_letter_print_job(registered_vessel)
