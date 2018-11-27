@@ -11,16 +11,17 @@
   %tbody
     - @submission.declarations.individual.each do |declaration|
       - owner = declaration.owner
-      %tr
-        %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
-        %td.owner-imo_number= owner.imo_number
-        %td.owner-nationality= owner.nationality
-        %td.owner-email= owner.email
-        %td.owner-phone_number= owner.phone_number
-        %td.owner-declaration= "Signed" if declaration.completed?
-        %td
-          - unless @readonly
-            = render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
+      - if owner
+        %tr
+          %td.owner-name= render partial: "submissions/basic/forms/owners/actions/edit_owner", locals: { declaration: declaration }
+          %td.owner-imo_number= owner.imo_number
+          %td.owner-nationality= owner.nationality
+          %td.owner-email= owner.email
+          %td.owner-phone_number= owner.phone_number
+          %td.owner-declaration= "Signed" if declaration.completed?
+          %td
+            - unless @readonly
+              = render partial: "submissions/basic/forms/owners/actions/remove_owner", locals: { declaration: declaration }
 
     - @submission.removed_registered_owners.each do |owner|
       - next unless owner.individual?
