@@ -42,7 +42,7 @@ class PrintJobsController < InternalPagesController
 
   def mark_as_printing(print_jobs)
     Array(print_jobs).each do |print_job|
-      print_job.printing!(current_user)
+      print_job.printing!(current_user) if print_job.can_printing?
     end
   end
 

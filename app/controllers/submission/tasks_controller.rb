@@ -103,11 +103,13 @@ class Submission::TasksController < InternalPagesController
   end
 
   def complete
-    @task.complete!(submission_task_params || {})
+    if @task.can_complete?
+      @task.complete!(submission_task_params || {})
+      log_work!(@task, @submission, :task_completed)
+      StaffPerformanceLog.record(@task, :completed, current_user)
+      flash[:notice] = "The task has been completed"
+    end
 
-    log_work!(@task, @submission, :task_completed)
-    StaffPerformanceLog.record(@task, :completed, current_user)
-    flash[:notice] = "The task has been completed"
     redirect_to submission_path(@submission)
   end
 
