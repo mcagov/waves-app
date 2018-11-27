@@ -6,6 +6,8 @@ class Pdfs::CoverLetterWriter
     @vessel = @registration.vessel
     @applicant_name = @registration.applicant_name
     @delivery_name_and_address = @registration.delivery_name_and_address
+    @applicant_name = @registration.delivery_name
+
     @pdf = pdf
   end
 
