@@ -11,7 +11,7 @@ class SequenceNumber::Generator < ApplicationRecord
 
   REG_NO_START =
     {
-      part_1: "2000000",
+      part_1: "5000999",
       part_2: "30000",
       part_3: "200000",
     }.freeze
