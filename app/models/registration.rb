@@ -54,6 +54,15 @@ class Registration < ApplicationRecord
     end.compact
   end
 
+  def charterers
+    (symbolized_registry_info[:charterers] || []).map do |charterer|
+      charterer[:charter_parties].map! do |charter_party|
+        CharterParty.new(charter_party)
+      end
+      Charterer.new(charterer)
+    end
+  end
+
   def delivery_name_and_address
     # Taking the delivery address from the most recent submission
     # is probably not the best approach but, for now, that is
