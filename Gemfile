@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "~> 2.5.1"
 
-gem "rails", "~> 5.2.1.rc1"
+gem "rails", "~> 5.2.1.1"
 
 gem "activerecord-session_store"
 gem "auto_increment"
