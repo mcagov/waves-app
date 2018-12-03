@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_111735) do
+ActiveRecord::Schema.define(version: 2018_12_03_143725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -364,6 +364,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_111735) do
     t.datetime "termination_at"
     t.boolean "provisional", default: false
     t.string "supporting_info"
+    t.string "application_type"
     t.index ["vessel_id"], name: "index_registrations_on_vessel_id"
   end
 
