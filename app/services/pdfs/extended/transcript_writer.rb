@@ -125,6 +125,7 @@ class Pdfs::Extended::TranscriptWriter < Pdfs::TranscriptWriter
       y_pos -= 30
     end
 
+    y_pos -= 40
     default_label_font
     @pdf.draw_text "Date/Time registered", at: [l_margin, y_pos]
     default_value_font
