@@ -297,9 +297,9 @@ Service.create(
   name: "Change of name/port/tonnage (1&4)",
   standard_days: 10,
   premium_days: 1,
-  part_1: { standard: 46, premium: 100 },
-  part_2: { standard: 53, premium: 100 },
-  part_4: { standard: 46, premium: 100 },
+  part_1: { standard: 46, premium: 100, subsequent: 17 },
+  part_2: { standard: 53, premium: 100, subsequent: 17 },
+  part_4: { standard: 46, premium: 100, subsequent: 17 },
   rules: [
     :registered_vessel_required,
     :validates_on_approval,
