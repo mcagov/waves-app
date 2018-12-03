@@ -26,7 +26,7 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
     default_label_font
     y_pos -= 20
 
-    @vessel.charterers.sort.each do |charterer|
+    @registration.charterers.sort.each do |charterer|
       @pdf.draw_text charterer.charter_period, at: [420, y_pos]
 
       charterer.charter_parties.each do |charter_party|
