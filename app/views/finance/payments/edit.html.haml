@@ -4,7 +4,14 @@
   = render partial: "form", locals: { f: f }
 
   .row.no-print
-    .col-xs-12
+    .col-md-6
+      = link_to finance_batch_payment_path(@batch, @finance_payment),
+        method: :delete,
+        data: { confirm: "Are you sure you want to delete this payment" },
+        class: "btn btn-danger btn-sm" do
+        %i.fa.fa-trash
+        Delete Fee Entry
+    .col-md-6
       = button_tag(type: 'submit', class: "btn btn-warning btn-lg pull-right") do
         %i.fa.fa-check
         Update Fee Entry

@@ -50,6 +50,13 @@ class Finance::PaymentsController < InternalPagesController
       @batch.finance_payments.paginate(page: params[:page], per_page: 20)
   end
 
+  def destroy
+    @finance_payment = Payment::FinancePayment.find(params[:id])
+    @finance_payment.destroy if @finance_payment.deleteable?
+    flash[:notice] = "Fee entry successfully deleted"
+    redirect_to finance_batch_payments_path(@batch)
+  end
+
   protected
 
   def finance_payment_params
