@@ -205,7 +205,10 @@ module Register
     end
 
     def communication_recipients
-      [owners + [agent] + managers + charter_parties + [representative]]
+      [
+        owners + [agent] + managers + charter_parties +
+          [representative] + mortgagees,
+      ]
         .flatten
         .compact
         .select do |customer|
