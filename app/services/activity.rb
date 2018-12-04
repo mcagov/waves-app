@@ -96,8 +96,12 @@ class Activity
     @part.to_sym == part.to_sym
   end
 
-  def searchable?
+  def searches_registry?
     PART_TYPES.map(&:last).include?(@part)
+  end
+
+  def searches_payments?
+    @part == :finance
   end
 
   private

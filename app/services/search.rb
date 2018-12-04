@@ -20,7 +20,7 @@ class Search
     def finance_payments(term)
       PgSearch.multisearch(term)
               .where(searchable_type: "Payment::FinancePayment")
-              .includes(:searchable)
+              .includes(searchable: [:batch])
               .limit(100)
               .map(&:searchable)
     end

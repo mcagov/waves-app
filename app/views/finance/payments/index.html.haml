@@ -1,46 +1,5 @@
 = render partial: "/finance/payments/heading"
 
-.row
-  .col-md-12
-    .x_panel
-      .x_content
-        %table#finance-payments.table.table-striped.table-hover
-          %thead
-            %tr
-              %th Fee Receipt Date
-              %th Primary Application
-              %th Part of Register
-              %th Vessel Name
-              %th Payer Name
-              %th Applicant Name
-              %th Payment Type
-              %th Payment Reference
-              %th.text-right Fee Amount
-          %tbody
-          - @finance_payments.each do |finance_payment|
-            - finance_payment = Decorators::FinancePayment.new(finance_payment)
-            %tr.finance-payment
-              %td
-                = link_to finance_batch_payment_path(@batch, finance_payment) do
-                  = finance_payment.payment_date
-              %td= finance_payment.application_type_description
-              %td= finance_payment.part_description
-              %td= finance_payment.vessel_name
-              %td= finance_payment.payer_name
-              %td= finance_payment.applicant_name
-              %td= finance_payment.payment_type_description
-              %td= finance_payment.payment_reference
-              %td.text-right
-                - if @batch.locked?
-                  = formatted_amount(finance_payment.payment_amount)
-                - else
-                  = link_to edit_finance_batch_payment_path(@batch, finance_payment) do
-                    = formatted_amount(finance_payment.payment_amount)
-                    %i.fa.fa-pencil-square-o
-          %tr
-            %td{colspan: 8}
-            %td.thick.text-right
-              TOTAL:
-              = formatted_amount(@batch.total_amount)
+= render partial: "/finance/payments/list", locals: {batch_total: true}
 
 = render partial: "/finance/batches/actions", locals: { batch: @batch }

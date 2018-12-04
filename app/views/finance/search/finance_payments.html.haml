@@ -1,0 +1,9 @@
+%h1 Search Results
+
+.row
+  %div
+    %ul#searchResults.nav.nav-tabs.bar_tabs{:role => "tablist"}
+      %li.active
+        %a#finance_payments-tab{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#vessels_tab", :role => "tab"} Fee Entries (#{@finance_payments.count})
+
+= render partial: "/finance/payments/list", locals: {batch_total: false}

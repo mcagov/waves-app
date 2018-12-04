@@ -331,6 +331,7 @@ Rails.application.routes.draw do
   get "/search/submissions", controller: :search, action: :submissions
   get "/search/vessels", controller: :search, action: :vessels
   get "/search/global", controller: :search, action: :global
+  get "/search/finance", controller: "finance/search", action: :finance_payments
 
   root to: "dashboards#show"
 end
