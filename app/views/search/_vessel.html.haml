@@ -21,6 +21,10 @@
   %td
     Owners: #{vessel.owners.map(&:name_and_postcode).join("; ")}
     %br
+    - if display_charterers?(vessel)
+      Charterers: #{vessel.charter_parties.map(&:name_and_postcode).join("; ")}
+      %br
+
     Last updated: #{vessel.updated_at}
 
   %td

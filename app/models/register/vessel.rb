@@ -13,10 +13,15 @@ module Register
         :hin,
         :pln,
         :owner_info,
+        :charter_party_info
       ]
 
     def owner_info
       owners.map(&:inline_name_and_address).join("; ")
+    end
+
+    def charter_party_info
+      charter_parties.map(&:inline_name_and_address).join("; ")
     end
 
     validates :part, presence: true
