@@ -51,6 +51,10 @@
       %td
         %strong= finance_payment.service_level.try(:titleize)
     %tr
+      %td Payment Reference
+      %td
+        %strong= finance_payment.payment_reference
+    %tr
       %td Documents Received
       %td#documents-received
         %strong= finance_payment.documents_received

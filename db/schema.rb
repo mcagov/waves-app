@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_143725) do
+ActiveRecord::Schema.define(version: 2018_12_04_132340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_143725) do
     t.uuid "batch_id"
     t.string "payer_name"
     t.integer "service_level", default: 0
+    t.string "payment_reference"
     t.index ["actioned_by_id"], name: "index_finance_payments_on_actioned_by_id"
   end
 

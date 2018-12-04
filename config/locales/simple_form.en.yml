@@ -22,6 +22,7 @@ en:
         applicant_name: Applicant Name
         applicant_email: Applicant's Email Address
         documents_received: Documents Received
+        payment_reference: Payment Reference
       submission:
         part: Part of the Register
         application_type: Primary Application
