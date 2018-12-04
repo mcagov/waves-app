@@ -58,14 +58,14 @@ class Pdfs::TranscriptWriter
     @pdf.formatted_text_box certification_text,
       at: [l_margin, 204], width: 500, height: 200
 
-    @pdf.text_box "Signed: ____________________________________________",
-                   at: [0, 150], height: 200, align: :center
+    @pdf.image "#{Rails.root}/public/pdf_images/registrar_signature.png",
+               at: [250, 150], scale: 0.3
 
     @pdf.font("Helvetica-Bold", size: 11)
     i = 0
     for_and_on_behalf_of_text_lines.each do |line|
       @pdf.text_box line,
-        at: [l_margin, 120 - i], width: 500, align: :center
+        at: [l_margin, 100 - i], width: 500, align: :center
         i += 12
     end
   end
@@ -115,8 +115,7 @@ class Pdfs::TranscriptWriter
   end
 
   def for_and_on_behalf_of_text_lines
-    s = ["For and on behalf of The Registrar General of Shipping and Seamen"]
-    s << "UK Ship Register"
+    s = ["UK Ship Register"]
     s << "Anchor Court"
     s << "Keen Road"
     s << "Cardiff"
