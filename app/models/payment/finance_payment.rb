@@ -1,6 +1,16 @@
 class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
+  include PgSearch
+  multisearchable against:
+    [
+      :payer_name,
+      :applicant_name,
+      :applicant_email,
+      :payment_reference,
+      :documents_received,
+    ]
+
   delegate :batch_no, to: :batch
 
   has_one :payment, as: :remittance

@@ -83,6 +83,24 @@ describe Search, type: :model do
     end
   end
 
+  describe ".finance_payments" do
+    let!(:finance_payment) do
+      create(:finance_payment, payment_reference: "foo")
+    end
+
+    subject { Search.finance_payments(term) }
+
+    context "for something that exists" do
+      let(:term) { "foo" }
+      it { expect(subject.first).to eq(finance_payment) }
+    end
+
+    context "for something that doesn't exist" do
+      let(:term) { "bar" }
+      it { expect(subject).to be_empty }
+    end
+  end
+
   context ".similar_vessels" do
     let!(:same_name) do
       create(:registered_vessel, name: "CELEBRATOR DOPPELBOCK")

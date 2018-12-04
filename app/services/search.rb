@@ -17,6 +17,14 @@ class Search
       vessels.limit(50).map(&:searchable)
     end
 
+    def finance_payments(term)
+      PgSearch.multisearch(term)
+              .where(searchable_type: "Payment::FinancePayment")
+              .includes(:searchable)
+              .limit(100)
+              .map(&:searchable)
+    end
+
     # looks for similar vessels, to help
     # a reg officer on a part_3 application page
     def similar_vessels(part, vessel) # rubocop:disable Metrics/MethodLength
