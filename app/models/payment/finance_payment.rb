@@ -88,6 +88,10 @@ class Payment::FinancePayment < ApplicationRecord
       Search.submissions(vessel_name, part).select(&:active?)
   end
 
+  def deleteable?
+    persisted? && batch.open?
+  end
+
   private
 
   def registered_vessel_exists
