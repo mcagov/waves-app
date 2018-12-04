@@ -13,19 +13,13 @@
     %th= vessel_field_title(:autonomous_vessel)
   %tbody
     %tr
-      %td
-        - if vessel.gross_tonnage.present?
-          #{Tonnage.new(:gross, vessel.gross_tonnage)}GT
-      %td
-        - if vessel.net_tonnage.present?
-          #{Tonnage.new(:net, vessel.net_tonnage)}NT
-      %td
-        - if vessel.register_tonnage.present?
-          #{Tonnage.new(:register, vessel.register_tonnage)}T
-      %td #{number_with_precision(vessel.register_length, precision: 2, delimiter: ",")} metres
-      %td #{number_with_precision(vessel.length_overall, precision: 2, delimiter: ",")} metres
-      %td #{number_with_precision(vessel.breadth, precision: 2, delimiter: ",")} metres
-      %td #{number_with_precision(vessel.depth, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.gross_tonnage.to_f, precision: 2, delimiter: ",")} GT
+      %td #{number_with_precision(vessel.net_tonnage.to_f, precision: 2, delimiter: ",")} NT
+      %td #{number_with_precision(vessel.register_tonnage.to_f, precision: 2, delimiter: ",")} RT
+      %td #{number_with_precision(vessel.register_length.to_f, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.length_overall.to_f, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.breadth.to_f, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.depth.to_f, precision: 2, delimiter: ",")} metres
       %td.propulsion-system= vessel.propulsion_system
       %td= vessel.number_of_hulls
       %td= y_n(vessel.autonomous_vessel)
