@@ -21,6 +21,8 @@
   %td
     Owners: #{vessel.owners.map(&:name_and_postcode).join("; ")}
     %br
+    Managing Owner: #{vessel.owners.find{|v| v.managing_owner == true}}
+    %br
     - if display_charterers?(vessel)
       Charterers: #{vessel.charter_parties.map(&:name_and_postcode).join("; ")}
       %br

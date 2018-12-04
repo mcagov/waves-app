@@ -13,7 +13,7 @@ module Register
         :hin,
         :pln,
         :owner_info,
-        :charter_party_info
+        :charter_party_info,
       ]
 
     def owner_info
