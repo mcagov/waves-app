@@ -22,10 +22,10 @@
       %td
         - if vessel.register_tonnage.present?
           #{Tonnage.new(:register, vessel.register_tonnage)}T
-      %td #{vessel.register_length.to_i} metres
-      %td #{vessel.length_overall.to_i} metres
-      %td #{vessel.breadth.to_i} metres
-      %td #{vessel.depth.to_i} metres
+      %td #{number_with_precision(vessel.register_length, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.length_overall, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.breadth, precision: 2, delimiter: ",")} metres
+      %td #{number_with_precision(vessel.depth, precision: 2, delimiter: ",")} metres
       %td.propulsion-system= vessel.propulsion_system
       %td= vessel.number_of_hulls
       %td= y_n(vessel.autonomous_vessel)
