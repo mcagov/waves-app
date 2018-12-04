@@ -14,6 +14,12 @@ FactoryBot.define do
     applicant_is_agent true
   end
 
+  factory :closed_finance_payment, parent: :finance_payment do
+    after(:create) do |finance_payment|
+      finance_payment.batch.close!
+    end
+  end
+
   factory :locked_finance_payment, parent: :finance_payment do
     after(:create) do |finance_payment|
       finance_payment.lock!

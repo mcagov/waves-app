@@ -39,6 +39,28 @@ describe Payment::FinancePayment do
     end
   end
 
+  describe "#deleteable?" do
+    subject { finance_payment.deleteable? }
+
+    context "new record" do
+      let(:finance_payment) { build(:finance_payment) }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "closed batch" do
+      let(:finance_payment) { create(:closed_finance_payment) }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "open batch" do
+      let(:finance_payment) { create(:finance_payment) }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
+
   context "for a registered (when vessel_reg_no is valid)" do
     let(:registered_vessel) { create(:registered_vessel) }
 

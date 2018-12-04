@@ -8,6 +8,7 @@
           %thead
             %tr
               %th Fee Receipt Date
+              %th Vessel Name
               %th Primary Application
               %th Part of Register
               %th Payer Name
@@ -21,6 +22,7 @@
               %td
                 = link_to finance_batch_payment_path(@batch, finance_payment) do
                   = finance_payment.payment_date
+              %td= finance_payment.vessel_name
               %td= finance_payment.application_type_description
               %td= finance_payment.part_description
               %td= finance_payment.payer_name
@@ -34,7 +36,7 @@
                     = formatted_amount(finance_payment.payment_amount)
                     %i.fa.fa-pencil-square-o
           %tr
-            %td{colspan: 6}
+            %td{colspan: 7}
             %td.thick.text-right
               TOTAL:
               = formatted_amount(@batch.total_amount)

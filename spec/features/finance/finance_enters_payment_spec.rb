@@ -69,4 +69,17 @@ describe "Finance enters a payment", type: :feature do
 
     expect(page).to have_link("£-15.00")
   end
+
+  scenario "creating and then deleting", js: true do
+    fill_in("Fee Amount", with: "25")
+    click_on("Save Fee Entry")
+    click_on("Batch #{FinanceBatch.last.batch_no}")
+    click_on("£25.00")
+
+    page.accept_confirm { click_on("Delete Fee Entry") }
+    expect(page).to have_css(
+      ".alert",
+      text: "Fee entry successfully deleted")
+    expect(Payment::FinancePayment.count).to eq(0)
+  end
 end
