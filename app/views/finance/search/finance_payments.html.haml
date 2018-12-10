@@ -1,5 +1,16 @@
 %h1 Search Results
 
+.x_panel.no-print
+  .x_title
+    %h4 Search Criteria
+  .x_content
+    = form_tag "/search/finance", method: :get do
+      - @report.filter_fields.each do |filter_field|
+        = render partial: "admin/reports/#{filter_field}", locals: { filter: @filter }
+      %hr
+      .row
+        .col-md-2.col-md-offset-2
+          = submit_tag "Apply Filter", class: "btn btn-success"
 .row
   %div
     %ul#searchResults.nav.nav-tabs.bar_tabs{:role => "tablist"}

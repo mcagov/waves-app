@@ -13,6 +13,7 @@
               %th Applicant Name
               %th Payment Type
               %th Payment Reference
+              %th Linked Application
               %th.text-right Fee Amount
           %tbody
           - @finance_payments.each do |finance_payment|
@@ -28,6 +29,9 @@
               %td= finance_payment.applicant_name
               %td= finance_payment.payment_type_description
               %td= finance_payment.payment_reference
+              %td
+                - if submission = finance_payment.linked_submission
+                  = link_to finance_payment.submission.ref_no, submission_path(submission), target: "_blank"
               %td.text-right
                 - if finance_payment.batch.locked?
                   = formatted_amount(finance_payment.payment_amount)

@@ -9,6 +9,7 @@ class Payment::FinancePayment < ApplicationRecord
       :vessel_reg_no,
       :applicant_name,
       :applicant_email,
+      :application_ref_no,
       :payment_reference,
       :documents_received,
     ]

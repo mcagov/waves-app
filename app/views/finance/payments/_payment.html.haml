@@ -59,8 +59,13 @@
       %td#documents-received
         %strong= finance_payment.documents_received
     %tr
-      %td{colspan: 2}
+      %td
         = link_to finance_payment_path(finance_payment, format: :pdf),
           target: "_blank", class: "btn btn-primary btn-sm" do
           %i.fa.fa-print
           Print Payment Receipt
+      %td#linked-submission
+        - if submission = finance_payment.linked_submission
+          %strong
+            = link_to submission_path(submission), target: "_blank" do
+              Application is linked to #{finance_payment.submission.ref_no}
