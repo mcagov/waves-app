@@ -33,7 +33,11 @@
                 Log Out
         %li{style: "width: 250px"}
           .top_search
-            - if current_activity.searchable?
+            - if current_activity.searches_registry?
               = form_tag "/search", method: :get do
                 = render partial: "search/fields"
+            -elsif current_activity.searches_payments?
+              = form_tag "/search/finance", method: :get do
+                = render partial: "search/fields"
+
   .clearfix

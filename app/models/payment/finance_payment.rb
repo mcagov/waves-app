@@ -1,6 +1,19 @@
 class Payment::FinancePayment < ApplicationRecord
   self.table_name = "finance_payments"
 
+  include PgSearch
+  multisearchable against:
+    [
+      :payer_name,
+      :vessel_name,
+      :vessel_reg_no,
+      :applicant_name,
+      :applicant_email,
+      :application_ref_no,
+      :payment_reference,
+      :documents_received,
+    ]
+
   delegate :batch_no, to: :batch
 
   has_one :payment, as: :remittance
@@ -56,19 +69,22 @@ class Payment::FinancePayment < ApplicationRecord
   end
 
   def submission # rubocop:disable Metrics/MethodLength
-    return payment.submission if payment.submission
+    linked_submission ||
+      Submission.new(
+        part: part,
+        application_type: application_type,
+        changeset: { vessel_info: { name: vessel_name } },
+        source: :manual_entry,
+        vessel_reg_no: vessel_reg_no,
+        applicant_name: applicant_name,
+        applicant_email: applicant_email,
+        applicant_is_agent: applicant_is_agent,
+        documents_received: documents_received,
+        received_at: payment_date)
+  end
 
-    Submission.new(
-      part: part,
-      application_type: application_type,
-      changeset: { vessel_info: { name: vessel_name } },
-      source: :manual_entry,
-      vessel_reg_no: vessel_reg_no,
-      applicant_name: applicant_name,
-      applicant_email: applicant_email,
-      applicant_is_agent: applicant_is_agent,
-      documents_received: documents_received,
-      received_at: payment_date)
+  def linked_submission
+    payment.submission if payment
   end
 
   def related_submission

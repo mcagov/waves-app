@@ -1,22 +1,14 @@
 class Report
   class << self
     def build(template, filters = {})
-      klass = "Report::#{template.camelize}"
+      klass = "Report::#{template.to_s.camelize}"
       klass.constantize.new(filters)
     end
   end
 
   def initialize(filters = {})
     @filters = filters.to_h.deep_symbolize_keys
-    @part = filters[:part]
-    @user_id = filters[:user_id]
-    @service_id = filters[:service_id]
-    @date_start = parse_date_start
-    @date_end = parse_date_end
-    @task = filters[:task] || "all_tasks"
-    @page = filters[:page]
-    @per_page = filters[:per_page]
-    @document_type = filters[:document_type]
+    init_filters
   end
 
   attr_accessor :pagination_collection
@@ -163,6 +155,19 @@ class Report
   end
 
   private
+
+  def init_filters
+    @part = @filters[:part]
+    @term = @filters[:term]
+    @user_id = @filters[:user_id]
+    @service_id = @filters[:service_id]
+    @date_start = parse_date_start
+    @date_end = parse_date_end
+    @task = @filters[:task] || "all_tasks"
+    @page = @filters[:page]
+    @per_page = @filters[:per_page]
+    @document_type = @filters[:document_type]
+  end
 
   def parse_date_start
     if @filters[:date_start].present?
