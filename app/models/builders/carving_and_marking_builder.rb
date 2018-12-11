@@ -33,7 +33,8 @@ class Builders::CarvingAndMarkingBuilder
         printable: @carving_and_marking,
         part: @carving_and_marking.part,
         template: :carving_and_marking,
-        submission: @carving_and_marking.submission)
+        submission: @carving_and_marking.submission,
+        added_by: @carving_and_marking.actioned_by)
     end
   end
 end
