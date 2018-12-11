@@ -30,7 +30,8 @@ class Pdfs::Extended::CoverLetterWriter < Pdfs::CoverLetterWriter
       "certificate. If you think there may be an error on the certificate you must return it to us with a covering "\
       "note. Do not deface or alter the certificate yourself. I would point out that mortgages on a vessel are "\
       "recorded on the main Register but they are not shown on certificates. If you need details of any "\
-      "outstanding mortgages you will need to apply to this office for a transcript which costs £21; cheques should "\
+      "outstanding mortgages you will need to apply to this office for a transcript which costs £29 "\
+      "(£32 for vessels registered on Part II of the registry); cheques should "\
       "be crossed and made payable to 'MCA'.",
       "\n\n",
       "Please note that engine power is shown in kilowatts, which is approximately 3/4 of the engine horsepower.",
