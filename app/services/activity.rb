@@ -58,6 +58,8 @@ class Activity
       case @part
       when :part_1, :part_4
         default_printable_templates + [:csr_form]
+      when :part_3
+        part_3_printable_templates
       else
         default_printable_templates
       end
@@ -121,5 +123,11 @@ class Activity
       :section_notice,
       :termination_notice,
     ]
+  end
+
+  def part_3_printable_templates
+    default_printable_templates - [:carving_and_marking,
+                                   :provisional_certificate,
+                                   :mortgagee_reminder_letter]
   end
 end
