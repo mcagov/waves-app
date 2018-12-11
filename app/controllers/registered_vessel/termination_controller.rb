@@ -15,7 +15,8 @@ class RegisteredVessel::TerminationController < InternalPagesController
     PrintJob.create(
       printable: build_termination_notice,
       part: @vessel.part,
-      template: :termination_notice)
+      template: :termination_notice,
+      added_by: current_user)
 
     @vessel.issue_termination_notice!
   end

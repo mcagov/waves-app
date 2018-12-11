@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User views print queues", type: :feature, js: true do
   before do
-    login_to_part_3
+    login_to_part_1
     visit "/print_queue/registration_certificate"
   end
 

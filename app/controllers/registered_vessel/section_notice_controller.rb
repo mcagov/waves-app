@@ -26,7 +26,8 @@ class RegisteredVessel::SectionNoticeController < InternalPagesController
     PrintJob.create(
       printable: build_section_notice,
       part: @vessel.part,
-      template: :section_notice)
+      template: :section_notice,
+      added_by: current_user)
 
     @vessel.issue_section_notice!
   end

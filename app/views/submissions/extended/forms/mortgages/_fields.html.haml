@@ -17,7 +17,7 @@
   .col-md-3
     = mortgage_f.input :amount, as: :select,
       label: "Shares Mortgaged",
-      collection: 1..64,
+      collection: (1..64).to_a.reverse,
       include_blank: true
 .row
   .col-md-3

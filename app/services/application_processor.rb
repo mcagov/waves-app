@@ -81,7 +81,8 @@ class ApplicationProcessor
           submission: @submission,
           printable: printable_for(print_template),
           part: @submission.part,
-          template: print_template)
+          template: print_template,
+          added_by: @task.claimant)
       end
     end
 

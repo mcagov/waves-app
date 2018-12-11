@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/mcagov/waves-utilities.git
-  revision: 74ff3f17e8e076b9b1e28c763bf948eded10338a
+  revision: c12d4b3d8a928faca04f45636dfb85fa88d595be
   specs:
     waves-utilities (0.1.0)
       countries
@@ -281,7 +281,7 @@ GEM
     hashie (3.5.7)
     highline (1.7.10)
     htmlentities (4.3.4)
-    i18n (1.1.1)
+    i18n (1.2.0)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     jquery-rails (4.3.3)

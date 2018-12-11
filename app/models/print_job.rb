@@ -3,6 +3,7 @@ class PrintJob < ApplicationRecord
   belongs_to :printable, polymorphic: true
   belongs_to :printing_by, class_name: "User"
   belongs_to :printed_by, class_name: "User"
+  belongs_to :added_by, class_name: "User"
 
   validates :part, presence: true
   validates :template, presence: true
