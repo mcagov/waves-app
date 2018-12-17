@@ -4,6 +4,7 @@ class Registration < ApplicationRecord
                                  foreign_key: :vessel_id
 
   has_many :submissions, -> { order("created_at desc") }
+  has_many :renewal_reminder_letters, as: :printable, class_name: "PrintJob"
 
   scope :fishing_vessels, (lambda do
     where(

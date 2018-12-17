@@ -6,4 +6,6 @@ class Mortgagee < Customer
 
   delegate :vessel, to: :parent
   delegate :part, to: :parent
+
+  has_many :mortgagee_reminder_letters, as: :printable, class_name: "PrintJob"
 end
