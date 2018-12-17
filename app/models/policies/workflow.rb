@@ -21,6 +21,10 @@ class Policies::Workflow
       user.system_manager?
     end
 
+    def can_edit_registration_dates?(user, vessel)
+      user.system_manager? && vessel.current_registration
+    end
+
     def can_unclaim_team_tasks?(user)
       user.system_manager?
     end

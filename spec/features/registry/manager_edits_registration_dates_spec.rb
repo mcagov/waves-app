@@ -2,7 +2,6 @@ require "rails_helper"
 
 describe "System Manager edits registration dates", type: :feature, js: true do
   scenario "as a system manager" do
-    vessel = create(:registered_vessel)
     visit_registered_vessel(create(:system_manager))
 
     click_on("Registrar Tools")
@@ -13,15 +12,11 @@ describe "System Manager edits registration dates", type: :feature, js: true do
     within("#edit-registration-dates") do
       fill_in("Registration Date", with: "30-07-2018")
       fill_in("Registration Expiry Date", with: "01-08-2023")
-      page.accept_alert do
-        find(".submit_edit_official_no").trigger("click")
-      end
+      find(".submit_edit_registration_dates").trigger("click")
     end
 
-    within("#vessel_summary") do
-      expect(page).to have_text("Registration Date: Mon July 30, 2018")
-      expect(page).to have_text("Registration Expiry Date:  Tue Aug 1, 2023")
-    end
+    expect(page).to have_css(".registered_at", text: "Mon Jul 30, 2018")
+    expect(page).to have_css(".registered_until", text: "Tue Aug 01, 2023")
   end
 
   scenario "as an operational user" do

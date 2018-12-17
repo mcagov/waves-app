@@ -45,11 +45,11 @@
     %tbody
       %tr
         %td.soft-label.no-top-border Registration Date:
-        %td.no-top-border
+        %td.no-top-border.registered_at
           %strong= @vessel.current_registration.registered_at.to_s(:date_time) if @vessel.current_registration
       %tr
         %td.soft-label Registration Expiry Date:
-        %td
+        %td.registered_until
           %strong= @vessel.current_registration.registered_until.to_s(:date_summary) if @vessel.current_registration
 
       - if @vessel.registration_status == :closed

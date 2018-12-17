@@ -28,6 +28,12 @@
                 class: "btn btn-block btn-danger"
           = render partial: "vessels/modals/edit_official_no", locals: {vessel: vessel}
 
+        - if Policies::Workflow.can_edit_registration_dates?(current_user, vessel)
+          %p= link_to "Edit Registration Dates (System Manager only)", "#",
+                data: { target: "#edit-registration-dates", toggle: "modal" },
+                class: "btn btn-block btn-danger"
+          = render partial: "vessels/modals/edit_registration_dates", locals: {vessel: vessel}
+
         %hr
         - if vessel.registration_status != :frozen
           %p= link_to "Freeze Record", "#",
