@@ -251,6 +251,10 @@ Rails.application.routes.draw do
              only: [:create],
              controller: "registered_vessel/cold_storage"
 
+    resource :current_registration,
+             only: [:update],
+             controller: "registered_vessel/current_registration"
+
     resource :current_transcript,
              only: [:show],
              controller: "registered_vessel/current_transcript"
