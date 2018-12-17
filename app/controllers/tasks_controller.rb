@@ -21,7 +21,11 @@ class TasksController < InternalPagesController
   end
 
   def cancelled
-    @tasks = task_scope.order("submission_tasks.updated_at desc").cancelled
+    @tasks =
+      task_scope
+      .cancelled
+      .where("submission_tasks.updated_at > ?", 30.days.ago)
+      .order("submission_tasks.updated_at desc")
   end
 
   def next_task
