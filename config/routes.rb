@@ -275,6 +275,10 @@ Rails.application.routes.draw do
              only: [:show],
              controller: "registered_vessel/registration_certificate"
 
+    resource :renewal_reminder,
+             only: [:create],
+             controller: "registered_vessel/renewal_reminder"
+
     resource :section_notice,
              only: [:create, :destroy],
              controller: "registered_vessel/section_notice"
