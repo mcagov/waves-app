@@ -48,7 +48,7 @@
         %td.no-top-border
           %strong= @vessel.current_registration.registered_at.to_s(:date_time) if @vessel.current_registration
       %tr
-        %td.soft-label Reg Expiry Date:
+        %td.soft-label Registration Expiry Date:
         %td
           %strong= @vessel.current_registration.registered_until.to_s(:date_summary) if @vessel.current_registration
 
