@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/mcagov/waves-utilities.git
-  revision: c12d4b3d8a928faca04f45636dfb85fa88d595be
+  revision: 5dea7660d30245778bc0aae8c8f68baa5c1a0742
   specs:
     waves-utilities (0.1.0)
       countries
@@ -188,10 +188,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.3)
-    countries (2.1.4)
+    concurrent-ruby (1.1.4)
+    countries (2.2.0)
+      i18n (> 1.0.1)
       i18n_data (~> 0.8.0)
-      money (~> 6.9)
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     country_select (3.1.1)
@@ -315,8 +315,6 @@ GEM
     minitest (5.11.3)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
-    money (6.13.1)
-      i18n (>= 0.6.4, <= 2)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nenv (0.3.0)
