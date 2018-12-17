@@ -167,6 +167,26 @@ describe Register::Vessel do
     end
   end
 
+  context "#prints_renewal_reminder?" do
+    before do
+      allow(vessel).to receive(:registration_status).and_return(status)
+    end
+
+    subject { vessel.prints_renewal_reminder? }
+
+    context "with status: pending" do
+      let(:status) { :pending }
+
+      it { expect(subject).to be_falsey }
+    end
+
+    context "with status: foo (i.e. any other status)" do
+      let(:status) { :foo }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
+
   context "#registry_info" do
     subject { vessel.registry_info }
 

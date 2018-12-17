@@ -195,6 +195,10 @@ module Register
       registration_status != :pending
     end
 
+    def prints_renewal_reminder?
+      registration_status != :pending
+    end
+
     def pln
       "#{port_code} #{port_no}"
     end

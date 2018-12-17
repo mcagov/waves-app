@@ -22,6 +22,11 @@
             target: "_blank",
             class: "btn btn-block btn-info #{'disabled' unless vessel.prints_transcript?}"
 
+        %p= link_to "Generate Renewal Reminder Letter(s)",
+            vessel_renewal_reminder_path(vessel),
+            method: "post",
+            class: "btn btn-block btn-warning #{'disabled' unless vessel.prints_renewal_reminder?}"
+
         - if Policies::Workflow.can_edit_official_number?(current_user)
           %p= link_to "Edit Official Number (System Manager only)", "#",
                 data: { target: "#edit-official-no", toggle: "modal" },
