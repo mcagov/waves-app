@@ -58,5 +58,6 @@ class PrintJobsController < InternalPagesController
     @printing_jobs = scoped_print_job
                      .where(template: template)
                      .order("printing_at asc").printing
+                     .where("printing_at > ?", 30.days.ago)
   end
 end
