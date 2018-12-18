@@ -51,6 +51,7 @@ module Register
     has_one :first_registration,
             -> { order("registered_at asc").limit(1) },
             class_name: "Registration"
+    has_many :renewal_reminder_letters, through: :registrations
 
     has_many :correspondences, as: :noteable
 
@@ -134,6 +135,7 @@ module Register
              as: :parent
 
     has_many :mortgagees, through: :mortgages
+    has_many :mortgagee_reminder_letters, through: :mortgagees
 
     has_many :csr_forms, -> { order("issue_number desc") }
 

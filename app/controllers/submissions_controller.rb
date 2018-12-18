@@ -60,7 +60,7 @@ class SubmissionsController < InternalPagesController
   end
 
   def closed
-    @submissions = submissions_scope.closed
+    @submissions = submissions_scope.closed.where("closed_at > ?", 30.days.ago)
     @page_title = "Closed Applications"
     render :index
   end
