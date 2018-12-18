@@ -1,0 +1,31 @@
+- recipients = email_recipient_select_options(submission)
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4.modal-title Carving & Marking (Email)
+.modal-body
+  .row
+    .col-md-12
+      %label Select Recipient(s) (for Email delivery)
+      .form-group.red= "No recipients" if recipients.empty?
+
+  - recipients.each do |recipient|
+    .row
+      .col-md-12
+        = label_tag do
+          = check_box_tag "recipients[]",
+            recipient.email_description, false
+          = recipient.email_description
+  .row
+    .col-md-12
+      .form-group
+        - f.object.email_subject = "Carving & Marking Note: #{submission.vessel}"
+        = f.input :email_subject, label: "Subject"
+  .row
+    .col-md-12
+      .form-group
+        - f.object.email_body = carving_and_marking_email_body(current_activity.part)
+        .form-group
+          %label{ for: "carving_and_marking_email_body" } Message
+          = f.trix_editor :email_body, id: "carving_and_marking_modal_trix_input"
+

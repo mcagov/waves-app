@@ -4,6 +4,10 @@ class Submission::CarvingAndMarkingsController < InternalPagesController
 
   def new
     @submission = Decorators::Submission.new(@submission)
+    @carving_and_marking =
+      CarvingAndMarking.new(
+        delivery_method: params[:delivery_method] || :print)
+
     respond_to do |format|
       format.js { render :new }
     end
@@ -45,7 +49,8 @@ class Submission::CarvingAndMarkingsController < InternalPagesController
   end
 
   def carving_and_marking_params
-    params.require(:carving_and_marking).permit(:delivery_method, :template)
+    params.require(:carving_and_marking)
+          .permit(:delivery_method, :template, :email_subject, :email_body)
   end
 
   def recipients
