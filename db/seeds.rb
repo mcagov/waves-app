@@ -8,6 +8,7 @@ Service.delete_all
 
 Service.create(
   name: "New Registration",
+  position: 10,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 153, premium: 180 },
@@ -30,6 +31,7 @@ Service.create(
 
 Service.create(
   name: "New Registration - full",
+  position: 20,
   standard_days: 10,
   premium_days: 1,
   part_2: { standard: 196, premium: 180 },
@@ -51,6 +53,7 @@ Service.create(
 
 Service.create(
   name: "New Registration - simple",
+  position: 30,
   standard_days: 10,
   part_2: { standard: 159 },
   part_4: { standard: 159 },
@@ -71,6 +74,7 @@ Service.create(
 
 Service.create(
   name: "Provisional Registration",
+  position: 40,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 175, premium: 140 },
@@ -90,6 +94,7 @@ Service.create(
 
 Service.create(
   name: "Provisional Registration - full",
+  position: 50,
   standard_days: 3,
   premium_days: 1,
   part_2: { standard: 179, premium: 140 },
@@ -108,6 +113,7 @@ Service.create(
 
 Service.create(
   name: "Provisional Registration - simple",
+  position: 60,
   standard_days: 3,
   part_2: { standard: 155 },
   rules: [
@@ -125,6 +131,7 @@ Service.create(
 
 Service.create(
   name: "Convert simple to full registration",
+  position: 70,
   standard_days: 10,
   premium_days: 1,
   part_2: { standard: 88, premium: 100 },
@@ -144,6 +151,7 @@ Service.create(
 
 Service.create(
   name: "Convert provisional to full",
+  position: 80,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 75, premium: 50 },
@@ -165,6 +173,7 @@ Service.create(
 
 Service.create(
   name: "Renewal",
+  position: 90,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 72, premium: 100 },
@@ -188,6 +197,7 @@ Service.create(
 
 Service.create(
   name: "Re-registration",
+  position: 100,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 153, premium: 180 },
@@ -210,6 +220,7 @@ Service.create(
 
 Service.create(
   name: "Re-registration - full",
+  position: 110,
   standard_days: 10,
   premium_days: 1,
   part_2: { standard: 196, premium: 180 },
@@ -231,6 +242,7 @@ Service.create(
 
 Service.create(
   name: "Re-registration - simple",
+  position: 120,
   standard_days: 10,
   part_2: { standard: 159 },
   part_4: { standard: 159 },
@@ -251,6 +263,7 @@ Service.create(
 
 Service.create(
   name: "Change of ownership (full)",
+  position: 130,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 105, premium: 100, subsequent: 20 },
@@ -275,6 +288,7 @@ Service.create(
 
 Service.create(
   name: "Change of ownership - simple",
+  position: 140,
   standard_days: 10,
   premium_days: 1,
   part_2: { standard: 88, premium: 100, subsequent: 21 },
@@ -295,6 +309,7 @@ Service.create(
 
 Service.create(
   name: "Change of name/port/tonnage (1&4)",
+  position: 150,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 46, premium: 100, subsequent: 17 },
@@ -316,6 +331,7 @@ Service.create(
 
 Service.create(
   name: "Change of vessel details",
+  position: 160,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 46, premium: 100 },
@@ -337,6 +353,7 @@ Service.create(
 
 Service.create(
   name: "Current transcript",
+  position: 170,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 29, premium: 50 },
@@ -355,6 +372,7 @@ Service.create(
 
 Service.create(
   name: "Historic transcript",
+  position: 180,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 46, premium: 50 },
@@ -373,6 +391,7 @@ Service.create(
 
 Service.create(
   name: "Duplicate certificate",
+  position: 190,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 32, premium: 50 },
@@ -392,6 +411,7 @@ Service.create(
 
 Service.create(
   name: "Mortgage intent",
+  position: 200,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 37, premium: 50 },
@@ -403,6 +423,7 @@ Service.create(
 
 Service.create(
   name: "Mortgage registration",
+  position: 210,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 101, premium: 100, subsequent: 19 },
@@ -418,6 +439,7 @@ Service.create(
 
 Service.create(
   name: "Transfer in",
+  position: 220,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 135, premium: 100 },
@@ -438,6 +460,7 @@ Service.create(
 
 Service.create(
   name: "Transfer out",
+  position: 230,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 52, premium: 100 },
@@ -455,6 +478,7 @@ Service.create(
 
 Service.create(
   name: "Courier/postage fee (allocate funds, no processing)",
+  position: 240,
   standard_days: 10,
   part_1: { standard: 30 },
   part_2: { standard: 30 },
@@ -470,6 +494,7 @@ Service.create(
 
 Service.create(
   name: "Copy of a document relating to a registration",
+  position: 250,
   standard_days: 10,
   premium_days: 1,
   part_1: { standard: 15, premium: 50 },
@@ -486,6 +511,7 @@ Service.create(
 
 Service.create(
   name: "Change of address",
+  position: 260,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -505,6 +531,7 @@ Service.create(
 
 Service.create(
   name: "Change of address (Part 3)",
+  position: 270,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -523,6 +550,7 @@ Service.create(
 
 Service.create(
   name: "General Enquiry/other non-fee task",
+  position: 280,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -539,6 +567,7 @@ Service.create(
 
 Service.create(
   name: "Mortgage discharge",
+  position: 290,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -554,6 +583,7 @@ Service.create(
 
 Service.create(
   name: "Mortgage transfer",
+  position: 300,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -570,6 +600,7 @@ Service.create(
 
 Service.create(
   name: "Registration Closure",
+  position: 310,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -588,6 +619,7 @@ Service.create(
 
 Service.create(
   name: "Carving and marking receipt",
+  position: 320,
   standard_days: 3,
   premium_days: 1,
   part_1: { standard: 0, premium: 0 },
@@ -604,6 +636,7 @@ Service.create(
 
 Service.create(
   name: "Issue CSR",
+  position: 330,
   standard_days: 3,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -621,6 +654,7 @@ Service.create(
 
 Service.create(
   name: "Manual Override",
+  position: 340,
   standard_days: 1,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -639,6 +673,7 @@ Service.create(
 
 Service.create(
   name: "Registration Closure: Owner Request",
+  position: 350,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -657,6 +692,7 @@ Service.create(
 
 Service.create(
   name: "Registration Closure: Close Without Notice",
+  position: 360,
   standard_days: 10,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -676,6 +712,7 @@ Service.create(
 
 Service.create(
   name: "Restore Closed Registration",
+  position: 370,
   standard_days: 1,
   part_1: { standard: 0 },
   part_2: { standard: 0 },
@@ -691,6 +728,7 @@ Service.create(
 
 Service.create(
   name: "Write on",
+  position: 380,
   standard_days: 1,
   part_1: { standard: 0 },
   part_2: { standard: 0 },

@@ -4,6 +4,7 @@ class Service < ApplicationRecord
   has_many :tasks, class_name: "Submission::Task"
   has_many :staff_performance_logs, through: :tasks
 
+  default_scope { order(:position) }
   def to_s
     name || "Unknown"
   end

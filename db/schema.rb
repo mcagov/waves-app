@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_110749) do
+ActiveRecord::Schema.define(version: 2018_12_18_112711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -392,6 +392,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_110749) do
     t.json "rules", default: []
     t.json "activities", default: []
     t.json "print_templates", default: []
+    t.integer "position"
     t.index ["name"], name: "index_services_on_name"
   end
 
