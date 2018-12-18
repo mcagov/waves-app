@@ -49,7 +49,8 @@ class Submission::CarvingAndMarkingsController < InternalPagesController
   end
 
   def carving_and_marking_params
-    params.require(:carving_and_marking).permit(:delivery_method, :template)
+    params.require(:carving_and_marking)
+          .permit(:delivery_method, :template, :email_subject, :email_body)
   end
 
   def recipients

@@ -17,16 +17,15 @@
             recipient.email_description, false
           = recipient.email_description
   .row
-    .col-md-6 &nbsp;
+    .col-md-12
+      .form-group
+        - f.object.email_subject = "Carving & Marking Note: #{submission.vessel}"
+        = f.input :email_subject, label: "Subject"
   .row
-    .col-md-6
-      = f.input :delivery_method, as: :select,
-        collection: delivery_methods_collection,
-        label: "Delivery Method",
-        include_blank: false
-  .row
-    .col-md-6
-      = f.input :template, as: :select,
-        collection: carving_and_marking_templates_collection(submission),
-        label: "Template",
-        include_blank: false
+    .col-md-12
+      .form-group
+        - f.object.email_body = carving_and_marking_email_body(current_activity.part)
+        .form-group
+          %label{ for: "carving_and_marking_email_body" } Message
+          = f.trix_editor :email_body, id: "carving_and_marking_modal_trix_input"
+

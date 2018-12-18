@@ -85,19 +85,6 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
   end
 
-  describe "carving_and_marking_note" do
-    let(:mail) do
-      NotificationMailer.carving_and_marking_note(
-        default_params, 100.0, "Sally SSR", "an_attachment")
-    end
-
-    let(:body) { mail.body.encoded }
-
-    it "renders the body" do
-      expect(body).to match(/Carving and Marking Note/)
-    end
-  end
-
   describe "carving_and_marking_reminder" do
     let(:mail) do
       NotificationMailer.carving_and_marking_reminder(

@@ -12,6 +12,8 @@ class CarvingAndMarking < ApplicationRecord
 
   enum delivery_method: [:email, :print]
 
+  attr_accessor :email_subject, :email_body
+
   TEMPLATES = [
     ["All fishing vessels",
      :all_fishing],

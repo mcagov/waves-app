@@ -15,7 +15,10 @@ describe "User issues a Carving & Marking Note", js: true do
     within(".modal-content") do
       check(@submission.owners.first.name)
       check(@submission.applicant_name)
-      select("All fishing vessels", from: "Template")
+      fill_in("Subject", with: "Carving & Marking Subject")
+      find("#carving_and_marking_modal_trix_input", visible: false)
+        .set("C&M, please!")
+
       click_on("Issue Carving & Marking Note")
     end
 
@@ -28,7 +31,7 @@ describe "User issues a Carving & Marking Note", js: true do
 
     click_on("Correspondence")
     expect(page)
-      .to have_css("#notification-list", text: "Carving & Marking Note")
+      .to have_css("#notification-list", text: "Carving & Marking Subject")
 
     creates_a_work_log_entry(:carving_and_marking_issued)
     expect(Notification::CarvingAndMarkingNote.count).to eq(2)
@@ -46,7 +49,6 @@ describe "User issues a Carving & Marking Note", js: true do
     end
 
     within(".modal-content") do
-      select("Send via Email", from: "Delivery Method")
       click_on("Issue Carving & Marking Note")
     end
 
