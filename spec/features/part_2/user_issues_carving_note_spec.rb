@@ -9,11 +9,10 @@ describe "User issues a Carving & Marking Note", js: true do
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do
-      click_on("Issue Carving & Marking Note")
+      click_on("Email")
     end
 
     within(".modal-content") do
-      select("Send via Email", from: "Delivery Method")
       check(@submission.owners.first.name)
       check(@submission.applicant_name)
       select("All fishing vessels", from: "Template")
@@ -43,7 +42,7 @@ describe "User issues a Carving & Marking Note", js: true do
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do
-      click_on("Issue Carving & Marking Note")
+      click_on("Email")
     end
 
     within(".modal-content") do
@@ -64,11 +63,10 @@ describe "User issues a Carving & Marking Note", js: true do
     click_on("Certificates & Documents")
 
     within("#carving_and_marking .status") do
-      click_on("Issue Carving & Marking Note")
+      click_on("Print")
     end
 
     within(".modal-content") do
-      select("Print", from: "Delivery Method")
       select("All fishing vessels", from: "Template")
       click_on("Issue Carving & Marking Note")
     end

@@ -23,12 +23,21 @@
 .row.status
   .col-md-3
     - if @submission.can_issue_carving_and_marking?
+      %h4 Issue Carving & Marking
       - unless @readonly
-        = link_to new_submission_carving_and_marking_path(@submission, task_id: @task.id), class: "btn btn-primary",
+        = link_to new_submission_carving_and_marking_path(@submission, task_id: @task.id, delivery_method: :print), class: "btn btn-primary",
           remote: true,
           "data-target" => "#new-carving-and-marking",
           "data-toggle" => "modal" do
-          Issue Carving & Marking Note
+          %i.fa.fa-print
+          Print
+
+        = link_to new_submission_carving_and_marking_path(@submission, task_id: @task.id, delivery_method: :email), class: "btn btn-primary",
+          remote: true,
+          "data-target" => "#new-carving-and-marking",
+          "data-toggle" => "modal" do
+          %i.fa.fa-envelope
+          Email
 
         = render partial: "submissions/extended/forms/carving_and_marking/modal"
     -else
