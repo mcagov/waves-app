@@ -25,19 +25,19 @@ class Admin::ReportsController < InternalPagesController
     { vessel: { name: { value: "", result_displayed: "1" } } }
   end
 
-  def build_report
-    @report = Report.build(params[:id], @filter)
-  end
-
   def html_report
     @filter[:page] = params[:page] || 1
     @filter[:per_page] = 50
-    build_report
+
+    @report = Report.build(params[:id], @filter)
   end
 
   def xls_report
-    @filter[:page] = 1
-    @filter[:per_page] = 10000
-    build_report
+    DownloadableReport.delay.build(
+      current_user, Report.build(params[:id], @filter))
+
+    flash[:notice] =
+      "You will shortly receive an email with a link to download the report"
+    redirect_to "/admin/reports/#{params[:id]}?#{request.query_string}"
   end
 end

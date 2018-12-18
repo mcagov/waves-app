@@ -73,14 +73,6 @@ describe "Manager views staff performance report by task", js: true do
     expect(page).to have_css("#results .red", text: 0)
   end
 
-  scenario "downloading the xls version" do
-    click_on("Export to Excel")
-    sleep 1
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text)
-      .to match("Worksheet ss:Name=\"Staff Performance by Task\"")
-  end
-
   scenario "viewing the sub report with an existing filter" do
     find("#filter_date_start").set("20/01/2017")
     select("Part III", from: "Part of Register")
