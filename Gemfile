@@ -15,7 +15,7 @@ gem "business_time"
 gem "clockwork", require: false
 gem "cocoon"
 gem "coffee-rails"
-gem "countries"
+gem "countries", "~> 2.1.4"
 gem "country_select"
 gem "daemons"
 gem "delayed_job_active_record"
