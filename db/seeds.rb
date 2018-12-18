@@ -688,3 +688,18 @@ Service.create(
   activities: [:restore_closure],
   print_templates: [
   ])
+
+Service.create(
+  name: "Write on",
+  standard_days: 1,
+  part_1: { standard: 0 },
+  part_2: { standard: 0 },
+  part_3: { standard: 0 },
+  part_4: { standard: 0 },
+  rules: [
+    :registry_not_editable,
+  ],
+  activities: [
+  ],
+  print_templates: [
+  ])
