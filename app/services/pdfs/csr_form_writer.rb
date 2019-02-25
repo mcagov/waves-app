@@ -50,7 +50,7 @@ class Pdfs::CsrFormWriter
     @pdf.move_down 12
     @pdf.image "#{Rails.root}/public/pdf_images/registrar_signature.png", at: [0, @pdf.cursor], scale: 0.2
     @pdf.move_down 20
-    @pdf.draw_text " David Jones. Registrar General of the United Kingdom Shipping Register.", at: [90, @pdf.cursor]
+    @pdf.draw_text " Richard Parkes. Registrar General of the United Kingdom Shipping Register.", at: [90, @pdf.cursor]
     @pdf.move_down 25
     @pdf.text "This document was received by the ship and attached to the ship's CSR file on the following date:"
     @pdf.move_down 30
