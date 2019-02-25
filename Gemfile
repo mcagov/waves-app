@@ -9,7 +9,7 @@ gem "auto_increment"
 gem "active_model_serializers"
 gem "bootstrap-datepicker-rails"
 gem "bootstrap-multiselect-rails"
-gem "bootstrap-sass", "~> 3.3.6"
+gem "bootstrap-sass", "~> 3.4.1"
 gem "bootstrap3-datetimepicker-rails"
 gem "business_time"
 gem "clockwork", require: false
