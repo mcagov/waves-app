@@ -1,16 +1,16 @@
 class Builders::RegistrationBuilder
   class << self
-    def create(task, registered_vessel, starts_at, ends_at, provisional)
+    def create(task, vessel, starts_at, ends_at, closed_at, provisional)
       registration = Registration.create(
-        vessel_id: registered_vessel.id,
+        vessel_id: vessel.id,
         registered_at: registered_at(task, starts_at),
         registered_until: registered_until(task, ends_at),
-        registry_info: registered_vessel.registry_info,
-        actioned_by: task.claimant,
-        provisional: provisional)
+        closed_at: closed_at,
+        registry_info: vessel.registry_info,
+        actioned_by: task.claimant, provisional: provisional)
 
       task.submission.update_attributes(registration: registration)
-      registered_vessel.update_attributes(current_registration: registration)
+      vessel.update_attributes(current_registration: registration)
 
       registration
     end

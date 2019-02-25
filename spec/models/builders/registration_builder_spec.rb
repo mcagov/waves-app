@@ -16,6 +16,7 @@ describe Builders::RegistrationBuilder do
           registered_vessel,
           "10/10/2012 12:23 PM".to_datetime,
           "10/10/2017 12:23 PM".to_datetime,
+          nil,
           false)
       end
 
@@ -56,15 +57,30 @@ describe Builders::RegistrationBuilder do
           registered_vessel,
           "10/10/2012 12:23 PM".to_datetime,
           "10/10/2017 12:23 PM".to_datetime,
+          nil,
           true)
       end
 
       it { expect(subject).to be_provisional }
     end
 
+    context "with the closed_at parameter" do
+      subject do
+        described_class.create(
+          task,
+          registered_vessel,
+          "10/10/2012 12:23 PM".to_datetime,
+          "10/10/2017 12:23 PM".to_datetime,
+          "10/10/2017 12:23 PM".to_datetime,
+          true)
+      end
+
+      it { expect(subject.closed_at).to eq("10/10/2017 12:23 PM") }
+    end
+
     context "when the dates are blank" do
       subject do
-        described_class.create(task, registered_vessel, "", nil, false)
+        described_class.create(task, registered_vessel, "", nil, nil, false)
       end
 
       it { expect(subject).to be_persisted }
