@@ -46,7 +46,7 @@ describe ApplicationProcessor do
           .to receive(:create)
           .with(
             task,
-            registered_vessel, "01/01/2011", "01/01/2016", false)
+            registered_vessel, "01/01/2011", "01/01/2016", nil, false)
       end
 
       it { subject }
@@ -67,7 +67,7 @@ describe ApplicationProcessor do
           .to receive(:create)
           .with(
             task,
-            registered_vessel, "01/01/2011", "01/04/2011", true)
+            registered_vessel, "01/01/2011", "01/04/2011", nil, true)
       end
 
       it { subject }
@@ -84,6 +84,7 @@ describe ApplicationProcessor do
             submission.registered_vessel,
             registered_vessel.current_registration.registered_at,
             registered_vessel.current_registration.registered_until,
+            registered_vessel.current_registration.closed_at,
             registered_vessel.current_registration.provisional?)
       end
 

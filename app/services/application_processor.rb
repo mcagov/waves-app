@@ -44,6 +44,7 @@ class ApplicationProcessor
           @registered_vessel,
           @approval_params[:registration_starts_at],
           @approval_params[:registration_ends_at],
+          nil,
           provisional)
     end
 
@@ -56,6 +57,7 @@ class ApplicationProcessor
           @registered_vessel,
           @registered_vessel.current_registration.registered_at,
           @registered_vessel.current_registration.registered_until,
+          @registered_vessel.current_registration.closed_at,
           @registered_vessel.current_registration.provisional?)
     end
 
