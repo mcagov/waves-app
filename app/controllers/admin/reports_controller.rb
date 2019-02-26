@@ -33,7 +33,7 @@ class Admin::ReportsController < InternalPagesController
   end
 
   def xls_report
-    DownloadableReport.delay.build(
+    DownloadableReport.delay.build_and_notify(
       current_user, Report.build(params[:id], @filter))
 
     redirect_key = params[:id].gsub("_report", "")
