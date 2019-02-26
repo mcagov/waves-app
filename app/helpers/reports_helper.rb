@@ -42,7 +42,7 @@ module ReportsHelper
 
   def render_link_to_download(data_element)
     link_to(
-      "Download",
+      "Download (you will receive an email with a link to download the report)",
       "/admin/reports/#{data_element.report_key}.xls?#{request.query_string}")
   end
 end
