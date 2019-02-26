@@ -76,7 +76,7 @@ describe "Manager views staff performance report", js: true do
     expect(page)
       .to have_css(".alert", text: "You will shortly receive an email")
     expect(page)
-      .to have_current_path("/admin/reports/staff_performance?")
+      .to have_current_path("/admin/reports/staff_performance")
   end
 
   scenario "viewing the sub report with an existing filter" do

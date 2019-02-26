@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views IHS/Fairplay reports", js: true do
+describe "User views IHS/Fairplay reports", js: true, run_delayed_jobs: true do
   before do
     login_to_reports
     visit admin_report_path(:vessel_age)
@@ -11,7 +11,7 @@ describe "User views IHS/Fairplay reports", js: true do
     expect_link_to_export_or_print(false)
     within("#results") { click_on("Download") }
 
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"IHS Fairplay\"")
+    expect(page.text).to match("You will shortly receive an email")
+    expect(DownloadableReport.last.file_file_name).to eq("ihs-fairplay.xls")
   end
 end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views fishing regional reports", js: true do
+describe "User views fishing regional", js: true, run_delayed_jobs: true do
   before do
     login_to_reports
     visit admin_report_path(:cefas)
@@ -16,7 +16,8 @@ describe "User views fishing regional reports", js: true do
 
     within("#results") { click_on("Download") }
 
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"Fishing Regional Report\"")
+    expect(page.text).to match("You will shortly receive an email")
+    expect(DownloadableReport.last.file_file_name)
+      .to eq("fishing-regional-report.xls")
   end
 end

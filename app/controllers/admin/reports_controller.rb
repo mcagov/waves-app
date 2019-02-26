@@ -36,8 +36,10 @@ class Admin::ReportsController < InternalPagesController
     DownloadableReport.delay.build(
       current_user, Report.build(params[:id], @filter))
 
+    redirect_key = params[:id].gsub("_report", "")
+
     flash[:notice] =
       "You will shortly receive an email with a link to download the report"
-    redirect_to "/admin/reports/#{params[:id]}?#{request.query_string}"
+    redirect_to "/admin/reports/#{redirect_key}?#{request.query_string}"
   end
 end
