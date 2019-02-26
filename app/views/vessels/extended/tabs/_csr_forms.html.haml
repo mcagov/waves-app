@@ -29,8 +29,8 @@
                     = button_tag type: 'submit',
                       class: "btn btn-primary btn-sm pull-right" do
                       Save
-        %td= csr_form.issued_at.to_s(:date_time) if csr_form.issued_at
-        %td= csr_form.updated_at
+        %td= csr_form.issued_at
+        %td= csr_form.updated_at.to_s(:date_time)
         %td
           = link_to vessel_csr_path(@vessel, csr_form, format: :pdf), target: "_blank" do
             %i.fa.fa-file-pdf-o
