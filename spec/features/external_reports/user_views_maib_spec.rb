@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views MAIB reports", js: true do
+describe "User views MAIB reports", js: true, run_delayed_jobs: true do
   before do
     login_to_reports
     visit admin_report_path(:fishing_regional)
@@ -18,8 +18,9 @@ describe "User views MAIB reports", js: true do
 
     within("#results") { click_on("Download") }
 
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"Fishing Vessel Closures\"")
+    expect(page.text).to match("You will shortly receive an email")
+    expect(DownloadableReport.last.file_file_name)
+      .to eq("fishing-vessel-closures.xlsx")
   end
 
   scenario "Quarterly Report" do
@@ -30,9 +31,8 @@ describe "User views MAIB reports", js: true do
 
     within("#results") { click_on("Download") }
 
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"Under 12m\"")
-    expect(page.text).to match("Worksheet ss:Name=\"12m and over\"")
+    expect(page.text).to match("You will shortly receive an email")
+    expect(DownloadableReport.last.file_file_name).to eq("under-12m.xlsx")
   end
 
   scenario "Vessel Length" do
@@ -43,7 +43,8 @@ describe "User views MAIB reports", js: true do
 
     within("#results") { click_on("Download") }
 
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("Worksheet ss:Name=\"Fishing Vessel Length\"")
+    expect(page.text).to match("You will shortly receive an email")
+    expect(DownloadableReport.last.file_file_name)
+      .to eq("fishing-vessel-length.xlsx")
   end
 end

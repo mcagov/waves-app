@@ -26,8 +26,7 @@ describe "User views UK Activity reports", js: true do
 
   scenario "exporting to excel" do
     click_on("Export to Excel")
-    sleep 1
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text).to match("UK Activity: 01/01/2017-31/03/2017")
+    expect(page)
+      .to have_css(".alert", text: "You will shortly receive an email")
   end
 end

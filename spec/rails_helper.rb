@@ -22,6 +22,12 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.around(:each, :run_delayed_jobs) do |example|
+    Delayed::Worker.delay_jobs = false
+    example.run
+    Delayed::Worker.delay_jobs = true
+  end
 end
 
 ActiveRecord::Migration.maintain_test_schema!

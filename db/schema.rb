@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_112711) do
+ActiveRecord::Schema.define(version: 2018_12_18_135040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,16 @@ ActiveRecord::Schema.define(version: 2018_12_18_112711) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "downloadable_reports", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.datetime "file_updated_at"
+    t.integer "file_file_size"
+    t.string "file_content_type"
+    t.string "file_file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "engines", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

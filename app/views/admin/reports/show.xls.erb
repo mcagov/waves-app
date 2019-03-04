@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:o="urn:schemas-microsoft-com:office:office"
   xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -8,7 +8,7 @@
     <Table>
       <% unless @report.xls_title == :hidden %>
         <Row>
-          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+          <Cell ss:MergeAcross="<%= @report.headings.length - 1 %>">
             <Data ss:Type="String"><%= @report.xls_title %></Data>
           </Cell>
         </Row>
@@ -36,7 +36,7 @@
     <Worksheet ss:Name="<%= @report.second_sheet_title %>">
       <Table>
         <Row>
-          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+          <Cell ss:MergeAcross="<%= @report.headings.length - 1 %>">
             <Data ss:Type="String"><%= @report.xls_title(@report.second_sheet_title) %></Data>
           </Cell>
         </Row>
@@ -64,7 +64,7 @@
     <Worksheet ss:Name="<%= @report.third_sheet_title %>">
       <Table>
         <Row>
-          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+          <Cell ss:MergeAcross="<%= @report.headings.length - 1 %>">
             <Data ss:Type="String"><%= @report.xls_title(@report.third_sheet_title) %></Data>
           </Cell>
         </Row>
@@ -92,7 +92,7 @@
     <Worksheet ss:Name="<%= @report.fourth_sheet_title %>">
       <Table>
         <Row>
-          <Cell ss:ss:MergeAcross="<%= @report.headings.length - 1 %>">
+          <Cell ss:MergeAcross="<%= @report.headings.length - 1 %>">
             <Data ss:Type="String"><%= @report.xls_title(@report.fourth_sheet_title) %></Data>
           </Cell>
         </Row>

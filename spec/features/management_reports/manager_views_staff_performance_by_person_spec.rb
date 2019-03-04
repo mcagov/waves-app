@@ -76,14 +76,6 @@ describe "Manager views staff performance report by person", js: true do
     click_on("Apply Filter")
     dont_expect_result
   end
-
-  scenario "downloading the xls version" do
-    click_on("Export to Excel")
-    sleep 1
-    expect(page.response_headers["Content-Type"]).to match("application/xls")
-    expect(page.text)
-      .to match("Worksheet ss:Name=\"Performance by Member of Staff\"")
-  end
 end
 
 def expect_result
