@@ -20,7 +20,7 @@ describe "User views MAIB reports", js: true, run_delayed_jobs: true do
 
     expect(page.text).to match("You will shortly receive an email")
     expect(DownloadableReport.last.file_file_name)
-      .to eq("fishing-vessel-closures.xls")
+      .to eq("fishing-vessel-closures.xlsx")
   end
 
   scenario "Quarterly Report" do
@@ -32,7 +32,7 @@ describe "User views MAIB reports", js: true, run_delayed_jobs: true do
     within("#results") { click_on("Download") }
 
     expect(page.text).to match("You will shortly receive an email")
-    expect(DownloadableReport.last.file_file_name).to eq("under-12m.xls")
+    expect(DownloadableReport.last.file_file_name).to eq("under-12m.xlsx")
   end
 
   scenario "Vessel Length" do
@@ -45,6 +45,6 @@ describe "User views MAIB reports", js: true, run_delayed_jobs: true do
 
     expect(page.text).to match("You will shortly receive an email")
     expect(DownloadableReport.last.file_file_name)
-      .to eq("fishing-vessel-length.xls")
+      .to eq("fishing-vessel-length.xlsx")
   end
 end

@@ -17,6 +17,6 @@ describe "User views HMRC reports", js: true, run_delayed_jobs: true do
     within("#results") { click_on("Download") }
 
     expect(page.text).to match("You will shortly receive an email")
-    expect(DownloadableReport.last.file_file_name).to eq("6-6-99m.xls")
+    expect(DownloadableReport.last.file_file_name).to eq("6-6-99m.xlsx")
   end
 end

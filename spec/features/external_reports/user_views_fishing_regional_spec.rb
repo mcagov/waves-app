@@ -18,6 +18,6 @@ describe "User views fishing regional", js: true, run_delayed_jobs: true do
 
     expect(page.text).to match("You will shortly receive an email")
     expect(DownloadableReport.last.file_file_name)
-      .to eq("fishing-regional-report.xls")
+      .to eq("fishing-regional-report.xlsx")
   end
 end

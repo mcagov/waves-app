@@ -17,7 +17,7 @@ class DownloadableReport < ActiveRecord::Base
 
     def build_file(report)
       FakeFile.new(
-        "#{report.title.parameterize}.xls",
+        "#{report.title.parameterize}.xlsx",
         ApplicationController.render(
           template: "admin/reports/show.xls",
           layout: false,
