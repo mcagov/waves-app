@@ -49,6 +49,7 @@
         = render partial: "submission/tasks/modals/validate"
         = link_to validate_submission_task_path(@submission, @task),
           data: { target: "#complete-task", toggle: "modal" },
+          id: "complete-task-button",
           class: "btn btn-success btn-lg pull-right",
           remote: true do
           %i.fa.fa-check
