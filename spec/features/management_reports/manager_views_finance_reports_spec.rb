@@ -66,4 +66,17 @@ describe "User views Finance reports", js: true do
 
     expect(find_all("#results tr").length).to eq(2)
   end
+
+  scenario "Balance Report" do
+    click_on("Finance Balance (Incomplete/Underpayment)")
+
+    within(find_all("#results tr")[0]) do
+      cells = find_all("th")
+
+      within(cells[0]) { expect(page).to have_text("Application ID") }
+      within(cells[1]) { expect(page).to have_text("Value of Incomplete") }
+      within(cells[2]) { expect(page).to have_text("Value of Underpayment") }
+      within(cells[3]) { expect(page).to have_text("Revenue Stream") }
+    end
+  end
 end
