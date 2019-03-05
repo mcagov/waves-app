@@ -7,8 +7,7 @@ class DownloadableReport < ActiveRecord::Base
     def build_and_notify(user, report)
       downloadable_report = create(file: build_file(report), user: user)
 
-      ReportMailer.download_link(
-        user.email, downloadable_report.download_link).deliver
+      ReportMailer.downloadable_report(user.email, downloadable_report).deliver
 
       downloadable_report
     end
@@ -17,15 +16,11 @@ class DownloadableReport < ActiveRecord::Base
 
     def build_file(report)
       FakeFile.new(
-        "#{report.title.parameterize}.xlsx",
+        "#{report.title.parameterize}.xls",
         ApplicationController.render(
           template: "admin/reports/show.xls",
           layout: false,
           assigns: { report: report }))
     end
-  end
-
-  def download_link
-    file.expiring_url(10.minutes.since, :original)
   end
 end

@@ -13,7 +13,7 @@ describe Admin::ReportsController do
     end
 
     it "generates the DownloadableReport", run_delayed_jobs: true do
-      expect(DownloadableReport.last.file_file_name).to eq("cefas.xlsx")
+      expect(DownloadableReport.last.file_file_name).to eq("cefas.xls")
     end
   end
 end
