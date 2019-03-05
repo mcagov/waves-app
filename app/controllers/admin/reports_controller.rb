@@ -1,3 +1,5 @@
+include AssetHelper
+
 class Admin::ReportsController < InternalPagesController
   before_action :system_manager_only!
 
@@ -12,6 +14,19 @@ class Admin::ReportsController < InternalPagesController
 
   def index
     redirect_to admin_report_path(:staff_performance)
+  end
+
+  def download
+    downloadable_report = DownloadableReport.find(params[:id])
+    data = open azure_private_asset_url(downloadable_report)
+
+    send_data(
+      data.read,
+      filename: downloadable_report.file_file_name,
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      disposition: "inline",
+      stream: true,
+      buffer_size: 4096)
   end
 
   protected

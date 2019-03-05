@@ -3,8 +3,7 @@ require "rails_helper"
 describe "User views CEFAS reports", js: true, run_delayed_jobs: true do
   before do
     login_to_reports
-    visit admin_report_path(:vessel_age)
-    click_on("CEFAS")
+    visit admin_report_path(:cefas)
   end
 
   scenario "in general" do
@@ -18,13 +17,18 @@ describe "User views CEFAS reports", js: true, run_delayed_jobs: true do
 
     expect(page.text).to match("You will shortly receive an email")
 
-    expect(DownloadableReport.last.file_file_name)
-      .to eq("open-registrations.xlsx")
+    downloadable_report = DownloadableReport.last
 
-    expect(last_email_sent)
-      .to have_subject("Waves: Report is ready")
+    expect(downloadable_report.file_file_name).to eq("open-registrations.xls")
 
-    expect(last_email_sent)
-      .to have_body_text(DownloadableReport.last.download_link)
+    expect(last_email_sent).to have_subject("Waves: Report is ready")
+
+    email = open_email(User.last.email)
+
+    download_link =
+      "http://test.local/admin/reports/#{downloadable_report.id}/download.xls"
+
+    expect(email.default_part_body)
+      .to have_link("Download Report", download_link)
   end
 end

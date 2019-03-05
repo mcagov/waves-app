@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :application_types, only: [:index]
     resources :common_mortgagees
     resources :fees, only: [:index]
-    resources :reports, only: [:show, :index]
+    resources :reports, only: [:show, :index] do
+      member do
+        get :download
+      end
+    end
     resources :services, only: [:index] do
       collection do
         get :prices
