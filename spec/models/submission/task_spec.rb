@@ -229,4 +229,10 @@ describe Submission::Task do
         [unclaimed, claimed, referred])
     end
   end
+
+  describe "#price_in_pounds" do
+    let(:task) { build(:task, price_in_pounds: 123.45) }
+
+    it { expect(task.price_in_pounds).to eq(123.45) }
+  end
 end

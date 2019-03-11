@@ -116,11 +116,11 @@ class Submission::Task < ApplicationRecord
   end
 
   def price_in_pounds
-    (price / 100).to_i
+    (price.to_f / 100).round(2)
   end
 
   def price_in_pounds=(input)
-    self.price = input.to_i * 100
+    self.price = input.to_f * 100
   end
 
   def reset_dates(*)
