@@ -1,4 +1,5 @@
 #flash
   - flash.each do |key, value|
+    - next unless value.is_a? String # prevent annoyting devise timedout = true
     .alert.alert-info{:role => "alert"}
       = h value
