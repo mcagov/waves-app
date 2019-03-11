@@ -68,7 +68,7 @@ describe "User views Finance reports", js: true do
   end
 
   scenario "Balance Report" do
-    click_on("Finance Balance (Incomplete/Underpayment)")
+    click_on("Finance Balance")
 
     within(find_all("#results tr")[0]) do
       cells = find_all("th")

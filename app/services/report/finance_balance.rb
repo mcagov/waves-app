@@ -1,6 +1,6 @@
 class Report::FinanceBalance < Report
   def title
-    "Finance Balance (Incomplete/Underpayment)"
+    "Finance Balance"
   end
 
   def headings
@@ -42,6 +42,7 @@ class Report::FinanceBalance < Report
         (SELECT SUM(t.price) FROM submission_tasks t
            WHERE t.submission_id = s.id
               AND t.state = 'completed')
+      ORDER BY s.part, s.ref_no
     SQL
   end
 
