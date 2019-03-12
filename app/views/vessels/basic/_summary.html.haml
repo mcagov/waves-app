@@ -57,3 +57,11 @@
           %td.soft-label Date of Closure:
           %td
             %strong= @vessel.current_registration.closed_at.to_s(:date_time)
+        %tr
+          %td.soft-label Closure Reason:
+          %td
+            %strong= @vessel.current_registration.description
+        %tr
+          %td.soft-label Supporting Info:
+          %td
+            %strong= @vessel.current_registration.supporting_info
