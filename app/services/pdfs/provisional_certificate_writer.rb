@@ -23,7 +23,7 @@ class Pdfs::ProvisionalCertificateWriter < Pdfs::CertificateWriter
     @pdf.draw_text @vessel.name, at: [232, 560]
     @pdf.draw_text @vessel.hin, at: [232, 524]
     @pdf.draw_text @vessel.register_length, at: [512, 522]
-    @pdf.draw_text @vessel.vessel_type, at: [232, 444]
+    @pdf.draw_text @vessel.vessel_type_description, at: [232, 444]
   end
 
   def draw_owners # rubocop:disable Metrics/MethodLength
