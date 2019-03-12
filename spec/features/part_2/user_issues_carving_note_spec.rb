@@ -16,6 +16,7 @@ describe "User issues a Carving & Marking Note", js: true do
       check(@submission.owners.first.name)
       check(@submission.applicant_name)
       fill_in("Subject", with: "Carving & Marking Subject")
+      select("All fishing vessels", from: "Print Template")
       find("#carving_and_marking_modal_trix_input", visible: false)
         .set("C&M, please!")
 

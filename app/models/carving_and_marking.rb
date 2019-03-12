@@ -14,6 +14,8 @@ class CarvingAndMarking < ApplicationRecord
 
   attr_accessor :email_subject, :email_body
 
+  validates :template, presence: true
+
   TEMPLATES = [
     ["All fishing vessels",
      :all_fishing],

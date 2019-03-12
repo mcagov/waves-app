@@ -1,6 +1,16 @@
 require "rails_helper"
 
 RSpec.describe CarvingAndMarking, type: :model do
+  describe "validations" do
+    let(:carving_and_marking) { CarvingAndMarking.new }
+
+    before { carving_and_marking.valid? }
+
+    it "requires a template" do
+      expect(carving_and_marking.errors).to include(:template)
+    end
+  end
+
   describe "tonnage details" do
     let(:changeset) do
       { vessel_info: { register_tonnage: register, net_tonnage: net } }

@@ -18,6 +18,12 @@
           = recipient.email_description
   .row
     .col-md-12
+      = f.input :template, as: :select,
+        collection: carving_and_marking_templates_collection(submission),
+        label: "Print Template",
+        include_blank: false
+  .row
+    .col-md-12
       .form-group
         - f.object.email_subject = "Carving & Marking Note: #{submission.vessel}"
         = f.input :email_subject, label: "Subject"
