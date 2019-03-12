@@ -15,21 +15,6 @@ class EmailTemplatesPreview < ActionMailer::Preview
       default_params, "<p>FREE TEXT</p>", "3N-777EA4")
   end
 
-  def carving_and_marking_note_under_15m
-    NotificationMailer.carving_and_marking_note(
-      default_params, 14.9, "Officer Bob", :pdf_attachment)
-  end
-
-  def carving_and_marking_note_15_to_24m
-    NotificationMailer.carving_and_marking_note(
-      default_params, 24, "Officer Bob", :pdf_attachment)
-  end
-
-  def carving_and_marking_note_over_24m
-    NotificationMailer.carving_and_marking_note(
-      default_params, 55, "Officer Bob", :pdf_attachment)
-  end
-
   def carving_and_marking_reminder
     NotificationMailer.carving_and_marking_reminder(
       default_params, "My Boat", "3N-777EA4")

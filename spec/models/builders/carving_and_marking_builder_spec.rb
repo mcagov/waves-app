@@ -8,9 +8,10 @@ describe Builders::CarvingAndMarkingBuilder do
       let(:carving_and_marking) { build(:emailable_carving_and_marking) }
       let(:recipient) { create(:customer) }
 
-      it "builds two notifications" do
+      it "builds a notification" do
         notification = Notification::CarvingAndMarkingNote.last
         expect(notification.notifiable).to eq(carving_and_marking)
+        expect(notification.attachments).to eq(["carving_and_marking"])
       end
     end
 

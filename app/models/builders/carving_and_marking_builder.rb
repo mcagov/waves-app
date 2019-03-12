@@ -25,7 +25,8 @@ class Builders::CarvingAndMarkingBuilder
           notifiable: @carving_and_marking,
           subject: @carving_and_marking.email_subject,
           body: @carving_and_marking.email_body,
-          actioned_by: @carving_and_marking.actioned_by)
+          actioned_by: @carving_and_marking.actioned_by,
+          attachments: [:carving_and_marking])
       end
     end
 
