@@ -63,13 +63,13 @@ class Department
   def phone
     case code
     when :pleasure
-      "02920 448866"
+      "0203 90 85204"
     when :commercial, :bareboat, :high_profile
-      "02920 448840/41/42/68"
+      "0203 90 85202"
     when :fishing
-      "02920 448855"
+      "0203 90 85203"
     when :ssr
-      "02920 448813"
+      "0203 90 85201"
     end
   end
 

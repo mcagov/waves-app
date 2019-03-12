@@ -81,7 +81,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "renders the phone number" do
-      expect(body).to match(/02920 448813/)
+      expect(body).to match(/0203 90 85201/)
     end
   end
 
