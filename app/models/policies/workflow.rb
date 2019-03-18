@@ -21,6 +21,10 @@ class Policies::Workflow
       user.system_manager?
     end
 
+    def can_scrub_vessel_details?(user)
+      user.system_manager?
+    end
+
     def can_edit_registration_dates?(user, vessel)
       user.system_manager? && vessel.current_registration
     end

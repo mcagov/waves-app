@@ -90,6 +90,22 @@ describe Policies::Workflow do
     end
   end
 
+  describe "#can_scrub_vessel_details?" do
+    subject { described_class.can_scrub_vessel_details?(user) }
+
+    context "as a system_manager" do
+      let(:user) { build(:system_manager) }
+
+      it { expect(subject).to be_truthy }
+    end
+
+    context "as an operational_user" do
+      let(:user) { build(:user) }
+
+      it { expect(subject).to be_falsey }
+    end
+  end
+
   context ".uses_port_no?" do
     subject { described_class.uses_port_no?(vessel) }
 
