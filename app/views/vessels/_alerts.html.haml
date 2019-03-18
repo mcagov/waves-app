@@ -3,3 +3,6 @@
 
 - if @vessel.termination_notice_issued?
   %label.red 7 day Termination Notice has been issued for this vessel
+
+- if @vessel.scrubbed_at
+  %label.red Personal details were removed by #{@vessel.scrubbed_by} on #{@vessel.scrubbed_at.to_s(:date_time)}

@@ -291,6 +291,10 @@ Rails.application.routes.draw do
              only: [:create, :destroy],
              controller: "registered_vessel/section_notice"
 
+    resource :scrub_details,
+             only: [:create],
+             controller: "registered_vessel/scrub_details"
+
     resource :termination,
              only: [:create],
              controller: "registered_vessel/termination"

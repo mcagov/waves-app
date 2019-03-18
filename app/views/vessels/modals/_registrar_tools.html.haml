@@ -40,6 +40,14 @@
           = render partial: "vessels/modals/edit_registration_dates", locals: {vessel: vessel}
 
         %hr
+
+        - if Policies::Workflow.can_scrub_vessel_details?(current_user)
+          - unless @vessel.scrubbed_at
+            %p= link_to "Remove Personal Details (System Manager only)", "#",
+                  data: { target: "#scrub-vessel-details", toggle: "modal" },
+                  class: "btn btn-block btn-danger"
+            = render partial: "vessels/modals/scrub_vessel_details", locals: {vessel: vessel}
+
         - if vessel.registration_status != :frozen
           %p= link_to "Freeze Record", "#",
               data: { target: "#freeze-record", toggle: "modal" },

@@ -1,0 +1,22 @@
+.modal.fade{id: "scrub-vessel-details", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+      = form_tag vessel_scrub_details_path(@vessel), method: :post do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Remove personal details (System Manager only)
+        .modal-body
+          .form-group
+            .row
+              .col-md-12
+                %label{ for: "vessel_reg_no" } Are you sure you wish to continue? <br/>This process will remove key pieces of information from this vessel record. <br/>To continue, please enter the official number of this vessel.
+            .row
+              .col-md-12
+                = text_field_tag "vessel_reg_no", "", class: "form-control"
+
+
+        .modal-footer
+          = link_to "Cancel", "#", class: "btn btn-danger", "data-dismiss" => "modal"
+          = button_tag "Continue", class: "btn btn-success submit_scrub_vessel_details"
+
