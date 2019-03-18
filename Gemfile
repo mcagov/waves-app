@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "~> 2.5.1"
 
-gem "rails", "~> 5.2.2"
+gem "rails", "~> 5.2.2.1"
 
 gem "activerecord-session_store"
 gem "auto_increment"
@@ -19,7 +19,7 @@ gem "countries", "~> 2.1.4"
 gem "country_select"
 gem "daemons"
 gem "delayed_job_active_record"
-gem "devise"
+gem "devise", ">= 4.6.0"
 gem "devise-async"
 gem "dotenv-rails"
 gem "faker"
@@ -53,7 +53,9 @@ gem "sprockets-es6"
 gem "title"
 gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "travis"
-gem "trix-rails", require: "trix", git: "https://github.com/bcoia/trix.git"
+# forked version with support for rails 5.2.2.1
+# see: https://github.com/maclover7/trix/pull/64
+gem "trix", git: "https://github.com/markmercedes/trix/"
 gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
