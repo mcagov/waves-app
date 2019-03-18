@@ -13,9 +13,7 @@ feature "User refers a task", type: :feature, js: true do
       check(@submission.owners.first.email_description)
       fill_in "Due By", with: "12/12/2020"
       select "Unknown vessel type", from: "Reason for Referral"
-
-      find("#refer_modal_trix_input_notification", visible: false)
-        .set("Referred!")
+      find(".trix-content", visible: false).set("Referred!")
 
       click_on "Refer Task"
     end

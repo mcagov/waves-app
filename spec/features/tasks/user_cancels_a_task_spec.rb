@@ -9,9 +9,7 @@ feature "User cancels a task", type: :feature, js: true do
       check(@submission.applicant.email_description)
       check(@submission.owners.first.email_description)
       select "Rejected (by RSS)", from: "Reason for cancelling task"
-
-      find("#cancel_modal_trix_input_notification", visible: false)
-        .set("Sorry!")
+      find(".trix-content", visible: false).set("Sorry!")
 
       click_on "Cancel Task"
     end

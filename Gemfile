@@ -53,7 +53,9 @@ gem "sprockets-es6"
 gem "title"
 gem "transitions", require: ["transitions", "active_model/transitions"]
 gem "travis"
-gem "trix-rails", require: "trix", git: "https://github.com/bcoia/trix.git"
+# forked version with support for rails 5.2.2.1
+# see: https://github.com/maclover7/trix/pull/64
+gem "trix", git: "https://github.com/markmercedes/trix/"
 gem "uglifier"
 gem "validates_email_format_of"
 gem "waves-utilities",
