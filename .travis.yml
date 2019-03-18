@@ -17,6 +17,7 @@ env:
   EMAIL_FROM: inbox@example.com
   APPLICATION_HOST: http://localhost:3000
   ASSET_HOST: localhost:3000
+  SECRET_KEY_BASE: secret_key_base_for_travis
 notifications:
   on_success: never
   on_failure: never
