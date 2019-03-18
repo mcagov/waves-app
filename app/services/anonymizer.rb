@@ -1,8 +1,9 @@
 class Anonymizer
   ANON = "<removed>".freeze
 
-  def initialize(registered_vessel)
+  def initialize(registered_vessel, user)
     @registered_vessel = registered_vessel
+    @user = user
   end
 
   def perform
@@ -10,6 +11,8 @@ class Anonymizer
     finance_payments_table
     submissions_table
     registrations_table
+    @registered_vessel.update(scrubbed_at: Time.zone.now)
+    @registered_vessel.update(scrubbed_by: @user)
   end
 
   private

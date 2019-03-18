@@ -139,6 +139,8 @@ module Register
 
     has_many :csr_forms, -> { order("issue_number desc") }
 
+    belongs_to :scrubbed_by, class_name: "User", foreign_key: "scrubbed_by_id"
+
     scope :in_part, ->(part) { where(part: part.to_sym) if part.present? }
     scope :frozen, -> { where.not(frozen_at: nil) }
     scope :not_frozen, -> { where(frozen_at: nil) }

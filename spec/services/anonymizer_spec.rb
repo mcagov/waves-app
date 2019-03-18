@@ -8,9 +8,10 @@ describe Anonymizer do
     let!(:finance_payment) { create(:finance_payment, payment: payment) }
 
     let(:anon) { Anonymizer::ANON }
+    let(:user) { create(:user) }
 
     before do
-      Anonymizer.new(vessel).perform
+      Anonymizer.new(vessel, user).perform
       vessel.reload
       submission.reload
       finance_payment.reload
@@ -65,9 +66,6 @@ describe Anonymizer do
 
       expect(submission.agent.email).to eq(anon)
       expect(submission.agent.phone_number).to eq(anon)
-
-      expect(submission.representative.email).to eq(anon)
-      expect(submission.representative.phone_number).to eq(anon)
     end
 
     it "scrubs the registrations #registry_info" do
@@ -113,6 +111,12 @@ describe Anonymizer do
       end
     end
 
-    it "sets the vessel's #scrubbed_at"
+    it "sets the vessel's #scrubbed_at" do
+      expect(vessel.scrubbed_at).to be_present
+    end
+
+    it "sets the vessel's #scrubbed_by" do
+      expect(vessel.scrubbed_by).to eq(user)
+    end
   end
 end
