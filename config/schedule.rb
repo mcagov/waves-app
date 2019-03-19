@@ -7,5 +7,6 @@ every 1.day, at: "4:00 am" do
   rake "waves:expire_referrals"
   rake "waves:process_reminders"
   rake "waves:close_terminated_vessels"
+  rake "waves:assign_scrubbable_vessels"
   rake "waves:clean_up_sessions"
 end

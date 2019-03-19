@@ -26,4 +26,8 @@ namespace :waves do
       .where("updated_at < ?", 30.days.ago)
       .delete_all
   end
+
+  task assign_scrubbable_vessels: :environment do
+    ScrubbableVessels.assign
+  end
 end
