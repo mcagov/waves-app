@@ -44,6 +44,14 @@ describe "Waves" do
     it { Rake::Task["waves:process_reminders"].invoke }
   end
 
+  context "scrubbable_vessels" do
+    before do
+      expect(ScrubbableVessels).to receive(:assign)
+    end
+
+    it { Rake::Task["waves:assign_scrubbable_vessels"].invoke }
+  end
+
   context "close_terminated_vessels" do
     before { expect(TerminatedVessels).to receive(:close!) }
 

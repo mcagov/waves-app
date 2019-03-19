@@ -134,10 +134,20 @@ module Register
              -> { order("priority_code asc") },
              as: :parent
 
+    has_one :latest_discharged_mortgage,
+            (lambda do
+              where("discharged_at is not null")
+              .order("discharged_at desc")
+            end),
+            foreign_key: :parent_id,
+            class_name: "Mortgage"
+
     has_many :mortgagees, through: :mortgages
     has_many :mortgagee_reminder_letters, through: :mortgagees
 
     has_many :csr_forms, -> { order("issue_number desc") }
+
+    belongs_to :scrubbed_by, class_name: "User", foreign_key: "scrubbed_by_id"
 
     scope :in_part, ->(part) { where(part: part.to_sym) if part.present? }
     scope :frozen, -> { where.not(frozen_at: nil) }

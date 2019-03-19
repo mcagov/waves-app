@@ -1,5 +1,7 @@
 #flash
   - flash.each do |key, value|
     - next unless value.is_a? String # prevent annoyting devise timedout = true
-    .alert.alert-info{:role => "alert"}
-      = h value
+    - if key == 'error'
+      .alert.alert-error= h value
+    - else
+      .alert.alert-info= h value

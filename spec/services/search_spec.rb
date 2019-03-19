@@ -120,7 +120,7 @@ describe Search, type: :model do
     let!(:different_mmsi) { create(:registered_vessel, mmsi_number: rand(9)) }
     let!(:same_hin) { create(:registered_vessel, hin: "foo") }
     let!(:blank_hin) { create(:registered_vessel, hin: nil) }
-    let!(:same_radio) { create(:registered_vessel, radio_call_sign: "4RWO0K") }
+    let!(:same_radio) { create(:registered_vessel, radio_call_sign: "4RWOK") }
     let!(:blank_radio) { create(:registered_vessel, radio_call_sign: nil) }
 
     let!(:vessel) { create_submission_from_api!.vessel }
