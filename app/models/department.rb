@@ -62,12 +62,12 @@ class Department
 
   def phone
     case code
-    when :pleasure
+    when :pleasure, :commercial
       "0203 90 85204"
-    when :commercial, :bareboat, :high_profile
-      "0203 90 85202"
-    when :fishing
+    when :bareboat, :high_profile
       "0203 90 85203"
+    when :fishing
+      "0203 90 85202"
     when :ssr
       "0203 90 85201"
     end
