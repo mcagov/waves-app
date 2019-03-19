@@ -8,7 +8,7 @@ class RegisteredVessel::ScrubDetailsController < InternalPagesController
         "No action was performed."
     else
       Anonymizer.new(@vessel, current_user).perform
-      flash[:notice] = "The personal details have been removed."
+      flash[:notice] = "Retention Policy Applied."
     end
 
     redirect_to vessel_path(@vessel)

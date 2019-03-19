@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "System Manager scrubs vessel details", type: :feature, js: true do
+describe "Manager applies retention policy", type: :feature, js: true do
   scenario "in general" do
     manager = create(:system_manager)
     visit_registered_vessel(manager)
@@ -18,11 +18,11 @@ describe "System Manager scrubs vessel details", type: :feature, js: true do
       find(".submit_scrub_vessel_details").trigger("click")
     end
 
-    expect(page).to have_text("The personal details have been removed")
+    expect(page).to have_text("Retention Policy Applied.")
 
     within("label.red") do
       expect(page).to have_text(
-        "Personal details were removed by #{manager.name}")
+        "Retention Policy Applied by #{manager.name}")
     end
   end
 
@@ -58,5 +58,5 @@ describe "System Manager scrubs vessel details", type: :feature, js: true do
 end
 
 def scrub_vessel_details_link
-  "Remove Personal Details (System Manager only)"
+  "Apply Retention Policy (System Manager only)"
 end

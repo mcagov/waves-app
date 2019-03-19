@@ -11,6 +11,8 @@ class Anonymizer
     finance_payments_table
     submissions_table
     registrations_table
+    submission_documents
+    vessel_documents
     @registered_vessel.update(scrubbed_at: Time.zone.now)
     @registered_vessel.update(scrubbed_by: @user)
   end
@@ -112,4 +114,26 @@ class Anonymizer
     end
   end
   # rubocop:enable all
+
+  def submission_documents
+    @registered_vessel.submissions.each do |submission|
+      submission.documents.each do |document|
+        remove_assets(document.assets)
+      end
+    end
+  end
+
+  def vessel_documents
+    @registered_vessel.documents.each do |document|
+      remove_assets(document.assets)
+    end
+  end
+
+  def remove_assets(assets)
+    assets.each do |asset|
+      asset.file.clear
+      asset.removed_by = @user
+      asset.save
+    end
+  end
 end

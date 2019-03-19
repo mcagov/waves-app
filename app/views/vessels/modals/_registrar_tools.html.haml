@@ -43,7 +43,7 @@
 
         - if Policies::Workflow.can_scrub_vessel_details?(current_user)
           - unless @vessel.scrubbed_at
-            %p= link_to "Remove Personal Details (System Manager only)", "#",
+            %p= link_to "Apply Retention Policy (System Manager only)", "#",
                   data: { target: "#scrub-vessel-details", toggle: "modal" },
                   class: "btn btn-block btn-danger"
             = render partial: "vessels/modals/scrub_vessel_details", locals: {vessel: vessel}

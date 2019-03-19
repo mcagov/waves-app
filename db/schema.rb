@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_155304) do
+ActiveRecord::Schema.define(version: 2019_03_19_115555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -569,6 +569,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_155304) do
     t.boolean "autonomous_vessel", default: false
     t.datetime "scrubbed_at"
     t.uuid "scrubbed_by_id"
+    t.boolean "scrubbable", default: false
     t.index ["hin"], name: "index_vessels_on_hin"
     t.index ["mmsi_number"], name: "index_vessels_on_mmsi_number"
     t.index ["name"], name: "index_vessels_on_name"

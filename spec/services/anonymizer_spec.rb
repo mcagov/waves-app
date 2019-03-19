@@ -3,7 +3,12 @@ require "rails_helper"
 describe Anonymizer do
   context "in general" do
     let!(:vessel) { create(:registered_vessel) }
-    let!(:submission) { create(:submission, registered_vessel: vessel) }
+
+    let!(:submission) do
+      create(:submission, registered_vessel: vessel,
+                          documents: [build(:document)])
+    end
+
     let!(:payment) { create(:payment, submission: submission) }
     let!(:finance_payment) { create(:finance_payment, payment: payment) }
 
@@ -117,6 +122,24 @@ describe Anonymizer do
 
     it "sets the vessel's #scrubbed_by" do
       expect(vessel.scrubbed_by).to eq(user)
+    end
+
+    it "removes the vessel's document assets" do
+      vessel.documents.each do |document|
+        asset = document.assets.first
+        expect(asset.file).to be_blank
+        expect(asset.removed_by).to eq(user)
+      end
+    end
+
+    it "removes the vessel submissions' document assets" do
+      vessel.submissions.each do |submission|
+        submission.documents.each do |document|
+          asset = document.assets.first
+          expect(asset.file).to be_blank
+          expect(asset.removed_by).to eq(user)
+        end
+      end
     end
   end
 end

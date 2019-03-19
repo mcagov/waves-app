@@ -134,6 +134,14 @@ module Register
              -> { order("priority_code asc") },
              as: :parent
 
+    has_one :latest_discharged_mortgage,
+            (lambda do
+              where("discharged_at is not null")
+              .order("discharged_at desc")
+            end),
+            foreign_key: :parent_id,
+            class_name: "Mortgage"
+
     has_many :mortgagees, through: :mortgages
     has_many :mortgagee_reminder_letters, through: :mortgagees
 
