@@ -5,6 +5,7 @@
     %th{ width: 300 } Issue Date
     %th Date Created
     %th
+    %th
   %tbody
     - @vessel.csr_forms.each do |csr_form|
       %tr
@@ -31,7 +32,11 @@
                       Save
         %td= csr_form.issued_at
         %td= csr_form.updated_at.to_s(:date_time)
-        %td
+        %td.pull-right
+          = link_to edit_vessel_csr_path(@vessel, csr_form) do
+            %i.fa.fa-edit
+            Edit CSR Form
+        %td.pull-right
           = link_to vessel_csr_path(@vessel, csr_form, format: :pdf), target: "_blank" do
             %i.fa.fa-file-pdf-o
             View CSR Form

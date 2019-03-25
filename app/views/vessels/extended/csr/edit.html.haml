@@ -1,0 +1,11 @@
+= simple_form_for :csr_form,
+                  url: vessel_csr_path(@vessel, @csr_form),
+                  method: :put do |f|
+  - @readonly = false
+  = render partial: "/csrs/fields", locals: { f: f }
+  .row
+    .col-md-12
+      = button_tag type: 'submit',
+        class: "btn btn-primary btn-lg pull-right" do
+        %i.fa.fa-floppy-o
+        Save
