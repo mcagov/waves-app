@@ -141,5 +141,13 @@ describe Anonymizer do
         end
       end
     end
+
+    it "scrubs the notifications table" do
+      notification =
+        Builders::NotificationListBuilder.for_registered_vessel(vessel).first
+
+      expect(notification.recipient_email).to eq(anon)
+      expect(notification.recipient_name).to eq(anon)
+    end
   end
 end

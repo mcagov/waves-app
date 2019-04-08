@@ -13,6 +13,7 @@ class Anonymizer
     registrations_table
     submission_documents
     vessel_documents
+    notifications_table
     @registered_vessel.update(scrubbed_at: Time.zone.now)
     @registered_vessel.update(scrubbed_by: @user)
   end
@@ -135,5 +136,13 @@ class Anonymizer
       asset.removed_by = @user
       asset.save
     end
+  end
+
+  def notifications_table
+    Builders::NotificationListBuilder
+      .for_registered_vessel(@registered_vessel)
+      .each do |n|
+        n.update_attributes(recipient_email: ANON, recipient_name: ANON)
+      end
   end
 end
