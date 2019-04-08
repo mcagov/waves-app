@@ -560,7 +560,6 @@ Service.create(
   ],
   activities: [
     :update_registry_details,
-    :record_transcript_event,
   ],
   print_templates: [
   ])
