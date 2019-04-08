@@ -11,7 +11,7 @@ class Admin::UsersController < InternalPagesController
 
   def create
     @user = User.new(user_params)
-    @user.password = Devise.friendly_token.first(8)
+    @user.password = "Ab1!#{Devise.friendly_token.first(5)}"
 
     if @user.save
       @user.send_reset_password_instructions
