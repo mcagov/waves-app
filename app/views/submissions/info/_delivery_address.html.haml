@@ -1,0 +1,59 @@
+%strong
+  = link_to_if submission.active?, submission.delivery_address_description, "#",
+    data: { target: "#edit_applicant", toggle: "modal" }
+
+.modal.fade{id: "edit_applicant", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Email Recipient
+      = simple_form_for submission, url: submission_applicant_path(submission, submission), method: :put, remote: true do |submission_f|
+        .modal-body
+          .row
+            .col-md-4
+              = submission_f.input :applicant_name, label: "Email Recipient Name", input_html: { class: "upcase" }
+            .col-md-4
+              = submission_f.input :applicant_email, label: "Email"
+          %hr
+          %h4 Postal Recipient
+
+          .postcode-lookup
+            = submission_f.simple_fields_for :delivery_address do |delivery_f|
+              .submission-delivery-address
+                %hr
+                - delivery_f.object = submission_f.object.delivery_address
+                .row
+                  .col-md-4
+                    = delivery_f.input :name, label: "Postal Recipient Name", input_html: { class: "upcase" }
+                  .col-md-4
+                    %label.form-label-bold
+                      Postcode
+                    .input-group
+                      = text_field_tag :postcode_lookup_field, "", class: "postcode-lookup-field form-control"
+                      %span.input-group-btn
+                        = link_to "Lookup address", "#", class: "postcode-lookup-button btn btn-primary"
+                .row
+                  .col-md-8.form-group
+                    .postcode-lookup-api-key.hidden= ENV["POSTCODE_LOOKUP_API_KEY"]
+                    .postcode-results-field
+                .clearfix
+                .row
+                  .col-md-4
+                    = delivery_f.input :address_1, input_html: { class: "upcase address-1" }
+                  .col-md-4
+                    = delivery_f.input :address_2, input_html: { class: "upcase address-2" }
+                  .col-md-4
+                    = delivery_f.input :address_3, input_html: { class: "upcase address-3" }
+                .row
+                  .col-md-4
+                    = delivery_f.input :town, label: "Town or City", input_html: { class: "upcase town" }
+                  .col-md-4
+                    = delivery_f.input :postcode, input_html: { class: "upcase postcode" }
+                  .col-md-4
+                    = delivery_f.input :country, collection: countries_collection, include_blank: false, selected: (@submission.delivery_address.country || "UNITED KINGDOM")
+
+
+        .modal-footer
+          = submission_f.submit "Save Notification Recipient", class: "btn btn-primary"

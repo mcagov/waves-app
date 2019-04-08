@@ -9,3 +9,8 @@
     '#{escape_javascript(
        render partial: "/submissions/extended/forms/correspondent/base")}'
   );
+
+  $(".applicant-delivery-address").html(
+    '#{escape_javascript(
+       render partial: "/submissions/info/delivery_address", locals: { submission: @submission })}'
+  );
