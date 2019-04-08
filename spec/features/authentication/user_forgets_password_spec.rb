@@ -22,8 +22,8 @@ describe "User forgets password" do
     expect(page).to have_css(".user_password",
                              text: "can't be blank")
 
-    fill_in("New password", with: "abc123456")
-    fill_in("Confirm your new password", with: "abc123456")
+    fill_in("New password", with: "Abc123456!")
+    fill_in("Confirm your new password", with: "Abc123456!")
     click_on("Save my password")
 
     expect(page).to have_css("h1", text: "Select Register")

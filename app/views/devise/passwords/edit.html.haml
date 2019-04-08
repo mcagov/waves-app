@@ -13,3 +13,11 @@
             = f.input :password_confirmation, autocomplete: :off, label: "Confirm your new password", required: true
 
             = f.button :submit, "Save my password", class: "btn btn-success"
+          %br
+          .form-group
+            Your password must use the following types of characters:
+            %ul
+              %li uppercase letters
+              %li lowercase letters
+              %li numbers
+              %li special characters
