@@ -72,7 +72,7 @@ class Pdfs::Part4::CertificateWriter < Pdfs::Extended::CertificateWriter
 
       charterer.charter_parties.each do |charter_party|
         draw_label charter_party.name, at: [lmargin, y_pos]
-        draw_label charter_party.inline_address, at: [lmargin, y_pos - 15]
+        @pdf.text_box charter_party.inline_address, width: 400, height: 30, at: [lmargin, y_pos - 5]
         y_pos -= 40
       end
     end
