@@ -142,6 +142,7 @@ class Anonymizer
     Builders::NotificationListBuilder
       .for_registered_vessel(@registered_vessel)
       .each do |n|
+        next unless n.respond_to?(:recipient_email)
         n.update_attributes(recipient_email: ANON, recipient_name: ANON)
       end
   end
