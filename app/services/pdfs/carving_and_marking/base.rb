@@ -56,6 +56,9 @@ class Pdfs::CarvingAndMarking::Base
     @pdf.draw_text "Office Stamp or Inspector's address", at: [300, 310]
 
     @pdf.draw_text "Name", at: [lmargin, 280]
+    @pdf.font("Helvetica", size: 11)
+    @pdf.draw_text "(In capitals)", at: [lmargin, 270]
+    set_copy_font
     @pdf.bounding_box([100, 285], width: 180) { @pdf.stroke_horizontal_rule }
 
     @pdf.draw_text "Date", at: [lmargin, 250]
