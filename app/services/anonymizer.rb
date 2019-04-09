@@ -139,9 +139,7 @@ class Anonymizer
   end
 
   def notifications_table
-    notifications.each do |n|
-      n.update_attributes(recipient_email: ANON, recipient_name: ANON)
-    end
+    notifications.each { |n| n.update_attributes(recipient_email: ANON) }
   end
 
   def notifications
