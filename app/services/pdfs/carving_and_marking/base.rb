@@ -47,36 +47,36 @@ class Pdfs::CarvingAndMarking::Base
   def draw_certify
     set_copy_font
     @pdf.draw_text "I certify that I have inspected the above-named vessel and it has been *carved and marked/marked",
-                  at: [lmargin, 370]
+                  at: [lmargin, 360]
     @pdf.draw_text "(*delete as appropriate) in accordance with the instructions above and overleaf.",
-                  at: [lmargin, 355]
+                  at: [lmargin, 345]
 
-    @pdf.draw_text "Signature", at: [lmargin, 320]
+    @pdf.draw_text "Signature", at: [lmargin, 310]
     @pdf.bounding_box([100, 315], width: 180) { @pdf.stroke_horizontal_rule }
-    @pdf.draw_text "Office Stamp or Inspector's address", at: [300, 320]
+    @pdf.draw_text "Office Stamp or Inspector's address", at: [300, 310]
 
-    @pdf.draw_text "Name", at: [lmargin, 290]
+    @pdf.draw_text "Name", at: [lmargin, 280]
     @pdf.bounding_box([100, 285], width: 180) { @pdf.stroke_horizontal_rule }
 
-    @pdf.draw_text "Date", at: [lmargin, 260]
+    @pdf.draw_text "Date", at: [lmargin, 250]
     @pdf.bounding_box([100, 255], width: 180) { @pdf.stroke_horizontal_rule }
 
-    @pdf.draw_text "Telephone No", at: [300, 260]
-    @pdf.bounding_box([380, 255], width: 120) { @pdf.stroke_horizontal_rule }
+    @pdf.draw_text "Telephone No", at: [300, 250]
+    @pdf.bounding_box([380, 245], width: 120) { @pdf.stroke_horizontal_rule }
 
     @pdf.draw_text "When this form has been completed, the Inspector of Marks should send or hand this form to the",
-                   at: [lmargin, 220]
+                   at: [lmargin, 210]
     @pdf.draw_text "address below, the only exception is if he/she seals the certificate in an envelope, signs across the seal",
-                   at: [lmargin, 205]
+                   at: [lmargin, 195]
     @pdf.draw_text "and hands it to the owner or charterer. It can then be sent or handed in, but the seal must be intact.",
-                   at: [lmargin, 190]
+                   at: [lmargin, 180]
 
-    @pdf.draw_text "This form must be completed and returned to:", at: [lmargin, 135]
-    @pdf.draw_text "UK Ship Register", at: [lmargin, 120]
-    @pdf.draw_text "Anchor Court", at: [lmargin, 105]
-    @pdf.draw_text "KEEN ROAD", at: [lmargin, 90]
-    @pdf.draw_text "Cardiff", at: [lmargin, 75]
-    @pdf.draw_text "CF24 5JW", at: [lmargin, 60]
+    @pdf.draw_text "This form must be completed and returned to:", at: [lmargin, 125]
+    @pdf.draw_text "UK Ship Register", at: [lmargin, 110]
+    @pdf.draw_text "Anchor Court", at: [lmargin, 95]
+    @pdf.draw_text "Keen Road", at: [lmargin, 80]
+    @pdf.draw_text "Cardiff", at: [lmargin, 65]
+    @pdf.draw_text "CF24 5JW", at: [lmargin, 50]
   end
 
   def draw_instructions_title
