@@ -37,6 +37,9 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
     @pdf.draw_text "Office Stamp or Inspector's address", at: [300, 320]
 
     @pdf.draw_text "Name", at: [lmargin, 290]
+    @pdf.font("Helvetica", size: 11)
+    @pdf.draw_text "(In capitals)", at: [lmargin, 280]
+    set_copy_font
     @pdf.bounding_box([100, 285], width: 180) { @pdf.stroke_horizontal_rule }
 
     @pdf.draw_text "Date", at: [lmargin, 260]
@@ -66,8 +69,8 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
     @pdf.draw_text "- the official number and its appropriate tonnage are to be permanently and conspicuously", at: [lmargin + 20, 480]
     @pdf.draw_text "carved or marked", at: [lmargin + 30, 465]
     @pdf.draw_text "- the name is to be marked on each of its bows and its stern", at: [lmargin + 20, 450]
-    @pdf.draw_text "- the port of choice is to be marked on its stern in the manner prescribed over", at: [lmargin + 20, 435]
-    @pdf.draw_text "If you are claiming exemption from the usual marking you should tick here [   ] and mark", at: [lmargin, 415]
+    @pdf.draw_text "- the port of choice is to be marked on its stern in the manner prescribed overleaf", at: [lmargin + 20, 435]
+    @pdf.draw_text "If you are claiming exemption from the usual marking requirements you should tick here [   ] and mark", at: [lmargin, 415]
     @pdf.draw_text "the vessel in accordance with the relevant exemption.", at: [lmargin, 400]
     @pdf.bounding_box([lmargin, 390], width: 510) { @pdf.stroke_horizontal_rule }
   end
@@ -75,37 +78,37 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
   def draw_instructions
      @pdf.font("Helvetica", size: 10)
     vpos = 760
-    spacer = 15
+    spacer = 18
     @pdf.draw_text "1. The ship's official number and registered or net tonnage (as appropriate) shall:", at: [lmargin, vpos]
-    vpos -= spacer
-    @pdf.draw_text "(a) be carved into the beam of the ship", at: [lmargin + 10, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
+    @pdf.draw_text "(a) be carved into the main beam of the ship", at: [lmargin + 10, vpos]
+    vpos -= spacer + 10
     @pdf.draw_text "(b) if there is no main beam, be carved on a readily accesible visible permanent part of", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "the structure of the ship either by cutting in, centre-punching or raised lettering or", at: [lmargin + 25, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.draw_text "(c) be engraved on plates of metal, wood or plastic, secured to the main beam (or if there is", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "no main beam, to a readily visible part of the structure) with rivets, through bolts, with", at: [lmargin + 25, vpos]
+    @pdf.draw_text "no main beam, to a readily accessible, visible part of the structure) with rivets, through bolts, with", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "the ends clenched, or screws with the slots removed.", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "2. The ship's name shall be permanently marked on each of its bows, and its name and port of choice shall", at: [lmargin, vpos]
+    @pdf.draw_text "2. The ship's name shall be permanently marked on each of its bows, and its name and port of choice must", at: [lmargin, vpos]
     vpos -= spacer
     @pdf.draw_text "be marked on its stern; the marking is to be on a dark ground in white or yellow letters or on a light", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "ground in black letters, the letters being not less than 10 centimetres bight and of proportionate breadth.", at: [lmargin + 10, vpos]
+    @pdf.draw_text "ground in black letters, the letters being not less than 10 centimetres high and of proportionate breadth.", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "The official number and its appropriate tonnage are to be marked as follows:", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.font("Helvetica", size: 12)
-    @pdf.draw_text "IMO NUMBER   #{@vessel.imo_number}        #{@carving_and_marking_note.tonnage_description}", at: [lmargin + 100, vpos]
+    @pdf.draw_text "O.N.   #{@submission.vessel_reg_no}        #{@carving_and_marking_note.tonnage_description}", at: [lmargin + 100, vpos]
     @pdf.font("Helvetica", size: 10)
-    vpos -= spacer + 200
+    vpos -= spacer + 100
     @pdf.draw_text "", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.font("Helvetica-Bold", size: 10)
@@ -114,24 +117,24 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "1. Pleasure vessels, pilot vessels, non-seagoing barges and ships employed solely in river", at: [lmargin, vpos]
     vpos -= spacer
-    @pdf.draw_text "navigation are exempt from marking the name on the bows.", at: [lmargin + 10, vpos]
-    vpos -= spacer
-    @pdf.draw_text "2. Pleasure vessels owned by members of exempted yacht clugs are exempt as in 1. and also", at: [lmargin, vpos]
+    @pdf.draw_text "navigation are exempt from marking the name on each of the bows.", at: [lmargin + 10, vpos]
+    vpos -= spacer + 10
+    @pdf.draw_text "2. Pleasure vessels owned by members of exempted yacht clubs are exempt as in 1. and also", at: [lmargin, vpos]
     vpos -= spacer
     @pdf.draw_text "from marking the port of choice on the stern.", at: [lmargin + 10, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.draw_text "3. Steam and motor pilot vessels are exempt from marking the name on each side of the bows", at: [lmargin, vpos]
     vpos -= spacer
     @pdf.draw_text "and name on the stern.", at: [lmargin + 10, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.draw_text "4. Lifeboats belonging to R.N.L.I.", at: [lmargin, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.draw_text "(i) Steel vessels and glass plastic (GRP) vessels are exempt from all marking requirements", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "except the name which must be marked on the bows or displayed in a permanent manner", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "on each side of the deckhouse.", at: [lmargin + 10, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.draw_text "(ii) Other R.N.L.I. vessels are exempt from marking the name and port of choice on the stern.", at: [lmargin + 10, vpos]
   end
 end

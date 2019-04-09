@@ -29,16 +29,16 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     @pdf.draw_text "- the official number and its appropriate tonnage are to be permanently and conspicuously", at: [lmargin + 20, 495]
     @pdf.draw_text "carved or marked", at: [lmargin + 30, 480]
     @pdf.draw_text "- the name is to be marked on each of its bows and its stern", at: [lmargin + 20, 465]
-    @pdf.draw_text "- the port of choice is to be marked on its stern in the manner prescribed over", at: [lmargin + 20, 450]
-    @pdf.draw_text "If you are claiming exemption from the usual marking you should tick here [   ] and mark", at: [lmargin, 425]
+    @pdf.draw_text "- the port of choice is to be marked on its stern in the manner prescribed overleaf", at: [lmargin + 20, 450]
+    @pdf.draw_text "If you are claiming exemption from the usual marking requirements you should tick here [   ] and mark", at: [lmargin, 425]
     @pdf.draw_text "the vessel in accordance with the relevant exemption.", at: [lmargin, 410]
     @pdf.bounding_box([lmargin, 390], width: 510) { @pdf.stroke_horizontal_rule }
   end
 
   def draw_instructions
     @pdf.font("Helvetica", size: 10)
-    vpos = 760
-    spacer = 15
+    vpos = 770
+    spacer = 16
     @pdf.draw_text "1. The ship's official/identification number shall be permanently marked as:", at: [lmargin, vpos]
     vpos -= spacer
     @pdf.draw_text "(a) in a visible place either on the stern of the ship or on either side of the hull, amidhships port and", at: [lmargin + 10, vpos]
@@ -51,9 +51,9 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "(b) in an easily accesible place either on one end of the transverse bulkheads of the machinery", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "spaces, as defined in regulation 11-2/3.30, or on one of the hatchways or, in the case of tankers,", at: [lmargin + 25, vpos]
+    @pdf.draw_text "spaces, as defined in regulation II-2/3.30, or on one of the hatchways or, in the case of tankers,", at: [lmargin + 25, vpos]
     vpos -= spacer
-    @pdf.draw_text "in the pump room or, in the case of ships with ro-ro spaces, as defined in regulation 11-2/3.4.1, on", at: [lmargin + 25, vpos]
+    @pdf.draw_text "in the pump room or, in the case of ships with ro-ro spaces, as defined in regulation II-2/3.4.1, on", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "one of the end transverse bulkheads of the ro-ro spaces.", at: [lmargin + 25, vpos]
     vpos -= spacer
@@ -81,15 +81,15 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "2. The registered or net tonnage (as appropriate) shall:", at: [lmargin, vpos]
     vpos -= spacer
-    @pdf.draw_text "(a) be carved into the beam of the ship", at: [lmargin + 10, vpos]
+    @pdf.draw_text "(a) be carved into the main beam of the ship", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "(b) if there is no main beam, be carved on a readily accesible visible permanent part of", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "the structure of the ship either by cutting in, centre-punching or raised lettering or", at: [lmargin + 25, vpos]
+    @pdf.draw_text "the structure of the ship either by cutting in, centre-punching or raised lettering, or", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "(c) be engraved on plates of metal, wood or plastic, secured to the main beam (or if there is", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "no main beam, to a readily visible part of the structure) with rivets, through bolts, with", at: [lmargin + 25, vpos]
+    @pdf.draw_text "no main beam, to a readily accessible, visible part of the structure) with rivets, through bolts, with", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "the ends clenched, or screws with the slots removed.", at: [lmargin + 25, vpos]
     vpos -= spacer
@@ -99,7 +99,7 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "be marked on its stern; the marking is to be on a dark ground in white or yellow letters or on a light", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "ground in black letters, the letters being not less than 10 centimetres bight and of proportionate breadth.", at: [lmargin + 10, vpos]
+    @pdf.draw_text "ground in black letters, the letters being not less than 10 centimetres high and of proportionate breadth.", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "The official number and its appropriate tonnage are to be marked as follows:", at: [lmargin + 10, vpos]
     vpos -= spacer
@@ -108,9 +108,7 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     @pdf.font("Helvetica", size: 12)
     @pdf.draw_text "IMO NUMBER   #{@vessel.imo_number}        #{@carving_and_marking_note.tonnage_description}", at: [lmargin + 100, vpos]
     @pdf.font("Helvetica", size: 10)
-    vpos -= spacer
-    @pdf.draw_text "", at: [lmargin + 10, vpos]
-    vpos -= spacer
+    vpos -= spacer + 10
     @pdf.font("Helvetica-Bold", size: 10)
     @pdf.draw_text "Exemptions", at: [lmargin, vpos]
     @pdf.font("Helvetica", size: 10)
@@ -119,7 +117,7 @@ class Pdfs::CarvingAndMarking::Over500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "navigation are exempt from marking the name on the bows.", at: [lmargin + 10, vpos]
     vpos -= spacer
-    @pdf.draw_text "2. Pleasure vessels owned by members of exempted yacht clugs are exempt as in 1. and also", at: [lmargin, vpos]
+    @pdf.draw_text "2. Pleasure vessels owned by members of exempted yacht clubs are exempt as in 1. and also", at: [lmargin, vpos]
     vpos -= spacer
     @pdf.draw_text "from marking the port of choice on the stern.", at: [lmargin + 10, vpos]
     vpos -= spacer
