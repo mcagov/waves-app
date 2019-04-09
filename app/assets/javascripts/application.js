@@ -10,13 +10,14 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery2
+//= require jquery3
 //= require jquery_ujs
 //= require moment
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
 //= require bootstrap-multiselect
+//= require popper
 //= require select2
 //= require cocoon
 //= require jquery.remotipart

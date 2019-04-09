@@ -182,7 +182,7 @@ if (typeof NProgress != 'undefined') {
         NProgress.start();
     });
 
-    $(window).load(function () {
+    $(window).on('load', function () {
         NProgress.done();
     });
 }
