@@ -1,6 +1,6 @@
 u = User.find_or_initialize_by(name: "Toby Privett")
 u.email = "toby@snaplab.co.uk"
-u.password = "password"
+u.password = "passwordA1$"
 u.access_level = :system_manager
 u.save!
 
