@@ -31,7 +31,7 @@ class Pdfs::Part4::TranscriptWriter < Pdfs::Extended::TranscriptWriter
 
       charterer.charter_parties.each do |charter_party|
         @pdf.draw_text charter_party.name, at: [l_margin, y_pos]
-        @pdf.draw_text charter_party.inline_address, at: [l_margin, y_pos - 15]
+        @pdf.text_box charter_party.inline_address, width: 400, height: 30, at: [l_margin, y_pos - 5]
         y_pos -= 40
       end
     end
