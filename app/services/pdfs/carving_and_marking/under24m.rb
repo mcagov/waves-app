@@ -100,7 +100,7 @@ class Pdfs::CarvingAndMarking::Under24m< Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "being clenched, or", at: [lmargin + 35, vpos]
     vpos -= spacer + 5
-    @pdf.draw_text "(ii) by individual reinforced plastic letters and numbers approximately 2mm in", at: [lmargin + 25, vpos]
+    @pdf.draw_text "(ii) by individual glass reinforced plastic letters and numbers approximately 2mm in", at: [lmargin + 25, vpos]
     vpos -= spacer
     @pdf.draw_text "thickness. These to be fixed to the hull with epoxy adhesive, and painted with", at: [lmargin + 35, vpos]
     vpos -= spacer
