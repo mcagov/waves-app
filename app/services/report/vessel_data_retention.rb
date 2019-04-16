@@ -12,7 +12,9 @@ class Report::VesselDataRetention < Report
   end
 
   def results
-    vessels.all.map do |vessel|
+    @pagination_collection = paginate(vessels)
+
+    @pagination_collection.map do |vessel|
       data_elements =
         [
           RenderAsLinkToVessel.new(vessel, :name),
