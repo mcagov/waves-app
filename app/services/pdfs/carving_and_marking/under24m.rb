@@ -121,7 +121,7 @@ class Pdfs::CarvingAndMarking::Under24m< Pdfs::CarvingAndMarking::Base
     @pdf.font("Helvetica-Bold", size: 11)
     @pdf.draw_text "Exemptions", at: [lmargin, vpos]
     vpos -= spacer
-    @pdf.draw_text "Please vessels owned by members of exempted yacht clubs are not require to ", at: [lmargin + 10, vpos]
+    @pdf.draw_text "Pleasure vessels owned by members of exempted yacht clubs are not require to ", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "have their ports of choice marked on their sterns.", at: [lmargin + 10, vpos]
   end
