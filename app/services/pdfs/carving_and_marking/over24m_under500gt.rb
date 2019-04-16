@@ -101,6 +101,7 @@ class Pdfs::CarvingAndMarking::Over24mUnder500gt < Pdfs::CarvingAndMarking::Base
     vpos -= spacer
     @pdf.draw_text "ground in black letters, the letters being not less than 10 centimetres high and of proportionate breadth.", at: [lmargin + 10, vpos]
     vpos -= spacer
+    vpos -= spacer
     @pdf.draw_text "The official number and its appropriate tonnage are to be marked as follows:", at: [lmargin + 10, vpos]
     vpos -= spacer
     @pdf.draw_text "", at: [lmargin + 10, vpos]
