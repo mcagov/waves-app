@@ -329,7 +329,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -388,7 +388,6 @@ GEM
     rack-cors (1.0.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.5.1)
     rack_session_access (0.2.0)
       builder (>= 2.0.0)
       rack (>= 1.0.0)
@@ -608,7 +607,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   momentjs-rails
-  nokogiri (>= 1.8.3)
+  nokogiri (>= 1.10.3)
   notifications-ruby-client (= 1.1.2)
   paperclip (>= 5.2.0)
   paperclip-azure!
@@ -625,7 +624,6 @@ DEPENDENCIES
   pry-rails
   puma
   rack-cors
-  rack-timeout
   rack_session_access
   rails (~> 5.2.2.1)
   rails-controller-testing
