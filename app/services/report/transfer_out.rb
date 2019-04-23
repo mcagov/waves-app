@@ -17,13 +17,13 @@ class Report::TransferOut < Report
 
   def results
     return [] unless @date_start && @date_end
-    vessels.map do |vessel|
+    @pagination_collection = paginate(vessels)
+    @pagination_collection.map do |vessel|
       Result.new(
         [
           RenderAsLinkToVessel.new(vessel, :name),
           vessel.part.to_s.humanize,
-          vessel.imo_number,
-          vessel.gross_tonnage,
+          vessel.imo_number, vessel.gross_tonnage,
           vessel.current_registration.try(:closed_at)])
     end
   end
