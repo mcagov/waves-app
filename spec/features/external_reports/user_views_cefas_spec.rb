@@ -26,7 +26,7 @@ describe "User views CEFAS reports", js: true, run_delayed_jobs: true do
     email = open_email(User.last.email)
 
     download_link =
-      "http://test.local/admin/reports/#{downloadable_report.id}/download.xls"
+      "http://test.local/admin/reports/#{downloadable_report.id}/download"
 
     expect(email.default_part_body)
       .to have_link("Download Report", download_link)

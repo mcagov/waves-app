@@ -18,15 +18,15 @@ class Report::ExpiringCertificates < Report
   end
 
   def results
-    certificates.map do |certificate|
+    @pagination_collection = paginate(certificates)
+    @pagination_collection.map do |certificate|
       vessel = certificate.vessel
       Result.new(
         [
           RenderAsLinkToVessel.new(vessel, :name),
           Activity.new(vessel.part), vessel.reg_no,
           (certificate.entity_type || "").to_s.titleize,
-          certificate.expires_at
-        ])
+          certificate.expires_at])
     end
   end
 
