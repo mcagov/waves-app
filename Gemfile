@@ -30,7 +30,7 @@ gem "jquery-rails"
 gem "haml"
 gem "pg"
 gem "momentjs-rails"
-gem "nokogiri", ">= 1.8.3"
+gem "nokogiri", ">= 1.10.3"
 gem "notifications-ruby-client", "= 1.1.2"
 gem "paperclip", ">= 5.2.0"
 gem "paperclip-azure",
@@ -104,8 +104,4 @@ group :test do
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
-end
-
-group :staging, :production do
-  gem "rack-timeout"
 end
