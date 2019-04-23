@@ -24,7 +24,7 @@ class Admin::ReportsController < InternalPagesController
       data.read,
       filename: downloadable_report.file_file_name,
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      disposition: "attachment",
+      disposition: "attachment;filename=#{downloadable_report.file_file_name}",
       stream: true,
       buffer_size: 4096)
   end
