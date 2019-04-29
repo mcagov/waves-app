@@ -34,6 +34,9 @@
                   Print
               %td= print_job.added_by
               %td= print_job.created_at.to_s(:date_time) if print_job.created_at
+      .row
+        .col-md-12
+          = will_paginate @unprinted_jobs, renderer: BootstrapPagination::Rails
 
 .row#printing
   .col-md-12
@@ -45,6 +48,8 @@
             %h2.text-center
               All items have been marked as printed
     - else
+      - if @unprinted_jobs.count > 99
+        %p Showing 100 most recently printed items
       %table.table.table-striped.table-hover
         %thead
           %tr

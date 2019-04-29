@@ -1,4 +1,5 @@
 class PrintJobsController < InternalPagesController
+  before_action :load_defaults, only: [:index]
   def show
     respond_to do |format|
       format.pdf do
@@ -11,11 +12,10 @@ class PrintJobsController < InternalPagesController
   end
 
   def index
-    @template = params[:template]
-    load_print_jobs(@template)
-
     respond_to do |format|
-      format.html
+      format.html do
+        @printing_jobs = load_printing_jobs
+      end
       format.pdf do
         @pdf = build_pdf(@unprinted_jobs, @template)
         mark_as_printing(@unprinted_jobs)
@@ -35,6 +35,11 @@ class PrintJobsController < InternalPagesController
 
   private
 
+  def load_defaults
+    @template = params[:template]
+    @unprinted_jobs = load_unprinted_jobs
+  end
+
   def build_pdf(print_jobs, template)
     printable_items = Array(print_jobs).map(&:printable)
     Pdfs::Processor.run(template, printable_items)
@@ -50,14 +55,19 @@ class PrintJobsController < InternalPagesController
     PrintJob.in_part(current_activity.part)
   end
 
-  def load_print_jobs(template)
-    @unprinted_jobs = scoped_print_job
-                      .where(template: template)
-                      .order("created_at asc").unprinted
+  def load_unprinted_jobs
+    scoped_print_job
+      .where(template: @template)
+      .order("created_at asc")
+      .unprinted
+      .paginate(page: params[:page], per_page: params[:per_page])
+  end
 
-    @printing_jobs = scoped_print_job
-                     .where(template: template)
-                     .order("printing_at asc").printing
-                     .where("printing_at > ?", 30.days.ago)
+  def load_printing_jobs
+    scoped_print_job
+      .where(template: @template)
+      .order("printing_at asc").printing
+      .where("printing_at > ?", 30.days.ago)
+      .limit(100)
   end
 end
